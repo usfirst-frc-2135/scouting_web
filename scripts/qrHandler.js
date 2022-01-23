@@ -25,17 +25,17 @@ function validateQrList(dataList){
 
 function qrListToDict(dataList){
   out = {};
-  out["teamNumber"]     = dataList[0];
-  out["autoStartPos"]   = dataList[1];
-  out["autoExitTarmac"] = dataList[2];
-  out["autoLow"]        = dataList[3];
-  out["autoHigh"]       = dataList[4];
-  out["teleopLow"]      = dataList[5];
-  out["teleopHigh"]     = dataList[6];
-  out["climbLevel"]     = dataList[7];
+  out["teamnumber"]     = dataList[0];
+  out["startpos"]   = dataList[1];
+  out["tarmac"] = dataList[2];
+  out["autonlowpoints"]        = dataList[3];
+  out["autonhighpoints"]       = dataList[4];
+  out["teleoplowpoints"]      = dataList[5];
+  out["teleophighpoints"]     = dataList[6];
+  out["climbed"]     = dataList[7];
   out["died"]           = dataList[8];
-  out["matchNum"]       = dataList[9];
-  out["eventCode"]      = dataList[10];
+  out["matchnumber"]       = dataList[9];
+  out["eventcode"]      = dataList[10];
   return out;
 }
 
