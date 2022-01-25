@@ -25,22 +25,22 @@ function validateQrList(dataList){
 
 function qrListToDict(dataList){
   out = {};
-  out["teamnumber"]     = dataList[0];
-  out["startpos"]   = dataList[1];
-  out["tarmac"] = dataList[2];
-  out["autonlowpoints"]        = dataList[3];
-  out["autonhighpoints"]       = dataList[4];
-  out["teleoplowpoints"]      = dataList[5];
-  out["teleophighpoints"]     = dataList[6];
-  out["climbed"]     = dataList[7];
-  out["died"]           = dataList[8];
-  out["matchnumber"]       = dataList[9];
-  out["eventcode"]      = dataList[10];
+  out["teamnumber"]       = dataList[0];
+  out["startpos"]         = dataList[1];
+  out["tarmac"]           = dataList[2];
+  out["autonlowpoints"]   = dataList[3];
+  out["autonhighpoints"]  = dataList[4];
+  out["teleoplowpoints"]  = dataList[5];
+  out["teleophighpoints"] = dataList[6];
+  out["climbed"]          = dataList[7];
+  out["died"]             = dataList[8];
+  out["matchnumber"]      = dataList[9];
+  out["eventcode"]        = dataList[10];
   return out;
 }
 
 function qrListToKey(dataObj){
-  return dataObj["eventCode"] + "_" + dataObj["matchNum"] + "_" + dataObj["teamNumber"];
+  return dataObj["eventcode"] + "_" + dataObj["matchnumber"] + "_" + dataObj["teamnumber"];
 }
 
 function addQrData(dataObj){
@@ -54,9 +54,9 @@ function addQrData(dataObj){
     // Modify table
     $("#qrValidationTable").append(
       $("<tr>").append([
-        $("<td>").text(dataObj["eventCode"]),
-        $("<td>").text(dataObj["matchNum"]),
-        $("<td>").text(dataObj["teamNumber"]),
+        $("<td>").text(dataObj["eventcode"]),
+        $("<td>").text(dataObj["matchnumber"]),
+        $("<td>").text(dataObj["teamnumber"]),
         $("<td>").append(
           "<button id='"+key+"_delete' value='"+key+"' type='button' class='btn btn-danger deleteRowButton'>Delete</button>"
         )

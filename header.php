@@ -7,7 +7,7 @@
     <meta name="author" content="FRC 2135">
     <link href="./external/bootstrap-5.1.3/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous"
   </head>
-
+  <body class="bg-light">
     <header class="navbar navbar-expand-md navbar-dark sticky-top bg-dark">
       <div class="container">
         <a class="navbar-brand" href="#">FRC 2135</a>
