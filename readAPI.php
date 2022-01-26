@@ -1,9 +1,15 @@
 <?php
   include("dbHandler.php");
+  $db = new dbHandler();
+  $dbConfig = $db->readDbConfig();
+  $db->connectToDB();
+  
+  $eventCode = $dbConfig["eventcode"];
+  if (isset($_GET["eventCode"])){
+    $eventCode = $_GET["eventCode"];
+  }
   
   if (isset($_GET["getAllData"])){
-    $db = new dbHandler();
-    $db->connectToDB();
-    echo(json_encode($db->readAllData()));
+    echo(json_encode($db->readAllData($eventCode)));
   }
 ?>

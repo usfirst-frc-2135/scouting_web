@@ -16,6 +16,8 @@
             <h4>Server: <span id="serverName" class="badge bg-primary">????</span></h4>
             <h4>Database: <span id="databaseName" class="badge bg-primary">????</span></h4>
             <h4>Username: <span id="userName" class="badge bg-primary">????</span></h4>
+            <h4>TBA Key: <span id="tbaKey" class="badge bg-primary">????</span></h4>
+            <h4>Event Code: <span id="eventCode" class="badge bg-primary">????</span></h4>
           </div>
         </div>
         
@@ -44,6 +46,14 @@
               <label for="writePassword" class="form-label">Password</label>
               <input type="password" class="form-control" id="writePassword" aria-describedby="password">
             </div>
+            <div class="mb-3">
+              <label for="writeTBAKey" class="form-label">TBA Key</label>
+              <input type="text" class="form-control" id="writeTBAKey" aria-describedby="tbaKey">
+            </div>
+            <div class="mb-3">
+              <label for="writeEventCode" class="form-label">Event Code</label>
+              <input type="text" class="form-control" id="writeEventCode" aria-describedby="tbaEventCode">
+            </div>
             <button id="writeConfig" class="btn btn-primary">Write Config</button>
             <button id="createDB" class="btn btn-primary">Create DB</button>
             <button id="createTable" class="btn btn-primary">Create Table</button>
@@ -61,10 +71,14 @@
 </div>
 <?php include("footer.php") ?>
 <script>
+  
+  
   function updateStatusValues(statusArray){
     $("#serverName").text(statusArray["server"]);
     $("#databaseName").text(statusArray["db"]);
     $("#userName").text(statusArray["username"]);
+    $("#tbaKey").text(statusArray["tbakey"]);
+    $("#eventCode").text(statusArray["eventcode"]);
     if(statusArray["dbExists"]){
       $("#dbStatus").text("Connected");
       $("#dbStatus").addClass("bg-success");
@@ -103,22 +117,40 @@
     }
   }
   
+  var id_to_key_map = {"writeServer" : "server", "writeDatabase" : "db", "writeTable" : "table", "writeUsername" : "username", "writePassword" : "password", "writeTBAKey" : "tbakey", "writeEventCode" : "eventcode"};
+  var id_to_written_map = {}
   
   
   $(document).ready(function() {
     $.post("dbAPI.php", {"getStatus" : true}, function(data){
-      console.log(data);
       updateStatusValues(JSON.parse(data));  
     });
     
+    
+    for(const key in id_to_key_map){
+      id_to_written_map[key] = false;
+      $("#"+key).change(function() {
+        if ($("#"+key).val() == ""){
+          $("#"+key).removeClass("bg-info");
+          id_to_written_map[key] = false;
+        }
+        else{
+          $("#"+key).addClass("bg-info");
+          id_to_written_map[key] = true;
+        }
+      });
+    }
+    
+    
     $("#writeConfig").on('click', function(event){
       var writeData = {};
-      writeData["server"] = $("#writeServer").val();
-      writeData["db"] = $("#writeDatabase").val();
-      writeData["table"] = $("#writeTable").val();
-      writeData["username"] = $("#writeUsername").val();
-      writeData["password"] = $("#writePassword").val();
-      writeData["writeConfig"] = true;
+      for(const key in id_to_key_map){
+        if($("#"+key).val() != "" && id_to_written_map[key]){
+          writeData[id_to_key_map[key]] = $("#"+key).val();
+        }
+      }
+      console.log(writeData);
+      writeData["writeConfig"] = JSON.stringify(writeData);
       
       $.post("dbAPI.php", writeData, function(data){
         updateStatusValues(JSON.parse(data));  

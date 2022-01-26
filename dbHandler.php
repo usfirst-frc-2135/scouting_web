@@ -7,10 +7,11 @@
     private $dbIniFile = "../../db_config.ini";
     private $charset = "utf8";
     private $conn = null;
-    private $already_connected = false;
+    private $alreadyConnected = false;
+    private $configKeys = array("server", "db", "username", "password", "table", "eventcode", "tbakey");
     
     function connectToDB(){
-      if(!$this->already_connected){
+      if(!$this->alreadyConnected){
         $dbConfig = $this->readDbConfig();
         $dsn = "mysql:host=" . $dbConfig["server"] . ";dbname=" . $dbConfig["db"] . ";charset=" . $this->charset;
         $opt = [
@@ -19,7 +20,7 @@
           PDO::ATTR_EMULATE_PREPARES   => false
         ];
         $this->conn = new PDO($dsn, $dbConfig["username"], $dbConfig["password"], $opt);
-        $this->already_connected = true;
+        $this->alreadyConnected = true;
       }
       return ($this->conn);
     }
@@ -33,7 +34,7 @@
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
         PDO::ATTR_EMULATE_PREPARES   => false
       ];
-      $this->already_connected = true;
+      $this->alreadyConnected = true;
       
       return (new PDO($dsn, $dbConfig["username"], $dbConfig["password"], $opt));
     }
@@ -68,7 +69,7 @@
       $prepared_statement->execute($data);
     }
     
-    function readAllData(){
+    function readAllData($eventCode){
       $dbConfig = $this->readDbConfig();
       $sql = "SELECT teamnumber,
                      startpos,
@@ -80,7 +81,7 @@
                      climbed,
                      died,
                      matchnumber,
-                     eventcode from ".$dbConfig["table"];
+                     eventcode from ".$dbConfig["table"]." where eventcode='".$eventCode."'";
       $prepared_statement = $this->conn->prepare($sql);
       $prepared_statement->execute();
       $result = $prepared_statement->fetchAll();
@@ -122,24 +123,36 @@
     
     
     function readDbConfig(){
-      $ini_arr = parse_ini_file($this->dbIniFile);
-      if (!isset($ini_arr["server"])){$ini_arr["server"] = "";}
-      if (!isset($ini_arr["db"])){$ini_arr["db"] = "";}
-      if (!isset($ini_arr["username"])){$ini_arr["username"] = "";}
-      if (!isset($ini_arr["password"])){$ini_arr["password"] = "";}
-      if (!isset($ini_arr["table"])){$ini_arr["table"] = "";}
+      // Read dbIniFile
+      // If File doesn't exist, instantiate array as empty
+      try{
+        $ini_arr = parse_ini_file($this->dbIniFile);
+      }
+      catch(Exception $e){
+        $ini_arr = array();
+      }
+      // If required keys don't exist, instantiate them to default empty string
+      foreach($this->configKeys as $key){
+        if(!isset($ini_arr[$key])){
+          $ini_arr[$key] = "";
+        }
+      }
       return $ini_arr;
     }
     
-    function writeDbConfig($server, $db, $username, $password, $table){
-      //
+    function writeDbConfig($dat){
+      // Get values to write
+      // If value is not in input, read from current DB config
+      $currDBConfig = $this->readDbConfig();
+      foreach($dat as $key => $value){
+        $currDBConfig[$key] = $value;
+      }     
+      // Build ini file string
       $data = "";
-      $data = $data . "server=" . $server ."\r\n";
-      $data = $data . "db=" . $db ."\r\n";
-      $data = $data . "username=" . $username ."\r\n";
-      $data = $data . "password=" . $password ."\r\n";
-      $data = $data . "table=" . $table ."\r\n";
-      //
+      foreach($currDBConfig as $key => $value){
+        $data = $data . $key . "=" . $value . "\r\n";
+      }
+      // Write ini file string to actual file
       if($fp = fopen($this->dbIniFile, 'w')){
         $startTime = microtime(True);
         do{
@@ -164,6 +177,8 @@
       //
       $out["server"]       = $dbConfig["server"];
       $out["db"]           = $dbConfig["db"];
+      $out["tbakey"]       = substr($dbConfig["tbakey"], 0, 3) . "******";
+      $out["eventcode"]    = $dbConfig["eventcode"];
       $out["username"]     = substr($dbConfig["username"], 0, 1). "*****";
       $out["dbExists"]     = false;
       $out["serverExists"] = false;

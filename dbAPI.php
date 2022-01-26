@@ -9,7 +9,7 @@
   }
   else if (isset($_POST["writeConfig"])){
     $db = new dbHandler();
-    $db->writeDbConfig($_POST["server"], $_POST["db"], $_POST["username"], $_POST["password"], $_POST["table"]);
+    $db->writeDbConfig(json_decode($_POST["writeConfig"]));
     $stat = $db->getStatus();
     echo json_encode($stat);
   }
