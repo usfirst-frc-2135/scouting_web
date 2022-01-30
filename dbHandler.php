@@ -88,6 +88,27 @@
       return $result;
     }
     
+    function readTeamData($teamNumber, $eventCode){
+      $dbConfig = $this->readDbConfig();
+      $sql = "SELECT teamnumber,
+                     startpos,
+                     tarmac,
+                     autonlowpoints,
+                     autonhighpoints,
+                     teleoplowpoints,
+                     teleophighpoints,
+                     climbed,
+                     died,
+                     matchnumber,
+                     eventcode from ".$dbConfig["table"]." where 
+                      eventcode='".$eventCode."' AND
+                      teamnumber='".$teamNumber."'";
+      $prepared_statement = $this->conn->prepare($sql);
+      $prepared_statement->execute();
+      $result = $prepared_statement->fetchAll();
+      return $result;
+    }
+    
     function createDB(){
       $dbConfig = $this->readDbConfig();
       $connection = $this->connectToServer();

@@ -12,4 +12,7 @@
   if (isset($_GET["getAllData"])){
     echo(json_encode($db->readAllData($eventCode)));
   }
+  else if (isset($_GET["getTeamData"])){
+    echo(json_encode($db->readTeamData($_GET["getTeamData"], $eventCode)));
+  }
 ?>
