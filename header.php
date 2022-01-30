@@ -25,6 +25,9 @@
             <li class="nav-item">
               <a class="nav-link" href="./dbStatus.php">DB Status</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./RawData.php">Raw Data</a>
+            </li>
           </ul>
         </div>
       </div>
