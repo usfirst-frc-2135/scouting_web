@@ -1,0 +1,7 @@
+*.png
+*.PNG
+*.jpg
+*.JGP
+*.jpeg
+*.JPEG
+!grogu.jpeg

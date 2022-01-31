@@ -28,6 +28,9 @@
             <li class="nav-item">
               <a class="nav-link" href="./RawData.php">Raw Data</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./pictureUpload.php">Picture Upload</a>
+            </li>
           </ul>
         </div>
       </div>
