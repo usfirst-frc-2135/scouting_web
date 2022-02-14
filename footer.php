@@ -7,6 +7,8 @@
   <script type="text/javascript" src="./external/zxing/zxing.min.js"></script>
   <script type="text/javascript" src="./external/sorttable/sorttable.js"></script>
   <script type="text/javascript" src="./external/charts/chart.min.js"></script>
+  <script type="text/javascript" src="./external/jquery-ui/jquery-ui.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
 
   
   </body>
