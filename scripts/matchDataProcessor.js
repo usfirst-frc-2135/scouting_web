@@ -36,7 +36,35 @@ class matchDataProcessor{
     
       Returns = {
                   teamNumber : { totalpoints : x,
-                                 maxpoints : x, 
+                                 avgtotalponits : x,
+                                 maxtotalpoints : x,
+                                 totalautopoints : x,
+                                 avgautopoints : x,
+                                 maxautopoints : x,
+                                 totalteleoppoints : x,
+                                 avgteleoppoints : x,
+                                 maxteleoppoints : x,
+                                 endgametotalpoints : x,
+                                 avgendgamepoints : x,
+                                 maxendgamepoints : x,
+                                 
+                                 avgautonupperpoints : x,
+                                 maxautonupperpoints : x,
+                                 avgautonlowerpoints : x,
+                                 maxautonlowerpoints : x,
+                                 
+                                 avgteleopupperpoints : x,
+                                 maxteleopupperpoints : x,
+                                 avgteleoplowerpoints : x,
+                                 maxteleoplowerpoints : x,
+                                 
+                                 endgame0climbpoints : x,
+                                 endgame1climbpoints : x,
+                                 endgame2climbpoints : x,
+                                 endgame3climbpoints : x,
+                                 endgame4climbpoints : x,
+                                 
+                                 avgdied : x,
                   }
                 }
     */
