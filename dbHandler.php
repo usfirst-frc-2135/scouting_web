@@ -8,7 +8,9 @@
     private $charset = "utf8";
     private $conn = null;
     private $alreadyConnected = false;
-    private $configKeys = array("server", "db", "username", "password", "table", "eventcode", "tbakey");
+    private $configKeys = array("server", "db", "username", "password", "table", "eventcode", "tbakey", 
+                                "fbapikey", "fbauthdomain", "fbdburl", "fbprojectid", "fbstoragebucket", 
+                                "fbsenderid", "fbappid", "fbmeasurementid");
     
     function connectToDB(){
       if(!$this->alreadyConnected){
@@ -124,14 +126,14 @@
       $query = "CREATE TABLE " . $dbConfig["db"] . "." . $dbConfig["table"] . " (
             entrykey VARCHAR(60) NOT NULL PRIMARY KEY,
             teamnumber VARCHAR(6) NOT NULL,
-            startpos VARCHAR(10) NOT NULL,
-            tarmac VARCHAR(1) NOT NULL,
-            autonlowpoints VARCHAR(10) NOT NULL,
-            autonhighpoints VARCHAR(10) NOT NULL,
-            teleoplowpoints VARCHAR(10) NOT NULL,
-            teleophighpoints VARCHAR(10) NOT NULL,
-            climbed VARCHAR(10) NOT NULL,
-            died VARCHAR(1) NOT NULL,
+            startpos TINYINT UNSIGNED NOT NULL,
+            tarmac TINYINT UNSIGNED NOT NULL,
+            autonlowpoints TINYINT UNSIGNED NOT NULL,
+            autonhighpoints TINYINT UNSIGNED NOT NULL,
+            teleoplowpoints TINYINT UNSIGNED NOT NULL,
+            teleophighpoints TINYINT UNSIGNED NOT NULL,
+            climbed TINYINT UNSIGNED NOT NULL,
+            died TINYINT UNSIGNED NOT NULL,
             matchnumber VARCHAR(10) NOT NULL,
             eventcode VARCHAR(10) NOT NULL
         )";
@@ -196,14 +198,22 @@
       $dbConfig = $this->readDbConfig();
       $out = array();
       //
-      $out["server"]       = $dbConfig["server"];
-      $out["db"]           = $dbConfig["db"];
-      $out["tbakey"]       = substr($dbConfig["tbakey"], 0, 3) . "******";
-      $out["eventcode"]    = $dbConfig["eventcode"];
-      $out["username"]     = substr($dbConfig["username"], 0, 1). "*****";
-      $out["dbExists"]     = false;
-      $out["serverExists"] = false;
-      $out["tableExists"] = false;
+      $out["server"]          = $dbConfig["server"];
+      $out["db"]              = $dbConfig["db"];
+      $out["tbakey"]          = substr($dbConfig["tbakey"], 0, 3) . "******";
+      $out["eventcode"]       = $dbConfig["eventcode"];
+      $out["username"]        = substr($dbConfig["username"], 0, 1). "*****";
+      $out["fbapikey"]        = substr($dbConfig["fbapikey"], 0, 1). "*****";
+      $out["fbauthdomain"]    = $dbConfig["fbauthdomain"];
+      $out["fbdburl"]         = substr($dbConfig["fbdburl"], 0, 1). "*****";
+      $out["fbprojectid"]     = substr($dbConfig["fbprojectid"], 0, 1). "*****";
+      $out["fbstoragebucket"] = substr($dbConfig["fbstoragebucket"], 0, 1). "*****";
+      $out["fbsenderid"]      = substr($dbConfig["fbsenderid"], 0, 1). "*****";
+      $out["fbappid"]         = substr($dbConfig["fbappid"], 0, 1). "*****";
+      $out["fbmeasurementid"] = substr($dbConfig["fbmeasurementid"], 0, 1). "*****";
+      $out["dbExists"]        = false;
+      $out["serverExists"]    = false;
+      $out["tableExists"]     = false;
       //DB Connection
       try{
         $dsn = "mysql:host=" . $dbConfig["server"] . ";dbname=" . $dbConfig["db"] . ";charset=" . $this->charset;
