@@ -36,7 +36,7 @@ class matchDataProcessor{
     
       Returns = {
                   teamNumber : { totalpoints : x,
-                                 avgtotalponits : x,
+                                 avgtotalpoints : x,
                                  maxtotalpoints : x,
                                  totalautopoints : x,
                                  avgautopoints : x,
@@ -48,13 +48,14 @@ class matchDataProcessor{
                                  avgendgamepoints : x,
                                  maxendgamepoints : x,
                                  
-                                 avgautonupperpoints : x,
-                                 maxautonupperpoints : x,
+                                 avgautonhighpoints : x,
+                                 maxautonhighpoints : x,
                                  avgautonlowerpoints : x,
                                  maxautonlowerpoints : x,
                                  
-                                 avgteleopupperpoints : x,
-                                 maxteleopupperpoints : x,
+                                 avgteleophighpieces : x,
+                                 maxteleophighpieces : x,
+                                 
                                  avgteleoplowerpoints : x,
                                  maxteleoplowerpoints : x,
                                  
@@ -65,9 +66,27 @@ class matchDataProcessor{
                                  endgame4climbpoints : x,
                                  
                                  avgdied : x,
+                                 
+                                 totalmatches : x
                   }
                 }
     */
+
+  var avg={};
+  for (var i=0; i<this.data.length; i++){
+      var tn=this.data[i]["teamnumber"];
+      console.log(this.data[i]);
+      if (! (tn in avg)){
+          avg [tn]={};
+          avg [tn]["avgteleophighpieces"]=0;
+          avg [tn]["maxteleophighpieces"]=0;
+          avg [tn]["totalmatches"]=0;
+      }
+      avg [tn]["avgteleophighpieces"]+=this.data[i]["teleoplowpoints"];
+      avg [tn]["totalmatches"]+=1;
+  }
+      return avg;
+  
   }
   
 }

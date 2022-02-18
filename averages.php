@@ -123,12 +123,17 @@
         
     }
         
+
+    
     
     function requestAPI() {
         //output: gets the API data from our server
         $.get( "readAPI.php", {getAllData: 1}).done( function( data ) {
             var dataObj = JSON.parse(data);        
-            dataToTable(dataObj);
+            var mdp = new matchDataProcessor(dataObj);
+            var dataAvg = mdp.getAverages();
+            //dataToTable(dataAvg);
+            console.log(dataAvg);
         });
         
     }
@@ -138,11 +143,6 @@
         requestAPI();
     });
     
-    
-    
-
-    
-    
 </script>
     
-    
+<script type="text/javascript" src="./scripts/matchDataProcessor.js"></script>
