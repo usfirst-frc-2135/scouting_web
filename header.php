@@ -1,3 +1,4 @@
+<?php header('Access-Control-Allow-Origin: *'); ?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -36,6 +37,9 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" href="./pictureUpload.php">Picture Upload</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./picklist.php">Picklist</a>
             </li>
           </ul>
         </div>

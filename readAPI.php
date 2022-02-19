@@ -44,4 +44,18 @@
     }
     echo(json_encode($imageList));
   }
+  else if (isset($_GET["config"])){
+    $output = array();
+    $output["eventcode"] = $dbConfig["eventcode"];
+    $output["tbakey"] = $dbConfig["tbakey"];
+    $output["fbapikey"] = $dbConfig["fbapikey"];
+    $output["fbauthdomain"] = $dbConfig["fbauthdomain"];
+    $output["fbdburl"] = $dbConfig["fbdburl"];
+    $output["fbprojectid"] = $dbConfig["fbprojectid"];
+    $output["fbstoragebucket"] = $dbConfig["fbstoragebucket"];
+    $output["fbsenderid"] = $dbConfig["fbsenderid"];
+    $output["fbappid"] = $dbConfig["fbappid"];
+    $output["fbmeasurementid"] = $dbConfig["fbmeasurementid"];
+    echo(json_encode($output));
+  }
 ?>
