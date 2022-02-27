@@ -24,6 +24,9 @@
               <a class="nav-link" href="./qrScanner.php">QR Scanner</a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" href="./pitScouting.php">Pit Scouting</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="./dbStatus.php">DB Status</a>
             </li>
             <li class="nav-item">
@@ -40,6 +43,9 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" href="./picklist.php">Picklist</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./matchSheet.php">Match Sheet</a>
             </li>
           </ul>
         </div>
