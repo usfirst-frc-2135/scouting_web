@@ -8,9 +8,10 @@
     private $charset = "utf8";
     private $conn = null;
     private $alreadyConnected = false;
-    private $configKeys = array("server", "db", "username", "password", "table", "eventcode", "tbakey", 
+    private $configKeys = array("server", "db", "username", "password", "eventcode", "tbakey", 
                                 "fbapikey", "fbauthdomain", "fbdburl", "fbprojectid", "fbstoragebucket", 
-                                "fbsenderid", "fbappid", "fbmeasurementid");
+                                "fbsenderid", "fbappid", "fbmeasurementid", 
+                                "datatable", "tbatable", "pittable", "ranktable");
     
     function connectToDB(){
       if(!$this->alreadyConnected){
@@ -43,7 +44,7 @@
     
     function writeRowToTable($data){
       $dbConfig = $this->readDbConfig();
-      $sql = "INSERT INTO ".$dbConfig["table"]."(entrykey,
+      $sql = "INSERT INTO ".$dbConfig["datatable"]."(entrykey,
                        teamnumber,
                        startpos,
                        tarmac,
@@ -54,7 +55,9 @@
                        climbed,
                        died,
                        matchnumber,
-                       eventcode)
+                       eventcode,
+                       scoutname,
+                       comment)
                 VALUES(:entrykey,
                        :teamnumber,
                        :startpos,
@@ -66,7 +69,9 @@
                        :climbed,
                        :died,
                        :matchnumber,
-                       :eventcode)";
+                       :eventcode,
+                       :scoutname,
+                       :comment)";
       $prepared_statement = $this->conn->prepare($sql);
       $prepared_statement->execute($data);
     }
@@ -83,7 +88,9 @@
                      climbed,
                      died,
                      matchnumber,
-                     eventcode from ".$dbConfig["table"]." where eventcode='".$eventCode."'";
+                     eventcode,
+                     scoutname,
+                     comment from ".$dbConfig["datatable"]." where eventcode='".$eventCode."'";
       $prepared_statement = $this->conn->prepare($sql);
       $prepared_statement->execute();
       $result = $prepared_statement->fetchAll();
@@ -102,9 +109,11 @@
                      climbed,
                      died,
                      matchnumber,
-                     eventcode from ".$dbConfig["table"]." where 
-                      eventcode='".$eventCode."' AND
-                      teamnumber='".$teamNumber."'";
+                     eventcode,
+                     scoutname,
+                     comment from ".$dbConfig["datatable"]." where 
+                     eventcode='".$eventCode."' AND
+                     teamnumber='".$teamNumber."'";
       $prepared_statement = $this->conn->prepare($sql);
       $prepared_statement->execute();
       $result = $prepared_statement->fetchAll();
@@ -120,10 +129,10 @@
       }
     }
     
-    function createTable(){
+    function createDataTable(){
       $conn = $this->connectToDB();
       $dbConfig = $this->readDbConfig();
-      $query = "CREATE TABLE " . $dbConfig["db"] . "." . $dbConfig["table"] . " (
+      $query = "CREATE TABLE " . $dbConfig["db"] . "." . $dbConfig["datatable"] . " (
             entrykey VARCHAR(60) NOT NULL PRIMARY KEY,
             teamnumber VARCHAR(6) NOT NULL,
             startpos TINYINT UNSIGNED NOT NULL,
@@ -135,14 +144,29 @@
             climbed TINYINT UNSIGNED NOT NULL,
             died TINYINT UNSIGNED NOT NULL,
             matchnumber VARCHAR(10) NOT NULL,
-            eventcode VARCHAR(10) NOT NULL
+            eventcode VARCHAR(10) NOT NULL,
+            scoutname VARCHAR(100) NOT NULL,
+            comment VARCHAR(500) NOT NULL
         )";
       $statement = $conn->prepare($query);
       if (!$statement->execute()) {
-        throw new Exception("createTable Error: CREATE TABLE ".$dbConfig["table"]." query failed.");
+        throw new Exception("createTable Error: CREATE TABLE ".$dbConfig["datatable"]." query failed.");
       }
     }
     
+    function createTBATable(){
+      $conn = $this->connectToDB();
+      $dbConfig = $this->readDbConfig();
+      $query = "CREATE TABLE " . $dbConfig["db"] . "." .$dbConfig["tbatable"] . " (
+            requestURI VARCHAR(100) NOT NULL PRIMARY KEY,
+            expiryTime BIGINT NOT NULL,
+            response JSON NOT NULL
+        )";
+      $statement = $conn->prepare($query);
+      if (!$statement->execute()) {
+        throw new Exception("createTBATable Error: CREATE TABLE ".$dbConfig["tbatable"]." query failed.");
+      }
+    }
     
     
     function readDbConfig(){
@@ -213,7 +237,11 @@
       $out["fbmeasurementid"] = substr($dbConfig["fbmeasurementid"], 0, 1). "*****";
       $out["dbExists"]        = false;
       $out["serverExists"]    = false;
-      $out["tableExists"]     = false;
+      $out["dataTableExists"] = false;
+      $out["tbaTableExists"]  = false;
+      $out["pitTableExists"]  = false;
+      $out["rankTableExists"] = false;
+      
       //DB Connection
       try{
         $dsn = "mysql:host=" . $dbConfig["server"] . ";dbname=" . $dbConfig["db"] . ";charset=" . $this->charset;
@@ -237,10 +265,37 @@
         $dsn = "mysql:host=" . $dbConfig["server"] . ";dbname=" . $dbConfig["db"] . ";charset=" . $this->charset;
         $conn = new PDO($dsn, $dbConfig["username"], $dbConfig["password"]);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $val = $conn->query('SELECT * from ' . $dbConfig["table"]) ;
-        $out["tableExists"] = true;
+        $val = $conn->query('SELECT * from ' . $dbConfig["datatable"]) ;
+        $out["dataTableExists"] = true;
       } catch(PDOException $e){
-        $out["tableExists"] = false;
+        $out["dataTableExists"] = false;
+      }
+      try{
+        $dsn = "mysql:host=" . $dbConfig["server"] . ";dbname=" . $dbConfig["db"] . ";charset=" . $this->charset;
+        $conn = new PDO($dsn, $dbConfig["username"], $dbConfig["password"]);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $val = $conn->query('SELECT * from ' . $dbConfig["tbatable"]) ;
+        $out["tbaTableExists"] = true;
+      } catch(PDOException $e){
+        $out["tbaTableExists"] = false;
+      }
+      try{
+        $dsn = "mysql:host=" . $dbConfig["server"] . ";dbname=" . $dbConfig["db"] . ";charset=" . $this->charset;
+        $conn = new PDO($dsn, $dbConfig["username"], $dbConfig["password"]);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $val = $conn->query('SELECT * from ' . $dbConfig["pittable"]) ;
+        $out["pitTableExists"] = true;
+      } catch(PDOException $e){
+        $out["pitTableExists"] = false;
+      }
+      try{
+        $dsn = "mysql:host=" . $dbConfig["server"] . ";dbname=" . $dbConfig["db"] . ";charset=" . $this->charset;
+        $conn = new PDO($dsn, $dbConfig["username"], $dbConfig["password"]);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $val = $conn->query('SELECT * from ' . $dbConfig["ranktable"]) ;
+        $out["rankTableExists"] = true;
+      } catch(PDOException $e){
+        $out["rankTableExists"] = false;
       }
       return $out;
     }

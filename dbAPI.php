@@ -1,6 +1,5 @@
 <?php
   include("dbHandler.php");
-  
 
   if (isset($_POST["getStatus"])){
     $db = new dbHandler();
@@ -21,8 +20,12 @@
   }
   else if (isset($_POST["createTable"])){
     $db = new dbHandler();
-    $db->createTable();
+    try{ $db->createDataTable(); } catch (Exception $e) {error_log($e);} 
+    try{ $db->createTBATable(); } catch (Exception $e) {error_log($e);} 
+    // try{ $db->createPitTable(); } catch (Exception $e) {error_log($e)} 
+    // try{ $db->createRankTable(); } catch (Exception $e) {error_log($e)} 
     $stat = $db->getStatus();
     echo json_encode($stat);
+    
   }
 ?>

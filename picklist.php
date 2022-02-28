@@ -2,8 +2,95 @@
 <?php include("header.php") ?>
 <div class="container row-offcanvas row-offcanvas-left">
     <div class="well column  col-lg-12  col-sm-12 col-xs-12" id="content">
+      <div class="row pt-3 pb-3 mb-3">
+        <div class="card col-md-12">
+          <div class="card-body">
+            <h2 id="pickListName">Pick List:</h2>
+          </div>
+        </div>
+      </div>
+      
+      
+      <div class="row pt-3 pb-3 mb-3">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header">
+              Pick List
+            </div>
+            <div class="card-body">
+              <table class="table table-striped table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col">#</th>
+                    <th scope="col">Team</th>
+                    <th scope="col">Data</th>
+                  </tr>
+                </thead>
+                <tbody id="picklistDiv">
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="row pt-3 pb-3 mb-3">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header">
+              Not Sorted
+            </div>
+            <div class="card-body">
+              <table class="table table-striped table-hover sortable">
+                <thead>
+                  <tr>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col">#</th>
+                    <th scope="col">Team</th>
+                    <th scope="col">Data</th>
+                  </tr>
+                </thead>
+                <tbody id="unsortedDiv">
+                  
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="row pt-3 pb-3 mb-3">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header">
+              Do Not Pick
+            </div>
+            <div class="card-body">
+              <table class="table table-striped table-hover sortable">
+                <thead>
+                  <tr>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col">#</th>
+                    <th scope="col">Team</th>
+                    <th scope="col">Data</th>
+                  </tr>
+                </thead>
+                <tbody id="doNotPickDiv">
+                  
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="row pt-3 pb-3 mb-3">
-      <div class="card col-md-12">
+    <div class="col-md-12">
+      <div class="card">
         <div class="card-header">
             Settings
           </div>
@@ -26,74 +113,7 @@
         </div>
       </div>
     </div>
-      <div class="row pt-3 pb-3 mb-3">
-        <div class="card col-md-12">
-          <div class="card-header">
-            Pick List
-          </div>
-          <div class="card-body">
-            <table class="table table-striped table-hover">
-              <thead>
-                <tr>
-                  <th scope="col">Picked</th>
-                  <th scope="col">#</th>
-                  <th scope="col">Team</th>
-                  <th scope="col">Data</th>
-                </tr>
-              </thead>
-              <tbody id="picklistDiv">
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-      
-      <div class="row pt-3 pb-3 mb-3">
-        <div class="card col-md-12">
-          <div class="card-header">
-            Not Sorted
-          </div>
-          <div class="card-body">
-            <table class="table table-striped table-hover sortable">
-              <thead>
-                <tr>
-                  <th scope="col">Picked</th>
-                  <th scope="col">#</th>
-                  <th scope="col">Team</th>
-                  <th scope="col">Data</th>
-                </tr>
-              </thead>
-              <tbody id="unsortedDiv">
-                
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-      
-      <div class="row pt-3 pb-3 mb-3">
-        <div class="card col-md-12">
-          <div class="card-header">
-            Do Not Pick
-          </div>
-          <div class="card-body">
-            <table class="table table-striped table-hover sortable">
-              <thead>
-                <tr>
-                  <th scope="col">Picked</th>
-                  <th scope="col">#</th>
-                  <th scope="col">Team</th>
-                  <th scope="col">Data</th>
-                </tr>
-              </thead>
-              <tbody id="doNotPickDiv">
-                
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
+  </div>
 </div>
 
 
@@ -122,7 +142,7 @@
 
 <script>
   
-    var firebaseApp, tbaApp;
+    var firebaseApp;
    
     var sortedListKeys = ["sorted", "unsorted", "dnp"];
     var sortedLists = {"sorted" : [], "unsorted" : [], "dnp" : []};
@@ -134,10 +154,12 @@
     
     var currPicklistName = null;
     
+    var eventCode = null;
+    
     function setSortable(state){
-      pickListSortable.sort = state;
-      notSortedSortable.sort = state;
-      dnpSortable.sort = state;
+      pickListSortable.option("disabled", !state);
+      notSortedSortable.option("disabled", !state);
+      dnpSortable.option("disabled", !state);
     }
     
     /*
@@ -150,22 +172,25 @@
         return false;
       }
       
-      tbaApp.getTeamList(tbaApp.eventcode, function(teamList){
+      $.get("./tbaAPI.php", {getTeamList : true}, function(teamList){
+        teamList = JSON.parse(teamList);
         var dataFormat = {"unsorted" : teamList, "sorted" : [], "dnp" : []};
-        firebaseApp.set("picklist/"+tbaApp.eventcode+"/picklists/"+picklistName, dataFormat);
+        firebaseApp.set("picklist/"+eventCode+"/picklists/"+picklistName, dataFormat);
         loadPicklist(picklistName);
         loadPicklistNames();
       });
+      
       return true;
     }
     
     function loadPicklist(picklistName){
       console.log(picklistName);
       if (currPicklistName != null){
-        firebaseApp.removeAllListeners("picklist/"+tbaApp.eventcode+"/picklists/"+currPicklistName);
+        firebaseApp.removeAllListeners("picklist/"+eventCode+"/picklists/"+currPicklistName);
       }
       currPicklistName = picklistName;
-      var reqURI = "picklist/"+tbaApp.eventcode+"/picklists/"+picklistName;
+      $("#pickListName").html("Pick List: " + currPicklistName);
+      var reqURI = "picklist/"+eventCode+"/picklists/"+picklistName;
       var needUpdate = false;
       firebaseApp.attachListener(reqURI, function(data){
         lockListEdit = true;
@@ -215,13 +240,13 @@
       for(let teamNumber in localPickedTeamLookup){
         pickedTeamList.push(teamNumber);
       }
-      firebaseApp.set("picklist/"+tbaApp.eventcode+"/pickedTeams", pickedTeamList);
+      firebaseApp.set("picklist/"+eventCode+"/pickedTeams", pickedTeamList);
     }
     
     function bindPickedTeamsFromFirebase(){
       /* On firebase change, get picked teams from there and update highlighted rows.
       */
-      var reqURI = "picklist/"+tbaApp.eventcode+"/pickedTeams";
+      var reqURI = "picklist/"+eventCode+"/pickedTeams";
       firebaseApp.attachListener(reqURI, function(data){
         var dval = data.val();
         // Checks if checked teams changed, only update if it did change
@@ -277,13 +302,17 @@
     }
     
     function createNewRow(index, team){
-      out = "";
+      var out = "";
+      var icon_svg = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrows-move" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M7.646.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 1.707V5.5a.5.5 0 0 1-1 0V1.707L6.354 2.854a.5.5 0 1 1-.708-.708l2-2zM8 10a.5.5 0 0 1 .5.5v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 0 1 .708-.708L7.5 14.293V10.5A.5.5 0 0 1 8 10zM.146 8.354a.5.5 0 0 1 0-.708l2-2a.5.5 0 1 1 .708.708L1.707 7.5H5.5a.5.5 0 0 1 0 1H1.707l1.147 1.146a.5.5 0 0 1-.708.708l-2-2zM10 8a.5.5 0 0 1 .5-.5h3.793l-1.147-1.146a.5.5 0 0 1 .708-.708l2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L14.293 8.5H10.5A.5.5 0 0 1 10 8z"/></svg>';
+      
       if (team in localPickedTeamLookup){
         out += "<tr data-team='"+team+"' class='table-dark'>";
+        out += "  <td scope='col' class='pickHandle'>"+icon_svg+"</td>";
         out += "  <td scope='col'> <input class='form-check-input pick-check' type='checkbox' role='switch' checked></td>";
       }
       else {
         out += "<tr data-team='"+team+"'>";
+        out += "  <td scope='col' class='pickHandle'>"+icon_svg+"</td>";
         out += "  <td scope='col'> <input class='form-check-input pick-check' type='checkbox' role='switch'></td>";
       }
       out += "  <td scope='col'>"+index+"</td>";
@@ -334,7 +363,7 @@
         }
       }
       if (needUpdate && !lockListEdit){ 
-        firebaseApp.set("picklist/"+tbaApp.eventcode+"/picklists/"+currPicklistName, sortedLists);
+        firebaseApp.set("picklist/"+eventCode+"/picklists/"+currPicklistName, sortedLists);
       }
     }
     
@@ -351,7 +380,7 @@
       var firstName = null;
       var itemSelected = false;
       $("#picklistSelect").html("");
-      firebaseApp.get("picklist/"+tbaApp.eventcode+"/picklists/", function(data){
+      firebaseApp.get("picklist/"+eventCode+"/picklists/", function(data){
         var dval = data.val();
         if (dval != null){
           for (var key in dval){
@@ -390,35 +419,168 @@
       localStorage.setItem("defaultPicklist", currPicklistName); 
     }
     
+    function bindSortScroll(){
+      $( "div" ).mousemove(function( event ) {
+        if(!draggingElement){
+          var pageCoords = "( " + event.pageX + ", " + event.pageY + " )";
+          var clientCoords = "( " + event.clientX + ", " + event.clientY + " )";
+          console.log(pageCoords);
+          console.log(clientCoords);
+        }
+      });
+    }
+    
+    
+  class scrollHandler{
+    /* Handle AutoScrolling when dragging elements because SortableJS is awful at it. */
+    constructor(){
+      this.draggingElement = false;
+      this.y = null;
+      this.upperPercentTresh = 0.20;
+      this.lowerPercentTresh = 0.20;
+      this.percentTresh = 0.30;
+      this.screenHeight = screen.height;
+      this.primaryCounter = 0;
+      this.primaryCounterHit = 20;
+      this.secondaryCounter = 0;
+      this.secondaryCounterHit = 10;
+      this.lowTresh = this.lowerPercentTresh * this.screenHeight;
+      this.highTresh = this.screenHeight - (this.upperPercentTresh * this.screenHeight);
+      this.state = 0; //0 no hit, 1 low hit, 2 high hit
+      this.scrollVal = 100;
+    }
+    
+    setY(y){
+      if (y != undefined){
+        this.y = y;
+      }
+    }
+    
+    startDrag(){
+      this.draggingElement = true;
+    }
+    
+    endDrag(){
+      this.draggingElement = false;
+      // this.y = null;
+    }
+    
+    handleScroll(){
+      if(!this.draggingElement){
+        return;
+      }
+      console.log(this.state);
+      switch (this.state){
+        case 0: // Idle
+          if (this.y < this.lowTresh){ this.state = 1; }
+          else if (this.y > this.highTresh){ this.state = 4; }
+          this.primaryCounter = 0;
+          this.secondaryCounter = 0;
+          break;
+        case 1: // Low start
+          if (this.y > this.lowTresh){ this.state = 0; }
+          else if (this.primaryCounter >= this.primaryCounterHit){ this.state = 3; }
+          this.primaryCounter++;
+          break;
+        case 2: // Scroll wait
+          if (this.y > this.lowTresh){ this.state = 0; }
+          else if (this.secondaryCounter >= this.secondaryCounterHit){ this.state = 3; }
+          this.secondaryCounter++;
+          break;
+        case 3: // Scroll down
+          if (this.y > this.lowTresh){ this.state = 0; }
+          this.setScroll(-this.scrollVal);
+          this.secondaryCounter = 0;
+          this.state = 2;
+          break;
+        case 4: // High start
+          if (this.y < this.highTresh){ this.state = 0; }
+          else if (this.primaryCounter >= this.primaryCounterHit){ this.state = 6; }
+          this.primaryCounter++;
+          break;
+        case 5: // Scroll wait
+          if (this.y < this.highTresh){ this.state = 0; }
+          else if (this.secondaryCounter >= this.secondaryCounterHit){ this.state = 6; }
+          this.secondaryCounter++;
+          break;
+        case 6: // Scroll down
+          if (this.y < this.highTresh){ this.state = 0; }
+          this.setScroll(this.scrollVal);
+          this.secondaryCounter = 0;
+          this.state = 5;
+          break;
+        default:
+          this.state = 0;
+      }
+      
+    }
+    
+    setScroll(verticalScroll){
+      window.scrollBy({
+        top: verticalScroll,
+        behavior: 'smooth'
+      });
+    }
+  }
+
+    
     $(document).ready(function() {
-        // $("#picklistDiv").sortable();
-        // $("#unsortedDiv").sortable();
         
         // Initialize Firebase
         firebaseApp = new firebaseWrapper();
-        tbaApp = new tbaAPI();
         
         readDefaultPicklist();
+        
+        var scrollHandlerObj = new scrollHandler();
+        
+        $.get("./tbaAPI.php", {getEventCode : true}, function(data){
+          eventCode = data;
+          loadPicklistNames();
+        });
         
         pickListSortable = new Sortable(document.getElementById('picklistDiv'), {
           group: 'shared',
           animation: 150,
           sort: true,
-          onEnd: tableManualChange
+          delayOnTouchOnly: true,
+          fallbackTolerance: 3,
+          scroll: true,
+          handle: '.pickHandle',
+          onStart: function(){scrollHandlerObj.startDrag()},
+          onEnd: function(){scrollHandlerObj.endDrag(); tableManualChange()},
+          setData: function(){console.log("AAA")},
+          onMove: function(evt, originalEvent){scrollHandlerObj.setY(originalEvent.clientY)}
+          // scrollFn: function(){console.log("A")}
         });
         
         notSortedSortable = new Sortable(document.getElementById('unsortedDiv'), {
           group: 'shared',
           animation: 150,
           sort: true,
-          onEnd: tableManualChange
+          delayOnTouchOnly: true,
+          fallbackTolerance: 3,
+          scroll: true,
+          handle: '.pickHandle',
+          onStart: function(){scrollHandlerObj.startDrag()},
+          onEnd: function(){scrollHandlerObj.endDrag(); tableManualChange()},
+          setData: function(){console.log("AAA")},
+          onMove: function(evt, originalEvent){scrollHandlerObj.setY(originalEvent.clientY)}
+          // onChange: function(){console.log("B")}
         });
         
         dnpSortable = new Sortable(document.getElementById('doNotPickDiv'), {
           group: 'shared',
           animation: 150,
           sort: true,
-          onEnd: tableManualChange
+          delayOnTouchOnly: true,
+          fallbackTolerance: 3,
+          scroll: true,
+          handle: '.pickHandle',
+          onStart: function(){scrollHandlerObj.startDrag()},
+          onEnd: function(){scrollHandlerObj.endDrag(); tableManualChange()},
+          setData: function(){console.log("AAA")},
+          onMove: function(evt, originalEvent){scrollHandlerObj.setY(originalEvent.clientY)}
+          // onChange: function(){console.log("C")}
         });
         
         $("#editPicklist").change(function(){
@@ -441,20 +603,24 @@
         });
         
         
-        loadPicklistNames();
-        
         $('#picklistSelect').change(function() {
             loadPicklist($(this).val());
         });
         
         bindPickedTeamsFromFirebase();
-      
+        setSortable(false);
+        
+        var intervalId = setInterval(function() {
+          scrollHandlerObj.handleScroll();
+        }, 10);
+        
+        
     });
      
+    
 </script>
 
 <script type="text/javascript" src="./scripts/firebaseWrapper.js"></script>
-<script type="text/javascript" src="./scripts/tbaAPI.js"></script>
     
     
     

@@ -17,7 +17,7 @@ function qrStringToList(dataString){
 }
 
 function validateQrList(dataList){
-  if (dataList.length != 11){
+  if (dataList.length != 13){
     return false;
   }
   return true;
@@ -36,6 +36,8 @@ function qrListToDict(dataList){
   out["died"]             = dataList[8];
   out["matchnumber"]      = dataList[9];
   out["eventcode"]        = dataList[10];
+  out["scoutname"]        = dataList[11];
+  out["comment"]          = dataList[12];
   return out;
 }
 

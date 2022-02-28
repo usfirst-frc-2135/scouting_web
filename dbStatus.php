@@ -12,7 +12,10 @@
           <div class="card-body">
             <h4>SQL Server Status: <span id="serverStatus" class="badge bg-warning">Not Connected</span></h4>
             <h4>Database Server Status: <span id="dbStatus" class="badge bg-warning">Not Connected</span></h4>
-            <h4>Table Status: <span id="tableStatus" class="badge bg-warning">Not Connected</span></h4>
+            <h4>Data Table Status: <span id="dataTableStatus" class="badge bg-warning">Not Connected</span></h4>
+            <h4>TBA Table Status: <span id="TBATableStatus" class="badge bg-warning">Not Connected</span></h4>
+            <h4>Pit Table Status: <span id="pitTableStatus" class="badge bg-warning">Not Connected</span></h4>
+            <h4>Rank Table Status: <span id="rankTableStatus" class="badge bg-warning">Not Connected</span></h4>
             <h4>Server: <span id="serverName" class="badge bg-primary">????</span></h4>
             <h4>Database: <span id="databaseName" class="badge bg-primary">????</span></h4>
             <h4>Username: <span id="userName" class="badge bg-primary">????</span></h4>
@@ -46,8 +49,20 @@
               <input type="text" class="form-control" id="writeDatabase" aria-describedby="databaseName">
             </div>
             <div class="mb-3">
-              <label for="writeTable" class="form-label">Table Name</label>
-              <input type="text" class="form-control" id="writeTable" aria-describedby="tableName">
+              <label for="writeDataTable" class="form-label">Data Table Name</label>
+              <input type="text" class="form-control" id="writeDataTable" aria-describedby="writeTableName">
+            </div>
+            <div class="mb-3">
+              <label for="writeTBATable" class="form-label">TBA Table Name</label>
+              <input type="text" class="form-control" id="writeTBATable" aria-describedby="writeTBATable">
+            </div>
+            <div class="mb-3">
+              <label for="writePitTable" class="form-label">Pit Table Name</label>
+              <input type="text" class="form-control" id="writePitTable" aria-describedby="writePitTable">
+            </div>
+            <div class="mb-3">
+              <label for="writeRankTable" class="form-label">Rank Table Name</label>
+              <input type="text" class="form-control" id="writeRankTable" aria-describedby="writeRankTable">
             </div>
             <div class="mb-3">
               <label for="writeUsername" class="form-label">User Name</label>
@@ -115,48 +130,34 @@
 <script>
   
   
+  function setStatusBadge(isSuccess, id){
+    if(isSuccess){
+      $("#"+id).text("Connected");
+      $("#"+id).addClass("bg-success");
+      $("#"+id).removeClass("bg-warning");
+      $("#"+id).removeClass("bg-danger");
+    }
+    else{
+      $("#"+id).text("Not Connected");
+      $("#"+id).addClass("bg-danger");
+      $("#"+id).removeClass("bg-warning");
+      $("#"+id).removeClass("bg-success");
+    }
+  }
+  
   function updateStatusValues(statusArray){
     $("#serverName").text(statusArray["server"]);
     $("#databaseName").text(statusArray["db"]);
     $("#userName").text(statusArray["username"]);
     $("#tbaKey").text(statusArray["tbakey"]);
     $("#eventCode").text(statusArray["eventcode"]);
-    if(statusArray["dbExists"]){
-      $("#dbStatus").text("Connected");
-      $("#dbStatus").addClass("bg-success");
-      $("#dbStatus").removeClass("bg-warning");
-      $("#dbStatus").removeClass("bg-danger");
-    }
-    else{
-      $("#dbStatus").text("Not Connected");
-      $("#dbStatus").addClass("bg-danger");
-      $("#dbStatus").removeClass("bg-warning");
-      $("#dbStatus").removeClass("bg-success");
-    }
-    if(statusArray["serverExists"]){
-      $("#serverStatus").text("Connected");
-      $("#serverStatus").addClass("bg-success");
-      $("#serverStatus").removeClass("bg-warning");
-      $("#serverStatus").removeClass("bg-danger");
-    }
-    else {
-      $("#serverStatus").text("Not Connected");
-      $("#serverStatus").addClass("bg-danger");
-      $("#serverStatus").removeClass("bg-warning");
-      $("#serverStatus").removeClass("bg-success");
-    }
-    if(statusArray["tableExists"]){
-      $("#tableStatus").text("Connected");
-      $("#tableStatus").addClass("bg-success");
-      $("#tableStatus").removeClass("bg-warning");
-      $("#tableStatus").removeClass("bg-danger");
-    }
-    else {
-      $("#tableStatus").text("Not Connected");
-      $("#tableStatus").addClass("bg-danger");
-      $("#tableStatus").removeClass("bg-warning");
-      $("#tableStatus").removeClass("bg-success");
-    }
+    
+    setStatusBadge(statusArray["dbExists"], "dbStatus");
+    setStatusBadge(statusArray["serverExists"], "serverStatus");
+    setStatusBadge(statusArray["dataTableExists"], "dataTableStatus");
+    setStatusBadge(statusArray["tbaTableExists"], "TBATableStatus");
+    setStatusBadge(statusArray["pitTableExists"], "pitTableStatus");
+    setStatusBadge(statusArray["rankTableExists"], "rankTableStatus");
     
     $("#writefbapikey").text(statusArray["fbapikey"]);
     $("#writefbauthdomain").text(statusArray["fbauthdomain"]);
@@ -169,8 +170,10 @@
   }
   
   
-  var id_to_key_map = {"writeServer" : "server", "writeDatabase" : "db", "writeTable" : "table", "writeUsername" : "username", 
+  var id_to_key_map = {"writeServer" : "server", "writeDatabase" : "db", "writeUsername" : "username", 
                        "writePassword" : "password", "writeTBAKey" : "tbakey", "writeEventCode" : "eventcode",
+                       "writeDataTable" : "datatable", "writeTBATable" : "tbatable",
+                       "writePitTable" : "pittable", "writeRankTable" : "ranktable",
                        "fbAPIKey" : "fbapikey", "fbAuthDomain" : "fbauthdomain", "fbDBUrl" : "fbdburl", 
                        "fbProjectID" : "fbprojectid", "fbStorageBucket" : "fbstoragebucket", "fbSenderID" : "fbsenderid",
                        "fbAppID" : "fbappid", "fbMeasurementID" : "fbmeasurementid"};

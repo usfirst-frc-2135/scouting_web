@@ -10,6 +10,7 @@
   <script type="text/javascript" src="./external/charts/chart.min.js"></script>
   <script type="text/javascript" src="./external/jquery-ui/jquery-ui.js"></script>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+  <!--<script type="module" src="./external/sortable/plugins/AutoScroll/AutoScroll.js"></script>-->
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
   
