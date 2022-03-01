@@ -2,6 +2,47 @@
 <?php include("header.php") ?>
 <div class="container row-offcanvas row-offcanvas-left">
   <div class="well column  col-lg-12  col-sm-12 col-xs-12" id="content">
+    <div class="row g-3">
+      <div class="container">
+        <div class="row">
+        <div class="col-1">
+            <h4>Match:</h4>
+        </div>
+      <div class="col-3">
+        <div class="input-group mb-3">
+              <select class="form-select" id="matchDropdown">
+              <option selected>Choose...</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              </select>
+          </div>
+      </div>
+    <div class="col">
+      <table class="table table-bordered">
+          <thead>
+            <tr>
+            <th colspan="2" class="text-center">Total Pts</th>
+            <th colspan="2" class="text-center">Total Pieces</th>
+            <th colspan="2" class="text-center">Total Climb Pts</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+            <td class="table-danger">&nbsp;</td>
+            <td class="table-primary">&nbsp;</td>
+            <td class="table-danger">&nbsp;</td>
+            <td class="table-primary">&nbsp;</td>
+            <td class="table-danger">&nbsp;</td>
+            <td class="table-primary">&nbsp;</td>
+            </tr>
+           </tbody>
+         </table>
+     </div>
+         </div>
+      </div>
+    </div>
+      
     <div class="row pt-3 pb-3 mb-3 gx-3">
       <div class="col-lg-4 col-sm-4 col-xs-4 gx-3">
         <div class="card text-white bg-danger mb-3">
@@ -167,7 +208,7 @@
              </div> 
       <div class="row pt-3 pb-3 mb-3 gx-3">
         <div class="col-lg-4 col-sm-4 col-xs-4 gx-3">
-          <div class="card text-dark bg-info mb-3">
+          <div class="card text-white bg-primary mb-3">
           <div class="card-body">
             <h5 class="card-title text-center">Team Number Here</h5>
               <div class="card mb-3">
@@ -205,7 +246,7 @@
           </div>
         </div>
     <div class="col-lg-4 col-sm-4 col-xs-4 gx-3">
-          <div class="card text-dark bg-info mb-3">
+          <div class="card text-white bg-primary mb-3">
           <div class="card-body">
             <h5 class="card-title text-center">Team Number Here</h5>
               <div class="card mb-3">
@@ -243,7 +284,7 @@
           </div>
         </div>
       <div class="col-lg-4 col-sm-4 col-xs-4 gx-3">
-          <div class="card text-dark bg-info mb-3">
+          <div class="card text-white bg-primary mb-3">
           <div class="card-body">
             <h5 class="card-title text-center">Team Number Here</h5>
               <div class="card mb-3">
