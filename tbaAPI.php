@@ -16,8 +16,13 @@
     echo($dbConfig["eventcode"]);
   }
   else if (isset($_GET["getTeamList"])){
-    // $tba->getTeamList($eventCode);
     echo(json_encode($tba->getSimpleTeamList($eventCode)));
+  }
+  else if (isset($_GET["getMatchList"])){
+    echo(json_encode($tba->getMatches($eventCode)));
+  }
+  else if (isset($_GET["getCOPRs"])){
+    echo(json_encode($tba->getComponentOPRS($eventCode)));
   }
   
 ?>
