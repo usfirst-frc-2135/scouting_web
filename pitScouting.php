@@ -22,19 +22,58 @@
                   <input type="number" class="form-control" id="batteries">
                 </div>
                 <div class="mb-3">
-                  <label for="programmingLanguage" class="form-label">Programming Language</label>
-                  <input type="text" class="form-control" id="batteries">
+                  <label for="batteryChargers" class="form-label">Number of Battery Chargers</label>
+                  <input type="number" class="form-control" id="batteries">
+                </div>
+                <div>
+                  <label class="form-label">Pit Organization</label>
+                </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="pitScore1" value="option1">
+                    <label class="form-check-label" for="pitScore1">1</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="pitScore2" value="option2">
+                    <label class="form-check-label" for="pitScore2">2</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="pitScore3" value="option2">
+                    <label class="form-check-label" for="pitScore3">3</label>
+                  </div>
+                <div>
+                  <label class="form-label">Does the team have spare parts?</label>
+                </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="sparePartsYes" value="option1">
+                    <label class="form-check-label" for="sparePartsYes">Yes</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="sparePartsNo" value="option2">
+                    <label class="form-check-label" for="sparePartsNo">No</label>
+                  </div>
+                <div class="mb-3">
+                  <label for="driveType" class="form-label">Programming Language</label>
+                  <div class="input-group mb-3">
+                    <select class="form-select" id="programmingLanguage">
+                    <option selected>Choose...</option>
+                    <option id="java" value="1">Java</option>
+                    <option id="labView" value="2">LabView</option>
+                    <option id="C++" value="3">C++</option>
+                    <option id="python" value="4">Python</option>
+                    <option id="other" value="5">Other</option>
+                    </select>
+                  </div>
                 </div>
                 <div class="mb-3">
-                  <label for="driveType" class="form-label">Drive Train Type</label>
+                  <label for="driveMotors" class="form-label">Drive Motors</label>
                   <div class="input-group mb-3">
-                  <select class="form-select" id="inputGroupSelect01">
-                  <option selected>Choose...</option>
-                  <option value="1">West Coast</option>
-                  <option value="2">other</option>
-                  <option value="3">other</option>
-                  </select>
-            </div>
+                    <select class="form-select" id="driveMotors">
+                    <option selected>Choose...</option>
+                    <option id="falcons" value="1">Falcons</option>
+                    <option id="neos" value="2">Neos</option>
+                    <option id="cims" value="3">Cims</option>
+                    </select>
+                  </div>
                 </div>
                 <div class="d-grid gap-2 col-6 mx-auto">
                   <button class="btn btn-primary" type="button" id="submit">Submit</button>

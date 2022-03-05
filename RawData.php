@@ -9,15 +9,17 @@
           <thead>
             <tr>
               <th scope="col">Match #</th>
-                <th scope="col">Team #</th>
+              <th scope="col">Team #</th>
               <th scope="col">Start Position</th>
               <th scope="col">Tarmac Cross</th>
               <th scope="col">Auto Upper Hub</th>
               <th scope="col">Auto Low Hub</th>
-                <th scope="col">Teleop Upper Hub</th>
-                <th scope="col">Teleop Low Hub</th>
-                <th scope="col">Climb</th>
-                <th scope="col">Died</th>
+              <th scope="col">Teleop Upper Hub</th>
+              <th scope="col">Teleop Low Hub</th>
+              <th scope="col">Climb</th>
+              <th scope="col">Died</th>
+              <th scope="col">Comment</th>
+              <th scope="col">Scout Name</th>
             </tr>
           </thead>
           <tbody id="tableData">
@@ -44,6 +46,8 @@
             +"<td>"+dataObj[i]["teleoplowpoints"]+"</td>"
             +"<td>"+dataObj[i]["climbed"]+"</td>"
             +"<td>"+dataObj[i]["died"]+"</td>"
+            +"<td>"+dataObj[i]["comment"]+"</td>"
+            +"<td>"+dataObj[i]["scoutname"]+"</td>"
             +"</td>";
             
             $("#tableData").append(rowString);
