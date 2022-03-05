@@ -3,12 +3,34 @@
 <div class="container row-offcanvas row-offcanvas-left">
     <div class="well column  col-lg-12  col-sm-12 col-xs-12" id="content">
         <div class="row pt-3 pb-3 mb-3 gx-3">
+        
+        <div>
+          <div class="input-group mb-3">
+            <input id="writeTeamNumber" type="text" class="form-control" placeholder="writeTeamNumber" aria-label="writeTeamNumber">
+            <button id="loadTeam" type="button" class="btn btn-primary">Load Team</button>
+          </div>
+        </div>
+        
+        
             <div class="col-lg-6 col-sm-6 col-xs-6 gx-3">
                 <div class="card mb-3">
-                    <img src="..." class="card-img-top" alt="...">
+                    <div id="robotPicsCarousel" class="carousel slide" data-bs-ride="carousel">
+                      <div id="robotPics" class="carousel-inner">
+                        
+                      </div>
+                      <button class="carousel-control-prev" type="button" data-bs-target="#robotPicsCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                      </button>
+                      <button class="carousel-control-next" type="button" data-bs-target="#robotPicsCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                      </button>
+                    </div>
+                    
                     <div class="card-body">
-                    <h5 class="card-title">robot picture</h5>
-                    <p class="card-text">pit scouting data here if used</p>
+                      <h5 class="card-title">robot picture</h5>
+                      <p class="card-text">pit scouting data here if used</p>
                     </div>
                 </div>
                 <div class="card mb-3">
@@ -229,9 +251,65 @@
         
     }
     
+    function checkGet(){
+      let sp = new URLSearchParams(window.location.search);
+      if (sp.has('teamNum')){
+        return sp.get('teamNum')
+      }
+      return null;
+    }
+    
+    
+    function clearTeamPics(){
+      $("#robotPics").html("");
+    }
+    
+    function loadTeamPics(teamPics){
+      /* Takes list of Team Pic paths and loads them
+      */
+      var first = true;
+      for(let uri of teamPics){
+        var tags = "";
+        if (first){
+          tags += "<div class='carousel-item active'>";
+        }
+        else {
+          tags += "<div class='carousel-item'>";
+        }
+        first = false;
+        tags += "  <img src='./"+uri+"' class='d-block w-100'>";
+        tags += "</div>";
+        $("#robotPics").append(tags);
+        console.log(tags);
+      }
+    }
+    
+    function loadTeam(team){
+      /* This is the main function that runs when we want to load a new team onto the page
+      
+      */
+      
+      // Clear existing data
+      clearTeamPics();
+      
+      // Write new data
+      
+      // Add new images/startingPositionB
+      $.get( "readAPI.php", {getTeamImages: team}).done( function( data ) {
+        var listOfImages = JSON.parse(data);        
+        loadTeamPics(listOfImages);
+      });
+    }
     
     $(document).ready(function() {
-        requestAPI();
+        var initTeamNumber = checkGet()
+        if (initTeamNumber){
+          loadTeam(initTeamNumber);
+        }
+        
+        $("#loadTeam").click(function(){
+          loadTeam($("#writeTeamNumber").val());
+        });
     });
     
     

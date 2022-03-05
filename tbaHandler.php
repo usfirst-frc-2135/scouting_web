@@ -53,12 +53,15 @@
       // Parse Header to get max-age
       $maxAge = 0;
       foreach(explode("\r\n", $headers) as $hdr){
-        list($key, $value) = explode(":", $hdr, 2);
-        if ($key == "Cache-Control"){
-          foreach(explode(",", $value) as $cacheControlKV){
-            $cacheKV = explode("=", $cacheControlKV, 2);
-            if (count($cacheKV) == 2 and strcmp($cacheKV[0], "max-age")){
-              $maxAge = intval($cacheKV[1]);
+        $kv = explode(":", $hdr, 2);
+        if (sizeof($kv) == 2){
+          list($key, $value) = $kv;
+          if ($key == "Cache-Control"){
+            foreach(explode(",", $value) as $cacheControlKV){
+              $cacheKV = explode("=", $cacheControlKV, 2);
+              if (count($cacheKV) == 2 and strcmp($cacheKV[0], "max-age")){
+                $maxAge = intval($cacheKV[1]);
+              }
             }
           }
         }
@@ -307,7 +310,7 @@
           $data[$team][$component] = round($x[$teamLookup[$team]], 2);
         }
       }
-      $out = array("data" => $data, "keys" => $this->getNumericalBreakdownKeys($simpleMatchData));
+      $out = array("eventCode" => $eventCode, "data" => $data, "keys" => $this->getNumericalBreakdownKeys($simpleMatchData));
       
       return $out;
     }
