@@ -30,8 +30,25 @@
                         </button>
                       </div>
                     
-                    
-                      <p class="card-text">pit scouting data here if used</p>
+                      <div class="overflow-auto">
+                            <table class="table table-striped table-hover sortable">
+                              <thead>
+                                <tr>
+                                  <th scope="col">Batteries</th>
+                                  <th scope="col">Chargers</th>
+                                  <th scope="col">Pit</th>
+                                  <th scope="col">Spare Parts</th>
+                                  <th scope="col">Programming</th>
+                                  <th scope="col">Drive Motors</th>
+                                </tr>
+                              </thead>
+                                
+                                <!-- pit data-- use this somewhere -->
+                                
+                              <tbody id="pitData">
+                              </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
                 <div class="card mb-3">

@@ -33,20 +33,14 @@
             </div>
         </div>
         
-    
-        
-        
-        
-        
-            
-        
-            
       <div class="row pt-3 pb-3 mb-3">
           <div class="overflow-auto">
+              
+              <!-- Heading of table -->
               <table class="table table-striped table-bordered table-hover sortable">
               <thead>
                 <tr>
-                    <td rowspan="3" class="text-center fw-bold">Team #</td>
+                    <td rowspan="1" class="text-center fw-bold"></td>
                     <td rowspan="1" class="text-center fw-bold"></td>
                     <td colspan="2" class="text-center fw-bold">Total Pts</td>
                     <th colspan="2" class="text-center">Total Auto Pts</th>
@@ -59,22 +53,32 @@
                 </tr>
                 <tr>
                     <th rowspan="1"></th>
-                    <th rowspan="2">AVG</th>
-                    <th rowspan="2">MAX</th>
-                    <th rowspan="2">AVG</th>
-                    <th rowspan="2">MAX</th>
-                    <th rowspan="2">AVG</th>
-                    <th rowspan="2">MAX</th>
-                    <th rowspan="2">AVG</th>
-                    <th rowspan="2">MAX</th>
+                    <th rowspan="1"></th>
+                    <th rowspan="1"></th>
+                    <th rowspan="1"></th>
+                    <th rowspan="1"></th>
+                    <th rowspan="1"></th>
+                    <th rowspan="1"></th>
+                    <th rowspan="1"></th>
+                    <th rowspan="1"></th>
+                    <th rowspan="1"></th>
                     <th colspan="2" class="text-center">Upper</th>
                     <th colspan="2" class="text-center">Lower</th>
                     <th colspan="2" class="text-center">Upper</th>
                     <th colspan="2" class="text-center">Lower</th>
                     <th colspan="5" class="text-center">Climb %</th>
                 </tr>
-                <tr>
+                <tr style="visibility: collapse;">
+                  <th scope="col">Team #</th>
                   <th scope="col">OPR</th>
+                  <th scope="col">AVG</th>
+                  <th scope="col">MAX</th>
+                  <th scope="col">AVG</th>
+                  <th scope="col">MAX</th>
+                  <th scope="col">AVG</th>
+                  <th scope="col">MAX</th>
+                  <th scope="col">AVG</th>
+                  <th scope="col">MAX</th>
                   <th scope="col">AVG</th>
                   <th scope="col">MAX</th>
                   <th scope="col">AVG</th>
@@ -90,6 +94,39 @@
                   <th scope="col">4</th>
                   <th scope="col">#</th>
                 </tr>
+              </thead>
+            </table>
+
+            <!-- sortable table body -->
+              <table class="table table-striped table-bordered table-hover sortable">
+              <thead>
+                <tr>
+                  <th scope="col">Team #</th>
+                  <th scope="col">OPR</th>
+                  <th scope="col">AVG</th>
+                  <th scope="col">MAX</th>
+                  <th scope="col">AVG</th>
+                  <th scope="col">MAX</th>
+                  <th scope="col">AVG</th>
+                  <th scope="col">MAX</th>
+                  <th scope="col">AVG</th>
+                  <th scope="col">MAX</th>
+                  <th scope="col">AVG</th>
+                  <th scope="col">MAX</th>
+                  <th scope="col">AVG</th>
+                  <th scope="col">MAX</th>
+                  <th scope="col">AVG</th>
+                  <th scope="col">MAX</th>
+                  <th scope="col">AVG</th>
+                  <th scope="col">MAX</th>
+                  <th scope="col">0</th>
+                  <th scope="col">1</th>
+                  <th scope="col">2</th>
+                  <th scope="col">3</th>
+                  <th scope="col">4</th>
+                  <th scope="col">#</th>
+                </tr>
+                  
               </thead>
               <tbody id="tableData">
               </tbody>
