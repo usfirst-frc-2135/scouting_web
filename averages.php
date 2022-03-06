@@ -47,6 +47,7 @@
               <thead>
                 <tr>
                     <td rowspan="3" class="text-center fw-bold">Team #</td>
+                    <td rowspan="1" class="text-center fw-bold"></td>
                     <td colspan="2" class="text-center fw-bold">Total Pts</td>
                     <th colspan="2" class="text-center">Total Auto Pts</th>
                     <th colspan="2" class="text-center">Total Teleop Pts</th>
@@ -54,9 +55,10 @@
                     <th colspan="4" class="text-center">Auton</th>
                     <th colspan="4" class="text-center">Teleop</th>
                     <th colspan="5" class="text-center">Endgame</th>
-                    <td colspan="2" class="text-center fw-bold">Died (0/1)</td>
+                    <td colspan="1" class="text-center fw-bold">Died</td>
                 </tr>
                 <tr>
+                    <th rowspan="1"></th>
                     <th rowspan="2">AVG</th>
                     <th rowspan="2">MAX</th>
                     <th rowspan="2">AVG</th>
@@ -72,6 +74,7 @@
                     <th colspan="5" class="text-center">Climb %</th>
                 </tr>
                 <tr>
+                  <th scope="col">OPR</th>
                   <th scope="col">AVG</th>
                   <th scope="col">MAX</th>
                   <th scope="col">AVG</th>
@@ -85,8 +88,7 @@
                   <th scope="col">2</th>
                   <th scope="col">3</th>
                   <th scope="col">4</th>
-                  <th scope="col">AVG</th>
-                  <th scope="col">MAX</th>
+                  <th scope="col">#</th>
                 </tr>
               </thead>
               <tbody id="tableData">
@@ -104,44 +106,95 @@
 <?php include("footer.php") ?>
 
 <script>
-    function dataToTable(dataObj){
-        for (let i = 0; i < dataObj.length; i++) {
-            var rowString = "<tr><td>"+dataObj[i]["teamnumber"]+"</td>"
-            +"<td>"+dataObj[i]["startpos"]+"</td>"
-            +"<td>"+dataObj[i]["tarmac"]+"</td>"
-            +"<td>"+dataObj[i]["autonhighpoints"]+"</td>"
-            +"<td>"+dataObj[i]["autonlowpoints"]+"</td>"
-            +"<td>"+dataObj[i]["teleophighpoints"]+"</td>"
-            +"<td>"+dataObj[i]["teleoplowpoints"]+"</td>"
-            +"<td>"+dataObj[i]["climbed"]+"</td>"
-            +"<td>"+dataObj[i]["died"]+"</td>"
-            +"</td>";
-            
-            $("#tableData").append(rowString);
-            
-        }
-        
+  
+  var teamList = new Set();
+  var scoutingData = {};
+  var tbaData = {};
+  
+  
+  function dummyGet(dict, key){
+    /* If key doesn't exist in given dict, return a 0. */
+    console.log(dict);
+    if (! dict){
+      return 0;
     }
-        
-
-    
-    
-    function requestAPI() {
-        //output: gets the API data from our server
-        $.get( "readAPI.php", {getAllData: 1}).done( function( data ) {
-            var dataObj = JSON.parse(data);        
-            var mdp = new matchDataProcessor(dataObj);
-            var dataAvg = mdp.getAverages();
-            //dataToTable(dataAvg);
-            console.log(dataAvg);
-        });
-        
+    if (key in dict){
+      return dict[key];
     }
+    return 0;
+  }
+  
+  
+  function dataToTable(){
+    /* Write data to table */
+    $("#tableData").html(""); // Clear Table
+    for (let teamNum of teamList) {
+      
+      var climbPercentage = dummyGet(scoutingData[teamNum], "endgameclimbpercent");
+      
+      var rowString = "<tr>"
+      + "<td><a href='teamLookup.php?teamNum="+teamNum+"'>" + teamNum + "</a></td>"
+      + "<td>" + dummyGet(tbaData[teamNum], "totalPoints") + "</td>"
+      + "<td>" + dummyGet(scoutingData[teamNum], "avgtotalpoints") + "</td>"
+      + "<td>" + dummyGet(scoutingData[teamNum], "maxtotalpoints") + "</td>"
+      + "<td>" + dummyGet(scoutingData[teamNum], "avgautopoints") + "</td>"
+      + "<td>" + dummyGet(scoutingData[teamNum], "maxautopoints") + "</td>"
+      + "<td>" + dummyGet(scoutingData[teamNum], "avgteleoppoints") + "</td>"
+      + "<td>" + dummyGet(scoutingData[teamNum], "maxteleoppoints") + "</td>"
+      + "<td>" + dummyGet(scoutingData[teamNum], "avgendgamepoints") + "</td>"
+      + "<td>" + dummyGet(scoutingData[teamNum], "maxendgamepoints") + "</td>"
+      + "<td>" + dummyGet(scoutingData[teamNum], "avgautonhighgoals") + "</td>"
+      + "<td>" + dummyGet(scoutingData[teamNum], "maxautonhighgoals") + "</td>"
+      + "<td>" + dummyGet(scoutingData[teamNum], "avgautonlowgoals") + "</td>"
+      + "<td>" + dummyGet(scoutingData[teamNum], "maxautonlowgoals") + "</td>"
+      + "<td>" + dummyGet(scoutingData[teamNum], "avgteleophighgoals") + "</td>"
+      + "<td>" + dummyGet(scoutingData[teamNum], "maxteleophighgoals") + "</td>"
+      + "<td>" + dummyGet(scoutingData[teamNum], "avgteleoplowgoals") + "</td>"
+      + "<td>" + dummyGet(scoutingData[teamNum], "maxteleoplowgoals") + "</td>"
+      + "<td>" + dummyGet(climbPercentage, 0)*100 + "%</td>"
+      + "<td>" + dummyGet(climbPercentage, 1)*100 + "%</td>"
+      + "<td>" + dummyGet(climbPercentage, 2)*100 + "%</td>"
+      + "<td>" + dummyGet(climbPercentage, 3)*100 + "%</td>"
+      + "<td>" + dummyGet(climbPercentage, 4)*100 + "%</td>"
+      + "<td>" + dummyGet(scoutingData[teamNum], "totaldied") + "</td>"
+      + "</td>";
+      
+      $("#tableData").append(rowString);
+    }
+  }
+    
+  
+  function addTeamKVToTeamList(data){
+    // Build a teamList from either our data or TBA data
+    for (var key in data){
+      teamList.add(key);
+    }
+  }
     
     
-    $(document).ready(function() {
-        requestAPI();
+  function requestAPI() {
+    // Gets data from our local scouting data
+    $.get( "readAPI.php", {getAllData: 1}).done( function( data ) {
+      data = JSON.parse(data);
+      var mdp = new matchDataProcessor(data);
+      scoutingData = mdp.getAverages();
+      addTeamKVToTeamList(scoutingData); 
+      dataToTable();
     });
+    
+    // Gets data from our TBA API
+    $.get( "tbaAPI.php", {getCOPRs: 1}).done( function( data ) {
+      data = JSON.parse(data)["data"];
+      addTeamKVToTeamList(data);
+      tbaData = data;
+      dataToTable();
+    });
+  }
+    
+    
+  $(document).ready(function() {
+    requestAPI();
+  });
     
 </script>
     

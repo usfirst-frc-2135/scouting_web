@@ -14,22 +14,23 @@
         
             <div class="col-lg-6 col-sm-6 col-xs-6 gx-3">
                 <div class="card mb-3">
-                    <div id="robotPicsCarousel" class="carousel slide" data-bs-ride="carousel">
-                      <div id="robotPics" class="carousel-inner">
-                        
+                  <div class="card-body">
+                      <h5 id="teamTitle" class="card-title">Team ????</h5>
+                      <div id="robotPicsCarousel" class="carousel slide" data-bs-ride="carousel">
+                        <div id="robotPics" class="carousel-inner">
+                          
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#robotPicsCarousel" data-bs-slide="prev">
+                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                          <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#robotPicsCarousel" data-bs-slide="next">
+                          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                          <span class="visually-hidden">Next</span>
+                        </button>
                       </div>
-                      <button class="carousel-control-prev" type="button" data-bs-target="#robotPicsCarousel" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                      </button>
-                      <button class="carousel-control-next" type="button" data-bs-target="#robotPicsCarousel" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                      </button>
-                    </div>
                     
-                    <div class="card-body">
-                      <h5 class="card-title">robot picture</h5>
+                    
                       <p class="card-text">pit scouting data here if used</p>
                     </div>
                 </div>
@@ -280,8 +281,15 @@
         tags += "  <img src='./"+uri+"' class='d-block w-100'>";
         tags += "</div>";
         $("#robotPics").append(tags);
-        console.log(tags);
       }
+    }
+    
+    function clearTeamTitle(){
+      $("#teamTitle").html("");
+    }
+    
+    function setTeamTitle(team){
+      $("#teamTitle").html("Team " + team);
     }
     
     function loadTeam(team){

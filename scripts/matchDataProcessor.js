@@ -18,7 +18,9 @@ class matchDataProcessor {
                    teleoplowpoints : x,
                    teleophighpoints : x,
                    climbed : x,
-                   died : x
+                   died : x,
+                   scoutname : x,
+                   comment : x
                   }]
     */
     this.data = data;
@@ -35,164 +37,155 @@ class matchDataProcessor {
     /*
     
       Returns = {
-                  teamNumber : { totalpoints : x,
-                                 avgtotalpoints : x,
+                  teamNumber : { avgtotalpoints : x,
                                  maxtotalpoints : x,
                                  
-                                 totalautopoints : x,
-                                 avgautopoints : x,
-                                 maxautopoints : x,
+                                 avgautopoints   : x,
+                                 maxautopoints   : x,
                                  
-                                 totalteleoppoints : x,
-                                 avgteleoppoints : x,
-                                 maxteleoppoints : x,
+                                 avgteleoppoints   : x,
+                                 maxteleoppoints   : x,
                                  
-                                 endgametotalpoints : x,
-                                 avgendgamepoints : x,
-                                 maxendgamepoints : x,
+                                 avgendgamepoints   : x,
+                                 maxendgamepoints   : x,
+                                  
+                                 avgautonhighgoals  : x,
+                                 maxautonhighgoals  : x,
+                                 avgautonlowergoals : x,
+                                 maxautonlowergoals : x,
                                  
-                                 avgautonhighpoints : x,
-                                 maxautonhighpoints : x,
-                                 avgautonlowerpoints : x,
-                                 maxautonlowerpoints : x,
+                                 avgteleophighgoals  : x,
+                                 maxteleophighgoals  : x,
+                                 avgteleoplowergoals : x,
+                                 maxteleoplowergoals : x,
                                  
-                                 avgteleophighpoints : x,
-                                 maxteleophighpoints : x,
+                                 tarmacpercent       : 0
+                                 endgameclimbpercent : {0:x, 1:x, 2:x, 3:x, 4:x}
+                                 autostartpercent    : {1:x, 2:x, 3:x, 4:x, 5:x}
                                  
-                                 avgteleoplowerpoints : x,
-                                 maxteleoplowerpoints : x,
-                                 
-                                 endgame0climbpoints : x,
-                                 endgame1climbpoints : x,
-                                 endgame2climbpoints : x,
-                                 endgame3climbpoints : x,
-                                 endgame4climbpoints : x,
-                                 
-                                 avgdied : x,
+                                 totaldied : x,
                                  
                                  totalmatches : x
+                                 
+                                 scoutnames : []
+                                 commentlist : []
                   }
                 }
     */
-
-  var avg={}; //general for all matches and all teams
-  for (var i=0; i<this.data.length; i++){
-      var tn=this.data[i]["teamnumber"];
-      console.log(this.data[i]);
-      if (! (tn in avg)){
-          avg [tn]={};
-          avg [tn]["totalpoints"]=0;
-          avg [tn]["avgtotalpoints"]=0;
-          avg [tn]["maxtotalpoints"]=0;
-          
-          avg [tn]["totalautopoints"]=0;
-          avg [tn]["avgautopoints"]=0;
-          avg [tn]["maxautopoints"]=0;
-          
-          avg [tn]["totalteleoppoints"]=0;
-          avg [tn]["avgteleoppoints"]=0;
-          avg [tn]["maxteleoppoints"]=0;
-          
-          avg [tn]["endgametotalpoints"]=0;
-          avg [tn]["avgendgamepoints"]=0;
-          avg [tn]["maxendgamepoints"]=0;
-          
-          avg [tn]["avgautonhighpoints"]=0;
-          avg [tn]["maxautonhighpoints"]=0;
-          
-          avg [tn]["avgautonlowerpoints"]=0;
-          avg [tn]["maxautonlowerpoints"]=0;
-          
-          avg [tn]["avgteleophighpoints"]=0;
-          avg [tn]["maxteleophighpoints"]=0;
-          
-          avg [tn]["avgteleoplowpoints"]=0;
-          avg [tn]["maxteleoplowpoints"]=0;
-          
-          avg [tn]["endgame0climbpoints"]=0;
-          avg [tn]["endgame1climbpoints"]=0;
-          avg [tn]["endgame2climbpoints"]=0;
-          avg [tn]["endgame3climbpoints"]=0; 
-          avg [tn]["endgame4climbpoints"]=0; 
-          
-          avg [tn]["avgdied"]=0;
-          avg [tn]["totalmatches"]=0;
-      }
-      avg [tn]["avgautonhighpoints"]+=this.data[i]["autonhighpoints"];
-      avg [tn]["avgautonlowerpoints"]+=this.data[i]["autonlowpoints"];
-      
-      avg [tn]["totalautopoints"]+=this.data[i]["autonlowpoints","autonhighpoints"];
-      
-      avg [tn]["maxautonhighpoints"]+=this.data[i]["autonhighpoints"];
-      avg [tn]["maxautonlowerpoints"]+=this.data[i]["autonlowpoints"];
-      
-      avg [tn]["avgautopoints"]+=this.data[i]["totalautopoints"];
-      
-      avg [tn]["avgteleophighpoints"]+=this.data[i]["teleophighpoints"];
-      avg [tn]["avgteleoplowpoints"]+=this.data[i]["teleoplowpoints"];
-      
-      avg [tn]["totalteleoppoints"]+=this.data[i]["teleoplowpoints","teleophighpoints"];
-      
-      avg [tn]["maxteleophighpoints"]+=this.data[i]["teleophighpoints"];
-      avg [tn]["maxteleoplowpoints"]+=this.data[i]["teleoplowpoints"];
-      
-     
-      avg [tn]["endgame0climbpoints"]+=this.data[i]["climbed"];
-      avg [tn]["endgame1climbpoints"]+=this.data[i]["climbed"];
-      avg [tn]["endgame2climbpoints"]+=this.data[i]["climbed"];
-      avg [tn]["endgame3climbpoints"]+=this.data[i]["climbed"];
-      avg [tn]["endgame4climbpoints"]+=this.data[i]["climbed"];
-      
-      
-      
-      avg [tn]["avgdied"]+=this.data[i]["died"];
-      avg [tn]["totalmatches"]+=1;
-      
-  }
-      
-      
-      for (var key in avg){ 
-          
-        
-        // Averages of High and Low Auton
-          
-        avg[key]["avgautonhighpoints"]= avg [key]["avgautonhighpoints"] / avg [key]["totalmatches"]
-          
-        avg[key]["avgautonlowerpoints"]= avg [key]["avgautonlowerpoints"] / avg [key]["totalmatches"]
-  
-        // Total Auton Points
-      
-        avg[key]["totalautopoints"]= avg [key]["autonhighpoints"] + avg [key]["autonlowpoints"]
-  
     
-        // Averages of High and Low Teleop
-      
-        avg[key]["avgteleophighpoints"]= avg [key]["avgteleophighpoints"] / avg [key]["totalmatches"]
-   
-        avg[key]["avgteleoplowpoints"]= avg [key]["avgteleoplowpoints"] / avg [key]["totalmatches"]
-
-        // Total Teleop Points
+    var avg={}; //general for all matches and all teams
+    for (var i=0; i<this.data.length; i++){
+      var tn = this.data[i]["teamnumber"];
+      if (! (tn in avg)){
+        avg[tn] = {};
         
-        avg[key]["totalteleoppoints"]= avg [key]["teleophighpoints"] + avg [key]["teleoplowpoints"]
-
-        // Average Died
-       
-        avg[key]["avgdied"]= avg [key]["avgdied"] / avg [key]["totalmatches"]
-      }
-          
-        return avg;
-      
-      // Endgame Climb Points
-      
-      
-      if (parseInt("climbed") = 0) {
-        avg [key]["endgame0climbpoints"]= parseInt ("endgame0climbpoints") + 0;
+        avg[tn]["avgtotalpoints"] = 0;
+        avg[tn]["maxtotalpoints"] = 0;
         
+        avg[tn]["avgautopoints"]   = 0;
+        avg[tn]["maxautopoints"]   = 0;
+  
+        avg[tn]["avgteleoppoints"]   = 0;
+        avg[tn]["maxteleoppoints"]   = 0;
+  
+        avg[tn]["avgendgamepoints"]   = 0;
+        avg[tn]["maxendgamepoints"]   = 0;
+        
+        avg[tn]["avgautonhighgoals"]  = 0;
+        avg[tn]["maxautonhighgoals"]  = 0;
+        avg[tn]["avgautonlowergoals"] = 0;
+        avg[tn]["maxautonlowergoals"] = 0;
+        
+        avg[tn]["avgteleophighgoals"] = 0;
+        avg[tn]["maxteleophighgoals"] = 0;
+        avg[tn]["avgteleoplowergoals"] = 0;
+        avg[tn]["maxteleoplowergoals"] = 0;
+        
+        avg[tn]["tarmacpercent"]       = 0;
+        avg[tn]["endgameclimbpercent"] = {0:0, 1:0, 2:0, 3:0, 4:0};
+        avg[tn]["autostartpercent"]    = {1:0, 2:0, 3:0, 4:0, 5:0};
+        
+        avg[tn]["totaldied"] = 0;
+        
+        avg[tn]["totalmatches"] = 0 ;
+        
+        avg[tn]["scoutnames"]  = [];
+        avg[tn]["commentlist"] = [];
       }
-     
-      return avg;
       
+      var autoPoints  = (this.data[i]["autonlowpoints"] * 2) + (this.data[i]["autonhighpoints"] * 4);
+      var telopPoints = this.data[i]["teleoplowpoints"] + (this.data[i]["teleophighpoints"] * 2);
       
+      var climbPoints = 0;
+      if(this.data[i]["climbed"] == 1){climbPoints = 4;}
+      if(this.data[i]["climbed"] == 2){climbPoints = 6;}
+      if(this.data[i]["climbed"] == 3){climbPoints = 10;}
+      if(this.data[i]["climbed"] == 4){climbPoints = 15;}
       
+      var totalPoints = autoPoints + telopPoints + climbPoints;
+      
+      avg[tn]["avgtotalpoints"] += totalPoints;
+      avg[tn]["maxtotalpoints"] = Math.max(avg[tn]["maxtotalpoints"], totalPoints);
+      
+      avg[tn]["avgautopoints"] += autoPoints;
+      avg[tn]["maxautopoints"] =  Math.max(avg[tn]["maxautopoints"], autoPoints);
+  
+      avg[tn]["avgteleoppoints"]   += telopPoints;
+      avg[tn]["maxteleoppoints"]   =  Math.max(avg[tn]["maxteleoppoints"], telopPoints);
+  
+      avg[tn]["avgendgamepoints"]   += climbPoints;
+      avg[tn]["maxendgamepoints"]   =  Math.max(avg[tn]["maxendgamepoints"], climbPoints);
+      
+      avg[tn]["avgautonhighgoals"]  += this.data[i]["autonhighpoints"];
+      avg[tn]["maxautonhighgoals"]  = Math.max(avg[tn]["maxautonhighgoals"], this.data[i]["autonhighpoints"]);
+      avg[tn]["avgautonlowergoals"] += this.data[i]["autonlowpoints"];
+      avg[tn]["maxautonlowergoals"] = Math.max(avg[tn]["maxautonlowergoals"], this.data[i]["autonlowpoints"]);
+      
+      avg[tn]["avgteleophighgoals"]  += this.data[i]["teleophighpoints"];
+      avg[tn]["maxteleophighgoals"]  = Math.max(avg[tn]["maxteleophighgoals"], this.data[i]["teleophighpoints"]);
+      avg[tn]["avgteleoplowergoals"] += this.data[i]["teleoplowpoints"];
+      avg[tn]["maxteleoplowergoals"] = Math.max(avg[tn]["maxteleoplowergoals"], this.data[i]["teleoplowpoints"]);
+      
+      avg[tn]["tarmacpercent"] += this.data[i]["tarmac"];
+      avg[tn]["endgameclimbpercent"][this.data[i]["climbed"]] += 1;
+      avg[tn]["autostartpercent"][this.data[i]["startpos"]]   += 1;
+      
+      avg[tn]["totaldied"] += this.data[i]["died"];
+      
+      avg[tn]["totalmatches"] += 1;
+      
+      avg[tn]["scoutnames"].push(this.data[i]["scoutname"]);
+      avg[tn]["commentlist"].push(this.data[i]["comment"]);
+      
+    }
+    
+    for (var key in avg){ 
+      avg[tn]["avgtotalpoints"]       = avg[tn]["avgtotalpoints"]      / avg[tn]["totalmatches"];
+      avg[tn]["avgautopoints"]        = avg[tn]["avgautopoints"]       / avg[tn]["totalmatches"];
+      avg[tn]["avgteleoppoints"]      = avg[tn]["avgteleoppoints"]     / avg[tn]["totalmatches"];
+      avg[tn]["avgendgamepoints"]     = avg[tn]["avgendgamepoints"]    / avg[tn]["totalmatches"];
+      avg[tn]["avgautonhighgoals"]    = avg[tn]["avgautonhighgoals"]   / avg[tn]["totalmatches"];
+      avg[tn]["avgautonlowergoals"]   = avg[tn]["avgautonlowergoals"]  / avg[tn]["totalmatches"];
+      avg[tn]["avgteleophighgoals"]   = avg[tn]["avgteleophighgoals"]  / avg[tn]["totalmatches"];
+      avg[tn]["avgteleoplowergoals"]  = avg[tn]["avgteleoplowergoals"] / avg[tn]["totalmatches"];
+      
+      avg[tn]["tarmacpercent"] = avg[tn]["tarmacpercent"] / avg[tn]["totalmatches"];
+      
+      avg[tn]["endgameclimbpercent"][0] = avg[tn]["endgameclimbpercent"][0] / avg[tn]["totalmatches"];
+      avg[tn]["endgameclimbpercent"][1] = avg[tn]["endgameclimbpercent"][1] / avg[tn]["totalmatches"];
+      avg[tn]["endgameclimbpercent"][2] = avg[tn]["endgameclimbpercent"][2] / avg[tn]["totalmatches"];
+      avg[tn]["endgameclimbpercent"][3] = avg[tn]["endgameclimbpercent"][3] / avg[tn]["totalmatches"];
+      avg[tn]["endgameclimbpercent"][4] = avg[tn]["endgameclimbpercent"][4] / avg[tn]["totalmatches"];
+      
+      avg[tn]["autostartpercent"][1] = avg[tn]["autostartpercent"][1] / avg[tn]["totalmatches"];
+      avg[tn]["autostartpercent"][2] = avg[tn]["autostartpercent"][2] / avg[tn]["totalmatches"];
+      avg[tn]["autostartpercent"][3] = avg[tn]["autostartpercent"][3] / avg[tn]["totalmatches"];
+      avg[tn]["autostartpercent"][4] = avg[tn]["autostartpercent"][4] / avg[tn]["totalmatches"];
+      avg[tn]["autostartpercent"][5] = avg[tn]["autostartpercent"][5] / avg[tn]["totalmatches"];
+      
+    }
+    
+    return avg;
+    
   }
 }
