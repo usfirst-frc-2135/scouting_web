@@ -32,6 +32,11 @@ class matchDataProcessor {
     */
   }
   
+  rnd(val){
+    /* Rounding helper function */
+    return Math.round((val + Number.EPSILON) * 100) / 100;
+  }
+  
   
   getAverages(){
     /*
@@ -160,28 +165,28 @@ class matchDataProcessor {
     }
     
     for (var key in avg){ 
-      avg[tn]["avgtotalpoints"]       = avg[tn]["avgtotalpoints"]      / avg[tn]["totalmatches"];
-      avg[tn]["avgautopoints"]        = avg[tn]["avgautopoints"]       / avg[tn]["totalmatches"];
-      avg[tn]["avgteleoppoints"]      = avg[tn]["avgteleoppoints"]     / avg[tn]["totalmatches"];
-      avg[tn]["avgendgamepoints"]     = avg[tn]["avgendgamepoints"]    / avg[tn]["totalmatches"];
-      avg[tn]["avgautonhighgoals"]    = avg[tn]["avgautonhighgoals"]   / avg[tn]["totalmatches"];
-      avg[tn]["avgautonlowergoals"]   = avg[tn]["avgautonlowergoals"]  / avg[tn]["totalmatches"];
-      avg[tn]["avgteleophighgoals"]   = avg[tn]["avgteleophighgoals"]  / avg[tn]["totalmatches"];
-      avg[tn]["avgteleoplowergoals"]  = avg[tn]["avgteleoplowergoals"] / avg[tn]["totalmatches"];
+      avg[key]["avgtotalpoints"]       = this.rnd(avg[key]["avgtotalpoints"]      / avg[key]["totalmatches"]);
+      avg[key]["avgautopoints"]        = this.rnd(avg[key]["avgautopoints"]       / avg[key]["totalmatches"]);
+      avg[key]["avgteleoppoints"]      = this.rnd(avg[key]["avgteleoppoints"]     / avg[key]["totalmatches"]);
+      avg[key]["avgendgamepoints"]     = this.rnd(avg[key]["avgendgamepoints"]    / avg[key]["totalmatches"]);
+      avg[key]["avgautonhighgoals"]    = this.rnd(avg[key]["avgautonhighgoals"]   / avg[key]["totalmatches"]);
+      avg[key]["avgautonlowergoals"]   = this.rnd(avg[key]["avgautonlowergoals"]  / avg[key]["totalmatches"]);
+      avg[key]["avgteleophighgoals"]   = this.rnd(avg[key]["avgteleophighgoals"]  / avg[key]["totalmatches"]);
+      avg[key]["avgteleoplowergoals"]  = this.rnd(avg[key]["avgteleoplowergoals"] / avg[key]["totalmatches"]);
       
-      avg[tn]["tarmacpercent"] = avg[tn]["tarmacpercent"] / avg[tn]["totalmatches"];
+      avg[key]["tarmacpercent"] = this.rnd(100* avg[key]["tarmacpercent"] / avg[key]["totalmatches"]);
       
-      avg[tn]["endgameclimbpercent"][0] = avg[tn]["endgameclimbpercent"][0] / avg[tn]["totalmatches"];
-      avg[tn]["endgameclimbpercent"][1] = avg[tn]["endgameclimbpercent"][1] / avg[tn]["totalmatches"];
-      avg[tn]["endgameclimbpercent"][2] = avg[tn]["endgameclimbpercent"][2] / avg[tn]["totalmatches"];
-      avg[tn]["endgameclimbpercent"][3] = avg[tn]["endgameclimbpercent"][3] / avg[tn]["totalmatches"];
-      avg[tn]["endgameclimbpercent"][4] = avg[tn]["endgameclimbpercent"][4] / avg[tn]["totalmatches"];
+      avg[key]["endgameclimbpercent"][0] = this.rnd(100 * avg[key]["endgameclimbpercent"][0] / avg[key]["totalmatches"]);
+      avg[key]["endgameclimbpercent"][1] = this.rnd(100 * avg[key]["endgameclimbpercent"][1] / avg[key]["totalmatches"]);
+      avg[key]["endgameclimbpercent"][2] = this.rnd(100 * avg[key]["endgameclimbpercent"][2] / avg[key]["totalmatches"]);
+      avg[key]["endgameclimbpercent"][3] = this.rnd(100 * avg[key]["endgameclimbpercent"][3] / avg[key]["totalmatches"]);
+      avg[key]["endgameclimbpercent"][4] = this.rnd(100 * avg[key]["endgameclimbpercent"][4] / avg[key]["totalmatches"]);
       
-      avg[tn]["autostartpercent"][1] = avg[tn]["autostartpercent"][1] / avg[tn]["totalmatches"];
-      avg[tn]["autostartpercent"][2] = avg[tn]["autostartpercent"][2] / avg[tn]["totalmatches"];
-      avg[tn]["autostartpercent"][3] = avg[tn]["autostartpercent"][3] / avg[tn]["totalmatches"];
-      avg[tn]["autostartpercent"][4] = avg[tn]["autostartpercent"][4] / avg[tn]["totalmatches"];
-      avg[tn]["autostartpercent"][5] = avg[tn]["autostartpercent"][5] / avg[tn]["totalmatches"];
+      avg[key]["autostartpercent"][1] = this.rnd(100 * avg[key]["autostartpercent"][1] / avg[key]["totalmatches"]);
+      avg[key]["autostartpercent"][2] = this.rnd(100 * avg[key]["autostartpercent"][2] / avg[key]["totalmatches"]);
+      avg[key]["autostartpercent"][3] = this.rnd(100 * avg[key]["autostartpercent"][3] / avg[key]["totalmatches"]);
+      avg[key]["autostartpercent"][4] = this.rnd(100 * avg[key]["autostartpercent"][4] / avg[key]["totalmatches"]);
+      avg[key]["autostartpercent"][5] = this.rnd(100 * avg[key]["autostartpercent"][5] / avg[key]["totalmatches"]);
       
     }
     

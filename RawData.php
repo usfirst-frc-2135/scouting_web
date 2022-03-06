@@ -5,7 +5,7 @@
     
       <div class="row pt-3 pb-3 mb-3">
 
-        <table class="table table-striped table-hover sortable">
+        <table id="rawDataTable" class="table table-striped table-hover sortable">
           <thead>
             <tr>
               <th scope="col">Match #</th>
@@ -62,6 +62,7 @@
         $.get( "readAPI.php", {getAllData: 1}).done( function( data ) {
             var dataObj = JSON.parse(data);        
             dataToTable(dataObj);
+            sorttable.makeSortable(document.getElementById("rawDataTable"));
         });
         
     }

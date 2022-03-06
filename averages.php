@@ -98,7 +98,7 @@
             </table>
 
             <!-- sortable table body -->
-              <table class="table table-striped table-bordered table-hover sortable">
+              <table id="rawDataTable" class="table table-striped table-bordered table-hover sortable">
               <thead>
                 <tr>
                   <th scope="col">Team #</th>
@@ -188,16 +188,17 @@
       + "<td>" + dummyGet(scoutingData[teamNum], "maxteleophighgoals") + "</td>"
       + "<td>" + dummyGet(scoutingData[teamNum], "avgteleoplowgoals") + "</td>"
       + "<td>" + dummyGet(scoutingData[teamNum], "maxteleoplowgoals") + "</td>"
-      + "<td>" + dummyGet(climbPercentage, 0)*100 + "%</td>"
-      + "<td>" + dummyGet(climbPercentage, 1)*100 + "%</td>"
-      + "<td>" + dummyGet(climbPercentage, 2)*100 + "%</td>"
-      + "<td>" + dummyGet(climbPercentage, 3)*100 + "%</td>"
-      + "<td>" + dummyGet(climbPercentage, 4)*100 + "%</td>"
+      + "<td>" + dummyGet(climbPercentage, 0) + "%</td>"
+      + "<td>" + dummyGet(climbPercentage, 1) + "%</td>"
+      + "<td>" + dummyGet(climbPercentage, 2) + "%</td>"
+      + "<td>" + dummyGet(climbPercentage, 3) + "%</td>"
+      + "<td>" + dummyGet(climbPercentage, 4) + "%</td>"
       + "<td>" + dummyGet(scoutingData[teamNum], "totaldied") + "</td>"
       + "</td>";
       
       $("#tableData").append(rowString);
     }
+    sorttable.makeSortable(document.getElementById("rawDataTable"));
   }
     
   
