@@ -163,6 +163,16 @@
       return $out;
     }
     
+    function removeUnplayedMatches($matchData){
+      $out = array();
+      foreach($matchData as $matchRow){
+        if ($matchRow["alliances"]["red"]["score"] != -1){
+          array_push($out, $matchRow);
+        }
+      }
+      return $out;
+    }
+    
     function getNumericalBreakdownKeys($matchData){
       $sampleBreakdown = $matchData[0]["score_breakdown"]["red"];
       $out = array();
@@ -286,6 +296,7 @@
       
       $simpleMatchData = $this->getSimpleMatches($eventCode);
       $simpleMatchData = $this->removeElimMatches($simpleMatchData);
+      $simpleMatchData = $this->removeUnplayedMatches($simpleMatchData);
       $matchMatricies = $this->createABMatricies($teamCount, $teamLookup, $simpleMatchData);
       
       $A    = $matchMatricies["A"]; 

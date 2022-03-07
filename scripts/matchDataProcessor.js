@@ -108,7 +108,7 @@ class matchDataProcessor {
         
         avg[tn]["tarmacpercent"]       = 0;
         avg[tn]["endgameclimbpercent"] = {0:0, 1:0, 2:0, 3:0, 4:0};
-        avg[tn]["autostartpercent"]    = {1:0, 2:0, 3:0, 4:0, 5:0};
+        avg[tn]["autostartpercent"]    = {1:0, 2:0, 3:0, 4:0, 5:0, 6:0};
         
         avg[tn]["totaldied"] = 0;
         
@@ -118,7 +118,7 @@ class matchDataProcessor {
         avg[tn]["commentlist"] = [];
       }
       
-      var autoPoints  = (this.data[i]["autonlowpoints"] * 2) + (this.data[i]["autonhighpoints"] * 4);
+      var autoPoints  = (this.data[i]["autonlowpoints"] * 2) + (this.data[i]["autonhighpoints"] * 4) + (this.data[i]["tarmac"] * 2);
       var telopPoints = this.data[i]["teleoplowpoints"] + (this.data[i]["teleophighpoints"] * 2);
       
       var climbPoints = 0;
@@ -187,6 +187,7 @@ class matchDataProcessor {
       avg[key]["autostartpercent"][3] = this.rnd(100 * avg[key]["autostartpercent"][3] / avg[key]["totalmatches"]);
       avg[key]["autostartpercent"][4] = this.rnd(100 * avg[key]["autostartpercent"][4] / avg[key]["totalmatches"]);
       avg[key]["autostartpercent"][5] = this.rnd(100 * avg[key]["autostartpercent"][5] / avg[key]["totalmatches"]);
+      avg[key]["autostartpercent"][5] = this.rnd(100 * avg[key]["autostartpercent"][6] / avg[key]["totalmatches"]);
       
     }
     

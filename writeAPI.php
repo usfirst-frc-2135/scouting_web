@@ -1,9 +1,16 @@
 <?php
   include("dbHandler.php");
+  $db = new dbHandler();
+  $dbConfig = $db->readDbConfig();
+  
+  
+  $eventCode = $dbConfig["eventcode"];
+  if (isset($_GET["eventCode"])){
+    $eventCode = $_GET["eventCode"];
+  }
   
   if (isset($_POST["writeData"])){
     // Write Data API
-    $db = new dbHandler();
     $db->connectToDB();
     $dat = json_decode($_POST["writeData"], true);
     // echo($_POST["writeData"]);
@@ -15,6 +22,17 @@
       catch(Exception $e){
       } 
     }
+  }
+  if (isset($_POST["writePitData"])){
+    /* 
+    $_POST["writePitData"] = {teamnumber : x, numbatteries : x, numchargers : x, pitorg : x,
+                       spareparts : x, proglanguage : x, drivemotors: x}
+    */
+    $db->connectToDB();
+    $args = json_decode($_POST["writePitData"]);
+    $args["entrykey"] = $eventCode . "_" . $args["teamnumber"];
+    $args["eventcode"] = $eventCode;
+    $db->writeRowToPitTable($args);
   }
   else if(isset($_POST["teamNum"]) and isset($_FILES["teamPic"])){
     // Upload Picture API

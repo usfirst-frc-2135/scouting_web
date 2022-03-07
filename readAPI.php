@@ -17,6 +17,27 @@
     // Get all data for a team
     echo(json_encode($db->readTeamData($_GET["getTeamData"], $eventCode)));
   }
+  else if (isset($_GET["getAllPitData"])){
+    // Get all pit data
+    $rawData = $db->readPitData($eventCode);
+    $out = array();
+    foreach($rawData as $row){
+      $out[$row["teamnumber"]] = $row;
+    }
+    echo(json_encode($out));
+  }
+  else if (isset($_GET["getTeamPitData"])){
+    // Get all pit data
+    $rawData = $db->readPitData($eventCode);
+    $out = array();
+    foreach($rawData as $row){
+      if ($row["teamnumber"] == $_GET["getTeamPitData"]){
+        $out = $row;
+        break;
+      }
+    }
+    echo(json_encode($out));
+  }
   else if (isset($_GET["getTeamImages"])){
     // Get all images for a team
     $imageList = array();

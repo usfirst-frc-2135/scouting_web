@@ -120,6 +120,46 @@
       return $result;
     }
     
+    function writeRowToPitTable($data){
+      $dbConfig = $this->readDbConfig();
+      $sql = "INSERT INTO ".$dbConfig["pittable"]."(entrykey,
+                       eventcode,
+                       teamnumber,
+                       numbatteries,
+                       numchargers,
+                       pitorg,
+                       spareparts,
+                       proglanguage,
+                       drivemotors)
+                VALUES(:entrykey,
+                       :eventcode,
+                       :teamnumber,
+                       :numbatteries,
+                       :numchargers,
+                       :pitorg,
+                       :spareparts,
+                       :proglanguage,
+                       :drivemotors)";
+      $prepared_statement = $this->conn->prepare($sql);
+      $prepared_statement->execute($data);
+    }
+    
+    function readPitData($eventCode){
+      $dbConfig = $this->readDbConfig();
+      $sql = "SELECT teamnumber,
+                     numbatteries,
+                     numchargers,
+                     pitorg,
+                     spareparts,
+                     proglanguage,
+                     drivemotors from ".$dbConfig["pittable"]." where 
+                     eventcode='".$eventCode."'";
+      $prepared_statement = $this->conn->prepare($sql);
+      $prepared_statement->execute();
+      $result = $prepared_statement->fetchAll();
+      return $result;
+    }
+    
     function createDB(){
       $dbConfig = $this->readDbConfig();
       $connection = $this->connectToServer();
@@ -165,6 +205,26 @@
       $statement = $conn->prepare($query);
       if (!$statement->execute()) {
         throw new Exception("createTBATable Error: CREATE TABLE ".$dbConfig["tbatable"]." query failed.");
+      }
+    }
+    
+    function createPitTable(){
+      $conn = $this->connectToDB();
+      $dbConfig = $this->readDbConfig();
+      $query = "CREATE TABLE " . $dbConfig["db"] . "." .$dbConfig["pittable"] . " (
+            entrykey VARCHAR(60) NOT NULL PRIMARY KEY,
+            eventcode VARCHAR(10) NOT NULL,
+            teamnumber VARCHAR(6) NOT NULL,
+            numbatteries TINYINT UNSIGNED NOT NULL,
+            numchargers TINYINT UNSIGNED NOT NULL,
+            pitorg TINYINT UNSIGNED NOT NULL,
+            spareparts TINYINT UNSIGNED NOT NULL,
+            proglanguage VARCHAR(20) NOT NULL,
+            drivemotors VARCHAR(20) NOT NULL
+        )";
+      $statement = $conn->prepare($query);
+      if (!$statement->execute()) {
+        throw new Exception("createPitTable Error: CREATE TABLE ".$dbConfig["pittable"]." query failed.");
       }
     }
     

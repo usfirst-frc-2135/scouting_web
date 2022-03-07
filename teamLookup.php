@@ -69,7 +69,7 @@
                                   <th scope="col">Died</th>
                                 </tr>
                               </thead>
-                                <tbody id="tableData">
+                                <tbody id="allMatchesTable">
                                 </tbody>
                             </table>
                         </div>
@@ -88,7 +88,6 @@
                                             <thead>
                                             <tr>
                                               <td>&nbsp;</td>
-                                              <th scope="col">0</th>
                                               <th scope="col">1</th>
                                               <th scope="col">2</th>
                                               <th scope="col">3</th>
@@ -97,7 +96,7 @@
                                               <th scope="col">6</th>
                                             </tr>
                                             </thead>
-                                            <tbody>
+                                            <tbody id="autoStartTable">
                                                 <tr>
                                                 <th scope="row">Start</th>
                                                 </tr>
@@ -105,13 +104,13 @@
                                         </table>
                                         <table class="table table-striped">
                                             <thead>
-                                            <tr>
-                                              <td>&nbsp;</td>
-                                              <th scope="col">AVG</th>
-                                              <th scope="col">MAX</th>
-                                            </tr>
+                                              <tr>
+                                                <td>&nbsp;</td>
+                                                <th scope="col">AVG</th>
+                                                <th scope="col">MAX</th>
+                                              </tr>
                                             </thead>
-                                            <tbody>
+                                            <tbody id="autoHubTable">
                                                 <tr>
                                                     <th scope="row">Cross</th>
                                                 </tr>
@@ -122,7 +121,7 @@
                                                     <th scope="row">Lower Hub</th>
                                                 </tr>
                                             </tbody>
-                                            <tfoot>
+                                            <tfoot id="autoHubTotalTable">
                                                 <tr>
                                                     <th scope="col">TOTAL</th>
                                                 </tr>
@@ -143,7 +142,7 @@
                                               <th scope="col">MAX</th>
                                             </tr>
                                             </thead>
-                                            <tbody>
+                                            <tbody id="teleopHubTable">
                                                 <tr>
                                                     <th scope="row">Upper Hub</th>
                                                 </tr>
@@ -151,7 +150,7 @@
                                                     <th scope="row">Lower Hub</th>
                                                 </tr>
                                             </tbody>
-                                            <tfoot>
+                                            <tfoot id="teleopHubTotalTable">
                                                 <tr>
                                                     <th scope="col">TOTAL</th>
                                                 </tr>
@@ -175,30 +174,11 @@
                                               <th scope="col">4</th>
                                             </tr>
                                             </thead>
-                                            <tbody>
+                                            <tbody id="climbTable">
                                                 <tr>
-                                                <th scope="row">Climb</th>
+                                                  <th scope="row">Climb %</th>
                                                 </tr>
                                             </tbody>
-                                        </table>
-                                        <table class="table table-striped">
-                                            <thead>
-                                            <tr>
-                                              <td>&nbsp;</td>
-                                              <th scope="col">AVG</th>
-                                              <th scope="col">MAX</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <th scope="row">Died</th>
-                                                </tr>
-                                            </tbody>
-                                            <tfoot>
-                                                <tr>
-                                                    <th scope="col">TOTAL</th>
-                                                </tr>
-                                            </tfoot>
                                         </table>
                                     </div>
                                 </div>
@@ -211,9 +191,9 @@
                                               <th scope="col">MAX</th>
                                             </tr>
                                             </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <th scope="row">TOTAL PTS</th>
+                                            <tbody id="totalTable">
+                                                <tr >
+                                                    <th scope="row">Total Points</th>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -240,47 +220,56 @@
 <?php include("footer.php") ?>
 
 <script>
-    function dataToTable(dataObj){
-        for (let i = 0; i < dataObj.length; i++) {
-            var rowString = "<tr><td>"+dataObj[i]["matchnumber"]+"</td>"
-            +"<td>"+dataObj[i]["startpos"]+"</td>"
-            +"<td>"+dataObj[i]["tarmac"]+"</td>"
-            +"<td>"+dataObj[i]["autonhighpoints"]+"</td>"
-            +"<td>"+dataObj[i]["autonlowpoints"]+"</td>"
-            +"<td>"+dataObj[i]["teleophighpoints"]+"</td>"
-            +"<td>"+dataObj[i]["teleoplowpoints"]+"</td>"
-            +"<td>"+dataObj[i]["climbed"]+"</td>"
-            +"<td>"+dataObj[i]["died"]+"</td>"
-            +"</td>";
-            
-            $("#tableData").append(rowString);
-            
-        }
-        
+  
+  function writeTableRow(tbodyID, dict, keys){
+    var row = "<tr>";
+    for(let i = 0; i < keys.length; i++){
+      row += "<td>"+dict[keys[i]]+"</td>";
     }
-        
-    
-    function requestAPI() {
-        //output: gets the API data from our server
-        $.get( "readAPI.php", {getAllData: 1}).done( function( data ) {
-            var dataObj = JSON.parse(data);        
-            dataToTable(dataObj);
-        });
-        
+    row += "</tr>";
+    $("#"+tbodyID).append(row);
+  }
+  
+  function dataToMatchTable(dataObj){
+    for (let i = 0; i < dataObj.length; i++) {
+      writeTableRow("allMatchesTable", dataObj[i], ["matchnumber", "startpos", "tarmac",
+        "autonhighpoints", "autonlowpoints", "teleophighpoints", "teleoplowpoints", "climbed", "died"]);
     }
+  }
+  
+  function dataToAvgTables(avgs){
+    // Auton Scores
+    avgs["autostartpercent"]["autostr"] = "<b>Start %</b>";
+    avgs["crossstr"] = "<b>Cross %</b>";
+    avgs["upperstr"] = "<b>Upper Cargo</b>";
+    avgs["lowerstr"] = "<b>Lower Cargo</b>";
+    avgs["totalstr"] = "<b>Total Points</b>";
+    avgs["endgameclimbpercent"]["climbstr"] = "<b>Climb %</b>";
+    writeTableRow("autoStartTable", avgs["autostartpercent"], ["autostr", 1, 2, 3, 4, 5, 6]);
+    writeTableRow("autoHubTable", avgs, ["crossstr", "tarmacpercent"]);
+    writeTableRow("autoHubTable", avgs, ["upperstr", "avgautonhighgoals", "maxautonhighgoals"]);
+    writeTableRow("autoHubTable", avgs, ["lowerstr", "avgautonlowergoals", "maxautonlowergoals"]);
+    writeTableRow("autoHubTotalTable", avgs, ["totalstr", "avgautopoints", "maxautopoints"]);
     
-    function checkGet(){
-      let sp = new URLSearchParams(window.location.search);
-      if (sp.has('teamNum')){
-        return sp.get('teamNum')
-      }
-      return null;
+    // Teleop Scores
+    writeTableRow("teleopHubTable", avgs, ["upperstr", "avgteleophighgoals", "maxteleophighgoals"]);
+    writeTableRow("teleopHubTable", avgs, ["lowerstr", "avgteleoplowergoals", "maxteleoplowergoals"]);
+    writeTableRow("teleopHubTotalTable", avgs, ["totalstr", "avgteleoppoints", "maxteleoppoints"]);
+    
+    // Climb Table
+    writeTableRow("climbTable", avgs["endgameclimbpercent"], ["climbstr", 0, 1, 2, 3, 4]);
+    
+    // Total Table
+    writeTableRow("totalTable", avgs, ["totalstr", "avgtotalpoints", "maxtotalpoints"]);
+  }
+    
+  function checkGet(){
+    let sp = new URLSearchParams(window.location.search);
+    if (sp.has('teamNum')){
+      return sp.get('teamNum')
     }
-    
-    
-    function clearTeamPics(){
-      $("#robotPics").html("");
-    }
+    return null;
+  }
     
     function loadTeamPics(teamPics){
       /* Takes list of Team Pic paths and loads them
@@ -301,12 +290,23 @@
       }
     }
     
-    function clearTeamTitle(){
-      $("#teamTitle").html("");
-    }
-    
     function setTeamTitle(team){
       $("#teamTitle").html("Team " + team);
+    }
+    
+    function processMatchData(team, data){
+      var mdp = new matchDataProcessor(data);
+      processedData = mdp.getAverages()[team];
+      dataToMatchTable(data);
+      dataToAvgTables(processedData);
+    }
+    
+    
+    function processPitData(data){
+      if (!data || !data.length){
+        data["sparepartsstring"] = data["spareparts"] ? "yes" : "no";
+        writeTableRow("pitData", data, ["numbatteries", "numchargers", "pitorg", "sparepartsstring", "proglanguage", "drivemotors"]);
+      }
     }
     
     function loadTeam(team){
@@ -315,15 +315,39 @@
       */
       
       // Clear existing data
-      clearTeamPics();
+      $("#robotPics").html("");
+      $("#teamTitle").html("");
+      $("#pitData").html("");
+      $("#allMatchesTable").html("");
+      $("#autoStartTable").html("");
+      $("#autoHubTable").html("");
+      $("#autoHubTotalTable").html("");
+      $("#teleopHubTable").html("");
+      $("#teleopHubTotalTable").html("");
+      $("#climbTable").html("");
+      $("#totalTable").html("");
       
       // Write new data
+      setTeamTitle(team);
       
-      // Add new images/startingPositionB
+      // Add new images
       $.get( "readAPI.php", {getTeamImages: team}).done( function( data ) {
         var listOfImages = JSON.parse(data);        
         loadTeamPics(listOfImages);
       });
+      
+      // Add Match Scouting Data
+      $.get( "readAPI.php", {getTeamData: team}).done( function( data ) {
+        matchData = JSON.parse(data);        
+        processMatchData(team, matchData);
+      });
+      
+      // Add Pit Scouting Data
+      $.get( "readAPI.php", {getTeamPitData: team}).done( function( data ) {
+        pitData = JSON.parse(data);        
+        processPitData(pitData);
+      });
+      
     }
     
     $(document).ready(function() {
@@ -338,10 +362,6 @@
     });
     
     
-    
-
-    
-    
 </script>
     
-    
+<script type="text/javascript" src="./scripts/matchDataProcessor.js"></script>
