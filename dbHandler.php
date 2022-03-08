@@ -200,7 +200,7 @@
       $query = "CREATE TABLE " . $dbConfig["db"] . "." .$dbConfig["tbatable"] . " (
             requestURI VARCHAR(100) NOT NULL PRIMARY KEY,
             expiryTime BIGINT NOT NULL,
-            response JSON NOT NULL
+            response MEDIUMTEXT NOT NULL
         )";
       $statement = $conn->prepare($query);
       if (!$statement->execute()) {
