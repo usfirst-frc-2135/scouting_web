@@ -2,7 +2,7 @@
 <?php include("header.php") ?>
 <div class="container row-offcanvas row-offcanvas-left">
   <div class="well column  col-lg-12  col-sm-12 col-xs-12" id="content">
-    <div class="row g-3">
+    <div class="row g-3 justify-content-md-center">
       <div class="g-4">
         <div class="input-group mb-3">
           <select class="form-select" id="writeCompLevel" aria-label="Comp Level Select">
@@ -14,28 +14,37 @@
           <input id="writeMatchNumber" type="text" class="form-control" placeholder="Match Number" aria-label="writeMatchNumber">
           <button id="loadMatch" type="button" class="btn btn-primary">Load Match</button>
         </div>
-        <h4 id="matchTitle">Match:</h4>
       </div>
-      
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th colspan="2" class="text-center">Total Pts</th>
-            <th colspan="2" class="text-center">Total Pieces</th>
-            <th colspan="2" class="text-center">Total Climb Pts</th>
-          </tr>
-        </thead>
+
+      <div class="col-md-6">
+        <h4 id="matchTitle">Match:</h4>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th class="text-center"></th>
+              <th class="text-center">Red</th>
+              <th class="text-center">Blue</th>
+            </tr>
+          </thead>
           <tbody>
             <tr>
-            <td class="table-danger">&nbsp;</td>
-            <td class="table-primary">&nbsp;</td>
-            <td class="table-danger">&nbsp;</td>
-            <td class="table-primary">&nbsp;</td>
-            <td class="table-danger">&nbsp;</td>
-            <td class="table-primary">&nbsp;</td>
+              <td class="table-secondary">Avg Total Points</td>
+              <td class="table-danger" id="redTotalPoints"></td>
+              <td class="table-primary" id="blueTotalPoints"></td>
+            </tr>
+            <tr>
+              <td class="table-secondary">Avg Total Cargo</td>
+              <td class="table-danger" id="redTotalCargo"></td>
+              <td class="table-primary" id="blueTotalCargo"></td>
+            </tr>
+            <tr>
+              <td class="table-secondary">Avg Climb Points</td>
+              <td class="table-danger" id="redExpectedClimbPoints"></td>
+              <td class="table-primary" id="blueExpectedClimbPoints"></td>
             </tr>
           </tbody>
         </table>
+      </div>
     </div>
       
     <div class="row pt-3 pb-3 mb-3 gx-3">
@@ -335,6 +344,7 @@
   var localMatchList = null;
   var localMatchNum = null;
   var localCompLevel = null;
+  var picDB = {};
   
   function checkGet(){
     let sp = new URLSearchParams(window.location.search);
@@ -385,6 +395,22 @@
   }
   
   function loadMatch(matchNum, compLevel){
+    // Clear Data
+    $("#R0DataTable").html("");
+    $("#R1DataTable").html("");
+    $("#R2DataTable").html("");
+    $("#B0DataTable").html("");
+    $("#B1DataTable").html("");
+    $("#B2DataTable").html("");
+    $("#redTotalPoints").html("");
+    $("#redTotalCargo").html("");
+    $("#redExpectedClimbPoints").html("");
+    $("#blueTotalPoints").html("");
+    $("#blueTotalCargo").html("");
+    $("#blueExpectedClimbPoints").html("");
+    picDB = {};
+    // Write Match Number
+    $("#matchTitle").html("Match " + compLevel + " " + matchNum);
     // Pull Data
     localMatchNum = matchNum;
     localCompLevel = compLevel;
@@ -398,17 +424,57 @@
       alert(makeKey(localMatchNum, localCompLevel) + " does not exist!");
       return;
     }
+    
+    // Update Team Boxes
     for(let i in matchVector["red_teams"]){
       displayTeam("R", i, strTeamToIntTeam(matchVector["red_teams"][i]));
     }
     for(let i in matchVector["blue_teams"]){
       displayTeam("B", i, strTeamToIntTeam(matchVector["blue_teams"][i]));
     }
+    
+    // Update Summary Box
+    updateSummary(matchVector["red_teams"], matchVector["blue_teams"]);
+    
+    // Request Team Pics
+    sendPicRequest(matchVector["red_teams"], matchVector["blue_teams"]);
   }
   
+  function updateSummary(redList, blueList){
+    var avgTotalPoints = {"red" : 0, "blue" : 0};
+    var avgTotalCargo = {"red" : 0, "blue" : 0};
+    var expectedClimb = {"red" : 0, "blue" : 0};
+    
+    for(let i in redList){
+      teamNum = strTeamToIntTeam(redList[i]);
+      var rd = localMatchData[teamNum];
+      avgTotalPoints["red"] += rd["avgtotalpoints"];
+      avgTotalCargo["red"] += rd["avgautonhighgoals"] + rd["avgautonlowergoals"] + rd["avgteleophighgoals"] + rd["avgteleoplowergoals"];
+      expectedClimb["red"] += rd["avgendgamepoints"];
+    }
+    for(let i in blueList){
+      teamNum = strTeamToIntTeam(blueList[i]);
+      var rd = localMatchData[teamNum];
+      avgTotalPoints["blue"] += rd["avgtotalpoints"];
+      avgTotalCargo["blue"] += rd["avgautonhighgoals"] + rd["avgautonlowergoals"] + rd["avgteleophighgoals"] + rd["avgteleoplowergoals"];
+      expectedClimb["blue"] += rd["avgendgamepoints"];
+    }
+    
+    $("#redTotalPoints").html(roundInt(avgTotalPoints["red"]));
+    $("#redTotalCargo").html(roundInt(avgTotalCargo["red"]));
+    $("#redExpectedClimbPoints").html(roundInt(expectedClimb["red"]));
+    
+    $("#blueTotalPoints").html(roundInt(avgTotalPoints["blue"]));
+    $("#blueTotalCargo").html(roundInt(avgTotalCargo["blue"]));
+    $("#blueExpectedClimbPoints").html(roundInt(expectedClimb["blue"]));
+  }
+  
+  function roundInt(val){
+    return Math.round((val + Number.EPSILON) * 100) / 100;
+  }
   
   function displayTeam(color, index, teamNum){
-    $("#"+color+index+"TeamNumber").html(teamNum);
+    $("#"+color+index+"TeamNumber").html("<a class='text-white' href='teamLookup.php?teamNum="+teamNum+"'>"+teamNum+"</a>");
     var rd = localMatchData[teamNum];
     var row = "<tr>";
     row += "<td>" + rd["avgautonhighgoals"] + "</td>";
@@ -423,6 +489,47 @@
     row += "</tr>";
     $("#"+color+index+"DataTable").append(row);
   }
+  
+  function sendPicRequest(redList, blueList){
+    var requestList = []
+    for(let i in redList){
+      var tn = strTeamToIntTeam(redList[i]);
+      picDB[tn] = "R"+i;
+      requestList.push(tn);
+    }
+    for(let i in blueList){
+      var tn = strTeamToIntTeam(blueList[i]);
+      picDB[tn] = "B"+i;
+      requestList.push(tn);
+    }
+    
+    $.get( "readAPI.php", {getTeamsImages: JSON.stringify(requestList)}).done( function( data ) {
+      var teamImages = JSON.parse(data);
+      for (var team of Object.keys(teamImages)) {
+        loadTeamPics(picDB[team], teamImages[team]);
+      }
+    });
+  }
+  
+  function loadTeamPics(prefix, teamPics){
+      /* Takes list of Team Pic paths and loads them
+      */
+      var first = true;
+      for(let uri of teamPics){
+        var tags = "";
+        if (first){
+          tags += "<div class='carousel-item active'>";
+        }
+        else {
+          tags += "<div class='carousel-item'>";
+        }
+        first = false;
+        tags += "  <img src='./"+uri+"' class='d-block w-100'>";
+        tags += "</div>";
+        $("#"+prefix+"RobotPics").append(tags);
+      }
+    }
+    
   
   function strTeamToIntTeam(team){
     return parseInt(team.replace(/^(frc)/,''));
