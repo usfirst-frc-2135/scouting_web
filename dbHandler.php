@@ -76,6 +76,26 @@
       $prepared_statement->execute($data);
     }
     
+    function enforceInt($val){
+      return intval($val);
+    }
+    
+    function enforceDataTyping($data){
+      $out = array();
+      foreach($data as $row){
+        foreach ($row as $key => $value){
+          if($key == "startpos" || $key == "tarmac" || $key == "autonlowpoints" || $key == "autonhighpoints" || $key == "teleoplowpoints" || $key == "teleophighpoints" || $key == "climbed" || $key == "died"){
+            $row[$key] = $this->enforceInt($value);
+          }
+          else {
+            $row[$key] = $value;
+          }
+        }
+        array_push($out, $row);
+      }
+      return $out;
+    }
+    
     function readAllData($eventCode){
       $dbConfig = $this->readDbConfig();
       $sql = "SELECT teamnumber,
@@ -94,7 +114,7 @@
       $prepared_statement = $this->conn->prepare($sql);
       $prepared_statement->execute();
       $result = $prepared_statement->fetchAll();
-      return $result;
+      return $this->enforceDataTyping($result);
     }
     
     function readTeamData($teamNumber, $eventCode){
@@ -117,7 +137,7 @@
       $prepared_statement = $this->conn->prepare($sql);
       $prepared_statement->execute();
       $result = $prepared_statement->fetchAll();
-      return $result;
+      return $this->enforceDataTyping($result);
     }
     
     function writeRowToPitTable($data){

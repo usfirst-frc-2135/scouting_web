@@ -122,7 +122,7 @@
   
   function dummyGet(dict, key){
     /* If key doesn't exist in given dict, return a 0. */
-    console.log(dict);
+    // console.log(dict);
     if (! dict){
       return 0;
     }
@@ -169,8 +169,8 @@
       
       $("#tableData").append(rowString);
     }
-      $('#rawDataTable').DataTable();
-      //sorttable.makeSortable(document.getElementById("rawDataTable"));
+      
+      sorttable.makeSortable(document.getElementById("rawDataTable"));
   }
     
   
@@ -204,6 +204,7 @@
     
   $(document).ready(function() {
     requestAPI();
+    
   });
     
   
@@ -211,5 +212,5 @@
     
 </script>
     
-<script type="text/javascript" src="./external/DataTables/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="./external/DataTables/DataTables-1.11.5/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="./scripts/matchDataProcessor.js"></script>

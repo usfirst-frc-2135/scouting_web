@@ -121,7 +121,7 @@ function scanCamera(reader, id){
 
 function alertSuccessfulScan(){
   try{
-    navigator.vibrate(200);
+    window.navigator.vibrate(200);
   }
   catch(exception){
     

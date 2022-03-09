@@ -2,8 +2,15 @@
 <?php include("header.php") ?>
 <div class="container row-offcanvas row-offcanvas-left">
   <div class="well column  col-lg-12  col-sm-12 col-xs-12" id="content">
+  <div class="row g-3 justify-content-md-center">
     <div class="row g-3 justify-content-md-center">
-      <div class="g-4">
+      <div class="col-md-6">
+        <div id="ourMatches">
+        </div>
+      </div>
+    </div>
+    <div class="row g-3 justify-content-md-center">
+      <div class="g-4 col-md-6">
         <div class="input-group mb-3">
           <select class="form-select" id="writeCompLevel" aria-label="Comp Level Select">
             <option value="QM">QM</option>
@@ -15,7 +22,9 @@
           <button id="loadMatch" type="button" class="btn btn-primary">Load Match</button>
         </div>
       </div>
+    </div>
 
+    <div class="row justify-content-md-center">
       <div class="col-md-6">
         <h4 id="matchTitle">Match:</h4>
         <table class="table table-bordered">
@@ -345,6 +354,8 @@
   var localMatchNum = null;
   var localCompLevel = null;
   var picDB = {};
+  var ourTeam = "frc1678";
+  var ourMatches = {};
   
   function checkGet(){
     let sp = new URLSearchParams(window.location.search);
@@ -368,6 +379,23 @@
     }
   }
   
+  function createOurMatchTable(){
+    var arrOurMatches = [];
+    for(let key in ourMatches){
+      arrOurMatches.push(ourMatches[key]);
+    }
+    arrOurMatches.sort(function(a,b){a["match_number"] - b["match_number"]});
+    $("#ourMatches").html("");
+    var row = 'Our Matches: ';
+    for(let i in arrOurMatches){
+      if (i != 0){
+        row += ", ";
+      }
+      row += '<a class="text-black" href="./matchSheet.php?matchNum='+arrOurMatches[i]["match_number"]+'&compLevel='+arrOurMatches[i]["comp_level"]+'">'+arrOurMatches[i]["comp_level"]+arrOurMatches[i]["match_number"]+'</a>';
+    }
+    $("#ourMatches").html(row);
+  }
+  
   function loadMatchList(successFunction){
     if(!localMatchList){
       $.get( "tbaAPI.php", {getMatchList: 1}).done( function( data ) {
@@ -381,7 +409,12 @@
           newMatch["red_teams"]    = match["alliances"]["red"]["team_keys"];
           newMatch["blue_teams"]   = match["alliances"]["blue"]["team_keys"];
           localMatchList[makeKey(newMatch["match_number"], newMatch["comp_level"])] = newMatch;
+          //
+          if (newMatch["red_teams"].includes(ourTeam) || newMatch["blue_teams"].includes(ourTeam)){
+            ourMatches[newMatch["comp_level"] + newMatch["match_number"]] = newMatch;
+          }
         }
+        createOurMatchTable();
         successFunction();
       });
     }
@@ -408,6 +441,12 @@
     $("#blueTotalPoints").html("");
     $("#blueTotalCargo").html("");
     $("#blueExpectedClimbPoints").html("");
+    $("#R0RobotPics").html("");
+    $("#R1RobotPics").html("");
+    $("#R2RobotPics").html("");
+    $("#B0RobotPics").html("");
+    $("#B1RobotPics").html("");
+    $("#B2RobotPics").html("");
     picDB = {};
     // Write Match Number
     $("#matchTitle").html("Match " + compLevel + " " + matchNum);
@@ -544,6 +583,9 @@
     $("#loadMatch").click(function(){
       loadMatch($("#writeMatchNumber").val(), $("#writeCompLevel").val());
     });
+    
+    loadMatchList(function(){});
+    
   });
   
 </script>

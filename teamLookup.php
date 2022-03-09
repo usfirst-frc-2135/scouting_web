@@ -55,7 +55,7 @@
                     <div class="card-body">
                         <h5 class="card-title">All Matches</h5>
                         <div class="overflow-auto">
-                            <table class="table table-striped table-hover sortable">
+                            <table id="sortableAllMatches" class="table table-striped table-hover sortable">
                               <thead>
                                 <tr>
                                   <th scope="col">Match #</th>
@@ -235,6 +235,7 @@
       writeTableRow("allMatchesTable", dataObj[i], ["matchnumber", "startpos", "tarmac",
         "autonhighpoints", "autonlowpoints", "teleophighpoints", "teleoplowpoints", "climbed", "died"]);
     }
+    sorttable.makeSortable(document.getElementById("sortableAllMatches"));
   }
   
   function dataToAvgTables(avgs){

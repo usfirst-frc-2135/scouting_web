@@ -84,7 +84,7 @@
       //
       $out = array("expiryTime" => 0, "response" => null);
       if (count($result) != 0){
-        $out["expiryTime"] = $result[0]["expiryTime"];
+        $out["expiryTime"] = intval($result[0]["expiryTime"]);
         $out["response"] = json_decode($result[0]["response"], true);
       }
       return $out;
