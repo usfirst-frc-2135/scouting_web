@@ -35,9 +35,8 @@
         
       <div class="row pt-3 pb-3 mb-3">
           <div class="overflow-auto">
-              
-              <!-- Heading of table -->
-              <table class="table table-striped table-bordered table-hover sortable">
+            
+              <table id="rawDataTable" class="table table-striped table-bordered table-hover sortable" style="width:100%">
               <thead>
                 <tr>
                     <td rowspan="1" class="text-center fw-bold"></td>
@@ -68,38 +67,6 @@
                     <th colspan="2" class="text-center">Lower</th>
                     <th colspan="5" class="text-center">Climb %</th>
                 </tr>
-                <tr style="visibility: collapse;">
-                  <th scope="col">Team #</th>
-                  <th scope="col">OPR</th>
-                  <th scope="col">AVG</th>
-                  <th scope="col">MAX</th>
-                  <th scope="col">AVG</th>
-                  <th scope="col">MAX</th>
-                  <th scope="col">AVG</th>
-                  <th scope="col">MAX</th>
-                  <th scope="col">AVG</th>
-                  <th scope="col">MAX</th>
-                  <th scope="col">AVG</th>
-                  <th scope="col">MAX</th>
-                  <th scope="col">AVG</th>
-                  <th scope="col">MAX</th>
-                  <th scope="col">AVG</th>
-                  <th scope="col">MAX</th>
-                  <th scope="col">AVG</th>
-                  <th scope="col">MAX</th>
-                  <th scope="col">0</th>
-                  <th scope="col">1</th>
-                  <th scope="col">2</th>
-                  <th scope="col">3</th>
-                  <th scope="col">4</th>
-                  <th scope="col">#</th>
-                </tr>
-              </thead>
-            </table>
-
-            <!-- sortable table body -->
-              <table id="rawDataTable" class="table table-striped table-bordered table-hover sortable">
-              <thead>
                 <tr>
                   <th scope="col">Team #</th>
                   <th scope="col">OPR</th>
@@ -142,8 +109,12 @@
 
 <?php include("footer.php") ?>
 
+<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 <script>
-  
+  src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"
+    
+    
   var teamList = new Set();
   var scoutingData = {};
   var tbaData = {};
@@ -198,7 +169,8 @@
       
       $("#tableData").append(rowString);
     }
-    sorttable.makeSortable(document.getElementById("rawDataTable"));
+      $('#rawDataTable').DataTable();
+      //sorttable.makeSortable(document.getElementById("rawDataTable"));
   }
     
   
@@ -234,6 +206,10 @@
     requestAPI();
   });
     
+  
+    
+    
 </script>
     
+<script type="text/javascript" src="./external/DataTables/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="./scripts/matchDataProcessor.js"></script>
