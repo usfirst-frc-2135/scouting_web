@@ -3,7 +3,7 @@
 */
 var scannedData = {};
 var scannedCount = 0;
-
+var localStore = window.localStorage;
 /*
   Function Definition
 */
@@ -111,10 +111,23 @@ function scanCamera(reader, id){
       var dataList = qrStringToList(result.text);
       
       if (validateQrList(dataList)){
+        alertSuccessfulScan();
         addQrData(qrListToDict(dataList));
       }
     }
   });
+}
+
+
+function alertSuccessfulScan(){
+  try{
+    navigator.vibrate(200);
+  }
+  catch(exception){
+    
+  }
+  $("#content").addClass("bg-success");
+  var timeoutFunction = setTimeout(function(){$("#content").removeClass("bg-success");}, 500);
 }
 
 /*
@@ -147,6 +160,12 @@ function createCameraSelect(reader){
   });
 }
 
+function clearData(){
+  $("#qrValidationTable").html("");
+  scannedCount = 0;
+  scannedData = {};
+}
+
 /*
   Submit Function
 */
@@ -157,7 +176,12 @@ function submitFunction(){
       indexedData.push(value);
     }
     $.post("writeAPI.php", {"writeData" : JSON.stringify(indexedData)}, function(data){
-      console.log(data);  
+      if (data == "success"){
+        alert("Data Successfully Submitted! Clearing Data.");
+        clearData();
+      } else {
+        alert("Data NOT Submitted. Please Check Network Connectivity.");
+      }
     });
   });
 }
