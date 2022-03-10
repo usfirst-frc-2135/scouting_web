@@ -23,6 +23,13 @@ function validateQrList(dataList){
   return true;
 }
 
+function padList(dataList){
+  if(dataList.length == 12){
+    dataList.push("");
+  }
+  return dataList;
+}
+
 function qrListToDict(dataList){
   out = {};
   out["teamnumber"]       = dataList[0];
@@ -59,6 +66,7 @@ function addQrData(dataObj){
         $("<td>").text(dataObj["eventcode"]),
         $("<td>").text(dataObj["matchnumber"]),
         $("<td>").text(dataObj["teamnumber"]),
+        $("<td>").text(dataObj["scoutname"]),
         $("<td>").append(
           "<button id='"+key+"_delete' value='"+key+"' type='button' class='btn btn-danger deleteRowButton'>Delete</button>"
         )
@@ -109,10 +117,14 @@ function scanCamera(reader, id){
   reader.decodeFromInputVideoDeviceContinuously(id, 'camera', (result, err) => {
     if (result) {
       var dataList = qrStringToList(result.text);
-      
+      dataList = padList(dataList);
+      console.log(dataList);
       if (validateQrList(dataList)){
         alertSuccessfulScan();
         addQrData(qrListToDict(dataList));
+      }
+      else {
+        alert("Make sure scout name is added!");
       }
     }
   });

@@ -80,6 +80,7 @@
       //output: gets the API data from our server
       $.get( "tbaAPI.php", {getCOPRs: 1}).done( function( data ) {
         processData(data);
+        sorttable.makeSortable(document.getElementById("dataTable"));
       });
     }
     
@@ -90,6 +91,7 @@
       $("#loadEvent").click(function(){
         $.get( "tbaAPI.php", {getCOPRs: 1, eventcode: $("#eventCode").val()}).done( function( data ) {
           processData(data);
+          sorttable.makeSortable(document.getElementById("dataTable"));
         });
       });
     });

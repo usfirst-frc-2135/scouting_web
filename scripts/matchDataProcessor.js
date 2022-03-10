@@ -26,10 +26,65 @@ class matchDataProcessor {
     this.data = data;
   }
   
+  get_match_tuple(match_str){
+    match_str = match_str.toLowerCase();
+    if (match_str.search("p") != -1){
+      return ["p", parseInt(match_str.substr(1))];
+    }
+    if (match_str.search("qm") != -1){
+      return ["qm", parseInt(match_str.substr(2))];
+    }
+    if (match_str.search("qf") != -1){
+      return ["qf", parseInt(match_str.substr(2))];
+    }
+    if (match_str.search("sf") != -1){
+      return ["sf", parseInt(match_str.substr(2))];
+    }
+    if (match_str.search("f") != -1){
+      return ["f", parseInt(match_str.substr(1))];
+    }
+    return null;
+  }
+  
+  verify_valid_start_end_match(start_match, end_match){
+    var sm = this.get_match_tuple(start_match);
+    var em = this.get_match_tuple(end_match);
+    console.log(sm);
+    console.log(em);
+    var type_prog = {"p" : 0, "qm" : 1, "qf" : 2, "sf" : 3, "f" : 4};
+    if (sm == null || em == null){
+      return false;
+    }
+    if (type_prog[sm[0]] < type_prog[em[0]]){
+      return true;
+    }
+    if (type_prog[sm[0]] > type_prog[em[0]]){
+      return false;
+    }
+    return sm[1] <= em[1];
+  }
+  
+  check_if_in_range(start_match, middle_match, end_match){
+    return this.verify_valid_start_end_match(start_match, middle_match) && this.verify_valid_start_end_match(middle_match, end_match);
+  }
+  
   filterMatches(start_match, end_match){
     /*
       Modify this.data to only include matches between start_match and end_match
     */
+    var type_prog = ["p", "qm", "qf", "sf", "f"];
+    var new_data = [];
+    for (var i = 0; i < this.data.length; i++){
+      var mid_str = this.data[i]["matchnumber"];
+      if (this.get_match_tuple(mid_str) == null){
+        mid_str = "qm" + mid_str;
+      }
+      if (this.check_if_in_range(start_match, mid_str, end_match)){
+        new_data.push(this.data[i]);
+      }
+      
+    }
+    this.data = new_data;
   }
   
   rnd(val){

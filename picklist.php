@@ -26,6 +26,9 @@
                     <th scope="col">#</th>
                     <th scope="col">Team</th>
                     <th scope="col">Data</th>
+                    <th scope="col">Avg Total Pts</th>
+                    <th scope="col">Max Total Pts</th>
+                    <th scope="col">Avg Endgame Pts</th>
                   </tr>
                 </thead>
                 <tbody id="picklistDiv">
@@ -79,6 +82,9 @@
                     <th scope="col">#</th>
                     <th scope="col">Team</th>
                     <th scope="col">Data</th>
+                    <th scope="col">Avg Total Pts</th>
+                    <th scope="col">Max Total Pts</th>
+                    <th scope="col">Avg Endgame Pts</th>
                   </tr>
                 </thead>
                 <tbody id="doNotPickDiv">

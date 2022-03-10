@@ -70,6 +70,7 @@
     
     $(document).ready(function() {
         requestAPI();
+        sorttable.makeSortable(document.getElementById("rawDataTable"));
     });
     
     

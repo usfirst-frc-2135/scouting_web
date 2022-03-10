@@ -354,7 +354,7 @@
   var localMatchNum = null;
   var localCompLevel = null;
   var picDB = {};
-  var ourTeam = "frc1678";
+  var ourTeam = "frc2135";
   var ourMatches = {};
   
   function checkGet(){

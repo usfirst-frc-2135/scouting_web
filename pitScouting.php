@@ -18,11 +18,11 @@
                   <input type="number" class="form-control" id="teamNumber">
                 </div>
                 <div class="mb-3">
-                  <label for="batteries" class="form-label">Number of Batteries</label>
+                  <label for="batteries" class="form-label">Count the number of batteries they have</label>
                   <input type="number" class="form-control" id="batteries">
                 </div>
                 <div class="mb-3">
-                  <label for="batteryChargers" class="form-label">Number of Battery Chargers</label>
+                  <label for="batteryChargers" class="form-label">Count the number of battery chargers</label>
                   <input type="number" class="form-control" id="batteryChargers">
                 </div>
                 <div>
@@ -30,18 +30,18 @@
                 </div>
                   <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="pitOrgGroup" id="pitScore1">
-                    <label class="form-check-label" for="pitScore1">1</label>
+                    <label class="form-check-label" for="pitScore1">1 (Little Organization)</label>
                   </div>
                   <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="pitOrgGroup" id="pitScore2">
-                    <label class="form-check-label" for="pitScore2">2</label>
+                    <label class="form-check-label" for="pitScore2">3 (Average)</label>
                   </div>
                   <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="pitOrgGroup" id="pitScore3">
-                    <label class="form-check-label" for="pitScore3">3</label>
+                    <label class="form-check-label" for="pitScore3">5 (Pristine)</label>
                   </div>
                 <div>
-                  <label class="form-label">Does the team have spare parts?</label>
+                  <label class="form-label">Does your team have spare parts for the robot?</label>
                 </div>
                   <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="sparePartsGroup" id="sparePartsYes">
@@ -52,7 +52,7 @@
                     <label class="form-check-label" for="sparePartsNo">No</label>
                   </div>
                 <div class="mb-3">
-                  <label for="driveType" class="form-label">Programming Language</label>
+                  <label for="driveType" class="form-label">What programming language do you use?</label>
                   <div class="input-group mb-3">
                     <select class="form-select" id="programmingLanguage">
                     <option selected value="0">Choose...</option>
@@ -65,7 +65,7 @@
                   </div>
                 </div>
                 <div class="mb-3">
-                  <label for="driveMotors" class="form-label">Drive Motors</label>
+                  <label for="driveMotors" class="form-label">What type of motors do you use on your drive train?</label>
                   <div class="input-group mb-3">
                     <select class="form-select" id="driveMotors">
                     <option selected>Choose...</option>

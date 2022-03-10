@@ -8,27 +8,28 @@
         <div class="row g-3">
             <div class="col-md-3">
                 <div class="input-group">
-                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Select</button>
-                  <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Qm</a></li>
-                    <li><a class="dropdown-item" href="#">Qf</a></li>
-                    <li><a class="dropdown-item" href="#">Sf</a></li>
-                    <li><a class="dropdown-item" href="#">F</a></li>
-                  </ul>
-                  <input type="text" class="form-control" aria-label="Text input with dropdown button">
+                  <select class="form-select mb-3" id="startPrefix">
+                    <option  class="dropdown-item" value="p">P</option>
+                    <option  class="dropdown-item" value="qm" selected>Qm</option>
+                    <option  class="dropdown-item" value="qf">Qf</option>
+                    <option  class="dropdown-item" value="sf">Sf</option>
+                    <option  class="dropdown-item" value="f">F</option>
+                  </select>
+                  <input type="text" id="startMatch" class="form-control" aria-label="Text input with dropdown button">
                 </div>
             </div>
             
             <div class="col-md-3">
                 <div class="input-group">
-                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Select</button>
-                  <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Qm</a></li>
-                    <li><a class="dropdown-item" href="#">Qf</a></li>
-                    <li><a class="dropdown-item" href="#">Sf</a></li>
-                    <li><a class="dropdown-item" href="#">F</a></li>
-                  </ul>
-                  <input type="text" class="form-control" aria-label="Text input with dropdown button">
+                  <select class="form-select mb-3" id="endPrefix">
+                    <option  class="dropdown-item" value="p">P</option>
+                    <option  class="dropdown-item" value="qm" selected>Qm</option>
+                    <option  class="dropdown-item" value="qf">Qf</option>
+                    <option  class="dropdown-item" value="sf">Sf</option>
+                    <option  class="dropdown-item" value="f">F</option>
+                  </select>
+                  <input type="text" id="endMatch" class="form-control" aria-label="Text input with dropdown button">
+                  <button id="filterData" type="button" class="btn btn-primary">Filter Data</button>
                 </div>
             </div>
         </div>
@@ -36,7 +37,7 @@
       <div class="row pt-3 pb-3 mb-3">
           <div class="overflow-auto">
             
-              <table id="rawDataTable" class="table table-striped table-bordered table-hover sortable" style="width:100%">
+              <table id="rawDataTable" class="tableFixHead table table-striped table-bordered table-hover sortable" style="width:100%">
               <thead>
                 <tr>
                     <td rowspan="1" class="text-center fw-bold"></td>
@@ -106,6 +107,15 @@
 
 <td colspan="2">&nbsp;</td>
 
+<style>
+  th:first-child, td:first-child, tr{
+    position: sticky;
+    left: 0px;
+    z-index: 1;
+    background: rgba(255, 255, 255, 1);
+  }
+
+</style>
 
 <?php include("footer.php") ?>
 
@@ -119,7 +129,8 @@
   var scoutingData = {};
   var tbaData = {};
   
-  
+  var rawdata  =null;
+
   function dummyGet(dict, key){
     /* If key doesn't exist in given dict, return a 0. */
     // console.log(dict);
@@ -186,10 +197,12 @@
     // Gets data from our local scouting data
     $.get( "readAPI.php", {getAllData: 1}).done( function( data ) {
       data = JSON.parse(data);
+      rawdata = data;
       var mdp = new matchDataProcessor(data);
       scoutingData = mdp.getAverages();
       addTeamKVToTeamList(scoutingData); 
       dataToTable();
+      sorttable.makeSortable(document.getElementById("rawDataTable"));
     });
     
     // Gets data from our TBA API
@@ -198,13 +211,27 @@
       addTeamKVToTeamList(data);
       tbaData = data;
       dataToTable();
+      sorttable.makeSortable(document.getElementById("rawDataTable"));
     });
   }
     
+  function filterAndShow(){
+    var start = $("#startPrefix").val() + $("#startMatch").val();
+    var end = $("#endPrefix").val() + $("#endMatch").val();
+    var mdp = new matchDataProcessor(rawdata);
+    mdp.filterMatches(start, end);
+    scoutingData = mdp.getAverages();
+    addTeamKVToTeamList(scoutingData); 
+    dataToTable();
+    sorttable.makeSortable(document.getElementById("rawDataTable"));
+  }
     
   $(document).ready(function() {
     requestAPI();
-    
+
+    $("#filterData").click(function(){
+      filterAndShow();
+    });
   });
     
   

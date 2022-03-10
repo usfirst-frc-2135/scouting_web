@@ -83,7 +83,7 @@
                             <div class="card mb-3">
                                 <div class="card-body">
                                     <div class="overflow-auto">
-                                        <h5 class="text-center">Auton</h5>
+                                        <h5 class="text-center">Auto</h5>
                                         <table class="table table-striped">
                                             <thead>
                                             <tr>
@@ -300,6 +300,7 @@
       processedData = mdp.getAverages()[team];
       dataToMatchTable(data);
       dataToAvgTables(processedData);
+      sorttable.makeSortable(document.getElementById("sortableAllMatches"));
     }
     
     

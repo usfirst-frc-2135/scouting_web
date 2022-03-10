@@ -27,6 +27,7 @@
           <th scope="col">Event Code</th>
           <th scope="col">Match Code</th>
           <th scope="col">Team Number</th>
+          <th scope="col">Scout</th>
           <th scope="col">Delete</th>
         </tr>
       </thead>
