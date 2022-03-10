@@ -25,7 +25,6 @@
                     <th scope="col"></th>
                     <th scope="col">#</th>
                     <th scope="col">Team</th>
-                    <th scope="col">Data</th>
                     <th scope="col">Avg Total Pts</th>
                     <th scope="col">Max Total Pts</th>
                     <th scope="col">Avg Endgame Pts</th>
@@ -46,16 +45,16 @@
               Not Sorted
             </div>
             <div class="card-body">
-              <table class="table table-striped table-hover sortable">
+              <table id="unsortedTable" class="table table-striped table-hover sortable">
                 <thead>
                   <tr>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                    <th scope="col">#</th>
-                    <th scope="col">Team</th>
-                    <th scope="col">Avg Total Pts</th>
-                    <th scope="col">Max Total Pts</th>
-                    <th scope="col">Avg Endgame Pts</th>
+                    <td scope="col"></td>
+                    <td scope="col"></td>
+                    <td scope="col">#</td>
+                    <td scope="col">Team</td>
+                    <td scope="col">Avg Total Pts</td>
+                    <td scope="col">Max Total Pts</td>
+                    <td scope="col">Avg Endgame Pts</td >
                   </tr>
                 </thead>
                 <tbody id="unsortedDiv">
@@ -81,7 +80,6 @@
                     <th scope="col"></th>
                     <th scope="col">#</th>
                     <th scope="col">Team</th>
-                    <th scope="col">Data</th>
                     <th scope="col">Avg Total Pts</th>
                     <th scope="col">Max Total Pts</th>
                     <th scope="col">Avg Endgame Pts</th>

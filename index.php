@@ -12,6 +12,7 @@
             <tr>
               <td>Team</td>
               <td>Pit Scouted?</td>
+              <td>Photo Taken?</td>
             </tr>
           </thead>
           <tbody id="pitScoutTable">
@@ -25,8 +26,9 @@
 
 <script>
 
-  var allPitData = null;
-  var teamList = null;
+  var allPitData = {};
+  var teamList = [];
+  var picLookup = {};
 
   function createTable(){
     if (allPitData == null || teamList == null){
@@ -36,9 +38,21 @@
     var row = "";
     for (let teamNum of teamList) {
       row += "<tr>";
-      row += "  <td>"+teamNum+"</td>";
+      // row += "  <td>"+teamNum+"</td>";
+      row += "  <td>"+"<a class='text-black' href='teamLookup.php?teamNum="+teamNum+"'>"+teamNum+"</a>"+"</td>";
       if (allPitData[teamNum] != null){
         row += "  <td class='bg-success'>Yes</td>";
+      }
+      else {
+        row += "  <td>No</td>";
+      }
+      if (picLookup[teamNum] != null){
+        if (picLookup[teamNum].length > 0){
+          row += "  <td class='bg-success'>Yes</td>";
+        }
+        else {
+          row += "  <td>No</td>";
+        }
       }
       else {
         row += "  <td>No</td>";
@@ -51,9 +65,14 @@
   $(document).ready(function() {
 
     $.get( "./tbaAPI.php", {getTeamList: 1}).done( function( data ) {
-      teamList = JSON.parse(data);        
+      teamList = JSON.parse(data);
       createTable();
-      sorttable.makeSortable(document.getElementById("psTable"));
+      $.get( "./readAPI.php", {getTeamsImages: JSON.stringify(teamList)}).done( function( data ) {
+        console.log(data);
+        picLookup = JSON.parse(data);
+        createTable();
+        sorttable.makeSortable(document.getElementById("psTable"));
+      });
     });
     
     
