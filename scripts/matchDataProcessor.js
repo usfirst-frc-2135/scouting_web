@@ -92,6 +92,19 @@ class matchDataProcessor {
     return Math.round((val + Number.EPSILON) * 100) / 100;
   }
   
+  removePracticeMatches(){
+    var new_data = [];
+    for (var i = 0; i < this.data.length; i++){
+      var mid_str = this.data[i]["matchnumber"];
+      var mt = this.get_match_tuple(mid_str);
+      if (mt == null || mt != "p"){
+        new_data.push(this.data[i]);
+      }
+      
+    }
+    this.data = new_data;
+  }
+  
   
   getAverages(){
     /*

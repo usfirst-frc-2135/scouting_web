@@ -199,6 +199,7 @@
       data = JSON.parse(data);
       rawdata = data;
       var mdp = new matchDataProcessor(data);
+      mdp.removePracticeMatches();
       scoutingData = mdp.getAverages();
       addTeamKVToTeamList(scoutingData); 
       dataToTable();

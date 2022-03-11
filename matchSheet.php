@@ -27,6 +27,7 @@
     <div class="row justify-content-md-center">
       <div class="col-md-6">
         <h4 id="matchTitle">Match:</h4>
+        <h5 id="matchTime">Time:</h5>
         <table class="table table-bordered">
           <thead>
             <tr>
@@ -60,19 +61,36 @@
       <div class="col-lg-4 col-sm-4 col-xs-4 gx-3">
         <div class="card text-white bg-danger mb-3">
           <div class="card-head">
-            <h5 id="R0TeamNumber" class="card-title text-center">Team ????</h5>
-            <div id="R0PicsCarousel" class="carousel slide" data-bs-ride="carousel">
-              <div id="R0RobotPics" class="carousel-inner">
-                
+            <div class="accordion accordion-flush bg-danger" id="R0Flush">
+              <div class="accordion-item bg-danger">
+                <h2 class="accordion-header bg-danger" id="flush-headingOne">
+                  <div class="row">
+                    <div class="col-6">
+                      <h5 id="R0TeamNumber" class="card-title text-center">Team ????</h5>
+                    </div>
+                    <div class="col-6">
+                      <button class="btn accordion-button collapsed bg-danger btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#flush-R0Collapse" aria-expanded="false" aria-controls="flush-R0Collapse">
+                        
+                      </button>
+                    </div>
+                  </div>
+                </h2>
+                  <div id="flush-R0Collapse" class="accordion-collapse collapse">
+                    <div id="R0PicsCarousel" class="carousel slide" data-interval="false">
+                    <div id="R0RobotPics" class="carousel-inner">
+                      
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#R0PicsCarousel" data-bs-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#R0PicsCarousel" data-bs-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Next</span>
+                    </button>
+                  </div>
+                </div>
               </div>
-              <button class="carousel-control-prev" type="button" data-bs-target="#R0PicsCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-              </button>
-              <button class="carousel-control-next" type="button" data-bs-target="#R0PicsCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-              </button>
             </div>
           </div>
           
@@ -107,19 +125,36 @@
       <div class="col-lg-4 col-sm-4 col-xs-4 gx-3">
         <div class="card text-white bg-danger mb-3">
           <div class="card-head">
-            <h5 id="R1TeamNumber" class="card-title text-center">Team ????</h5>
-            <div id="R1PicsCarousel" class="carousel slide" data-bs-ride="carousel">
-              <div id="R1RobotPics" class="carousel-inner">
-                
+            <div class="accordion accordion-flush bg-danger" id="R1Flush">
+              <div class="accordion-item bg-danger">
+                <h2 class="accordion-header bg-danger" id="flush-headingOne">
+                  <div class="row">
+                    <div class="col-6">
+                      <h5 id="R1TeamNumber" class="card-title text-center">Team ????</h5>
+                    </div>
+                    <div class="col-6">
+                      <button class="btn accordion-button collapsed bg-danger btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#flush-R1Collapse" aria-expanded="false" aria-controls="flush-R1Collapse">
+                        
+                      </button>
+                    </div>
+                  </div>
+                </h2>
+                  <div id="flush-R1Collapse" class="accordion-collapse collapse">
+                    <div id="R1PicsCarousel" class="carousel slide" data-interval="false">
+                    <div id="R1RobotPics" class="carousel-inner">
+                      
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#R1PicsCarousel" data-bs-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#R1PicsCarousel" data-bs-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Next</span>
+                    </button>
+                  </div>
+                </div>
               </div>
-              <button class="carousel-control-prev" type="button" data-bs-target="#R1PicsCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-              </button>
-              <button class="carousel-control-next" type="button" data-bs-target="#R1PicsCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-              </button>
             </div>
           </div>
           
@@ -154,19 +189,36 @@
       <div class="col-lg-4 col-sm-4 col-xs-4 gx-3">
         <div class="card text-white bg-danger mb-3">
           <div class="card-head">
-            <h5 id="R2TeamNumber" class="card-title text-center">Team ????</h5>
-            <div id="R2PicsCarousel" class="carousel slide" data-bs-ride="carousel">
-              <div id="R2RobotPics" class="carousel-inner">
-                
+            <div class="accordion accordion-flush bg-danger" id="R2Flush">
+              <div class="accordion-item bg-danger">
+                <h2 class="accordion-header bg-danger" id="flush-headingOne">
+                  <div class="row">
+                    <div class="col-6">
+                      <h5 id="R2TeamNumber" class="card-title text-center">Team ????</h5>
+                    </div>
+                    <div class="col-6">
+                      <button class="btn accordion-button collapsed bg-danger btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#flush-R2Collapse" aria-expanded="false" aria-controls="flush-R2Collapse">
+                        
+                      </button>
+                    </div>
+                  </div>
+                </h2>
+                  <div id="flush-R2Collapse" class="accordion-collapse collapse">
+                    <div id="R2PicsCarousel" class="carousel slide" data-interval="false">
+                    <div id="R2RobotPics" class="carousel-inner">
+                      
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#R2PicsCarousel" data-bs-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#R2PicsCarousel" data-bs-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Next</span>
+                    </button>
+                  </div>
+                </div>
               </div>
-              <button class="carousel-control-prev" type="button" data-bs-target="#R2PicsCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-              </button>
-              <button class="carousel-control-next" type="button" data-bs-target="#R2PicsCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-              </button>
             </div>
           </div>
           
@@ -202,19 +254,36 @@
       <div class="col-lg-4 col-sm-4 col-xs-4 gx-3">
         <div class="card text-white bg-primary mb-3">
           <div class="card-head">
-            <h5 id="B0TeamNumber" class="card-title text-center">Team ????</h5>
-            <div id="B0PicsCarousel" class="carousel slide" data-bs-ride="carousel">
-              <div id="B0RobotPics" class="carousel-inner">
-                
+            <div class="accordion accordion-flush bg-primary" id="B0Flush">
+              <div class="accordion-item bg-primary">
+                <h2 class="accordion-header bg-primary" id="flush-headingOne">
+                  <div class="row">
+                    <div class="col-6">
+                      <h5 id="B0TeamNumber" class="card-title text-center">Team ????</h5>
+                    </div>
+                    <div class="col-6">
+                      <button class="btn accordion-button collapsed bg-primary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#flush-B0Collapse" aria-expanded="false" aria-controls="flush-B0Collapse">
+                        
+                      </button>
+                    </div>
+                  </div>
+                </h2>
+                  <div id="flush-B0Collapse" class="accordion-collapse collapse">
+                    <div id="B0PicsCarousel" class="carousel slide" data-interval="false">
+                    <div id="B0RobotPics" class="carousel-inner">
+                      
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#B0PicsCarousel" data-bs-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#B0PicsCarousel" data-bs-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Next</span>
+                    </button>
+                  </div>
+                </div>
               </div>
-              <button class="carousel-control-prev" type="button" data-bs-target="#B0PicsCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-              </button>
-              <button class="carousel-control-next" type="button" data-bs-target="#B0PicsCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-              </button>
             </div>
           </div>
           
@@ -249,19 +318,36 @@
       <div class="col-lg-4 col-sm-4 col-xs-4 gx-3">
         <div class="card text-white bg-primary mb-3">
           <div class="card-head">
-            <h5 id="B1TeamNumber" class="card-title text-center">Team ????</h5>
-            <div id="B1PicsCarousel" class="carousel slide" data-bs-ride="carousel">
-              <div id="B1RobotPics" class="carousel-inner">
-                
+            <div class="accordion accordion-flush bg-primary" id="B1Flush">
+              <div class="accordion-item bg-primary">
+                <h2 class="accordion-header bg-primary" id="flush-headingOne">
+                  <div class="row">
+                    <div class="col-6">
+                      <h5 id="B1TeamNumber" class="card-title text-center">Team ????</h5>
+                    </div>
+                    <div class="col-6">
+                      <button class="btn accordion-button collapsed bg-primary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#flush-B1Collapse" aria-expanded="false" aria-controls="flush-B1Collapse">
+                        
+                      </button>
+                    </div>
+                  </div>
+                </h2>
+                  <div id="flush-B1Collapse" class="accordion-collapse collapse">
+                    <div id="B1PicsCarousel" class="carousel slide" data-interval="false">
+                    <div id="B1RobotPics" class="carousel-inner">
+                      
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#B1PicsCarousel" data-bs-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#B1PicsCarousel" data-bs-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Next</span>
+                    </button>
+                  </div>
+                </div>
               </div>
-              <button class="carousel-control-prev" type="button" data-bs-target="#B1PicsCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-              </button>
-              <button class="carousel-control-next" type="button" data-bs-target="#B1PicsCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-              </button>
             </div>
           </div>
           
@@ -296,19 +382,36 @@
       <div class="col-lg-4 col-sm-4 col-xs-4 gx-3">
         <div class="card text-white bg-primary mb-3">
           <div class="card-head">
-            <h5 id="B2TeamNumber" class="card-title text-center">Team ????</h5>
-            <div id="B2PicsCarousel" class="carousel slide" data-bs-ride="carousel">
-              <div id="B2RobotPics" class="carousel-inner">
-                
+            <div class="accordion accordion-flush bg-primary" id="B2Flush">
+              <div class="accordion-item bg-primary">
+                <h2 class="accordion-header bg-primary" id="flush-headingOne">
+                  <div class="row">
+                    <div class="col-6">
+                      <h5 id="B2TeamNumber" class="card-title text-center">Team ????</h5>
+                    </div>
+                    <div class="col-6">
+                      <button class="btn accordion-button collapsed bg-primary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#flush-B2Collapse" aria-expanded="false" aria-controls="flush-B2Collapse">
+                        
+                      </button>
+                    </div>
+                  </div>
+                </h2>
+                  <div id="flush-B2Collapse" class="accordion-collapse collapse">
+                    <div id="B2PicsCarousel" class="carousel slide" data-interval="false">
+                    <div id="B2RobotPics" class="carousel-inner">
+                      
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#B2PicsCarousel" data-bs-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#B2PicsCarousel" data-bs-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Next</span>
+                    </button>
+                  </div>
+                </div>
               </div>
-              <button class="carousel-control-prev" type="button" data-bs-target="#B2PicsCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-              </button>
-              <button class="carousel-control-next" type="button" data-bs-target="#B2PicsCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-              </button>
             </div>
           </div>
           
@@ -353,6 +456,7 @@
   var localMatchList = null;
   var localMatchNum = null;
   var localCompLevel = null;
+  var rawMatchData = null;
   var picDB = {};
   var ourTeam = "frc2135";
   var ourMatches = {};
@@ -408,6 +512,10 @@
           newMatch["match_number"] = match["comp_level"] == "qm" ? match["match_number"] : match["set_number"];
           newMatch["red_teams"]    = match["alliances"]["red"]["team_keys"];
           newMatch["blue_teams"]   = match["alliances"]["blue"]["team_keys"];
+          newMatch["time"] = null;
+          if (newMatch["time"] == null && match["actual_time"] != null){ newMatch["time"] = match["actual_time"]; }
+          if (newMatch["time"] == null && match["predicted_time"] != null){ newMatch["time"] = match["predicted_time"]; }
+          // if (newMatch["time"] == null && match["time"] != null){ newMatch["time"] = match["time"]; }
           localMatchList[makeKey(newMatch["match_number"], newMatch["comp_level"])] = newMatch;
           //
           if (newMatch["red_teams"].includes(ourTeam) || newMatch["blue_teams"].includes(ourTeam)){
@@ -456,6 +564,18 @@
     loadMatchData(function(){loadMatchList(processMatchList)});
   }
   
+  function updateTime(time){
+    var date = new Date(time * 1000);
+    var hours = date.getHours();
+    var suff = "AM";
+    if (hours > 12){
+      hours = hours - 12;
+      suff = "PM"
+    }
+    var minutes = "0" + date.getMinutes();
+    $("#matchTime").html("Time: " + hours + ":" + minutes.substr(-2) + " " + suff);
+  }
+  
   function processMatchList(){
     // Get Match Vector
     matchVector = localMatchList[makeKey(localMatchNum, localCompLevel)];
@@ -477,6 +597,9 @@
     
     // Request Team Pics
     sendPicRequest(matchVector["red_teams"], matchVector["blue_teams"]);
+    
+    // Update Time
+    updateTime(matchVector["time"]);
   }
   
   function updateSummary(redList, blueList){
