@@ -487,16 +487,20 @@
     for(let i in redList){
       teamNum = strTeamToIntTeam(redList[i]);
       var rd = localMatchData[teamNum];
-      avgTotalPoints["red"] += rd["avgtotalpoints"];
-      avgTotalCargo["red"] += rd["avgautonhighgoals"] + rd["avgautonlowergoals"] + rd["avgteleophighgoals"] + rd["avgteleoplowergoals"];
-      expectedClimb["red"] += rd["avgendgamepoints"];
+      if (rd != null){
+        avgTotalPoints["red"] += rd["avgtotalpoints"];
+        avgTotalCargo["red"] += rd["avgautonhighgoals"] + rd["avgautonlowergoals"] + rd["avgteleophighgoals"] + rd["avgteleoplowergoals"];
+        expectedClimb["red"] += rd["avgendgamepoints"];
+      }
     }
     for(let i in blueList){
       teamNum = strTeamToIntTeam(blueList[i]);
       var rd = localMatchData[teamNum];
-      avgTotalPoints["blue"] += rd["avgtotalpoints"];
-      avgTotalCargo["blue"] += rd["avgautonhighgoals"] + rd["avgautonlowergoals"] + rd["avgteleophighgoals"] + rd["avgteleoplowergoals"];
-      expectedClimb["blue"] += rd["avgendgamepoints"];
+      if (rd != null){
+        avgTotalPoints["blue"] += rd["avgtotalpoints"];
+        avgTotalCargo["blue"] += rd["avgautonhighgoals"] + rd["avgautonlowergoals"] + rd["avgteleophighgoals"] + rd["avgteleoplowergoals"];
+        expectedClimb["blue"] += rd["avgendgamepoints"];
+      }
     }
     
     $("#redTotalPoints").html(roundInt(avgTotalPoints["red"]));
@@ -515,17 +519,19 @@
   function displayTeam(color, index, teamNum){
     $("#"+color+index+"TeamNumber").html("<a class='text-white' href='teamLookup.php?teamNum="+teamNum+"'>"+teamNum+"</a>");
     var rd = localMatchData[teamNum];
-    var row = "<tr>";
-    row += "<td>" + rd["avgautonhighgoals"] + "</td>";
-    row += "<td>" + rd["avgautonlowergoals"] + "</td>";
-    row += "<td>" + rd["avgteleophighgoals"] + "</td>";
-    row += "<td>" + rd["avgteleoplowergoals"] + "</td>";
-    row += "<td>" + rd["endgameclimbpercent"][0] + "</td>";
-    row += "<td>" + rd["endgameclimbpercent"][1] + "</td>";
-    row += "<td>" + rd["endgameclimbpercent"][2] + "</td>";
-    row += "<td>" + rd["endgameclimbpercent"][3] + "</td>";
-    row += "<td>" + rd["endgameclimbpercent"][4] + "</td>";
-    row += "</tr>";
+    if (rd != null){
+      var row = "<tr>";
+      row += "<td>" + rd["avgautonhighgoals"] + "</td>";
+      row += "<td>" + rd["avgautonlowergoals"] + "</td>";
+      row += "<td>" + rd["avgteleophighgoals"] + "</td>";
+      row += "<td>" + rd["avgteleoplowergoals"] + "</td>";
+      row += "<td>" + rd["endgameclimbpercent"][0] + "</td>";
+      row += "<td>" + rd["endgameclimbpercent"][1] + "</td>";
+      row += "<td>" + rd["endgameclimbpercent"][2] + "</td>";
+      row += "<td>" + rd["endgameclimbpercent"][3] + "</td>";
+      row += "<td>" + rd["endgameclimbpercent"][4] + "</td>";
+      row += "</tr>";
+    }
     $("#"+color+index+"DataTable").append(row);
   }
   
