@@ -75,7 +75,7 @@
                     </div>
                   </div>
                 </h2>
-                  <div id="flush-R0Collapse" class="accordion-collapse collapse">
+                  <div id="flush-R0Collapse" class="accordion-collapse collapse show">
                     <div id="R0PicsCarousel" class="carousel slide" data-interval="false">
                     <div id="R0RobotPics" class="carousel-inner">
                       
@@ -139,7 +139,7 @@
                     </div>
                   </div>
                 </h2>
-                  <div id="flush-R1Collapse" class="accordion-collapse collapse">
+                  <div id="flush-R1Collapse" class="accordion-collapse collapse show">
                     <div id="R1PicsCarousel" class="carousel slide" data-interval="false">
                     <div id="R1RobotPics" class="carousel-inner">
                       
@@ -203,7 +203,7 @@
                     </div>
                   </div>
                 </h2>
-                  <div id="flush-R2Collapse" class="accordion-collapse collapse">
+                  <div id="flush-R2Collapse" class="accordion-collapse collapse show">
                     <div id="R2PicsCarousel" class="carousel slide" data-interval="false">
                     <div id="R2RobotPics" class="carousel-inner">
                       
@@ -268,7 +268,7 @@
                     </div>
                   </div>
                 </h2>
-                  <div id="flush-B0Collapse" class="accordion-collapse collapse">
+                  <div id="flush-B0Collapse" class="accordion-collapse collapse show">
                     <div id="B0PicsCarousel" class="carousel slide" data-interval="false">
                     <div id="B0RobotPics" class="carousel-inner">
                       
@@ -332,7 +332,7 @@
                     </div>
                   </div>
                 </h2>
-                  <div id="flush-B1Collapse" class="accordion-collapse collapse">
+                  <div id="flush-B1Collapse" class="accordion-collapse collapse show">
                     <div id="B1PicsCarousel" class="carousel slide" data-interval="false">
                     <div id="B1RobotPics" class="carousel-inner">
                       
@@ -396,7 +396,7 @@
                     </div>
                   </div>
                 </h2>
-                  <div id="flush-B2Collapse" class="accordion-collapse collapse">
+                  <div id="flush-B2Collapse" class="accordion-collapse collapse show">
                     <div id="B2PicsCarousel" class="carousel slide" data-interval="false">
                     <div id="B2RobotPics" class="carousel-inner">
                       
