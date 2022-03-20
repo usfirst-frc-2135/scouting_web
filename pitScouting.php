@@ -105,7 +105,7 @@
     }
     
     var progLanguage = $("#programmingLanguage").val();
-    if (progLanguage != 1 && progLanguage != 2 && progLanguage != 3){
+    if (progLanguage != 1 && progLanguage != 2 && progLanguage != 3 && progLanguage != 4 && progLanguage != 5){
       errorMessage += "Please Select Programming Language. ";
       isError = true;
     }

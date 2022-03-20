@@ -49,8 +49,21 @@
                               </tbody>
                             </table>
                         </div>
+                      <div class="overflow-auto">
+                            <table class="table table-striped">
+                              <thead>
+                                <tr>
+                                  <th scope="col">Comments</th>
+                                  <th scope="col">Scout</th>
+                                </tr>
+                              </thead>
+                              <tbody id="comments">
+                              </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
+                
                 <div class="card mb-3">
                     <div class="card-body">
                         <h5 class="card-title">All Matches</h5>
@@ -230,6 +243,12 @@
     $("#"+tbodyID).append(row);
   }
   
+  function dataToCommentTable(commentObj){
+    for (let i = 0; i < commentObj.length; i++) {
+      writeTableRow("comments", commentObj[i], ["comment", "scoutname"]);
+    }
+  }
+    
   function dataToMatchTable(dataObj){
     for (let i = 0; i < dataObj.length; i++) {
       writeTableRow("allMatchesTable", dataObj[i], ["matchnumber", "startpos", "tarmac",
@@ -298,11 +317,15 @@
     function processMatchData(team, data){
       var mdp = new matchDataProcessor(data);
       processedData = mdp.getAverages()[team];
+      dataToCommentTable(data);
       dataToMatchTable(data);
       dataToAvgTables(processedData);
       sorttable.makeSortable(document.getElementById("sortableAllMatches"));
     }
     
+    function processCommentData(data){
+      dataToCommentTable(data);
+    }
     
     function processPitData(data){
       if (!data || !data.length){
@@ -320,6 +343,7 @@
       $("#robotPics").html("");
       $("#teamTitle").html("");
       $("#pitData").html("");
+      $("#comments").html("");
       $("#allMatchesTable").html("");
       $("#autoStartTable").html("");
       $("#autoHubTable").html("");
@@ -343,7 +367,7 @@
         matchData = JSON.parse(data);        
         processMatchData(team, matchData);
       });
-      
+        
       // Add Pit Scouting Data
       $.get( "readAPI.php", {getTeamPitData: team}).done( function( data ) {
         pitData = JSON.parse(data);        
