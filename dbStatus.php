@@ -3,9 +3,9 @@
 
 <div class="container row-offcanvas row-offcanvas-left">
     <div class="well column  col-lg-12  col-sm-12 col-xs-12" id="content">
-    
       <div class="row pt-3 pb-3 mb-3">
-        <div class="card col-md-6">
+          <div class="col-lg-6 col-sm-6 col-xs-6 gx-3">
+            <div class="card">
           <div class="card-header">
             Database Status
           </div>
@@ -33,12 +33,48 @@
             <h4>Firebase Measurement ID: <span id="writefbmeasurementid" class="badge bg-primary">????</span></h4>
           </div>
         </div>
-        
-        
-        <div class="card col-md-6">
-          <div class="card-header">
-            Database Config
+          
           </div>
+        <div class="col-lg-6 col-sm-6 col-xs-6 gx-3">
+          <div class="overflow-auto">
+            <div class="card">
+              <div class="card-header">
+              Select Data to Use
+              </div>
+              <div class="card-body d-grid gap-4">
+                <div class="p-2">
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="dataGroup" id="dataP">
+                    <label class="form-check-label" for="dataP">Practice</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="dataGroup" id="dataQm">
+                    <label class="form-check-label" for="dataQm">Quals</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="dataGroup" id="dataQf">
+                    <label class="form-check-label" for="dataQf">Quarterfinals</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="dataGroup" id="dataSf">
+                    <label class="form-check-label" for="dataSf">Semifinals</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="dataGroup" id="dataF">
+                    <label class="form-check-label" for="dataF">Finals</label>
+                  </div>
+                </div> 
+                <div class="p-2">
+                  <button id="useData" class="btn btn-primary">Use this data</button>
+                </div>
+                </div>
+              </div>
+          </div>
+            
+          <div class="card">
+            <div class="card-header">
+            Database Config
+            </div>
           <div class="card-body">
             <div class="mb-3">
               <label for="writeServer" class="form-label"> MySQL Server URL</label>
@@ -117,6 +153,9 @@
             <button id="createTable" class="btn btn-primary">Create Table</button>
           </div>
         </div>
+          
+          </div>
+        
         <!-- DB Exists Badge -->
         
         <!-- Create DB - DB Name + Create -->
