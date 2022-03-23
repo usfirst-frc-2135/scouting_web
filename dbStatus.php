@@ -214,6 +214,14 @@
     $("#writefbsenderid").text(statusArray["fbsenderid"]);
     $("#writefbappid").text(statusArray["fbappid"]);
     $("#writefbmeasurementid").text(statusArray["fbmeasurementid"]);
+    
+    $("#dataP").prop('checked',  statusArray["useP"] ); 
+    $("#dataQm").prop('checked', statusArray["useQm"]); 
+    $("#dataQf").prop('checked', statusArray["useQf"]); 
+    $("#dataSf").prop('checked', statusArray["useSf"]); 
+    $("#dataF").prop('checked',  statusArray["useF"] ); 
+    
+    console.log(statusArray);
   }
   
   
@@ -285,6 +293,24 @@
       console.log(writeData);
       writeData["writeConfig"] = JSON.stringify(writeData);
       
+      $.post("dbAPI.php", writeData, function(data){
+        updateStatusValues(JSON.parse(data));  
+      }); 
+    });
+    
+    $("#useData").on('click', function(event){
+      // Make data to send to API
+      var useData = {};
+      useData["useP"]  = + $("#dataP").is(":checked");
+      useData["useQm"] = + $("#dataQm").is(":checked");
+      useData["useQf"] = + $("#dataQf").is(":checked");
+      useData["useSf"] = + $("#dataSf").is(":checked");
+      useData["useF"]  = + $("#dataF").is(":checked");
+      
+      var writeData = {}
+      writeData["filterConfig"] = JSON.stringify(useData);
+      
+      // Make request
       $.post("dbAPI.php", writeData, function(data){
         updateStatusValues(JSON.parse(data));  
       }); 

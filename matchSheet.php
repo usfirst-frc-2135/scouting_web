@@ -474,8 +474,10 @@
       $.get( "readAPI.php", {getAllData: 1}).done( function( data ) {
         data = JSON.parse(data);
         var mdp = new matchDataProcessor(data);
-        localMatchData = mdp.getAverages();
-        successFunction();
+        mdp.getSiteFilteredAverages(function(averageData){
+          localMatchData = averageData;
+          successFunction();
+        });
       });
     }
     else{

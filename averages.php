@@ -180,8 +180,6 @@
       
       $("#tableData").append(rowString);
     }
-      
-      sorttable.makeSortable(document.getElementById("rawDataTable"));
   }
     
   
@@ -199,11 +197,14 @@
       data = JSON.parse(data);
       rawdata = data;
       var mdp = new matchDataProcessor(data);
-      mdp.removePracticeMatches();
-      scoutingData = mdp.getAverages();
-      addTeamKVToTeamList(scoutingData); 
-      dataToTable();
-      sorttable.makeSortable(document.getElementById("rawDataTable"));
+      // mdp.removePracticeMatches();
+      mdp.getSiteFilteredAverages(function(averageData){
+        scoutingData = {...averageData};
+        console.log(scoutingData);
+        addTeamKVToTeamList(scoutingData); 
+        dataToTable();
+        setTimeout(sorttable.makeSortable(document.getElementById("rawDataTable")), 100);
+      });
     });
     
     // Gets data from our TBA API
@@ -212,7 +213,7 @@
       addTeamKVToTeamList(data);
       tbaData = data;
       dataToTable();
-      sorttable.makeSortable(document.getElementById("rawDataTable"));
+      setTimeout(sorttable.makeSortable(document.getElementById("rawDataTable")), 100);
     });
   }
     
@@ -224,7 +225,9 @@
     scoutingData = mdp.getAverages();
     addTeamKVToTeamList(scoutingData); 
     dataToTable();
-    sorttable.makeSortable(document.getElementById("rawDataTable"));
+    setTimeout(sorttable.makeSortable(document.getElementById("rawDataTable")), 100);
+    setTimeout(sorttable.makeSortable(document.getElementById("rawDataTable")), 100);
+
   }
     
   $(document).ready(function() {

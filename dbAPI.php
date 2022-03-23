@@ -12,6 +12,12 @@
     $stat = $db->getStatus();
     echo json_encode($stat);
   }
+  else if (isset($_POST["filterConfig"])){
+    $db = new dbHandler();
+    $db->writeDbConfig(json_decode($_POST["filterConfig"]));
+    $stat = $db->getStatus();
+    echo json_encode($stat);
+  }
   else if (isset($_POST["createDB"])){
     $db = new dbHandler();
     $db->createDB();

@@ -213,10 +213,10 @@
       }
       
       if (canEdit){
-        // sorttable.makeSortable(document.getElementById("unsortedDiv"));
+        // sorttable.makeSortable(document.getElementById("unsortedTable"));
       }
       else {
-        // sorttable.makeSortable(document.getElementById("unsortedDiv"));
+        // sorttable.makeSortable(document.getElementById("unsortedTable"));
       }
     }
     
@@ -754,7 +754,9 @@
         $.get( "readAPI.php", {getAllData: 1}).done( function( data ) {
           matchData = JSON.parse(data);
           var mdp = new matchDataProcessor(matchData);
-          localAverages = mdp.getAverages();
+          mdp.getSiteFilteredAverages(function(averageData){
+            localAverages = averageData;
+          });
           //loadPicklist(picklistName);
         });
         

@@ -11,7 +11,8 @@
     private $configKeys = array("server", "db", "username", "password", "eventcode", "tbakey", 
                                 "fbapikey", "fbauthdomain", "fbdburl", "fbprojectid", "fbstoragebucket", 
                                 "fbsenderid", "fbappid", "fbmeasurementid", 
-                                "datatable", "tbatable", "pittable", "ranktable");
+                                "datatable", "tbatable", "pittable", "ranktable",
+                                "useP", "useQm", "useQf", "useSf", "useF");
     
     function connectToDB(){
       if(!$this->alreadyConnected){
@@ -263,6 +264,19 @@
         if(!isset($ini_arr[$key])){
           $ini_arr[$key] = "";
         }
+        
+        # Specific checking
+        if ($key == "useP" || $key == "useQm" || $key == "useQf" || $key == "useSf" || $key == "useF"){
+          if ($ini_arr[$key] == ""){
+            $ini_arr[$key] = true;
+          }
+          else if ($ini_arr[$key] == "1" || $ini_arr[$key] == "true"){
+            $ini_arr[$key] = true;
+          }
+          else {
+            $ini_arr[$key] = false;
+          }
+        }
       }
       return $ini_arr;
     }
@@ -321,6 +335,11 @@
       $out["tbaTableExists"]  = false;
       $out["pitTableExists"]  = false;
       $out["rankTableExists"] = false;
+      $out["useP"]            = $dbConfig["useP"] ;
+      $out["useQm"]           = $dbConfig["useQm"];
+      $out["useQf"]           = $dbConfig["useQf"];
+      $out["useSf"]           = $dbConfig["useSf"];
+      $out["useF"]            = $dbConfig["useF"] ;
       
       //DB Connection
       try{

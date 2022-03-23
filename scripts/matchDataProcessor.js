@@ -24,6 +24,7 @@ class matchDataProcessor {
                   }]
     */
     this.data = data;
+    this.siteFilter = null;
   }
   
   get_match_tuple(match_str){
@@ -49,8 +50,6 @@ class matchDataProcessor {
   verify_valid_start_end_match(start_match, end_match){
     var sm = this.get_match_tuple(start_match);
     var em = this.get_match_tuple(end_match);
-    console.log(sm);
-    console.log(em);
     var type_prog = {"p" : 0, "qm" : 1, "qf" : 2, "sf" : 3, "f" : 4};
     if (sm == null || em == null){
       return false;
@@ -105,6 +104,64 @@ class matchDataProcessor {
     this.data = new_data;
   }
   
+  
+  getSiteFilter(successFunction){
+    if (!this.siteFilter){
+      $.post("dbAPI.php", {"getStatus" : true}, function(data){
+        data = JSON.parse(data);
+        var localSiteFilter = {};
+        localSiteFilter["useP"]  = data["useP"] ;
+        localSiteFilter["useQm"] = data["useQm"];
+        localSiteFilter["useQf"] = data["useQf"];
+        localSiteFilter["useSf"] = data["useSf"];
+        localSiteFilter["useF"]  = data["useF"] ;
+        this.siteFilter = {...localSiteFilter};
+        successFunction();
+      }); 
+    }
+    else {
+      successFunction();
+    }
+  }
+  
+  applySiteFilter(){
+    /*
+      Modify this.data to only include matches specified by the site filter
+    */
+    var new_data = [];
+    for (var i = 0; i < this.data.length; i++){
+      var mn = this.data[i]["matchnumber"];
+      var mt = this.get_match_tuple(mn);
+      if (mt == null){
+        mt = ["qm", null];
+      }
+      if (mt[0] == "p"  && this.siteFilter ["useP"]){ new_data.push(this.data[i]); }
+      else if (mt[0] == "qm" && this.siteFilter["useQm"]){ new_data.push(this.data[i]); }
+      else if (mt[0] == "qf" && this.siteFilter["useQf"]){ new_data.push(this.data[i]); }
+      else if (mt[0] == "sf" && this.siteFilter["useSf"]){ new_data.push(this.data[i]); }
+      else if (mt[0] == "f"  && this.siteFilter["useF"]){ new_data.push(this.data[i]); }
+    }
+    this.data = [...new_data];
+  }
+  
+  getSiteFilteredAverages(successFunction){
+    var temp_this = this;
+    $.post("dbAPI.php", {"getStatus" : true}, function(data){
+      data = JSON.parse(data);
+      var localSiteFilter = {};
+      localSiteFilter["useP"]  = data["useP"] ;
+      localSiteFilter["useQm"] = data["useQm"];
+      localSiteFilter["useQf"] = data["useQf"];
+      localSiteFilter["useSf"] = data["useSf"];
+      localSiteFilter["useF"]  = data["useF"] ;
+      temp_this.siteFilter = {...localSiteFilter};
+      //
+      // console.log(temp_this);
+      temp_this.applySiteFilter();
+      //
+      successFunction(temp_this.getAverages());
+    }); 
+  }
   
   getAverages(){
     /*

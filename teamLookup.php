@@ -318,13 +318,14 @@
     
     function processMatchData(team, data){
       var mdp = new matchDataProcessor(data);
-      processedData = mdp.getAverages()[team];
+      mdp.getSiteFilteredAverages(function(averageData){
+        processedData = averageData[team];
+        dataToAvgTables(processedData);
+      });
       dataToCommentTable(data);
       dataToMatchTable(data);
-      dataToAvgTables(processedData);
-      dataToGraph(data);
+      // dataToGraph(data);
       sorttable.makeSortable(document.getElementById("sortableAllMatches"));
-      dataToGraph(data);
     }
     
     function dataToGraph(data){
