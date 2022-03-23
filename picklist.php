@@ -17,7 +17,7 @@
             <div class="card-header">
               Pick List
             </div>
-            <div class="card-body">
+            <div class="card-body overflow-auto">
               <table class="table table-striped table-hover">
                 <thead>
                   <tr>
@@ -27,7 +27,11 @@
                     <th scope="col">Team</th>
                     <th scope="col">Avg Total Pts</th>
                     <th scope="col">Max Total Pts</th>
+                    <th scope="col">Avg Auto Pts</th>
+                    <th scope="col">Avg Teleop Pts</th>
                     <th scope="col">Avg Endgame Pts</th>
+                    <th scope="col">Total Died</th>
+                  <th scope="col">Notes</th>
                   </tr>
                 </thead>
                 <tbody id="picklistDiv">
@@ -44,17 +48,21 @@
             <div class="card-header">
               Not Sorted
             </div>
-            <div class="card-body">
+            <div class="card-body overflow-auto">
               <table id="unsortedTable" class="table table-striped table-hover sortable">
                 <thead>
                   <tr>
-                    <td scope="col"></td>
-                    <td scope="col"></td>
-                    <td scope="col">#</td>
-                    <td scope="col">Team</td>
-                    <td scope="col">Avg Total Pts</td>
-                    <td scope="col">Max Total Pts</td>
-                    <td scope="col">Avg Endgame Pts</td >
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col">#</th>
+                    <th scope="col">Team</th>
+                    <th scope="col">Avg Total Pts</th>
+                    <th scope="col">Max Total Pts</th>
+                    <th scope="col">Avg Auto Pts</th>
+                    <th scope="col">Avg Teleop Pts</th>
+                    <th scope="col">Avg Endgame Pts</th>
+                    <th scope="col">Total Died</th>
+                    <th scope="col">Notes</th>
                   </tr>
                 </thead>
                 <tbody id="unsortedDiv">
@@ -72,7 +80,7 @@
             <div class="card-header">
               Do Not Pick
             </div>
-            <div class="card-body">
+            <div class="card-body overflow-auto">
               <table class="table table-striped table-hover sortable">
                 <thead>
                   <tr>
@@ -82,7 +90,11 @@
                     <th scope="col">Team</th>
                     <th scope="col">Avg Total Pts</th>
                     <th scope="col">Max Total Pts</th>
+                    <th scope="col">Avg Auto Pts</th>
+                    <th scope="col">Avg Teleop Pts</th>
                     <th scope="col">Avg Endgame Pts</th>
+                    <th scope="col">Total Died</th>
+                    <th scope="col">Notes</th>
                   </tr>
                 </thead>
                 <tbody id="doNotPickDiv">
@@ -163,11 +175,49 @@
     var eventCode = null;
     
     var localAverages = null;
+    var localNotes = {};
     
-    function setSortable(state){
-      pickListSortable.option("disabled", !state);
-      notSortedSortable.option("disabled", !state);
-      dnpSortable.option("disabled", !state);
+    var canEdit = false;
+    
+    function setEditable(state){
+      if (state != null){
+        canEdit = state; 
+      }
+      
+      pickListSortable.option("disabled", !canEdit);
+      notSortedSortable.option("disabled", !canEdit);
+      dnpSortable.option("disabled", !canEdit);
+      
+      
+      if (canEdit){
+        $(".pick-check").change(function(){
+          modPickedTeams(this.checked, $(this).parent().parent().attr('data-team'));
+          addPickedTeamsToFirebase();
+        });
+        
+        $(".teamNotes").removeAttr('disabled');
+        
+        // Bind comment edit function
+        $(".teamNotes").on("focusout", function() {
+          var newText = $(this).val();
+          var teamNumber = $(this).attr('data-team');
+          // if text changed
+          if(localNotes[teamNumber] != newText && !(newText == "" && !(teamNumber in localNotes))){
+            localNotes[teamNumber] = newText; 
+            firebaseApp.set("picklist/"+eventCode+"/notes", localNotes);
+          }
+        });
+      }
+      else {
+        $(".teamNotes").attr('disabled', 'disabled');
+      }
+      
+      if (canEdit){
+        // sorttable.makeSortable(document.getElementById("unsortedDiv"));
+      }
+      else {
+        // sorttable.makeSortable(document.getElementById("unsortedDiv"));
+      }
     }
     
     /*
@@ -218,12 +268,11 @@
         }
         
         // Bind all checkboxes to select function
-        $(".pick-check").change(function(){
-          modPickedTeams(this.checked, $(this).parent().parent().attr('data-team'));
-          addPickedTeamsToFirebase();
-        });
+        setEditable(null);
       });
       saveDefaultPicklist();
+      bindPickedTeamsFromFirebase();
+      bindNotesFromFirebase();
     }
     
     function modPickedTeams(isChecked, teamNumber){
@@ -268,6 +317,24 @@
       });
     }
     
+    function bindNotesFromFirebase(){
+      /* On firebase change, get notes and update rows
+      */
+      var reqURI = "picklist/"+eventCode+"/notes";
+      firebaseApp.attachListener(reqURI, function(data){
+        var dval = data.val();
+        console.log(dval);
+        console.log(localNotes);
+        // Checks if team notes changed, only update if it did change
+        if (! dictEqual(localNotes, dval) && dval != null){
+          console.log(dval);
+          localNotes = {...dval};
+          addTeamsToLists();
+          setEditable(null);
+        }
+      });
+    }
+    
     function showPickedTeams(){
       /* Show all picked teams
       */
@@ -298,19 +365,27 @@
       return true;
     }
     
-    function addTeamsToLists(picks, notsorted, dnp){
+    function addTeamsToLists(){
       var ids = ["picklistDiv", "unsortedDiv", "doNotPickDiv"];
+      var teamSet = new Set();
       for(var i = 0; i != sortedListKeys.length; i++){
         $("#"+ids[i]).html("");
+        var sortIndex = 0;
         for(var j = 0; j != sortedLists[sortedListKeys[i]].length; j++){
-          $("#"+ids[i]).append(createNewRow(j+1, sortedLists[sortedListKeys[i]][j]));
+          var teamNumber = sortedLists[sortedListKeys[i]][j];
+          if (!teamSet.has(teamNumber)){
+            $("#"+ids[i]).append(createNewRow(++sortIndex, teamNumber));
+            teamSet.add(teamNumber);
+          }
         }
       }
       lockListEdit = false;
+      // Make sortable
+      
     }
     
     function dummylocalAveragesLookup(team,item){
-      if (!item){
+      if (!localAverages){
         return "NA";
       }
       if (!(team in localAverages)){
@@ -318,6 +393,16 @@
       }
       return localAverages[team][item];
     }
+  
+  function commentLookup(team){
+    if (!localNotes){
+      return "";
+    }
+    if (!(team in localNotes)){
+      return "";
+    }
+    return localNotes[team];
+  }
     
     function createNewRow(index, team){
       var out = "";
@@ -337,7 +422,11 @@
       out += "  <td scope='col'><b>"+team+"</b></td>";
       out += "  <td scope='col'>"+ dummylocalAveragesLookup(team, "avgtotalpoints") +"</td>";
       out += "  <td scope='col'>"+ dummylocalAveragesLookup(team, "maxtotalpoints") +"</td>";
+      out += "  <td scope='col'>"+ dummylocalAveragesLookup(team, "avgautopoints") +"</td>";
+      out += "  <td scope='col'>"+ dummylocalAveragesLookup(team, "avgteleoppoints") +"</td>";
       out += "  <td scope='col'>"+ dummylocalAveragesLookup(team, "avgendgamepoints") +"</td>";
+      out += "  <td scope='col'>"+ dummylocalAveragesLookup(team, "totaldied") +"</td>";
+      out += "  <td><textarea style='min-width:200px' class='form-control teamNotes' rows='1' data-team='"+team+"'>"+ commentLookup(team) +"</textarea></td>";
       out += "</tr>";
       return out;
     }
@@ -382,7 +471,7 @@
           needUpdate = true;
         }
       }
-      if (needUpdate && !lockListEdit){ 
+      if (needUpdate && !lockListEdit && canEdit){ 
         firebaseApp.set("picklist/"+eventCode+"/picklists/"+currPicklistName, sortedLists);
       }
     }
@@ -391,6 +480,33 @@
       if (a.length !== b.length) return false;
       for (var i = 0; i < a.length; ++i) {
         if (a[i] !== b[i]) return false;
+      }
+      return true;
+    }
+    
+    function dictEqual(a, b){
+      if (typeof a !== "object" || typeof b !== "object" || a == null || b == null){
+        return false;
+      }
+      var a_keys = Object.keys(a);
+      var b_keys = Object.keys(b);
+      if (!arraysEqual(a_keys, b_keys)){
+        return false;
+      }
+      for(let i in a_keys){
+        var key = a_keys[i];
+        if (Array.isArray(a[key]) && Array.isArray(b[key])){
+          console.log("compared arr, " + key);
+          if (!arraysEqual(a[key], b[key])){ return false; }
+        }
+        else if (typeof a[key] === "object" && typeof b[key] === "object"){
+          console.log("compared dict, " + key);
+          if (!dictEqual(a[key], b[key])){ return false; }
+        }
+        else {
+          console.log("compared otehr, " + key);
+          if (a[key] !== b[key]){ return false; }
+        }
       }
       return true;
     }
@@ -604,7 +720,7 @@
         });
         
         $("#editPicklist").change(function(){
-          setSortable(this.checked);
+          setEditable(this.checked);
         });
         
         var newPicklistModal = new bootstrap.Modal(document.getElementById('newPicklistModal'))
@@ -627,8 +743,8 @@
             loadPicklist($(this).val());
         });
         
-        bindPickedTeamsFromFirebase();
-        setSortable(false);
+        
+        setEditable(false);
         
         var intervalId = setInterval(function() {
           scrollHandlerObj.handleScroll();
