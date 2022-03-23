@@ -70,6 +70,14 @@
                 </div>
               </div>
           </div>
+        <div class="card">
+          <div class="card-header">
+            Export Data
+          </div>
+          <div class="card-body">
+            <button id="exportData" class="btn btn-primary">Export all data to CSV</button>
+          </div>
+        </div>
             
           <div class="card">
             <div class="card-header">
@@ -238,8 +246,35 @@
         }
       });
     }
+
+      
+    function requestAPI() {
+        //output: gets the API data from our server
+        $.get( "readAPI.php", {getAllData: 1}).done( function( data ) {
+            var dataObj = JSON.parse(data);
+        });
+        
+    }
+      
+    function download_csv() {
+    var csv = 'eventcode,teamnumber,matchnumber,startpos,tarmac,autonlowpoints,autonhighpoints,teleoplowpoints,teleophighpoints,climbed,died,scoutname,comment\n';
+    dataObj.forEach(function(row) {
+            csv += row.join(',');
+            csv += "\n";
+    });
+ 
+    console.log(csv);
+    var hiddenElement = document.createElement('a');
+    hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
+    hiddenElement.target = '_blank';
+    hiddenElement.download = 'people.csv';
+    hiddenElement.click();
+    }
     
-    
+    $("#exportData").on('click', function(event){
+      var csv = {};    
+    });  
+      
     $("#writeConfig").on('click', function(event){
       var writeData = {};
       for(const key in id_to_key_map){
@@ -268,4 +303,3 @@
     });
   });
 </script>
-
