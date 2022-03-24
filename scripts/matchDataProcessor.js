@@ -47,9 +47,20 @@ class matchDataProcessor {
     return null;
   }
   
-  verify_valid_start_end_match(start_match, end_match){
+  matchLessEqualThan(start_match, end_match){
     var sm = this.get_match_tuple(start_match);
     var em = this.get_match_tuple(end_match);
+    
+    if (sm == null){
+      start_match = "qm" + start_match;
+      sm = this.get_match_tuple(start_match);
+    }
+    
+    if (em == null){
+      end_match = "qm" + end_match;
+      em = this.get_match_tuple(end_match);
+    }
+    
     var type_prog = {"p" : 0, "qm" : 1, "qf" : 2, "sf" : 3, "f" : 4};
     if (sm == null || em == null){
       return false;
@@ -64,7 +75,7 @@ class matchDataProcessor {
   }
   
   check_if_in_range(start_match, middle_match, end_match){
-    return this.verify_valid_start_end_match(start_match, middle_match) && this.verify_valid_start_end_match(middle_match, end_match);
+    return this.matchLessEqualThan(start_match, middle_match) && this.matchLessEqualThan(middle_match, end_match);
   }
   
   filterMatches(start_match, end_match){
@@ -104,6 +115,13 @@ class matchDataProcessor {
     this.data = new_data;
   }
   
+  sortMatches(newData){
+   newData.sort((a, b) => {
+     var compare = this.matchLessEqualThan(a["matchnumber"], b["matchnumber"]);
+     if (compare){ return -1; }
+     return 1;
+   });
+  }
   
   getSiteFilter(successFunction){
     if (!this.siteFilter){

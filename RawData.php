@@ -62,7 +62,7 @@
         $.get( "readAPI.php", {getAllData: 1}).done( function( data ) {
             var dataObj = JSON.parse(data);        
             dataToTable(dataObj);
-            sorttable.makeSortable(document.getElementById("rawDataTable"));
+            setTimeout(function(){sorttable.makeSortable(document.getElementById("rawDataTable"))}, 500);
         });
         
     }
@@ -70,7 +70,7 @@
     
     $(document).ready(function() {
         requestAPI();
-        sorttable.makeSortable(document.getElementById("rawDataTable"));
+        // sorttable.makeSortable(document.getElementById("rawDataTable"));
     });
     
     

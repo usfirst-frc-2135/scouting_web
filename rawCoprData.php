@@ -73,7 +73,7 @@
       keysToTable(keys);
       dataToTable(data, keys);
       // sorttable.makeSortable($("#dataTable"));
-      sorttable.makeSortable(document.getElementById("dataTable"));
+      // sorttable.makeSortable(document.getElementById("dataTable"));
     }
     
     function requestAPI() {
@@ -91,7 +91,7 @@
       $("#loadEvent").click(function(){
         $.get( "tbaAPI.php", {getCOPRs: 1, eventcode: $("#eventCode").val()}).done( function( data ) {
           processData(data);
-          sorttable.makeSortable(document.getElementById("dataTable"));
+          setTimeout(function(){sorttable.makeSortable(document.getElementById("rawDataTable"))}, 200);
         });
       });
     });
