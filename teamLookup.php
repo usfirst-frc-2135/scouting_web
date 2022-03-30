@@ -43,6 +43,14 @@
                                 </tr>
                               </thead>
                                 
+                      <div class="card mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">Graph</h5>
+                                    <canvas id="myChart" width="400" height="400"></canvas>
+                        
+                            </div>
+                      </div>
+                                
                                 <!-- pit data-- use this somewhere -->
                                 
                               <tbody id="pitData">
@@ -80,6 +88,7 @@
                                   <th scope="col">Teleop Low Hub</th>
                                   <th scope="col">Climb</th>
                                   <th scope="col">Died</th>
+                                  <th scope="col">Scout</th>
                                 </tr>
                               </thead>
                                 <tbody id="allMatchesTable">
@@ -212,13 +221,7 @@
                                         </table>
                     </div>
                 </div>
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <h5 class="card-title">Graph</h5>
-                        <canvas id="myChart" width="400" height="400"></canvas>
-                        
-                        </div>
-                </div>
+                
                 <div class="card mb-3">
                     <div class="card-body">
                         <h5 class="card-title">Start Position Reference</h5>
@@ -257,7 +260,7 @@
   function dataToMatchTable(dataObj){
     for (let i = 0; i < dataObj.length; i++) {
       writeTableRow("allMatchesTable", dataObj[i], ["matchnumber", "startpos", "tarmac",
-        "autonhighpoints", "autonlowpoints", "teleophighpoints", "teleoplowpoints", "climbed", "died"]);
+        "autonhighpoints", "autonlowpoints", "teleophighpoints", "teleoplowpoints", "climbed", "died", "scoutname"]);
     }
     sorttable.makeSortable(document.getElementById("sortableAllMatches"));
   }
