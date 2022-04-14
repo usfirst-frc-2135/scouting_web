@@ -114,12 +114,16 @@
     z-index: 1;
     background: rgba(255, 255, 255, 1);
   }
-
 </style>
 
 <?php include("footer.php") ?>
 
 <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src = "https://raw.githubusercontent.com/laertejjunior/freezeheader/master/js/jquery.freezeheader.js">
+  $(document).ready(function () {
+            $("#rawDataTable").freezeHeader({ 'height': '300px' });
+        })
+</script>
 
 <script>
   src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"
@@ -237,9 +241,13 @@
       filterAndShow();
     });
   });
-    
   
-    
+    /*
+    //freezes table header in place
+  $(document).ready(function () {
+            $("#rawDataTable").freezeHeader({ 'height': '300px' });
+        })
+    *\
     
 </script>
     
