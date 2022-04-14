@@ -35,38 +35,38 @@
         </div>
         
       <div class="row pt-3 pb-3 mb-3">
-          <div class="overflow-auto">
-            
-              <table id="rawDataTable" class="tableFixHead table table-striped table-bordered table-hover sortable" style="width:100%">
+          <div class="overflow-auto" id="freezeTableDiv">
+              <table id="rawDataTable" class="tableFixHead table table-striped table-bordered table-hover sortable" style="width:100%;">
               <thead>
                 <tr>
-                    <td rowspan="1" class="text-center fw-bold"></td>
-                    <td rowspan="1" class="text-center fw-bold"></td>
-                    <td colspan="2" class="text-center fw-bold">Total Pts</td>
+                    <th colspan="1" class="text-center fw-bold"></th>
+                    <th colspan="1" class="text-center fw-bold"></th>
+                    <th colspan="2" class="text-center fw-bold">Total Pts</th>
                     <th colspan="2" class="text-center">Total Auto Pts</th>
                     <th colspan="2" class="text-center">Total Teleop Pts</th>
                     <th colspan="2" class="text-center">Climb Pts</th>
                     <th colspan="4" class="text-center">Auton</th>
                     <th colspan="4" class="text-center">Teleop</th>
                     <th colspan="5" class="text-center">Endgame</th>
-                    <td colspan="1" class="text-center fw-bold">Died</td>
+                    <th colspan="1" class="text-center fw-bold">Died</td>
                 </tr>
                 <tr>
-                    <th rowspan="1"></th>
-                    <th rowspan="1"></th>
-                    <th rowspan="1"></th>
-                    <th rowspan="1"></th>
-                    <th rowspan="1"></th>
-                    <th rowspan="1"></th>
-                    <th rowspan="1"></th>
-                    <th rowspan="1"></th>
-                    <th rowspan="1"></th>
-                    <th rowspan="1"></th>
+                    <th colspan="1"></th>
+                    <th colspan="1"></th>
+                    <th colspan="1"></th>
+                    <th colspan="1"></th>
+                    <th colspan="1"></th>
+                    <th colspan="1"></th>
+                    <th colspan="1"></th>
+                    <th colspan="1"></th>
+                    <th colspan="1"></th>
+                    <th colspan="1"></th>
                     <th colspan="2" class="text-center">Upper</th>
                     <th colspan="2" class="text-center">Lower</th>
                     <th colspan="2" class="text-center">Upper</th>
                     <th colspan="2" class="text-center">Lower</th>
                     <th colspan="5" class="text-center">Climb %</th>
+                    <th colspan="1"></th>
                 </tr>
                 <tr>
                   <th scope="col">Team #</th>
@@ -96,7 +96,7 @@
                 </tr>
                   
               </thead>
-              <tbody id="tableData">
+              <tbody id="tableData" style="z-index:-1;">>
               </tbody>
             </table>
           </div>
@@ -105,25 +105,13 @@
 </div>
 
 
-<td colspan="2">&nbsp;</td>
-
 <style>
-  th:first-child, td:first-child, tr{
-    position: sticky;
-    left: 0px;
-    z-index: 1;
-    background: rgba(255, 255, 255, 1);
-  }
-</style>
+
+  </style>
 
 <?php include("footer.php") ?>
-
-<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src = "https://raw.githubusercontent.com/laertejjunior/freezeheader/master/js/jquery.freezeheader.js">
-  $(document).ready(function () {
-            $("#rawDataTable").freezeHeader({ 'height': '300px' });
-        })
-</script>
+<script type="text/javascript" src="./external/DataTables/DataTables-1.11.5/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="./scripts/matchDataProcessor.js"></script>
 
 <script>
   src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"
@@ -134,6 +122,7 @@
   var tbaData = {};
   
   var rawdata  =null;
+  var frozenTable = null;
 
   function dummyGet(dict, key){
     /* If key doesn't exist in given dict, return a 0. */
@@ -207,7 +196,10 @@
         console.log(scoutingData);
         addTeamKVToTeamList(scoutingData); 
         dataToTable();
-        setTimeout(sorttable.makeSortable(document.getElementById("rawDataTable")), 100);
+        setTimeout(function(){
+          sorttable.makeSortable(document.getElementById("rawDataTable"))
+          frozenTable = $('#freezeTableDiv').freezeTable({backgroundColor:"white", 'columnKeep': true, 'frozenColVerticalOffset': 25});
+        }, 1);
       });
     });
     
@@ -217,7 +209,10 @@
       addTeamKVToTeamList(data);
       tbaData = data;
       dataToTable();
-      setTimeout(sorttable.makeSortable(document.getElementById("rawDataTable")), 100);
+      setTimeout(function(){
+        sorttable.makeSortable(document.getElementById("rawDataTable"))
+        frozenTable = $('#freezeTableDiv').freezeTable({backgroundColor:"white", 'columnKeep': true, 'frozenColVerticalOffset': 25});
+      }, 1);
     });
   }
     
@@ -229,9 +224,10 @@
     scoutingData = mdp.getAverages();
     addTeamKVToTeamList(scoutingData); 
     dataToTable();
-    setTimeout(sorttable.makeSortable(document.getElementById("rawDataTable")), 100);
-    setTimeout(sorttable.makeSortable(document.getElementById("rawDataTable")), 100);
-
+    setTimeout(function(){
+      sorttable.makeSortable(document.getElementById("rawDataTable"))
+      frozenTable = $('#freezeTableDiv').freezeTable({backgroundColor:"white", 'columnKeep': true, 'frozenColVerticalOffset': 25});
+    }, 1);
   }
     
   $(document).ready(function() {
@@ -240,16 +236,13 @@
     $("#filterData").click(function(){
       filterAndShow();
     });
+    
+    $("#rawDataTable").click(function(){
+        frozenTable.update();
+      });
+    
   });
   
-    /*
-    //freezes table header in place
-  $(document).ready(function () {
-            $("#rawDataTable").freezeHeader({ 'height': '300px' });
-        })
-    *\
     
 </script>
     
-<script type="text/javascript" src="./external/DataTables/DataTables-1.11.5/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="./scripts/matchDataProcessor.js"></script>

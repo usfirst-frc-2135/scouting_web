@@ -521,7 +521,7 @@
           localMatchList[makeKey(newMatch["match_number"], newMatch["comp_level"])] = newMatch;
           //
           if (newMatch["red_teams"].includes(ourTeam) || newMatch["blue_teams"].includes(ourTeam)){
-            ourMatches[newMatch["comp_level"] + newMatch["match_number"]] = newMatch;
+            ourMatches[newMatch["match_number"]] = newMatch;
           }
         }
         createOurMatchTable();
