@@ -4,6 +4,7 @@
     <div class="well column  col-lg-12  col-sm-12 col-xs-12" id="content">
     
       <div class="row pt-3 pb-3 mb-3">
+        <h2>Raw Data</h2>
         <div id="freezeTableDiv">
           <table id="rawDataTable" class="table table-striped table-hover sortable">
             <thead>
@@ -68,7 +69,7 @@
             dataToTable(dataObj);
             setTimeout(function(){
               sorttable.makeSortable(document.getElementById("rawDataTable"));
-              frozenTable = $('#freezeTableDiv').freezeTable({backgroundColor:"white", columnNum:1});
+              frozenTable = $('#freezeTableDiv').freezeTable({'backgroundColor':"white", 'columnNum':2, 'frozenColVerticalOffset':0});
             }, 1);
         });
         
