@@ -27,10 +27,12 @@
                     <th scope="col">Team</th>
                     <th scope="col">Avg Total Pts</th>
                     <th scope="col">Max Total Pts</th>
-                    <th scope="col">Avg Auto Pts</th>
-                    <th scope="col">Avg Teleop Pts</th>
-                    <th scope="col">Avg Endgame Pts</th>
-                    <th scope="col">Total Died</th>
+                    <th scope="col">Avg A+E Pts</th>
+                    <th scope="col">Max A+E Pts</th>
+                    <th scope="col" class="d-none d-md-table-cell">Avg A Pts</th>
+                    <th scope="col" class="d-none d-md-table-cell">Avg T Pts</th>
+                    <th scope="col" class="d-none d-md-table-cell">Avg E Pts</th>
+                    <th scope="col" class="d-none d-md-table-cell">Total Died</th>
                   <th scope="col">Notes</th>
                   </tr>
                 </thead>
@@ -58,10 +60,12 @@
                     <th scope="col">Team</th>
                     <th scope="col">Avg Total Pts</th>
                     <th scope="col">Max Total Pts</th>
-                    <th scope="col">Avg Auto Pts</th>
-                    <th scope="col">Avg Teleop Pts</th>
-                    <th scope="col">Avg Endgame Pts</th>
-                    <th scope="col">Total Died</th>
+                    <th scope="col">Avg A+E Pts</th>
+                    <th scope="col">Max A+E Pts</th>
+                    <th scope="col" class="d-none d-md-table-cell">Avg A Pts</th>
+                    <th scope="col" class="d-none d-md-table-cell">Avg T Pts</th>
+                    <th scope="col" class="d-none d-md-table-cell">Avg E Pts</th>
+                    <th scope="col" class="d-none d-md-table-cell">Total Died</th>
                     <th scope="col">Notes</th>
                   </tr>
                 </thead>
@@ -90,10 +94,12 @@
                     <th scope="col">Team</th>
                     <th scope="col">Avg Total Pts</th>
                     <th scope="col">Max Total Pts</th>
-                    <th scope="col">Avg Auto Pts</th>
-                    <th scope="col">Avg Teleop Pts</th>
-                    <th scope="col">Avg Endgame Pts</th>
-                    <th scope="col">Total Died</th>
+                    <th scope="col">Avg A+E Pts</th>
+                    <th scope="col">Max A+E Pts</th>
+                    <th scope="col" class="d-none d-md-table-cell">Avg A Pts</th>
+                    <th scope="col" class="d-none d-md-table-cell">Avg T Pts</th>
+                    <th scope="col" class="d-none d-md-table-cell">Avg E Pts</th>
+                    <th scope="col" class="d-none d-md-table-cell">Total Died</th>
                     <th scope="col">Notes</th>
                   </tr>
                 </thead>
@@ -403,6 +409,11 @@
     }
     return localNotes[team];
   }
+  
+  function rnd(val){
+    /* Rounding helper function */
+    return Math.round((val + Number.EPSILON) * 100) / 100;
+  }
     
     function createNewRow(index, team){
       var out = "";
@@ -418,14 +429,18 @@
         out += "  <td scope='col' class='pickHandle'>"+icon_svg+"</td>";
         out += "  <td scope='col'> <input class='form-check-input pick-check' type='checkbox' role='switch'></td>";
       }
+      var avgAutoEnd = rnd(dummylocalAveragesLookup(team, "avgautopoints") + dummylocalAveragesLookup(team, "avgendgamepoints"));
+      var maxAutoEnd = rnd(dummylocalAveragesLookup(team, "maxautopoints") + dummylocalAveragesLookup(team, "maxendgamepoints"));
       out += "  <td scope='col'>"+index+"</td>";
       out += "  <td scope='col'><b>"+team+"</b></td>";
       out += "  <td scope='col'>"+ dummylocalAveragesLookup(team, "avgtotalpoints") +"</td>";
       out += "  <td scope='col'>"+ dummylocalAveragesLookup(team, "maxtotalpoints") +"</td>";
-      out += "  <td scope='col'>"+ dummylocalAveragesLookup(team, "avgautopoints") +"</td>";
-      out += "  <td scope='col'>"+ dummylocalAveragesLookup(team, "avgteleoppoints") +"</td>";
-      out += "  <td scope='col'>"+ dummylocalAveragesLookup(team, "avgendgamepoints") +"</td>";
-      out += "  <td scope='col'>"+ dummylocalAveragesLookup(team, "totaldied") +"</td>";
+      out += "  <td scope='col'>"+ avgAutoEnd +"</td>";
+      out += "  <td scope='col'>"+ maxAutoEnd +"</td>";
+      out += "  <td scope='col' class='d-none d-md-table-cell'>"+ dummylocalAveragesLookup(team, "avgautopoints") +"</td>";
+      out += "  <td scope='col' class='d-none d-md-table-cell'>"+ dummylocalAveragesLookup(team, "avgteleoppoints") +"</td>";
+      out += "  <td scope='col' class='d-none d-md-table-cell'>"+ dummylocalAveragesLookup(team, "avgendgamepoints") +"</td>";
+      out += "  <td scope='col' class='d-none d-md-table-cell'>"+ dummylocalAveragesLookup(team, "totaldied") +"</td>";
       out += "  <td><textarea style='min-width:200px' class='form-control teamNotes' rows='1' data-team='"+team+"'>"+ commentLookup(team) +"</textarea></td>";
       out += "</tr>";
       return out;
