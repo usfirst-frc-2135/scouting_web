@@ -47,6 +47,9 @@
               <a class="nav-link" href="./picklist.php">Picklist</a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" href="./allianceRanking.php">Alliance Rank</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="./matchSheet.php">Match Sheet</a>
             </li>
             <li class="nav-item">
