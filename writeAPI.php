@@ -24,6 +24,16 @@
     }
     echo("success");
   }
+  if (isset($_POST["writeSingleData"])){
+    // Write Data API
+    $db->connectToDB();
+    $dat = json_decode($_POST["writeSingleData"], true);
+    // echo($_POST["writeData"]);
+    $dat["eventcode"] = $eventCode;
+    $dat["entrykey"] = $dat["eventcode"] . "_" . $dat["matchnumber"] . "_" . $dat["teamnumber"];
+    $db->writeRowToTable($dat);
+    echo("success");
+  }
   if (isset($_POST["writePitData"])){
     /* 
     $_POST["writePitData"] = {teamnumber : x, numbatteries : x, numchargers : x, pitorg : x,
