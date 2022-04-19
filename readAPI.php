@@ -1,5 +1,6 @@
 <?php
-  include("dbHandler.php");
+  require_once("dbHandler.php");
+  require_once("qualRankgen.php");
   $db = new dbHandler();
   $dbConfig = $db->readDbConfig();
   $db->connectToDB();
@@ -78,6 +79,15 @@
     }
     echo(json_encode($imageObj));
   } 
+  else if (isset($_GET["getRawRankingData"])){
+    echo(json_encode($db->readRawRankData($eventCode)));
+  }
+  else if (isset($_GET["getInternalRankings"])){
+    $qrg = new qualRankGen($db->readRankData($eventCode));
+    $rankMap = array();
+    $rankMap["elo"] = $qrg->raw_votes_to_elo_map(30);
+    echo(json_encode($rankMap));
+  }
   else if (isset($_GET["config"])){
     $output = array();
     $output["eventcode"] = $dbConfig["eventcode"];

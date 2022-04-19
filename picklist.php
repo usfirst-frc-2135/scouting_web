@@ -25,6 +25,7 @@
                     <th scope="col"></th>
                     <th scope="col">#</th>
                     <th scope="col">Team</th>
+                    <th scope="col">Internal ELO</th>
                     <th scope="col">Avg Total Pts</th>
                     <th scope="col">Max Total Pts</th>
                     <th scope="col">Avg A+E Pts</th>
@@ -58,6 +59,7 @@
                     <th scope="col"></th>
                     <th scope="col">#</th>
                     <th scope="col">Team</th>
+                    <th scope="col">Internal ELO</th>
                     <th scope="col">Avg Total Pts</th>
                     <th scope="col">Max Total Pts</th>
                     <th scope="col">Avg A+E Pts</th>
@@ -92,6 +94,7 @@
                     <th scope="col"></th>
                     <th scope="col">#</th>
                     <th scope="col">Team</th>
+                    <th scope="col">Internal ELO</th>
                     <th scope="col">Avg Total Pts</th>
                     <th scope="col">Max Total Pts</th>
                     <th scope="col">Avg A+E Pts</th>
@@ -171,6 +174,7 @@
     var sortedListKeys = ["sorted", "unsorted", "dnp"];
     var sortedLists = {"sorted" : [], "unsorted" : [], "dnp" : []};
     var localPickedTeamLookup = [];
+    var internalEloRank = {"elo" : {}};
     
     var pickListSortable, notSortedSortable, dnpSortable;
     
@@ -184,6 +188,19 @@
     var localNotes = {};
     
     var canEdit = false;
+    
+    
+    function dummyGet(dict, key){
+      /* If key doesn't exist in given dict, return a 0. */
+      // console.log(dict);
+      if (! dict){
+        return 0;
+      }
+      if (key in dict){
+        return dict[key];
+      }
+      return 0;
+    }
     
     function setEditable(state){
       if (state != null){
@@ -433,6 +450,7 @@
       var maxAutoEnd = rnd(dummylocalAveragesLookup(team, "maxautopoints") + dummylocalAveragesLookup(team, "maxendgamepoints"));
       out += "  <td scope='col'>"+index+"</td>";
       out += "  <td scope='col'><b>"+team+"</b></td>";
+      out += "  <td scope='col'>"+ dummyGet(internalEloRank["elo"], team) +"</td>";
       out += "  <td scope='col'>"+ dummylocalAveragesLookup(team, "avgtotalpoints") +"</td>";
       out += "  <td scope='col'>"+ dummylocalAveragesLookup(team, "maxtotalpoints") +"</td>";
       out += "  <td scope='col'>"+ avgAutoEnd +"</td>";
@@ -687,6 +705,12 @@
         $.get("./tbaAPI.php", {getEventCode : true}, function(data){
           eventCode = data;
           loadPicklistNames();
+        });
+        
+        $.get( "readAPI.php", {getInternalRankings: 1}).done( function( data ) {
+          var data = JSON.parse(data);
+          internalEloRank = {...data};
+          dataToTable();
         });
         
         pickListSortable = new Sortable(document.getElementById('picklistDiv'), {

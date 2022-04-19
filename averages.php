@@ -41,6 +41,7 @@
                 <tr>
                     <th colspan="1" class="text-center fw-bold"></th>
                     <th colspan="1" class="text-center fw-bold"></th>
+                    <th colspan="1" class="text-center fw-bold"></th>
                     <th colspan="2" class="text-center fw-bold">Total Pts</th>
                     <th colspan="2" class="text-center">Total Auto Pts</th>
                     <th colspan="2" class="text-center">Total Teleop Pts</th>
@@ -61,6 +62,7 @@
                     <th colspan="1"></th>
                     <th colspan="1"></th>
                     <th colspan="1"></th>
+                    <th colspan="1"></th>
                     <th colspan="2" class="text-center">Upper</th>
                     <th colspan="2" class="text-center">Lower</th>
                     <th colspan="2" class="text-center">Upper</th>
@@ -71,6 +73,7 @@
                 <tr>
                   <th scope="col">Team #</th>
                   <th scope="col">OPR</th>
+                  <th scope="col">Internal ELO</th>
                   <th scope="col">AVG</th>
                   <th scope="col">MAX</th>
                   <th scope="col">AVG</th>
@@ -120,6 +123,7 @@
   var teamList = new Set();
   var scoutingData = {};
   var tbaData = {};
+  var internalEloRank = {"elo" : {}};
   
   var rawdata  =null;
   var frozenTable = null;
@@ -147,6 +151,7 @@
       var rowString = "<tr>"
       + "<td><a href='teamLookup.php?teamNum="+teamNum+"'>" + teamNum + "</a></td>"
       + "<td>" + dummyGet(tbaData[teamNum], "totalPoints") + "</td>"
+      + "<td>" + dummyGet(internalEloRank["elo"], teamNum) + "</td>"
       + "<td>" + dummyGet(scoutingData[teamNum], "avgtotalpoints") + "</td>"
       + "<td>" + dummyGet(scoutingData[teamNum], "maxtotalpoints") + "</td>"
       + "<td>" + dummyGet(scoutingData[teamNum], "avgautopoints") + "</td>"
@@ -202,6 +207,14 @@
         }, 1);
       });
     });
+    
+    // Get internal ranking data
+    $.get( "readAPI.php", {getInternalRankings: 1}).done( function( data ) {
+      var data = JSON.parse(data);
+      internalEloRank = {...data};
+      dataToTable();
+    });
+    
     
     // Gets data from our TBA API
     $.get( "tbaAPI.php", {getCOPRs: 1}).done( function( data ) {
