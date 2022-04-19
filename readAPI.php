@@ -1,6 +1,6 @@
 <?php
   require_once("dbHandler.php");
-  require_once("qualRankgen.php");
+  require_once("qualRankGen.php");
   $db = new dbHandler();
   $dbConfig = $db->readDbConfig();
   $db->connectToDB();
