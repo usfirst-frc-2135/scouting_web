@@ -8,11 +8,42 @@ class firebaseWrapper{
       Args:
         firebaseApp
     */
-    if (firebaseApp == null){
-      firebaseApp = this.createDB();
-    }
+    this.secretStorage = "secretStorage";
     this.db = firebaseApp;
   }
+  
+  applyAuth(secretWord){
+    localStorage.setItem(this.secretStorage, secretWord);
+  }
+  
+  getAuthWord(){
+    return localStorage.getItem(this.secretStorage);
+  }
+  
+  checkAuth(successFunction, failureFunction){
+    $.ajax({
+      url: "readAPI.php?config=1&secret="+this.getAuthWord(),
+      type: 'get',
+      dataType: 'json',
+      async: true,
+      success: function(data) {
+        if (data["response"]){
+          console.log("Sucess Success");
+          successFunction({...data});
+        }
+        else {
+          console.log("Success Fail");
+          failureFunction();
+        }
+      },
+      fail: function(){
+        console.log("Fail");
+        failureFunction();
+      }
+    });
+  }
+  
+  
   
   getConfig(){
     var out = null;
@@ -28,22 +59,23 @@ class firebaseWrapper{
     return out;
   }
   
-  createDB(){
-    var cfg = this.getConfig();
-    this.eventcode = cfg["eventcode"];
-    this.tbakey = cfg["tbakey"];
+  createDB(cfg){
+    this.cfg = cfg;
+    this.eventcode = this.cfg["eventcode"];
+    this.tbakey = this.cfg["tbakey"];
     const firebaseConfig = {
-      apiKey:             cfg["fbapikey"],
-      authDomain:         cfg["fbauthdomain"],
-      databaseURL:        cfg["fbdburl"],
-      projectId:          cfg["fbprojectid"],
-      storageBucket:      cfg["fbstoragebucket"],
-      messagingSenderId:  cfg["fbsenderid"],
-      appId:              cfg["fbappid"],
-      measurementId:      cfg["fbmeasurementid"]
+      apiKey:             this.cfg["fbapikey"],
+      authDomain:         this.cfg["fbauthdomain"],
+      databaseURL:        this.cfg["fbdburl"],
+      projectId:          this.cfg["fbprojectid"],
+      storageBucket:      this.cfg["fbstoragebucket"],
+      messagingSenderId:  this.cfg["fbsenderid"],
+      appId:              this.cfg["fbappid"],
+      measurementId:      this.cfg["fbmeasurementid"]
     };
     var rawFirebaseApp = firebase.initializeApp(firebaseConfig);
-    return firebase.database();
+    this.db = firebase.database();
+    return this.db;
   }
   
   

@@ -3,7 +3,7 @@
 <div class="container row-offcanvas row-offcanvas-left">
     <div class="well column  col-lg-12  col-sm-12 col-xs-12" id="content">
       <div class="row pt-3 pb-3 mb-3">
-        <div class="card col-md-12">
+        <div id="authFlagDiv" class="card col-md-12">
           <div class="card-body">
             <h2 id="pickListName">Pick List:</h2>
           </div>
@@ -120,8 +120,8 @@
       <div class="card">
         <div class="card-header">
             Settings
-          </div>
-          <div class="card-body">
+        </div>
+        <div class="card-body">
           <div class="row justify-content-md-center">
               <div class="col-md-4 mt-1 mb-1">
                 <select class="form-select" aria-label="Picklist Select" id="picklistSelect">
@@ -136,6 +136,16 @@
                   <label class="form-check-label" for="editPicklist">Edit Picklist</label>
                 </div>
               </div>
+          </div>
+          <div class="row justify-content-md-center">
+            <div class="col-md-4 mt-1 mb-1">
+              <div class="input-group mb-3">
+                <input type="password" id="secretWordText" class="form-control" placeholder="Secret Word">
+              </div>
+            </div>
+            <div class="col-md-2 mt-1 mb-1">
+              <button type="button" id="applySecretWord" class="btn btn-primary" data-bs-target="#newPicklistModal">Apply Secret Word</button>
+            </div>
           </div>
         </div>
       </div>
@@ -179,6 +189,7 @@
     var pickListSortable, notSortedSortable, dnpSortable;
     
     var lockListEdit = false;
+    var drawingPicklist = false;
     
     var currPicklistName = null;
     
@@ -389,21 +400,24 @@
     }
     
     function addTeamsToLists(){
-      var ids = ["picklistDiv", "unsortedDiv", "doNotPickDiv"];
-      var teamSet = new Set();
-      for(var i = 0; i != sortedListKeys.length; i++){
-        $("#"+ids[i]).html("");
-        var sortIndex = 0;
-        for(var j = 0; j != sortedLists[sortedListKeys[i]].length; j++){
-          var teamNumber = sortedLists[sortedListKeys[i]][j];
-          if (!teamSet.has(teamNumber)){
-            $("#"+ids[i]).append(createNewRow(++sortIndex, teamNumber));
-            teamSet.add(teamNumber);
+      if (!drawingPicklist){
+        drawingPicklist = true;
+        var ids = ["picklistDiv", "unsortedDiv", "doNotPickDiv"];
+        var teamSet = new Set();
+        for(var i = 0; i != sortedListKeys.length; i++){
+          $("#"+ids[i]).html("");
+          var sortIndex = 0;
+          for(var j = 0; j != sortedLists[sortedListKeys[i]].length; j++){
+            var teamNumber = sortedLists[sortedListKeys[i]][j];
+            if (!teamSet.has(teamNumber)){
+              $("#"+ids[i]).append(createNewRow(++sortIndex, teamNumber));
+              teamSet.add(teamNumber);
+            }
           }
         }
+        drawingPicklist = false;
+        lockListEdit = false;
       }
-      lockListEdit = false;
-      // Make sortable
       
     }
     
@@ -691,12 +705,42 @@
       });
     }
   }
+  
+   
+  
+  function authSuccess(cfg){
+    //
+    firebaseApp.createDB(cfg);
+    //
+    $("#secretWordText").prop("disabled", true);
+    $("#applySecretWord").prop("disabled", true);
+    //
+    $("#authFlagDiv").addClass("bg-sucess");
+    $("#authFlagDiv").removeClass("bg-danger");
+    //
 
+    initialize_app_after_auth();
+  }
+  
+  function authFailure(){
+    $("#authFlagDiv").removeClass("bg-sucess");
+    $("#authFlagDiv").addClass("bg-danger");
+  }
+
+  $(document).ready(function() {
+    // Initialize Firebase
+    firebaseApp = new firebaseWrapper();
     
-    $(document).ready(function() {
-        
-        // Initialize Firebase
-        firebaseApp = new firebaseWrapper();
+    firebaseApp.checkAuth(authSuccess, authFailure);
+    
+    $("#applySecretWord").click(function (){
+      firebaseApp.applyAuth($("#secretWordText").val());
+      firebaseApp.checkAuth(authSuccess, authFailure);
+    });
+  });
+  
+    
+   function initialize_app_after_auth(){
         
         readDefaultPicklist();
         
@@ -705,12 +749,6 @@
         $.get("./tbaAPI.php", {getEventCode : true}, function(data){
           eventCode = data;
           loadPicklistNames();
-        });
-        
-        $.get( "readAPI.php", {getInternalRankings: 1}).done( function( data ) {
-          var data = JSON.parse(data);
-          internalEloRank = {...data};
-          dataToTable();
         });
         
         pickListSortable = new Sortable(document.getElementById('picklistDiv'), {
@@ -795,13 +833,17 @@
           var mdp = new matchDataProcessor(matchData);
           mdp.getSiteFilteredAverages(function(averageData){
             localAverages = averageData;
+            
+            $.get( "readAPI.php", {getInternalRankings: 1}).done( function( data ) {
+              var data = JSON.parse(data);
+              internalEloRank = {...data};
+              addTeamsToLists();
+            });
           });
           //loadPicklist(picklistName);
         });
         
-        
-        
-    });
+    }
      
     
 </script>
