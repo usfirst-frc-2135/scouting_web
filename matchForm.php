@@ -130,9 +130,16 @@
         <div class="col-md-6 g-5">
           <div class="row">
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" name="climbed" id="climbed">
               <label class="form-check-label" for="climbed">Climbed?</label>
+              <select class="form-select" id="climbed">
+                <option value="0">No Climb</option>
+                <option value="1">Level 1</option>
+                <option value="2">Level 2</option>
+                <option value="3">Level 3</option>
+                <option value="4">Level 4</option>
+              </select>
             </div>
+
             
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="checkbox" name="dead" id="dead">
@@ -229,7 +236,7 @@
     out["autonhighpoints"]  = auto_high;
     out["teleoplowpoints"]  = teleop_low;
     out["teleophighpoints"] = teleop_high;
-    out["climbed"]          = $("#climbed").is(':checked') ? 1 : 0;
+    out["climbed"]          = $("#climbed").val();
     out["died"]             = $("#dead").is(':checked') ? 1 : 0;
     out["scoutname"]        = $("#scoutName").val();
     out["comment"]          = $("#comment").val();
