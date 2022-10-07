@@ -252,8 +252,11 @@
   }
   
   function dataToCommentTable(commentObj){
-    for (let i = 0; i < commentObj.length; i++) {
-      writeTableRow("comments", commentObj[i], ["comment", "scoutname"]);
+    console.log("dataTocommentTable starting");
+      for (let i = 0; i < commentObj.length; i++) {
+        console.log(commentObj[i].comment);
+        if (commentObj[i].comment === "-") { continue; }
+        writeTableRow("comments", commentObj[i], ["comment", "scoutname"]);
     }
   }
     
