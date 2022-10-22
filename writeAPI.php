@@ -24,6 +24,16 @@
     }
     echo("success");
   }
+  if (isset($_POST["writeSingleData"])){
+    // Write Data API
+    $db->connectToDB();
+    $dat = json_decode($_POST["writeSingleData"], true);
+    // echo($_POST["writeData"]);
+    $dat["eventcode"] = $eventCode;
+    $dat["entrykey"] = $dat["eventcode"] . "_" . $dat["matchnumber"] . "_" . $dat["teamnumber"];
+    $db->writeRowToTable($dat);
+    echo("success");
+  }
   if (isset($_POST["writePitData"])){
     /* 
     $_POST["writePitData"] = {teamnumber : x, numbatteries : x, numchargers : x, pitorg : x,
@@ -34,6 +44,33 @@
     $args["entrykey"] = $eventCode . "_" . $args["teamnumber"];
     $args["eventcode"] = $eventCode;
     $db->writeRowToPitTable($args);
+    echo("success");
+  }
+  if (isset($_POST["writeAllianceRankData"])){
+    /* 
+    $_POST["writeAllianceRankData"] = [team1, team2, team3]
+    */
+    $db->connectToDB();
+    $data = array();
+    $data["eventcode"] = $eventCode;
+    $data["teamrank"] = $_POST["writeAllianceRankData"];
+    $data["matchkey"] = $_POST["matchKey"];
+    $db->writeRowToRankTable($data);
+    
+    echo("success");
+  }
+  
+  if (isset($_POST["deleteAllianceRankData"])){
+    /* 
+    $_POST["deleteAllianceRankData"] = [team1, team2, team3]
+    */
+    $db->connectToDB();
+    $data = array();
+    $data["eventcode"] = $eventCode;
+    $data["teamrank"] = $_POST["deleteAllianceRankData"];
+    $data["matchkey"] = $_POST["matchKey"];
+    $db->deleteRowFromRankTable($data);
+    
     echo("success");
   }
   else if(isset($_POST["teamNum"]) and isset($_FILES["teamPic"])){

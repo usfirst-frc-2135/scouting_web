@@ -249,6 +249,57 @@
       }
     }
     
+    function createRankTable(){
+      $conn = $this->connectToDB();
+      $dbConfig = $this->readDbConfig();
+      $query = "CREATE TABLE " . $dbConfig["db"] . "." .$dbConfig["ranktable"] . " (
+            eventcode VARCHAR(10) NOT NULL,
+            matchkey VARCHAR(60) NOT NULL,
+            teamrank MEDIUMTEXT NOT NULL
+        )";
+      $statement = $conn->prepare($query);
+      if (!$statement->execute()) {
+        throw new Exception("createRankingTable Error: CREATE TABLE ".$dbConfig["ranktable"]." query failed.");
+      }
+    }
+    
+    function writeRowToRankTable($data){
+      $dbConfig = $this->readDbConfig();
+      $sql = "INSERT INTO ".$dbConfig["ranktable"]."(eventcode, matchkey, teamrank)
+                VALUES(:eventcode, :matchkey, :teamrank)";
+      $prepared_statement = $this->conn->prepare($sql);
+      $prepared_statement->execute($data);
+    }
+    
+    
+    function readRawRankData($eventCode){
+      $dbConfig = $this->readDbConfig();
+      $sql = "SELECT matchkey,
+                     teamrank from ".$dbConfig["ranktable"]." where 
+                     eventcode='".$eventCode."'";
+      $prepared_statement = $this->conn->prepare($sql);
+      $prepared_statement->execute();
+      $result = $prepared_statement->fetchAll();
+      return $result;
+    }
+    
+    function readRankData($eventCode){
+      $rawRankData = $this->readRawRankData($eventCode);
+      $rankData = array();
+      $dataSize = sizeof($rawRankData);
+      for($i = 0; $i < $dataSize; $i++){
+        array_push($rankData, json_decode($rawRankData[$i]["teamrank"], True));
+      }
+      return $rankData;
+    }
+    
+    function deleteRowFromRankTable($data){
+      $dbConfig = $this->readDbConfig();
+      $sql = "DELETE FROM ".$dbConfig["ranktable"]." WHERE eventcode = :eventcode AND matchkey = :matchkey AND teamrank = :teamrank LIMIT 1";
+      $prepared_statement = $this->conn->prepare($sql);
+      $prepared_statement->execute($data);
+    }
+    
     
     function readDbConfig(){
       // Read dbIniFile

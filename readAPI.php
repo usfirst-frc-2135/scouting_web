@@ -1,5 +1,6 @@
 <?php
-  include("dbHandler.php");
+  require_once("dbHandler.php");
+  require_once("qualRankGen.php");
   $db = new dbHandler();
   $dbConfig = $db->readDbConfig();
   $db->connectToDB();
@@ -78,18 +79,33 @@
     }
     echo(json_encode($imageObj));
   } 
+  else if (isset($_GET["getRawRankingData"])){
+    echo(json_encode($db->readRawRankData($eventCode)));
+  }
+  else if (isset($_GET["getInternalRankings"])){
+    $qrg = new qualRankGen($db->readRankData($eventCode));
+    $rankMap = array();
+    $rankMap["elo"] = $qrg->raw_votes_to_elo_map(30);
+    echo(json_encode($rankMap));
+  }
   else if (isset($_GET["config"])){
     $output = array();
-    $output["eventcode"] = $dbConfig["eventcode"];
-    $output["tbakey"] = $dbConfig["tbakey"];
-    $output["fbapikey"] = $dbConfig["fbapikey"];
-    $output["fbauthdomain"] = $dbConfig["fbauthdomain"];
-    $output["fbdburl"] = $dbConfig["fbdburl"];
-    $output["fbprojectid"] = $dbConfig["fbprojectid"];
-    $output["fbstoragebucket"] = $dbConfig["fbstoragebucket"];
-    $output["fbsenderid"] = $dbConfig["fbsenderid"];
-    $output["fbappid"] = $dbConfig["fbappid"];
-    $output["fbmeasurementid"] = $dbConfig["fbmeasurementid"];
+    $output["response"] = False;
+    if (isset($_GET["secret"])){
+      if (strcmp($_GET["secret"], "CHANGE_PER_SERVER") == 0){
+        $output["response"] = True;
+        $output["eventcode"] = $dbConfig["eventcode"];
+        $output["tbakey"] = $dbConfig["tbakey"];
+        $output["fbapikey"] = $dbConfig["fbapikey"];
+        $output["fbauthdomain"] = $dbConfig["fbauthdomain"];
+        $output["fbdburl"] = $dbConfig["fbdburl"];
+        $output["fbprojectid"] = $dbConfig["fbprojectid"];
+        $output["fbstoragebucket"] = $dbConfig["fbstoragebucket"];
+        $output["fbsenderid"] = $dbConfig["fbsenderid"];
+        $output["fbappid"] = $dbConfig["fbappid"];
+        $output["fbmeasurementid"] = $dbConfig["fbmeasurementid"];
+      }
+    }
     echo(json_encode($output));
   }
 ?>

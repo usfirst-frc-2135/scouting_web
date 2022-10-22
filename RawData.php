@@ -4,28 +4,30 @@
     <div class="well column  col-lg-12  col-sm-12 col-xs-12" id="content">
     
       <div class="row pt-3 pb-3 mb-3">
+        <h2>Raw Data</h2>
+        <div id="freezeTableDiv">
+          <table id="rawDataTable" class="table table-striped table-hover sortable">
+            <thead>
+              <tr>
+                <th scope="col">Match #</th>
+                <th scope="col">Team #</th>
+                <th scope="col">Start Position</th>
+                <th scope="col">Tarmac Cross</th>
+                <th scope="col">Auto Upper Hub</th>
+                <th scope="col">Auto Low Hub</th>
+                <th scope="col">Teleop Upper Hub</th>
+                <th scope="col">Teleop Low Hub</th>
+                <th scope="col">Climb</th>
+                <th scope="col">Died</th>
+                <th scope="col">Comment</th>
+                <th scope="col">Scout Name</th>
+              </tr>
+            </thead>
+            <tbody id="tableData">
+            </tbody>
+          </table>
 
-        <table id="rawDataTable" class="table table-striped table-hover sortable">
-          <thead>
-            <tr>
-              <th scope="col">Match #</th>
-              <th scope="col">Team #</th>
-              <th scope="col">Start Position</th>
-              <th scope="col">Tarmac Cross</th>
-              <th scope="col">Auto Upper Hub</th>
-              <th scope="col">Auto Low Hub</th>
-              <th scope="col">Teleop Upper Hub</th>
-              <th scope="col">Teleop Low Hub</th>
-              <th scope="col">Climb</th>
-              <th scope="col">Died</th>
-              <th scope="col">Comment</th>
-              <th scope="col">Scout Name</th>
-            </tr>
-          </thead>
-          <tbody id="tableData">
-          </tbody>
-        </table>
-
+          </div>
         </div>
     </div>
 </div>
@@ -34,6 +36,9 @@
 <?php include("footer.php") ?>
 
 <script>
+  
+  var frozenTable = null;
+  
     function dataToTable(dataObj){
         for (let i = 0; i < dataObj.length; i++) {
             var rowString = "<tr><td>"+dataObj[i]["matchnumber"]+"</td>"
@@ -62,7 +67,10 @@
         $.get( "readAPI.php", {getAllData: 1}).done( function( data ) {
             var dataObj = JSON.parse(data);        
             dataToTable(dataObj);
-            setTimeout(function(){sorttable.makeSortable(document.getElementById("rawDataTable"))}, 500);
+            setTimeout(function(){
+              sorttable.makeSortable(document.getElementById("rawDataTable"));
+              frozenTable = $('#freezeTableDiv').freezeTable({'backgroundColor':"white", 'columnNum':2, 'frozenColVerticalOffset':0});
+            }, 1);
         });
         
     }
@@ -71,6 +79,12 @@
     $(document).ready(function() {
         requestAPI();
         // sorttable.makeSortable(document.getElementById("rawDataTable"));
+        
+        $("#rawDataTable").click(function(){
+          if (!frozenTable){
+            frozenTable.update();
+          }
+        });
     });
     
     

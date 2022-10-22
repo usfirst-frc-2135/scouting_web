@@ -13,15 +13,17 @@
       </div>
       
       <div class="table-responsive">
-        <table id="dataTable" class="table table-striped table-hover">
-          <thead>
-            <tr id="tableKeys">
-            </tr>
-          </thead>
-        <tbody id="tableData">
-        </tbody>
-      </table>
-    </div>
+        <div id="freezeTableDiv">
+          <table id="dataTable" class="table table-striped table-hover">
+            <thead>
+              <tr id="tableKeys">
+              </tr>
+            </thead>
+            <tbody id="tableData">
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -38,6 +40,9 @@
 <?php include("footer.php") ?>
 
 <script>
+  
+  var frozenTable = null;
+  
     function dataToTable(dataObj, keys){
       $("#tableData").html("");
       for (let team in dataObj){
@@ -81,6 +86,7 @@
       $.get( "tbaAPI.php", {getCOPRs: 1}).done( function( data ) {
         processData(data);
         sorttable.makeSortable(document.getElementById("dataTable"));
+        frozenTable = $('#freezeTableDiv').freezeTable({'backgroundColor':"white", 'columnNum':1, 'frozenColVerticalOffset':0});
       });
     }
     
@@ -91,9 +97,20 @@
       $("#loadEvent").click(function(){
         $.get( "tbaAPI.php", {getCOPRs: 1, eventcode: $("#eventCode").val()}).done( function( data ) {
           processData(data);
-          setTimeout(function(){sorttable.makeSortable(document.getElementById("rawDataTable"))}, 200);
+          setTimeout(function(){
+            sorttable.makeSortable(document.getElementById("dataTable"));
+            frozenTable = $('#freezeTableDiv').freezeTable({'backgroundColor':"white", 'columnNum':1, 'frozenColVerticalOffset':0});
+            }, 200);
         });
       });
+      
+      $("#dataTable").click(function(){
+          if (!frozenTable){
+            frozenTable.update();
+          }
+        });
+      
+      
     });
     
     

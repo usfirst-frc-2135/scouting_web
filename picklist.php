@@ -3,7 +3,7 @@
 <div class="container row-offcanvas row-offcanvas-left">
     <div class="well column  col-lg-12  col-sm-12 col-xs-12" id="content">
       <div class="row pt-3 pb-3 mb-3">
-        <div class="card col-md-12">
+        <div id="authFlagDiv" class="card col-md-12">
           <div class="card-body">
             <h2 id="pickListName">Pick List:</h2>
           </div>
@@ -25,12 +25,15 @@
                     <th scope="col"></th>
                     <th scope="col">#</th>
                     <th scope="col">Team</th>
+                    <th scope="col">Internal ELO</th>
                     <th scope="col">Avg Total Pts</th>
                     <th scope="col">Max Total Pts</th>
-                    <th scope="col">Avg Auto Pts</th>
-                    <th scope="col">Avg Teleop Pts</th>
-                    <th scope="col">Avg Endgame Pts</th>
-                    <th scope="col">Total Died</th>
+                    <th scope="col">Avg A+E Pts</th>
+                    <th scope="col">Max A+E Pts</th>
+                    <th scope="col" class="d-none d-md-table-cell">Avg A Pts</th>
+                    <th scope="col" class="d-none d-md-table-cell">Avg T Pts</th>
+                    <th scope="col" class="d-none d-md-table-cell">Avg E Pts</th>
+                    <th scope="col" class="d-none d-md-table-cell">Total Died</th>
                   <th scope="col">Notes</th>
                   </tr>
                 </thead>
@@ -56,12 +59,15 @@
                     <th scope="col"></th>
                     <th scope="col">#</th>
                     <th scope="col">Team</th>
+                    <th scope="col">Internal ELO</th>
                     <th scope="col">Avg Total Pts</th>
                     <th scope="col">Max Total Pts</th>
-                    <th scope="col">Avg Auto Pts</th>
-                    <th scope="col">Avg Teleop Pts</th>
-                    <th scope="col">Avg Endgame Pts</th>
-                    <th scope="col">Total Died</th>
+                    <th scope="col">Avg A+E Pts</th>
+                    <th scope="col">Max A+E Pts</th>
+                    <th scope="col" class="d-none d-md-table-cell">Avg A Pts</th>
+                    <th scope="col" class="d-none d-md-table-cell">Avg T Pts</th>
+                    <th scope="col" class="d-none d-md-table-cell">Avg E Pts</th>
+                    <th scope="col" class="d-none d-md-table-cell">Total Died</th>
                     <th scope="col">Notes</th>
                   </tr>
                 </thead>
@@ -88,12 +94,15 @@
                     <th scope="col"></th>
                     <th scope="col">#</th>
                     <th scope="col">Team</th>
+                    <th scope="col">Internal ELO</th>
                     <th scope="col">Avg Total Pts</th>
                     <th scope="col">Max Total Pts</th>
-                    <th scope="col">Avg Auto Pts</th>
-                    <th scope="col">Avg Teleop Pts</th>
-                    <th scope="col">Avg Endgame Pts</th>
-                    <th scope="col">Total Died</th>
+                    <th scope="col">Avg A+E Pts</th>
+                    <th scope="col">Max A+E Pts</th>
+                    <th scope="col" class="d-none d-md-table-cell">Avg A Pts</th>
+                    <th scope="col" class="d-none d-md-table-cell">Avg T Pts</th>
+                    <th scope="col" class="d-none d-md-table-cell">Avg E Pts</th>
+                    <th scope="col" class="d-none d-md-table-cell">Total Died</th>
                     <th scope="col">Notes</th>
                   </tr>
                 </thead>
@@ -111,8 +120,8 @@
       <div class="card">
         <div class="card-header">
             Settings
-          </div>
-          <div class="card-body">
+        </div>
+        <div class="card-body">
           <div class="row justify-content-md-center">
               <div class="col-md-4 mt-1 mb-1">
                 <select class="form-select" aria-label="Picklist Select" id="picklistSelect">
@@ -127,6 +136,16 @@
                   <label class="form-check-label" for="editPicklist">Edit Picklist</label>
                 </div>
               </div>
+          </div>
+          <div class="row justify-content-md-center">
+            <div class="col-md-4 mt-1 mb-1">
+              <div class="input-group mb-3">
+                <input type="password" id="secretWordText" class="form-control" placeholder="Secret Word">
+              </div>
+            </div>
+            <div class="col-md-2 mt-1 mb-1">
+              <button type="button" id="applySecretWord" class="btn btn-primary" data-bs-target="#newPicklistModal">Apply Secret Word</button>
+            </div>
           </div>
         </div>
       </div>
@@ -165,10 +184,12 @@
     var sortedListKeys = ["sorted", "unsorted", "dnp"];
     var sortedLists = {"sorted" : [], "unsorted" : [], "dnp" : []};
     var localPickedTeamLookup = [];
+    var internalEloRank = {"elo" : {}};
     
     var pickListSortable, notSortedSortable, dnpSortable;
     
     var lockListEdit = false;
+    var drawingPicklist = false;
     
     var currPicklistName = null;
     
@@ -178,6 +199,19 @@
     var localNotes = {};
     
     var canEdit = false;
+    
+    
+    function dummyGet(dict, key){
+      /* If key doesn't exist in given dict, return a 0. */
+      // console.log(dict);
+      if (! dict){
+        return 0;
+      }
+      if (key in dict){
+        return dict[key];
+      }
+      return 0;
+    }
     
     function setEditable(state){
       if (state != null){
@@ -366,21 +400,24 @@
     }
     
     function addTeamsToLists(){
-      var ids = ["picklistDiv", "unsortedDiv", "doNotPickDiv"];
-      var teamSet = new Set();
-      for(var i = 0; i != sortedListKeys.length; i++){
-        $("#"+ids[i]).html("");
-        var sortIndex = 0;
-        for(var j = 0; j != sortedLists[sortedListKeys[i]].length; j++){
-          var teamNumber = sortedLists[sortedListKeys[i]][j];
-          if (!teamSet.has(teamNumber)){
-            $("#"+ids[i]).append(createNewRow(++sortIndex, teamNumber));
-            teamSet.add(teamNumber);
+      if (!drawingPicklist){
+        drawingPicklist = true;
+        var ids = ["picklistDiv", "unsortedDiv", "doNotPickDiv"];
+        var teamSet = new Set();
+        for(var i = 0; i != sortedListKeys.length; i++){
+          $("#"+ids[i]).html("");
+          var sortIndex = 0;
+          for(var j = 0; j != sortedLists[sortedListKeys[i]].length; j++){
+            var teamNumber = sortedLists[sortedListKeys[i]][j];
+            if (!teamSet.has(teamNumber)){
+              $("#"+ids[i]).append(createNewRow(++sortIndex, teamNumber));
+              teamSet.add(teamNumber);
+            }
           }
         }
+        drawingPicklist = false;
+        lockListEdit = false;
       }
-      lockListEdit = false;
-      // Make sortable
       
     }
     
@@ -403,6 +440,11 @@
     }
     return localNotes[team];
   }
+  
+  function rnd(val){
+    /* Rounding helper function */
+    return Math.round((val + Number.EPSILON) * 100) / 100;
+  }
     
     function createNewRow(index, team){
       var out = "";
@@ -418,14 +460,19 @@
         out += "  <td scope='col' class='pickHandle'>"+icon_svg+"</td>";
         out += "  <td scope='col'> <input class='form-check-input pick-check' type='checkbox' role='switch'></td>";
       }
+      var avgAutoEnd = rnd(dummylocalAveragesLookup(team, "avgautopoints") + dummylocalAveragesLookup(team, "avgendgamepoints"));
+      var maxAutoEnd = rnd(dummylocalAveragesLookup(team, "maxautopoints") + dummylocalAveragesLookup(team, "maxendgamepoints"));
       out += "  <td scope='col'>"+index+"</td>";
       out += "  <td scope='col'><b>"+team+"</b></td>";
+      out += "  <td scope='col'>"+ dummyGet(internalEloRank["elo"], team) +"</td>";
       out += "  <td scope='col'>"+ dummylocalAveragesLookup(team, "avgtotalpoints") +"</td>";
       out += "  <td scope='col'>"+ dummylocalAveragesLookup(team, "maxtotalpoints") +"</td>";
-      out += "  <td scope='col'>"+ dummylocalAveragesLookup(team, "avgautopoints") +"</td>";
-      out += "  <td scope='col'>"+ dummylocalAveragesLookup(team, "avgteleoppoints") +"</td>";
-      out += "  <td scope='col'>"+ dummylocalAveragesLookup(team, "avgendgamepoints") +"</td>";
-      out += "  <td scope='col'>"+ dummylocalAveragesLookup(team, "totaldied") +"</td>";
+      out += "  <td scope='col'>"+ avgAutoEnd +"</td>";
+      out += "  <td scope='col'>"+ maxAutoEnd +"</td>";
+      out += "  <td scope='col' class='d-none d-md-table-cell'>"+ dummylocalAveragesLookup(team, "avgautopoints") +"</td>";
+      out += "  <td scope='col' class='d-none d-md-table-cell'>"+ dummylocalAveragesLookup(team, "avgteleoppoints") +"</td>";
+      out += "  <td scope='col' class='d-none d-md-table-cell'>"+ dummylocalAveragesLookup(team, "avgendgamepoints") +"</td>";
+      out += "  <td scope='col' class='d-none d-md-table-cell'>"+ dummylocalAveragesLookup(team, "totaldied") +"</td>";
       out += "  <td><textarea style='min-width:200px' class='form-control teamNotes' rows='1' data-team='"+team+"'>"+ commentLookup(team) +"</textarea></td>";
       out += "</tr>";
       return out;
@@ -658,12 +705,42 @@
       });
     }
   }
+  
+   
+  
+  function authSuccess(cfg){
+    //
+    firebaseApp.createDB(cfg);
+    //
+    $("#secretWordText").prop("disabled", true);
+    $("#applySecretWord").prop("disabled", true);
+    //
+    $("#authFlagDiv").addClass("bg-sucess");
+    $("#authFlagDiv").removeClass("bg-danger");
+    //
 
+    initialize_app_after_auth();
+  }
+  
+  function authFailure(){
+    $("#authFlagDiv").removeClass("bg-sucess");
+    $("#authFlagDiv").addClass("bg-danger");
+  }
+
+  $(document).ready(function() {
+    // Initialize Firebase
+    firebaseApp = new firebaseWrapper();
     
-    $(document).ready(function() {
-        
-        // Initialize Firebase
-        firebaseApp = new firebaseWrapper();
+    firebaseApp.checkAuth(authSuccess, authFailure);
+    
+    $("#applySecretWord").click(function (){
+      firebaseApp.applyAuth($("#secretWordText").val());
+      firebaseApp.checkAuth(authSuccess, authFailure);
+    });
+  });
+  
+    
+   function initialize_app_after_auth(){
         
         readDefaultPicklist();
         
@@ -756,13 +833,17 @@
           var mdp = new matchDataProcessor(matchData);
           mdp.getSiteFilteredAverages(function(averageData){
             localAverages = averageData;
+            
+            $.get( "readAPI.php", {getInternalRankings: 1}).done( function( data ) {
+              var data = JSON.parse(data);
+              internalEloRank = {...data};
+              addTeamsToLists();
+            });
           });
           //loadPicklist(picklistName);
         });
         
-        
-        
-    });
+    }
      
     
 </script>
