@@ -35,10 +35,13 @@
                               <thead>
                                 <tr>
                                   <th scope="col">Batteries</th>
-                                  <th scope="col">Chargers</th>
                                   <th scope="col">Pit</th>
                                   <th scope="col">Spare Parts</th>
                                   <th scope="col">Programming</th>
+                                  <th scope="col">Vision</th>
+                                  <th scope="col">Swerve</th>
+                                  <th scope="col">Climber</th>
+                                  <th scope="col">Preparedness</th>
                                   <th scope="col">Drive Motors</th>
                                 </tr>
                               </thead>
@@ -57,6 +60,10 @@
                               </tbody>
                             </table>
                         </div>
+                      
+                    
+                    
+                      
                       <div class="overflow-auto">
                             <table class="table table-striped">
                               <thead>
@@ -221,6 +228,7 @@
                                         </table>
                     </div>
                 </div>
+                
                 
                 <div class="card mb-3">
                     <div class="card-body">
@@ -391,7 +399,11 @@
     function processPitData(data){
       if (!data || !data.length){
         data["sparepartsstring"] = data["spareparts"] ? "yes" : "no";
-        writeTableRow("pitData", data, ["numbatteries", "numchargers", "pitorg", "sparepartsstring", "proglanguage", "drivemotors"]);
+        data["computervisionstring"] = data["computervision"] ? "yes" : "no";
+        data["swervedrivestring"] = data["swervedrive"] ? "yes" : "no";
+        data["climberonstring"] = data["climberon"] ? "yes" : "no";
+        data["preparednessstring"] = data["preparedness"] ? "yes" : "no";
+        writeTableRow("pitData", data, ["numbatteries", "pitorg", "preparedness","sparepartsstring","computervisionstring","swervedrivestring","climberonstring", "proglanguage", "drivemotors"]);
       }
     }
     
