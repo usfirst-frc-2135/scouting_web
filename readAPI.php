@@ -24,11 +24,6 @@
         $i++;
       }
     }
-    
-    if ($teamLower == "2135"){
-      // Easter egg to always add a picture of grogu to the team images
-      array_push($imageList, "robot-pics/grogu.jpeg");
-    }
     return $imageList;
   }
   
