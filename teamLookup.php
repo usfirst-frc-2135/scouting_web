@@ -15,7 +15,7 @@
             <div class="col-lg-6 col-sm-6 col-xs-6 gx-3">
                 <div class="card mb-3">
                   <div class="card-body">
-                      <h5 id="teamTitle" class="card-title">Team ????</h5>
+                      <h5 id="teamTitle" class="card-title">Team ???? </h5>
                       <div id="robotPicsCarousel" class="carousel slide" data-bs-ride="carousel">
                         <div id="robotPics" class="carousel-inner">
                           
