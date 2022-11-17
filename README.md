@@ -1,7 +1,6 @@
 # scouting_web
 Scouting web server
 
-
 ## Firebase Setup
 
 We use Firebase to store data that we want to update rapidly cross devices.

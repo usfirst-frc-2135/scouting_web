@@ -2,8 +2,8 @@
   Firebase Wrapper
 */
 
-class firebaseWrapper{
-  constructor(firebaseApp=null){
+class firebaseWrapper {
+  constructor(firebaseApp = null) {
     /*
       Args:
         firebaseApp
@@ -11,90 +11,85 @@ class firebaseWrapper{
     this.secretStorage = "secretStorage";
     this.db = firebaseApp;
   }
-  
-  applyAuth(secretWord){
+
+  applyAuth(secretWord) {
     localStorage.setItem(this.secretStorage, secretWord);
   }
-  
-  getAuthWord(){
+
+  getAuthWord() {
     return localStorage.getItem(this.secretStorage);
   }
-  
-  checkAuth(successFunction, failureFunction){
+
+  checkAuth(successFunction, failureFunction) {
     $.ajax({
-      url: "readAPI.php?config=1&secret="+this.getAuthWord(),
+      url: "readAPI.php?config=1&secret=" + this.getAuthWord(),
       type: 'get',
       dataType: 'json',
       async: true,
-      success: function(data) {
-        if (data["response"]){
+      success: function (data) {
+        if (data["response"]) {
           console.log("Sucess Success");
-          successFunction({...data});
+          successFunction({ ...data });
         }
         else {
           console.log("Success Fail");
           failureFunction();
         }
       },
-      fail: function(){
+      fail: function () {
         console.log("Fail");
         failureFunction();
       }
     });
   }
-  
-  
-  
-  getConfig(){
+
+  getConfig() {
     var out = null;
     $.ajax({
       url: "readAPI.php?config",
       type: 'get',
       dataType: 'json',
       async: false,
-      success: function(data) {
-          out = data;
-      } 
+      success: function (data) {
+        out = data;
+      }
     });
     return out;
   }
-  
-  createDB(cfg){
+
+  createDB(cfg) {
     this.cfg = cfg;
     this.eventcode = this.cfg["eventcode"];
     this.tbakey = this.cfg["tbakey"];
     const firebaseConfig = {
-      apiKey:             this.cfg["fbapikey"],
-      authDomain:         this.cfg["fbauthdomain"],
-      databaseURL:        this.cfg["fbdburl"],
-      projectId:          this.cfg["fbprojectid"],
-      storageBucket:      this.cfg["fbstoragebucket"],
-      messagingSenderId:  this.cfg["fbsenderid"],
-      appId:              this.cfg["fbappid"],
-      measurementId:      this.cfg["fbmeasurementid"]
+      apiKey: this.cfg["fbapikey"],
+      authDomain: this.cfg["fbauthdomain"],
+      databaseURL: this.cfg["fbdburl"],
+      projectId: this.cfg["fbprojectid"],
+      storageBucket: this.cfg["fbstoragebucket"],
+      messagingSenderId: this.cfg["fbsenderid"],
+      appId: this.cfg["fbappid"],
+      measurementId: this.cfg["fbmeasurementid"]
     };
     var rawFirebaseApp = firebase.initializeApp(firebaseConfig);
     this.db = firebase.database();
     return this.db;
   }
-  
-  
-  set(key, value){
+
+  set(key, value) {
     this.db.ref(key).set(value);
   }
-  
-  get(key, func){
+
+  get(key, func) {
     this.db.ref(key).once("value").then(func);
   }
-  
-  attachListener(key, func){
+
+  attachListener(key, func) {
     this.db.ref(key).on('value', func);
   }
-  
-  removeAllListeners(key){
+
+  removeAllListeners(key) {
     this.db.ref(key).off();
   }
-  
-  
-  
+
 }

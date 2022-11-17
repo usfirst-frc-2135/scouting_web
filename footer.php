@@ -1,5 +1,5 @@
   <footer class="container">
-  
+
   </footer>
 
   <script type="text/javascript" src="./external/jquery/jquery-3.6.0.min.js"></script>
@@ -15,4 +15,5 @@
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
   <script type="text/javascript" src="./external/freeze-table/freeze-table.js"></script>
   </body>
-</html>
+
+  </html>

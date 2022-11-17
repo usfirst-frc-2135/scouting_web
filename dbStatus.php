@@ -2,10 +2,10 @@
 <?php include("header.php") ?>
 
 <div class="container row-offcanvas row-offcanvas-left">
-    <div class="well column  col-lg-12  col-sm-12 col-xs-12" id="content">
-      <div class="row pt-3 pb-3 mb-3">
-          <div class="col-lg-6 col-sm-6 col-xs-6 gx-3">
-            <div class="card">
+  <div class="well column  col-lg-12  col-sm-12 col-xs-12" id="content">
+    <div class="row pt-3 pb-3 mb-3">
+      <div class="col-lg-6 col-sm-6 col-xs-6 gx-3">
+        <div class="card">
           <div class="card-header">
             Database Status
           </div>
@@ -33,43 +33,43 @@
             <h4>Firebase Measurement ID: <span id="writefbmeasurementid" class="badge bg-primary">????</span></h4>
           </div>
         </div>
-          
-          </div>
-        <div class="col-lg-6 col-sm-6 col-xs-6 gx-3">
-          <div class="overflow-auto">
-            <div class="card">
-              <div class="card-header">
+
+      </div>
+      <div class="col-lg-6 col-sm-6 col-xs-6 gx-3">
+        <div class="overflow-auto">
+          <div class="card">
+            <div class="card-header">
               Select Data to Use
-              </div>
-              <div class="card-body d-grid gap-4">
-                <div class="p-2">
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" name="dataGroup" id="dataP">
-                    <label class="form-check-label" for="dataP">Practice</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" name="dataGroup" id="dataQm">
-                    <label class="form-check-label" for="dataQm">Quals</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" name="dataGroup" id="dataQf">
-                    <label class="form-check-label" for="dataQf">Quarterfinals</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" name="dataGroup" id="dataSf">
-                    <label class="form-check-label" for="dataSf">Semifinals</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" name="dataGroup" id="dataF">
-                    <label class="form-check-label" for="dataF">Finals</label>
-                  </div>
-                </div> 
-                <div class="p-2">
-                  <button id="useData" class="btn btn-primary">Use this data</button>
+            </div>
+            <div class="card-body d-grid gap-4">
+              <div class="p-2">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" name="dataGroup" id="dataP">
+                  <label class="form-check-label" for="dataP">Practice</label>
                 </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" name="dataGroup" id="dataQm">
+                  <label class="form-check-label" for="dataQm">Quals</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" name="dataGroup" id="dataQf">
+                  <label class="form-check-label" for="dataQf">Quarterfinals</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" name="dataGroup" id="dataSf">
+                  <label class="form-check-label" for="dataSf">Semifinals</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" name="dataGroup" id="dataF">
+                  <label class="form-check-label" for="dataF">Finals</label>
                 </div>
               </div>
+              <div class="p-2">
+                <button id="useData" class="btn btn-primary">Use this data</button>
+              </div>
+            </div>
           </div>
+        </div>
         <div class="card">
           <div class="card-header">
             Export Data
@@ -78,11 +78,11 @@
             <button id="exportData" class="btn btn-primary">Export all data to CSV</button>
           </div>
         </div>
-            
-          <div class="card">
-            <div class="card-header">
+
+        <div class="card">
+          <div class="card-header">
             Database Config
-            </div>
+          </div>
           <div class="card-body">
             <div class="mb-3">
               <label for="writeServer" class="form-label"> MySQL Server URL</label>
@@ -161,51 +161,48 @@
             <button id="createTable" class="btn btn-primary">Create Table</button>
           </div>
         </div>
-          
-          </div>
-        
-        <!-- DB Exists Badge -->
-        
-        <!-- Create DB - DB Name + Create -->
-        <!-- Write Admin Credentials - Admin Name Write -->
+
       </div>
-      
+
+      <!-- DB Exists Badge -->
+
+      <!-- Create DB - DB Name + Create -->
+      <!-- Write Admin Credentials - Admin Name Write -->
+    </div>
+
   </div>
-  </div>
+</div>
 </div>
 <?php include("footer.php") ?>
 <script>
-  
-  
-  function setStatusBadge(isSuccess, id){
-    if(isSuccess){
-      $("#"+id).text("Connected");
-      $("#"+id).addClass("bg-success");
-      $("#"+id).removeClass("bg-warning");
-      $("#"+id).removeClass("bg-danger");
-    }
-    else{
-      $("#"+id).text("Not Connected");
-      $("#"+id).addClass("bg-danger");
-      $("#"+id).removeClass("bg-warning");
-      $("#"+id).removeClass("bg-success");
+  function setStatusBadge(isSuccess, id) {
+    if (isSuccess) {
+      $("#" + id).text("Connected");
+      $("#" + id).addClass("bg-success");
+      $("#" + id).removeClass("bg-warning");
+      $("#" + id).removeClass("bg-danger");
+    } else {
+      $("#" + id).text("Not Connected");
+      $("#" + id).addClass("bg-danger");
+      $("#" + id).removeClass("bg-warning");
+      $("#" + id).removeClass("bg-success");
     }
   }
-  
-  function updateStatusValues(statusArray){
+
+  function updateStatusValues(statusArray) {
     $("#serverName").text(statusArray["server"]);
     $("#databaseName").text(statusArray["db"]);
     $("#userName").text(statusArray["username"]);
     $("#tbaKey").text(statusArray["tbakey"]);
     $("#eventCode").text(statusArray["eventcode"]);
-    
+
     setStatusBadge(statusArray["dbExists"], "dbStatus");
     setStatusBadge(statusArray["serverExists"], "serverStatus");
     setStatusBadge(statusArray["dataTableExists"], "dataTableStatus");
     setStatusBadge(statusArray["tbaTableExists"], "TBATableStatus");
     setStatusBadge(statusArray["pitTableExists"], "pitTableStatus");
     setStatusBadge(statusArray["rankTableExists"], "rankTableStatus");
-    
+
     $("#writefbapikey").text(statusArray["fbapikey"]);
     $("#writefbauthdomain").text(statusArray["fbauthdomain"]);
     $("#writefbdburl").text(statusArray["fbdburl"]);
@@ -214,118 +211,134 @@
     $("#writefbsenderid").text(statusArray["fbsenderid"]);
     $("#writefbappid").text(statusArray["fbappid"]);
     $("#writefbmeasurementid").text(statusArray["fbmeasurementid"]);
-    
-    $("#dataP").prop('checked',  statusArray["useP"] ); 
-    $("#dataQm").prop('checked', statusArray["useQm"]); 
-    $("#dataQf").prop('checked', statusArray["useQf"]); 
-    $("#dataSf").prop('checked', statusArray["useSf"]); 
-    $("#dataF").prop('checked',  statusArray["useF"] ); 
-    
+
+    $("#dataP").prop('checked', statusArray["useP"]);
+    $("#dataQm").prop('checked', statusArray["useQm"]);
+    $("#dataQf").prop('checked', statusArray["useQf"]);
+    $("#dataSf").prop('checked', statusArray["useSf"]);
+    $("#dataF").prop('checked', statusArray["useF"]);
+
     console.log(statusArray);
   }
-  
-  
-  var id_to_key_map = {"writeServer" : "server", "writeDatabase" : "db", "writeUsername" : "username", 
-                       "writePassword" : "password", "writeTBAKey" : "tbakey", "writeEventCode" : "eventcode",
-                       "writeDataTable" : "datatable", "writeTBATable" : "tbatable",
-                       "writePitTable" : "pittable", "writeRankTable" : "ranktable",
-                       "fbAPIKey" : "fbapikey", "fbAuthDomain" : "fbauthdomain", "fbDBUrl" : "fbdburl", 
-                       "fbProjectID" : "fbprojectid", "fbStorageBucket" : "fbstoragebucket", "fbSenderID" : "fbsenderid",
-                       "fbAppID" : "fbappid", "fbMeasurementID" : "fbmeasurementid"};
+
+  var id_to_key_map = {
+    "writeServer": "server",
+    "writeDatabase": "db",
+    "writeUsername": "username",
+    "writePassword": "password",
+    "writeTBAKey": "tbakey",
+    "writeEventCode": "eventcode",
+    "writeDataTable": "datatable",
+    "writeTBATable": "tbatable",
+    "writePitTable": "pittable",
+    "writeRankTable": "ranktable",
+    "fbAPIKey": "fbapikey",
+    "fbAuthDomain": "fbauthdomain",
+    "fbDBUrl": "fbdburl",
+    "fbProjectID": "fbprojectid",
+    "fbStorageBucket": "fbstoragebucket",
+    "fbSenderID": "fbsenderid",
+    "fbAppID": "fbappid",
+    "fbMeasurementID": "fbmeasurementid"
+  };
   var id_to_written_map = {}
-  
-  
+
   $(document).ready(function() {
-    $.post("dbAPI.php", {"getStatus" : true}, function(data){
-      updateStatusValues(JSON.parse(data));  
+    $.post("dbAPI.php", {
+      "getStatus": true
+    }, function(data) {
+      updateStatusValues(JSON.parse(data));
     });
-    
-    
-    for(const key in id_to_key_map){
+
+    for (const key in id_to_key_map) {
       id_to_written_map[key] = false;
-      $("#"+key).change(function() {
-        if ($("#"+key).val() == ""){
-          $("#"+key).removeClass("bg-info");
+      $("#" + key).change(function() {
+        if ($("#" + key).val() == "") {
+          $("#" + key).removeClass("bg-info");
           id_to_written_map[key] = false;
-        }
-        else{
-          $("#"+key).addClass("bg-info");
+        } else {
+          $("#" + key).addClass("bg-info");
           id_to_written_map[key] = true;
         }
       });
     }
 
-      
     function requestAPI() {
-        //output: gets the API data from our server
-        $.get( "readAPI.php", {getAllData: 1}).done( function( data ) {
-            var dataObj = JSON.parse(data);
-        });
-        
+      //output: gets the API data from our server
+      $.get("readAPI.php", {
+        getAllData: 1
+      }).done(function(data) {
+        var dataObj = JSON.parse(data);
+      });
+
     }
-      
+
     function download_csv() {
-    var csv = 'eventcode,teamnumber,matchnumber,startpos,tarmac,autonlowpoints,autonhighpoints,teleoplowpoints,teleophighpoints,climbed,died,scoutname,comment\n';
-    dataObj.forEach(function(row) {
-            csv += row.join(',');
-            csv += "\n";
-    });
- 
-    console.log(csv);
-    var hiddenElement = document.createElement('a');
-    hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
-    hiddenElement.target = '_blank';
-    hiddenElement.download = 'people.csv';
-    hiddenElement.click();
+      var csv = 'eventcode,teamnumber,matchnumber,startpos,tarmac,autonlowpoints,autonhighpoints,teleoplowpoints,teleophighpoints,climbed,died,scoutname,comment\n';
+      dataObj.forEach(function(row) {
+        csv += row.join(',');
+        csv += "\n";
+      });
+
+      console.log(csv);
+      var hiddenElement = document.createElement('a');
+      hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
+      hiddenElement.target = '_blank';
+      hiddenElement.download = 'people.csv';
+      hiddenElement.click();
     }
-    
-    $("#exportData").on('click', function(event){
-      var csv = {};    
-    });  
-      
-    $("#writeConfig").on('click', function(event){
+
+    $("#exportData").on('click', function(event) {
+      var csv = {};
+    });
+
+    $("#writeConfig").on('click', function(event) {
       var writeData = {};
-      for(const key in id_to_key_map){
-        if($("#"+key).val() != "" && id_to_written_map[key]){
-          writeData[id_to_key_map[key]] = $("#"+key).val();
+      for (const key in id_to_key_map) {
+        if ($("#" + key).val() != "" && id_to_written_map[key]) {
+          writeData[id_to_key_map[key]] = $("#" + key).val();
         }
       }
       console.log(writeData);
       writeData["writeConfig"] = JSON.stringify(writeData);
-      
-      $.post("dbAPI.php", writeData, function(data){
-        updateStatusValues(JSON.parse(data));  
-      }); 
+
+      $.post("dbAPI.php", writeData, function(data) {
+        updateStatusValues(JSON.parse(data));
+      });
     });
-    
-    $("#useData").on('click', function(event){
+
+    $("#useData").on('click', function(event) {
       // Make data to send to API
       var useData = {};
-      useData["useP"]  = + $("#dataP").is(":checked");
-      useData["useQm"] = + $("#dataQm").is(":checked");
-      useData["useQf"] = + $("#dataQf").is(":checked");
-      useData["useSf"] = + $("#dataSf").is(":checked");
-      useData["useF"]  = + $("#dataF").is(":checked");
-      
+      useData["useP"] = +$("#dataP").is(":checked");
+      useData["useQm"] = +$("#dataQm").is(":checked");
+      useData["useQf"] = +$("#dataQf").is(":checked");
+      useData["useSf"] = +$("#dataSf").is(":checked");
+      useData["useF"] = +$("#dataF").is(":checked");
+
       var writeData = {}
       writeData["filterConfig"] = JSON.stringify(useData);
-      
+
       // Make request
-      $.post("dbAPI.php", writeData, function(data){
-        updateStatusValues(JSON.parse(data));  
-      }); 
+      $.post("dbAPI.php", writeData, function(data) {
+        updateStatusValues(JSON.parse(data));
+      });
     });
-    
-    $("#createDB").on('click', function(event){
-      $.post("dbAPI.php", {"createDB" : true}, function(data){
-        updateStatusValues(JSON.parse(data));  
-      }); 
+
+    $("#createDB").on('click', function(event) {
+      $.post("dbAPI.php", {
+        "createDB": true
+      }, function(data) {
+        updateStatusValues(JSON.parse(data));
+      });
     });
-    
-    $("#createTable").on('click', function(event){
-      $.post("dbAPI.php", {"createTable" : true}, function(data){
-        updateStatusValues(JSON.parse(data));  
-      });  
+
+    $("#createTable").on('click', function(event) {
+      $.post("dbAPI.php", {
+        "createTable": true
+      }, function(data) {
+        updateStatusValues(JSON.parse(data));
+      });
     });
   });
 </script>
