@@ -40,7 +40,6 @@
                     <th scope="col">Vision</th>
                     <th scope="col">Swerve</th>
                     <th scope="col">Climber</th>
-                    <th scope="col">Preparedness</th>
                     <th scope="col">Drive Motors</th>
                   </tr>
                 </thead>
@@ -252,7 +251,6 @@
   }
 
   function dataToCommentTable(commentObj) {
-    console.log("dataTocommentTable starting");
     for (let i = 0; i < commentObj.length; i++) {
       console.log(commentObj[i].comment);
       if (commentObj[i].comment === "-") {
@@ -413,10 +411,9 @@
     if (!data || !data.length) {
       data["sparepartsstring"] = data["spareparts"] ? "yes" : "no";
       data["computervisionstring"] = data["computervision"] ? "yes" : "no";
-      data["swervedrivestring"] = data["swervedrive"] ? "yes" : "no";
+      data["swervedrivestring"] = data["swerve"] ? "yes" : "no";
       data["climberonstring"] = data["climberon"] ? "yes" : "no";
-      data["preparednessstring"] = data["preparedness"] ? "yes" : "no";
-      writeTableRow("pitData", data, ["numbatteries", "pitorg", "preparedness", "sparepartsstring", "computervisionstring", "swervedrivestring", "climberonstring", "proglanguage", "drivemotors"]);
+      writeTableRow("pitData", data, ["numbatteries", "pitorg", "sparepartsstring", "computervisionstring", "swervedrivestring", "climberonstring", "proglanguage", "drivemotors"]);
     }
   }
 

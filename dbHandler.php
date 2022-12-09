@@ -163,18 +163,22 @@ class dbHandler
                        eventcode,
                        teamnumber,
                        numbatteries,
-                       numchargers,
                        pitorg,
                        spareparts,
+                       computervision,
+                       swerve,
+                       climberon,
                        proglanguage,
                        drivemotors)
                 VALUES(:entrykey,
                        :eventcode,
                        :teamnumber,
                        :numbatteries,
-                       :numchargers,
                        :pitorg,
                        :spareparts,
+                       :computervision,
+                       :swerve,
+                       :climberon,
                        :proglanguage,
                        :drivemotors)";
     $prepared_statement = $this->conn->prepare($sql);
@@ -186,9 +190,11 @@ class dbHandler
     $dbConfig = $this->readDbConfig();
     $sql = "SELECT teamnumber,
                      numbatteries,
-                     numchargers,
                      pitorg,
                      spareparts,
+                     computervision,
+                     swerve,
+                     climberon,
                      proglanguage,
                      drivemotors from " . $dbConfig["pittable"] . " where
                      eventcode='" . $eventCode . "'";
@@ -261,9 +267,11 @@ class dbHandler
             eventcode VARCHAR(10) NOT NULL,
             teamnumber VARCHAR(6) NOT NULL,
             numbatteries TINYINT UNSIGNED NOT NULL,
-            numchargers TINYINT UNSIGNED NOT NULL,
             pitorg TINYINT UNSIGNED NOT NULL,
             spareparts TINYINT UNSIGNED NOT NULL,
+            computervision TINYINT UNSIGNED NOT NULL,
+            swerve TINYINT UNSIGNED NOT NULL,
+            climberon TINYINT UNSIGNED NOT NULL,
             proglanguage VARCHAR(20) NOT NULL,
             drivemotors VARCHAR(20) NOT NULL
         )";

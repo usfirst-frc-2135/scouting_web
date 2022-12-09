@@ -47,6 +47,7 @@ if (isset($_POST["writePitData"]))
     */
   $db->connectToDB();
   $args = json_decode($_POST["writePitData"], true);
+  
   $args["entrykey"] = $eventCode . "_" . $args["teamnumber"];
   $args["eventcode"] = $eventCode;
   $db->writeRowToPitTable($args);
@@ -153,3 +154,4 @@ else if (isset($_POST["teamNum"]) and isset($_FILES["teamPic"]))
   $response["message"] = $errorMessage;
   echo (json_encode($response));
 }
+?>

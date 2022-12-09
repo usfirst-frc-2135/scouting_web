@@ -113,22 +113,6 @@
               </div>
             </div>
 
-            <div>
-              <label class="form-label">Preparedness/Professionalism</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="preparednessGroup" id="preparednessScore1">
-              <label class="form-check-label" for="preparednessScore1">1 (Minimal)</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="preparednessGroup" id="preparednessScore2">
-              <label class="form-check-label" for="preparednessScore2">3 (Average)</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="preparednessGroup" id="preparedness3">
-              <label class="form-check-label" for="preparednessScore3">5 (Excellent)</label>
-            </div>
-
             <div class="d-grid gap-2 col-6 mx-auto">
               <button class="btn btn-primary" type="button" id="submitButton">Submit</button>
             </div>
@@ -177,9 +161,6 @@
     $("#pitScore1").prop("checked", false);
     $("#pitScore2").prop("checked", false);
     $("#pitScore3").prop("checked", false);
-    $("#preparednessScore1").prop("checked", false);
-    $("#preparednessScore2").prop("checked", false);
-    $("#preparednessScore3").prop("checked", false);
     $("#sparePartsYes").prop("checked", false);
     $("#sparePartsNo").prop("checked", false);
     $("#computerVisionYes").prop("checked", false);
@@ -191,88 +172,87 @@
   }
 
   function writeDataToAPI() {
-    var writeData = {};
-    writeData["teamnumber"] = $("#teamNumber").val();
-    writeData["numbatteries"] = $("#batteries").val();
+    var dataToUse = {};
+    dataToUse["teamnumber"] = $("#teamNumber").val();
+    dataToUse["numbatteries"] = $("#batteries").val();
 
     if ($("#pitScore1").is(':checked')) {
-      writeData["pitorg"] = 1;
+      dataToUse["pitorg"] = 1;
     }
     if ($("#pitScore2").is(':checked')) {
-      writeData["pitorg"] = 3;
+      dataToUse["pitorg"] = 3;
     }
     if ($("#pitScore3").is(':checked')) {
-      writeData["pitorg"] = 5;
-    }
-
-    if ($("#preparednessScore1").is(':checked')) {
-      writeData["preparedness"] = 1;
-    }
-    if ($("#preparednessScore2").is(':checked')) {
-      writeData["preparedness"] = 3;
-    }
-    if ($("#preparednessScore3").is(':checked')) {
-      writeData["preparedness"] = 5;
+      dataToUse["pitorg"] = 5;
     }
 
     if ($("#sparePartsYes").is(':checked')) {
-      writeData["spareparts"] = 1;
+      dataToUse["spareparts"] = 1;
     }
     if ($("#sparePartsNo").is(':checked')) {
-      writeData["spareparts"] = 0;
+      dataToUse["spareparts"] = 0;
     }
 
     if ($("#computerVisionYes").is(':checked')) {
-      writeData["computervision"] = 1;
+      dataToUse["computervision"] = 1;
     }
     if ($("#computerVisionNo").is(':checked')) {
-      writeData["computervision"] = 0;
+      dataToUse["computervision"] = 0;
     }
 
     if ($("#swerveDriveYes").is(':checked')) {
-      writeData["swervedrive"] = 1;
+      dataToUse["swerve"] = 1;
     }
     if ($("#swerveDriveNo").is(':checked')) {
-      writeData["swervedrive"] = 0;
+      dataToUse["swerve"] = 0;
     }
 
     if ($("#climberOnYes").is(':checked')) {
-      writeData["climberon"] = 1;
+      dataToUse["climberon"] = 1;
     }
     if ($("#climberOnNo").is(':checked')) {
-      writeData["swervedrive"] = 0;
+      dataToUse["climberon"] = 0;
     }
 
     var progLang = $("#programmingLanguage").val();
     if (progLang == 1) {
-      writeData["proglanguage"] = "Java";
+      dataToUse["proglanguage"] = "Java";
     }
     if (progLang == 2) {
-      writeData["proglanguage"] = "LabView";
+      dataToUse["proglanguage"] = "LabView";
     }
     if (progLang == 3) {
-      writeData["proglanguage"] = "C++";
+      dataToUse["proglanguage"] = "C++";
     }
     if (progLang == 4) {
-      writeData["proglanguage"] = "Python";
+      dataToUse["proglanguage"] = "Python";
     }
     if (progLang == 5) {
-      writeData["proglanguage"] = "Other";
+      dataToUse["proglanguage"] = "Other";
     }
 
     var driveMotors = $("#driveMotors").val()
     if (driveMotors == 1) {
-      writeData["drivemotors"] = "Falcons";
+      dataToUse["drivemotors"] = "Falcons";
     }
     if (driveMotors == 2) {
-      writeData["drivemotors"] = "NEOs";
+      dataToUse["drivemotors"] = "NEOs";
     }
     if (driveMotors == 3) {
-      writeData["drivemotors"] = "Cims";
+      dataToUse["drivemotors"] = "Cims";
     }
 
+    console.log("   ==> dataToUse[pitorg] = "+ dataToUse["pitorg"]);
+    console.log("   ==> dataToUse[spareparts] = "+ dataToUse["spareparts"]);
+    console.log("   ==> dataToUse[computervision] = "+ dataToUse["computervision"]);
+    console.log("   ==> dataToUse[swerve] = "+ dataToUse["swerve"]);
+    console.log("   ==> dataToUse[climberon] = "+ dataToUse["climberon"]);
+    console.log("   ==> dataToUse[proglanguage] = "+ dataToUse["proglanguage"]);
+    console.log("   ==> dataToUse[drivemotors] = "+ dataToUse["drivemotors"]);
+    console.log("  ===> in writeDataToAPI() calling writePitData ");
+
     $.post("writeAPI.php", {
-      writePitData: JSON.stringify(writeData)
+      writePitData: JSON.stringify(dataToUse)
     }).done(function(data) {
       if (data == "success") {
         alert("Success in submitting data!");
