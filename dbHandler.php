@@ -169,7 +169,8 @@ class dbHandler
                        swerve,
                        climberon,
                        proglanguage,
-                       drivemotors)
+                       drivemotors,
+                       preparedness)
                 VALUES(:entrykey,
                        :eventcode,
                        :teamnumber,
@@ -180,7 +181,8 @@ class dbHandler
                        :swerve,
                        :climberon,
                        :proglanguage,
-                       :drivemotors)";
+                       :drivemotors,
+                       :preparedness)";
     $prepared_statement = $this->conn->prepare($sql);
     $prepared_statement->execute($data);
   }
@@ -196,7 +198,8 @@ class dbHandler
                      swerve,
                      climberon,
                      proglanguage,
-                     drivemotors from " . $dbConfig["pittable"] . " where
+                     drivemotors,
+                     preparedness from " . $dbConfig["pittable"] . " where
                      eventcode='" . $eventCode . "'";
     $prepared_statement = $this->conn->prepare($sql);
     $prepared_statement->execute();
@@ -273,7 +276,8 @@ class dbHandler
             swerve TINYINT UNSIGNED NOT NULL,
             climberon TINYINT UNSIGNED NOT NULL,
             proglanguage VARCHAR(20) NOT NULL,
-            drivemotors VARCHAR(20) NOT NULL
+            drivemotors VARCHAR(20) NOT NULL,
+            preparedness TINYINT UNSIGNED NOT NULL
         )";
     $statement = $conn->prepare($query);
     if (!$statement->execute())

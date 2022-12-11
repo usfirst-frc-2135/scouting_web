@@ -113,6 +113,22 @@
               </div>
             </div>
 
+            <div>
+              <label class="form-label">Preparedness/Professionalism</label>
+            </div>
+             <div class="form-check form-check-inline">
+               <input class="form-check-input" type="radio" name="preparednessGroup" id="preparednessScore1">
+               <label class="form-check-label" for="preparednessScore1">1 (Minimal)</label>
+             </div>
+             <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="preparednessGroup" id="preparednessScore2">
+                <label class="form-check-label" for="preparednessScore2">3 (Average)</label>
+             </div>
+             <div class="form-check form-check-inline">
+               <input class="form-check-input" type="radio" name="preparednessGroup" id="preparednessScore3">
+               <label class="form-check-label" for="preparednessScore3">5 (Excellent)</label>
+             </div>
+    
             <div class="d-grid gap-2 col-6 mx-auto">
               <button class="btn btn-primary" type="button" id="submitButton">Submit</button>
             </div>
@@ -128,27 +144,74 @@
 <script>
   function verifyData() {
     var isError = false;
-    var errorMessage = "";
+    var errMsg = "Please enter values for these fields:";
 
+    // Make sure each piece of data has a value selected.
     if ($("#teamNumber").val() == "") {
-      errorMessage += "Please Enter Team Number. ";
+      errMsg += " Team Number";
       isError = true;
     }
 
-    var driveMotors = $("#driveMotors").val();
-    if (driveMotors != 1 && driveMotors != 2 && driveMotors != 3) {
-      errorMessage += "Please Select Drive Motor. ";
+    if ((!($("#pitScore1").is(':checked'))) && (!($("#pitScore2").is(':checked'))) && (!($("#pitScore3").is(':checked')))) {
+      if (isError == true) 
+        errMsg += ", Pit Organization";
+      else errMsg += " Pit Organization";
+      isError = true;
+    }
+
+    if ((!($("#sparePartsYes").is(':checked'))) && (!($("#sparePartsNo").is(':checked')))) {
+      if (isError == true) 
+        errMsg += ", Spare Parts";
+      else errMsg += " Spare Parts";
+      isError = true;
+    }
+
+    if ((!($("#computerVisionYes").is(':checked'))) && (!($("#computerVisionNo").is(':checked')))) {
+      if (isError == true) 
+        errMsg += ", Computer Vision";
+      else errMsg += " Computer Vision";
+      isError = true;
+    }
+
+    if ((!($("#swerveDriveYes").is(':checked'))) && (!($("#swerveDriveNo").is(':checked')))) {
+      if (isError == true) 
+        errMsg += ", Swerve Drive";
+      else errMsg += " Swerve Drive";
+      isError = true;
+    }
+
+    if ((!($("#climberOnYes").is(':checked'))) && (!($("#climberOnNo").is(':checked')))) {
+      if (isError == true) 
+        errMsg += ", Functioning Climber";
+      else errMsg += " Functioning Climber";
       isError = true;
     }
 
     var progLanguage = $("#programmingLanguage").val();
     if (progLanguage != 1 && progLanguage != 2 && progLanguage != 3 && progLanguage != 4 && progLanguage != 5) {
-      errorMessage += "Please Select Programming Language. ";
+      if (isError == true) 
+        errMsg += ", Programming Language";
+      else errMsg += " Programming Language";
+      isError = true;
+    }
+
+    var driveMotors = $("#driveMotors").val();
+    if (driveMotors != 1 && driveMotors != 2 && driveMotors != 3) {
+      if (isError == true) 
+        errMsg += ", Drive Motors";
+      else errMsg += " Drive Motors";
+      isError = true;
+    }
+
+    if ((!($("#preparednessScore1").is(':checked'))) && (!($("#preparednessScore2").is(':checked'))) && (!($("#preparednessScore3").is(':checked')))) {
+      if (isError == true) 
+        errMsg += ", Preparedness";
+      else errMsg += " Preparedness";
       isError = true;
     }
 
     if (isError) {
-      alert(errorMessage);
+      alert(errMsg);
     }
     return isError;
   }
@@ -169,6 +232,9 @@
     $("#swerveDriveNo").prop("checked", false);
     $("#climberOnYes").prop("checked", false);
     $("#climberOnNo").prop("checked", false);
+    $("#preparednessScore1").prop("checked", false);
+    $("#preparednessScore2").prop("checked", false);
+    $("#preparednessScore3").prop("checked", false);
   }
 
   function writeDataToAPI() {
@@ -215,19 +281,20 @@
     }
 
     var progLang = $("#programmingLanguage").val();
+    dataToUse["proglanguage"] = "Other";  // default
     if (progLang == 1) {
       dataToUse["proglanguage"] = "Java";
     }
-    if (progLang == 2) {
+    else if (progLang == 2) {
       dataToUse["proglanguage"] = "LabView";
     }
-    if (progLang == 3) {
+    else if (progLang == 3) {
       dataToUse["proglanguage"] = "C++";
     }
-    if (progLang == 4) {
+    else if (progLang == 4) {
       dataToUse["proglanguage"] = "Python";
     }
-    if (progLang == 5) {
+    else if (progLang == 5) {
       dataToUse["proglanguage"] = "Other";
     }
 
@@ -241,6 +308,16 @@
     if (driveMotors == 3) {
       dataToUse["drivemotors"] = "Cims";
     }
+    dataToUse["preparedness"] = 1;  // default
+    if ($("#preparednessScore1").is(':checked')) {
+      dataToUse["preparedness"] = 1;
+    }
+    else if ($("#preparednessScore2").is(':checked')) {
+      dataToUse["preparedness"] = 3;
+    }
+    else if ($("#preparednessScore3").is(':checked')) {
+      dataToUse["preparedness"] = 5;
+    }
 
     console.log("   ==> dataToUse[pitorg] = "+ dataToUse["pitorg"]);
     console.log("   ==> dataToUse[spareparts] = "+ dataToUse["spareparts"]);
@@ -249,16 +326,16 @@
     console.log("   ==> dataToUse[climberon] = "+ dataToUse["climberon"]);
     console.log("   ==> dataToUse[proglanguage] = "+ dataToUse["proglanguage"]);
     console.log("   ==> dataToUse[drivemotors] = "+ dataToUse["drivemotors"]);
-    console.log("  ===> in writeDataToAPI() calling writePitData ");
+    console.log("   ==> dataToUse[preparedness] = "+ dataToUse["preparedness"]);
 
     $.post("writeAPI.php", {
       writePitData: JSON.stringify(dataToUse)
     }).done(function(data) {
       if (data == "success") {
-        alert("Success in submitting data!");
+        alert("Success in submitting pit data!");
         clearForm();
       } else {
-        alert("Failure in submitting data!");
+        alert("Failure in submitting pit data!");
       }
     });
   }

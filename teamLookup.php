@@ -36,11 +36,12 @@
                     <th scope="col">Batteries</th>
                     <th scope="col">Pit</th>
                     <th scope="col">Spare Parts</th>
-                    <th scope="col">Programming</th>
                     <th scope="col">Vision</th>
                     <th scope="col">Swerve</th>
                     <th scope="col">Climber</th>
+                    <th scope="col">Programming</th>
                     <th scope="col">Drive Motors</th>
+                    <th scope="col">Preparedness</th>
                   </tr>
                 </thead>
 
@@ -412,8 +413,8 @@
       data["sparepartsstring"] = data["spareparts"] ? "yes" : "no";
       data["computervisionstring"] = data["computervision"] ? "yes" : "no";
       data["swervedrivestring"] = data["swerve"] ? "yes" : "no";
-      data["climberonstring"] = data["climberon"] ? "yes" : "no";
-      writeTableRow("pitData", data, ["numbatteries", "pitorg", "sparepartsstring", "computervisionstring", "swervedrivestring", "climberonstring", "proglanguage", "drivemotors"]);
+      data["climberonstring"] = data["climberon"] ? "yes" : "no"; 
+      writeTableRow("pitData", data, ["numbatteries", "pitorg", "sparepartsstring", "computervisionstring", "swervedrivestring", "climberonstring", "proglanguage", "drivemotors", "preparedness"]);
     }
   }
 
