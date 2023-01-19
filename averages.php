@@ -45,11 +45,11 @@
               <th colspan="2" class="text-center fw-bold">Total Pts</th>
               <th colspan="2" class="text-center">Total Auto Pts</th>
               <th colspan="2" class="text-center">Total Teleop Pts</th>
-              <th colspan="2" class="text-center">Climb Pts</th>
+              <th colspan="2" class="text-center">Endgame Pts</th>
               <th colspan="4" class="text-center">Auton</th>
               <th colspan="4" class="text-center">Teleop</th>
               <th colspan="5" class="text-center">Endgame</th>
-              <th colspan="1" class="text-center fw-bold">Died</td>
+              <th colspan="1" class="text-center fw-bold">Died</th>
             </tr>
             <tr>
               <th colspan="1"></th>
@@ -63,11 +63,11 @@
               <th colspan="1"></th>
               <th colspan="1"></th>
               <th colspan="1"></th>
-              <th colspan="2" class="text-center">Upper</th>
-              <th colspan="2" class="text-center">Lower</th>
-              <th colspan="2" class="text-center">Upper</th>
-              <th colspan="2" class="text-center">Lower</th>
-              <th colspan="5" class="text-center">Climb %</th>
+              <th colspan="2" class="text-center">Cones</th>
+              <th colspan="2" class="text-center">Cubes</th>
+              <th colspan="2" class="text-center">Cones</th>
+              <th colspan="2" class="text-center">Cubes</th>
+              <th colspan="5" class="text-center">Charge Station %</th>
               <th colspan="1"></th>
             </tr>
             <tr>
@@ -90,11 +90,10 @@
               <th scope="col">MAX</th>
               <th scope="col">AVG</th>
               <th scope="col">MAX</th>
-              <th scope="col">0</th>
-              <th scope="col">1</th>
-              <th scope="col">2</th>
-              <th scope="col">3</th>
-              <th scope="col">4</th>
+              <th scope="col">None</th>
+              <th scope="col">Parked</th>
+              <th scope="col">Docked</th>
+              <th scope="col">Engaged</th>
               <th scope="col">#</th>
             </tr>
 
@@ -144,8 +143,9 @@
     /* Write data to table */
     $("#tableData").html(""); // Clear Table
     for (let teamNum of teamList) {
-
-      var climbPercentage = dummyGet(scoutingData[teamNum], "endgameclimbpercent");
+	 
+	  var autonchargestationPercentage = dummyGet(scoutingData[teamNum], "autonchargestationpercent");
+      var endgamechargestationPercentage = dummyGet(scoutingData[teamNum], "endgamechargestationpercent");
 
       var rowString = "<tr>" +
         "<td><a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a></td>" +
@@ -159,19 +159,43 @@
         "<td>" + dummyGet(scoutingData[teamNum], "maxteleoppoints") + "</td>" +
         "<td>" + dummyGet(scoutingData[teamNum], "avgendgamepoints") + "</td>" +
         "<td>" + dummyGet(scoutingData[teamNum], "maxendgamepoints") + "</td>" +
-        "<td>" + dummyGet(scoutingData[teamNum], "avgautonhighgoals") + "</td>" +
-        "<td>" + dummyGet(scoutingData[teamNum], "maxautonhighgoals") + "</td>" +
-        "<td>" + dummyGet(scoutingData[teamNum], "avgautonlowergoals") + "</td>" +
-        "<td>" + dummyGet(scoutingData[teamNum], "maxautonlowergoals") + "</td>" +
-        "<td>" + dummyGet(scoutingData[teamNum], "avgteleophighgoals") + "</td>" +
-        "<td>" + dummyGet(scoutingData[teamNum], "maxteleophighgoals") + "</td>" +
-        "<td>" + dummyGet(scoutingData[teamNum], "avgteleoplowergoals") + "</td>" +
-        "<td>" + dummyGet(scoutingData[teamNum], "maxteleoplowergoals") + "</td>" +
-        "<td>" + dummyGet(climbPercentage, 0) + "%</td>" +
-        "<td>" + dummyGet(climbPercentage, 1) + "%</td>" +
-        "<td>" + dummyGet(climbPercentage, 2) + "%</td>" +
-        "<td>" + dummyGet(climbPercentage, 3) + "%</td>" +
-        "<td>" + dummyGet(climbPercentage, 4) + "%</td>" +
+		  
+        "<td>" + dummyGet(scoutingData[teamNum], "avgautonconesbottom") + "</td>" +
+		"<td>" + dummyGet(scoutingData[teamNum], "maxautonconesbottom") + "</td>" +
+		"<td>" + dummyGet(scoutingData[teamNum], "avgautonconesmiddle") + "</td>" +
+		"<td>" + dummyGet(scoutingData[teamNum], "maxautonconesmiddle") + "</td>" +
+		"<td>" + dummyGet(scoutingData[teamNum], "avgautonconestop") + "</td>" +
+		"<td>" + dummyGet(scoutingData[teamNum], "maxautonconestop") + "</td>" +
+		
+		"<td>" + dummyGet(scoutingData[teamNum], "avgautoncubesbottom") + "</td>" +
+		"<td>" + dummyGet(scoutingData[teamNum], "maxautoncubesbottom") + "</td>" +
+		"<td>" + dummyGet(scoutingData[teamNum], "avgautoncubesmiddle") + "</td>" +
+		"<td>" + dummyGet(scoutingData[teamNum], "maxautoncubesmiddle") + "</td>" +
+		"<td>" + dummyGet(scoutingData[teamNum], "avgautoncubestop") + "</td>" +
+		"<td>" + dummyGet(scoutingData[teamNum], "maxautoncubestop") + "</td>" +
+		  
+		"<td>" + dummyGet(autonchargestationPercentage, 0) + "%</td>" +
+        "<td>" + dummyGet(autonchargestationPercentage, 1) + "%</td>" +
+        "<td>" + dummyGet(autonchargestationPercentage, 2) + "%</td>" +
+		  
+		"<td>" + dummyGet(scoutingData[teamNum], "avgteleopconesbottom") + "</td>" +
+		"<td>" + dummyGet(scoutingData[teamNum], "maxteleopconesbottom") + "</td>" +
+		"<td>" + dummyGet(scoutingData[teamNum], "avgteleopconesmiddle") + "</td>" +
+		"<td>" + dummyGet(scoutingData[teamNum], "maxteleopconesmiddle") + "</td>" +
+		"<td>" + dummyGet(scoutingData[teamNum], "avgteleopconestop") + "</td>" +
+		"<td>" + dummyGet(scoutingData[teamNum], "maxteleopconestop") + "</td>" +
+		
+		"<td>" + dummyGet(scoutingData[teamNum], "avgteleopcubesbottom") + "</td>" +
+		"<td>" + dummyGet(scoutingData[teamNum], "maxteleopcubesbottom") + "</td>" +
+		"<td>" + dummyGet(scoutingData[teamNum], "avgteleopcubesmiddle") + "</td>" +
+		"<td>" + dummyGet(scoutingData[teamNum], "maxteleopcubesmiddle") + "</td>" +
+		"<td>" + dummyGet(scoutingData[teamNum], "avgteleopcubestop") + "</td>" +
+		"<td>" + dummyGet(scoutingData[teamNum], "maxteleopcubestop") + "</td>" +
+		  
+        "<td>" + dummyGet(endgamechargestationPercentage, 0) + "%</td>" +
+        "<td>" + dummyGet(endgamechargestationPercentage, 1) + "%</td>" +
+        "<td>" + dummyGet(endgamechargestationPercentage, 2) + "%</td>" +
+        "<td>" + dummyGet(endgamechargestationPercentage, 3) + "%</td>" +
         "<td>" + dummyGet(scoutingData[teamNum], "totaldied") + "</td>" +
         "</td>";
 

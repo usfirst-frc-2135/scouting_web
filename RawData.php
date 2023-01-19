@@ -11,13 +11,24 @@
             <tr>
               <th scope="col">Match #</th>
               <th scope="col">Team #</th>
-              <th scope="col">Start Position</th>
-              <th scope="col">Tarmac Cross</th>
-              <th scope="col">Auto Upper Hub</th>
-              <th scope="col">Auto Low Hub</th>
-              <th scope="col">Teleop Upper Hub</th>
-              <th scope="col">Teleop Low Hub</th>
-              <th scope="col">Climb</th>
+              <th scope="col">Exited Community</th>
+              <th scope="col">Auton Cones Bottom</th>
+              <th scope="col">Auton Cones Middle</th>
+              <th scope="col">Auton Cones Top</th>   
+              <th scope="col">Auton Cubes Bottom</th>
+              <th scope="col">Auton Cubes Middle</th>
+              <th scope="col">Auton Cubes Top</th> 
+              <th scope="col">Auton Charge Level</th>  
+              <th scope="col">Teleop Cones Bottom</th>
+              <th scope="col">Teleop Cones Middle</th>
+              <th scope="col">Teleop Cones Top</th>   
+              <th scope="col">Teleop Cubes Bottom</th>
+              <th scope="col">Teleop Cubes Middle</th>
+              <th scope="col">Teleop Cubes Top</th> 
+              <th scope="col">Picked Up Cone</th>
+              <th scope="col">Picked Up Upright Cone</th>
+              <th scope="col">Picked Up Tipped Cone</th>     
+              <th scope="col">Endgame Charge Level</th> 
               <th scope="col">Died</th>
               <th scope="col">Comment</th>
               <th scope="col">Scout Name</th>
@@ -41,13 +52,24 @@
     for (let i = 0; i < dataObj.length; i++) {
       var rowString = "<tr><td>" + dataObj[i]["matchnumber"] + "</td>" +
         "<td>" + dataObj[i]["teamnumber"] + "</td>" +
-        "<td>" + dataObj[i]["startpos"] + "</td>" +
-        "<td>" + dataObj[i]["tarmac"] + "</td>" +
-        "<td>" + dataObj[i]["autonhighpoints"] + "</td>" +
-        "<td>" + dataObj[i]["autonlowpoints"] + "</td>" +
-        "<td>" + dataObj[i]["teleophighpoints"] + "</td>" +
-        "<td>" + dataObj[i]["teleoplowpoints"] + "</td>" +
-        "<td>" + dataObj[i]["climbed"] + "</td>" +
+        "<td>" + dataObj[i]["exitcommunity"] + "</td>" +
+        "<td>" + dataObj[i]["autonconesbottom"] + "</td>" +
+        "<td>" + dataObj[i]["autonconesmiddle"] + "</td>" +
+        "<td>" + dataObj[i]["autonconestop"] + "</td>" +
+        "<td>" + dataObj[i]["autoncubesbottom"] + "</td>" +
+        "<td>" + dataObj[i]["autoncubesmiddle"] + "</td>" +
+        "<td>" + dataObj[i]["autoncubestop"] + "</td>" +
+        "<td>" + dataObj[i]["autonchargelevel"] + "</td>" +
+        "<td>" + dataObj[i]["teleopconesbottom"] + "</td>" +
+        "<td>" + dataObj[i]["teleopconesmiddle"] + "</td>" +
+        "<td>" + dataObj[i]["teleopconestop"] + "</td>" +
+        "<td>" + dataObj[i]["teleopcubesbottom"] + "</td>" +
+        "<td>" + dataObj[i]["teleopcubesmiddle"] + "</td>" +
+        "<td>" + dataObj[i]["teleopcubestop"] + "</td>" +  
+        "<td>" + dataObj[i]["pickedupcone"] + "</td>" +
+        "<td>" + dataObj[i]["pickedupuprightcone"] + "</td>" +
+        "<td>" + dataObj[i]["pickeduptippedcone"] + "</td>" +  
+        "<td>" + dataObj[i]["endgamechargelevel"] + "</td>" +
         "<td>" + dataObj[i]["died"] + "</td>" +
         "<td>" + dataObj[i]["comment"] + "</td>" +
         "<td>" + dataObj[i]["scoutname"] + "</td>" +

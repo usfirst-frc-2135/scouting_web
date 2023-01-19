@@ -38,7 +38,7 @@
         <div class="input-group mb-3 justify-content-md-center">
           <h3>Auto</h3>
         </div>
-        <div class="col-md-6 ">
+        <!--<div class="col-md-6 ">
           <div class="input-group g-5">
             <h4 class="">Auto Start Position</h4>
             <img src="./images/startingPositionB.png" class="card-img-top" alt="starting position image">
@@ -50,44 +50,117 @@
               <option value="5">5</option>
               <option value="6">6</option>
             </select>
-          </div>
+          </div> -->
         </div>
         <div class="col-md-6 g-5">
           <div class="row">
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" name="leftTarmac" id="leftTarmac">
-              <label class="form-check-label" for="leftTarmac">Left Tarmac?</label>
+              <input class="form-check-input" type="checkbox" name="exitCommunity" id="exitCommunity">
+              <label class="form-check-label" for="exitCommunity">Exited Community?</label>
             </div>
           </div>
 
           <div class="row">
+           
+              
             <div class="col-md-6 g-5">
               <div class="row">
-                <button class="btn btn-primary btn-info" style="width:100%" type="button" id="plusAutoLow">+</button>
+                <button class="btn btn-primary btn-info" style="width:100%" type="button" id="plusAutoConesBottom">+</button>
               </div>
               <div class="row">
-                <b id="autoLowGoal">Auto Low Goal: 0</b>
+                <b id="autoConesBottom">Auto Cones Bottom: 0</b>
               </div>
               <div class="row">
-                <button class="btn btn-primary btn-warning" style="width:100%" type="button" id="minusAutoLow">-</button>
+                <button class="btn btn-primary btn-warning" style="width:100%" type="button" id="minusAutoConesBottom">-</button>
               </div>
               <br>
-            </div>
+            </div>  
 
+              
             <div class="col-md-6 g-5">
               <div class="row">
-                <button class="btn btn-primary btn-info" style="width:100%" type="button" id="plusAutoHigh">+</button>
+                <button class="btn btn-primary btn-info" style="width:100%" type="button" id="plusAutoConesMiddle">+</button>
               </div>
               <div class="row">
-                <b id="autoHighGoal">Auto High Goal: 0</b>
+                <b id="autoConesMiddle">Auto Cones Middle: 0</b>
               </div>
               <div class="row">
-                <button class="btn btn-primary btn-warning" style="width:100%" type="button" id="minusAutoHigh">-</button>
+                <button class="btn btn-primary btn-warning" style="width:100%" type="button" id="minusAutoConesMiddle">-</button>
               </div>
-            </div>
-            <br>
-          </div>
+              <br>
+            </div>  
+            
+              
+            <div class="col-md-6 g-5">
+              <div class="row">
+                <button class="btn btn-primary btn-info" style="width:100%" type="button" id="plusAutoConesTop">+</button>
+              </div>
+              <div class="row">
+                <b id="autoConesTop">Auto Cones Top: 0</b>
+              </div>
+              <div class="row">
+                <button class="btn btn-primary btn-warning" style="width:100%" type="button" id="minusAutoConesTop">-</button>
+              </div>
+              <br>
+            </div>  
+              
+            <div class="col-md-6 g-5">
+              <div class="row">
+                <button class="btn btn-primary btn-info" style="width:100%" type="button" id="plusAutoCubesBottom">+</button>
+              </div>
+              <div class="row">
+                <b id="autoCubesBottom">Auto Cubes Bottom: 0</b>
+              </div>
+              <div class="row">
+                <button class="btn btn-primary btn-warning" style="width:100%" type="button" id="minusAutoCubesBottom">-</button>
+              </div>
+              <br>
+            </div>  
 
+              
+            <div class="col-md-6 g-5">
+              <div class="row">
+                <button class="btn btn-primary btn-info" style="width:100%" type="button" id="plusAutoCubesMiddle">+</button>
+              </div>
+              <div class="row">
+                <b id="autoCubesMiddle">Auto Cubes Middle: 0</b>
+              </div>
+              <div class="row">
+                <button class="btn btn-primary btn-warning" style="width:100%" type="button" id="minusAutoCubesMiddle">-</button>
+              </div>
+              <br>
+            </div>  
+            
+              
+            <div class="col-md-6 g-5">
+              <div class="row">
+                <button class="btn btn-primary btn-info" style="width:100%" type="button" id="plusAutoCubesTop">+</button>
+              </div>
+              <div class="row">
+                <b id="autoCubesTop">Auto Cubes Top: 0</b>
+              </div>
+              <div class="row">
+                <button class="btn btn-primary btn-warning" style="width:100%" type="button" id="minusAutoCubesTop">-</button>
+              </div>
+              <br>
+            </div> 
+              
+            <div class="col-md-6 g-5">
+              <div class="row">
+                <div class="form-check form-check-inline">
+                  <label class="form-check-label" for="autochargestation">Auto Charge Station?</label>
+                <select class="form-select" id="autochargestation">
+                  <option value="0">None</option>
+                  <option value="1">Docked</option>
+                  <option value="2">Engaged</option>
+               </select>
+               </div>
+             <br>
+             </div>
+            </div>  
+    
+            <br>
+        </div>
         </div>
       </div>
 
@@ -95,48 +168,120 @@
         <div class="input-group mb-3 justify-content-md-center">
           <h3>Teleop</h3>
         </div>
-        <div class="col-md-6 g-5 ">
-          <div class="row">
-            <div class="col-md-5">
+        <div class="col-md-6 g-5">
               <div class="row">
-                <button class="btn btn-primary btn-info" style="width:100%" type="button" id="plusTeleopLow">+</button>
+                <button class="btn btn-primary btn-info" style="width:100%" type="button" id="plusTeleopConesBottom">+</button>
               </div>
               <div class="row">
-                <b id="teleopLowGoal">Teleop Low Goal: 0</b>
+                <b id="teleopConesBottom">Teleop Cones Bottom: 0</b>
               </div>
               <div class="row">
-                <button class="btn btn-primary btn-warning" style="width:100%" type="button" id="minusTeleopLow">-</button>
+                <button class="btn btn-primary btn-warning" style="width:100%" type="button" id="minusTeleopConesBottom">-</button>
               </div>
               <br>
-            </div>
+            </div>  
 
-            <div class="col-md-2">
-            </div>
+              
+            <div class="col-md-6 g-5">
+              <div class="row">
+                <button class="btn btn-primary btn-info" style="width:100%" type="button" id="plusTeleopConesMiddle">+</button>
+              </div>
+              <div class="row">
+                <b id="teleopConesMiddle">Teleop Cones Middle: 0</b>
+              </div>
+              <div class="row">
+                <button class="btn btn-primary btn-warning" style="width:100%" type="button" id="minusTeleopConesMiddle">-</button>
+              </div>
+              <br>
+            </div>  
+            
+              
+            <div class="col-md-6 g-5">
+              <div class="row">
+                <button class="btn btn-primary btn-info" style="width:100%" type="button" id="plusTeleopConesTop">+</button>
+              </div>
+              <div class="row">
+                <b id="teleopConesTop">Teleop Cones Top: 0</b>
+              </div>
+              <div class="row">
+                <button class="btn btn-primary btn-warning" style="width:100%" type="button" id="minusTeleopConesTop">-</button>
+              </div>
+              <br>
+            </div>  
+             
+            <div class="col-md-6 g-5">
+              <div class="row">
+                <button class="btn btn-primary btn-info" style="width:100%" type="button" id="plusTeleopCubesBottom">+</button>
+              </div>
+              <div class="row">
+                <b id="teleopCubesBottom">Teleop Cubes Bottom: 0</b>
+              </div>
+              <div class="row">
+                <button class="btn btn-primary btn-warning" style="width:100%" type="button" id="minusTeleopCubesBottom">-</button>
+              </div>
+              <br>
+            </div>  
 
-            <div class="col-md-5">
+              
+            <div class="col-md-6 g-5">
               <div class="row">
-                <button class="btn btn-primary btn-info" style="width:100%" type="button" id="plusTeleopHigh">+</button>
+                <button class="btn btn-primary btn-info" style="width:100%" type="button" id="plusTeleopCubesMiddle">+</button>
               </div>
               <div class="row">
-                <b id="teleopHighGoal">Teleop High Goal: 0</b>
+                <b id="teleopCubesMiddle">Teleop Cubes Middle: 0</b>
               </div>
               <div class="row">
-                <button class="btn btn-primary btn-warning" style="width:100%" type="button" id="minusTeleopHigh">-</button>
+                <button class="btn btn-primary btn-warning" style="width:100%" type="button" id="minusTeleopCubesMiddle">-</button>
               </div>
+              <br>
+            </div>  
+            
+              
+            <div class="col-md-6 g-5">
+              <div class="row">
+                <button class="btn btn-primary btn-info" style="width:100%" type="button" id="plusTeleopCubesTop">+</button>
+              </div>
+              <div class="row">
+                <b id="teleopCubesTop">Teleop Cubes Top: 0</b>
+              </div>
+              <div class="row">
+                <button class="btn btn-primary btn-warning" style="width:100%" type="button" id="minusTeleopCubesTop">-</button>
+              </div>
+              <br>
+            </div> 
+          
+          <div class="row">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" name="pickedupCube" id="pickedupCube">
+              <label class="form-check-label" for="pickedupCube">Picked Up Cube?</label>
             </div>
-            <br>
           </div>
+          
+          <div class="row">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" name="pickedupUprightCone" id="pickedupUprightCone">
+              <label class="form-check-label" for="pickedupUprightCone">Picked Up Upright Cone?</label>
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" name="pickedupTippedCone" id="pickedupTippedCone">
+              <label class="form-check-label" for="pickedupTippedCone">Picked Up Tipped Cone</label>
+            </div>
+          </div>
+        
         </div>
+      
         <div class="col-md-6 g-5">
           <div class="row">
             <div class="form-check form-check-inline">
-              <label class="form-check-label" for="climbed">Climbed?</label>
-              <select class="form-select" id="climbed">
-                <option value="0">No Climb</option>
-                <option value="1">Level 1</option>
-                <option value="2">Level 2</option>
-                <option value="3">Level 3</option>
-                <option value="4">Level 4</option>
+              <label class="form-check-label" for="endgamechargestation">Charge Station?</label>
+              <select class="form-select" id="endgamechargestation">
+                <option value="0">None</option>
+                <option value="1">Parked</option>
+                <option value="2">Docked</option>
+                <option value="3">Engaged</option>
               </select>
             </div>
 
@@ -158,57 +303,147 @@
       </div>
 
     </div>
-  </div>
-</div>
+  <!-- </div> -->
+<!-- </div> -->
 
 <?php include("footer.php") ?>
 
 <script>
-  var auto_low = 0;
-  var auto_high = 0;
-  var teleop_low = 0;
-  var teleop_high = 0;
+  var auto_conesbottom = 0;
+  var auto_conesmiddle = 0;
+  var auto_conestop = 0;
+  var auto_cubesbottom = 0;
+  var auto_cubesmiddle = 0;
+  var auto_cubestop = 0;
+  var teleop_conesbottom = 0;
+  var teleop_conesmiddle = 0;
+  var teleop_conestop = 0;
+  var teleop_cubesbottom = 0;
+  var teleop_cubesmiddle = 0;
+  var teleop_cubestop = 0;
 
-  function attach_ball_scoring() {
-    $("#plusAutoLow").click(function() {
-      auto_low += 1;
-      $("#autoLowGoal").html("Auto Low Goal: " + auto_low);
+  function attach_gamepiece_scoring() {
+    $("#plusAutoConesBottom").click(function() {
+      auto_conesbottom += 1;
+      $("#autoConesBottom").html("Auto Cones Bottom: " + auto_conesbottom);
     });
 
-    $("#minusAutoLow").click(function() {
-      auto_low = Math.max(auto_low - 1, 0);
-      $("#autoLowGoal").html("Auto Low Goal: " + auto_low);
+    $("#minusAutoConesBottom").click(function() {
+      auto_conesbottom = Math.max(auto_conesbottom - 1, 0);
+      $("#autoConesBottom").html("Auto Cones Bottom: " + auto_conesbottom);
+    });
+      
+    $("#plusAutoConesMiddle").click(function() {
+      auto_conesmiddle += 1;
+      $("#autoConesMiddle").html("Auto Cones Middle: " + auto_conesmiddle);
     });
 
-    $("#plusAutoHigh").click(function() {
-      auto_high += 1;
-      $("#autoHighGoal").html("Auto High Goal: " + auto_high);
+    $("#minusAutoConesMiddle").click(function() {
+      auto_conesmiddle = Math.max(auto_conesmiddle - 1, 0);
+      $("#autoConesMiddle").html("Auto Cones Middle: " + auto_conesmiddle);
     });
 
-    $("#minusAutoHigh").click(function() {
-      auto_high = Math.max(auto_high - 1, 0);
-      $("#autoHighGoal").html("Auto High Goal: " + auto_high);
+    $("#plusAutoConesTop").click(function() {
+      auto_conestop += 1;
+      $("#autoConesTop").html("Auto Cones Top: " + auto_conestop);
     });
 
-    $("#plusTeleopLow").click(function() {
-      teleop_low += 1;
-      $("#teleopLowGoal").html("Teleop Low Goal: " + teleop_low);
+    $("#minusAutoConesTop").click(function() {
+      auto_conestop = Math.max(auto_conestop - 1, 0);
+      $("#autoConesTop").html("Auto Cones Top: " + auto_conestop);
+    });
+      
+    $("#plusAutoCubesBottom").click(function() {
+      auto_cubesbottom += 1;
+      $("#autoCubesBottom").html("Auto Cubes Bottom: " + auto_cubesbottom);
     });
 
-    $("#minusTeleopLow").click(function() {
-      teleop_low = Math.max(teleop_low - 1, 0);
-      $("#teleopLowGoal").html("Teleop Low Goal: " + teleop_low);
+    $("#minusAutoCubesBottom").click(function() {
+      auto_cubesbottom = Math.max(auto_cubesbottom - 1, 0);
+      $("#autoCubesBottom").html("Auto Cubes Bottom: " + auto_cubesbottom);
+    });
+      
+    $("#plusAutoCubesMiddle").click(function() {
+      auto_cubesmiddle += 1;
+      $("#autoConesMiddle").html("Auto Cubes Middle: " + auto_cubesmiddle);
     });
 
-    $("#plusTeleopHigh").click(function() {
-      teleop_high += 1;
-      $("#teleopHighGoal").html("Teleop High Goal: " + teleop_high);
+    $("#minusAutoCubesMiddle").click(function() {
+      auto_cubesmiddle = Math.max(auto_cubesmiddle - 1, 0);
+      $("#autoCubesMiddle").html("Auto Cubes Middle: " + auto_cubesmiddle);
     });
 
-    $("#minusTeleopHigh").click(function() {
-      teleop_high = Math.max(teleop_high - 1, 0);
-      $("#teleopHighGoal").html("Teleop High Goal: " + teleop_high);
+    $("#plusAutoCubesTop").click(function() {
+      auto_cubestop += 1;
+      $("#autoCubesTop").html("Auto Cubes Top: " + auto_cubestop);
     });
+
+    $("#minusAutoCubesTop").click(function() {
+      auto_cubestop = Math.max(auto_cubestop - 1, 0);
+      $("#autoCubesTop").html("Auto Cubes Top: " + auto_cubestop);
+    });
+      
+      
+    $("#plusTeleopConesBottom").click(function() {
+      teleop_conesbottom += 1;
+      $("#teleopConesBottom").html("Teleop Cones Bottom: " + teleop_conesbottom);
+    });
+
+    $("#minusTeleopConesBottom").click(function() {
+      teleop_conesbottom = Math.max(teleop_conesbottom - 1, 0);
+      $("#teleopConesBottom").html("Teleop Cones Bottom: " + teleop_conesbottom);
+    });
+      
+    $("#plusTeleopConesMiddle").click(function() {
+      teleop_conesmiddle += 1;
+      $("#teleopConesMiddle").html("Teleop Cones Middle: " + teleop_conesmiddle);
+    });
+
+    $("#minusTeleopConesMiddle").click(function() {
+      teleop_conesmiddle = Math.max(teleop_conesmiddle - 1, 0);
+      $("#teleopConesMiddle").html("Teleop Cones Middle: " + teleop_conesmiddle);
+    });
+
+    $("#plusTeleopConesTop").click(function() {
+      teleop_conestop += 1;
+      $("#teleopConesTop").html("Teleop Cones Top: " + teleop_conestop);
+    });
+
+    $("#minusTeleopConesTop").click(function() {
+      teleop_conestop = Math.max(teleop_conestop - 1, 0);
+      $("#teleopConesTop").html("Teleop Cones Top: " + teleop_conestop);
+    });
+      
+    $("#plusTeleopCubesBottom").click(function() {
+      teleop_cubesbottom += 1;
+      $("#teleopCubesBottom").html("Teleop Cubes Bottom: " + teleop_cubesbottom);
+    });
+
+    $("#minusTeleopCubesBottom").click(function() {
+      teleop_cubesbottom = Math.max(teleop_cubesbottom - 1, 0);
+      $("#teleopCubesBottom").html("Teleop Cubes Bottom: " + teleop_cubesbottom);
+    });
+      
+    $("#plusTeleopCubesMiddle").click(function() {
+      teleop_cubesmiddle += 1;
+      $("#teleopConesMiddle").html("Teleop Cubes Middle: " + teleop_cubesmiddle);
+    });
+
+    $("#minusTeleopCubesMiddle").click(function() {
+      teleop_cubesmiddle = Math.max(teleop_cubesmiddle - 1, 0);
+      $("#teleopCubesMiddle").html("Teleop Cubes Middle: " + teleop_cubesmiddle);
+    });
+
+    $("#plusTeleopCubesTop").click(function() {
+      teleop_cubestop += 1;
+      $("#teleopCubesTop").html("Teleop Cubes Top: " + teleop_cubestop);
+    });
+
+    $("#minusTeleopCubesTop").click(function() {
+      teleop_cubestop = Math.max(teleop_cubestop - 1, 0);
+      $("#teleopCubesTop").html("Teleop Cubes Top: " + teleop_cubestop);
+    });
+    
 
   }
 
@@ -227,13 +462,25 @@
     }
     out["matchnumber"] = match_level + match_number;
     out["teamnumber"] = teamNumber;
-    out["startpos"] = $("#autoStartPosition").val();
-    out["tarmac"] = $("#leftTarmac").is(':checked') ? 1 : 0;
-    out["autonlowpoints"] = auto_low;
-    out["autonhighpoints"] = auto_high;
-    out["teleoplowpoints"] = teleop_low;
-    out["teleophighpoints"] = teleop_high;
-    out["climbed"] = $("#climbed").val();
+    // out["startpos"] = $("#autoStartPosition").val();
+    out["mobility"] = $("#exitCommunity").is(':checked') ? 1 : 0;
+    out["autonconesbottom"] = auto_conesbottom;
+    out["autonconesmiddle"] = auto_conesmiddle;
+    out["autonconestop"] = auto_conestop;
+    out["autoncubesbottom"] = auto_cubesbottom;
+    out["autoncubesbottom"] = auto_cubesmiddle;
+    out["autoncubesbottom"] = auto_cubestop;
+    out["autochargestation"] = $("#autochargestation").val();
+    out["teleopconesbottom"] = teleop_conesbottom;
+    out["teleopconesmiddle"] = teleop_conesmiddle;
+    out["teleopconestop"] = teleop_conestop;
+    out["teleopcubesbottom"] = teleop_cubesbottom;
+    out["teleopcubesbottom"] = teleop_cubesmiddle;
+    out["teleopcubesbottom"] = teleop_cubestop;
+    out["cubepickup"] = $("#pickedupCube").is(':checked') ? 1 : 0;
+    out["uprightconepickup"] = $("#pickedupUprightCone").is(':checked') ? 1 : 0;
+    out["tippedconepickup"] = $("#pickedupTippedCone").is(':checked') ? 1 : 0;
+    out["endgamechargestation"] = $("#endgamechargestation").val();
     out["died"] = $("#dead").is(':checked') ? 1 : 0;
     out["scoutname"] = $("#scoutName").val();
     out["comment"] = $("#comment").val();
@@ -242,15 +489,31 @@
 
   function clear_data() {
     $("#matchNumber").val("");
-    $("#startpos").val("0");
-    auto_low = 0;
-    auto_high = 0;
-    teleop_low = 0;
-    teleop_high = 0;
-    $("#autoLowGoal").html("Auto Low Goal: " + auto_low);
-    $("#autoHighGoal").html("Auto High Goal: " + auto_high);
-    $("#teleopLowGoal").html("Teleop Low Goal: " + teleop_low);
-    $("#teleopHighGoal").html("Teleop High Goal: " + teleop_high);
+    //$("#startpos").val("0");
+    auto_conesbottom = 0;
+    auto_conesmiddle = 0;
+    auto_conestop = 0;
+    auto_cubesbottom = 0;
+    auto_cubesmiddle = 0;
+    auto_cubestop = 0;
+    teleop_conesbottom = 0;
+    teleop_conesmiddle = 0;
+    teleop_conestop = 0;
+    teleop_cubesbottom = 0;
+    teleop_cubesmiddle = 0;
+    teleop_cubestop = 0;
+    $("#autoConesBottom").html("Auto Cones Bottom: " + auto_conesbottom);
+    $("#autoConesMiddle").html("Auto Cones Middle: " + auto_conesmiddle);
+    $("#autoConesTop").html("Auto Cones Top: " + auto_conestop);
+    $("#autoCubesBottom").html("Auto Cubes Bottom: " + auto_cubesbottom);
+    $("#autoCubesMiddle").html("Auto Cubes Middle: " + auto_cubesmiddle);
+    $("#autoCubesTop").html("Auto Cubes Top: " + auto_cubestop);
+    $("#teleopConesBottom").html("Teleop Cones Bottom: " + teleop_conesbottom);
+    $("#teleopConesMiddle").html("Teleop Cones Middle: " + teleop_conesmiddle);
+    $("#teleopConesTop").html("Teleop Cones Top: " + teleop_conestop);
+    $("#teleopCubesBottom").html("Teleop Cubes Bottom: " + teleop_cubesbottom);
+    $("#teleopCubesMiddle").html("Teleop Cubes Middle: " + teleop_cubesmiddle);
+    $("#teleopCubesTop").html("Teleop Cubes Top: " + teleop_cubestop);
     $("#teamNumber").val("");
     $("#comment").val("");
   }
@@ -269,7 +532,7 @@
   }
 
   $(document).ready(function() {
-    attach_ball_scoring();
+    attach_gamepiece_scoring();
     $("#submitForm").click(function() {
       var form_data = get_form_data();
       submit(form_data);

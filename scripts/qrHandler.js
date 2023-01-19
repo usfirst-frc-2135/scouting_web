@@ -17,14 +17,16 @@ function qrStringToList(dataString) {
 }
 
 function validateQrList(dataList) {
-  if (dataList.length != 13) {
+	var dataListSize = dataList.length;
+	console.log ("==>>> data list size = " + dataListSize);
+  if (dataList.length != 25) {
     return false;
   }
   return true;
 }
 
 function padList(dataList) {
-  if (dataList.length == 12) {
+  if (dataList.length == 24) {
     dataList.push("");
   }
   return dataList;
@@ -33,18 +35,29 @@ function padList(dataList) {
 function qrListToDict(dataList) {
   out = {};
   out["teamnumber"] = dataList[0];
-  out["startpos"] = dataList[1];
-  out["tarmac"] = dataList[2];
-  out["autonlowpoints"] = dataList[3];
-  out["autonhighpoints"] = dataList[4];
-  out["teleoplowpoints"] = dataList[5];
-  out["teleophighpoints"] = dataList[6];
-  out["climbed"] = dataList[7];
-  out["died"] = dataList[8];
-  out["matchnumber"] = dataList[9];
-  out["eventcode"] = dataList[10];
-  out["scoutname"] = dataList[11];
-  out["comment"] = dataList[12];
+  out["exitcommunity"] = dataList[1];
+  out["autonconesbottom"] = dataList[2];
+  out["autonconesmiddle"] = dataList[3];
+  out["autonconestop"] = dataList[4];
+  out["autoncubesbottom"] = dataList[5];
+  out["autoncubesmiddle"] = dataList[6];
+  out["autoncubestop"] = dataList[7];
+  out["autonchargelevel"] = dataList[8];
+  out["teleopconesbottom"] = dataList[9];
+  out["teleopconesmiddle"] = dataList[10];
+  out["teleopconestop"] = dataList[11];
+  out["teleopcubesbottom"] = dataList[12];
+  out["teleopcubesmiddle"] = dataList[13];
+  out["teleopcubestop"] = dataList[14];
+  out["pickedupcone"] = dataList[15];
+  out["pickedupuprightcone"] = dataList[16];
+  out["pickeduptippedcone"] = dataList[17];
+  out["endgamechargelevel"] = dataList[18];
+  out["died"] = dataList[19];
+  out["matchnumber"] = dataList[20];
+  out["eventcode"] = dataList[21];
+  out["scoutname"] = dataList[22];
+  out["comment"] = dataList[23];
   return out;
 }
 
@@ -119,9 +132,10 @@ function scanCamera(reader, id) {
       var dataList = qrStringToList(result.text);
       dataList = padList(dataList);
       console.log(dataList);
+	  alert ("++++> Data list size = ");
       if (validateQrList(dataList)) {
         alertSuccessfulScan();
-        addQrData(qrListToDict(dataList));
+		addQrData(qrListToDict(dataList));
       }
       else {
         alert("Make sure scout name is added!");
