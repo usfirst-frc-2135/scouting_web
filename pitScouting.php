@@ -75,18 +75,6 @@
               <label class="form-check-label" for="swerveDriveNo">No</label>
             </div>
 
-            <div>
-              <label class="form-label">Do you have a functioning climber attached to your robot?</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="climberOnGroup" id="climberOnYes">
-              <label class="form-check-label" for="climberOnYes">Yes</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="climberOnGroup" id="climberOnNo">
-              <label class="form-check-label" for="climberOnNo">No</label>
-            </div>
-
             <div class="mb-3">
               <label for="driveType" class="form-label">What programming language do you use?</label>
               <div class="input-group mb-3">
@@ -180,13 +168,6 @@
       isError = true;
     }
 
-    if ((!($("#climberOnYes").is(':checked'))) && (!($("#climberOnNo").is(':checked')))) {
-      if (isError == true) 
-        errMsg += ", Functioning Climber";
-      else errMsg += " Functioning Climber";
-      isError = true;
-    }
-
     var progLanguage = $("#programmingLanguage").val();
     if (progLanguage != 1 && progLanguage != 2 && progLanguage != 3 && progLanguage != 4 && progLanguage != 5) {
       if (isError == true) 
@@ -230,8 +211,6 @@
     $("#computerVisionNo").prop("checked", false);
     $("#swerveDriveYes").prop("checked", false);
     $("#swerveDriveNo").prop("checked", false);
-    $("#climberOnYes").prop("checked", false);
-    $("#climberOnNo").prop("checked", false);
     $("#preparednessScore1").prop("checked", false);
     $("#preparednessScore2").prop("checked", false);
     $("#preparednessScore3").prop("checked", false);
@@ -273,13 +252,6 @@
       dataToUse["swerve"] = 0;
     }
 
-    if ($("#climberOnYes").is(':checked')) {
-      dataToUse["climberon"] = 1;
-    }
-    if ($("#climberOnNo").is(':checked')) {
-      dataToUse["climberon"] = 0;
-    }
-
     var progLang = $("#programmingLanguage").val();
     dataToUse["proglanguage"] = "Other";  // default
     if (progLang == 1) {
@@ -318,15 +290,6 @@
     else if ($("#preparednessScore3").is(':checked')) {
       dataToUse["preparedness"] = 5;
     }
-
-    console.log("   ==> dataToUse[pitorg] = "+ dataToUse["pitorg"]);
-    console.log("   ==> dataToUse[spareparts] = "+ dataToUse["spareparts"]);
-    console.log("   ==> dataToUse[computervision] = "+ dataToUse["computervision"]);
-    console.log("   ==> dataToUse[swerve] = "+ dataToUse["swerve"]);
-    console.log("   ==> dataToUse[climberon] = "+ dataToUse["climberon"]);
-    console.log("   ==> dataToUse[proglanguage] = "+ dataToUse["proglanguage"]);
-    console.log("   ==> dataToUse[drivemotors] = "+ dataToUse["drivemotors"]);
-    console.log("   ==> dataToUse[preparedness] = "+ dataToUse["preparedness"]);
 
     $.post("writeAPI.php", {
       writePitData: JSON.stringify(dataToUse)

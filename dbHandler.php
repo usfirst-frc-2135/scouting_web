@@ -211,7 +211,6 @@ class dbHandler
                        spareparts,
                        computervision,
                        swerve,
-                       climberon,
                        proglanguage,
                        drivemotors,
                        preparedness)
@@ -223,7 +222,6 @@ class dbHandler
                        :spareparts,
                        :computervision,
                        :swerve,
-                       :climberon,
                        :proglanguage,
                        :drivemotors,
                        :preparedness)";
@@ -240,7 +238,6 @@ class dbHandler
                      spareparts,
                      computervision,
                      swerve,
-                     climberon,
                      proglanguage,
                      drivemotors,
                      preparedness from " . $dbConfig["pittable"] . " where
@@ -329,7 +326,6 @@ class dbHandler
             spareparts TINYINT UNSIGNED NOT NULL,
             computervision TINYINT UNSIGNED NOT NULL,
             swerve TINYINT UNSIGNED NOT NULL,
-            climberon TINYINT UNSIGNED NOT NULL,
             proglanguage VARCHAR(20) NOT NULL,
             drivemotors VARCHAR(20) NOT NULL,
             preparedness TINYINT UNSIGNED NOT NULL
