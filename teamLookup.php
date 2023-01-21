@@ -106,28 +106,26 @@
         <div class="card mb-3">
           <div class="card-body">
             <h5 class="card-title">Match Averages</h5>
+              
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <td>&nbsp;</td>
+                      <th scope="col">AVG</th>
+                      <th scope="col">MAX</th>
+                    </tr>
+                  </thead>
+                  <tbody id="totalTable">
+                    <tr>
+                      <th scope="row">Total Points</th>
+                    </tr>
+                  </tbody>
+                </table>
+              
             <div class="card mb-3">
               <div class="card-body">
                 <div class="overflow-auto">
-                  <h5 class="text-center">Auto</h5>
-                  <table class="table table-striped">
-                    <thead>
-                      <tr>
-                        <td>&nbsp;</td>
-                        <th scope="col">1</th>
-                        <th scope="col">2</th>
-                        <th scope="col">3</th>
-                        <th scope="col">4</th>
-                        <th scope="col">5</th>
-                        <th scope="col">6</th>
-                      </tr>
-                    </thead>
-                    <tbody id="autoStartTable">
-                      <tr>
-                        <th scope="row">Start</th>
-                      </tr>
-                    </tbody>
-                  </table>
+                  <h5 class="text-center">Auton</h5>
                   <table class="table table-striped">
                     <thead>
                       <tr>
@@ -209,20 +207,6 @@
                 </div>
               </div>
             </div>
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <td>&nbsp;</td>
-                  <th scope="col">AVG</th>
-                  <th scope="col">MAX</th>
-                </tr>
-              </thead>
-              <tbody id="totalTable">
-                <tr>
-                  <th scope="row">Total Points</th>
-                </tr>
-              </tbody>
-            </table>
           </div>
         </div>
       </div>
