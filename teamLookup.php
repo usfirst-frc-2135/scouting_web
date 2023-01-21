@@ -224,13 +224,6 @@
             </table>
           </div>
         </div>
-
-        <div class="card mb-3">
-          <div class="card-body">
-            <h5 class="card-title">Start Position Reference</h5>
-          </div>
-          <img src="./images/startingPositionB.png" class="card-img-top" alt="starting position image">
-        </div>
       </div>
     </div>
   </div>
