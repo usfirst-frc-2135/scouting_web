@@ -38,7 +38,6 @@
                     <th scope="col">Spare Parts</th>
                     <th scope="col">Vision</th>
                     <th scope="col">Swerve</th>
-                    <th scope="col">Climber</th>
                     <th scope="col">Programming</th>
                     <th scope="col">Drive Motors</th>
                     <th scope="col">Preparedness</th>
@@ -75,6 +74,7 @@
           </div>
         </div>
 
+        <!-- NOT SURE IF WE WANT TO STILL USE THIS
         <div class="card mb-3">
           <div class="card-body">
             <h5 class="card-title">All Matches</h5>
@@ -100,6 +100,7 @@
             </div>
           </div>
         </div>
+        -->
       </div>
       <div class="col-lg-6 col-sm-6 col-xs-6 gx-3">
         <div class="card mb-3">
