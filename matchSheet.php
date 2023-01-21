@@ -66,7 +66,7 @@
                   <h2 class="accordion-header bg-danger" id="flush-headingOne">
                     <div class="row">
                       <div class="col-6">
-                        <h5 id="R0TeamNumber" class="card-title text-center">Team ????</h5>
+                        <h5 id="R0TeamNumber" class="card-title text-center">Team #</h5>
                       </div>
                       <div class="col-6">
                         <button class="btn accordion-button collapsed bg-danger btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#flush-R0Collapse" aria-expanded="false" aria-controls="flush-R0Collapse">
@@ -130,7 +130,7 @@
                   <h2 class="accordion-header bg-danger" id="flush-headingOne">
                     <div class="row">
                       <div class="col-6">
-                        <h5 id="R1TeamNumber" class="card-title text-center">Team ????</h5>
+                        <h5 id="R1TeamNumber" class="card-title text-center">Team #</h5>
                       </div>
                       <div class="col-6">
                         <button class="btn accordion-button collapsed bg-danger btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#flush-R1Collapse" aria-expanded="false" aria-controls="flush-R1Collapse">
@@ -194,7 +194,7 @@
                   <h2 class="accordion-header bg-danger" id="flush-headingOne">
                     <div class="row">
                       <div class="col-6">
-                        <h5 id="R2TeamNumber" class="card-title text-center">Team ????</h5>
+                        <h5 id="R2TeamNumber" class="card-title text-center">Team #</h5>
                       </div>
                       <div class="col-6">
                         <button class="btn accordion-button collapsed bg-danger btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#flush-R2Collapse" aria-expanded="false" aria-controls="flush-R2Collapse">
@@ -259,7 +259,7 @@
                   <h2 class="accordion-header bg-primary" id="flush-headingOne">
                     <div class="row">
                       <div class="col-6">
-                        <h5 id="B0TeamNumber" class="card-title text-center">Team ????</h5>
+                        <h5 id="B0TeamNumber" class="card-title text-center">Team #</h5>
                       </div>
                       <div class="col-6">
                         <button class="btn accordion-button collapsed bg-primary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#flush-B0Collapse" aria-expanded="false" aria-controls="flush-B0Collapse">
@@ -323,7 +323,7 @@
                   <h2 class="accordion-header bg-primary" id="flush-headingOne">
                     <div class="row">
                       <div class="col-6">
-                        <h5 id="B1TeamNumber" class="card-title text-center">Team ????</h5>
+                        <h5 id="B1TeamNumber" class="card-title text-center">Team #</h5>
                       </div>
                       <div class="col-6">
                         <button class="btn accordion-button collapsed bg-primary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#flush-B1Collapse" aria-expanded="false" aria-controls="flush-B1Collapse">
@@ -387,7 +387,7 @@
                   <h2 class="accordion-header bg-primary" id="flush-headingOne">
                     <div class="row">
                       <div class="col-6">
-                        <h5 id="B2TeamNumber" class="card-title text-center">Team ????</h5>
+                        <h5 id="B2TeamNumber" class="card-title text-center">Team #</h5>
                       </div>
                       <div class="col-6">
                         <button class="btn accordion-button collapsed bg-primary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#flush-B2Collapse" aria-expanded="false" aria-controls="flush-B2Collapse">

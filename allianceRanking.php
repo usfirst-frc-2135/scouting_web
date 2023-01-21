@@ -12,7 +12,7 @@
     </div>
     <div class="card mb-3">
       <div class="card-body">
-        <h5 id="teamTitle" class="card-title">Match ????</h5>
+        <h5 id="teamTitle" class="card-title">Match #</h5>
         <div class="row g-3 justify-content-md-center">
           <div class="input-group mb-3">
             <select class="form-select" id="writeCompLevel" aria-label="Comp Level Select">
@@ -38,7 +38,7 @@
                   <tr>
                     <th scope="col"></th>
                     <th scope="col">Color</th>
-                    <th scope="col">Team</th>
+                    <th scope="col">Team #</th>
                   </tr>
                 </thead>
                 <tbody id="rawAllianceRows">
