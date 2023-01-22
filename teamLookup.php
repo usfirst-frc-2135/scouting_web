@@ -240,17 +240,17 @@
   }
 
   function dataToMatchTable(dataObj) {
-    for (let i = 0; i < dataObj.length; i++) {
+    /* HOLD for (let i = 0; i < dataObj.length; i++) {
       writeTableRow("allMatchesTable", dataObj[i], ["matchnumber", "startpos", "tarmac",
         "autonhighpoints", "autonlowpoints", "teleophighpoints", "teleoplowpoints", "climbed", "died", "scoutname"
       ]);
     }
-    sorttable.makeSortable(document.getElementById("sortableAllMatches"));
+    sorttable.makeSortable(document.getElementById("sortableAllMatches")); */
   }
 
   function dataToAvgTables(avgs) {
     // Auton Scores
-    avgs["autostartpercent"]["autostr"] = "<b>Start %</b>";
+    /* HOLD avgs["autostartpercent"]["autostr"] = "<b>Start %</b>";
     avgs["crossstr"] = "<b>Cross %</b>";
     avgs["upperstr"] = "<b>Upper Cargo</b>";
     avgs["lowerstr"] = "<b>Lower Cargo</b>";
@@ -271,7 +271,7 @@
     writeTableRow("climbTable", avgs["endgameclimbpercent"], ["climbstr", 0, 1, 2, 3, 4]);
 
     // Total Table
-    writeTableRow("totalTable", avgs, ["totalstr", "avgtotalpoints", "maxtotalpoints"]);
+    writeTableRow("totalTable", avgs, ["totalstr", "avgtotalpoints", "maxtotalpoints"]); match */
   }
 
   function checkGet() {
@@ -305,19 +305,19 @@
   }
 
   function processMatchData(team, data) {
-    var mdp = new matchDataProcessor(data);
+    /* HOLD var mdp = new matchDataProcessor(data);
     mdp.sortMatches(data);
     mdp.getSiteFilteredAverages(function(averageData) {
       processedData = averageData[team];
       dataToAvgTables(processedData);
     });
     dataToCommentTable(data);
-    dataToMatchTable(data);
+    dataToMatchTable(data); */
     dataToGraph(data);
-    sorttable.makeSortable(document.getElementById("sortableAllMatches"));
+    /* sorttable.makeSortable(document.getElementById("sortableAllMatches")); */
   }
 
-  function dataToGraph(data) {
+  function dataToGraph(matchdata) {
     // Declare variables
     var match_list = []; // List of matches to use as x lables
     var datasets = []; // Each entry is a dict with a label and data attribute
@@ -345,12 +345,12 @@
     
 
     // Build data sets
-    for (let i = 0; i < data.length; i++) {
-      match_list.push(data[i]["matchnumber"]);
-      datasets[0]["data"].push(data[i]["autonconestop"]);
-      datasets[1]["data"].push(data[i]["autonconesmiddle"]);
-      datasets[2]["data"].push(data[i]["autonconesbottom"]);
-      datasets[3]["data"].push(data[i]["autonchargelevel"]);
+    for (let i = 0; i < matchdata.length; i++) {
+      match_list.push(matchdata[i]["matchnumber"]);
+      datasets[0]["data"].push(matchdata[i]["autonconestop"]);
+      datasets[1]["data"].push(matchdata[i]["autonconesmiddle"]);
+      datasets[2]["data"].push(matchdata[i]["autonconesbottom"]);
+      datasets[3]["data"].push(matchdata[i]["autonchargelevel"]);
     }
 
     // Graph data
