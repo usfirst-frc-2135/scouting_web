@@ -11,7 +11,7 @@
             <tr>
               <th scope="col">Match #</th>
               <th scope="col">Team #</th>
-              <th scope="col">Exited Community</th>
+              <th scope="col">Mobility</th>
               <th scope="col">Auton Cones Bottom</th>
               <th scope="col">Auton Cones Middle</th>
               <th scope="col">Auton Cones Top</th>   
