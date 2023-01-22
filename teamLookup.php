@@ -323,39 +323,34 @@
     var datasets = []; // Each entry is a dict with a label and data attribute
 
     datasets.push({
-      label: "Auto High Balls",
+      label: "Auton Top Row Items",
       data: [],
       borderColor: 'red'
     });
     datasets.push({
-      label: "Auto Low Balls",
+      label: "Auton Middle Row Items",
       data: [],
       borderColor: 'green'
     });
     datasets.push({
-      label: "Teleop High Balls",
+      label: "Auton Bottom Row Items",
       data: [],
       borderColor: 'blue'
     });
     datasets.push({
-      label: "Teleop Low Balls",
+      label: "Auton Charge Level",
       data: [],
       borderColor: 'yellow'
     });
-    datasets.push({
-      label: "Climb Level",
-      data: [],
-      borderColor: 'purple'
-    });
+    
 
     // Build data sets
     for (let i = 0; i < data.length; i++) {
       match_list.push(data[i]["matchnumber"]);
-      datasets[0]["data"].push(data[i]["autonhighpoints"]);
-      datasets[1]["data"].push(data[i]["autonlowpoints"]);
-      datasets[2]["data"].push(data[i]["teleophighpoints"]);
-      datasets[3]["data"].push(data[i]["teleoplowpoints"]);
-      datasets[4]["data"].push(data[i]["climbed"]);
+      datasets[0]["data"].push(data[i]["autonconestop"]);
+      datasets[1]["data"].push(data[i]["autonconesmiddle"]);
+      datasets[2]["data"].push(data[i]["autonconesbottom"]);
+      datasets[3]["data"].push(data[i]["autonchargelevel"]);
     }
 
     // Graph data
@@ -390,9 +385,8 @@
     if (!data || !data.length) {
       data["sparepartsstring"] = data["spareparts"] ? "yes" : "no";
       data["computervisionstring"] = data["computervision"] ? "yes" : "no";
-      data["swervedrivestring"] = data["swerve"] ? "yes" : "no";
-      data["climberonstring"] = data["climberon"] ? "yes" : "no"; 
-      writeTableRow("pitData", data, ["numbatteries", "pitorg", "sparepartsstring", "computervisionstring", "swervedrivestring", "climberonstring", "proglanguage", "drivemotors", "preparedness"]);
+      data["swervedrivestring"] = data["swerve"] ? "yes" : "no"; 
+      writeTableRow("pitData", data, ["numbatteries", "pitorg", "sparepartsstring", "computervisionstring", "swervedrivestring", "proglanguage", "drivemotors", "preparedness"]);
     }
   }
 
