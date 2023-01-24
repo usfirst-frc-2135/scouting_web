@@ -46,7 +46,7 @@
 
                 <div class="card mb-3">
                   <div class="card-body">
-                    <h5 class="card-title">Graph</h5>
+                    <h5 class="card-title">Auton Graph</h5>
                     <canvas id="myChart" width="400" height="400"></canvas>
 
                   </div>
@@ -74,7 +74,7 @@
           </div>
         </div>
 
-        <!-- NOT SURE IF WE WANT TO STILL USE THIS
+        <!-- Commented out the All Matches Rapid React raw data lines FOR NOW
         <div class="card mb-3">
           <div class="card-body">
             <h5 class="card-title">All Matches</h5>
@@ -101,6 +101,7 @@
           </div>
         </div>
         -->
+
       </div>
       <div class="col-lg-6 col-sm-6 col-xs-6 gx-3">
         <div class="card mb-3">
@@ -231,7 +232,7 @@
 
   function dataToCommentTable(commentObj) {
     for (let i = 0; i < commentObj.length; i++) {
-      console.log(commentObj[i].comment);
+      console.log("Adding comment: "+commentObj[i].comment);
       if (commentObj[i].comment === "-") {
         continue;
       }
@@ -321,6 +322,9 @@
     // Declare variables
     var match_list = []; // List of matches to use as x lables
     var datasets = []; // Each entry is a dict with a label and data attribute
+    var autonTopRowTips = []; // custom tooltips for auton top row points
+    var autonMidRowTips = []; // custom tooltips for auton middle row points
+    var autonBotRowTips = []; // custom tooltips for auton bottom row points
 
     datasets.push({
       label: "Auton Top Row Items",
@@ -344,17 +348,40 @@
     });
     
 
-    // Build data sets
+    // Build data sets; go thru each matchdata QR code string and populate the graph datasets.
     for (let i = 0; i < matchdata.length; i++) {
-      match_list.push(matchdata[i]["matchnumber"]);
-      datasets[0]["data"].push(matchdata[i]["autonconestop"]);
-      datasets[1]["data"].push(matchdata[i]["autonconesmiddle"]);
-      datasets[2]["data"].push(matchdata[i]["autonconesbottom"]);
+      var matchnum = matchdata[i]["matchnumber"];
+      match_list.push(matchnum);
+
+      // Get auton top row data
+      var autonTopRowCubes = matchdata[i]["autoncubestop"];
+      var autonTopRowCones = matchdata[i]["autonconestop"];
+      var autonTopSum = autonTopRowCones + autonTopRowCubes;
+      datasets[0]["data"].push(autonTopSum);
+      var tooltipStr = "Auton Top Row (cubes: "+autonTopRowCubes+"; cones: "+autonTopRowCones+") = "+autonTopSum;
+      autonTopRowTips.push({xlabel: matchnum, tip: tooltipStr}); 
+
+      // Get auton middle row data
+      var autonMidRowCubes = matchdata[i]["autoncubesmiddle"];
+      var autonMidRowCones = matchdata[i]["autonconesmiddle"];
+      var autonMidSum = autonMidRowCones + autonMidRowCubes;
+      datasets[1]["data"].push(autonMidSum);
+      var tooltipStr = "Auton Middle Row (cubes: "+autonMidRowCubes+"; cones: "+autonMidRowCones+") = "+autonMidSum;
+      autonMidRowTips.push({xlabel: matchnum, tip: tooltipStr}); 
+
+      // Get auton bottom row data
+      var autonBotRowCubes = matchdata[i]["autoncubesbottom"];
+      var autonBotRowCones = matchdata[i]["autonconesbottom"];
+      var autonBotSum = autonBotRowCones + autonBotRowCubes;
+      datasets[2]["data"].push(autonBotSum);
+      var tooltipStr = "Auton Bottom Row (cubes: "+autonBotRowCubes+"; cones: "+autonBotRowCones+") = "+autonBotSum;
+      autonBotRowTips.push({xlabel: matchnum, tip: tooltipStr}); 
+
+      // Get auton charge level
       datasets[3]["data"].push(matchdata[i]["autonchargelevel"]);
     }
 
-    // Graph data
-
+    // Define the graph as a line chart:
     if (chartDefined) {
       myChart.destroy();
     }
@@ -371,6 +398,57 @@
         scales: {
           y: {
             beginAtZero: true
+          }
+        },
+        plugins: {
+          tooltip: {
+            callbacks: {  // Special tooltip handling
+              label: function(tooltipItem,ddata) {
+                 var toolIndex = tooltipItem.datasetIndex;
+                 var matchnum = tooltipItem.label;
+                 var tipStr = "Auton Charge Level = ";
+                 var label = datasets[toolIndex].label;
+      // doesn't work:           var ivalue = tooltipItem.value;
+      //           console.log("--> in callback: ivalue = "+ivalue);
+ // FOR NOW - hard coding generic tooltip to use data at index 2.
+                 var dvalue = datasets[toolIndex].data[2];
+                 var tipStr = label+" = "+dvalue;
+       //          console.log("      --> tipStr = "+tipStr);
+                 if(toolIndex == 0) {   // Auton Top Row
+                   for (let i = 0; i < autonTopRowTips.length; i++) {
+                     if(autonTopRowTips[i].xlabel == matchnum) {
+                       tipStr = autonTopRowTips[i].tip;
+                       break;
+                     }
+                   }
+                 }
+                 else if(toolIndex == 1) {   // Auton Middle Row
+                   for (let i = 0; i < autonMidRowTips.length; i++) {
+                     if(autonMidRowTips[i].xlabel == matchnum) {
+                       tipStr = autonMidRowTips[i].tip;
+                       break;
+                     }
+                   }
+                 }
+                 else if(toolIndex == 2) {   // Auton Bottom Row
+                   for (let i = 0; i < autonBotRowTips.length; i++) {
+                     if(autonBotRowTips[i].xlabel == matchnum) {
+                       tipStr = autonBotRowTips[i].tip;
+                       break;
+                     }
+                   }
+                 }
+                 else if(toolIndex == 3) {   // Auton Charge Level
+                   var clevel = "None";
+                   if(dvalue == 1)
+                     clevel = "Docked";
+                   else if(dvalue == 2)
+                     clevel = "Engaged";
+                   tipStr = "Auton Charge Level = "+clevel;
+                 }
+                 return tipStr;
+              }
+            }
           }
         }
       }
