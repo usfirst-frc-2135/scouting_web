@@ -322,9 +322,10 @@
     // Declare variables
     var match_list = []; // List of matches to use as x lables
     var datasets = []; // Each entry is a dict with a label and data attribute
-    var autonTopRowTips = []; // custom tooltips for auton top row points
-    var autonMidRowTips = []; // custom tooltips for auton middle row points
-    var autonBotRowTips = []; // custom tooltips for auton bottom row points
+    var autonTopRowTips = []; // holds custom tooltips for auton top row points
+    var autonMidRowTips = []; // holds custom tooltips for auton middle row points
+    var autonBotRowTips = []; // holds custom tooltips for auton bottom row points
+    var autonChargeTips = []; // holds custom tooltips for auton charge level points
 
     datasets.push({
       label: "Auton Top Row Items",
@@ -358,7 +359,7 @@
       var autonTopRowCones = matchdata[i]["autonconestop"];
       var autonTopSum = autonTopRowCones + autonTopRowCubes;
       datasets[0]["data"].push(autonTopSum);
-      var tooltipStr = "Auton Top Row (cubes: "+autonTopRowCubes+"; cones: "+autonTopRowCones+") = "+autonTopSum;
+      var tooltipStr = "Top (cubes "+autonTopRowCubes+", cones "+autonTopRowCones+")="+autonTopSum;
       autonTopRowTips.push({xlabel: matchnum, tip: tooltipStr}); 
 
       // Get auton middle row data
@@ -366,7 +367,7 @@
       var autonMidRowCones = matchdata[i]["autonconesmiddle"];
       var autonMidSum = autonMidRowCones + autonMidRowCubes;
       datasets[1]["data"].push(autonMidSum);
-      var tooltipStr = "Auton Middle Row (cubes: "+autonMidRowCubes+"; cones: "+autonMidRowCones+") = "+autonMidSum;
+      var tooltipStr = "Middle (cubes "+autonMidRowCubes+", cones "+autonMidRowCones+")="+autonMidSum;
       autonMidRowTips.push({xlabel: matchnum, tip: tooltipStr}); 
 
       // Get auton bottom row data
@@ -374,11 +375,19 @@
       var autonBotRowCones = matchdata[i]["autonconesbottom"];
       var autonBotSum = autonBotRowCones + autonBotRowCubes;
       datasets[2]["data"].push(autonBotSum);
-      var tooltipStr = "Auton Bottom Row (cubes: "+autonBotRowCubes+"; cones: "+autonBotRowCones+") = "+autonBotSum;
+      var tooltipStr = "Bottom (cubes "+autonBotRowCubes+", cones "+autonBotRowCones+")="+autonBotSum;
       autonBotRowTips.push({xlabel: matchnum, tip: tooltipStr}); 
 
       // Get auton charge level
-      datasets[3]["data"].push(matchdata[i]["autonchargelevel"]);
+      var autonChargeLevel = matchdata[i]["autonchargelevel"];
+      datasets[3]["data"].push(autonChargeLevel);
+      var clevel = "None";
+      if(autonChargeLevel == 1)
+        clevel = "Docked";
+      else if(autonChargeLevel == 2)
+        clevel = "Engaged";
+      var tipStr = "Charge Level="+clevel;
+      autonChargeTips.push({xlabel: matchnum, tip: tipStr}); 
     }
 
     // Define the graph as a line chart:
@@ -406,14 +415,8 @@
               label: function(tooltipItem,ddata) {
                  var toolIndex = tooltipItem.datasetIndex;
                  var matchnum = tooltipItem.label;
-                 var tipStr = "Auton Charge Level = ";
-                 var label = datasets[toolIndex].label;
-      // doesn't work:           var ivalue = tooltipItem.value;
-      //           console.log("--> in callback: ivalue = "+ivalue);
- // FOR NOW - hard coding generic tooltip to use data at index 2.
-                 var dvalue = datasets[toolIndex].data[2];
-                 var tipStr = label+" = "+dvalue;
-       //          console.log("      --> tipStr = "+tipStr);
+                 var tipStr = datasets[toolIndex].label;
+
                  if(toolIndex == 0) {   // Auton Top Row
                    for (let i = 0; i < autonTopRowTips.length; i++) {
                      if(autonTopRowTips[i].xlabel == matchnum) {
@@ -439,12 +442,12 @@
                    }
                  }
                  else if(toolIndex == 3) {   // Auton Charge Level
-                   var clevel = "None";
-                   if(dvalue == 1)
-                     clevel = "Docked";
-                   else if(dvalue == 2)
-                     clevel = "Engaged";
-                   tipStr = "Auton Charge Level = "+clevel;
+                   for (let i = 0; i < autonChargeTips.length; i++) {
+                     if(autonChargeTips[i].xlabel == matchnum) {
+                       tipStr = autonChargeTips[i].tip;
+                       break;
+                     }
+                   }
                  }
                  return tipStr;
               }
