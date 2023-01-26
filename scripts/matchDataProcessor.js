@@ -5,10 +5,7 @@
 
 class matchDataProcessor {
   constructor(data) {
-    //make sure this constructor is set
-	console.log("in match data processor constructor ");
     this.data = data;
-	console.log(">+++=== Endgame points is " + this.data[0]["endgamechargelevel"]);
     this.siteFilter = null;
   }
 
@@ -189,17 +186,15 @@ class matchDataProcessor {
 
         avg[tn]["avgautoncones"] = 0;
         avg[tn]["maxautoncones"] = 0;
-		  
 		avg[tn]["avgautoncubes"] = 0;
         avg[tn]["maxautoncubes"] = 0;
 		
 		avg[tn]["avgteleopcones"] = 0;
         avg[tn]["maxteleopcones"] = 0;
-		
 		avg[tn]["avgteleopcubes"] = 0;
         avg[tn]["maxteleopcubes"] = 0;
 		  
-		avg[tn]["autonchargestationpercent"] = { 0: 0, 1: 0, 2: 0};
+		//avg[tn]["autonchargestationpercent"] = { 0: 0, 1: 0, 2: 0};
         avg[tn]["endgamechargestationpercent"] = { 0: 0, 1: 0, 2: 0, 3: 0 };  
        
         avg[tn]["totaldied"] = 0;
@@ -211,7 +206,7 @@ class matchDataProcessor {
       }
 
 	  
-	 var totalmatches = (this.data[i]["totalmatches"]);
+	  var totalmatches = (this.data[i]["totalmatches"]);
 		
 	  var mobilitycheck = (this.data[i]["exitcommunity"]);
 	  
@@ -229,26 +224,26 @@ class matchDataProcessor {
      
 		
 	  var autoPoints = ((mobilitycheck * 3) + (autonbottomPieces * 3) + (autonmiddlePieces * 5) + (autontopPieces * 6) +(autonchargestationPoints));
-	  console.log(">+++=== Setting auto points to " + autoPoints);
+	 
 	  
 		
 	  var teleopbottomPieces = (this.data[i]["teleopconesbottom"]) + (this.data[i]["teleopcubesbottom"]);
-	  console.log(">+++=== the number of teleop bottom pieces are " + teleopbottomPieces);
+	  //console.log(">+++=== the number of teleop bottom pieces are " + teleopbottomPieces);
 	  var teleopmiddlePieces = (this.data[i]["teleopconesmiddle"]) + (this.data[i]["teleopcubesmiddle"]);
-	  console.log(">+++=== the number of teleop middle pieces are " + teleopmiddlePieces);	
+	  //console.log(">+++=== the number of teleop middle pieces are " + teleopmiddlePieces);	
 		
 	  var teleoptopPieces = (this.data[i]["teleopconestop"]) + (this.data[i]["teleopcubestop"]);
 	  
 	  var telopPoints = ((parseInt(teleopbottomPieces) * 3) + (parseInt(teleopmiddlePieces) * 5) + (parseInt(teleoptopPieces) * 6));
-	  console.log(">+++=== Setting teleop points to " + telopPoints);
+	  
 	  
 
       var endgamePoints = 0;
-	  console.log(">+++=== Endgame points is " + this.data[i]["endgamechargelevel"]);
+	  //console.log(">+++=== Endgame points is " + this.data[i]["endgamechargelevel"]);
       if (this.data[i]["endgamechargelevel"] == 1) { endgamePoints = 2; }
       if (this.data[i]["endgamechargelevel"] == 2) { endgamePoints = 6; }
       if (this.data[i]["endgamechargelevel"] == 3) { endgamePoints = 10; }
-	  console.log(">+++=== Setting endgame points to " + endgamePoints);
+	  //console.log(">+++=== Setting endgame points to " + endgamePoints);
 	  
       
       var totalPoints = autoPoints + telopPoints + endgamePoints;
@@ -271,51 +266,32 @@ class matchDataProcessor {
 
       avg[tn]["avgteleoppoints"] += telopPoints;
       avg[tn]["maxteleoppoints"] = Math.max(avg[tn]["maxteleoppoints"], telopPoints);
-
+		
       avg[tn]["avgendgamepoints"] += endgamePoints;
       avg[tn]["maxendgamepoints"] = Math.max(avg[tn]["maxendgamepoints"], endgamePoints);
 		
 		
+	  var combinedAutonCones = (parseInt(this.data[i]["autonconestop"]))+(parseInt(this.data[i]["autonconesmiddle"]))+(parseInt(this.data[i]["autonconesbottom"]));
+	  var topcones = (parseInt(this.data[i]["autonconestop"]));
+	  console.log ("top cones is " + topcones);
+	  console.log(">+++=== initial auton cone value " + combinedAutonCones);
+	  avg[tn]["avgautoncones"] += combinedAutonCones;
+      avg[tn]["maxautoncones"] = Math.max(avg[tn]["maxautoncones"], combinedAutonCones);
+	  console.log(">+++=== auton cone value " + combinedAutonCones);
+		
+	  var combinedAutonCubes = (parseInt(this.data[i]["autoncubestop"]))+(parseInt(this.data[i]["autoncubesmiddle"]))+(parseInt(this.data[i]["autoncubesbottom"]));
+	  avg[tn]["avgautoncubes"] += combinedAutonCubes;
+      avg[tn]["maxautoncubes"] = Math.max(avg[tn]["maxautoncubes"], combinedAutonCubes);
+		
+	  var combinedTeleopCones = (parseInt(this.data[i]["teleopconestop"]))+(parseInt(this.data[i]["teleopconesmiddle"]))+(parseInt(this.data[i]["teleopconesbottom"]));
+	  avg[tn]["avgteleopcones"] += combinedTeleopCones;
+      avg[tn]["maxteleopcones"] = Math.max(avg[tn]["maxteleopcones"], combinedTeleopCones);
+	
+	
+      var combinedTeleopCubes = (parseInt(this.data[i]["teleopcubestop"]))+(parseInt(this.data[i]["teleopcubesmiddle"]))+(parseInt(this.data[i]["teleopcubesbottom"]));
+	  avg[tn]["avgteleopcubes"] += combinedTeleopCubes;
+      avg[tn]["maxteleopcubes"] = Math.max(avg[tn]["maxteleopcubes"], combinedTeleopCubes);
 
-      avg[tn]["avgautoncones"] += (autonconePieces/totalmatches);
-      avg[tn]["maxautoncones"] = Math.max(avg[tn]["avgautoncones"], this.data[i]["maxautopoints"]);
-		
-	  /*avg[tn]["avgautonconesmiddle"] += this.data[i]["autonmiddlepoints"];
-      avg[tn]["maxautonconesmiddle"] = Math.max(avg[tn]["maxautonconesmiddle"], this.data[i]["autonmiddlepoints"]);
-		
-	  avg[tn]["avgautonconestop"] += this.data[i]["autontoppoints"];
-      avg[tn]["maxautonconestop"] = Math.max(avg[tn]["maxautonconestop"], this.data[i]["autontoppoints"]);
-		
-	  avg[tn]["avgautoncubesbottom"] += this.data[i]["autonbottompoints"];
-      avg[tn]["maxautoncubesbottom"] = Math.max(avg[tn]["maxautoncubesbottom"], this.data[i]["autonbottompoints"]);
-		
-	  avg[tn]["avgautoncubesmiddle"] += this.data[i]["autonmiddlepoints"];
-      avg[tn]["maxautoncubesmiddle"] = Math.max(avg[tn]["maxautoncubesmiddle"], this.data[i]["autonmiddlepoints"]);
-		
-	  avg[tn]["avgautoncubestop"] += this.data[i]["autontoppoints"];
-      avg[tn]["maxautoncubestop"] = Math.max(avg[tn]["maxautoncubestop"], this.data[i]["autontoppoints"]);
-		
-	  
-	  avg[tn]["avgteleopconesbottom"] += this.data[i]["teleopbottompoints"];
-      avg[tn]["maxteleopconesbottom"] = Math.max(avg[tn]["maxteleopconesbottom"], this.data[i]["teleopbottompoints"]);
-		
-	  avg[tn]["avgteleopconesmiddle"] += this.data[i]["teleopmiddlepoints"];
-      avg[tn]["maxteleopconesmiddle"] = Math.max(avg[tn]["maxteleopconesmiddle"], this.data[i]["teleopmiddlepoints"]);
-		
-	  avg[tn]["avgteleopconestop"] += this.data[i]["teleoptoppoints"];
-      avg[tn]["maxteleopconestop"] = Math.max(avg[tn]["maxteleopconestop"], this.data[i]["teleoptoppoints"]);
-		
-	  avg[tn]["avgteleopcubesbottom"] += this.data[i]["teleopbottompoints"];
-      avg[tn]["maxteleopcubesbottom"] = Math.max(avg[tn]["maxteleopcubesbottom"], this.data[i]["teleopbottompoints"]);
-		
-	  avg[tn]["avgteleopcubesmiddle"] += this.data[i]["teleopmiddlepoints"];
-      avg[tn]["maxteleopcubesmiddle"] = Math.max(avg[tn]["maxteleopcubesmiddle"], this.data[i]["teleopmiddlepoints"]);
-		
-	  avg[tn]["avgteleopcubestop"] += this.data[i]["teleoptoppoints"];
-      avg[tn]["maxteleopcubestop"] = Math.max(avg[tn]["maxteleopcubestop"], this.data[i]["teleoptoppoints"]); */
-		
-
-      avg[tn]["exitcommunitypercent"] += this.data[i]["exitcommunity"];
 		
 		
       avg[tn]["endgamechargestationpercent"][this.data[i]["endgamechargelevel"]] += 1;
@@ -338,21 +314,11 @@ class matchDataProcessor {
       avg[key]["avgendgamepoints"] = this.rnd(avg[key]["avgendgamepoints"] / avg[key]["totalmatches"]);
 	
       avg[key]["avgautoncones"] = this.rnd(avg[key]["avgautoncones"] / avg[key]["totalmatches"]);
-	  /*avg[key]["avgautonconesmiddle"] = this.rnd(avg[key]["avgautonconesmiddle"] / avg[key]["totalmatches"]);
-	  avg[key]["avgautonconestop"] = this.rnd(avg[key]["avgautonconestop"] / avg[key]["totalmatches"]);
+	  avg[key]["avgautoncubes"] = this.rnd(avg[key]["avgautoncubes"] / avg[key]["totalmatches"]);
 		
-	  avg[key]["avgautoncubesbottom"] = this.rnd(avg[key]["avgautoncubesbottom"] / avg[key]["totalmatches"]);
-	  avg[key]["avgautoncubesmiddle"] = this.rnd(avg[key]["avgautoncubesmiddle"] / avg[key]["totalmatches"]);
-	  avg[key]["avgautoncubestop"] = this.rnd(avg[key]["avgautoncubestop"] / avg[key]["totalmatches"]);
-		
-	  
-	  avg[key]["avgteleopconesbottom"] = this.rnd(avg[key]["avgteleopconesbottom"] / avg[key]["totalmatches"]);
-	  avg[key]["avgteleopconesmiddle"] = this.rnd(avg[key]["avgteleopconesmiddle"] / avg[key]["totalmatches"]);
-	  avg[key]["avgteleopconestop"] = this.rnd(avg[key]["avgteleopconestop"] / avg[key]["totalmatches"]);
-		
-	  avg[key]["avgteleopcubesbottom"] = this.rnd(avg[key]["avgteleopcubesbottom"] / avg[key]["totalmatches"]);
-	  avg[key]["avgteleopcubesmiddle"] = this.rnd(avg[key]["avgteleopcubesmiddle"] / avg[key]["totalmatches"]);
-	  avg[key]["avgteleopcubestop"] = this.rnd(avg[key]["avgteleopcubestop"] / avg[key]["totalmatches"]); */
+	  avg[key]["avgteleopcones"] = this.rnd(avg[key]["avgteleopcones"] / avg[key]["totalmatches"]);
+	  avg[key]["avgteleopcubes"] = this.rnd(avg[key]["avgteleopcubes"] / avg[key]["totalmatches"]);
+	
 	  
 	  
 
@@ -362,8 +328,8 @@ class matchDataProcessor {
       avg[key]["endgamechargestationpercent"][3] = this.rnd(100 * avg[key]["endgamechargestationpercent"][3] / avg[key]["totalmatches"]);
       
 
-      avg[key]["autonchargestationpercent"][1] = this.rnd(100 * avg[key]["autonchargestationpercent"][1] / avg[key]["totalmatches"]);
-      avg[key]["autonchargestationpercent"][2] = this.rnd(100 * avg[key]["autonchargestationpercent"][2] / avg[key]["totalmatches"]);
+      //avg[key]["autonchargestationpercent"][1] = this.rnd(100 * avg[key]["autonchargestationpercent"][1] / avg[key]["totalmatches"]);
+      //avg[key]["autonchargestationpercent"][2] = this.rnd(100 * avg[key]["autonchargestationpercent"][2] / avg[key]["totalmatches"]);
       
 
     }

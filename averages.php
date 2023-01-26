@@ -59,12 +59,16 @@
               <th colspan="1"></th>
               <th colspan="1"></th>
               <th colspan="1"></th>
+				
               <th colspan="1"></th>
               <th colspan="1"></th>
               <th colspan="1"></th>
               <th colspan="1"></th>
-              <th colspan="2" class="text-center">Cones</th>
+              
+			  <th colspan="2" class="text-center">Cones</th>
               <th colspan="2" class="text-center">Cubes</th>
+			
+				
               <th colspan="2" class="text-center">Cones</th>
               <th colspan="2" class="text-center">Cubes</th>
               <th colspan="5" class="text-center">Charge Station %</th>
@@ -144,7 +148,7 @@
     $("#tableData").html(""); // Clear Table
     for (let teamNum of teamList) {
 	 
-	  var autonchargestationPercentage = dummyGet(scoutingData[teamNum], "autonchargestationpercent");
+	  //var autonchargestationPercentage = dummyGet(scoutingData[teamNum], "autonchargestationpercent");
       var endgamechargestationPercentage = dummyGet(scoutingData[teamNum], "endgamechargestationpercent");
 
       var rowString = "<tr>" +
@@ -159,6 +163,10 @@
         "<td>" + dummyGet(scoutingData[teamNum], "maxteleoppoints") + "</td>" +
         "<td>" + dummyGet(scoutingData[teamNum], "avgendgamepoints") + "</td>" +
         "<td>" + dummyGet(scoutingData[teamNum], "maxendgamepoints") + "</td>" +
+		 
+		//"<td>" + dummyGet(autonchargestationPercentage, 0) + "%</td>" +
+        //"<td>" + dummyGet(autonchargestationPercentage, 1) + "%</td>" +
+        //"<td>" + dummyGet(autonchargestationPercentage, 2) + "%</td>" + 
 		  
         "<td>" + dummyGet(scoutingData[teamNum], "avgautoncones") + "</td>" +
 		"<td>" + dummyGet(scoutingData[teamNum], "maxautoncones") + "</td>" +
@@ -166,11 +174,7 @@
 		
 		"<td>" + dummyGet(scoutingData[teamNum], "avgautoncubes") + "</td>" +
 		"<td>" + dummyGet(scoutingData[teamNum], "maxautoncubes") + "</td>" +
-		
-		  
-		"<td>" + dummyGet(autonchargestationPercentage, 0) + "%</td>" +
-        "<td>" + dummyGet(autonchargestationPercentage, 1) + "%</td>" +
-        "<td>" + dummyGet(autonchargestationPercentage, 2) + "%</td>" + 
+
 		  
 		"<td>" + dummyGet(scoutingData[teamNum], "avgteleopcones") + "</td>" +
 		"<td>" + dummyGet(scoutingData[teamNum], "maxteleopcones") + "</td>" +
