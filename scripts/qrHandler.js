@@ -132,7 +132,6 @@ function scanCamera(reader, id) {
       var dataList = qrStringToList(result.text);
       dataList = padList(dataList);
       console.log(dataList);
-	  alert ("++++> Data list size = ");
       if (validateQrList(dataList)) {
         alertSuccessfulScan();
 		addQrData(qrListToDict(dataList));

@@ -25,7 +25,7 @@
               <th scope="col">Teleop Cubes Bottom</th>
               <th scope="col">Teleop Cubes Middle</th>
               <th scope="col">Teleop Cubes Top</th> 
-              <th scope="col">Picked Up Cone</th>
+              <th scope="col">Picked Up Cube</th>
               <th scope="col">Picked Up Upright Cone</th>
               <th scope="col">Picked Up Tipped Cone</th>     
               <th scope="col">Endgame Charge Level</th> 
