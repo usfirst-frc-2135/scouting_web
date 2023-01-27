@@ -194,7 +194,7 @@ class matchDataProcessor {
 		avg[tn]["avgteleopcubes"] = 0;
         avg[tn]["maxteleopcubes"] = 0;
 		  
-		//avg[tn]["autonchargestationpercent"] = { 0: 0, 1: 0, 2: 0};
+		avg[tn]["autonchargestationpercent"] = { 0: 0, 1: 0, 2: 0};
         avg[tn]["endgamechargestationpercent"] = { 0: 0, 1: 0, 2: 0, 3: 0 };  
        
         avg[tn]["totaldied"] = 0;
@@ -326,11 +326,10 @@ class matchDataProcessor {
       avg[key]["endgamechargestationpercent"][1] = this.rnd(100 * avg[key]["endgamechargestationpercent"][1] / avg[key]["totalmatches"]);
       avg[key]["endgamechargestationpercent"][2] = this.rnd(100 * avg[key]["endgamechargestationpercent"][2] / avg[key]["totalmatches"]);
       avg[key]["endgamechargestationpercent"][3] = this.rnd(100 * avg[key]["endgamechargestationpercent"][3] / avg[key]["totalmatches"]);
-
+      
       avg[key]["autonchargestationpercent"][0] = this.rnd(100 * avg[key]["autonchargestationpercent"][0] / avg[key]["totalmatches"]);
       avg[key]["autonchargestationpercent"][1] = this.rnd(100 * avg[key]["autonchargestationpercent"][1] / avg[key]["totalmatches"]);
       avg[key]["autonchargestationpercent"][2] = this.rnd(100 * avg[key]["autonchargestationpercent"][2] / avg[key]["totalmatches"]);
-
       
 
     }
@@ -338,3 +337,4 @@ class matchDataProcessor {
     return avg;
 
   }
+}
