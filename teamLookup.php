@@ -51,6 +51,14 @@
 
                   </div>
                 </div>
+                  
+                <div class="card mb-3">
+                  <div class="card-body">
+                    <h5 class="card-title">Teleop Graph</h5>
+                    <canvas id="myChart2" width="400" height="400"></canvas>
+
+                  </div>
+                </div>
 
                 <!-- pit data-- use this somewhere -->
 
@@ -220,6 +228,9 @@
 <script>
   var chartDefined = false;
   var myChart;
+    
+  var chart2Defined = false;
+  var myChart2;
 
   function writeTableRow(tbodyID, dict, keys) {
     var row = "<tr>";
@@ -314,11 +325,12 @@
     });
     dataToCommentTable(data);
     dataToMatchTable(data); */
-    dataToGraph(data);
+    dataToAutonGraph(data);
+    dataToTeleopGraph(data);
     /* sorttable.makeSortable(document.getElementById("sortableAllMatches")); */
   }
 
-  function dataToGraph(matchdata) {
+  function dataToAutonGraph(matchdata) {
     // Declare variables
     var match_list = []; // List of matches to use as x lables
     var datasets = []; // Each entry is a dict with a label and data attribute
@@ -445,6 +457,148 @@
                    for (let i = 0; i < autonChargeTips.length; i++) {
                      if(autonChargeTips[i].xlabel == matchnum) {
                        tipStr = autonChargeTips[i].tip;
+                       break;
+                     }
+                   }
+                 }
+                 return tipStr;
+              }
+            }
+          }
+        }
+      }
+    });
+  }
+    
+  function dataToTeleopGraph(matchdata) {
+    // Declare variables
+    var match_list = []; // List of matches to use as x lables
+    var datasets = []; // Each entry is a dict with a label and data attribute
+    var teleopTopRowTips = []; // holds custom tooltips for teleop top row points
+    var teleopMidRowTips = []; // holds custom tooltips for teleop middle row points
+    var teleopBotRowTips = []; // holds custom tooltips for teleop bottom row points
+    var endgameChargeTips = []; // holds custom tooltips for endgame charge level points
+
+    datasets.push({
+      label: "Teleop Top Row Items",
+      data: [],
+      borderColor: 'red'
+    });
+    datasets.push({
+      label: "Teleop Middle Row Items",
+      data: [],
+      borderColor: 'green'
+    });
+    datasets.push({
+      label: "Teleop Bottom Row Items",
+      data: [],
+      borderColor: 'blue'
+    });
+    datasets.push({
+      label: "Endgame Charge Level",
+      data: [],
+      borderColor: 'yellow'
+    });
+    
+
+    // Build data sets; go thru each matchdata QR code string and populate the graph datasets.
+    for (let i = 0; i < matchdata.length; i++) {
+      var matchnum = matchdata[i]["matchnumber"];
+      match_list.push(matchnum);
+
+      // Get teleop top row data
+      var teleopTopRowCubes = matchdata[i]["teleopcubestop"];
+      var teleopTopRowCones = matchdata[i]["teleopconestop"];
+      var teleopTopSum = teleopTopRowCones + teleopTopRowCubes;
+      datasets[0]["data"].push(teleopTopSum);
+      var tooltipStr = "Top (cubes "+teleopTopRowCubes+", cones "+teleopTopRowCones+")="+teleopTopSum;
+      teleopTopRowTips.push({xlabel: matchnum, tip: tooltipStr}); 
+
+      // Get teleop middle row data
+      var teleopMidRowCubes = matchdata[i]["teleopcubesmiddle"];
+      var teleopMidRowCones = matchdata[i]["teleopconesmiddle"];
+      var teleopMidSum = teleopMidRowCones + teleopMidRowCubes;
+      datasets[1]["data"].push(teleopMidSum);
+      var tooltipStr = "Middle (cubes "+teleopMidRowCubes+", cones "+teleopMidRowCones+")="+teleopMidSum;
+      teleopMidRowTips.push({xlabel: matchnum, tip: tooltipStr}); 
+
+      // Get teleop bottom row data
+      var teleopBotRowCubes = matchdata[i]["teleopcubesbottom"];
+      var teleopBotRowCones = matchdata[i]["teleopconesbottom"];
+      var teleopBotSum = teleopBotRowCones + teleopBotRowCubes;
+      datasets[2]["data"].push(teleopBotSum);
+      var tooltipStr = "Bottom (cubes "+teleopBotRowCubes+", cones "+teleopBotRowCones+")="+teleopBotSum;
+      teleopBotRowTips.push({xlabel: matchnum, tip: tooltipStr}); 
+
+      // Get endgame charge level
+      var endgameChargeLevel = matchdata[i]["endgamechargelevel"];
+      datasets[3]["data"].push(endgameChargeLevel);
+      var clevel = "None";
+      if(endgameChargeLevel == 1)
+        clevel = "Parked";
+      if(endgameChargeLevel == 2)
+        clevel = "Docked"
+      else if(endgameChargeLevel == 3)
+        clevel = "Engaged";
+      var tipStr = "Charge Level="+clevel;
+      endgameChargeTips.push({xlabel: matchnum, tip: tipStr}); 
+    }
+
+    // Define the graph as a line chart:
+    if (chart2Defined) {
+      myChart2.destroy();
+    }
+    chart2Defined = true;
+
+    const ctx = document.getElementById('myChart2').getContext('2d');
+    myChart2 = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: match_list,
+        datasets: datasets
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        },
+        plugins: {
+          tooltip: {
+            callbacks: {  // Special tooltip handling
+              label: function(tooltipItem,ddata) {
+                 var toolIndex = tooltipItem.datasetIndex;
+                 var matchnum = tooltipItem.label;
+                 var tipStr = datasets[toolIndex].label;
+
+                 if(toolIndex == 0) {   // Teleop Top Row
+                   for (let i = 0; i < teleopTopRowTips.length; i++) {
+                     if(teleopTopRowTips[i].xlabel == matchnum) {
+                       tipStr = teleopTopRowTips[i].tip;
+                       break;
+                     }
+                   }
+                 }
+                 else if(toolIndex == 1) {   // Teleop Middle Row
+                   for (let i = 0; i < teleopMidRowTips.length; i++) {
+                     if(teleopMidRowTips[i].xlabel == matchnum) {
+                       tipStr = teleopMidRowTips[i].tip;
+                       break;
+                     }
+                   }
+                 }
+                 else if(toolIndex == 2) {   // Teleop Bottom Row
+                   for (let i = 0; i < teleopBotRowTips.length; i++) {
+                     if(teleopBotRowTips[i].xlabel == matchnum) {
+                       tipStr = teleopBotRowTips[i].tip;
+                       break;
+                     }
+                   }
+                 }
+                 else if(toolIndex == 3) {   // Endgame Charge Level
+                   for (let i = 0; i < endgameChargeTips.length; i++) {
+                     if(endgameChargeTips[i].xlabel == matchnum) {
+                       tipStr = endgameChargeTips[i].tip;
                        break;
                      }
                    }
