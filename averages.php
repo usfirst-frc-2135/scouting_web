@@ -46,9 +46,9 @@
               <th colspan="2" class="text-center">Total Auto Pts</th>
               <th colspan="2" class="text-center">Total Teleop Pts</th>
               <th colspan="2" class="text-center">Endgame Pts</th>
-              <th colspan="4" class="text-center">Auton</th>
+              <th colspan="7" class="text-center">Auton</th>
               <th colspan="4" class="text-center">Teleop</th>
-              <th colspan="5" class="text-center">Endgame</th>
+              <th colspan="4" class="text-center">Endgame</th>
               <th colspan="1" class="text-center fw-bold">Died</th>
             </tr>
             <tr>
@@ -67,11 +67,11 @@
               
 			  <th colspan="2" class="text-center">Cones</th>
               <th colspan="2" class="text-center">Cubes</th>
-			
+			  <th colspan="3" class="text-center">Charge Station %</th>
 				
               <th colspan="2" class="text-center">Cones</th>
               <th colspan="2" class="text-center">Cubes</th>
-              <th colspan="5" class="text-center">Charge Station %</th>
+              <th colspan="4" class="text-center">Charge Station %</th>
               <th colspan="1"></th>
             </tr>
             <tr>
@@ -90,14 +90,19 @@
               <th scope="col">MAX</th>
               <th scope="col">AVG</th>
               <th scope="col">MAX</th>
+			   
+			  <th scope="col">N</th>
+              <th scope="col">P</th>	
+			  <th scope="col">E</th>
+				
               <th scope="col">AVG</th>
               <th scope="col">MAX</th>
               <th scope="col">AVG</th>
               <th scope="col">MAX</th>
-              <th scope="col">None</th>
-              <th scope="col">Parked</th>
-              <th scope="col">Docked</th>
-              <th scope="col">Engaged</th>
+              <th scope="col">N</th>
+              <th scope="col">P</th>
+              <th scope="col">D</th>
+              <th scope="col">E</th>
               <th scope="col">#</th>
             </tr>
 
@@ -148,7 +153,7 @@
     $("#tableData").html(""); // Clear Table
     for (let teamNum of teamList) {
 	 
-	  //var autonchargestationPercentage = dummyGet(scoutingData[teamNum], "autonchargestationpercent");
+	  var autonchargestationPercentage = dummyGet(scoutingData[teamNum], "autonchargestationpercent");
       var endgamechargestationPercentage = dummyGet(scoutingData[teamNum], "endgamechargestationpercent");
 
       var rowString = "<tr>" +
@@ -164,9 +169,6 @@
         "<td>" + dummyGet(scoutingData[teamNum], "avgendgamepoints") + "</td>" +
         "<td>" + dummyGet(scoutingData[teamNum], "maxendgamepoints") + "</td>" +
 		 
-		//"<td>" + dummyGet(autonchargestationPercentage, 0) + "%</td>" +
-        //"<td>" + dummyGet(autonchargestationPercentage, 1) + "%</td>" +
-        //"<td>" + dummyGet(autonchargestationPercentage, 2) + "%</td>" + 
 		  
         "<td>" + dummyGet(scoutingData[teamNum], "avgautoncones") + "</td>" +
 		"<td>" + dummyGet(scoutingData[teamNum], "maxautoncones") + "</td>" +
@@ -174,7 +176,10 @@
 		
 		"<td>" + dummyGet(scoutingData[teamNum], "avgautoncubes") + "</td>" +
 		"<td>" + dummyGet(scoutingData[teamNum], "maxautoncubes") + "</td>" +
-
+		  
+		"<td>" + dummyGet(autonchargestationPercentage, 0) + "%</td>" +
+        "<td>" + dummyGet(autonchargestationPercentage, 1) + "%</td>" +
+        "<td>" + dummyGet(autonchargestationPercentage, 2) + "%</td>" + 
 		  
 		"<td>" + dummyGet(scoutingData[teamNum], "avgteleopcones") + "</td>" +
 		"<td>" + dummyGet(scoutingData[teamNum], "maxteleopcones") + "</td>" +
