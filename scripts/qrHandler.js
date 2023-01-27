@@ -17,8 +17,7 @@ function qrStringToList(dataString) {
 }
 
 function validateQrList(dataList) {
-	var dataListSize = dataList.length;
-	console.log ("==>>> data list size = " + dataListSize);
+  var dataListSize = dataList.length;
   if (dataList.length != 25) {
     return false;
   }

@@ -164,8 +164,6 @@ class matchDataProcessor {
   }
 
   getAverages() {
-    
-
     var avg = {}; //general for all matches and all teams
     for (var i = 0; i < this.data.length; i++) {
       var tn = this.data[i]["teamnumber"];
@@ -186,15 +184,22 @@ class matchDataProcessor {
 
         avg[tn]["avgautoncones"] = 0;
         avg[tn]["maxautoncones"] = 0;
-		avg[tn]["avgautoncubes"] = 0;
+	avg[tn]["avgautoncubes"] = 0;
         avg[tn]["maxautoncubes"] = 0;
 		
-		avg[tn]["avgteleopcones"] = 0;
+        avg[tn]["avg_autontoprowitems"] = 0;
+        avg[tn]["max_autontoprowitems"] = 0;
+        avg[tn]["avg_autonmidrowitems"] = 0;
+        avg[tn]["max_autonmidrowitems"] = 0;
+        avg[tn]["avg_autonbotrowitems"] = 0;
+        avg[tn]["max_autonbotrowitems"] = 0;
+
+	avg[tn]["avgteleopcones"] = 0;
         avg[tn]["maxteleopcones"] = 0;
-		avg[tn]["avgteleopcubes"] = 0;
+	avg[tn]["avgteleopcubes"] = 0;
         avg[tn]["maxteleopcubes"] = 0;
 		  
-		avg[tn]["autonchargestationpercent"] = { 0: 0, 1: 0, 2: 0};
+	avg[tn]["autonchargestationpercent"] = { 0: 0, 1: 0, 2: 0};
         avg[tn]["endgamechargestationpercent"] = { 0: 0, 1: 0, 2: 0, 3: 0 };  
        
         avg[tn]["totaldied"] = 0;
@@ -204,59 +209,44 @@ class matchDataProcessor {
         avg[tn]["scoutnames"] = [];
         avg[tn]["commentlist"] = [];
       }
+	  
+      var totalmatches = (this.data[i]["totalmatches"]);
+      var mobilitycheck = (this.data[i]["exitcommunity"]);
+      var autonbottomPieces = (this.data[i]["autonconesbottom"]) += (this.data[i]["autoncubesbottom"]);
+      var autonmiddlePieces = (this.data[i]["autonconesmiddle"]) += (this.data[i]["autoncubesmiddle"]);
+      var autontopPieces = (this.data[i]["autonconestop"]) += (this.data[i]["autoncubestop"]);
+      var autonchargestationPoints = 0;
+	 
+      if (this.data[i]["autonchargelevel"] == 1) { 
+        autonchargestationPoints = 8; 
+      }
+      if (this.data[i]["autonchargelevel"] == 2) { 
+        autonchargestationPoints = 12; 
+      }
+		
+      var autoPoints = ((mobilitycheck * 3) + (autonbottomPieces * 3) + (autonmiddlePieces * 5) + (autontopPieces * 6) +(autonchargestationPoints));
 
-	  
-	  var totalmatches = (this.data[i]["totalmatches"]);
-		
-	  var mobilitycheck = (this.data[i]["exitcommunity"]);
-	  
-	  var autonbottomPieces = (this.data[i]["autonconesbottom"]) += (this.data[i]["autoncubesbottom"]);
-		
-	  var autonmiddlePieces = (this.data[i]["autonconesmiddle"]) += (this.data[i]["autoncubesmiddle"]);
-		
-	  var autontopPieces = (this.data[i]["autonconestop"]) += (this.data[i]["autoncubestop"]);
-		
-		
-	  var autonchargestationPoints = 0;
-	 
-      if (this.data[i]["autonchargelevel"] == 1) { autonchargestationPoints = 8; }
-      if (this.data[i]["autonchargelevel"] == 2) { autonchargestationPoints = 12; }
-     
-		
-	  var autoPoints = ((mobilitycheck * 3) + (autonbottomPieces * 3) + (autonmiddlePieces * 5) + (autontopPieces * 6) +(autonchargestationPoints));
-	 
-	  
-		
-	  var teleopbottomPieces = (this.data[i]["teleopconesbottom"]) + (this.data[i]["teleopcubesbottom"]);
-	  //console.log(">+++=== the number of teleop bottom pieces are " + teleopbottomPieces);
-	  var teleopmiddlePieces = (this.data[i]["teleopconesmiddle"]) + (this.data[i]["teleopcubesmiddle"]);
-	  //console.log(">+++=== the number of teleop middle pieces are " + teleopmiddlePieces);	
-		
-	  var teleoptopPieces = (this.data[i]["teleopconestop"]) + (this.data[i]["teleopcubestop"]);
-	  
-	  var telopPoints = ((parseInt(teleopbottomPieces) * 3) + (parseInt(teleopmiddlePieces) * 5) + (parseInt(teleoptopPieces) * 6));
-	  
-	  
+      var teleopbottomPieces = (this.data[i]["teleopconesbottom"]) + (this.data[i]["teleopcubesbottom"]);
+      var teleopmiddlePieces = (this.data[i]["teleopconesmiddle"]) + (this.data[i]["teleopcubesmiddle"]);
+      var teleoptopPieces = (this.data[i]["teleopconestop"]) + (this.data[i]["teleopcubestop"]);
+      var telopPoints = ((parseInt(teleopbottomPieces) * 3) + (parseInt(teleopmiddlePieces) * 5) + (parseInt(teleoptopPieces) * 6));
 
       var endgamePoints = 0;
-	  //console.log(">+++=== Endgame points is " + this.data[i]["endgamechargelevel"]);
-      if (this.data[i]["endgamechargelevel"] == 1) { endgamePoints = 2; }
-      if (this.data[i]["endgamechargelevel"] == 2) { endgamePoints = 6; }
-      if (this.data[i]["endgamechargelevel"] == 3) { endgamePoints = 10; }
-	  //console.log(">+++=== Setting endgame points to " + endgamePoints);
-	  
+      if (this.data[i]["endgamechargelevel"] == 1) { 
+        endgamePoints = 2; 
+      }
+      if (this.data[i]["endgamechargelevel"] == 2) { 
+        endgamePoints = 6; 
+      }
+      if (this.data[i]["endgamechargelevel"] == 3) { 
+        endgamePoints = 10; 
+      }
       
       var totalPoints = autoPoints + telopPoints + endgamePoints;
-		
-
-	  var autonconePieces = (this.data[i]["autonconesbottom"]) + (this.data[i]["autonconesmiddle"]) + (this.data[i]["autonconestop"]);
-	 
-	  var autoncubePieces = (this.data[i]["autoncubesbottom"]) + (this.data[i]["autoncubesmiddle"]) + (this.data[i]["autoncubestop"]);
-		
-	  var teleopconePieces = (this.data[i]["teleopconesbottom"]) + (this.data[i]["teleopconesmiddle"]) + (this.data[i]["teleopconestop"]);
-	 
-	  var teleopcubePieces = (this.data[i]["teleopcubesbottom"]) + (this.data[i]["teleopcubesmiddle"]) + (this.data[i]["teleopcubestop"]);
-		
+      var autonconePieces = (this.data[i]["autonconesbottom"]) + (this.data[i]["autonconesmiddle"]) + (this.data[i]["autonconestop"]);
+      var autoncubePieces = (this.data[i]["autoncubesbottom"]) + (this.data[i]["autoncubesmiddle"]) + (this.data[i]["autoncubestop"]);
+      var teleopconePieces = (this.data[i]["teleopconesbottom"]) + (this.data[i]["teleopconesmiddle"]) + (this.data[i]["teleopconestop"]);
+      var teleopcubePieces = (this.data[i]["teleopcubesbottom"]) + (this.data[i]["teleopcubesmiddle"]) + (this.data[i]["teleopcubestop"]);
 
       avg[tn]["avgtotalpoints"] += totalPoints;
       avg[tn]["maxtotalpoints"] = Math.max(avg[tn]["maxtotalpoints"], totalPoints);
@@ -270,38 +260,40 @@ class matchDataProcessor {
       avg[tn]["avgendgamepoints"] += endgamePoints;
       avg[tn]["maxendgamepoints"] = Math.max(avg[tn]["maxendgamepoints"], endgamePoints);
 		
-		
-	  var combinedAutonCones = (parseInt(this.data[i]["autonconestop"]))+(parseInt(this.data[i]["autonconesmiddle"]))+(parseInt(this.data[i]["autonconesbottom"]));
-	  var topcones = (parseInt(this.data[i]["autonconestop"]));
-	  console.log ("top cones is " + topcones);
-	  console.log(">+++=== initial auton cone value " + combinedAutonCones);
-	  avg[tn]["avgautoncones"] += combinedAutonCones;
+      var combinedAutonCones = (parseInt(this.data[i]["autonconestop"]))+(parseInt(this.data[i]["autonconesmiddle"]))+(parseInt(this.data[i]["autonconesbottom"]));
+      var topcones = (parseInt(this.data[i]["autonconestop"]));
+//      console.log ("top cones is " + topcones);
+//      console.log(">+++=== initial auton cone value " + combinedAutonCones);
+      avg[tn]["avgautoncones"] += combinedAutonCones;
       avg[tn]["maxautoncones"] = Math.max(avg[tn]["maxautoncones"], combinedAutonCones);
-	  console.log(">+++=== auton cone value " + combinedAutonCones);
+//      console.log(">+++=== auton cone value " + combinedAutonCones);
 		
-	  var combinedAutonCubes = (parseInt(this.data[i]["autoncubestop"]))+(parseInt(this.data[i]["autoncubesmiddle"]))+(parseInt(this.data[i]["autoncubesbottom"]));
-	  avg[tn]["avgautoncubes"] += combinedAutonCubes;
+      var combinedAutonCubes = (parseInt(this.data[i]["autoncubestop"]))+(parseInt(this.data[i]["autoncubesmiddle"]))+(parseInt(this.data[i]["autoncubesbottom"]));
+      avg[tn]["avgautoncubes"] += combinedAutonCubes;
       avg[tn]["maxautoncubes"] = Math.max(avg[tn]["maxautoncubes"], combinedAutonCubes);
 		
-	  var combinedTeleopCones = (parseInt(this.data[i]["teleopconestop"]))+(parseInt(this.data[i]["teleopconesmiddle"]))+(parseInt(this.data[i]["teleopconesbottom"]));
-	  avg[tn]["avgteleopcones"] += combinedTeleopCones;
+      var autonTopRowItems = (parseInt(this.data[i]["autonconestop"]))+(parseInt(this.data[i]["autoncubestop"]));
+      var autonMidRowItems = (parseInt(this.data[i]["autonconesmiddle"]))+(parseInt(this.data[i]["autoncubesmiddle"]));
+      var autonBotRowItems = (parseInt(this.data[i]["autonconesbottom"]))+(parseInt(this.data[i]["autoncubesbottom"]));
+      avg[tn]["avg_autontoprowitems"] += autonTopRowItems;
+      avg[tn]["max_autontoprowitems"] = Math.max(avg[tn]["max_autontoprowitems"], autonTopRowItems);
+      avg[tn]["avg_autonmidrowitems"] += autonMidRowItems;
+      avg[tn]["max_autonmidrowitems"] = Math.max(avg[tn]["max_autonmidrowitems"], autonMidRowItems);
+      avg[tn]["avg_autonbotrowitems"] += autonBotRowItems;
+      avg[tn]["max_autonbotrowitems"] = Math.max(avg[tn]["max_autonbotrowitems"], autonBotRowItems);
+
+      var combinedTeleopCones = (parseInt(this.data[i]["teleopconestop"]))+(parseInt(this.data[i]["teleopconesmiddle"]))+(parseInt(this.data[i]["teleopconesbottom"]));
+      avg[tn]["avgteleopcones"] += combinedTeleopCones;
       avg[tn]["maxteleopcones"] = Math.max(avg[tn]["maxteleopcones"], combinedTeleopCones);
 	
-	
       var combinedTeleopCubes = (parseInt(this.data[i]["teleopcubestop"]))+(parseInt(this.data[i]["teleopcubesmiddle"]))+(parseInt(this.data[i]["teleopcubesbottom"]));
-	  avg[tn]["avgteleopcubes"] += combinedTeleopCubes;
+      avg[tn]["avgteleopcubes"] += combinedTeleopCubes;
       avg[tn]["maxteleopcubes"] = Math.max(avg[tn]["maxteleopcubes"], combinedTeleopCubes);
-
-		
 		
       avg[tn]["endgamechargestationpercent"][this.data[i]["endgamechargelevel"]] += 1;
-	
       avg[tn]["autonchargestationpercent"][this.data[i]["autonchargelevel"]] += 1;
-
       avg[tn]["totaldied"] += this.data[i]["died"];
-
       avg[tn]["totalmatches"] += 1;
-
       avg[tn]["scoutnames"].push(this.data[i]["scoutname"]);
       avg[tn]["commentlist"].push(this.data[i]["comment"]);
 
@@ -314,13 +306,14 @@ class matchDataProcessor {
       avg[key]["avgendgamepoints"] = this.rnd(avg[key]["avgendgamepoints"] / avg[key]["totalmatches"]);
 	
       avg[key]["avgautoncones"] = this.rnd(avg[key]["avgautoncones"] / avg[key]["totalmatches"]);
-	  avg[key]["avgautoncubes"] = this.rnd(avg[key]["avgautoncubes"] / avg[key]["totalmatches"]);
+      avg[key]["avgautoncubes"] = this.rnd(avg[key]["avgautoncubes"] / avg[key]["totalmatches"]);
 		
-	  avg[key]["avgteleopcones"] = this.rnd(avg[key]["avgteleopcones"] / avg[key]["totalmatches"]);
-	  avg[key]["avgteleopcubes"] = this.rnd(avg[key]["avgteleopcubes"] / avg[key]["totalmatches"]);
+      avg[key]["avgteleopcones"] = this.rnd(avg[key]["avgteleopcones"] / avg[key]["totalmatches"]);
+      avg[key]["avgteleopcubes"] = this.rnd(avg[key]["avgteleopcubes"] / avg[key]["totalmatches"]);
 	
-	  
-	  
+      avg[key]["avg_autontoprowitems"] = this.rnd(avg[key]["avg_autontoprowitems"] / avg[key]["totalmatches"]);
+      avg[key]["avg_autonmidrowitems"] = this.rnd(avg[key]["avg_autonmidrowitems"] / avg[key]["totalmatches"]);
+      avg[key]["avg_autonmidrowitems"] = this.rnd(avg[key]["avg_autonmidrowitems"] / avg[key]["totalmatches"]);
 
       avg[key]["endgamechargestationpercent"][0] = this.rnd(100 * avg[key]["endgamechargestationpercent"][0] / avg[key]["totalmatches"]);
       avg[key]["endgamechargestationpercent"][1] = this.rnd(100 * avg[key]["endgamechargestationpercent"][1] / avg[key]["totalmatches"]);
@@ -330,11 +323,7 @@ class matchDataProcessor {
       avg[key]["autonchargestationpercent"][0] = this.rnd(100 * avg[key]["autonchargestationpercent"][0] / avg[key]["totalmatches"]);
       avg[key]["autonchargestationpercent"][1] = this.rnd(100 * avg[key]["autonchargestationpercent"][1] / avg[key]["totalmatches"]);
       avg[key]["autonchargestationpercent"][2] = this.rnd(100 * avg[key]["autonchargestationpercent"][2] / avg[key]["totalmatches"]);
-      
-
     }
-
     return avg;
-
   }
 }

@@ -109,60 +109,72 @@
           </div>
         </div>
         -->
-
       </div>
+
       <div class="col-lg-6 col-sm-6 col-xs-6 gx-3">
         <div class="card mb-3">
           <div class="card-body">
-            <h5 class="card-title">Match Averages</h5>
-              
-                <table class="table table-striped">
-                  <thead>
-                    <tr>
-                      <td>&nbsp;</td>
-                      <th scope="col">AVG</th>
-                      <th scope="col">MAX</th>
-                    </tr>
-                  </thead>
-                  <tbody id="totalTable">
-                    <tr>
-                      <th scope="row">Total Points</th>
-                    </tr>
-                  </tbody>
-                </table>
-              
+
             <div class="card mb-3">
               <div class="card-body">
                 <div class="overflow-auto">
-                  <h5 class="text-center">Auton</h5>
-                  <table class="table table-striped">
-                    <thead>
-                      <tr>
-                        <td>&nbsp;</td>
-                        <th scope="col">AVG</th>
-                        <th scope="col">MAX</th>
-                      </tr>
-                    </thead>
-                    <tbody id="autoHubTable">
-                      <tr>
-                        <th scope="row">Cross</th>
-                      </tr>
-                      <tr>
-                        <th scope="row">Upper Hub</th>
-                      </tr>
-                      <tr>
-                        <th scope="row">Lower Hub</th>
-                      </tr>
-                    </tbody>
-                    <tfoot id="autoHubTotalTable">
-                      <tr>
-                        <th scope="col">TOTAL</th>
-                      </tr>
-                    </tfoot>
-                  </table>
+                  <h5 class="text-center">Match Total Points </h5>
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>
+                          <td>&nbsp;</td>
+                          <th scope="col">AVG</th>
+                          <th scope="col">MAX</th>
+                        </tr>
+                      </thead>
+                      <tbody id="totalTable">
+                        <tr>
+                          <th scope="row">Total Pts</th>
+                        </tr>
+                      </tbody>
+                    </table>
                 </div>
               </div>
             </div>
+              
+
+            <div class="card mb-3">
+              <div class="card-header">
+                <div class="overflow-auto">
+                  <h5 class="text-center"> <a href="#collapseAuton" data-bs-toggle="collapse" aria-expanded="false"> Auton </a></h5>
+                  <div class="collapse" id="collapseAuton">
+                    <div class="card card-body">
+                      <table class="table table-striped">
+                        <thead>
+                          <tr>
+                            <td>&nbsp;</td>
+                            <th scope="col">AVG</th>
+                            <th scope="col">MAX</th>
+                          </tr>
+                        </thead>
+                        <tbody id="autoTable">
+                          <tr>
+                            <th scope="row">Top Row</th>
+                          </tr>
+                          <tr>
+                            <th scope="row">Middle Row</th>
+                          </tr>
+                          <tr>
+                            <th scope="row">Bottom Row</th>
+                          </tr>
+                        </tbody>
+                        <tfoot id="autoTotalTable">
+                          <tr>
+                            <th scope="col">Total Pts</th>
+                          </tr>
+                        </tfoot>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <div class="card mb-3">
               <div class="card-body">
                 <div class="overflow-auto">
@@ -185,13 +197,14 @@
                     </tbody>
                     <tfoot id="teleopHubTotalTable">
                       <tr>
-                        <th scope="col">TOTAL</th>
+                        <th scope="col">Total Pts</th>
                       </tr>
                     </tfoot>
                   </table>
                 </div>
               </div>
             </div>
+
             <div class="card mb-3">
               <div class="card-body">
                 <div class="overflow-auto">
@@ -216,6 +229,7 @@
                 </div>
               </div>
             </div>
+
           </div>
         </div>
       </div>
@@ -257,33 +271,30 @@
         "autonhighpoints", "autonlowpoints", "teleophighpoints", "teleoplowpoints", "climbed", "died", "scoutname"
       ]);
     }
-    sorttable.makeSortable(document.getElementById("sortableAllMatches")); */
+    sorttable.makeSortable(document.getElementById("sortableAllMatches")); HOLD*/
   }
 
   function dataToAvgTables(avgs) {
     // Auton Scores
-    /* HOLD avgs["autostartpercent"]["autostr"] = "<b>Start %</b>";
-    avgs["crossstr"] = "<b>Cross %</b>";
-    avgs["upperstr"] = "<b>Upper Cargo</b>";
-    avgs["lowerstr"] = "<b>Lower Cargo</b>";
-    avgs["totalstr"] = "<b>Total Points</b>";
-    avgs["endgameclimbpercent"]["climbstr"] = "<b>Climb %</b>";
-    writeTableRow("autoStartTable", avgs["autostartpercent"], ["autostr", 1, 2, 3, 4, 5, 6]);
-    writeTableRow("autoHubTable", avgs, ["crossstr", "tarmacpercent"]);
-    writeTableRow("autoHubTable", avgs, ["upperstr", "avgautonhighgoals", "maxautonhighgoals"]);
-    writeTableRow("autoHubTable", avgs, ["lowerstr", "avgautonlowergoals", "maxautonlowergoals"]);
-    writeTableRow("autoHubTotalTable", avgs, ["totalstr", "avgautopoints", "maxautopoints"]);
+    avgs["toprowstr"] = "<b>Top Row Items</b>";
+    avgs["midrowstr"] = "<b>Middle Row Items</b>";
+    avgs["botrowstr"] = "<b>Bottom Row Items</b>";
+    avgs["totalstr"] = "<b>Total Pts</b>";
+    writeTableRow("autoTable", avgs, ["toprowstr", "avg_autontoprowitems", "max_autontoprowitems"]);
+    writeTableRow("autoTable", avgs, ["midrowstr", "avg_autonmidrowitems", "max_autonmidrowitems"]);
+    writeTableRow("autoTable", avgs, ["botrowstr", "avg_autonbotrowitems", "max_autonbotrowitems"]);
+    writeTableRow("autoTotalTable", avgs, ["totalstr", "avgautopoints", "maxautopoints"]);
 
     // Teleop Scores
-    writeTableRow("teleopHubTable", avgs, ["upperstr", "avgteleophighgoals", "maxteleophighgoals"]);
-    writeTableRow("teleopHubTable", avgs, ["lowerstr", "avgteleoplowergoals", "maxteleoplowergoals"]);
-    writeTableRow("teleopHubTotalTable", avgs, ["totalstr", "avgteleoppoints", "maxteleoppoints"]);
+//HOLD    writeTableRow("teleopHubTable", avgs, ["upperstr", "avgteleophighgoals", "maxteleophighgoals"]);
+//HOLD    writeTableRow("teleopHubTable", avgs, ["lowerstr", "avgteleoplowergoals", "maxteleoplowergoals"]);
+//HOLD    writeTableRow("teleopHubTotalTable", avgs, ["totalstr", "avgteleoppoints", "maxteleoppoints"]);
 
     // Climb Table
-    writeTableRow("climbTable", avgs["endgameclimbpercent"], ["climbstr", 0, 1, 2, 3, 4]);
+//HOLD    writeTableRow("climbTable", avgs["endgameclimbpercent"], ["climbstr", 0, 1, 2, 3, 4]);
 
     // Total Table
-    writeTableRow("totalTable", avgs, ["totalstr", "avgtotalpoints", "maxtotalpoints"]); match */
+    writeTableRow("totalTable", avgs, ["totalstr", "avgtotalpoints", "maxtotalpoints"]); 
   }
 
   function checkGet() {
@@ -317,17 +328,17 @@
   }
 
   function processMatchData(team, data) {
-    /* HOLD var mdp = new matchDataProcessor(data);
+    var mdp = new matchDataProcessor(data);
     mdp.sortMatches(data);
     mdp.getSiteFilteredAverages(function(averageData) {
       processedData = averageData[team];
       dataToAvgTables(processedData);
     });
     dataToCommentTable(data);
-    dataToMatchTable(data); */
+    dataToMatchTable(data); 
     dataToAutonGraph(data);
     dataToTeleopGraph(data);
-    /* sorttable.makeSortable(document.getElementById("sortableAllMatches")); */
+//HOLD    sorttable.makeSortable(document.getElementById("sortableAllMatches")); 
   }
 
   function dataToAutonGraph(matchdata) {
@@ -635,8 +646,8 @@
     $("#comments").html("");
     $("#allMatchesTable").html("");
     $("#autoStartTable").html("");
-    $("#autoHubTable").html("");
-    $("#autoHubTotalTable").html("");
+    $("#autoTable").html("");
+    $("#autoTotalTable").html("");
     $("#teleopHubTable").html("");
     $("#teleopHubTotalTable").html("");
     $("#climbTable").html("");
