@@ -37,6 +37,16 @@
     <div class="row pt-3 pb-3 mb-3">
       <div class="overflow-auto" id="freezeTableDiv">
         <table id="rawDataTable" class="tableFixHead table table-striped table-bordered table-hover sortable" style="width:100%;">
+          <colgroup>
+            <col span="3" style="background-color:transparent">
+            <col span="2" style="background-color:#cfe2ff">
+            <col span="2" style="background-color:transparent">
+            <col span="2" style="background-color:#cfe2ff">
+            <col span="2" style="background-color:transparent">
+            <col span="7" style="background-color:#cfe2ff">
+            <col span="4" style="background-color:transparent">
+            <col span="4" style="background-color:#cfe2ff">
+          </colgroup>
           <thead>
             <tr>
               <th colspan="1" class="text-center fw-bold"></th>
