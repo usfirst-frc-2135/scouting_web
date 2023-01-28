@@ -43,14 +43,14 @@
                 <td class="table-primary" id="blueTotalPoints"></td>
               </tr>
               <tr>
-                <td class="table-secondary">Avg Total Cargo</td>
-                <td class="table-danger" id="redTotalCargo"></td>
-                <td class="table-primary" id="blueTotalCargo"></td>
+                <td class="table-secondary">Avg Total Game Pieces</td>
+                <td class="table-danger" id="redTotalGamePieces"></td>
+                <td class="table-primary" id="blueTotalGamePieces"></td>
               </tr>
               <tr>
-                <td class="table-secondary">Avg Climb Points</td>
-                <td class="table-danger" id="redExpectedClimbPoints"></td>
-                <td class="table-primary" id="blueExpectedClimbPoints"></td>
+                <td class="table-secondary">Avg Endgame Points</td>
+                <td class="table-danger" id="redExpectedEndgamePoints"></td>
+                <td class="table-primary" id="blueExpectedEndgamePoints"></td>
               </tr>
             </tbody>
           </table>
@@ -98,20 +98,22 @@
               <table class="table table-bordered table-danger">
                 <thead>
                   <tr>
-                    <th colspan="2" class="text-center fs-6">Auton</th>
+                    <th colspan="5" class="text-center fs-6">Auton</th>
                     <th colspan="2" class="text-center fw-bold fs-6">Teleop</th>
                     <th colspan="5" class="text-center fw-bold fs-6">Endgame</th>
                   </tr>
                   <tr>
-                    <th scope="col">Upper</th>
-                    <th scope="col">Lower</th>
-                    <th scope="col">Upper</th>
-                    <th scope="col">Lower</th>
-                    <th scope="col">0</th>
-                    <th scope="col">1</th>
-                    <th scope="col">2</th>
-                    <th scope="col">3</th>
-                    <th scope="col">4</th>
+                    <th scope="col">Cones</th>
+                    <th scope="col">Cubes</th>
+				    <th scope="col">N</th>
+                    <th scope="col">D</th>
+                    <th scope="col">E</th>
+                    <th scope="col">Cones</th>
+                    <th scope="col">Cubes</th>
+                    <th scope="col">N</th>
+                    <th scope="col">P</th>
+                    <th scope="col">D</th>
+                    <th scope="col">E</th>
                   </tr>
                 </thead>
                 <tbody id="R0DataTable">
@@ -162,20 +164,22 @@
               <table class="table table-bordered table-danger">
                 <thead>
                   <tr>
-                    <th colspan="2" class="text-center fs-6">Auton</th>
+                    <th colspan="5" class="text-center fs-6">Auton</th>
                     <th colspan="2" class="text-center fw-bold fs-6">Teleop</th>
                     <th colspan="5" class="text-center fw-bold fs-6">Endgame</th>
                   </tr>
                   <tr>
-                    <th scope="col">Upper</th>
-                    <th scope="col">Lower</th>
-                    <th scope="col">Upper</th>
-                    <th scope="col">Lower</th>
-                    <th scope="col">0</th>
-                    <th scope="col">1</th>
-                    <th scope="col">2</th>
-                    <th scope="col">3</th>
-                    <th scope="col">4</th>
+                   <th scope="col">Cones</th>
+                    <th scope="col">Cubes</th>
+					<th scope="col">N</th>
+                    <th scope="col">D</th>
+                    <th scope="col">E</th>
+                    <th scope="col">Cones</th>
+                    <th scope="col">Cubes</th>
+                    <th scope="col">N</th>
+                    <th scope="col">P</th>
+                    <th scope="col">D</th>
+                    <th scope="col">E</th>
                   </tr>
                 </thead>
                 <tbody id="R1DataTable">
@@ -226,20 +230,22 @@
               <table class="table table-bordered table-danger">
                 <thead>
                   <tr>
-                    <th colspan="2" class="text-center fs-6">Auton</th>
+                    <th colspan="5" class="text-center fs-6">Auton</th>
                     <th colspan="2" class="text-center fw-bold fs-6">Teleop</th>
                     <th colspan="5" class="text-center fw-bold fs-6">Endgame</th>
                   </tr>
                   <tr>
-                    <th scope="col">Upper</th>
-                    <th scope="col">Lower</th>
-                    <th scope="col">Upper</th>
-                    <th scope="col">Lower</th>
-                    <th scope="col">0</th>
-                    <th scope="col">1</th>
-                    <th scope="col">2</th>
-                    <th scope="col">3</th>
-                    <th scope="col">4</th>
+                    <th scope="col">Cones</th>
+                    <th scope="col">Cubes</th>
+					<th scope="col">N</th>
+                    <th scope="col">D</th>
+                    <th scope="col">E</th>
+                    <th scope="col">Cones</th>
+                    <th scope="col">Cubes</th>
+                    <th scope="col">N</th>
+                    <th scope="col">P</th>
+                    <th scope="col">D</th>
+                    <th scope="col">E</th>
                   </tr>
                 </thead>
                 <tbody id="R2DataTable">
@@ -291,20 +297,22 @@
               <table class="table table-bordered table-primary">
                 <thead>
                   <tr>
-                    <th colspan="2" class="text-center fs-6">Auton</th>
+                    <th colspan="5" class="text-center fs-6">Auton</th>
                     <th colspan="2" class="text-center fw-bold fs-6">Teleop</th>
                     <th colspan="5" class="text-center fw-bold fs-6">Endgame</th>
                   </tr>
                   <tr>
-                    <th scope="col">Upper</th>
-                    <th scope="col">Lower</th>
-                    <th scope="col">Upper</th>
-                    <th scope="col">Lower</th>
-                    <th scope="col">0</th>
-                    <th scope="col">1</th>
-                    <th scope="col">2</th>
-                    <th scope="col">3</th>
-                    <th scope="col">4</th>
+                   <th scope="col">Cones</th>
+                    <th scope="col">Cubes</th>
+					<th scope="col">N</th>
+                    <th scope="col">D</th>
+                    <th scope="col">E</th>
+                    <th scope="col">Cones</th>
+                    <th scope="col">Cubes</th>
+                    <th scope="col">N</th>
+                    <th scope="col">P</th>
+                    <th scope="col">D</th>
+                    <th scope="col">E</th>
                   </tr>
                 </thead>
                 <tbody id="B0DataTable">
@@ -355,20 +363,22 @@
               <table class="table table-bordered table-primary">
                 <thead>
                   <tr>
-                    <th colspan="2" class="text-center fs-6">Auton</th>
+                    <th colspan="5" class="text-center fs-6">Auton</th>
                     <th colspan="2" class="text-center fw-bold fs-6">Teleop</th>
                     <th colspan="5" class="text-center fw-bold fs-6">Endgame</th>
                   </tr>
                   <tr>
-                    <th scope="col">Upper</th>
-                    <th scope="col">Lower</th>
-                    <th scope="col">Upper</th>
-                    <th scope="col">Lower</th>
-                    <th scope="col">0</th>
-                    <th scope="col">1</th>
-                    <th scope="col">2</th>
-                    <th scope="col">3</th>
-                    <th scope="col">4</th>
+                   <th scope="col">Cones</th>
+                    <th scope="col">Cubes</th>
+					<th scope="col">N</th>
+                    <th scope="col">D</th>
+                    <th scope="col">E</th>
+                    <th scope="col">Cones</th>
+                    <th scope="col">Cubes</th>
+                    <th scope="col">N</th>
+                    <th scope="col">P</th>
+                    <th scope="col">D</th>
+                    <th scope="col">E</th>
                   </tr>
                 </thead>
                 <tbody id="B1DataTable">
@@ -419,20 +429,22 @@
               <table class="table table-bordered table-primary">
                 <thead>
                   <tr>
-                    <th colspan="2" class="text-center fs-6">Auton</th>
+                    <th colspan="5" class="text-center fs-6">Auton</th>
                     <th colspan="2" class="text-center fw-bold fs-6">Teleop</th>
                     <th colspan="5" class="text-center fw-bold fs-6">Endgame</th>
                   </tr>
                   <tr>
-                    <th scope="col">Upper</th>
-                    <th scope="col">Lower</th>
-                    <th scope="col">Upper</th>
-                    <th scope="col">Lower</th>
-                    <th scope="col">0</th>
-                    <th scope="col">1</th>
-                    <th scope="col">2</th>
-                    <th scope="col">3</th>
-                    <th scope="col">4</th>
+                   <th scope="col">Cones</th>
+                    <th scope="col">Cubes</th>
+					<th scope="col">N</th>
+                    <th scope="col">D</th>
+                    <th scope="col">E</th>
+                    <th scope="col">Cones</th>
+                    <th scope="col">Cubes</th>
+                    <th scope="col">N</th>
+                    <th scope="col">P</th>
+                    <th scope="col">D</th>
+                    <th scope="col">E</th>
                   </tr>
                 </thead>
                 <tbody id="B2DataTable">
@@ -551,11 +563,11 @@
       $("#B1DataTable").html("");
       $("#B2DataTable").html("");
       $("#redTotalPoints").html("");
-      $("#redTotalCargo").html("");
-      $("#redExpectedClimbPoints").html("");
+      $("#redTotalGamePieces").html("");
+      $("#redExpectedEndgamePoints").html("");
       $("#blueTotalPoints").html("");
-      $("#blueTotalCargo").html("");
-      $("#blueExpectedClimbPoints").html("");
+      $("#blueTotalGamePieces").html("");
+      $("#blueExpectedEndgamePoints").html("");
       $("#R0RobotPics").html("");
       $("#R1RobotPics").html("");
       $("#R2RobotPics").html("");
@@ -616,11 +628,11 @@
         "red": 0,
         "blue": 0
       };
-      var avgTotalCargo = {
+      var avgTotalGamePieces = {
         "red": 0,
         "blue": 0
       };
-      var expectedClimb = {
+      var expectedEndgameChargeStation = {
         "red": 0,
         "blue": 0
       };
@@ -630,8 +642,8 @@
         var rd = localMatchData[teamNum];
         if (rd != null) {
           avgTotalPoints["red"] += rd["avgtotalpoints"];
-          avgTotalCargo["red"] += rd["avgautonhighgoals"] + rd["avgautonlowergoals"] + rd["avgteleophighgoals"] + rd["avgteleoplowergoals"];
-          expectedClimb["red"] += rd["avgendgamepoints"];
+          avgTotalGamePieces["red"] += rd["avgautoncones"] + rd["avgautoncubes"] + rd["avgteleopcones"] + rd["avgteleopcubes"];
+          expectedEndgameChargeStation["red"] += rd["avgendgamepoints"];
         }
       }
       for (let i in blueList) {
@@ -639,18 +651,18 @@
         var rd = localMatchData[teamNum];
         if (rd != null) {
           avgTotalPoints["blue"] += rd["avgtotalpoints"];
-          avgTotalCargo["blue"] += rd["avgautonhighgoals"] + rd["avgautonlowergoals"] + rd["avgteleophighgoals"] + rd["avgteleoplowergoals"];
-          expectedClimb["blue"] += rd["avgendgamepoints"];
+          avgTotalGamePieces["blue"] += rd["avgautoncones"] + rd["avgautoncubes"] + rd["avgteleopcones"] + rd["avgteleopcubes"];
+          expectedEndgameChargeStation["blue"] += rd["avgendgamepoints"];
         }
       }
 
       $("#redTotalPoints").html(roundInt(avgTotalPoints["red"]));
-      $("#redTotalCargo").html(roundInt(avgTotalCargo["red"]));
-      $("#redExpectedClimbPoints").html(roundInt(expectedClimb["red"]));
+      $("#redTotalGamePieces").html(roundInt(avgTotalGamePieces["red"]));
+      $("#redExpectedEndgamePoints").html(roundInt(expectedEndgameChargeStation["red"]));
 
       $("#blueTotalPoints").html(roundInt(avgTotalPoints["blue"]));
-      $("#blueTotalCargo").html(roundInt(avgTotalCargo["blue"]));
-      $("#blueExpectedClimbPoints").html(roundInt(expectedClimb["blue"]));
+      $("#blueTotalGamePieces").html(roundInt(avgTotalGamePieces["blue"]));
+      $("#blueExpectedEndgamePoints").html(roundInt(expectedEndgameChargeStation["blue"]));
     }
 
     function roundInt(val) {
@@ -662,15 +674,17 @@
       var rd = localMatchData[teamNum];
       if (rd != null) {
         var row = "<tr>";
-        row += "<td>" + rd["avgautonhighgoals"] + "</td>";
-        row += "<td>" + rd["avgautonlowergoals"] + "</td>";
-        row += "<td>" + rd["avgteleophighgoals"] + "</td>";
-        row += "<td>" + rd["avgteleoplowergoals"] + "</td>";
-        row += "<td>" + rd["endgameclimbpercent"][0] + "</td>";
-        row += "<td>" + rd["endgameclimbpercent"][1] + "</td>";
-        row += "<td>" + rd["endgameclimbpercent"][2] + "</td>";
-        row += "<td>" + rd["endgameclimbpercent"][3] + "</td>";
-        row += "<td>" + rd["endgameclimbpercent"][4] + "</td>";
+        row += "<td>" + rd["avgautoncones"] + "</td>";
+        row += "<td>" + rd["avgautoncubes"] + "</td>";
+        row += "<td>" + rd["avgteleopcones"] + "</td>";
+        row += "<td>" + rd["avgteleopcubes"] + "</td>";
+		row += "<td>" + rd["autonchargestationpercent"][0] + "</td>";
+        row += "<td>" + rd["autonchargestationpercent"][1] + "</td>";
+        row += "<td>" + rd["autonchargestationpercent"][2] + "</td>";
+        row += "<td>" + rd["endgamechargestationpercent"][0] + "</td>";
+        row += "<td>" + rd["endgamechargestationpercent"][1] + "</td>";
+        row += "<td>" + rd["endgamechargestationpercent"][2] + "</td>";
+        row += "<td>" + rd["endgamechargestationpercent"][3] + "</td>";
         row += "</tr>";
       }
       $("#" + color + index + "DataTable").append(row);
