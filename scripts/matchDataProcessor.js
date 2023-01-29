@@ -184,7 +184,7 @@ class matchDataProcessor {
 
         avg[tn]["avgautoncones"] = 0;
         avg[tn]["maxautoncones"] = 0;
-	avg[tn]["avgautoncubes"] = 0;
+	    avg[tn]["avgautoncubes"] = 0;
         avg[tn]["maxautoncubes"] = 0;
 		
         avg[tn]["avg_autontoprowitems"] = 0;
@@ -194,12 +194,12 @@ class matchDataProcessor {
         avg[tn]["avg_autonbotrowitems"] = 0;
         avg[tn]["max_autonbotrowitems"] = 0;
 
-	avg[tn]["avgteleopcones"] = 0;
+	    avg[tn]["avgteleopcones"] = 0;
         avg[tn]["maxteleopcones"] = 0;
-	avg[tn]["avgteleopcubes"] = 0;
+	    avg[tn]["avgteleopcubes"] = 0;
         avg[tn]["maxteleopcubes"] = 0;
 		  
-	avg[tn]["autonchargestationpercent"] = { 0: 0, 1: 0, 2: 0};
+		avg[tn]["autonchargestationpercent"] = { 0: 0, 1: 0, 2: 0};
         avg[tn]["endgamechargestationpercent"] = { 0: 0, 1: 0, 2: 0, 3: 0 };  
        
         avg[tn]["totaldied"] = 0;
@@ -262,11 +262,11 @@ class matchDataProcessor {
 		
       var combinedAutonCones = (parseInt(this.data[i]["autonconestop"]))+(parseInt(this.data[i]["autonconesmiddle"]))+(parseInt(this.data[i]["autonconesbottom"]));
       var topcones = (parseInt(this.data[i]["autonconestop"]));
-//      console.log ("top cones is " + topcones);
-//      console.log(">+++=== initial auton cone value " + combinedAutonCones);
+      //console.log ("top cones is " + topcones);
+      //console.log(">+++=== initial auton cone value " + combinedAutonCones);
       avg[tn]["avgautoncones"] += combinedAutonCones;
       avg[tn]["maxautoncones"] = Math.max(avg[tn]["maxautoncones"], combinedAutonCones);
-//      console.log(">+++=== auton cone value " + combinedAutonCones);
+      //console.log(">+++=== auton cone value " + combinedAutonCones);
 		
       var combinedAutonCubes = (parseInt(this.data[i]["autoncubestop"]))+(parseInt(this.data[i]["autoncubesmiddle"]))+(parseInt(this.data[i]["autoncubesbottom"]));
       avg[tn]["avgautoncubes"] += combinedAutonCubes;

@@ -164,6 +164,7 @@ class tbaHandler
   function getMatches($eventCode)
   {
     $requestURI = "/event/" . $eventCode . "/matches";
+	error_log ("in get matches for event code");
     return $this->makeDBCachedCall($requestURI);
   }
 

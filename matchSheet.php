@@ -472,12 +472,13 @@
 
     function checkGet() {
       let sp = new URLSearchParams(window.location.search);
+	  console.log ("!----"+sp);
       if (sp.has('matchNum') && sp.has('compLevel')) {
         return [sp.get('matchNum'), sp.get('compLevel')];
       }
       return null;
     }
-
+ 
     function loadMatchData(successFunction) {
       if (!localMatchData) {
         $.get("readAPI.php", {
@@ -516,6 +517,7 @@
 
     function loadMatchList(successFunction) {
       if (!localMatchList) {
+		  console.log("going to get match list from tba api");
         $.get("tbaAPI.php", {
           getMatchList: 1
         }).done(function(data) {
@@ -536,6 +538,7 @@
               newMatch["time"] = match["predicted_time"];
             }
             // if (newMatch["time"] == null && match["time"] != null){ newMatch["time"] = match["time"]; }
+			console.log("adding to local match list " + match_number);
             localMatchList[makeKey(newMatch["match_number"], newMatch["comp_level"])] = newMatch;
             //
             if (newMatch["red_teams"].includes(ourTeam) || newMatch["blue_teams"].includes(ourTeam)) {
@@ -737,6 +740,7 @@
 
     $(document).ready(function() {
       var initialGet = checkGet();
+	 console.log (">>>>>"+initialGet);
       if (initialGet) {
         loadMatch(initialGet[0], initialGet[1]);
       }

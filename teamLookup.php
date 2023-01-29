@@ -44,21 +44,35 @@
                   </tr>
                 </thead>
 
-                <div class="card mb-3">
-                  <div class="card-body">
-                    <h5 class="card-title">Auton Graph</h5>
-                    <canvas id="myChart" width="400" height="400"></canvas>
-
-                  </div>
+   
+			<div class="card mb-3">
+  				<div class="card-body"> 
+    				<div class="overflow-auto">
+      				<h5 class="text-center"> 
+                    <a href="#collapseAutonGraph" data-bs-toggle="collapse" aria-expanded="false"> Auton Graph</a>
+					</h5>
+            <div class="collapse" id="collapseAutonGraph">
+                <canvas id="myChart" width="400" height="400"></canvas>
                 </div>
-                  
-                <div class="card mb-3">
-                  <div class="card-body">
-                    <h5 class="card-title">Teleop Graph</h5>
-                    <canvas id="myChart2" width="400" height="400"></canvas>
+              </div>
+             </div>
+            </div>
 
-                  </div>
-                </div>
+
+<div class="card mb-3">
+  <div class="card-body">
+    <div class="overflow-auto">
+      <h5 class="text-center"> 
+        <a href="#collapseTeleopGraph" data-bs-toggle="collapse" aria-expanded="false"> Teleop Graph</a>
+      </h5>
+      <div class="collapse" id="collapseTeleopGraph">
+        <canvas id="myChart2" width="400" height="400"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 
                 <!-- pit data-- use this somewhere -->
 
