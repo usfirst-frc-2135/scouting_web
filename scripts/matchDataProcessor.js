@@ -311,18 +311,18 @@ class matchDataProcessor {
       avg[key]["avgteleopcones"] = this.rnd(avg[key]["avgteleopcones"] / avg[key]["totalmatches"]);
       avg[key]["avgteleopcubes"] = this.rnd(avg[key]["avgteleopcubes"] / avg[key]["totalmatches"]);
 	
-      avg[key]["avg_autontoprowitems"] = this.rnd(avg[key]["avg_autontoprowitems"] / avg[key]["totalmatches"]);
-      avg[key]["avg_autonmidrowitems"] = this.rnd(avg[key]["avg_autonmidrowitems"] / avg[key]["totalmatches"]);
-      avg[key]["avg_autonmidrowitems"] = this.rnd(avg[key]["avg_autonmidrowitems"] / avg[key]["totalmatches"]);
-
-      avg[key]["endgamechargestationpercent"][0] = this.rnd(100 * avg[key]["endgamechargestationpercent"][0] / avg[key]["totalmatches"]);
-      avg[key]["endgamechargestationpercent"][1] = this.rnd(100 * avg[key]["endgamechargestationpercent"][1] / avg[key]["totalmatches"]);
-      avg[key]["endgamechargestationpercent"][2] = this.rnd(100 * avg[key]["endgamechargestationpercent"][2] / avg[key]["totalmatches"]);
-      avg[key]["endgamechargestationpercent"][3] = this.rnd(100 * avg[key]["endgamechargestationpercent"][3] / avg[key]["totalmatches"]);
+      avg[key]["avg_autontoprowitems"] = (avg[key]["avg_autontoprowitems"] / avg[key]["totalmatches"]);
+      avg[key]["avg_autonmidrowitems"] = (avg[key]["avg_autonmidrowitems"] / avg[key]["totalmatches"]);
+      avg[key]["avg_autonmidrowitems"] = (avg[key]["avg_autonmidrowitems"] / avg[key]["totalmatches"]);
+		
+      avg[key]["endgamechargestationpercent"][0] = Math.round(100 * avg[key]["endgamechargestationpercent"][0] / avg[key]["totalmatches"]);
+      avg[key]["endgamechargestationpercent"][1] = Math.round(100 * avg[key]["endgamechargestationpercent"][1] / avg[key]["totalmatches"]);
+      avg[key]["endgamechargestationpercent"][2] = Math.round(100 * avg[key]["endgamechargestationpercent"][2] / avg[key]["totalmatches"]);
+      avg[key]["endgamechargestationpercent"][3] = Math.round(100 * avg[key]["endgamechargestationpercent"][3] / avg[key]["totalmatches"]);
       
-      avg[key]["autonchargestationpercent"][0] = this.rnd(100 * avg[key]["autonchargestationpercent"][0] / avg[key]["totalmatches"]);
-      avg[key]["autonchargestationpercent"][1] = this.rnd(100 * avg[key]["autonchargestationpercent"][1] / avg[key]["totalmatches"]);
-      avg[key]["autonchargestationpercent"][2] = this.rnd(100 * avg[key]["autonchargestationpercent"][2] / avg[key]["totalmatches"]);
+      avg[key]["autonchargestationpercent"][0] = Math.round(100 * avg[key]["autonchargestationpercent"][0] / avg[key]["totalmatches"]);
+      avg[key]["autonchargestationpercent"][1] = Math.round(100 * avg[key]["autonchargestationpercent"][1] / avg[key]["totalmatches"]);
+      avg[key]["autonchargestationpercent"][2] = Math.round(100 * avg[key]["autonchargestationpercent"][2] / avg[key]["totalmatches"]);
     }
     return avg;
   }

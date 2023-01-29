@@ -38,7 +38,7 @@
       <div class="overflow-auto" id="freezeTableDiv">
         <table id="rawDataTable" class="tableFixHead table table-striped table-bordered table-hover sortable" style="width:100%;">
           <colgroup>
-            <col span="3" style="background-color:transparent">
+            <col span="2" style="background-color:transparent">
             <col span="2" style="background-color:#cfe2ff">
             <col span="2" style="background-color:transparent">
             <col span="2" style="background-color:#cfe2ff">
@@ -56,7 +56,6 @@
             <tr>
               <th colspan="1" class="text-center fw-bold"></th>
               <th colspan="1" class="text-center fw-bold"></th>
-              <th colspan="1" class="text-center fw-bold"></th>
               <th colspan="2" class="text-center fw-bold" style="background-color:#3686FF">Total Pts</th>
               <th colspan="2" class="text-center">Total Auto Pts</th>
               <th colspan="2" class="text-center" style="background-color:#3686FF">Total Teleop Pts</th>
@@ -69,7 +68,7 @@
             <tr>
               <th colspan="1"></th>
               <th colspan="1"></th>
-              <th colspan="1"></th>
+              <th colspan="1"></th> 
               <th colspan="1"></th>
               <th colspan="1"></th>
               <th colspan="1"></th>
@@ -78,7 +77,7 @@
               <th colspan="1"></th>
               <th colspan="1"></th>
               <th colspan="1"></th>
-              <th colspan="1"></th>
+              
               
 			  <th colspan="2" class="text-center">Cones</th>
               <th colspan="2" class="text-center">Cubes</th>
@@ -91,8 +90,7 @@
             </tr>
             <tr>
               <th scope="col">Team #</th>
-              <th scope="col">OPR</th>
-              <th scope="col">Internal ELO</th>
+			  <th scope="col">OPR</th>
               <th scope="col">AVG</th>
               <th scope="col">MAX</th>
               <th scope="col">AVG</th>
@@ -174,7 +172,7 @@
       var rowString = "<tr>" +
         "<td><a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a></td>" +
         "<td>" + dummyGet(tbaData[teamNum], "totalPoints") + "</td>" +
-        "<td>" + dummyGet(internalEloRank["elo"], teamNum) + "</td>" +
+        //"<td>" + dummyGet(internalEloRank["elo"], teamNum) + "</td>" +
         "<td>" + dummyGet(scoutingData[teamNum], "avgtotalpoints") + "</td>" +
         "<td>" + dummyGet(scoutingData[teamNum], "maxtotalpoints") + "</td>" +
         "<td>" + dummyGet(scoutingData[teamNum], "avgautopoints") + "</td>" +
