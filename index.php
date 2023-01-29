@@ -63,6 +63,10 @@
     $.get("./tbaAPI.php", {
       getTeamList: 1
     }).done(function(data) {
+
+      if(data == null)
+        alert("Can't load teamlist from TBA; check if TBA Key was set in dbStatus");
+
       teamList = JSON.parse(data);
       createTable();
       $.get("./readAPI.php", {

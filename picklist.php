@@ -265,6 +265,9 @@
     $.get("./tbaAPI.php", {
       getTeamList: true
     }, function(teamList) {
+      if(teamList == null)
+        alert("Can't load teamlist from TBA; check if TBA Key was set in dbStatus");
+
       teamList = JSON.parse(teamList);
       var dataFormat = {
         "unsorted": teamList,

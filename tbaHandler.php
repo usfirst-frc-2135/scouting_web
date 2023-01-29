@@ -17,7 +17,7 @@ class tbaHandler
 {
   private $charset = "utf8";
   private $alreadyConnected = false;
-  private $tbaApiKey;
+  private $tbaApiKey = null;
   private $tbaTableName;
   private $dbConnection;
   private $apiURL;
@@ -32,6 +32,9 @@ class tbaHandler
 
   function readURIFromTBA($uri)
   {
+    if ( $this->tbaApiKey == null)
+      error_log("Can't read TheBlueAlliance data because no TBA Key was set!");
+    else error_log("READING BlueAlliance data");
     $url = $this->apiURL . $uri . "?X-TBA-Auth-Key=" . $this->tbaApiKey;
     $ch = curl_init();
     curl_setopt_array(
@@ -164,7 +167,6 @@ class tbaHandler
   function getMatches($eventCode)
   {
     $requestURI = "/event/" . $eventCode . "/matches";
-	error_log ("in get matches for event code");
     return $this->makeDBCachedCall($requestURI);
   }
 

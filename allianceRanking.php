@@ -157,6 +157,8 @@
       $.get("tbaAPI.php", {
         getMatchList: 1
       }).done(function(data) {
+        if(data == null)
+          alert("Can't load matchlist from TBA; check if TBA Key was set in dbStatus");
         if (!lockMatchList) {
           lockMatchList = true; // A good enough mutex
           rawMatchData = JSON.parse(data)["response"];

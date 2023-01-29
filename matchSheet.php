@@ -472,7 +472,6 @@
 
     function checkGet() {
       let sp = new URLSearchParams(window.location.search);
-	  console.log ("!----"+sp);
       if (sp.has('matchNum') && sp.has('compLevel')) {
         return [sp.get('matchNum'), sp.get('compLevel')];
       }
@@ -517,10 +516,14 @@
 
     function loadMatchList(successFunction) {
       if (!localMatchList) {
-		  console.log("going to get match list from tba api");
         $.get("tbaAPI.php", {
           getMatchList: 1
         }).done(function(data) {
+
+          if(data == null)
+            alert("Can't load matchlist from TBA; check if TBA Key was set in dbStatus");
+          else alert("loadMatchList after TBA stuff");
+
           rawMatchData = JSON.parse(data)["response"];
           localMatchList = {};
           for (let mi in rawMatchData) {
@@ -538,7 +541,6 @@
               newMatch["time"] = match["predicted_time"];
             }
             // if (newMatch["time"] == null && match["time"] != null){ newMatch["time"] = match["time"]; }
-			console.log("adding to local match list " + match_number);
             localMatchList[makeKey(newMatch["match_number"], newMatch["comp_level"])] = newMatch;
             //
             if (newMatch["red_teams"].includes(ourTeam) || newMatch["blue_teams"].includes(ourTeam)) {
@@ -740,7 +742,6 @@
 
     $(document).ready(function() {
       var initialGet = checkGet();
-	 console.log (">>>>>"+initialGet);
       if (initialGet) {
         loadMatch(initialGet[0], initialGet[1]);
       }
