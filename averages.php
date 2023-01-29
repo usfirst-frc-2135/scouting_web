@@ -43,22 +43,27 @@
             <col span="2" style="background-color:transparent">
             <col span="2" style="background-color:#cfe2ff">
             <col span="2" style="background-color:transparent">
-            <col span="7" style="background-color:#cfe2ff">
+            <col span="2" style="background-color:#cfe2ff">
+            <col span="2" style="background-color:#B5D3FF">
+            <col span="3" style="background-color:#cfe2ff">
             <col span="4" style="background-color:transparent">
-            <col span="4" style="background-color:#cfe2ff">
+            <col span="1" style="background-color:#cfe2ff">
+            <col span="1" style="background-color:#B5D3FF">
+            <col span="1" style="background-color:#cfe2ff">
+            <col span="1" style="background-color:#B5D3FF">
           </colgroup>
           <thead>
             <tr>
               <th colspan="1" class="text-center fw-bold"></th>
               <th colspan="1" class="text-center fw-bold"></th>
               <th colspan="1" class="text-center fw-bold"></th>
-              <th colspan="2" class="text-center fw-bold">Total Pts</th>
+              <th colspan="2" class="text-center fw-bold" style="background-color:#3686FF">Total Pts</th>
               <th colspan="2" class="text-center">Total Auto Pts</th>
-              <th colspan="2" class="text-center">Total Teleop Pts</th>
+              <th colspan="2" class="text-center" style="background-color:#3686FF">Total Teleop Pts</th>
               <th colspan="2" class="text-center">Endgame Pts</th>
-              <th colspan="7" class="text-center">Auton</th>
+              <th colspan="7" class="text-center" style="background-color:#3686FF">Auton</th>
               <th colspan="4" class="text-center">Teleop</th>
-              <th colspan="4" class="text-center">Endgame</th>
+              <th colspan="4" class="text-center" style="background-color:#3686FF">Endgame</th>
               <th colspan="1" class="text-center fw-bold">Died</th>
             </tr>
             <tr>
@@ -81,7 +86,7 @@
 				
               <th colspan="2" class="text-center">Cones</th>
               <th colspan="2" class="text-center">Cubes</th>
-              <th colspan="4" class="text-center">Charge Station %</th>
+              <th colspan="4" class="text-center" style="background-color:#83B4FF">Charge Station %</th>
               <th colspan="1"></th>
             </tr>
             <tr>
