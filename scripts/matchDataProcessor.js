@@ -4,6 +4,7 @@
 */
 
 class matchDataProcessor {
+
   constructor(data) {
     this.data = data;
     this.siteFilter = null;
@@ -222,12 +223,14 @@ class matchDataProcessor {
         autonchargestationPoints = 12; 
       }
 		
-      var autoPoints = ((mobilitycheck * 3) + (autonbottomPieces * 3) + (autonmiddlePieces * 5) + (autontopPieces * 6) +(autonchargestationPoints));
+      var autoPoints = ((mobilitycheck * 3) + (autonbottomPieces * 3) + (autonmiddlePieces * 4) + (autontopPieces * 6) +(autonchargestationPoints));
+//      console.log("===> for team "+tn+": autoPoints = "+autoPoints); //TEST
 
       var teleopbottomPieces = (this.data[i]["teleopconesbottom"]) + (this.data[i]["teleopcubesbottom"]);
       var teleopmiddlePieces = (this.data[i]["teleopconesmiddle"]) + (this.data[i]["teleopcubesmiddle"]);
       var teleoptopPieces = (this.data[i]["teleopconestop"]) + (this.data[i]["teleopcubestop"]);
-      var telopPoints = ((parseInt(teleopbottomPieces) * 3) + (parseInt(teleopmiddlePieces) * 5) + (parseInt(teleoptopPieces) * 6));
+      var telopPoints = ((parseInt(teleopbottomPieces) * 2) + (parseInt(teleopmiddlePieces) * 3) + (parseInt(teleoptopPieces) * 5));
+//      console.log("   -> teleop points = "+telopPoints); //TEST
 
       var endgamePoints = 0;
       if (this.data[i]["endgamechargelevel"] == 1) { 
@@ -239,8 +242,10 @@ class matchDataProcessor {
       if (this.data[i]["endgamechargelevel"] == 3) { 
         endgamePoints = 10; 
       }
+//      console.log("   -> endgamePoints = "+endgamePoints); //TEST
       
       var totalPoints = autoPoints + telopPoints + endgamePoints;
+//      console.log("     -> totalPoints = "+totalPoints); //TEST
       var autonconePieces = (this.data[i]["autonconesbottom"]) + (this.data[i]["autonconesmiddle"]) + (this.data[i]["autonconestop"]);
       var autoncubePieces = (this.data[i]["autoncubesbottom"]) + (this.data[i]["autoncubesmiddle"]) + (this.data[i]["autoncubestop"]);
       var teleopconePieces = (this.data[i]["teleopconesbottom"]) + (this.data[i]["teleopconesmiddle"]) + (this.data[i]["teleopconestop"]);
@@ -251,6 +256,7 @@ class matchDataProcessor {
 
       avg[tn]["avgautopoints"] += autoPoints;
       avg[tn]["maxautopoints"] = Math.max(avg[tn]["maxautopoints"], autoPoints);
+//      console.log("   -> avgautopoints = "+avg[tn]["avgautopoints"]); //TEST
 
       avg[tn]["avgteleoppoints"] += telopPoints;
       avg[tn]["maxteleoppoints"] = Math.max(avg[tn]["maxteleoppoints"], telopPoints);
@@ -296,7 +302,10 @@ class matchDataProcessor {
     for (var key in avg) {
       avg[key]["avgtotalpoints"] = this.rnd(avg[key]["avgtotalpoints"] / avg[key]["totalmatches"]);
       avg[key]["avgautopoints"] = this.rnd(avg[key]["avgautopoints"] / avg[key]["totalmatches"]);
-      avg[key]["avgteleoppoints"] = this.rnd(avg[key]["avgteleoppoints"] / avg[key]["totalmatches"]);
+//      console.log("-> for "+key+" calc: current avgautopoints = "+ this.rnd(avg[key]["avgautopoints"])); //TEST
+//      console.log("     current totalmatches = "+ avg[key]["totalmatches"]); //TEST
+//      console.log("       calculated avgautopoints = "+avg[key]["avgautopoints"]); //TEST
+      avg[key]["avgteleoppoints"] = this.rnd(avg[key]["avgteleoppoints"] / avg[key]["totalmatches"]); 
       avg[key]["avgendgamepoints"] = this.rnd(avg[key]["avgendgamepoints"] / avg[key]["totalmatches"]);
 	
       avg[key]["avgautoncones"] = this.rnd(avg[key]["avgautoncones"] / avg[key]["totalmatches"]);

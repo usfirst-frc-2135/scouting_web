@@ -5,7 +5,7 @@
     <div class="row g-3 justify-content-md-center">
       <div class="row g-3 justify-content-md-center">
         <div class="col-md-6">
-          <div id="ourMatches">
+          <div id="theMatches">
           </div>
         </div>
       </div>
