@@ -61,9 +61,7 @@ class matchDataProcessor {
   }
 
   filterMatches(start_match, end_match) {
-    /*
-      Modify this.data to only include matches between start_match and end_match
-    */
+    //  Modify this.data to only include matches between start_match and end_match
     var type_prog = ["p", "qm", "qf", "sf", "f"];
     var new_data = [];
     for (var i = 0; i < this.data.length; i++) {
@@ -80,7 +78,7 @@ class matchDataProcessor {
   }
 
   rnd(val) {
-    /* Rounding helper function */
+    // Rounding helper function 
     return Math.round((val + Number.EPSILON) * 100) / 100;
   }
 
@@ -125,9 +123,7 @@ class matchDataProcessor {
   }
 
   applySiteFilter() {
-    /*
-      Modify this.data to only include matches specified by the site filter
-    */
+    //  Modify this.data to only include matches specified by the site filter
     var new_data = [];
     for (var i = 0; i < this.data.length; i++) {
       var mn = this.data[i]["matchnumber"];
@@ -155,10 +151,10 @@ class matchDataProcessor {
       localSiteFilter["useSf"] = data["useSf"];
       localSiteFilter["useF"] = data["useF"];
       temp_this.siteFilter = { ...localSiteFilter };
-      //
+        
       // console.log(temp_this);
       temp_this.applySiteFilter();
-      //
+        
       successFunction(temp_this.getAverages());
     });
   }
@@ -167,6 +163,7 @@ class matchDataProcessor {
     var avg = {}; //general for all matches and all teams
     for (var i = 0; i < this.data.length; i++) {
       var tn = this.data[i]["teamnumber"];
+
       if (!(tn in avg)) {
         avg[tn] = {};
 
@@ -184,7 +181,7 @@ class matchDataProcessor {
 
         avg[tn]["avgautoncones"] = 0;
         avg[tn]["maxautoncones"] = 0;
-	    avg[tn]["avgautoncubes"] = 0;
+        avg[tn]["avgautoncubes"] = 0;
         avg[tn]["maxautoncubes"] = 0;
 		
         avg[tn]["avg_autontoprowitems"] = 0;
@@ -194,12 +191,12 @@ class matchDataProcessor {
         avg[tn]["avg_autonbotrowitems"] = 0;
         avg[tn]["max_autonbotrowitems"] = 0;
 
-	    avg[tn]["avgteleopcones"] = 0;
+        avg[tn]["avgteleopcones"] = 0;
         avg[tn]["maxteleopcones"] = 0;
-	    avg[tn]["avgteleopcubes"] = 0;
+        avg[tn]["avgteleopcubes"] = 0;
         avg[tn]["maxteleopcubes"] = 0;
 		  
-		avg[tn]["autonchargestationpercent"] = { 0: 0, 1: 0, 2: 0};
+	avg[tn]["autonchargestationpercent"] = { 0: 0, 1: 0, 2: 0};
         avg[tn]["endgamechargestationpercent"] = { 0: 0, 1: 0, 2: 0, 3: 0 };  
        
         avg[tn]["totaldied"] = 0;
@@ -212,9 +209,10 @@ class matchDataProcessor {
 	  
       var totalmatches = (this.data[i]["totalmatches"]);
       var mobilitycheck = (this.data[i]["exitcommunity"]);
-      var autonbottomPieces = (this.data[i]["autonconesbottom"]) += (this.data[i]["autoncubesbottom"]);
-      var autonmiddlePieces = (this.data[i]["autonconesmiddle"]) += (this.data[i]["autoncubesmiddle"]);
-      var autontopPieces = (this.data[i]["autonconestop"]) += (this.data[i]["autoncubestop"]);
+
+      var autonbottomPieces = (this.data[i]["autonconesbottom"]) + (this.data[i]["autoncubesbottom"]);
+      var autonmiddlePieces = (this.data[i]["autonconesmiddle"]) + (this.data[i]["autoncubesmiddle"]);
+      var autontopPieces = (this.data[i]["autonconestop"]) + (this.data[i]["autoncubestop"]);
       var autonchargestationPoints = 0;
 	 
       if (this.data[i]["autonchargelevel"] == 1) { 
@@ -261,12 +259,8 @@ class matchDataProcessor {
       avg[tn]["maxendgamepoints"] = Math.max(avg[tn]["maxendgamepoints"], endgamePoints);
 		
       var combinedAutonCones = (parseInt(this.data[i]["autonconestop"]))+(parseInt(this.data[i]["autonconesmiddle"]))+(parseInt(this.data[i]["autonconesbottom"]));
-      var topcones = (parseInt(this.data[i]["autonconestop"]));
-      //console.log ("top cones is " + topcones);
-      //console.log(">+++=== initial auton cone value " + combinedAutonCones);
       avg[tn]["avgautoncones"] += combinedAutonCones;
       avg[tn]["maxautoncones"] = Math.max(avg[tn]["maxautoncones"], combinedAutonCones);
-      //console.log(">+++=== auton cone value " + combinedAutonCones);
 		
       var combinedAutonCubes = (parseInt(this.data[i]["autoncubestop"]))+(parseInt(this.data[i]["autoncubesmiddle"]))+(parseInt(this.data[i]["autoncubesbottom"]));
       avg[tn]["avgautoncubes"] += combinedAutonCubes;

@@ -271,7 +271,7 @@
 
   function dataToCommentTable(commentObj) {
     for (let i = 0; i < commentObj.length; i++) {
-      console.log("Adding comment: "+commentObj[i].comment);
+//      console.log("Adding comment: "+commentObj[i].comment);
       if (commentObj[i].comment === "-") {
         continue;
       }

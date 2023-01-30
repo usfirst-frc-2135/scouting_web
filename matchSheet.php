@@ -105,7 +105,7 @@
                   <tr>
                     <th scope="col">Cones</th>
                     <th scope="col">Cubes</th>
-				    <th scope="col">N</th>
+                    <th scope="col">N</th>
                     <th scope="col">D</th>
                     <th scope="col">E</th>
                     <th scope="col">Cones</th>
@@ -171,7 +171,7 @@
                   <tr>
                    <th scope="col">Cones</th>
                     <th scope="col">Cubes</th>
-					<th scope="col">N</th>
+                    <th scope="col">N</th>
                     <th scope="col">D</th>
                     <th scope="col">E</th>
                     <th scope="col">Cones</th>
@@ -304,7 +304,7 @@
                   <tr>
                    <th scope="col">Cones</th>
                     <th scope="col">Cubes</th>
-					<th scope="col">N</th>
+                    <th scope="col">N</th>
                     <th scope="col">D</th>
                     <th scope="col">E</th>
                     <th scope="col">Cones</th>
@@ -370,7 +370,7 @@
                   <tr>
                    <th scope="col">Cones</th>
                     <th scope="col">Cubes</th>
-					<th scope="col">N</th>
+                    <th scope="col">N</th>
                     <th scope="col">D</th>
                     <th scope="col">E</th>
                     <th scope="col">Cones</th>
@@ -436,7 +436,7 @@
                   <tr>
                    <th scope="col">Cones</th>
                     <th scope="col">Cubes</th>
-					<th scope="col">N</th>
+                    <th scope="col">N</th>
                     <th scope="col">D</th>
                     <th scope="col">E</th>
                     <th scope="col">Cones</th>
@@ -522,7 +522,6 @@
 
           if(data == null)
             alert("Can't load matchlist from TBA; check if TBA Key was set in dbStatus");
-          else alert("loadMatchList after TBA stuff");
 
           rawMatchData = JSON.parse(data)["response"];
           localMatchList = {};
@@ -681,11 +680,11 @@
         var row = "<tr>";
         row += "<td>" + rd["avgautoncones"] + "</td>";
         row += "<td>" + rd["avgautoncubes"] + "</td>";
-        row += "<td>" + rd["avgteleopcones"] + "</td>";
-        row += "<td>" + rd["avgteleopcubes"] + "</td>";
-		row += "<td>" + rd["autonchargestationpercent"][0] + "</td>";
+        row += "<td>" + rd["autonchargestationpercent"][0] + "</td>";
         row += "<td>" + rd["autonchargestationpercent"][1] + "</td>";
         row += "<td>" + rd["autonchargestationpercent"][2] + "</td>";
+        row += "<td>" + rd["avgteleopcones"] + "</td>";
+        row += "<td>" + rd["avgteleopcubes"] + "</td>";
         row += "<td>" + rd["endgamechargestationpercent"][0] + "</td>";
         row += "<td>" + rd["endgamechargestationpercent"][1] + "</td>";
         row += "<td>" + rd["endgamechargestationpercent"][2] + "</td>";
