@@ -31,53 +31,60 @@
 
             <div class="overflow-auto">
               <table class="table table-striped table-hover sortable">
-                <thead>
-                  <tr>
-                    <th scope="col">Batteries</th>
-                    <th scope="col">Pit</th>
-                    <th scope="col">Spare Parts</th>
-                    <th scope="col">Vision</th>
-                    <th scope="col">Swerve</th>
-                    <th scope="col">Programming</th>
-                    <th scope="col">Drive Motors</th>
-                    <th scope="col">Preparedness</th>
-                  </tr>
-                </thead>
-
-   
-			<div class="card mb-3">
-  				<div class="card-body"> 
-    				<div class="overflow-auto">
-      				<h5 class="text-center"> 
-                    <a href="#collapseAutonGraph" data-bs-toggle="collapse" aria-expanded="false"> Auton Graph</a>
-					</h5>
+                <div class="card mb-3">
+  		            <div class="card-body"> 
+                        <div class="overflow-auto">
+      		            <h5 class="text-center"> 
+                        <a href="#collapseAutonGraph" data-bs-toggle="collapse" aria-expanded="false"> Auton Graph</a>
+					    </h5>
             <div class="collapse" id="collapseAutonGraph">
                 <canvas id="myChart" width="400" height="400"></canvas>
                 </div>
               </div>
              </div>
             </div>
-
-
-<div class="card mb-3">
-  <div class="card-body">
-    <div class="overflow-auto">
-      <h5 class="text-center"> 
-        <a href="#collapseTeleopGraph" data-bs-toggle="collapse" aria-expanded="false"> Teleop Graph</a>
-      </h5>
-      <div class="collapse" id="collapseTeleopGraph">
-        <canvas id="myChart2" width="400" height="400"></canvas>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-                <!-- pit data-- use this somewhere -->
-
-                <tbody id="pitData">
+                  
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="overflow-auto">
+                      <h5 class="text-center"> 
+                        <a href="#collapseTeleopGraph" data-bs-toggle="collapse" aria-expanded="false"> Teleop Graph</a>
+                      </h5>
+                      <div class="collapse" id="collapseTeleopGraph">
+                        <canvas id="myChart2" width="400" height="400"></canvas>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                  
+                  
+                <thead>
+                  <tr>
+                    <th scope="col">Batt</th>
+                    <th scope="col">Pit</th>
+                    <th scope="col">Spare Parts</th>
+                    <th scope="col">Vision</th>
+                    <th scope="col">Swerve</th>
+                    <th scope="col">Lang</th>
+                  </tr>
+                </thead>
+                
+                <tbody id="pitRow1">
+                </tbody>  
+                  
+                <thead>
+                  <tr>
+                    <th scope="col">Drive Motors</th>
+                    <th scope="col">Prep</th>
+                    <th scope="col">Pickup Cube</th>
+                    <th scope="col">Tipped Cone</th>
+                    <th scope="col">Upright Cone</th>
+                  </tr>  
+                </thead>
+                  
+                <tbody id="pitRow2">
                 </tbody>
+
               </table>
             </div>
 
@@ -641,12 +648,42 @@
     dataToCommentTable(data);
   }
 
-  function processPitData(data) {
-    if (!data || !data.length) {
-      data["sparepartsstring"] = data["spareparts"] ? "yes" : "no";
-      data["computervisionstring"] = data["computervision"] ? "yes" : "no";
-      data["swervedrivestring"] = data["swerve"] ? "yes" : "no"; 
-      writeTableRow("pitData", data, ["numbatteries", "pitorg", "sparepartsstring", "computervisionstring", "swervedrivestring", "proglanguage", "drivemotors", "preparedness"]);
+  function processPitData(pitData, matchData) {
+    if (!pitData || !pitData.length) {
+      pitData["sparepartsstring"] = pitData["spareparts"] ? "yes" : "no";
+      pitData["computervisionstring"] = pitData["computervision"] ? "yes" : "no";
+      pitData["swervedrivestring"] = pitData["swerve"] ? "yes" : "no"; 
+      //First row has pit data
+      writeTableRow("pitRow1", pitData, ["numbatteries", "pitorg", "sparepartsstring", "computervisionstring", "swervedrivestring", "proglanguage"]);
+      //Need to create our own dictionary to make new writeTableRow
+        //Go thru all the matches and see if pickedup data is ever true.
+        
+      var pickedupcubevalue = 0;
+      var pickedupuprightvalue = 0;
+      var pickeduptippedvalue = 0;
+        console.log("matchData.length = "+matchData.length);
+      /*for (let i = 0; i < matchData.length; i++) {
+          console.log("matchData[i][pickedupcube] = "+matchData[i]["endgamechargelevel"]);
+         if(matchData[i]["pickedupcube"] == true) {
+            console.log("HI");
+            pickedupcubevalue = 1;
+         }
+         else if(matchData[i]["pickedupupright"] == true) {
+            pickedupuprightvalue = 1;
+         }
+         else if(matchData[i]["pickeduptipped"] == true) {
+            pickeduptippedvalue = 1;
+         }
+      }*/
+          
+      const dictX = {
+        drivemotors: pitData["drivemotors"],
+        preparedness: pitData["preparedness"],
+        pickedupcone: matchData["pickedupcube"],
+        pickedupuprightcone: matchData["pickedupupright"],
+        pickeduptippedcone: matchData["pickeduptipped"]};
+      writeTableRow("pitRow2", dictX, ["drivemotors", "preparedness", "pickedupcube", "pickedupupright", "pickeduptipped"]);
+
     }
   }
 
@@ -656,7 +693,8 @@
     // Clear existing data
     $("#robotPics").html("");
     $("#teamTitle").html("");
-    $("#pitData").html("");
+    $("#pitRow1").html("");
+    $("#pitRow2").html("")
     $("#comments").html("");
     $("#allMatchesTable").html("");
     $("#autoStartTable").html("");
@@ -679,6 +717,7 @@
     });
 
     // Add Match Scouting Data
+    var matchData;
     $.get("readAPI.php", {
       getTeamData: team
     }).done(function(data) {
@@ -691,7 +730,7 @@
       getTeamPitData: team
     }).done(function(data) {
       pitData = JSON.parse(data);
-      processPitData(pitData);
+      processPitData(pitData, matchData);
     });
 
   }
