@@ -48,9 +48,9 @@ function qrListToDict(dataList) {
   out["teleopcubesbottom"] = dataList[12];
   out["teleopcubesmiddle"] = dataList[13];
   out["teleopcubestop"] = dataList[14];
-  out["pickedupcone"] = dataList[15];
-  out["pickedupuprightcone"] = dataList[16];
-  out["pickeduptippedcone"] = dataList[17];
+  out["pickedupcube"] = dataList[15];
+  out["pickedupupright"] = dataList[16];
+  out["pickeduptipped"] = dataList[17];
   out["endgamechargelevel"] = dataList[18];
   out["died"] = dataList[19];
   out["matchnumber"] = dataList[20];

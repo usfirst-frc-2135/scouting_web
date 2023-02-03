@@ -66,9 +66,9 @@
         "<td>" + dataObj[i]["teleopcubesbottom"] + "</td>" +
         "<td>" + dataObj[i]["teleopcubesmiddle"] + "</td>" +
         "<td>" + dataObj[i]["teleopcubestop"] + "</td>" +  
-        "<td>" + dataObj[i]["pickedupcone"] + "</td>" +
-        "<td>" + dataObj[i]["pickedupuprightcone"] + "</td>" +
-        "<td>" + dataObj[i]["pickeduptippedcone"] + "</td>" +  
+        "<td>" + dataObj[i]["pickedupcube"] + "</td>" +
+        "<td>" + dataObj[i]["pickedupupright"] + "</td>" +
+        "<td>" + dataObj[i]["pickeduptipped"] + "</td>" +  
         "<td>" + dataObj[i]["endgamechargelevel"] + "</td>" +
         "<td>" + dataObj[i]["died"] + "</td>" +
         "<td>" + dataObj[i]["comment"] + "</td>" +

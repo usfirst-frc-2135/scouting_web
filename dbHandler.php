@@ -68,9 +68,9 @@ class dbHandler
                        teleopcubesbottom,
                        teleopcubesmiddle,
                        teleopcubestop,
-                       pickedupcone,
-                       pickedupuprightcone,
-                       pickeduptippedcone,
+                       pickedupcube,
+                       pickedupupright,
+                       pickeduptipped,
                        endgamechargelevel,
                        died,
                        matchnumber,
@@ -93,9 +93,9 @@ class dbHandler
                        :teleopcubesbottom,
                        :teleopcubesmiddle,
                        :teleopcubestop,
-                       :pickedupcone,
-                       :pickedupuprightcone,
-                       :pickeduptippedcone,
+                       :pickedupcube,
+                       :pickedupupright,
+                       :pickeduptipped,
                        :endgamechargelevel,
                        :died,
                        :matchnumber,
@@ -118,7 +118,7 @@ class dbHandler
     {
       foreach ($row as $key => $value)
       {
-        if ($key == "exitedcommunity" || $key == "autonconesbottom" || $key == "autonconesmiddle" || $key == "autonconestop" || $key == "autoncubesbottom" || $key == "autoncubesmiddle" || $key == "autoncubestop" || $key == "autonchargelevel" ||$key == "teleopconesbottom" || $key == "teleopconesmiddle" || $key == "teleopconestop" || $key == "teleopcubesbottom" || $key == "teleopcubesmiddle" || $key == "teleopcubestop" || $key == "pickedupcone" || $key == "pickedupuprightcone" || $key == "pickeduptippedcone" || $key == "endgamechargelevel" || $key == "died")
+        if ($key == "exitedcommunity" || $key == "autonconesbottom" || $key == "autonconesmiddle" || $key == "autonconestop" || $key == "autoncubesbottom" || $key == "autoncubesmiddle" || $key == "autoncubestop" || $key == "autonchargelevel" ||$key == "teleopconesbottom" || $key == "teleopconesmiddle" || $key == "teleopconestop" || $key == "teleopcubesbottom" || $key == "teleopcubesmiddle" || $key == "teleopcubestop" || $key == "pickedupcube" || $key == "pickedupupright" || $key == "pickeduptipped" || $key == "endgamechargelevel" || $key == "died")
         {
           $row[$key] = $this->enforceInt($value);
         }
@@ -150,9 +150,9 @@ class dbHandler
                      teleopcubesbottom,
                      teleopcubesmiddle,
                      teleopcubestop,
-                     pickedupcone,
-                     pickedupuprightcone,
-                     pickeduptippedcone,
+                     pickedupcube,
+                     pickedupupright,
+                     pickeduptipped,
                      endgamechargelevel,
                      died,
                      matchnumber,
@@ -183,9 +183,9 @@ class dbHandler
                      teleopcubesbottom,
                      teleopcubesmiddle,
                      teleopcubestop,
-                     pickedupcone,
-                     pickedupuprightcone,
-                     pickeduptippedcone,
+                     pickedupcube,
+                     pickedupupright,
+                     pickeduptipped,
                      endgamechargelevel,
                      died,
                      matchnumber,
@@ -280,9 +280,9 @@ class dbHandler
             teleopcubesbottom TINYINT UNSIGNED NOT NULL,
             teleopcubesmiddle TINYINT UNSIGNED NOT NULL,
             teleopcubestop TINYINT UNSIGNED NOT NULL,
-            pickedupcone TINYINT UNSIGNED NOT NULL,
-            pickedupuprightcone TINYINT UNSIGNED NOT NULL,
-            pickeduptippedcone TINYINT UNSIGNED NOT NULL,
+            pickedupcube TINYINT UNSIGNED NOT NULL,
+            pickedupupright TINYINT UNSIGNED NOT NULL,
+            pickeduptipped TINYINT UNSIGNED NOT NULL,
             endgamechargelevel TINYINT UNSIGNED NOT NULL,
             died TINYINT UNSIGNED NOT NULL,
             matchnumber VARCHAR(10) NOT NULL,

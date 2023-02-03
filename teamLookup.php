@@ -374,22 +374,22 @@
     datasets.push({
       label: "Auton Top Row Items",
       data: [],
-      borderColor: 'red'
+      borderColor: 'Red'
     });
     datasets.push({
       label: "Auton Middle Row Items",
       data: [],
-      borderColor: 'green'
+      borderColor: 'Yellow'
     });
     datasets.push({
       label: "Auton Bottom Row Items",
       data: [],
-      borderColor: 'blue'
+      borderColor: 'Green'
     });
     datasets.push({
       label: "Auton Charge Level",
       data: [],
-      borderColor: 'yellow'
+      borderColor: 'Blue'
     });
     
 
@@ -514,22 +514,22 @@
     datasets.push({
       label: "Teleop Top Row Items",
       data: [],
-      borderColor: 'red'
+      borderColor: 'MediumOrchid'
     });
     datasets.push({
       label: "Teleop Middle Row Items",
       data: [],
-      borderColor: 'green'
+      borderColor: 'MediumSeaGreen'
     });
     datasets.push({
       label: "Teleop Bottom Row Items",
       data: [],
-      borderColor: 'blue'
+      borderColor: 'MediumTurquoise'
     });
     datasets.push({
       label: "Endgame Charge Level",
       data: [],
-      borderColor: 'yellow'
+      borderColor: 'PaleVioletRed'
     });
     
 
@@ -661,11 +661,8 @@
       var pickedupcubevalue = 0;
       var pickedupuprightvalue = 0;
       var pickeduptippedvalue = 0;
-        console.log("matchData.length = "+matchData.length);
-      /*for (let i = 0; i < matchData.length; i++) {
-          console.log("matchData[i][pickedupcube] = "+matchData[i]["endgamechargelevel"]);
+      for (let i = 0; i < matchData.length; i++) {
          if(matchData[i]["pickedupcube"] == true) {
-            console.log("HI");
             pickedupcubevalue = 1;
          }
          else if(matchData[i]["pickedupupright"] == true) {
@@ -674,14 +671,14 @@
          else if(matchData[i]["pickeduptipped"] == true) {
             pickeduptippedvalue = 1;
          }
-      }*/
-          
+      }
+        
       const dictX = {
         drivemotors: pitData["drivemotors"],
         preparedness: pitData["preparedness"],
-        pickedupcone: matchData["pickedupcube"],
-        pickedupuprightcone: matchData["pickedupupright"],
-        pickeduptippedcone: matchData["pickeduptipped"]};
+        pickedupcube: pickedupcubevalue,
+        pickedupupright: pickedupuprightvalue,
+        pickeduptipped: pickeduptippedvalue};
       writeTableRow("pitRow2", dictX, ["drivemotors", "preparedness", "pickedupcube", "pickedupupright", "pickeduptipped"]);
 
     }
