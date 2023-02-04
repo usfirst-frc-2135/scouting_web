@@ -251,7 +251,7 @@
     });
 
     // Gets data from our TBA API
-    $.get("tbaAPI.php", {
+    /* HOLD $.get("tbaAPI.php", {
       getCOPRs: 1
     }).done(function(data) {
       data = JSON.parse(data)["data"];
@@ -266,7 +266,7 @@
           'frozenColVerticalOffset': 25
         });
       }, 1);
-    });
+    }); HOLD */
   }
 
   function filterAndShow() {
