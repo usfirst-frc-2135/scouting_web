@@ -48,12 +48,12 @@
               <th scope="col">Teleop Cones Top</th>   
               <th scope="col">Teleop Cubes Bottom</th>
               <th scope="col">Teleop Cubes Middle</th>
-              <th scope="col">Teleop Cubes Top</th> 
+              <th scope="col">Teleop Cubes Top</th>
+              <th scope="col">Endgame Charge Level</th>
+              <th scope="col">Died</th>
               <th scope="col">Picked Up Cube</th>
               <th scope="col">Picked Up Upright Cone</th>
-              <th scope="col">Picked Up Tipped Cone</th>     
-              <th scope="col">Endgame Charge Level</th> 
-              <th scope="col">Died</th>
+              <th scope="col">Picked Up Tipped Cone</th>
               <th scope="col">Comment</th>
               <th scope="col">Scout Name</th>
             </tr>
@@ -90,11 +90,11 @@
         "<td>" + dataObj[i]["teleopcubesbottom"] + "</td>" +
         "<td>" + dataObj[i]["teleopcubesmiddle"] + "</td>" +
         "<td>" + dataObj[i]["teleopcubestop"] + "</td>" +  
-        "<td>" + dataObj[i]["pickedupcube"] + "</td>" +
-        "<td>" + dataObj[i]["pickedupupright"] + "</td>" +
-        "<td>" + dataObj[i]["pickeduptipped"] + "</td>" +  
         "<td>" + dataObj[i]["endgamechargelevel"] + "</td>" +
         "<td>" + dataObj[i]["died"] + "</td>" +
+        "<td>" + dataObj[i]["pickedupcube"] + "</td>" +
+        "<td>" + dataObj[i]["pickedupupright"] + "</td>" +
+        "<td>" + dataObj[i]["pickeduptipped"] + "</td>" + 
         "<td>" + dataObj[i]["comment"] + "</td>" +
         "<td>" + dataObj[i]["scoutname"] + "</td>" +
         "</td>";
