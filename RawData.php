@@ -7,6 +7,30 @@
       <h2>Raw Data</h2>
       <div id="freezeTableDiv">
         <table id="rawDataTable" class="table table-striped table-hover sortable">
+          <colgroup>
+            <col span="2" style="background-color:transparent">
+            <col span="1" style="background-color:#cfe2ff">
+            <col span="1" style="background-color:transparent">
+            <col span="1" style="background-color:#cfe2ff">
+            <col span="1" style="background-color:transparent">
+            <col span="1" style="background-color:#cfe2ff">
+            <col span="1" style="background-color:#transparent">
+            <col span="1" style="background-color:#cfe2ff">
+            <col span="1" style="background-color:transparent">
+            <col span="1" style="background-color:#cfe2ff">
+            <col span="1" style="background-color:#transparent">
+            <col span="1" style="background-color:#cfe2ff">
+            <col span="1" style="background-color:#transparent">
+            <col span="1" style="background-color:#cfe2ff">
+            <col span="1" style="background-color:transparent">
+            <col span="1" style="background-color:#cfe2ff">
+            <col span="1" style="background-color:transparent">
+            <col span="1" style="background-color:#cfe2ff">
+            <col span="1" style="background-color:#transparent">
+            <col span="1" style="background-color:#cfe2ff">
+            <col span="1" style="background-color:transparent">
+            <col span="1" style="background-color:#cfe2ff">
+          </colgroup>
           <thead>
             <tr>
               <th scope="col">Match #</th>
