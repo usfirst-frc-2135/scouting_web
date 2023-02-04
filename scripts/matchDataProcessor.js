@@ -300,19 +300,19 @@ class matchDataProcessor {
     }
 
     for (var key in avg) {
-      avg[key]["avgtotalpoints"] = this.rnd(avg[key]["avgtotalpoints"] / avg[key]["totalmatches"]);
-      avg[key]["avgautopoints"] = this.rnd(avg[key]["avgautopoints"] / avg[key]["totalmatches"]);
+      avg[key]["avgtotalpoints"] = Math.round(10 * avg[key]["avgtotalpoints"] / avg[key]["totalmatches"]) / 10;
+      avg[key]["avgautopoints"] = Math.round(10 * avg[key]["avgautopoints"] / avg[key]["totalmatches"]) / 10;
 //      console.log("-> for "+key+" calc: current avgautopoints = "+ this.rnd(avg[key]["avgautopoints"])); //TEST
 //      console.log("     current totalmatches = "+ avg[key]["totalmatches"]); //TEST
 //      console.log("       calculated avgautopoints = "+avg[key]["avgautopoints"]); //TEST
-      avg[key]["avgteleoppoints"] = this.rnd(avg[key]["avgteleoppoints"] / avg[key]["totalmatches"]); 
-      avg[key]["avgendgamepoints"] = this.rnd(avg[key]["avgendgamepoints"] / avg[key]["totalmatches"]);
+      avg[key]["avgteleoppoints"] = Math.round(10 * avg[key]["avgteleoppoints"] / avg[key]["totalmatches"]) / 10; 
+      avg[key]["avgendgamepoints"] = Math.round(10 * avg[key]["avgendgamepoints"] / avg[key]["totalmatches"]) / 10;
 	
-      avg[key]["avgautoncones"] = this.rnd(avg[key]["avgautoncones"] / avg[key]["totalmatches"]);
-      avg[key]["avgautoncubes"] = this.rnd(avg[key]["avgautoncubes"] / avg[key]["totalmatches"]);
+      avg[key]["avgautoncones"] = Math.round(10 * avg[key]["avgautoncones"] / avg[key]["totalmatches"]) / 10;
+      avg[key]["avgautoncubes"] = Math.round(10 * avg[key]["avgautoncubes"] / avg[key]["totalmatches"]) / 10;
 		
-      avg[key]["avgteleopcones"] = this.rnd(avg[key]["avgteleopcones"] / avg[key]["totalmatches"]);
-      avg[key]["avgteleopcubes"] = this.rnd(avg[key]["avgteleopcubes"] / avg[key]["totalmatches"]);
+      avg[key]["avgteleopcones"] = Math.round(10 * avg[key]["avgteleopcones"] / avg[key]["totalmatches"]) / 10;
+      avg[key]["avgteleopcubes"] = Math.round(10 * avg[key]["avgteleopcubes"] / avg[key]["totalmatches"]) / 10;
 	
       avg[key]["avg_autontoprowitems"] = (avg[key]["avg_autontoprowitems"] / avg[key]["totalmatches"]);
       avg[key]["avg_autonmidrowitems"] = (avg[key]["avg_autonmidrowitems"] / avg[key]["totalmatches"]);
