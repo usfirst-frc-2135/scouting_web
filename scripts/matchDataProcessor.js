@@ -197,6 +197,13 @@ class matchDataProcessor {
         avg[tn]["avgteleopcubes"] = 0;
         avg[tn]["maxteleopcubes"] = 0;
 		  
+        avg[tn]["avg_teleoptoprowitems"] = 0;
+        avg[tn]["max_teleoptoprowitems"] = 0;
+        avg[tn]["avg_teleopmidrowitems"] = 0;
+        avg[tn]["max_teleopmidrowitems"] = 0;
+        avg[tn]["avg_teleopbotrowitems"] = 0;
+        avg[tn]["max_teleopbotrowitems"] = 0;
+          
 	avg[tn]["autonchargestationpercent"] = { 0: 0, 1: 0, 2: 0};
         avg[tn]["endgamechargestationpercent"] = { 0: 0, 1: 0, 2: 0, 3: 0 };  
        
@@ -290,6 +297,16 @@ class matchDataProcessor {
       avg[tn]["avgteleopcubes"] += combinedTeleopCubes;
       avg[tn]["maxteleopcubes"] = Math.max(avg[tn]["maxteleopcubes"], combinedTeleopCubes);
 		
+      var teleopTopRowItems = (parseInt(this.data[i]["teleopconestop"]))+(parseInt(this.data[i]["teleopcubestop"]));
+      var teleopMidRowItems = (parseInt(this.data[i]["teleopconesmiddle"]))+(parseInt(this.data[i]["teleopcubesmiddle"]));
+      var teleopBotRowItems = (parseInt(this.data[i]["teleopconesbottom"]))+(parseInt(this.data[i]["teleopcubesbottom"]));
+      avg[tn]["avg_teleoptoprowitems"] += teleopTopRowItems;
+      avg[tn]["max_teleoptoprowitems"] = Math.max(avg[tn]["max_teleoptoprowitems"], teleopTopRowItems);
+      avg[tn]["avg_teleopmidrowitems"] += teleopMidRowItems;
+      avg[tn]["max_teleopmidrowitems"] = Math.max(avg[tn]["max_teleopmidrowitems"], teleopMidRowItems);
+      avg[tn]["avg_teleopbotrowitems"] += teleopBotRowItems;
+      avg[tn]["max_teleopbotrowitems"] = Math.max(avg[tn]["max_teleopbotrowitems"], teleopBotRowItems);
+        
       avg[tn]["endgamechargestationpercent"][this.data[i]["endgamechargelevel"]] += 1;
       avg[tn]["autonchargestationpercent"][this.data[i]["autonchargelevel"]] += 1;
       avg[tn]["totaldied"] += this.data[i]["died"];
@@ -317,6 +334,10 @@ class matchDataProcessor {
       avg[key]["avg_autontoprowitems"] = (avg[key]["avg_autontoprowitems"] / avg[key]["totalmatches"]);
       avg[key]["avg_autonmidrowitems"] = (avg[key]["avg_autonmidrowitems"] / avg[key]["totalmatches"]);
       avg[key]["avg_autonmidrowitems"] = (avg[key]["avg_autonmidrowitems"] / avg[key]["totalmatches"]);
+        
+      avg[key]["avg_teleoptoprowitems"] = (avg[key]["avg_teleoptoprowitems"] / avg[key]["totalmatches"]);
+      avg[key]["avg_teleopmidrowitems"] = (avg[key]["avg_teleopmidrowitems"] / avg[key]["totalmatches"]);
+      avg[key]["avg_teleopbotrowitems"] = (avg[key]["avg_teleopbotrowitems"] / avg[key]["totalmatches"]);    
 		
       avg[key]["endgamechargestationpercent"][0] = Math.round(100 * avg[key]["endgamechargestationpercent"][0] / avg[key]["totalmatches"]);
       avg[key]["endgamechargestationpercent"][1] = Math.round(100 * avg[key]["endgamechargestationpercent"][1] / avg[key]["totalmatches"]);

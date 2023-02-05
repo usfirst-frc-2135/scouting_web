@@ -197,37 +197,45 @@
             </div>
 
             <div class="card mb-3">
-              <div class="card-body">
+              <div class="card-header">
                 <div class="overflow-auto">
-                  <h5 class="text-center">Teleop</h5>
-                  <table class="table table-striped">
-                    <thead>
-                      <tr>
-                        <td>&nbsp;</td>
-                        <th scope="col">AVG</th>
-                        <th scope="col">MAX</th>
-                      </tr>
-                    </thead>
-                    <tbody id="teleopHubTable">
-                      <tr>
-                        <th scope="row">Upper Hub</th>
-                      </tr>
-                      <tr>
-                        <th scope="row">Lower Hub</th>
-                      </tr>
-                    </tbody>
-                    <tfoot id="teleopHubTotalTable">
-                      <tr>
-                        <th scope="col">Total Pts</th>
-                      </tr>
-                    </tfoot>
-                  </table>
+                  <h5 class="text-center"> <a href="#collapseTeleop" data-bs-toggle="collapse" aria-expanded="false"> Teleop </a>
+                  </h5>
+                  <div class="collapse" id="collapseTeleop">
+                    <div class="card card-body">
+                      <table class="table table-striped">
+                        <thead>
+                          <tr>
+                            <td>&nbsp;</td>
+                            <th scope="col">AVG</th>
+                            <th scope="col">MAX</th>
+                          </tr>
+                        </thead>
+                        <tbody id="teleopTable">
+                          <tr>
+                            <th scope="row">Top Row</th>
+                          </tr>
+                          <tr>
+                            <th scope="row">Middle Row</th>
+                          </tr>
+                          <tr>
+                            <th scope="row">Bottom Row</th>
+                          </tr>
+                        </tbody>
+                        <tfoot id="teleopTotalTable">
+                          <tr>
+                            <th scope="col">Total Pts</th>
+                          </tr>
+                        </tfoot>
+                      </table>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
 
             <div class="card mb-3">
-              <div class="card-body">
+              <div class="card-header">
                 <div class="overflow-auto">
                   <h5 class="text-center">Endgame</h5>
                   <table class="table table-striped">
@@ -307,9 +315,14 @@
     writeTableRow("autoTotalTable", avgs, ["totalstr", "avgautopoints", "maxautopoints"]);
 
     // Teleop Scores
-//HOLD    writeTableRow("teleopHubTable", avgs, ["upperstr", "avgteleophighgoals", "maxteleophighgoals"]);
-//HOLD    writeTableRow("teleopHubTable", avgs, ["lowerstr", "avgteleoplowergoals", "maxteleoplowergoals"]);
-//HOLD    writeTableRow("teleopHubTotalTable", avgs, ["totalstr", "avgteleoppoints", "maxteleoppoints"]);
+    avgs["toprowstr"] = "<b>Top Row Items</b>";
+    avgs["midrowstr"] = "<b>Middle Row Items</b>";
+    avgs["botrowstr"] = "<b>Bottom Row Items</b>";
+    avgs["totalstr"] = "<b>Total Pts</b>";
+    writeTableRow("teleopTable", avgs, ["toprowstr", "avg_teleoptoprowitems", "max_teleoptoprowitems"]);
+    writeTableRow("teleopTable", avgs, ["midrowstr", "avg_teleopmidrowitems", "max_teleopmidrowitems"]);
+    writeTableRow("teleopTable", avgs, ["botrowstr", "avg_teleopbotrowitems", "max_teleopbotrowitems"]);
+    writeTableRow("teleopTotalTable", avgs, ["totalstr", "avgteleoppoints", "maxteleoppoints"]);
 
     // Climb Table
 //HOLD    writeTableRow("climbTable", avgs["endgameclimbpercent"], ["climbstr", 0, 1, 2, 3, 4]);
@@ -697,8 +710,8 @@
     $("#autoStartTable").html("");
     $("#autoTable").html("");
     $("#autoTotalTable").html("");
-    $("#teleopHubTable").html("");
-    $("#teleopHubTotalTable").html("");
+    $("#teleopTable").html("");
+    $("#teleopTotalTable").html("");
     $("#climbTable").html("");
     $("#totalTable").html("");
 
