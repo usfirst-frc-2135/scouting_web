@@ -26,7 +26,7 @@
           </div>
         </div>
       </div>
-      <div class="row pt-3 pb-3 mb-3 g-3">
+      <div class="row p-3 mb-3 g-3">
         <div class="col-lg-6 col-sm-6 col-xs-6 gx-3">
           <div class="card mb-3">
             <div class="card-header">
