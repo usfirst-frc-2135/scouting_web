@@ -129,7 +129,7 @@
     // sorttable.makeSortable(document.getElementById("rawDataTable"));
 
     $("#rawDataTable").click(function() {
-      if (!frozenTable) {
+      if (frozenTable) {
         frozenTable.update();
       }
     });
