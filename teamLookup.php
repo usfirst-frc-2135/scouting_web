@@ -169,11 +169,30 @@
                         <thead>
                           <tr>
                             <td>&nbsp;</td>
+                            <th scope="col">N</th>
+                            <th scope="col">D</th>
+                            <th scope="col">E</th>
+                          </tr>
+                        </thead>
+                        <tbody id="autonChargeTable">
+                          <tr>
+                            <th scope="row">Charge Level %</th>
+                          </tr>
+                        </tbody>
+                      </table>  
+                        
+                      <table class="table table-striped">
+                        <thead>
+                          <tr>
+                            <td>&nbsp;</td>
                             <th scope="col">AVG</th>
                             <th scope="col">MAX</th>
                           </tr>
                         </thead>
                         <tbody id="autoTable">
+                          <!--<tr>
+                            <th scope="row">Mobility %</th>
+                          </tr>-->
                           <tr>
                             <th scope="row">Top Row</th>
                           </tr>
@@ -237,24 +256,28 @@
             <div class="card mb-3">
               <div class="card-header">
                 <div class="overflow-auto">
-                  <h5 class="text-center">Endgame</h5>
-                  <table class="table table-striped">
-                    <thead>
-                      <tr>
-                        <td>&nbsp;</td>
-                        <th scope="col">0</th>
-                        <th scope="col">1</th>
-                        <th scope="col">2</th>
-                        <th scope="col">3</th>
-                        <th scope="col">4</th>
-                      </tr>
-                    </thead>
-                    <tbody id="climbTable">
-                      <tr>
-                        <th scope="row">Climb %</th>
-                      </tr>
-                    </tbody>
-                  </table>
+                  <h5 class="text-center"> <a href="#collapseEndgame" data-bs-toggle="collapse" aria-expanded="false"> Endgame </a>
+                  </h5>
+                  <div class="collapse" id="collapseEndgame">
+                    <div class="card card-body">
+                      <table class="table table-striped">
+                        <thead>
+                          <tr>
+                            <td>&nbsp;</td>
+                            <th scope="col">N</th>
+                            <th scope="col">P</th>
+                            <th scope="col">D</th>
+                            <th scope="col">E</th>
+                          </tr>
+                        </thead>
+                        <tbody id="endgameChargeTable">
+                          <tr>
+                            <th scope="row">Charge Level %</th>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -304,16 +327,22 @@
   }
 
   function dataToAvgTables(avgs) {
+    // Auton Climb Table
+      
     // Auton Scores
+    avgs["autonchargestationpercent"]["autonchargestr"] = "<b>Charge Level %</b>";
+    //avgs["mobilitystr"] = "<b>Mobility %</b>";
     avgs["toprowstr"] = "<b>Top Row Items</b>";
     avgs["midrowstr"] = "<b>Middle Row Items</b>";
     avgs["botrowstr"] = "<b>Bottom Row Items</b>";
     avgs["totalstr"] = "<b>Total Pts</b>";
+    writeTableRow("autonChargeTable", avgs["autonchargestationpercent"], ["autonchargestr", 0, 1, 2]);
+    //writeTableRow("autoTable", avgs, ["mobilitystr", "mobilitypercent"]);
     writeTableRow("autoTable", avgs, ["toprowstr", "avg_autontoprowitems", "max_autontoprowitems"]);
     writeTableRow("autoTable", avgs, ["midrowstr", "avg_autonmidrowitems", "max_autonmidrowitems"]);
     writeTableRow("autoTable", avgs, ["botrowstr", "avg_autonbotrowitems", "max_autonbotrowitems"]);
     writeTableRow("autoTotalTable", avgs, ["totalstr", "avgautopoints", "maxautopoints"]);
-
+      
     // Teleop Scores
     avgs["toprowstr"] = "<b>Top Row Items</b>";
     avgs["midrowstr"] = "<b>Middle Row Items</b>";
@@ -324,8 +353,11 @@
     writeTableRow("teleopTable", avgs, ["botrowstr", "avg_teleopbotrowitems", "max_teleopbotrowitems"]);
     writeTableRow("teleopTotalTable", avgs, ["totalstr", "avgteleoppoints", "maxteleoppoints"]);
 
-    // Climb Table
-//HOLD    writeTableRow("climbTable", avgs["endgameclimbpercent"], ["climbstr", 0, 1, 2, 3, 4]);
+    // Endgame Climb Table
+    avgs["endgamechargestationpercent"]["endgamechargestr"] = "<b>Charge Level %</b>";
+    //var chargestationlevel = avgs["endgamechargestationpercent"];
+    //chargestationlevel["chargestr"] = "<b>Charge Level %</b>";
+    writeTableRow("endgameChargeTable", avgs["endgamechargestationpercent"], ["endgamechargestr", 0, 1, 2, 3]);
 
     // Total Table
     writeTableRow("totalTable", avgs, ["totalstr", "avgtotalpoints", "maxtotalpoints"]); 
@@ -710,9 +742,10 @@
     $("#autoStartTable").html("");
     $("#autoTable").html("");
     $("#autoTotalTable").html("");
+    $("#autonChargeTable").html("");
     $("#teleopTable").html("");
     $("#teleopTotalTable").html("");
-    $("#climbTable").html("");
+    $("#endgameChargeTable").html("");
     $("#totalTable").html("");
 
     // Write new data
