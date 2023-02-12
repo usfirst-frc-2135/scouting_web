@@ -13,7 +13,7 @@ class dbHandler
     "server", "db", "username", "password", "eventcode", "tbakey",
     "fbapikey", "fbauthdomain", "fbdburl", "fbprojectid", "fbstoragebucket",
     "fbsenderid", "fbappid", "fbmeasurementid",
-    "datatable", "tbatable", "pittable", "ranktable",
+    "datatable", "tbatable", "pittable", "ranktable", "driveranktable",
     "useP", "useQm", "useQf", "useSf", "useF"
   );
 
@@ -247,6 +247,49 @@ class dbHandler
     $result = $prepared_statement->fetchAll();
     return $result;
   }
+	
+
+  function writeRowTodriveRankTable($data)
+  {
+    $dbConfig = $this->readDbConfig();
+    $sql = "INSERT INTO " . $dbConfig["driveranktable"] . "(entrykey,
+                       eventcode,
+					   scoutname,
+                       teamnumber,
+					   matchnumber,
+                       driverability,
+					   quickness,
+					   fieldawareness,
+                       gamepiecedrop)
+                VALUES(:entrykey,
+                       :eventcode,
+					   :scoutname,
+					   :teamnumber,
+					   :matchnumber,
+                       :driverability,
+                       :quickness,
+                       :fieldawareness,
+                       :gamepiecedrop)";
+    $prepared_statement = $this->conn->prepare($sql);
+    $prepared_statement->execute($data);
+  }
+
+  function readdriveRankData($eventCode)
+  {
+    $dbConfig = $this->readDbConfig();
+    $sql = "SELECT scoutname,
+	                 teamnumber,
+	                 matchnumber,
+                     driverability,
+					 quickness,
+					 fieldawareness,
+                     gamepiecedrop from " . $dbConfig["driveranktable"] . " where
+                     eventcode='" . $eventCode . "'";
+    $prepared_statement = $this->conn->prepare($sql);
+    $prepared_statement->execute();
+    $result = $prepared_statement->fetchAll();
+    return $result;
+  }
 
   function createDB()
   {
@@ -334,6 +377,28 @@ class dbHandler
     if (!$statement->execute())
     {
       throw new Exception("createPitTable Error: CREATE TABLE " . $dbConfig["pittable"] . " query failed.");
+    }
+  }
+	
+  function createdriveRankTable()
+  {
+    $conn = $this->connectToDB();
+    $dbConfig = $this->readDbConfig();
+    $query = "CREATE TABLE " . $dbConfig["db"] . "." . $dbConfig["driveranktable"] . " (
+            entrykey VARCHAR(60) NOT NULL PRIMARY KEY,
+            eventcode VARCHAR(10) NOT NULL,
+			scoutname VARCHAR(15) NOT NULL,
+            teamnumber VARCHAR(6) NOT NULL,
+		    matchnumber VARCHAR(6) NOT NULL,
+            driverability TINYINT UNSIGNED NOT NULL,
+            quickness TINYINT UNSIGNED NOT NULL,
+            fieldawareness TINYINT UNSIGNED NOT NULL,
+            gamepiecedrop TINYINT UNSIGNED NOT NULL
+        )";
+    $statement = $conn->prepare($query);
+    if (!$statement->execute())
+    {
+      throw new Exception("createdriveRankTable Error: CREATE TABLE " . $dbConfig["driveranktable"] . " query failed.");
     }
   }
 
@@ -494,6 +559,7 @@ class dbHandler
     $out["dataTableExists"] = false;
     $out["tbaTableExists"]  = false;
     $out["pitTableExists"]  = false;
+	$out["driveRankTableExists"] = false;
     $out["rankTableExists"] = false;
     $out["useP"]            = $dbConfig["useP"];
     $out["useQm"]           = $dbConfig["useQm"];
@@ -561,6 +627,18 @@ class dbHandler
     catch (PDOException $e)
     {
       $out["pitTableExists"] = false;
+    }
+	try
+    {
+      $dsn = "mysql:host=" . $dbConfig["server"] . ";dbname=" . $dbConfig["db"] . ";charset=" . $this->charset;
+      $conn = new PDO($dsn, $dbConfig["username"], $dbConfig["password"]);
+      $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+      $val = $conn->query('SELECT * from ' . $dbConfig["driveranktable"]);
+      $out["driveRankTableExists"] = true;
+    }
+    catch (PDOException $e)
+    {
+      $out["driveRankTableExists"] = false;
     }
     try
     {

@@ -16,6 +16,7 @@
             <h4>TBA Table Status: <span id="TBATableStatus" class="badge bg-warning">Not Connected</span></h4>
             <h4>Pit Table Status: <span id="pitTableStatus" class="badge bg-warning">Not Connected</span></h4>
             <h4>Rank Table Status: <span id="rankTableStatus" class="badge bg-warning">Not Connected</span></h4>
+			<h4>Drive Rank Table Status: <span id="driveRankTableStatus" class="badge bg-warning">Not Connected</span></h4>
             <h4>Server: <span id="serverName" class="badge bg-primary">????</span></h4>
             <h4>Database: <span id="databaseName" class="badge bg-primary">????</span></h4>
             <h4>Username: <span id="userName" class="badge bg-primary">????</span></h4>
@@ -107,6 +108,10 @@
             <div class="mb-3">
               <label for="writeRankTable" class="form-label">Rank Table Name</label>
               <input type="text" class="form-control" id="writeRankTable" aria-describedby="writeRankTable">
+            </div>
+			<div class="mb-3">
+              <label for="writedriveRankTable" class="form-label">Drive Rank Table Name</label>
+              <input type="text" class="form-control" id="writedriveRankTable" aria-describedby="writedriveRankTable">
             </div>
             <div class="mb-3">
               <label for="writeUsername" class="form-label">User Name</label>
@@ -202,7 +207,8 @@
     setStatusBadge(statusArray["tbaTableExists"], "TBATableStatus");
     setStatusBadge(statusArray["pitTableExists"], "pitTableStatus");
     setStatusBadge(statusArray["rankTableExists"], "rankTableStatus");
-
+    setStatusBadge(statusArray["driveRankTableExists"], "driveRankTableStatus");
+	  
     $("#writefbapikey").text(statusArray["fbapikey"]);
     $("#writefbauthdomain").text(statusArray["fbauthdomain"]);
     $("#writefbdburl").text(statusArray["fbdburl"]);
@@ -232,6 +238,7 @@
     "writeTBATable": "tbatable",
     "writePitTable": "pittable",
     "writeRankTable": "ranktable",
+	"writedriveRankTable": "driveranktable",
     "fbAPIKey": "fbapikey",
     "fbAuthDomain": "fbauthdomain",
     "fbDBUrl": "fbdburl",

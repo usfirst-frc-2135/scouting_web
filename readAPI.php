@@ -74,6 +74,32 @@ else if (isset($_GET["getTeamPitData"]))
   }
   echo (json_encode($out));
 }
+else if (isset($_GET["getAllDriveRankData"]))
+{
+  // Get all drive rank data
+  $rawData = $db->readDriveRankData($eventCode);
+  $out = array();
+  foreach ($rawData as $row)
+  {
+    $out[$row["teamnumber"]] = $row;
+  }
+  echo (json_encode($out));
+}
+else if (isset($_GET["getDriveRankData"]))
+{
+  // Get all drive rank data
+  $rawData = $db->readDriveRankData($eventCode);
+  $out = array();
+  foreach ($rawData as $row)
+  {
+    if ($row["teamnumber"] == $_GET["getTeamDriveRankData"])
+    {
+      $out = $row;
+      break;
+    }
+  }
+  echo (json_encode($out));
+}
 else if (isset($_GET["getTeamImages"]))
 {
   // Get all images for a team
@@ -94,13 +120,13 @@ else if (isset($_GET["getRawRankingData"]))
 {
   echo (json_encode($db->readRawRankData($eventCode)));
 }
-else if (isset($_GET["getInternalRankings"]))
+/*else if (isset($_GET["getInternalRankings"]))
 {
   $qrg = new qualRankGen($db->readRankData($eventCode));
   $rankMap = array();
   $rankMap["elo"] = $qrg->raw_votes_to_elo_map(30);
   echo (json_encode($rankMap));
-}
+}*/
 else if (isset($_GET["config"]))
 {
   $output = array();

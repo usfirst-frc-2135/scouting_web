@@ -41,16 +41,22 @@ if (isset($_POST["writeSingleData"]))
 }
 if (isset($_POST["writePitData"]))
 {
-  /*
-    $_POST["writePitData"] = {teamnumber : x, numbatteries : x, numchargers : x, pitorg : x,
-                       spareparts : x, proglanguage : x, drivemotors: x}
-    */
   $db->connectToDB();
   $args = json_decode($_POST["writePitData"], true);
   
   $args["entrykey"] = $eventCode . "_" . $args["teamnumber"];
   $args["eventcode"] = $eventCode;
   $db->writeRowToPitTable($args);
+  echo ("success");
+}
+if (isset($_POST["writeDriveRankData"]))
+{
+  $db->connectToDB();
+  $args = json_decode($_POST["writeDriveRankData"], true);
+  
+  $args["entrykey"] = $eventCode . "_" . $args["teamnumber"] . $args["matchnumber"] ;
+  $args["eventcode"] = $eventCode;
+  $db->writeRowToDriveRankTable($args);
   echo ("success");
 }
 if (isset($_POST["writeAllianceRankData"]))
@@ -155,3 +161,4 @@ else if (isset($_POST["teamNum"]) and isset($_FILES["teamPic"]))
   echo (json_encode($response));
 }
 ?>
+

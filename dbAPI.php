@@ -63,6 +63,14 @@ else if (isset($_POST["createTable"]))
   {
     error_log($e);
   }
+  try
+  {
+    $db->createdriveRankTable();
+  }
+  catch (Exception $e)
+  {
+    error_log($e);
+  }
   $stat = $db->getStatus();
   echo json_encode($stat);
 }
