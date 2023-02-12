@@ -9,7 +9,42 @@
   <meta name="author" content="FRC 2135">
   <link rel="icon" href="./images/favicon.ico">
   <link rel="icon" type="image/png" href="./images/favicon-32x32.png" sizes="32x32">
-  <link href="./external/bootstrap-5.1.3/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" </head>
+  <link href="./external/bootstrap-5.1.3/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+  <style>
+    a {
+      color: #000;
+      text-decoration: none;
+    }
+    .nav {
+      border-radius: 10px;
+      padding: 0px 10px;
+      float: left;
+    }
+    /* .nav li {
+         list-style-type: none;
+         float: left;
+         margin: 0;
+         padding: 0;
+         overflow: hidden;
+        } */
+    .nav li a {
+      display: inline-block;
+      color: #A9A9A9;
+      text-align: center;
+      width: 76px;
+      float: left;
+    }
+    .nav a:hover {
+      color: #fff;
+    }
+    .nav li a.selected {
+      list-style-type: none;
+      float: left;
+      background-color: skyblue;
+      color: #fff;
+    }
+  </style>
+</head>
 
 <body class="bg-light">
   <header class="navbar navbar-expand-md navbar-dark sticky-top bg-dark">
@@ -19,7 +54,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarCollapse">
-        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+        <ul class="nav">
           <li class="nav-item">
             <a class="nav-link" href="./index.php">Home</a>
           </li>
@@ -63,3 +98,15 @@
       </div>
     </div>
   </header>
+    
+<script>
+  const currentLocation = location.href;
+  const items = document.querySelectorAll("a");
+  const length = items.length;
+  
+  for (let i = 0; i < items.length; i++) {
+    if (items[i].href === currentLocation) {
+      items[i].className = "selected";
+    }
+  }
+</script>
