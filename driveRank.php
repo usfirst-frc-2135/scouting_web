@@ -254,9 +254,10 @@
 
 
     $.post("writeAPI.php", {
-      writedriveRankData: JSON.stringify(dataToUse)
+      writeDriveRankData: JSON.stringify(dataToUse)
     }).done(function(data) {
-      if (data == "success") {
+      // Because success word may have a new-line at the end, don't do a direct compare
+      if (data.indexOf('success') > -1) {
         alert("Success in submitting drive rank data!");
         clearForm();
       } else {
@@ -305,12 +306,12 @@
       gamepieceDrop: gamepieceDrop
     };
 
-	
   // Define the graph as a line chart:
     if (chartDefined) {
       myChart.destroy();
     }
     chartDefined = true;
+  }
 
   function drawLineChart(data) {
     var ctx = document.getElementById("myChart").getContext("2d");

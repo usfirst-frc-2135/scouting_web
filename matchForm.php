@@ -522,7 +522,8 @@
     $.post("writeAPI.php", {
       "writeSingleData": JSON.stringify(form_data)
     }, function(data) {
-      if (data == "success") {
+      // Because success word may have a new-line at the end, don't do a direct compare
+      if (data.indexOf('success') > -1) {
         alert("Data Successfully Submitted! Clearing Data.");
         clear_data();
       } else {

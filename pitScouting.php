@@ -294,7 +294,8 @@
     $.post("writeAPI.php", {
       writePitData: JSON.stringify(dataToUse)
     }).done(function(data) {
-      if (data == "success") {
+      // Because success word may have a new-line at the end, don't do a direct compare
+      if (data.indexOf('success') > -1) {
         alert("Success in submitting pit data!");
         clearForm();
       } else {

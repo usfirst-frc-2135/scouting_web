@@ -227,7 +227,8 @@
           writeAllianceRankData: JSON.stringify(sortedTeamList),
           matchKey: getMatchRequestKey()
         }).done(function(data) {
-          if (data == "success") {
+          // Because success word may have a new-line at the end, don't do a direct compare
+          if (data.indexOf('success') > -1) {
             alertSuccess();
           } else {
             alertFailure();

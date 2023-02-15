@@ -130,10 +130,10 @@ function scanCamera(reader, id) {
     if (result) {
       var dataList = qrStringToList(result.text);
       dataList = padList(dataList);
-      console.log(dataList);
+      console.log("scanCamera: dataList = "+dataList);
       if (validateQrList(dataList)) {
         alertSuccessfulScan();
-		addQrData(qrListToDict(dataList));
+	addQrData(qrListToDict(dataList));
       }
       else {
         alert("Make sure scout name is added!");
@@ -199,11 +199,12 @@ function submitFunction() {
       indexedData.push(value);
     }
     $.post("writeAPI.php", { "writeData": JSON.stringify(indexedData) }, function (data) {
-      if (data == "success") {
+      // Because success word may have a new-line at the end, don't do a direct compare
+      if (data.indexOf('success') > -1) {
         alert("Data Successfully Submitted! Clearing Data.");
         clearData();
       } else {
-        alert("Data NOT Submitted. Please Check Network Connectivity.");
+        alert("Data NOT Submitted.");
       }
     });
   });
