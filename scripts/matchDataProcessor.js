@@ -206,6 +206,7 @@ class matchDataProcessor {
           
 	avg[tn]["autonchargestationpercent"] = { 0: 0, 1: 0, 2: 0};
         avg[tn]["endgamechargestationpercent"] = { 0: 0, 1: 0, 2: 0, 3: 0 };  
+        avg[tn]["mobilitypercent"] = 0;
        
         avg[tn]["totaldied"] = 0;
 
@@ -307,6 +308,7 @@ class matchDataProcessor {
       avg[tn]["avg_teleopbotrowitems"] += teleopBotRowItems;
       avg[tn]["max_teleopbotrowitems"] = Math.max(avg[tn]["max_teleopbotrowitems"], teleopBotRowItems);
         
+      avg[tn]["mobilitypercent"] += this.data[i]["exitcommunity"];
       avg[tn]["endgamechargestationpercent"][this.data[i]["endgamechargelevel"]] += 1;
       avg[tn]["autonchargestationpercent"][this.data[i]["autonchargelevel"]] += 1;
       avg[tn]["totaldied"] += this.data[i]["died"];
@@ -339,6 +341,8 @@ class matchDataProcessor {
       avg[key]["avg_teleopmidrowitems"] = (avg[key]["avg_teleopmidrowitems"] / avg[key]["totalmatches"]);
       avg[key]["avg_teleopbotrowitems"] = (avg[key]["avg_teleopbotrowitems"] / avg[key]["totalmatches"]);    
 		
+      avg[key]["mobilitypercent"] = Math.round(100 * avg[key]["mobilitypercent"] / avg[key]["totalmatches"]);
+        
       avg[key]["endgamechargestationpercent"][0] = Math.round(100 * avg[key]["endgamechargestationpercent"][0] / avg[key]["totalmatches"]);
       avg[key]["endgamechargestationpercent"][1] = Math.round(100 * avg[key]["endgamechargestationpercent"][1] / avg[key]["totalmatches"]);
       avg[key]["endgamechargestationpercent"][2] = Math.round(100 * avg[key]["endgamechargestationpercent"][2] / avg[key]["totalmatches"]);

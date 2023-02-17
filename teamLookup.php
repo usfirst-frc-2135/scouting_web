@@ -190,9 +190,9 @@
                           </tr>
                         </thead>
                         <tbody id="autoTable">
-                          <!--<tr>
+                          <tr>
                             <th scope="row">Mobility %</th>
-                          </tr>-->
+                          </tr>
                           <tr>
                             <th scope="row">Top Row</th>
                           </tr>
@@ -331,13 +331,16 @@
       
     // Auton Scores
     avgs["autonchargestationpercent"]["autonchargestr"] = "<b>Charge Level %</b>";
-    //avgs["mobilitystr"] = "<b>Mobility %</b>";
+    avgs["mobilitystr"] = "<b>Mobility %</b>";
     avgs["toprowstr"] = "<b>Top Row Items</b>";
     avgs["midrowstr"] = "<b>Middle Row Items</b>";
     avgs["botrowstr"] = "<b>Bottom Row Items</b>";
     avgs["totalstr"] = "<b>Total Pts</b>";
+      
+    console.log[avgs, ["mobilitystr", "exitcommunity"]];
+      
     writeTableRow("autonChargeTable", avgs["autonchargestationpercent"], ["autonchargestr", 0, 1, 2]);
-    //writeTableRow("autoTable", avgs, ["mobilitystr", "mobilitypercent"]);
+    writeTableRow("autoTable", avgs, ["mobilitystr", "mobilitypercent"]);
     writeTableRow("autoTable", avgs, ["toprowstr", "avg_autontoprowitems", "max_autontoprowitems"]);
     writeTableRow("autoTable", avgs, ["midrowstr", "avg_autonmidrowitems", "max_autonmidrowitems"]);
     writeTableRow("autoTable", avgs, ["botrowstr", "avg_autonbotrowitems", "max_autonbotrowitems"]);
