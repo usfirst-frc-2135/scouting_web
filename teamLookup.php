@@ -37,7 +37,7 @@
       		            <h5 class="text-center"> 
                         <a href="#collapseAutonGraph" data-bs-toggle="collapse" aria-expanded="false"> Auton Graph</a>
 					    </h5>
-            <div class="collapse" id="collapseAutonGraph">
+                       <div class="collapse" id="collapseAutonGraph">
                 <canvas id="myChart" width="400" height="400"></canvas>
                 </div>
               </div>
@@ -48,7 +48,7 @@
                 <div class="card-body">
                     <div class="overflow-auto">
                       <h5 class="text-center"> 
-                        <a href="#collapseTeleopGraph" data-bs-toggle="collapse" aria-expanded="false"> Teleop Graph</a>
+                      <a href="#collapseTeleopGraph" data-bs-toggle="collapse" aria-expanded="false"> Teleop Graph</a>
                       </h5>
                       <div class="collapse" id="collapseTeleopGraph">
                         <canvas id="myChart2" width="400" height="400"></canvas>
@@ -281,13 +281,28 @@
                 </div>
               </div>
             </div>
-
+       
+          <div class="overflow-auto">
+            <div class="card mb-3">
+  		      <div class="card-body"> 
+                <div class="overflow-auto">
+      		      <h5 class="text-center"> 
+                    <a href="#collapsedriveRankGraph" data-bs-toggle="collapse" aria-expanded="false"> Drive Rank Graph</a>
+				  </h5>
+                  <div class="collapse" id="collapsedriveRankGraph">
+                    <canvas id="myChart3" width="400" height="350"></canvas>
+                  </div>
+                </div>
+             </div>
+            </div>  
           </div>
-        </div>
+			  
+       </div>
       </div>
+     </div>
     </div>
+   </div>
   </div>
-</div>
 
 <?php include("footer.php") ?>
 
@@ -297,6 +312,9 @@
     
   var chart2Defined = false;
   var myChart2;
+	
+  var chart3Defined = false;
+  var myChart3;
 
   function writeTableRow(tbodyID, dict, keys) {
     var row = "<tr>";
@@ -409,6 +427,8 @@
     dataToTeleopGraph(data);
 //HOLD    sorttable.makeSortable(document.getElementById("sortableAllMatches")); 
   }
+	
+
 
   function dataToAutonGraph(matchdata) {
     // Declare variables
@@ -691,6 +711,70 @@
       }
     });
   }
+	
+	
+ function dataToDriveRankGraph(driveRankData) {
+    // Declare variables
+    var match_list = []; // List of matches to use as x lables
+    var datasets = []; // Each entry is a dict with a label and data attribute
+
+    datasets.push({
+      label: "Drive Ability",
+      data: [],
+      borderColor: 'Teal'
+    });
+    datasets.push({
+      label: "Quickness",
+      data: [],
+      borderColor: 'Salmon'
+    });
+    datasets.push({
+      label: "Field Awareness",
+      data: [],
+      borderColor: 'Gold'
+    });
+    datasets.push({
+      label: "Game Pieces Dropped",
+      data: [],
+      borderColor: 'FireBrick'
+    });
+    
+
+    // Build data sets; go thru each matchdata QR code string and populate the graph datasets.
+    for (let i = 0; i < driveRankData.length; i++) {
+      var matchnum = driveRankData[i]["matchnumber"];
+      match_list.push(matchnum);
+		
+	console.log(">>>>> test adding driver ability " + driveRankData[i]["driverability"]);	
+	datasets[0]["data"].push(driveRankData[i]["driverability"]);
+	datasets[1]["data"].push(driveRankData[i]["quickness"]);	
+	datasets[2]["data"].push(driveRankData[i]["fieldawareness"]);	
+    datasets[3]["data"].push(driveRankData[i]["gamepiecedrop"]);
+    }
+
+    // Define the graph as a line chart:
+    if (chart3Defined) {
+      myChart3.destroy();
+    }
+    chart3Defined = true;
+
+    const ctx = document.getElementById('myChart3').getContext('2d');
+    myChart3 = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: match_list,
+        datasets: datasets
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+       
+          }
+        }
+    });
+  }
 
   function processCommentData(data) {
     dataToCommentTable(data);
@@ -731,6 +815,13 @@
 
     }
   }
+	
+   function processDriveRankData(driveRankData) {
+	console.log("processing drive rank data: length= " + driveRankData.length);
+    
+	  dataToDriveRankGraph(driveRankData);
+    
+  }
 
   function loadTeam(team) {
     /* This is the main function that runs when we want to load a new team onto the page */
@@ -763,11 +854,12 @@
     });
 
     // Add Match Scouting Data
-    var matchData;
+    var rawData;
     $.get("readAPI.php", {
       getTeamData: team
     }).done(function(data) {
       matchData = JSON.parse(data);
+	  rawData = matchData;
       processMatchData(team, matchData);
     });
 
@@ -776,9 +868,20 @@
       getTeamPitData: team
     }).done(function(data) {
       pitData = JSON.parse(data);
-      processPitData(pitData, matchData);
+      processPitData(pitData, rawData);
     });
-
+	  
+	  
+    console.log ("adding drive rank data");
+    // Add Drive Rank Scouting Data
+    $.get("readAPI.php", {
+      getTeamDriveRankData: team
+    }).done(function(data) {
+      driveRankData = JSON.parse(data);
+	  console.log ("got drive rank data: " + driveRankData);
+      processDriveRankData(driveRankData);
+    });
+  console.log ("got through drive rank data");
   }
 
   $(document).ready(function() {

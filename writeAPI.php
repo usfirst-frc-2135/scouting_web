@@ -54,7 +54,7 @@ if (isset($_POST["writeDriveRankData"]))
   $db->connectToDB();
   $args = json_decode($_POST["writeDriveRankData"], true);
   
-  $args["entrykey"] = $eventCode . "_" . $args["teamnumber"] . "_" . $args["matchnumber"] ;
+  $args["entrykey"] = $args[$i]["eventcode"] . "_" . $args["matchnumber"] . "_" . $args["teamnumber"];
   $args["eventcode"] = $eventCode;
   $db->writeRowToDriveRankTable($args);
   echo ("success");

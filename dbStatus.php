@@ -110,8 +110,8 @@
               <input type="text" class="form-control" id="writeRankTable" aria-describedby="writeRankTable">
             </div>
 			<div class="mb-3">
-              <label for="writedriveRankTable" class="form-label">Drive Rank Table Name</label>
-              <input type="text" class="form-control" id="writedriveRankTable" aria-describedby="writedriveRankTable">
+              <label for="writeDriveRankTable" class="form-label">Drive Rank Table Name</label>
+              <input type="text" class="form-control" id="writeDriveRankTable" aria-describedby="writeDriveRankTable">
             </div>
             <div class="mb-3">
               <label for="writeUsername" class="form-label">User Name</label>
@@ -238,7 +238,7 @@
     "writeTBATable": "tbatable",
     "writePitTable": "pittable",
     "writeRankTable": "ranktable",
-	"writedriveRankTable": "driveranktable",
+	"writeDriveRankTable": "driveranktable",
     "fbAPIKey": "fbapikey",
     "fbAuthDomain": "fbauthdomain",
     "fbDBUrl": "fbdburl",

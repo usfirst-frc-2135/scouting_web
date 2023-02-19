@@ -74,32 +74,46 @@ else if (isset($_GET["getTeamPitData"]))
   }
   echo (json_encode($out));
 }
+
 else if (isset($_GET["getAllDriveRankData"]))
 {
+  // Get all data
+  echo (json_encode($db->readAllDriveRankData($eventCode)));
+}
+
+/*else if (isset($_GET["getAllDriveRankData"]))
+{
   // Get all drive rank data
-  $rawData = $db->readDriveRankData($eventCode);
+  $driveRankData = $db->readDriveRankData($eventCode);
   $out = array();
-  foreach ($rawData as $row)
+  foreach ($driveRankData as $row)
   {
     $out[$row["teamnumber"]] = $row;
   }
   echo (json_encode($out));
-}
-else if (isset($_GET["getDriveRankData"]))
+} */
+else if (isset($_GET["getTeamDriveRankData"]))
 {
+  // Get all data for a team
+  echo (json_encode($db->readTeamDriveRankData($_GET["getTeamDriveRankData"], $eventCode)));
+}
+/*else if (isset($_GET["getTeamDriveRankData"]))
+{
+  // Get all data for a team
+  echo (json_encode($db->readTeamDriveRankData($_GET["getTeamData"], $eventCode)));
   // Get all drive rank data
-  $rawData = $db->readDriveRankData($eventCode);
+  $driveRankData = $db->readTeamDriveRankData($eventCode);
   $out = array();
-  foreach ($rawData as $row)
+  foreach ($driveRankData as $row)
   {
     if ($row["teamnumber"] == $_GET["getTeamDriveRankData"])
     {
       $out = $row;
       break;
-    }
+    } 
   }
   echo (json_encode($out));
-}
+} */
 else if (isset($_GET["getTeamImages"]))
 {
   // Get all images for a team

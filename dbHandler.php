@@ -249,23 +249,24 @@ class dbHandler
   }
 	
 
-  function writeRowTodriveRankTable($data)
+  function writeRowToDriveRankTable($data)
   {
     $dbConfig = $this->readDbConfig();
+	
     $sql = "INSERT INTO " . $dbConfig["driveranktable"] . "(entrykey,
                        eventcode,
-					   scoutname,
-                       teamnumber,
+					   teamnumber,
 					   matchnumber,
+					   scoutname,
                        driverability,
 					   quickness,
 					   fieldawareness,
                        gamepiecedrop)
                 VALUES(:entrykey,
                        :eventcode,
-					   :scoutname,
 					   :teamnumber,
 					   :matchnumber,
+					   :scoutname,
                        :driverability,
                        :quickness,
                        :fieldawareness,
@@ -274,17 +275,34 @@ class dbHandler
     $prepared_statement->execute($data);
   }
 
-  function readdriveRankData($eventCode)
+  function readAllDriveRankData($eventCode)
   {
     $dbConfig = $this->readDbConfig();
-    $sql = "SELECT scoutname,
-	                 teamnumber,
+    $sql = "SELECT teamnumber,
 	                 matchnumber,
+	                 scoutname,
+                     driverability,
+					 quickness,
+					 fieldawareness,
+                     gamepiecedrop from " . $dbConfig["driveranktable"] . " where eventcode='" . $eventCode . "'";
+    $prepared_statement = $this->conn->prepare($sql);
+    $prepared_statement->execute();
+    $result = $prepared_statement->fetchAll();
+    return $result;
+  }
+	
+  function readTeamDriveRankData($teamNumber,$eventCode)
+  {
+    $dbConfig = $this->readDbConfig();
+    $sql = "SELECT teamnumber,
+	                 matchnumber,
+	                 scoutname,
                      driverability,
 					 quickness,
 					 fieldawareness,
                      gamepiecedrop from " . $dbConfig["driveranktable"] . " where
-                     eventcode='" . $eventCode . "'";
+                     eventcode='" . $eventCode . "' AND
+                     teamnumber='" . $teamNumber . "'";
     $prepared_statement = $this->conn->prepare($sql);
     $prepared_statement->execute();
     $result = $prepared_statement->fetchAll();
@@ -380,16 +398,16 @@ class dbHandler
     }
   }
 	
-  function createdriveRankTable()
+  function createDriveRankTable()
   {
     $conn = $this->connectToDB();
     $dbConfig = $this->readDbConfig();
     $query = "CREATE TABLE " . $dbConfig["db"] . "." . $dbConfig["driveranktable"] . " (
             entrykey VARCHAR(60) NOT NULL PRIMARY KEY,
             eventcode VARCHAR(10) NOT NULL,
-			scoutname VARCHAR(15) NOT NULL,
-            teamnumber VARCHAR(6) NOT NULL,
+			teamnumber VARCHAR(6) NOT NULL,
 		    matchnumber VARCHAR(6) NOT NULL,
+			scoutname VARCHAR(15) NOT NULL,
             driverability TINYINT UNSIGNED NOT NULL,
             quickness TINYINT UNSIGNED NOT NULL,
             fieldawareness TINYINT UNSIGNED NOT NULL,
