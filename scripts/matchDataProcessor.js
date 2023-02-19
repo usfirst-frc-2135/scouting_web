@@ -333,13 +333,13 @@ class matchDataProcessor {
       avg[key]["avgteleopcones"] = Math.round(10 * avg[key]["avgteleopcones"] / avg[key]["totalmatches"]) / 10;
       avg[key]["avgteleopcubes"] = Math.round(10 * avg[key]["avgteleopcubes"] / avg[key]["totalmatches"]) / 10;
 	
-      avg[key]["avg_autontoprowitems"] = (avg[key]["avg_autontoprowitems"] / avg[key]["totalmatches"]);
-      avg[key]["avg_autonmidrowitems"] = (avg[key]["avg_autonmidrowitems"] / avg[key]["totalmatches"]);
-      avg[key]["avg_autonmidrowitems"] = (avg[key]["avg_autonmidrowitems"] / avg[key]["totalmatches"]);
+      avg[key]["avg_autontoprowitems"] = Math.round(10 * avg[key]["avg_autontoprowitems"] / avg[key]["totalmatches"]) / 10;
+      avg[key]["avg_autonmidrowitems"] = Math.round(10 * avg[key]["avg_autonmidrowitems"] / avg[key]["totalmatches"]) / 10;
+      avg[key]["avg_autonbotrowitems"] = Math.round(10 * avg[key]["avg_autonbotrowitems"] / avg[key]["totalmatches"]) / 10;
         
-      avg[key]["avg_teleoptoprowitems"] = (avg[key]["avg_teleoptoprowitems"] / avg[key]["totalmatches"]);
-      avg[key]["avg_teleopmidrowitems"] = (avg[key]["avg_teleopmidrowitems"] / avg[key]["totalmatches"]);
-      avg[key]["avg_teleopbotrowitems"] = (avg[key]["avg_teleopbotrowitems"] / avg[key]["totalmatches"]);    
+      avg[key]["avg_teleoptoprowitems"] = Math.round(10 * avg[key]["avg_teleoptoprowitems"] / avg[key]["totalmatches"]) / 10;
+      avg[key]["avg_teleopmidrowitems"] = Math.round(10 * avg[key]["avg_teleopmidrowitems"] / avg[key]["totalmatches"]) / 10;
+      avg[key]["avg_teleopbotrowitems"] = Math.round(10 * avg[key]["avg_teleopbotrowitems"] / avg[key]["totalmatches"]) / 10;    
 		
       avg[key]["mobilitypercent"] = Math.round(100 * avg[key]["mobilitypercent"] / avg[key]["totalmatches"]);
         
