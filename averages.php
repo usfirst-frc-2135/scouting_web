@@ -3,9 +3,9 @@
 <?php include("header.php") ?>
 <div class="container row-offcanvas row-offcanvas-left">
   <div class="well column  col-lg-12  col-sm-12 col-xs-12" id="content">
-    <h5>Averages</h5>
 
-    <div class="row g-3">
+    <div class="row pt-3 pb-3 mb-3">
+      <h2>Averages</h2>
       <div class="col-md-3">
         <div class="input-group">
           <select class="form-select mb-3" id="startPrefix">
