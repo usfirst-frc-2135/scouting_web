@@ -20,7 +20,7 @@
            <input type="text" class="form-control" id="scoutName">
          </div>
 		
-        <div class="mb-5">
+        <div class="mb-3">
           <label for="teamNumber" class="form-label">Team Number </label>
           <input type="number" class="form-control" id="teamNumber">
         </div>
