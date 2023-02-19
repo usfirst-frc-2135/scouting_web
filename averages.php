@@ -170,7 +170,7 @@
       var rowString = "<tr>" +
         "<td><a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a></td>" +
         "<td>" + dummyGet(tbaData[teamNum], "totalPoints") + "</td>" +
-        //"<td>" + dummyGet(internalEloRank["elo"], teamNum) + "</td>" +
+        //HOLD"<td>" + dummyGet(internalEloRank["elo"], teamNum) + "</td>" +
         "<td>" + dummyGet(scoutingData[teamNum], "avgtotalpoints") + "</td>" +
         "<td>" + dummyGet(scoutingData[teamNum], "maxtotalpoints") + "</td>" +
         "<td>" + dummyGet(scoutingData[teamNum], "avgautopoints") + "</td>" +
@@ -239,6 +239,7 @@
       });
     });
 
+/*HOLD--> ELO column is commented out for now
     // Get internal ranking data
     $.get("readAPI.php", {
       getInternalRankings: 1
@@ -249,6 +250,7 @@
       };
       dataToTable();
     });
+<--HOLD*/
 
     // Gets data from our TBA API
     /* HOLD $.get("tbaAPI.php", {
