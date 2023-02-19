@@ -345,8 +345,6 @@
   }
 
   function dataToAvgTables(avgs) {
-    // Auton Climb Table
-      
     // Auton Scores
     avgs["autonchargestationpercent"]["autonchargestr"] = "<b>Charge Level %</b>";
     avgs["mobilitystr"] = "<b>Mobility %</b>";
@@ -852,21 +850,19 @@
     });
 
     // Add Match Scouting Data
-    var rawData;
     $.get("readAPI.php", {
       getTeamData: team
     }).done(function(data) {
       matchData = JSON.parse(data);
-      rawData = matchData;
       processMatchData(team, matchData);
-    });
 
-    // Add Pit Scouting Data
-    $.get("readAPI.php", {
-      getTeamPitData: team
-    }).done(function(data) {
-      pitData = JSON.parse(data);
-      processPitData(pitData, rawData);
+      // Do the Pit Scouting Data here because it also needs the matchData.
+      $.get("readAPI.php", {
+        getTeamPitData: team
+      }).done(function(data) {
+        pitData = JSON.parse(data);
+        processPitData(pitData, matchData);
+      });
     });
 	  
     // Add Drive Rank Scouting Data
