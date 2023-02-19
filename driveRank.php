@@ -1,19 +1,24 @@
 <title>Drive Rank</title>
 <?php include("header.php") ?>
+
 <div class="container row-offcanvas row-offcanvas-left">
   <div class="well column  col-lg-12  col-sm-12 col-xs-12" id="content">
     <div class="row pt-3 pb-3 mb-3">
+        <div class="row g-3 justify-content-md-center">
+            <div class="row justify-content-md-center">
+              <h2 class="col-md-6"> Drive Ranking </h2>
+            </div>
+        </div>
+        
       <div class="card col-md-6 mx-auto">
+          
         <div id="driveRankScoutingMessage" style="display: none"   class="alert alert-dismissible fade show" role="alert">
           <div id="uploadMessageText"></div>
           <button type="button" class="btn-close" id="closeMessage" aria-label="Close"></button>
         </div>
-        <div class="card-header">
-          Drive Ranking
-        </div> 
+
 	    <div class="card-body">
           <form id="driveRankForm" method="post" enctype="multipart/form-data">
-        
         
 		<div class="mb-3">
            <label for="scoutName" class="form-label">Scout Name</label>
