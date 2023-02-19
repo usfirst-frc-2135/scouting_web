@@ -28,16 +28,16 @@ class firebaseWrapper {
       async: true,
       success: function (data) {
         if (data["response"]) {
-          console.log("Sucess Success");
+          console.log("SuccessFunction: Success");
           successFunction({ ...data });
         }
         else {
-          console.log("Success Fail");
+          console.log("SuccessFunction: Fail");
           failureFunction();
         }
       },
       fail: function () {
-        console.log("Fail");
+        console.log("failureFunction: Fail");
         failureFunction();
       }
     });

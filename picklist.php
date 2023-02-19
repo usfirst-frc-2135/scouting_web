@@ -283,7 +283,7 @@
   }
 
   function loadPicklist(picklistName) {
-    console.log(picklistName);
+    console.log("loadPicklist(): picklist name = "+picklistName);
     if (currPicklistName != null) {
       firebaseApp.removeAllListeners("picklist/" + eventCode + "/picklists/" + currPicklistName);
     }
@@ -362,11 +362,11 @@
     var reqURI = "picklist/" + eventCode + "/notes";
     firebaseApp.attachListener(reqURI, function(data) {
       var dval = data.val();
-      console.log(dval);
-      console.log(localNotes);
+      console.log("bindNotesFromFirebase(): dval = "+dval);
+      console.log("bindNotesFromFirebase(): localNotes = "+localNotes);
       // Checks if team notes changed, only update if it did change
       if (!dictEqual(localNotes, dval) && dval != null) {
-        console.log(dval);
+        console.log("bindNotesFromFirebase(): dval = "+dval);
         localNotes = {
           ...dval
         };
@@ -551,17 +551,17 @@
     for (let i in a_keys) {
       var key = a_keys[i];
       if (Array.isArray(a[key]) && Array.isArray(b[key])) {
-        console.log("compared arr, " + key);
+        console.log("dictEqual(): compared arr, " + key);
         if (!arraysEqual(a[key], b[key])) {
           return false;
         }
       } else if (typeof a[key] === "object" && typeof b[key] === "object") {
-        console.log("compared dict, " + key);
+        console.log("dictEqual(): compared dict, " + key);
         if (!dictEqual(a[key], b[key])) {
           return false;
         }
       } else {
-        console.log("compared otehr, " + key);
+        console.log("dictEqual(): compared other, " + key);
         if (a[key] !== b[key]) {
           return false;
         }
@@ -615,8 +615,8 @@
       if (!draggingElement) {
         var pageCoords = "( " + event.pageX + ", " + event.pageY + " )";
         var clientCoords = "( " + event.clientX + ", " + event.clientY + " )";
-        console.log(pageCoords);
-        console.log(clientCoords);
+        console.log("bindSortScroll(): pageCoords = "+pageCoords);
+        console.log("bindSortScroll(): clientCoords = "+clientCoords);
       }
     });
   }
@@ -659,7 +659,7 @@
       if (!this.draggingElement) {
         return;
       }
-      console.log(this.state);
+      console.log("handleScroll(): this.state = "+this.state);
       switch (this.state) {
         case 0: // Idle
           if (this.y < this.lowTresh) {

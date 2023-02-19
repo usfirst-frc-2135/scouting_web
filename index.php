@@ -72,7 +72,7 @@
       $.get("./readAPI.php", {
         getTeamsImages: JSON.stringify(teamList)
       }).done(function(data) {
-        console.log(data);
+        console.log("index.php: getTeamList: data = "+data);
         picLookup = JSON.parse(data);
         createTable();
         sorttable.makeSortable(document.getElementById("psTable"));

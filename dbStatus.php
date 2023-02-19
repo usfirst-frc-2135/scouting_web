@@ -224,7 +224,7 @@
     $("#dataSf").prop('checked', statusArray["useSf"]);
     $("#dataF").prop('checked', statusArray["useF"]);
 
-    console.log(statusArray);
+    console.log("updateStatusValues(): statusArray = " +statusArray);
   }
 
   var id_to_key_map = {
@@ -287,7 +287,7 @@
         csv += "\n";
       });
 
-      console.log(csv);
+      console.log("download_csv(): csv = "+csv);
       var hiddenElement = document.createElement('a');
       hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
       hiddenElement.target = '_blank';
@@ -306,7 +306,7 @@
           writeData[id_to_key_map[key]] = $("#" + key).val();
         }
       }
-      console.log(writeData);
+      console.log("writeConfig: writeData = "+writeData);
       writeData["writeConfig"] = JSON.stringify(writeData);
 
       $.post("dbAPI.php", writeData, function(data) {

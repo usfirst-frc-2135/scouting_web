@@ -355,7 +355,7 @@
     avgs["botrowstr"] = "<b>Bottom Row Items</b>";
     avgs["totalstr"] = "<b>Total Pts</b>";
       
-    console.log[avgs, ["mobilitystr", "exitcommunity"]];
+//    console.log[avgs, ["mobilitystr", "exitcommunity"]];
       
     writeTableRow("autonChargeTable", avgs["autonchargestationpercent"], ["autonchargestr", 0, 1, 2]);
     writeTableRow("autoTable", avgs, ["mobilitystr", "mobilitypercent"]);
@@ -744,12 +744,10 @@
     for (let i = 0; i < driveRankData.length; i++) {
       var matchnum = driveRankData[i]["matchnumber"];
       match_list.push(matchnum);
-		
-	console.log(">>>>> test adding driver ability " + driveRankData[i]["driverability"]);	
-	datasets[0]["data"].push(driveRankData[i]["driverability"]);
-	datasets[1]["data"].push(driveRankData[i]["quickness"]);	
-	datasets[2]["data"].push(driveRankData[i]["fieldawareness"]);	
-    datasets[3]["data"].push(driveRankData[i]["gamepiecedrop"]);
+      datasets[0]["data"].push(driveRankData[i]["driverability"]);
+      datasets[1]["data"].push(driveRankData[i]["quickness"]);	
+      datasets[2]["data"].push(driveRankData[i]["fieldawareness"]);	
+      datasets[3]["data"].push(driveRankData[i]["gamepiecedrop"]);
     }
 
     // Define the graph as a line chart:
@@ -785,47 +783,47 @@
       pitData["sparepartsstring"] = pitData["spareparts"] ? "yes" : "no";
       pitData["computervisionstring"] = pitData["computervision"] ? "yes" : "no";
       pitData["swervedrivestring"] = pitData["swerve"] ? "yes" : "no"; 
-      //First row has pit data
+
+      // First row has pit data, so write out that data.
       writeTableRow("pitRow1", pitData, ["numbatteries", "pitorg", "sparepartsstring", "computervisionstring", "swervedrivestring", "proglanguage"]);
-      //Need to create our own dictionary to make new writeTableRow
-        //Go thru all the matches and see if pickedup data is ever true.
-        
+
+      // 2nd row has both pit data and matchData.
+      // So need to create our own dictionary to use in writeTableRow that holds
+      // both the pit data and the matchData needed in this line. 
+      // First get the matchData that we need:
       var pickedupcubevalue = 0;
       var pickedupuprightvalue = 0;
       var pickeduptippedvalue = 0;
       for (let i = 0; i < matchData.length; i++) {
-         if(matchData[i]["pickedupcube"] == true) {
-            pickedupcubevalue = 1;
-         }
-         else if(matchData[i]["pickedupupright"] == true) {
-            pickedupuprightvalue = 1;
-         }
-         else if(matchData[i]["pickeduptipped"] == true) {
-            pickeduptippedvalue = 1;
-         }
+        if(matchData[i]["pickedupcube"] == true) {
+           pickedupcubevalue = 1;
+        }
+        else if(matchData[i]["pickedupupright"] == true) {
+           pickedupuprightvalue = 1;
+        }
+        else if(matchData[i]["pickeduptipped"] == true) {
+           pickeduptippedvalue = 1;
+        }
       }
         
+      // Now create a dictionary variable with the <keyword>: <data value> needed
       const dictX = {
         drivemotors: pitData["drivemotors"],
         preparedness: pitData["preparedness"],
         pickedupcube: pickedupcubevalue,
         pickedupupright: pickedupuprightvalue,
-        pickeduptipped: pickeduptippedvalue};
+        pickeduptipped: pickeduptippedvalue
+      };
       writeTableRow("pitRow2", dictX, ["drivemotors", "preparedness", "pickedupcube", "pickedupupright", "pickeduptipped"]);
-
     }
   }
 	
    function processDriveRankData(driveRankData) {
-	console.log("processing drive rank data: length= " + driveRankData.length);
-    
-	  dataToDriveRankGraph(driveRankData);
-    
+     dataToDriveRankGraph(driveRankData);
   }
 
+  // This is the main function that runs when we want to load a new team 
   function loadTeam(team) {
-    /* This is the main function that runs when we want to load a new team onto the page */
-
     // Clear existing data
     $("#robotPics").html("");
     $("#teamTitle").html("");
@@ -859,7 +857,7 @@
       getTeamData: team
     }).done(function(data) {
       matchData = JSON.parse(data);
-	  rawData = matchData;
+      rawData = matchData;
       processMatchData(team, matchData);
     });
 
@@ -871,17 +869,13 @@
       processPitData(pitData, rawData);
     });
 	  
-	  
-    console.log ("adding drive rank data");
     // Add Drive Rank Scouting Data
     $.get("readAPI.php", {
       getTeamDriveRankData: team
     }).done(function(data) {
       driveRankData = JSON.parse(data);
-	  console.log ("got drive rank data: " + driveRankData);
       processDriveRankData(driveRankData);
     });
-  console.log ("got through drive rank data");
   }
 
   $(document).ready(function() {
