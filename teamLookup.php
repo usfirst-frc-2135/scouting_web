@@ -11,10 +11,13 @@
         </div>
       </div>
 
+      <!-- First column of data starts here -->
       <div class="col-lg-6 col-sm-6 col-xs-6 gx-3">
         <div class="card mb-3">
           <div class="card-body">
             <h5 id="teamTitle" class="card-title">Team # </h5>
+
+            <!-- Robot photo carousel section -->
             <div id="robotPicsCarousel" class="carousel slide" data-bs-ride="carousel">
               <div id="robotPics" class="carousel-inner">
 
@@ -29,36 +32,44 @@
               </button>
             </div>
 
-            <div class="overflow-auto">
-              <table class="table table-striped table-hover sortable">
-                <div class="card mb-3">
-  		            <div class="card-body"> 
-                        <div class="overflow-auto">
-      		            <h5 class="text-center"> 
-                        <a href="#collapseAutonGraph" data-bs-toggle="collapse" aria-expanded="false"> Auton Graph</a>
-					    </h5>
-                       <div class="collapse" id="collapseAutonGraph">
-                <canvas id="myChart" width="400" height="400"></canvas>
-                </div>
-              </div>
-             </div>
-            </div>
-                  
+            <!-- Auton collapsible graph -->
             <div class="card mb-3">
-                <div class="card-body">
-                    <div class="overflow-auto">
-                      <h5 class="text-center"> 
-                      <a href="#collapseTeleopGraph" data-bs-toggle="collapse" aria-expanded="false"> Teleop Graph</a>
-                      </h5>
-                      <div class="collapse" id="collapseTeleopGraph">
-                        <canvas id="myChart2" width="400" height="400"></canvas>
-                      </div>
-                    </div>
+              <div class="card-body"> 
+                <div class="overflow-auto">
+      		  <h5 class="text-center"> 
+                    <a href="#collapseAutonGraph" data-bs-toggle="collapse" aria-expanded="false"> Auton Graph</a> </h5>
+                  <div class="collapse" id="collapseAutonGraph">
+                    <canvas id="myChart" width="400" height="400"></canvas>
                   </div>
                 </div>
+              </div>
+            </div>
                   
+            <!-- Teleop collapsible graph -->
+            <div class="card mb-3">
+              <div class="card-body">
+                <div class="overflow-auto">
+                  <h5 class="text-center"> 
+                    <a href="#collapseTeleopGraph" data-bs-toggle="collapse" aria-expanded="false"> Teleop Graph</a> </h5>
+                  <div class="collapse" id="collapseTeleopGraph">
+                    <canvas id="myChart2" width="400" height="400"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
                   
+            <!-- Pit Scouting 1st row -->
+            <div class="overflow-auto">
+              <table class="table table-striped">
                 <thead>
+                  <colgroup>
+                    <col span="1" style="background-color:transparent">
+                    <col span="1" style="background-color:#cfe2ff">
+                    <col span="1" style="background-color:transparent">
+                    <col span="1" style="background-color:#cfe2ff">
+                    <col span="1" style="background-color:transparent">
+                    <col span="1" style="background-color:#cfe2ff">
+                  </colgroup>
                   <tr>
                     <th scope="col">Batt</th>
                     <th scope="col">Pit</th>
@@ -68,11 +79,22 @@
                     <th scope="col">Lang</th>
                   </tr>
                 </thead>
-                
                 <tbody id="pitRow1">
                 </tbody>  
+              </table>
+            </div>
                   
+            <!-- Pit Scouting 2nd row -->
+            <div class="overflow-auto">
+              <table class="table table-striped">
                 <thead>
+                  <colgroup>
+                    <col span="1" style="background-color:transparent">
+                    <col span="1" style="background-color:#cfe2ff">
+                    <col span="1" style="background-color:transparent">
+                    <col span="1" style="background-color:#cfe2ff">
+                    <col span="1" style="background-color:transparent">
+                  </colgroup>
                   <tr>
                     <th scope="col">Drive Motors</th>
                     <th scope="col">Prep</th>
@@ -81,84 +103,122 @@
                     <th scope="col">Upright Cone</th>
                   </tr>  
                 </thead>
-                  
                 <tbody id="pitRow2">
                 </tbody>
-
-              </table>
-            </div>
-
-            <div class="overflow-auto">
-              <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th scope="col">Comments</th>
-                    <th scope="col">Scout</th>
-                  </tr>
-                </thead>
-                <tbody id="comments">
-                </tbody>
               </table>
             </div>
           </div>
+
+          <!-- Comments section -->
+          <div class="overflow-auto">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">Comments</th>
+                  <th scope="col">Scout</th>
+                </tr>
+              </thead>
+            <tbody id="comments">
+            </tbody>
+          </table>
         </div>
 
-        <!-- Commented out the All Matches Rapid React raw data lines FOR NOW
+        <!-- All Matches collapsible table -->
         <div class="card mb-3">
           <div class="card-body">
-            <h5 class="card-title">All Matches</h5>
             <div class="overflow-auto">
-              <table id="sortableAllMatches" class="table table-striped table-hover sortable">
-                <thead>
-                  <tr>
-                    <th scope="col">Match #</th>
-                    <th scope="col">Start Position</th>
-                    <th scope="col">Tarmac Cross</th>
-                    <th scope="col">Auto Upper Hub</th>
-                    <th scope="col">Auto Low Hub</th>
-                    <th scope="col">Teleop Upper Hub</th>
-                    <th scope="col">Teleop Low Hub</th>
-                    <th scope="col">Climb</th>
-                    <th scope="col">Died</th>
-                    <th scope="col">Scout</th>
-                  </tr>
-                </thead>
-                <tbody id="allMatchesTable">
-                </tbody>
-              </table>
+              <h5 class="text-center"> 
+                <a href="#collapseAllMatches" data-bs-toggle="collapse" aria-expanded="false"> All Matches </a> </h5>
+                <div class="collapse" id="collapseAllMatches">
+                  <table id="sortableAllMatches" class="table table-striped table-hover sortable">
+                    <colgroup>
+                      <col span="1" style="background-color:transparent">
+                      <col span="1" style="background-color:#cfe2ff">
+                      <col span="1" style="background-color:transparent">
+                      <col span="1" style="background-color:#cfe2ff">
+                      <col span="1" style="background-color:transparent">
+                      <col span="1" style="background-color:#cfe2ff">
+                      <col span="1" style="background-color:#transparent">
+                      <col span="1" style="background-color:#cfe2ff">
+                      <col span="1" style="background-color:transparent">
+                      <col span="1" style="background-color:#cfe2ff">
+                      <col span="1" style="background-color:#transparent">
+                      <col span="1" style="background-color:#cfe2ff">
+                      <col span="1" style="background-color:#transparent">
+                      <col span="1" style="background-color:#cfe2ff">
+                      <col span="1" style="background-color:transparent">
+                      <col span="1" style="background-color:#cfe2ff">
+                      <col span="1" style="background-color:transparent">
+                      <col span="1" style="background-color:#cfe2ff">
+                      <col span="1" style="background-color:#transparent">
+                      <col span="1" style="background-color:#cfe2ff">
+                      <col span="1" style="background-color:transparent">
+                      <col span="1" style="background-color:#cfe2ff">
+                    </colgroup>
+                    <thead>
+                      <tr>
+                        <th scope="col">Match #</th>
+                        <th scope="col">Mobility</th>
+                        <th scope="col">Auton Cones Bottom</th>
+                        <th scope="col">Auton Cones Middle</th>
+                        <th scope="col">Auton Cones Top</th>
+                        <th scope="col">Auton Cubes Bottom</th>
+                        <th scope="col">Auton Cubes Middle</th>
+                        <th scope="col">Auton Cubes Top</th>
+                        <th scope="col">Auton Charge Level</th>
+                        <th scope="col">Teleop Cones Bottom</th>
+                        <th scope="col">Teleop Cones Middle</th>
+                        <th scope="col">Teleop Cones Top</th>
+                        <th scope="col">Teleop Cubes Bottom</th>
+                        <th scope="col">Teleop Cubes Middle</th>
+                        <th scope="col">Teleop Cubes Top</th>
+                        <th scope="col">Endgame Charge Level</th>
+                        <th scope="col">Died</th>
+                        <th scope="col">Picked Up Cube</th>
+                        <th scope="col">Picked Up Upright Cone</th>
+                        <th scope="col">Picked Up Tipped Cone</th>
+                        <th scope="col">Scout Name</th>
+                      </tr>
+                    </thead>
+                    <tbody id="allMatchesTable">
+                    </tbody>
+                  </table>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        -->
       </div>
 
+      <!-- Second Column of Data starts here -->
       <div class="col-lg-6 col-sm-6 col-xs-6 gx-3">
         <div class="card mb-3">
           <div class="card-body">
-
+  
+            <!-- Match Total Points section -->
             <div class="card mb-3">
               <div class="card-body">
                 <div class="overflow-auto">
                   <h5 class="text-center">Match Total Points </h5>
-                    <table class="table table-striped">
-                      <thead>
-                        <tr>
-                          <td>&nbsp;</td>
-                          <th scope="col">AVG</th>
-                          <th scope="col">MAX</th>
-                        </tr>
-                      </thead>
-                      <tbody id="totalTable">
-                        <tr>
-                          <th scope="row">Total Pts</th>
-                        </tr>
-                      </tbody>
-                    </table>
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <td>&nbsp;</td>
+                        <th scope="col">AVG</th>
+                        <th scope="col">MAX</th>
+                      </tr>
+                    </thead>
+                    <tbody id="totalTable">
+                      <tr>
+                        <th scope="row">Total Pts</th>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>
-              
-
+  
+            <!-- Auton Points section -->
             <div class="card mb-3">
               <div class="card-header">
                 <div class="overflow-auto">
@@ -215,11 +275,11 @@
               </div>
             </div>
 
+            <!-- Teleop Points section -->
             <div class="card mb-3">
               <div class="card-header">
                 <div class="overflow-auto">
-                  <h5 class="text-center"> <a href="#collapseTeleop" data-bs-toggle="collapse" aria-expanded="false"> Teleop </a>
-                  </h5>
+                  <h5 class="text-center"> <a href="#collapseTeleop" data-bs-toggle="collapse" aria-expanded="false"> Teleop </a> </h5>
                   <div class="collapse" id="collapseTeleop">
                     <div class="card card-body">
                       <table class="table table-striped">
@@ -253,11 +313,11 @@
               </div>
             </div>
 
+            <!-- Endgame Points section -->
             <div class="card mb-3">
               <div class="card-header">
                 <div class="overflow-auto">
-                  <h5 class="text-center"> <a href="#collapseEndgame" data-bs-toggle="collapse" aria-expanded="false"> Endgame </a>
-                  </h5>
+                  <h5 class="text-center"> <a href="#collapseEndgame" data-bs-toggle="collapse" aria-expanded="false"> Endgame </a> </h5>
                   <div class="collapse" id="collapseEndgame">
                     <div class="card card-body">
                       <table class="table table-striped">
@@ -282,26 +342,27 @@
               </div>
             </div>
        
-          <div class="overflow-auto">
-            <div class="card mb-3">
-  		      <div class="card-body"> 
-                <div class="overflow-auto">
-      		      <h5 class="text-center"> 
-                    <a href="#collapsedriveRankGraph" data-bs-toggle="collapse" aria-expanded="false"> Drive Rank Graph</a>
-				  </h5>
-                  <div class="collapse" id="collapsedriveRankGraph">
-                    <canvas id="myChart3" width="400" height="350"></canvas>
+            <!-- Drive Rank graph -->
+            <div class="overflow-auto">
+              <div class="card mb-3">
+                <div class="card-body"> 
+                  <div class="overflow-auto">
+                    <h5 class="text-center"> 
+                      <a href="#collapsedriveRankGraph" data-bs-toggle="collapse" aria-expanded="false"> Drive Rank Graph</a> </h5>
+                    <div class="collapse" id="collapsedriveRankGraph">
+                      <canvas id="myChart3" width="400" height="350"></canvas>
+                    </div>
                   </div>
                 </div>
-             </div>
-            </div>  
-          </div>
+              </div>  
+            </div>
 			  
+         </div>
+        </div>
        </div>
       </div>
      </div>
     </div>
-   </div>
   </div>
 
 <?php include("footer.php") ?>
@@ -336,12 +397,14 @@
   }
 
   function dataToMatchTable(dataObj) {
-    /* HOLD for (let i = 0; i < dataObj.length; i++) {
-      writeTableRow("allMatchesTable", dataObj[i], ["matchnumber", "startpos", "tarmac",
-        "autonhighpoints", "autonlowpoints", "teleophighpoints", "teleoplowpoints", "climbed", "died", "scoutname"
+     for (let i = 0; i < dataObj.length; i++) {
+      writeTableRow("allMatchesTable", dataObj[i], ["matchnumber", "exitcommunity", "autonconesbottom", "autonconesmiddle", 
+        "autonconestop", "autoncubesbottom", "autoncubesmiddle", "autoncubestop", "autonchargelevel",
+        "teleopconesbottom", "teleopconesmiddle", "teleopconestop", "teleopcubesbottom", "teleopcubesmiddle", "teleopcubestop",
+        "endgamechargelevel", "died", "pickedupcube", "pickedupupright", "pickeduptipped", "scoutname"
       ]);
     }
-    sorttable.makeSortable(document.getElementById("sortableAllMatches")); HOLD*/
+    sorttable.makeSortable(document.getElementById("sortableAllMatches")); 
   }
 
   function dataToAvgTables(avgs) {
@@ -423,7 +486,7 @@
     dataToMatchTable(data); 
     dataToAutonGraph(data);
     dataToTeleopGraph(data);
-//HOLD    sorttable.makeSortable(document.getElementById("sortableAllMatches")); 
+    sorttable.makeSortable(document.getElementById("sortableAllMatches")); 
   }
 	
 
