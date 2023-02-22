@@ -17,108 +17,113 @@
           <button type="button" class="btn-close" id="closeMessage" aria-label="Close"></button>
         </div>
 
-	    <div class="card-body">
+        <div class="card-body">
           <form id="driveRankForm" method="post" enctype="multipart/form-data">
-        
-		<div class="mb-3">
-           <label for="scoutName" class="form-label">Scout Name</label>
-           <input type="text" class="form-control" id="scoutName">
-         </div>
 		
-        <div class="mb-3">
-          <label for="teamNumber" class="form-label">Team Number </label>
-          <input type="number" class="form-control" id="teamNumber">
-        </div>
+          <div class="mb-3">
+            <label for="teamNumber" class="form-label">Team Number </label>
+            <input type="number" class="form-control" id="teamNumber">
+          </div>
 			
-		 <div class="mb-3">
+          <div class="mb-3">
             <label for="matchNumber" class="form-label">Match Number </label>
             <input type="number" class="form-control" id="matchNumber">
-         </div>
+          </div>
 
-        <div>
-          <label class="form-label">Driver Ability</label>
-        </div>
+          <div class="mb-3">
+            <label for="scoutName" class="form-label">Scout Name</label>
+            <input type="text" class="form-control" id="scoutName">
+          </div>
+          <div>
+            <label class="form-label">Driver Ability</label>
+          </div>
 			
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="driverAbilityGroup" id="driveScore1">
-          <label class="form-check-label" for="driveScore1">1 (Beginner)</label>
-        </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="driverAbilityGroup" id="driveScore1">
+            <label class="form-check-label" for="driveScore1">1 (Beginner)</label>
+          </div>
             
-        <div class="form-check form-check-inline">
-           <input class="form-check-input" type="radio" name="driverAbilityGroup" id="driveScore2">
-           <label class="form-check-label" for="driveScore2">2(Intermediate)</label>
-        </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="driverAbilityGroup" id="driveScore2">
+            <label class="form-check-label" for="driveScore2">2(Intermediate)</label>
+          </div>
             
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="driverAbilityGroup" id="driveScore3">
-          <label class="form-check-label" for="driveScore3">3(Advanced)</label>
-        </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="driverAbilityGroup" id="driveScore3">
+            <label class="form-check-label" for="driveScore3">3(Advanced)</label>
+          </div>
               
-        <div>
-          <label class="form-label">Quickness</label>
-        </div>
+          <p>   </p>
+          <div>
+            <label class="form-label">Quickness</label>
+          </div>
         
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="quicknessGroup" id="quicknessScore1">
-          <label class="form-check-label" for="quicknessScore1">1 (Slow/Jerky)</label>
-        </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="quicknessGroup" id="quicknessScore1">
+            <label class="form-check-label" for="quicknessScore1">1 (Slow/Jerky)</label>
+          </div>
             
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="quicknessGroup" id="quicknessScore2">
-          <label class="form-check-label" for="quicknessScore2">2 (Average)</label>
-        </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="quicknessGroup" id="quicknessScore2">
+            <label class="form-check-label" for="quicknessScore2">2 (Average)</label>
+          </div>
         
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="quicknessGroup" id="quicknessScore3">
-          <label class="form-check-label" for="3">3 (Swift)</label>
-        </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="quicknessGroup" id="quicknessScore3">
+            <label class="form-check-label" for="3">3 (Swift)</label>
+          </div>
               
-        <div>
-          <label class="form-label">Field Awareness</label>
-        </div>
+          <p>   </p>
+          <div>
+            <label class="form-label">Field Awareness</label>
+          </div>
             
-        <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="fieldAwarenessGroup" id="fieldAwarenessScore1">
-              <label class="form-check-label" for="fieldAwarenessScore1">1 (Minimal)</label>
-        </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="fieldAwarenessGroup" id="fieldAwarenessScore1">
+            <label class="form-check-label" for="fieldAwarenessScore1">1 (Minimal)</label>
+          </div>
             
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="fieldAwarenessGroup" id="fieldAwarenessScore2">
-          <label class="form-check-label" for="fieldAwarenessScore2">2 (Average)</label>
-        </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="fieldAwarenessGroup" id="fieldAwarenessScore2">
+            <label class="form-check-label" for="fieldAwarenessScore2">2 (Average)</label>
+          </div>
             
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="fieldAwarenessGroup" id="fieldAwarenessScore3">
-          <label class="form-check-label" for="fieldAwarenessScore3">3 (Highly Aware/Agile)</label>
-        </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="fieldAwarenessGroup" id="fieldAwarenessScore3">
+            <label class="form-check-label" for="fieldAwarenessScore3">3 (Highly Aware/Agile)</label>
+          </div>
 
-        <div>
-          <label class="form-label">About how many game pieces were dropped?</label>
-        </div>
+          <p>   </p>
+          <div>
+            <label class="form-label">About how many game pieces were dropped?</label>
+          </div>
             
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="gamepieceDropGroup" id="gamepieceDropScore1">
-          <label class="form-check-label" for="gamepieceDropScore1">0-1 (Minimal)</label>
-        </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="gamepieceDropGroup" id="gamepieceDropScore1">
+            <label class="form-check-label" for="gamepieceDropScore1">0-1 (Minimal)</label>
+          </div>
             
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="gamepieceDropGroup" id="gamepieceDropScore2">
-          <label class="form-check-label" for="gamepieceDropScore2">2-4</label>
-        </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="gamepieceDropGroup" id="gamepieceDropScore2">
+            <label class="form-check-label" for="gamepieceDropScore2">2-4</label>
+          </div>
              
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="gamepieceDropGroup" id="gamepieceDropScore3">
-          <label class="form-check-label" for="gamepieceDropScore3">5+</label>
-        </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="gamepieceDropGroup" id="gamepieceDropScore3">
+            <label class="form-check-label" for="gamepieceDropScore3">5+</label>
+          </div>
     
-        <div class="d-grid gap-2 col-6 mx-auto">
-              <button class="btn btn-primary" type="button" id="submitButton">Submit</button>
-        </div>
+          <p>   </p>
+          <div class="d-grid gap-2 col-6 mx-auto">
+            <button class="btn btn-primary" type="button" id="submitButton">Submit</button>
+          </div>
 			
-        </form>
+          </form>
+        </div>
       </div>
     </div>
   </div>
+</div>
  
 
 <?php include("footer.php") ?>

@@ -45,6 +45,7 @@
               <label class="form-check-label" for="pitScore3">5 (Pristine)</label>
             </div>
 
+            <p>   </p>
             <div>
               <label class="form-label">Does your team have spare parts for the robot?</label>
             </div>
@@ -57,6 +58,7 @@
               <label class="form-check-label" for="sparePartsNo">No</label>
             </div>
 
+            <p>   </p>
             <div>
               <label class="form-label">Does your robot have computer vision?</label>
             </div>
@@ -69,6 +71,7 @@
               <label class="form-check-label" for="computerVisionNo">No</label>
             </div>
 
+            <p>   </p>
             <div>
               <label class="form-label">Does your robot have swerve drive?</label>
             </div>
@@ -81,6 +84,7 @@
               <label class="form-check-label" for="swerveDriveNo">No</label>
             </div>
 
+            <p>   </p>
             <div class="mb-3">
               <label for="driveType" class="form-label">What programming language do you use?</label>
               <div class="input-group mb-3">
@@ -95,6 +99,7 @@
               </div>
             </div>
 
+            <p>   </p>
             <div class="mb-3">
               <label for="driveMotors" class="form-label">What type of motors do you use on your drive train?</label>
               <div class="input-group mb-3">
@@ -107,22 +112,24 @@
               </div>
             </div>
 
+            <p>   </p>
             <div>
               <label class="form-label">Preparedness/Professionalism</label>
             </div>
-             <div class="form-check form-check-inline">
-               <input class="form-check-input" type="radio" name="preparednessGroup" id="preparednessScore1">
-               <label class="form-check-label" for="preparednessScore1">1 (Minimal)</label>
-             </div>
-             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="preparednessGroup" id="preparednessScore2">
-                <label class="form-check-label" for="preparednessScore2">3 (Average)</label>
-             </div>
-             <div class="form-check form-check-inline">
-               <input class="form-check-input" type="radio" name="preparednessGroup" id="preparednessScore3">
-               <label class="form-check-label" for="preparednessScore3">5 (Excellent)</label>
-             </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="preparednessGroup" id="preparednessScore1">
+              <label class="form-check-label" for="preparednessScore1">1 (Minimal)</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="preparednessGroup" id="preparednessScore2">
+              <label class="form-check-label" for="preparednessScore2">3 (Average)</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="preparednessGroup" id="preparednessScore3">
+              <label class="form-check-label" for="preparednessScore3">5 (Excellent)</label>
+            </div>
     
+            <p>   </p>
             <div class="d-grid gap-2 col-6 mx-auto">
               <button class="btn btn-primary" type="button" id="submitButton">Submit</button>
             </div>

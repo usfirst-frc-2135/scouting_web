@@ -68,7 +68,7 @@
           <li class="nav-item">
             <a class="nav-link" href="./qrScanner.php">QR Scanner</a> <!-- what's the diff with qr scanner and others things ... idk what it says after -->
           </li>
-		  <li class="nav-item">
+	  <li class="nav-item">
             <a class="nav-link" href="./dbStatus.php">DB Status</a>
           </li>
           <li class="nav-item">
@@ -80,26 +80,26 @@
           <li class="nav-item">
             <a class="nav-link" href="./teamLookup.php">Team Lookup</a>
           </li>
-		  <li class="nav-item">
+	  <li class="nav-item">
             <a class="nav-link" href="./matchSheet.php">Match Sheet</a>
           </li>
-		  <li class="nav-item">
+	  <li class="nav-item">
             <a class="nav-link" href="./pitScouting.php">Pit Scouting</a>
           </li>
-		  <li class="nav-item">
-            <a class="nav-link" href="./pictureUpload.php">Picture Upload</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="./picklist.php">Picklist</a>
-          </li>
-		  <li class="nav-item">
+	  <li class="nav-item">
             <a class="nav-link" href="./driveRank.php">Drive Rank</a>
+          </li>
+	  <li class="nav-item">
+            <a class="nav-link" href="./pictureUpload.php">Picture Upload</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="./allianceRanking.php">Alliance Rank</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="./rawCoprData.php">COPRs</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./picklist.php">Picklist</a>
           </li>
         </ul>
       </div>
