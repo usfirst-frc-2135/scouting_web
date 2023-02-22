@@ -6,7 +6,7 @@
 
     <div class="row pt-3 pb-3 mb-3">
       <h2>Averages</h2>
-      <div class="col-md-3">
+      <div class="col-md-2">
         <div class="input-group">
           <select class="form-select mb-3" id="startPrefix">
             <option class="dropdown-item" value="p">P</option>
@@ -88,7 +88,7 @@
               <th colspan="1"></th>
             </tr>
             <tr>
-              <th scope="col">Team #</th>
+              <th scope="col">Team</th>
               <th scope="col">OPR</th>
               <th scope="col">AVG</th>
               <th scope="col">MAX</th>
