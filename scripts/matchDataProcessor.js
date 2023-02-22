@@ -204,9 +204,9 @@ class matchDataProcessor {
         avg[tn]["avg_teleopbotrowitems"] = 0;
         avg[tn]["max_teleopbotrowitems"] = 0;
           
-	avg[tn]["autonchargestationpercent"] = { 0: 0, 1: 0, 2: 0};
-        avg[tn]["endgamechargestationpercent"] = { 0: 0, 1: 0, 2: 0, 3: 0 };  
         avg[tn]["mobilitypercent"] = 0;
+	avg[tn]["autonchargestationpercent"] = {0:0, 1:0, 2:0};
+        avg[tn]["endgamechargestationpercent"] = {0:0, 1:0, 2:0, 3:0};  
        
         avg[tn]["totaldied"] = 0;
 
@@ -218,6 +218,7 @@ class matchDataProcessor {
 	  
       var totalmatches = (this.data[i]["totalmatches"]);
       var mobilitycheck = (this.data[i]["exitcommunity"]);
+//      console.log("+++> for i="+i+", mobilitycheck = "+mobilitycheck); //TEST
 
       var autonbottomPieces = (this.data[i]["autonconesbottom"]) + (this.data[i]["autoncubesbottom"]);
       var autonmiddlePieces = (this.data[i]["autonconesmiddle"]) + (this.data[i]["autoncubesmiddle"]);
@@ -308,7 +309,15 @@ class matchDataProcessor {
       avg[tn]["avg_teleopbotrowitems"] += teleopBotRowItems;
       avg[tn]["max_teleopbotrowitems"] = Math.max(avg[tn]["max_teleopbotrowitems"], teleopBotRowItems);
         
-      avg[tn]["mobilitypercent"] += this.data[i]["exitcommunity"];
+      // For some reason the real website handling of exitcommunity and mobilitypercent
+      // is to treat mobilitypercent like a string, and keep appending the next value 
+      // as a char. To fix that, we are just incrementing mobilitypercent instead of
+      // adding the value here.
+//      console.log(">>> exitcommunity = "+ this.data[i]["exitcommunity"]); //TEST
+      if(this.data[i]["exitcommunity"] == 1) { 
+        avg[tn]["mobilitypercent"] ++;
+//        console.log("   >>> incrementing mobilitypercent = "+ avg[tn]["mobilitypercent"]); //TEST
+      } 
       avg[tn]["endgamechargestationpercent"][this.data[i]["endgamechargelevel"]] += 1;
       avg[tn]["autonchargestationpercent"][this.data[i]["autonchargelevel"]] += 1;
       avg[tn]["totaldied"] += this.data[i]["died"];
@@ -341,7 +350,10 @@ class matchDataProcessor {
       avg[key]["avg_teleopmidrowitems"] = Math.round(10 * avg[key]["avg_teleopmidrowitems"] / avg[key]["totalmatches"]) / 10;
       avg[key]["avg_teleopbotrowitems"] = Math.round(10 * avg[key]["avg_teleopbotrowitems"] / avg[key]["totalmatches"]) / 10;    
 		
+//      console.log("===> calculating mobilitypercent from sum = "+avg[key]["mobilitypercent"]); //TEST
+//      console.log("  ===> totalmatches = "+avg[key]["totalmatches"]); //TEST
       avg[key]["mobilitypercent"] = Math.round(100 * avg[key]["mobilitypercent"] / avg[key]["totalmatches"]);
+//      console.log("     ===> FINAL mobilitypercent = "+avg[key]["mobilitypercent"]);//TEST
         
       avg[key]["endgamechargestationpercent"][0] = Math.round(100 * avg[key]["endgamechargestationpercent"][0] / avg[key]["totalmatches"]);
       avg[key]["endgamechargestationpercent"][1] = Math.round(100 * avg[key]["endgamechargestationpercent"][1] / avg[key]["totalmatches"]);

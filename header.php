@@ -72,7 +72,7 @@
             <a class="nav-link" href="./dbStatus.php">DB Status</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="./rawData.php">Raw Data</a>
+            <a class="nav-link" href="./RawData.php">Raw Data</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="./averages.php">Averages</a>
