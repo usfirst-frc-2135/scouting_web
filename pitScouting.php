@@ -31,6 +31,7 @@
 
             <div>
               <label class="form-label">Pit Organization</label>
+              <label class="form-label" style="color:red;">(observe only, do not ask)</label>
             </div>
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="radio" name="pitOrgGroup" id="pitScore1">
@@ -115,6 +116,7 @@
             <p>   </p>
             <div>
               <label class="form-label">Preparedness/Professionalism</label>
+              <label class="form-label" style="color:red;">(observe only, do not ask)</label>
             </div>
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="radio" name="preparednessGroup" id="preparednessScore1">
