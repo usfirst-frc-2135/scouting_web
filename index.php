@@ -5,8 +5,9 @@
   <div class="well column  col-lg-12  col-sm-12 col-xs-12" id="content">
 
     <div class="row pt-3 pb-3 mb-3">
-      <h1>2135 2023 Scouting Database</h1>
-
+      <h1>2023 Scouting Database</h1>
+      <h4 id="pageTitle">Event Code: </h4>
+        
       <table id="psTable" class="table table-striped table-bordered table-hover sortable">
         <thead>
           <tr>
@@ -28,6 +29,7 @@
   var allPitData = {};
   var teamList = [];
   var picLookup = {};
+  var eventCode = null;
 
   function createTable() {
     if (allPitData == null || teamList == null) {
@@ -60,6 +62,13 @@
 
   $(document).ready(function() {
 
+    $.get("./tbaAPI.php", {
+      getEventCode: true
+    }, function(data) {
+      $("#pageTitle").html("Event Code: " + data);
+    });
+      
+      
     $.get("./tbaAPI.php", {
       getTeamList: 1
     }).done(function(data) {
