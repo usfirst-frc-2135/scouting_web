@@ -69,7 +69,7 @@
             <a class="nav-link" href="./qrScanner.php">QR Scanner</a> <!-- what's the diff with qr scanner and others things ... idk what it says after -->
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="./RawData.php">Raw Data</a>
+            <a class="nav-link" href="./rawData.php">Raw Data</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="./averages.php">Averages</a>
