@@ -118,7 +118,7 @@
     });
 
     $("#dataTable").click(function() {
-      if (!frozenTable) {
+      if (frozenTable) {
         frozenTable.update();
       }
     });
