@@ -147,7 +147,7 @@
       var team = teamList[i];
       team = team.toUpperCase();
       team = team.replace("FRC", "");
-      out.push(parseInt(team, 10));
+      out.push(team);
     }
     return out;
   }

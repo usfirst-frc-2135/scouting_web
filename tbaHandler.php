@@ -138,13 +138,87 @@ class tbaHandler
     return $this->makeDBCachedCall($requestURI);
   }
 
+  // NOTE: for events that have multiple robots, the teamlist only lists the basic team numbers.
+  // So we must adjust the list to contain the multiple robot <teamNum><Letter>.
   function getSimpleTeamList($eventCode)
   {
     $tl = $this->getTeamList($eventCode);
     $out = array();
+
+    // FORNOW - only "mttd" events are known multi-robot events. Add any others as needed.
+    $bMultiRobots = false;
+    if(strstr($eventCode,'mttd'))   // Hardcoded multi-robot eventcode
+    {
+      error_log("getTeamList: this is a multi-robot event");  
+      $bMultiRobots = true;
+    }
+
+    $ml = null;   // matchlist, only needed if multi-robot event
+    if($bMultiRobots == true)
+    {
+      $ml = $this->getMatches($eventCode);
+      error_log("getTeamList: going to adjust teamlist for multi-robots"); 
+    }
+
     foreach ($tl["response"] as $teamRow)
     {
-      array_push($out, $teamRow["team_number"]);
+      if($bMultiRobots == true)
+      { 
+        // If this is a multi-robot event, go thru  match list to get B/C/D/E robots and 
+        // add them as separate teams.
+        $teamnum = $teamRow["team_number"];
+        $numStr = "$teamnum"; // $teadmnum needs to be converted to a string, for later
+        $multiBots = array();
+        array_push($multiBots, $teamnum);  // always add the plain team number
+
+        // Check the matches if this team number has multiple robots.
+        foreach ($ml["response"] as $match)
+        {
+          // Put all this match's teams in $teams, then check for the current teamnumber.
+          $teams = array();
+          for ($j = 0; $j < 3; $j++)
+            array_push($teams, substr($match["alliances"]["red"]["team_keys"][$j],3));
+          for ($k = 0; $k < 3; $k++)
+            array_push($teams, substr($match["alliances"]["blue"]["team_keys"][$k],3));
+          for ($m = 0; $m < 6; $m++)
+          {
+            $entryNum = "$teams[$m]";
+            $trimmedNum = substr($entryNum,0,-1); // trim off the last char in entryNum, for later matching
+
+            // If trimmedNum is same as numStr AND it ends in a B/C/D/E/F, then it's a 
+            // multiple robot for numStr team.
+            if(($trimmedNum == $numStr) && ((substr($entryNum,-1) == 'B') || 
+               (substr($entryNum,-1) == 'C') || (substr($entryNum,-1) == 'D') || 
+               (substr($entryNum,-1) == 'E') || (substr($entryNum,-1) == 'F')))
+            {
+              // Check if this entryNum is already in multiBots.
+              $w = sizeof($multiBots); 
+              $bFoundInMultiBots = false;
+              for ($x = 0; $x < $w; $x++)
+              {
+                if(strcmp($multiBots[$x],$entryNum) == 0)
+                {
+                  $bFoundInMultiBots = true;
+                  break;
+                } 
+              }
+              if($bFoundInMultiBots == false)
+              {
+                array_push($multiBots, $entryNum);  // add this multi-bot number.
+              }
+            }
+          }
+        }
+
+        // Add the team numbers found (at least the basic number, even if no multiples found)
+        $n  = sizeof($multiBots);
+        for ($j = 0; $j < $n; $j++)
+        {
+          error_log("-- Adding to out: $multiBots[$j]"); 
+          array_push($out, $multiBots[$j]);
+        }
+      } 
+      else array_push($out, $teamRow["team_number"]);   // not mulit-bot case
     }
     return $out;
   }

@@ -72,6 +72,7 @@
     $.get("./tbaAPI.php", {
       getTeamList: 1
     }).done(function(data) {
+      console.log("index.php: getTeamList: data = "+data);
 
       if(data == null)
         alert("Can't load teamlist from TBA; check if TBA Key was set in dbStatus");
@@ -81,7 +82,7 @@
       $.get("./readAPI.php", {
         getTeamsImages: JSON.stringify(teamList)
       }).done(function(data) {
-        console.log("index.php: getTeamList: data = "+data);
+        console.log("index.php: getTeamsImages = "+data);
         picLookup = JSON.parse(data);
         createTable();
         sorttable.makeSortable(document.getElementById("psTable"));

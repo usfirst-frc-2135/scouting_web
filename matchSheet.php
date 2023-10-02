@@ -736,7 +736,7 @@
     }
 
     function strTeamToIntTeam(team) {
-      return parseInt(team.replace(/^(frc)/, ''));
+      return team.replace(/^(frc)/, '');
     }
 
     $(document).ready(function() {
