@@ -142,12 +142,13 @@ class tbaHandler
   // So we must adjust the list to contain the multiple robot <teamNum><Letter>.
   function getSimpleTeamList($eventCode)
   {
+    error_log("---> starting getSimpleTeamList for eventCode: $eventCode");  
     $tl = $this->getTeamList($eventCode);
     $out = array();
 
-    // FORNOW - only "mttd" events are known multi-robot events. Add any others as needed.
+    // FORNOW - only "mttd", "cacg", "cacc"  events are known multi-robot events. Add any others as needed.
     $bMultiRobots = false;
-    if(strstr($eventCode,'mttd'))   // Hardcoded multi-robot eventcode
+    if(strstr($eventCode,'mttd') || strstr($eventCode,'cacg') || strstr($eventCode,'cacc'))   // Hardcoded multi-robot eventcode
     {
       error_log("getTeamList: this is a multi-robot event");  
       $bMultiRobots = true;

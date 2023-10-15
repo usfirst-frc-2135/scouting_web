@@ -29,6 +29,11 @@
               <input class="form-control" type="file" id="robotPic">
             </div>
               
+            <div class="mb-3">
+              <label for="replacePic" class="form-label">Replace Existing Pictures</label>
+              <input class="form-check-input" type="checkbox" id="replacePic">
+            </div>
+
             <div class="d-grid gap-2 col-6 mx-auto">
               <button class="btn btn-primary" type="button" id="upload">Upload</button>
             </div>
@@ -75,6 +80,40 @@
 
   $(document).ready(function() {
     $("#upload").on('click', function(event) {
+      if ( $("#replacePic").is(":checked") == true) 
+      {
+        var teamNum = $("#teamNumber").val();
+        console.log("Going to remove existing photo for team #"+teamNum); 
+
+        // First get list of robot-pic files for this team.
+        $.get("readAPI.php", {
+          getTeamImages: teamNum 
+        }).done(function(data) {
+          var teamPics = JSON.parse(data);
+
+          // If there are any existing pics, delete them.
+          for (let picFile of teamPics) {
+            $.ajax({
+              url:'deleteFile.php',
+              data: {'file' : "<?php echo dirname(__FILE__) . '/'?>" + picFile },
+              success:function(response){
+                console.log("Deleted existing picture: "+picFile); 
+              },
+              error:function(){
+                console.log("Could NOT delete existing picture: "+picFile); 
+              }
+            });
+          }
+        });
+        // Reload the list of team images 
+        $.get("readAPI.php", {
+          getTeamImages: teamNum 
+        }).done(function(data) {
+          console.log("Reloaded team images" );
+        });
+      }
+
+      // Now upload the new pic
       var uploadPost = new FormData();
       uploadPost.append("teamPic", $("#robotPic")[0].files[0]);
       uploadPost.append("teamNum", $("#teamNumber").val());
@@ -92,6 +131,7 @@
 
     $("#closeMessage").on('click', function(event) {
       $("#uploadMessage").hide();
+      $("#replacePic").prop("checked",false); 
     });
   });
 </script>
