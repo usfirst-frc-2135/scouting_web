@@ -382,7 +382,7 @@ class dbHandler
             entrykey VARCHAR(60) NOT NULL PRIMARY KEY,
             eventcode VARCHAR(10) NOT NULL,
             teamnumber VARCHAR(6) NOT NULL,
-            numbatteries TINYINT UNSIGNED NOT NULL,
+            numbatteries VARCHAR(8) NOT NULL,
             pitorg TINYINT UNSIGNED NOT NULL,
             spareparts TINYINT UNSIGNED NOT NULL,
             computervision TINYINT UNSIGNED NOT NULL,

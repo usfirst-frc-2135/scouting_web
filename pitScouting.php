@@ -26,7 +26,7 @@
 
             <div class="mb-3">
               <label for="batteries" class="form-label">Count the number of batteries they have</label>
-              <input type="number" class="form-control" id="batteries">
+              <input type="text" class="form-control" id="batteries">
             </div>
 
             <div>
