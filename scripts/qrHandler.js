@@ -18,45 +18,36 @@ function qrStringToList(dataString) {
 
 function validateQrList(dataList) {
   var dataListSize = dataList.length;
-  if (dataList.length != 25) {
+  if (dataList.length != 15) {
     return false;
   }
   return true;
 }
 
 function padList(dataList) {
-  if (dataList.length == 24) {
+  if (dataList.length == 14) {
     dataList.push("");
   }
   return dataList;
 }
-
+//also need to adjust data list size in "validateQrList" and "padList"!!!
 function qrListToDict(dataList) {
   out = {};
   out["teamnumber"] = dataList[0];
-  out["exitcommunity"] = dataList[1];
-  out["autonconesbottom"] = dataList[2];
-  out["autonconesmiddle"] = dataList[3];
-  out["autonconestop"] = dataList[4];
-  out["autoncubesbottom"] = dataList[5];
-  out["autoncubesmiddle"] = dataList[6];
-  out["autoncubestop"] = dataList[7];
-  out["autonchargelevel"] = dataList[8];
-  out["teleopconesbottom"] = dataList[9];
-  out["teleopconesmiddle"] = dataList[10];
-  out["teleopconestop"] = dataList[11];
-  out["teleopcubesbottom"] = dataList[12];
-  out["teleopcubesmiddle"] = dataList[13];
-  out["teleopcubestop"] = dataList[14];
-  out["pickedupcube"] = dataList[15];
-  out["pickedupupright"] = dataList[16];
-  out["pickeduptipped"] = dataList[17];
-  out["endgamechargelevel"] = dataList[18];
-  out["died"] = dataList[19];
-  out["matchnumber"] = dataList[20];
-  out["eventcode"] = dataList[21];
-  out["scoutname"] = dataList[22];
-  out["comment"] = dataList[23];
+  out["autonleave"] = dataList[1];
+  out["autonampnotes"] = dataList[2];
+  out["autonspeakernotes"] = dataList[3];
+  out["teleopampnotes"] = dataList[4];
+  out["teleopspeakernotes"] = dataList[5];
+  out["endgamestage"] = dataList[6];
+  out["endgameharmony"] = dataList[7];
+  out["endgamespotlit"] = dataList[8];
+  out["endgametrap"] = dataList[9];
+  out["died"] = dataList[10];
+  out["matchnumber"] = dataList[11];
+  out["eventcode"] = dataList[12];
+  out["scoutname"] = dataList[13];
+  out["comment"] = dataList[14];
   return out;
 }
 
@@ -133,10 +124,10 @@ function scanCamera(reader, id) {
       console.log("scanCamera: dataList = "+dataList);
       if (validateQrList(dataList)) {
         alertSuccessfulScan();
-	addQrData(qrListToDict(dataList));
+	    addQrData(qrListToDict(dataList));
       }
       else {
-        alert("Make sure scout name is added!");
+        alert("QR data failed validation!");
       }
     }
   });

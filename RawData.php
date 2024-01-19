@@ -21,39 +21,21 @@
             <col span="1" style="background-color:#transparent">
             <col span="1" style="background-color:#cfe2ff">
             <col span="1" style="background-color:#transparent">
-            <col span="1" style="background-color:#cfe2ff">
-            <col span="1" style="background-color:transparent">
-            <col span="1" style="background-color:#cfe2ff">
-            <col span="1" style="background-color:transparent">
-            <col span="1" style="background-color:#cfe2ff">
-            <col span="1" style="background-color:#transparent">
-            <col span="1" style="background-color:#cfe2ff">
-            <col span="1" style="background-color:transparent">
-            <col span="1" style="background-color:#cfe2ff">
           </colgroup>
           <thead>
             <tr>
               <th scope="col">Match #</th>
               <th scope="col">Team #</th>
-              <th scope="col">Mobility</th>
-              <th scope="col">Auton Cones Bottom</th>
-              <th scope="col">Auton Cones Middle</th>
-              <th scope="col">Auton Cones Top</th>   
-              <th scope="col">Auton Cubes Bottom</th>
-              <th scope="col">Auton Cubes Middle</th>
-              <th scope="col">Auton Cubes Top</th> 
-              <th scope="col">Auton Charge Level</th>  
-              <th scope="col">Teleop Cones Bottom</th>
-              <th scope="col">Teleop Cones Middle</th>
-              <th scope="col">Teleop Cones Top</th>   
-              <th scope="col">Teleop Cubes Bottom</th>
-              <th scope="col">Teleop Cubes Middle</th>
-              <th scope="col">Teleop Cubes Top</th>
-              <th scope="col">Endgame Charge Level</th>
+              <th scope="col">Leave</th>
+              <th scope="col">Auton Amp Notes</th>
+              <th scope="col">Auton Speaker Notes</th>
+              <th scope="col">Teleop Amp Notes</th>
+              <th scope="col">Teleop Speaker Notes</th>
+              <th scope="col">Endgame Stage Level</th>
+              <th scope="col">Endgame Harmony Level</th>
+              <th scope="col">Endgame Spotlit</th>
+              <th scope="col">Endgame Trap</th>
               <th scope="col">Died</th>
-              <th scope="col">Picked Up Cube</th>
-              <th scope="col">Picked Up Upright Cone</th>
-              <th scope="col">Picked Up Tipped Cone</th>
               <th scope="col">Comment</th>
               <th scope="col">Scout Name</th>
             </tr>
@@ -76,29 +58,19 @@
     for (let i = 0; i < dataObj.length; i++) {
       var rowString = "<tr><td>" + dataObj[i]["matchnumber"] + "</td>" +
         "<td>" + dataObj[i]["teamnumber"] + "</td>" +
-        "<td>" + dataObj[i]["exitcommunity"] + "</td>" +
-        "<td>" + dataObj[i]["autonconesbottom"] + "</td>" +
-        "<td>" + dataObj[i]["autonconesmiddle"] + "</td>" +
-        "<td>" + dataObj[i]["autonconestop"] + "</td>" +
-        "<td>" + dataObj[i]["autoncubesbottom"] + "</td>" +
-        "<td>" + dataObj[i]["autoncubesmiddle"] + "</td>" +
-        "<td>" + dataObj[i]["autoncubestop"] + "</td>" +
-        "<td>" + dataObj[i]["autonchargelevel"] + "</td>" +
-        "<td>" + dataObj[i]["teleopconesbottom"] + "</td>" +
-        "<td>" + dataObj[i]["teleopconesmiddle"] + "</td>" +
-        "<td>" + dataObj[i]["teleopconestop"] + "</td>" +
-        "<td>" + dataObj[i]["teleopcubesbottom"] + "</td>" +
-        "<td>" + dataObj[i]["teleopcubesmiddle"] + "</td>" +
-        "<td>" + dataObj[i]["teleopcubestop"] + "</td>" +  
-        "<td>" + dataObj[i]["endgamechargelevel"] + "</td>" +
+        "<td>" + dataObj[i]["autonleave"] + "</td>" +
+        "<td>" + dataObj[i]["autonampnotes"] + "</td>" +
+        "<td>" + dataObj[i]["autonspeakernotes"] + "</td>" +
+        "<td>" + dataObj[i]["teleopampnotes"] + "</td>" +
+        "<td>" + dataObj[i]["teleopspeakernotes"] + "</td>" +
+        "<td>" + dataObj[i]["endgamestage"] + "</td>" +
+        "<td>" + dataObj[i]["endgameharmony"] + "</td>" +
+        "<td>" + dataObj[i]["endgamespotlit"] + "</td>" +
+        "<td>" + dataObj[i]["endgametrap"] + "</td>" +
         "<td>" + dataObj[i]["died"] + "</td>" +
-        "<td>" + dataObj[i]["pickedupcube"] + "</td>" +
-        "<td>" + dataObj[i]["pickedupupright"] + "</td>" +
-        "<td>" + dataObj[i]["pickeduptipped"] + "</td>" + 
         "<td>" + dataObj[i]["comment"] + "</td>" +
         "<td>" + dataObj[i]["scoutname"] + "</td>" +
         "</td>";
-
       $("#tableData").append(rowString);
 
     }
