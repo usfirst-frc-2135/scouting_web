@@ -146,6 +146,10 @@ class tbaHandler
     $tl = $this->getTeamList($eventCode);
     $out = array();
 
+    // If eventCode is "COMPX", just exit.
+    if(strstr($eventCode,'COMPX') )   
+      return $out;
+
     // FORNOW - only "mttd", "cacg", "cacc"  events are known multi-robot events. Add any others as needed.
     $bMultiRobots = false;
     if(strstr($eventCode,'mttd') || strstr($eventCode,'cacg') || strstr($eventCode,'cacc'))   // Hardcoded multi-robot eventcode
