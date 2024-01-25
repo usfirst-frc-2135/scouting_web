@@ -16,7 +16,6 @@
         <div class="card mb-3">
           <div class="card-body">
             <h5 id="teamTitle" class="card-title">Team # </h5>
-
             <!-- Robot photo carousel section -->
             <div id="robotPicsCarousel" class="carousel slide" data-bs-ride="carousel">
               <div id="robotPics" class="carousel-inner">
@@ -42,7 +41,7 @@
                     <canvas id="myChart" width="400" height="400"></canvas>
                   </div>
                 </div>
-              </div>
+              </div> 
             </div>
                   
             <!-- Teleop collapsible graph -->
@@ -67,16 +66,12 @@
                     <col span="1" style="background-color:#cfe2ff">
                     <col span="1" style="background-color:transparent">
                     <col span="1" style="background-color:#cfe2ff">
-                    <col span="1" style="background-color:transparent">
-                    <col span="1" style="background-color:#cfe2ff">
                   </colgroup>
                   <tr>
                     <th scope="col">Batt</th>
                     <th scope="col">Pit</th>
                     <th scope="col">Spare Parts</th>
                     <th scope="col">Vision</th>
-                    <th scope="col">Swerve</th>
-                    <th scope="col">Lang</th>
                   </tr>
                 </thead>
                 <tbody id="pitRow1">
@@ -93,14 +88,12 @@
                     <col span="1" style="background-color:#cfe2ff">
                     <col span="1" style="background-color:transparent">
                     <col span="1" style="background-color:#cfe2ff">
-                    <col span="1" style="background-color:transparent">
                   </colgroup>
                   <tr>
                     <th scope="col">Drive Motors</th>
                     <th scope="col">Prep</th>
-                    <th scope="col">Pickup Cube</th>
-                    <th scope="col">Tipped Cone</th>
-                    <th scope="col">Upright Cone</th>
+                    <th scope="col">Swerve</th>
+                    <th scope="col">Lang</th>
                   </tr>  
                 </thead>
                 <tbody id="pitRow2">
@@ -158,25 +151,16 @@
                     <thead>
                       <tr>
                         <th scope="col">Match #</th>
-                        <th scope="col">Mobility</th>
-                        <th scope="col">Auton Cones Bottom</th>
-                        <th scope="col">Auton Cones Middle</th>
-                        <th scope="col">Auton Cones Top</th>
-                        <th scope="col">Auton Cubes Bottom</th>
-                        <th scope="col">Auton Cubes Middle</th>
-                        <th scope="col">Auton Cubes Top</th>
-                        <th scope="col">Auton Charge Level</th>
-                        <th scope="col">Teleop Cones Bottom</th>
-                        <th scope="col">Teleop Cones Middle</th>
-                        <th scope="col">Teleop Cones Top</th>
-                        <th scope="col">Teleop Cubes Bottom</th>
-                        <th scope="col">Teleop Cubes Middle</th>
-                        <th scope="col">Teleop Cubes Top</th>
-                        <th scope="col">Endgame Charge Level</th>
+                        <th scope="col">Leave</th>
+                        <th scope="col">Auton Speaker Notes</th>
+                        <th scope="col">Auton Amp Notes</th>
+                        <th scope="col">Teleop Amp Notes</th>
+                        <th scope="col">Teleop Speaker Notes</th>
+                        <th scope="col">Endgame Stage Level</th>
+                        <th scope="col">Endgame Harmony Level</th>
+                        <th scope="col">Endgame Spotlit </th>
+                        <th scope="col">Endgame Trap </th>
                         <th scope="col">Died</th>
-                        <th scope="col">Picked Up Cube</th>
-                        <th scope="col">Picked Up Upright Cone</th>
-                        <th scope="col">Picked Up Tipped Cone</th>
                         <th scope="col">Scout Name</th>
                       </tr>
                     </thead>
@@ -253,7 +237,7 @@
                           <tr>
                             <th scope="row">Mobility %</th>
                           </tr>
-                          <tr>
+                         <tr>
                             <th scope="row">Top Row</th>
                           </tr>
                           <tr>
@@ -388,7 +372,6 @@
 
   function dataToCommentTable(commentObj) {
     for (let i = 0; i < commentObj.length; i++) {
-//      console.log("Adding comment: "+commentObj[i].comment);
       if (commentObj[i].comment === "-") {
         continue;
       }
@@ -397,12 +380,11 @@
   }
 
   function dataToMatchTable(dataObj) {
+      console.log("starting data to match table, data length= "+dataObj.length);
      for (let i = 0; i < dataObj.length; i++) {
-      writeTableRow("allMatchesTable", dataObj[i], ["matchnumber", "exitcommunity", "autonconesbottom", "autonconesmiddle", 
-        "autonconestop", "autoncubesbottom", "autoncubesmiddle", "autoncubestop", "autonchargelevel",
-        "teleopconesbottom", "teleopconesmiddle", "teleopconestop", "teleopcubesbottom", "teleopcubesmiddle", "teleopcubestop",
-        "endgamechargelevel", "died", "pickedupcube", "pickedupupright", "pickeduptipped", "scoutname"
-      ]);
+      writeTableRow("allMatchesTable", dataObj[i], ["matchnumber", "autonleave", "autonampnotes", "autonspeakernotes", 
+        "teleopampnotes", "teleopspeakernotes", "endgamestage", "endgameharmony", "endgamespotlit",
+        "endgametrap","died", "scoutname"]);
     }
     sorttable.makeSortable(document.getElementById("sortableAllMatches")); 
   }
@@ -437,8 +419,8 @@
 
     // Endgame Climb Table
     avgs["endgamechargestationpercent"]["endgamechargestr"] = "<b>Charge Level %</b>";
-    //var chargestationlevel = avgs["endgamechargestationpercent"];
-    //chargestationlevel["chargestr"] = "<b>Charge Level %</b>";
+    var chargestationlevel = avgs["endgamechargestationpercent"];
+    chargestationlevel["chargestr"] = "<b>Charge Level %</b>";
     writeTableRow("endgameChargeTable", avgs["endgamechargestationpercent"], ["endgamechargestr", 0, 1, 2, 3]);
 
     // Total Table
@@ -476,13 +458,14 @@
   }
 
   function processMatchData(team, data) {
-    var mdp = new matchDataProcessor(data);
-    mdp.sortMatches(data);
-    mdp.getSiteFilteredAverages(function(averageData) {
+      var mdp = new matchDataProcessor(data);
+      mdp.sortMatches(data);
+      mdp.getSiteFilteredAverages(function(averageData) {
       processedData = averageData[team];
       dataToAvgTables(processedData);
     });
-    dataToCommentTable(data);
+      dataToCommentTable(data);
+      console.log("in processMatchData, calling data to MatchTable, team= "+team);
     dataToMatchTable(data); 
     dataToAutonGraph(data);
     dataToTeleopGraph(data);
@@ -501,12 +484,12 @@
     var autonChargeTips = []; // holds custom tooltips for auton charge level points
 
     datasets.push({
-      label: "Auton Top Row Items",
+      label: "Auton Amp Notes",
       data: [],
       borderColor: 'Red'
     });
     datasets.push({
-      label: "Auton Middle Row Items",
+      label: "Auton Speaker Notes",
       data: [],
       borderColor: 'Yellow'
     });
@@ -822,7 +805,7 @@
       type: 'line',
       data: {
         labels: match_list,
-        datasets: datasets
+        datasets: datasetsx
       },
       options: {
         scales: {
@@ -844,40 +827,19 @@
       pitData["sparepartsstring"] = pitData["spareparts"] ? "yes" : "no";
       pitData["computervisionstring"] = pitData["computervision"] ? "yes" : "no";
       pitData["swervedrivestring"] = pitData["swerve"] ? "yes" : "no"; 
+      pitData["drivemotors"];
+      pitData["preparedness"];
+      pitData["projlanguage"];
 
       // First row has pit data, so write out that data.
-      writeTableRow("pitRow1", pitData, ["numbatteries", "pitorg", "sparepartsstring", "computervisionstring", "swervedrivestring", "proglanguage"]);
-
-      // 2nd row has both pit data and matchData.
-      // So need to create our own dictionary to use in writeTableRow that holds
-      // both the pit data and the matchData needed in this line. 
-      // First get the matchData that we need:
-      var pickedupcubevalue = 0;
-      var pickedupuprightvalue = 0;
-      var pickeduptippedvalue = 0;
-      for (let i = 0; i < matchData.length; i++) {
-        if(matchData[i]["pickedupcube"] == true) {
-           pickedupcubevalue = 1;
-        }
-        else if(matchData[i]["pickedupupright"] == true) {
-           pickedupuprightvalue = 1;
-        }
-        else if(matchData[i]["pickeduptipped"] == true) {
-           pickeduptippedvalue = 1;
-        }
-      }
-        
-      // Now create a dictionary variable with the <keyword>: <data value> needed
-      const dictX = {
-        drivemotors: pitData["drivemotors"],
-        preparedness: pitData["preparedness"],
-        pickedupcube: pickedupcubevalue,
-        pickedupupright: pickedupuprightvalue,
-        pickeduptipped: pickeduptippedvalue
-      };
-      writeTableRow("pitRow2", dictX, ["drivemotors", "preparedness", "pickedupcube", "pickedupupright", "pickeduptipped"]);
+      
+        writeTableRow("pitRow1", pitData, ["numbatteries", "pitorg", "sparepartsstring", "computervisionstring"]);
+        writeTableRow("pitRow2",pitData,["drivemotors","preparedness","swervedrivestring","proglanguage"]);
     }
+    
   }
+      
+  
 	
    function processDriveRankData(driveRankData) {
      dataToDriveRankGraph(driveRankData);
@@ -917,6 +879,7 @@
       getTeamData: team
     }).done(function(data) {
       matchData = JSON.parse(data);
+        //console.log("matchdata from teamAPI= "+matchData);
       processMatchData(team, matchData);
 
       // Do the Pit Scouting Data here because it also needs the matchData.
@@ -948,5 +911,4 @@
     });
   });
 </script>
-
 <script type="text/javascript" src="./scripts/matchDataProcessor.js"></script>
