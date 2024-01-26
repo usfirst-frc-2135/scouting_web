@@ -168,45 +168,32 @@ class matchDataProcessor {
       if (!(tn in avg)) {
         avg[tn] = {};
 
-        avg[tn]["avgtotalpoints"] = 0;
-        avg[tn]["maxtotalpoints"] = 0;
+        avg[tn]["avgtotalnotes"] = 0;
+        avg[tn]["maxtotalnotes"] = 0;
 
-        avg[tn]["avgautopoints"] = 0;
-        avg[tn]["maxautopoints"] = 0;
+        avg[tn]["avgautonotes"] = 0;
+        avg[tn]["maxautonotes"] = 0;
 
-        avg[tn]["avgteleoppoints"] = 0;
-        avg[tn]["maxteleoppoints"] = 0;
+        avg[tn]["avgteleopnotes"] = 0;
+        avg[tn]["maxteleopnotes"] = 0;
 
         avg[tn]["avgendgamepoints"] = 0;
         avg[tn]["maxendgamepoints"] = 0;
-
-        avg[tn]["avgautoncones"] = 0;
-        avg[tn]["maxautoncones"] = 0;
-        avg[tn]["avgautoncubes"] = 0;
-        avg[tn]["maxautoncubes"] = 0;
-		
-        avg[tn]["avg_autontoprowitems"] = 0;
-        avg[tn]["max_autontoprowitems"] = 0;
-        avg[tn]["avg_autonmidrowitems"] = 0;
-        avg[tn]["max_autonmidrowitems"] = 0;
-        avg[tn]["avg_autonbotrowitems"] = 0;
-        avg[tn]["max_autonbotrowitems"] = 0;
-
-        avg[tn]["avgteleopcones"] = 0;
-        avg[tn]["maxteleopcones"] = 0;
-        avg[tn]["avgteleopcubes"] = 0;
-        avg[tn]["maxteleopcubes"] = 0;
-		  
-        avg[tn]["avg_teleoptoprowitems"] = 0;
-        avg[tn]["max_teleoptoprowitems"] = 0;
-        avg[tn]["avg_teleopmidrowitems"] = 0;
-        avg[tn]["max_teleopmidrowitems"] = 0;
-        avg[tn]["avg_teleopbotrowitems"] = 0;
-        avg[tn]["max_teleopbotrowitems"] = 0;
           
-        avg[tn]["mobilitypercent"] = 0;
-	avg[tn]["autonchargestationpercent"] = {0:0, 1:0, 2:0};
-        avg[tn]["endgamechargestationpercent"] = {0:0, 1:0, 2:0, 3:0};  
+        avg[tn]["avgautonamps"] = 0;
+        avg[tn]["maxautonamps"] = 0;
+        avg[tn]["avgautonspeaker"] = 0;
+        avg[tn]["maxautonspeaker"] = 0;
+		
+        avg[tn]["avgteleopampnotes"] = 0;
+        avg[tn]["maxteleopampnotes"] = 0;
+        avg[tn]["avgteleopspeakernotes"] = 0;
+        avg[tn]["maxteleopspeakernotes"] = 0;
+          
+        avg[tn]["endgamestagepercent"] = {0:0, 1:0, 2:0};  
+        avg[tn]["endgameharmonypercent"] = {0:0, 1:0, 2:0};
+        avg[tn]["avgspotlit"] = 0;
+        avg[tn]["avgtrap"] = 0;
        
         avg[tn]["totaldied"] = 0;
 
@@ -218,108 +205,86 @@ class matchDataProcessor {
 	  
       var totalmatches = (this.data[i]["totalmatches"]);
       var mobilitycheck = (this.data[i]["exitcommunity"]);
-//      console.log("+++> for i="+i+", mobilitycheck = "+mobilitycheck); //TEST
-
-      var autonbottomPieces = (this.data[i]["autonconesbottom"]) + (this.data[i]["autoncubesbottom"]);
-      var autonmiddlePieces = (this.data[i]["autonconesmiddle"]) + (this.data[i]["autoncubesmiddle"]);
-      var autontopPieces = (this.data[i]["autonconestop"]) + (this.data[i]["autoncubestop"]);
-      var autonchargestationPoints = 0;
-	 
-      if (this.data[i]["autonchargelevel"] == 1) { 
-        autonchargestationPoints = 8; 
-      }
-      if (this.data[i]["autonchargelevel"] == 2) { 
-        autonchargestationPoints = 12; 
-      }
+        
+      var autonAmpNotes = (this.data[i]["autonampnotes"]);
+      var autonSpeakerNotes = (this.data[i]["autonspeakernotes"]);
 		
-      var autoPoints = ((mobilitycheck * 3) + (autonbottomPieces * 3) + (autonmiddlePieces * 4) + (autontopPieces * 6) +(autonchargestationPoints));
+      var autoNotes = (autonAmpNotes) + (autonSpeakerNotes);
 //      console.log("===> for team "+tn+": autoPoints = "+autoPoints); //TEST
 
-      var teleopbottomPieces = (this.data[i]["teleopconesbottom"]) + (this.data[i]["teleopcubesbottom"]);
-      var teleopmiddlePieces = (this.data[i]["teleopconesmiddle"]) + (this.data[i]["teleopcubesmiddle"]);
-      var teleoptopPieces = (this.data[i]["teleopconestop"]) + (this.data[i]["teleopcubestop"]);
-      var telopPoints = ((parseInt(teleopbottomPieces) * 2) + (parseInt(teleopmiddlePieces) * 3) + (parseInt(teleoptopPieces) * 5));
+      var teleopAmpNotes = (this.data[i]["teleopampnotes"]);
+      var teleopSpeakerNotes = (this.data[i]["teleopspeakernotes"]);
+      var teleopNotes = (parseInt(teleopAmpNotes)) + (parseInt(teleopSpeakerNotes));
 //      console.log("   -> teleop points = "+telopPoints); //TEST
 
-      var endgamePoints = 0;
-      if (this.data[i]["endgamechargelevel"] == 1) { 
-        endgamePoints = 2; 
+      var endgameStagePoints = (this.data[i]["endgamestage"]);
+      var endgameHarmonyPoints = (this.data[i]["endgameharmony"]);
+      if (endgameStagePoints == 2) { 
+        endgameStagePoints = 3; 
       }
-      if (this.data[i]["endgamechargelevel"] == 2) { 
-        endgamePoints = 6; 
+      //harmony points based on number of robots onstage
+      if (endgameHarmonyPoints == 1) {
+        endgameHarmonyPoints = 2;
       }
-      if (this.data[i]["endgamechargelevel"] == 3) { 
-        endgamePoints = 10; 
+      else if (endgameHarmonyPoints == 2) {
+        endgameHarmonyPoints = 4;
       }
+      var endgameSpotlit = (this.data[i]["endgamespotlit"]);
+        //console.log(">> spotlit = " + endgameSpotlit);
+      var endgameTrap = (this.data[i]["endgametrap"]);
+        //console.log(">> endgame stage = " + endgameStagePoints);
+        //console.log(">> endgame harmomy = " + endgameHarmonyPoints);
+        //console.log(">> endgame trap = " + endgameTrap);
+      var endgamePoints = (endgameStagePoints) + (endgameHarmonyPoints) + (endgameSpotlit) + (endgameTrap * 5);
+        //console.log(">> endgame points = " + endgamePoints);
+
 //      console.log("   -> endgamePoints = "+endgamePoints); //TEST
+      var combinedTrap = (parseInt(this.data[i]["endgametrap"]));
+      avg[tn]["avgtrap"] += combinedTrap;
+        
+      var combinedSpotlit = (parseInt(this.data[i]["endgamespotlit"]));
+      avg[tn]["avgspotlit"] += combinedSpotlit;
       
-      var totalPoints = autoPoints + telopPoints + endgamePoints;
+      var totalNotes = autoNotes + teleopNotes;
 //      console.log("     -> totalPoints = "+totalPoints); //TEST
-      var autonconePieces = (this.data[i]["autonconesbottom"]) + (this.data[i]["autonconesmiddle"]) + (this.data[i]["autonconestop"]);
-      var autoncubePieces = (this.data[i]["autoncubesbottom"]) + (this.data[i]["autoncubesmiddle"]) + (this.data[i]["autoncubestop"]);
-      var teleopconePieces = (this.data[i]["teleopconesbottom"]) + (this.data[i]["teleopconesmiddle"]) + (this.data[i]["teleopconestop"]);
-      var teleopcubePieces = (this.data[i]["teleopcubesbottom"]) + (this.data[i]["teleopcubesmiddle"]) + (this.data[i]["teleopcubestop"]);
 
-      avg[tn]["avgtotalpoints"] += totalPoints;
-      avg[tn]["maxtotalpoints"] = Math.max(avg[tn]["maxtotalpoints"], totalPoints);
+      avg[tn]["avgtotalnotes"] += totalNotes;
+      avg[tn]["maxtotalnotes"] = Math.max(avg[tn]["maxtotalnotes"], totalNotes);
 
-      avg[tn]["avgautopoints"] += autoPoints;
-      avg[tn]["maxautopoints"] = Math.max(avg[tn]["maxautopoints"], autoPoints);
+      avg[tn]["avgautonotes"] += autoNotes;
+      avg[tn]["maxautonotes"] = Math.max(avg[tn]["maxautonotes"], autoNotes);
 //      console.log("   -> avgautopoints = "+avg[tn]["avgautopoints"]); //TEST
 
-      avg[tn]["avgteleoppoints"] += telopPoints;
-      avg[tn]["maxteleoppoints"] = Math.max(avg[tn]["maxteleoppoints"], telopPoints);
+      avg[tn]["avgteleopnotes"] += teleopNotes;
+      avg[tn]["maxteleopnotes"] = Math.max(avg[tn]["maxteleopnotes"], teleopNotes);
 		
       avg[tn]["avgendgamepoints"] += endgamePoints;
       avg[tn]["maxendgamepoints"] = Math.max(avg[tn]["maxendgamepoints"], endgamePoints);
 		
-      var combinedAutonCones = (parseInt(this.data[i]["autonconestop"]))+(parseInt(this.data[i]["autonconesmiddle"]))+(parseInt(this.data[i]["autonconesbottom"]));
-      avg[tn]["avgautoncones"] += combinedAutonCones;
-      avg[tn]["maxautoncones"] = Math.max(avg[tn]["maxautoncones"], combinedAutonCones);
+      var combinedAutonAmpNotes = (parseInt(this.data[i]["autonampnotes"]));
+      avg[tn]["avgautonamps"] += combinedAutonAmpNotes;
+      avg[tn]["maxautonamps"] = Math.max(avg[tn]["maxautonamps"], combinedAutonAmpNotes);
 		
-      var combinedAutonCubes = (parseInt(this.data[i]["autoncubestop"]))+(parseInt(this.data[i]["autoncubesmiddle"]))+(parseInt(this.data[i]["autoncubesbottom"]));
-      avg[tn]["avgautoncubes"] += combinedAutonCubes;
-      avg[tn]["maxautoncubes"] = Math.max(avg[tn]["maxautoncubes"], combinedAutonCubes);
-		
-      var autonTopRowItems = (parseInt(this.data[i]["autonconestop"]))+(parseInt(this.data[i]["autoncubestop"]));
-      var autonMidRowItems = (parseInt(this.data[i]["autonconesmiddle"]))+(parseInt(this.data[i]["autoncubesmiddle"]));
-      var autonBotRowItems = (parseInt(this.data[i]["autonconesbottom"]))+(parseInt(this.data[i]["autoncubesbottom"]));
-      avg[tn]["avg_autontoprowitems"] += autonTopRowItems;
-      avg[tn]["max_autontoprowitems"] = Math.max(avg[tn]["max_autontoprowitems"], autonTopRowItems);
-      avg[tn]["avg_autonmidrowitems"] += autonMidRowItems;
-      avg[tn]["max_autonmidrowitems"] = Math.max(avg[tn]["max_autonmidrowitems"], autonMidRowItems);
-      avg[tn]["avg_autonbotrowitems"] += autonBotRowItems;
-      avg[tn]["max_autonbotrowitems"] = Math.max(avg[tn]["max_autonbotrowitems"], autonBotRowItems);
+      var combinedAutonSpeakerNotes = (parseInt(this.data[i]["autonspeakernotes"]));
+      avg[tn]["avgautonspeaker"] += combinedAutonSpeakerNotes;
+      avg[tn]["maxautonspeaker"] = Math.max(avg[tn]["maxautonspeaker"], combinedAutonSpeakerNotes);
 
-      var combinedTeleopCones = (parseInt(this.data[i]["teleopconestop"]))+(parseInt(this.data[i]["teleopconesmiddle"]))+(parseInt(this.data[i]["teleopconesbottom"]));
-      avg[tn]["avgteleopcones"] += combinedTeleopCones;
-      avg[tn]["maxteleopcones"] = Math.max(avg[tn]["maxteleopcones"], combinedTeleopCones);
+      var combinedTeleopAmpNotes = (parseInt(this.data[i]["teleopampnotes"]));
+      avg[tn]["avgteleopampnotes"] += combinedTeleopAmpNotes;
+      avg[tn]["maxteleopampnotes"] = Math.max(avg[tn]["maxteleopampnotes"], combinedTeleopAmpNotes);
 	
-      var combinedTeleopCubes = (parseInt(this.data[i]["teleopcubestop"]))+(parseInt(this.data[i]["teleopcubesmiddle"]))+(parseInt(this.data[i]["teleopcubesbottom"]));
-      avg[tn]["avgteleopcubes"] += combinedTeleopCubes;
-      avg[tn]["maxteleopcubes"] = Math.max(avg[tn]["maxteleopcubes"], combinedTeleopCubes);
-		
-      var teleopTopRowItems = (parseInt(this.data[i]["teleopconestop"]))+(parseInt(this.data[i]["teleopcubestop"]));
-      var teleopMidRowItems = (parseInt(this.data[i]["teleopconesmiddle"]))+(parseInt(this.data[i]["teleopcubesmiddle"]));
-      var teleopBotRowItems = (parseInt(this.data[i]["teleopconesbottom"]))+(parseInt(this.data[i]["teleopcubesbottom"]));
-      avg[tn]["avg_teleoptoprowitems"] += teleopTopRowItems;
-      avg[tn]["max_teleoptoprowitems"] = Math.max(avg[tn]["max_teleoptoprowitems"], teleopTopRowItems);
-      avg[tn]["avg_teleopmidrowitems"] += teleopMidRowItems;
-      avg[tn]["max_teleopmidrowitems"] = Math.max(avg[tn]["max_teleopmidrowitems"], teleopMidRowItems);
-      avg[tn]["avg_teleopbotrowitems"] += teleopBotRowItems;
-      avg[tn]["max_teleopbotrowitems"] = Math.max(avg[tn]["max_teleopbotrowitems"], teleopBotRowItems);
+      var combinedTeleopSpeakerNotes = (parseInt(this.data[i]["teleopspeakernotes"]));
+      avg[tn]["avgteleopspeakernotes"] += combinedTeleopSpeakerNotes;
+      avg[tn]["maxteleopspeakernotes"] = Math.max(avg[tn]["maxteleopspeakernotes"], combinedTeleopSpeakerNotes);
         
       // For some reason the real website handling of exitcommunity and mobilitypercent
       // is to treat mobilitypercent like a string, and keep appending the next value 
       // as a char. To fix that, we are just incrementing mobilitypercent instead of
       // adding the value here.
-//      console.log(">>> exitcommunity = "+ this.data[i]["exitcommunity"]); //TEST
-      if(this.data[i]["exitcommunity"] == 1) { 
-        avg[tn]["mobilitypercent"] ++;
-//        console.log("   >>> incrementing mobilitypercent = "+ avg[tn]["mobilitypercent"]); //TEST
-      } 
-      avg[tn]["endgamechargestationpercent"][this.data[i]["endgamechargelevel"]] += 1;
-      avg[tn]["autonchargestationpercent"][this.data[i]["autonchargelevel"]] += 1;
+      
+      avg[tn]["endgamestagepercent"][this.data[i]["endgamestage"]] += 1;
+      avg[tn]["endgameharmonypercent"][this.data[i]["endgameharmony"]] += 1;
+      //console.log(">>> number of traps " + combinedTrap);
       avg[tn]["totaldied"] += this.data[i]["died"];
       avg[tn]["totalmatches"] += 1;
       avg[tn]["scoutnames"].push(this.data[i]["scoutname"]);
@@ -328,41 +293,33 @@ class matchDataProcessor {
     }
 
     for (var key in avg) {
-      avg[key]["avgtotalpoints"] = Math.round(10 * avg[key]["avgtotalpoints"] / avg[key]["totalmatches"]) / 10;
-      avg[key]["avgautopoints"] = Math.round(10 * avg[key]["avgautopoints"] / avg[key]["totalmatches"]) / 10;
-//      console.log("-> for "+key+" calc: current avgautopoints = "+ this.rnd(avg[key]["avgautopoints"])); //TEST
+      avg[key]["avgtotalnotes"] = Math.round(10 * avg[key]["avgtotalnotes"] / avg[key]["totalmatches"]) / 10;
+      avg[key]["avgautonotes"] = Math.round(10 * avg[key]["avgautonotes"] / avg[key]["totalmatches"]) / 10;
+//      console.log("-> for "+key+" calc: current avgautonotes = "+ this.rnd(avg[key]["avgautonotes"])); //TEST
 //      console.log("     current totalmatches = "+ avg[key]["totalmatches"]); //TEST
-//      console.log("       calculated avgautopoints = "+avg[key]["avgautopoints"]); //TEST
-      avg[key]["avgteleoppoints"] = Math.round(10 * avg[key]["avgteleoppoints"] / avg[key]["totalmatches"]) / 10; 
+//      console.log("       calculated avgautonotes = "+avg[key]["avgautonotes"]); //TEST
+      avg[key]["avgteleopnotes"] = Math.round(10 * avg[key]["avgteleopnotes"] / avg[key]["totalmatches"]) / 10; 
       avg[key]["avgendgamepoints"] = Math.round(10 * avg[key]["avgendgamepoints"] / avg[key]["totalmatches"]) / 10;
 	
-      avg[key]["avgautoncones"] = Math.round(10 * avg[key]["avgautoncones"] / avg[key]["totalmatches"]) / 10;
-      avg[key]["avgautoncubes"] = Math.round(10 * avg[key]["avgautoncubes"] / avg[key]["totalmatches"]) / 10;
+      avg[key]["avgautonamps"] = Math.round(10 * avg[key]["avgautonamps"] / avg[key]["totalmatches"]) / 10;
+      avg[key]["avgautonspeaker"] = Math.round(10 * avg[key]["avgautonspeaker"] / avg[key]["totalmatches"]) / 10;
 		
-      avg[key]["avgteleopcones"] = Math.round(10 * avg[key]["avgteleopcones"] / avg[key]["totalmatches"]) / 10;
-      avg[key]["avgteleopcubes"] = Math.round(10 * avg[key]["avgteleopcubes"] / avg[key]["totalmatches"]) / 10;
-	
-      avg[key]["avg_autontoprowitems"] = Math.round(10 * avg[key]["avg_autontoprowitems"] / avg[key]["totalmatches"]) / 10;
-      avg[key]["avg_autonmidrowitems"] = Math.round(10 * avg[key]["avg_autonmidrowitems"] / avg[key]["totalmatches"]) / 10;
-      avg[key]["avg_autonbotrowitems"] = Math.round(10 * avg[key]["avg_autonbotrowitems"] / avg[key]["totalmatches"]) / 10;
-        
-      avg[key]["avg_teleoptoprowitems"] = Math.round(10 * avg[key]["avg_teleoptoprowitems"] / avg[key]["totalmatches"]) / 10;
-      avg[key]["avg_teleopmidrowitems"] = Math.round(10 * avg[key]["avg_teleopmidrowitems"] / avg[key]["totalmatches"]) / 10;
-      avg[key]["avg_teleopbotrowitems"] = Math.round(10 * avg[key]["avg_teleopbotrowitems"] / avg[key]["totalmatches"]) / 10;    
+      avg[key]["avgteleopampnotes"] = Math.round(10 * avg[key]["avgteleopampnotes"] / avg[key]["totalmatches"]) / 10;
+      avg[key]["avgteleopspeakernotes"] = Math.round(10 * avg[key]["avgteleopspeakernotes"] / avg[key]["totalmatches"]) / 10;
+        //console.log(">> number of traps for team " + key + " is = " + avg[key]["avgtrap"]);
+      avg[key]["avgtrap"] = Math.round(10 * avg[key]["avgtrap"] / avg[key]["totalmatches"]) / 10;
+        //console.log(">> average is = " + Math.round(10 * avg[key]["avgtrap"] / avg[key]["totalmatches"] / 10));
+      avg[key]["avgspotlit"] = Math.round(10 * avg[key]["avgspotlit"] / avg[key]["totalmatches"]) / 10; 
 		
-//      console.log("===> calculating mobilitypercent from sum = "+avg[key]["mobilitypercent"]); //TEST
 //      console.log("  ===> totalmatches = "+avg[key]["totalmatches"]); //TEST
-      avg[key]["mobilitypercent"] = Math.round(100 * avg[key]["mobilitypercent"] / avg[key]["totalmatches"]);
-//      console.log("     ===> FINAL mobilitypercent = "+avg[key]["mobilitypercent"]);//TEST
         
-      avg[key]["endgamechargestationpercent"][0] = Math.round(100 * avg[key]["endgamechargestationpercent"][0] / avg[key]["totalmatches"]);
-      avg[key]["endgamechargestationpercent"][1] = Math.round(100 * avg[key]["endgamechargestationpercent"][1] / avg[key]["totalmatches"]);
-      avg[key]["endgamechargestationpercent"][2] = Math.round(100 * avg[key]["endgamechargestationpercent"][2] / avg[key]["totalmatches"]);
-      avg[key]["endgamechargestationpercent"][3] = Math.round(100 * avg[key]["endgamechargestationpercent"][3] / avg[key]["totalmatches"]);
-      
-      avg[key]["autonchargestationpercent"][0] = Math.round(100 * avg[key]["autonchargestationpercent"][0] / avg[key]["totalmatches"]);
-      avg[key]["autonchargestationpercent"][1] = Math.round(100 * avg[key]["autonchargestationpercent"][1] / avg[key]["totalmatches"]);
-      avg[key]["autonchargestationpercent"][2] = Math.round(100 * avg[key]["autonchargestationpercent"][2] / avg[key]["totalmatches"]);
+      avg[key]["endgamestagepercent"][0] = Math.round(100 * avg[key]["endgamestagepercent"][0] / avg[key]["totalmatches"]);
+      avg[key]["endgamestagepercent"][1] = Math.round(100 * avg[key]["endgamestagepercent"][1] / avg[key]["totalmatches"]);
+      avg[key]["endgamestagepercent"][2] = Math.round(100 * avg[key]["endgamestagepercent"][2] / avg[key]["totalmatches"]);
+        
+      avg[key]["endgameharmonypercent"][0] = Math.round(100 * avg[key]["endgameharmonypercent"][0] / avg[key]["totalmatches"]);
+      avg[key]["endgameharmonypercent"][1] = Math.round(100 * avg[key]["endgameharmonypercent"][1] / avg[key]["totalmatches"]);
+      avg[key]["endgameharmonypercent"][2] = Math.round(100 * avg[key]["endgameharmonypercent"][2] / avg[key]["totalmatches"]);
     }
     return avg;
   }

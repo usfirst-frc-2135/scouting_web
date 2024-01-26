@@ -45,24 +45,28 @@
             <col span="2" style="background-color:transparent">
             <col span="2" style="background-color:#cfe2ff">
             <col span="2" style="background-color:#B5D3FF">
-            <col span="3" style="background-color:#cfe2ff">
             <col span="4" style="background-color:transparent">
             <col span="1" style="background-color:#cfe2ff">
             <col span="1" style="background-color:#B5D3FF">
             <col span="1" style="background-color:#cfe2ff">
+            <col span="1" style="background-color:#cfe2ff">
             <col span="1" style="background-color:#B5D3FF">
+            <col span="1" style="background-color:#cfe2ff">
+            <col span="1" style="background-color:#b5d3ff">
+            <col span="1" style="background-color:#b5d3ff">
+
           </colgroup>
           <thead>
             <tr>
               <th colspan="1" class="text-center fw-bold"></th>
               <th colspan="1" class="text-center fw-bold"></th>
-              <th colspan="2" class="text-center fw-bold" style="background-color:#3686FF">Total Pts</th>
-              <th colspan="2" class="text-center">Total Auto Pts</th>
-              <th colspan="2" class="text-center" style="background-color:#3686FF">Total Teleop Pts</th>
+              <th colspan="2" class="text-center fw-bold" style="background-color:#3686FF">Total Notes</th>
+              <th colspan="2" class="text-center">Total Auto Notes</th>
+              <th colspan="2" class="text-center" style="background-color:#3686FF">Total Teleop Notes</th>
               <th colspan="2" class="text-center">Endgame Pts</th>
-              <th colspan="7" class="text-center" style="background-color:#3686FF">Auton</th>
+              <th colspan="4" class="text-center" style="background-color:#3686FF">Auton</th>
               <th colspan="4" class="text-center">Teleop</th>
-              <th colspan="4" class="text-center" style="background-color:#3686FF">Endgame</th>
+              <th colspan="8" class="text-center" style="background-color:#3686FF">Endgame</th>
               <th colspan="1" class="text-center fw-bold">Died</th>
             </tr>
             <tr>
@@ -78,13 +82,16 @@
               <th colspan="1"></th>
               <th colspan="1"></th>
               
-              <th colspan="2" class="text-center">Cones</th>
-              <th colspan="2" class="text-center">Cubes</th>
-              <th colspan="3" class="text-center">Charge Station %</th>
+              <th colspan="2" class="text-center">Amp</th>
+              <th colspan="2" class="text-center">Speaker</th>
+              <!--<th colspan="3" class="text-center">Charge Station %</th>-->
 				
-              <th colspan="2" class="text-center">Cones</th>
-              <th colspan="2" class="text-center">Cubes</th>
-              <th colspan="4" class="text-center" style="background-color:#83B4FF">Charge Station %</th>
+              <th colspan="2" class="text-center">Amp</th>
+              <th colspan="2" class="text-center">Speaker</th>
+              <th colspan="3" class="text-center" style="background-color:#83B4FF">Stage %</th>
+              <th colspan="3" class="text-center" style="background-color:#83B4FF">Harmony %</th> 
+              <th colspan="1" class="text-center" style="background-color:#83b4ff">Spotlit</th> 
+              <th colspan="1" class="text-center" style="background-color:#83b4ff">Trap</th> 
               <th colspan="1"></th>
             </tr>
             <tr>
@@ -102,10 +109,6 @@
               <th scope="col">MAX</th>
               <th scope="col">AVG</th>
               <th scope="col">MAX</th>
-			   
-              <th scope="col">N</th>
-              <th scope="col">D</th>	
-              <th scope="col">E</th>
 				
               <th scope="col">AVG</th>
               <th scope="col">MAX</th>
@@ -113,8 +116,12 @@
               <th scope="col">MAX</th>
               <th scope="col">N</th>
               <th scope="col">P</th>
-              <th scope="col">D</th>
-              <th scope="col">E</th>
+              <th scope="col">O</th>
+              <th scope="col">0</th>
+              <th scope="col">1</th>
+              <th scope="col">2</th>
+              <th scope="col">AVG</th>
+              <th scope="col">AVG</th>
               <th scope="col">#</th>
             </tr>
 
@@ -164,40 +171,42 @@
     /* Write data to table */
     $("#tableData").html(""); // Clear Table
     for (let teamNum of teamList) {
-      var autonchargestationPercentage = dummyGet(scoutingData[teamNum], "autonchargestationpercent");
-      var endgamechargestationPercentage = dummyGet(scoutingData[teamNum], "endgamechargestationpercent");
+      var endgamestagePercentage = dummyGet(scoutingData[teamNum], "endgamestagepercent");
+      var endgameharmonyPercentage = dummyGet(scoutingData[teamNum], "endgameharmonypercent");
 
       var rowString = "<tr>" +
         "<td><a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a></td>" +
         "<td>" + dummyGet(tbaData[teamNum], "totalPoints") + "</td>" +
         //HOLD"<td>" + dummyGet(internalEloRank["elo"], teamNum) + "</td>" +
-        "<td>" + dummyGet(scoutingData[teamNum], "avgtotalpoints") + "</td>" +
-        "<td>" + dummyGet(scoutingData[teamNum], "maxtotalpoints") + "</td>" +
-        "<td>" + dummyGet(scoutingData[teamNum], "avgautopoints") + "</td>" +
-        "<td>" + dummyGet(scoutingData[teamNum], "maxautopoints") + "</td>" +
-        "<td>" + dummyGet(scoutingData[teamNum], "avgteleoppoints") + "</td>" +
-        "<td>" + dummyGet(scoutingData[teamNum], "maxteleoppoints") + "</td>" +
+        "<td>" + dummyGet(scoutingData[teamNum], "avgtotalnotes") + "</td>" +
+        "<td>" + dummyGet(scoutingData[teamNum], "maxtotalnotes") + "</td>" +
+        "<td>" + dummyGet(scoutingData[teamNum], "avgautonotes") + "</td>" +
+        "<td>" + dummyGet(scoutingData[teamNum], "maxautonotes") + "</td>" +
+        "<td>" + dummyGet(scoutingData[teamNum], "avgteleopnotes") + "</td>" +
+        "<td>" + dummyGet(scoutingData[teamNum], "maxteleopnotes") + "</td>" +
         "<td>" + dummyGet(scoutingData[teamNum], "avgendgamepoints") + "</td>" +
         "<td>" + dummyGet(scoutingData[teamNum], "maxendgamepoints") + "</td>" +
 
-        "<td>" + dummyGet(scoutingData[teamNum], "avgautoncones") + "</td>" +
-	"<td>" + dummyGet(scoutingData[teamNum], "maxautoncones") + "</td>" +
-	"<td>" + dummyGet(scoutingData[teamNum], "avgautoncubes") + "</td>" +
-	"<td>" + dummyGet(scoutingData[teamNum], "maxautoncubes") + "</td>" +
-
-	"<td>" + dummyGet(autonchargestationPercentage, 0) + "%</td>" +
-        "<td>" + dummyGet(autonchargestationPercentage, 1) + "%</td>" +
-        "<td>" + dummyGet(autonchargestationPercentage, 2) + "%</td>" + 
+        "<td>" + dummyGet(scoutingData[teamNum], "avgautonamps") + "</td>" +
+	    "<td>" + dummyGet(scoutingData[teamNum], "maxautonamps") + "</td>" +
+	    "<td>" + dummyGet(scoutingData[teamNum], "avgautonspeaker") + "</td>" +
+	    "<td>" + dummyGet(scoutingData[teamNum], "maxautonspeaker") + "</td>" +
 		  
-	"<td>" + dummyGet(scoutingData[teamNum], "avgteleopcones") + "</td>" +
-	"<td>" + dummyGet(scoutingData[teamNum], "maxteleopcones") + "</td>" +
-	"<td>" + dummyGet(scoutingData[teamNum], "avgteleopcubes") + "</td>" +
-	"<td>" + dummyGet(scoutingData[teamNum], "maxteleopcubes") + "</td>" +
+        "<td>" + dummyGet(scoutingData[teamNum], "avgteleopampnotes") + "</td>" +
+	    "<td>" + dummyGet(scoutingData[teamNum], "maxteleopampnotes") + "</td>" +
+	    "<td>" + dummyGet(scoutingData[teamNum], "avgteleopspeakernotes") + "</td>" +
+	    "<td>" + dummyGet(scoutingData[teamNum], "maxteleopspeakernotes") + "</td>" +
 		  
-        "<td>" + dummyGet(endgamechargestationPercentage, 0) + "%</td>" +
-        "<td>" + dummyGet(endgamechargestationPercentage, 1) + "%</td>" +
-        "<td>" + dummyGet(endgamechargestationPercentage, 2) + "%</td>" +
-        "<td>" + dummyGet(endgamechargestationPercentage, 3) + "%</td>" +
+        "<td>" + dummyGet(endgamestagePercentage, 0) + "%</td>" +
+        "<td>" + dummyGet(endgamestagePercentage, 1) + "%</td>" +
+        "<td>" + dummyGet(endgamestagePercentage, 2) + "%</td>" +
+          
+        "<td>" + dummyGet(endgameharmonyPercentage, 0) + "%</td>" +
+        "<td>" + dummyGet(endgameharmonyPercentage, 1) + "%</td>" +
+        "<td>" + dummyGet(endgameharmonyPercentage, 2) + "%</td>" +
+          
+        "<td>" + dummyGet(scoutingData[teamNum], "avgspotlit") + "</td>" +
+        "<td>" + dummyGet(scoutingData[teamNum], "avgtrap") + "</td>" +
         "<td>" + dummyGet(scoutingData[teamNum], "totaldied") + "</td>" + 
         "</td>"; 
 
@@ -225,7 +234,7 @@
         scoutingData = {
           ...averageData
         };
-//        console.log(scoutingData);
+        //console.log(scoutingData);
         addTeamKVToTeamList(scoutingData);
         dataToTable();
         setTimeout(function() {
