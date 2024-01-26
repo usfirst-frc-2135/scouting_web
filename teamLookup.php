@@ -478,10 +478,9 @@
     // Declare variables
     var match_list = []; // List of matches to use as x lables
     var datasets = []; // Each entry is a dict with a label and data attribute
-    var autonTopRowTips = []; // holds custom tooltips for auton top row points
-    var autonMidRowTips = []; // holds custom tooltips for auton middle row points
-    var autonBotRowTips = []; // holds custom tooltips for auton bottom row points
-    var autonChargeTips = []; // holds custom tooltips for auton charge level points
+    var autonAmpTips = []; // holds custom tooltips for auton amp notes
+    var autonSpeakerTips = []; // holds custom tooltips for auton speaker notes
+    var autonLeaveTips = []; // holds custom tooltips for auton leave starting zone data
 
     datasets.push({
       label: "Auton Amp Notes",
@@ -491,15 +490,10 @@
     datasets.push({
       label: "Auton Speaker Notes",
       data: [],
-      borderColor: 'Yellow'
-    });
-    datasets.push({
-      label: "Auton Bottom Row Items",
-      data: [],
       borderColor: 'Green'
     });
     datasets.push({
-      label: "Auton Charge Level",
+      label: "Auton Leave Starting Zone",
       data: [],
       borderColor: 'Blue'
     });
@@ -509,42 +503,34 @@
     for (let i = 0; i < matchdata.length; i++) {
       var matchnum = matchdata[i]["matchnumber"];
       match_list.push(matchnum);
+        console.log("in matchnum");
 
-      // Get auton top row data
-      var autonTopRowCubes = matchdata[i]["autoncubestop"];
-      var autonTopRowCones = matchdata[i]["autonconestop"];
-      var autonTopSum = autonTopRowCones + autonTopRowCubes;
-      datasets[0]["data"].push(autonTopSum);
-      var tooltipStr = "Top (cubes "+autonTopRowCubes+", cones "+autonTopRowCones+")="+autonTopSum;
-      autonTopRowTips.push({xlabel: matchnum, tip: tooltipStr}); 
+      // Get auton amp notes data
+      var autonAmpNotes = matchdata[i]["autonampnotes"];
+      datasets[0]["data"].push(autonAmpNotes);
+      var tooltopStr = "Auton Amp(amp "+autonAmpNotes+")="+autonAmpNotes;
+      autonAmpTips.push({xlabel: matchnum, tip: tooltipStr}); 
+        console.log("autonampnotes");
 
-      // Get auton middle row data
-      var autonMidRowCubes = matchdata[i]["autoncubesmiddle"];
-      var autonMidRowCones = matchdata[i]["autonconesmiddle"];
-      var autonMidSum = autonMidRowCones + autonMidRowCubes;
-      datasets[1]["data"].push(autonMidSum);
-      var tooltipStr = "Middle (cubes "+autonMidRowCubes+", cones "+autonMidRowCones+")="+autonMidSum;
-      autonMidRowTips.push({xlabel: matchnum, tip: tooltipStr}); 
+      // Get auton speaker notes data
+      var autonSpeakerNotes = matchdata[i]["autonspeakernotes"];
+      datasets[1]["data"].push(autonSpeakerNotes);
+      var tooltipStr = "Auton Speaker(speaker "+autonSpeakerNotes+")="+autonSpeakerNotes;
+      autonSpeakerTips.push({xlabel: matchnum, tip: tooltipStr}); 
+        console.log("autonspeakernotes");
 
-      // Get auton bottom row data
-      var autonBotRowCubes = matchdata[i]["autoncubesbottom"];
-      var autonBotRowCones = matchdata[i]["autonconesbottom"];
-      var autonBotSum = autonBotRowCones + autonBotRowCubes;
-      datasets[2]["data"].push(autonBotSum);
-      var tooltipStr = "Bottom (cubes "+autonBotRowCubes+", cones "+autonBotRowCones+")="+autonBotSum;
-      autonBotRowTips.push({xlabel: matchnum, tip: tooltipStr}); 
-
-      // Get auton charge level
-      var autonChargeLevel = matchdata[i]["autonchargelevel"];
-      datasets[3]["data"].push(autonChargeLevel);
-      var clevel = "None";
-      if(autonChargeLevel == 1)
-        clevel = "Docked";
-      else if(autonChargeLevel == 2)
-        clevel = "Engaged";
-      var tipStr = "Charge Level="+clevel;
-      autonChargeTips.push({xlabel: matchnum, tip: tipStr}); 
+     
+     // Get auton leave starting zone data
+      var autonLeaveStartingZone = matchdata[i]["autonleave"];
+      datasets[2]["data"].push(autonLeaveStartingZone);
+      var clevel = "No";
+      if(autonLeaveStartingZone == 1)
+        clevel = "Yes";
+      var tipStr = "Leave Starting Zone="+clevel;
+      autonLeaveTips.push({xlabel: matchnum, tip: tipStr});
+        console.log("leavestartingzone");
     }
+        
 
     // Define the graph as a line chart:
     if (chartDefined) {
@@ -573,34 +559,27 @@
                  var matchnum = tooltipItem.label;
                  var tipStr = datasets[toolIndex].label;
 
-                 if(toolIndex == 0) {   // Auton Top Row
-                   for (let i = 0; i < autonTopRowTips.length; i++) {
-                     if(autonTopRowTips[i].xlabel == matchnum) {
-                       tipStr = autonTopRowTips[i].tip;
+                 if(toolIndex == 0) {   // Auton Amp Notes
+                   for (let i = 0; i < autonAmpTips.length; i++) {
+                       console.log("in auton amp tips line");
+                     if(autonAmpTips[i].xlabel == matchnum) {
+                       tipStr = autonAmpTips[i].tip;
                        break;
                      }
                    }
                  }
-                 else if(toolIndex == 1) {   // Auton Middle Row
-                   for (let i = 0; i < autonMidRowTips.length; i++) {
-                     if(autonMidRowTips[i].xlabel == matchnum) {
-                       tipStr = autonMidRowTips[i].tip;
+                 else if(toolIndex == 1) {   // Auton Speaker Notes
+                   for (let i = 0; i < autonSpeakerTips.length; i++) {
+                     if(autonSpeakerTips[i].xlabel == matchnum) {
+                       tipStr = autonSpeakerTips[i].tip;
                        break;
                      }
                    }
                  }
-                 else if(toolIndex == 2) {   // Auton Bottom Row
-                   for (let i = 0; i < autonBotRowTips.length; i++) {
-                     if(autonBotRowTips[i].xlabel == matchnum) {
-                       tipStr = autonBotRowTips[i].tip;
-                       break;
-                     }
-                   }
-                 }
-                 else if(toolIndex == 3) {   // Auton Charge Level
-                   for (let i = 0; i < autonChargeTips.length; i++) {
-                     if(autonChargeTips[i].xlabel == matchnum) {
-                       tipStr = autonChargeTips[i].tip;
+                 else if(toolIndex == 2) {   // Auton Leave Starting Zone
+                   for (let i = 0; i < autonLeaveTips.length; i++) {
+                     if(autonLeaveTips[i].xlabel == matchnum) {
+                       tipStr = autonLeaveTips[i].tip;
                        break;
                      }
                    }
@@ -805,7 +784,7 @@
       type: 'line',
       data: {
         labels: match_list,
-        datasets: datasetsx
+        datasets: datasets
       },
       options: {
         scales: {
