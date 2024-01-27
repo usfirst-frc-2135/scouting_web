@@ -38,19 +38,24 @@
             </thead>
             <tbody>
               <tr>
-                <td class="table-secondary">Avg Total Points</td>
-                <td class="table-danger" id="redTotalPoints"></td>
-                <td class="table-primary" id="blueTotalPoints"></td>
+                <td class="table-secondary">Avg Total Amps</td>
+                <td class="table-danger" id="redTotalAmps"></td>
+                <td class="table-primary" id="blueTotalAmps"></td>
               </tr>
               <tr>
-                <td class="table-secondary">Avg Total Game Pieces</td>
-                <td class="table-danger" id="redTotalGamePieces"></td>
-                <td class="table-primary" id="blueTotalGamePieces"></td>
+                <td class="table-secondary">Avg Total Speakers</td>
+                <td class="table-danger" id="redTotalSpeakers"></td>
+                <td class="table-primary" id="blueTotalSpeakers"></td>
+              </tr>
+              <tr>
+                <td class="table-secondary">Avg Total Notes</td>
+                <td class="table-danger" id="redTotalNotes"></td>
+                <td class="table-primary" id="blueTotalNotes"></td>
               </tr>
               <tr>
                 <td class="table-secondary">Avg Endgame Points</td>
-                <td class="table-danger" id="redExpectedEndgamePoints"></td>
-                <td class="table-primary" id="blueExpectedEndgamePoints"></td>
+                <td class="table-danger" id="redAvgEndgamePoints"></td>
+                <td class="table-primary" id="blueAvgEndgamePoints"></td>
               </tr>
             </tbody>
           </table>
@@ -98,22 +103,25 @@
               <table class="table table-bordered table-danger">
                 <thead>
                   <tr>
-                    <th colspan="5" class="text-center fs-6">Auton</th>
+                    <th colspan="2" class="text-center fs-6">Auton</th>
                     <th colspan="2" class="text-center fw-bold fs-6">Teleop</th>
-                    <th colspan="5" class="text-center fw-bold fs-6">Endgame</th>
+                    <th colspan="9" class="text-center fw-bold fs-6">Endgame</th>
                   </tr>
                   <tr>
-                    <th scope="col">Cones</th>
-                    <th scope="col">Cubes</th>
-                    <th scope="col">N</th>
-                    <th scope="col">D</th>
-                    <th scope="col">E</th>
-                    <th scope="col">Cones</th>
-                    <th scope="col">Cubes</th>
+                    <th scope="col">Amps</th>
+                    <th scope="col">Speakers</th>
+
+                    <th scope="col">Amps</th>
+                    <th scope="col">Speakers</th>
+                      
                     <th scope="col">N</th>
                     <th scope="col">P</th>
-                    <th scope="col">D</th>
-                    <th scope="col">E</th>
+                    <th scope="col">O</th>
+                    <th scope="col">0</th>
+                    <th scope="col">1</th>
+                    <th scope="col">2</th>
+                    <th scope="col">Spotlit</th>
+                    <th scope="col">Trap</th>
                   </tr>
                 </thead>
                 <tbody id="R0DataTable">
@@ -164,22 +172,23 @@
               <table class="table table-bordered table-danger">
                 <thead>
                   <tr>
-                    <th colspan="5" class="text-center fs-6">Auton</th>
+                    <th colspan="2" class="text-center fs-6">Auton</th>
                     <th colspan="2" class="text-center fw-bold fs-6">Teleop</th>
-                    <th colspan="5" class="text-center fw-bold fs-6">Endgame</th>
+                    <th colspan="9" class="text-center fw-bold fs-6">Endgame</th>
                   </tr>
                   <tr>
-                   <th scope="col">Cones</th>
-                    <th scope="col">Cubes</th>
-                    <th scope="col">N</th>
-                    <th scope="col">D</th>
-                    <th scope="col">E</th>
-                    <th scope="col">Cones</th>
-                    <th scope="col">Cubes</th>
+                   <th scope="col">Amps</th>
+                    <th scope="col">Speakers</th>
+                    <th scope="col">Amps</th>
+                    <th scope="col">Speakers</th>
                     <th scope="col">N</th>
                     <th scope="col">P</th>
-                    <th scope="col">D</th>
-                    <th scope="col">E</th>
+                    <th scope="col">O</th>
+                    <th scope="col">0</th>
+                    <th scope="col">1</th>
+                    <th scope="col">2</th>
+                    <th scope="col">Spotlit</th>
+                    <th scope="col">Trap</th>
                   </tr>
                 </thead>
                 <tbody id="R1DataTable">
@@ -230,22 +239,23 @@
               <table class="table table-bordered table-danger">
                 <thead>
                   <tr>
-                    <th colspan="5" class="text-center fs-6">Auton</th>
+                    <th colspan="2" class="text-center fs-6">Auton</th>
                     <th colspan="2" class="text-center fw-bold fs-6">Teleop</th>
-                    <th colspan="5" class="text-center fw-bold fs-6">Endgame</th>
+                    <th colspan="9" class="text-center fw-bold fs-6">Endgame</th>
                   </tr>
                   <tr>
-                    <th scope="col">Cones</th>
-                    <th scope="col">Cubes</th>
-					<th scope="col">N</th>
-                    <th scope="col">D</th>
-                    <th scope="col">E</th>
-                    <th scope="col">Cones</th>
-                    <th scope="col">Cubes</th>
+                    <th scope="col">Amps</th>
+                    <th scope="col">Speakers</th>
+                    <th scope="col">Amps</th>
+                    <th scope="col">Speakers</th>
                     <th scope="col">N</th>
                     <th scope="col">P</th>
-                    <th scope="col">D</th>
-                    <th scope="col">E</th>
+                    <th scope="col">O</th>
+                    <th scope="col">0</th>
+                    <th scope="col">1</th>
+                    <th scope="col">2</th>
+                    <th scope="col">Spotlit</th>
+                    <th scope="col">Trap</th>
                   </tr>
                 </thead>
                 <tbody id="R2DataTable">
@@ -297,22 +307,23 @@
               <table class="table table-bordered table-primary">
                 <thead>
                   <tr>
-                    <th colspan="5" class="text-center fs-6">Auton</th>
+                    <th colspan="2" class="text-center fs-6">Auton</th>
                     <th colspan="2" class="text-center fw-bold fs-6">Teleop</th>
-                    <th colspan="5" class="text-center fw-bold fs-6">Endgame</th>
+                    <th colspan="9" class="text-center fw-bold fs-6">Endgame</th>
                   </tr>
                   <tr>
-                   <th scope="col">Cones</th>
-                    <th scope="col">Cubes</th>
-                    <th scope="col">N</th>
-                    <th scope="col">D</th>
-                    <th scope="col">E</th>
-                    <th scope="col">Cones</th>
-                    <th scope="col">Cubes</th>
+                   <th scope="col">Amps</th>
+                    <th scope="col">Speakers</th>
+                    <th scope="col">Amps</th>
+                    <th scope="col">Speakers</th>
                     <th scope="col">N</th>
                     <th scope="col">P</th>
-                    <th scope="col">D</th>
-                    <th scope="col">E</th>
+                    <th scope="col">O</th>
+                    <th scope="col">0</th>
+                    <th scope="col">1</th>
+                    <th scope="col">2</th>
+                    <th scope="col">Spotlit</th>
+                    <th scope="col">Trap</th>
                   </tr>
                 </thead>
                 <tbody id="B0DataTable">
@@ -363,22 +374,23 @@
               <table class="table table-bordered table-primary">
                 <thead>
                   <tr>
-                    <th colspan="5" class="text-center fs-6">Auton</th>
+                    <th colspan="2" class="text-center fs-6">Auton</th>
                     <th colspan="2" class="text-center fw-bold fs-6">Teleop</th>
-                    <th colspan="5" class="text-center fw-bold fs-6">Endgame</th>
+                    <th colspan="9" class="text-center fw-bold fs-6">Endgame</th>
                   </tr>
                   <tr>
-                   <th scope="col">Cones</th>
-                    <th scope="col">Cubes</th>
-                    <th scope="col">N</th>
-                    <th scope="col">D</th>
-                    <th scope="col">E</th>
-                    <th scope="col">Cones</th>
-                    <th scope="col">Cubes</th>
+                   <th scope="col">Amps</th>
+                    <th scope="col">Speakers</th>
+                    <th scope="col">Amps</th>
+                    <th scope="col">Speakers</th>
                     <th scope="col">N</th>
                     <th scope="col">P</th>
-                    <th scope="col">D</th>
-                    <th scope="col">E</th>
+                    <th scope="col">O</th>
+                    <th scope="col">0</th>
+                    <th scope="col">1</th>
+                    <th scope="col">2</th>
+                    <th scope="col">Spotlit</th>
+                    <th scope="col">Trap</th>
                   </tr>
                 </thead>
                 <tbody id="B1DataTable">
@@ -429,22 +441,23 @@
               <table class="table table-bordered table-primary">
                 <thead>
                   <tr>
-                    <th colspan="5" class="text-center fs-6">Auton</th>
+                    <th colspan="2" class="text-center fs-6">Auton</th>
                     <th colspan="2" class="text-center fw-bold fs-6">Teleop</th>
-                    <th colspan="5" class="text-center fw-bold fs-6">Endgame</th>
+                    <th colspan="9" class="text-center fw-bold fs-6">Endgame</th>
                   </tr>
                   <tr>
-                   <th scope="col">Cones</th>
-                    <th scope="col">Cubes</th>
-                    <th scope="col">N</th>
-                    <th scope="col">D</th>
-                    <th scope="col">E</th>
-                    <th scope="col">Cones</th>
-                    <th scope="col">Cubes</th>
+                   <th scope="col">Amps</th>
+                    <th scope="col">Speakers</th>
+                    <th scope="col">Amps</th>
+                    <th scope="col">Speakers</th>
                     <th scope="col">N</th>
                     <th scope="col">P</th>
-                    <th scope="col">D</th>
-                    <th scope="col">E</th>
+                    <th scope="col">O</th>
+                    <th scope="col">0</th>
+                    <th scope="col">1</th>
+                    <th scope="col">2</th>
+                    <th scope="col">Spotlit</th>
+                    <th scope="col">Trap</th>
                   </tr>
                 </thead>
                 <tbody id="B2DataTable">
@@ -566,12 +579,14 @@
       $("#B0DataTable").html("");
       $("#B1DataTable").html("");
       $("#B2DataTable").html("");
-      $("#redTotalPoints").html("");
-      $("#redTotalGamePieces").html("");
-      $("#redExpectedEndgamePoints").html("");
-      $("#blueTotalPoints").html("");
-      $("#blueTotalGamePieces").html("");
-      $("#blueExpectedEndgamePoints").html("");
+      $("#redTotalAmps").html("");
+      $("#redTotalSpeakers").html("");
+      $("#redTotalNotes").html("");
+      $("#redAvgEndgamePoints").html("");
+      $("#blueTotalAmps").html("");
+      $("#blueTotalSpeakerse").html("");
+      $("blueTotalNotes").html("");
+      $("#blueAvgEndgamePoints").html("");
       $("#R0RobotPics").html("");
       $("#R1RobotPics").html("");
       $("#R2RobotPics").html("");
@@ -628,15 +643,19 @@
     }
 
     function updateSummary(redList, blueList) {
-      var avgTotalPoints = {
+      var avgTotalAmps = {
         "red": 0,
         "blue": 0
       };
-      var avgTotalGamePieces = {
+      var avgTotalSpeakers = {
+         "red": 0,
+         "blue": 0
+      }
+      var avgTotalNotes = {
         "red": 0,
         "blue": 0
       };
-      var expectedEndgameChargeStation = {
+      var avgEndgamePoints = {
         "red": 0,
         "blue": 0
       };
@@ -645,28 +664,32 @@
         teamNum = strTeamToIntTeam(redList[i]);
         var rd = localMatchData[teamNum];
         if (rd != null) {
-          avgTotalPoints["red"] += rd["avgtotalpoints"];
-          avgTotalGamePieces["red"] += rd["avgautoncones"] + rd["avgautoncubes"] + rd["avgteleopcones"] + rd["avgteleopcubes"];
-          expectedEndgameChargeStation["red"] += rd["avgendgamepoints"];
+          avgTotalAmps["red"] += rd["avgautonamps"] + rd["avgteleopampnotes"];
+          avgTotalSpeakers["red"] += rd["avgautonspeaker"] + rd["avgteleopspeakernotes"];
+          avgTotalNotes["red"] += rd["avgtotalnotes"];
+          avgEndgamePoints["red"] += rd["avgendgamepoints"];
         }
       }
       for (let i in blueList) {
         teamNum = strTeamToIntTeam(blueList[i]);
         var rd = localMatchData[teamNum];
         if (rd != null) {
-          avgTotalPoints["blue"] += rd["avgtotalpoints"];
-          avgTotalGamePieces["blue"] += rd["avgautoncones"] + rd["avgautoncubes"] + rd["avgteleopcones"] + rd["avgteleopcubes"];
-          expectedEndgameChargeStation["blue"] += rd["avgendgamepoints"];
+          avgTotalAmps["blue"] += rd["avgautonamps"] + rd["avgteleopampnotes"];
+          avgTotalSpeakers["blue"] += rd["avgautonspeaker"] + rd["avgteleopspeakernotes"];
+          avgTotalNotes["blue"] += rd["avgtotalnotes"];
+          avgEndgamePoints["blue"] += rd["avgendgamepoints"];
         }
       }
 
-      $("#redTotalPoints").html(roundInt(avgTotalPoints["red"]));
-      $("#redTotalGamePieces").html(roundInt(avgTotalGamePieces["red"]));
-      $("#redExpectedEndgamePoints").html(roundInt(expectedEndgameChargeStation["red"]));
+      $("#redTotalAmps").html(roundInt(avgTotalAmps["red"]));
+      $("#redTotalSpeakers").html(roundInt(avgTotalSpeakers["red"]));
+      $("#redTotalNotes").html(roundInt(avgTotalNotes["red"]));
+      $("#redAvgEndgamePoints").html(roundInt(avgEndgamePoints["red"]));
 
-      $("#blueTotalPoints").html(roundInt(avgTotalPoints["blue"]));
-      $("#blueTotalGamePieces").html(roundInt(avgTotalGamePieces["blue"]));
-      $("#blueExpectedEndgamePoints").html(roundInt(expectedEndgameChargeStation["blue"]));
+      $("#blueTotalAmps").html(roundInt(avgTotalAmps["blue"]));
+      $("#blueTotalSpeakers").html(roundInt(avgTotalSpeakers["blue"]));
+      $("#blueTotalNotes").html(roundInt(avgTotalNotes["blue"]));
+      $("#blueAvgEndgamePoints").html(roundInt(avgEndgamePoints["blue"]));
     }
 
     function roundInt(val) {
@@ -678,17 +701,18 @@
       var rd = localMatchData[teamNum];
       if (rd != null) {
         var row = "<tr>";
-        row += "<td>" + rd["avgautoncones"] + "</td>";
-        row += "<td>" + rd["avgautoncubes"] + "</td>";
-        row += "<td>" + rd["autonchargestationpercent"][0] + "</td>";
-        row += "<td>" + rd["autonchargestationpercent"][1] + "</td>";
-        row += "<td>" + rd["autonchargestationpercent"][2] + "</td>";
-        row += "<td>" + rd["avgteleopcones"] + "</td>";
-        row += "<td>" + rd["avgteleopcubes"] + "</td>";
-        row += "<td>" + rd["endgamechargestationpercent"][0] + "</td>";
-        row += "<td>" + rd["endgamechargestationpercent"][1] + "</td>";
-        row += "<td>" + rd["endgamechargestationpercent"][2] + "</td>";
-        row += "<td>" + rd["endgamechargestationpercent"][3] + "</td>";
+        row += "<td>" + rd["avgautonamps"] + "</td>";
+        row += "<td>" + rd["avgautonspeaker"] + "</td>";
+        row += "<td>" + rd["avgteleopampnotes"] + "</td>";
+        row += "<td>" + rd["avgteleopspeakernotes"] + "</td>";
+        row += "<td>" + rd["endgamestagepercent"][0] + "</td>";
+        row += "<td>" + rd["endgamestagepercent"][1] + "</td>";
+        row += "<td>" + rd["endgamestagepercent"][2] + "</td>";
+        row += "<td>" + rd["endgameharmonypercent"][0] + "</td>";
+        row += "<td>" + rd["endgameharmonypercent"][1] + "</td>";
+        row += "<td>" + rd["endgameharmonypercent"][2] + "</td>";
+        row += "<td>" + rd["avgspotlit"] + "</td>";
+        row += "<td>" + rd["avgtrap"] + "</td>";
         row += "</tr>";
       }
       $("#" + color + index + "DataTable").append(row);
