@@ -19,19 +19,32 @@
           <div class="card-body overflow-auto">
             <table class="table table-striped table-hover">
               <thead>
+                <colgroup>
+                  <col span="4" style="background-color:transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:#transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:transparent">
+                </colgroup>
                 <tr>
                   <th scope="col"></th>
                   <th scope="col"></th>
                   <th scope="col">#</th>
                   <th scope="col">Team</th>
                   <th scope="col">Internal ELO</th>
-                  <th scope="col">Avg Total Pts</th>
-                  <th scope="col">Max Total Pts</th>
-                  <th scope="col">Avg A+E Pts</th>
-                  <th scope="col">Max A+E Pts</th>
-                  <th scope="col" class="d-none d-md-table-cell">Avg A Pts</th>
-                  <th scope="col" class="d-none d-md-table-cell">Avg T Pts</th>
-                  <th scope="col" class="d-none d-md-table-cell">Avg E Pts</th>
+                  <th scope="col">Avg Total Notes</th>
+                  <th scope="col">Max Total Notes</th>
+                  <th scope="col" class="d-none d-md-table-cell">Avg A Notes</th>
+                  <th scope="col" class="d-none d-md-table-cell">Avg T Notes</th>
+                  <th scope="col" class="d-none d-md-table-cell">Avg E Points</th>
+                  <th scope="col" class="d-none d-md-table-cell">Onstage %</th>
+                  <th scope="col" class="d-none d-md-table-cell">Trap %</th>
                   <th scope="col" class="d-none d-md-table-cell">Total Died</th>
                   <th scope="col">Notes</th>
                 </tr>
@@ -53,19 +66,32 @@
           <div class="card-body overflow-auto">
             <table id="unsortedTable" class="table table-striped table-hover sortable">
               <thead>
+                <colgroup>
+                  <col span="4" style="background-color:transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:#transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:transparent">
+                </colgroup>
                 <tr>
                   <th scope="col"></th>
                   <th scope="col"></th>
                   <th scope="col">#</th>
                   <th scope="col">Team</th>
                   <th scope="col">Internal ELO</th>
-                  <th scope="col">Avg Total Pts</th>
-                  <th scope="col">Max Total Pts</th>
-                  <th scope="col">Avg A+E Pts</th>
-                  <th scope="col">Max A+E Pts</th>
-                  <th scope="col" class="d-none d-md-table-cell">Avg A Pts</th>
-                  <th scope="col" class="d-none d-md-table-cell">Avg T Pts</th>
-                  <th scope="col" class="d-none d-md-table-cell">Avg E Pts</th>
+                  <th scope="col">Avg Total Notes</th>
+                  <th scope="col">Max Total Notes</th>
+                  <th scope="col" class="d-none d-md-table-cell">Avg A Notes</th>
+                  <th scope="col" class="d-none d-md-table-cell">Avg T Notes</th>
+                  <th scope="col" class="d-none d-md-table-cell">Avg E Points</th>
+                  <th scope="col" class="d-none d-md-table-cell">Onstage %</th>
+                  <th scope="col" class="d-none d-md-table-cell">Trap %</th>
                   <th scope="col" class="d-none d-md-table-cell">Total Died</th>
                   <th scope="col">Notes</th>
                 </tr>
@@ -88,19 +114,32 @@
           <div class="card-body overflow-auto">
             <table class="table table-striped table-hover sortable">
               <thead>
+                <colgroup>
+                  <col span="4" style="background-color:transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:#transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:transparent">
+                </colgroup>
                 <tr>
                   <th scope="col"></th>
                   <th scope="col"></th>
                   <th scope="col">#</th>
                   <th scope="col">Team</th>
                   <th scope="col">Internal ELO</th>
-                  <th scope="col">Avg Total Pts</th>
-                  <th scope="col">Max Total Pts</th>
-                  <th scope="col">Avg A+E Pts</th>
-                  <th scope="col">Max A+E Pts</th>
-                  <th scope="col" class="d-none d-md-table-cell">Avg A Pts</th>
-                  <th scope="col" class="d-none d-md-table-cell">Avg T Pts</th>
-                  <th scope="col" class="d-none d-md-table-cell">Avg E Pts</th>
+                  <th scope="col">Avg Total Notes</th>
+                  <th scope="col">Max Total Notes</th>
+                  <th scope="col" class="d-none d-md-table-cell">Avg A Notes</th>
+                  <th scope="col" class="d-none d-md-table-cell">Avg T Notes</th>
+                  <th scope="col" class="d-none d-md-table-cell">Avg E Points</th>
+                  <th scope="col" class="d-none d-md-table-cell">Onstage %</th>
+                  <th scope="col" class="d-none d-md-table-cell">Trap %</th>
                   <th scope="col" class="d-none d-md-table-cell">Total Died</th>
                   <th scope="col">Notes</th>
                 </tr>
@@ -246,9 +285,9 @@
     }
 
     if (canEdit) {
-      // sorttable.makeSortable(document.getElementById("unsortedTable"));
+      //sorttable.makeSortable(document.getElementById("unsortedTable"));
     } else {
-      // sorttable.makeSortable(document.getElementById("unsortedTable"));
+      //sorttable.makeSortable(document.getElementById("unsortedTable"));
     }
   }
 
@@ -433,6 +472,9 @@
     if (!(team in localAverages)) {
       return "NA";
     }
+    if (item == "endgamestagepercent") {
+      return localAverages[team][item][2];
+    }
     return localAverages[team][item];
   }
 
@@ -464,18 +506,18 @@
       out += "  <td scope='col' class='pickHandle'>" + icon_svg + "</td>";
       out += "  <td scope='col'> <input class='form-check-input pick-check' type='checkbox' role='switch'></td>";
     }
-    var avgAutoEnd = rnd(dummylocalAveragesLookup(team, "avgautopoints") + dummylocalAveragesLookup(team, "avgendgamepoints"));
-    var maxAutoEnd = rnd(dummylocalAveragesLookup(team, "maxautopoints") + dummylocalAveragesLookup(team, "maxendgamepoints"));
+    var onstagePercent = rnd(dummylocalAveragesLookup(team, "endgamestagepercent"));
+    var trapPercent = rnd(dummylocalAveragesLookup(team, "avgtrap") * 100);
     out += "  <td scope='col'>" + index + "</td>";
     out += "  <td scope='col'><b>" + team + "</b></td>";
     out += "  <td scope='col'>" + dummyGet(internalEloRank["elo"], team) + "</td>";
-    out += "  <td scope='col'>" + dummylocalAveragesLookup(team, "avgtotalpoints") + "</td>";
-    out += "  <td scope='col'>" + dummylocalAveragesLookup(team, "maxtotalpoints") + "</td>";
-    out += "  <td scope='col'>" + avgAutoEnd + "</td>";
-    out += "  <td scope='col'>" + maxAutoEnd + "</td>";
-    out += "  <td scope='col' class='d-none d-md-table-cell'>" + dummylocalAveragesLookup(team, "avgautopoints") + "</td>";
-    out += "  <td scope='col' class='d-none d-md-table-cell'>" + dummylocalAveragesLookup(team, "avgteleoppoints") + "</td>";
+    out += "  <td scope='col'>" + dummylocalAveragesLookup(team, "avgtotalnotes") + "</td>";
+    out += "  <td scope='col'>" + dummylocalAveragesLookup(team, "maxtotalnotes") + "</td>";
+    out += "  <td scope='col' class='d-none d-md-table-cell'>" + dummylocalAveragesLookup(team, "avgautonotes") + "</td>";
+    out += "  <td scope='col' class='d-none d-md-table-cell'>" + dummylocalAveragesLookup(team, "avgteleopnotes") + "</td>";
     out += "  <td scope='col' class='d-none d-md-table-cell'>" + dummylocalAveragesLookup(team, "avgendgamepoints") + "</td>";
+    out += "  <td scope='col'>" + onstagePercent + "</td>";
+    out += "  <td scope='col'>" + trapPercent + "</td>";
     out += "  <td scope='col' class='d-none d-md-table-cell'>" + dummylocalAveragesLookup(team, "totaldied") + "</td>";
     out += "  <td><textarea style='min-width:200px' class='form-control teamNotes' rows='1' data-team='" + team + "'>" + commentLookup(team) + "</textarea></td>";
     out += "</tr>";
