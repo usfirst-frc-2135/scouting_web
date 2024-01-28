@@ -37,7 +37,7 @@
                   <th scope="col"></th>
                   <th scope="col">#</th>
                   <th scope="col">Team</th>
-                  <th scope="col">Internal ELO</th>
+                  <th scope="col">ELO</th>
                   <th scope="col">Avg Total Notes</th>
                   <th scope="col">Max Total Notes</th>
                   <th scope="col" class="d-none d-md-table-cell">Avg A Notes</th>
@@ -84,7 +84,7 @@
                   <th scope="col"></th>
                   <th scope="col">#</th>
                   <th scope="col">Team</th>
-                  <th scope="col">Internal ELO</th>
+                  <th scope="col">ELO</th>
                   <th scope="col">Avg Total Notes</th>
                   <th scope="col">Max Total Notes</th>
                   <th scope="col" class="d-none d-md-table-cell">Avg A Notes</th>
@@ -132,7 +132,7 @@
                   <th scope="col"></th>
                   <th scope="col">#</th>
                   <th scope="col">Team</th>
-                  <th scope="col">Internal ELO</th>
+                  <th scope="col">ELO</th>
                   <th scope="col">Avg Total Notes</th>
                   <th scope="col">Max Total Notes</th>
                   <th scope="col" class="d-none d-md-table-cell">Avg A Notes</th>
