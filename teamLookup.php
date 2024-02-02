@@ -56,6 +56,19 @@
                 </div>
               </div>
             </div>
+            
+            <!-- Endgame collapsible graph -->
+            <div class="card mb-3">
+              <div class="card-body">
+                <div class="overflow-auto">
+                  <h5 class="text-center"> 
+                    <a href="#collapseEndgameGraph" data-bs-toggle="collapse" aria-expanded="false"> Endgame Graph</a> </h5>
+                  <div class="collapse" id="collapseEndgameGraph">
+                    <canvas id="myChart3" width="400" height="400"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
                   
             <!-- Pit Scouting 1st row -->
             <div class="overflow-auto">
@@ -183,7 +196,7 @@
             <div class="card mb-3">
               <div class="card-body">
                 <div class="overflow-auto">
-                  <h5 class="text-center">Match Total Points </h5>
+                  <h5 class="text-center">Match Total Notes </h5>
                   <table class="table table-striped">
                     <thead>
                       <tr>
@@ -194,7 +207,7 @@
                     </thead>
                     <tbody id="totalTable">
                       <tr>
-                        <th scope="row">Total Pts</th>
+                        <th scope="row">Total Notes</th>
                       </tr>
                     </tbody>
                   </table>
@@ -213,43 +226,21 @@
                         <thead>
                           <tr>
                             <td>&nbsp;</td>
-                            <th scope="col">N</th>
-                            <th scope="col">D</th>
-                            <th scope="col">E</th>
-                          </tr>
-                        </thead>
-                        <tbody id="autonChargeTable">
-                          <tr>
-                            <th scope="row">Charge Level %</th>
-                          </tr>
-                        </tbody>
-                      </table>  
-                        
-                      <table class="table table-striped">
-                        <thead>
-                          <tr>
-                            <td>&nbsp;</td>
                             <th scope="col">AVG</th>
                             <th scope="col">MAX</th>
                           </tr>
                         </thead>
                         <tbody id="autoTable">
-                          <tr>
-                            <th scope="row">Mobility %</th>
-                          </tr>
                          <tr>
-                            <th scope="row">Top Row</th>
+                            <th scope="row">Amp Notes</th>
                           </tr>
                           <tr>
-                            <th scope="row">Middle Row</th>
-                          </tr>
-                          <tr>
-                            <th scope="row">Bottom Row</th>
+                            <th scope="row">Speaker Notes</th>
                           </tr>
                         </tbody>
                         <tfoot id="autoTotalTable">
                           <tr>
-                            <th scope="col">Total Pts</th>
+                            <th scope="col">Total Notes</th>
                           </tr>
                         </tfoot>
                       </table>
@@ -276,18 +267,15 @@
                         </thead>
                         <tbody id="teleopTable">
                           <tr>
-                            <th scope="row">Top Row</th>
+                            <th scope="row">Amp Notes</th>
                           </tr>
                           <tr>
-                            <th scope="row">Middle Row</th>
-                          </tr>
-                          <tr>
-                            <th scope="row">Bottom Row</th>
+                            <th scope="row">Speaker Notes</th>
                           </tr>
                         </tbody>
                         <tfoot id="teleopTotalTable">
                           <tr>
-                            <th scope="col">Total Pts</th>
+                            <th scope="col">Total Notes</th>
                           </tr>
                         </tfoot>
                       </table>
@@ -310,14 +298,37 @@
                             <td>&nbsp;</td>
                             <th scope="col">N</th>
                             <th scope="col">P</th>
-                            <th scope="col">D</th>
-                            <th scope="col">E</th>
+                            <th scope="col">O</th>
                           </tr>
                         </thead>
-                        <tbody id="endgameChargeTable">
+                        <tbody id="endgameStageTable">
                           <tr>
-                            <th scope="row">Charge Level %</th>
+                            <th scope="row">Stage Level %</th>
                           </tr>
+                          </tbody>
+                          <thead>
+                          <tr>
+                            <td>&nbsp;</td>
+                            <th scope="col">0</th>
+                            <th scope="col">1</th>
+                            <th scope="col">2</th>
+                          </tr>
+                        </thead>
+                          <tbody id="endgameHarmonyTable">
+                          <tr>
+                            <th scope="row">Harmony Level %</th>
+                            </tr>
+                        </tbody>
+                        <thread>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <th scope="col">%</th>
+                            </tr>
+                        </thread>
+                          <tbody id="endgameTrapTable">
+                          <tr>
+                            <th scope="row">Trap Notes %</th>
+                            </tr>
                         </tbody>
                       </table>
                     </div>
@@ -334,7 +345,7 @@
                     <h5 class="text-center"> 
                       <a href="#collapsedriveRankGraph" data-bs-toggle="collapse" aria-expanded="false"> Drive Rank Graph</a> </h5>
                     <div class="collapse" id="collapsedriveRankGraph">
-                      <canvas id="myChart3" width="400" height="350"></canvas>
+                      <canvas id="myChart4" width="400" height="350"></canvas>
                     </div>
                   </div>
                 </div>
@@ -347,7 +358,6 @@
       </div>
      </div>
     </div>
-  </div>
 
 <?php include("footer.php") ?>
 
@@ -360,6 +370,9 @@
 	
   var chart3Defined = false;
   var myChart3;
+    
+  var chart4Defined = false;
+  var myChart4;
 
   function writeTableRow(tbodyID, dict, keys) {
     var row = "<tr>";
@@ -390,41 +403,39 @@
   }
 
   function dataToAvgTables(avgs) {
-    // Auton Scores
-    avgs["autonchargestationpercent"]["autonchargestr"] = "<b>Charge Level %</b>";
-    avgs["mobilitystr"] = "<b>Mobility %</b>";
-    avgs["toprowstr"] = "<b>Top Row Items</b>";
-    avgs["midrowstr"] = "<b>Middle Row Items</b>";
-    avgs["botrowstr"] = "<b>Bottom Row Items</b>";
-    avgs["totalstr"] = "<b>Total Pts</b>";
+    //Auton Scores
+    avgs["amprowstr"] = "<b>Amp Now</b>";
+    avgs["speakerrowstr"] = "<b>Speaker Notes</b>";
+    avgs["totalstr"] = "<b>Total Notes</b>";
       
-//    console.log[avgs, ["mobilitystr", "exitcommunity"]];
-      
-    writeTableRow("autonChargeTable", avgs["autonchargestationpercent"], ["autonchargestr", 0, 1, 2]);
-    writeTableRow("autoTable", avgs, ["mobilitystr", "mobilitypercent"]);
-    writeTableRow("autoTable", avgs, ["toprowstr", "avg_autontoprowitems", "max_autontoprowitems"]);
-    writeTableRow("autoTable", avgs, ["midrowstr", "avg_autonmidrowitems", "max_autonmidrowitems"]);
-    writeTableRow("autoTable", avgs, ["botrowstr", "avg_autonbotrowitems", "max_autonbotrowitems"]);
-    writeTableRow("autoTotalTable", avgs, ["totalstr", "avgautopoints", "maxautopoints"]);
+    writeTableRow("autoTable", avgs, ["amprowstr", "avgautonamps", "maxautonamps"]);
+    writeTableRow("autoTable", avgs, ["speakerrowstr", "avgautonspeaker", "maxautonspeaker"]);
+    writeTableRow("autoTotalTable", avgs, ["totalstr", "avgautonotes", "maxautonotes"]);
       
     // Teleop Scores
-    avgs["toprowstr"] = "<b>Top Row Items</b>";
-    avgs["midrowstr"] = "<b>Middle Row Items</b>";
-    avgs["botrowstr"] = "<b>Bottom Row Items</b>";
-    avgs["totalstr"] = "<b>Total Pts</b>";
-    writeTableRow("teleopTable", avgs, ["toprowstr", "avg_teleoptoprowitems", "max_teleoptoprowitems"]);
-    writeTableRow("teleopTable", avgs, ["midrowstr", "avg_teleopmidrowitems", "max_teleopmidrowitems"]);
-    writeTableRow("teleopTable", avgs, ["botrowstr", "avg_teleopbotrowitems", "max_teleopbotrowitems"]);
-    writeTableRow("teleopTotalTable", avgs, ["totalstr", "avgteleoppoints", "maxteleoppoints"]);
+    avgs["amprowstr"] = "<b>Amp Notes</b>";
+    avgs["speakerrowstr"] = "<b>Speaker Notes</b>";
+    avgs["totalstr"] = "<b>Total Notes</b>";
+    writeTableRow("teleopTotalTable", avgs, ["totalstr", "avgteleopnotes", "maxteleopnotes"]);
+    writeTableRow("teleopTable", avgs, ["amprowstr", "avgteleopampnotes", "maxteleopampnotes"]);
+    writeTableRow("teleopTable", avgs, ["speakerrowstr", "avgteleopspeakernotes", "maxteleopspeakernotes"]);
 
     // Endgame Climb Table
-    avgs["endgamechargestationpercent"]["endgamechargestr"] = "<b>Charge Level %</b>";
-    var chargestationlevel = avgs["endgamechargestationpercent"];
-    chargestationlevel["chargestr"] = "<b>Charge Level %</b>";
-    writeTableRow("endgameChargeTable", avgs["endgamechargestationpercent"], ["endgamechargestr", 0, 1, 2, 3]);
+    avgs["endgamestagepercent"]["endgamestagestr"] = "<b>Stage Level %</b>";
+    avgs["endgameharmonypercent"]["endgameharmonystr"] = "<b>Harmony Level %</b>";
+    avgs["avgtrap"]["endgametrapstr"] = "<b>Trap Notes %</b>";
+    var stageLevel = avgs["endgamestagepercent"];
+    stageLevel["stagestr"] = "<b>Stage Level %</b>";
+    var harmonyLevel = avgs["endgameharmonypercent"];
+    harmonyLevel["harmomystr"] = "<b>Harmony Level %</b>";
+    avgs["traprowstr"] = "<b>Trap Notes %</b>";
+    writeTableRow("endgameStageTable", avgs["endgamestagepercent"], ["endgamestagestr", 0, 1, 2]);
+    writeTableRow("endgameHarmonyTable", avgs["endgameharmonypercent"], ["endgameharmonystr", 0, 1, 2]);
+    avgs["avgtrap"] = avgs["avgtrap"] * 100
+    writeTableRow("endgameTrapTable", avgs, ["traprowstr", "avgtrap"]);
 
     // Total Table
-    writeTableRow("totalTable", avgs, ["totalstr", "avgtotalpoints", "maxtotalpoints"]); 
+    writeTableRow("totalTable", avgs, ["totalstr", "avgtotalnotes", "maxtotalnotes"]); 
   }
 
   function checkGet() {
@@ -469,6 +480,7 @@
     dataToMatchTable(data); 
     dataToAutonGraph(data);
     dataToTeleopGraph(data);
+    dataToEndgameGraph(data);
     sorttable.makeSortable(document.getElementById("sortableAllMatches")); 
   }
 	
@@ -483,17 +495,17 @@
     var autonLeaveTips = []; // holds custom tooltips for auton leave starting zone data
 
     datasets.push({
-      label: "Auton Amp Notes",
+      label: "Amp Notes",
       data: [],
       borderColor: 'Red'
     });
     datasets.push({
-      label: "Auton Speaker Notes",
+      label: "Speaker Notes",
       data: [],
       borderColor: 'Green'
     });
     datasets.push({
-      label: "Auton Leave Starting Zone",
+      label: "Leave Starting Zone",
       data: [],
       borderColor: 'Blue'
     });
@@ -508,14 +520,14 @@
       // Get auton amp notes data
       var autonAmpNotes = matchdata[i]["autonampnotes"];
       datasets[0]["data"].push(autonAmpNotes);
-      var tooltopStr = "Auton Amp(amp "+autonAmpNotes+")="+autonAmpNotes;
+      var tooltipStr = "Amp Notes="+autonAmpNotes;
       autonAmpTips.push({xlabel: matchnum, tip: tooltipStr}); 
         console.log("autonampnotes");
 
       // Get auton speaker notes data
       var autonSpeakerNotes = matchdata[i]["autonspeakernotes"];
       datasets[1]["data"].push(autonSpeakerNotes);
-      var tooltipStr = "Auton Speaker(speaker "+autonSpeakerNotes+")="+autonSpeakerNotes;
+      var tooltipStr = "Speaker Notes="+autonSpeakerNotes;
       autonSpeakerTips.push({xlabel: matchnum, tip: tooltipStr}); 
         console.log("autonspeakernotes");
 
@@ -528,7 +540,7 @@
         clevel = "Yes";
       var tipStr = "Leave Starting Zone="+clevel;
       autonLeaveTips.push({xlabel: matchnum, tip: tipStr});
-        console.log("leavestartingzone");
+        //console.log("leavestartingzone");
     }
         
 
@@ -561,7 +573,7 @@
 
                  if(toolIndex == 0) {   // Auton Amp Notes
                    for (let i = 0; i < autonAmpTips.length; i++) {
-                       console.log("in auton amp tips line");
+                       //console.log("in auton amp tips line");
                      if(autonAmpTips[i].xlabel == matchnum) {
                        tipStr = autonAmpTips[i].tip;
                        break;
@@ -597,74 +609,36 @@
     // Declare variables
     var match_list = []; // List of matches to use as x lables
     var datasets = []; // Each entry is a dict with a label and data attribute
-    var teleopTopRowTips = []; // holds custom tooltips for teleop top row points
-    var teleopMidRowTips = []; // holds custom tooltips for teleop middle row points
-    var teleopBotRowTips = []; // holds custom tooltips for teleop bottom row points
-    var endgameChargeTips = []; // holds custom tooltips for endgame charge level points
+    var teleopAmpTips = []; // holds custom tooltips for teleop top row points
+    var teleopSpeakerTips = []; // holds custom tooltips for teleop middle row points
 
     datasets.push({
-      label: "Teleop Top Row Items",
+      label: "Amp Notes",
       data: [],
       borderColor: 'MediumOrchid'
     });
     datasets.push({
-      label: "Teleop Middle Row Items",
+      label: "Speaker Notes",
       data: [],
       borderColor: 'MediumSeaGreen'
     });
-    datasets.push({
-      label: "Teleop Bottom Row Items",
-      data: [],
-      borderColor: 'MediumTurquoise'
-    });
-    datasets.push({
-      label: "Endgame Charge Level",
-      data: [],
-      borderColor: 'PaleVioletRed'
-    });
-    
-
+      
     // Build data sets; go thru each matchdata QR code string and populate the graph datasets.
     for (let i = 0; i < matchdata.length; i++) {
       var matchnum = matchdata[i]["matchnumber"];
       match_list.push(matchnum);
 
-      // Get teleop top row data
-      var teleopTopRowCubes = matchdata[i]["teleopcubestop"];
-      var teleopTopRowCones = matchdata[i]["teleopconestop"];
-      var teleopTopSum = teleopTopRowCones + teleopTopRowCubes;
-      datasets[0]["data"].push(teleopTopSum);
-      var tooltipStr = "Top (cubes "+teleopTopRowCubes+", cones "+teleopTopRowCones+")="+teleopTopSum;
-      teleopTopRowTips.push({xlabel: matchnum, tip: tooltipStr}); 
+      // Get teleop amp notes data
+      var teleopAmpNotes = matchdata[i]["teleopampnotes"];
+      datasets[0]["data"].push(teleopAmpNotes);
+      var tooltipStr = "Amp Notes="+teleopAmpNotes;
+      teleopAmpTips.push({xlabel: matchnum, tip: tooltipStr}); 
 
-      // Get teleop middle row data
-      var teleopMidRowCubes = matchdata[i]["teleopcubesmiddle"];
-      var teleopMidRowCones = matchdata[i]["teleopconesmiddle"];
-      var teleopMidSum = teleopMidRowCones + teleopMidRowCubes;
-      datasets[1]["data"].push(teleopMidSum);
-      var tooltipStr = "Middle (cubes "+teleopMidRowCubes+", cones "+teleopMidRowCones+")="+teleopMidSum;
-      teleopMidRowTips.push({xlabel: matchnum, tip: tooltipStr}); 
-
-      // Get teleop bottom row data
-      var teleopBotRowCubes = matchdata[i]["teleopcubesbottom"];
-      var teleopBotRowCones = matchdata[i]["teleopconesbottom"];
-      var teleopBotSum = teleopBotRowCones + teleopBotRowCubes;
-      datasets[2]["data"].push(teleopBotSum);
-      var tooltipStr = "Bottom (cubes "+teleopBotRowCubes+", cones "+teleopBotRowCones+")="+teleopBotSum;
-      teleopBotRowTips.push({xlabel: matchnum, tip: tooltipStr}); 
-
-      // Get endgame charge level
-      var endgameChargeLevel = matchdata[i]["endgamechargelevel"];
-      datasets[3]["data"].push(endgameChargeLevel);
-      var clevel = "None";
-      if(endgameChargeLevel == 1)
-        clevel = "Parked";
-      if(endgameChargeLevel == 2)
-        clevel = "Docked"
-      else if(endgameChargeLevel == 3)
-        clevel = "Engaged";
-      var tipStr = "Charge Level="+clevel;
-      endgameChargeTips.push({xlabel: matchnum, tip: tipStr}); 
+      // Get teleop speaker notes data
+      var teleopSpeakerNotes = matchdata[i]["teleopspeakernotes"];
+      datasets[1]["data"].push(teleopSpeakerNotes);
+      var tooltipStr = "Speaker Notes="+teleopSpeakerNotes;
+      teleopSpeakerTips.push({xlabel: matchnum, tip: tooltipStr});  
     }
 
     // Define the graph as a line chart:
@@ -672,7 +646,6 @@
       myChart2.destroy();
     }
     chart2Defined = true;
-
     const ctx = document.getElementById('myChart2').getContext('2d');
     myChart2 = new Chart(ctx, {
       type: 'line',
@@ -695,33 +668,17 @@
                  var tipStr = datasets[toolIndex].label;
 
                  if(toolIndex == 0) {   // Teleop Top Row
-                   for (let i = 0; i < teleopTopRowTips.length; i++) {
-                     if(teleopTopRowTips[i].xlabel == matchnum) {
-                       tipStr = teleopTopRowTips[i].tip;
+                   for (let i = 0; i < teleopAmpTips.length; i++) {
+                     if(teleopAmpTips[i].xlabel == matchnum) {
+                       tipStr = teleopAmpTips[i].tip;
                        break;
                      }
                    }
                  }
                  else if(toolIndex == 1) {   // Teleop Middle Row
-                   for (let i = 0; i < teleopMidRowTips.length; i++) {
-                     if(teleopMidRowTips[i].xlabel == matchnum) {
-                       tipStr = teleopMidRowTips[i].tip;
-                       break;
-                     }
-                   }
-                 }
-                 else if(toolIndex == 2) {   // Teleop Bottom Row
-                   for (let i = 0; i < teleopBotRowTips.length; i++) {
-                     if(teleopBotRowTips[i].xlabel == matchnum) {
-                       tipStr = teleopBotRowTips[i].tip;
-                       break;
-                     }
-                   }
-                 }
-                 else if(toolIndex == 3) {   // Endgame Charge Level
-                   for (let i = 0; i < endgameChargeTips.length; i++) {
-                     if(endgameChargeTips[i].xlabel == matchnum) {
-                       tipStr = endgameChargeTips[i].tip;
+                   for (let i = 0; i < teleopSpeakerTips.length; i++) {
+                     if(teleopSpeakerTips[i].xlabel == matchnum) {
+                       tipStr = teleopSpeakerTips[i].tip;
                        break;
                      }
                    }
@@ -734,7 +691,103 @@
       }
     });
   }
-	
+    
+ function dataToEndgameGraph(matchdata) {
+     var match_list = [];
+     var datasets = [];
+     var endgameStageTips = [];
+     var endgameHarmonyTips = [];
+     
+     datasets.push({
+         label: "Stage Level",
+         data: [],
+         borderColor: 'SteelBlue'
+     });
+     datasets.push({
+         label: "Harmony Level",
+         data: [],
+         borderColor: 'RebeccaPurple'
+     });
+     
+     for (let i = 0; i < matchdata.length; i++) {
+         var matchnum = matchdata[i]["matchnumber"];
+         match_list.push(matchnum);
+         
+         // Get endgame stage level
+         var endgameStage = matchdata[i]["endgamestage"];
+         datasets[0]["data"].push(endgameStage);
+         var clevel = "None";
+         if(endgameStage == 1)
+            clevel = "Parked";
+         if(endgameStage == 2)
+            clevel = "Onstage";
+         
+         var tipStr = "Stage="+clevel;
+         endgameStageTips.push({xlabel: matchnum, tip: tipStr}); 
+         
+         // Get endgame harmony level
+         var endgameHarmony = matchdata[i]["endgameharmony"];
+         datasets[1]["data"].push(endgameHarmony);
+         var clevel = "0";
+         if(endgameHarmony == 1)
+            clevel = "1";
+         if(endgameHarmony == 2)
+            clevel = "2";
+         
+         var tipStr = "Harmony="+clevel;
+         endgameHarmonyTips.push({xlabel: matchnum, tip: tipStr});
+         
+     }
+         
+     if (chart3Defined) {
+        myChart3.destroy();
+     }
+     chart3Defined = true;
+     const ctx = document.getElementById('myChart3').getContext('2d');
+     myChart3 = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: match_list,
+        datasets: datasets
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        },
+        plugins: {
+          tooltip: {
+            callbacks: {  // Special tooltip handling
+              label: function(tooltipItem,ddata) {
+                 var toolIndex = tooltipItem.datasetIndex;
+                 var matchnum = tooltipItem.label;
+                 var tipStr = datasets[toolIndex].label;
+
+                 if(toolIndex == 0) {   // Stage Level
+                   for (let i = 0; i < endgameStageTips.length; i++) {
+                     if(endgameStageTips[i].xlabel == matchnum) {
+                       tipStr = endgameStageTips[i].tip;
+                       break;
+                     }
+                   }
+                 }
+                 else if(toolIndex == 1) {   // Teleop Middle Row
+                   for (let i = 0; i < endgameHarmonyTips.length; i++) {
+                     if(endgameHarmonyTips[i].xlabel == matchnum) {
+                       tipStr = endgameHarmonyTips[i].tip;
+                       break;
+                     }
+                   }
+                 }
+                 return tipStr;
+              }
+            }
+          }
+        }
+      }
+    });    
+   }
 	
  function dataToDriveRankGraph(driveRankData) {
     // Declare variables
@@ -774,13 +827,13 @@
     }
 
     // Define the graph as a line chart:
-    if (chart3Defined) {
-      myChart3.destroy();
+    if (chart4Defined) {
+      myChart4.destroy();
     }
-    chart3Defined = true;
+    chart4Defined = true;
 
-    const ctx = document.getElementById('myChart3').getContext('2d');
-    myChart3 = new Chart(ctx, {
+    const ctx = document.getElementById('myChart4').getContext('2d');
+    myChart4 = new Chart(ctx, {
       type: 'line',
       data: {
         labels: match_list,
@@ -839,7 +892,9 @@
     $("#autonChargeTable").html("");
     $("#teleopTable").html("");
     $("#teleopTotalTable").html("");
-    $("#endgameChargeTable").html("");
+    $("#endgameStageTable").html("");
+    $("#endgameHarmonyTable").html("");
+    $("#endgameTrapTable").html("");
     $("#totalTable").html("");
 
     // Write new data
