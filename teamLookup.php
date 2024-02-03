@@ -81,10 +81,10 @@
                     <col span="1" style="background-color:#cfe2ff">
                   </colgroup>
                   <tr>
-                    <th scope="col">Batt</th>
-                    <th scope="col">Pit</th>
-                    <th scope="col">Spare Parts</th>
-                    <th scope="col">Vision</th>
+                    <th scope="col" style="width:25%">Batt</th>
+                    <th scope="col" style="width:25%">Pit</th>
+                    <th scope="col" style="width:25%">Spare Parts</th>
+                    <th scope="col" style="width:25%">Vision</th>
                   </tr>
                 </thead>
                 <tbody id="pitRow1">
@@ -103,10 +103,10 @@
                     <col span="1" style="background-color:#cfe2ff">
                   </colgroup>
                   <tr>
-                    <th scope="col">Drive Motors</th>
-                    <th scope="col">Prep</th>
-                    <th scope="col">Swerve</th>
-                    <th scope="col">Lang</th>
+                    <th scope="col" style="width:25%">Drive Motors</th>
+                    <th scope="col" style="width:25%">Prep</th>
+                    <th scope="col" style="width:25%">Swerve</th>
+                    <th scope="col" style="width:25%">Lang</th>
                   </tr>  
                 </thead>
                 <tbody id="pitRow2">
@@ -404,7 +404,7 @@
 
   function dataToAvgTables(avgs) {
     //Auton Scores
-    avgs["amprowstr"] = "<b>Amp Now</b>";
+    avgs["amprowstr"] = "<b>Amp Notes</b>";
     avgs["speakerrowstr"] = "<b>Speaker Notes</b>";
     avgs["totalstr"] = "<b>Total Notes</b>";
       
