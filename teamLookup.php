@@ -292,7 +292,7 @@
                   <h5 class="text-center"> <a href="#collapseEndgame" data-bs-toggle="collapse" aria-expanded="false"> Endgame </a> </h5>
                   <div class="collapse" id="collapseEndgame">
                     <div class="card card-body">
-                      <table class="table table-striped">
+                      <table class="table">
                         <thead>
                           <tr>
                             <td>&nbsp;</td>
@@ -303,7 +303,7 @@
                         </thead>
                         <tbody id="endgameStageTable">
                           <tr>
-                            <th scope="row">Stage Level %</th>
+                            <th scope="row" style="background-color:rgb(240,240,240);">Stage Level %</th>
                           </tr>
                           </tbody>
                           <thead>
@@ -316,18 +316,18 @@
                         </thead>
                           <tbody id="endgameHarmonyTable">
                           <tr>
-                            <th scope="row">Harmony Level %</th>
+                            <th scope="row" style="background-color:rgb(240,240,240);">Harmony Level %</th>
                             </tr>
                         </tbody>
                         <thread>
                             <tr>
                                 <td>&nbsp;</td>
-                                <th scope="col">%</th>
+                                <th scope="col"></th>
                             </tr>
                         </thread>
                           <tbody id="endgameTrapTable">
                           <tr>
-                            <th scope="row">Trap Notes %</th>
+                            <th scope="row" style="background-color:rgb(240,240,240);">Trap Notes %</th>
                             </tr>
                         </tbody>
                       </table>
@@ -430,9 +430,12 @@
     harmonyLevel["harmomystr"] = "<b>Harmony Level %</b>";
     avgs["traprowstr"] = "<b>Trap Notes %</b>";
     writeTableRow("endgameStageTable", avgs["endgamestagepercent"], ["endgamestagestr", 0, 1, 2]);
+    document.getElementById("endgameStageTable").style.backgroundColor = "f0f0f0";
     writeTableRow("endgameHarmonyTable", avgs["endgameharmonypercent"], ["endgameharmonystr", 0, 1, 2]);
+    document.getElementById("endgameHarmonyTable").style.backgroundColor = "f0f0f0";
     avgs["avgtrap"] = avgs["avgtrap"] * 100
     writeTableRow("endgameTrapTable", avgs, ["traprowstr", "avgtrap"]);
+    document.getElementById("endgameTrapTable").style.backgroundColor = "f0f0f0";
 
     // Total Table
     writeTableRow("totalTable", avgs, ["totalstr", "avgtotalnotes", "maxtotalnotes"]); 
