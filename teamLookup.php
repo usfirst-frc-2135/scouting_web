@@ -164,7 +164,7 @@
                     <thead>
                       <tr>
                         <th scope="col">Match #</th>
-                        <th scope="col">Leave</th>
+                        <th scope="col">Auton Leave</th>
                         <th scope="col">Auton Speaker Notes</th>
                         <th scope="col">Auton Amp Notes</th>
                         <th scope="col">Teleop Amp Notes</th>
