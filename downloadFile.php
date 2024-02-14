@@ -1,12 +1,12 @@
 <?php
    $file = ($_GET['file']);
    $newPath = ($_GET['newFilePath']);
-   error_log(">>>> file = $file");
    
+   // Get the contents of the file to download.
    $contents = file_get_contents($file);
-   error_log("   ===>> newPath = $newPath");
 
-  $contents = file_get_contents($file);
-  file_put_contents($newPath,$contents);
+   // Copy the contents to the newPath.
+   file_put_contents($newPath,$contents);
+   error_log("Downloaded file '$file' to '$newPath'");
 ?>
 

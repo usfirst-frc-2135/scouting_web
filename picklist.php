@@ -84,7 +84,7 @@
 
 
   function writeCSVFile() {
-    console.log("===> starting writeCSVFile() ");
+    console.log("starting writeCSVFile() ");
     $.get("readAPI.php", {
       getAllData: 1
     }).done(function(data) {
@@ -101,7 +101,6 @@
           writePicklist: plistStrings
         }).done(function(data) {
 
-          console.log("===> done calling writeAPI::writePicklist ");
           if(data.indexOf('success') > -1) {
             alert("Success in creating CSV file");
           } else {
@@ -113,21 +112,20 @@
   }
 
   function downloadCSVFile(newPath) { 
-    console.log("===> starting downloadCSVFile() ");
+    console.log("starting downloadCSVFile() ");
+    var filename = eventCode + ".csv"; 
     
-        var filename = eventCode + ".csv"; 
-    
-            $.ajax({
-              url:'downloadFile.php',
-              data: {'file' : filename,
-                    'newFilePath' : newPath},
-              success:function(response){
-                console.log("Downloaded "+filename); 
-              },
-              error:function(){
-                console.log("Could NOT download "+filename); 
-              }
-            });
+    $.ajax({
+      url:'downloadFile.php',
+      data: {'file' : filename,
+             'newFilePath' : newPath},
+      success:function(response){
+        console.log("Downloaded "+filename); 
+      },
+      error:function(){
+        console.log("Could NOT download "+filename); 
+      }
+    });
   }
 
 
@@ -141,16 +139,16 @@
       
     $("#create_csv_file").on('click', function(event) {
        // Write out CSV file (will overwrite existing one).
-       console.log("===> create_csv_file clicked");
        writeCSVFile();  
     });
 
     $("#download_csv_file").on('click', function(event) {
        // Download existing CSV file.
-       console.log("===> download_file clicked");
-       const userInput = prompt("Please enter device id: ");
-       const newPath = "/Users/" + userInput + "/" + "Desktop/" + eventCode + ".csv";
-       downloadCSVFile(newPath); 
+       const userInput = prompt("Please enter MAC user id: ");
+       if (!userInput == "") {
+         const newPath = "/Users/" + userInput + "/" + "Desktop/" + eventCode + ".csv";
+         downloadCSVFile(newPath); 
+       }
     });
   });
 

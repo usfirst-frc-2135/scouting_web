@@ -74,58 +74,20 @@ if (isset($_POST["writeAllianceRankData"]))
   echo ("success");
 }
 
-//NEW->
 if (isset($_POST["writePicklist"]))
 {
   $plistData = $_POST["writePicklist"];
   $fileName = "$eventCode.csv";
-  error_log("===>> writePicklist data = $plistData");
-  error_log("  ===>> writePicklist fileName = $fileName");
+  error_log("writePicklist fileName = $fileName");
   $file = fopen($fileName,"w");
   fwrite($file,$plistData);
   fclose($file);
   echo ("success");
 }
 
-if (isset($_POST["downloadCsvFile"]))
-{
-//  $tdata = $_POST["downloadCsvFile"];
-  $fileName = "$eventCode.csv";
-  error_log("===>> downloadCsvFile filename = $fileName");
-
-  $newFilePath = "https://drive.google.com/drive/folders/1D71D7OGk5vg-veZ3QMrHk9rY-esD-wcujmG?usp=sharing/$fileName";
-  error_log("   ===>> newFilePath = $newFilePath");
-
-  $contents = file_get_contents($fileName);
-  file_put_contents($newFilePath,$contents);
-
-/*HOLD->
-  $filePath = $_GET['path'];
-  $baseName = basename($filePath);
-  error_log("  ===>> filePath = $filePath");
-  error_log("    ===>> baseName = $baseName");
-  if(empty($filePath)) {
-    echo("error - path cannot be empty");
-    exit;
-  }
-  if(!file_exists($filePath)) {
-    echo("'$filepath' does not exist");
-    exit;
-  }
-  header("Content-disposition: attachment; filename=" . $fileName);
-  header("Content-type: " . meme_content_type($filePath));
-  readfile($filePath);
-<-HOLD*/
-
-  echo ("success");
-}
-// <-NEW
-
 if (isset($_POST["deleteAllianceRankData"]))
 {
-  /*
-    $_POST["deleteAllianceRankData"] = [team1, team2, team3]
-    */
+  //  $_POST["deleteAllianceRankData"] = [team1, team2, team3]
   $db->connectToDB();
   $data = array();
   $data["eventcode"] = $eventCode;
