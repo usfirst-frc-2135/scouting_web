@@ -16,10 +16,7 @@
       <div class="card">
         <div class="card-body">
           <div class="col-md-2 mt-1 mb-1">
-            <button type="button" id="create_csv_file" class="btn btn-primary">Create CSV File</button>
-          </div>
-          <div class="col-md-2 mt-1 mb-1">
-            <button type="button" id="download_csv_file" class="btn btn-primary">Download File</button>
+            <button type="button" id="download_csv_file" class="btn btn-primary">Download CSV File</button>
           </div>
         </div>
       </div>
@@ -100,12 +97,6 @@
         $.post("writeAPI.php", {
           writePicklist: plistStrings
         }).done(function(data) {
-
-          if(data.indexOf('success') > -1) {
-            alert("Success in creating CSV file");
-          } else {
-            alert("Failed to create CSV file");
-          }
         });
       });
     });
@@ -118,14 +109,18 @@
     $.ajax({
       url:'downloadFile.php',
       data: {'file' : filename,
-             'newFilePath' : newPath},
-      success:function(response){
-        console.log("Downloaded "+filename); 
-      },
-      error:function(){
-        console.log("Could NOT download "+filename); 
-      }
-    });
+             'newFilePath' : newPath}
+    }).then(
+       function(response)
+       {
+         var jsonData = JSON.parse(response);
+         if(jsonData.success == "1")
+           alert("Successfully downloaded "+filename); 
+         else
+           alert("Failed to download "+filename); 
+       }
+
+     );
   }
 
 
@@ -137,12 +132,10 @@
         eventCode = data;
     });
       
-    $("#create_csv_file").on('click', function(event) {
+    $("#download_csv_file").on('click', function(event) {
        // Write out CSV file (will overwrite existing one).
        writeCSVFile();  
-    });
 
-    $("#download_csv_file").on('click', function(event) {
        // Download existing CSV file.
        const userInput = prompt("Please enter MAC user id: ");
        if (!userInput == "") {
