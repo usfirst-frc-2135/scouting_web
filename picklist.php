@@ -97,30 +97,52 @@
         $.post("writeAPI.php", {
           writePicklist: plistStrings
         }).done(function(data) {
+
+          // Because success word may have a new-line at end, don't do a direct compare.
+          if (data.indexOf('success') > -1) {
+            // Do nothing if ok
+          } else {
+            alert("Failure in creating CSV file!");
+          }
         });
       });
     });
   }
 
-  function downloadCSVFile(newPath) { 
+  function downloadCSVFile() { 
     console.log("starting downloadCSVFile() ");
     var filename = eventCode + ".csv"; 
+    var rtncode = 0;
     
-    $.ajax({
-      url:'downloadFile.php',
-      data: {'file' : filename,
-             'newFilePath' : newPath}
-    }).then(
-       function(response)
-       {
-         var jsonData = JSON.parse(response);
-         if(jsonData.success == "1")
-           alert("Successfully downloaded "+filename); 
-         else
-           alert("Failed to download "+filename); 
-       }
+    // Get MAC user ID to use for destination file path.
+    const userInput = prompt("Please enter MAC user id: ");
+    if (!userInput == "") {
+      const newPath = "/Users/" + userInput + "/" + "Desktop/" + eventCode + ".csv";
 
-     );
+      $.ajax({
+        url:'downloadFile.php',
+        data: {'file' : filename,
+               'newFilePath' : newPath}
+      }).then(
+         function(response)
+         {
+           var jsonData = JSON.parse(response);
+           console.log("downloadFile returned: '"+jsonData.success+"'");
+           if(jsonData.success == "1") {
+             var msg = "Successfully downloaded CSV file to "+newPath;
+             alert(msg);
+           }
+           else if(jsonData.success == "0") {
+             var msg = "CSV file was not successfully created";
+             alert(msg);
+           }
+           else if(jsonData.success == "2") {
+             var msg = "Failed to download CSV file to "+newPath;
+             alert(msg);
+           }
+         }
+      );
+    }
   }
 
 
@@ -134,14 +156,10 @@
       
     $("#download_csv_file").on('click', function(event) {
        // Write out CSV file (will overwrite existing one).
-       writeCSVFile();  
+//HOLD       writeCSVFile();
 
-       // Download existing CSV file.
-       const userInput = prompt("Please enter MAC user id: ");
-       if (!userInput == "") {
-         const newPath = "/Users/" + userInput + "/" + "Desktop/" + eventCode + ".csv";
-         downloadCSVFile(newPath); 
-       }
+       // Download the CSV file.
+       downloadCSVFile();
     });
   });
 
