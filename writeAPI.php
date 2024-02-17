@@ -82,11 +82,6 @@ if (isset($_POST["writePicklist"]))
   $file = fopen($fileName,"w");
   fwrite($file,$plistData);
   fclose($file);
-
-  // Verify file got created.
-  if (file_exists($fileName))
-    echo ("success");
-  else echo ("fail");
 }
 
 if (isset($_POST["deleteAllianceRankData"]))

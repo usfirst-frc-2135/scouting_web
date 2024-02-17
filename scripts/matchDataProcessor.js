@@ -191,8 +191,8 @@ class matchDataProcessor {
           
         avg[tn]["endgamestagepercent"] = {0:0, 1:0, 2:0};  
         avg[tn]["endgameharmonypercent"] = {0:0, 1:0, 2:0};
-        avg[tn]["avgspotlit"] = 0;
-        avg[tn]["avgtrap"] = 0;
+        avg[tn]["spotlitPercentage"] = 0;
+        avg[tn]["trapPercentage"] = 0;
        
         avg[tn]["totaldied"] = 0;
 
@@ -238,10 +238,10 @@ class matchDataProcessor {
 //      console.log(">> endgame points = " + endgamePoints);
 //      console.log("   -> endgamePoints = "+endgamePoints); //TEST
       var combinedTrap = (parseInt(this.data[i]["endgametrap"]));
-      avg[tn]["avgtrap"] += combinedTrap;
+      avg[tn]["trapPercentage"] += combinedTrap;
         
       var combinedSpotlit = (parseInt(this.data[i]["endgamespotlit"]));
-      avg[tn]["avgspotlit"] += combinedSpotlit;
+      avg[tn]["spotlitPercentage"] += combinedSpotlit;
       
       var totalNotes = autoNotes + teleopNotes;
 //      console.log("     -> totalPoints = "+totalPoints); //TEST
@@ -305,10 +305,10 @@ class matchDataProcessor {
 		
       avg[key]["avgteleopampnotes"] = Math.round(10 * avg[key]["avgteleopampnotes"] / avg[key]["totalmatches"]) / 10;
       avg[key]["avgteleopspeakernotes"] = Math.round(10 * avg[key]["avgteleopspeakernotes"] / avg[key]["totalmatches"]) / 10;
-      avg[key]["avgtrap"] = Math.round(100 * avg[key]["avgtrap"] / avg[key]["totalmatches"]);
-      avg[key]["avgspotlit"] = Math.round(100 * avg[key]["avgspotlit"] / avg[key]["totalmatches"]);
-//      console.log("   >> number of traps is = " + avg[key]["avgtrap"]);
-//      console.log("   >> spotlit (percentage) is = "+ avg[key]["avgspotlit"]);
+      avg[key]["trapPercentage"] = Math.round(100 * avg[key]["trapPercentage"] / avg[key]["totalmatches"]);
+      avg[key]["spotlitPercentage"] = Math.round(100 * avg[key]["spotlitPercentage"] / avg[key]["totalmatches"]);
+//      console.log("   >> number of traps is = " + avg[key]["trapPercentage"]);
+//      console.log("   >> spotlit (percentage) is = "+ avg[key]["spotlitPercentage"]);
 		
 //      console.log("  ===> totalmatches = "+avg[key]["totalmatches"]); //TEST
         

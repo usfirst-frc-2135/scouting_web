@@ -711,8 +711,8 @@
         row += "<td>" + rd["endgameharmonypercent"][0] + "</td>";
         row += "<td>" + rd["endgameharmonypercent"][1] + "</td>";
         row += "<td>" + rd["endgameharmonypercent"][2] + "</td>";
-        row += "<td>" + rd["avgtrap"] + "%</td>";
-        row += "<td>" + rd["avgspotlit"] + "%</td>";
+        row += "<td>" + rd["trapPercentage"] + "%</td>";
+        row += "<td>" + rd["spotlitPercentage"] + "%</td>";
         row += "</tr>";
       }
       $("#" + color + index + "DataTable").append(row);
