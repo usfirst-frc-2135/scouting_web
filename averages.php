@@ -36,9 +36,17 @@
 
     <div class="row pt-3 pb-3 mb-3">
       <div class="overflow-auto" id="freezeTableDiv">
+          <style type="text/css" media="screen">
+            table tr {
+                border: 1px solid black;
+            }
+            table td, table th {
+                border-right: 1px solid black;
+            }
+            </style>
         <table id="rawDataTable" class="tableFixHead table table-striped table-bordered table-hover sortable" style="width:100%;">
           <colgroup>
-            <col span="1" style="background-color:transparent">
+            <col span="1" style="background-color:transparent" >
             <col span="2" style="background-color:#cfe2ff">
             <col span="2" style="background-color:transparent">
             <col span="2" style="background-color:#cfe2ff">
@@ -171,39 +179,39 @@
       var endgameharmonyPercentage = dummyGet(scoutingData[teamNum], "endgameharmonypercent");
 
       var rowString = "<tr>" +
-        "<td><a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a></td>" +
+        "<td align=\"center\"><a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a></td>" +
         //"<td>" + dummyGet(tbaData[teamNum], "totalPoints") + "</td>" +
         //HOLD"<td>" + dummyGet(internalEloRank["elo"], teamNum) + "</td>" +
         "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgtotalnotes") + "</td>" +
-        "<td>" + dummyGet(scoutingData[teamNum], "maxtotalnotes") + "</td>" +
-        "<td>" + dummyGet(scoutingData[teamNum], "avgautonotes") + "</td>" +
-        "<td>" + dummyGet(scoutingData[teamNum], "maxautonotes") + "</td>" +
-        "<td>" + dummyGet(scoutingData[teamNum], "avgteleopnotes") + "</td>" +
-        "<td>" + dummyGet(scoutingData[teamNum], "maxteleopnotes") + "</td>" +
-        "<td>" + dummyGet(scoutingData[teamNum], "avgendgamepoints") + "</td>" +
-        "<td>" + dummyGet(scoutingData[teamNum], "maxendgamepoints") + "</td>" +
+        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxtotalnotes") + "</td>" +
+        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgautonotes") + "</td>" +
+        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxautonotes") + "</td>" +
+        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgteleopnotes") + "</td>" +
+        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxteleopnotes") + "</td>" +
+        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgendgamepoints") + "</td>" +
+        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxendgamepoints") + "</td>" +
 
-        "<td>" + dummyGet(scoutingData[teamNum], "avgautonamps") + "</td>" +
-	    "<td>" + dummyGet(scoutingData[teamNum], "maxautonamps") + "</td>" +
-	    "<td>" + dummyGet(scoutingData[teamNum], "avgautonspeaker") + "</td>" +
-	    "<td>" + dummyGet(scoutingData[teamNum], "maxautonspeaker") + "</td>" +
+        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgautonamps") + "</td>" +
+	    "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxautonamps") + "</td>" +
+	    "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgautonspeaker") + "</td>" +
+	    "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxautonspeaker") + "</td>" +
 		  
-        "<td>" + dummyGet(scoutingData[teamNum], "avgteleopampnotes") + "</td>" +
-	    "<td>" + dummyGet(scoutingData[teamNum], "maxteleopampnotes") + "</td>" +
-	    "<td>" + dummyGet(scoutingData[teamNum], "avgteleopspeakernotes") + "</td>" +
-	    "<td>" + dummyGet(scoutingData[teamNum], "maxteleopspeakernotes") + "</td>" +
+        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgteleopampnotes") + "</td>" +
+	    "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxteleopampnotes") + "</td>" +
+	    "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgteleopspeakernotes") + "</td>" +
+	    "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxteleopspeakernotes") + "</td>" +
 		  
-        "<td>" + dummyGet(endgamestagePercentage, 0) + "%</td>" +
-        "<td>" + dummyGet(endgamestagePercentage, 1) + "%</td>" +
-        "<td>" + dummyGet(endgamestagePercentage, 2) + "%</td>" +
+        "<td align=\"center\">" + dummyGet(endgamestagePercentage, 0) + "%</td>" +
+        "<td align=\"center\">" + dummyGet(endgamestagePercentage, 1) + "%</td>" +
+        "<td align=\"center\">" + dummyGet(endgamestagePercentage, 2) + "%</td>" +
           
-        "<td>" + dummyGet(endgameharmonyPercentage, 0) + "%</td>" +
-        "<td>" + dummyGet(endgameharmonyPercentage, 1) + "%</td>" +
-        "<td>" + dummyGet(endgameharmonyPercentage, 2) + "%</td>" +
+        "<td align=\"center\">" + dummyGet(endgameharmonyPercentage, 0) + "%</td>" +
+        "<td align=\"center\">" + dummyGet(endgameharmonyPercentage, 1) + "%</td>" +
+        "<td align=\"center\">" + dummyGet(endgameharmonyPercentage, 2) + "%</td>" +
           
-        "<td>" + dummyGet(scoutingData[teamNum], "trapPercentage") + "%</td>" +
-        "<td>" + dummyGet(scoutingData[teamNum], "spotlitPercentage") + "%</td>" +
-        "<td>" + dummyGet(scoutingData[teamNum], "totaldied") + "</td>" + 
+        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "trapPercentage") + "%</td>" +
+        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "spotlitPercentage") + "%</td>" +
+        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "totaldied") + "</td>" + 
         "</td>"; 
 
       $("#tableData").append(rowString);
