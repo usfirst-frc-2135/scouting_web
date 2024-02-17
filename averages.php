@@ -84,14 +84,13 @@
               
               <th colspan="2" class="text-center">Amp</th>
               <th colspan="2" class="text-center">Speaker</th>
-              <!--<th colspan="3" class="text-center">Charge Station %</th>-->
 				
               <th colspan="2" class="text-center">Amp</th>
               <th colspan="2" class="text-center">Speaker</th>
               <th colspan="3" class="text-center" style="background-color:#83B4FF">Stage %</th>
               <th colspan="3" class="text-center" style="background-color:#83B4FF">Harmony %</th> 
-              <th colspan="1" class="text-center" style="background-color:#83b4ff">Spotlit</th> 
               <th colspan="1" class="text-center" style="background-color:#83b4ff">Trap</th> 
+              <th colspan="1" class="text-center" style="background-color:#83b4ff">Spotlit</th> 
               <th colspan="1"></th>
             </tr>
             <tr>
@@ -114,15 +113,15 @@
               <th scope="col">MAX</th>
               <th scope="col">AVG</th>
               <th scope="col">MAX</th>
-              <th scope="col">N</th>
-              <th scope="col">P</th>
-              <th scope="col">O</th>
-              <th scope="col">0</th>
-              <th scope="col">1</th>
-              <th scope="col">2</th>
-              <th scope="col">AVG</th>
-              <th scope="col">AVG</th>
-              <th scope="col">#</th>
+              <th class="text-center" scope="col">N</th>
+              <th class="text-center" scope="col">P</th>
+              <th class="text-center" scope="col">O</th>
+              <th class="text-center" scope="col">0</th>
+              <th class="text-center" scope="col">1</th>
+              <th class="text-center" scope="col">2</th>
+              <th class="text-center" scope="col">%</th>
+              <th class="text-center" scope="col">%</th>
+              <th class="text-center" scope="col">#</th>
             </tr>
 
           </thead>
@@ -178,7 +177,7 @@
         "<td><a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a></td>" +
         "<td>" + dummyGet(tbaData[teamNum], "totalPoints") + "</td>" +
         //HOLD"<td>" + dummyGet(internalEloRank["elo"], teamNum) + "</td>" +
-        "<td>" + dummyGet(scoutingData[teamNum], "avgtotalnotes") + "</td>" +
+        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgtotalnotes") + "</td>" +
         "<td>" + dummyGet(scoutingData[teamNum], "maxtotalnotes") + "</td>" +
         "<td>" + dummyGet(scoutingData[teamNum], "avgautonotes") + "</td>" +
         "<td>" + dummyGet(scoutingData[teamNum], "maxautonotes") + "</td>" +
@@ -205,8 +204,8 @@
         "<td>" + dummyGet(endgameharmonyPercentage, 1) + "%</td>" +
         "<td>" + dummyGet(endgameharmonyPercentage, 2) + "%</td>" +
           
-        "<td>" + dummyGet(scoutingData[teamNum], "avgspotlit") + "</td>" +
-        "<td>" + dummyGet(scoutingData[teamNum], "avgtrap") + "</td>" +
+        "<td>" + dummyGet(scoutingData[teamNum], "avgtrap") + "%</td>" +
+        "<td>" + dummyGet(scoutingData[teamNum], "avgspotlit") + "%</td>" +
         "<td>" + dummyGet(scoutingData[teamNum], "totaldied") + "</td>" + 
         "</td>"; 
 

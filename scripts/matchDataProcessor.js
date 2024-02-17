@@ -153,7 +153,6 @@ class matchDataProcessor {
       localSiteFilter["useF"] = data["useF"];
       temp_this.siteFilter = { ...localSiteFilter };
         
-      // console.log(temp_this);
       temp_this.applySiteFilter();
         
       successFunction(temp_this.getAverages());
@@ -210,7 +209,7 @@ class matchDataProcessor {
       var autonSpeakerNotes = (this.data[i]["autonspeakernotes"]);
 		
       var autoNotes = (autonAmpNotes) + (autonSpeakerNotes);
-//      console.log("===> for team "+tn+": autoPoints = "+autoPoints); //TEST
+//      console.log("===> for team "+tn+": autoNotes = "+autoNotes); //TEST
 
       var teleopAmpNotes = (this.data[i]["teleopampnotes"]);
       var teleopSpeakerNotes = (this.data[i]["teleopspeakernotes"]);
@@ -230,14 +229,13 @@ class matchDataProcessor {
         endgameHarmonyPoints = 4;
       }
       var endgameSpotlit = (this.data[i]["endgamespotlit"]);
-        //console.log(">> spotlit = " + endgameSpotlit);
       var endgameTrap = (this.data[i]["endgametrap"]);
-        //console.log(">> endgame stage = " + endgameStagePoints);
-        //console.log(">> endgame harmomy = " + endgameHarmonyPoints);
-        //console.log(">> endgame trap = " + endgameTrap);
       var endgamePoints = (endgameStagePoints) + (endgameHarmonyPoints) + (endgameSpotlit) + (endgameTrap * 5);
-        //console.log(">> endgame points = " + endgamePoints);
-
+//      console.log(">> spotlit = " + endgameSpotlit);
+//      console.log(">> endgame stage = " + endgameStagePoints);
+//      console.log(">> endgame harmomy = " + endgameHarmonyPoints);
+//      console.log(">> endgame trap = " + endgameTrap);
+//      console.log(">> endgame points = " + endgamePoints);
 //      console.log("   -> endgamePoints = "+endgamePoints); //TEST
       var combinedTrap = (parseInt(this.data[i]["endgametrap"]));
       avg[tn]["avgtrap"] += combinedTrap;
@@ -277,14 +275,14 @@ class matchDataProcessor {
       avg[tn]["avgteleopspeakernotes"] += combinedTeleopSpeakerNotes;
       avg[tn]["maxteleopspeakernotes"] = Math.max(avg[tn]["maxteleopspeakernotes"], combinedTeleopSpeakerNotes);
         
-      // For some reason the real website handling of exitcommunity and mobilitypercent
-      // is to treat mobilitypercent like a string, and keep appending the next value 
+      // For some reason the real website handling of boolean data (exit and mobilitypercent
+      // is to treat it like a string, and keep appending the next value 
       // as a char. To fix that, we are just incrementing mobilitypercent instead of
       // adding the value here.
       
       avg[tn]["endgamestagepercent"][this.data[i]["endgamestage"]] += 1;
       avg[tn]["endgameharmonypercent"][this.data[i]["endgameharmony"]] += 1;
-      //console.log(">>> number of traps " + combinedTrap);
+
       avg[tn]["totaldied"] += this.data[i]["died"];
       avg[tn]["totalmatches"] += 1;
       avg[tn]["scoutnames"].push(this.data[i]["scoutname"]);
@@ -293,6 +291,7 @@ class matchDataProcessor {
     }
 
     for (var key in avg) {
+//      console.log(">>>> for team " + key);
       avg[key]["avgtotalnotes"] = Math.round(10 * avg[key]["avgtotalnotes"] / avg[key]["totalmatches"]) / 10;
       avg[key]["avgautonotes"] = Math.round(10 * avg[key]["avgautonotes"] / avg[key]["totalmatches"]) / 10;
 //      console.log("-> for "+key+" calc: current avgautonotes = "+ this.rnd(avg[key]["avgautonotes"])); //TEST
@@ -306,10 +305,10 @@ class matchDataProcessor {
 		
       avg[key]["avgteleopampnotes"] = Math.round(10 * avg[key]["avgteleopampnotes"] / avg[key]["totalmatches"]) / 10;
       avg[key]["avgteleopspeakernotes"] = Math.round(10 * avg[key]["avgteleopspeakernotes"] / avg[key]["totalmatches"]) / 10;
-        //console.log(">> number of traps for team " + key + " is = " + avg[key]["avgtrap"]);
-      avg[key]["avgtrap"] = Math.round(10 * avg[key]["avgtrap"] / avg[key]["totalmatches"]) / 10;
-        //console.log(">> average is = " + Math.round(10 * avg[key]["avgtrap"] / avg[key]["totalmatches"] / 10));
-      avg[key]["avgspotlit"] = Math.round(10 * avg[key]["avgspotlit"] / avg[key]["totalmatches"]) / 10; 
+      avg[key]["avgtrap"] = Math.round(100 * avg[key]["avgtrap"] / avg[key]["totalmatches"]);
+      avg[key]["avgspotlit"] = Math.round(100 * avg[key]["avgspotlit"] / avg[key]["totalmatches"]);
+//      console.log("   >> number of traps is = " + avg[key]["avgtrap"]);
+//      console.log("   >> spotlit (percentage) is = "+ avg[key]["avgspotlit"]);
 		
 //      console.log("  ===> totalmatches = "+avg[key]["totalmatches"]); //TEST
         

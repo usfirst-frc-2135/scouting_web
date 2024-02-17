@@ -327,7 +327,7 @@
                         </thread>
                           <tbody id="endgameTrapTable">
                           <tr>
-                            <th scope="row" style="background-color:rgb(240,240,240);">Trap Notes %</th>
+                            <th scope="row" style="background-color:rgb(240,240,240);">Trap Note %</th>
                             </tr>
                         </tbody>
                       </table>
@@ -423,17 +423,17 @@
     // Endgame Climb Table
     avgs["endgamestagepercent"]["endgamestagestr"] = "<b>Stage Level %</b>";
     avgs["endgameharmonypercent"]["endgameharmonystr"] = "<b>Harmony Level %</b>";
-    avgs["avgtrap"]["endgametrapstr"] = "<b>Trap Notes %</b>";
+    avgs["avgtrap"]["endgametrapstr"] = "<b>Trap Note %</b>";
     var stageLevel = avgs["endgamestagepercent"];
     stageLevel["stagestr"] = "<b>Stage Level %</b>";
     var harmonyLevel = avgs["endgameharmonypercent"];
     harmonyLevel["harmomystr"] = "<b>Harmony Level %</b>";
-    avgs["traprowstr"] = "<b>Trap Notes %</b>";
+    avgs["traprowstr"] = "<b>Trap Note %</b>";
     writeTableRow("endgameStageTable", avgs["endgamestagepercent"], ["endgamestagestr", 0, 1, 2]);
     document.getElementById("endgameStageTable").style.backgroundColor = "f0f0f0";
     writeTableRow("endgameHarmonyTable", avgs["endgameharmonypercent"], ["endgameharmonystr", 0, 1, 2]);
     document.getElementById("endgameHarmonyTable").style.backgroundColor = "f0f0f0";
-    avgs["avgtrap"] = avgs["avgtrap"] * 100
+    avgs["avgtrap"] = avgs["avgtrap"];
     writeTableRow("endgameTrapTable", avgs, ["traprowstr", "avgtrap"]);
     document.getElementById("endgameTrapTable").style.backgroundColor = "f0f0f0";
 

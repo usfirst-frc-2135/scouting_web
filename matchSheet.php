@@ -120,8 +120,8 @@
                     <th scope="col">0</th>
                     <th scope="col">1</th>
                     <th scope="col">2</th>
-                    <th scope="col">Spotlit</th>
                     <th scope="col">Trap</th>
+                    <th scope="col">Spotlit</th>
                   </tr>
                 </thead>
                 <tbody id="R0DataTable">
@@ -187,8 +187,8 @@
                     <th scope="col">0</th>
                     <th scope="col">1</th>
                     <th scope="col">2</th>
-                    <th scope="col">Spotlit</th>
                     <th scope="col">Trap</th>
+                    <th scope="col">Spotlit</th>
                   </tr>
                 </thead>
                 <tbody id="R1DataTable">
@@ -254,8 +254,8 @@
                     <th scope="col">0</th>
                     <th scope="col">1</th>
                     <th scope="col">2</th>
-                    <th scope="col">Spotlit</th>
                     <th scope="col">Trap</th>
+                    <th scope="col">Spotlit</th>
                   </tr>
                 </thead>
                 <tbody id="R2DataTable">
@@ -322,8 +322,8 @@
                     <th scope="col">0</th>
                     <th scope="col">1</th>
                     <th scope="col">2</th>
-                    <th scope="col">Spotlit</th>
                     <th scope="col">Trap</th>
+                    <th scope="col">Spotlit</th>
                   </tr>
                 </thead>
                 <tbody id="B0DataTable">
@@ -389,8 +389,8 @@
                     <th scope="col">0</th>
                     <th scope="col">1</th>
                     <th scope="col">2</th>
-                    <th scope="col">Spotlit</th>
                     <th scope="col">Trap</th>
+                    <th scope="col">Spotlit</th>
                   </tr>
                 </thead>
                 <tbody id="B1DataTable">
@@ -456,8 +456,8 @@
                     <th scope="col">0</th>
                     <th scope="col">1</th>
                     <th scope="col">2</th>
-                    <th scope="col">Spotlit</th>
                     <th scope="col">Trap</th>
+                    <th scope="col">Spotlit</th>
                   </tr>
                 </thead>
                 <tbody id="B2DataTable">
@@ -711,8 +711,8 @@
         row += "<td>" + rd["endgameharmonypercent"][0] + "</td>";
         row += "<td>" + rd["endgameharmonypercent"][1] + "</td>";
         row += "<td>" + rd["endgameharmonypercent"][2] + "</td>";
-        row += "<td>" + rd["avgspotlit"] + "</td>";
-        row += "<td>" + rd["avgtrap"] + "</td>";
+        row += "<td>" + rd["avgtrap"] + "%</td>";
+        row += "<td>" + rd["avgspotlit"] + "%</td>";
         row += "</tr>";
       }
       $("#" + color + index + "DataTable").append(row);
