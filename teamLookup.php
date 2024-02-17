@@ -171,8 +171,8 @@
                         <th scope="col">Teleop Speaker Notes</th>
                         <th scope="col">Endgame Stage Level</th>
                         <th scope="col">Endgame Harmony Level</th>
-                        <th scope="col">Endgame Spotlit </th>
                         <th scope="col">Endgame Trap </th>
+                        <th scope="col">Endgame Spotlit </th>
                         <th scope="col">Died</th>
                         <th scope="col">Scout Name</th>
                       </tr>
@@ -396,8 +396,8 @@
       console.log("starting data to match table, data length= "+dataObj.length);
      for (let i = 0; i < dataObj.length; i++) {
       writeTableRow("allMatchesTable", dataObj[i], ["matchnumber", "autonleave", "autonampnotes", "autonspeakernotes", 
-        "teleopampnotes", "teleopspeakernotes", "endgamestage", "endgameharmony", "endgamespotlit",
-        "endgametrap","died", "scoutname"]);
+        "teleopampnotes", "teleopspeakernotes", "endgamestage", "endgameharmony", "endgametrap",
+        "endgamespotlit","died", "scoutname"]);
     }
     sorttable.makeSortable(document.getElementById("sortableAllMatches")); 
   }
@@ -423,7 +423,7 @@
     // Endgame Climb Table
     avgs["endgamestagepercent"]["endgamestagestr"] = "<b>Stage Level %</b>";
     avgs["endgameharmonypercent"]["endgameharmonystr"] = "<b>Harmony Level %</b>";
-    avgs["avgtrap"]["endgametrapstr"] = "<b>Trap Note %</b>";
+    avgs["trapPercentage"]["endgametrapstr"] = "<b>Trap Note %</b>";
     var stageLevel = avgs["endgamestagepercent"];
     stageLevel["stagestr"] = "<b>Stage Level %</b>";
     var harmonyLevel = avgs["endgameharmonypercent"];
@@ -433,8 +433,8 @@
     document.getElementById("endgameStageTable").style.backgroundColor = "f0f0f0";
     writeTableRow("endgameHarmonyTable", avgs["endgameharmonypercent"], ["endgameharmonystr", 0, 1, 2]);
     document.getElementById("endgameHarmonyTable").style.backgroundColor = "f0f0f0";
-    avgs["avgtrap"] = avgs["avgtrap"];
-    writeTableRow("endgameTrapTable", avgs, ["traprowstr", "avgtrap"]);
+    avgs["trapPercentage"] = avgs["trapPercentage"];
+    writeTableRow("endgameTrapTable", avgs, ["traprowstr", "trapPercentage"]);
     document.getElementById("endgameTrapTable").style.backgroundColor = "f0f0f0";
 
     // Total Table

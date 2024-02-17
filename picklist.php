@@ -65,7 +65,7 @@
 // Returns a string with the comma-separated line of data for the given team.
   function createCSVLine(localAverages,team) {
     var onstagePercent = rnd(dummylocalAveragesLookup(localAverages,team, "endgamestagepercent"));
-    var trapPercent = rnd(dummylocalAveragesLookup(localAverages,team, "avgtrap") * 100);
+    var trapPercent = rnd(dummylocalAveragesLookup(localAverages,team, "trapPercentage"));
     var out = team+",";
     out += dummylocalAveragesLookup(localAverages,team, "avgtotalnotes") + ",";
     out += dummylocalAveragesLookup(localAverages,team, "maxtotalnotes") + ",";
@@ -98,12 +98,6 @@
           writePicklist: plistStrings
         }).done(function(data) {
 
-          // Because success word may have a new-line at end, don't do a direct compare.
-          if (data.indexOf('success') > -1) {
-            // Do nothing if ok
-          } else {
-            alert("Failure in creating CSV file!");
-          }
         });
       });
     });
@@ -156,7 +150,7 @@
       
     $("#download_csv_file").on('click', function(event) {
        // Write out CSV file (will overwrite existing one).
-//HOLD       writeCSVFile();
+       writeCSVFile();
 
        // Download the CSV file.
        downloadCSVFile();

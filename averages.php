@@ -204,8 +204,8 @@
         "<td>" + dummyGet(endgameharmonyPercentage, 1) + "%</td>" +
         "<td>" + dummyGet(endgameharmonyPercentage, 2) + "%</td>" +
           
-        "<td>" + dummyGet(scoutingData[teamNum], "avgtrap") + "%</td>" +
-        "<td>" + dummyGet(scoutingData[teamNum], "avgspotlit") + "%</td>" +
+        "<td>" + dummyGet(scoutingData[teamNum], "trapPercentage") + "%</td>" +
+        "<td>" + dummyGet(scoutingData[teamNum], "spotlitPercentage") + "%</td>" +
         "<td>" + dummyGet(scoutingData[teamNum], "totaldied") + "</td>" + 
         "</td>"; 
 

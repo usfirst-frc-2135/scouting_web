@@ -33,8 +33,8 @@
               <th scope="col">Teleop Speaker Notes</th>
               <th scope="col">Endgame Stage Level</th>
               <th scope="col">Endgame Harmony Level</th>
-              <th scope="col">Endgame Spotlit</th>
               <th scope="col">Endgame Trap</th>
+              <th scope="col">Endgame Spotlit</th>
               <th scope="col">Died</th>
               <th scope="col">Comment</th>
               <th scope="col">Scout Name</th>
@@ -65,8 +65,8 @@
         "<td>" + dataObj[i]["teleopspeakernotes"] + "</td>" +
         "<td>" + dataObj[i]["endgamestage"] + "</td>" +
         "<td>" + dataObj[i]["endgameharmony"] + "</td>" +
-        "<td>" + dataObj[i]["endgamespotlit"] + "</td>" +
         "<td>" + dataObj[i]["endgametrap"] + "</td>" +
+        "<td>" + dataObj[i]["endgamespotlit"] + "</td>" +
         "<td>" + dataObj[i]["died"] + "</td>" +
         "<td>" + dataObj[i]["comment"] + "</td>" +
         "<td>" + dataObj[i]["scoutname"] + "</td>" +
