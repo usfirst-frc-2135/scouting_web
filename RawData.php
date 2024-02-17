@@ -6,6 +6,14 @@
     <div class="row pt-3 pb-3 mb-3">
       <h2>Raw Data</h2>
       <div id="freezeTableDiv">
+          <style type="text/css" media="screen">
+            table tr {
+                border: 1px solid black;
+            }
+            table td, table th {
+                border-right: 1px solid black;
+            }
+            </style>
         <table id="rawDataTable" class="table table-striped table-hover sortable">
           <colgroup>
             <col span="2" style="background-color:transparent">
@@ -56,20 +64,20 @@
 
   function dataToTable(dataObj) {
     for (let i = 0; i < dataObj.length; i++) {
-      var rowString = "<tr><td>" + dataObj[i]["matchnumber"] + "</td>" +
-        "<td>" + dataObj[i]["teamnumber"] + "</td>" +
-        "<td>" + dataObj[i]["autonleave"] + "</td>" +
-        "<td>" + dataObj[i]["autonampnotes"] + "</td>" +
-        "<td>" + dataObj[i]["autonspeakernotes"] + "</td>" +
-        "<td>" + dataObj[i]["teleopampnotes"] + "</td>" +
-        "<td>" + dataObj[i]["teleopspeakernotes"] + "</td>" +
-        "<td>" + dataObj[i]["endgamestage"] + "</td>" +
-        "<td>" + dataObj[i]["endgameharmony"] + "</td>" +
-        "<td>" + dataObj[i]["endgametrap"] + "</td>" +
-        "<td>" + dataObj[i]["endgamespotlit"] + "</td>" +
-        "<td>" + dataObj[i]["died"] + "</td>" +
-        "<td>" + dataObj[i]["comment"] + "</td>" +
-        "<td>" + dataObj[i]["scoutname"] + "</td>" +
+      var rowString = "<tr><td align=\"center\">" + dataObj[i]["matchnumber"] + "</td>" +
+        "<td align=\"center\">" + dataObj[i]["teamnumber"] + "</td>" +
+        "<td align=\"center\">" + dataObj[i]["autonleave"] + "</td>" +
+        "<td align=\"center\">" + dataObj[i]["autonampnotes"] + "</td>" +
+        "<td align=\"center\">" + dataObj[i]["autonspeakernotes"] + "</td>" +
+        "<td align=\"center\">" + dataObj[i]["teleopampnotes"] + "</td>" +
+        "<td align=\"center\">" + dataObj[i]["teleopspeakernotes"] + "</td>" +
+        "<td align=\"center\">" + dataObj[i]["endgamestage"] + "</td>" +
+        "<td align=\"center\">" + dataObj[i]["endgameharmony"] + "</td>" +
+        "<td align=\"center\">" + dataObj[i]["endgametrap"] + "</td>" +
+        "<td align=\"center\">" + dataObj[i]["endgamespotlit"] + "</td>" +
+        "<td align=\"center\">" + dataObj[i]["died"] + "</td>" +
+        "<td align=\"center\">" + dataObj[i]["comment"] + "</td>" +
+        "<td align=\"center\">" + dataObj[i]["scoutname"] + "</td>" +
         "</td>";
       $("#tableData").append(rowString);
 
