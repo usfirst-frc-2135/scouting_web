@@ -30,19 +30,6 @@
 <script>
 
   var eventCode = null;
-  var localNotes = {};
-
-
-  function dummyGet(dict, key) {
-    /* If key doesn't exist in given dict, return a 0. */
-    if (!dict) {
-      return 0;
-    }
-    if (key in dict) {
-      return dict[key];
-    }
-    return 0;
-  }
 
   function dummylocalAveragesLookup(localAverages,team, item) {
     if (!localAverages) {
@@ -87,56 +74,21 @@
     }).done(function(data) {
       matchData = JSON.parse(data);
       var mdp = new matchDataProcessor(matchData);
-      var plistStrings = "Team,Avg Total Notes,Max Total Notes,Avg A Notes,Avg T Notes,Avg E Notes, Onstage%, Trap%, Total Died, Comment\n";
+      var csvStr = "Team,Avg Total Notes,Max Total Notes,Avg A Notes,Avg T Notes,Avg E Notes, Onstage%, Trap%, Total Died, Comment\n";
       mdp.getSiteFilteredAverages(function(averageData) {
         for (var key in averageData) {
-          plistStrings += createCSVLine(averageData,key);  // key is team number
+          csvStr += createCSVLine(averageData,key);  // key is team number
         }
 
-        // Now create a csv file with these strings
-        $.post("writeAPI.php", {
-          writePicklist: plistStrings
-        }).done(function(data) {
-
-        });
+        var hiddenElement = document.createElement('a');
+        var filename = eventCode + ".csv";
+        console.log("CSV filename = "+filename);
+        hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csvStr);
+        hiddenElement.target = '_blank';
+        hiddenElement.download = filename;
+        hiddenElement.click();
       });
     });
-  }
-
-  function downloadCSVFile() { 
-    console.log("starting downloadCSVFile() ");
-    var filename = eventCode + ".csv"; 
-    var rtncode = 0;
-    
-    // Get MAC user ID to use for destination file path.
-    const userInput = prompt("Please enter MAC user id: ");
-    if (!userInput == "") {
-      const newPath = "/Users/" + userInput + "/" + "Desktop/" + eventCode + ".csv";
-
-      $.ajax({
-        url:'downloadFile.php',
-        data: {'file' : filename,
-               'newFilePath' : newPath}
-      }).then(
-         function(response)
-         {
-           var jsonData = JSON.parse(response);
-           console.log("downloadFile returned: '"+jsonData.success+"'");
-           if(jsonData.success == "1") {
-             var msg = "Successfully downloaded CSV file to "+newPath;
-             alert(msg);
-           }
-           else if(jsonData.success == "0") {
-             var msg = "CSV file was not successfully created";
-             alert(msg);
-           }
-           else if(jsonData.success == "2") {
-             var msg = "Failed to download CSV file to "+newPath;
-             alert(msg);
-           }
-         }
-      );
-    }
   }
 
 
@@ -149,11 +101,8 @@
     });
       
     $("#download_csv_file").on('click', function(event) {
-       // Write out CSV file (will overwrite existing one).
+       // Write out picklist CSV file to client's download dir.
        writeCSVFile();
-
-       // Download the CSV file.
-       downloadCSVFile();
     });
   });
 
