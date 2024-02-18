@@ -162,6 +162,11 @@
                       <col span="1" style="background-color:#cfe2ff">
                     </colgroup>
                     <thead>
+                        <style type="text/css" media="screen">
+                            #sortableAllMatches tr, #sortableAllMatches td, #sortableAllMatches th {
+                                border: 1px solid black;
+                            }
+                            </style>
                       <tr>
                         <th scope="col">Match #</th>
                         <th scope="col">Auton Leave</th>
@@ -394,13 +399,26 @@
 
   function dataToMatchTable(dataObj) {
       console.log("starting data to match table, data length= "+dataObj.length);
+
      for (let i = 0; i < dataObj.length; i++) {
-      writeTableRow("allMatchesTable", dataObj[i], ["matchnumber", "autonleave", "autonampnotes", "autonspeakernotes", 
-        "teleopampnotes", "teleopspeakernotes", "endgamestage", "endgameharmony", "endgametrap",
-        "endgamespotlit","died", "scoutname"]);
+      var rowString = "<tr><td align=\"center\">" + dataObj[i]["matchnumber"] + "</td>" +
+        "<td align=\"center\">" + dataObj[i]["autonleave"] + "</td>" +
+        "<td align=\"center\">" + dataObj[i]["autonampnotes"] + "</td>" +
+        "<td align=\"center\">" + dataObj[i]["autonspeakernotes"] + "</td>" +
+        "<td align=\"center\">" + dataObj[i]["teleopampnotes"] + "</td>" +
+        "<td align=\"center\">" + dataObj[i]["teleopspeakernotes"] + "</td>" +
+        "<td align=\"center\">" + dataObj[i]["endgamestage"] + "</td>" +
+        "<td align=\"center\">" + dataObj[i]["endgameharmony"] + "</td>" +
+        "<td align=\"center\">" + dataObj[i]["endgametrap"] + "</td>" +
+        "<td align=\"center\">" + dataObj[i]["endgamespotlit"] + "</td>" +
+        "<td align=\"center\">" + dataObj[i]["died"] + "</td>" +
+        "<td align=\"center\">" + dataObj[i]["scoutname"] + "</td>" +
+        "</td>";
+      $("#allMatchesTable").append(rowString);
     }
-    sorttable.makeSortable(document.getElementById("sortableAllMatches")); 
+    sorttable.makeSortable(document.getElementById("sortableAllMatches"));
   }
+  
 
   function dataToAvgTables(avgs) {
     //Auton Scores
