@@ -30,6 +30,14 @@
           <h5 id="matchTime">Time:</h5>
           <table class="table table-bordered">
             <thead>
+                <style type="text/css" media="screen">
+                table tr {
+                    border: 1px solid black;
+                }
+                table td, table th {
+                    border-right: 1px solid black;
+                }
+                </style>
               <tr>
                 <th class="text-center"></th>
                 <th class="text-center">Red</th>
@@ -109,10 +117,10 @@
                   </tr>
                   <tr>
                     <th scope="col">Amps</th>
-                    <th scope="col">Speakers</th>
+                    <th scope="col">Spkr</th>
 
                     <th scope="col">Amps</th>
-                    <th scope="col">Speakers</th>
+                    <th scope="col">Spkr</th>
                       
                     <th scope="col">N</th>
                     <th scope="col">P</th>
@@ -178,9 +186,9 @@
                   </tr>
                   <tr>
                    <th scope="col">Amps</th>
-                    <th scope="col">Speakers</th>
+                    <th scope="col">Spkr</th>
                     <th scope="col">Amps</th>
-                    <th scope="col">Speakers</th>
+                    <th scope="col">Spkr</th>
                     <th scope="col">N</th>
                     <th scope="col">P</th>
                     <th scope="col">O</th>
@@ -245,9 +253,9 @@
                   </tr>
                   <tr>
                     <th scope="col">Amps</th>
-                    <th scope="col">Speakers</th>
+                    <th scope="col">Spkr</th>
                     <th scope="col">Amps</th>
-                    <th scope="col">Speakers</th>
+                    <th scope="col">Spkr</th>
                     <th scope="col">N</th>
                     <th scope="col">P</th>
                     <th scope="col">O</th>
@@ -313,9 +321,9 @@
                   </tr>
                   <tr>
                    <th scope="col">Amps</th>
-                    <th scope="col">Speakers</th>
+                    <th scope="col">Spkr</th>
                     <th scope="col">Amps</th>
-                    <th scope="col">Speakers</th>
+                    <th scope="col">Spkr</th>
                     <th scope="col">N</th>
                     <th scope="col">P</th>
                     <th scope="col">O</th>
@@ -380,9 +388,9 @@
                   </tr>
                   <tr>
                    <th scope="col">Amps</th>
-                    <th scope="col">Speakers</th>
+                    <th scope="col">Spkr</th>
                     <th scope="col">Amps</th>
-                    <th scope="col">Speakers</th>
+                    <th scope="col">Spkr</th>
                     <th scope="col">N</th>
                     <th scope="col">P</th>
                     <th scope="col">O</th>
@@ -447,9 +455,9 @@
                   </tr>
                   <tr>
                    <th scope="col">Amps</th>
-                    <th scope="col">Speakers</th>
+                    <th scope="col">Spkr</th>
                     <th scope="col">Amps</th>
-                    <th scope="col">Speakers</th>
+                    <th scope="col">Spkr</th>
                     <th scope="col">N</th>
                     <th scope="col">P</th>
                     <th scope="col">O</th>
@@ -680,7 +688,7 @@
           avgEndgamePoints["blue"] += rd["avgendgamepoints"];
         }
       }
-
+                
       $("#redTotalAmps").html(roundInt(avgTotalAmps["red"]));
       $("#redTotalSpeakers").html(roundInt(avgTotalSpeakers["red"]));
       $("#redTotalNotes").html(roundInt(avgTotalNotes["red"]));
@@ -690,6 +698,16 @@
       $("#blueTotalSpeakers").html(roundInt(avgTotalSpeakers["blue"]));
       $("#blueTotalNotes").html(roundInt(avgTotalNotes["blue"]));
       $("#blueAvgEndgamePoints").html(roundInt(avgEndgamePoints["blue"]));
+        
+      document.getElementById("redTotalAmps").setAttribute("align", "center");
+      document.getElementById("redTotalSpeakers").setAttribute("align", "center");
+      document.getElementById("redTotalNotes").setAttribute("align", "center");
+      document.getElementById("redAvgEndgamePoints").setAttribute("align", "center");
+
+      document.getElementById("blueTotalAmps").setAttribute("align", "center");
+      document.getElementById("blueTotalSpeakers").setAttribute("align", "center");
+      document.getElementById("blueTotalNotes").setAttribute("align", "center");
+      document.getElementById("blueAvgEndgamePoints").setAttribute("align", "center");
     }
 
     function roundInt(val) {
@@ -701,18 +719,18 @@
       var rd = localMatchData[teamNum];
       if (rd != null) {
         var row = "<tr>";
-        row += "<td>" + rd["avgautonamps"] + "</td>";
-        row += "<td>" + rd["avgautonspeaker"] + "</td>";
-        row += "<td>" + rd["avgteleopampnotes"] + "</td>";
-        row += "<td>" + rd["avgteleopspeakernotes"] + "</td>";
-        row += "<td>" + rd["endgamestagepercent"][0] + "</td>";
-        row += "<td>" + rd["endgamestagepercent"][1] + "</td>";
-        row += "<td>" + rd["endgamestagepercent"][2] + "</td>";
-        row += "<td>" + rd["endgameharmonypercent"][0] + "</td>";
-        row += "<td>" + rd["endgameharmonypercent"][1] + "</td>";
-        row += "<td>" + rd["endgameharmonypercent"][2] + "</td>";
-        row += "<td>" + rd["trapPercentage"] + "%</td>";
-        row += "<td>" + rd["spotlitPercentage"] + "%</td>";
+        row += "<td align=\"center\">" + rd["avgautonamps"] + "</td>";
+        row += "<td align=\"center\">" + rd["avgautonspeaker"] + "</td>";
+        row += "<td align=\"center\">" + rd["avgteleopampnotes"] + "</td>";
+        row += "<td align=\"center\">" + rd["avgteleopspeakernotes"] + "</td>";
+        row += "<td align=\"center\">" + rd["endgamestagepercent"][0] + "</td>";
+        row += "<td align=\"center\">" + rd["endgamestagepercent"][1] + "</td>";
+        row += "<td align=\"center\">" + rd["endgamestagepercent"][2] + "</td>";
+        row += "<td align=\"center\">" + rd["endgameharmonypercent"][0] + "</td>";
+        row += "<td align=\"center\">" + rd["endgameharmonypercent"][1] + "</td>";
+        row += "<td align=\"center\">" + rd["endgameharmonypercent"][2] + "</td>";
+        row += "<td align=\"center\">" + rd["trapPercentage"] + "</td>";
+        row += "<td align=\"center\">" + rd["spotlitPercentage"] + "</td>";
         row += "</tr>";
       }
       $("#" + color + index + "DataTable").append(row);
