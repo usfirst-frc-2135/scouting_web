@@ -109,6 +109,7 @@
                   <option value="1">Falcons</option>
                   <option value="2">Neos</option>
                   <option value="3">Cims</option>
+                  <option value="4">Krakens</option>
                 </select>
               </div>
             </div>
