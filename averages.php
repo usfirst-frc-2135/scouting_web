@@ -201,16 +201,16 @@
 	    "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgteleopspeakernotes") + "</td>" +
 	    "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxteleopspeakernotes") + "</td>" +
 		  
-        "<td align=\"center\">" + dummyGet(endgamestagePercentage, 0) + "%</td>" +
-        "<td align=\"center\">" + dummyGet(endgamestagePercentage, 1) + "%</td>" +
-        "<td align=\"center\">" + dummyGet(endgamestagePercentage, 2) + "%</td>" +
+        "<td align=\"center\">" + dummyGet(endgamestagePercentage, 0) + "</td>" +
+        "<td align=\"center\">" + dummyGet(endgamestagePercentage, 1) + "</td>" +
+        "<td align=\"center\">" + dummyGet(endgamestagePercentage, 2) + "</td>" +
           
-        "<td align=\"center\">" + dummyGet(endgameharmonyPercentage, 0) + "%</td>" +
-        "<td align=\"center\">" + dummyGet(endgameharmonyPercentage, 1) + "%</td>" +
-        "<td align=\"center\">" + dummyGet(endgameharmonyPercentage, 2) + "%</td>" +
+        "<td align=\"center\">" + dummyGet(endgameharmonyPercentage, 0) + "</td>" +
+        "<td align=\"center\">" + dummyGet(endgameharmonyPercentage, 1) + "</td>" +
+        "<td align=\"center\">" + dummyGet(endgameharmonyPercentage, 2) + "</td>" +
           
-        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "trapPercentage") + "%</td>" +
-        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "spotlitPercentage") + "%</td>" +
+        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "trapPercentage") + "</td>" +
+        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "spotlitPercentage") + "</td>" +
         "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "totaldied") + "</td>" + 
         "</td>"; 
 
