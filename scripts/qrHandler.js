@@ -194,6 +194,7 @@ function submitFunction() {
       if (data.indexOf('success') > -1) {
         alert("Data Successfully Submitted! Clearing Data.");
         clearData();
+        $("#submitData").html("Click to Submit Data: " + scannedCount);
       } else {
         alert("Data NOT Submitted.");
       }
