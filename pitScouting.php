@@ -193,7 +193,7 @@
     }
 
     var driveMotors = $("#driveMotors").val();
-    if (driveMotors != 1 && driveMotors != 2 && driveMotors != 3) {
+    if (driveMotors != 1 && driveMotors != 2 && driveMotors != 3 && driveMotors != 4) {
       if (isError == true) 
         errMsg += ", Drive Motors";
       else errMsg += " Drive Motors";
@@ -295,6 +295,9 @@
     }
     if (driveMotors == 3) {
       dataToUse["drivemotors"] = "Cims";
+    }
+    if (driveMotors == 4) {
+      dataToUse["drivemotors"] = "Krakens";
     }
     dataToUse["preparedness"] = 1;  // default
     if ($("#preparednessScore1").is(':checked')) {
