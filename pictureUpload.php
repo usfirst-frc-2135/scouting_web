@@ -12,6 +12,10 @@
 
       <div class="card col-md-6 mx-auto">
 
+        <button class="btn btn-primary" id="loading">
+          <span class="spinner-border spinner-border-sm"></span>
+          Loading..
+        </button>
         <div id="uploadMessage" style="display: none" class="alert alert-dismissible fade show" role="alert">
           <div id="uploadMessageText"></div>
           <button type="button" class="btn-close" id="closeMessage" aria-label="Close"></button>
@@ -46,6 +50,10 @@
 </div>
 <?php include("footer.php") ?>
 <script>
+    
+  const button = document.getElementById("loading");
+  button.style.visibility = 'hidden';
+    
   function showSuccessMessage(message) {
     $("#robotPic").val("");
     $("#teamNumber").val("");
@@ -70,8 +78,12 @@
   function uploadSuccess(data) {
     data = JSON.parse(data);
     if (data["success"]) {
+      const button = document.getElementById("loading");
+      button.style.visibility = 'hidden';
       showSuccessMessage("Upload successful, clearing form!");
     } else {
+      const button = document.getElementById("loading");
+      button.style.visibility = 'hidden';
       showErrorMessage(data["message"]);
     }
     console.log(data);
@@ -79,6 +91,10 @@
 
   $(document).ready(function() {
     $("#upload").on('click', function(event) {
+          if(document.getElementById("robotPic").value != "" && document.getElementById("teamNumber").value != "") {
+            const button = document.getElementById("loading");
+            button.style.visibility = 'visible';
+    
       if ( $("#replacePic").is(":checked") == true) 
       {
         var teamNum = $("#teamNumber").val();
@@ -111,7 +127,7 @@
           console.log("Reloaded team images" );
         });
       }
-
+          
       // Now upload the new pic
       var uploadPost = new FormData();
       uploadPost.append("teamPic", $("#robotPic")[0].files[0]);
@@ -126,11 +142,16 @@
         error: uploadError,
         success: uploadSuccess
       });
-    });
-
+    }
+    else {
+        alert("Please fill out all fields!");
+        const button = document.getElementById("loading");
+        button.style.visibility = 'hidden';
+    }
     $("#closeMessage").on('click', function(event) {
       $("#uploadMessage").hide();
       $("#replacePic").prop("checked",false); 
+    });
     });
   });
 </script>
