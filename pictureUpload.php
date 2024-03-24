@@ -12,7 +12,7 @@
 
       <div class="card col-md-6 mx-auto">
 
-        <button class="btn btn-primary" id="loading">
+        <button class="btn btn-primary" id="loadingButton">
           <span class="spinner-border spinner-border-sm"></span>
           Loading..
         </button>
@@ -51,8 +51,8 @@
 <?php include("footer.php") ?>
 <script>
     
-  const button = document.getElementById("loading");
-  button.style.visibility = 'hidden';
+  const loadButton = document.getElementById("loadingButton");
+  loadButton.style.visibility = 'hidden';
     
   function showSuccessMessage(message) {
     $("#robotPic").val("");
@@ -77,13 +77,12 @@
 
   function uploadSuccess(data) {
     data = JSON.parse(data);
+    const loadButton = document.getElementById("loadingButton");
     if (data["success"]) {
-      const button = document.getElementById("loading");
-      button.style.visibility = 'hidden';
+      loadButton.style.visibility = 'hidden';
       showSuccessMessage("Upload successful, clearing form!");
     } else {
-      const button = document.getElementById("loading");
-      button.style.visibility = 'hidden';
+      loadButton.style.visibility = 'hidden';
       showErrorMessage(data["message"]);
     }
     console.log(data);
@@ -91,9 +90,9 @@
 
   $(document).ready(function() {
     $("#upload").on('click', function(event) {
-          if(document.getElementById("robotPic").value != "" && document.getElementById("teamNumber").value != "") {
-            const button = document.getElementById("loading");
-            button.style.visibility = 'visible';
+      if(document.getElementById("robotPic").value != "" && document.getElementById("teamNumber").value != "") {
+        const loadButton = document.getElementById("loadingButton");
+        loadButton.style.visibility = 'visible';
     
       if ( $("#replacePic").is(":checked") == true) 
       {
@@ -145,8 +144,8 @@
     }
     else {
         alert("Please fill out all fields!");
-        const button = document.getElementById("loading");
-        button.style.visibility = 'hidden';
+        const loadButton = document.getElementById("loadingButton");
+        loadButton.style.visibility = 'hidden';
     }
     $("#closeMessage").on('click', function(event) {
       $("#uploadMessage").hide();

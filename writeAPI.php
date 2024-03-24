@@ -98,6 +98,9 @@ if (isset($_POST["deleteAllianceRankData"]))
 }
 else if (isset($_POST["teamNum"]) and isset($_FILES["teamPic"]))
 {
+  // For testing: add a delay
+//TEST  sleep(10); // 10 seconds delay
+
   // Upload Picture API
   $uploadSuccess = false;
   $errorMessage = "";
