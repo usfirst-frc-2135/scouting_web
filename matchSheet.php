@@ -23,8 +23,59 @@
           </div>
         </div>
       </div>
+    
+    <div class="row g-3 justify-content-md-center">
+        <div class="g-4 col-md-6">
+            <button type="button btn-primary" id="custom" name="custom" value="Custom" class="collapsible">Custom</button>
+            <div class="content" id="customAlliance">
+                <style type="text/css" media="screen">
+                      .collapsible {
+                      background-color: #006fff;
+                      color: white;
+                      cursor: pointer;
+                      padding: 10px;
+                      width: 100%;
+                      border: none;
+                      text-align: left;
+                      outline: none;
+                      font-size: 16px;
+                    }
 
-      <div class="row justify-content-md-center">
+                    /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+                    .active, .collapsible:hover {
+                      background-color: #0064e6;
+                    }
+
+                    /* Style the collapsible content. Note: hidden by default */
+                    .content {
+                      padding: 0 5px;
+                      display: none;
+                      overflow: hidden;
+                      background-color: #f1f1f1;
+                    }
+                </style>
+                <div class="input-group mb-3">
+                <h4 id="red">Red Alliance:</h4>
+                <div class="input-group mb-3">
+                    <input id="writeTeamNumber1" type="text" class="form-control" placeholder="Red Team Number 1" aria-label="writeTeamNumber1"> 
+                    <input id="writeTeamNumber2" type="text" class="form-control" placeholder="Red Team Number 2" aria-label="writeTeamNumber2"> 
+                    <input id="writeTeamNumber3" type="text" class="form-control" placeholder="Red Team Number 3" aria-label="writeTeamNumber3"> 
+                </div>
+            </div>
+            <div class="input-group mb-3">
+                <h4 id="blue">Blue Alliance:</h4>
+                <div class="input-group mb-3">
+                    <input id="writeTeamNumber4" type="text" class="form-control" placeholder="Blue Team Number 1" aria-label="writeTeamNumber4"> 
+                    <input id="writeTeamNumber5" type="text" class="form-control" placeholder="Blue Team Number 2" aria-label="writeTeamNumber5"> 
+                    <input id="writeTeamNumber6" type="text" class="form-control" placeholder="Blue Team Number 3" aria-label="writeTeamNumber6"> 
+                </div>
+            </div>
+            <button type="button" class="button btn-primary" id="loadCustom">Load Custom Match</button>
+          </div>
+        </div>
+    </div>
+
+      <div class="row g-3 justify-content-md-center">
         <div class="col-md-6">
           <h4 id="matchTitle">Match:</h4>
           <h5 id="matchTime">Time:</h5>
@@ -482,10 +533,33 @@
   <?php include("footer.php") ?>
 
   <script>
+    
+    var coll = document.getElementsByClassName("collapsible");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+      coll[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var content = this.nextElementSibling;
+        if (content.style.display === "block") {
+          content.style.display = "none";
+        } else {
+          content.style.display = "block";
+        }
+      });
+    }
+      
     var localMatchData = null;
+    var bUsingCustom = false;
     var localMatchList = null;
     var localMatchNum = null;
     var localCompLevel = null;
+    var customTeamNum1 = "-";
+    var customTeamNum2 = "-";
+    var customTeamNum3 = "-";
+    var customTeamNum4 = "-";
+    var customTeamNum5 = "-";
+    var customTeamNum6 = "-";
     var rawMatchData = null;
     var picDB = {};
     var ourTeam = "frc2135";
@@ -493,8 +567,15 @@
 
     function checkGet() {
       let sp = new URLSearchParams(window.location.search);
-      if (sp.has('matchNum') && sp.has('compLevel')) {
-        return [sp.get('matchNum'), sp.get('compLevel')];
+      if (!bUsingCustom) {
+          if (sp.has('matchNum') && sp.has('compLevel')) {
+            return [sp.get('matchNum'), sp.get('compLevel')];
+        }
+      }
+      if (bUsingCustom) {
+          if (sp.has('customTeamNum1') && sp.has('customTeamNum2') && sp.has('customTeamNum3') && sp.has('customTeamNum4') && sp.has('customTeamNum5') && sp.has('customTeamNum6')) {
+              return [sp.get('customTeamNum1'), sp.get('customTeamNum2'), sp.get('customTeamNum3'), sp.get('customTeamNum4'), sp.get('customTeamNum5'), sp.get('customTeamNum6')];
+          }
       }
       return null;
     }
@@ -535,8 +616,11 @@
       $("#ourMatches").html(row);
     }
 
+    
     function loadMatchList(successFunction) {
-      if (!localMatchList) {
+        
+      if(!bUsingCustom) {
+        if (!localMatchList) {
         $.get("tbaAPI.php", {
           getMatchList: 1
         }).done(function(data) {
@@ -549,22 +633,23 @@
           for (let mi in rawMatchData) {
             var newMatch = {};
             var match = rawMatchData[mi];
+            
             newMatch["comp_level"] = match["comp_level"];
             newMatch["match_number"] = match["comp_level"] == "qm" ? match["match_number"] : match["set_number"];
             newMatch["red_teams"] = match["alliances"]["red"]["team_keys"];
             newMatch["blue_teams"] = match["alliances"]["blue"]["team_keys"];
             newMatch["time"] = null;
             if (newMatch["time"] == null && match["actual_time"] != null) {
-              newMatch["time"] = match["actual_time"];
+                newMatch["time"] = match["actual_time"];
             }
             if (newMatch["time"] == null && match["predicted_time"] != null) {
-              newMatch["time"] = match["predicted_time"];
+                newMatch["time"] = match["predicted_time"];
             }
             // if (newMatch["time"] == null && match["time"] != null){ newMatch["time"] = match["time"]; }
             localMatchList[makeKey(newMatch["match_number"], newMatch["comp_level"])] = newMatch;
-            //
+        
             if (newMatch["red_teams"].includes(ourTeam) || newMatch["blue_teams"].includes(ourTeam)) {
-              ourMatches[newMatch["match_number"]] = newMatch;
+                ourMatches[newMatch["match_number"]] = newMatch;
             }
           }
           createOurMatchTable();
@@ -573,6 +658,24 @@
       } else {
         successFunction();
       }
+    } 
+        else { // using custom
+            localMatchList = {};
+            var newMatch = {};
+            newMatch["comp_level"] = "qm";
+            newMatch["match_number"] = 1;
+            newMatch["red_teams"] = [customTeamNum1, customTeamNum2, customTeamNum3];
+            newMatch["blue_teams"] = [customTeamNum4, customTeamNum5, customTeamNum6]; //NEW
+            newMatch["time"] = "predicted_time"; //NEW
+            localMatchList["QM_1"] = newMatch;
+        
+            //if (newMatch["red_teams"].includes(ourTeam) || newMatch["blue_teams"].includes(ourTeam)) {
+            //ourMatches[newMatch["match_number"]] = newMatch;
+          
+            //createOurMatchTable();
+            successFunction();
+            
+        }
     }
 
     function makeKey(matchNumber, compLevel) {
@@ -611,6 +714,49 @@
         loadMatchList(processMatchList)
       });
     }
+      
+      function loadCustom(teamNum1, teamNum2, teamNum3, teamNum4, teamNum5, teamNum6) {
+      // Clear Data
+      $("#R0DataTable").html("");
+      $("#R1DataTable").html("");
+      $("#R2DataTable").html("");
+      $("#B0DataTable").html("");
+      $("#B1DataTable").html("");
+      $("#B2DataTable").html("");
+      $("#writeTeamNumber1").html("");
+      $("#writeTeamNumber2").html("");
+      $("#writeTeamNumber3").html("");
+      $("#writeTeamNumber4").html("");
+      $("#writeTeamNumber5").html("");
+      $("#writeTeamNumber6").html("");
+      $("#redTotalAmps").html("");
+      $("#redTotalSpeakers").html("");
+      $("#redTotalNotes").html("");
+      $("#redAvgEndgamePoints").html("");
+      $("#blueTotalAmps").html("");
+      $("#blueTotalSpeakerse").html("");
+      $("blueTotalNotes").html("");
+      $("#blueAvgEndgamePoints").html("");
+      $("#R0RobotPics").html("");
+      $("#R1RobotPics").html("");
+      $("#R2RobotPics").html("");
+      $("#B0RobotPics").html("");
+      $("#B1RobotPics").html("");
+      $("#B2RobotPics").html("");
+      picDB = {};
+      // Write Match Number
+      //$("#matchTitle").html("Match " + compLevel + " " + matchNum);
+      // Pull Data
+      customTeamNum1 = teamNum1;
+      customTeamNum2 = teamNum2;
+      customTeamNum3 = teamNum3;
+      customTeamNum4 = teamNum4;
+      customTeamNum5 = teamNum5;
+      customTeamNum6 = teamNum6;
+      loadMatchData(function() {
+        loadMatchList(processMatchList)
+      });
+    }
 
     function updateTime(time) {
       var date = new Date(time * 1000);
@@ -626,28 +772,55 @@
 
     function processMatchList() {
       // Get Match Vector
+      if(!bUsingCustom) {
       matchVector = localMatchList[makeKey(localMatchNum, localCompLevel)];
       if (!matchVector) {
         alert(makeKey(localMatchNum, localCompLevel) + " does not exist!");
         return;
+        }
+      }
+        
+      if(bUsingCustom) {
+          customMatchVector = localMatchList["QM_1"];
+          if(!customMatchVector) {
+            alert("This does not exist!");
+            return;
+          }
       }
 
       // Update Team Boxes
-      for (let i in matchVector["red_teams"]) {
-        displayTeam("R", i, strTeamToIntTeam(matchVector["red_teams"][i]));
+      if (!bUsingCustom) {
+        for (let i in matchVector["red_teams"]) {
+          displayTeam("R", i, strTeamToIntTeam(matchVector["red_teams"][i]));
+        }
+        for (let i in matchVector["blue_teams"]) {
+          displayTeam("B", i, strTeamToIntTeam(matchVector["blue_teams"][i]));
+        }
       }
-      for (let i in matchVector["blue_teams"]) {
-        displayTeam("B", i, strTeamToIntTeam(matchVector["blue_teams"][i]));
+
+      if(bUsingCustom){
+        for (let i in customMatchVector["red_teams"]) {
+          displayTeam("R", i, strTeamToIntTeam(customMatchVector["red_teams"][i]));
+        }
+        for (let i in customMatchVector["blue_teams"]) {
+          displayTeam("B", i, strTeamToIntTeam(customMatchVector["blue_teams"][i]));
+        }
       }
+          // Update Summary Box
+      if (!bUsingCustom) {
+        updateSummary(matchVector["red_teams"], matchVector["blue_teams"]);
 
-      // Update Summary Box
-      updateSummary(matchVector["red_teams"], matchVector["blue_teams"]);
+          // Request Team Pics
+        sendPicRequest(matchVector["red_teams"], matchVector["blue_teams"]);
 
-      // Request Team Pics
-      sendPicRequest(matchVector["red_teams"], matchVector["blue_teams"]);
-
-      // Update Time
-      updateTime(matchVector["time"]);
+          // Update Time
+        updateTime(matchVector["time"]);
+      }
+      if (bUsingCustom) {
+        updateSummary(customMatchVector["red_teams"], customMatchVector["blue_teams"]);
+          // Request Team Pics
+        sendPicRequest(customMatchVector["red_teams"], customMatchVector["blue_teams"]);
+        }
     }
 
     function updateSummary(redList, blueList) {
@@ -737,16 +910,20 @@
     }
 
     function sendPicRequest(redList, blueList) {
-      var requestList = []
+      var requestList = [];
       for (let i in redList) {
         var tn = strTeamToIntTeam(redList[i]);
-        picDB[tn] = "R" + i;
-        requestList.push(tn);
+        if (tn !== "") {
+            picDB[tn] = "R" + i;
+            requestList.push(tn);
+        }
       }
       for (let i in blueList) {
         var tn = strTeamToIntTeam(blueList[i]);
-        picDB[tn] = "B" + i;
-        requestList.push(tn);
+        if (tn !== "") {
+            picDB[tn] = "B" + i;
+            requestList.push(tn);
+        }
       }
 
       $.get("readAPI.php", {
@@ -786,14 +963,35 @@
       if (initialGet) {
         loadMatch(initialGet[0], initialGet[1]);
       }
-
       $("#loadMatch").click(function() {
+        bUsingCustom = false;
         loadMatch($("#writeMatchNumber").val(), $("#writeCompLevel").val());
+      });
+        
+      $("#loadCustom").click(function() {
+        bUsingCustom = true;
+        var redTeamNum1 = document.getElementById("writeTeamNumber1").value;
+        var blueTeamNum1 = document.getElementById("writeTeamNumber4").value;
+        console.log(redTeamNum1);
+        console.log(blueTeamNum1);
+        if (redTeamNum1.trim() == "" && blueTeamNum1.trim() == "") {
+            alert("Please fill out Red Team Number 1 and Blue Team Number 1!");
+            return false;
+        }
+        else if (redTeamNum1.trim() !== "" && blueTeamNum1.trim() !== ""){
+            loadCustom($("#writeTeamNumber1").val(), $("#writeTeamNumber2").val(), $("#writeTeamNumber3").val(), $("#writeTeamNumber4").val(), $("#writeTeamNumber5").val(), $("#writeTeamNumber6").val());
+        }
+        else {
+            alert("Please fill out red team number 1 and blue team number 1!");
+        }
       });
 
       loadMatchList(function() {});
 
     });
+      
+      
+      
   </script>
 
   <script type="text/javascript" src="./scripts/matchDataProcessor.js"></script>
