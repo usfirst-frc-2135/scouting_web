@@ -489,21 +489,84 @@
     $("#teamTitle").html("Team " + team);
   }
 
+    //filters out the match type as specified in the db status page
+  function getFilteredData(team, successFunction) {
+      console.log(">> starting getSiteFilteredData for team " + team);
+      var temp_this = this;
+      $.post("dbAPI.php", { "getStatus": true }, function (data) {
+          dbdata = JSON.parse(data);
+          var localSiteFilter = {};
+          localSiteFilter["useP"] = dbdata["useP"];
+          localSiteFilter["useQm"] = dbdata["useQm"];
+          localSiteFilter["useQf"] = dbdata["useQf"];
+          localSiteFilter["useSf"] = dbdata["useSf"];
+          localSiteFilter["useF"] = dbdata["useF"];
+          //temp_this.siteFilter = { ...localSiteFilter };
+          console.log(">>> useP = " + localSiteFilter["useP"]);
+          console.log(">>> useQm = " + localSiteFilter["useQm"]);
+          //temp_this.applySiteFilter();
+          $.get("readAPI.php", {
+            getTeamData: team
+          }).done(function(data) {
+            matchData = JSON.parse(data);
+
+            var new_data = [];
+            for (var i = 0; i < matchData.length; i++) {
+              var mn = matchData[i]["matchnumber"];
+              var mt = "-";
+              var match_str = mn.toLowerCase();
+              if (match_str.search("p") != -1) {
+                mt = "p";
+              }
+              else if (match_str.search("qm") != -1) {
+                mt = "qm";
+              }    
+              else if (match_str.search("qf") != -1) {
+                mt = "qf";
+              }
+              else if (match_str.search("sf") != -1) {
+                mt = "sf";
+              }
+              else if (match_str.search("f") != -1) {
+                mt = "f";
+              } 
+
+              //if (mt == null) {
+                //mt = ["qm", null];
+              //}
+              if (mt == "p" && localSiteFilter["useP"]) { new_data.push(matchData[i]); }
+              else if (mt == "qm" && localSiteFilter["useQm"]) { new_data.push(matchData[i]); }
+              else if (mt == "qf" && localSiteFilter["useQf"]) { new_data.push(matchData[i]); }
+              else if (mt == "sf" && localSiteFilter["useSf"]) { new_data.push(matchData[i]); }
+              else if (mt == "f" && localSiteFilter["useF"]) { new_data.push(matchData[i]); }
+            }
+            matchData = [...new_data];
+
+            successFunction(matchData);
+        });
+     });
+  };
+    
   function processMatchData(team, data) {
       var mdp = new matchDataProcessor(data);
+      console.log(mdp);
       mdp.sortMatches(data);
       mdp.getSiteFilteredAverages(function(averageData) {
-      processedData = averageData[team];
-      dataToAvgTables(processedData);
+          processedData = averageData[team];
+          dataToAvgTables(processedData);
+          console.log(processedData);
     });
-      dataToCommentTable(data);
-      console.log("in processMatchData, calling data to MatchTable, team= "+team);
-    dataToMatchTable(data); 
-    dataToAutonGraph(data);
-    dataToTeleopGraph(data);
-    dataToEndgameGraph(data);
-    sorttable.makeSortable(document.getElementById("sortableAllMatches")); 
-  }
+      getFilteredData(team, function(fData) {
+        filteredData = fData;
+        dataToCommentTable(filteredData);
+        console.log("in processMatchData, calling data to MatchTable, team= "+team);
+        dataToMatchTable(filteredData); 
+        dataToAutonGraph(filteredData);
+        dataToTeleopGraph(filteredData);
+        dataToEndgameGraph(filteredData);
+    });
+      sorttable.makeSortable(document.getElementById("sortableAllMatches")); 
+  };
 	
 
 
@@ -562,6 +625,7 @@
       var tipStr = "Leave Starting Zone="+clevel;
       autonLeaveTips.push({xlabel: matchnum, tip: tipStr});
         //console.log("leavestartingzone");
+      console.log(matchdata);
     }
         
 
