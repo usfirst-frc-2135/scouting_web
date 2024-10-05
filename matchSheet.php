@@ -116,6 +116,11 @@
                 <td class="table-danger" id="redAvgEndgamePoints"></td>
                 <td class="table-primary" id="blueAvgEndgamePoints"></td>
               </tr>
+              <tr>
+                <td class="table-secondary">Total Predicted Points</td>
+                <td class="table-danger" id="redTotalPredictedPoints"></td>
+                <td class="table-primary" id="blueTotalPredictedPoints"></td>  
+              </tr>
             </tbody>
           </table>
         </div>
@@ -694,10 +699,12 @@
       $("#redTotalSpeakers").html("");
       $("#redTotalNotes").html("");
       $("#redAvgEndgamePoints").html("");
+      $("#redTotalPredictedPoints").html("");
       $("#blueTotalAmps").html("");
       $("#blueTotalSpeakerse").html("");
-      $("blueTotalNotes").html("");
+      $("#blueTotalNotes").html("");
       $("#blueAvgEndgamePoints").html("");
+      $("#blueTotalPredictedPoints").html("");
       $("#R0RobotPics").html("");
       $("#R1RobotPics").html("");
       $("#R2RobotPics").html("");
@@ -733,10 +740,12 @@
       $("#redTotalSpeakers").html("");
       $("#redTotalNotes").html("");
       $("#redAvgEndgamePoints").html("");
+      $("#redTotalPredictedPoints").html("");
       $("#blueTotalAmps").html("");
       $("#blueTotalSpeakerse").html("");
       $("blueTotalNotes").html("");
       $("#blueAvgEndgamePoints").html("");
+      $("#blueTotalPredictedPoints").html("");
       $("#R0RobotPics").html("");
       $("#R1RobotPics").html("");
       $("#R2RobotPics").html("");
@@ -831,12 +840,16 @@
       var avgTotalSpeakers = {
          "red": 0,
          "blue": 0
-      }
+      };
       var avgTotalNotes = {
         "red": 0,
         "blue": 0
       };
       var avgEndgamePoints = {
+        "red": 0,
+        "blue": 0
+      };
+      var totalPredictedPoints = {
         "red": 0,
         "blue": 0
       };
@@ -849,6 +862,7 @@
           avgTotalSpeakers["red"] += rd["avgautonspeaker"] + rd["avgteleopspeakernotes"];
           avgTotalNotes["red"] += rd["avgtotalnotes"];
           avgEndgamePoints["red"] += rd["avgendgamepoints"];
+          totalPredictedPoints["red"] += rd["avgautonamps"]*2 + rd["avgteleopampnotes"] + rd["avgautonspeaker"]*5 + rd["avgteleopspeakernotes"]*2 + rd["avgendgamepoints"];
         }
       }
       for (let i in blueList) {
@@ -859,6 +873,7 @@
           avgTotalSpeakers["blue"] += rd["avgautonspeaker"] + rd["avgteleopspeakernotes"];
           avgTotalNotes["blue"] += rd["avgtotalnotes"];
           avgEndgamePoints["blue"] += rd["avgendgamepoints"];
+          totalPredictedPoints["blue"] += rd["avgautonamps"]*2 + rd["avgteleopampnotes"] + rd["avgautonspeaker"]*5 + rd["avgteleopspeakernotes"]*2 + rd["avgendgamepoints"];
         }
       }
                 
@@ -866,21 +881,25 @@
       $("#redTotalSpeakers").html(roundInt(avgTotalSpeakers["red"]));
       $("#redTotalNotes").html(roundInt(avgTotalNotes["red"]));
       $("#redAvgEndgamePoints").html(roundInt(avgEndgamePoints["red"]));
+      $("#redTotalPredictedPoints").html(roundInt(totalPredictedPoints["red"]));
 
       $("#blueTotalAmps").html(roundInt(avgTotalAmps["blue"]));
       $("#blueTotalSpeakers").html(roundInt(avgTotalSpeakers["blue"]));
       $("#blueTotalNotes").html(roundInt(avgTotalNotes["blue"]));
       $("#blueAvgEndgamePoints").html(roundInt(avgEndgamePoints["blue"]));
+      $("#blueTotalPredictedPoints").html(roundInt(totalPredictedPoints["blue"]));
         
       document.getElementById("redTotalAmps").setAttribute("align", "center");
       document.getElementById("redTotalSpeakers").setAttribute("align", "center");
       document.getElementById("redTotalNotes").setAttribute("align", "center");
       document.getElementById("redAvgEndgamePoints").setAttribute("align", "center");
+      document.getElementById("redTotalPredictedPoints").setAttribute("align", "center");
 
       document.getElementById("blueTotalAmps").setAttribute("align", "center");
       document.getElementById("blueTotalSpeakers").setAttribute("align", "center");
       document.getElementById("blueTotalNotes").setAttribute("align", "center");
       document.getElementById("blueAvgEndgamePoints").setAttribute("align", "center");
+      document.getElementById("blueTotalPredictedPoints").setAttribute("align", "center");
     }
 
     function roundInt(val) {
