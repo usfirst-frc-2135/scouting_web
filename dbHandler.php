@@ -300,7 +300,7 @@ class dbHandler
   function createDB()
   {
     $dbConfig = $this->readDbConfig();
-    $connectin = $this->connectToServer();
+    $connection = $this->connectToServer();
     $statement = $connection->prepare('CREATE DATABASE IF NOT EXISTS ' . $dbConfig["db"]);
     if (!$statement->execute())
     {
