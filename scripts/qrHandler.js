@@ -18,36 +18,42 @@ function qrStringToList(dataString) {
 
 function validateQrList(dataList) {
   var dataListSize = dataList.length;
-  if (dataList.length != 15) {
+  if (dataList.length != 21) {
     return false;
   }
   return true;
 }
-
+//update this data list length whenever new data is added to the table
 function padList(dataList) {
-  if (dataList.length == 14) {
+  if (dataList.length == 20) {
     dataList.push("");
   }
   return dataList;
 }
-//also need to adjust data list size in "validateQrList" and "padList"!!!
+//IMPORTANT! also need to adjust data list size in "validateQrList" and "padList"!!!
 function qrListToDict(dataList) {
   out = {};
   out["teamnumber"] = dataList[0];
   out["autonleave"] = dataList[1];
   out["autonampnotes"] = dataList[2];
-  out["autonspeakernotes"] = dataList[3];
-  out["teleopampnotes"] = dataList[4];
-  out["teleopspeakernotes"] = dataList[5];
-  out["endgamestage"] = dataList[6];
-  out["endgameharmony"] = dataList[7];
-  out["endgamespotlit"] = dataList[8];
-  out["endgametrap"] = dataList[9];
-  out["died"] = dataList[10];
-  out["matchnumber"] = dataList[11];
-  out["eventcode"] = dataList[12];
-  out["scoutname"] = dataList[13];
-  out["comment"] = dataList[14];
+  out["autonampmisses"] = dataList[3];
+  out["autonspeakernotes"] = dataList[4];
+  out["autonspeakermisses"] = dataList[5];
+  out["teleopampused"] = dataList[6];
+  out["teleopampnotes"] = dataList[7];
+  out["teleopampmisses"] = dataList[8];
+  out["teleopspeakernotes"] = dataList[9];
+  out["teleopspeakermisses"] = dataList[10];
+  out["teleoppasses"] = dataList[11];
+  out["endgamestage"] = dataList[12];
+  out["endgameharmony"] = dataList[13];
+  out["endgamespotlit"] = dataList[14];
+  out["endgametrap"] = dataList[15];
+  out["died"] = dataList[16];
+  out["matchnumber"] = dataList[17];
+  out["eventcode"] = dataList[18];
+  out["scoutname"] = dataList[19];
+  out["comment"] = dataList[20];
   return out;
 }
 
@@ -121,7 +127,7 @@ function scanCamera(reader, id) {
     if (result) {
       var dataList = qrStringToList(result.text);
       dataList = padList(dataList);
-      console.log("scanCamera: dataList = "+dataList);
+        console.log("scanCamera: dataList = "+dataList);
       if (validateQrList(dataList)) {
         alertSuccessfulScan();
 	    addQrData(qrListToDict(dataList));

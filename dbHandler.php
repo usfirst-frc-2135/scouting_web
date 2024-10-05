@@ -56,9 +56,15 @@ class dbHandler
                        teamnumber,
                        autonleave,
                        autonampnotes,
+                       autonampmisses,
                        autonspeakernotes,
+                       autonspeakermisses,
+                       teleopampused,
                        teleopampnotes,
+                       teleopampmisses,
                        teleopspeakernotes,
+                       teleopspeakermisses,
+                       teleoppasses,
                        endgamestage,
                        endgameharmony,
                        endgamespotlit,
@@ -70,11 +76,17 @@ class dbHandler
                        comment)
                 VALUES(:entrykey,
                        :teamnumber,
-                       :autonleave,
+                       :autonleave, 
                        :autonampnotes,
+                       :autonampmisses,
                        :autonspeakernotes,
+                       :autonspeakermisses,
+                       :teleopampused,
                        :teleopampnotes,
+                       :teleopampmisses,
                        :teleopspeakernotes,
+                       :teleopspeakermisses,
+                       :teleoppasses,
                        :endgamestage,
                        :endgameharmony,
                        :endgamespotlit,
@@ -100,7 +112,7 @@ class dbHandler
     {
       foreach ($row as $key => $value)
       {
-        if ($key == "autonleave" || $key == "autonampnotes" || $key == "autonspeakernotes" || $key == "teleopampnotes" || $key == "teleopspeakernotes" || $key == "endgamestage" || $key == "endgameharmony" || $key == "endgamespotlit" ||$key == "endgametrap" || $key == "died")
+        if ($key == "autonleave" || $key == "autonampnotes" || $key == "autonampmisses" || $key == "autonspeakernotes" || $key == "autonspeakermisses" || $key == "teleopampused" || $key == "teleopampnotes" ||  $key == "teleopampmisses" || $key == "teleopspeakernotes" || $key == "teleopspeakermisses" || $key == "teleoppasses" || $key == "endgamestage" || $key == "endgameharmony" || $key == "endgamespotlit" ||$key == "endgametrap" || $key == "died")
         {
           $row[$key] = $this->enforceInt($value);
         }
@@ -120,9 +132,15 @@ class dbHandler
     $sql = "SELECT teamnumber,
                      autonleave,
                      autonampnotes,
+                     autonampmisses,
                      autonspeakernotes,
+                     autonspeakermisses,
+                     teleopampused,
                      teleopampnotes,
+                     teleopampmisses,
                      teleopspeakernotes,
+                     teleopspeakermisses,
+                     teleoppasses,
                      endgamestage,
                      endgameharmony,
                      endgamespotlit,
@@ -144,9 +162,15 @@ class dbHandler
     $sql = "SELECT teamnumber,
                      autonleave,
                      autonampnotes,
+                     autonampmisses,
                      autonspeakernotes,
+                     autonspeakermisses, 
+                     teleopampused,
                      teleopampnotes,
+                     teleopampmisses,
                      teleopspeakernotes,
+                     teleopspeakermisses,
+                     teleoppasses,
                      endgamestage,
                      endgameharmony,
                      endgamespotlit,
@@ -276,7 +300,7 @@ class dbHandler
   function createDB()
   {
     $dbConfig = $this->readDbConfig();
-    $connection = $this->connectToServer();
+    $connectin = $this->connectToServer();
     $statement = $connection->prepare('CREATE DATABASE IF NOT EXISTS ' . $dbConfig["db"]);
     if (!$statement->execute())
     {
@@ -293,9 +317,15 @@ class dbHandler
             teamnumber VARCHAR(6) NOT NULL,
             autonleave TINYINT UNSIGNED NOT NULL,
             autonampnotes TINYINT UNSIGNED NOT NULL,
+            autonampmisses TINYINT UNSIGNED NOT NULL,
             autonspeakernotes TINYINT UNSIGNED NOT NULL,
+            autonspeakermisses TINYINT UNSIGNED NOT NULL,
+            teleopampused TINYINT UNSIGNED NOT NULL,
             teleopampnotes TINYINT UNSIGNED NOT NULL,
+            teleopampmisses TINYINT UNSIGNED NOT NULL,
             teleopspeakernotes TINYINT UNSIGNED NOT NULL,
+            teleopspeakermisses TINYINT UNSIGNED NOT NULL,
+            teleoppasses TINYINT UNSIGNED NOT NULL,
             endgamestage TINYINT UNSIGNED NOT NULL,
             endgameharmony TINYINT UNSIGNED NOT NULL,
             endgamespotlit TINYINT UNSIGNED NOT NULL,
