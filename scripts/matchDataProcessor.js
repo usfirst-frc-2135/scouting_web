@@ -188,6 +188,7 @@ class matchDataProcessor {
         avg[tn]["maxteleopampnotes"] = 0;
         avg[tn]["avgteleopspeakernotes"] = 0;
         avg[tn]["maxteleopspeakernotes"] = 0;
+        avg[tn]["teleopSpeakerShootPercent"] = 0;
           
         avg[tn]["endgamestagepercent"] = {0:0, 1:0, 2:0};  
         avg[tn]["endgameharmonypercent"] = {0:0, 1:0, 2:0};
@@ -209,12 +210,21 @@ class matchDataProcessor {
       var autonSpeakerNotes = (this.data[i]["autonspeakernotes"]);
 		
       var autoNotes = (autonAmpNotes) + (autonSpeakerNotes);
-//      console.log("===> for team "+tn+": autoNotes = "+autoNotes); //TEST
+//      console.log("===> for team "+tn+":"); //TEST
 
       var teleopAmpNotes = (this.data[i]["teleopampnotes"]);
       var teleopSpeakerNotes = (this.data[i]["teleopspeakernotes"]);
       var teleopNotes = (parseInt(teleopAmpNotes)) + (parseInt(teleopSpeakerNotes));
-//      console.log("   -> teleop points = "+telopPoints); //TEST
+//      console.log("   -> teleop notes = "+teleopNotes); //TEST
+
+      // Calculate the shooting percentage for each match: (#speakerNotes/#totalNotes)
+      var teleopSpeakerMisses = (this.data[i]["teleopspeakermisses"]);
+      var totalSpeakerShots = (parseInt(teleopSpeakerNotes)) + (parseInt(teleopSpeakerMisses));
+      // If there are no shots, don't bother doing the calculation here.
+      if (totalSpeakerShots != 0) {
+        var teleopSpeakerShotPercent = (parseInt(teleopSpeakerNotes)) / totalSpeakerShots;
+        avg[tn]["teleopSpeakerShootPercent"] += teleopSpeakerShotPercent;
+      }
 
       var endgameStagePoints = (this.data[i]["endgamestage"]);
       var endgameHarmonyPoints = (this.data[i]["endgameharmony"]);
@@ -305,6 +315,11 @@ class matchDataProcessor {
 		
       avg[key]["avgteleopampnotes"] = Math.round(10 * avg[key]["avgteleopampnotes"] / avg[key]["totalmatches"]) / 10;
       avg[key]["avgteleopspeakernotes"] = Math.round(10 * avg[key]["avgteleopspeakernotes"] / avg[key]["totalmatches"]) / 10;
+      if (avg[key]["teleopSpeakerShootPercent"] != "0") {
+        avg[key]["teleopSpeakerShootPercent"] = Math.round(100 * avg[key]["teleopSpeakerShootPercent"] / avg[key]["totalmatches"]); 
+      }
+//      console.log("---> AVG shootingPercentage calculated: "+ avg[key]["teleopSpeakerShootPercent"]); //TEST
+        
       avg[key]["trapPercentage"] = Math.round(100 * avg[key]["trapPercentage"] / avg[key]["totalmatches"]);
       avg[key]["spotlitPercentage"] = Math.round(100 * avg[key]["spotlitPercentage"] / avg[key]["totalmatches"]);
 //      console.log("   >> number of traps is = " + avg[key]["trapPercentage"]);
