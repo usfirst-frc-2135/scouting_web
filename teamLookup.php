@@ -160,6 +160,12 @@
                       <col span="1" style="background-color:#cfe2ff">
                       <col span="1" style="background-color:transparent">
                       <col span="1" style="background-color:#cfe2ff">
+                      <col span="1" style="background-color:transparent"> 
+                      <col span="1" style="baclground-color:#cfe2ff">
+                      <col span="1" style="background-color:transparent"> 
+                      <col span="1" style="baclground-color:#cfe2ff">
+                      <col span="1" style="background-color:transparent"> 
+                      <col span="1" style="baclground-color:#cfe2ff">
                     </colgroup>
                     <thead>
                         <style type="text/css" media="screen">
@@ -171,9 +177,15 @@
                         <th scope="col">Match #</th>
                         <th scope="col">Auton Leave</th>
                         <th scope="col">Auton Amp Notes</th>
+                        <th scope="col">Auton Amp Misses</th>
                         <th scope="col">Auton Speaker Notes</th>
+                        <th scope="col">Auton Speaker Misses</th>
+                        <th scope="col">Teleop Amp Used</th>
                         <th scope="col">Teleop Amp Notes</th>
+                        <th scope="col">Teleop Amp Misses</th>
                         <th scope="col">Teleop Speaker Notes</th>
+                        <th scope="col">Teleop Speaker Misses</th>
+                        <th scope="col">Teleop Passes</th>
                         <th scope="col">Endgame Stage Level</th>
                         <th scope="col">Endgame Harmony Level</th>
                         <th scope="col">Endgame Trap </th>
@@ -404,9 +416,15 @@
       var rowString = "<tr><td align=\"center\">" + dataObj[i]["matchnumber"] + "</td>" +
         "<td align=\"center\">" + dataObj[i]["autonleave"] + "</td>" +
         "<td align=\"center\">" + dataObj[i]["autonampnotes"] + "</td>" +
+        "<td align=\"center\">" + dataObj[i]["autonampmisses"] + "</td>" +
         "<td align=\"center\">" + dataObj[i]["autonspeakernotes"] + "</td>" +
+        "<td align=\"center\">" + dataObj[i]["autonspeakermisses"] + "</td>" +
+        "<td align=\"center\">" + dataObj[i]["teleopampused"] + "</td>" +
         "<td align=\"center\">" + dataObj[i]["teleopampnotes"] + "</td>" +
+        "<td align=\"center\">" + dataObj[i]["teleopampmisses"] + "</td>" +
         "<td align=\"center\">" + dataObj[i]["teleopspeakernotes"] + "</td>" +
+        "<td align=\"center\">" + dataObj[i]["teleopspeakermisses"] + "</td>" +
+        "<td align=\"center\">" + dataObj[i]["teleoppasses"] + "</td>" +
         "<td align=\"center\">" + dataObj[i]["endgamestage"] + "</td>" +
         "<td align=\"center\">" + dataObj[i]["endgameharmony"] + "</td>" +
         "<td align=\"center\">" + dataObj[i]["endgametrap"] + "</td>" +
