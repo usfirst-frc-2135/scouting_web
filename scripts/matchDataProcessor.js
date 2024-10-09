@@ -190,6 +190,9 @@ class matchDataProcessor {
         avg[tn]["maxteleopspeakernotes"] = 0;
         avg[tn]["teleopSpeakerShootPercent"] = 0;
           
+        avg[tn]["avgPasses"] = 0;
+        avg[tn]["maxPasses"] = 0;
+
         avg[tn]["endgamestagepercent"] = {0:0, 1:0, 2:0};  
         avg[tn]["endgameharmonypercent"] = {0:0, 1:0, 2:0};
         avg[tn]["spotlitPercentage"] = 0;
@@ -225,6 +228,8 @@ class matchDataProcessor {
         var teleopSpeakerShotPercent = (parseInt(teleopSpeakerNotes)) / totalSpeakerShots;
         avg[tn]["teleopSpeakerShootPercent"] += teleopSpeakerShotPercent;
       }
+
+      var passes = (this.data[i]["teleoppasses"]);
 
       var endgameStagePoints = (this.data[i]["endgamestage"]);
       var endgameHarmonyPoints = (this.data[i]["endgameharmony"]);
@@ -285,6 +290,10 @@ class matchDataProcessor {
       avg[tn]["avgteleopspeakernotes"] += combinedTeleopSpeakerNotes;
       avg[tn]["maxteleopspeakernotes"] = Math.max(avg[tn]["maxteleopspeakernotes"], combinedTeleopSpeakerNotes);
         
+      var combinedPasses = (parseInt(this.data[i]["teleoppasses"]));
+      avg[tn]["avgPasses"] += combinedPasses;
+      avg[tn]["maxPasses"] = Math.max(avg[tn]["maxPasses"], combinedPasses);
+	
       // For some reason the real website handling of boolean data (exit and mobilitypercent
       // is to treat it like a string, and keep appending the next value 
       // as a char. To fix that, we are just incrementing mobilitypercent instead of
@@ -304,9 +313,6 @@ class matchDataProcessor {
 //      console.log(">>>> for team " + key);
       avg[key]["avgtotalnotes"] = Math.round(10 * avg[key]["avgtotalnotes"] / avg[key]["totalmatches"]) / 10;
       avg[key]["avgautonotes"] = Math.round(10 * avg[key]["avgautonotes"] / avg[key]["totalmatches"]) / 10;
-//      console.log("-> for "+key+" calc: current avgautonotes = "+ this.rnd(avg[key]["avgautonotes"])); //TEST
-//      console.log("     current totalmatches = "+ avg[key]["totalmatches"]); //TEST
-//      console.log("       calculated avgautonotes = "+avg[key]["avgautonotes"]); //TEST
       avg[key]["avgteleopnotes"] = Math.round(10 * avg[key]["avgteleopnotes"] / avg[key]["totalmatches"]) / 10; 
       avg[key]["avgendgamepoints"] = Math.round(10 * avg[key]["avgendgamepoints"] / avg[key]["totalmatches"]) / 10;
 	
@@ -320,6 +326,8 @@ class matchDataProcessor {
       }
 //      console.log("---> AVG shootingPercentage calculated: "+ avg[key]["teleopSpeakerShootPercent"]); //TEST
         
+      avg[key]["avgPasses"] = Math.round(10 * avg[key]["avgPasses"] / avg[key]["totalmatches"]) / 10;
+
       avg[key]["trapPercentage"] = Math.round(100 * avg[key]["trapPercentage"] / avg[key]["totalmatches"]);
       avg[key]["spotlitPercentage"] = Math.round(100 * avg[key]["spotlitPercentage"] / avg[key]["totalmatches"]);
 //      console.log("   >> number of traps is = " + avg[key]["trapPercentage"]);

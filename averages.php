@@ -53,7 +53,9 @@
             <col span="2" style="background-color:transparent">
             <col span="2" style="background-color:#cfe2ff">
             <col span="2" style="background-color:#B5D3FF">
-            <col span="5" style="background-color:transparent">
+            <col span="2" style="background-color:transparent">
+            <col span="3" style="background-color:#cfe2ff">
+            <col span="2" style="background-color:transparent">
             <col span="1" style="background-color:#cfe2ff">
             <col span="1" style="background-color:#B5D3FF">
             <col span="1" style="background-color:#cfe2ff">
@@ -72,7 +74,7 @@
               <th colspan="2" class="text-center" style="background-color:#3686FF">Total Teleop Notes</th>
               <th colspan="2" class="text-center">Endgame Pts</th>
               <th colspan="4" class="text-center" style="background-color:#3686FF">Auton</th>
-              <th colspan="5" class="text-center">Teleop</th>
+              <th colspan="7" class="text-center">Teleop</th>
               <th colspan="8" class="text-center" style="background-color:#3686FF">Endgame</th>
               <th colspan="1" class="text-center fw-bold">Died</th>
             </tr>
@@ -93,6 +95,7 @@
 				
               <th colspan="2" class="text-center">Amp</th>
               <th colspan="3" class="text-center">Speaker</th>
+              <th colspan="2" class="text-center">Passes</th>
               <th colspan="3" class="text-center" style="background-color:#83B4FF">Stage%</th>
               <th colspan="3" class="text-center" style="background-color:#83B4FF">Harmony%</th> 
               <th colspan="1" class="text-center" style="background-color:#83b4ff">Trap</th> 
@@ -118,6 +121,8 @@
               <th scope="col">Avg</th>
               <th scope="col">Max</th>
               <th scope="col">Acc%</th>
+              <th scope="col">Avg</th>
+              <th scope="col">Max</th>
               <th class="text-center" scope="col">N</th>
               <th class="text-center" scope="col">P</th>
               <th class="text-center" scope="col">O</th>
@@ -200,8 +205,11 @@
 	    "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxteleopampnotes") + "</td>" +
 	    "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgteleopspeakernotes") + "</td>" +
 	    "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxteleopspeakernotes") + "</td>" +
-        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "teleopSpeakerShootPercent") + "</td>" +
+            "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "teleopSpeakerShootPercent") + "</td>" +
 		  
+	    "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgPasses") + "</td>" +
+	    "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxPasses") + "</td>" +
+
         "<td align=\"center\">" + dummyGet(endgamestagePercentage, 0) + "</td>" +
         "<td align=\"center\">" + dummyGet(endgamestagePercentage, 1) + "</td>" +
         "<td align=\"center\">" + dummyGet(endgamestagePercentage, 2) + "</td>" +
