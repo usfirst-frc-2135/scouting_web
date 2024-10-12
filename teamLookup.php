@@ -459,9 +459,9 @@
       
     writeTableRow("teleopTotalTable", avgs, ["totalstr", "avgteleopnotes", "maxteleopnotes"]);
     writeTableRow("teleopTable", avgs, ["amprowstr", "avgteleopampnotes", "maxteleopampnotes"]);
-    writeTableRow("teleopTable", avgs, ["passesrowstr", "avgPasses", "maxPasses"]);
     writeTableRow("teleopTable", avgs, ["speakerrowstr", "avgteleopspeakernotes", "maxteleopspeakernotes"]);
-
+    writeTableRow("teleopTable", avgs, ["passesrowstr", "avgPasses", "maxPasses"]);
+      
     // Endgame Climb Table
     avgs["endgamestagepercent"]["endgamestagestr"] = "<b>Stage Level %</b>";
     avgs["endgameharmonypercent"]["endgameharmonystr"] = "<b>Harmony Level %</b>";
@@ -768,11 +768,14 @@
       teleopPassesTips.push({xlabel: matchnum, tip: tooltipStr3}); 
         
       //Get Amplification
-      // Get passes data
       var teleopAmpUsed = matchdata[i]["teleopampused"];
       datasets[3]["data"].push(teleopAmpUsed);
-      var tooltipStr4 = "Amp Used="+teleopAmpUsed;
-      teleopAmpUsedTips.push({xlabel: matchnum, tip: tooltipStr4}); 
+      var label = "No";
+      if(teleopAmpUsed == 1)
+          label = "Yes";
+      var tooltipStr4 = "Amp Used="+label;
+      teleopAmpUsedTips.push({xlabel: matchnum, tip: tooltipStr4});         
+        
     }
 
     // Define the graph as a line chart:
