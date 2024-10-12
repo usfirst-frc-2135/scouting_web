@@ -53,11 +53,15 @@
   function createCSVLine(localAverages,team) {
     var onstagePercent = rnd(dummylocalAveragesLookup(localAverages,team, "endgamestagepercent"));
     var trapPercent = rnd(dummylocalAveragesLookup(localAverages,team, "trapPercentage"));
+    var teleopShootingAcc = rnd(dummylocalAveragesLookup(localAverages,team, "teleopSpeakerShootPercent"));
     var out = team+",";
     out += dummylocalAveragesLookup(localAverages,team, "avgtotalnotes") + ",";
     out += dummylocalAveragesLookup(localAverages,team, "maxtotalnotes") + ",";
     out += dummylocalAveragesLookup(localAverages,team, "avgautonotes") + ",";
     out += dummylocalAveragesLookup(localAverages,team, "avgteleopnotes") + ",";
+    out += teleopShootingAcc + ",";
+    out += dummylocalAveragesLookup(localAverages,team, "avgPasses") + ",";
+    out += dummylocalAveragesLookup(localAverages,team, "maxPasses") + ",";
     out += dummylocalAveragesLookup(localAverages,team, "avgendgamepoints") + ",";
     out += onstagePercent + ",";
     out += trapPercent + ",";
@@ -74,7 +78,7 @@
     }).done(function(data) {
       matchData = JSON.parse(data);
       var mdp = new matchDataProcessor(matchData);
-      var csvStr = "Team,Avg Total Notes,Max Total Notes,Avg A Notes,Avg T Notes,Avg E Notes, Onstage%, Trap%, Total Died, Comment\n";
+      var csvStr = "Team,Avg Total Notes,Max Total Notes,Avg A Notes,Avg T Notes,T Speaker Acc,Avg Passes,Max Passes,Avg E Points, Onstage%, Trap%, Total Died, Comment\n";
       mdp.getSiteFilteredAverages(function(averageData) {
         for (var key in averageData) {
           csvStr += createCSVLine(averageData,key);  // key is team number
