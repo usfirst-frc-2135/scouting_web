@@ -712,8 +712,10 @@
     // Declare variables
     var match_list = []; // List of matches to use as x lables
     var datasets = []; // Each entry is a dict with a label and data attribute
-    var teleopAmpTips = []; // holds custom tooltips for teleop top row points
-    var teleopSpeakerTips = []; // holds custom tooltips for teleop middle row points
+    var teleopAmpTips = []; // holds custom tooltips for teleop amp notes
+    var teleopSpeakerTips = []; // holds custom tooltips for teleop speaker notes
+    var teleopPassesTips =[];//holds custom tooltips for teleop passes
+    var teleopAmpUsedTips =[];//holds custom tooltips for if amplification used
 
     datasets.push({
       label: "Amp Notes",
@@ -725,7 +727,17 @@
       data: [],
       borderColor: 'MediumSeaGreen'
     });
-      
+    datasets.push({
+      label: "Passes",
+      data: [],
+      borderColor: 'Blue'
+    });
+    datasets.push({
+      label: "Used Amp",
+      data: [],
+      borderColor: 'Red'
+    });
+    
     // Build data sets; go thru each matchdata QR code string and populate the graph datasets.
     for (let i = 0; i < matchdata.length; i++) {
       var matchnum = matchdata[i]["matchnumber"];
@@ -734,14 +746,27 @@
       // Get teleop amp notes data
       var teleopAmpNotes = matchdata[i]["teleopampnotes"];
       datasets[0]["data"].push(teleopAmpNotes);
-      var tooltipStr = "Amp Notes="+teleopAmpNotes;
-      teleopAmpTips.push({xlabel: matchnum, tip: tooltipStr}); 
+      var tooltipStr1 = "Amp Notes="+teleopAmpNotes;
+      teleopAmpTips.push({xlabel: matchnum, tip: tooltipStr1}); 
 
       // Get teleop speaker notes data
       var teleopSpeakerNotes = matchdata[i]["teleopspeakernotes"];
       datasets[1]["data"].push(teleopSpeakerNotes);
-      var tooltipStr = "Speaker Notes="+teleopSpeakerNotes;
-      teleopSpeakerTips.push({xlabel: matchnum, tip: tooltipStr});  
+      var tooltipStr2 = "Speaker Notes="+teleopSpeakerNotes;
+      teleopSpeakerTips.push({xlabel: matchnum, tip: tooltipStr2}); 
+        
+      // Get passes data
+      var teleopPasses = matchdata[i]["teleoppasses"];
+      datasets[2]["data"].push(teleopPasses);
+      var tooltipStr3 = "Passes="+teleopPasses;
+      teleopPassesTips.push({xlabel: matchnum, tip: tooltipStr3}); 
+        
+      //Get Amplification
+      // Get passes data
+      var teleopAmpUsed = matchdata[i]["teleopampused"];
+      datasets[3]["data"].push(teleopAmpUsed);
+      var tooltipStr4 = "Amp Used="+teleopAmpUsed;
+      teleopAmpUsedTips.push({xlabel: matchnum, tip: tooltipStr4}); 
     }
 
     // Define the graph as a line chart:
@@ -770,7 +795,7 @@
                  var matchnum = tooltipItem.label;
                  var tipStr = datasets[toolIndex].label;
 
-                 if(toolIndex == 0) {   // Teleop Top Row
+                 if(toolIndex == 0) {   // Teleop Amp Notes
                    for (let i = 0; i < teleopAmpTips.length; i++) {
                      if(teleopAmpTips[i].xlabel == matchnum) {
                        tipStr = teleopAmpTips[i].tip;
@@ -778,7 +803,7 @@
                      }
                    }
                  }
-                 else if(toolIndex == 1) {   // Teleop Middle Row
+                 else if(toolIndex == 1) {   // Teleop Speaker Notes
                    for (let i = 0; i < teleopSpeakerTips.length; i++) {
                      if(teleopSpeakerTips[i].xlabel == matchnum) {
                        tipStr = teleopSpeakerTips[i].tip;
@@ -786,6 +811,22 @@
                      }
                    }
                  }
+                 else if(toolIndex == 2) {   // Teleop Passes
+                   for (let i = 0; i < teleopPassesTips.length; i++) {
+                     if(teleopPassesTips[i].xlabel == matchnum) {
+                       tipStr = teleopPassesTips[i].tip;
+                       break;
+                     }
+                   }
+                 }
+                 else if(toolIndex == 3) {   // Teleop Amp Used
+                   for (let i = 0; i < teleopAmpUsedTips.length; i++) {
+                     if(teleopAmpUsedTips[i].xlabel == matchnum) {
+                       tipStr = teleopAmpUsedTips[i].tip;
+                       break;
+                     }
+                   }
+                 }  
                  return tipStr;
               }
             }
