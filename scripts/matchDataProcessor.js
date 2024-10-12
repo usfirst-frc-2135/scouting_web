@@ -183,6 +183,7 @@ class matchDataProcessor {
         avg[tn]["maxautonamps"] = 0;
         avg[tn]["avgautonspeaker"] = 0;
         avg[tn]["maxautonspeaker"] = 0;
+        avg[tn]["autonSpeakerShootPercent"] = 0;
 		
         avg[tn]["avgteleopampnotes"] = 0;
         avg[tn]["maxteleopampnotes"] = 0;
@@ -214,6 +215,12 @@ class matchDataProcessor {
 		
       var autoNotes = (autonAmpNotes) + (autonSpeakerNotes);
 //      console.log("===> for team "+tn+":"); //TEST
+      var autonSpeakerMisses = (this.data[i]["autonspeakermisses"]);
+      var totalAutonSpeakerShots = (parseInt(autonSpeakerNotes)) + (parseInt(autonSpeakerMisses));
+      if (totalAutonSpeakerShots != 0) {
+          var autonSpeakerShotPercent = (parseInt(autonSpeakerNotes)) / totalAutonSpeakerShots;
+          avg[tn]["autonSpeakerShootPercent"] += autonSpeakerShotPercent;
+      }
 
       var teleopAmpNotes = (this.data[i]["teleopampnotes"]);
       var teleopSpeakerNotes = (this.data[i]["teleopspeakernotes"]);
@@ -318,6 +325,9 @@ class matchDataProcessor {
 	
       avg[key]["avgautonamps"] = Math.round(10 * avg[key]["avgautonamps"] / avg[key]["totalmatches"]) / 10;
       avg[key]["avgautonspeaker"] = Math.round(10 * avg[key]["avgautonspeaker"] / avg[key]["totalmatches"]) / 10;
+      if (avg[key]["autonSpeakerShootPercent"] != "0") {
+        avg[key]["autonSpeakerShootPercent"] = Math.round(100 * avg[key]["autonSpeakerShootPercent"] / avg[key]["totalmatches"]); 
+      }
 		
       avg[key]["avgteleopampnotes"] = Math.round(10 * avg[key]["avgteleopampnotes"] / avg[key]["totalmatches"]) / 10;
       avg[key]["avgteleopspeakernotes"] = Math.round(10 * avg[key]["avgteleopspeakernotes"] / avg[key]["totalmatches"]) / 10;

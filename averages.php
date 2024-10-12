@@ -52,7 +52,7 @@
             <col span="2" style="background-color:#cfe2ff">
             <col span="2" style="background-color:transparent">
             <col span="2" style="background-color:#cfe2ff">
-            <col span="2" style="background-color:#B5D3FF">
+            <col span="3" style="background-color:#B5D3FF">
             <col span="2" style="background-color:transparent">
             <col span="3" style="background-color:#cfe2ff">
             <col span="2" style="background-color:transparent">
@@ -73,7 +73,7 @@
               <th colspan="2" class="text-center">Total Auto Notes</th>
               <th colspan="2" class="text-center" style="background-color:#3686FF">Total Teleop Notes</th>
               <th colspan="2" class="text-center">Endgame Pts</th>
-              <th colspan="4" class="text-center" style="background-color:#3686FF">Auton</th>
+              <th colspan="5" class="text-center" style="background-color:#3686FF">Auton</th>
               <th colspan="7" class="text-center">Teleop</th>
               <th colspan="8" class="text-center" style="background-color:#3686FF">Endgame</th>
               <th colspan="1" class="text-center fw-bold">Died</th>
@@ -91,7 +91,7 @@
               <th colspan="1"></th>
               
               <th colspan="2" class="text-center">Amp</th>
-              <th colspan="2" class="text-center">Speaker</th>
+              <th colspan="3" class="text-center">Speaker</th>
 				
               <th colspan="2" class="text-center">Amp</th>
               <th colspan="3" class="text-center">Speaker</th>
@@ -116,6 +116,7 @@
               <th scope="col">Max</th>
               <th scope="col">Avg</th>
               <th scope="col">Max</th>
+              <th scope="col">Acc%</th>
               <th scope="col">Avg</th>
               <th scope="col">Max</th>
               <th scope="col">Avg</th>
@@ -200,12 +201,13 @@
 	    "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxautonamps") + "</td>" +
 	    "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgautonspeaker") + "</td>" +
 	    "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxautonspeaker") + "</td>" +
+        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "autonSpeakerShootPercent") + "</td>" +
 		  
         "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgteleopampnotes") + "</td>" +
 	    "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxteleopampnotes") + "</td>" +
 	    "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgteleopspeakernotes") + "</td>" +
 	    "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxteleopspeakernotes") + "</td>" +
-            "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "teleopSpeakerShootPercent") + "</td>" +
+        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "teleopSpeakerShootPercent") + "</td>" +
 		  
 	    "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgPasses") + "</td>" +
 	    "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxPasses") + "</td>" +
