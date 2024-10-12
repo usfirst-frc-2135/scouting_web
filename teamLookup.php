@@ -254,6 +254,9 @@
                           <tr>
                             <th scope="row">Speaker Notes</th>
                           </tr>
+                          <tr>
+                            <th scope="row">Speaker Accuracy%</th>
+                          </tr>
                         </tbody>
                         <tfoot id="autoTotalTable">
                           <tr>
@@ -448,10 +451,12 @@
     //Auton Scores
     avgs["amprowstr"] = "<b>Amp Notes</b>";
     avgs["speakerrowstr"] = "<b>Speaker Notes</b>";
+    avgs["speakerautonaccuracyrowstr"] = "<b>Speaker Accuracy%</b>";
     avgs["totalstr"] = "<b>Total Notes</b>";
       
     writeTableRow("autoTable", avgs, ["amprowstr", "avgautonamps", "maxautonamps"]);
     writeTableRow("autoTable", avgs, ["speakerrowstr", "avgautonspeaker", "maxautonspeaker"]);
+    writeTableRow("autoTable", avgs, ["speakerautonaccuracyrowstr", "autonSpeakerShootPercent"]);
     writeTableRow("autoTotalTable", avgs, ["totalstr", "avgautonotes", "maxautonotes"]);
       
     // Teleop Scores
