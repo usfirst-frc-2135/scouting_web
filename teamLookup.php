@@ -292,6 +292,9 @@
                           <tr>
                             <th scope="row">Passes</th>
                           </tr>
+                          <tr>
+                            <th scope="row">Speaker Accuracy%</th>
+                          </tr>
                         </tbody>
                         <tfoot id="teleopTotalTable">
                           <tr>
@@ -454,12 +457,14 @@
     // Teleop Scores
     avgs["amprowstr"] = "<b>Amp Notes</b>";
     avgs["speakerrowstr"] = "<b>Speaker Notes</b>";
+    avgs["speakeraccuracyrowstr"] = "<b>Speaker Accuracy%</b>";
     avgs["passesrowstr"] = "<b>Passes</b>";
     avgs["totalstr"] = "<b>Total Notes</b>";
       
     writeTableRow("teleopTotalTable", avgs, ["totalstr", "avgteleopnotes", "maxteleopnotes"]);
     writeTableRow("teleopTable", avgs, ["amprowstr", "avgteleopampnotes", "maxteleopampnotes"]);
     writeTableRow("teleopTable", avgs, ["speakerrowstr", "avgteleopspeakernotes", "maxteleopspeakernotes"]);
+    writeTableRow("teleopTable", avgs, ["speakeraccuracyrowstr", "teleopSpeakerShootPercent"]) 
     writeTableRow("teleopTable", avgs, ["passesrowstr", "avgPasses", "maxPasses"]);
       
     // Endgame Climb Table
@@ -739,7 +744,7 @@
       borderColor: 'Blue'
     });
     datasets.push({
-      label: "Used Amp",
+      label: "Ampf Used",
       data: [],
       borderColor: 'Red'
     });
