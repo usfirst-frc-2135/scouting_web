@@ -167,16 +167,18 @@
               <table class="table table-bordered table-danger">
                 <thead>
                   <tr>
-                    <th colspan="2" class="text-center fs-6">Auton</th>
-                    <th colspan="2" class="text-center fw-bold fs-6">Teleop</th>
+                    <th colspan="3" class="text-center fs-6">Auton</th>
+                    <th colspan="3" class="text-center fw-bold fs-6">Teleop</th>
                     <th colspan="9" class="text-center fw-bold fs-6">Endgame</th>
                   </tr>
                   <tr>
                     <th scope="col">Amps</th>
                     <th scope="col">Spkr</th>
+                    <th scope="col">Acc</th>
 
                     <th scope="col">Amps</th>
                     <th scope="col">Spkr</th>
+                    <th scope="col">Acc</th>
                       
                     <th scope="col">N</th>
                     <th scope="col">P</th>
@@ -236,15 +238,17 @@
               <table class="table table-bordered table-danger">
                 <thead>
                   <tr>
-                    <th colspan="2" class="text-center fs-6">Auton</th>
-                    <th colspan="2" class="text-center fw-bold fs-6">Teleop</th>
+                    <th colspan="3" class="text-center fs-6">Auton</th>
+                    <th colspan="3" class="text-center fw-bold fs-6">Teleop</th>
                     <th colspan="9" class="text-center fw-bold fs-6">Endgame</th>
                   </tr>
                   <tr>
                    <th scope="col">Amps</th>
                     <th scope="col">Spkr</th>
+                    <th scope="col">Acc</th>
                     <th scope="col">Amps</th>
                     <th scope="col">Spkr</th>
+                    <th scope="col">Acc</th>
                     <th scope="col">N</th>
                     <th scope="col">P</th>
                     <th scope="col">O</th>
@@ -303,15 +307,17 @@
               <table class="table table-bordered table-danger">
                 <thead>
                   <tr>
-                    <th colspan="2" class="text-center fs-6">Auton</th>
-                    <th colspan="2" class="text-center fw-bold fs-6">Teleop</th>
+                    <th colspan="3" class="text-center fs-6">Auton</th>
+                    <th colspan="3" class="text-center fw-bold fs-6">Teleop</th>
                     <th colspan="9" class="text-center fw-bold fs-6">Endgame</th>
                   </tr>
                   <tr>
                     <th scope="col">Amps</th>
                     <th scope="col">Spkr</th>
+                    <th scope="col">Acc</th>
                     <th scope="col">Amps</th>
                     <th scope="col">Spkr</th>
+                    <th scope="col">Acc</th>
                     <th scope="col">N</th>
                     <th scope="col">P</th>
                     <th scope="col">O</th>
@@ -371,15 +377,17 @@
               <table class="table table-bordered table-primary">
                 <thead>
                   <tr>
-                    <th colspan="2" class="text-center fs-6">Auton</th>
-                    <th colspan="2" class="text-center fw-bold fs-6">Teleop</th>
+                    <th colspan="3" class="text-center fs-6">Auton</th>
+                    <th colspan="3" class="text-center fw-bold fs-6">Teleop</th>
                     <th colspan="9" class="text-center fw-bold fs-6">Endgame</th>
                   </tr>
                   <tr>
                    <th scope="col">Amps</th>
                     <th scope="col">Spkr</th>
+                    <th scope="col">Acc</th>
                     <th scope="col">Amps</th>
                     <th scope="col">Spkr</th>
+                    <th scope="col">Acc</th>
                     <th scope="col">N</th>
                     <th scope="col">P</th>
                     <th scope="col">O</th>
@@ -438,15 +446,17 @@
               <table class="table table-bordered table-primary">
                 <thead>
                   <tr>
-                    <th colspan="2" class="text-center fs-6">Auton</th>
-                    <th colspan="2" class="text-center fw-bold fs-6">Teleop</th>
+                    <th colspan="3" class="text-center fs-6">Auton</th>
+                    <th colspan="3" class="text-center fw-bold fs-6">Teleop</th>
                     <th colspan="9" class="text-center fw-bold fs-6">Endgame</th>
                   </tr>
                   <tr>
                    <th scope="col">Amps</th>
                     <th scope="col">Spkr</th>
+                    <th scope="col">Acc</th>
                     <th scope="col">Amps</th>
                     <th scope="col">Spkr</th>
+                    <th scope="col">Acc</th>
                     <th scope="col">N</th>
                     <th scope="col">P</th>
                     <th scope="col">O</th>
@@ -505,15 +515,17 @@
               <table class="table table-bordered table-primary">
                 <thead>
                   <tr>
-                    <th colspan="2" class="text-center fs-6">Auton</th>
-                    <th colspan="2" class="text-center fw-bold fs-6">Teleop</th>
+                    <th colspan="3" class="text-center fs-6">Auton</th>
+                    <th colspan="3" class="text-center fw-bold fs-6">Teleop</th>
                     <th colspan="9" class="text-center fw-bold fs-6">Endgame</th>
                   </tr>
                   <tr>
                    <th scope="col">Amps</th>
                     <th scope="col">Spkr</th>
+                    <th scope="col">Acc</th>
                     <th scope="col">Amps</th>
                     <th scope="col">Spkr</th>
+                    <th scope="col">Acc</th>
                     <th scope="col">N</th>
                     <th scope="col">P</th>
                     <th scope="col">O</th>
@@ -913,8 +925,10 @@
         var row = "<tr>";
         row += "<td align=\"center\">" + rd["avgautonamps"] + "</td>";
         row += "<td align=\"center\">" + rd["avgautonspeaker"] + "</td>";
+        row += "<td align=\"center\">" + rd["autonSpeakerShootPercent"] + "</td>";
         row += "<td align=\"center\">" + rd["avgteleopampnotes"] + "</td>";
         row += "<td align=\"center\">" + rd["avgteleopspeakernotes"] + "</td>";
+        row += "<td align=\"center\">" + rd["teleopSpeakerShootPercent"] + "</td>";
         row += "<td align=\"center\">" + rd["endgamestagepercent"][0] + "</td>";
         row += "<td align=\"center\">" + rd["endgamestagepercent"][1] + "</td>";
         row += "<td align=\"center\">" + rd["endgamestagepercent"][2] + "</td>";
