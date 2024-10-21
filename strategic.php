@@ -44,17 +44,38 @@
   src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"
 
 
-  console.log("---> doing strategic page");
+//  console.log("---> doing strategic page");
 
   var frozenTable = null;
 
   function dataToTable(dataObj) {
     $("#tableData").html(""); // Clear table
     for (let i = 0; i < dataObj.length; i++) {
-      var rowString = "<tr><td align=\"center\">" + dataObj[i]["match_number"] + "</td>" +
+      var matchNumInt = parseInt(dataObj[i]["match_number"]);
+      var rowString = "<tr><td align=\"center\">" + matchNumInt + "</td>" +
            "<td align=\"center\">" + dataObj[i]["teams"] + "</td>" + "</td>";
       $("#tableData").append(rowString);
     }
+  }
+
+   
+  function sortTable() {
+//    console.log("---> starting sortTable()");
+    var table = document.getElementById("matchTable");
+    var rows = Array.prototype.slice.call(table.querySelectorAll("tbody> tr"));
+
+    // Sort the rows based on column 1 match number value
+//    console.log("---> going thru rows ");
+    rows.sort(function(rowA,rowB) {
+      var cellA = rowA.cells[0].textContent.trim();                          
+      var cellB = rowB.cells[0].textContent.trim();                          
+//      console.log("  ---> cellA = "+cellA+"; cellB = "+cellB );
+      return(cellA - cellB);
+    });
+    // Update the table body with the sorted rows 
+    rows.forEach(function(row) {
+      table.querySelector("tbody").appendChild(row);
+    });
   }
 
   // Figure out which matches and teams for strategic scouts 
@@ -65,28 +86,16 @@
     }).done(function(data) {
       var dataObj = JSON.parse(data);
       dataToTable(dataObj);
-/*      setTimeout(function() {
-        sorttable.makeSortable(document.getElementById("matchTable"));
-        frozenTable = $('#freezeTableDiv').freezeTable({
-          'backgroundColor': "white",
-          'columnNum': 1,
-          'frozenColVerticalOffset': 0
-        });
-     }, 1); */
+      sortTable();
     });
   }
 
 
 
   $(document).ready(function() {
-    console.log("--->>> starting ready() for strategic");
     $("#createButton").click(function() {
       console.log("--->>> Create Schedule button clicked!");
       determineMatches();
     });
-
-//    $("#matchTable").click(function() {
-//      frozenTable.update();
-//    });
   });
 </script>
