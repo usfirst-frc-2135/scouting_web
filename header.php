@@ -99,6 +99,9 @@
             <a class="nav-link" href="./picklist.php">Picklist</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="./strategic.php">Strategic</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="./dbStatus.php">DB Status</a>
           </li>
         </ul>
