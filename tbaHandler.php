@@ -479,13 +479,12 @@ class tbaHandler
 
     $out = array();
     $mdata = array();
-    error_log("---> calling getMatches()");  
+//    error_log("---> calling getMatches()");  
     $ml = $this->getMatches($eventCode);   // get all the matches at this event
   
-    error_log("---> done calling getMatches()");  
     // Go thru all the matches and figure out which ones are our matches.
     $ourMatches = array();
-    error_log("---> going thru matches ");  
+//    error_log("---> going thru matches ");  
     foreach ($ml["response"] as $match)
     {
       $complevel = $match["comp_level"];
@@ -503,7 +502,7 @@ class tbaHandler
           $entryNum = "$teams[$m]";
           if($entryNum == "2135") 
           {
-            error_log("     ---> found one of our matches: $matchnum");  
+//            error_log("     ---> found one of our matches: $matchnum");  
             $myMatch = array();  // store this match's num and teams in myMatch
             $myMatch["match_number"] = $matchnum;
             $myMatch["teams"] = $teams;
@@ -519,14 +518,14 @@ class tbaHandler
     // in the match and hang on to their list of matches that are earlier (lower number) than that match.
     // Those are matches we want to strategic scout. So store as match# and teams.
     $msize = sizeof($ourMatches); 
-    error_log(" ===> ourMatches size = $msize");  
+//    error_log(" ===> ourMatches size = $msize");  
     for ($n = 0; $n < $msize; $n++)
     {
       $tmatch = array();
       $tmatch = $ourMatches[$n];
       $ourMatchNum = $tmatch["match_number"];
       $intOurMatchnum = (int)$ourMatchNum; 
-      error_log(" >>>> Looking at OUR match: $ourMatchNum");  
+//      error_log(" >>>> Looking at OUR match: $ourMatchNum");  
 
       // Get this match's teams; for each: get their match numbers. Any match# that is less than this 
       // match#, save it with that team number.
@@ -535,13 +534,13 @@ class tbaHandler
       for ($p = 0; $p < 6; $p++)
       {
         $tnum = "$mteams[$p]";
-        error_log("   >>>> for match $ourMatchNum, looking at team: $tnum");  
+//        error_log("   >>>> for match $ourMatchNum, looking at team: $tnum");  
         // If team number is 2135, skip.
         if($tnum == "2135") 
           continue;
 
         // Get their match numbers.
-        error_log("     ===> going to get match numbers for team: $tnum");  
+//        error_log("     ===> going to get match numbers for team: $tnum");  
         foreach ($ml["response"] as $bmatch)
         {
           $bcomplevel = $bmatch["comp_level"];
@@ -567,9 +566,8 @@ class tbaHandler
                 $entryNum = "$bteams[$m]";
                 if($entryNum == $tnum) 
                 {
-                  error_log("     ---> found team $tnum! so save with match $bmatchnum");  
+//                  error_log("     ---> found team $tnum! so save with match $bmatchnum");  
                   $dsize = sizeof($out); 
-                  error_log("        --> out size = $dsize");  
                   $bFoundInOut = 0;
                   for ($z = 0; $z < $dsize; $z++)
                   {
@@ -577,17 +575,16 @@ class tbaHandler
                     $dout = $out[$z];
                     $dmnum = $dout["match_number"];
  //                   error_log("         ---> Looking at dout match# = $dmnum");  
-                    if( $dout["match_number"] == $intbmatchnum)
+                    if( $dout["match_number"] == $bmatchnum)
                     {
                       $bFoundInOut = 1;
-                      error_log("       ---> found match $bmatchnum in out; save with team $tnum");  
+//                      error_log("       ---> found match $bmatchnum in out; save with team $tnum");  
                       $prev = $dout["teams"];
-                      error_log("          ===> prev = $prev");  
 
                       // If tnum is already in prev, then don't do anything.
                       if(str_contains($prev,$tnum))
                       {
-                        error_log("            ===> IN OUT: match $bmatchnum already had team $tnum");  
+//                        error_log("            ===> IN OUT: match $bmatchnum already had team $tnum"); 
                       }
                       else 
                       {
@@ -595,7 +592,7 @@ class tbaHandler
                         $prev .= $str1;   // append prev with str1
                         $prev .= $tnum;   // append with tnum
                         $dout["teams"] = $prev;
-                        error_log("            ===> IN OUT: match $bmatchnum: now teams = $prev");  
+//                        error_log("            ===> IN OUT: match $bmatchnum: now teams = $prev");  
                         $out[$z] = $dout;
                       }
                       break;
@@ -604,10 +601,10 @@ class tbaHandler
                   if( $bFoundInOut == 0)
                   { 
                     $dout = array();
-                    $dout["match_number"] = $intbmatchnum;
+                    $dout["match_number"] = $bmatchnum;
                     $dout["teams"] = $tnum;
                     array_push($out,$dout);
-                    error_log("           >>>> ADDING to out: match $bmatchnum: teams = $tnum");  
+//                    error_log("           >>>> ADDING to out: match $bmatchnum: teams = $tnum");  
               
                   }
                 }
@@ -618,6 +615,86 @@ class tbaHandler
       }
     }
     return $out;
+  }
+
+  function getStrategicTeamList($eventCode)
+  {
+//    error_log("---> starting getStrategicTeamList for eventCode: $eventCode");  
+
+    // If eventCode is "COMPX", just exit.
+    if(strstr($eventCode,'COMPX') )   {
+//      error_log("skipping getStrategicTeamList for COMPX");  
+      $aout = array();
+      return $aout;
+    }
+
+    $out = array();
+    $mdata = array();
+//    error_log("---> getStrategicTeamList()- calling getMatches()");  
+    $ml = $this->getMatches($eventCode);   // get all the matches at this event
+  
+    // Go thru all the matches and figure out which ones are our matches.
+    $allTeams = array();
+//    error_log("---> getStrategicTeamList() - going thru matches ");  
+    foreach ($ml["response"] as $match)
+    {
+      $bFoundOurMatch = 0;
+      $complevel = $match["comp_level"];
+      if($complevel == "qm") {  // Only care about Qual matches
+        // Put all this match's teams in $teams, then check for our teamnumber.
+        $matchnum = $match["match_number"];
+
+        // Load up the teams from this match's red and blue alliances
+        $teams = array();
+        for ($j = 0; $j < 3; $j++)
+          array_push($teams, substr($match["alliances"]["red"]["team_keys"][$j],3));
+        for ($k = 0; $k < 3; $k++)
+          array_push($teams, substr($match["alliances"]["blue"]["team_keys"][$k],3));
+
+        // Now check if we are in this match
+        for ($m = 0; $m < 6; $m++)
+        {
+          // If team number is 2135, then this match is one of ours. 
+          $entryNum = "$teams[$m]";
+          if($entryNum == "2135") 
+          {
+//            error_log("   ---> found one of our matches: $matchnum");  
+            $bFoundOurMatch = 1;
+            break;
+          }
+        }
+        if( $bFoundOurMatch == 1)
+        {
+          // Add these teams to the allTeams array (if they aren't in it already).
+          for ($z = 0; $z < 6; $z++)
+          {
+            $teamz = "$teams[$z]";
+            if($teamz == "2135") 
+              continue;
+
+            // If this team is not yet in allTeams, add it.
+            $listsize = sizeof($allTeams); 
+            $bFoundInList = 0;
+            for ($x = 0; $x < $listsize; $x++)
+            {
+              $val = "$allTeams[$x]";
+              if( $val == $teamz)
+              {
+                $bFoundInList = 1;
+                break;
+              }
+            } 
+            if($bFoundInList == 0) 
+            {
+//              error_log("   ---> Adding $teamz to allTeams list");  
+              array_push($allTeams,$teamz);
+            }
+//            else error_log("   ---> $teamz already in allTeams list");  
+          }
+        }
+      }
+    }
+    return $allTeams;
   }
 
 }
