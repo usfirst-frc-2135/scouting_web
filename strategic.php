@@ -68,9 +68,36 @@
 
 <script>
   src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"
-
+  
 
 //  console.log("---> doing strategic page");
+  var teamList = [];   // used to hold the team numbers for the teamTable
+
+  function addToTeamList(teamstr)
+  {
+    var strList = teamstr.split(",");
+    var listcount = strList.length;
+    for (let i = 0; i < listcount; i++) 
+    {
+      // Put each team number found in teamList if it isn't already there.
+      var teamnum = strList[i];
+      teamnum = teamnum.trim();   // trim whitespace
+      var bAlreadyInList = false;
+      for (let j = 0; j < teamList.length; j++)
+      {
+//        console.log("     ---> comparing team '"+teamList[j]+"' vs '"+teamnum+"'");
+        if(teamList[j] == teamnum)
+        {
+          bAlreadyInList = true;
+          break; 
+        }
+      }
+      if(bAlreadyInList === false)
+      {
+        teamList.push(teamnum);
+      }
+    }
+  }
 
   function dataToTable(dataObj) {
     $("#tableData").html(""); // Clear table
@@ -79,14 +106,18 @@
       var rowString = "<tr><td align=\"center\">" + matchNum + "</td>" +
            "<td align=\"center\">" + dataObj[i]["teams"] + "</td>" + "</td>";
       $("#tableData").append(rowString);
+
+      // Also get the data for the teamTable; this is a string that can contain several team 
+      // numbers, separated by comma-space.
+      addToTeamList(dataObj[i]["teams"]);
     }
   }
 
-  function dataToTeamListTable(dataObj) {
+  function dataToTeamListTable() {
     $("#teamListData").html(""); // Clear table
-    var sizeTeams = dataObj.length;
+    var sizeTeams = teamList.length;
     for (let i = 0; i < sizeTeams; i++) {
-      var team = dataObj[i];
+      var team = teamList[i];
       var rowString = "<tr><td align=\"center\">" + team + "</td>" + "</td>";
       $("#teamListData").append(rowString);
     }
@@ -99,30 +130,25 @@
     // a "B", "C", "D", or "E", in which case we want to strip that off and just use the number for
     // the comparison.
 
-//    console.log("---> starting sortTable()");
     var table = document.getElementById(id);
     var rows = Array.prototype.slice.call(table.querySelectorAll("tbody> tr"));
 
     // Sort the rows based on column 1 match number value
-//    console.log("---> going thru rows ");
     rows.sort(function(rowA,rowB) {
       var cellA = rowA.cells[0].textContent.trim();                          
       var cellB = rowB.cells[0].textContent.trim();                          
-//      console.log("  ---> cellA = "+cellA+"; cellB = "+cellB );
 
       // Remove any letters at the last char for the sort comparison.
       if (cellA.charAt(cellA.length-1) == "B" || cellA.charAt(cellA.length-1) == "C" ||
           cellA.charAt(cellA.length-1) == "D" || cellA.charAt(cellA.length-1) == "E")
       {
         cellA = cellA.substr(0,cellA.length-1);
-//        console.log("    ---> converted cellA to " +cellA);
       }
 
       if (cellB.charAt(cellB.length-1) == "B" || cellB.charAt(cellB.length-1) == "C" ||
           cellB.charAt(cellB.length-1) == "D" || cellB.charAt(cellB.length-1) == "E")
       {
         cellB = cellB.substr(0,cellB.length-1);
-//        console.log("    ---> converted cellB to " +cellB);
       }
       
       return(cellA - cellB);
@@ -143,19 +169,15 @@
       var dataObj = JSON.parse(data);
       dataToTable(dataObj);
       sortTable("matchTable");
+      setupTeamList();
     });
   }
 
   // Get teamlist for strategic scouting matche
-  function getTeamList() {
-    console.log("---> starting getTeamList()");
-    $.get("tbaAPI.php", {
-      getStrategicTeamList: 1
-    }).done(function(data) {
-      var dataObj = JSON.parse(data);
-      dataToTeamListTable(dataObj);
-      sortTable("teamListTable");
-    });
+  function setupTeamList() {
+    console.log("--->>> starting setupTeamList()");
+    dataToTeamListTable();
+    sortTable("teamListTable");
   }
 
 
@@ -163,7 +185,6 @@
     $("#createButton").click(function() {
       console.log("--->>> Create Schedule button clicked!");
       determineMatches();
-      getTeamList();
     });
   });
 </script>

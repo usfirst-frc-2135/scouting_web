@@ -29,10 +29,6 @@ else if (isset($_GET["getStrategicMatches"]))
 {
   echo (json_encode($tba->getStrategicMatches($eventCode)));
 }
-else if (isset($_GET["getStrategicTeamList"]))
-{
-  echo (json_encode($tba->getStrategicTeamList($eventCode)));
-}
 else if (isset($_GET["getCOPRs"]))
 {
   echo (json_encode($tba->getComponentOPRS($eventCode)));
