@@ -582,7 +582,7 @@ class tbaHandler
                       $prev = $dout["teams"];
 
                       // If tnum is already in prev, then don't do anything.
-                      if(str_contains($prev,$tnum))
+                      if(strpos($prev,$tnum) !== false)
                       {
 //                        error_log("            ===> IN OUT: match $bmatchnum already had team $tnum"); 
                       }

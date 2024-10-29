@@ -39,8 +39,8 @@
           </colgroup>
           <thead>
             <tr>
-              <th scope="col">Match #</th>
-              <th scope="col">Team #</th>
+              <th scope="col">Match</th>
+              <th scope="col">Team</th>
               <th scope="col">Auton Leave</th>
               <th scope="col">Auton Amp Notes</th>
               <th scope="col">Auton Amp Misses</th>

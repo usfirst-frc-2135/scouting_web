@@ -6,6 +6,8 @@
 
     <div class="row pt-3 pb-3 mb-3">
       <h2>Averages</h2>
+
+<!--  COMMENTED OUT FOR NOW
       <div class="col-md-2">
         <div class="input-group">
           <select class="form-select mb-3" id="startPrefix">
@@ -33,6 +35,7 @@
         </div>
       </div>
     </div>
+COMMENTED OUT FOR NOW-->
 
     <div class="row pt-3 pb-3 mb-3">
       <div class="overflow-auto" id="freezeTableDiv">
@@ -44,7 +47,7 @@
                 border-right: 1px solid black;
             }
             </style>
-        <table id="rawDataTable" class="tableFixHead table table-striped table-bordered table-hover sortable" style="width:100%;">
+        <table id="rawDataTable" class="tableFixHead table table-striped table-bordered table-hover sortable" style="width:100%">
           <colgroup>
             <col span="1" style="background-color:transparent" >
             <col span="2" style="background-color:#cfe2ff">
@@ -68,7 +71,7 @@
           </colgroup>
           <thead>
             <tr>
-              <th colspan="1" class="text-center fw-bold"></th>
+              <th colspan="1" class="text-center"></th>
               <th colspan="2" class="text-center fw-bold" style="background-color:#3686FF">Total Notes</th>
               <th colspan="2" class="text-center">Total Auto Notes</th>
               <th colspan="2" class="text-center" style="background-color:#3686FF">Total Teleop Notes</th>
@@ -136,7 +139,7 @@
             </tr>
 
           </thead>
-          <tbody id="tableData" style="z-index:-1;">>
+            <tbody id="tableData" >
           </tbody>
         </table>
       </div>
@@ -144,9 +147,7 @@
   </div>
 </div>
 
-<style>
 
-</style>
 
 <?php include("footer.php") ?>
 <script type="text/javascript" src="./external/DataTables/DataTables-1.11.5/js/jquery.dataTables.min.js"></script>
@@ -257,7 +258,7 @@
           frozenTable = $('#freezeTableDiv').freezeTable({
             backgroundColor: "white",
             'columnKeep': true,
-            'frozenColVerticalOffset': 25
+            'frozenColVerticalOffset': 0
           });
         }, 1);
       });
@@ -276,8 +277,9 @@
     });
 <--HOLD*/
 
+/*HOLD->
     // Gets data from our TBA API
-    /* HOLD $.get("tbaAPI.php", {
+    $.get("tbaAPI.php", {
       getCOPRs: 1
     }).done(function(data) {
       data = JSON.parse(data)["data"];
@@ -289,10 +291,11 @@
         frozenTable = $('#freezeTableDiv').freezeTable({
           backgroundColor: "white",
           'columnKeep': true,
-          'frozenColVerticalOffset': 25
+          'frozenColVerticalOffset': 0
         });
       }, 1);
-    }); HOLD */
+    }); 
+<-HOLD */
   }
 
   function filterAndShow() {
@@ -308,7 +311,7 @@
       frozenTable = $('#freezeTableDiv').freezeTable({
         backgroundColor: "white",
         'columnKeep': true,
-        'frozenColVerticalOffset': 25
+        'frozenColVerticalOffset': 0
       });
     }, 1);
   }
