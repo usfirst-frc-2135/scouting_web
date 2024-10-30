@@ -160,81 +160,87 @@ class matchDataProcessor {
   }
 
   getAverages() {
-    var avg = {}; //general for all matches and all teams
-    for (var i = 0; i < this.data.length; i++) {
+    var pdata = {}; // to hold returning data for all matches and all teams
+
+    // For each team, go thru all its matches and do the calculations for the averages table data.
+    for (var i = 0; i < this.data.length; i++) 
+    {
       var tn = this.data[i]["teamnumber"];
+//      console.log("===> getAverages() for team: "+tn);
 
-      if (!(tn in avg)) {
-        avg[tn] = {};
+      if (!(tn in pdata)) 
+      {
+        // If this team doesn't have any data stored yet, initialize its data array.
+        pdata[tn] = {};
 
-        avg[tn]["avgtotalnotes"] = 0;
-        avg[tn]["maxtotalnotes"] = 0;
+        pdata[tn]["avgtotalnotes"] = 0;
+        pdata[tn]["maxtotalnotes"] = 0;
 
-        avg[tn]["avgautonotes"] = 0;
-        avg[tn]["maxautonotes"] = 0;
+        pdata[tn]["avgautonotes"] = 0;
+        pdata[tn]["maxautonotes"] = 0;
 
-        avg[tn]["avgteleopnotes"] = 0;
-        avg[tn]["maxteleopnotes"] = 0;
+        pdata[tn]["avgteleopnotes"] = 0;
+        pdata[tn]["maxteleopnotes"] = 0;
 
-        avg[tn]["avgendgamepoints"] = 0;
-        avg[tn]["maxendgamepoints"] = 0;
+        pdata[tn]["avgendgamepoints"] = 0;
+        pdata[tn]["maxendgamepoints"] = 0;
           
-        avg[tn]["avgautonamps"] = 0;
-        avg[tn]["maxautonamps"] = 0;
-        avg[tn]["avgautonspeaker"] = 0;
-        avg[tn]["maxautonspeaker"] = 0;
-        avg[tn]["autonSpeakerShootPercent"] = 0;
+        pdata[tn]["avgautonamps"] = 0;
+        pdata[tn]["maxautonamps"] = 0;
+        pdata[tn]["avgautonspeaker"] = 0;
+        pdata[tn]["maxautonspeaker"] = 0;
+        pdata[tn]["autonSpeakerShootPercent"] = 0;
+        pdata[tn]["totalAutonSpeakerNotes"] = 0;    // for calculating shooting percentage
+        pdata[tn]["totalAutonSpeakerMisses"] = 0;   // for calculating shooting percentage
 		
-        avg[tn]["avgteleopampnotes"] = 0;
-        avg[tn]["maxteleopampnotes"] = 0;
-        avg[tn]["avgteleopspeakernotes"] = 0;
-        avg[tn]["maxteleopspeakernotes"] = 0;
-        avg[tn]["teleopSpeakerShootPercent"] = 0;
+        pdata[tn]["avgteleopampnotes"] = 0;
+        pdata[tn]["maxteleopampnotes"] = 0;
+        pdata[tn]["avgteleopspeakernotes"] = 0;
+        pdata[tn]["maxteleopspeakernotes"] = 0;
+        pdata[tn]["teleopSpeakerShootPercent"] = 0;
+        pdata[tn]["totalTeleopSpeakerNotes"] = 0;    // for calculating shooting percentage
+        pdata[tn]["totalTeleopSpeakerMisses"] = 0;   // for calculating shooting percentage
           
-        avg[tn]["avgPasses"] = 0;
-        avg[tn]["maxPasses"] = 0;
+        pdata[tn]["avgPasses"] = 0;
+        pdata[tn]["maxPasses"] = 0;
 
-        avg[tn]["endgamestagepercent"] = {0:0, 1:0, 2:0};  
-        avg[tn]["endgameharmonypercent"] = {0:0, 1:0, 2:0};
-        avg[tn]["spotlitPercentage"] = 0;
-        avg[tn]["trapPercentage"] = 0;
+        pdata[tn]["endgamestagepercent"] = {0:0, 1:0, 2:0};  
+        pdata[tn]["endgameharmonypercent"] = {0:0, 1:0, 2:0};
+        pdata[tn]["spotlitPercentage"] = 0;
+        pdata[tn]["trapPercentage"] = 0;
        
-        avg[tn]["totaldied"] = 0;
+        pdata[tn]["totaldied"] = 0;
 
-        avg[tn]["totalmatches"] = 0;
+        pdata[tn]["totalmatches"] = 0;
 
-        avg[tn]["scoutnames"] = [];
-        avg[tn]["commentlist"] = [];
+        pdata[tn]["scoutnames"] = [];
+        pdata[tn]["commentlist"] = [];
       }
 	  
       var totalmatches = (this.data[i]["totalmatches"]);
       var mobilitycheck = (this.data[i]["exitcommunity"]);
         
-      var autonAmpNotes = (this.data[i]["autonampnotes"]);
-      var autonSpeakerNotes = (this.data[i]["autonspeakernotes"]);
-		
-      var autoNotes = (autonAmpNotes) + (autonSpeakerNotes);
-//      console.log("===> for team "+tn+":"); //TEST
-      var autonSpeakerMisses = (this.data[i]["autonspeakermisses"]);
-      var totalAutonSpeakerShots = (parseInt(autonSpeakerNotes)) + (parseInt(autonSpeakerMisses));
-      if (totalAutonSpeakerShots != 0) {
-          var autonSpeakerShotPercent = (parseInt(autonSpeakerNotes)) / totalAutonSpeakerShots;
-          avg[tn]["autonSpeakerShootPercent"] += autonSpeakerShotPercent;
-      }
+      var currentAutonAmpNotes = (this.data[i]["autonampnotes"]);
+      var currentAutonSpeakerNotes = (this.data[i]["autonspeakernotes"]);
+      var totalAutoNotes = parseInt(currentAutonAmpNotes) + parseInt(currentAutonSpeakerNotes);
+      var currentAutonSpeakerMisses = (this.data[i]["autonspeakermisses"]);
+      pdata[tn]["totalAutonSpeakerNotes"] += parseInt(currentAutonSpeakerNotes);
+      pdata[tn]["totalAutonSpeakerMisses"] += parseInt(currentAutonSpeakerMisses);
+//      console.log("   -> current auton speaker notes = "+ currentAutonSpeakerNotes); //TEST
+//      console.log("   -> current auton speaker misses = "+ currentAutonSpeakerMisses); //TEST
+//      console.log("   -> total auton speaker notes = " + pdata[tn]["totalAutonSpeakerNotes"]); //TEST
+//      console.log("   -> total auton speaker misses = " + pdata[tn]["totalAutonSpeakerMisses"]); //TEST
 
-      var teleopAmpNotes = (this.data[i]["teleopampnotes"]);
-      var teleopSpeakerNotes = (this.data[i]["teleopspeakernotes"]);
-      var teleopNotes = (parseInt(teleopAmpNotes)) + (parseInt(teleopSpeakerNotes));
-//      console.log("   -> teleop notes = "+teleopNotes); //TEST
-
-      // Calculate the shooting percentage for each match: (#speakerNotes/#totalNotes)
-      var teleopSpeakerMisses = (this.data[i]["teleopspeakermisses"]);
-      var totalSpeakerShots = (parseInt(teleopSpeakerNotes)) + (parseInt(teleopSpeakerMisses));
-      // If there are no shots, don't bother doing the calculation here.
-      if (totalSpeakerShots != 0) {
-        var teleopSpeakerShotPercent = (parseInt(teleopSpeakerNotes)) / totalSpeakerShots;
-        avg[tn]["teleopSpeakerShootPercent"] += teleopSpeakerShotPercent;
-      }
+      var currentTeleopAmpNotes = (this.data[i]["teleopampnotes"]);
+      var currentTeleopSpeakerNotes = (this.data[i]["teleopspeakernotes"]);
+      var totalTeleopNotes = (parseInt(currentTeleopAmpNotes)) + (parseInt(currentTeleopSpeakerNotes));
+      var currentTeleopSpeakerMisses = (this.data[i]["teleopspeakermisses"]);
+      pdata[tn]["totalTeleopSpeakerNotes"] += parseInt(currentTeleopSpeakerNotes);
+      pdata[tn]["totalTeleopSpeakerMisses"] += parseInt(currentTeleopSpeakerMisses);
+//      console.log("   -> current teleop speaker notes = "+ currentTeleopSpeakerNotes); //TEST
+//      console.log("   -> current total teleop notes = "+ totalTeleopNotes); //TEST
+//      console.log("   -> total teleop speaker notes = " + pdata[tn]["totalTeleopSpeakerNotes"]); //TEST
+//      console.log("   -> total teleop speaker misses = " + pdata[tn]["totalTeleopSpeakerMisses"]); //TEST
 
       var passes = (this.data[i]["teleoppasses"]);
 
@@ -253,106 +259,112 @@ class matchDataProcessor {
       var endgameSpotlit = (this.data[i]["endgamespotlit"]);
       var endgameTrap = (this.data[i]["endgametrap"]);
       var endgamePoints = (endgameStagePoints) + (endgameHarmonyPoints) + (endgameSpotlit) + (endgameTrap * 5);
-//      console.log(">> spotlit = " + endgameSpotlit);
-//      console.log(">> endgame stage = " + endgameStagePoints);
-//      console.log(">> endgame harmomy = " + endgameHarmonyPoints);
-//      console.log(">> endgame trap = " + endgameTrap);
-//      console.log(">> endgame points = " + endgamePoints);
+//      console.log("   >> spotlit = " + endgameSpotlit);
+//      console.log("   >> endgame stage = " + endgameStagePoints);
+//      console.log("   >> endgame harmomy = " + endgameHarmonyPoints);
+//      console.log("   >> endgame trap = " + endgameTrap);
+//      console.log("   >> endgame points = " + endgamePoints);
 //      console.log("   -> endgamePoints = "+endgamePoints); //TEST
-      var combinedTrap = (parseInt(this.data[i]["endgametrap"]));
-      avg[tn]["trapPercentage"] += combinedTrap;
+      var currentTrap = (parseInt(this.data[i]["endgametrap"]));
+      pdata[tn]["trapPercentage"] += currentTrap;
         
-      var combinedSpotlit = (parseInt(this.data[i]["endgamespotlit"]));
-      avg[tn]["spotlitPercentage"] += combinedSpotlit;
+      var currentSpotlit = (parseInt(this.data[i]["endgamespotlit"]));
+      pdata[tn]["spotlitPercentage"] += currentSpotlit;
       
-      var totalNotes = autoNotes + teleopNotes;
-//      console.log("     -> totalPoints = "+totalPoints); //TEST
+      var totalNotes = totalAutoNotes + totalTeleopNotes;
 
-      avg[tn]["avgtotalnotes"] += totalNotes;
-      avg[tn]["maxtotalnotes"] = Math.max(avg[tn]["maxtotalnotes"], totalNotes);
+      pdata[tn]["avgtotalnotes"] += totalNotes;
+      pdata[tn]["maxtotalnotes"] = Math.max(pdata[tn]["maxtotalnotes"], totalNotes);
 
-      avg[tn]["avgautonotes"] += autoNotes;
-      avg[tn]["maxautonotes"] = Math.max(avg[tn]["maxautonotes"], autoNotes);
-//      console.log("   -> avgautopoints = "+avg[tn]["avgautopoints"]); //TEST
+      pdata[tn]["avgautonotes"] += totalAutoNotes;
+      pdata[tn]["maxautonotes"] = Math.max(pdata[tn]["maxautonotes"], totalAutoNotes);
+//      console.log("   -> avgautopoints = "+pdata[tn]["avgautopoints"]); //TEST
 
-      avg[tn]["avgteleopnotes"] += teleopNotes;
-      avg[tn]["maxteleopnotes"] = Math.max(avg[tn]["maxteleopnotes"], teleopNotes);
+      pdata[tn]["avgteleopnotes"] += totalTeleopNotes;
+      pdata[tn]["maxteleopnotes"] = Math.max(pdata[tn]["maxteleopnotes"], totalTeleopNotes);
 		
-      avg[tn]["avgendgamepoints"] += endgamePoints;
-      avg[tn]["maxendgamepoints"] = Math.max(avg[tn]["maxendgamepoints"], endgamePoints);
+      pdata[tn]["avgendgamepoints"] += endgamePoints;
+      pdata[tn]["maxendgamepoints"] = Math.max(pdata[tn]["maxendgamepoints"], endgamePoints);
 		
-      var combinedAutonAmpNotes = (parseInt(this.data[i]["autonampnotes"]));
-      avg[tn]["avgautonamps"] += combinedAutonAmpNotes;
-      avg[tn]["maxautonamps"] = Math.max(avg[tn]["maxautonamps"], combinedAutonAmpNotes);
+      var currentAutonAmpNotes = (parseInt(this.data[i]["autonampnotes"]));
+      pdata[tn]["avgautonamps"] += currentAutonAmpNotes;
+      pdata[tn]["maxautonamps"] = Math.max(pdata[tn]["maxautonamps"], currentAutonAmpNotes);
 		
-      var combinedAutonSpeakerNotes = (parseInt(this.data[i]["autonspeakernotes"]));
-      avg[tn]["avgautonspeaker"] += combinedAutonSpeakerNotes;
-      avg[tn]["maxautonspeaker"] = Math.max(avg[tn]["maxautonspeaker"], combinedAutonSpeakerNotes);
+      var currentAutonSpeakerNotes = (parseInt(this.data[i]["autonspeakernotes"]));
+      pdata[tn]["avgautonspeaker"] += currentAutonSpeakerNotes;
+      pdata[tn]["maxautonspeaker"] = Math.max(pdata[tn]["maxautonspeaker"], currentAutonSpeakerNotes);
 
-      var combinedTeleopAmpNotes = (parseInt(this.data[i]["teleopampnotes"]));
-      avg[tn]["avgteleopampnotes"] += combinedTeleopAmpNotes;
-      avg[tn]["maxteleopampnotes"] = Math.max(avg[tn]["maxteleopampnotes"], combinedTeleopAmpNotes);
+      var currentTeleopAmpNotes = (parseInt(this.data[i]["teleopampnotes"]));
+      pdata[tn]["avgteleopampnotes"] += currentTeleopAmpNotes;
+      pdata[tn]["maxteleopampnotes"] = Math.max(pdata[tn]["maxteleopampnotes"], currentTeleopAmpNotes);
 	
-      var combinedTeleopSpeakerNotes = (parseInt(this.data[i]["teleopspeakernotes"]));
-      avg[tn]["avgteleopspeakernotes"] += combinedTeleopSpeakerNotes;
-      avg[tn]["maxteleopspeakernotes"] = Math.max(avg[tn]["maxteleopspeakernotes"], combinedTeleopSpeakerNotes);
+      var currentTeleopSpeakerNotes = (parseInt(this.data[i]["teleopspeakernotes"]));
+      pdata[tn]["avgteleopspeakernotes"] += currentTeleopSpeakerNotes;
+      pdata[tn]["maxteleopspeakernotes"] = Math.max(pdata[tn]["maxteleopspeakernotes"], currentTeleopSpeakerNotes);
         
-      var combinedPasses = (parseInt(this.data[i]["teleoppasses"]));
-      avg[tn]["avgPasses"] += combinedPasses;
-      avg[tn]["maxPasses"] = Math.max(avg[tn]["maxPasses"], combinedPasses);
+      var currentPasses = (parseInt(this.data[i]["teleoppasses"]));
+      pdata[tn]["avgPasses"] += currentPasses;
+      pdata[tn]["maxPasses"] = Math.max(pdata[tn]["maxPasses"], currentPasses);
 	
-      // For some reason the real website handling of boolean data (exit and mobilitypercent
-      // is to treat it like a string, and keep appending the next value 
-      // as a char. To fix that, we are just incrementing mobilitypercent instead of
-      // adding the value here.
-      
-      avg[tn]["endgamestagepercent"][this.data[i]["endgamestage"]] += 1;
-      avg[tn]["endgameharmonypercent"][this.data[i]["endgameharmony"]] += 1;
+      // For boolean data, we are just incrementing that data instead of adding the new value here.
+      pdata[tn]["endgamestagepercent"][this.data[i]["endgamestage"]] += 1;
+      pdata[tn]["endgameharmonypercent"][this.data[i]["endgameharmony"]] += 1;
 
-      avg[tn]["totaldied"] += this.data[i]["died"];
-      avg[tn]["totalmatches"] += 1;
-      avg[tn]["scoutnames"].push(this.data[i]["scoutname"]);
-      avg[tn]["commentlist"].push(this.data[i]["comment"]);
-
+      pdata[tn]["totaldied"] += this.data[i]["died"];
+      pdata[tn]["totalmatches"] += 1;
+      pdata[tn]["scoutnames"].push(this.data[i]["scoutname"]);
+      pdata[tn]["commentlist"].push(this.data[i]["comment"]);
     }
 
-    for (var key in avg) {
+    // Go thru each team in pdata and do the avg, max and percent calculations.
+    for (var key in pdata) 
+    {
 //      console.log(">>>> for team " + key);
-      avg[key]["avgtotalnotes"] = Math.round(10 * avg[key]["avgtotalnotes"] / avg[key]["totalmatches"]) / 10;
-      avg[key]["avgautonotes"] = Math.round(10 * avg[key]["avgautonotes"] / avg[key]["totalmatches"]) / 10;
-      avg[key]["avgteleopnotes"] = Math.round(10 * avg[key]["avgteleopnotes"] / avg[key]["totalmatches"]) / 10; 
-      avg[key]["avgendgamepoints"] = Math.round(10 * avg[key]["avgendgamepoints"] / avg[key]["totalmatches"]) / 10;
+      pdata[key]["avgtotalnotes"] = Math.round(10 * pdata[key]["avgtotalnotes"] / pdata[key]["totalmatches"]) / 10;
+      pdata[key]["avgautonotes"] = Math.round(10 * pdata[key]["avgautonotes"] / pdata[key]["totalmatches"]) / 10;
+      pdata[key]["avgteleopnotes"] = Math.round(10 * pdata[key]["avgteleopnotes"] / pdata[key]["totalmatches"]) / 10; 
+      pdata[key]["avgendgamepoints"] = Math.round(10 * pdata[key]["avgendgamepoints"] / pdata[key]["totalmatches"]) / 10;
 	
-      avg[key]["avgautonamps"] = Math.round(10 * avg[key]["avgautonamps"] / avg[key]["totalmatches"]) / 10;
-      avg[key]["avgautonspeaker"] = Math.round(10 * avg[key]["avgautonspeaker"] / avg[key]["totalmatches"]) / 10;
-      if (avg[key]["autonSpeakerShootPercent"] != "0") {
-        avg[key]["autonSpeakerShootPercent"] = Math.round(100 * avg[key]["autonSpeakerShootPercent"] / avg[key]["totalmatches"]); 
-      }
+      pdata[key]["avgautonamps"] = Math.round(10 * pdata[key]["avgautonamps"] / pdata[key]["totalmatches"]) / 10;
+      pdata[key]["avgautonspeaker"] = Math.round(10 * pdata[key]["avgautonspeaker"] / pdata[key]["totalmatches"]) / 10;
 		
-      avg[key]["avgteleopampnotes"] = Math.round(10 * avg[key]["avgteleopampnotes"] / avg[key]["totalmatches"]) / 10;
-      avg[key]["avgteleopspeakernotes"] = Math.round(10 * avg[key]["avgteleopspeakernotes"] / avg[key]["totalmatches"]) / 10;
-      if (avg[key]["teleopSpeakerShootPercent"] != "0") {
-        avg[key]["teleopSpeakerShootPercent"] = Math.round(100 * avg[key]["teleopSpeakerShootPercent"] / avg[key]["totalmatches"]); 
+      var totalAutonSpeakerShots = (parseInt(pdata[key]["totalAutonSpeakerNotes"]) + (parseInt(pdata[key]["totalAutonSpeakerMisses"])));
+//      console.log("     ---> total auton speakerShots calculated: " + totalAutonSpeakerShots); //TEST
+      // If there are no shots, don't bother doing the calculation here.
+      if (totalAutonSpeakerShots != 0) {
+        var autonSpeakerShotPercent = (parseInt(pdata[key]["totalAutonSpeakerNotes"])) / totalAutonSpeakerShots;
+        pdata[key]["autonSpeakerShootPercent"] = Math.round(100 * autonSpeakerShotPercent);
+//        console.log("     ---> Auton speakerShootingPercentage: " + pdata[key]["autonSpeakerShootPercent"]); //TEST
       }
-//      console.log("---> AVG shootingPercentage calculated: "+ avg[key]["teleopSpeakerShootPercent"]); //TEST
-        
-      avg[key]["avgPasses"] = Math.round(10 * avg[key]["avgPasses"] / avg[key]["totalmatches"]) / 10;
 
-      avg[key]["trapPercentage"] = Math.round(100 * avg[key]["trapPercentage"] / avg[key]["totalmatches"]);
-      avg[key]["spotlitPercentage"] = Math.round(100 * avg[key]["spotlitPercentage"] / avg[key]["totalmatches"]);
-//      console.log("   >> number of traps is = " + avg[key]["trapPercentage"]);
-//      console.log("   >> spotlit (percentage) is = "+ avg[key]["spotlitPercentage"]);
+      pdata[key]["avgteleopampnotes"] = Math.round(10 * pdata[key]["avgteleopampnotes"] / pdata[key]["totalmatches"]) / 10;
+      pdata[key]["avgteleopspeakernotes"] = Math.round(10 * pdata[key]["avgteleopspeakernotes"] / pdata[key]["totalmatches"]) / 10;
+      pdata[key]["avgPasses"] = Math.round(10 * pdata[key]["avgPasses"] / pdata[key]["totalmatches"]) / 10;
+
+      var totalTeleopSpeakerShots = (parseInt(pdata[key]["totalTeleopSpeakerNotes"]) + (parseInt(pdata[key]["totalTeleopSpeakerMisses"])));
+//      console.log("     ---> total teleop speakerShots calculated: " + totalTeleopSpeakerShots); //TEST
+      // If there are no shots, don't bother doing the calculation here.
+      if (totalTeleopSpeakerShots != 0) {
+        var teleopSpeakerShotPercent = (parseInt(pdata[key]["totalTeleopSpeakerNotes"])) / totalTeleopSpeakerShots;
+        pdata[key]["teleopSpeakerShootPercent"] = Math.round(100 * teleopSpeakerShotPercent);
+//        console.log("     ---> speakerShootingPercentage: " + pdata[key]["teleopSpeakerShootPercent"]); //TEST
+      }
+
+      pdata[key]["trapPercentage"] = Math.round(100 * pdata[key]["trapPercentage"] / pdata[key]["totalmatches"]);
+      pdata[key]["spotlitPercentage"] = Math.round(100 * pdata[key]["spotlitPercentage"] / pdata[key]["totalmatches"]);
+//      console.log("   >> number of traps is = " + pdata[key]["trapPercentage"]);
+//      console.log("   >> spotlit (percentage) is = "+ pdata[key]["spotlitPercentage"]);
 		
-//      console.log("  ===> totalmatches = "+avg[key]["totalmatches"]); //TEST
+//      console.log("  ===> totalmatches = "+pdata[key]["totalmatches"]); //TEST
         
-      avg[key]["endgamestagepercent"][0] = Math.round(100 * avg[key]["endgamestagepercent"][0] / avg[key]["totalmatches"]);
-      avg[key]["endgamestagepercent"][1] = Math.round(100 * avg[key]["endgamestagepercent"][1] / avg[key]["totalmatches"]);
-      avg[key]["endgamestagepercent"][2] = Math.round(100 * avg[key]["endgamestagepercent"][2] / avg[key]["totalmatches"]);
+      pdata[key]["endgamestagepercent"][0] = Math.round(100 * pdata[key]["endgamestagepercent"][0] / pdata[key]["totalmatches"]);
+      pdata[key]["endgamestagepercent"][1] = Math.round(100 * pdata[key]["endgamestagepercent"][1] / pdata[key]["totalmatches"]);
+      pdata[key]["endgamestagepercent"][2] = Math.round(100 * pdata[key]["endgamestagepercent"][2] / pdata[key]["totalmatches"]);
         
-      avg[key]["endgameharmonypercent"][0] = Math.round(100 * avg[key]["endgameharmonypercent"][0] / avg[key]["totalmatches"]);
-      avg[key]["endgameharmonypercent"][1] = Math.round(100 * avg[key]["endgameharmonypercent"][1] / avg[key]["totalmatches"]);
-      avg[key]["endgameharmonypercent"][2] = Math.round(100 * avg[key]["endgameharmonypercent"][2] / avg[key]["totalmatches"]);
+      pdata[key]["endgameharmonypercent"][0] = Math.round(100 * pdata[key]["endgameharmonypercent"][0] / pdata[key]["totalmatches"]);
+      pdata[key]["endgameharmonypercent"][1] = Math.round(100 * pdata[key]["endgameharmonypercent"][1] / pdata[key]["totalmatches"]);
+      pdata[key]["endgameharmonypercent"][2] = Math.round(100 * pdata[key]["endgameharmonypercent"][2] / pdata[key]["totalmatches"]);
     }
-    return avg;
+    return pdata;
   }
 }
