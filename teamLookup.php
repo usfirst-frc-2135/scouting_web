@@ -136,6 +136,15 @@
               <h5 class="text-center"> 
                 <a href="#collapseAllMatches" data-bs-toggle="collapse" aria-expanded="false"> All Matches </a> </h5>
                 <div class="collapse" id="collapseAllMatches">
+                <div class="overflow-auto" id="freezeTableDiv">
+                  <style type="text/css" media="screen">
+                    table tr {
+                      border: 1px solid black;
+                    }
+                    table td, table th {
+                      border-right: 1px solid black;
+                    }
+                  </style>
                   <table id="sortableAllMatches" class="table table-striped table-hover sortable">
                     <colgroup>
                       <col span="1" style="background-color:transparent">
@@ -174,7 +183,7 @@
                             }
                             </style>
                       <tr>
-                        <th scope="col">Match #</th>
+                        <th scope="col">Match</th>
                         <th scope="col">Auton Leave</th>
                         <th scope="col">Auton Amp Notes</th>
                         <th scope="col">Auton Amp Misses</th>
@@ -197,6 +206,7 @@
                     <tbody id="allMatchesTable">
                     </tbody>
                   </table>
+                </div>
                 </div>
               </div>
             </div>
@@ -388,6 +398,8 @@
 <?php include("footer.php") ?>
 
 <script>
+  var frozenTable = null;
+
   var chartDefined = false;
   var myChart;
     
@@ -631,8 +643,15 @@
           "</td>";
       $("#allMatchesTable").append(rowString);
     }
+    setTimeout(function() {
+      sorttable.makeSortable(document.getElementById("sortableAllMatches"));
+      frozenTable = $('#freezeTableDiv').freezeTable({
+        'backgroundColor': "white",
+        'columnKeep': true,
+        'frozenColVerticalOffset': 0
+      });
+    }, 1);
     sortAllMatchesTable();
-//REMOVE    sorttable.makeSortable(document.getElementById("sortableAllMatches"));
   }
 
   function processMatchData(team, data) {
@@ -1205,6 +1224,12 @@
 
     $("#loadTeam").click(function() {
       loadTeam($("#writeTeamNumber").val());
+    });
+    
+    $("#sortableAllMatches").click(function() {
+       if(frozenTable) {
+         frozenTable.update();
+       }
     });
   });
 </script>
