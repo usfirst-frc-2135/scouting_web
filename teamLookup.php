@@ -419,7 +419,6 @@
   }
 
   function dataToMatchTable(dataObj) {
-      console.log("starting data to match table, data length= "+dataObj.length);
 
      for (let i = 0; i < dataObj.length; i++) {
       var rowString = "<tr><td align=\"center\">" + dataObj[i]["matchnumber"] + "</td>" +
@@ -525,7 +524,7 @@
 
     //filters out the match type as specified in the db status page
   function getFilteredData(team, successFunction) {
-      console.log(">> starting getSiteFilteredData for team " + team);
+//      console.log(">> starting getSiteFilteredData for team " + team);
       var temp_this = this;
       $.post("dbAPI.php", { "getStatus": true }, function (data) {
           dbdata = JSON.parse(data);
@@ -536,8 +535,8 @@
           localSiteFilter["useSf"] = dbdata["useSf"];
           localSiteFilter["useF"] = dbdata["useF"];
           //temp_this.siteFilter = { ...localSiteFilter };
-          console.log(">>> useP = " + localSiteFilter["useP"]);
-          console.log(">>> useQm = " + localSiteFilter["useQm"]);
+//          console.log(">>> useP = " + localSiteFilter["useP"]);
+//          console.log(">>> useQm = " + localSiteFilter["useQm"]);
           //temp_this.applySiteFilter();
           $.get("readAPI.php", {
             getTeamData: team
@@ -565,9 +564,6 @@
                 mt = "f";
               } 
 
-              //if (mt == null) {
-                //mt = ["qm", null];
-              //}
               if (mt == "p" && localSiteFilter["useP"]) { new_data.push(matchData[i]); }
               else if (mt == "qm" && localSiteFilter["useQm"]) { new_data.push(matchData[i]); }
               else if (mt == "qf" && localSiteFilter["useQf"]) { new_data.push(matchData[i]); }
@@ -583,17 +579,14 @@
     
   function processMatchData(team, data) {
       var mdp = new matchDataProcessor(data);
-      console.log(mdp);
       mdp.sortMatches(data);
       mdp.getSiteFilteredAverages(function(averageData) {
           processedData = averageData[team];
           dataToAvgTables(processedData);
-          console.log(processedData);
     });
       getFilteredData(team, function(fData) {
         filteredData = fData;
         dataToCommentTable(filteredData);
-        console.log("in processMatchData, calling data to MatchTable, team= "+team);
         dataToMatchTable(filteredData); 
         dataToAutonGraph(filteredData);
         dataToTeleopGraph(filteredData);
@@ -602,7 +595,49 @@
       sorttable.makeSortable(document.getElementById("sortableAllMatches")); 
   };
 	
+  // Returns 0 if rowA is before rowB; else returns 1. Assumes the row has a "matchnum" key
+  // that is <prefix><number>, where prefix is "p", "qm" or "sf".
+  function sortRows(cellA,cellB) {
 
+    // Pull apart prefix and number from matchnum (ie, "p", "qm", "sf")
+    var Aprefix = "";
+    var Anum = "";
+    var Bprefix = "";
+    var Bnum = "";
+    if(cellA.charAt(0) == "p") {
+     Anum = cellA.substr(1,cellA.length);
+     Aprefix = "p";
+    } 
+    else if(cellA.charAt(0) == "q") {   // "qm"
+     Anum = cellA.substr(2,cellA.length);
+     Aprefix = "qm";
+    } 
+    else if(cellA.charAt(0) == "s") {   // "sf"
+     Anum = cellA.substr(2,cellA.length);
+     Aprefix = "sf";
+    } 
+    if(cellB.charAt(0) == "p") {
+     Bnum = cellB.substr(1,cellB.length);
+     Bprefix = "p";
+    } 
+    else if(cellB.charAt(0) == "q") {   // "qm"
+     Bnum = cellB.substr(2,cellB.length);
+     Bprefix = "qm";
+    } 
+    else if(cellA.charAt(0) == "s") {   // "sf"
+     Bnum = cellB.substr(2,cellB.length);
+     Bprefix = "sf";
+    } 
+    if(Aprefix == Bprefix)
+      return(Anum - Bnum);
+    if(Aprefix == "p")
+      return 0;
+    if(Bprefix == "p")
+      return 1;
+    if(Aprefix == "qm")
+      return 0;
+    return 1;
+  };
 
   function dataToAutonGraph(matchdata) {
     // Declare variables
@@ -629,39 +664,53 @@
     });
     
 
-    // Build data sets; go thru each matchdata QR code string and populate the graph datasets.
+    // Go thru each matchdata QR code string and build up a table of the data, so we can
+    // later sort it so the matches are listed in the right order. 
+    var mydata = [];
     for (let i = 0; i < matchdata.length; i++) {
       var matchnum = matchdata[i]["matchnumber"];
+      var autonAmpNotes = matchdata[i]["autonampnotes"];
+      var autonSpeakerNotes = matchdata[i]["autonspeakernotes"];
+      var autonLeave = matchdata[i]["autonleave"];
+      mydata.push({
+        matchnum: matchnum,
+        ampnotes: autonAmpNotes,
+        speakernotes: autonSpeakerNotes,
+        leave: autonLeave
+      });
+    }
+    mydata.sort(function(rowA,rowB) {
+      var cellA = rowA["matchnum"];
+      var cellB = rowB["matchnum"];
+      return(sortRows(cellA,cellB));
+    });
+
+    // Build data sets; go thru each mydata row and populate the graph datasets.
+    for (let i = 0; i < mydata.length; i++) {
+      var matchnum = mydata[i]["matchnum"];
       match_list.push(matchnum);
-        console.log("in matchnum");
 
       // Get auton amp notes data
-      var autonAmpNotes = matchdata[i]["autonampnotes"];
+      var autonAmpNotes = mydata[i]["ampnotes"];
       datasets[0]["data"].push(autonAmpNotes);
       var tooltipStr = "Amp Notes="+autonAmpNotes;
       autonAmpTips.push({xlabel: matchnum, tip: tooltipStr}); 
-        console.log("autonampnotes");
 
       // Get auton speaker notes data
-      var autonSpeakerNotes = matchdata[i]["autonspeakernotes"];
+      var autonSpeakerNotes = mydata[i]["speakernotes"];
       datasets[1]["data"].push(autonSpeakerNotes);
       var tooltipStr = "Speaker Notes="+autonSpeakerNotes;
       autonSpeakerTips.push({xlabel: matchnum, tip: tooltipStr}); 
-        console.log("autonspeakernotes");
 
-     
      // Get auton leave starting zone data
-      var autonLeaveStartingZone = matchdata[i]["autonleave"];
+      var autonLeaveStartingZone = mydata[i]["leave"];
       datasets[2]["data"].push(autonLeaveStartingZone);
       var clevel = "No";
       if(autonLeaveStartingZone == 1)
         clevel = "Yes";
       var tipStr = "Leave Starting Zone="+clevel;
       autonLeaveTips.push({xlabel: matchnum, tip: tipStr});
-        //console.log("leavestartingzone");
-      console.log(matchdata);
     }
-        
 
     // Define the graph as a line chart:
     if (chartDefined) {
@@ -692,7 +741,6 @@
 
                  if(toolIndex == 0) {   // Auton Amp Notes
                    for (let i = 0; i < autonAmpTips.length; i++) {
-                       //console.log("in auton amp tips line");
                      if(autonAmpTips[i].xlabel == matchnum) {
                        tipStr = autonAmpTips[i].tip;
                        break;
@@ -754,38 +802,60 @@
       borderColor: 'Red'
     });
     
-    // Build data sets; go thru each matchdata QR code string and populate the graph datasets.
+    // Go thru each matchdata QR code string and build up a table of the data, so we can 
+    // later sort it so the matches are listed in the right order.
+    var mydata = [];
     for (let i = 0; i < matchdata.length; i++) {
       var matchnum = matchdata[i]["matchnumber"];
+      var teleopAmpNotes = matchdata[i]["teleopampnotes"];
+      var teleopSpeakerNotes = matchdata[i]["teleopspeakernotes"];
+      var teleopPasses = matchdata[i]["teleoppasses"];
+      var teleopAmpUsed = matchdata[i]["teleopampused"];
+      mydata.push({
+        matchnum: matchnum,
+        ampnotes: teleopAmpNotes,
+        speakernotes: teleopSpeakerNotes,
+        passes: teleopPasses,
+        ampused: teleopAmpUsed
+      });
+    } 
+    mydata.sort(function(rowA,rowB) {
+      var cellA = rowA["matchnum"];
+      var cellB = rowB["matchnum"];
+      return(sortRows(cellA,cellB));
+    });
+
+    // Build data sets; go thru each mydata row and populate the graph datasets.
+    for (let i = 0; i < mydata.length; i++) {
+      var matchnum = mydata[i]["matchnum"];
       match_list.push(matchnum);
 
       // Get teleop amp notes data
-      var teleopAmpNotes = matchdata[i]["teleopampnotes"];
+      var teleopAmpNotes = mydata[i]["ampnotes"];
       datasets[0]["data"].push(teleopAmpNotes);
       var tooltipStr1 = "Amp Notes="+teleopAmpNotes;
       teleopAmpTips.push({xlabel: matchnum, tip: tooltipStr1}); 
 
       // Get teleop speaker notes data
-      var teleopSpeakerNotes = matchdata[i]["teleopspeakernotes"];
+      var teleopSpeakerNotes = mydata[i]["speakernotes"];
       datasets[1]["data"].push(teleopSpeakerNotes);
       var tooltipStr2 = "Speaker Notes="+teleopSpeakerNotes;
       teleopSpeakerTips.push({xlabel: matchnum, tip: tooltipStr2}); 
         
       // Get passes data
-      var teleopPasses = matchdata[i]["teleoppasses"];
+      var teleopPasses = mydata[i]["passes"];
       datasets[2]["data"].push(teleopPasses);
       var tooltipStr3 = "Passes="+teleopPasses;
       teleopPassesTips.push({xlabel: matchnum, tip: tooltipStr3}); 
         
       //Get Amplification
-      var teleopAmpUsed = matchdata[i]["teleopampused"];
+      var teleopAmpUsed = mydata[i]["ampused"];
       datasets[3]["data"].push(teleopAmpUsed);
       var label = "No";
       if(teleopAmpUsed == 1)
           label = "Yes";
       var tooltipStr4 = "Amp Used="+label;
       teleopAmpUsedTips.push({xlabel: matchnum, tip: tooltipStr4});         
-        
     }
 
     // Define the graph as a line chart:
@@ -855,59 +925,78 @@
     });
   }
     
- function dataToEndgameGraph(matchdata) {
-     var match_list = [];
-     var datasets = [];
-     var endgameStageTips = [];
-     var endgameHarmonyTips = [];
+  function dataToEndgameGraph(matchdata) {
+    var match_list = [];
+    var datasets = [];
+    var endgameStageTips = [];
+    var endgameHarmonyTips = [];
      
-     datasets.push({
-         label: "Stage Level",
-         data: [],
-         borderColor: 'SteelBlue'
-     });
-     datasets.push({
-         label: "Harmony Level",
-         data: [],
-         borderColor: 'RebeccaPurple'
-     });
+    datasets.push({
+       label: "Stage Level",
+       data: [],
+       borderColor: 'SteelBlue'
+    });
+    datasets.push({
+       label: "Harmony Level",
+       data: [],
+       borderColor: 'RebeccaPurple'
+    });
      
-     for (let i = 0; i < matchdata.length; i++) {
-         var matchnum = matchdata[i]["matchnumber"];
-         match_list.push(matchnum);
+    // Go thru each matchdata QR code string and build up a table of the data, so we can
+    // later sort it so the matches are listed in the right order. 
+    var mydata = [];
+    for (let i = 0; i < matchdata.length; i++) {
+      var matchnum = matchdata[i]["matchnumber"];
+      var stage = matchdata[i]["endgamestage"];
+      var harmony = matchdata[i]["endgameharmony"];
+      mydata.push({
+        matchnum: matchnum,
+        stage: stage,
+        harmony: harmony
+      });
+    }
+    mydata.sort(function(rowA,rowB) {
+      var cellA = rowA["matchnum"];
+      var cellB = rowB["matchnum"];
+      return(sortRows(cellA,cellB));
+    });
+
+    // Build data sets; go thru each mydata row and populate the graph datasets.
+    for (let i = 0; i < mydata.length; i++) {
+      var matchnum = mydata[i]["matchnum"];
+      match_list.push(matchnum);
          
-         // Get endgame stage level
-         var endgameStage = matchdata[i]["endgamestage"];
-         datasets[0]["data"].push(endgameStage);
-         var clevel = "None";
-         if(endgameStage == 1)
-            clevel = "Parked";
-         if(endgameStage == 2)
-            clevel = "Onstage";
+      // Get endgame stage level
+      var endgameStage = mydata[i]["stage"];
+      datasets[0]["data"].push(endgameStage);
+      var clevel = "None";
+      if(endgameStage == 1)
+        clevel = "Parked";
+      if(endgameStage == 2)
+        clevel = "Onstage";
          
-         var tipStr = "Stage="+clevel;
-         endgameStageTips.push({xlabel: matchnum, tip: tipStr}); 
+      var tipStr = "Stage="+clevel;
+      endgameStageTips.push({xlabel: matchnum, tip: tipStr}); 
          
-         // Get endgame harmony level
-         var endgameHarmony = matchdata[i]["endgameharmony"];
-         datasets[1]["data"].push(endgameHarmony);
-         var clevel = "0";
-         if(endgameHarmony == 1)
-            clevel = "1";
-         if(endgameHarmony == 2)
-            clevel = "2";
+      // Get endgame harmony level
+      var endgameHarmony = mydata[i]["harmony"];
+      datasets[1]["data"].push(endgameHarmony);
+      var clevel = "0";
+      if(endgameHarmony == 1)
+        clevel = "1";
+      if(endgameHarmony == 2)
+        clevel = "2";
          
-         var tipStr = "Harmony="+clevel;
-         endgameHarmonyTips.push({xlabel: matchnum, tip: tipStr});
+      var tipStr = "Harmony="+clevel;
+      endgameHarmonyTips.push({xlabel: matchnum, tip: tipStr});
+    }
          
-     }
-         
-     if (chart3Defined) {
-        myChart3.destroy();
-     }
-     chart3Defined = true;
-     const ctx = document.getElementById('myChart3').getContext('2d');
-     myChart3 = new Chart(ctx, {
+    if (chart3Defined) {
+      myChart3.destroy();
+    }
+    chart3Defined = true;
+    const ctx = document.getElementById('myChart3').getContext('2d');
+    myChart3 = new Chart(ctx, {
       type: 'line',
       data: {
         labels: match_list,
@@ -923,34 +1012,34 @@
           tooltip: {
             callbacks: {  // Special tooltip handling
               label: function(tooltipItem,ddata) {
-                 var toolIndex = tooltipItem.datasetIndex;
-                 var matchnum = tooltipItem.label;
-                 var tipStr = datasets[toolIndex].label;
+                var toolIndex = tooltipItem.datasetIndex;
+                var matchnum = tooltipItem.label;
+                var tipStr = datasets[toolIndex].label;
 
-                 if(toolIndex == 0) {   // Stage Level
-                   for (let i = 0; i < endgameStageTips.length; i++) {
-                     if(endgameStageTips[i].xlabel == matchnum) {
-                       tipStr = endgameStageTips[i].tip;
-                       break;
-                     }
-                   }
-                 }
-                 else if(toolIndex == 1) {   // Teleop Middle Row
-                   for (let i = 0; i < endgameHarmonyTips.length; i++) {
-                     if(endgameHarmonyTips[i].xlabel == matchnum) {
-                       tipStr = endgameHarmonyTips[i].tip;
-                       break;
-                     }
-                   }
-                 }
-                 return tipStr;
+                if(toolIndex == 0) {   // Stage Level
+                  for (let i = 0; i < endgameStageTips.length; i++) {
+                    if(endgameStageTips[i].xlabel == matchnum) {
+                      tipStr = endgameStageTips[i].tip;
+                      break;
+                    }
+                  }
+                }
+                else if(toolIndex == 1) {   // Teleop Middle Row
+                  for (let i = 0; i < endgameHarmonyTips.length; i++) {
+                    if(endgameHarmonyTips[i].xlabel == matchnum) {
+                      tipStr = endgameHarmonyTips[i].tip;
+                      break;
+                    }
+                  }
+                }
+                return tipStr;
               }
             }
           }
         }
       }
     });    
-   }
+  }
 	
  function dataToDriveRankGraph(driveRankData) {
     // Declare variables
@@ -1076,7 +1165,6 @@
       getTeamData: team
     }).done(function(data) {
       matchData = JSON.parse(data);
-        //console.log("matchdata from teamAPI= "+matchData);
       processMatchData(team, matchData);
 
       // Do the Pit Scouting Data here because it also needs the matchData.
