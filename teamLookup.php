@@ -418,34 +418,6 @@
     }
   }
 
-  function dataToMatchTable(dataObj) {
-
-     for (let i = 0; i < dataObj.length; i++) {
-      var rowString = "<tr><td align=\"center\">" + dataObj[i]["matchnumber"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["autonleave"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["autonampnotes"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["autonampmisses"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["autonspeakernotes"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["autonspeakermisses"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["teleopampused"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["teleopampnotes"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["teleopampmisses"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["teleopspeakernotes"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["teleopspeakermisses"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["teleoppasses"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["endgamestage"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["endgameharmony"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["endgametrap"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["endgamespotlit"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["died"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["scoutname"] + "</td>" +
-        "</td>";
-      $("#allMatchesTable").append(rowString);
-    }
-    sorttable.makeSortable(document.getElementById("sortableAllMatches"));
-  }
-  
-
   function dataToAvgTables(avgs) {
     //Auton Scores
     avgs["amprowstr"] = "<b>Amp Notes</b>";
@@ -575,26 +547,22 @@
             successFunction(matchData);
         });
      });
-  };
+  }
     
-  function processMatchData(team, data) {
-      var mdp = new matchDataProcessor(data);
-      mdp.sortMatches(data);
-      mdp.getSiteFilteredAverages(function(averageData) {
-          processedData = averageData[team];
-          dataToAvgTables(processedData);
+  function sortAllMatchesTable() {
+    var table = document.getElementById("sortableAllMatches");
+    var rows = Array.prototype.slice.call(table.querySelectorAll("tbody> tr"));
+    rows.sort(function(rowA,rowB) {
+      var cellA = rowA.cells[0].textContent.trim();
+      var cellB = rowB.cells[0].textContent.trim();
+      return(sortRows(cellA,cellB));
     });
-      getFilteredData(team, function(fData) {
-        filteredData = fData;
-        dataToCommentTable(filteredData);
-        dataToMatchTable(filteredData); 
-        dataToAutonGraph(filteredData);
-        dataToTeleopGraph(filteredData);
-        dataToEndgameGraph(filteredData);
+    // Update the table body with the sorted rows.
+    rows.forEach(function(row) {
+      table.querySelector("tbody").appendChild(row);
     });
-      sorttable.makeSortable(document.getElementById("sortableAllMatches")); 
-  };
-	
+  }
+
   // Returns 0 if rowA is before rowB; else returns 1. Assumes the row has a "matchnum" key
   // that is <prefix><number>, where prefix is "p", "qm" or "sf".
   function sortRows(cellA,cellB) {
@@ -639,6 +607,51 @@
     return 1;
   };
 
+  function dataToMatchTable(dataObj) {
+    $("#allMatchesTable").html("");  // clear table
+    for (let i = 0; i < dataObj.length; i++) {
+      var rowString = "<tr><td align=\"center\">" + dataObj[i]["matchnumber"] + "</td>" +
+          "<td align=\"center\">" + dataObj[i]["autonleave"] + "</td>" +
+          "<td align=\"center\">" + dataObj[i]["autonampnotes"] + "</td>" +
+          "<td align=\"center\">" + dataObj[i]["autonampmisses"] + "</td>" +
+          "<td align=\"center\">" + dataObj[i]["autonspeakernotes"] + "</td>" +
+          "<td align=\"center\">" + dataObj[i]["autonspeakermisses"] + "</td>" +
+          "<td align=\"center\">" + dataObj[i]["teleopampused"] + "</td>" +
+          "<td align=\"center\">" + dataObj[i]["teleopampnotes"] + "</td>" +
+          "<td align=\"center\">" + dataObj[i]["teleopampmisses"] + "</td>" +
+          "<td align=\"center\">" + dataObj[i]["teleopspeakernotes"] + "</td>" +
+          "<td align=\"center\">" + dataObj[i]["teleopspeakermisses"] + "</td>" +
+          "<td align=\"center\">" + dataObj[i]["teleoppasses"] + "</td>" +
+          "<td align=\"center\">" + dataObj[i]["endgamestage"] + "</td>" +
+          "<td align=\"center\">" + dataObj[i]["endgameharmony"] + "</td>" +
+          "<td align=\"center\">" + dataObj[i]["endgametrap"] + "</td>" +
+          "<td align=\"center\">" + dataObj[i]["endgamespotlit"] + "</td>" +
+          "<td align=\"center\">" + dataObj[i]["died"] + "</td>" +
+          "<td align=\"center\">" + dataObj[i]["scoutname"] + "</td>" +
+          "</td>";
+      $("#allMatchesTable").append(rowString);
+    }
+    sortAllMatchesTable();
+//REMOVE    sorttable.makeSortable(document.getElementById("sortableAllMatches"));
+  }
+
+  function processMatchData(team, data) {
+    var mdp = new matchDataProcessor(data);
+    mdp.sortMatches(data);
+    mdp.getSiteFilteredAverages(function(averageData) {
+      processedData = averageData[team];
+      dataToAvgTables(processedData);
+    });
+    getFilteredData(team, function(fData) {
+      filteredData = fData;
+      dataToCommentTable(filteredData);
+      dataToMatchTable(filteredData); 
+      dataToAutonGraph(filteredData);
+      dataToTeleopGraph(filteredData);
+      dataToEndgameGraph(filteredData);
+    });
+  }
+	
   function dataToAutonGraph(matchdata) {
     // Declare variables
     var match_list = []; // List of matches to use as x lables
@@ -663,7 +676,6 @@
       borderColor: 'Blue'
     });
     
-
     // Go thru each matchdata QR code string and build up a table of the data, so we can
     // later sort it so the matches are listed in the right order. 
     var mydata = [];
