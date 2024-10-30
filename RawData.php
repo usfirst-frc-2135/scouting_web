@@ -75,6 +75,64 @@
 <script>
   var frozenTable = null;
 
+  function sortTable() {
+    var table = document.getElementById("rawDataTable");
+    var rows = Array.prototype.slice.call(table.querySelectorAll("tbody> tr"));
+    rows.sort(function(rowA,rowB) {
+      var cellA = rowA.cells[0].textContent.trim();
+      var cellB = rowB.cells[0].textContent.trim();
+      return(sortRows(cellA,cellB));
+    });
+    // Update the table body with the sorted rows.
+    rows.forEach(function(row) {
+      table.querySelector("tbody").appendChild(row);
+    });
+  }
+
+  // Returns 0 if rowA is before rowB; else returns 1. Assumes the row has a 
+  // "matchnum" key that is <prefix><number>, where prefix is "p", "qm" or "sf".
+  function sortRows(cellA,cellB) {
+
+    // Pull apart prefix and number from matchnum (ie, "p", "qm", "sf")
+    var Aprefix = "";
+    var Anum = "";
+    var Bprefix = "";
+    var Bnum = "";
+    if(cellA.charAt(0) == "p") {
+     Anum = cellA.substr(1,cellA.length);
+     Aprefix = "p";
+    } 
+    else if(cellA.charAt(0) == "q") {   // "qm"
+     Anum = cellA.substr(2,cellA.length);
+     Aprefix = "qm";
+    } 
+    else if(cellA.charAt(0) == "s") {   // "sf"
+     Anum = cellA.substr(2,cellA.length);
+     Aprefix = "sf";
+    } 
+    if(cellB.charAt(0) == "p") {
+     Bnum = cellB.substr(1,cellB.length);
+     Bprefix = "p";
+    } 
+    else if(cellB.charAt(0) == "q") {   // "qm"
+     Bnum = cellB.substr(2,cellB.length);
+     Bprefix = "qm";
+    } 
+    else if(cellA.charAt(0) == "s") {   // "sf"
+     Bnum = cellB.substr(2,cellB.length);
+     Bprefix = "sf";
+    } 
+    if(Aprefix == Bprefix)
+      return(Anum - Bnum);
+    if(Aprefix == "p")
+      return 0;
+    if(Bprefix == "p")
+      return 1;
+    if(Aprefix == "qm")
+      return 0;
+    return 1;
+  };
+
   function dataToTable(dataObj) {
     for (let i = 0; i < dataObj.length; i++) {
       var rowString = "<tr><td align=\"center\">" + dataObj[i]["matchnumber"] + "</td>" +
@@ -101,7 +159,6 @@
       $("#tableData").append(rowString);
 
     }
-
   }
 
   function requestAPI() {
@@ -119,8 +176,8 @@
           'frozenColVerticalOffset': 0
         });
       }, 1);
+      sortTable();
     });
-
   }
 
   $(document).ready(function() {
