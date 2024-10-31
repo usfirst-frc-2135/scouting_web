@@ -619,8 +619,21 @@
       for (let key in ourMatches) {
         arrOurMatches.push(ourMatches[key]);
       }
-      arrOurMatches.sort(function(a, b) {
-        a["match_number"] - b["match_number"]
+      // Sort the matches
+      arrOurMatches.sort(function(matchA, matchB) {
+        var Aprefix = matchA["comp_level"]; 
+        var Bprefix = matchB["comp_level"]; 
+        var Anum = matchA["match_number"];
+        var Bnum = matchB["match_number"];
+        if(Aprefix == Bprefix)
+          return (Anum - Bnum);
+        if(Aprefix == "p")
+          return 0;
+        if(Bprefix == "p")
+          return 1;
+        if(Aprefix == "qm")
+          return 0;
+        return 1;
       });
       $("#ourMatches").html("");
       var row = 'Our Matches: ';
