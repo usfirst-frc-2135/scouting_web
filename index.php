@@ -60,6 +60,38 @@
     $("#pitScoutTable").html(row);
   }
 
+  // Assumes the entries are team numbers or match numbers. Note a team number could 
+  // end in a "B", "C", "D", or "E", in which case we want to strip that off and just 
+  // use the number for the comparison.
+  function sortTable() {
+    var table = document.getElementById("psTable");
+    var rows = Array.prototype.slice.call(table.querySelectorAll("tbody> tr"));
+    rows.sort(function(rowA,rowB) {
+      var cellA = rowA.cells[0].textContent.trim();
+      var cellB = rowB.cells[0].textContent.trim();
+
+      // Remove any letters at the last char for the sort comparison.
+      if (cellA.charAt(cellA.length-1) == "B" || cellA.charAt(cellA.length-1) == "C" ||
+          cellA.charAt(cellA.length-1) == "D" || cellA.charAt(cellA.length-1) == "E")
+      {      
+        cellA = cellA.substr(0,cellA.length-1);
+      } 
+      
+      if (cellB.charAt(cellB.length-1) == "B" || cellB.charAt(cellB.length-1) == "C" ||
+          cellB.charAt(cellB.length-1) == "D" || cellB.charAt(cellB.length-1) == "E")
+      { 
+        cellB = cellB.substr(0,cellB.length-1);
+      }   
+          
+      return(cellA - cellB);
+    });
+
+    // Update the table body with the sorted rows.
+    rows.forEach(function(row) {
+      table.querySelector("tbody").appendChild(row);
+    });
+  }
+
   $(document).ready(function() {
 
     $.get("./tbaAPI.php", {
@@ -86,6 +118,7 @@
         picLookup = JSON.parse(data);
         createTable();
         sorttable.makeSortable(document.getElementById("psTable"));
+        sortTable();
       });
     });
 
@@ -95,6 +128,7 @@
       allPitData = JSON.parse(data);
       createTable();
       sorttable.makeSortable(document.getElementById("psTable"));
+      sortTable();
     });
 
   });
