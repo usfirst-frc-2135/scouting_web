@@ -132,7 +132,7 @@ class tbaHandler
     return $apiResponse;
   }
 
-  /*********** Team List Operations ***********/
+  // Team List Operations 
 
   function getTeamList($eventCode)
   {
@@ -301,16 +301,16 @@ class tbaHandler
     return $out;
   }
 
-  /* COPR Calculation */
-
+  // COPR Calculation 
+  // NOTE: this will NOT work for events with multiple teams unless that event code is in 
+  // the hard-coded list (see getTeamList()). The result is that there is no OPR data shown.
+ 
   function choleskyDecomposition($A)
   {
-    /*
-      Args:
-        $A - Must be square matrix that is symetric and positive definite
-      Returns:
-        array("L" => and "Lp" =>) decompositions
-      */
+    //  Args:
+    //    $A - Must be square matrix that is symetric and positive definite
+    //  Returns:
+    //    array("L" => and "Lp" =>) decompositions
     $n  = sizeof($A);
 
     $L  = array_fill(0, $n, array_fill(0, $n, 0));
@@ -332,8 +332,18 @@ class tbaHandler
         }
         else
         {
-          $L[$i][$j]  = (1 / $L[$j][$j]) * ($A[$i][$j] - $sum);
-          $Lp[$j][$i] = (1 / $L[$j][$j]) * ($A[$i][$j] - $sum);
+          if($L[$j][$j] != 0 ) {
+            $L[$i][$j]  = (1 / $L[$j][$j]) * ($A[$i][$j] - $sum);
+            $Lp[$j][$i] = (1 / $L[$j][$j]) * ($A[$i][$j] - $sum);
+            $test1 = (1 / $L[$j][$j]) * ($A[$i][$j] - $sum);
+            $test2 = (1 / $L[$j][$j]) * ($A[$i][$j] - $sum);
+          }
+          else
+          {
+            error_log("---> in choleskyDecomposition(): avoiding divide-by-0!");
+            $L[$i][$j]  = 0;
+            $Lp[$j][$i] = 0;
+          }
         }
       }
     }
@@ -359,7 +369,14 @@ class tbaHandler
       {
         $sum += $A[$i][$j] * $X[$j];
       }
-      $X[$i] = ($B[$i] - $sum) / $A[$i][$i];
+      if($A[$i][$i] != 0) {
+        $X[$i] = ($B[$i] - $sum) / $A[$i][$i];
+        $test3 = ($B[$i] - $sum) / $A[$i][$i];
+      }
+      else {
+        error_log("---> in forwardSubstitution(): avoiding divide-by-0");  
+        $X[$i] = 0;
+      }
     }
     return $X;
   }
@@ -383,7 +400,14 @@ class tbaHandler
       {
         $sum += $A[$nm - $i][$nm - $j] * $X[$nm - $j];
       }
-      $X[$nm - $i] = ($B[$nm - $i] - $sum) / $A[$nm - $i][$nm - $i];
+      if($A[$nm - $i][$nm - $i] != 0) {
+        $X[$nm - $i] = ($B[$nm - $i] - $sum) / $A[$nm - $i][$nm - $i];
+        $test4 = ($B[$nm - $i] - $sum) / $A[$nm - $i][$nm - $i];
+      }
+      else {
+        error_log("---> in backwardSubstitution(): avoiding divide-by-0");
+        $X[$nm - $i] = 0;
+      }
     }
     return $X;
   }
@@ -427,9 +451,18 @@ class tbaHandler
 
   function getComponentOPRS($eventCode)
   {
+    error_log("===> getComponentOPRS(): getting simpleTeamList");
     $simpleTeamList = $this->getSimpleTeamList($eventCode);
+
+
     $teamLookup = $this->teamListToLookup($simpleTeamList);
+//HERE
+    $TLCount = sizeof($teamLookup);  //TEST
+    error_log("  ===> teamLookup size = $TLCount");
+
+
     $teamCount = sizeof($simpleTeamList);
+    error_log("  ===> simpleTeamList size = $teamCount");
 
     $simpleMatchData = $this->getSimpleMatches($eventCode);
     $simpleMatchData = $this->removeElimMatches($simpleMatchData);
