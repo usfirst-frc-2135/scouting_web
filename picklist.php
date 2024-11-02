@@ -30,6 +30,7 @@
 <script>
 
   var eventCode = null;
+  var oprData = {};          // for TBA OPR data
 
   function dummylocalAveragesLookup(localAverages,team, item) {
     if (!localAverages) {
@@ -49,12 +50,24 @@
     return Math.round((val + Number.EPSILON) * 100) / 100;
   }
 
-// Returns a string with the comma-separated line of data for the given team.
+  function dummyGetOPR(dict) {
+    if(!dict) {
+      return 0;
+    }
+    if("totalPoints" in dict ) {
+      return dict["totalPoints"];
+    }
+    return 0;
+  }
+
+  // Returns a string with the comma-separated line of data for the given team.
   function createCSVLine(localAverages,team) {
+    var oprTP = dummyGetOPR(oprData[team]);
     var onstagePercent = rnd(dummylocalAveragesLookup(localAverages,team, "endgamestagepercent"));
     var trapPercent = rnd(dummylocalAveragesLookup(localAverages,team, "trapPercentage"));
     var teleopShootingAcc = rnd(dummylocalAveragesLookup(localAverages,team, "teleopSpeakerShootPercent"));
     var out = team+",";
+    out += oprTP + ",";
     out += dummylocalAveragesLookup(localAverages,team, "avgtotalnotes") + ",";
     out += dummylocalAveragesLookup(localAverages,team, "maxtotalnotes") + ",";
     out += dummylocalAveragesLookup(localAverages,team, "avgautonotes") + ",";
@@ -73,24 +86,32 @@
 
   function writeCSVFile() {
     console.log("starting writeCSVFile() ");
-    $.get("readAPI.php", {
-      getAllData: 1
+    // Get OPR data 
+    $.get("tbaAPI.php", {
+      getCOPRs: 1
     }).done(function(data) {
-      matchData = JSON.parse(data);
-      var mdp = new matchDataProcessor(matchData);
-      var csvStr = "Team,Avg Total Notes,Max Total Notes,Avg A Notes,Avg T Notes,T Speaker Acc,Avg Passes,Max Passes,Avg E Points, Onstage%, Trap%, Total Died, Comment\n";
-      mdp.getSiteFilteredAverages(function(averageData) {
-        for (var key in averageData) {
-          csvStr += createCSVLine(averageData,key);  // key is team number
-        }
+      data = JSON.parse(data)["data"];
+      oprData = data;
 
-        var hiddenElement = document.createElement('a');
-        var filename = eventCode + ".csv";
-        console.log("CSV filename = "+filename);
-        hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csvStr);
-        hiddenElement.target = '_blank';
-        hiddenElement.download = filename;
-        hiddenElement.click();
+      $.get("readAPI.php", {
+        getAllData: 1
+      }).done(function(data) {
+        matchData = JSON.parse(data);
+        var mdp = new matchDataProcessor(matchData);
+        var csvStr = "Team,OPR,Avg Total Notes,Max Total Notes,Avg A Notes,Avg T Notes,T Speaker Acc,Avg Passes,Max Passes,Avg E Points, Onstage%, Trap%, Total Died, Comment\n";
+        mdp.getSiteFilteredAverages(function(averageData) {
+          for (var key in averageData) {
+            csvStr += createCSVLine(averageData,key);  // key is team number
+          }
+
+          var hiddenElement = document.createElement('a');
+          var filename = eventCode + ".csv";
+          console.log("CSV filename = "+filename);
+          hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csvStr);
+          hiddenElement.target = '_blank';
+          hiddenElement.download = filename;
+          hiddenElement.click();
+        });
       });
     });
   }
