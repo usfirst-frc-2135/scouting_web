@@ -44,9 +44,6 @@
     if (!(team in localAverages)) {
       return "NA";
     }
-    if (item == "endgamestagepercent") {
-      return localAverages[team][item][2];
-    }
     return localAverages[team][item];
   }
 
@@ -64,27 +61,60 @@
     }
     return 0;
   }
+    
+    
+   function dummyGet(dict, key) {
+    /* If key doesn't exist in given dict, return a 0. */
+    // console.log(dict);
+    if (!dict) {
+      return 0;
+    }
+    if (key in dict) {
+      return dict[key];
+    }
+    return 0;
+  }
+    
 
   // Returns a string with the comma-separated line of data for the given team.
   function createCSVLine(localAverages,team,bSkipOpr) {
     var oprTP = 0;
     if(bSkipOpr == false) 
       oprTP = dummyGetOPR(oprData[team]);
-    var onstagePercent = rnd(dummylocalAveragesLookup(localAverages,team, "endgamestagepercent"));
     var trapPercent = rnd(dummylocalAveragesLookup(localAverages,team, "trapPercentage"));
     var teleopShootingAcc = rnd(dummylocalAveragesLookup(localAverages,team, "teleopSpeakerShootPercent"));
+    var endgamestagePercentage = dummylocalAveragesLookup(localAverages,team, "endgamestagepercent");
+    var endgameharmonyPercentage = dummylocalAveragesLookup(localAverages,team, "endgameharmonypercent");
     var out = team+",";
     out += oprTP + ",";
     out += dummylocalAveragesLookup(localAverages,team, "avgtotalnotes") + ",";
     out += dummylocalAveragesLookup(localAverages,team, "maxtotalnotes") + ",";
     out += dummylocalAveragesLookup(localAverages,team, "avgautonotes") + ",";
+    out += dummylocalAveragesLookup(localAverages,team, "maxautonotes") + ",";  
     out += dummylocalAveragesLookup(localAverages,team, "avgteleopnotes") + ",";
-    out += teleopShootingAcc + ",";
+    out += dummylocalAveragesLookup(localAverages,team, "maxteleopnotes") + ",";   
+    out += dummylocalAveragesLookup(localAverages,team, "avgendgamepoints") + ",";
+    out += dummylocalAveragesLookup(localAverages,team, "maxendgamepoints") + ",";  
+    out += dummylocalAveragesLookup(localAverages,team, "avgautonamps") + ",";  
+    out += dummylocalAveragesLookup(localAverages,team, "maxautonamps") + ",";  
+    out += dummylocalAveragesLookup(localAverages,team, "avgautonspeaker") + ",";  
+    out += dummylocalAveragesLookup(localAverages,team, "maxautonspeaker") + ","; 
+    out += dummylocalAveragesLookup(localAverages,team, "autonSpeakerShootPercent") + ","; 
+    out += dummylocalAveragesLookup(localAverages,team, "avgteleopampnotes") + ",";  
+    out += dummylocalAveragesLookup(localAverages,team, "maxteleopampnotes") + ",";  
+    out += dummylocalAveragesLookup(localAverages,team, "avgteleopspeakernotes") + ",";  
+    out += dummylocalAveragesLookup(localAverages,team, "maxteleopspeakernotes") + ",";  
+    out += dummylocalAveragesLookup(localAverages,team, "teleopSpeakerShootPercent") + ",";   
     out += dummylocalAveragesLookup(localAverages,team, "avgPasses") + ",";
     out += dummylocalAveragesLookup(localAverages,team, "maxPasses") + ",";
-    out += dummylocalAveragesLookup(localAverages,team, "avgendgamepoints") + ",";
-    out += onstagePercent + ",";
+    out += dummyGet(endgamestagePercentage, 0) + ",";   
+    out += dummyGet(endgamestagePercentage, 1) + ",";   
+    out += dummyGet(endgamestagePercentage, 2) + ","; 
+    out += dummyGet(endgameharmonyPercentage, 0) + ",";   
+    out += dummyGet(endgameharmonyPercentage, 1) + ",";
+    out += dummyGet(endgameharmonyPercentage, 2) + ",";
     out += trapPercent + ",";
+    out += dummylocalAveragesLookup(localAverages,team, "spotlitPercentage") + ",";   
     out += dummylocalAveragesLookup(localAverages,team, "totaldied") + ",";
     out += "-\n";    // NOTE
     return out;
@@ -93,7 +123,7 @@
   function processData(matchData,bSkipOpr) {
     console.log("setting up mdp ");
     var mdp = new matchDataProcessor(matchData);
-    var csvStr = "Team,OPR,Avg Total Notes,Max Total Notes,Avg A Notes,Avg T Notes,T Speaker Acc,Avg Passes,Max Passes,Avg E Points, Onstage%, Trap%, Total Died, Note\n";
+    var csvStr = "Team, OPR, Avg Total Notes,Max Total Notes,Avg A Notes, Max A Notes, Avg T Notes, Max T Notes, Avg E Points, Max E Points, Avg A Amp, Max A Amp, Avg A Speaker, Max A Speaker, A Speaker Acc, Avg T Amp, Max T Amp, Avg T Speaker, Max T Speaker, T Speaker Acc, Avg Passes, Max Passes, N, P, O, H 0, H 1, H 2, Trap%, Spotlit%, Total Died, Note\n";
     mdp.getSiteFilteredAverages(function(averageData) {
       console.log("writing csv lines");
       for (var key in averageData) {
