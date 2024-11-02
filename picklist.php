@@ -15,6 +15,11 @@
     <div class="col-md-12">
       <div class="card">
         <div class="card-body">
+          <div class="mb-3">
+              <label for="skip_opr" class="form-label">Skip OPR data in picklist</label>
+              <input class="form-check-input" type="checkbox" id="skip_opr">
+          </div>
+
           <div class="col-md-2 mt-1 mb-1">
             <button type="button" id="download_csv_file" class="btn btn-primary">Download CSV File</button>
           </div>
@@ -61,8 +66,10 @@
   }
 
   // Returns a string with the comma-separated line of data for the given team.
-  function createCSVLine(localAverages,team) {
-    var oprTP = dummyGetOPR(oprData[team]);
+  function createCSVLine(localAverages,team,bSkipOpr) {
+    var oprTP = 0;
+    if(bSkipOpr == false) 
+      oprTP = dummyGetOPR(oprData[team]);
     var onstagePercent = rnd(dummylocalAveragesLookup(localAverages,team, "endgamestagepercent"));
     var trapPercent = rnd(dummylocalAveragesLookup(localAverages,team, "trapPercentage"));
     var teleopShootingAcc = rnd(dummylocalAveragesLookup(localAverages,team, "teleopSpeakerShootPercent"));
@@ -79,45 +86,65 @@
     out += onstagePercent + ",";
     out += trapPercent + ",";
     out += dummylocalAveragesLookup(localAverages,team, "totaldied") + ",";
-    out += "-\n";    // Comment
+    out += "-\n";    // NOTE
     return out;
   }
 
+  function processData(matchData,bSkipOpr) {
+    console.log("setting up mdp ");
+    var mdp = new matchDataProcessor(matchData);
+    var csvStr = "Team,OPR,Avg Total Notes,Max Total Notes,Avg A Notes,Avg T Notes,T Speaker Acc,Avg Passes,Max Passes,Avg E Points, Onstage%, Trap%, Total Died, Note\n";
+    mdp.getSiteFilteredAverages(function(averageData) {
+      console.log("writing csv lines");
+      for (var key in averageData) {
+        csvStr += createCSVLine(averageData,key,bSkipOpr);  // key is team number
+      }
 
-  function writeCSVFile() {
-    console.log("starting writeCSVFile() ");
-    // Get OPR data 
-    $.get("tbaAPI.php", {
-      getCOPRs: 1
+      var hiddenElement = document.createElement('a');
+      var filename = eventCode + ".csv";
+      console.log("CSV filename = "+filename);
+      hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csvStr);
+      hiddenElement.target = '_blank';
+      hiddenElement.download = filename;
+      hiddenElement.click();
+    });
+  }
+
+  function writeCSVFile(bSkipOpr) {
+    console.log("starting writeCSVFile(): skipOpr = "+bSkipOpr);
+
+    console.log("getting raw data");
+    $.get("readAPI.php", {
+      getAllData: 1
     }).done(function(data) {
-      data = JSON.parse(data)["data"];
-      oprData = data;
+      matchData = JSON.parse(data);
 
-      $.get("readAPI.php", {
-        getAllData: 1
-      }).done(function(data) {
-        matchData = JSON.parse(data);
-        var mdp = new matchDataProcessor(matchData);
-        var csvStr = "Team,OPR,Avg Total Notes,Max Total Notes,Avg A Notes,Avg T Notes,T Speaker Acc,Avg Passes,Max Passes,Avg E Points, Onstage%, Trap%, Total Died, Comment\n";
-        mdp.getSiteFilteredAverages(function(averageData) {
-          for (var key in averageData) {
-            csvStr += createCSVLine(averageData,key);  // key is team number
-          }
-
-          var hiddenElement = document.createElement('a');
-          var filename = eventCode + ".csv";
-          console.log("CSV filename = "+filename);
-          hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csvStr);
-          hiddenElement.target = '_blank';
-          hiddenElement.download = filename;
-          hiddenElement.click();
+      if(bSkipOpr == false)
+      {
+        // Get OPR data 
+        console.log("getting OPR data");
+        $.get("tbaAPI.php", {
+          getCOPRs: 1
+        }).done(function(data) {
+          data = JSON.parse(data)["data"];
+          oprData = data;
+          console.log("--> setting oprData");
+          processData(matchData,bSkipOpr);
         });
-      });
+      }
+      else
+      {
+        console.log("skipped OPR ");
+        processData(matchData,bSkipOpr);
+      }
     });
   }
 
 
   $(document).ready(function() {
+    var bSkipOPR = false;
+    if( $("#skip_opr").is(":checked") == true)
+      bSkipOPR = true;    // Don't put OPR data in the CSV file
 
     $.get("./tbaAPI.php", {
       getEventCode: true
@@ -127,7 +154,7 @@
       
     $("#download_csv_file").on('click', function(event) {
        // Write out picklist CSV file to client's download dir.
-       writeCSVFile();
+       writeCSVFile(bSkipOPR);
     });
   });
 
