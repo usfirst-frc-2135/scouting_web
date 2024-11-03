@@ -50,7 +50,7 @@
               <th scope="col">Teleop Amp Notes</th>
               <th scope="col">Teleop Amp Misses</th>
               <th scope="col">Teleop Speaker Notes</th>
-              <th scope="col">Teleop Speaker Misess</th>
+              <th scope="col">Teleop Speaker Misses</th>
               <th scope="col">Teleop Passes</th>
               <th scope="col">Endgame Stage Level</th>
               <th scope="col">Endgame Harmony Level</th>

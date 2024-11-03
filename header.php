@@ -66,9 +66,6 @@
             <a class="nav-link" href="./index.php">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="./qrScanner.php">QR Scanner</a> <!-- what's the diff with qr scanner and others things ... idk what it says after -->
-          </li>
-          <li class="nav-item">
             <a class="nav-link" href="./RawData.php">Raw Data</a>
           </li>
           <li class="nav-item">
@@ -80,17 +77,23 @@
 	      <li class="nav-item">
             <a class="nav-link" href="./matchSheet.php">Match Sheet</a>
           </li>
-	      <li class="nav-item">
+          <li class="nav-item">
+            <a class="nav-link" href="./strategicData.php">Strategic Data</a>
+          </li>
+	  <li class="nav-item">
             <a class="nav-link" href="./pitScouting.php">Pit Scouting</a>
           </li>
 	      <li class="nav-item">
-            <a class="nav-link" href="./driveRank.php">Drive Rank</a>
+            <a class="nav-link" href="./driveRank.php">Strategic Scouting</a>
           </li>
 	      <li class="nav-item">
             <a class="nav-link" href="./pictureUpload.php">Picture Upload</a>
           </li>
-          <li class="nav-item">
+<!--HOLD          <li class="nav-item">
             <a class="nav-link" href="./allianceRanking.php">Alliance Rank</a>
+          </li>  HOLD-->
+          <li class="nav-item">
+            <a class="nav-link" href="./qrScanner.php">QR Scanner</a> 
           </li>
           <li class="nav-item">
             <a class="nav-link" href="./rawCoprData.php">COPRs</a>
@@ -99,7 +102,7 @@
             <a class="nav-link" href="./picklist.php">Picklist</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="./strategic.php">Strategic</a>
+            <a class="nav-link" href="./strategic.php">Strategic Schedule</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="./dbStatus.php">DB Status</a>

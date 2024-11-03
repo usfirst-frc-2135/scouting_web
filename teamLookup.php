@@ -381,7 +381,7 @@
               </div>
             </div>
        
-            <!-- Drive Rank graph -->
+            <!-- HOLD Drive Rank graph 
             <div class="overflow-auto">
               <div class="card mb-3">
                 <div class="card-body"> 
@@ -395,6 +395,7 @@
                 </div>
               </div>  
             </div>
+HOLD-->
 			  
          </div>
         </div>
@@ -1080,6 +1081,7 @@
     });    
   }
 	
+/*HOLD->
  function dataToDriveRankGraph(driveRankData) {
     // Declare variables
     var match_list = []; // List of matches to use as x lables
@@ -1140,6 +1142,7 @@
         }
     });
   }
+<-HOLD*/
 
   function processCommentData(data) {
     dataToCommentTable(data);
@@ -1159,18 +1162,14 @@
       pitData["projlanguage"];
 
       // First row has pit data, so write out that data.
-      
-        writeTableRow("pitRow1", pitData, ["numbatteries", "pitorg", "sparepartsstring", "computervisionstring", "groundintakestring", "amp"]);
-        writeTableRow("pitRow2",pitData,["drivemotors","preparedness","swervedrivestring","proglanguage","preloadAndLeaveAuton","centerLineAutonString"]);
-        console.log(pitData["preloadAndLeaveAutonString"])
+      writeTableRow("pitRow1", pitData, ["numbatteries", "pitorg", "sparepartsstring", "computervisionstring", "groundintakestring", "amp"]);
+      writeTableRow("pitRow2",pitData,["drivemotors","preparedness","swervedrivestring","proglanguage","preloadAndLeaveAuton","centerLineAutonString"]);
     }
     
   }
-      
-  
 	
    function processDriveRankData(driveRankData) {
-     dataToDriveRankGraph(driveRankData);
+//HOLD     dataToDriveRankGraph(driveRankData);
   }
 
   // This is the main function that runs when we want to load a new team 
