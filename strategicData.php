@@ -50,6 +50,16 @@
             <tr>
               <th colspan="1"</th>
               <th colspan="1"</th>
+              <th colspan="29" class="text-center">Strategic Scouting Data</th>
+            </tr>
+            <tr>
+              <th colspan="1"</th>
+              <th colspan="1"</th>
+              <th colspan="29" class="text-center">Table</th>
+            </tr>
+            <tr>
+              <th colspan="1"</th>
+              <th colspan="1"</th>
               <th colspan="4" class="text-center" style="background-color:#3686FF">Pit Scouting</th>
               <th colspan="1"</th>
               <th colspan="2" class="text-center" style="background-color:#3686FF">Auto Multi-Note Source</th>

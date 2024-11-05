@@ -39,6 +39,16 @@
           </colgroup>
           <thead>
             <tr>
+              <th colspan="1"</th>
+              <th colspan="1"</th>
+              <th colspan="18" class="text-center">Raw Scouted Data</th>
+            </tr>
+            <tr>
+              <th colspan="1"</th>
+              <th colspan="1"</th>
+              <th colspan="18" class="text-center">Table</th>
+            </tr>
+            <tr>
               <th scope="col">Match</th>
               <th scope="col">Team</th>
               <th scope="col">Auton Leave</th>

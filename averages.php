@@ -71,6 +71,14 @@ COMMENTED OUT FOR NOW-->
           </colgroup>
           <thead>
             <tr>
+              <th colspan="1" class="text-center" ></th>
+              <th colspan="26" class="text-center" >Averages</th>
+            </tr>
+            <tr>
+              <th colspan="1" class="text-center" ></th>
+              <th colspan="26" class="text-center" >Table</th>
+            </tr>
+            <tr>
               <th colspan="1" class="text-center"></th>
               <th colspan="2" class="text-center fw-bold" style="background-color:#3686FF">Total Notes</th>
               <th colspan="2" class="text-center">Total Auto Notes</th>
