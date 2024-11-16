@@ -122,31 +122,18 @@
 
   function sortTable() {
     // Assumes the entries are team numbers or match numbers. Note a team number could have end in 
-    // a "B", "C", "D", or "E", in which case we want to strip that off and just use the number for
-    // the comparison.
+    // a "B", "C", "D", or "E".
 
     var table = document.getElementById("rawDataTable");
     var rows = Array.prototype.slice.call(table.querySelectorAll("tbody> tr"));
 
-    // Sort the rows based on column 1 match number value
+    // Sort the rows based on column 1 team number value, then col2 match number
     rows.sort(function(rowA,rowB) {
-      var cellA = rowA.cells[0].textContent.trim();                          
-      var cellB = rowB.cells[0].textContent.trim();                          
-
-      // Remove any letters at the last char for the sort comparison.
-      if (cellA.charAt(cellA.length-1) == "B" || cellA.charAt(cellA.length-1) == "C" ||
-          cellA.charAt(cellA.length-1) == "D" || cellA.charAt(cellA.length-1) == "E")
-      {
-        cellA = cellA.substr(0,cellA.length-1);
-      }
-
-      if (cellB.charAt(cellB.length-1) == "B" || cellB.charAt(cellB.length-1) == "C" ||
-          cellB.charAt(cellB.length-1) == "D" || cellB.charAt(cellB.length-1) == "E")
-      {
-        cellB = cellB.substr(0,cellB.length-1);
-      }
-      
-      return(cellA - cellB);
+      var cellA = rowA.cells[0].textContent.trim(); // rowA team num
+      var cellB = rowB.cells[0].textContent.trim(); // rowB team num
+      var matchA = rowA.cells[1].textContent.trim(); // rowA match num              
+      var matchB = rowB.cells[1].textContent.trim(); // rowB match num                         
+      return(sortRows(cellA,cellB,matchA,matchB));
     });
 
     // Update the table body with the sorted rows 
@@ -154,6 +141,126 @@
       table.querySelector("tbody").appendChild(row);
     });
   }
+
+  // Returns 0 if rowA is before rowB; else returns 1. Assumes the row has a
+  // team number and may have a B, C, D, or E letter at the end. Note the letter may be lower case.
+  // If team numbers are the same, then sort by match num (2nd col).
+  function sortRows(cellA,cellB,matchA,matchB) {
+            
+    cellA = cellA.toUpperCase();  // make letter upper case
+    cellB = cellB.toUpperCase();
+    cellA = cellA.replace(/[^0-9a-zA-Z]/g, '');  // remove any non-alphanumeric chars
+    cellB = cellB.replace(/[^0-9a-zA-Z]/g, '');  // remove any non-alphanumeric chars
+    var cellA_num = cellA; 
+    var cellB_num = cellB; 
+    var A_let = 0;
+    var B_let = 0;
+    
+    if (cellA.charAt(cellA.length-1) == "B")
+    {
+      cellA_num = cellA.substr(0,cellA.length-1);
+      A_let = 1;
+    }
+    else if (cellA.charAt(cellA.length-1) == "C")
+    {
+      cellA_num = cellA.substr(0,cellA.length-1);
+      A_let = 2;
+    }
+    else if (cellA.charAt(cellA.length-1) == "D")
+    {
+      cellA_num = cellA.substr(0,cellA.length-1);
+      A_let = 3;
+    }
+    else if (cellA.charAt(cellA.length-1) == "E")
+    {
+      cellA_num = cellA.substr(0,cellA.length-1);
+      A_let = 4;
+    }
+    if (cellB.charAt(cellB.length-1) == "B")
+    {
+      cellB_num = cellB.substr(0,cellB.length-1);
+      B_let = 1;
+    }
+    else if (cellB.charAt(cellB.length-1) == "C")
+    {
+      cellB_num = cellB.substr(0,cellB.length-1);
+      B_let = 2;
+    }
+    else if (cellB.charAt(cellB.length-1) == "D")
+    {
+      cellB_num = cellB.substr(0,cellB.length-1);
+      B_let = 3;
+    }
+    else if (cellB.charAt(cellB.length-1) == "E")
+    {
+      cellB_num = cellB.substr(0,cellB.length-1);
+      B_let = 4;
+    }
+
+    // Now determine which cell goes first.
+    if(A_let == 0 && B_let == 0)   // no letters, so just compare team numbers.
+    {
+      if(cellA == cellB)  // same team and letters
+      {
+        // sort on match col
+        matchA = matchA.toUpperCase();  // make upper case
+        matchB = matchB.toUpperCase();  // make upper case
+        Aprefix = "qm";  // assume qm if there is no prefix
+        Bprefix = "qm";  
+        Amnum = matchA;
+        Bmnum = matchB;
+        if(matchA.charAt(0) == "Q") {        // QM
+          Amnum = matchA.substr(2,matchA.length);
+          Aprefix = "qm";
+        }
+        else if(matchA.charAt(0) == "P") {    // P
+          Amnum = matchA.substr(1,matchA.length);
+          Aprefix = "p";
+        } 
+        else if(matchA.charAt(0) == "S") {    // SF
+          Amnum = matchA.substr(2,matchA.length);
+          Aprefix = "sf";
+        }
+        if(matchB.charAt(0) == "Q") { 
+          Bmnum = matchB.substr(2,matchB.length);
+          Bprefix = "qm";
+        }
+        else if(matchB.charAt(0) == "P") { 
+          Bmnum = matchB.substr(1,matchB.length);
+          Bprefix = "p";
+        }
+        else if(matchB.charAt(0) == "S") { 
+          Bmnum = matchB.substr(2,matchB.length);
+          Bprefix = "sf";
+        }
+        if(Aprefix == Bprefix)
+          return(Amnum - Bmnum);
+        if(Aprefix == "p")
+          return(0);
+        if(Bprefix == "p")
+          return(1);
+        if(Aprefix == "qm")
+          return(0);
+        return 1;
+      }
+      return(cellA - cellB);
+    }
+    if(cellA_num == cellB_num)   // same team number, with letters on at least one
+    { 
+      if(A_let == 0)  // no letter in cellA, so it will be before cellB
+        return(0);
+      if(B_let == 0)  // no letter in cellB, so it will be before cellA
+        return(1);
+      if(A_let == B_let)  // letters are the same 
+        return(0);
+      if(A_let > B_let)  // cellA letter is higher than B
+        return(1);
+      return(0);
+    } 
+    // not same team number, with letters, so just compare team number part
+    return(cellA_num - cellB_num);
+  }
+
 
   // Converts a given "1" to yes, "0" to no, anything else to empty string.
   function convertToYesNo(value) {

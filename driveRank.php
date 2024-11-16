@@ -290,8 +290,13 @@
 
   function writeDataToAPI() {
     var dataToUse = {};
+
+    // Clean up teamnumber before writing to table.
+    var teamnum = $("#teamNumber").val();
+    teamnum = teamnum.toUpperCase();  // if there's a letter, make it upper case
+    teamnum = teamnum.replace(/[^0-9a-zA-Z]/g, '');  // remove any non-alphanumeric chars
     dataToUse["scoutname"] = $("#scoutName").val();
-    dataToUse["teamnumber"] = $("#teamNumber").val();
+    dataToUse["teamnumber"] = teamnum;
     dataToUse["matchnumber"] = $("#matchNumber").val();
 	  
     // Assume that some options were not checked at all.
