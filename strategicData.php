@@ -271,7 +271,11 @@
     if(value == "1")
       convertedVal = "yes"; 
     else if(value == "0")
+      convertedVal = "-";
+    else if(value == "2")
       convertedVal = "no"; 
+    else if(value == "3")
+      convertedVal = "-"; 
     return convertedVal;
   }
 
@@ -287,6 +291,8 @@
         driveVal = "Average"; 
       else if(driverability == "4")
         driveVal = "Quick"; 
+      else if(driverability == "5")
+        driveVal = "-"; 
 
       var shootsFrom = dataObj[i]["shootsfrom"];
       var sfVal = ""; 
@@ -296,6 +302,8 @@
         sfVal = "Podium"; 
       else if(shootsFrom == "3")
         sfVal = "Anywhere"; 
+      else if(shootsFrom == "4")
+        sfVal = "-"; 
 
       var teamnum = dataObj[i]["teamnumber"];
 
@@ -341,7 +349,7 @@
         "<td align=\"center\">" + dataObj[i]["scoutname"] + "</td>" +
         "</td>";
       $("#tableData").append(rowString);
-
+        
     }
   }
 

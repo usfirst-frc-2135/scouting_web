@@ -54,6 +54,10 @@
             <input class="form-check-input" type="radio" name="driverAbilityGroup" id="driveScore4">
             <label class="form-check-label" for="driveScore4">4 - Quick/agile</label>
           </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="driverAbilityGroup" id="driveScore5">
+            <label class="form-check-label" for="driveScore5">5 - N/A</label>
+          </div>
               
           <p>   </p>
           <div>
@@ -85,6 +89,10 @@
             <input class="form-check-input" type="radio" name="shootsFromGroup" id="shootsFromScore3">
             <label class="form-check-label" for="shootsFromScore3">3 - Anywhere</label>
           </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="shootsFromGroup" id="shootsFromScore4">
+            <label class="form-check-label" for="shootsFromScore4">4 - N/A</label>
+          </div>
 
 
           <p>   </p>
@@ -99,6 +107,10 @@
             <input class="form-check-input" type="radio" name="passingGroup" id="passingScore2">
             <label class="form-check-label" for="passingScore2">No</label>
           </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="passingGroup" id="passingScore3">
+            <label class="form-check-label" for="passingScore3">N/A</label>
+          </div>
              
 
           <p>   </p>
@@ -112,6 +124,10 @@
           <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" name="underStageGroup" id="underStageScore2">
             <label class="form-check-label" for="underStageScore2">No</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="underStageGroup" id="underStageScore3">
+            <label class="form-check-label" for="underStageScore3">N/A</label>
           </div>
              
 
@@ -253,6 +269,7 @@
     $("#driveScore2").prop("checked", false);
     $("#driveScore3").prop("checked", false);
     $("#driveScore4").prop("checked", false);
+    $("#driveScore5").prop("checked", false);
 
     $("#multinote_starting_zone").prop("checked", false);
     $("#multinote_centerline").prop("checked", false);  
@@ -260,12 +277,15 @@
     $("#shootsFromScore1").prop("checked", false);
     $("#shootsFromScore2").prop("checked", false);
     $("#shootsFromScore3").prop("checked", false);
+    $("#shootsFromScore4").prop("checked", false);
 
     $("#passingScore1").prop("checked", false);
     $("#passingScore2").prop("checked", false);
+    $("#passingScore3").prop("checked", false);
 
     $("#underStageScore1").prop("checked", false);
     $("#underStageScore2").prop("checked", false);
+    $("#underStageScore3").prop("checked", false);
 
     $("#defenseTactic1").prop("checked", false); 
     $("#defenseTactic2").prop("checked", false);
@@ -313,6 +333,9 @@
     if ($("#driveScore4").is(':checked')) {
       dataToUse["driverability"] = 4;
     }
+    if ($("#driveScore5").is(':checked')) {
+      dataToUse["driverability"] = 5;
+    }
     
     dataToUse["multinote_starting_zone"] = 0;  // default
     dataToUse["multinote_centerline"] = 0;     // default
@@ -333,15 +356,31 @@
     if ($("#shootsFromScore3").is(':checked')) {
       dataToUse["shootsfrom"] = 3;
     }
+    if ($("#shootsFromScore4").is(':checked')) {
+      dataToUse["shootsfrom"] = 4;
+    }
+    console.log(dataToUse["shootsfrom"]);
       
     dataToUse["passing"] = 0; // default
     if ($("#passingScore1").is(':checked')) {
       dataToUse["passing"] = 1;
     }
+    if ($("#passingScore2").is(':checked')) {
+      dataToUse["passing"] = 2;
+    }
+    if ($("#passingScore3").is(':checked')) {
+      dataToUse["passing"] = 3;
+    }
 
     dataToUse["understage"] = 0;  // default
     if ($("#underStageScore1").is(':checked')) {
       dataToUse["understage"] = 1;
+    }
+    if ($("#underStageScore2").is(':checked')) {
+      dataToUse["understage"] = 2;
+    }
+    if ($("#underStageScore3").is(':checked')) {
+      dataToUse["understage"] = 3;
     }
 
     dataToUse["defense_tactic1"] = 0;     // default
