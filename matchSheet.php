@@ -628,11 +628,11 @@
         if(Aprefix == Bprefix)
           return (Anum - Bnum);
         if(Aprefix == "p")
-          return 0;
+          return -1;
         if(Bprefix == "p")
           return 1;
         if(Aprefix == "qm")
-          return 0;
+          return -1;
         return 1;
       });
       $("#ourMatches").html("");
