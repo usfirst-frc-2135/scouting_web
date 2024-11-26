@@ -620,6 +620,7 @@
         arrOurMatches.push(ourMatches[key]);
       }
       // Sort the matches
+      // Sort for "p", then "qm", then "sf" then "f" matches
       arrOurMatches.sort(function(matchA, matchB) {
         var Aprefix = matchA["comp_level"]; 
         var Bprefix = matchB["comp_level"]; 
@@ -633,6 +634,12 @@
           return 1;
         if(Aprefix == "qm")
           return -1;
+        if(Bprefix == "qm")
+          return 1;
+        if(Aprefix == "sf")
+          return -1;
+        if(Bprefix == "sf")
+          return 1;
         return 1;
       });
       $("#ourMatches").html("");
@@ -665,7 +672,10 @@
             var match = rawMatchData[mi];
             
             newMatch["comp_level"] = match["comp_level"];
-            newMatch["match_number"] = match["comp_level"] == "qm" ? match["match_number"] : match["set_number"];
+            newMatch["match_number"] = match["match_number"];
+            if(match["comp_level"] == "sf")
+              newMatch["match_number"] = match["set_number"];
+          
             newMatch["red_teams"] = match["alliances"]["red"]["team_keys"];
             newMatch["blue_teams"] = match["alliances"]["blue"]["team_keys"];
             newMatch["time"] = null;
@@ -679,7 +689,8 @@
             localMatchList[makeKey(newMatch["match_number"], newMatch["comp_level"])] = newMatch;
         
             if (newMatch["red_teams"].includes(ourTeam) || newMatch["blue_teams"].includes(ourTeam)) {
-                ourMatches[newMatch["match_number"]] = newMatch;
+                var keyw = newMatch["comp_level"]+newMatch["match_number"];
+                ourMatches[keyw] = newMatch;
             }
           }
           createOurMatchTable();
@@ -1035,8 +1046,6 @@
       loadMatchList(function() {});
 
     });
-      
-      
       
   </script>
 

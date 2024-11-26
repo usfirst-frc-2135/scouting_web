@@ -84,26 +84,6 @@
               <input type="text" class="form-control" id="writeDatabase" aria-describedby="databaseName">
             </div>
             <div class="mb-3">
-              <label for="writeDataTable" class="form-label">Data Table Name</label>
-              <input type="text" class="form-control" id="writeDataTable" aria-describedby="writeTableName">
-            </div>
-            <div class="mb-3">
-              <label for="writeTBATable" class="form-label">TBA Table Name</label>
-              <input type="text" class="form-control" id="writeTBATable" aria-describedby="writeTBATable">
-            </div>
-            <div class="mb-3">
-              <label for="writePitTable" class="form-label">Pit Table Name</label>
-              <input type="text" class="form-control" id="writePitTable" aria-describedby="writePitTable">
-            </div>
-            <div class="mb-3">
-              <label for="writeRankTable" class="form-label">Rank Table Name</label>
-              <input type="text" class="form-control" id="writeRankTable" aria-describedby="writeRankTable">
-            </div>
-			<div class="mb-3">
-              <label for="writeDriveRankTable" class="form-label">Drive Rank Table Name</label>
-              <input type="text" class="form-control" id="writeDriveRankTable" aria-describedby="writeDriveRankTable">
-            </div>
-            <div class="mb-3">
               <label for="writeUsername" class="form-label">User Name</label>
               <input type="text" class="form-control" id="writeUsername" aria-describedby="userName">
             </div>
@@ -177,8 +157,6 @@
     $("#dataQf").prop('checked', statusArray["useQf"]);
     $("#dataSf").prop('checked', statusArray["useSf"]);
     $("#dataF").prop('checked', statusArray["useF"]);
-
-    console.log("updateStatusValues(): statusArray = " +statusArray);
   }
 
   var id_to_key_map = {
@@ -188,11 +166,6 @@
     "writePassword": "password",
     "writeTBAKey": "tbakey",
     "writeEventCode": "eventcode",
-    "writeDataTable": "datatable",
-    "writeTBATable": "tbatable",
-    "writePitTable": "pittable",
-    "writeRankTable": "ranktable",
-    "writeDriveRankTable": "driveranktable",
   };
   var id_to_written_map = {}
 
@@ -206,12 +179,29 @@
     for (const key in id_to_key_map) {
       id_to_written_map[key] = false;
       $("#" + key).change(function() {
+        var keyval = ($("#" + key).val());
         if ($("#" + key).val() == "") {
           $("#" + key).removeClass("bg-info");
           id_to_written_map[key] = false;
+          if (key == "writeDatabase") {
+            id_to_written_map["writeDataTable"] = false;
+            id_to_written_map["writeTBATable"] = false;
+            id_to_written_map["writePitTable"] = false;
+            id_to_written_map["writeRankTable"] = false;
+            id_to_written_map["writeDriveRankTable"] = false;
+          }
         } else {
           $("#" + key).addClass("bg-info");
           id_to_written_map[key] = true;
+          if (key == "writeDatabase") {
+            // Mark tables in id_to_written_map 
+            var dataTableName = keyval+"dt";
+            id_to_written_map["writeDataTable"] = true;
+            id_to_written_map["writeTBATable"] = true;
+            id_to_written_map["writePitTable"] = true;
+            id_to_written_map["writeRankTable"] = true;
+            id_to_written_map["writeDriveRankTable"] = true;
+          }
         }
       });
     }
@@ -298,6 +288,13 @@
           writeData[id_to_key_map[key]] = $("#" + key).val();
         }
       }
+      // Create table names from database name.
+      var databaseName = ($("#" + "writeDatabase").val());
+      writeData["writeDataTable"] = databaseName + "_dt";
+      writeData["writeTBATable"] = databaseName + "_tba";
+      writeData["writePitTable"] = databaseName + "_pt";
+      writeData["writeRankTable"] = databaseName + "_rt";
+      writeData["writeDriveRankTable"] = databaseName + "_drt";
       console.log("writeConfig: writeData = "+writeData);
       writeData["writeConfig"] = JSON.stringify(writeData);
 
