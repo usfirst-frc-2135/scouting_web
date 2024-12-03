@@ -36,69 +36,10 @@
       </table>
     </div>
   </div>
-  <div class="col-md-2">
-    <div id="TeamListDiv"> 
-        <style type="text/css" media="screen">
-        table tr {
-            border: 1px solid black;
-        }
-        table td, table th {
-             border-right: 1px solid black;
-        }
-        </style>
-      <table id="teamListTable" class="table table-striped table-hover sortable">
-        <colgroup>
-          <col span="1" style="background-color:transparent">
-        </colgroup>
-        <thead>
-          <tr>
-          <th id="teamTitle" class="text-center" scope="col">Teams</th>
-          </tr>
-        </thead>
-        <tbody id="teamListData">
-        </tbody>
-      </table>
-    </div>
-  </div>
 </div>
-
-
 <?php include("footer.php") ?>
-<script type="text/javascript" src="./external/DataTables/DataTables-1.11.5/js/jquery.dataTables.min.js"></script>
 
 <script>
-  src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"
-  
-
-//  console.log("---> doing strategic page");
-  var teamList = [];   // used to hold the team numbers for the teamTable
-
-  function addToTeamList(teamstr)
-  {
-    var strList = teamstr.split(",");
-    var listcount = strList.length;
-    for (let i = 0; i < listcount; i++) 
-    {
-      // Put each team number found in teamList if it isn't already there.
-      var teamnum = strList[i];
-      teamnum = teamnum.trim();   // trim whitespace
-      var bAlreadyInList = false;
-      for (let j = 0; j < teamList.length; j++)
-      {
-//        console.log("     ---> comparing team '"+teamList[j]+"' vs '"+teamnum+"'");
-        if(teamList[j] == teamnum)
-        {
-          bAlreadyInList = true;
-          break; 
-        }
-      }
-      if(bAlreadyInList === false)
-      {
-        teamList.push(teamnum);
-      }
-    }
-  }
-
   function dataToTable(dataObj) {
     $("#tableData").html(""); // Clear table
     for (let i = 0; i < dataObj.length; i++) {
@@ -107,21 +48,8 @@
            "<td align=\"center\">" + dataObj[i]["teams"] + "</td>" + "</td>";
       $("#tableData").append(rowString);
 
-      // Also get the data for the teamTable; this is a string that can contain several team 
-      // numbers, separated by comma-space.
-      addToTeamList(dataObj[i]["teams"]);
+      
     }
-  }
-
-  function dataToTeamListTable() {
-    $("#teamListData").html(""); // Clear table
-    var sizeTeams = teamList.length;
-    for (let i = 0; i < sizeTeams; i++) {
-      var team = teamList[i];
-      var rowString = "<tr><td align=\"center\">" + team + "</td>" + "</td>";
-      $("#teamListData").append(rowString);
-    }
-    $("#teamTitle").html("Teams - "+sizeTeams);
   }
 
    
@@ -169,15 +97,7 @@
       var dataObj = JSON.parse(data);
       dataToTable(dataObj);
       sortTable("matchTable");
-      setupTeamList();
     });
-  }
-
-  // Get teamlist for strategic scouting matche
-  function setupTeamList() {
-    console.log("--->>> starting setupTeamList()");
-    dataToTeamListTable();
-    sortTable("teamListTable");
   }
 
 
