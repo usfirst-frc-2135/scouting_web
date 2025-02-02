@@ -36,36 +36,71 @@
             <col span="1" style="background-color:#cfe2ff">
             <col span="1" style="background-color:#transparent">
             <col span="1" style="background-color:#cfe2ff">
-          </colgroup>
+            <col span="1" style="background-color:#transparent">
+            <col span="1" style="background-color:#cfe2ff">
+            <col span="1" style="background-color:#transparent">
+            <col span="1" style="background-color:#cfe2ff">
+            <col span="1" style="background-color:#transparent">
+            <col span="1" style="background-color:#cfe2ff">
+            <col span="1" style="background-color:#transparent">
+            <col span="1" style="background-color:#cfe2ff">
+            <col span="1" style="background-color:#transparent">
+            <col span="1" style="background-color:#cfe2ff">
+            <col span="1" style="background-color:#transparent">
+            <col span="1" style="background-color:#cfe2ff">
+            <col span="1" style="background-color:#transparent">
+            <col span="1" style="background-color:#cfe2ff">
+            <col span="1" style="background-color:#transparent">
+            <col span="1" style="background-color:#cfe2ff">
+            <col span="1" style="background-color:#transparent">
+            </colgroup>
           <thead>
             <tr>
               <th colspan="1"</th>
               <th colspan="1"</th>
-              <th colspan="18" class="text-center">Raw Scouted Data</th>
+              <th colspan="38" class="text-center">Raw Scouted Data</th>
             </tr>
             <tr>
               <th colspan="1"</th>
               <th colspan="1"</th>
-              <th colspan="18" class="text-center">Table</th>
+              <th colspan="38" class="text-center">Table</th>
             </tr>
             <tr>
               <th scope="col">Match</th>
               <th scope="col">Team</th>
               <th scope="col">Auton Leave</th>
-              <th scope="col">Auton Amp Notes</th>
-              <th scope="col">Auton Amp Misses</th>
-              <th scope="col">Auton Speaker Notes</th>
-              <th scope="col">Auton Speaker Misses</th>
-              <th scope="col">Teleop Amp Used</th>
-              <th scope="col">Teleop Amp Notes</th>
-              <th scope="col">Teleop Amp Misses</th>
-              <th scope="col">Teleop Speaker Notes</th>
-              <th scope="col">Teleop Speaker Misses</th>
-              <th scope="col">Teleop Passes</th>
-              <th scope="col">Endgame Stage Level</th>
-              <th scope="col">Endgame Harmony Level</th>
-              <th scope="col">Endgame Trap</th>
-              <th scope="col">Endgame Spotlit</th>
+              <th scope="col">Auton Start</th>
+              <th scope="col">Auton L1</th>
+              <th scope="col">Auton L2</th>
+              <th scope="col">Auton L3</th>
+              <th scope="col">Auton L4</th>
+              <th scope="col">Auton Net</th>
+              <th scope="col">Auton Pro</th>
+              <th scope="col">Auton Coral Floor Pick</th>
+              <th scope="col">Auton Acq Coral Stat</th>
+              <th scope="col">Auton Algae Floor</th>
+              <th scope="col">Auton Algae Reef</th>
+              <th scope="col">Teleop Acq Coral</th>
+              <th scope="col">Teleop Acq Algae</th>
+              <th scope="col">Teleop Algae Floor Pick</th>
+              <th scope="col">Teleop Coral Floor Pick</th>
+              <th scope="col">Teleop Knock Algae</th>
+              <th scope="col">Teleop Acq Reef Algae</th>
+              <th scope="col">Teleop Two Game Pieces</th>
+              <th scope="col">Teleop L1</th>
+              <th scope="col">Teleop L2</th>
+              <th scope="col">Teleop L3</th>
+              <th scope="col">Teleop L4</th>
+              <th scope="col">Teleop Net</th>
+              <th scope="col">Teleop Proc</th>
+              <th scope="col">Teleop Pin Foul</th>
+              <th scope="col">Teleop Anchor Foul</th>
+              <th scope="col">Teleop Cage Foul</th>
+              <th scope="col">Teleop Barge Foul</th>
+              <th scope="col">Teleop ReefZone Foul</th>
+              <th scope="col">Endgame Climb</th>
+              <th scope="col">Endgame Start Climbing</th>
+              <th scope="col">Endgame Foul</th>  
               <th scope="col">Died</th>
               <th scope="col">Comment</th>
               <th scope="col">Scout Name</th>
@@ -142,30 +177,49 @@
       return 0;
     return 1;
   };
-
+//data object keywords should match the database configuration in dbHander.php
   function dataToTable(dataObj) {
     for (let i = 0; i < dataObj.length; i++) {
       var rowString = "<tr><td align=\"center\">" + dataObj[i]["matchnumber"] + "</td>" +
         "<td align=\"center\">" + dataObj[i]["teamnumber"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["autonleave"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["autonampnotes"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["autonampmisses"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["autonspeakernotes"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["autonspeakermisses"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["teleopampused"] + "</td>" + 
-        "<td align=\"center\">" + dataObj[i]["teleopampnotes"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["teleopampmisses"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["teleopspeakernotes"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["teleopspeakermisses"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["teleoppasses"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["endgamestage"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["endgameharmony"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["endgametrap"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["endgamespotlit"] + "</td>" +
+        "<td align=\"center\">" + dataObj[i]["autonLeave"] + "</td>" +
+        "<td align=\"center\">" + dataObj[i]["autonStartingPosition"] + "</td>" +
+        "<td align=\"center\">" + dataObj[i]["autonCoralL1"] + "</td>" +
+        "<td align=\"center\">" + dataObj[i]["autonCoralL2"] + "</td>" +
+        "<td align=\"center\">" + dataObj[i]["autonCoralL3"] + "</td>" +
+        "<td align=\"center\">" + dataObj[i]["autonCoralL4"] + "</td>" + 
+        "<td align=\"center\">" + dataObj[i]["autonAlgaeNet"] + "</td>" +
+        "<td align=\"center\">" + dataObj[i]["autonAlgaeProcessor"] + "</td>" +
+        "<td align=\"center\">" + dataObj[i]["autonCoralFloor"] + "</td>" +
+        "<td align=\"center\">" + dataObj[i]["autonCoralStation"] + "</td>" +
+        "<td align=\"center\">" + dataObj[i]["autonAlgaeFloor"] + "</td>" +
+        "<td align=\"center\">" + dataObj[i]["autonAlgaeReef"] + "</td>" +
+        "<td align=\"center\">" + dataObj[i]["teleopAcquireCoral"] + "</td>" +
+        "<td align=\"center\">" + dataObj[i]["teleopAcquireAlgae"] + "</td>" +
+        "<td align=\"center\">" + dataObj[i]["teleopAlgaeFloorPickup"] + "</td>" +
+        "<td align=\"center\">" + dataObj[i]["teleopCoralFloorPickup"] + "</td>" +
+        "<td align=\"center\">" + dataObj[i]["teleopKnockOffAlgae"] + "</td>" +
+        "<td align=\"center\">" + dataObj[i]["teleopAcquireAlgaeReef"] + "</td>" +
+        "<td align=\"center\">" + dataObj[i]["teleopHoldBothElements"] + "</td>" +
+        "<td align=\"center\">" + dataObj[i]["teleopCoralL1"] + "</td>" +
+        "<td align=\"center\">" + dataObj[i]["teleopCoralL2"] + "</td>" +
+        "<td align=\"center\">" + dataObj[i]["teleopCoralL3"] + "</td>" +  
+        "<td align=\"center\">" + dataObj[i]["teleopCoralL4"] + "</td>" +
+        "<td align=\"center\">" + dataObj[i]["teleopAlgaeNet"] + "</td>" +  
+        "<td align=\"center\">" + dataObj[i]["teleopAlgaeProcessor"] + "</td>" + 
+        "<td align=\"center\">" + dataObj[i]["teleopDefenseLevel"] + "</td>" +
+        "<td align=\"center\">" + dataObj[i]["teleopPinFoul"] + "</td>" +
+        "<td align=\"center\">" + dataObj[i]["teleopAnchorFoul"] + "</td>" +  
+        "<td align=\"center\">" + dataObj[i]["teleopCageFoul"] + "</td>" +
+        "<td align=\"center\">" + dataObj[i]["teleopBargeZoneFoul"] + "</td>" +
+        "<td align=\"center\">" + dataObj[i]["endgameClimbLevel"] + "</td>" +
+        "<td align=\"center\">" + dataObj[i]["endgameStartClimbing"] + "</td>" + 
+        
+        "<td align=\"center\">" + dataObj[i]["endgameFoulNumber"] + "</td>" +  
         "<td align=\"center\">" + dataObj[i]["died"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["comment"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["scoutname"] + "</td>" +
-        "</td>";
+        "<td align=\"center\">" + dataObj[i]["comment"] + "</td>" +  
+        "<td align=\"center\">" + dataObj[i]["scoutname"] + "</td>" +  
+        "</tr>";
       $("#tableData").append(rowString);
 
     }
