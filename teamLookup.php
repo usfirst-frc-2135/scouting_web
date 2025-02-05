@@ -80,15 +80,12 @@
                     <col span="1" style="background-color:transparent">
                     <col span="1" style="background-color:#cfe2ff">
                     <col span="1" style="background-color:transparent">
-                    <col span="1" style="background-color:#cfe2ff">
                   </colgroup>
                   <tr>
                     <th scope="col" style="width:25%">Batt</th>
                     <th scope="col" style="width:25%">Pit</th>
                     <th scope="col" style="width:25%">Spare Parts</th>
                     <th scope="col" style="width:25%">Vision</th>
-                    <th scope="col" style="width:25%">Ground Intake</th>
-                    <th scope="col" style="width:25%">Amp</th>
                   </tr>
                 </thead>
                 <tbody id="pitRow1">
@@ -113,8 +110,6 @@
                     <th scope="col" style="width:25%">Prep</th>
                     <th scope="col" style="width:25%">Swerve</th>
                     <th scope="col" style="width:25%">Lang</th>
-                    <th scope="col" style="width:25%">Auton Modes</th>
-                    <th scope="col" style="width:25%">Center Line Auton</th>
                   </tr>  
                 </thead>
                 <tbody id="pitRow2">
@@ -1153,17 +1148,13 @@ HOLD-->
       pitData["sparepartsstring"] = pitData["spareparts"] ? "yes" : "no";
       pitData["computervisionstring"] = pitData["computervision"] ? "yes" : "no";
       pitData["swervedrivestring"] = pitData["swerve"] ? "yes" : "no"; 
-      pitData["groundintakestring"] = pitData["intake"] ? "yes" : "no"; 
-      pitData["amp"] = pitData["amp"] ? "yes" : "no"; 
-      pitData["centerLineAutonString"] = pitData["centerLineAuton"] ? "yes" : "no"; 
-      pitData["preloadAndLeaveAuton"];
       pitData["drivemotors"];
       pitData["preparedness"];
       pitData["projlanguage"];
 
       // First row has pit data, so write out that data.
-      writeTableRow("pitRow1", pitData, ["numbatteries", "pitorg", "sparepartsstring", "computervisionstring", "groundintakestring", "amp"]);
-      writeTableRow("pitRow2",pitData,["drivemotors","preparedness","swervedrivestring","proglanguage","preloadAndLeaveAuton","centerLineAutonString"]);
+      writeTableRow("pitRow1", pitData, ["numbatteries", "pitorg", "sparepartsstring", "computervisionstring"]);
+      writeTableRow("pitRow2",pitData,["drivemotors","preparedness","swervedrivestring","proglanguage"]);
     }
     
   }

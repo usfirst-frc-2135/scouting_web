@@ -275,10 +275,6 @@ class dbHandler
                        spareparts,
                        computervision,
                        swerve,
-                       intake,
-                       amp,
-                       preloadAndLeaveAuton,
-                       centerLineAuton,
                        proglanguage,
                        drivemotors,
                        preparedness)
@@ -290,10 +286,6 @@ class dbHandler
                        :spareparts,
                        :computervision,
                        :swerve,
-                       :intake,
-                       :amp,
-                       :preloadAndLeaveAuton,
-                       :centerLineAuton,
                        :proglanguage,
                        :drivemotors,
                        :preparedness)";
@@ -310,10 +302,6 @@ class dbHandler
                      spareparts,
                      computervision,
                      swerve,
-                     intake,
-                     amp,
-                     preloadAndLeaveAuton,
-                     centerLineAuton,
                      proglanguage,
                      drivemotors,
                      preparedness from " . $dbConfig["pittable"] . " where
@@ -551,10 +539,6 @@ class dbHandler
             spareparts TINYINT UNSIGNED NOT NULL,
             computervision TINYINT UNSIGNED NOT NULL,
             swerve TINYINT UNSIGNED NOT NULL,
-            intake TINYINT UNSIGNED NOT NULL,
-            amp TINYINT UNSIGNED NOT NULL,
-            preloadAndLeaveAuton VARCHAR(50) NOT NULL,
-            centerLineAuton TINYINT UNSIGNED NOT NULL,
             proglanguage VARCHAR(20) NOT NULL,
             drivemotors VARCHAR(20) NOT NULL,
             preparedness TINYINT UNSIGNED NOT NULL

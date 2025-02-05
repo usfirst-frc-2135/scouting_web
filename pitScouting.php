@@ -84,59 +84,6 @@
               <input class="form-check-input" type="radio" name="swerveDriveGroup" id="swerveDriveNo">
               <label class="form-check-label" for="swerveDriveNo">No</label>
             </div>
-              
-            <p>   </p>
-            <div>
-              <label class="form-label">Does your robot have a ground intake?</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="groundIntakeGroup" id="groundIntakeYes">
-              <label class="form-check-label" for="groundIntakeYes">Yes</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="groundIntakeGroup" id="groundIntakeNo">
-              <label class="form-check-label" for="groundIntakeNo">No</label>
-            </div>
-              
-             <p>   </p>
-            <div>
-              <label class="form-label">Does your robot have the capability to do amp?</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="ampGroup" id="ampYes">
-              <label class="form-check-label" for="ampYes">Yes</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="ampGroup" id="ampNo">
-              <label class="form-check-label" for="ampNo">No</label>
-            </div>
-              
-            <p>   </p>
-            <div class="mb-3">
-              <label for="preloadAndLeave" class="form-label">Does your robot at least have a tested pre-load/leave auton?</label>
-              <div class="input-group mb-3">
-                <select class="form-select" id="preloadAndLeave">
-                  <option selected>Choose...</option>
-                  <option value="1">Leave Only</option>
-                  <option value="2">Pre-load Only</option>
-                  <option value="3">Both</option>
-                  <option value="4">None</option>
-                </select>
-              </div>
-            </div>
-              
-            <p>   </p>
-            <div>
-              <label class="form-label">Does your robot have a tested center line auto?</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="centerLineAutonGroup" id="centerLineAutonYes">
-              <label class="form-check-label" for="centerLineAutonYes">Yes</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="centerLineAutonGroup" id="centerLineAutonNo">
-              <label class="form-check-label" for="centerLineAutonNo">No</label>
-            </div>
 
             <p>   </p>
             <div class="mb-3">
@@ -159,10 +106,10 @@
               <div class="input-group mb-3">
                 <select class="form-select" id="driveMotors">
                   <option selected>Choose...</option>
-                  <option value="1">Falcons</option>
+                  <option value="1">Krakens</option>
                   <option value="2">Neos</option>
-                  <option value="3">Cims</option>
-                  <option value="4">Krakens</option>
+                  <option value="3">Falcons</option>
+                  <option value="4">Cims</option>
                 </select>
               </div>
             </div>
@@ -236,36 +183,7 @@
       else errMsg += " Swerve Drive";
       isError = true;
     }
-    
-    if ((!($("#ampYes").is(':checked'))) && (!($("#ampNo").is(':checked')))) {
-      if (isError == true) 
-        errMsg += ", Amp";
-      else errMsg += " Amp";
-      isError = true;
-    }
       
-    if ((!($("#groundIntakeYes").is(':checked'))) && (!($("#groundIntakeNo").is(':checked')))) {
-        if (isError == true)
-            errMsg += ", Ground Intake";
-        else errMsg += " Ground Intake";
-        isError = true;
-    }
-      
-    var preloadAndLeave = $("#preloadAndLeave").val();
-    if (preloadAndLeave != 1 && preloadAndLeave != 2 && preloadAndLeave != 3 && preloadAndLeave != 4) {
-      if (isError == true) 
-        errMsg += ", Pre-load/Leave Auton";
-      else errMsg += " Pre-load/Leave Auton";
-      isError = true;
-    }
-      
-    if ((!($("#centerLineAutonYes").is(':checked'))) && (!($("#centerLineAutonNo").is(':checked')))) {
-        if (isError == true)
-            errMsg += ", Center Line Auton";
-        else errMsg += " Center Line Auton";
-        isError = true;
-    }
-
     var progLanguage = $("#programmingLanguage").val();
     if (progLanguage != 1 && progLanguage != 2 && progLanguage != 3 && progLanguage != 4 && progLanguage != 5) {
       if (isError == true) 
@@ -310,12 +228,6 @@
     $("#computerVisionNo").prop("checked", false);
     $("#swerveDriveYes").prop("checked", false);
     $("#swerveDriveNo").prop("checked", false);
-    $("#ampYes").prop("checked", false);
-    $("#ampNo").prop("checked", false);
-    $("#groundIntakeYes").prop("checked", false);
-    $("#groundIntakeNo").prop("checked", false);
-    $("#centerLineAutonYes").prop("checked", false);
-    $("#centerLineAutonNo").prop("checked", false);
     $("#preparednessScore1").prop("checked", false);
     $("#preparednessScore2").prop("checked", false);
     $("#preparednessScore3").prop("checked", false);
@@ -356,41 +268,6 @@
     if ($("#swerveDriveNo").is(':checked')) {
       dataToUse["swerve"] = 0;
     }
-
-    if ($("#groundIntakeYes").is(':checked')) {
-      dataToUse["intake"] = 1;
-    }
-    if ($("#groundIntakeNo").is(':checked')) {
-      dataToUse["intake"] = 0;
-    }
-      
-    if ($("#ampYes").is(':checked')) {
-      dataToUse["amp"] = 1;
-    }
-    if ($("#ampNo").is(':checked')) {
-      dataToUse["amp"] = 0;
-    }
-      
-    var preloadAndLeave = $("#preloadAndLeave").val();
-    if (preloadAndLeave == 1) {
-      dataToUse["preloadAndLeaveAuton"] = "Leave Only";
-    }
-    if (preloadAndLeave == 2) {
-      dataToUse["preloadAndLeaveAuton"] = "Pre-load Only";
-    }
-    if (preloadAndLeave == 3) {
-      dataToUse["preloadAndLeaveAuton"] = "Both";
-    }
-    if (preloadAndLeave == 4) {
-      dataToUse["preloadAndLeaveAuton"] = "None";
-    }
-      
-    if ($("#centerLineAutonYes").is(':checked')) {
-      dataToUse["centerLineAuton"] = 1;
-    }
-    if ($("#centerLineAutonNo").is(':checked')) {
-      dataToUse["centerLineAuton"] = 0;
-    }
       
     var progLang = $("#programmingLanguage").val();
     dataToUse["proglanguage"] = "Other";  // default
@@ -412,16 +289,16 @@
 
     var driveMotors = $("#driveMotors").val()
     if (driveMotors == 1) {
-      dataToUse["drivemotors"] = "Falcons";
+      dataToUse["drivemotors"] = "Krakens";
     }
     if (driveMotors == 2) {
       dataToUse["drivemotors"] = "NEOs";
     }
     if (driveMotors == 3) {
-      dataToUse["drivemotors"] = "Cims";
+      dataToUse["drivemotors"] = "Falcons";
     }
     if (driveMotors == 4) {
-      dataToUse["drivemotors"] = "Krakens";
+      dataToUse["drivemotors"] = "Cims";
     }
       
     dataToUse["preparedness"] = 1;  // default
