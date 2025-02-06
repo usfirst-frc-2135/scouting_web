@@ -173,41 +173,56 @@ class matchDataProcessor {
         // If this team doesn't have any data stored yet, initialize its data array.
         pdata[tn] = {};
 
-        pdata[tn]["avgtotalnotes"] = 0;
-        pdata[tn]["maxtotalnotes"] = 0;
-
-        pdata[tn]["avgautonotes"] = 0;
-        pdata[tn]["maxautonotes"] = 0;
-
-        pdata[tn]["avgteleopnotes"] = 0;
-        pdata[tn]["maxteleopnotes"] = 0;
-
-        pdata[tn]["avgendgamepoints"] = 0;
-        pdata[tn]["maxendgamepoints"] = 0;
+        pdata[tn]["avgTotalCoral"] = 0;
+        pdata[tn]["maxTotalCoral"] = 0;
+        pdata[tn]["avgTotalAlgae"] = 0;
+        pdata[tn]["maxTotalAlgae"] = 0;
           
-        pdata[tn]["avgautonamps"] = 0;
-        pdata[tn]["maxautonamps"] = 0;
-        pdata[tn]["avgautonspeaker"] = 0;
-        pdata[tn]["maxautonspeaker"] = 0;
-        pdata[tn]["autonSpeakerShootPercent"] = 0;
-        pdata[tn]["totalAutonSpeakerNotes"] = 0;    // for calculating shooting percentage
-        pdata[tn]["totalAutonSpeakerMisses"] = 0;   // for calculating shooting percentage
+        pdata[tn]["avgTotalAutoPoints"] = 0;
+        pdata[tn]["maxTotalAutoPoints"] = 0;
+          
+        pdata[tn]["avgTotalTeleopPoints"] = 0;
+        pdata[tn]["maxTotalTeleopPoints"] = 0;
+          
+        //pdata[tn]["avgAutoPieces"] = 0;
+        //pdata[tn]["maxAutoPieces"] = 0;
+
+        //pdata[tn]["avgTeleopPieces"] = 0;
+        //pdata[tn]["maxTeleopPieces"] = 0;
+
+        pdata[tn]["avgEndgamePoints"] = 0;
+        pdata[tn]["maxEndgamePoints"] = 0;
+          
+        pdata[tn]["avgTotalPoints"] = 0;
+        pdata[tn]["maxTotalPoints"] = 0;
+          
+        pdata[tn]["avgAutonCoral"] = 0;
+        pdata[tn]["maxAutonCoral"] = 0;
+        pdata[tn]["avgAutonAlgae"] = 0;
+        pdata[tn]["maxAutonAlgae"] = 0;
+        pdata[tn]["autonStartPositionPercent"] = {0:0, 1:0, 2:0};
+        pdata[tn]["autonCoralPickupFloor"] = 0;
+        pdata[tn]["autonCoralPickupStation"] = 0;
+        pdata[tn]["autonAlgaePickupFloor"] = 0;
+        pdata[tn]["autonAlgaePickupReef"] = 0;
 		
-        pdata[tn]["avgteleopampnotes"] = 0;
-        pdata[tn]["maxteleopampnotes"] = 0;
-        pdata[tn]["avgteleopspeakernotes"] = 0;
-        pdata[tn]["maxteleopspeakernotes"] = 0;
-        pdata[tn]["teleopSpeakerShootPercent"] = 0;
-        pdata[tn]["totalTeleopSpeakerNotes"] = 0;    // for calculating shooting percentage
-        pdata[tn]["totalTeleopSpeakerMisses"] = 0;   // for calculating shooting percentage
-          
-        pdata[tn]["avgPasses"] = 0;
-        pdata[tn]["maxPasses"] = 0;
+        pdata[tn]["avgTeleopCoralScored"] = 0;
+        pdata[tn]["maxTeleopCoralScored"] = 0;
+        pdata[tn]["avgTeleopAlgaeScored"] = 0;
+        pdata[tn]["maxTeleopAlgaeScored"] = 0;
+        pdata[tn]["teleopCoralScoringPercent"] = 0;
+        pdata[tn]["teleopAlgaeScoringPercent"]
+        pdata[tn]["totalTeleopCoralAcquired"] = 0;    // for calculating shooting percentage
+        pdata[tn]["totalTeleopAlgaeAcquired"] = 0;   // for calculating shooting percentage
+        pdata[tn]["teleopAlgaeFloorPickup"] = 0;
+        pdata[tn]["teleopCoralFloorPickup"] = 0;
+        pdata[tn]["teleopKnockOffAlgae"] = 0;
+        pdata[tn]["teleopAcquireAlgaeFromReef"] = 0;
+        pdata[tn]["teleopHoldTwoGamePieces"] = 0;
 
-        pdata[tn]["endgamestagepercent"] = {0:0, 1:0, 2:0};  
-        pdata[tn]["endgameharmonypercent"] = {0:0, 1:0, 2:0};
-        pdata[tn]["spotlitPercentage"] = 0;
-        pdata[tn]["trapPercentage"] = 0;
+        pdata[tn]["endgameClimbPercent"] = {0:0, 1:0, 2:0, 3:0, 4:0};  
+        pdata[tn]["endgameStartClimbingPercent"] = {0:0, 1:0, 2:0, 3:0};
+        pdata[tn]["endgameFoulPercent"] = {0:0, 1:0, 2:0};
        
         pdata[tn]["totaldied"] = 0;
 
@@ -220,95 +235,160 @@ class matchDataProcessor {
       var totalmatches = (this.data[i]["totalmatches"]);
       var mobilitycheck = (this.data[i]["exitcommunity"]);
         
-      var currentAutonAmpNotes = (this.data[i]["autonampnotes"]);
-      var currentAutonSpeakerNotes = (this.data[i]["autonspeakernotes"]);
-      var totalAutoNotes = parseInt(currentAutonAmpNotes) + parseInt(currentAutonSpeakerNotes);
-      var currentAutonSpeakerMisses = (this.data[i]["autonspeakermisses"]);
-      pdata[tn]["totalAutonSpeakerNotes"] += parseInt(currentAutonSpeakerNotes);
-      pdata[tn]["totalAutonSpeakerMisses"] += parseInt(currentAutonSpeakerMisses);
+      var currentAutonCoralL1 = (this.data[i]["autonCoralL1"]);
+      var currentAutonCoralL2 = (this.data[i]["autonCoralL2"]);
+      var currentAutonCoralL3 = (this.data[i]["autonCoralL3"]);
+      var currentAutonCoralL4 = (this.data[i]["autonCoralL4"]);
+      var currentAutonAlgaeNet = (this.data[i]["autonAlgaeNet"]);
+      var currentAutonAlgaeProcessor = (this.data[i]["autonAlgaeProcessor"]);
+      var totalAutoCoral = parseInt(currentAutonCoralL1) + parseInt(currentAutonCoralL2) + parseInt(currentAutonCoralL3) + parseInt(currentAutonCoralL4);
+      var totalAutoCoralPoints = (parseInt(currentAutonCoralL1) * 3) + (parseInt(currentAutonCoralL2) * 4) + (parseInt(currentAutonCoralL3) * 6) + (parseInt(currentAutonCoralL4) * 7);
+      var totalAutoAlgae = parseInt(currentAutonAlgaeNet) + parseInt(currentAutonAlgaeProcessor);
+      var totalAutoAlgaePoints = (parseInt(currentAutonAlgaeNet) * 4) + (parseInt(currentAutonAlgaeProcessor) * 6)
+      //var currentAutonSpeakerMisses = (this.data[i]["autonspeakermisses"]);
+      //pdata[tn]["totalAutonSpeakerNotes"] += parseInt(currentAutonSpeakerNotes);
+      //pdata[tn]["totalAutonSpeakerMisses"] += parseInt(currentAutonSpeakerMisses);
 //      console.log("   -> current auton speaker notes = "+ currentAutonSpeakerNotes); //TEST
 //      console.log("   -> current auton speaker misses = "+ currentAutonSpeakerMisses); //TEST
 //      console.log("   -> total auton speaker notes = " + pdata[tn]["totalAutonSpeakerNotes"]); //TEST
 //      console.log("   -> total auton speaker misses = " + pdata[tn]["totalAutonSpeakerMisses"]); //TEST
 
-      var currentTeleopAmpNotes = (this.data[i]["teleopampnotes"]);
-      var currentTeleopSpeakerNotes = (this.data[i]["teleopspeakernotes"]);
-      var totalTeleopNotes = (parseInt(currentTeleopAmpNotes)) + (parseInt(currentTeleopSpeakerNotes));
-      var currentTeleopSpeakerMisses = (this.data[i]["teleopspeakermisses"]);
-      pdata[tn]["totalTeleopSpeakerNotes"] += parseInt(currentTeleopSpeakerNotes);
-      pdata[tn]["totalTeleopSpeakerMisses"] += parseInt(currentTeleopSpeakerMisses);
+      var currentTeleopCoralL1 = (this.data[i]["teleopCoralL1"]);
+      var currentTeleopCoralL2 = (this.data[i]["teleopCoralL2"]);
+      var currentTeleopCoralL3 = (this.data[i]["teleopCoralL3"]);
+      var currentTeleopCoralL4 = (this.data[i]["teleopCoralL4"]);
+      var currentTeleopAlgaeNet = (this.data[i]["teleopAlgaeNet"]);
+      var currentTeleopAlgaeProcessor = (this.data[i]["teleopAlgaeProcessor"]);
+      //var currentTeleopSpeakerNotes = (this.data[i]["teleopspeakernotes"]);
+      var totalTeleopCoral = (parseInt(currentTeleopCoralL1)) + (parseInt(currentTeleopCoralL2)) + (parseInt(currentTeleopCoralL3)) + (parseInt(currentTeleopCoralL4));
+      var totalTeleopCoralPoints = (parseInt(currentTeleopCoralL1) * 2) + (parseInt(currentTeleopCoralL2) * 3) + (parseInt(currentTeleopCoralL3) * 4) + (parseInt(currentTeleopCoralL4) * 5);
+      var totalTeleopAlgae = (parseInt(currentTeleopAlgaeNet)) + (parseInt(currentTeleopAlgaeProcessor));
+      var totalTeleopAlgaePoints = (parseInt(currentTeleopAlgaeNet) * 4) + (parseInt(currentTeleopAlgaeProcessor) * 6);
+      var currentTeleopCoralAcquired = (this.data[i]["teleopAcquireCoral"]);
+      var currentTeleopAlgaeAcquired = (this.data[i]["teleopAcquireAlgae"]);
+      pdata[tn]["totalTeleopCoral"] += parseInt(totalTeleopCoral);
+      pdata[tn]["totalTeleopCoralAcquired"] += parseInt(currentTeleopCoralAcquired);
+      pdata[tn]["totalTeleopAlgae"] += parseInt(totalTeleopAlgae);
+      pdata[tn]["totalTeleopAlgaeAcquired"] += parseInt(currentTeleopAlgaeAcquired);
 //      console.log("   -> current teleop speaker notes = "+ currentTeleopSpeakerNotes); //TEST
 //      console.log("   -> current total teleop notes = "+ totalTeleopNotes); //TEST
 //      console.log("   -> total teleop speaker notes = " + pdata[tn]["totalTeleopSpeakerNotes"]); //TEST
 //      console.log("   -> total teleop speaker misses = " + pdata[tn]["totalTeleopSpeakerMisses"]); //TEST
 
-      var passes = (this.data[i]["teleoppasses"]);
+      //var passes = (this.data[i]["teleoppasses"]);
 
-      var endgameStagePoints = (this.data[i]["endgamestage"]);
-      var endgameHarmonyPoints = (this.data[i]["endgameharmony"]);
-      if (endgameStagePoints == 2) { 
-        endgameStagePoints = 3; 
+      var endgameClimbPoints = (this.data[i]["endgameClimbLevel"]);
+      //var endgameHarmonyPoints = (this.data[i]["endgameharmony"]);
+      if (endgameClimbPoints == 1) { 
+        endgameClimbPoints = 2; 
+      }
+      else if (endgameClimbPoints == 2) {
+        endgameClimbPoints = 2;
+      }
+      else if (endgameClimbPoints == 3) {
+        endgameClimbPoints = 6;
+      }
+      else if (endgameClimbPoints == 4) {
+          endgameClimbPoints = 12;
       }
       //harmony points based on number of robots onstage
-      if (endgameHarmonyPoints == 1) {
+      /*if (endgameHarmonyPoints == 1) {
         endgameHarmonyPoints = 2;
       }
       else if (endgameHarmonyPoints == 2) {
         endgameHarmonyPoints = 4;
-      }
-      var endgameSpotlit = (this.data[i]["endgamespotlit"]);
-      var endgameTrap = (this.data[i]["endgametrap"]);
-      var endgamePoints = (endgameStagePoints) + (endgameHarmonyPoints) + (endgameSpotlit) + (endgameTrap * 5);
+      }*/
+      var autonCoralFloor = (this.data[i]["autonCoralFloor"]);
+      var autonCoralStation = (this.data[i]["autonCoralStation"]);
+      var autonAlgaeFloor = (this.data[i]["autonAlgaeFloor"]);
+      var autonAlgaeReef = (this.data[i]["autonAlgaeReef"]);
+        
+      var teleopAlgaeFloor = (this.data[i]["teleopAlgaeFloorPickup"]);
+      var teleopCoralFloor = (this.data[i]["teleopCoralFloorPickup"]);
+        
+      var startClimbing = (this.data[i]["endgameStartClimbing"]);
+      var endgameFouls = (this.data[i]["endgameFoulNumber"]);
+      //var endgameTrap = (this.data[i]["endgametrap"]);
+      //var endgamePoints = (endgameStagePoints) + (endgameHarmonyPoints) + (endgameSpotlit) + (endgameTrap * 5);
 //      console.log("   >> spotlit = " + endgameSpotlit);
 //      console.log("   >> endgame stage = " + endgameStagePoints);
 //      console.log("   >> endgame harmomy = " + endgameHarmonyPoints);
 //      console.log("   >> endgame trap = " + endgameTrap);
 //      console.log("   >> endgame points = " + endgamePoints);
 //      console.log("   -> endgamePoints = "+endgamePoints); //TEST
-      var currentTrap = (parseInt(this.data[i]["endgametrap"]));
-      pdata[tn]["trapPercentage"] += currentTrap;
+      //var currentTrap = (parseInt(this.data[i]["endgametrap"]));
+      //pdata[tn]["trapPercentage"] += currentTrap;
+      pdata[tn]["autonCoralFloorPercent"] += autonCoralFloor;
+      pdata[tn]["autonCoralStationPercent"] += autonCoralStation;
+      pdata[tn]["autonAlgaeFloorPercent"] += autonAlgaeFloor;
+      pdata[tn]["autonAlgaeReefPercent"] += autonAlgaeReef;
         
-      var currentSpotlit = (parseInt(this.data[i]["endgamespotlit"]));
-      pdata[tn]["spotlitPercentage"] += currentSpotlit;
+      pdata[tn]["teleopAlgaeFloor"] += teleopAlgaeFloor;
+      pdata[tn]["teleopCoralFloor"] += teleopCoralFloor;
+      //var currentSpotlit = (parseInt(this.data[i]["endgamespotlit"]));
+      //pdata[tn]["spotlitPercentage"] += currentSpotlit;
       
-      var totalNotes = totalAutoNotes + totalTeleopNotes;
+      var totalCoral = totalAutoCoral + totalTeleopCoral;
+      var totalAlgae = totalAutoAlgae + totalTeleopAlgae;
+      var totalAutoPoints = totalAutoCoralPoints + totalAutoAlgaePoints
+      var totalTeleopPoints = totalTeleopCoralPoints + totalTeleopAlgaePoints
+      var totalPoints = totalAutoPoints + totalTeleopPoints
+    
 
-      pdata[tn]["avgtotalnotes"] += totalNotes;
-      pdata[tn]["maxtotalnotes"] = Math.max(pdata[tn]["maxtotalnotes"], totalNotes);
-
-      pdata[tn]["avgautonotes"] += totalAutoNotes;
-      pdata[tn]["maxautonotes"] = Math.max(pdata[tn]["maxautonotes"], totalAutoNotes);
+      pdata[tn]["avgTotalCoral"] += totalCoral;
+      pdata[tn]["maxTotalCoral"] = Math.max(pdata[tn]["maxTotalCoral"], totalCoral);
+        
+      pdata[tn]["avgTotalAlgae"] += totalAlgae;
+      pdata[tn]["maxTotalAlgae"] = Math.max(pdata[tn]["maxTotalAlgae"], totalAlgae);
+        
+      pdata[tn]["avgTotalAutoPoints"] += totalAutoPoints;
+      pdata[tn]["maxTotalAutoPoints"] = Math.max(pdata[tn]["maxTotalAutoPoints"], totalAutoPoints);
+        
+      pdata[tn]["avgTotalAutoCoralPoints"] += totalAutoCoralPoints;
+      pdata[tn]["maxTotalAutoCoralPoints"] = Math.max(pdata[tn]["maxTotalAutoCoralPoints"], totalAutoCoralPoints);
+        
+      pdata[tn]["avgTotalAutoAlgaePoints"] += totalAutoAlgaePoints;
+      pdata[tn]["maxTotalAutoAlgaePoints"] = Math.max(pdata[tn]["maxTotalAutoAlgaePoints"], totalAutoAlgaePoints);
+        
+      pdata[tn]["avgTotalTeleopPoints"] += totalTeleopPoints;
+      pdata[tn]["maxTotalTeleopPoints"] = Math.max(pdata[tn]["maxTotalTeleopPoints"], totalTeleopPoints);
+        
+      pdata[tn]["avgTotalTeleopCoralPoints"] += totalTeleopCoralPoints;
+      pdata[tn]["maxTotalTeleopCoralPoints"] = Math.max(pdata[tn]["maxTotalTeleopCoralPoints"], totalTeleopCoralPoints);
+        
+      pdata[tn]["avgTotalTeleopAlgaePoints"] += totalTeleopAlgaePoints;
+      pdata[tn]["maxTotalTeleopAlgaePoints"] = Math.max(pdata[tn]["maxTotalTeleopAlgaePoints"], totalTeleopAlgaePoints);
+        
+      /*pdata[tn]["avgAutoCoral"] += totalAutoCoral;
+      pdata[tn]["maxAutoCoral"] = Math.max(pdata[tn]["maxAutoCoral"], totalAutoCoral);
 //      console.log("   -> avgautopoints = "+pdata[tn]["avgautopoints"]); //TEST
 
       pdata[tn]["avgteleopnotes"] += totalTeleopNotes;
-      pdata[tn]["maxteleopnotes"] = Math.max(pdata[tn]["maxteleopnotes"], totalTeleopNotes);
+      pdata[tn]["maxteleopnotes"] = Math.max(pdata[tn]["maxteleopnotes"], totalTeleopNotes);*/
 		
-      pdata[tn]["avgendgamepoints"] += endgamePoints;
-      pdata[tn]["maxendgamepoints"] = Math.max(pdata[tn]["maxendgamepoints"], endgamePoints);
+      pdata[tn]["avgEndgamePoints"] += endgameClimbPoints;
+      pdata[tn]["maxEndgamePoints"] = Math.max(pdata[tn]["maxEndgamePoints"], endgameClimbPoints);
 		
-      var currentAutonAmpNotes = (parseInt(this.data[i]["autonampnotes"]));
-      pdata[tn]["avgautonamps"] += currentAutonAmpNotes;
-      pdata[tn]["maxautonamps"] = Math.max(pdata[tn]["maxautonamps"], currentAutonAmpNotes);
-		
-      var currentAutonSpeakerNotes = (parseInt(this.data[i]["autonspeakernotes"]));
-      pdata[tn]["avgautonspeaker"] += currentAutonSpeakerNotes;
-      pdata[tn]["maxautonspeaker"] = Math.max(pdata[tn]["maxautonspeaker"], currentAutonSpeakerNotes);
-
-      var currentTeleopAmpNotes = (parseInt(this.data[i]["teleopampnotes"]));
-      pdata[tn]["avgteleopampnotes"] += currentTeleopAmpNotes;
-      pdata[tn]["maxteleopampnotes"] = Math.max(pdata[tn]["maxteleopampnotes"], currentTeleopAmpNotes);
-	
-      var currentTeleopSpeakerNotes = (parseInt(this.data[i]["teleopspeakernotes"]));
-      pdata[tn]["avgteleopspeakernotes"] += currentTeleopSpeakerNotes;
-      pdata[tn]["maxteleopspeakernotes"] = Math.max(pdata[tn]["maxteleopspeakernotes"], currentTeleopSpeakerNotes);
+      var currentAutonCoral = (parseInt(totalAutoCoral));
+      pdata[tn]["avgAutonCoral"] += currentAutonCoral;
+      pdata[tn]["maxAutonCoral"] = Math.max(pdata[tn]["maxAutonCoral"], currentAutonCoral);
         
-      var currentPasses = (parseInt(this.data[i]["teleoppasses"]));
-      pdata[tn]["avgPasses"] += currentPasses;
-      pdata[tn]["maxPasses"] = Math.max(pdata[tn]["maxPasses"], currentPasses);
+      var currentAutonAlgae = (parseInt(totalAutoAlgae));
+      pdata[tn]["avgAutonAlgae"] += currentAutonAlgae;
+      pdata[tn]["maxAutonAlgae"] = Math.max(pdata[tn]["maxAutonAlgae"], currentAutonAlgae);
+
+      var currentTeleopCoral = (parseInt(totalTeleopCoral));
+      pdata[tn]["avgTeleopCoral"] += currentTeleopCoral;
+      pdata[tn]["maxTeleopCoral"] = Math.max(pdata[tn]["maxTeleopCoral"], currentTeleopCoral);
+	
+      var currentTeleopAlgae = (parseInt(totalTeleopAlgae));
+      pdata[tn]["avgTeleopAlgae"] += currentTeleopAlgae;
+      pdata[tn]["maxTeleopAlgae"] = Math.max(pdata[tn]["maxTeleopAlgae"], currentTeleopAlgae);
 	
       // For boolean data, we are just incrementing that data instead of adding the new value here.
-      pdata[tn]["endgamestagepercent"][this.data[i]["endgamestage"]] += 1;
-      pdata[tn]["endgameharmonypercent"][this.data[i]["endgameharmony"]] += 1;
+      pdata[tn]["endgameClimbPercent"][this.data[i]["endgameClimbLevel"]] += 1;
+      pdata[tn]["endgameStartClimbPercent"][this.data[i]["endgameStartClimbing"]] += 1;
+      pdata[tn]["endgameFoulPercent"][this.data[i]["endgameFoulNumber"]] += 1;
 
       pdata[tn]["totaldied"] += this.data[i]["died"];
       pdata[tn]["totalmatches"] += 1;
@@ -320,50 +400,72 @@ class matchDataProcessor {
     for (var key in pdata) 
     {
 //      console.log(">>>> for team " + key);
-      pdata[key]["avgtotalnotes"] = Math.round(10 * pdata[key]["avgtotalnotes"] / pdata[key]["totalmatches"]) / 10;
-      pdata[key]["avgautonotes"] = Math.round(10 * pdata[key]["avgautonotes"] / pdata[key]["totalmatches"]) / 10;
-      pdata[key]["avgteleopnotes"] = Math.round(10 * pdata[key]["avgteleopnotes"] / pdata[key]["totalmatches"]) / 10; 
-      pdata[key]["avgendgamepoints"] = Math.round(10 * pdata[key]["avgendgamepoints"] / pdata[key]["totalmatches"]) / 10;
+      pdata[key]["avgTotalCoral"] = Math.round(10 * pdata[key]["avgTotalCoral"] / pdata[key]["totalmatches"]) / 10;
+      pdata[key]["avgTotalAlgae"] = Math.round(10 * pdata[key]["avgTotalAlgae"] / pdata[key]["totalmatches"]) / 10;
+      
+      pdata[key]["avgAutonCoral"] = Math.round(10 * pdata[key]["avgAutonCoral"] / pdata[key]["totalmatches"]) / 10;
+      pdata[key]["avgAutonAlgae"] = Math.round(10 * pdata[key]["avgAutonAlgae"] / pdata[key]["totalmatches"]) / 10;
+      pdata[key]
+      
+      pdata[key]["avgTeleopCoral"] = Math.round(10 * pdata[key]["avgTeleopCoral"] / pdata[key]["totalmatches"]) / 10; 
+      pdata[key]["avgTeleopAlgae"] = Math.round(10 * pdata[key]["avgTeleopAlgae"] / pdata[key]["totalmatches"]) / 10; 
+      
+      pdata[key]["avgEndgamePoints"] = Math.round(10 * pdata[key]["avgEndgamePoints"] / pdata[key]["totalmatches"]) / 10;
 	
-      pdata[key]["avgautonamps"] = Math.round(10 * pdata[key]["avgautonamps"] / pdata[key]["totalmatches"]) / 10;
-      pdata[key]["avgautonspeaker"] = Math.round(10 * pdata[key]["avgautonspeaker"] / pdata[key]["totalmatches"]) / 10;
-		
-      var totalAutonSpeakerShots = (parseInt(pdata[key]["totalAutonSpeakerNotes"]) + (parseInt(pdata[key]["totalAutonSpeakerMisses"])));
+      //pdata[key]["avgautonamps"] = Math.round(10 * pdata[key]["avgautonamps"] / pdata[key]["totalmatches"]) / 10;
+      //pdata[key]["avgautonspeaker"] = Math.round(10 * pdata[key]["avgautonspeaker"] / pdata[key]["totalmatches"]) / 10;
+
 //      console.log("     ---> total auton speakerShots calculated: " + totalAutonSpeakerShots); //TEST
       // If there are no shots, don't bother doing the calculation here.
-      if (totalAutonSpeakerShots != 0) {
+      /*if (totalAutonSpeakerShots != 0) {
         var autonSpeakerShotPercent = (parseInt(pdata[key]["totalAutonSpeakerNotes"])) / totalAutonSpeakerShots;
         pdata[key]["autonSpeakerShootPercent"] = Math.round(100 * autonSpeakerShotPercent);
 //        console.log("     ---> Auton speakerShootingPercentage: " + pdata[key]["autonSpeakerShootPercent"]); //TEST
-      }
+      }*/
 
-      pdata[key]["avgteleopampnotes"] = Math.round(10 * pdata[key]["avgteleopampnotes"] / pdata[key]["totalmatches"]) / 10;
-      pdata[key]["avgteleopspeakernotes"] = Math.round(10 * pdata[key]["avgteleopspeakernotes"] / pdata[key]["totalmatches"]) / 10;
-      pdata[key]["avgPasses"] = Math.round(10 * pdata[key]["avgPasses"] / pdata[key]["totalmatches"]) / 10;
+      //pdata[key]["avgteleopampnotes"] = Math.round(10 * pdata[key]["avgteleopampnotes"] / pdata[key]["totalmatches"]) / 10;
+      //pdata[key]["avgteleopspeakernotes"] = Math.round(10 * pdata[key]["avgteleopspeakernotes"] / pdata[key]["totalmatches"]) / 10;
+      //pdata[key]["avgPasses"] = Math.round(10 * pdata[key]["avgPasses"] / pdata[key]["totalmatches"]) / 10;
 
-      var totalTeleopSpeakerShots = (parseInt(pdata[key]["totalTeleopSpeakerNotes"]) + (parseInt(pdata[key]["totalTeleopSpeakerMisses"])));
+      var totalCoralAcquired = (parseInt(pdata[key]["teleopAcquireCoral"]);
 //      console.log("     ---> total teleop speakerShots calculated: " + totalTeleopSpeakerShots); //TEST
       // If there are no shots, don't bother doing the calculation here.
-      if (totalTeleopSpeakerShots != 0) {
-        var teleopSpeakerShotPercent = (parseInt(pdata[key]["totalTeleopSpeakerNotes"])) / totalTeleopSpeakerShots;
-        pdata[key]["teleopSpeakerShootPercent"] = Math.round(100 * teleopSpeakerShotPercent);
+      if (totalCoralAcquired != 0) {
+        var teleopCoralPercent = (parseInt(pdata[key]["teleopAcquireCoral"])) / totalCoralAcquired;
+        pdata[key]["teleopCoralScoringPercent"] = Math.round(100 * teleopCoralPercent);
+//        console.log("     ---> speakerShootingPercentage: " + pdata[key]["teleopSpeakerShootPercent"]); //TEST
+      }
+        
+      var totalAlgaeAcquired = (parseInt(pdata[key]["teleopAcquireAlgae"]);
+//      console.log("     ---> total teleop speakerShots calculated: " + totalTeleopSpeakerShots); //TEST
+      // If there are no shots, don't bother doing the calculation here.
+      if (totalAlgaeAcquired != 0) {
+        var teleopAlgaePercent = (parseInt(pdata[key]["teleopAcquireAlgae"])) / totalAlgaeAcquired;
+        pdata[key]["teleopAlgaeScoringPercent"] = Math.round(100 * teleopAlgaePercent);
 //        console.log("     ---> speakerShootingPercentage: " + pdata[key]["teleopSpeakerShootPercent"]); //TEST
       }
 
-      pdata[key]["trapPercentage"] = Math.round(100 * pdata[key]["trapPercentage"] / pdata[key]["totalmatches"]);
-      pdata[key]["spotlitPercentage"] = Math.round(100 * pdata[key]["spotlitPercentage"] / pdata[key]["totalmatches"]);
+      //pdata[key]["trapPercentage"] = Math.round(100 * pdata[key]["trapPercentage"] / pdata[key]["totalmatches"]);
+      //pdata[key]["spotlitPercentage"] = Math.round(100 * pdata[key]["spotlitPercentage"] / pdata[key]["totalmatches"]);
 //      console.log("   >> number of traps is = " + pdata[key]["trapPercentage"]);
 //      console.log("   >> spotlit (percentage) is = "+ pdata[key]["spotlitPercentage"]);
 		
 //      console.log("  ===> totalmatches = "+pdata[key]["totalmatches"]); //TEST
         
-      pdata[key]["endgamestagepercent"][0] = Math.round(100 * pdata[key]["endgamestagepercent"][0] / pdata[key]["totalmatches"]);
-      pdata[key]["endgamestagepercent"][1] = Math.round(100 * pdata[key]["endgamestagepercent"][1] / pdata[key]["totalmatches"]);
-      pdata[key]["endgamestagepercent"][2] = Math.round(100 * pdata[key]["endgamestagepercent"][2] / pdata[key]["totalmatches"]);
+      pdata[key]["endgameClimbPercent"][0] = Math.round(100 * pdata[key]["endgameClimbPercent"][0] / pdata[key]["totalmatches"]);
+      pdata[key]["endgameClimbPercent"][1] = Math.round(100 * pdata[key]["endgameClimbPercent"][1] / pdata[key]["totalmatches"]);
+      pdata[key]["endgameClimbPercent"][2] = Math.round(100 * pdata[key]["endgameClimbPercent"][2] / pdata[key]["totalmatches"]);
+      pdata[key]["endgameClimbPercent"][3] = Math.round(100 * pdata[key]["endgameClimbPercent"][3] / pdata[key]["totalmatches"]);
+      pdata[key]["endgameClimbPercent"][4] = Math.round(100 * pdata[key]["endgameClimbPercent"][4] / pdata[key]["totalmatches"]);
         
-      pdata[key]["endgameharmonypercent"][0] = Math.round(100 * pdata[key]["endgameharmonypercent"][0] / pdata[key]["totalmatches"]);
-      pdata[key]["endgameharmonypercent"][1] = Math.round(100 * pdata[key]["endgameharmonypercent"][1] / pdata[key]["totalmatches"]);
-      pdata[key]["endgameharmonypercent"][2] = Math.round(100 * pdata[key]["endgameharmonypercent"][2] / pdata[key]["totalmatches"]);
+      pdata[key]["endgameStartClimbingPercent"][0] = Math.round(100 * pdata[key]["endgameStartClimbingPercent"][0] / pdata[key]["totalmatches"]);
+      pdata[key]["endgameStartClimbingPercent"][1] = Math.round(100 * pdata[key]["endgameStartClimbingPercent"][1] / pdata[key]["totalmatches"]);
+      pdata[key]["endgameStartClimbingPercent"][2] = Math.round(100 * pdata[key]["endgameStartClimbingPercent"][2] / pdata[key]["totalmatches"]);
+      pdata[key]["endgameStartClimbingPercent"][3] = Math.round(100 * pdata[key]["endgameStartClimbingPercent"][3] / pdata[key]["totalmatches"]);
+        
+      pdata[key]["endgameFoulPercent"][0] = Math.round(100 * pdata[key]["endgameFoulPercent"][0] / pdata[key]["totalmatches"]);
+      pdata[key]["endgameFoulPercent"][1] = Math.round(100 * pdata[key]["endgameFoulPercent"][1] / pdata[key]["totalmatches"]);
+      pdata[key]["endgameFoulPercent"][2] = Math.round(100 * pdata[key]["endgameFoulPercent"][2] / pdata[key]["totalmatches"]);
     }
     return pdata;
   }
