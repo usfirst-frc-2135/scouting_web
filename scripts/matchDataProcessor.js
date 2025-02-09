@@ -387,7 +387,7 @@ class matchDataProcessor {
 	
       // For boolean data, we are just incrementing that data instead of adding the new value here.
       pdata[tn]["endgameClimbPercent"][this.data[i]["endgameClimbLevel"]] += 1;
-      pdata[tn]["endgameStartClimbPercent"][this.data[i]["endgameStartClimbing"]] += 1;
+      //HOLD pdata[tn]["endgameStartClimbPercent"][this.data[i]["endgameStartClimbing"]] += 1;
       pdata[tn]["endgameFoulPercent"][this.data[i]["endgameFoulNumber"]] += 1;
 
       pdata[tn]["totaldied"] += this.data[i]["died"];
@@ -427,7 +427,7 @@ class matchDataProcessor {
       //pdata[key]["avgteleopspeakernotes"] = Math.round(10 * pdata[key]["avgteleopspeakernotes"] / pdata[key]["totalmatches"]) / 10;
       //pdata[key]["avgPasses"] = Math.round(10 * pdata[key]["avgPasses"] / pdata[key]["totalmatches"]) / 10;
 
-      var totalCoralAcquired = (parseInt(pdata[key]["teleopAcquireCoral"]);
+      var totalCoralAcquired = (parseInt(pdata[key]["teleopAcquireCoral"]));
 //      console.log("     ---> total teleop speakerShots calculated: " + totalTeleopSpeakerShots); //TEST
       // If there are no shots, don't bother doing the calculation here.
       if (totalCoralAcquired != 0) {
@@ -436,7 +436,7 @@ class matchDataProcessor {
 //        console.log("     ---> speakerShootingPercentage: " + pdata[key]["teleopSpeakerShootPercent"]); //TEST
       }
         
-      var totalAlgaeAcquired = (parseInt(pdata[key]["teleopAcquireAlgae"]);
+      var totalAlgaeAcquired = (parseInt(pdata[key]["teleopAcquireAlgae"]));
 //      console.log("     ---> total teleop speakerShots calculated: " + totalTeleopSpeakerShots); //TEST
       // If there are no shots, don't bother doing the calculation here.
       if (totalAlgaeAcquired != 0) {
