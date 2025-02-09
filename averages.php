@@ -55,37 +55,63 @@ COMMENTED OUT FOR NOW-->
             <col span="2" style="background-color:#cfe2ff">
             <col span="2" style="background-color:transparent">
             <col span="2" style="background-color:#cfe2ff">
-            <col span="3" style="background-color:#B5D3FF">
             <col span="2" style="background-color:transparent">
+            <col span="2" style="background-color:#cfe2ff">
+            <col span="2" style="background-color:transparent">
+            <col span="2" style="background-color:#cfe2ff">
+            <col span="2" style="background-color:transparent">
+            <col span="2" style="background-color:#B5D3FF">
+            <col span="2" style="background-color:#cfe2ff">
+            <col span="2" style="background-color:#B5D3FF">
+            <col span="2" style="background-color:#cfe2ff">
+            <col span="2" style="background-color:#B5D3FF">
+            <col span="2" style="background-color:#transparent">
+            <col span="2" style="background-color:cfe2ff">
+            <col span="2" style="background-color:#transparent">
             <col span="3" style="background-color:#cfe2ff">
+            <col span="2" style="background-color:#B5D3FF">
+            <col span="2" style="background-color:#cfe2ff">
+            <col span="2" style="background-color:#B5D3FF">
+            <col span="2" style="background-color:#cfe2ff">
+            <col span="3" style="background-color:transparent">
+            <col span="2" style="background-color:#cfe2ff">
             <col span="2" style="background-color:transparent">
-            <col span="1" style="background-color:#cfe2ff">
             <col span="1" style="background-color:#B5D3FF">
             <col span="1" style="background-color:#cfe2ff">
+            <col span="1" style="background-color:#B5D3FF">
             <col span="1" style="background-color:#cfe2ff">
             <col span="1" style="background-color:#B5D3FF">
             <col span="1" style="background-color:#cfe2ff">
             <col span="1" style="background-color:#b5d3ff">
+            <col span="1" style="background-color:#cfe2ff">
+            <col span="1" style="background-color:#b5d3ff">
+            <col span="1" style="background-color:#cfe2ff">
             <col span="1" style="background-color:#b5d3ff">
 
           </colgroup>
           <thead>
             <tr>
               <th colspan="1" class="text-center" ></th>
-              <th colspan="26" class="text-center" >Averages</th>
+              <th colspan="66" class="text-center" >Averages</th>
             </tr>
             <tr>
               <th colspan="1" class="text-center" ></th>
-              <th colspan="26" class="text-center" >Table</th>
+              <th colspan="66" class="text-center" >Table</th>
             </tr>
             <tr>
               <th colspan="1" class="text-center"></th>
-              <th colspan="2" class="text-center fw-bold" style="background-color:#3686FF">Total Notes</th>
-              <th colspan="2" class="text-center">Total Auto Notes</th>
-              <th colspan="2" class="text-center" style="background-color:#3686FF">Total Teleop Notes</th>
+              <th colspan="2" class="text-center fw-bold" style="background-color:#3686FF">Total Points</th>
+              <th colspan="2" class="text-center fw-bold">Total Coral</th>
+              <th colspan="2" class="text-center fw-bold" style="background-color:#3686FF">Total Algae</th>
+              <th colspan="2" class="text-center">Total Auto Points</th>
+              <th colspan="2" class="text-center" style="background-color:#3686FF">Auto Coral Points</th>
+              <th colspan="2" class="text-center">Auto Algae Points</th>
+              <th colspan="2" class="text-center" style="background-color:#3686FF">Total Teleop Points</th>
+              <th colspan="2" class="text-center">Teleop Coral Points</th>
+              <th colspan="2" class="text-center" style="background-color:#3686FF">Teleop Algae Points</th>
               <th colspan="2" class="text-center">Endgame Pts</th>
-              <th colspan="5" class="text-center" style="background-color:#3686FF">Auton</th>
-              <th colspan="7" class="text-center">Teleop</th>
+              <th colspan="16" class="text-center" style="background-color:#3686FF">Auton</th>
+              <th colspan="18" class="text-center">Teleop</th>
               <th colspan="8" class="text-center" style="background-color:#3686FF">Endgame</th>
               <th colspan="1" class="text-center fw-bold">Died</th>
             </tr>
@@ -100,17 +126,77 @@ COMMENTED OUT FOR NOW-->
               <th colspan="1"></th>
               <th colspan="1"></th>
               <th colspan="1"></th>
+              <th colspan="1"></th>
+              <th colspan="1"></th>
+              <th colspan="1"></th>
+              <th colspan="1"></th>
+              <th colspan="1"></th>
+              <th colspan="1"></th>
+              <th colspan="1"></th>
+              <th colspan="1"></th>
+              <th colspan="1"></th>
+              <th colspan="1"></th>
+              <th colspan="1"></th>
+              <th colspan="1"></th>
               
-              <th colspan="2" class="text-center">Amp</th>
-              <th colspan="3" class="text-center">Speaker</th>
+              <th colspan="10" class="text-center">Coral</th>
+              <th colspan="6" class="text-center">Algae</th>
 				
-              <th colspan="2" class="text-center">Amp</th>
-              <th colspan="3" class="text-center">Speaker</th>
-              <th colspan="2" class="text-center">Passes</th>
-              <th colspan="3" class="text-center" style="background-color:#83B4FF">Stage%</th>
-              <th colspan="3" class="text-center" style="background-color:#83B4FF">Harmony%</th> 
-              <th colspan="1" class="text-center" style="background-color:#83b4ff">Trap</th> 
-              <th colspan="1" class="text-center" style="background-color:#83b4ff">Spotlit</th> 
+              <th colspan="11" class="text-center" style="background-color:#83B4FF">Coral</th>
+              <th colspan="7" class="text-center">Algae</th>
+              <th colspan="5" class="text-center" style="background-color:#83B4FF">Climb%</th>
+              <!--<th colspan="4" class="text-center" style="background-color:#83B4FF">Climb Start%</th>--> 
+              <th colspan="3" class="text-center" style="background-color:#83b4ff">Fouls%</th> 
+              <th colspan="1"></th>
+            </tr>
+            <tr>
+              <th colspan="1"></th>
+              <th colspan="1"></th> 
+              <th colspan="1"></th>
+              <th colspan="1"></th>
+              <th colspan="1"></th>
+              <th colspan="1"></th>
+				
+              <th colspan="1"></th>
+              <th colspan="1"></th>
+              <th colspan="1"></th>
+              <th colspan="1"></th>
+              <th colspan="1"></th>
+              <th colspan="1"></th>
+              <th colspan="1"></th>
+              <th colspan="1"></th>
+              <th colspan="1"></th>
+              <th colspan="1"></th>
+              <th colspan="1"></th>
+              <th colspan="1"></th>
+              <th colspan="1"></th>
+              <th colspan="1"></th>
+              <th colspan="1"></th>
+              <th colspan="2" class="text-center">Total</th>
+              <th colspan="2" class="text-center">L1</th>
+              <th colspan="2" class="text-center">L2</th>
+              <th colspan="2" class="text-center">L3</th>
+              <th colspan="2" class="text-center">L4</th>
+              <th colspan="2" class="text-center">Total</th>
+              <th colspan="2" class="text-center">Net</th>
+              <th colspan="2" class="text-center">Proc</th>
+            
+              <th colspan="3" class="text-center">Total</th>
+              <th colspan="2" class="text-center">L1</th>
+              <th colspan="2" class="text-center">L2</th>
+              <th colspan="2" class="text-center">L3</th>
+              <th colspan="2" class="text-center">L4</th>
+              <th colspan="3" class="text-center">Total</th>
+              <th colspan="2" class="text-center">Net</th>
+              <th colspan="2" class="text-center">Proc</th>
+              <th colspan="1"></th>
+              <th colspan="1"></th>
+              <th colspan="1"></th>
+              <th colspan="1"></th>
+              <th colspan="1"></th>
+              <th colspan="1"></th>
+              <th colspan="1"></th>
+              <th colspan="1"></th>
               <th colspan="1"></th>
             </tr>
             <tr>
@@ -127,7 +213,26 @@ COMMENTED OUT FOR NOW-->
               <th scope="col">Max</th>
               <th scope="col">Avg</th>
               <th scope="col">Max</th>
-              <th scope="col">Acc%</th>
+              <th scope="col">Avg</th>
+              <th scope="col">Max</th>
+              <th scope="col">Avg</th>
+              <th scope="col">Max</th>
+              <th scope="col">Avg</th>
+              <th scope="col">Max</th>
+              <th scope="col">Avg</th>
+              <th scope="col">Max</th>
+              <th scope="col">Avg</th>
+              <th scope="col">Max</th>
+              <th scope="col">Avg</th>
+              <th scope="col">Max</th>
+              <th scope="col">Avg</th>
+              <th scope="col">Max</th>
+              <th scope="col">Avg</th>
+              <th scope="col">Max</th>
+              <th scope="col">Avg</th>
+              <th scope="col">Max</th>
+              <th scope="col">Avg</th>
+              <th scope="col">Max</th>
               <th scope="col">Avg</th>
               <th scope="col">Max</th>
               <th scope="col">Avg</th>
@@ -135,14 +240,34 @@ COMMENTED OUT FOR NOW-->
               <th scope="col">Acc%</th>
               <th scope="col">Avg</th>
               <th scope="col">Max</th>
+              <th scope="col">Avg</th>
+              <th scope="col">Max</th>
+              <th scope="col">Avg</th>
+              <th scope="col">Max</th>
+              <th scope="col">Avg</th>
+              <th scope="col">Max</th>
+              <th scope="col">Avg</th>
+              <th scope="col">Max</th>
+              <th scope="col">Acc%</th>
+              <th scope="col">Avg</th>
+              <th scope="col">Max</th>
+              <th scope="col">Avg</th>
+              <th scope="col">Max</th>
+              <th scope="col">Avg</th>
+              <th scope="col">Max</th>
+                
               <th class="text-center" scope="col">N</th>
               <th class="text-center" scope="col">P</th>
-              <th class="text-center" scope="col">O</th>
+              <th class="text-center" scope="col">F</th>
+              <th class="text-center" scope="col">S</th>
+              <th class="text-center" scope="col">D</th>
+              <!--<th class="text-center" scope="col">N</th>
+              <th class="text-center" scope="col">Bell</th>
+              <th class="text-center" scope="col">10s</th>
+              <th class="text-center" scope="col">5s</th>-->
               <th class="text-center" scope="col">0</th>
               <th class="text-center" scope="col">1</th>
-              <th class="text-center" scope="col">2</th>
-              <th class="text-center" scope="col">%</th>
-              <th class="text-center" scope="col">%</th>
+              <th class="text-center" scope="col">2+</th>
               <th class="text-center" scope="col">#</th>
             </tr>
 
@@ -190,47 +315,87 @@ COMMENTED OUT FOR NOW-->
     /* Write data to table */
     $("#tableData").html(""); // Clear Table
     for (let teamNum of teamList) {
-      var endgamestagePercentage = dummyGet(scoutingData[teamNum], "endgamestagepercent");
-      var endgameharmonyPercentage = dummyGet(scoutingData[teamNum], "endgameharmonypercent");
+      var endgameClimbPercentage = dummyGet(scoutingData[teamNum], "endgameClimbPercent");
+      //var endgameClimbStartPercentage = dummyGet(scoutingData[teamNum], "endgameStartClimbPercent");
+      var endgameFoulPercentage = dummyGet(scoutingData[teamNum], "endgameFoulPercent");
 
       var rowString = "<tr>" +
         "<td align=\"center\"><a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a></td>" +
         //"<td>" + dummyGet(tbaData[teamNum], "totalPoints") + "</td>" +
         //HOLD"<td>" + dummyGet(internalEloRank["elo"], teamNum) + "</td>" +
-        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgtotalnotes") + "</td>" +
-        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxtotalnotes") + "</td>" +
-        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgautonotes") + "</td>" +
-        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxautonotes") + "</td>" +
-        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgteleopnotes") + "</td>" +
-        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxteleopnotes") + "</td>" +
-        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgendgamepoints") + "</td>" +
-        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxendgamepoints") + "</td>" +
+        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgTotalPoints") + "</td>" +
+        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxTotalPoints") + "</td>" +
+        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgTotalCoral") + "</td>" +
+        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxTotalCoral") + "</td>" +
+        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgTotalAlgae") + "</td>" +
+        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgTotalAlgae") + "</td>" +
+        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgTotalAutoPoints") + "</td>" +
+        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxTotalAutoPoints") + "</td>" +
+        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgTotalAutoCoralPoints") + "</td>" +
+        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxTotalAutoCoralPoints") + "</td>" +
+        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgTotalAutoAlgaePoints") + "</td>" +
+        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxTotalAutoAlgaePoints") + "</td>" +
+        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgTotalTeleopPoints") + "</td>" +
+        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxTotalTeleopPoints") + "</td>" +
+        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgTotalTeleopCoralPoints") + "</td>" +
+        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxTotalTeleopCoralPoints") + "</td>" +
+        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgTotalTeleopAlgaePoints") + "</td>" +
+        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxTotalTeleopAlgaePoints") + "</td>" +
+        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgEndgamePoints") + "</td>" +
+        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxEndgamePoints") + "</td>" +
 
-        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgautonamps") + "</td>" +
-	    "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxautonamps") + "</td>" +
-	    "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgautonspeaker") + "</td>" +
-	    "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxautonspeaker") + "</td>" +
-        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "autonSpeakerShootPercent") + "</td>" +
+        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgAutonCoral") + "</td>" +
+	    "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxAutonCoral") + "</td>" +
+        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgAutonCoralL1") + "</td>" +
+        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxAutonCoralL1") + "</td>" +
+        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgAutonCoralL2") + "</td>" +
+        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxAutonCoralL2") + "</td>" +
+        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgAutonCoralL3") + "</td>" +
+        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxAutonCoralL3") + "</td>" +
+        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgAutonCoralL4") + "</td>" +
+        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxAutonCoralL4") + "</td>" +
+        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgAutonAlgae") + "</td>" +
+	    "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxAutonAlgae") + "</td>" +
+        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgAutonAlgaeNet") + "</td>" +
+        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxAutonAlgaeNet") + "</td>" +
+        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgAutonAlgaeProc") + "</td>" +
+        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxAutonAlgaeProc") + "</td>" +
 		  
-        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgteleopampnotes") + "</td>" +
-	    "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxteleopampnotes") + "</td>" +
-	    "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgteleopspeakernotes") + "</td>" +
-	    "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxteleopspeakernotes") + "</td>" +
-        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "teleopSpeakerShootPercent") + "</td>" +
+        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "teleopCoralScoringPercent") + "</td>" +
+        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgTeleopCoralScored") + "</td>" +
+	    "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxTeleopCoralScored") + "</td>" +
+        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgTeleopCoralL1") + "</td>" +
+        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxTeleopCoralL1") + "</td>" +
+        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgTeleopCoralL2") + "</td>" +
+        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxTeleopCoralL2") + "</td>" +
+        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgTeleopCoralL3") + "</td>" +
+        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxTeleopCoralL3") + "</td>" +
+        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgTeleopCoralL4") + "</td>" +
+        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxTeleopCoralL4") + "</td>" +
+        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "teleopAlgaeScoringPercent") + "</td>" +
+	    "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgTeleopAlgaeScored") + "</td>" +
+	    "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxTeleopAlgaeScored") + "</td>" +
+        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgTeleopAlgaeNet") + "</td>" +
+        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxTeleopAlgaeNet") + "</td>" +
+        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgTeleopAlgaeProc") + "</td>" +
+        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxTeleopAlgaeProc") + "</td>" +
 		  
-	    "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgPasses") + "</td>" +
-	    "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxPasses") + "</td>" +
-
-        "<td align=\"center\">" + dummyGet(endgamestagePercentage, 0) + "</td>" +
-        "<td align=\"center\">" + dummyGet(endgamestagePercentage, 1) + "</td>" +
-        "<td align=\"center\">" + dummyGet(endgamestagePercentage, 2) + "</td>" +
+        "<td align=\"center\">" + dummyGet(endgameClimbPercentage, 0) + "</td>" +
+        "<td align=\"center\">" + dummyGet(endgameClimbPercentage, 1) + "</td>" +
+        "<td align=\"center\">" + dummyGet(endgameClimbPercentage, 2) + "</td>" +
+        "<td align=\"center\">" + dummyGet(endgameClimbPercentage, 3) + "</td>" +
+        "<td align=\"center\">" + dummyGet(endgameClimbPercentage, 4) + "</td>" +
           
-        "<td align=\"center\">" + dummyGet(endgameharmonyPercentage, 0) + "</td>" +
-        "<td align=\"center\">" + dummyGet(endgameharmonyPercentage, 1) + "</td>" +
-        "<td align=\"center\">" + dummyGet(endgameharmonyPercentage, 2) + "</td>" +
+        /*"<td align=\"center\">" + dummyGet(endgameClimbStartPercentage, 0) + "</td>" +
+        "<td align=\"center\">" + dummyGet(endgameClimbStartPercentage, 1) + "</td>" +
+        "<td align=\"center\">" + dummyGet(endgameClimbStartPercentage, 2) + "</td>" +*/
           
-        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "trapPercentage") + "</td>" +
-        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "spotlitPercentage") + "</td>" +
+        "<td align=\"center\">" + dummyGet(endgameFoulPercentage, 0) + "</td>" +
+        "<td align=\"center\">" + dummyGet(endgameFoulPercentage, 1) + "</td>" +
+        "<td align=\"center\">" + dummyGet(endgameFoulPercentage, 2) + "</td>" +
+          
+        //"<td align=\"center\">" + dummyGet(scoutingData[teamNum], "trapPercentage") + "</td>" +
+        //"<td align=\"center\">" + dummyGet(scoutingData[teamNum], "spotlitPercentage") + "</td>" +
         "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "totaldied") + "</td>" + 
         "</td>"; 
 

@@ -212,6 +212,7 @@
         "<td align=\"center\">" + dataObj[i]["teleopAnchorFoul"] + "</td>" +  
         "<td align=\"center\">" + dataObj[i]["teleopCageFoul"] + "</td>" +
         "<td align=\"center\">" + dataObj[i]["teleopBargeZoneFoul"] + "</td>" +
+        "<td align=\"center\">" + dataObj[i]["teleopReefZoneFoul"] + "</td>" +
         "<td align=\"center\">" + dataObj[i]["endgameClimbLevel"] + "</td>" +
         "<td align=\"center\">" + dataObj[i]["endgameStartClimbing"] + "</td>" + 
         

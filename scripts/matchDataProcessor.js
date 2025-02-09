@@ -200,6 +200,22 @@ class matchDataProcessor {
         pdata[tn]["maxAutonCoral"] = 0;
         pdata[tn]["avgAutonAlgae"] = 0;
         pdata[tn]["maxAutonAlgae"] = 0;
+        pdata[tn]["avgAutonCoralL1"] = 0;
+        pdata[tn]["maxAutonCoralL1"] = 0;
+        pdata[tn]["avgAutonCoralL2"] = 0;
+        pdata[tn]["maxAutonCoralL2"] = 0;
+        pdata[tn]["avgAutonCoralL3"] = 0;
+        pdata[tn]["maxAutonCoralL3"] = 0;
+        pdata[tn]["avgAutonCoralL4"] = 0;
+        pdata[tn]["maxAutonCoralL4"] = 0;
+        pdata[tn]["avgAutonAlgaeNet"] = 0;
+        pdata[tn]["avgAutonAlgaeProc"] = 0;
+        pdata[tn]["maxAutonAlgaeNet"] = 0;
+        pdata[tn]["maxAutonAlgaeProc"] = 0;
+        pdata[tn]["avgTotalAutoCoralPoints"] = 0;
+        pdata[tn]["maxTotalAutoCoralPoints"] = 0;
+        pdata[tn]["avgTotalAutoAlgaePoints"] = 0;
+        pdata[tn]["maxTotalAutoAlgaePoints"] = 0;
         pdata[tn]["autonStartPositionPercent"] = {0:0, 1:0, 2:0};
         pdata[tn]["autonCoralPickupFloor"] = 0;
         pdata[tn]["autonCoralPickupStation"] = 0;
@@ -210,10 +226,26 @@ class matchDataProcessor {
         pdata[tn]["maxTeleopCoralScored"] = 0;
         pdata[tn]["avgTeleopAlgaeScored"] = 0;
         pdata[tn]["maxTeleopAlgaeScored"] = 0;
+        pdata[tn]["avgTeleopCoralL1"] = 0;
+        pdata[tn]["maxTeleopCoralL1"] = 0;
+        pdata[tn]["avgTeleopCoralL2"] = 0;
+        pdata[tn]["maxTeleopCoralL2"] = 0;
+        pdata[tn]["avgTeleopCoralL3"] = 0;
+        pdata[tn]["maxTeleopCoralL3"] = 0;
+        pdata[tn]["avgTeleopCoralL4"] = 0;
+        pdata[tn]["maxTeleopCoralL4"] = 0;
+        pdata[tn]["avgTeleopAlgaeNet"] = 0;
+        pdata[tn]["avgTeleopAlgaeProc"] = 0;
+        pdata[tn]["maxTeleopAlgaeNet"] = 0;
+        pdata[tn]["maxTeleopAlgaeProc"] = 0;
+        pdata[tn]["avgTotalTeleopCoralPoints"] = 0;
+        pdata[tn]["maxTotalTeleopCoralPoints"] = 0;
+        pdata[tn]["avgTotalTeleopAlgaePoints"] = 0;
+        pdata[tn]["maxTotalTeleopAlgaePoints"] = 0;
         pdata[tn]["teleopCoralScoringPercent"] = 0;
-        pdata[tn]["teleopAlgaeScoringPercent"]
-        pdata[tn]["totalTeleopCoralAcquired"] = 0;    // for calculating shooting percentage
-        pdata[tn]["totalTeleopAlgaeAcquired"] = 0;   // for calculating shooting percentage
+        pdata[tn]["teleopAlgaeScoringPercent"] = 0;
+        pdata[tn]["teleopAcquireCoral"] = 0;    // for calculating shooting percentage
+        pdata[tn]["teleopAcquireAlgae"] = 0;   // for calculating shooting percentage
         pdata[tn]["teleopAlgaeFloorPickup"] = 0;
         pdata[tn]["teleopCoralFloorPickup"] = 0;
         pdata[tn]["teleopKnockOffAlgae"] = 0;
@@ -267,9 +299,9 @@ class matchDataProcessor {
       var currentTeleopCoralAcquired = (this.data[i]["teleopAcquireCoral"]);
       var currentTeleopAlgaeAcquired = (this.data[i]["teleopAcquireAlgae"]);
       pdata[tn]["totalTeleopCoral"] += parseInt(totalTeleopCoral);
-      pdata[tn]["totalTeleopCoralAcquired"] += parseInt(currentTeleopCoralAcquired);
+      pdata[tn]["teleopAcquireCoral"] += parseInt(currentTeleopCoralAcquired);
       pdata[tn]["totalTeleopAlgae"] += parseInt(totalTeleopAlgae);
-      pdata[tn]["totalTeleopAlgaeAcquired"] += parseInt(currentTeleopAlgaeAcquired);
+      pdata[tn]["teleopAcquireAlgae"] += parseInt(currentTeleopAlgaeAcquired);
 //      console.log("   -> current teleop speaker notes = "+ currentTeleopSpeakerNotes); //TEST
 //      console.log("   -> current total teleop notes = "+ totalTeleopNotes); //TEST
 //      console.log("   -> total teleop speaker notes = " + pdata[tn]["totalTeleopSpeakerNotes"]); //TEST
@@ -378,13 +410,44 @@ class matchDataProcessor {
       pdata[tn]["maxAutonAlgae"] = Math.max(pdata[tn]["maxAutonAlgae"], currentAutonAlgae);
 
       var currentTeleopCoral = (parseInt(totalTeleopCoral));
-      pdata[tn]["avgTeleopCoral"] += currentTeleopCoral;
-      pdata[tn]["maxTeleopCoral"] = Math.max(pdata[tn]["maxTeleopCoral"], currentTeleopCoral);
+      pdata[tn]["avgTeleopCoralScored"] += currentTeleopCoral;
+      pdata[tn]["maxTeleopCoralScored"] = Math.max(pdata[tn]["maxTeleopCoralScored"], currentTeleopCoral);
 	
       var currentTeleopAlgae = (parseInt(totalTeleopAlgae));
-      pdata[tn]["avgTeleopAlgae"] += currentTeleopAlgae;
-      pdata[tn]["maxTeleopAlgae"] = Math.max(pdata[tn]["maxTeleopAlgae"], currentTeleopAlgae);
+      pdata[tn]["avgTeleopAlgaeScored"] += currentTeleopAlgae;
+      pdata[tn]["maxTeleopAlgaeScored"] = Math.max(pdata[tn]["maxTeleopAlgaeScored"], currentTeleopAlgae);
+        
+      pdata[tn]["avgAutonCoralL1"] += currentAutonCoralL1; 
+      pdata[tn]["avgAutonCoralL2"] += currentAutonCoralL2; 
+      pdata[tn]["avgAutonCoralL3"] += currentAutonCoralL3; 
+      pdata[tn]["avgAutonCoralL4"] += currentAutonCoralL4; 
+      
+      pdata[tn]["maxAutonCoralL1"] = Math.max(pdata[tn]["maxAutonCoralL1"], currentAutonCoralL1);
+      pdata[tn]["maxAutonCoralL2"] = Math.max(pdata[tn]["maxAutonCoralL2"], currentAutonCoralL2);
+      pdata[tn]["maxAutonCoralL3"] = Math.max(pdata[tn]["maxAutonCoralL3"], currentAutonCoralL3);
+      pdata[tn]["maxAutonCoralL4"] = Math.max(pdata[tn]["maxAutonCoralL4"], currentAutonCoralL4);
+    
+      pdata[tn]["avgAutonAlgaeNet"] += currentAutonAlgaeNet;
+      pdata[tn]["avgAutonAlgaeProc"] += currentAutonAlgaeProcessor;
+    
+      pdata[tn]["maxAutonAlgaeNet"] = Math.max(pdata[tn]["maxAutonAlgaeNet"], currentAutonAlgaeNet);
+      pdata[tn]["maxAutonAlgaeProc"] = Math.max(pdata[tn]["maxAutonAlgaeProc"], currentAutonAlgaeProcessor);
 	
+      pdata[tn]["avgTeleopCoralL1"] += currentTeleopCoralL1; 
+      pdata[tn]["avgTeleopCoralL2"] += currentTeleopCoralL2; 
+      pdata[tn]["avgTeleopCoralL3"] += currentTeleopCoralL3; 
+      pdata[tn]["avgTeleopCoralL4"] += currentTeleopCoralL4; 
+      
+      pdata[tn]["maxTeleopCoralL1"] = Math.max(pdata[tn]["maxTeleopCoralL1"], currentTeleopCoralL1);
+      pdata[tn]["maxTeleopCoralL2"] = Math.max(pdata[tn]["maxTeleopCoralL2"], currentTeleopCoralL2);
+      pdata[tn]["maxTeleopCoralL3"] = Math.max(pdata[tn]["maxTeleopCoralL3"], currentTeleopCoralL3);
+      pdata[tn]["maxTeleopCoralL4"] = Math.max(pdata[tn]["maxTeleopCoralL4"], currentTeleopCoralL4);
+        
+      pdata[tn]["avgTeleopAlgaeNet"] += currentTeleopAlgaeNet;
+      pdata[tn]["avgTeleopAlgaeProc"] += currentTeleopAlgaeProcessor;
+    
+      pdata[tn]["maxTeleopAlgaeNet"] = Math.max(pdata[tn]["maxTeleopAlgaeNet"], currentTeleopAlgaeNet);
+      pdata[tn]["maxTeleopAlgaeProc"] = Math.max(pdata[tn]["maxTeleopAlgaeProc"], currentTeleopAlgaeProcessor);
       // For boolean data, we are just incrementing that data instead of adding the new value here.
       pdata[tn]["endgameClimbPercent"][this.data[i]["endgameClimbLevel"]] += 1;
       //HOLD pdata[tn]["endgameStartClimbPercent"][this.data[i]["endgameStartClimbing"]] += 1;
@@ -407,10 +470,41 @@ class matchDataProcessor {
       pdata[key]["avgAutonAlgae"] = Math.round(10 * pdata[key]["avgAutonAlgae"] / pdata[key]["totalmatches"]) / 10;
       pdata[key]
       
-      pdata[key]["avgTeleopCoral"] = Math.round(10 * pdata[key]["avgTeleopCoral"] / pdata[key]["totalmatches"]) / 10; 
-      pdata[key]["avgTeleopAlgae"] = Math.round(10 * pdata[key]["avgTeleopAlgae"] / pdata[key]["totalmatches"]) / 10; 
+      pdata[key]["avgTeleopCoralScored"] = Math.round(10 * pdata[key]["avgTeleopCoralScored"] / pdata[key]["totalmatches"]) / 10; 
+      pdata[key]["maxTeleopCoralScored"] = Math.round(10 * pdata[key]["maxTeleopCoralScored"] / pdata[key]["totalmatches"]) / 10; 
+    
+      pdata[key]["avgTeleopAlgaeScored"] = Math.round(10 * pdata[key]["avgTeleopAlgaeScored"] / pdata[key]["totalmatches"]) / 10; 
+      pdata[key]["maxTeleopAlgaeScored"] = Math.round(10 * pdata[key]["maxTeleopAlgaeScored"] / pdata[key]["totalmatches"]) / 10; 
       
       pdata[key]["avgEndgamePoints"] = Math.round(10 * pdata[key]["avgEndgamePoints"] / pdata[key]["totalmatches"]) / 10;
+        
+      pdata[key]["avgAutonCoralL1"] = Math.round(10 * pdata[key]["avgAutonCoralL1"] / pdata[key]["totalmatches"]) / 10;
+      pdata[key]["maxAutonCoralL1"] = Math.round(10 * pdata[key]["maxAutonCoralL1"] / pdata[key]["totalmatches"]) / 10;
+      pdata[key]["avgAutonCoralL2"] = Math.round(10 * pdata[key]["avgAutonCoralL2"] / pdata[key]["totalmatches"]) / 10;
+      pdata[key]["maxAutonCoralL2"] = Math.round(10 * pdata[key]["maxAutonCoralL2"] / pdata[key]["totalmatches"]) / 10;
+      pdata[key]["avgAutonCoralL3"] = Math.round(10 * pdata[key]["avgAutonCoralL3"] / pdata[key]["totalmatches"]) / 10;
+      pdata[key]["maxAutonCoralL3"] = Math.round(10 * pdata[key]["maxAutonCoralL3"] / pdata[key]["totalmatches"]) / 10;
+      pdata[key]["avgAutonCoralL4"] = Math.round(10 * pdata[key]["avgAutonCoralL4"] / pdata[key]["totalmatches"]) / 10;
+      pdata[key]["maxAutonCoralL4"] = Math.round(10 * pdata[key]["maxAutonCoralL4"] / pdata[key]["totalmatches"]) / 10;
+        
+      pdata[key]["avgAutonAlgaeNet"] = Math.round(10 * pdata[key]["avgAutonAlgaeNet"] / pdata[key]["totalmatches"]) / 10;
+      pdata[key]["maxAutonAlgaeNet"] = Math.round(10 * pdata[key]["maxAutonAlgaeNet"] / pdata[key]["totalmatches"]) / 10;
+      pdata[key]["avgAutonAlgaeProc"] = Math.round(10 * pdata[key]["avgAutonAlgaeProc"] / pdata[key]["totalmatches"]) / 10;
+      pdata[key]["maxAutonAlgaeProc"] = Math.round(10 * pdata[key]["maxAutonAlgaeProc"] / pdata[key]["totalmatches"]) / 10;
+        
+      pdata[key]["avgTeleopCoralL1"] = Math.round(10 * pdata[key]["avgTeleopCoralL1"] / pdata[key]["totalmatches"]) / 10;
+      pdata[key]["maxTeleopCoralL1"] = Math.round(10 * pdata[key]["maxTeleopCoralL1"] / pdata[key]["totalmatches"]) / 10;
+      pdata[key]["avgTeleopCoralL2"] = Math.round(10 * pdata[key]["avgTeleopCoralL2"] / pdata[key]["totalmatches"]) / 10;
+      pdata[key]["maxTeleopCoralL2"] = Math.round(10 * pdata[key]["maxTeleopCoralL2"] / pdata[key]["totalmatches"]) / 10;
+      pdata[key]["avgTeleopCoralL3"] = Math.round(10 * pdata[key]["avgTeleopCoralL3"] / pdata[key]["totalmatches"]) / 10;
+      pdata[key]["maxTeleopCoralL3"] = Math.round(10 * pdata[key]["maxTeleopCoralL3"] / pdata[key]["totalmatches"]) / 10;
+      pdata[key]["avgTeleopCoralL4"] = Math.round(10 * pdata[key]["avgTeleopCoralL4"] / pdata[key]["totalmatches"]) / 10;
+      pdata[key]["maxTeleopCoralL4"] = Math.round(10 * pdata[key]["maxTeleopCoralL4"] / pdata[key]["totalmatches"]) / 10;
+        
+      pdata[key]["avgTeleopAlgaeNet"] = Math.round(10 * pdata[key]["avgTeleopAlgaeNet"] / pdata[key]["totalmatches"]) / 10;
+      pdata[key]["maxTeleopAlgaeNet"] = Math.round(10 * pdata[key]["maxTeleopAlgaeNet"] / pdata[key]["totalmatches"]) / 10;
+      pdata[key]["avgTeleopAlgaeProc"] = Math.round(10 * pdata[key]["avgTeleopAlgaeProc"] / pdata[key]["totalmatches"]) / 10;
+      pdata[key]["maxTeleopAlgaeProc"] = Math.round(10 * pdata[key]["maxTeleopAlgaeProc"] / pdata[key]["totalmatches"]) / 10;
 	
       //pdata[key]["avgautonamps"] = Math.round(10 * pdata[key]["avgautonamps"] / pdata[key]["totalmatches"]) / 10;
       //pdata[key]["avgautonspeaker"] = Math.round(10 * pdata[key]["avgautonspeaker"] / pdata[key]["totalmatches"]) / 10;
@@ -431,7 +525,7 @@ class matchDataProcessor {
 //      console.log("     ---> total teleop speakerShots calculated: " + totalTeleopSpeakerShots); //TEST
       // If there are no shots, don't bother doing the calculation here.
       if (totalCoralAcquired != 0) {
-        var teleopCoralPercent = (parseInt(pdata[key]["teleopAcquireCoral"])) / totalCoralAcquired;
+        var teleopCoralPercent = (parseInt(pdata[key]["avgTeleopCoralScored"])) / totalCoralAcquired;
         pdata[key]["teleopCoralScoringPercent"] = Math.round(100 * teleopCoralPercent);
 //        console.log("     ---> speakerShootingPercentage: " + pdata[key]["teleopSpeakerShootPercent"]); //TEST
       }
