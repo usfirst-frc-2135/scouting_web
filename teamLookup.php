@@ -433,33 +433,37 @@ HOLD-->
       writeTableRow("comments", commentObj[i], ["comment", "scoutname"]);
     }
   }
-
   function dataToAvgTables(avgs) {
     //Auton Scores
+      /*
     avgs["amprowstr"] = "<b>Amp Notes</b>";
     avgs["speakerrowstr"] = "<b>Speaker Notes</b>";
     avgs["speakerautonaccuracyrowstr"] = "<b>Speaker Accuracy%</b>";
     avgs["totalstr"] = "<b>Total Notes</b>";
-      
-    writeTableRow("autoTable", avgs, ["amprowstr", "avgautonamps", "maxautonamps"]);
+      */
+    /*writeTableRow("autoTable", avgs, ["amprowstr", "avgautonamps", "maxautonamps"]);
     writeTableRow("autoTable", avgs, ["speakerrowstr", "avgautonspeaker", "maxautonspeaker"]);
     writeTableRow("autoTable", avgs, ["speakerautonaccuracyrowstr", "autonSpeakerShootPercent"]);
     writeTableRow("autoTotalTable", avgs, ["totalstr", "avgautonotes", "maxautonotes"]);
+    */
       
     // Teleop Scores
+      /*
     avgs["amprowstr"] = "<b>Amp Notes</b>";
     avgs["speakerrowstr"] = "<b>Speaker Notes</b>";
     avgs["speakeraccuracyrowstr"] = "<b>Speaker Accuracy%</b>";
     avgs["passesrowstr"] = "<b>Passes</b>";
     avgs["totalstr"] = "<b>Total Notes</b>";
-      
+    */
+     /* 
     writeTableRow("teleopTotalTable", avgs, ["totalstr", "avgteleopnotes", "maxteleopnotes"]);
     writeTableRow("teleopTable", avgs, ["amprowstr", "avgteleopampnotes", "maxteleopampnotes"]);
     writeTableRow("teleopTable", avgs, ["speakerrowstr", "avgteleopspeakernotes", "maxteleopspeakernotes"]);
     writeTableRow("teleopTable", avgs, ["speakeraccuracyrowstr", "teleopSpeakerShootPercent"]) 
     writeTableRow("teleopTable", avgs, ["passesrowstr", "avgPasses", "maxPasses"]);
-      
+      */
     // Endgame Climb Table
+    /*  
     avgs["endgamestagepercent"]["endgamestagestr"] = "<b>Stage Level %</b>";
     avgs["endgameharmonypercent"]["endgameharmonystr"] = "<b>Harmony Level %</b>";
     avgs["trapPercentage"]["endgametrapstr"] = "<b>Trap Note %</b>";
@@ -469,15 +473,18 @@ HOLD-->
     harmonyLevel["harmomystr"] = "<b>Harmony Level %</b>";
     avgs["traprowstr"] = "<b>Trap Note %</b>";
     writeTableRow("endgameStageTable", avgs["endgamestagepercent"], ["endgamestagestr", 0, 1, 2]);
-    document.getElementById("endgameStageTable").style.backgroundColor = "f0f0f0";
+   */
+     /* document.getElementById("endgameStageTable").style.backgroundColor = "f0f0f0";
     writeTableRow("endgameHarmonyTable", avgs["endgameharmonypercent"], ["endgameharmonystr", 0, 1, 2]);
     document.getElementById("endgameHarmonyTable").style.backgroundColor = "f0f0f0";
     avgs["trapPercentage"] = avgs["trapPercentage"];
     writeTableRow("endgameTrapTable", avgs, ["traprowstr", "trapPercentage"]);
     document.getElementById("endgameTrapTable").style.backgroundColor = "f0f0f0";
-
+*/
+      /*
     // Total Table
     writeTableRow("totalTable", avgs, ["totalstr", "avgtotalnotes", "maxtotalnotes"]); 
+    */
   }
 
   function checkGet() {
@@ -627,10 +634,10 @@ HOLD-->
     $("#allMatchesTable").html("");  // clear table
     for (let i = 0; i < dataObj.length; i++) {
       var rowString = "<tr><td align=\"center\">" + dataObj[i]["matchnumber"] + "</td>" +
-          "<td align=\"center\">" + dataObj[i]["autonleave"] + "</td>" +
-          "<td align=\"center\">" + dataObj[i]["autonampnotes"] + "</td>" +
-          "<td align=\"center\">" + dataObj[i]["autonampmisses"] + "</td>" +
-          "<td align=\"center\">" + dataObj[i]["autonspeakernotes"] + "</td>" +
+          "<td align=\"center\">" + dataObj[i]["autonLeave"] + "</td>" +
+          "<td align=\"center\">" + dataObj[i]["autonStartingPosition"] + "</td>" +
+          "<td align=\"center\">" + dataObj[i]["autonAlgaeNet"] + "</td>" +
+          "<td align=\"center\">" + dataObj[i]["autonAlgaeProcessor"] + "</td>" +
           "<td align=\"center\">" + dataObj[i]["autonspeakermisses"] + "</td>" +
           "<td align=\"center\">" + dataObj[i]["teleopampused"] + "</td>" +
           "<td align=\"center\">" + dataObj[i]["teleopampnotes"] + "</td>" +
@@ -674,44 +681,58 @@ HOLD-->
       dataToEndgameGraph(filteredData);
     });
   }
-	
   function dataToAutonGraph(matchdata) {
+
     // Declare variables
     var match_list = []; // List of matches to use as x lables
+
     var datasets = []; // Each entry is a dict with a label and data attribute
-    var autonAmpTips = []; // holds custom tooltips for auton amp notes
-    var autonSpeakerTips = []; // holds custom tooltips for auton speaker notes
-    var autonLeaveTips = []; // holds custom tooltips for auton leave starting zone data
+
+    var startingSpotTips = []; // holds custom tooltips for auton amp notes
+
+    var autonAlgaeNetTips = []; // holds custom tooltips for auton speaker notes
+      
+    var autonAlgaeProcTips = []; // holds custom tooltips for auton speaker notes
+
+    var autonLeaveTips = []; // holds custom tooltips for auton leave starting zone data      
+  
 
     datasets.push({
-      label: "Amp Notes",
+      label: "Starting Spot",
       data: [],
       borderColor: 'Red'
     });
     datasets.push({
-      label: "Speaker Notes",
+      label: "Net",
       data: [],
       borderColor: 'Green'
     });
     datasets.push({
+      label: "Processor",
+      data: [],
+      borderColor: 'Orange'
+    });
+    datasets.push({
       label: "Leave Starting Zone",
       data: [],
-      borderColor: 'Blue'
+      borderColor: 'Blue'    
+        
     });
-    
     // Go thru each matchdata QR code string and build up a table of the data, so we can
     // later sort it so the matches are listed in the right order. 
     var mydata = [];
     for (let i = 0; i < matchdata.length; i++) {
       var matchnum = matchdata[i]["matchnumber"];
-      var autonAmpNotes = matchdata[i]["autonampnotes"];
-      var autonSpeakerNotes = matchdata[i]["autonspeakernotes"];
-      var autonLeave = matchdata[i]["autonleave"];
+      var startingPosition = matchdata[i]["autonStartingPosition"];
+      var autonAlgaeNet = matchdata[i]["autonAlgaeNet"];
+      var autonAlgaeProcessor = matchdata[i]["autonAlgaeProcessor"];
+      var autonLeave = matchdata[i]["autonLeave"];
       mydata.push({
         matchnum: matchnum,
-        ampnotes: autonAmpNotes,
-        speakernotes: autonSpeakerNotes,
-        leave: autonLeave
+        startposition: startingPosition,
+        algae: autonAlgaeNet,
+        leave: autonLeave,
+        processor: autonAlgaeProcessor 
       });
     }
     mydata.sort(function(rowA,rowB) {
@@ -719,27 +740,36 @@ HOLD-->
       var cellB = rowB["matchnum"];
       return(sortRows(cellA,cellB));
     });
-
     // Build data sets; go thru each mydata row and populate the graph datasets.
     for (let i = 0; i < mydata.length; i++) {
       var matchnum = mydata[i]["matchnum"];
       match_list.push(matchnum);
-
       // Get auton amp notes data
-      var autonAmpNotes = mydata[i]["ampnotes"];
-      datasets[0]["data"].push(autonAmpNotes);
-      var tooltipStr = "Amp Notes="+autonAmpNotes;
-      autonAmpTips.push({xlabel: matchnum, tip: tooltipStr}); 
-
+      var startingPosition = mydata[i]["startposition"];
+      datasets[0]["data"].push(startingPosition);
+      var slevel = "Right";
+      if(startingPosition == 1)
+        slevel = "Middle";
+      if(startingPosition == 2)
+        slevel = "Left";    
+      var tipStr = "Starting Spot="+slevel;
+      startingSpotTips.push({xlabel: matchnum, tip: tipStr}); 
+        
       // Get auton speaker notes data
-      var autonSpeakerNotes = mydata[i]["speakernotes"];
-      datasets[1]["data"].push(autonSpeakerNotes);
-      var tooltipStr = "Speaker Notes="+autonSpeakerNotes;
-      autonSpeakerTips.push({xlabel: matchnum, tip: tooltipStr}); 
-
+      var autonAlgaeNet = mydata[i]["algae"];
+      datasets[1]["data"].push(autonAlgaeNet);
+      var tooltipStr = "Net="+autonAlgaeNet;
+      autonAlgaeNetTips.push({xlabel: matchnum, tip: tooltipStr}); 
+        
+      // Get auton speaker notes data
+      var autonAlgaeProcessor = mydata[i]["processor"];
+      datasets[2]["data"].push(autonAlgaeProcessor);
+      var tooltipStr = "Processor="+autonAlgaeProcessor;    
+      autonAlgaeProcTips.push({xlabel: matchnum, tip: tooltipStr});
+        
      // Get auton leave starting zone data
       var autonLeaveStartingZone = mydata[i]["leave"];
-      datasets[2]["data"].push(autonLeaveStartingZone);
+      datasets[3]["data"].push(autonLeaveStartingZone);
       var clevel = "No";
       if(autonLeaveStartingZone == 1)
         clevel = "Yes";
@@ -775,22 +805,30 @@ HOLD-->
                  var tipStr = datasets[toolIndex].label;
 
                  if(toolIndex == 0) {   // Auton Amp Notes
-                   for (let i = 0; i < autonAmpTips.length; i++) {
-                     if(autonAmpTips[i].xlabel == matchnum) {
-                       tipStr = autonAmpTips[i].tip;
+                   for (let i = 0; i < startingSpotTips.length; i++) {
+                     if(startingSpotTips[i].xlabel == matchnum) {
+                       tipStr = startingSpotTips[i].tip;
                        break;
                      }
                    }
                  }
                  else if(toolIndex == 1) {   // Auton Speaker Notes
-                   for (let i = 0; i < autonSpeakerTips.length; i++) {
-                     if(autonSpeakerTips[i].xlabel == matchnum) {
-                       tipStr = autonSpeakerTips[i].tip;
+                   for (let i = 0; i < autonAlgaeNetTips.length; i++) {
+                     if(autonAlgaeNetTips[i].xlabel == matchnum) {
+                       tipStr = autonAlgaeNetTips[i].tip;
+                       break;   
+                     }
+                   }
+                 }
+                 else if(toolIndex == 2) {   // Auton Speaker Notes
+                   for (let i = 0; i < autonAlgaeProcTips.length; i++) {
+                     if(autonAlgaeProcTips[i].xlabel == matchnum) {
+                       tipStr = autonAlgaeProcTips[i].tip;
                        break;
                      }
                    }
                  }
-                 else if(toolIndex == 2) {   // Auton Leave Starting Zone
+                 else if(toolIndex == 3) {   // Auton Leave Starting Zone
                    for (let i = 0; i < autonLeaveTips.length; i++) {
                      if(autonLeaveTips[i].xlabel == matchnum) {
                        tipStr = autonLeaveTips[i].tip;
