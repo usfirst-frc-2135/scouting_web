@@ -364,8 +364,10 @@ class matchDataProcessor {
       var totalAlgae = totalAutoAlgae + totalTeleopAlgae;
       var totalAutoPoints = totalAutoCoralPoints + totalAutoAlgaePoints
       var totalTeleopPoints = totalTeleopCoralPoints + totalTeleopAlgaePoints
-      var totalPoints = totalAutoPoints + totalTeleopPoints
+      var totalPoints = totalAutoPoints + totalTeleopPoints + endgameClimbPoints;
     
+      pdata[tn]["avgTotalPoints"] += totalPoints;
+      pdata[tn]["maxTotalPoints"] = Math.max(pdata[tn]["maxTotalPoints"], totalPoints);
 
       pdata[tn]["avgTotalCoral"] += totalCoral;
       pdata[tn]["maxTotalCoral"] = Math.max(pdata[tn]["maxTotalCoral"], totalCoral);
@@ -463,6 +465,9 @@ class matchDataProcessor {
     for (var key in pdata) 
     {
 //      console.log(">>>> for team " + key);
+      pdata[key]["avgTotalPoints"] = Math.round(10 * pdata[key]["avgTotalPoints"] / pdata[key]["totalmatches"]) / 10;
+      pdata[key]["avgTotalPoints"] = Math.round(10 * pdata[key]["avgTotalPoints"] / pdata[key]["totalmatches"]) / 10;
+        
       pdata[key]["avgTotalCoral"] = Math.round(10 * pdata[key]["avgTotalCoral"] / pdata[key]["totalmatches"]) / 10;
       pdata[key]["avgTotalAlgae"] = Math.round(10 * pdata[key]["avgTotalAlgae"] / pdata[key]["totalmatches"]) / 10;
       
@@ -477,6 +482,7 @@ class matchDataProcessor {
       pdata[key]["maxTeleopAlgaeScored"] = Math.round(10 * pdata[key]["maxTeleopAlgaeScored"] / pdata[key]["totalmatches"]) / 10; 
       
       pdata[key]["avgEndgamePoints"] = Math.round(10 * pdata[key]["avgEndgamePoints"] / pdata[key]["totalmatches"]) / 10;
+      pdata[key]["maxEndgamePoints"] = Math.round(10 * pdata[key]["avgEndgamePoints"] / pdata[key]["totalmatches"]) / 10;
         
       pdata[key]["avgAutonCoralL1"] = Math.round(10 * pdata[key]["avgAutonCoralL1"] / pdata[key]["totalmatches"]) / 10;
       pdata[key]["maxAutonCoralL1"] = Math.round(10 * pdata[key]["maxAutonCoralL1"] / pdata[key]["totalmatches"]) / 10;
