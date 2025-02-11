@@ -295,7 +295,12 @@
       writeData["writePitTable"] = databaseName + "_pt";
       writeData["writeRankTable"] = databaseName + "_rt";
       writeData["writeDriveRankTable"] = databaseName + "_drt";
-      console.log("writeConfig: writeData = "+writeData);
+      console.log("writeConfig: database name = "+databaseName);
+      console.log("writeConfig: dataTable name = "+writeData["writeDataTable"]);
+      console.log("writeConfig: TBATable name = "+writeData["writeTBATable"]);
+      console.log("writeConfig: PitTable name = "+writeData["writePitTable"]);
+      console.log("writeConfig: RankTable name = "+writeData["writeRankTable"]);
+      console.log("writeConfig: DriveRankTable name = "+writeData["writeDriveRankTable"]);
       writeData["writeConfig"] = JSON.stringify(writeData);
 
       $.post("dbAPI.php", writeData, function(data) {

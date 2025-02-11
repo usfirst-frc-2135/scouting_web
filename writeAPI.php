@@ -14,7 +14,7 @@ if (isset($_POST["writeData"]))
   // Write Data API
   $db->connectToDB();
   $dat = json_decode($_POST["writeData"], true);
-  // echo($_POST["writeData"]);
+  $msg = "success";
   for ($i = 0; $i < count($dat); ++$i)
   {
     $dat[$i]["entrykey"] = $dat[$i]["eventcode"] . "_" . $dat[$i]["matchnumber"] . "_" . $dat[$i]["teamnumber"];
@@ -24,9 +24,11 @@ if (isset($_POST["writeData"]))
     }
     catch (Exception $e)
     {
+      error_log("! writeRowToTable() threw exception = $e");
+      $msg = "fail";
     }
   }
-  echo ("success");
+  echo ($msg);
 }
 if (isset($_POST["writeSingleData"]))
 {

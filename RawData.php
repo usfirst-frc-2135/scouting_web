@@ -53,6 +53,7 @@
             <col span="1" style="background-color:#transparent">
             <col span="1" style="background-color:#cfe2ff">
             <col span="1" style="background-color:#transparent">
+            <col span="1" style="background-color:#cfe2ff">
             </colgroup>
           <thead>
             <tr>
@@ -70,40 +71,41 @@
               <th scope="col">Team</th>
               <th scope="col">Auton Leave</th>
               <th scope="col">Auton Start</th>
-              <th scope="col">Auton L1</th>
-              <th scope="col">Auton L2</th>
-              <th scope="col">Auton L3</th>
-              <th scope="col">Auton L4</th>
-              <th scope="col">Auton Net</th>
-              <th scope="col">Auton Proc</th>
-              <th scope="col">Auton Acq Coral Floor</th>
-              <th scope="col">Auton Acq Coral Statn</th>
-              <th scope="col">Auton Acq Algae Floor</th>
-              <th scope="col">Auton Acq Algae Reef</th>
-              <th scope="col">Teleop Acq Coral</th>
-              <th scope="col">Teleop Acq Algae</th>
+              <th scope="col">Reef Zone AB</th>
+              <th scope="col">Reef Zone CD</th>
+              <th scope="col">Reef Zone EF</th>
+              <th scope="col">Reef Zone GH</th>
+              <th scope="col">Reef Zone IJ</th>
+              <th scope="col">Reef Zone KL</th>
+              <th scope="col">Auton Coral L1</th>
+              <th scope="col">Auton Coral L2</th>
+              <th scope="col">Auton Coral L3</th>
+              <th scope="col">Auton Coral L4</th>
+              <th scope="col">Auton Algae Net</th>
+              <th scope="col">Auton Algae Proc</th>
+              <th scope="col">Auton Coral From Floor</th>
+              <th scope="col">Auton Coral From Stn</th>
+              <th scope="col">Auton Algae From Floor</th>
+              <th scope="col">Auton Algae From Reef</th>
+              <th scope="col">Acq'd Coral</th>
+              <th scope="col">Acq'd Algae</th>
               <th scope="col">Teleop Algae Floor Pickup</th>
               <th scope="col">Teleop Coral Floor Pickup</th>
-              <th scope="col">Teleop Knock Algae</th>
-              <th scope="col">Teleop Acq Reef Algae</th>
+              <th scope="col">Teleop Knock Off Algae</th>
+              <th scope="col">Teleop Algae From Reef</th>
               <th scope="col">Teleop Hold Both</th>
-              <th scope="col">Teleop L1</th>
-              <th scope="col">Teleop L2</th>
-              <th scope="col">Teleop L3</th>
-              <th scope="col">Teleop L4</th>
-              <th scope="col">Teleop Net</th>
-              <th scope="col">Teleop Proc</th>
-              <th scope="col">Teleop Pin Foul</th>
-              <th scope="col">Teleop Anchor Foul</th>
-              <th scope="col">Teleop Cage Foul</th>
-              <th scope="col">Teleop Barge Foul</th>
-              <th scope="col">Teleop Reef Foul</th>
-              <th scope="col">Climb</th>
+              <th scope="col">Teleop Coral L1</th>
+              <th scope="col">Teleop Coral L2</th>
+              <th scope="col">Teleop Coral L3</th>
+              <th scope="col">Teleop Coral L4</th>
+              <th scope="col">Teleop Algae Net</th>
+              <th scope="col">Teleop Algae Proc</th>
+              <th scope="col">Defense</th>
+              <th scope="col">Cage Climb</th>
               <th scope="col">Start Climb</th>
-              <th scope="col">Endgame Foul</th>  
               <th scope="col">Died</th>
-              <th scope="col">Comment</th>
               <th scope="col">Scout Name</th>
+              <th scope="col">Comment</th>
             </tr>
           </thead>
           <tbody id="tableData">
@@ -177,13 +179,20 @@
       return 0;
     return 1;
   };
-//data object keywords should match the database configuration in dbHander.php
+
+  //NOTE: data object keywords should match the database definition in dbHander.php
   function dataToTable(dataObj) {
     for (let i = 0; i < dataObj.length; i++) {
       var rowString = "<tr><td align=\"center\">" + dataObj[i]["matchnumber"] + "</td>" +
         "<td align=\"center\">" + dataObj[i]["teamnumber"] + "</td>" +
         "<td align=\"center\">" + dataObj[i]["autonLeave"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["autonStartingPosition"] + "</td>" +
+        "<td align=\"center\">" + dataObj[i]["autonStartPos"] + "</td>" +
+        "<td align=\"center\">" + dataObj[i]["reefzoneAB"] + "</td>" +
+        "<td align=\"center\">" + dataObj[i]["reefzoneCD"] + "</td>" +
+        "<td align=\"center\">" + dataObj[i]["reefzoneEF"] + "</td>" +
+        "<td align=\"center\">" + dataObj[i]["reefzoneGH"] + "</td>" +
+        "<td align=\"center\">" + dataObj[i]["reefzoneIJ"] + "</td>" +
+        "<td align=\"center\">" + dataObj[i]["reefzoneKL"] + "</td>" +
         "<td align=\"center\">" + dataObj[i]["autonCoralL1"] + "</td>" +
         "<td align=\"center\">" + dataObj[i]["autonCoralL2"] + "</td>" +
         "<td align=\"center\">" + dataObj[i]["autonCoralL3"] + "</td>" +
@@ -194,32 +203,25 @@
         "<td align=\"center\">" + dataObj[i]["autonCoralStation"] + "</td>" +
         "<td align=\"center\">" + dataObj[i]["autonAlgaeFloor"] + "</td>" +
         "<td align=\"center\">" + dataObj[i]["autonAlgaeReef"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["teleopAcquireCoral"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["teleopAcquireAlgae"] + "</td>" +
+        "<td align=\"center\">" + dataObj[i]["acquiredCoral"] + "</td>" +
+        "<td align=\"center\">" + dataObj[i]["acquiredAlgae"] + "</td>" +
         "<td align=\"center\">" + dataObj[i]["teleopAlgaeFloorPickup"] + "</td>" +
         "<td align=\"center\">" + dataObj[i]["teleopCoralFloorPickup"] + "</td>" +
         "<td align=\"center\">" + dataObj[i]["teleopKnockOffAlgae"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["teleopAcquireAlgaeReef"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["teleopHoldBothElements"] + "</td>" +
+        "<td align=\"center\">" + dataObj[i]["teleopAlgaeFromReef"] + "</td>" +
+        "<td align=\"center\">" + dataObj[i]["teleopHoldBoth"] + "</td>" +
         "<td align=\"center\">" + dataObj[i]["teleopCoralL1"] + "</td>" +
         "<td align=\"center\">" + dataObj[i]["teleopCoralL2"] + "</td>" +
         "<td align=\"center\">" + dataObj[i]["teleopCoralL3"] + "</td>" +  
         "<td align=\"center\">" + dataObj[i]["teleopCoralL4"] + "</td>" +
         "<td align=\"center\">" + dataObj[i]["teleopAlgaeNet"] + "</td>" +  
         "<td align=\"center\">" + dataObj[i]["teleopAlgaeProcessor"] + "</td>" + 
-        "<td align=\"center\">" + dataObj[i]["teleopDefenseLevel"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["teleopPinFoul"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["teleopAnchorFoul"] + "</td>" +  
-        "<td align=\"center\">" + dataObj[i]["teleopCageFoul"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["teleopBargeZoneFoul"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["teleopReefZoneFoul"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["endgameClimbLevel"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["endgameStartClimbing"] + "</td>" + 
-        
-        "<td align=\"center\">" + dataObj[i]["endgameFoulNumber"] + "</td>" +  
+        "<td align=\"center\">" + dataObj[i]["defenseLevel"] + "</td>" +
+        "<td align=\"center\">" + dataObj[i]["cageClimb"] + "</td>" +
+        "<td align=\"center\">" + dataObj[i]["startClimb"] + "</td>" + 
         "<td align=\"center\">" + dataObj[i]["died"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["comment"] + "</td>" +  
         "<td align=\"center\">" + dataObj[i]["scoutname"] + "</td>" +  
+        "<td align=\"center\">" + dataObj[i]["comment"] + "</td>" +  
         "</tr>";
       $("#tableData").append(rowString);
 
@@ -231,7 +233,9 @@
     $.get("readAPI.php", {
       getAllData: 1
     }).done(function(data) {
+      console.log("===> RawData: data = " + data);
       var dataObj = JSON.parse(data);
+      console.log("===> RawData: dataObj size = " + dataObj.length);
       dataToTable(dataObj);
       setTimeout(function() {
         sorttable.makeSortable(document.getElementById("rawDataTable"));

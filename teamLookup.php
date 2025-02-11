@@ -635,7 +635,7 @@ HOLD-->
     for (let i = 0; i < dataObj.length; i++) {
       var rowString = "<tr><td align=\"center\">" + dataObj[i]["matchnumber"] + "</td>" +
           "<td align=\"center\">" + dataObj[i]["autonLeave"] + "</td>" +
-          "<td align=\"center\">" + dataObj[i]["autonStartingPosition"] + "</td>" +
+          "<td align=\"center\">" + dataObj[i]["autonStartPos"] + "</td>" +
           "<td align=\"center\">" + dataObj[i]["autonAlgaeNet"] + "</td>" +
           "<td align=\"center\">" + dataObj[i]["autonAlgaeProcessor"] + "</td>" +
           "<td align=\"center\">" + dataObj[i]["autonspeakermisses"] + "</td>" +
@@ -723,7 +723,7 @@ HOLD-->
     var mydata = [];
     for (let i = 0; i < matchdata.length; i++) {
       var matchnum = matchdata[i]["matchnumber"];
-      var startingPosition = matchdata[i]["autonStartingPosition"];
+      var startingPosition = matchdata[i]["autonStartPos"];
       var autonAlgaeNet = matchdata[i]["autonAlgaeNet"];
       var autonAlgaeProcessor = matchdata[i]["autonAlgaeProcessor"];
       var autonLeave = matchdata[i]["autonLeave"];

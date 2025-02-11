@@ -323,6 +323,7 @@
   var teleop_cubestop = 0;
 
   function attach_gamepiece_scoring() {
+    console.log("==> matchForm.php: attach_gamepiece_scoring() starting");
     $("#plusAutoConesBottom").click(function() {
       auto_conesbottom += 1;
       $("#autoConesBottom").html("Auto Cones Bottom: " + auto_conesbottom);
@@ -448,6 +449,7 @@
   }
 
   function get_form_data() {
+    console.log("==> matchForm.php: get_form_data() starting");
     var out = {};
     var match_level = $("#compLevel").val();
     var match_number = $("#matchNumber").val();
@@ -488,6 +490,7 @@
   }
 
   function clear_data() {
+    console.log("==> matchForm.php: clear_data() starting");
     $("#matchNumber").val("");
     //$("#startpos").val("0");
     auto_conesbottom = 0;
@@ -519,6 +522,7 @@
   }
 
   function submit(form_data) {
+    console.log("==> matchForm.php: submit() starting");
     $.post("writeAPI.php", {
       "writeSingleData": JSON.stringify(form_data)
     }, function(data) {
@@ -533,6 +537,7 @@
   }
 
   $(document).ready(function() {
+    console.log("==> matchForm.php: ready() starting");
     attach_gamepiece_scoring();
     $("#submitForm").click(function() {
       var form_data = get_form_data();

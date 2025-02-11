@@ -254,7 +254,6 @@ class matchDataProcessor {
 
         pdata[tn]["endgameClimbPercent"] = {0:0, 1:0, 2:0, 3:0, 4:0};  
         pdata[tn]["endgameStartClimbingPercent"] = {0:0, 1:0, 2:0, 3:0};
-        pdata[tn]["endgameFoulPercent"] = {0:0, 1:0, 2:0};
        
         pdata[tn]["totaldied"] = 0;
 
@@ -339,7 +338,6 @@ class matchDataProcessor {
       var teleopCoralFloor = (this.data[i]["teleopCoralFloorPickup"]);
         
       var startClimbing = (this.data[i]["endgameStartClimbing"]);
-      var endgameFouls = (this.data[i]["endgameFoulNumber"]);
       //var endgameTrap = (this.data[i]["endgametrap"]);
       //var endgamePoints = (endgameStagePoints) + (endgameHarmonyPoints) + (endgameSpotlit) + (endgameTrap * 5);
 //      console.log("   >> spotlit = " + endgameSpotlit);
@@ -453,7 +451,6 @@ class matchDataProcessor {
       // For boolean data, we are just incrementing that data instead of adding the new value here.
       pdata[tn]["endgameClimbPercent"][this.data[i]["endgameClimbLevel"]] += 1;
       //HOLD pdata[tn]["endgameStartClimbPercent"][this.data[i]["endgameStartClimbing"]] += 1;
-      pdata[tn]["endgameFoulPercent"][this.data[i]["endgameFoulNumber"]] += 1;
 
       pdata[tn]["totaldied"] += this.data[i]["died"];
       pdata[tn]["totalmatches"] += 1;
@@ -563,9 +560,6 @@ class matchDataProcessor {
       pdata[key]["endgameStartClimbingPercent"][2] = Math.round(100 * pdata[key]["endgameStartClimbingPercent"][2] / pdata[key]["totalmatches"]);
       pdata[key]["endgameStartClimbingPercent"][3] = Math.round(100 * pdata[key]["endgameStartClimbingPercent"][3] / pdata[key]["totalmatches"]);
         
-      pdata[key]["endgameFoulPercent"][0] = Math.round(100 * pdata[key]["endgameFoulPercent"][0] / pdata[key]["totalmatches"]);
-      pdata[key]["endgameFoulPercent"][1] = Math.round(100 * pdata[key]["endgameFoulPercent"][1] / pdata[key]["totalmatches"]);
-      pdata[key]["endgameFoulPercent"][2] = Math.round(100 * pdata[key]["endgameFoulPercent"][2] / pdata[key]["totalmatches"]);
     }
     return pdata;
   }

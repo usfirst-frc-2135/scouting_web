@@ -18,14 +18,16 @@ function qrStringToList(dataString) {
 
 function validateQrList(dataList) {
   var dataListSize = dataList.length;
-  if (dataList.length != 40) {
+  console.log("===> validateQrList(): dataList.length = "+dataList.length);
+  if (dataList.length != 41) {
     return false;
   }
+  console.log("   ===> validateQrList(): returning true! ");
   return true;
 }
 //update this data list length whenever new data is added to the table
 function padList(dataList) {
-  if (dataList.length == 39) {
+  if (dataList.length == 40) {
     dataList.push("");
   }
   return dataList;
@@ -34,40 +36,40 @@ function padList(dataList) {
 function qrListToDict(dataList) {
   out = {};
   out["teamnumber"] = dataList[0];
-  out["autonStartingPosition"] = dataList[1];
+  out["autonStartPos"] = dataList[1];
   out["autonLeave"] = dataList[2];
-  out["autonCoralL1"] = dataList[3];
-  out["autonCoralL2"] = dataList[4];
-  out["autonCoralL3"] = dataList[5];
-  out["autonCoralL4"] = dataList[6];
-  out["autonAlgaeNet"] = dataList[7];
-  out["autonAlgaeProcessor"] = dataList[8];
-  out["autonCoralFloor"] = dataList[9];
-  out["autonCoralStation"] = dataList[10];
-  out["autonAlgaeFloor"] = dataList[11];
-  out["autonAlgaeReef"] = dataList[12];
-  out["teleopAcquireCoral"] = dataList[13];
-  out["teleopAcquireAlgae"] = dataList[14];
-  out["teleopAlgaeFloorPickup"] = dataList[15];
-  out["teleopCoralFloorPickup"] = dataList[16];
-  out["teleopKnockOffAlgae"] = dataList[17];
-  out["teleopAcquireAlgaeReef"] = dataList[18];
-  out["teleopHoldBothElements"] = dataList[19];
-  out["teleopCoralL1"] = dataList[20];
-  out["teleopCoralL2"] = dataList[21];
-  out["teleopCoralL3"] = dataList[22];
-  out["teleopCoralL4"] = dataList[23];
-  out["teleopAlgaeNet"] = dataList[24];
-  out["teleopAlgaeProcessor"] = dataList[25];
-  out["teleopDefenseLevel"] = dataList[26];
-  out["teleopPinFoul"] = dataList[27];
-  out["teleopAnchorFoul"] = dataList[28];
-  out["teleopCageFoul"] = dataList[29];
-  out["teleopBargeZoneFoul"] = dataList[30];
-  out["teleopReefZoneFoul"] = dataList[31];
-  out["endgameClimbLevel"] = dataList[32];
-  out["endgameStartClimbing"] = dataList[33];
-  out["endgameFoulNumber"] = dataList[34];
+  out["reefzoneAB"] = dataList[3];
+  out["reefzoneCD"] = dataList[4];
+  out["reefzoneEF"] = dataList[5];
+  out["reefzoneGH"] = dataList[6];
+  out["reefzoneIJ"] = dataList[7];
+  out["reefzoneKL"] = dataList[8];
+  out["autonCoralL1"] = dataList[9];
+  out["autonCoralL2"] = dataList[10];
+  out["autonCoralL3"] = dataList[11];
+  out["autonCoralL4"] = dataList[12];
+  out["autonAlgaeNet"] = dataList[13];
+  out["autonAlgaeProcessor"] = dataList[14];
+  out["autonCoralFloor"] = dataList[15];
+  out["autonCoralStation"] = dataList[16];
+  out["autonAlgaeFloor"] = dataList[17];
+  out["autonAlgaeReef"] = dataList[18];
+  out["acquiredCoral"] = dataList[19];
+  out["acquiredAlgae"] = dataList[20];
+  out["teleopAlgaeFloorPickup"] = dataList[21];
+  out["teleopCoralFloorPickup"] = dataList[22];
+  out["teleopKnockOffAlgae"] = dataList[23];
+  out["teleopAlgaeFromReef"] = dataList[24];
+  out["teleopHoldBoth"] = dataList[25];
+  out["teleopCoralL1"] = dataList[26];
+  out["teleopCoralL2"] = dataList[27];
+  out["teleopCoralL3"] = dataList[28];
+  out["teleopCoralL4"] = dataList[29];
+  out["teleopAlgaeNet"] = dataList[30];
+  out["teleopAlgaeProcessor"] = dataList[31];
+  out["defenseLevel"] = dataList[32];
+  out["cageClimb"] = dataList[33];
+  out["startClimb"] = dataList[34];
   out["died"] = dataList[35];
   out["matchnumber"] = dataList[36];
   out["eventcode"] = dataList[37];
