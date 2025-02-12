@@ -56,7 +56,20 @@
                 </div>
               </div> 
             </div>
-                  
+            
+            <!-- Teleop Coral collapsible graph -->
+            <div class="card mb-3">
+              <div class="card-body">
+                <div class="overflow-auto">
+                  <h5 class="text-center"> 
+                    <a href="#collapseTeleopCoralGraph" data-bs-toggle="collapse" aria-expanded="false"> Teleop Coral Graph</a> </h5>
+                  <div class="collapse" id="collapseTeleopCoralGraph">
+                    <canvas id="myChart3" width="400" height="400"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+              
             <!-- Teleop collapsible graph -->
             <div class="card mb-3">
               <div class="card-body">
@@ -423,6 +436,9 @@ HOLD-->
   var chart2Defined = false;
   var myChart2;
     
+  var chart3Defined = false;
+  var myChart3;    
+    
   var chart4Defined = false;
   var myChart4;
 	
@@ -662,6 +678,11 @@ HOLD-->
           "<td align=\"center\">" + dataObj[i]["autonCoralL2"] + "</td>" +
           "<td align=\"center\">" + dataObj[i]["autonCoralL3"] + "</td>" +
           "<td align=\"center\">" + dataObj[i]["autonCoralL4"] + "</td>" +
+          
+          "<td align=\"center\">" + dataObj[i]["teleopCoralL1"] + "</td>" +
+          "<td align=\"center\">" + dataObj[i]["teleopCoralL2"] + "</td>" +
+          "<td align=\"center\">" + dataObj[i]["teleopCoralL3"] + "</td>" +
+          "<td align=\"center\">" + dataObj[i]["teleopCoralL4"] + "</td>" +
 
           "<td align=\"center\">" + dataObj[i]["teleopampused"] + "</td>" +
           "<td align=\"center\">" + dataObj[i]["teleopampnotes"] + "</td>" +
@@ -703,6 +724,7 @@ HOLD-->
       dataToMatchTable(filteredData);
       dataToAutonCoralGraph(filteredData);    
       dataToAutonGraph(filteredData);
+      dataToTeleopCoralGraph(filteredData);    
       dataToTeleopGraph(filteredData);
       dataToEndgameGraph(filteredData);
     });
@@ -885,8 +907,6 @@ HOLD-->
     
     
     
-    
-    
   function dataToAutonGraph(matchdata) {
 
     // Declare variables
@@ -1051,6 +1071,181 @@ HOLD-->
     });
   }
     
+    
+    
+    
+    //NEW TELEOP CORAL GRAPH STARTS HERE
+    
+    
+    
+    
+    
+    function dataToTeleopCoralGraph(matchdata) {
+
+    // Declare variables
+    var match_list = []; // List of matches to use as x lables
+
+    var datasets = []; // Each entry is a dict with a label and data attribute
+
+    var teleopCoralL1Tips = []; // holds custom tooltips for teleop coral L1
+
+    var teleopCoralL2Tips = []; // holds custom tooltips for teleop coral L2
+      
+    var teleopCoralL3Tips = []; // holds custom tooltips for teleop coral L3
+
+    var teleopCoralL4Tips = []; // holds custom tooltips for teleop coral 4      
+  
+
+    datasets.push({
+      label: "L1",
+      data: [],
+      borderColor: 'Red'
+    });
+    datasets.push({
+      label: "L2",
+      data: [],
+      borderColor: 'Green'
+    });
+    datasets.push({
+      label: "L3",
+      data: [],
+      borderColor: 'Orange'
+    });
+    datasets.push({
+      label: "L4",
+      data: [],
+      borderColor: 'Blue'    
+        
+    });
+    // Go thru each matchdata QR code string and build up a table of the data, so we can
+    // later sort it so the matches are listed in the right order. 
+    var mydata = [];
+    for (let i = 0; i < matchdata.length; i++) {
+      var matchnum = matchdata[i]["matchnumber"];
+      var teleopCoralOne = matchdata[i]["teleopCoralL1"];
+      var teleopCoralTwo = matchdata[i]["teleopCoralL2"];
+      var teleopCoralThree = matchdata[i]["teleopCoralL3"];
+      var teleopCoralFour = matchdata[i]["teleopCoralL4"];
+      mydata.push({
+        matchnum: matchnum,
+        levelone: teleopCoralOne,
+        leveltwo: teleopCoralTwo,
+        levelthree: teleopCoralThree,
+        levelfour: teleopCoralFour 
+      });
+    }
+    mydata.sort(function(rowA,rowB) {
+      var cellA = rowA["matchnum"];
+      var cellB = rowB["matchnum"];
+      return(sortRows(cellA,cellB));
+    });
+    // Build data sets; go thru each mydata row and populate the graph datasets.
+    for (let i = 0; i < mydata.length; i++) {
+      var matchnum = mydata[i]["matchnum"];
+      match_list.push(matchnum);
+        
+      // Get teleop coral level one
+      var teleopCoralOne = mydata[i]["levelone"];
+      datasets[0]["data"].push(teleopCoralOne);
+      var tooltipStr = "L1="+teleopCoralOne;      
+      teleopCoralL1Tips.push({xlabel: matchnum, tip: tooltipStr}); 
+        
+      // Get teleop coral level two
+      var teleopCoralTwo = mydata[i]["leveltwo"];
+      datasets[1]["data"].push(teleopCoralTwo);
+      var tooltipStr = "L2="+teleopCoralTwo;
+      teleopCoralL2Tips.push({xlabel: matchnum, tip: tooltipStr}); 
+        
+      // Get teleop coral level three
+      var teleopCoralThree = mydata[i]["levelthree"];
+      datasets[2]["data"].push(teleopCoralThree);
+      var tooltipStr = "L3="+teleopCoralThree;    
+      teleopCoralL3Tips.push({xlabel: matchnum, tip: tooltipStr});
+        
+     // Get teleop coral level four
+      var teleopCoralFour = mydata[i]["levelfour"];
+      datasets[3]["data"].push(teleopCoralFour);
+      var tooltipStr = "L4="+teleopCoralFour;          
+      teleopCoralL4Tips.push({xlabel: matchnum, tip: tooltipStr});
+    }
+
+    // Define the graph as a line chart:
+    if (chart3Defined) {
+      myChart3.destroy();
+    }
+    chart3Defined = true;
+
+    const ctx = document.getElementById('myChart3').getContext('2d');
+    myChart3 = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: match_list,
+        datasets: datasets
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        },
+        plugins: {
+          tooltip: {
+            callbacks: {  // Special tooltip handling
+              label: function(tooltipItem,ddata) {
+                 var toolIndex = tooltipItem.datasetIndex;
+                 var matchnum = tooltipItem.label;
+                 var tipStr = datasets[toolIndex].label;
+
+                 if(toolIndex == 0) {   // Auton Amp Notes
+                   for (let i = 0; i < teleopCoralL1Tips.length; i++) {
+                     if(teleopCoralL1Tips[i].xlabel == matchnum) {
+                       tipStr = teleopCoralL1Tips[i].tip;
+                       break;
+                     }
+                   }
+                 }
+                 else if(toolIndex == 1) {   // Auton Speaker Notes
+                   for (let i = 0; i < teleopCoralL2Tips.length; i++) {
+                     if(teleopCoralL2Tips[i].xlabel == matchnum) {
+                       tipStr = teleopCoralL2Tips[i].tip;
+                       break;   
+                     }
+                   }
+                 }
+                 else if(toolIndex == 2) {   // Auton Speaker Notes
+                   for (let i = 0; i < teleopCoralL3Tips.length; i++) {
+                     if(teleopCoralL3Tips[i].xlabel == matchnum) {
+                       tipStr = teleopCoralL3Tips[i].tip;
+                       break;
+                     }
+                   }
+                 }
+                 else if(toolIndex == 3) {   // Auton Leave Starting Zone
+                   for (let i = 0; i < teleopCoralL4Tips.length; i++) {
+                     if(teleopCoralL4Tips[i].xlabel == matchnum) {
+                       tipStr = teleopCoralL4Tips[i].tip;
+                       break;
+                     }
+                   }
+                 }
+                 return tipStr;
+              }
+            }
+          }
+        }
+      }
+    });
+  }
+    
+    
+    
+    
+    //NEW TELEOP CORAL GRAPH ENDS HERE
+    
+    
+    
+    
+
     
   function dataToTeleopGraph(matchdata) {
     // Declare variables
