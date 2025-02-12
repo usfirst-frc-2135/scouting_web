@@ -30,6 +30,19 @@
                 <span class="visually-hidden">Next</span>
               </button>
             </div>
+              
+              <!-- Auton Coral collapsible graph -->
+            <div class="card mb-3">
+              <div class="card-body"> 
+                <div class="overflow-auto">
+      		  <h5 class="text-center"> 
+                    <a href="#collapseAutonCoralGraph" data-bs-toggle="collapse" aria-expanded="false"> Auton Coral Graph</a> </h5>
+                  <div class="collapse" id="collapseAutonCoralGraph">
+                    <canvas id="myChart" width="400" height="400"></canvas>
+                  </div>
+                </div>
+              </div> 
+            </div>
 
             <!-- Auton collapsible graph -->
             <div class="card mb-3">
@@ -38,7 +51,7 @@
       		  <h5 class="text-center"> 
                     <a href="#collapseAutonGraph" data-bs-toggle="collapse" aria-expanded="false"> Auton Graph</a> </h5>
                   <div class="collapse" id="collapseAutonGraph">
-                    <canvas id="myChart" width="400" height="400"></canvas>
+                    <canvas id="myChart2" width="400" height="400"></canvas>
                   </div>
                 </div>
               </div> 
@@ -51,7 +64,7 @@
                   <h5 class="text-center"> 
                     <a href="#collapseTeleopGraph" data-bs-toggle="collapse" aria-expanded="false"> Teleop Graph</a> </h5>
                   <div class="collapse" id="collapseTeleopGraph">
-                    <canvas id="myChart2" width="400" height="400"></canvas>
+                    <canvas id="myChart4" width="400" height="400"></canvas>
                   </div>
                 </div>
               </div>
@@ -64,7 +77,7 @@
                   <h5 class="text-center"> 
                     <a href="#collapseEndgameGraph" data-bs-toggle="collapse" aria-expanded="false"> Endgame Graph</a> </h5>
                   <div class="collapse" id="collapseEndgameGraph">
-                    <canvas id="myChart3" width="400" height="400"></canvas>
+                    <canvas id="myChart5" width="400" height="400"></canvas>
                   </div>
                 </div>
               </div>
@@ -403,19 +416,24 @@ HOLD-->
 
 <script>
   var frozenTable = null;
-
-  var chartDefined = false;
-  var myChart;
     
+  var chartDefined = false;
+  var myChart;    
+
   var chart2Defined = false;
   var myChart2;
-	
-  var chart3Defined = false;
-  var myChart3;
     
   var chart4Defined = false;
   var myChart4;
-
+	
+  var chart5Defined = false;
+  var myChart5;
+    
+//for old drive rank graph?   
+/*    
+  var chart4Defined = false;
+  var myChart4;
+*/
   function writeTableRow(tbodyID, dict, keys) {
     var row = "<tr>";
     for (let i = 0; i < keys.length; i++) {
@@ -639,12 +657,19 @@ HOLD-->
           "<td align=\"center\">" + dataObj[i]["autonAlgaeNet"] + "</td>" +
           "<td align=\"center\">" + dataObj[i]["autonAlgaeProcessor"] + "</td>" +
           "<td align=\"center\">" + dataObj[i]["autonspeakermisses"] + "</td>" +
+          
+          "<td align=\"center\">" + dataObj[i]["autonCoralL1"] + "</td>" +
+          "<td align=\"center\">" + dataObj[i]["autonCoralL2"] + "</td>" +
+          "<td align=\"center\">" + dataObj[i]["autonCoralL3"] + "</td>" +
+          "<td align=\"center\">" + dataObj[i]["autonCoralL4"] + "</td>" +
+
           "<td align=\"center\">" + dataObj[i]["teleopampused"] + "</td>" +
           "<td align=\"center\">" + dataObj[i]["teleopampnotes"] + "</td>" +
           "<td align=\"center\">" + dataObj[i]["teleopampmisses"] + "</td>" +
           "<td align=\"center\">" + dataObj[i]["teleopspeakernotes"] + "</td>" +
           "<td align=\"center\">" + dataObj[i]["teleopspeakermisses"] + "</td>" +
           "<td align=\"center\">" + dataObj[i]["teleoppasses"] + "</td>" +
+          
           "<td align=\"center\">" + dataObj[i]["endgamestage"] + "</td>" +
           "<td align=\"center\">" + dataObj[i]["endgameharmony"] + "</td>" +
           "<td align=\"center\">" + dataObj[i]["endgametrap"] + "</td>" +
@@ -675,12 +700,193 @@ HOLD-->
     getFilteredData(team, function(fData) {
       filteredData = fData;
       dataToCommentTable(filteredData);
-      dataToMatchTable(filteredData); 
+      dataToMatchTable(filteredData);
+      dataToAutonCoralGraph(filteredData);    
       dataToAutonGraph(filteredData);
       dataToTeleopGraph(filteredData);
       dataToEndgameGraph(filteredData);
     });
   }
+    
+    
+    
+    
+    
+    //NEW AUTON CORAL GRAPH STARTS HERE
+    
+    
+    
+    
+    
+    function dataToAutonCoralGraph(matchdata) {
+
+    // Declare variables
+    var match_list = []; // List of matches to use as x lables
+
+    var datasets = []; // Each entry is a dict with a label and data attribute
+
+    var autonCoralL1Tips = []; // holds custom tooltips for auton coral L1
+
+    var autonCoralL2Tips = []; // holds custom tooltips for auton coral L2
+      
+    var autonCoralL3Tips = []; // holds custom tooltips for auton coral L3
+
+    var autonCoralL4Tips = []; // holds custom tooltips for auton coral 4      
+  
+
+    datasets.push({
+      label: "L1",
+      data: [],
+      borderColor: 'Red'
+    });
+    datasets.push({
+      label: "L2",
+      data: [],
+      borderColor: 'Green'
+    });
+    datasets.push({
+      label: "L3",
+      data: [],
+      borderColor: 'Orange'
+    });
+    datasets.push({
+      label: "L4",
+      data: [],
+      borderColor: 'Blue'    
+        
+    });
+    // Go thru each matchdata QR code string and build up a table of the data, so we can
+    // later sort it so the matches are listed in the right order. 
+    var mydata = [];
+    for (let i = 0; i < matchdata.length; i++) {
+      var matchnum = matchdata[i]["matchnumber"];
+      var autonCoralOne = matchdata[i]["autonCoralL1"];
+      var autonCoralTwo = matchdata[i]["autonCoralL2"];
+      var autonCoralThree = matchdata[i]["autonCoralL3"];
+      var autonCoralFour = matchdata[i]["autonCoralL4"];
+      mydata.push({
+        matchnum: matchnum,
+        one: autonCoralOne,
+        two: autonCoralTwo,
+        three: autonCoralThree,
+        four: autonCoralFour 
+      });
+    }
+    mydata.sort(function(rowA,rowB) {
+      var cellA = rowA["matchnum"];
+      var cellB = rowB["matchnum"];
+      return(sortRows(cellA,cellB));
+    });
+    // Build data sets; go thru each mydata row and populate the graph datasets.
+    for (let i = 0; i < mydata.length; i++) {
+      var matchnum = mydata[i]["matchnum"];
+      match_list.push(matchnum);
+        
+      // Get auton coral level one
+      var autonCoralOne = mydata[i]["one"];
+      datasets[0]["data"].push(autonCoralOne);
+      var tooltipStr = "L1="+autonCoralOne;      
+      autonCoralL1Tips.push({xlabel: matchnum, tip: tooltipStr}); 
+        
+      // Get auton coral level two
+      var autonCoralTwo = mydata[i]["two"];
+      datasets[1]["data"].push(autonCoralTwo);
+      var tooltipStr = "L2="+autonCoralTwo;
+      autonCoralL2Tips.push({xlabel: matchnum, tip: tooltipStr}); 
+        
+      // Get auton coral level three
+      var autonCoralThree = mydata[i]["three"];
+      datasets[2]["data"].push(autonCoralThree);
+      var tooltipStr = "L3="+autonCoralThree;    
+      autonCoralL3Tips.push({xlabel: matchnum, tip: tooltipStr});
+        
+     // Get auton coral level four
+      var autonCoralFour = mydata[i]["four"];
+      datasets[3]["data"].push(autonCoralFour);
+      var tooltipStr = "L4="+autonCoralFour;          
+      autonCoralL4Tips.push({xlabel: matchnum, tip: tooltipStr});
+    }
+
+    // Define the graph as a line chart:
+    if (chartDefined) {
+      myChart.destroy();
+    }
+    chartDefined = true;
+
+    const ctx = document.getElementById('myChart').getContext('2d');
+    myChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: match_list,
+        datasets: datasets
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        },
+        plugins: {
+          tooltip: {
+            callbacks: {  // Special tooltip handling
+              label: function(tooltipItem,ddata) {
+                 var toolIndex = tooltipItem.datasetIndex;
+                 var matchnum = tooltipItem.label;
+                 var tipStr = datasets[toolIndex].label;
+
+                 if(toolIndex == 0) {   // Auton Amp Notes
+                   for (let i = 0; i < autonCoralL1Tips.length; i++) {
+                     if(autonCoralL1Tips[i].xlabel == matchnum) {
+                       tipStr = autonCoralL1Tips[i].tip;
+                       break;
+                     }
+                   }
+                 }
+                 else if(toolIndex == 1) {   // Auton Speaker Notes
+                   for (let i = 0; i < autonCoralL2Tips.length; i++) {
+                     if(autonCoralL2Tips[i].xlabel == matchnum) {
+                       tipStr = autonCoralL2Tips[i].tip;
+                       break;   
+                     }
+                   }
+                 }
+                 else if(toolIndex == 2) {   // Auton Speaker Notes
+                   for (let i = 0; i < autonCoralL3Tips.length; i++) {
+                     if(autonCoralL3Tips[i].xlabel == matchnum) {
+                       tipStr = autonCoralL3Tips[i].tip;
+                       break;
+                     }
+                   }
+                 }
+                 else if(toolIndex == 3) {   // Auton Leave Starting Zone
+                   for (let i = 0; i < autonCoralL4Tips.length; i++) {
+                     if(autonCoralL4Tips[i].xlabel == matchnum) {
+                       tipStr = autonCoralL4Tips[i].tip;
+                       break;
+                     }
+                   }
+                 }
+                 return tipStr;
+              }
+            }
+          }
+        }
+      }
+    });
+  }
+    
+    
+    
+    
+    //NEW AUTON CORAL GRAPH ENDS HERE
+    
+    
+    
+    
+    
+    
+    
+    
   function dataToAutonGraph(matchdata) {
 
     // Declare variables
@@ -778,13 +984,13 @@ HOLD-->
     }
 
     // Define the graph as a line chart:
-    if (chartDefined) {
-      myChart.destroy();
+    if (chart2Defined) {
+      myChart2.destroy();
     }
-    chartDefined = true;
+    chart2Defined = true;
 
-    const ctx = document.getElementById('myChart').getContext('2d');
-    myChart = new Chart(ctx, {
+    const ctx = document.getElementById('myChart2').getContext('2d');
+    myChart2 = new Chart(ctx, {
       type: 'line',
       data: {
         labels: match_list,
@@ -844,6 +1050,7 @@ HOLD-->
       }
     });
   }
+    
     
   function dataToTeleopGraph(matchdata) {
     // Declare variables
@@ -932,12 +1139,12 @@ HOLD-->
     }
 
     // Define the graph as a line chart:
-    if (chart2Defined) {
-      myChart2.destroy();
+    if (chart4Defined) {
+      myChart4.destroy();
     }
-    chart2Defined = true;
-    const ctx = document.getElementById('myChart2').getContext('2d');
-    myChart2 = new Chart(ctx, {
+    chart4Defined = true;
+    const ctx = document.getElementById('myChart4').getContext('2d');
+    myChart4 = new Chart(ctx, {
       type: 'line',
       data: {
         labels: match_list,
@@ -1064,12 +1271,12 @@ HOLD-->
       endgameHarmonyTips.push({xlabel: matchnum, tip: tipStr});
     }
          
-    if (chart3Defined) {
-      myChart3.destroy();
+    if (chart5Defined) {
+      myChart5.destroy();
     }
-    chart3Defined = true;
-    const ctx = document.getElementById('myChart3').getContext('2d');
-    myChart3 = new Chart(ctx, {
+    chart5Defined = true;
+    const ctx = document.getElementById('myChart5').getContext('2d');
+    myChart5 = new Chart(ctx, {
       type: 'line',
       data: {
         labels: match_list,
