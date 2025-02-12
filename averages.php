@@ -84,19 +84,16 @@ COMMENTED OUT FOR NOW-->
             <col span="1" style="background-color:#cfe2ff">
             <col span="1" style="background-color:#b5d3ff">
             <col span="1" style="background-color:#cfe2ff">
-            <col span="1" style="background-color:#b5d3ff">
-            <col span="1" style="background-color:#cfe2ff">
-            <col span="1" style="background-color:#b5d3ff">
 
           </colgroup>
           <thead>
             <tr>
               <th colspan="1" class="text-center" ></th>
-              <th colspan="66" class="text-center" >Averages</th>
+              <th colspan="63" class="text-center" >Averages</th>
             </tr>
             <tr>
               <th colspan="1" class="text-center" ></th>
-              <th colspan="66" class="text-center" >Table</th>
+              <th colspan="63" class="text-center" >Table</th>
             </tr>
             <tr>
               <th colspan="1" class="text-center"></th>
@@ -112,7 +109,7 @@ COMMENTED OUT FOR NOW-->
               <th colspan="2" class="text-center">Endgame Pts</th>
               <th colspan="16" class="text-center" style="background-color:#3686FF">Auton</th>
               <th colspan="18" class="text-center">Teleop</th>
-              <th colspan="8" class="text-center" style="background-color:#3686FF">Endgame</th>
+              <th colspan="5" class="text-center" style="background-color:#3686FF">Endgame</th>
               <th colspan="1" class="text-center fw-bold">Died</th>
             </tr>
             <tr>
@@ -146,7 +143,6 @@ COMMENTED OUT FOR NOW-->
               <th colspan="7" class="text-center">Algae</th>
               <th colspan="5" class="text-center" style="background-color:#83B4FF">Climb%</th>
               <!--<th colspan="4" class="text-center" style="background-color:#83B4FF">Climb Start%</th>--> 
-              <th colspan="3" class="text-center" style="background-color:#83b4ff">Fouls%</th> 
               <th colspan="1"></th>
             </tr>
             <tr>
@@ -189,9 +185,6 @@ COMMENTED OUT FOR NOW-->
               <th colspan="3" class="text-center">Total</th>
               <th colspan="2" class="text-center">Net</th>
               <th colspan="2" class="text-center">Proc</th>
-              <th colspan="1"></th>
-              <th colspan="1"></th>
-              <th colspan="1"></th>
               <th colspan="1"></th>
               <th colspan="1"></th>
               <th colspan="1"></th>
@@ -265,9 +258,6 @@ COMMENTED OUT FOR NOW-->
               <th class="text-center" scope="col">Bell</th>
               <th class="text-center" scope="col">10s</th>
               <th class="text-center" scope="col">5s</th>-->
-              <th class="text-center" scope="col">0</th>
-              <th class="text-center" scope="col">1</th>
-              <th class="text-center" scope="col">2+</th>
               <th class="text-center" scope="col">#</th>
             </tr>
 
@@ -390,15 +380,11 @@ COMMENTED OUT FOR NOW-->
         "<td align=\"center\">" + dummyGet(endgameClimbStartPercentage, 1) + "</td>" +
         "<td align=\"center\">" + dummyGet(endgameClimbStartPercentage, 2) + "</td>" +*/
           
-        "<td align=\"center\">" + dummyGet(endgameFoulPercentage, 0) + "</td>" +
-        "<td align=\"center\">" + dummyGet(endgameFoulPercentage, 1) + "</td>" +
-        "<td align=\"center\">" + dummyGet(endgameFoulPercentage, 2) + "</td>" +
-          
         //"<td align=\"center\">" + dummyGet(scoutingData[teamNum], "trapPercentage") + "</td>" +
         //"<td align=\"center\">" + dummyGet(scoutingData[teamNum], "spotlitPercentage") + "</td>" +
         "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "totaldied") + "</td>" + 
         "</td>"; 
-
+        
       $("#tableData").append(rowString);
     }
   }
