@@ -684,12 +684,12 @@ HOLD-->
           "<td align=\"center\">" + dataObj[i]["teleopCoralL3"] + "</td>" +
           "<td align=\"center\">" + dataObj[i]["teleopCoralL4"] + "</td>" +
 
-          "<td align=\"center\">" + dataObj[i]["teleopampused"] + "</td>" +
-          "<td align=\"center\">" + dataObj[i]["teleopampnotes"] + "</td>" +
-          "<td align=\"center\">" + dataObj[i]["teleopampmisses"] + "</td>" +
+          "<td align=\"center\">" + dataObj[i]["teleopAlgaeNet"] + "</td>" +
+          "<td align=\"center\">" + dataObj[i]["teleopAlgaeProcessor"] + "</td>" +
+          "<td align=\"center\">" + dataObj[i]["defenseLevel"] + "</td>" +
+          
           "<td align=\"center\">" + dataObj[i]["teleopspeakernotes"] + "</td>" +
           "<td align=\"center\">" + dataObj[i]["teleopspeakermisses"] + "</td>" +
-          "<td align=\"center\">" + dataObj[i]["teleoppasses"] + "</td>" +
           
           "<td align=\"center\">" + dataObj[i]["endgamestage"] + "</td>" +
           "<td align=\"center\">" + dataObj[i]["endgameharmony"] + "</td>" +
@@ -864,7 +864,7 @@ HOLD-->
                      }
                    }
                  }
-                 else if(toolIndex == 1) {   // Auton Speaker Notes
+                 else if(toolIndex == 1) {   // Auton coral
                    for (let i = 0; i < autonCoralL2Tips.length; i++) {
                      if(autonCoralL2Tips[i].xlabel == matchnum) {
                        tipStr = autonCoralL2Tips[i].tip;
@@ -872,7 +872,7 @@ HOLD-->
                      }
                    }
                  }
-                 else if(toolIndex == 2) {   // Auton Speaker Notes
+                 else if(toolIndex == 2) {   // Auton coral
                    for (let i = 0; i < autonCoralL3Tips.length; i++) {
                      if(autonCoralL3Tips[i].xlabel == matchnum) {
                        tipStr = autonCoralL3Tips[i].tip;
@@ -880,7 +880,7 @@ HOLD-->
                      }
                    }
                  }
-                 else if(toolIndex == 3) {   // Auton Leave Starting Zone
+                 else if(toolIndex == 3) {   // Auton coral
                    for (let i = 0; i < autonCoralL4Tips.length; i++) {
                      if(autonCoralL4Tips[i].xlabel == matchnum) {
                        tipStr = autonCoralL4Tips[i].tip;
@@ -914,11 +914,11 @@ HOLD-->
 
     var datasets = []; // Each entry is a dict with a label and data attribute
 
-    var startingSpotTips = []; // holds custom tooltips for auton amp notes
+    var startingSpotTips = []; // holds custom tooltips for starting position
 
-    var autonAlgaeNetTips = []; // holds custom tooltips for auton speaker notes
+    var autonAlgaeNetTips = []; // holds custom tooltips for auton algae net
       
-    var autonAlgaeProcTips = []; // holds custom tooltips for auton speaker notes
+    var autonAlgaeProcTips = []; // holds custom tooltips for auton algae processor
 
     var autonLeaveTips = []; // holds custom tooltips for auton leave starting zone data      
   
@@ -970,7 +970,7 @@ HOLD-->
     for (let i = 0; i < mydata.length; i++) {
       var matchnum = mydata[i]["matchnum"];
       match_list.push(matchnum);
-      // Get auton amp notes data
+      // Get starting position data
       var startingPosition = mydata[i]["startposition"];
       datasets[0]["data"].push(startingPosition);
       var slevel = "Right";
@@ -981,13 +981,13 @@ HOLD-->
       var tipStr = "Starting Spot="+slevel;
       startingSpotTips.push({xlabel: matchnum, tip: tipStr}); 
         
-      // Get auton speaker notes data
+      // Get auton algae net data
       var autonAlgaeNet = mydata[i]["algae"];
       datasets[1]["data"].push(autonAlgaeNet);
       var tooltipStr = "Net="+autonAlgaeNet;
       autonAlgaeNetTips.push({xlabel: matchnum, tip: tooltipStr}); 
         
-      // Get auton speaker notes data
+      // Get auton algae processor data
       var autonAlgaeProcessor = mydata[i]["processor"];
       datasets[2]["data"].push(autonAlgaeProcessor);
       var tooltipStr = "Processor="+autonAlgaeProcessor;    
@@ -1030,7 +1030,7 @@ HOLD-->
                  var matchnum = tooltipItem.label;
                  var tipStr = datasets[toolIndex].label;
 
-                 if(toolIndex == 0) {   // Auton Amp Notes
+                 if(toolIndex == 0) {   // starting position
                    for (let i = 0; i < startingSpotTips.length; i++) {
                      if(startingSpotTips[i].xlabel == matchnum) {
                        tipStr = startingSpotTips[i].tip;
@@ -1038,7 +1038,7 @@ HOLD-->
                      }
                    }
                  }
-                 else if(toolIndex == 1) {   // Auton Speaker Notes
+                 else if(toolIndex == 1) {   // Auton algae net
                    for (let i = 0; i < autonAlgaeNetTips.length; i++) {
                      if(autonAlgaeNetTips[i].xlabel == matchnum) {
                        tipStr = autonAlgaeNetTips[i].tip;
@@ -1046,7 +1046,7 @@ HOLD-->
                      }
                    }
                  }
-                 else if(toolIndex == 2) {   // Auton Speaker Notes
+                 else if(toolIndex == 2) {   // Auton algae net
                    for (let i = 0; i < autonAlgaeProcTips.length; i++) {
                      if(autonAlgaeProcTips[i].xlabel == matchnum) {
                        tipStr = autonAlgaeProcTips[i].tip;
@@ -1054,7 +1054,7 @@ HOLD-->
                      }
                    }
                  }
-                 else if(toolIndex == 3) {   // Auton Leave Starting Zone
+                 else if(toolIndex == 3) {   // Auton algae net
                    for (let i = 0; i < autonLeaveTips.length; i++) {
                      if(autonLeaveTips[i].xlabel == matchnum) {
                        tipStr = autonLeaveTips[i].tip;
@@ -1196,7 +1196,7 @@ HOLD-->
                  var matchnum = tooltipItem.label;
                  var tipStr = datasets[toolIndex].label;
 
-                 if(toolIndex == 0) {   // Auton Amp Notes
+                 if(toolIndex == 0) {   // teleop coral level one
                    for (let i = 0; i < teleopCoralL1Tips.length; i++) {
                      if(teleopCoralL1Tips[i].xlabel == matchnum) {
                        tipStr = teleopCoralL1Tips[i].tip;
@@ -1204,7 +1204,7 @@ HOLD-->
                      }
                    }
                  }
-                 else if(toolIndex == 1) {   // Auton Speaker Notes
+                 else if(toolIndex == 1) {   // teleop coral level two
                    for (let i = 0; i < teleopCoralL2Tips.length; i++) {
                      if(teleopCoralL2Tips[i].xlabel == matchnum) {
                        tipStr = teleopCoralL2Tips[i].tip;
@@ -1212,7 +1212,7 @@ HOLD-->
                      }
                    }
                  }
-                 else if(toolIndex == 2) {   // Auton Speaker Notes
+                 else if(toolIndex == 2) {   // teleop coral level three
                    for (let i = 0; i < teleopCoralL3Tips.length; i++) {
                      if(teleopCoralL3Tips[i].xlabel == matchnum) {
                        tipStr = teleopCoralL3Tips[i].tip;
@@ -1220,7 +1220,7 @@ HOLD-->
                      }
                    }
                  }
-                 else if(toolIndex == 3) {   // Auton Leave Starting Zone
+                 else if(toolIndex == 3) {   // teleop coral level four
                    for (let i = 0; i < teleopCoralL4Tips.length; i++) {
                      if(teleopCoralL4Tips[i].xlabel == matchnum) {
                        tipStr = teleopCoralL4Tips[i].tip;
@@ -1250,31 +1250,29 @@ HOLD-->
   function dataToTeleopGraph(matchdata) {
     // Declare variables
     var match_list = []; // List of matches to use as x lables
+      
     var datasets = []; // Each entry is a dict with a label and data attribute
-    var teleopAmpTips = []; // holds custom tooltips for teleop amp notes
-    var teleopSpeakerTips = []; // holds custom tooltips for teleop speaker notes
-    var teleopPassesTips =[];//holds custom tooltips for teleop passes
-    var teleopAmpUsedTips =[];//holds custom tooltips for if amplification used
+      
+    var defenseLevelTips = []; // holds custom tooltips for teleop amp notes
+      
+    var teleopAlgaeProcessorTips = []; // holds custom tooltips for teleop speaker notes
+      
+    var teleopAlgaeNetTips =[];//holds custom tooltips for if amplification used
 
     datasets.push({
-      label: "Amp Notes",
+      label: "Processor",
       data: [],
       borderColor: 'MediumOrchid'
     });
     datasets.push({
-      label: "Speaker Notes",
+      label: "Defense",
       data: [],
       borderColor: 'MediumSeaGreen'
     });
     datasets.push({
-      label: "Passes",
+      label: "Net",
       data: [],
       borderColor: 'Blue'
-    });
-    datasets.push({
-      label: "Ampf Used",
-      data: [],
-      borderColor: 'Red'
     });
     
     // Go thru each matchdata QR code string and build up a table of the data, so we can 
@@ -1282,16 +1280,14 @@ HOLD-->
     var mydata = [];
     for (let i = 0; i < matchdata.length; i++) {
       var matchnum = matchdata[i]["matchnumber"];
-      var teleopAmpNotes = matchdata[i]["teleopampnotes"];
-      var teleopSpeakerNotes = matchdata[i]["teleopspeakernotes"];
-      var teleopPasses = matchdata[i]["teleoppasses"];
-      var teleopAmpUsed = matchdata[i]["teleopampused"];
+      var teleopAlgaeProcessor = matchdata[i]["teleopAlgaeProcessor"];
+      var defenseLevel = matchdata[i]["defenseLevel"];
+      var teleopAlgaeNet = matchdata[i]["teleopAlgaeNet"];
       mydata.push({
         matchnum: matchnum,
-        ampnotes: teleopAmpNotes,
-        speakernotes: teleopSpeakerNotes,
-        passes: teleopPasses,
-        ampused: teleopAmpUsed
+        teleopprocessor: teleopAlgaeProcessor,
+        teleopdefense: defenseLevel,
+        teleopnet: teleopAlgaeNet
       });
     } 
     mydata.sort(function(rowA,rowB) {
@@ -1305,32 +1301,30 @@ HOLD-->
       var matchnum = mydata[i]["matchnum"];
       match_list.push(matchnum);
 
-      // Get teleop amp notes data
-      var teleopAmpNotes = mydata[i]["ampnotes"];
-      datasets[0]["data"].push(teleopAmpNotes);
-      var tooltipStr1 = "Amp Notes="+teleopAmpNotes;
-      teleopAmpTips.push({xlabel: matchnum, tip: tooltipStr1}); 
+      // Get teleop algae processor
+      var teleopAlgaeProcessor = mydata[i]["teleopprocessor"];
+      datasets[0]["data"].push(teleopAlgaeProcessor);
+      var tooltipStr1 = "Processor="+teleopAlgaeProcessor;
+      teleopAlgaeProcessorTips.push({xlabel: matchnum, tip: tooltipStr1}); 
 
-      // Get teleop speaker notes data
-      var teleopSpeakerNotes = mydata[i]["speakernotes"];
-      datasets[1]["data"].push(teleopSpeakerNotes);
-      var tooltipStr2 = "Speaker Notes="+teleopSpeakerNotes;
-      teleopSpeakerTips.push({xlabel: matchnum, tip: tooltipStr2}); 
+      // Get teleop defense level
+      var defenseLevel = mydata[i]["teleopdefense"];
+      datasets[1]["data"].push(defenseLevel);
+      var dlevel = "N/A";
+      if(defenseLevel == 1)
+        dlevel = "Low";
+      if(defenseLevel == 2)
+        dlevel = "Medium";  
+      if(defenseLevel == 3)
+        dlevel = "High";      
+      var tipStr2 = "Defense="+dlevel; 
+      defenseLevelTips.push({xlabel: matchnum, tip: tipStr2}); 
         
-      // Get passes data
-      var teleopPasses = mydata[i]["passes"];
-      datasets[2]["data"].push(teleopPasses);
-      var tooltipStr3 = "Passes="+teleopPasses;
-      teleopPassesTips.push({xlabel: matchnum, tip: tooltipStr3}); 
-        
-      //Get Amplification
-      var teleopAmpUsed = mydata[i]["ampused"];
-      datasets[3]["data"].push(teleopAmpUsed);
-      var label = "No";
-      if(teleopAmpUsed == 1)
-          label = "Yes";
-      var tooltipStr4 = "Amp Used="+label;
-      teleopAmpUsedTips.push({xlabel: matchnum, tip: tooltipStr4});         
+      //Get teleop algae net
+      var teleopAlgaeNet = mydata[i]["teleopnet"];
+      datasets[2]["data"].push(teleopAlgaeNet);
+      var tooltipStr3 = "Net ="+teleopAlgaeNet;
+      teleopAlgaeNetTips.push({xlabel: matchnum, tip: tooltipStr3});         
     }
 
     // Define the graph as a line chart:
@@ -1359,34 +1353,26 @@ HOLD-->
                  var matchnum = tooltipItem.label;
                  var tipStr = datasets[toolIndex].label;
 
-                 if(toolIndex == 0) {   // Teleop Amp Notes
-                   for (let i = 0; i < teleopAmpTips.length; i++) {
-                     if(teleopAmpTips[i].xlabel == matchnum) {
-                       tipStr = teleopAmpTips[i].tip;
+                 if(toolIndex == 0) {   // Teleop algae processor
+                   for (let i = 0; i < teleopAlgaeProcessorTips.length; i++) {
+                     if(teleopAlgaeProcessorTips[i].xlabel == matchnum) {
+                       tipStr = teleopAlgaeProcessorTips[i].tip;
                        break;
                      }
                    }
                  }
-                 else if(toolIndex == 1) {   // Teleop Speaker Notes
-                   for (let i = 0; i < teleopSpeakerTips.length; i++) {
-                     if(teleopSpeakerTips[i].xlabel == matchnum) {
-                       tipStr = teleopSpeakerTips[i].tip;
+                 else if(toolIndex == 1) {   // Teleop defense level
+                   for (let i = 0; i < defenseLevelTips.length; i++) {
+                     if(defenseLevelTips[i].xlabel == matchnum) {
+                       tipStr = defenseLevelTips[i].tip;
                        break;
                      }
                    }
                  }
-                 else if(toolIndex == 2) {   // Teleop Passes
-                   for (let i = 0; i < teleopPassesTips.length; i++) {
-                     if(teleopPassesTips[i].xlabel == matchnum) {
-                       tipStr = teleopPassesTips[i].tip;
-                       break;
-                     }
-                   }
-                 }
-                 else if(toolIndex == 3) {   // Teleop Amp Used
-                   for (let i = 0; i < teleopAmpUsedTips.length; i++) {
-                     if(teleopAmpUsedTips[i].xlabel == matchnum) {
-                       tipStr = teleopAmpUsedTips[i].tip;
+                 else if(toolIndex == 2) {   // Teleop Algae Net
+                   for (let i = 0; i < teleopAlgaeNetTips.length; i++) {
+                     if(teleopAlgaeNetTips[i].xlabel == matchnum) {
+                       tipStr = teleopAlgaeNetTips[i].tip;
                        break;
                      }
                    }
