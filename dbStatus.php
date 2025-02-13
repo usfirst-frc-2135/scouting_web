@@ -179,7 +179,6 @@
     for (const key in id_to_key_map) {
       id_to_written_map[key] = false;
       $("#" + key).change(function() {
-        var keyval = ($("#" + key).val());
         if ($("#" + key).val() == "") {
           $("#" + key).removeClass("bg-info");
           id_to_written_map[key] = false;
@@ -195,7 +194,6 @@
           id_to_written_map[key] = true;
           if (key == "writeDatabase") {
             // Mark tables in id_to_written_map 
-            var dataTableName = keyval+"dt";
             id_to_written_map["writeDataTable"] = true;
             id_to_written_map["writeTBATable"] = true;
             id_to_written_map["writePitTable"] = true;
@@ -290,17 +288,11 @@
       }
       // Create table names from database name.
       var databaseName = ($("#" + "writeDatabase").val());
-      writeData["writeDataTable"] = databaseName + "_dt";
-      writeData["writeTBATable"] = databaseName + "_tba";
-      writeData["writePitTable"] = databaseName + "_pt";
-      writeData["writeRankTable"] = databaseName + "_rt";
-      writeData["writeDriveRankTable"] = databaseName + "_drt";
-      console.log("writeConfig: database name = "+databaseName);
-      console.log("writeConfig: dataTable name = "+writeData["writeDataTable"]);
-      console.log("writeConfig: TBATable name = "+writeData["writeTBATable"]);
-      console.log("writeConfig: PitTable name = "+writeData["writePitTable"]);
-      console.log("writeConfig: RankTable name = "+writeData["writeRankTable"]);
-      console.log("writeConfig: DriveRankTable name = "+writeData["writeDriveRankTable"]);
+      writeData["datatable"] = databaseName + "_dt";
+      writeData["tbatable"] = databaseName + "_tba";
+      writeData["pittable"] = databaseName + "_pt";
+      writeData["ranktable"] = databaseName + "_rt";
+      writeData["driveranktable"] = databaseName + "_drt";
       writeData["writeConfig"] = JSON.stringify(writeData);
 
       $.post("dbAPI.php", writeData, function(data) {

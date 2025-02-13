@@ -653,10 +653,12 @@ class dbHandler
     // If File doesn't exist, instantiate array as empty
     try
     {
+      error_log("dbHandler: readDbConfig(): reading db_config.ini file");
       $ini_arr = parse_ini_file($this->dbIniFile);
     }
     catch (Exception $e)
     {
+      error_log("  dbHandler: no existing db_config.ini file, so  creating a new one");
       $ini_arr = array();
     }
     // If required keys don't exist, instantiate them to default empty string
@@ -694,6 +696,7 @@ class dbHandler
     $currDBConfig = $this->readDbConfig();
     foreach ($dat as $key => $value)
     {
+      error_log("dbHandler: writeDbConfig(): setting currDBConfig[$key] to $value");
       $currDBConfig[$key] = $value;
     }
     // Build ini file string
