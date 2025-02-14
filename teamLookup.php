@@ -691,10 +691,8 @@ HOLD-->
           "<td align=\"center\">" + dataObj[i]["teleopspeakernotes"] + "</td>" +
           "<td align=\"center\">" + dataObj[i]["teleopspeakermisses"] + "</td>" +
           
-          "<td align=\"center\">" + dataObj[i]["endgamestage"] + "</td>" +
-          "<td align=\"center\">" + dataObj[i]["endgameharmony"] + "</td>" +
-          "<td align=\"center\">" + dataObj[i]["endgametrap"] + "</td>" +
-          "<td align=\"center\">" + dataObj[i]["endgamespotlit"] + "</td>" +
+          "<td align=\"center\">" + dataObj[i]["cageClimb"] + "</td>" +
+          "<td align=\"center\">" + dataObj[i]["startClimb"] + "</td>" +
           "<td align=\"center\">" + dataObj[i]["died"] + "</td>" +
           "<td align=\"center\">" + dataObj[i]["scoutname"] + "</td>" +
           "</td>";
@@ -1388,17 +1386,20 @@ HOLD-->
     
   function dataToEndgameGraph(matchdata) {
     var match_list = [];
+      
     var datasets = [];
-    var endgameStageTips = [];
-    var endgameHarmonyTips = [];
+      
+    var cageClimbTips = [];
+      
+    var startClimbTips = [];
      
     datasets.push({
-       label: "Stage Level",
+       label: "Cage Climb",
        data: [],
        borderColor: 'SteelBlue'
     });
     datasets.push({
-       label: "Harmony Level",
+       label: "Start Climb",
        data: [],
        borderColor: 'RebeccaPurple'
     });
@@ -1408,12 +1409,12 @@ HOLD-->
     var mydata = [];
     for (let i = 0; i < matchdata.length; i++) {
       var matchnum = matchdata[i]["matchnumber"];
-      var stage = matchdata[i]["endgamestage"];
-      var harmony = matchdata[i]["endgameharmony"];
+      var cageClimb = matchdata[i]["cageClimb"];
+      var startClimb = matchdata[i]["startClimb"];
       mydata.push({
         matchnum: matchnum,
-        stage: stage,
-        harmony: harmony
+        cage: cageClimb,
+        climb: startClimb
       });
     }
     mydata.sort(function(rowA,rowB) {
@@ -1427,29 +1428,34 @@ HOLD-->
       var matchnum = mydata[i]["matchnum"];
       match_list.push(matchnum);
          
-      // Get endgame stage level
-      var endgameStage = mydata[i]["stage"];
-      datasets[0]["data"].push(endgameStage);
-      var clevel = "None";
-      if(endgameStage == 1)
+      // Get endgame climb cage levl
+      var cageClimb = mydata[i]["cage"];
+      datasets[0]["data"].push(cageClimb);
+      var clevel = "N/A";
+      if(cageClimb == 1)
         clevel = "Parked";
-      if(endgameStage == 2)
-        clevel = "Onstage";
+      if(cageClimb == 2)
+        clevel = "Fell";
+      if(cageClimb == 3)
+        clevel = "Shallow";
+      if(cageClimb == 4)
+        clevel = "Deep";
+      var tipStr = "Cage Climb ="+clevel;
+      cageClimbTips.push({xlabel: matchnum, tip: tipStr}); 
          
-      var tipStr = "Stage="+clevel;
-      endgameStageTips.push({xlabel: matchnum, tip: tipStr}); 
+      // Get start climb
+      var startClimb = mydata[i]["climb"];
+      datasets[1]["data"].push(startClimb);
+      var clevel = "N/A";
+      if(startClimb == 1)
+        clevel = "At Bell";
+      if(startClimb == 2)
+        clevel = "10 Seconds";
+      if(startClimb == 2)
+        clevel = "5 seconds";
          
-      // Get endgame harmony level
-      var endgameHarmony = mydata[i]["harmony"];
-      datasets[1]["data"].push(endgameHarmony);
-      var clevel = "0";
-      if(endgameHarmony == 1)
-        clevel = "1";
-      if(endgameHarmony == 2)
-        clevel = "2";
-         
-      var tipStr = "Harmony="+clevel;
-      endgameHarmonyTips.push({xlabel: matchnum, tip: tipStr});
+      var tipStr = "Start Climb="+clevel;
+      startClimbTips.push({xlabel: matchnum, tip: tipStr});
     }
          
     if (chart5Defined) {
@@ -1477,18 +1483,18 @@ HOLD-->
                 var matchnum = tooltipItem.label;
                 var tipStr = datasets[toolIndex].label;
 
-                if(toolIndex == 0) {   // Stage Level
-                  for (let i = 0; i < endgameStageTips.length; i++) {
-                    if(endgameStageTips[i].xlabel == matchnum) {
-                      tipStr = endgameStageTips[i].tip;
+                if(toolIndex == 0) {   // Cage Climb
+                  for (let i = 0; i < cageClimbTips.length; i++) {
+                    if(cageClimbTips[i].xlabel == matchnum) {
+                      tipStr = cageClimbTips[i].tip;
                       break;
                     }
                   }
                 }
-                else if(toolIndex == 1) {   // Teleop Middle Row
-                  for (let i = 0; i < endgameHarmonyTips.length; i++) {
-                    if(endgameHarmonyTips[i].xlabel == matchnum) {
-                      tipStr = endgameHarmonyTips[i].tip;
+                else if(toolIndex == 1) {   // Start Climb
+                  for (let i = 0; i < startClimbTips.length; i++) {
+                    if(startClimbTips[i].xlabel == matchnum) {
+                      tipStr = startClimbTips[i].tip;
                       break;
                     }
                   }
