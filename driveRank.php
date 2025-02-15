@@ -58,46 +58,10 @@
             <input class="form-check-input" type="radio" name="driverAbilityGroup" id="driveScore5">
             <label class="form-check-label" for="driveScore5">5 - N/A</label>
           </div>
-              
-          <p>   </p>
-          <div>
-            <label class="form-label"><b>Multi-note auton - gets notes from:</b></label>
-          </div>
-          <div class="form-check form-check-inline">
-            <label for="multinote_starting_zone" class ="form-label">Starting zone</label>
-            <input class="form-check-input" type="checkbox" id="multinote_starting_zone">
-          </div>
-          <div class="form-check form-check-inline">
-            <label for="multinote_centerline" class ="form-label">Center line</label>
-            <input class="form-check-input" type="checkbox" id="multinote_centerline">
-          </div>
-            
-              
-          <p>   </p>
-          <div>
-            <label class="form-label"><b>Teleop - shoots from:</b></label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="shootsFromGroup" id="shootsFromScore1">
-            <label class="form-check-label" for="shootsFromScore1">1 - Subwoofer</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="shootsFromGroup" id="shootsFromScore2">
-            <label class="form-check-label" for="shootsFromScore2">2 - Podium</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="shootsFromGroup" id="shootsFromScore3">
-            <label class="form-check-label" for="shootsFromScore3">3 - Anywhere</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="shootsFromGroup" id="shootsFromScore4">
-            <label class="form-check-label" for="shootsFromScore4">4 - N/A</label>
-          </div>
-
 
           <p>   </p>
           <div>
-            <label class="form-label"><b>Passing - consistently lands in starting zone area?</b></label>
+            <label class="form-label"><b>Relaying Coral - consistently relaying coral to other robots?</b></label>
           </div>
           <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" name="passingGroup" id="passingScore1">
@@ -115,19 +79,19 @@
 
           <p>   </p>
           <div>
-            <label class="form-label"><b>Can go under the stage?</b></label>
+            <label class="form-label"><b>Can go under/between cages?</b></label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="underStageGroup" id="underStageScore1">
-            <label class="form-check-label" for="underStageScore1">Yes</label>
+            <input class="form-check-input" type="radio" name="underCageGroup" id="underCageScore1">
+            <label class="form-check-label" for="underCageScore1">Yes</label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="underStageGroup" id="underStageScore2">
-            <label class="form-check-label" for="underStageScore2">No</label>
+            <input class="form-check-input" type="radio" name="underCageGroup" id="underCageScore2">
+            <label class="form-check-label" for="underCageScore2">No</label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="underStageGroup" id="underStageScore3">
-            <label class="form-check-label" for="underStageScore3">N/A</label>
+            <input class="form-check-input" type="radio" name="underCageGroup" id="underCageScore3">
+            <label class="form-check-label" for="underCageScore3">N/A</label>
           </div>
              
 
@@ -136,16 +100,12 @@
             <label class="form-label"><b>Defense tactics played:</b></label>
           </div>
           <div class="form-check form-check-inline">
-            <label for="defenseTactic1" class ="form-label">Bumping a shooting robot (how many shots missed?)</label>
+            <label for="defenseTactic1" class ="form-label">Blocking loading station (how long detained?)</label>
             <input class="form-check-input" type="checkbox" id="defenseTactic1">
           </div>
           <div class="form-check form-check-inline">
-            <label for="defenseTactic2" class ="form-label">Pinning (how long before clearing?)</label>
+            <label for="defenseTactic2" class ="form-label">Blocking path (how long detained?)</label>
             <input class="form-check-input" type="checkbox" id="defenseTactic2">
-          </div>
-          <div class="form-check form-check-inline">
-            <label for="defenseTactic3" class ="form-label">Blocking path (how long detained?)</label>
-            <input class="form-check-input" type="checkbox" id="defenseTactic3">
           </div>
           <div class="mb-3">
             <label for="defenseComment" class="form-label">Defense note: </label>
@@ -158,12 +118,8 @@
             <label class="form-label"><b>Against defensive robot:</b></label>
           </div>
           <div class="form-check form-check-inline">
-            <label for="againstTactic1" class ="form-label">Pinned or path blocked (able to quickly escape?)</label>
+            <label for="againstTactic1" class ="form-label">Path Blocked (able to escape quickly?)</label>
             <input class="form-check-input" type="checkbox" id="againstTactic1">
-          </div>
-          <div class="form-check form-check-inline">
-            <label for="againstTactic2" class ="form-label">Bumped when shooting (how many shots missed?)</label>
-            <input class="form-check-input" type="checkbox" id="againstTactic2">
           </div>
           <div class="mb-3">
             <label for="againstComment" class="form-label">Against defense note: </label>
@@ -176,35 +132,51 @@
             <label class="form-label"><b>Caused fouls:</b></label>
           </div>
           <div class="form-check form-check-inline">
-            <label for="foul1" class ="form-label">Pinning for 5 count</label>
+            <label for="foul1" class ="form-label">Pinning for 3 count</label>
             <input class="form-check-input" type="checkbox" id="foul1">
           </div>
-          <div class="form-check form-check-inline">
-            <label for="foul2" class ="form-label">Controlling more than 1 note</label>
-            <input class="form-check-input" type="checkbox" id="foul2">
-          </div>
-          <div class="form-check form-check-inline">
-            <label for="foul3" class ="form-label">Crossed center line in auton</label>
-            <input class="form-check-input" type="checkbox" id="foul3">
-          </div>
-          <div class="form-check form-check-inline">
-            <label for="foul4" class ="form-label">Touched opposing robot at Podium</label>
-            <input class="form-check-input" type="checkbox" id="foul4">
-          </div>
-          <div class="form-check form-check-inline">
-            <label for="foul5" class ="form-label">Touched opposing robot at Source or Amp</label>
-            <input class="form-check-input" type="checkbox" id="foul5">
-          </div>
-          <div class="form-check form-check-inline">
-            <label for="foul6" class ="form-label">Touched opposing robot at stage in Endgame</label>
-            <input class="form-check-input" type="checkbox" id="foul6">
-          </div>
-
-
+              
           <p>   </p>
-          <div class="mb-3">
-            <label for="climbComment" class="form-label">How long it took to climb; at what time do they go to climb once Endgame starts?</label>
-            <input type="text" class="form-control" id="climbComment">
+          <div>
+            <label class="form-label"><b>Auton Caused fouls:</b></label>
+          </div>
+          <div class="form-check form-check-inline">
+            <label for="autonFoul1" class ="form-label">Robot contact with opposing barge zone</label>
+            <input class="form-check-input" type="checkbox" id="autonFoul1">
+          </div>
+          <div class="form-check form-check-inline">
+            <label for="autonFoul2" class ="form-label">Robot contact with opposing cage</label>
+            <input class="form-check-input" type="checkbox" id="autonFoul2">
+          </div>
+              
+          <p>   </p>
+          <div>
+            <label class="form-label"><b>Teleop Caused fouls:</b></label>
+          </div>
+          <div class="form-check form-check-inline">
+            <label for="teleopFoul1" class ="form-label">Robot contact with anchor</label>
+            <input class="form-check-input" type="checkbox" id="teleopFoul1">
+          </div>
+          <div class="form-check form-check-inline">
+            <label for="teleopFoul2" class ="form-label">Robot contact with opposing barge zone</label>
+            <input class="form-check-input" type="checkbox" id="teleopFoul2">
+          </div>
+          <div class="form-check form-check-inline">
+            <label for="teleopFoul3" class ="form-label">Robot contact opposing reef zone</label>
+            <input class="form-check-input" type="checkbox" id="teleopFoul3">
+          </div>
+          <div class="form-check form-check-inline">
+            <label for="teleopFoul4" class ="form-label">Opposing cage contact</label>
+            <input class="form-check-input" type="checkbox" id="teleopFoul4">
+          </div>
+              
+          <p>   </p>
+          <div>
+            <label class="form-label"><b>Endgame Caused fouls:</b></label>
+          </div>
+          <div class="form-check form-check-inline">
+            <label for="endgameFoul1" class ="form-label">Contact with opposing robot while it is touching its cage</label>
+            <input class="form-check-input" type="checkbox" id="endgameFoul1">
           </div>
  
           <p>   </p>
@@ -215,7 +187,7 @@
 
           <p>   </p>
           <div class="mb-3">
-            <label for="climbComment" class="form-label">General comment:</label>
+            <label for="generalComment" class="form-label">General comment:</label>
             <input type="text" class="form-control" id="generalComment">
           </div>
  
@@ -271,39 +243,33 @@
     $("#driveScore4").prop("checked", false);
     $("#driveScore5").prop("checked", false);
 
-    $("#multinote_starting_zone").prop("checked", false);
-    $("#multinote_centerline").prop("checked", false);  
-
-    $("#shootsFromScore1").prop("checked", false);
-    $("#shootsFromScore2").prop("checked", false);
-    $("#shootsFromScore3").prop("checked", false);
-    $("#shootsFromScore4").prop("checked", false);
-
     $("#passingScore1").prop("checked", false);
     $("#passingScore2").prop("checked", false);
     $("#passingScore3").prop("checked", false);
 
-    $("#underStageScore1").prop("checked", false);
-    $("#underStageScore2").prop("checked", false);
-    $("#underStageScore3").prop("checked", false);
+    $("#underCageScore1").prop("checked", false);
+    $("#underCageScore2").prop("checked", false);
+    $("#underCageScore3").prop("checked", false);
 
     $("#defenseTactic1").prop("checked", false); 
     $("#defenseTactic2").prop("checked", false);
-    $("#defenseTactic3").prop("checked", false);
     $("#defenseComment").val("");
 
     $("#againstTactic1").prop("checked", false);
-    $("#againstTactic2").prop("checked", false);
     $("#againstComment").val(""); 
 
     $("#foul1").prop("checked", false); 
-    $("#foul2").prop("checked", false); 
-    $("#foul3").prop("checked", false); 
-    $("#foul4").prop("checked", false);
-    $("#foul5").prop("checked", false);
-    $("#foul6").prop("checked", false);
+    
+    $("#autonFoul1").prop("checked", false); 
+    $("#autonFoul2").prop("checked", false); 
+      
+    $("#teleopFoul1").prop("checked", false); 
+    $("#teleopFoul2").prop("checked", false);
+    $("#teleopFoul3").prop("checked", false);
+    $("#teleopFoul4").prop("checked", false);
+      
+    $("#endgameFoul1").prop("checked", false);
 
-    $("#climbComment").val("");  
     $("#problemComment").val(""); 
     $("#generalComment").val("");
   }
@@ -336,30 +302,6 @@
     if ($("#driveScore5").is(':checked')) {
       dataToUse["driverability"] = 5;
     }
-    
-    dataToUse["multinote_starting_zone"] = 0;  // default
-    dataToUse["multinote_centerline"] = 0;     // default
-    if ($("#multinote_starting_zone").is(':checked')) {
-      dataToUse["multinote_starting_zone"] = 1;
-    }
-    if ($("#multinote_centerline").is(':checked')) {
-      dataToUse["multinote_centerline"] = 1;
-    }
-      
-    dataToUse["shootsfrom"] = 0; // default
-    if ($("#shootsFromScore1").is(':checked')) {
-      dataToUse["shootsfrom"] = 1;
-    }
-    if ($("#shootsFromScore2").is(':checked')) {
-      dataToUse["shootsfrom"] = 2;
-    }
-    if ($("#shootsFromScore3").is(':checked')) {
-      dataToUse["shootsfrom"] = 3;
-    }
-    if ($("#shootsFromScore4").is(':checked')) {
-      dataToUse["shootsfrom"] = 4;
-    }
-    console.log(dataToUse["shootsfrom"]);
       
     dataToUse["passing"] = 0; // default
     if ($("#passingScore1").is(':checked')) {
@@ -372,67 +314,66 @@
       dataToUse["passing"] = 3;
     }
 
-    dataToUse["understage"] = 0;  // default
-    if ($("#underStageScore1").is(':checked')) {
-      dataToUse["understage"] = 1;
+    dataToUse["underCage"] = 0;  // default
+    if ($("#underCageScore1").is(':checked')) {
+      dataToUse["underCage"] = 1;
     }
-    if ($("#underStageScore2").is(':checked')) {
-      dataToUse["understage"] = 2;
+    if ($("#underCageScore2").is(':checked')) {
+      dataToUse["underCage"] = 2;
     }
-    if ($("#underStageScore3").is(':checked')) {
-      dataToUse["understage"] = 3;
+    if ($("#underCageScore3").is(':checked')) {
+      dataToUse["underCage"] = 3;
     }
 
     dataToUse["defense_tactic1"] = 0;     // default
     dataToUse["defense_tactic2"] = 0;     // default
-    dataToUse["defense_tactic3"] = 0;     // default
     if ($("#defenseTactic1").is(':checked')) {
       dataToUse["defense_tactic1"] = 1;
     }
     if ($("#defenseTactic2").is(':checked')) {
       dataToUse["defense_tactic2"] = 1;
     }
-    if ($("#defenseTactic3").is(':checked')) {
-      dataToUse["defense_tactic3"] = 1;
-    }
     dataToUse["defense_comment"] = $("#defenseComment").val();
 
     dataToUse["against_tactic1"] = 0;     // default
-    dataToUse["against_tactic2"] = 0;     // default
     if ($("#againstTactic1").is(':checked')) {
       dataToUse["against_tactic1"] = 1;
-    }
-    if ($("#againstTactic2").is(':checked')) {
-      dataToUse["against_tactic2"] = 1;
     }
     dataToUse["against_comment"] = $("#againstComment").val();
 
     dataToUse["foul1"] = 0;     // default
-    dataToUse["foul2"] = 0;     // default
-    dataToUse["foul3"] = 0;     // default
-    dataToUse["foul4"] = 0;     // default
-    dataToUse["foul5"] = 0;     // default
-    dataToUse["foul6"] = 0;     // default
+    dataToUse["autonFoul1"] = 0;     // default
+    dataToUse["autonFoul2"] = 0;     // default
+    dataToUse["teleopFoul1"] = 0;     // default
+    dataToUse["teleopFoul2"] = 0;     // default
+    dataToUse["teleopFoul3"] = 0;     // default
+    dataToUse["teleopFoul4"] = 0;     // default
+    dataToUse["endgameFoul1"] = 0;     // default
     if ($("#foul1").is(':checked')) {
       dataToUse["foul1"] = 1;
     }
-    if ($("#foul2").is(':checked')) {
-      dataToUse["foul2"] = 1;
+    if ($("#autonFoul1").is(':checked')) {
+      dataToUse["autonFoul1"] = 1;
     }
-    if ($("#foul3").is(':checked')) {
-      dataToUse["foul3"] = 1;
+    if ($("#autonFoul2").is(':checked')) {
+      dataToUse["autonFoul2"] = 1;
     }
-    if ($("#foul4").is(':checked')) {
-      dataToUse["foul4"] = 1;
+    if ($("#teleopFoul1").is(':checked')) {
+      dataToUse["teleopFoul1"] = 1;
     }
-    if ($("#foul5").is(':checked')) {
-      dataToUse["foul5"] = 1;
+    if ($("#teleopFoul2").is(':checked')) {
+      dataToUse["teleopFoul2"] = 1;
     }
-    if ($("#foul6").is(':checked')) {
-      dataToUse["foul6"] = 1;
+    if ($("#teleopFoul3").is(':checked')) {
+      dataToUse["teleopFoul3"] = 1;
+    }
+    if ($("#teleopFoul4").is(':checked')) {
+      dataToUse["teleopFoul4"] = 1;
+    }
+    if ($("#endgameFoul1").is(':checked')) {
+      dataToUse["endgameFoul1"] = 1;
     }
 
-    dataToUse["climb_comment"] = $("#climbComment").val();
     dataToUse["problem_comment"] = $("#problemComment").val();
     dataToUse["general_comment"] = $("#generalComment").val();
 

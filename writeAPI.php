@@ -45,7 +45,7 @@ if (isset($_POST["writePitData"]))
 {
   $db->connectToDB();
   $args = json_decode($_POST["writePitData"], true);
-  
+
   $args["entrykey"] = $eventCode . "_" . $args["teamnumber"];
   $args["eventcode"] = $eventCode;
   $db->writeRowToPitTable($args);
@@ -56,10 +56,19 @@ if (isset($_POST["writeDriveRankData"]))
   $db->connectToDB();
   $args = json_decode($_POST["writeDriveRankData"], true);
   
-  $args["entrykey"] = $args[$i]["eventcode"] . "_" . $args["matchnumber"] . "_" . $args["teamnumber"];
   $args["eventcode"] = $eventCode;
-  $db->writeRowToDriveRankTable($args);
-  echo ("success");
+  $msg = "success";
+  $args["entrykey"] = $args["eventcode"] . "_" . $args["matchnumber"] . "_" . $args["teamnumber"];
+    try
+    {
+        $db->writeRowToDriveRankTable($args);
+    }
+    catch (Exception $e)
+    {
+      error_log("! writeDriveRankData() threw exception = $e");
+      $msg = "fail";
+    }
+  echo ($msg);
 }
 if (isset($_POST["writeAllianceRankData"]))
 {

@@ -35,41 +35,27 @@
             <col span="1" style="background-color:#transparent">
             <col span="1" style="background-color:#cfe2ff">
             <col span="1" style="background-color:#transparent">
-            <col span="1" style="background-color:#cfe2ff">
-            <col span="1" style="background-color:#transparent">
-            <col span="1" style="background-color:#cfe2ff">
-            <col span="1" style="background-color:#transparent">
-            <col span="1" style="background-color:#cfe2ff">
-            <col span="1" style="background-color:#transparent">
-            <col span="1" style="background-color:#cfe2ff">
-            <col span="1" style="background-color:#transparent">
-            <col span="1" style="background-color:#cfe2ff">
-            <col span="1" style="background-color:#transparent">
           </colgroup>
           <thead>
             <tr>
               <th colspan="1"</th>
               <th colspan="1"</th>
-              <th colspan="29" class="text-center">Strategic Scouting Data</th>
+              <th colspan="18" class="text-center">Strategic Scouting Data</th>
             </tr>
             <tr>
               <th colspan="1"</th>
               <th colspan="1"</th>
-              <th colspan="29" class="text-center">Table</th>
+              <th colspan="18" class="text-center">Table</th>
             </tr>
             <tr>
               <th colspan="1"</th>
               <th colspan="1"</th>
-              <th colspan="4" class="text-center" style="background-color:#3686FF">Pit Scouting</th>
-              <th colspan="1"</th>
-              <th colspan="2" class="text-center" style="background-color:#3686FF">Auto Multi-Note Source</th>
               <th colspan="1"</th>
               <th colspan="1"</th>
               <th colspan="1"</th>
-              <th colspan="4" class="text-center" style="background-color:#3686FF">Defense Tactics</th>
-              <th colspan="3" class="text-center">Against Defense</th>
-              <th colspan="6" class="text-center" style="background-color:#3686FF">Fouls</th>
-              <th colspan="1"</th>
+              <th colspan="3" class="text-center" style="background-color:#3686FF">Defense Tactics</th>
+              <th colspan="2" class="text-center">Against Defense</th>
+              <th colspan="7" class="text-center" style="background-color:#3686FF">Fouls</th>
               <th colspan="1"</th>
               <th colspan="1"</th>
               <th colspan="1"</th>
@@ -77,30 +63,21 @@
             <tr>
               <th scope="col" class="text-center">Team</th>
               <th scope="col" class="text-center">Match</th>
-              <th scope="col" class="text-center">Gnd Intake</th>
-              <th scope="col" class="text-center">Leave Shoot Auto</th>
-              <th scope="col" class="text-center">Center Line Auto</th>
-              <th scope="col" class="text-center">Can Do Amp</th>
               <th scope="col" class="text-center">Drive Skill</th>
-              <th scope="col" class="text-center">Start Zone</th>
-              <th scope="col" class="text-center">Center Line</th>
-              <th scope="col" class="text-center">Shoots From</th>
-              <th scope="col" class="text-center">Solid Passes</th>
-              <th scope="col" class="text-center">Under Stage</th>
-              <th scope="col" class="text-center">Bump</th>
-              <th scope="col" class="text-center">Pin</th>
+              <th scope="col" class="text-center">Solid Relays</th>
+              <th scope="col" class="text-center">Under Cage</th>
+              <th scope="col" class="text-center">Block Path</th>
+              <th scope="col" class="text-center">Block Station</th>
+              <th scope="col" class="text-center">Note</th>
               <th scope="col" class="text-center">Block</th>
               <th scope="col" class="text-center">Note</th>
-              <th scope="col" class="text-center">Pin /Block</th>
-              <th scope="col" class="text-center">Bump</th>
-              <th scope="col" class="text-center">Note</th>
               <th scope="col" class="text-center">Pin</th>
-              <th scope="col" class="text-center">1+ Notes</th>
-              <th scope="col" class="text-center">Crossed Center</th>
-              <th scope="col" class="text-center">Podium Touch</th>
-              <th scope="col" class="text-center">Source Touch</th>
-              <th scope="col" class="text-center">Stage Touch</th>
-              <th scope="col" class="text-center">Climb Note</th>
+              <th scope="col" class="text-center">Barge Contact</th>
+              <th scope="col" class="text-center">Cage Contact</th>
+              <th scope="col" class="text-center">Anchor Contact</th>
+              <th scope="col" class="text-center">Barge Contact</th>
+              <th scope="col" class="text-center">Reef Contact</th>
+              <th scope="col" class="text-center">Cage Contact</th>
               <th scope="col" class="text-center">Problem Note</th>
               <th scope="col" class="text-center">General Note</th>
               <th scope="col" class="text-center">Scout</th>
@@ -294,62 +271,32 @@
       else if(driverability == "5")
         driveVal = "-"; 
 
-      var shootsFrom = dataObj[i]["shootsfrom"];
-      var sfVal = ""; 
-      if(shootsFrom == "1")
-        sfVal = "Subwoofer"; 
-      else if(shootsFrom == "2")
-        sfVal = "Podium"; 
-      else if(shootsFrom == "3")
-        sfVal = "Anywhere"; 
-      else if(shootsFrom == "4")
-        sfVal = "-"; 
-
       var teamnum = dataObj[i]["teamnumber"];
-
-      // Get pit-scouting data; note ths team may not have any pit data.
-      var pit_leaveVal = "NA"; 
-      var pit_clVal = "NA"; 
-      var pit_ampVal = "NA"; 
-      var pit_intakeVal = "NA"; 
-      if(pitData[teamnum] != null) {
-        var pit_leaveVal = pitData[teamnum]["preloadAndLeaveAuton"];
-        pit_intakeVal = convertToYesNo(pitData[teamnum]["intake"]);
-        pit_clVal = convertToYesNo(pitData[teamnum]["centerLineAuton"]);
-        pit_ampVal = convertToYesNo(pitData[teamnum]["amp"]);
-      }
-
+     
       var rowString = "<tr><td align=\"center\">" + teamnum + "</td>" +
         "<td align=\"center\">" + dataObj[i]["matchnumber"] + "</td>" +
-        "<td align=\"center\">" + pit_intakeVal + "</td>" +
-        "<td align=\"center\">" + pit_leaveVal + "</td>" +
-        "<td align=\"center\">" + pit_clVal + "</td>" +
-        "<td align=\"center\">" + pit_ampVal + "</td>" +
         "<td align=\"center\">" + driveVal + "</td>" +
-        "<td align=\"center\">" + convertToYesNo(dataObj[i]["multinote_starting_zone"]) + "</td>" +
-        "<td align=\"center\">" + convertToYesNo(dataObj[i]["multinote_centerline"]) + "</td>" +
-        "<td align=\"center\">" + sfVal + "</td>" +
         "<td align=\"center\">" + convertToYesNo(dataObj[i]["passing"]) + "</td>" +
-        "<td align=\"center\">" + convertToYesNo(dataObj[i]["understage"]) + "</td>" + 
+        "<td align=\"center\">" + convertToYesNo(dataObj[i]["underCage"]) + "</td>" + 
         "<td align=\"center\">" + convertToYesNo(dataObj[i]["defense_tactic1"]) + "</td>" +
         "<td align=\"center\">" + convertToYesNo(dataObj[i]["defense_tactic2"]) + "</td>" +
-        "<td align=\"center\">" + convertToYesNo(dataObj[i]["defense_tactic3"]) + "</td>" +
         "<td align=\"center\">" + dataObj[i]["defense_comment"] + "</td>" +
         "<td align=\"center\">" + convertToYesNo(dataObj[i]["against_tactic1"]) + "</td>" +
-        "<td align=\"center\">" + convertToYesNo(dataObj[i]["against_tactic2"]) + "</td>" +
         "<td align=\"center\">" + dataObj[i]["against_comment"] + "</td>" +
         "<td align=\"center\">" + convertToYesNo(dataObj[i]["foul1"]) + "</td>" +
-        "<td align=\"center\">" + convertToYesNo(dataObj[i]["foul2"]) + "</td>" +
-        "<td align=\"center\">" + convertToYesNo(dataObj[i]["foul3"]) + "</td>" + "<td align=\"center\">" + convertToYesNo(dataObj[i]["foul4"]) + "</td>" +
-        "<td align=\"center\">" + convertToYesNo(dataObj[i]["foul5"]) + "</td>" +
-        "<td align=\"center\">" + convertToYesNo(dataObj[i]["foul6"]) + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["climb_comment"] + "</td>" +
+        "<td align=\"center\">" + convertToYesNo(dataObj[i]["autonFoul1"]) + "</td>" +
+        "<td align=\"center\">" + convertToYesNo(dataObj[i]["autonFoul2"]) + "</td>" +
+        "<td align=\"center\">" + convertToYesNo(dataObj[i]["teleopFoul1"]) + "</td>" + 
+        "<td align=\"center\">" + convertToYesNo(dataObj[i]["teleopFoul2"]) + "</td>" +
+        "<td align=\"center\">" + convertToYesNo(dataObj[i]["teleopFoul3"]) + "</td>" +
+        "<td align=\"center\">" + convertToYesNo(dataObj[i]["teleopFoul4"]) + "</td>" +
+        "<td align=\"center\">" + convertToYesNo(dataObj[i]["endgameFoul1"]) + "</td>" +
         "<td align=\"center\">" + dataObj[i]["problem_comment"] + "</td>" +
         "<td align=\"center\">" + dataObj[i]["general_comment"] + "</td>" +
         "<td align=\"center\">" + dataObj[i]["scoutname"] + "</td>" +
         "</td>";
       $("#tableData").append(rowString);
-        
+                
     }
   }
 
@@ -359,14 +306,7 @@
       getAllDriveRankData: 1
     }).done(function(data) {
       var dataObj = JSON.parse(data);
-
-      // Get the Pit Scouting Data too.
-      $.get("readAPI.php", {
-        getAllPitData: 1
-      }).done(function(data) {
-        var pitData = JSON.parse(data);
-        dataToTable(dataObj,pitData);
-
+        dataToTable(dataObj);
         setTimeout(function() {
           sorttable.makeSortable(document.getElementById("rawDataTable"));
           frozenTable = $('#freezeTableDiv').freezeTable({
@@ -377,7 +317,6 @@
         }, 1);
         sortTable();
       });
-    });
   }
 
   $(document).ready(function() {
