@@ -495,6 +495,52 @@
                 </div>
              </div>
             </div>
+              
+              
+              
+            <!-- Reefzone sides used section -->
+            <div class="card mb-3">
+              <div class="card-header">
+                <div class="overflow-auto">
+                  <h5 class="text-center"> <a href="#collapseReefZone" data-bs-toggle="collapse" aria-expanded="false"> Reefzone Sides Used </a> </h5>
+                  <div class="collapse" id="collapseReefZone">
+                    <div class="card card-body">
+                      <table class="table table-striped">
+                        <thead>
+                          <tr>
+                            <td>&nbsp;</td>
+                            <th scope="col">%</th>
+                          </tr>
+                        </thead>
+                        <tbody id="reefzoneTable">
+                          <tr>
+                            <th scope="row">AB</th>
+                          </tr>
+                          <tr>
+                            <th scope="row">CD</th>
+                          </tr>
+                          <tr>
+                            <th scope="row">EF</th>
+                          </tr>
+                          <tr>
+                            <th scope="row">GH</th>
+                          </tr>
+                          <tr>
+                            <th scope="row">IJ</th>
+                          </tr>
+                          <tr>
+                            <th scope="row">KL</th>
+                          </tr>   
+                        </tbody>
+                        <tfoot id="reefzoneTotalTable">
+                        </tfoot>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+  
        
             <!-- HOLD Drive Rank graph 
             <div class="overflow-auto">
@@ -564,7 +610,7 @@ HOLD-->
     
   function dataToAvgTables(avgs) {
       
-    //Auton Total Scores and Points  
+    //Auton Table  
     avgs["autonpointsstr"] = "<b>Total Points</b>";
     avgs["autontotalcoralstr"] = "<b>Total Coral Scored</b>";
     avgs["autontotalalgaestr"] = "<b>Total Algae Scored</b>";   
@@ -577,7 +623,7 @@ HOLD-->
     writeTableRow("autoTable", avgs, ["autoncoralpointsstr", "avgTotalAutoCoralPoints", "maxTotalAutoCoralPoints"]);
     writeTableRow("autoTable", avgs, ["autonalgaepointsstr", "avgTotalAutoAlgaePoints", "maxTotalAutoAlgaePoints"]); 
       
-    // Teleop Scores
+    // Teleop Table
 
     avgs["teleoppointsstr"] = "<b>Total Points</b>";
     avgs["teleoptotalcoralstr"] = "<b>Total Coral Scored</b>";
@@ -595,7 +641,7 @@ HOLD-->
     writeTableRow("teleopTable", avgs, ["teleopcoralaccuracystr", "teleopCoralScoringPercent"]); 
     writeTableRow("teleopTable", avgs, ["teleopalgaeaccuracysstr", "teleopAlgaeScoringPercent"]); 
       
-    // Endgame Climb Table
+    // Endgame Table
       
     avgs["totalEndGamePointsstr"] = "<b>Total Points</b>";  
     avgs["endgameClimbPercent"]["endgameclimbstr"] = "<b>Cage Climb %</b>";  
@@ -621,6 +667,25 @@ HOLD-->
     writeTableRow("endgameTrapTable", avgs, ["traprowstr", "trapPercentage"]);
     document.getElementById("endgameTrapTable").style.backgroundColor = "f0f0f0";
     */
+      
+    //ReefZone Table
+      
+    avgs["sideABstr"] = "<b>AB</b>";
+    avgs["sideCDstr"] = "<b>CD</b>";
+    avgs["sideEFstr"] = "<b>EF</b>";
+    avgs["sideGHstr"] = "<b>GH</b>";
+    avgs["sideIJstr"] = "<b>IJ</b>";
+    avgs["sideKLstr"] = "<b>KL</b>";
+      
+      
+    writeTableRow("reefzoneTable", avgs, ["sideABstr", "reefzoneABpercent"]); 
+    writeTableRow("reefzoneTable", avgs, ["sideCDstr", "reefzoneCDpercent"]);
+    writeTableRow("reefzoneTable", avgs, ["sideEFstr", "reefzoneEFpercent"]);
+    writeTableRow("reefzoneTable", avgs, ["sideGHstr", "reefzoneGHpercent"]);
+    writeTableRow("reefzoneTable", avgs, ["sideIJstr", "reefzoneIJpercent"]);  
+    writeTableRow("reefzoneTable", avgs, ["sideKLstr", "reefzoneKLpercent"]);      
+      
+      
       
     // Total Table
       
@@ -1805,6 +1870,8 @@ HOLD-->
     $("#teleopTotalTable").html("");
     $("#endgameStageTable").html("");
     $("#endgameHarmonyTable").html("");
+    $("#reefzoneTable").html("");
+    $("#reefzoneTotalTable").html(""); 
     $("#endgameTrapTable").html("");
     $("#totalTable").html("");
 
