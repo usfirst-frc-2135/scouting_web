@@ -473,7 +473,25 @@ class matchDataProcessor {
     // Go thru each team in pdata and do the avg, max and percent calculations.
     for (var key in pdata) 
     {
-//      console.log(">>>> for team " + key);
+      console.log(">>>> Calculations for team " + key);
+      // Calculate the accuracy percentage before the actual AVG is calculated.
+      var totalCoralAcquired = (parseInt(pdata[key]["teleopAcquireCoral"]));
+      console.log("   ---> total (teleop) coral acquired: " + totalCoralAcquired); //TEST
+      // If there are no coral acq'd, don't bother doing the calculation here.
+      if (totalCoralAcquired != 0) {
+        var teleopCoralPercent = (parseInt(pdata[key]["avgTeleopCoralScored"])) / totalCoralAcquired;
+        pdata[key]["teleopCoralScoringPercent"] = Math.round(100 * teleopCoralPercent);
+        console.log("    ---> Coral Scoring Percentage: " + pdata[key]["teleopCoralScoringPercent"]); //TEST
+      }
+      var totalAlgaeAcquired = (parseInt(pdata[key]["teleopAcquireAlgae"]));
+      console.log("   ---> total (teleop) algae acquired: " + totalAlgaeAcquired); //TEST
+      // If there are no algae acquired, don't bother doing the calculation here.
+      if (totalAlgaeAcquired != 0) {
+        var teleopAlgaePercent = (parseInt(pdata[key]["avgTeleopAlgaeScored"])) / totalAlgaeAcquired;
+        pdata[key]["teleopAlgaeScoringPercent"] = Math.round(100 * teleopAlgaePercent);
+        console.log("    ---> Algae Scoring Percentage: " + pdata[key]["teleopAlgaeScoringPercent"]); //TEST
+      }
+        
       pdata[key]["avgTotalPoints"] = Math.round(10 * pdata[key]["avgTotalPoints"] / pdata[key]["totalmatches"]) / 10;
       pdata[key]["avgTotalAutoPoints"] = Math.round(10 * pdata[key]["avgTotalAutoPoints"] / pdata[key]["totalmatches"]) / 10;
       pdata[key]["avgTotalAutoCoralPoints"] = Math.round(10 * pdata[key]["avgTotalAutoCoralPoints"] / pdata[key]["totalmatches"]) / 10;
@@ -513,36 +531,6 @@ class matchDataProcessor {
 	
       //pdata[key]["avgautonamps"] = Math.round(10 * pdata[key]["avgautonamps"] / pdata[key]["totalmatches"]) / 10;
       //pdata[key]["avgautonspeaker"] = Math.round(10 * pdata[key]["avgautonspeaker"] / pdata[key]["totalmatches"]) / 10;
-
-//      console.log("     ---> total auton speakerShots calculated: " + totalAutonSpeakerShots); //TEST
-      // If there are no shots, don't bother doing the calculation here.
-      /*if (totalAutonSpeakerShots != 0) {
-        var autonSpeakerShotPercent = (parseInt(pdata[key]["totalAutonSpeakerNotes"])) / totalAutonSpeakerShots;
-        pdata[key]["autonSpeakerShootPercent"] = Math.round(100 * autonSpeakerShotPercent);
-//        console.log("     ---> Auton speakerShootingPercentage: " + pdata[key]["autonSpeakerShootPercent"]); //TEST
-      }*/
-
-      //pdata[key]["avgteleopampnotes"] = Math.round(10 * pdata[key]["avgteleopampnotes"] / pdata[key]["totalmatches"]) / 10;
-      //pdata[key]["avgteleopspeakernotes"] = Math.round(10 * pdata[key]["avgteleopspeakernotes"] / pdata[key]["totalmatches"]) / 10;
-      //pdata[key]["avgPasses"] = Math.round(10 * pdata[key]["avgPasses"] / pdata[key]["totalmatches"]) / 10;
-
-      var totalCoralAcquired = (parseInt(pdata[key]["teleopAcquireCoral"]));
-//      console.log("     ---> total teleop speakerShots calculated: " + totalTeleopSpeakerShots); //TEST
-      // If there are no shots, don't bother doing the calculation here.
-      if (totalCoralAcquired != 0) {
-        var teleopCoralPercent = (parseInt(pdata[key]["avgTeleopCoralScored"])) / totalCoralAcquired;
-        pdata[key]["teleopCoralScoringPercent"] = Math.round(100 * teleopCoralPercent);
-//        console.log("     ---> speakerShootingPercentage: " + pdata[key]["teleopSpeakerShootPercent"]); //TEST
-      }
-        
-      var totalAlgaeAcquired = (parseInt(pdata[key]["teleopAcquireAlgae"]));
-//      console.log("     ---> total teleop speakerShots calculated: " + totalTeleopSpeakerShots); //TEST
-      // If there are no shots, don't bother doing the calculation here.
-      if (totalAlgaeAcquired != 0) {
-        var teleopAlgaePercent = (parseInt(pdata[key]["avgTeleopAlgaeScored"])) / totalAlgaeAcquired;
-        pdata[key]["teleopAlgaeScoringPercent"] = Math.round(100 * teleopAlgaePercent);
-//        console.log("     ---> speakerShootingPercentage: " + pdata[key]["teleopSpeakerShootPercent"]); //TEST
-      }
 
       //pdata[key]["trapPercentage"] = Math.round(100 * pdata[key]["trapPercentage"] / pdata[key]["totalmatches"]);
       //pdata[key]["spotlitPercentage"] = Math.round(100 * pdata[key]["spotlitPercentage"] / pdata[key]["totalmatches"]);
