@@ -201,6 +201,13 @@ class matchDataProcessor {
         pdata[tn]["avgTotalAlgaePoints"] = 0;
         pdata[tn]["maxTotalAlgaePoints"] = 0;
 
+        pdata[tn]["reefzoneABpercent"] = 0;
+        pdata[tn]["reefzoneCDpercent"] = 0;
+        pdata[tn]["reefzoneEFpercent"] = 0;
+        pdata[tn]["reefzoneGHpercent"] = 0;
+        pdata[tn]["reefzoneIJpercent"] = 0;
+        pdata[tn]["reefzoneKLpercent"] = 0;
+
         pdata[tn]["avgAutonCoral"] = 0;
         pdata[tn]["maxAutonCoral"] = 0;
         pdata[tn]["avgAutonAlgae"] = 0;
@@ -268,9 +275,15 @@ class matchDataProcessor {
         pdata[tn]["commentlist"] = [];
       }
 	  
-//REMOVE      var totalmatches = (this.data[i]["totalmatches"]);
       console.log("   -> for match = "+ this.data[i]["matchnumber"]); //TEST
         
+      pdata[tn]["reefzoneABpercent"] += this.data[i]["reefzoneAB"];
+      pdata[tn]["reefzoneCDpercent"] += this.data[i]["reefzoneCD"];
+      pdata[tn]["reefzoneEFpercent"] += this.data[i]["reefzoneEF"];
+      pdata[tn]["reefzoneGHpercent"] += this.data[i]["reefzoneGH"];
+      pdata[tn]["reefzoneIJpercent"] += this.data[i]["reefzoneIJ"];
+      pdata[tn]["reefzoneKLpercent"] += this.data[i]["reefzoneKL"];
+
       var autonLeave = (this.data[i]["autonLeave"]);
       var autonLeavePoints = 0;
       if(parseInt(autonLeave) == 1)
@@ -341,22 +354,22 @@ class matchDataProcessor {
       }
       console.log("  --> endgame climb points = "+endgameClimbPoints);  //TEST
 
-      var autonCoralFloor = (this.data[i]["autonCoralFloor"]);
-      var autonCoralStation = (this.data[i]["autonCoralStation"]);
-      var autonAlgaeFloor = (this.data[i]["autonAlgaeFloor"]);
-      var autonAlgaeReef = (this.data[i]["autonAlgaeReef"]);
+//REMOVE      var autonCoralFloor = (this.data[i]["autonCoralFloor"]);
+//REMOVE      var autonCoralStation = (this.data[i]["autonCoralStation"]);
+//REMOVE      var autonAlgaeFloor = (this.data[i]["autonAlgaeFloor"]);
+//REMOVE      var autonAlgaeReef = (this.data[i]["autonAlgaeReef"]);
         
-      var teleopAlgaeFloor = (this.data[i]["teleopAlgaeFloorPickup"]);
-      var teleopCoralFloor = (this.data[i]["teleopCoralFloorPickup"]);
+//REMOVE      var teleopAlgaeFloor = (this.data[i]["teleopAlgaeFloorPickup"]);
+//REMOVE      var teleopCoralFloor = (this.data[i]["teleopCoralFloorPickup"]);
         
-      var startClimbing = (this.data[i]["endgameStartClimbing"]);
-      pdata[tn]["autonCoralFloorPercent"] += autonCoralFloor;
-      pdata[tn]["autonCoralStationPercent"] += autonCoralStation;
-      pdata[tn]["autonAlgaeFloorPercent"] += autonAlgaeFloor;
-      pdata[tn]["autonAlgaeReefPercent"] += autonAlgaeReef;
+//REMOVE      var startClimbing = (this.data[i]["endgameStartClimbing"]);
+//REMOVE      pdata[tn]["autonCoralFloorPercent"] += autonCoralFloor;
+//REMOVE      pdata[tn]["autonCoralStationPercent"] += autonCoralStation;
+//REMOVE      pdata[tn]["autonAlgaeFloorPercent"] += autonAlgaeFloor;
+//REMOVE      pdata[tn]["autonAlgaeReefPercent"] += autonAlgaeReef;
         
-      pdata[tn]["teleopAlgaeFloor"] += teleopAlgaeFloor;
-      pdata[tn]["teleopCoralFloor"] += teleopCoralFloor;
+//REMOVE      pdata[tn]["teleopAlgaeFloor"] += teleopAlgaeFloor;
+//REMOVE      pdata[tn]["teleopCoralFloor"] += teleopCoralFloor;
       
       var totalCoral = totalAutoCoral + totalTeleopCoral;
       var totalAlgae = totalAutoAlgae + totalTeleopAlgae;
@@ -492,6 +505,19 @@ class matchDataProcessor {
         console.log("    ---> Algae Scoring Percentage: " + pdata[key]["teleopAlgaeScoringPercent"]); //TEST
       }
         
+      pdata[key]["reefzoneABpercent"] = Math.round(100 * pdata[key]["reefzoneABpercent"] / pdata[key]["totalmatches"]);
+      pdata[key]["reefzoneCDpercent"] = Math.round(100 * pdata[key]["reefzoneCDpercent"] / pdata[key]["totalmatches"]);
+      pdata[key]["reefzoneEFpercent"] = Math.round(100 * pdata[key]["reefzoneEFpercent"] / pdata[key]["totalmatches"]);
+      pdata[key]["reefzoneGHpercent"] = Math.round(100 * pdata[key]["reefzoneGHpercent"] / pdata[key]["totalmatches"]);
+      pdata[key]["reefzoneIJpercent"] = Math.round(100 * pdata[key]["reefzoneIJpercent"] / pdata[key]["totalmatches"]);
+      pdata[key]["reefzoneKLpercent"] = Math.round(100 * pdata[key]["reefzoneKLpercent"] / pdata[key]["totalmatches"]);
+      console.log(" ---> reefzoneAB Percentage used: " + pdata[key]["reefzoneABpercent"]); //TEST
+      console.log(" ---> reefzoneCD Percentage used: " + pdata[key]["reefzoneCDpercent"]); //TEST
+      console.log(" ---> reefzoneEF Percentage used: " + pdata[key]["reefzoneEFpercent"]); //TEST
+      console.log(" ---> reefzoneGH Percentage used: " + pdata[key]["reefzoneGHpercent"]); //TEST
+      console.log(" ---> reefzoneIJ Percentage used: " + pdata[key]["reefzoneIJpercent"]); //TEST
+      console.log(" ---> reefzoneKL Percentage used: " + pdata[key]["reefzoneKLpercent"]); //TEST
+
       pdata[key]["avgTotalPoints"] = Math.round(10 * pdata[key]["avgTotalPoints"] / pdata[key]["totalmatches"]) / 10;
       pdata[key]["avgTotalAutoPoints"] = Math.round(10 * pdata[key]["avgTotalAutoPoints"] / pdata[key]["totalmatches"]) / 10;
       pdata[key]["avgTotalAutoCoralPoints"] = Math.round(10 * pdata[key]["avgTotalAutoCoralPoints"] / pdata[key]["totalmatches"]) / 10;
