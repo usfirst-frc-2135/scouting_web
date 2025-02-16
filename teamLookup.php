@@ -252,7 +252,7 @@
             <div class="card mb-3">
               <div class="card-body">
                 <div class="overflow-auto">
-                  <h5 class="text-center">Match Total Notes </h5>
+                  <h5 class="text-center">Match Totals </h5>
                   <table class="table table-striped">
                     <thead>
                       <tr>
@@ -263,9 +263,19 @@
                     </thead>
                     <tbody id="totalTable">
                       <tr>
-                        <th scope="row">Total Notes</th>
+                        <th scope="row">Total Coral Scored</th>
                       </tr>
+                      <tr>
+                        <th scope="row">Total Algae Scored</th>
+                      </tr>
+                      <tr>
+                        <th scope="row">Total Coral Points</th>
+                      </tr>
+                      <tr>
+                        <th scope="row">Total Algae Points</th>
+                      </tr>    
                     </tbody>
+                    <tfoot id="matchTotalTable">
                   </table>
                 </div>
               </div>
@@ -288,14 +298,20 @@
                         </thead>
                         <tbody id="autoTable">
                          <tr>
-                            <th scope="row">Amp Notes</th>
+                            <th scope="row">Total Points</th>
                           </tr>
                           <tr>
-                            <th scope="row">Speaker Notes</th>
+                            <th scope="row">Total Coral Scored</th>
                           </tr>
                           <tr>
-                            <th scope="row">Speaker Accuracy%</th>
+                            <th scope="row">Total Algae Scored</th>
                           </tr>
+                          <tr>
+                            <th scope="row">Total Coral Points</th>
+                          </tr>
+                          <tr>
+                            <th scope="row">Total Algae Points</th>
+                          </tr>    
                         </tbody>
                         <tfoot id="autoTotalTable">
                           <tr>
@@ -326,22 +342,28 @@
                         </thead>
                         <tbody id="teleopTable">
                           <tr>
-                            <th scope="row">Amp Notes</th>
+                            <th scope="row">Total Points</th>
                           </tr>
                           <tr>
-                            <th scope="row">Speaker Notes</th>
+                            <th scope="row">Total Coral Scored</th>
                           </tr>
                           <tr>
-                            <th scope="row">Passes</th>
+                            <th scope="row">Total Algae Scored</th>
                           </tr>
                           <tr>
-                            <th scope="row">Speaker Accuracy%</th>
+                            <th scope="row">Total Coral Points</th>
                           </tr>
+                          <tr>
+                            <th scope="row">Total Algae Points</th>
+                          </tr>
+                          <tr>
+                            <th scope="row">Coral Acc%</th>
+                          </tr>
+                          <tr>
+                            <th scope="row">Algae Acc%</th>
+                          </tr>    
                         </tbody>
                         <tfoot id="teleopTotalTable">
-                          <tr>
-                            <th scope="col">Total Notes</th>
-                          </tr>
                         </tfoot>
                       </table>
                     </div>
@@ -361,45 +383,35 @@
                         <thead>
                           <tr>
                             <td>&nbsp;</td>
-                            <th scope="col">N</th>
-                            <th scope="col">P</th>
-                            <th scope="col">O</th>
+                            <th scope="col">AVG</th>
+                            <th scope="col">MAX</th> 
                           </tr>
                         </thead>
                         <tbody id="endgameStageTable">
                           <tr>
-                            <th scope="row" style="background-color:rgb(240,240,240);">Stage Level %</th>
-                          </tr>
-                          </tbody>
-                          <thead>
+                            <th scope="row">Total Points</th>
+                          </tr> 
+                        </tbody>
+                        <thead>
                           <tr>
                             <td>&nbsp;</td>
-                            <th scope="col">0</th>
-                            <th scope="col">1</th>
-                            <th scope="col">2</th>
+                            <th scope="col">N</th>
+                            <th scope="col">P</th>
+                            <th scope="col">F</th>  
+                            <th scope="col">S</th>
+                            <th scope="col">D</th>   
                           </tr>
-                        </thead>
-                          <tbody id="endgameHarmonyTable">
+                        </thead> 
+                        <tbody id="endgameHarmonyTable">
                           <tr>
-                            <th scope="row" style="background-color:rgb(240,240,240);">Harmony Level %</th>
-                            </tr>
-                        </tbody>
-                        <thread>
-                            <tr>
-                                <td>&nbsp;</td>
-                                <th scope="col"></th>
-                            </tr>
-                        </thread>
-                          <tbody id="endgameTrapTable">
-                          <tr>
-                            <th scope="row" style="background-color:rgb(240,240,240);">Trap Note %</th>
-                            </tr>
+                            <th scope="row">Cage Climb %</th>
+                          </tr>    
                         </tbody>
                       </table>
                     </div>
                   </div>
                 </div>
-              </div>
+             </div>
             </div>
        
             <!-- HOLD Drive Rank graph 
@@ -467,37 +479,50 @@ HOLD-->
       writeTableRow("comments", commentObj[i], ["comment", "scoutname"]);
     }
   }
+    
   function dataToAvgTables(avgs) {
-    //Auton Scores
-      /*
-    avgs["amprowstr"] = "<b>Amp Notes</b>";
-    avgs["speakerrowstr"] = "<b>Speaker Notes</b>";
-    avgs["speakerautonaccuracyrowstr"] = "<b>Speaker Accuracy%</b>";
-    avgs["totalstr"] = "<b>Total Notes</b>";
-      */
-    /*writeTableRow("autoTable", avgs, ["amprowstr", "avgautonamps", "maxautonamps"]);
-    writeTableRow("autoTable", avgs, ["speakerrowstr", "avgautonspeaker", "maxautonspeaker"]);
-    writeTableRow("autoTable", avgs, ["speakerautonaccuracyrowstr", "autonSpeakerShootPercent"]);
-    writeTableRow("autoTotalTable", avgs, ["totalstr", "avgautonotes", "maxautonotes"]);
-    */
+      
+    //Auton Total Scores and Points  
+    avgs["autonpointsstr"] = "<b>Total Points</b>";
+    avgs["autontotalcoralstr"] = "<b>Total Coral Scored</b>";
+    avgs["autontotalalgaestr"] = "<b>Total Algae Scored</b>";   
+    avgs["autoncoralpointsstr"] = "<b>Total Coral Points</b>";
+    avgs["autonalgaepointsstr"] = "<b>Total Algae Points</b>";
+      
+    writeTableRow("autoTable", avgs, ["autonpointsstr", "avgTotalAutoPoints", "maxTotalAutoPoints"]);         
+    writeTableRow("autoTable", avgs, ["autontotalcoralstr", "avgAutonCoral", "maxAutonCoral"]);
+    writeTableRow("autoTable", avgs, ["autontotalalgaestr", "avgAutonAlgae","maxAutonAlgae"]);
+    writeTableRow("autoTable", avgs, ["autoncoralpointsstr", "avgTotalAutoCoralPoints", "maxTotalAutoCoralPoints"]);
+    writeTableRow("autoTable", avgs, ["autonalgaepointsstr", "avgTotalAutoAlgaePoints", "maxTotalAutoAlgaePoints"]); 
       
     // Teleop Scores
-      /*
-    avgs["amprowstr"] = "<b>Amp Notes</b>";
-    avgs["speakerrowstr"] = "<b>Speaker Notes</b>";
-    avgs["speakeraccuracyrowstr"] = "<b>Speaker Accuracy%</b>";
-    avgs["passesrowstr"] = "<b>Passes</b>";
-    avgs["totalstr"] = "<b>Total Notes</b>";
-    */
-     /* 
-    writeTableRow("teleopTotalTable", avgs, ["totalstr", "avgteleopnotes", "maxteleopnotes"]);
-    writeTableRow("teleopTable", avgs, ["amprowstr", "avgteleopampnotes", "maxteleopampnotes"]);
-    writeTableRow("teleopTable", avgs, ["speakerrowstr", "avgteleopspeakernotes", "maxteleopspeakernotes"]);
-    writeTableRow("teleopTable", avgs, ["speakeraccuracyrowstr", "teleopSpeakerShootPercent"]) 
-    writeTableRow("teleopTable", avgs, ["passesrowstr", "avgPasses", "maxPasses"]);
-      */
+
+    avgs["teleoppointsstr"] = "<b>Total Points</b>";
+    avgs["teleoptotalcoralstr"] = "<b>Total Coral Scored</b>";
+    avgs["teleoptotalalgaestr"] = "<b>Total Algae Scored</b>";
+    avgs["teleopcoralpointsstr"] = "<b>Total Coral Points</b>";
+    avgs["teleopalgaepointsstr"] = "<b>Total Algae Points</b>";
+    avgs["teleopcoralaccuracystr"] = "<b>Coral Acc%</b>";
+    avgs["teleopalgaeaccuracysstr"] = "<b>Algae Acc%</b>";  
+     
+    writeTableRow("teleopTable", avgs, ["teleoppointsstr", "avgTotalTeleopPoints", "maxTotalTeleopPoints"]);
+    writeTableRow("teleopTable", avgs, ["teleoptotalcoralstr", "avgTeleopCoralScored", "maxTeleopCoralScored"]);
+    writeTableRow("teleopTable", avgs, ["teleoptotalalgaestr", "avgTeleopAlgaeScored", "maxTeleopAlgaeScored"]);
+    writeTableRow("teleopTable", avgs, ["teleopcoralpointsstr", "avgTotalTeleopCoralPoints","maxTotalTeleopCoralPoints"]); 
+    writeTableRow("teleopTable", avgs, ["teleopalgaepointsstr", "avgTotalTeleopAlgaePoints", "maxTotalTeleopAlgaePoints"]);
+    writeTableRow("teleopTable", avgs, ["teleopcoralaccuracystr", "teleopCoralScoringPercent"]); 
+    writeTableRow("teleopTable", avgs, ["teleopalgaeaccuracysstr", "teleopAlgaeScoringPercent"]); 
+      
     // Endgame Climb Table
-    /*  
+      
+    avgs["totalEndGamePointsstr"] = "<b>Total Points</b>";  
+    avgs["endgameClimbPercent"]["endgameclimbstr"] = "<b>Cage Climb %</b>";  
+      
+    writeTableRow("endgameStageTable", avgs, ["totalEndGamePointsstr", "avgEndgamePoints", "maxEndgamePoints"]);   
+    writeTableRow("endgameHarmonyTable", avgs["endgameClimbPercent"], ["endgameclimbstr", 0, 1, 2, 3,4]);
+      
+    /*
+    //Old endgame code *just for reference*
     avgs["endgamestagepercent"]["endgamestagestr"] = "<b>Stage Level %</b>";
     avgs["endgameharmonypercent"]["endgameharmonystr"] = "<b>Harmony Level %</b>";
     avgs["trapPercentage"]["endgametrapstr"] = "<b>Trap Note %</b>";
@@ -507,18 +532,26 @@ HOLD-->
     harmonyLevel["harmomystr"] = "<b>Harmony Level %</b>";
     avgs["traprowstr"] = "<b>Trap Note %</b>";
     writeTableRow("endgameStageTable", avgs["endgamestagepercent"], ["endgamestagestr", 0, 1, 2]);
-   */
-     /* document.getElementById("endgameStageTable").style.backgroundColor = "f0f0f0";
+    document.getElementById("endgameStageTable").style.backgroundColor = "f0f0f0";
     writeTableRow("endgameHarmonyTable", avgs["endgameharmonypercent"], ["endgameharmonystr", 0, 1, 2]);
     document.getElementById("endgameHarmonyTable").style.backgroundColor = "f0f0f0";
     avgs["trapPercentage"] = avgs["trapPercentage"];
     writeTableRow("endgameTrapTable", avgs, ["traprowstr", "trapPercentage"]);
     document.getElementById("endgameTrapTable").style.backgroundColor = "f0f0f0";
-*/
-      /*
-    // Total Table
-    writeTableRow("totalTable", avgs, ["totalstr", "avgtotalnotes", "maxtotalnotes"]); 
     */
+      
+    // Total Table
+      
+    avgs["totalCoralstr"] = "<b>Total Coral Scored</b>";
+    avgs["totalAlgaestr"] = "<b>Total Algae Scored</b>";
+    avgs["totalCoralPointsstr"] = "<b>Total Coral Points</b>";
+    avgs["totalAlgaePointsstr"] = "<b>Total Algae Points</b>";
+      
+    writeTableRow("totalTable", avgs, ["totalCoralstr", "avgTotalCoral", "maxTotalCoral"]); 
+    writeTableRow("totalTable", avgs, ["totalAlgaestr", "avgTotalAlgae", "maxTotalAlgae"]);
+    writeTableRow("totalTable", avgs, ["totalCoralPointsstr", "avgTotalCoralPoints", "maxTotalCoralPoints"]); 
+    writeTableRow("totalTable", avgs, ["totalAlgaePointsstr", "avgTotalAlgaePoints", "maxTotalAlgaePoints"]); 
+        
   }
 
   function checkGet() {

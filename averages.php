@@ -318,7 +318,7 @@ COMMENTED OUT FOR NOW-->
         "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgTotalCoral") + "</td>" +
         "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxTotalCoral") + "</td>" +
         "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgTotalAlgae") + "</td>" +
-        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgTotalAlgae") + "</td>" +
+        "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxTotalAlgae") + "</td>" +
         "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgTotalAutoPoints") + "</td>" +
         "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxTotalAutoPoints") + "</td>" +
         "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgTotalAutoCoralPoints") + "</td>" +
