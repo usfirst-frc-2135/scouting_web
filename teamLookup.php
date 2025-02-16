@@ -142,8 +142,61 @@
                 </tbody>
               </table>
             </div>
-          </div>
 
+            
+            <!-- Pit Scouting 3rd row -->
+            <div class="overflow-auto">
+              <table class="table table-striped">
+                <thead>
+                  <colgroup>
+                    <col span="1" style="background-color:transparent">
+                    <col span="1" style="background-color:#cfe2ff">
+                    <col span="1" style="background-color:transparent">
+                    <col span="1" style="background-color:#cfe2ff">
+                    <col span="1" style="background-color:transparent">
+                  </colgroup>
+                  <tr>
+                    <th scope="col" style="width:20%">Auton</th>                      
+                    <th scope="col" style="width:20%">Floor Coral</th>
+                    <th scope="col" style="width:20%">Station Coral</th>
+                    <th scope="col" style="width:20%">Floor Algae</th>
+                    <th scope="col" style="width:20%">Reef Algae</th>
+                  </tr>  
+                </thead>
+                <tbody id="pitRow3">
+                </tbody>
+              </table>
+            </div>
+          
+          
+          <!-- Pit Scouting 4th row -->
+        <div class="overflow-auto">
+              <table class="table table-striped">
+                <thead>
+                  <colgroup>
+                    <col span="1" style="background-color:transparent">
+                    <col span="1" style="background-color:#cfe2ff">
+                    <col span="1" style="background-color:transparent">
+                    <col span="1" style="background-color:#cfe2ff">
+                    <col span="1" style="background-color:transparent">
+                    <col span="1" style="background-color:#cfe2ff">
+                  </colgroup>
+                  <tr>
+                    <th scope="col" style="width:16.6%">Teleop</th>                      
+                    <th scope="col" style="width:16.6%">Floor Coral</th>  
+                    <th scope="col" style="width:16.6%">Floor Algae</th>
+                    <th scope="col" style="width:16.6%">Knock Off Algae</th>
+                    <th scope="col" style="width:16.6%">Reef Algae</th>
+                    <th scope="col" style="width:16.6%">Hold Both</th>
+                  </tr>  
+                </thead>
+                <tbody id="pitRow4">
+                </tbody>
+              </table>
+            </div>
+          </div>
+          
+          
           <!-- Comments section -->
           <div class="overflow-auto">
             <table class="table table-striped">
@@ -811,14 +864,8 @@ HOLD-->
   }
     
     
-    
-    
-    
-    //NEW AUTON CORAL GRAPH STARTS HERE
-    
-    
-    
-    
+
+    //AUTON CORAL GRAPH STARTS HERE
     
     function dataToAutonCoralGraph(matchdata) {
 
@@ -978,14 +1025,10 @@ HOLD-->
   }
     
     
+    //AUTON CORAL GRAPH ENDS HERE
     
     
-    //NEW AUTON CORAL GRAPH ENDS HERE
-    
-    
-    
-    
-    
+
     
   function dataToAutonGraph(matchdata) {
 
@@ -1151,14 +1194,9 @@ HOLD-->
     });
   }
     
+    //TELEOP CORAL GRAPH STARTS HERE
     
-    
-    
-    //NEW TELEOP CORAL GRAPH STARTS HERE
-    
-    
-    
-    
+ 
     
     function dataToTeleopCoralGraph(matchdata) {
 
@@ -1317,15 +1355,9 @@ HOLD-->
     });
   }
     
+     
+    //TELEOP CORAL GRAPH ENDS HERE
     
-    
-    
-    //NEW TELEOP CORAL GRAPH ENDS HERE
-    
-    
-    
-    
-
     
   function dataToTeleopGraph(matchdata) {
     // Declare variables
@@ -1659,17 +1691,94 @@ HOLD-->
 
   function processPitData(pitData, matchData) {
     if (!pitData || !pitData.length) {
+    // row one    
       pitData["sparepartsstring"] = pitData["spareparts"] ? "yes" : "no";
       pitData["computervisionstring"] = pitData["computervision"] ? "yes" : "no";
       pitData["swervedrivestring"] = pitData["swerve"] ? "yes" : "no"; 
+        
+    // row two    
       pitData["drivemotors"];
       pitData["preparedness"];
-      pitData["projlanguage"];
+      pitData["projlanguage"]; 
+        
+    //row three   
+      //the space under auton in the "pit table" table        
+      var autonplaceholder = " ";    
+      var autoncoralflooracq = 0;
+      var autoncoralstationacq = 0;  
+      var autonalgaeflooracq = 0;
+      var autonalgaereef = 0; 
+                
+      for (let i =0; i < matchData.length; i++) {
+          console.log("matchData autonAlgaeFloor="+matchData[i]["autonAlgaeFloor"]);
+          if(matchData[i]["autonCoralFloor"] == true) {
+              autoncoralflooracq = 1; 
+          }
+          if(matchData[i]["autonCoralStation"] == true) {
+              autoncoralstationacq = 1;
+          }
+          if(matchData[i]["autonAlgaeFloor"] == true) {
 
-      // First row has pit data, so write out that data.
-      writeTableRow("pitRow1", pitData, ["numbatteries", "pitorg", "sparepartsstring", "computervisionstring"]);
-      writeTableRow("pitRow2",pitData,["drivemotors","preparedness","swervedrivestring","proglanguage"]);
+              autonalgaeflooracq = 1;
+          }
+          if(matchData[i]["autonAlgaeReef"] == true) {
+              autonalgaereef = 1;
+          }
+      } 
+        
+    // row four
+        //the space under teleop in the "pit table" table
+        var teleopplaceholder = " ";
+        var teleopfloorcoralacq = 0;
+        var teleopflooralgaeacq = 0;
+        var teleopknockalgae = 0;
+        var teleopreefalgaeacq = 0;
+        var teleopholdbothacq = 0;
+                
+        for (let i =0; i < matchData.length; i++) {
+          if(matchData[i]["teleopCoralFloorPickup"] == true) {
+              teleopfloorcoralacq = 1; 
+          }
+          if(matchData[i]["teleopAlgaeFloorPickup"] == true) {
+              teleopflooralgaeacq = 1;
+          }
+          if(matchData[i]["teleopKnockOffAlgae"] == true) {
+              teleopknockalgae = 1;
+          }
+          if(matchData[i]["teleopAlgaeFromReef"] == true) {
+              teleopreefalgaeacq = 1;
+          }
+          if(matchData[i]["teleopHoldBoth"] == true) {
+              teleopholdbothacq = 1;
+          }    
+      } 
+        
+    // row three    
+        pitData["autoncoralfloorstring"] = autoncoralflooracq ? "yes" : "no"; 
+        pitData["autonstationcoralstring"] = autoncoralstationacq ? "yes" : "no"; 
+        pitData["autonflooralgaestring"] = autonalgaeflooracq ? "yes" : "no";         
+        pitData["autonreefalgaestring"] = autonalgaereef ? "yes" : "no"; 
+        pitData["autonplaceholder"] = autonplaceholder;
+        
+    // row four        
+        pitData["teleopfloorcoralstring"] = teleopfloorcoralacq ? "yes" : "no"; 
+        pitData["teleopflooralgaestring"] = teleopflooralgaeacq ? "yes" : "no"; 
+        pitData["teleopknockoffalgaestring"] = teleopknockalgae ? "yes" : "no"; 
+        pitData["teleopreefalgaestring"] = teleopreefalgaeacq ? "yes" : "no"; 
+        pitData["teleopholdbothstring"] = teleopholdbothacq ? "yes" : "no"; 
+        pitData["teleopplaceholder"] = teleopplaceholder;
+       
     }
+
+      // first row 
+      writeTableRow("pitRow1", pitData,["numbatteries", "pitorg", "sparepartsstring", "computervisionstring"]);
+      // second row
+      writeTableRow("pitRow2",pitData,["drivemotors","preparedness","swervedrivestring","proglanguage"]);
+      // three row
+      writeTableRow("pitRow3",pitData,["autonplaceholder","autoncoralfloorstring","autonstationcoralstring","autonflooralgaestring","autonreefalgaestring"]);
+      // four row
+      writeTableRow("pitRow4",pitData,["teleopplaceholder","teleopfloorcoralstring","teleopflooralgaestring","teleopknockoffalgaestring","teleopreefalgaestring","teleopholdbothstring"]);
+ 
     
   }
 	
@@ -1677,19 +1786,21 @@ HOLD-->
 //HOLD     dataToDriveRankGraph(driveRankData);
   }
 
-  // This is the main function that runs when we want to load a new team 
+  // Thiss is the main function that runs when we want to load a new team 
   function loadTeam(team) {
     // Clear existing data
     $("#robotPics").html("");
     $("#teamTitle").html("");
     $("#pitRow1").html("");
-    $("#pitRow2").html("")
+    $("#pitRow2").html("");
+    $("#pitRow3").html("");
+    $("#pitRow4").html(""); 
     $("#comments").html("");
     $("#allMatchesTable").html("");
-    $("#autoStartTable").html("");
+    //$("#autoStartTable").html("");
     $("#autoTable").html("");
     $("#autoTotalTable").html("");
-    $("#autonChargeTable").html("");
+    //$("#autonChargeTable").html("");
     $("#teleopTable").html("");
     $("#teleopTotalTable").html("");
     $("#endgameStageTable").html("");
