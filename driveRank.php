@@ -61,7 +61,7 @@
 
           <p>   </p>
           <div>
-            <label class="form-label"><b>Relaying Coral - consistently relaying coral to other robots?</b></label>
+            <label class="form-label"><b>Relaying coral - consistently relaying coral to other robots?</b></label>
           </div>
           <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" name="passingGroup" id="passingScore1">
@@ -138,41 +138,41 @@
               
           <p>   </p>
           <div>
-            <label class="form-label"><b>Auton Caused fouls:</b></label>
+            <label class="form-label"><b>Auton - Caused fouls:</b></label>
           </div>
           <div class="form-check form-check-inline">
-            <label for="autonFoul1" class ="form-label">Robot contact with opposing barge zone</label>
+            <label for="autonFoul1" class ="form-label">Contact with opposing robot in their barge zone</label>
             <input class="form-check-input" type="checkbox" id="autonFoul1">
           </div>
           <div class="form-check form-check-inline">
-            <label for="autonFoul2" class ="form-label">Robot contact with opposing cage</label>
+            <label for="autonFoul2" class ="form-label">Contact with opposing cage</label>
             <input class="form-check-input" type="checkbox" id="autonFoul2">
           </div>
               
           <p>   </p>
           <div>
-            <label class="form-label"><b>Teleop Caused fouls:</b></label>
+            <label class="form-label"><b>Teleop - Caused fouls:</b></label>
           </div>
           <div class="form-check form-check-inline">
-            <label for="teleopFoul1" class ="form-label">Robot contact with anchor</label>
+            <label for="teleopFoul1" class ="form-label">Contact with anchor</label>
             <input class="form-check-input" type="checkbox" id="teleopFoul1">
           </div>
           <div class="form-check form-check-inline">
-            <label for="teleopFoul2" class ="form-label">Robot contact with opposing barge zone</label>
+            <label for="teleopFoul2" class ="form-label">Contact with opposing robot in their barge zone</label>
             <input class="form-check-input" type="checkbox" id="teleopFoul2">
           </div>
           <div class="form-check form-check-inline">
-            <label for="teleopFoul3" class ="form-label">Robot contact opposing reef zone</label>
+            <label for="teleopFoul3" class ="form-label">Contact with opposing robot in their reef zone</label>
             <input class="form-check-input" type="checkbox" id="teleopFoul3">
           </div>
           <div class="form-check form-check-inline">
-            <label for="teleopFoul4" class ="form-label">Opposing cage contact</label>
+            <label for="teleopFoul4" class ="form-label">Contact with opposing cage</label>
             <input class="form-check-input" type="checkbox" id="teleopFoul4">
           </div>
               
           <p>   </p>
           <div>
-            <label class="form-label"><b>Endgame Caused fouls:</b></label>
+            <label class="form-label"><b>Endgame - Caused fouls:</b></label>
           </div>
           <div class="form-check form-check-inline">
             <label for="endgameFoul1" class ="form-label">Contact with opposing robot while it is touching its cage</label>
