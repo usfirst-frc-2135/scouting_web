@@ -540,30 +540,12 @@
                 </div>
               </div>
             </div>
-  
-       
-            <!-- HOLD Drive Rank graph 
-            <div class="overflow-auto">
-              <div class="card mb-3">
-                <div class="card-body"> 
-                  <div class="overflow-auto">
-                    <h5 class="text-center"> 
-                      <a href="#collapsedriveRankGraph" data-bs-toggle="collapse" aria-expanded="false"> Drive Rank Graph</a> </h5>
-                    <div class="collapse" id="collapsedriveRankGraph">
-                      <canvas id="myChart4" width="400" height="350"></canvas>
-                    </div>
-                  </div>
-                </div>
-              </div>  
-            </div>
-HOLD-->
-			  
-         </div>
+          </div>
         </div>
-       </div>
       </div>
-     </div>
     </div>
+  </div>
+</div>
 
 <?php include("footer.php") ?>
 
@@ -585,11 +567,6 @@ HOLD-->
   var chart5Defined = false;
   var myChart5;
     
-//for old drive rank graph?   
-/*    
-  var chart4Defined = false;
-  var myChart4;
-*/
   function writeTableRow(tbodyID, dict, keys) {
     var row = "<tr>";
     for (let i = 0; i < keys.length; i++) {
@@ -1687,69 +1664,6 @@ HOLD-->
     });    
   }
 	
-/*HOLD->
- function dataToDriveRankGraph(driveRankData) {
-    // Declare variables
-    var match_list = []; // List of matches to use as x lables
-    var datasets = []; // Each entry is a dict with a label and data attribute
-
-    datasets.push({
-      label: "Drive Ability",
-      data: [],
-      borderColor: 'Teal'
-    });
-    datasets.push({
-      label: "Quickness",
-      data: [],
-      borderColor: 'Salmon'
-    });
-    datasets.push({
-      label: "Field Awareness",
-      data: [],
-      borderColor: 'Gold'
-    });
-    datasets.push({
-      label: "Game Pieces Dropped",
-      data: [],
-      borderColor: 'FireBrick'
-    });
-    
-
-    // Build data sets; go thru each matchdata QR code string and populate the graph datasets.
-    for (let i = 0; i < driveRankData.length; i++) {
-      var matchnum = driveRankData[i]["matchnumber"];
-      match_list.push(matchnum);
-      datasets[0]["data"].push(driveRankData[i]["driverability"]);
-      datasets[1]["data"].push(driveRankData[i]["quickness"]);	
-      datasets[2]["data"].push(driveRankData[i]["fieldawareness"]);	
-      datasets[3]["data"].push(driveRankData[i]["gamepiecedrop"]);
-    }
-
-    // Define the graph as a line chart:
-    if (chart4Defined) {
-      myChart4.destroy();
-    }
-    chart4Defined = true;
-
-    const ctx = document.getElementById('myChart4').getContext('2d');
-    myChart4 = new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: match_list,
-        datasets: datasets
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true
-          }
-       
-          }
-        }
-    });
-  }
-<-HOLD*/
-
   function processCommentData(data) {
     dataToCommentTable(data);
   }
@@ -1847,11 +1761,7 @@ HOLD-->
     
   }
 	
-   function processDriveRankData(driveRankData) {
-//HOLD     dataToDriveRankGraph(driveRankData);
-  }
-
-  // Thiss is the main function that runs when we want to load a new team 
+  // This is the main function that runs when we want to load a new team 
   function loadTeam(team) {
     // Clear existing data
     $("#robotPics").html("");
@@ -1900,14 +1810,6 @@ HOLD-->
         pitData = JSON.parse(data);
         processPitData(pitData, matchData);
       });
-    });
-	  
-    // Add Drive Rank Scouting Data
-    $.get("readAPI.php", {
-      getTeamDriveRankData: team
-    }).done(function(data) {
-      driveRankData = JSON.parse(data);
-      processDriveRankData(driveRankData);
     });
   }
 

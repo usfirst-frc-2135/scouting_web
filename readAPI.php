@@ -1,6 +1,5 @@
 <?php
 require_once("dbHandler.php");
-require_once("qualRankGen.php");
 $db = new dbHandler();
 $dbConfig = $db->readDbConfig();
 $db->connectToDB();
@@ -75,38 +74,38 @@ else if (isset($_GET["getTeamPitData"]))
   echo (json_encode($out));
 }
 
-else if (isset($_GET["getAllDriveRankData"]))
+else if (isset($_GET["getAllStrategicData"]))
 {
   // Get all data
-  echo (json_encode($db->readAllDriveRankData($eventCode)));
+  echo (json_encode($db->readAllStrategicData($eventCode)));
 }
 
-/*else if (isset($_GET["getAllDriveRankData"]))
+/*else if (isset($_GET["getAllStrategicData"]))
 {
-  // Get all drive rank data
-  $driveRankData = $db->readDriveRankData($eventCode);
+  // Get all strategic data
+  $strategicData = $db->readStrategicData($eventCode);
   $out = array();
-  foreach ($driveRankData as $row)
+  foreach ($strategicData as $row)
   {
     $out[$row["teamnumber"]] = $row;
   }
   echo (json_encode($out));
 } */
-else if (isset($_GET["getTeamDriveRankData"]))
+else if (isset($_GET["getTeamStrategicData"]))
 {
   // Get all data for a team
-  echo (json_encode($db->readTeamDriveRankData($_GET["getTeamDriveRankData"], $eventCode)));
+  echo (json_encode($db->readTeamStrategicData($_GET["getTeamStrategicData"], $eventCode)));
 }
-/*else if (isset($_GET["getTeamDriveRankData"]))
+/*else if (isset($_GET["getTeamStrategicData"]))
 {
   // Get all data for a team
-  echo (json_encode($db->readTeamDriveRankData($_GET["getTeamData"], $eventCode)));
-  // Get all drive rank data
-  $driveRankData = $db->readTeamDriveRankData($eventCode);
+  echo (json_encode($db->readTeamStrategicData($_GET["getTeamData"], $eventCode)));
+  // Get all strategic data
+  $strategicData = $db->readTeamStrategicData($eventCode);
   $out = array();
-  foreach ($driveRankData as $row)
+  foreach ($strategicData as $row)
   {
-    if ($row["teamnumber"] == $_GET["getTeamDriveRankData"])
+    if ($row["teamnumber"] == $_GET["getTeamStrategicData"])
     {
       $out = $row;
       break;
@@ -130,17 +129,6 @@ else if (isset($_GET["getTeamsImages"]))
   }
   echo (json_encode($imageObj));
 }
-else if (isset($_GET["getRawRankingData"]))
-{
-  echo (json_encode($db->readRawRankData($eventCode)));
-}
-/*else if (isset($_GET["getInternalRankings"]))
-{
-  $qrg = new qualRankGen($db->readRankData($eventCode));
-  $rankMap = array();
-  $rankMap["elo"] = $qrg->raw_votes_to_elo_map(30);
-  echo (json_encode($rankMap));
-}*/
 else if (isset($_GET["config"]))
 {
   $output = array();

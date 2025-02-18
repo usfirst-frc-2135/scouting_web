@@ -301,9 +301,9 @@
   }
 
   function requestAPI() {
-    // get Drive Rank Scouting Data
+    // get Strategic Scouting Data
     $.get("readAPI.php", {
-      getAllDriveRankData: 1
+      getAllStrategicData: 1
     }).done(function(data) {
       var dataObj = JSON.parse(data);
         dataToTable(dataObj);

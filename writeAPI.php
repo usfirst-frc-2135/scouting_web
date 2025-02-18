@@ -51,38 +51,24 @@ if (isset($_POST["writePitData"]))
   $db->writeRowToPitTable($args);
   echo ("success");
 }
-if (isset($_POST["writeDriveRankData"]))
+if (isset($_POST["writeStrategicData"]))
 {
   $db->connectToDB();
-  $args = json_decode($_POST["writeDriveRankData"], true);
+  $args = json_decode($_POST["writeStrategicData"], true);
   
   $args["eventcode"] = $eventCode;
   $msg = "success";
   $args["entrykey"] = $args["eventcode"] . "_" . $args["matchnumber"] . "_" . $args["teamnumber"];
     try
     {
-        $db->writeRowToDriveRankTable($args);
+        $db->writeRowToStrategicTable($args);
     }
     catch (Exception $e)
     {
-      error_log("! writeDriveRankData() threw exception = $e");
+      error_log("! writeStrategicData() threw exception = $e");
       $msg = "fail";
     }
   echo ($msg);
-}
-if (isset($_POST["writeAllianceRankData"]))
-{
-  /*
-    $_POST["writeAllianceRankData"] = [team1, team2, team3]
-    */
-  $db->connectToDB();
-  $data = array();
-  $data["eventcode"] = $eventCode;
-  $data["teamrank"] = $_POST["writeAllianceRankData"];
-  $data["matchkey"] = $_POST["matchKey"];
-  $db->writeRowToRankTable($data);
-
-  echo ("success");
 }
 
 if (isset($_POST["writePicklist"]))
@@ -95,19 +81,7 @@ if (isset($_POST["writePicklist"]))
   fclose($file);
 }
 
-if (isset($_POST["deleteAllianceRankData"]))
-{
-  //  $_POST["deleteAllianceRankData"] = [team1, team2, team3]
-  $db->connectToDB();
-  $data = array();
-  $data["eventcode"] = $eventCode;
-  $data["teamrank"] = $_POST["deleteAllianceRankData"];
-  $data["matchkey"] = $_POST["matchKey"];
-  $db->deleteRowFromRankTable($data);
-
-  echo ("success");
-}
-else if (isset($_POST["teamNum"]) and isset($_FILES["teamPic"]))
+if (isset($_POST["teamNum"]) and isset($_FILES["teamPic"]))
 {
   // For testing: add a delay
 //TEST  sleep(10); // 10 seconds delay

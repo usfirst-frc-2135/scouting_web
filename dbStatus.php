@@ -15,8 +15,7 @@
             <h4>Data Table Status: <span id="dataTableStatus" class="badge bg-warning">Not Connected</span></h4>
             <h4>TBA Table Status: <span id="TBATableStatus" class="badge bg-warning">Not Connected</span></h4>
             <h4>Pit Table Status: <span id="pitTableStatus" class="badge bg-warning">Not Connected</span></h4>
-            <h4>Rank Table Status: <span id="rankTableStatus" class="badge bg-warning">Not Connected</span></h4>
-			<h4>Drive Rank Table Status: <span id="driveRankTableStatus" class="badge bg-warning">Not Connected</span></h4>
+  	    <h4>Strategic Table Status: <span id="strategicTableStatus" class="badge bg-warning">Not Connected</span></h4>
             <h4>Server: <span id="serverName" class="badge bg-primary">????</span></h4>
             <h4>Database: <span id="databaseName" class="badge bg-primary">????</span></h4>
             <h4>Username: <span id="userName" class="badge bg-primary">????</span></h4>
@@ -149,8 +148,7 @@
     setStatusBadge(statusArray["dataTableExists"], "dataTableStatus");
     setStatusBadge(statusArray["tbaTableExists"], "TBATableStatus");
     setStatusBadge(statusArray["pitTableExists"], "pitTableStatus");
-    setStatusBadge(statusArray["rankTableExists"], "rankTableStatus");
-    setStatusBadge(statusArray["driveRankTableExists"], "driveRankTableStatus");
+    setStatusBadge(statusArray["strategicTableExists"], "strategicTableStatus");
 	  
     $("#dataP").prop('checked', statusArray["useP"]);
     $("#dataQm").prop('checked', statusArray["useQm"]);
@@ -186,8 +184,7 @@
             id_to_written_map["writeDataTable"] = false;
             id_to_written_map["writeTBATable"] = false;
             id_to_written_map["writePitTable"] = false;
-            id_to_written_map["writeRankTable"] = false;
-            id_to_written_map["writeDriveRankTable"] = false;
+            id_to_written_map["writeStrategicTable"] = false;
           }
         } else {
           $("#" + key).addClass("bg-info");
@@ -197,8 +194,7 @@
             id_to_written_map["writeDataTable"] = true;
             id_to_written_map["writeTBATable"] = true;
             id_to_written_map["writePitTable"] = true;
-            id_to_written_map["writeRankTable"] = true;
-            id_to_written_map["writeDriveRankTable"] = true;
+            id_to_written_map["writeStrategicTable"] = true;
           }
         }
       });
@@ -291,8 +287,7 @@
       writeData["datatable"] = databaseName + "_dt";
       writeData["tbatable"] = databaseName + "_tba";
       writeData["pittable"] = databaseName + "_pt";
-      writeData["ranktable"] = databaseName + "_rt";
-      writeData["driveranktable"] = databaseName + "_drt";
+      writeData["strategictable"] = databaseName + "_drt";
       writeData["writeConfig"] = JSON.stringify(writeData);
 
       $.post("dbAPI.php", writeData, function(data) {

@@ -1,4 +1,4 @@
-<title>Drive Rank</title>
+<title>Strategic Scouting</title>
 <?php include("header.php") ?>
 
 <div class="container row-offcanvas row-offcanvas-left">
@@ -12,13 +12,13 @@
         
       <div class="card col-md-6 mx-auto">
           
-        <div id="driveRankScoutingMessage" style="display: none"   class="alert alert-dismissible fade show" role="alert">
+        <div id="strategicScoutingMessage" style="display: none"   class="alert alert-dismissible fade show" role="alert">
           <div id="uploadMessageText"></div>
           <button type="button" class="btn-close" id="closeMessage" aria-label="Close"></button>
         </div>
 
         <div class="card-body">
-          <form id="driveRankForm" method="post" enctype="multipart/form-data">
+          <form id="strategicForm" method="post" enctype="multipart/form-data">
 		
           <div class="mb-3">
             <label for="teamNumber" class="form-label">Team Number </label>
@@ -378,7 +378,7 @@
     dataToUse["general_comment"] = $("#generalComment").val();
 
     $.post("writeAPI.php", {
-      writeDriveRankData: JSON.stringify(dataToUse)
+      writeStrategicData: JSON.stringify(dataToUse)
     }).done(function(data) {
       // Because success word may have a new-line at the end, don't do a direct compare
       if (data.indexOf('success') > -1) {

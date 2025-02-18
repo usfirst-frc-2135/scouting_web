@@ -13,7 +13,7 @@ class dbHandler
     "server", "db", "username", "password", "eventcode", "tbakey",
     "fbapikey", "fbauthdomain", "fbdburl", "fbprojectid", "fbstoragebucket",
     "fbsenderid", "fbappid", "fbmeasurementid",
-    "datatable", "tbatable", "pittable", "ranktable", "driveranktable",
+    "datatable", "tbatable", "pittable", "strategictable",
     "useP", "useQm", "useQf", "useSf", "useF"
   );
 
@@ -313,11 +313,11 @@ class dbHandler
   }
 	
 
-  function writeRowToDriveRankTable($data)
+  function writeRowToStrategicTable($data)
   {
     $dbConfig = $this->readDbConfig();
 	
-    $sql = "INSERT INTO " . $dbConfig["driveranktable"] . "(entrykey,
+    $sql = "INSERT INTO " . $dbConfig["strategictable"] . "(entrykey,
                    eventcode,
 		   teamnumber,
 		   matchnumber,
@@ -367,7 +367,7 @@ class dbHandler
     $prepared_statement->execute($data);
   }
 
-  function readAllDriveRankData($eventCode)
+  function readAllStrategicData($eventCode)
   {
     $dbConfig = $this->readDbConfig();
     $sql = "SELECT teamnumber,
@@ -390,14 +390,14 @@ class dbHandler
                    teleopFoul4,
                    endgameFoul1,
                    problem_comment,
-                   general_comment from " . $dbConfig["driveranktable"] . " where eventcode='" . $eventCode . "'";
+                   general_comment from " . $dbConfig["strategictable"] . " where eventcode='" . $eventCode . "'";
     $prepared_statement = $this->conn->prepare($sql);
     $prepared_statement->execute();
     $result = $prepared_statement->fetchAll();
     return $result;
   }
 	
-  function readTeamDriveRankData($teamNumber,$eventCode)
+  function readTeamStrategicData($teamNumber,$eventCode)
   {
     $dbConfig = $this->readDbConfig();
     $sql = "SELECT teamnumber,
@@ -420,7 +420,7 @@ class dbHandler
                    teleopFoul4,
                    endgameFoul1,
                    problem_comment,
-                   general_comment from " . $dbConfig["driveranktable"] . " where
+                   general_comment from " . $dbConfig["strategictable"] . " where
                      eventcode='" . $eventCode . "' AND
                      teamnumber='" . $teamNumber . "'";
     $prepared_statement = $this->conn->prepare($sql);
@@ -534,11 +534,11 @@ class dbHandler
     }
   }
 	
-  function createDriveRankTable()
+  function createStrategicTable()
   {
     $conn = $this->connectToDB();
     $dbConfig = $this->readDbConfig();
-    $query = "CREATE TABLE " . $dbConfig["db"] . "." . $dbConfig["driveranktable"] . " (
+    $query = "CREATE TABLE " . $dbConfig["db"] . "." . $dbConfig["strategictable"] . " (
             entrykey VARCHAR(60) NOT NULL PRIMARY KEY,
             eventcode VARCHAR(10) NOT NULL,
 	    teamnumber VARCHAR(6) NOT NULL,
@@ -566,65 +566,8 @@ class dbHandler
     $statement = $conn->prepare($query);
     if (!$statement->execute())
     {
-      throw new Exception("createdriveRankTable Error: CREATE TABLE " . $dbConfig["driveranktable"] . " query failed.");
+      throw new Exception("createStrategicTable Error: CREATE TABLE " . $dbConfig["strategictable"] . " query failed.");
     }
-  }
-
-  function createRankTable()
-  {
-    $conn = $this->connectToDB();
-    $dbConfig = $this->readDbConfig();
-    $query = "CREATE TABLE " . $dbConfig["db"] . "." . $dbConfig["ranktable"] . " (
-            eventcode VARCHAR(10) NOT NULL,
-            matchkey VARCHAR(60) NOT NULL,
-            teamrank MEDIUMTEXT NOT NULL
-        )";
-    $statement = $conn->prepare($query);
-    if (!$statement->execute())
-    {
-      throw new Exception("createRankingTable Error: CREATE TABLE " . $dbConfig["ranktable"] . " query failed.");
-    }
-  }
-
-  function writeRowToRankTable($data)
-  {
-    $dbConfig = $this->readDbConfig();
-    $sql = "INSERT INTO " . $dbConfig["ranktable"] . "(eventcode, matchkey, teamrank)
-                VALUES(:eventcode, :matchkey, :teamrank)";
-    $prepared_statement = $this->conn->prepare($sql);
-    $prepared_statement->execute($data);
-  }
-
-  function readRawRankData($eventCode)
-  {
-    $dbConfig = $this->readDbConfig();
-    $sql = "SELECT matchkey,
-                     teamrank from " . $dbConfig["ranktable"] . " where
-                     eventcode='" . $eventCode . "'";
-    $prepared_statement = $this->conn->prepare($sql);
-    $prepared_statement->execute();
-    $result = $prepared_statement->fetchAll();
-    return $result;
-  }
-
-  function readRankData($eventCode)
-  {
-    $rawRankData = $this->readRawRankData($eventCode);
-    $rankData = array();
-    $dataSize = sizeof($rawRankData);
-    for ($i = 0; $i < $dataSize; $i++)
-    {
-      array_push($rankData, json_decode($rawRankData[$i]["teamrank"], True));
-    }
-    return $rankData;
-  }
-
-  function deleteRowFromRankTable($data)
-  {
-    $dbConfig = $this->readDbConfig();
-    $sql = "DELETE FROM " . $dbConfig["ranktable"] . " WHERE eventcode = :eventcode AND matchkey = :matchkey AND teamrank = :teamrank LIMIT 1";
-    $prepared_statement = $this->conn->prepare($sql);
-    $prepared_statement->execute($data);
   }
 
   function readDbConfig()
@@ -730,8 +673,7 @@ class dbHandler
     $out["dataTableExists"] = false;
     $out["tbaTableExists"]  = false;
     $out["pitTableExists"]  = false;
-	$out["driveRankTableExists"] = false;
-    $out["rankTableExists"] = false;
+    $out["strategicTableExists"] = false;
     $out["useP"]            = $dbConfig["useP"];
     $out["useQm"]           = $dbConfig["useQm"];
     $out["useQf"]           = $dbConfig["useQf"];
@@ -804,24 +746,12 @@ class dbHandler
       $dsn = "mysql:host=" . $dbConfig["server"] . ";dbname=" . $dbConfig["db"] . ";charset=" . $this->charset;
       $conn = new PDO($dsn, $dbConfig["username"], $dbConfig["password"]);
       $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-      $val = $conn->query('SELECT * from ' . $dbConfig["driveranktable"]);
-      $out["driveRankTableExists"] = true;
+      $val = $conn->query('SELECT * from ' . $dbConfig["strategictable"]);
+      $out["strategicTableExists"] = true;
     }
     catch (PDOException $e)
     {
-      $out["driveRankTableExists"] = false;
-    }
-    try
-    {
-      $dsn = "mysql:host=" . $dbConfig["server"] . ";dbname=" . $dbConfig["db"] . ";charset=" . $this->charset;
-      $conn = new PDO($dsn, $dbConfig["username"], $dbConfig["password"]);
-      $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-      $val = $conn->query('SELECT * from ' . $dbConfig["ranktable"]);
-      $out["rankTableExists"] = true;
-    }
-    catch (PDOException $e)
-    {
-      $out["rankTableExists"] = false;
+      $out["strategicTableExists"] = false;
     }
     return $out;
   }

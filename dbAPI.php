@@ -57,15 +57,7 @@ else if (isset($_POST["createTable"]))
   }
   try
   {
-    $db->createRankTable();
-  }
-  catch (Exception $e)
-  {
-    error_log($e);
-  }
-  try
-  {
-    $db->createdriveRankTable();
+    $db->createStrategicTable();
   }
   catch (Exception $e)
   {

@@ -66,7 +66,7 @@
             <a class="nav-link" href="./index.php">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="./RawData.php">Raw Data</a>
+            <a class="nav-link" href="./rawData.php">Raw Data</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="./averages.php">Averages</a>
@@ -84,25 +84,22 @@
             <a class="nav-link" href="./pitScouting.php">Pit Scouting</a>
           </li>
 	      <li class="nav-item">
-            <a class="nav-link" href="./driveRank.php">Strategic Scouting</a>
+            <a class="nav-link" href="./strategicScouting.php">Strategic Scouting</a>
           </li>
 	      <li class="nav-item">
             <a class="nav-link" href="./pictureUpload.php">Picture Upload</a>
           </li>
-<!--HOLD          <li class="nav-item">
-            <a class="nav-link" href="./allianceRanking.php">Alliance Rank</a>
-          </li>  HOLD-->
           <li class="nav-item">
             <a class="nav-link" href="./qrScanner.php">QR Scanner</a> 
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="./rawCoprData.php">COPRs</a>
+            <a class="nav-link" href="./coprData.php">COPRs</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="./picklist.php">Picklist</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="./strategic.php">Strategic Schedule</a>
+            <a class="nav-link" href="./strategicSchedule.php">Strategic Schedule</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="./dbStatus.php">DB Status</a>
