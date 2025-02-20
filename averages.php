@@ -61,113 +61,69 @@ COMMENTED OUT FOR NOW-->
             <col span="2" style="background-color:#cfe2ff">
             <col span="2" style="background-color:transparent">
             <col span="2" style="background-color:#B5D3FF">
-            <col span="2" style="background-color:#cfe2ff">
+            <col span="2" style="background-color:transparent">
             <col span="2" style="background-color:#B5D3FF">
-            <col span="2" style="background-color:#cfe2ff">
+            <col span="2" style="background-color:transparent">
             <col span="2" style="background-color:#B5D3FF">
             <col span="2" style="background-color:#transparent">
             <col span="2" style="background-color:cfe2ff">
             <col span="2" style="background-color:#transparent">
-            <col span="3" style="background-color:#cfe2ff">
-            <col span="2" style="background-color:#B5D3FF">
-            <col span="2" style="background-color:#cfe2ff">
-            <col span="2" style="background-color:#B5D3FF">
-            <col span="2" style="background-color:#cfe2ff">
+            <col span="3" style="background-color:#b5d3ff">
+            <col span="2" style="background-color:transparent">
+            <col span="2" style="background-color:#b5d3ff">
+            <col span="2" style="background-color:transparent">
+            <col span="2" style="background-color:#b5d3ff">
             <col span="3" style="background-color:transparent">
             <col span="2" style="background-color:#cfe2ff">
             <col span="2" style="background-color:transparent">
             <col span="1" style="background-color:#B5D3FF">
-            <col span="1" style="background-color:#cfe2ff">
+            <col span="1" style="background-color:transparent">
             <col span="1" style="background-color:#B5D3FF">
-            <col span="1" style="background-color:#cfe2ff">
+            <col span="1" style="background-color:transparent">
             <col span="1" style="background-color:#B5D3FF">
-            <col span="1" style="background-color:#cfe2ff">
-            <col span="1" style="background-color:#b5d3ff">
-            <col span="1" style="background-color:#cfe2ff">
-
+            <col span="1" style="background-color:transparent">
           </colgroup>
           <thead>
             <tr>
               <th colspan="1" class="text-center" ></th>
-              <th colspan="63" class="text-center" >Averages</th>
+              <th colspan="63" class="text-center fw-bold" style="background-color:#e8f1ff">Averages</th>
             </tr>
             <tr>
               <th colspan="1" class="text-center" ></th>
-              <th colspan="63" class="text-center" >Table</th>
+              <th colspan="63" class="text-center fw-bold" style="background-color:#e8f1ff">Table</th>
+            </tr>
+            <tr>
+              <th colspan="1" class="text-center" ></th>
+              <th colspan="20" class="text-center fw-bold" style="background-color:#e8f1ff"></th>
+              <th colspan="16" class="text-center fw-bold" style="background-color:#83B4FF">Auton Game Pieces</th>
+              <th colspan="18" class="text-center fw-bold" style="background-color:#cfe2ff">Teleop Game Pieces</th>
+              <th colspan="6" class="text-center fw-bold" style="background-color:#e8f1ff"></th>
+            </tr>
+            <tr>
+              <th colspan="1" class="text-center" ></th>
+              <th colspan="6" class="text-center fw-bold" style="background-color:#83B4FF">Totals</th>
+              <th colspan="6" class="text-center" >Auton</th>
+              <th colspan="6" class="text-center fw-bold" style="background-color:#83B4FF">Teleop</th>
+              <th colspan="2" class="text-center" >Endgame</th>
+              <th colspan="10" class="text-center fw-bold" style="background-color:#3686FF">Coral</th>
+              <th colspan="6" class="text-center" >Algae</th>
+              <th colspan="11" class="text-center fw-bold" style="background-color:#3686FF">Coral</th>
+              <th colspan="7" class="text-center" >Algae</th>
+              <th colspan="5" class="text-center fw-bold" style="background-color:#3686FF">Endgame</th>
+              <th colspan="1" class="text-center" ></th>
             </tr>
             <tr>
               <th colspan="1" class="text-center"></th>
-              <th colspan="2" class="text-center fw-bold" style="background-color:#3686FF">Total Points</th>
-              <th colspan="2" class="text-center fw-bold">Total Coral</th>
-              <th colspan="2" class="text-center fw-bold" style="background-color:#3686FF">Total Algae</th>
-              <th colspan="2" class="text-center">Total Auto Points</th>
-              <th colspan="2" class="text-center" style="background-color:#3686FF">Auto Coral Points</th>
-              <th colspan="2" class="text-center">Auto Algae Points</th>
-              <th colspan="2" class="text-center" style="background-color:#3686FF">Total Teleop Points</th>
-              <th colspan="2" class="text-center">Teleop Coral Points</th>
-              <th colspan="2" class="text-center" style="background-color:#3686FF">Teleop Algae Points</th>
-              <th colspan="2" class="text-center">Endgame Pts</th>
-              <th colspan="16" class="text-center" style="background-color:#3686FF">Auton</th>
-              <th colspan="18" class="text-center">Teleop</th>
-              <th colspan="5" class="text-center" style="background-color:#3686FF">Endgame</th>
-              <th colspan="1" class="text-center fw-bold">Died</th>
-            </tr>
-            <tr>
-              <th colspan="1"></th>
-              <th colspan="1"></th> 
-              <th colspan="1"></th>
-              <th colspan="1"></th>
-              <th colspan="1"></th>
-              <th colspan="1"></th>
-				
-              <th colspan="1"></th>
-              <th colspan="1"></th>
-              <th colspan="1"></th>
-              <th colspan="1"></th>
-              <th colspan="1"></th>
-              <th colspan="1"></th>
-              <th colspan="1"></th>
-              <th colspan="1"></th>
-              <th colspan="1"></th>
-              <th colspan="1"></th>
-              <th colspan="1"></th>
-              <th colspan="1"></th>
-              <th colspan="1"></th>
-              <th colspan="1"></th>
-              <th colspan="1"></th>
-              
-              <th colspan="10" class="text-center">Coral</th>
-              <th colspan="6" class="text-center">Algae</th>
-				
-              <th colspan="11" class="text-center" style="background-color:#83B4FF">Coral</th>
-              <th colspan="7" class="text-center">Algae</th>
-              <th colspan="5" class="text-center" style="background-color:#83B4FF">Climb%</th>
-              <!--<th colspan="4" class="text-center" style="background-color:#83B4FF">Climb Start%</th>--> 
-              <th colspan="1"></th>
-            </tr>
-            <tr>
-              <th colspan="1"></th>
-              <th colspan="1"></th> 
-              <th colspan="1"></th>
-              <th colspan="1"></th>
-              <th colspan="1"></th>
-              <th colspan="1"></th>
-				
-              <th colspan="1"></th>
-              <th colspan="1"></th>
-              <th colspan="1"></th>
-              <th colspan="1"></th>
-              <th colspan="1"></th>
-              <th colspan="1"></th>
-              <th colspan="1"></th>
-              <th colspan="1"></th>
-              <th colspan="1"></th>
-              <th colspan="1"></th>
-              <th colspan="1"></th>
-              <th colspan="1"></th>
-              <th colspan="1"></th>
-              <th colspan="1"></th>
-              <th colspan="1"></th>
+              <th colspan="2" class="text-center fw-bold" style="background-color:#3686FF">Points</th>
+              <th colspan="2" class="text-center fw-bold">Coral</th>
+              <th colspan="2" class="text-center fw-bold" style="background-color:#3686FF">Algae</th>
+              <th colspan="2" class="text-center">Points</th>
+              <th colspan="2" class="text-center" style="background-color:#3686FF">Coral Pts</th>
+              <th colspan="2" class="text-center">Algae Pts</th>
+              <th colspan="2" class="text-center" style="background-color:#3686FF">Points</th>
+              <th colspan="2" class="text-center">Coral Pts</th>
+              <th colspan="2" class="text-center" style="background-color:#3686FF">Algae Pts</th>
+              <th colspan="2" class="text-center">Points</th>
               <th colspan="2" class="text-center">Total</th>
               <th colspan="2" class="text-center">L1</th>
               <th colspan="2" class="text-center">L2</th>
@@ -176,7 +132,6 @@ COMMENTED OUT FOR NOW-->
               <th colspan="2" class="text-center">Total</th>
               <th colspan="2" class="text-center">Net</th>
               <th colspan="2" class="text-center">Proc</th>
-            
               <th colspan="3" class="text-center">Total</th>
               <th colspan="2" class="text-center">L1</th>
               <th colspan="2" class="text-center">L2</th>
@@ -185,12 +140,8 @@ COMMENTED OUT FOR NOW-->
               <th colspan="3" class="text-center">Total</th>
               <th colspan="2" class="text-center">Net</th>
               <th colspan="2" class="text-center">Proc</th>
-              <th colspan="1"></th>
-              <th colspan="1"></th>
-              <th colspan="1"></th>
-              <th colspan="1"></th>
-              <th colspan="1"></th>
-              <th colspan="1"></th>
+              <th colspan="5" class="text-center fw-bold" style="background-color:#3686FF">Climb%</th>
+              <th colspan="1" class="text-center" >Died</th>
             </tr>
             <tr>
               <th scope="col">Team</th>

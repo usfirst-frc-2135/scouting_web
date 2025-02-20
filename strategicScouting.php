@@ -104,7 +104,7 @@
             <input class="form-check-input" type="checkbox" id="defenseTactic1">
           </div>
           <div class="form-check form-check-inline">
-            <label for="defenseTactic2" class ="form-label">Blocking path (how long detained?)</label>
+            <label for="defenseTactic2" class ="form-label">Blocking path (how long detained? where?)</label>
             <input class="form-check-input" type="checkbox" id="defenseTactic2">
           </div>
           <div class="mb-3">
