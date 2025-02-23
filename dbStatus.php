@@ -287,7 +287,7 @@
       writeData["datatable"] = databaseName + "_dt";
       writeData["tbatable"] = databaseName + "_tba";
       writeData["pittable"] = databaseName + "_pt";
-      writeData["strategictable"] = databaseName + "_drt";
+      writeData["strategictable"] = databaseName + "_st";
       writeData["writeConfig"] = JSON.stringify(writeData);
 
       $.post("dbAPI.php", writeData, function(data) {
