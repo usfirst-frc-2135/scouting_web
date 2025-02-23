@@ -1140,8 +1140,12 @@
       datasets[0]["data"].push(startingPosition);
       var slevel = "Right";
       if(startingPosition == 1)
-        slevel = "Middle";
+        slevel = "Mid Right";
       if(startingPosition == 2)
+        slevel = "Middle";
+      if(startingPosition == 3)
+        slevel = "Mid Left";
+      if(startingPosition == 4)
         slevel = "Left";    
       var tipStr = "Starting Spot="+slevel;
       startingSpotTips.push({xlabel: matchnum, tip: tipStr}); 
