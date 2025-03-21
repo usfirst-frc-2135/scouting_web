@@ -79,6 +79,7 @@
   // Returns a string with the comma-separated line of data for the given team.
   function createCSVLine(localAverages,team,bSkipOpr) {
     var oprTP = 0;
+    var pitLocation = 0;
     if(bSkipOpr == false) 
       oprTP = dummyGetOPR(oprData[team]);
     //var trapPercent = rnd(dummylocalAveragesLookup(localAverages,team, "trapPercentage"));
@@ -87,6 +88,7 @@
     var endgameClimbPercent = dummylocalAveragesLookup(localAverages,team, "endgameClimbPercent");
     //var endgameharmonyPercentage = dummylocalAveragesLookup(localAverages,team, "endgameharmonypercent");
     var out = team+",";
+    out += pitLocation + ",";
     out += oprTP + ",";
     out += dummylocalAveragesLookup(localAverages,team, "avgTotalCoral") + ",";
     out += dummylocalAveragesLookup(localAverages,team, "maxTotalCoral") + ",";
@@ -147,7 +149,7 @@
   function processData(matchData,bSkipOpr) {
     console.log("setting up mdp ");
     var mdp = new matchDataProcessor(matchData);
-    var csvStr = "Team, OPR, Avg Total Coral,Max Total Coral,Avg Total Algae,Max Total Algae,Avg A Points,Max A Points,Avg T Points,Max T Points,Avg E Points,Max E Points,Avg Total Points,Max Total Points,Avg A Coral, Max A Coral,Avg A L1,Max A L1,Avg A L2,Max A L2,Avg A L3,Max A L3,Avg A L4,Max A L4,Avg A Algae,Max A Algae,Avg A Net,Max A Net,Avg A Proc,Max A Proc,Avg T Coral, Max T Coral,Avg T L1,Max T L1,Avg T L2,Max T L2,Avg T L3,Max T L3,Avg T L4,Max T L4,T Coral Acc,Avg T Algae,Max T Algae,Avg T Net,Max T Net,Avg T Proc,Max T Proc,T Algae Acc, N, P, F, S, D, Total Died, Note\n";
+    var csvStr = "Team,Pit Location,OPR,Total Coral Avg,Total Coral Max,Total Algae Avg,Total Algae Max,Auto Pts Avg,Auto Pts Max,Tel Pts Avg,Tel Pts Max,End Pts Avg,End Pts Max,Total Pts Avg,Total Pts Max,Auto Coral Avg,Auto Coral Max,Auto L1 Avg,Auto L1 Max,Auto L2 Avg,Auto L2 Max,Auto L3 Avg,Auto L3 Max,Auto L4 Avg,Auto L4 Max,Auto Algae Avg,Auto Algae Max,Auto Net Avg,Auto Net Max,Auto Proc Avg,Auto Proc Max,Tel Coral Avg,Tel Coral Max,Tel L1 Avg,Tel L1 Max,Tel L2 Avg,Tel L2 Max,Tel L3 Avg,Tel L3 Max,Tel L4 Avg,Tel L4 Max,Tel Coral Acc,Tel Algae Avg,Tel Algae Max,Tel Net Avg,Tel Net Max,Tel Proc Avg,Tel Proc Max,Tel Algae Acc,End N/A,End Park,End Fall,End Shal,End Deep, Total Died, Note\n";
     mdp.getSiteFilteredAverages(function(averageData) {
       console.log("writing csv lines");
       for (var key in averageData) {
