@@ -910,8 +910,6 @@
 
     var datasets = []; // Each entry is a dict with a label and data attribute
 
-    var startingSpotTips = []; // holds custom tooltips for starting position
-
     var autonAlgaeNetTips = []; // holds custom tooltips for auton algae net
       
     var autonAlgaeProcTips = []; // holds custom tooltips for auton algae processor
@@ -919,11 +917,6 @@
     var autonLeaveTips = []; // holds custom tooltips for auton leave starting zone data      
   
 
-    datasets.push({
-      label: "Starting Spot",
-      data: [],
-      borderColor: 'Red'
-    });
     datasets.push({
       label: "Net",
       data: [],
@@ -945,13 +938,11 @@
     var mydata = [];
     for (let i = 0; i < matchdata.length; i++) {
       var matchnum = matchdata[i]["matchnumber"];
-      var startingPosition = matchdata[i]["autonStartPos"];
       var autonAlgaeNet = matchdata[i]["autonAlgaeNet"];
       var autonAlgaeProcessor = matchdata[i]["autonAlgaeProcessor"];
       var autonLeave = matchdata[i]["autonLeave"];
       mydata.push({
         matchnum: matchnum,
-        startposition: startingPosition,
         algae: autonAlgaeNet,
         leave: autonLeave,
         processor: autonAlgaeProcessor 
@@ -966,36 +957,21 @@
     for (let i = 0; i < mydata.length; i++) {
       var matchnum = mydata[i]["matchnum"];
       match_list.push(matchnum);
-      // Get starting position data
-      var startingPosition = mydata[i]["startposition"];
-      datasets[0]["data"].push(startingPosition);
-      var slevel = "Right";
-      if(startingPosition == 1)
-        slevel = "Mid Right";
-      if(startingPosition == 2)
-        slevel = "Middle";
-      if(startingPosition == 3)
-        slevel = "Mid Left";
-      if(startingPosition == 4)
-        slevel = "Left";    
-      var tipStr = "Starting Spot="+slevel;
-      startingSpotTips.push({xlabel: matchnum, tip: tipStr}); 
-        
       // Get auton algae net data
       var autonAlgaeNet = mydata[i]["algae"];
-      datasets[1]["data"].push(autonAlgaeNet);
+      datasets[0]["data"].push(autonAlgaeNet);
       var tooltipStr = "Net="+autonAlgaeNet;
       autonAlgaeNetTips.push({xlabel: matchnum, tip: tooltipStr}); 
         
       // Get auton algae processor data
       var autonAlgaeProcessor = mydata[i]["processor"];
-      datasets[2]["data"].push(autonAlgaeProcessor);
+      datasets[1]["data"].push(autonAlgaeProcessor);
       var tooltipStr = "Processor="+autonAlgaeProcessor;    
       autonAlgaeProcTips.push({xlabel: matchnum, tip: tooltipStr});
         
      // Get auton leave starting zone data
       var autonLeaveStartingZone = mydata[i]["leave"];
-      datasets[3]["data"].push(autonLeaveStartingZone);
+      datasets[2]["data"].push(autonLeaveStartingZone);
       var clevel = "No";
       if(autonLeaveStartingZone == 1)
         clevel = "Yes";
@@ -1030,15 +1006,7 @@
                  var matchnum = tooltipItem.label;
                  var tipStr = datasets[toolIndex].label;
 
-                 if(toolIndex == 0) {   // starting position
-                   for (let i = 0; i < startingSpotTips.length; i++) {
-                     if(startingSpotTips[i].xlabel == matchnum) {
-                       tipStr = startingSpotTips[i].tip;
-                       break;
-                     }
-                   }
-                 }
-                 else if(toolIndex == 1) {   // Auton algae net
+                 if(toolIndex == 0) {   // Auton algae net
                    for (let i = 0; i < autonAlgaeNetTips.length; i++) {
                      if(autonAlgaeNetTips[i].xlabel == matchnum) {
                        tipStr = autonAlgaeNetTips[i].tip;
@@ -1046,7 +1014,7 @@
                      }
                    }
                  }
-                 else if(toolIndex == 2) {   // Auton algae net
+                 else if(toolIndex == 1) {   // Auton algae processor
                    for (let i = 0; i < autonAlgaeProcTips.length; i++) {
                      if(autonAlgaeProcTips[i].xlabel == matchnum) {
                        tipStr = autonAlgaeProcTips[i].tip;
@@ -1054,7 +1022,7 @@
                      }
                    }
                  }
-                 else if(toolIndex == 3) {   // Auton algae net
+                 else if(toolIndex == 2) {   // Auton leave
                    for (let i = 0; i < autonLeaveTips.length; i++) {
                      if(autonLeaveTips[i].xlabel == matchnum) {
                        tipStr = autonLeaveTips[i].tip;
@@ -1242,8 +1210,6 @@
       
     var datasets = []; // Each entry is a dict with a label and data attribute
       
-    var defenseLevelTips = []; // holds custom tooltips for teleop amp notes
-      
     var teleopAlgaeProcessorTips = []; // holds custom tooltips for teleop speaker notes
       
     var teleopAlgaeNetTips =[];//holds custom tooltips for if amplification used
@@ -1252,11 +1218,6 @@
       label: "Processor",
       data: [],
       borderColor: 'MediumOrchid'
-    });
-    datasets.push({
-      label: "Defense",
-      data: [],
-      borderColor: 'MediumSeaGreen'
     });
     datasets.push({
       label: "Net",
@@ -1270,12 +1231,10 @@
     for (let i = 0; i < matchdata.length; i++) {
       var matchnum = matchdata[i]["matchnumber"];
       var teleopAlgaeProcessor = matchdata[i]["teleopAlgaeProcessor"];
-      var defenseLevel = matchdata[i]["defenseLevel"];
       var teleopAlgaeNet = matchdata[i]["teleopAlgaeNet"];
       mydata.push({
         matchnum: matchnum,
         teleopprocessor: teleopAlgaeProcessor,
-        teleopdefense: defenseLevel,
         teleopnet: teleopAlgaeNet
       });
     } 
@@ -1295,23 +1254,10 @@
       datasets[0]["data"].push(teleopAlgaeProcessor);
       var tooltipStr1 = "Processor="+teleopAlgaeProcessor;
       teleopAlgaeProcessorTips.push({xlabel: matchnum, tip: tooltipStr1}); 
-
-      // Get teleop defense level
-      var defenseLevel = mydata[i]["teleopdefense"];
-      datasets[1]["data"].push(defenseLevel);
-      var dlevel = "N/A";
-      if(defenseLevel == 1)
-        dlevel = "Low";
-      if(defenseLevel == 2)
-        dlevel = "Medium";  
-      if(defenseLevel == 3)
-        dlevel = "High";      
-      var tipStr2 = "Defense="+dlevel; 
-      defenseLevelTips.push({xlabel: matchnum, tip: tipStr2}); 
         
       //Get teleop algae net
       var teleopAlgaeNet = mydata[i]["teleopnet"];
-      datasets[2]["data"].push(teleopAlgaeNet);
+      datasets[1]["data"].push(teleopAlgaeNet);
       var tooltipStr3 = "Net ="+teleopAlgaeNet;
       teleopAlgaeNetTips.push({xlabel: matchnum, tip: tooltipStr3});         
     }
@@ -1350,15 +1296,7 @@
                      }
                    }
                  }
-                 else if(toolIndex == 1) {   // Teleop defense level
-                   for (let i = 0; i < defenseLevelTips.length; i++) {
-                     if(defenseLevelTips[i].xlabel == matchnum) {
-                       tipStr = defenseLevelTips[i].tip;
-                       break;
-                     }
-                   }
-                 }
-                 else if(toolIndex == 2) {   // Teleop Algae Net
+                 else if(toolIndex == 1) {   // Teleop Algae Net
                    for (let i = 0; i < teleopAlgaeNetTips.length; i++) {
                      if(teleopAlgaeNetTips[i].xlabel == matchnum) {
                        tipStr = teleopAlgaeNetTips[i].tip;
@@ -1381,18 +1319,11 @@
     var datasets = [];
       
     var cageClimbTips = [];
-      
-    var startClimbTips = [];
      
     datasets.push({
        label: "Cage Climb",
        data: [],
        borderColor: 'SteelBlue'
-    });
-    datasets.push({
-       label: "Start Climb",
-       data: [],
-       borderColor: 'RebeccaPurple'
     });
      
     // Go thru each matchdata QR code string and build up a table of the data, so we can
@@ -1401,11 +1332,9 @@
     for (let i = 0; i < matchdata.length; i++) {
       var matchnum = matchdata[i]["matchnumber"];
       var cageClimb = matchdata[i]["cageClimb"];
-      var startClimb = matchdata[i]["startClimb"];
       mydata.push({
         matchnum: matchnum,
         cage: cageClimb,
-        climb: startClimb
       });
     }
     mydata.sort(function(rowA,rowB) {
@@ -1419,7 +1348,7 @@
       var matchnum = mydata[i]["matchnum"];
       match_list.push(matchnum);
          
-      // Get endgame climb cage levl
+      // Get endgame climb cage level
       var cageClimb = mydata[i]["cage"];
       datasets[0]["data"].push(cageClimb);
       var clevel = "N/A";
@@ -1434,19 +1363,6 @@
       var tipStr = "Cage Climb ="+clevel;
       cageClimbTips.push({xlabel: matchnum, tip: tipStr}); 
          
-      // Get start climb
-      var startClimb = mydata[i]["climb"];
-      datasets[1]["data"].push(startClimb);
-      var clevel = "N/A";
-      if(startClimb == 1)
-        clevel = "At Bell";
-      if(startClimb == 2)
-        clevel = "10 Seconds";
-      if(startClimb == 2)
-        clevel = "5 seconds";
-         
-      var tipStr = "Start Climb="+clevel;
-      startClimbTips.push({xlabel: matchnum, tip: tipStr});
     }
          
     if (chart5Defined) {
@@ -1478,14 +1394,6 @@
                   for (let i = 0; i < cageClimbTips.length; i++) {
                     if(cageClimbTips[i].xlabel == matchnum) {
                       tipStr = cageClimbTips[i].tip;
-                      break;
-                    }
-                  }
-                }
-                else if(toolIndex == 1) {   // Start Climb
-                  for (let i = 0; i < startClimbTips.length; i++) {
-                    if(startClimbTips[i].xlabel == matchnum) {
-                      tipStr = startClimbTips[i].tip;
                       break;
                     }
                   }
