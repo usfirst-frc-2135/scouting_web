@@ -249,24 +249,6 @@
                       <col span="1" style="background-color:#cfe2ff">
                       <col span="1" style="background-color:#transparent">
                       <col span="1" style="background-color:#cfe2ff">
-                      <col span="1" style="background-color:#transparent">
-                      <col span="1" style="background-color:#cfe2ff">
-                      <col span="1" style="background-color:#transparent">
-                      <col span="1" style="background-color:#cfe2ff">
-                      <col span="1" style="background-color:#transparent">
-                      <col span="1" style="background-color:#cfe2ff">
-                      <col span="1" style="background-color:#transparent">
-                      <col span="1" style="background-color:#cfe2ff">
-                      <col span="1" style="background-color:#transparent">
-                      <col span="1" style="background-color:#cfe2ff">
-                      <col span="1" style="background-color:#transparent">
-                      <col span="1" style="background-color:#cfe2ff">
-                      <col span="1" style="background-color:#transparent">
-                      <col span="1" style="background-color:#cfe2ff">
-                      <col span="1" style="background-color:#transparent">
-                      <col span="1" style="background-color:#cfe2ff">
-                      <col span="1" style="background-color:#transparent">
-                      <col span="1" style="background-color:#cfe2ff">
                     </colgroup>
                     <thead>
                         <style type="text/css" media="screen">
@@ -277,39 +259,21 @@
                       <tr>
                         <th scope="col">Match</th>
                         <th scope="col">Auton Leave</th>
-                        <th scope="col">Auton Start Position</th>
-                        <th scope="col">Reef Zone AB</th>
-                        <th scope="col">Reef Zone CD</th>
-                        <th scope="col">Reef Zone EF</th>
-                        <th scope="col">Reef Zone GH</th>
-                        <th scope="col">Reef Zone IJ</th>
-                        <th scope="col">Reef Zone KL</th>
                         <th scope="col">Auton Coral L1</th>
                         <th scope="col">Auton Coral L2</th>
                         <th scope="col">Auton Coral L3</th>
                         <th scope="col">Auton Coral L4</th>
                         <th scope="col">Auton Algae Net</th>
                         <th scope="col">Auton Algae Proc</th>
-                        <th scope="col">Auton Coral From Floor</th>
-                        <th scope="col">Auton Coral From Stn</th>
-                        <th scope="col">Auton Algae From Floor</th>
-                        <th scope="col">Auton Algae Froom Reef</th>
                         <th scope="col">Acquired Coral</th>
                         <th scope="col">Acquired Algae</th>
-                        <th scope="col">Teleop Algae Floor Pickup</th>
-                        <th scope="col">Teleop Coral Floor Pickup</th>
-                        <th scope="col">Teleop Knock Off Algae</th>
-                        <th scope="col">Teleop Algae From Reef</th>
-                        <th scope="col">Teleop Hold Both</th>
                         <th scope="col">Teleop Coral L1</th>
                         <th scope="col">Teleop Coral L2</th>
                         <th scope="col">Teleop Coral L3</th>
                         <th scope="col">Teleop Coral L4</th>
                         <th scope="col">Teleop Algae Net</th>
                         <th scope="col">Teleop Algae Proc</th>
-                        <th scope="col">Defense Level</th>
-                        <th scope="col">Cage Climb</th>
-                        <th scope="col">Start Climb</th>  
+                        <th scope="col">Cage Climb</th>  
                         <th scope="col">Died</th>
                         <th scope="col">Scout Name</th>
                       </tr>
@@ -495,51 +459,6 @@
                 </div>
              </div>
             </div>
-              
-              
-              
-            <!-- Reefzone sides used section -->
-            <div class="card mb-3">
-              <div class="card-header">
-                <div class="overflow-auto">
-                  <h5 class="text-center"> <a href="#collapseReefZone" data-bs-toggle="collapse" aria-expanded="false"> Reefzone Sides Used </a> </h5>
-                  <div class="collapse" id="collapseReefZone">
-                    <div class="card card-body">
-                      <table class="table table-striped">
-                        <thead>
-                          <tr>
-                            <td>&nbsp;</td>
-                            <th scope="col">%</th>
-                          </tr>
-                        </thead>
-                        <tbody id="reefzoneTable">
-                          <tr>
-                            <th scope="row">AB</th>
-                          </tr>
-                          <tr>
-                            <th scope="row">CD</th>
-                          </tr>
-                          <tr>
-                            <th scope="row">EF</th>
-                          </tr>
-                          <tr>
-                            <th scope="row">GH</th>
-                          </tr>
-                          <tr>
-                            <th scope="row">IJ</th>
-                          </tr>
-                          <tr>
-                            <th scope="row">KL</th>
-                          </tr>   
-                        </tbody>
-                        <tfoot id="reefzoneTotalTable">
-                        </tfoot>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -644,24 +563,7 @@
     writeTableRow("endgameTrapTable", avgs, ["traprowstr", "trapPercentage"]);
     document.getElementById("endgameTrapTable").style.backgroundColor = "f0f0f0";
     */
-      
-    //ReefZone Table
-      
-    avgs["sideABstr"] = "<b>AB</b>";
-    avgs["sideCDstr"] = "<b>CD</b>";
-    avgs["sideEFstr"] = "<b>EF</b>";
-    avgs["sideGHstr"] = "<b>GH</b>";
-    avgs["sideIJstr"] = "<b>IJ</b>";
-    avgs["sideKLstr"] = "<b>KL</b>";
-      
-      
-    writeTableRow("reefzoneTable", avgs, ["sideABstr", "reefzoneABpercent"]); 
-    writeTableRow("reefzoneTable", avgs, ["sideCDstr", "reefzoneCDpercent"]);
-    writeTableRow("reefzoneTable", avgs, ["sideEFstr", "reefzoneEFpercent"]);
-    writeTableRow("reefzoneTable", avgs, ["sideGHstr", "reefzoneGHpercent"]);
-    writeTableRow("reefzoneTable", avgs, ["sideIJstr", "reefzoneIJpercent"]);  
-    writeTableRow("reefzoneTable", avgs, ["sideKLstr", "reefzoneKLpercent"]);      
-      
+       
       
       
     // Total Table
