@@ -35,27 +35,39 @@
             <col span="1" style="background-color:#transparent">
             <col span="1" style="background-color:#cfe2ff">
             <col span="1" style="background-color:#transparent">
+            <col span="1" style="background-color:#cfe2ff">
+            <col span="1" style="background-color:#transparent">
+            <col span="1" style="background-color:#cfe2ff">
+            <col span="1" style="background-color:#transparent">
+            <col span="1" style="background-color:#cfe2ff">
+            <col span="1" style="background-color:#transparent">
           </colgroup>
           <thead>
             <tr>
               <th colspan="1"</th>
               <th colspan="1"</th>
-              <th colspan="18" class="text-center">Strategic Scouting Data</th>
+              <th colspan="24" class="text-center">Strategic Scouting Data</th>
             </tr>
             <tr>
               <th colspan="1"</th>
               <th colspan="1"</th>
-              <th colspan="18" class="text-center">Table</th>
+              <th colspan="24" class="text-center">Table</th>
             </tr>
             <tr>
-              <th colspan="1"</th>
-              <th colspan="1"</th>
               <th colspan="1"</th>
               <th colspan="1"</th>
               <th colspan="1"</th>
               <th colspan="3" class="text-center" style="background-color:#3686FF">Defense Tactics</th>
               <th colspan="2" class="text-center">Against Defense</th>
-              <th colspan="7" class="text-center" style="background-color:#3686FF">Fouls</th>
+              <th colspan="8" class="text-center" style="background-color:#3686FF">Fouls</th>
+              <th colspan="1"</th>
+              <th colspan="1"</th>
+              <th colspan="1"</th>
+              <th colspan="1"</th>
+              <th colspan="1"</th>
+              <th colspan="1"</th>
+              <th colspan="1"</th>
+              <th colspan="1"</th>
               <th colspan="1"</th>
               <th colspan="1"</th>
               <th colspan="1"</th>
@@ -64,8 +76,6 @@
               <th scope="col" class="text-center">Team</th>
               <th scope="col" class="text-center">Match</th>
               <th scope="col" class="text-center">Drive Skill</th>
-              <th scope="col" class="text-center">Solid Relays</th>
-              <th scope="col" class="text-center">Under Cage</th>
               <th scope="col" class="text-center">Block Path</th>
               <th scope="col" class="text-center">Block Station</th>
               <th scope="col" class="text-center">Note</th>
@@ -78,6 +88,15 @@
               <th scope="col" class="text-center">Barge Contact</th>
               <th scope="col" class="text-center">Reef Contact</th>
               <th scope="col" class="text-center">Cage Contact</th>
+              <th scope="col" class="text-center">Contact Robot Touching Cage</th>
+              <th scope="col" class="text-center">Get Coral From Floor</th>
+              <th scope="col" class="text-center">Get Coral From Station</th>
+              <th scope="col" class="text-center">Get Algae From Floor</th>
+              <th scope="col" class="text-center">Get Algae From Reef</th>
+              <th scope="col" class="text-center">Floor Pickup Coral</th>
+              <th scope="col" class="text-center">Floor Pickup Algae</th>
+              <th scope="col" class="text-center">Knock Off Algae From Reef</th>
+              <th scope="col" class="text-center">Acquire Algae From Reef</th>
               <th scope="col" class="text-center">Problem Note</th>
               <th scope="col" class="text-center">General Note</th>
               <th scope="col" class="text-center">Scout</th>
@@ -276,8 +295,6 @@
       var rowString = "<tr><td align=\"center\">" + teamnum + "</td>" +
         "<td align=\"center\">" + dataObj[i]["matchnumber"] + "</td>" +
         "<td align=\"center\">" + driveVal + "</td>" +
-        "<td align=\"center\">" + convertToYesNo(dataObj[i]["passing"]) + "</td>" +
-        "<td align=\"center\">" + convertToYesNo(dataObj[i]["underCage"]) + "</td>" + 
         "<td align=\"center\">" + convertToYesNo(dataObj[i]["defense_tactic1"]) + "</td>" +
         "<td align=\"center\">" + convertToYesNo(dataObj[i]["defense_tactic2"]) + "</td>" +
         "<td align=\"center\">" + dataObj[i]["defense_comment"] + "</td>" +
@@ -291,12 +308,20 @@
         "<td align=\"center\">" + convertToYesNo(dataObj[i]["teleopFoul3"]) + "</td>" +
         "<td align=\"center\">" + convertToYesNo(dataObj[i]["teleopFoul4"]) + "</td>" +
         "<td align=\"center\">" + convertToYesNo(dataObj[i]["endgameFoul1"]) + "</td>" +
+        "<td align=\"center\">" + convertToYesNo(dataObj[i]["autonGetCoralFromFloor"]) + "</td>" +
+        "<td align=\"center\">" + convertToYesNo(dataObj[i]["autonGetCoralFromStation"]) + "</td>" +
+        "<td align=\"center\">" + convertToYesNo(dataObj[i]["autonGetAlgaeFromFloor"]) + "</td>" +
+        "<td align=\"center\">" + convertToYesNo(dataObj[i]["autonGetAlgaeFromReef"]) + "</td>" +
+        "<td align=\"center\">" + convertToYesNo(dataObj[i]["teleopFloorPickupAlgae"]) + "</td>" +
+        "<td align=\"center\">" + convertToYesNo(dataObj[i]["teleopFloorPickupCoral"]) + "</td>" +
+        "<td align=\"center\">" + convertToYesNo(dataObj[i]["teleopKnockOffAlgaeFromReef"]) + "</td>" +
+        "<td align=\"center\">" + convertToYesNo(dataObj[i]["teleopAcquireAlgaeFromReef"]) + "</td>" +
         "<td align=\"center\">" + dataObj[i]["problem_comment"] + "</td>" +
         "<td align=\"center\">" + dataObj[i]["general_comment"] + "</td>" +
         "<td align=\"center\">" + dataObj[i]["scoutname"] + "</td>" +
         "</td>";
       $("#tableData").append(rowString);
-                
+                console.log(convertToYesNo(dataObj[i]["autonGetCoralFromFloor"]));
     }
   }
 

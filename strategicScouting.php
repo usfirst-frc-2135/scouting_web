@@ -155,6 +155,9 @@
             <label for="teleopFoul4" class ="form-label">Contact with opposing cage                           </label>
             <input class="form-check-input" type="checkbox" id="teleopFoul4">
           </div>
+          <div>
+            <label class="form-label"><b>Handling Algae:</b></label>
+          </div>
           <div class="form-check form-check-inline">
             <label for="teleopKnockOffAlgaeFromReef" class ="form-label">Knock off algae from reef</label>
             <input class="form-check-input" type="checkbox" id="teleopKnockOffAlgaeFromReef">
