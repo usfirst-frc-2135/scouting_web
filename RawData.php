@@ -35,74 +35,37 @@
             <col span="1" style="background-color:#transparent">
             <col span="1" style="background-color:#cfe2ff">
             <col span="1" style="background-color:#transparent">
-            <col span="1" style="background-color:#cfe2ff">
-            <col span="1" style="background-color:#transparent">
-            <col span="1" style="background-color:#cfe2ff">
-            <col span="1" style="background-color:#transparent">
-            <col span="1" style="background-color:#cfe2ff">
-            <col span="1" style="background-color:#transparent">
-            <col span="1" style="background-color:#cfe2ff">
-            <col span="1" style="background-color:#transparent">
-            <col span="1" style="background-color:#cfe2ff">
-            <col span="1" style="background-color:#transparent">
-            <col span="1" style="background-color:#cfe2ff">
-            <col span="1" style="background-color:#transparent">
-            <col span="1" style="background-color:#cfe2ff">
-            <col span="1" style="background-color:#transparent">
-            <col span="1" style="background-color:#cfe2ff">
-            <col span="1" style="background-color:#transparent">
-            <col span="1" style="background-color:#cfe2ff">
-            <col span="1" style="background-color:#transparent">
-            <col span="1" style="background-color:#cfe2ff">
             </colgroup>
           <thead>
             <tr>
               <th colspan="1"</th>
               <th colspan="1"</th>
-              <th colspan="38" class="text-center">Raw Scouted Data</th>
+              <th colspan="19" class="text-center">Raw Scouted Data</th>
             </tr>
             <tr>
               <th colspan="1"</th>
               <th colspan="1"</th>
-              <th colspan="38" class="text-center">Table</th>
+              <th colspan="19" class="text-center">Table</th>
             </tr>
             <tr>
               <th scope="col">Match</th>
               <th scope="col">Team</th>
               <th scope="col">Auton Leave</th>
-              <th scope="col">Auton Start</th>
-              <th scope="col">Reef Zone AB</th>
-              <th scope="col">Reef Zone CD</th>
-              <th scope="col">Reef Zone EF</th>
-              <th scope="col">Reef Zone GH</th>
-              <th scope="col">Reef Zone IJ</th>
-              <th scope="col">Reef Zone KL</th>
               <th scope="col">Auton Coral L1</th>
               <th scope="col">Auton Coral L2</th>
               <th scope="col">Auton Coral L3</th>
               <th scope="col">Auton Coral L4</th>
               <th scope="col">Auton Algae Net</th>
               <th scope="col">Auton Algae Proc</th>
-              <th scope="col">Auton Coral From Floor</th>
-              <th scope="col">Auton Coral From Stn</th>
-              <th scope="col">Auton Algae From Floor</th>
-              <th scope="col">Auton Algae From Reef</th>
               <th scope="col">Acq'd Coral</th>
               <th scope="col">Acq'd Algae</th>
-              <th scope="col">Teleop Algae Floor Pickup</th>
-              <th scope="col">Teleop Coral Floor Pickup</th>
-              <th scope="col">Teleop Knock Off Algae</th>
-              <th scope="col">Teleop Algae From Reef</th>
-              <th scope="col">Teleop Hold Both</th>
               <th scope="col">Teleop Coral L1</th>
               <th scope="col">Teleop Coral L2</th>
               <th scope="col">Teleop Coral L3</th>
               <th scope="col">Teleop Coral L4</th>
               <th scope="col">Teleop Algae Net</th>
               <th scope="col">Teleop Algae Proc</th>
-              <th scope="col">Defense</th>
               <th scope="col">Cage Climb</th>
-              <th scope="col">Start Climb</th>
               <th scope="col">Died</th>
               <th scope="col">Scout Name</th>
               <th scope="col">Comment</th>
@@ -186,39 +149,21 @@
       var rowString = "<tr><td align=\"center\">" + dataObj[i]["matchnumber"] + "</td>" +
         "<td align=\"center\">" + dataObj[i]["teamnumber"] + "</td>" +
         "<td align=\"center\">" + dataObj[i]["autonLeave"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["autonStartPos"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["reefzoneAB"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["reefzoneCD"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["reefzoneEF"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["reefzoneGH"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["reefzoneIJ"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["reefzoneKL"] + "</td>" +
         "<td align=\"center\">" + dataObj[i]["autonCoralL1"] + "</td>" +
         "<td align=\"center\">" + dataObj[i]["autonCoralL2"] + "</td>" +
         "<td align=\"center\">" + dataObj[i]["autonCoralL3"] + "</td>" +
         "<td align=\"center\">" + dataObj[i]["autonCoralL4"] + "</td>" + 
         "<td align=\"center\">" + dataObj[i]["autonAlgaeNet"] + "</td>" +
         "<td align=\"center\">" + dataObj[i]["autonAlgaeProcessor"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["autonCoralFloor"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["autonCoralStation"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["autonAlgaeFloor"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["autonAlgaeReef"] + "</td>" +
         "<td align=\"center\">" + dataObj[i]["acquiredCoral"] + "</td>" +
         "<td align=\"center\">" + dataObj[i]["acquiredAlgae"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["teleopAlgaeFloorPickup"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["teleopCoralFloorPickup"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["teleopKnockOffAlgae"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["teleopAlgaeFromReef"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["teleopHoldBoth"] + "</td>" +
         "<td align=\"center\">" + dataObj[i]["teleopCoralL1"] + "</td>" +
         "<td align=\"center\">" + dataObj[i]["teleopCoralL2"] + "</td>" +
         "<td align=\"center\">" + dataObj[i]["teleopCoralL3"] + "</td>" +  
         "<td align=\"center\">" + dataObj[i]["teleopCoralL4"] + "</td>" +
         "<td align=\"center\">" + dataObj[i]["teleopAlgaeNet"] + "</td>" +  
         "<td align=\"center\">" + dataObj[i]["teleopAlgaeProcessor"] + "</td>" + 
-        "<td align=\"center\">" + dataObj[i]["defenseLevel"] + "</td>" +
         "<td align=\"center\">" + dataObj[i]["cageClimb"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["startClimb"] + "</td>" + 
         "<td align=\"center\">" + dataObj[i]["died"] + "</td>" +
         "<td align=\"center\">" + dataObj[i]["scoutname"] + "</td>" +  
         "<td align=\"center\">" + dataObj[i]["comment"] + "</td>" +  
