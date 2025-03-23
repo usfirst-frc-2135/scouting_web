@@ -61,42 +61,6 @@
 
           <p>   </p>
           <div>
-            <label class="form-label"><b>Relaying coral - consistently relaying coral to other robots?</b></label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="passingGroup" id="passingScore1">
-            <label class="form-check-label" for="passingScore1">Yes</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="passingGroup" id="passingScore2">
-            <label class="form-check-label" for="passingScore2">No</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="passingGroup" id="passingScore3">
-            <label class="form-check-label" for="passingScore3">N/A</label>
-          </div>
-             
-
-          <p>   </p>
-          <div>
-            <label class="form-label"><b>Can go under/between cages?</b></label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="underCageGroup" id="underCageScore1">
-            <label class="form-check-label" for="underCageScore1">Yes</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="underCageGroup" id="underCageScore2">
-            <label class="form-check-label" for="underCageScore2">No</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="underCageGroup" id="underCageScore3">
-            <label class="form-check-label" for="underCageScore3">N/A</label>
-          </div>
-             
-
-          <p>   </p>
-          <div>
             <label class="form-label"><b>Defense tactics played:</b></label>
           </div>
           <div class="form-check form-check-inline">
@@ -148,6 +112,28 @@
             <label for="autonFoul2" class ="form-label">Contact with opposing cage</label>
             <input class="form-check-input" type="checkbox" id="autonFoul2">
           </div>
+          <div>
+            <label class="form-label"><b>Get coral from:</b></label>
+          </div>
+          <div class="form-check form-check-inline">
+            <label for="autonGetCoralFromFloor" class ="form-label">Floor</label>
+            <input class="form-check-input" type="checkbox" id="autonGetCoralFromFloor">
+          </div>
+          <div class="form-check form-check-inline">
+            <label for="autonGetCoralFromStation" class ="form-label">Coral Station</label>
+            <input class="form-check-input" type="checkbox" id="autonGetCoralFromStation">
+          </div>
+          <div>
+            <label class="form-label"><b>Get algae from:</b></label>
+          </div>
+          <div class="form-check form-check-inline">
+            <label for="autonGetAlgaeFromFloor" class ="form-label">Floor</label>
+            <input class="form-check-input" type="checkbox" id="autonGetAlgaeFromFloor">
+          </div>
+          <div class="form-check form-check-inline">
+            <label for="autonGetAlgaeFromReef" class ="form-label">Reef</label>
+            <input class="form-check-input" type="checkbox" id="autonGetAlgaeFromReef">
+          </div>
               
           <p>   </p>
           <div>
@@ -166,8 +152,27 @@
             <input class="form-check-input" type="checkbox" id="teleopFoul3">
           </div>
           <div class="form-check form-check-inline">
-            <label for="teleopFoul4" class ="form-label">Contact with opposing cage</label>
+            <label for="teleopFoul4" class ="form-label">Contact with opposing cage                           </label>
             <input class="form-check-input" type="checkbox" id="teleopFoul4">
+          </div>
+          <div class="form-check form-check-inline">
+            <label for="teleopKnockOffAlgaeFromReef" class ="form-label">Knock off algae from reef</label>
+            <input class="form-check-input" type="checkbox" id="teleopKnockOffAlgaeFromReef">
+          </div>
+          <div class="form-check form-check-inline">
+            <label for="teleopAcquireAlgaeFromReef" class ="form-label">Acquire algae from reef</label>
+            <input class="form-check-input" type="checkbox" id="teleopAcquireAlgaeFromReef">
+          </div>
+          <div>
+            <label class="form-label"><b>Floor Pickup:</b></label>
+          </div>
+          <div class="form-check form-check-inline">
+            <label for="teleopFloorPickupCoral" class ="form-label">Coral</label>
+            <input class="form-check-input" type="checkbox" id="teleopFloorPickupCoral">
+          </div>
+          <div class="form-check form-check-inline">
+            <label for="teleopFloorPickupAlgae" class ="form-label">Algae</label>
+            <input class="form-check-input" type="checkbox" id="teleopFloorPickupAlgae">
           </div>
               
           <p>   </p>
@@ -243,14 +248,6 @@
     $("#driveScore4").prop("checked", false);
     $("#driveScore5").prop("checked", false);
 
-    $("#passingScore1").prop("checked", false);
-    $("#passingScore2").prop("checked", false);
-    $("#passingScore3").prop("checked", false);
-
-    $("#underCageScore1").prop("checked", false);
-    $("#underCageScore2").prop("checked", false);
-    $("#underCageScore3").prop("checked", false);
-
     $("#defenseTactic1").prop("checked", false); 
     $("#defenseTactic2").prop("checked", false);
     $("#defenseComment").val("");
@@ -262,11 +259,19 @@
     
     $("#autonFoul1").prop("checked", false); 
     $("#autonFoul2").prop("checked", false); 
+    $("#autonGetCoralFromFloor").prop("checked", false); 
+    $("#autonGetCoralFromStation").prop("checked", false);
+    $("#autonGetAlgaeFromFloor").prop("checked", false);
+    $("#autonGetAlgaeFromReef").prop("checked", false);  
       
     $("#teleopFoul1").prop("checked", false); 
     $("#teleopFoul2").prop("checked", false);
     $("#teleopFoul3").prop("checked", false);
     $("#teleopFoul4").prop("checked", false);
+    $("#teleopKnockOffAlgaeFromReef").prop("checked", false);
+    $("#teleopAcquireAlgaeFromReef").prop("checked", false);
+    $("#teleopFloorPickupCoral").prop("checked", false);
+    $("#teleopFloorPickupAlgae").prop("checked", false);
       
     $("#endgameFoul1").prop("checked", false);
 
@@ -303,28 +308,6 @@
       dataToUse["driverability"] = 5;
     }
       
-    dataToUse["passing"] = 0; // default
-    if ($("#passingScore1").is(':checked')) {
-      dataToUse["passing"] = 1;
-    }
-    if ($("#passingScore2").is(':checked')) {
-      dataToUse["passing"] = 2;
-    }
-    if ($("#passingScore3").is(':checked')) {
-      dataToUse["passing"] = 3;
-    }
-
-    dataToUse["underCage"] = 0;  // default
-    if ($("#underCageScore1").is(':checked')) {
-      dataToUse["underCage"] = 1;
-    }
-    if ($("#underCageScore2").is(':checked')) {
-      dataToUse["underCage"] = 2;
-    }
-    if ($("#underCageScore3").is(':checked')) {
-      dataToUse["underCage"] = 3;
-    }
-
     dataToUse["defense_tactic1"] = 0;     // default
     dataToUse["defense_tactic2"] = 0;     // default
     if ($("#defenseTactic1").is(':checked')) {
@@ -340,14 +323,22 @@
       dataToUse["against_tactic1"] = 1;
     }
     dataToUse["against_comment"] = $("#againstComment").val();
-
+    
     dataToUse["foul1"] = 0;     // default
     dataToUse["autonFoul1"] = 0;     // default
     dataToUse["autonFoul2"] = 0;     // default
+    dataToUse["autonGetCoralFromFloor"] = 0;     // default
+    dataToUse["autonGetCoralFromStation"] = 0;     // default
+    dataToUse["autonGetAlgaeFromFloor"] = 0;     // default
+    dataToUse["autonGetAlgaeFromReef"] = 0;     // default
     dataToUse["teleopFoul1"] = 0;     // default
     dataToUse["teleopFoul2"] = 0;     // default
     dataToUse["teleopFoul3"] = 0;     // default
     dataToUse["teleopFoul4"] = 0;     // default
+    dataToUse["teleopKnockOffAlgaeFromReef"] = 0;     // default
+    dataToUse["teleopAcquireAlgaeFromReef"] = 0;     // default
+    dataToUse["teleopFloorPickupCoral"] = 0;     // default
+    dataToUse["teleopFloorPickupAlgae"] = 0;     // default
     dataToUse["endgameFoul1"] = 0;     // default
     if ($("#foul1").is(':checked')) {
       dataToUse["foul1"] = 1;
@@ -357,6 +348,18 @@
     }
     if ($("#autonFoul2").is(':checked')) {
       dataToUse["autonFoul2"] = 1;
+    }
+    if ($("#autonGetCoralFromFloor").is(':checked')) {
+      dataToUse["autonGetCoralFromFloor"] = 1;
+    }
+    if ($("#autonGetCoralFromStation").is(':checked')) {
+      dataToUse["autonGetCoralFromStation"] = 1;
+    }
+    if ($("#autonGetAlgaeFromFloor").is(':checked')) {
+      dataToUse["autonGetAlgaeFromFloor"] = 1;
+    }
+    if ($("#autonGetAlgaeFromReef").is(':checked')) {
+      dataToUse["autonGetAlgaeFromReef"] = 1;
     }
     if ($("#teleopFoul1").is(':checked')) {
       dataToUse["teleopFoul1"] = 1;
@@ -369,6 +372,18 @@
     }
     if ($("#teleopFoul4").is(':checked')) {
       dataToUse["teleopFoul4"] = 1;
+    }
+    if ($("#teleopKnockOffAlgaeFromReef").is(':checked')) {
+      dataToUse["teleopKnockOffAlgaeFromReef"] = 1;
+    }
+    if ($("#teleopAcquireAlgaeFromReef").is(':checked')) {
+      dataToUse["teleopAcquireAlgaeFromReef"] = 1;
+    }
+    if ($("#teleopFloorPickupCoral").is(':checked')) {
+      dataToUse["teleopFloorPickupCoral"] = 1;
+    }
+    if ($("#teleopFloorPickupAlgae").is(':checked')) {
+      dataToUse["teleopFloorPickupAlgae"] = 1;
     }
     if ($("#endgameFoul1").is(':checked')) {
       dataToUse["endgameFoul1"] = 1;
