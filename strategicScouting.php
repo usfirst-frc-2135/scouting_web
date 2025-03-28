@@ -34,79 +34,193 @@
             <label for="scoutName" class="form-label">Scout Name</label>
             <input type="text" class="form-control" id="scoutName">
           </div>
-          <div>
-            <label class="form-label"><b>Driver ability/speed:</b></label>
-          </div>
-			
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="driverAbilityGroup" id="driveScore1">
-            <label class="form-check-label" for="driveScore1">1 - Jerky</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="driverAbilityGroup" id="driveScore2">
-            <label class="form-check-label" for="driveScore2">2 - Slow</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="driverAbilityGroup" id="driveScore3">
-            <label class="form-check-label" for="driveScore3">3 - Average</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="driverAbilityGroup" id="driveScore4">
-            <label class="form-check-label" for="driveScore4">4 - Quick/agile</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="driverAbilityGroup" id="driveScore5">
-            <label class="form-check-label" for="driveScore5">5 - N/A</label>
-          </div>
 
-          <p>   </p>
-          <div>
-            <label class="form-label"><b>Defense tactics played:</b></label>
-          </div>
-          <div class="form-check form-check-inline">
-            <label for="defenseTactic1" class ="form-label">Blocking loading station (how long detained?)</label>
-            <input class="form-check-input" type="checkbox" id="defenseTactic1">
-          </div>
-          <div class="form-check form-check-inline">
-            <label for="defenseTactic2" class ="form-label">Blocking path (how long detained? where?)</label>
-            <input class="form-check-input" type="checkbox" id="defenseTactic2">
-          </div>
-          <div class="mb-3">
-            <label for="defenseComment" class="form-label">Defense note: </label>
-            <input type="text" class="form-control" id="defenseComment">
-          </div>
- 
+  <!-- Autonomous Mode -->
+          <div class="card" style="background-color:#cfe2ff">
+            <div class="card-header">
+               <b>Autonomous Mode</b>
+            </div>
+            <div class="card-body">
+              <div>
+                <label class="form-label"><b>Auton - Get coral from:</b></label>
+              </div>
+              <div class="form-check form-check-inline">
+                <label for="autonGetCoralFromFloor" class ="form-label">Floor</label>
+                <input class="form-check-input" type="checkbox" id="autonGetCoralFromFloor">
+              </div>
+              <div class="form-check form-check-inline">
+                <label for="autonGetCoralFromStation" class ="form-label">Coral Station</label>
+                <input class="form-check-input" type="checkbox" id="autonGetCoralFromStation">
+              </div>
+              <p>   </p>
+              <div>
+                <label class="form-label"><b>Auton - Get algae from:</b></label>
+              </div>
+              <div class="form-check form-check-inline">
+                <label for="autonGetAlgaeFromFloor" class ="form-label">Floor</label>
+                <input class="form-check-input" type="checkbox" id="autonGetAlgaeFromFloor">
+              </div>
+              <div class="form-check form-check-inline">
+                <label for="autonGetAlgaeFromReef" class ="form-label">Reef</label>
+                <input class="form-check-input" type="checkbox" id="autonGetAlgaeFromReef">
+              </div>
 
-          <p>   </p>
-          <div>
-            <label class="form-label"><b>Against defensive robot:</b></label>
+    <!-- Auton - Committed fouls section -->
+              <p>   </p>
+              <div>
+                <label class="form-label"><b>Auton - Committed fouls:</b></label>
+              </div>
+              <div class="form-check form-check-inline">
+                <label for="autonFoul1" class ="form-label">Contact with opposing robot in their barge zone</label>
+                <input class="form-check-input" type="checkbox" id="autonFoul1">
+              </div>
+              <div class="form-check form-check-inline">
+                <label for="autonFoul2" class ="form-label">Contact with opposing cage</label>
+                <input class="form-check-input" type="checkbox" id="autonFoul2">
+              </div>
+            </div>
           </div>
-          <div class="form-check form-check-inline">
-            <label for="againstTactic1" class ="form-label">Path Blocked (able to escape quickly?)</label>
-            <input class="form-check-input" type="checkbox" id="againstTactic1">
-          </div>
-          <div class="mb-3">
-            <label for="againstComment" class="form-label">Against defense note: </label>
-            <input type="text" class="form-control" id="againstComment">
-          </div>
+  <!-- end Autonomous Mode -->
 
+  <!-- Teleop Mode -->
+          <div class="card" style="background-color:#c8f1ff">
+            <div class="card-header">
+               <b>Teleop Mode</b>
+            </div>
+            <div class="card-body">
 
-          <p>   </p>
-          <div>
-            <label class="form-label"><b>Caused fouls:</b></label>
-          </div>
-          <div class="form-check form-check-inline">
-            <label for="foul1" class ="form-label">Pinning for 3 count</label>
-            <input class="form-check-input" type="checkbox" id="foul1">
-          </div>
+    <!-- Teleop - Floor pickup section -->
+              <div>
+                <label class="form-label"><b>Teleop - Floor pickup:</b></label>
+              </div>
+              <div class="form-check form-check-inline">
+                <label for="teleopFloorPickupCoral" class ="form-label">Coral</label>
+                <input class="form-check-input" type="checkbox" id="teleopFloorPickupCoral">
+              </div>
+              <div class="form-check form-check-inline">
+                <label for="teleopFloorPickupAlgae" class ="form-label">Algae</label>
+                <input class="form-check-input" type="checkbox" id="teleopFloorPickupAlgae">
+              </div>
+    <!-- Teleop - Algae from reef section -->
+              <p>   </p>
+              <div>
+                <label class="form-label"><b>Teleop - Algae from reef:</b></label>
+              </div>
+              <div class="form-check form-check-inline">
+                <label for="teleopKnockOffAlgaeFromReef" class ="form-label">Knock off algae from reef</label>
+                <input class="form-check-input" type="checkbox" id="teleopKnockOffAlgaeFromReef">
+              </div>
+              <div class="form-check form-check-inline">
+                <label for="teleopAcquireAlgaeFromReef" class ="form-label">Acquire algae from reef</label>
+                <input class="form-check-input" type="checkbox" id="teleopAcquireAlgaeFromReef">
+              </div>
               
-          <p>   </p>
-          <div>
-            <label class="form-label"><b>Auton - Caused fouls:</b></label>
+    <!-- Driver ability section -->
+              <p>   </p>
+              <div>
+                <label class="form-label"><b>Driver ability/speed:</b></label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="driverAbilityGroup" id="driveScore1">
+                <label class="form-check-label" for="driveScore1">1 - Jerky</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="driverAbilityGroup" id="driveScore2">
+                <label class="form-check-label" for="driveScore2">2 - Slow</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="driverAbilityGroup" id="driveScore3">
+                <label class="form-check-label" for="driveScore3">3 - Average</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="driverAbilityGroup" id="driveScore4">
+                <label class="form-check-label" for="driveScore4">4 - Quick/agile</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="driverAbilityGroup" id="driveScore5">
+                <label class="form-check-label" for="driveScore5">5 - N/A</label>
+              </div>
+
+    <!-- Against defensive robot section -->
+              <p>   </p>
+              <div>
+                <label class="form-label"><b>Against defensive robot:</b></label>
+              </div>
+              <div class="form-check form-check-inline">
+                <label for="againstTactic1" class ="form-label">Path Blocked (able to escape quickly?)</label>
+                <input class="form-check-input" type="checkbox" id="againstTactic1">
+              </div>
+              <div class="mb-3">
+                <label for="againstComment" class="form-label">Against defense note: </label>
+                <input type="text" class="form-control" id="againstComment">
+              </div>
+              <p>   </p>
+              <div>
+                <label class="form-label"><b>Endgame: Climbing Foul:</b></label>
+              </div>
+              <div class="form-check form-check-inline">
+                <label for="teleopFoul1" class ="form-label">Contact with anchor when climbing</label>
+                <input class="form-check-input" type="checkbox" id="teleopFoul1">
+              </div>
+            </div>
           </div>
-          <div class="form-check form-check-inline">
-            <label for="autonFoul1" class ="form-label">Contact with opposing robot in their barge zone</label>
-            <input class="form-check-input" type="checkbox" id="autonFoul1">
+  <!-- end Teleop Mode -->
+
+  <!-- Playing Defense Section -->
+          <div class="card" style="background-color:#e8f1ff">
+            <div class="card-header">
+               <b>Playing Defense</b>
+            </div>
+            <div class="card-body">
+    <!-- Defense tactics section -->
+              <div>
+                <label class="form-label"><b>Defense tactics played:</b></label>
+              </div>
+              <div class="form-check form-check-inline">
+                <label for="defenseTactic1" class ="form-label">Blocking loading station (how long detained?)</label>
+                <input class="form-check-input" type="checkbox" id="defenseTactic1">
+              </div>
+              <div class="form-check form-check-inline">
+                <label for="defenseTactic2" class ="form-label">Blocking path (how long detained? where?)</label>
+                <input class="form-check-input" type="checkbox" id="defenseTactic2">
+              </div>
+              <div class="mb-3">
+                <label for="defenseComment" class="form-label">Defense note: </label>
+                <input type="text" class="form-control" id="defenseComment">
+              </div>
+
+    <!-- Committed fouls section -->
+              <p>   </p>
+              <div>
+                <label class="form-label"><b>Committed fouls:</b></label>
+              </div>
+              <div class="form-check form-check-inline">
+                <label for="foul1" class ="form-label">Pinning for 3 count</label>
+                <input class="form-check-input" type="checkbox" id="foul1">
+              </div>
+              <div class="form-check form-check-inline">
+                <label for="teleopFoul3" class ="form-label">Contact with opposing robot in their reef zone</label>
+                <input class="form-check-input" type="checkbox" id="teleopFoul3">
+              </div>
+              <div class="form-check form-check-inline">
+                <label for="teleopFoul2" class ="form-label">Contact with opposing robot in their barge zone</label>
+                <input class="form-check-input" type="checkbox" id="teleopFoul2">
+              </div>
+              <div class="form-check form-check-inline">
+                <label for="teleopFoul4" class ="form-label">Contact with opposing cage                           </label>
+                <input class="form-check-input" type="checkbox" id="teleopFoul4">
+              </div>
+
+    <!-- Endgame fouls section -->
+              <p>   </p>
+              <div>
+                <label class="form-label"><b>Endgame fouls:</b></label>
+              </div>
+              <div class="form-check form-check-inline">
+                <label for="endgameFoul1" class ="form-label">Contact with opposing robot while it is touching its cage</label>
+                <input class="form-check-input" type="checkbox" id="endgameFoul1">
+              </div>
+            </div>
           </div>
           <div class="form-check form-check-inline">
             <label for="autonFoul2" class ="form-label">Contact with opposing cage</label>
@@ -187,19 +301,27 @@
             <input class="form-check-input" type="checkbox" id="endgameFoul1">
           </div>
  
-          <p>   </p>
-          <div class="mb-3">
-            <label for="problemComment" class="form-label">Problems robot ran into on the field:</label>
-            <input type="text" class="form-control" id="problemComment">
-          </div>
+  <!-- Comments section -->
+          <div class="card" style="background-color:#83b4ff">
+            <div class="card-header">
+               <b>Comments</b>
+            </div>
+            <div class="card-body">
+              <div class="mb-3">
+                <label for="problemComment" class="form-label">Problems robot ran into on the field:</label>
+                <input type="text" class="form-control" id="problemComment">
+              </div>
 
-          <p>   </p>
-          <div class="mb-3">
-            <label for="generalComment" class="form-label">General comment:</label>
-            <input type="text" class="form-control" id="generalComment">
+              <p>   </p>
+              <div class="mb-3">
+                <label for="generalComment" class="form-label">General comment:</label>
+                <input type="text" class="form-control" id="generalComment">
+              </div>
+            </div>
           </div>
- 
+  <!-- End Comments section -->
     
+  <!-- Submit button -->
           <p>   </p>
           <div class="d-grid gap-2 col-6 mx-auto">
             <button class="btn btn-primary" type="button" id="submitButton">Submit</button>
