@@ -557,10 +557,6 @@
     }
   }
 
-  function setTeamTitle(team) {
-    $("#teamTitle").html("Team " + team);
-  }
-
     //filters out the match type as specified in the db status page
   function getFilteredData(team, successFunction) {
 //      console.log(">> starting getSiteFilteredData for team " + team);
@@ -1433,7 +1429,7 @@
   }
 	
   // This is the main function that runs when we want to load a new team 
-  function loadTeam(team) {
+  function loadTeam(teamNum) {
     // Clear existing data
     $("#robotPics").html("");
     $("#teamTitle").html("");
@@ -1454,12 +1450,29 @@
     $("#endgameTrapTable").html("");
     $("#totalTable").html("");
 
-    // Write new data
-    setTeamTitle(team);
-
+    // Get team name from TBA
+      $.get("tbaAPI.php", {
+        getTeamInfo: teamNum
+      }).done(function(data) {
+        var teamname = "XX";
+        if(data == null)
+          alert("Can't load teamName from TBA; check if TBA Key was set in dbStatus");
+        else { 
+          console.log("teamLookup: getTeamInfo: data = "+data);
+          teamInfo = JSON.parse(data)["response"];
+          teamname = teamInfo["nickname"];
+          console.log("teamLookup: for "+teamNum+", teamname = "+teamname);
+        }
+        if(teamname != "XX") {
+           $("#teamTitle").html(teamNum + " - " + teamname);
+        } else {
+           $("#teamTitle").html("Team " + teamNum);
+        }
+      });
+            
     // Add new images
     $.get("readAPI.php", {
-      getTeamImages: team
+      getTeamImages: teamNum
     }).done(function(data) {
       var listOfImages = JSON.parse(data);
       loadTeamPics(listOfImages);
@@ -1467,14 +1480,14 @@
 
     // Add Match Scouting Data
     $.get("readAPI.php", {
-      getTeamData: team
+      getTeamData: teamNum
     }).done(function(data) {
       matchData = JSON.parse(data);
-      processMatchData(team, matchData);
+      processMatchData(teamNum, matchData);
 
       // Do the Pit Scouting Data here because it also needs the matchData.
       $.get("readAPI.php", {
-        getTeamPitData: team
+        getTeamPitData: teamNum
       }).done(function(data) {
         pitData = JSON.parse(data);
         processPitData(pitData, matchData);
