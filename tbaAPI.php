@@ -17,6 +17,10 @@ if (isset($_GET["getEventCode"]))
 {
   echo ($dbConfig["eventcode"]);
 }
+else if (isset($_GET["getTeamInfo"]))
+{
+  echo (json_encode($tba->getTeamInfo($_GET["getTeamInfo"])));
+}
 else if (isset($_GET["getTeamList"]))
 {
   echo (json_encode($tba->getSimpleTeamList($eventCode)));

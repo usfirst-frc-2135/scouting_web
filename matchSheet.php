@@ -1,14 +1,20 @@
 <title>Match Sheet</title>
 <?php include("header.php") ?>
+
 <div class="container row-offcanvas row-offcanvas-left">
   <div class="well column  col-lg-12  col-sm-12 col-xs-12" id="content">
     <div class="row g-3 justify-content-md-center">
+
+      <!-- Our team matches list -->
       <div class="row g-3 justify-content-md-center">
+
         <div class="col-md-6">
           <div id="ourMatches">
           </div>
         </div>
       </div>
+
+      <!-- Load Match buttons -->
       <div class="row g-3 justify-content-md-center">
         <div class="g-4 col-md-6">
           <div class="input-group mb-3">
@@ -24,6 +30,7 @@
         </div>
       </div>
     
+    <!-- Custom button (collapsible section) -->
     <div class="row g-3 justify-content-md-center">
         <div class="g-4 col-md-6">
             <button type="button btn-primary" id="custom" name="custom" value="Custom" class="collapsible">Custom</button>
@@ -139,10 +146,10 @@
                 <div class="accordion-item bg-danger">
                   <h2 class="accordion-header bg-danger" id="flush-headingOne">
                     <div class="row">
-                      <div class="col-6">
+                      <div class="col-10">
                         <h5 id="R0TeamNumber" class="card-title text-center">Team #</h5>
                       </div>
-                      <div class="col-6">
+                      <div class="col-2">
                         <button class="btn accordion-button collapsed bg-danger btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#flush-R0Collapse" aria-expanded="false" aria-controls="flush-R0Collapse">
 
                         </button>
@@ -215,10 +222,10 @@
                 <div class="accordion-item bg-danger">
                   <h2 class="accordion-header bg-danger" id="flush-headingOne">
                     <div class="row">
-                      <div class="col-6">
+                      <div class="col-10">
                         <h5 id="R1TeamNumber" class="card-title text-center">Team #</h5>
                       </div>
-                      <div class="col-6">
+                      <div class="col-2">
                         <button class="btn accordion-button collapsed bg-danger btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#flush-R1Collapse" aria-expanded="false" aria-controls="flush-R1Collapse">
 
                         </button>
@@ -291,10 +298,10 @@
                 <div class="accordion-item bg-danger">
                   <h2 class="accordion-header bg-danger" id="flush-headingOne">
                     <div class="row">
-                      <div class="col-6">
+                      <div class="col-10">
                         <h5 id="R2TeamNumber" class="card-title text-center">Team #</h5>
                       </div>
-                      <div class="col-6">
+                      <div class="col-2">
                         <button class="btn accordion-button collapsed bg-danger btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#flush-R2Collapse" aria-expanded="false" aria-controls="flush-R2Collapse">
 
                         </button>
@@ -368,10 +375,10 @@
                 <div class="accordion-item bg-primary">
                   <h2 class="accordion-header bg-primary" id="flush-headingOne">
                     <div class="row">
-                      <div class="col-6">
+                      <div class="col-10">
                         <h5 id="B0TeamNumber" class="card-title text-center">Team #</h5>
                       </div>
-                      <div class="col-6">
+                      <div class="col-2">
                         <button class="btn accordion-button collapsed bg-primary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#flush-B0Collapse" aria-expanded="false" aria-controls="flush-B0Collapse">
 
                         </button>
@@ -444,10 +451,10 @@
                 <div class="accordion-item bg-primary">
                   <h2 class="accordion-header bg-primary" id="flush-headingOne">
                     <div class="row">
-                      <div class="col-6">
+                      <div class="col-10">
                         <h5 id="B1TeamNumber" class="card-title text-center">Team #</h5>
                       </div>
-                      <div class="col-6">
+                      <div class="col-2">
                         <button class="btn accordion-button collapsed bg-primary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#flush-B1Collapse" aria-expanded="false" aria-controls="flush-B1Collapse">
 
                         </button>
@@ -520,10 +527,10 @@
                 <div class="accordion-item bg-primary">
                   <h2 class="accordion-header bg-primary" id="flush-headingOne">
                     <div class="row">
-                      <div class="col-6">
+                      <div class="col-10">
                         <h5 id="B2TeamNumber" class="card-title text-center">Team #</h5>
                       </div>
-                      <div class="col-6">
+                      <div class="col-2">
                         <button class="btn accordion-button collapsed bg-primary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#flush-B2Collapse" aria-expanded="false" aria-controls="flush-B2Collapse">
 
                         </button>
@@ -700,47 +707,46 @@
 
     
     function loadMatchList(successFunction) {
-        
       if(!bUsingCustom) {
         if (!localMatchList) {
-        $.get("tbaAPI.php", {
-          getMatchList: 1
-        }).done(function(data) {
-
-          if(data == null)
-            alert("Can't load matchlist from TBA; check if TBA Key was set in dbStatus");
-
-          rawMatchData = JSON.parse(data)["response"];
-          localMatchList = {};
-          for (let mi in rawMatchData) {
-            var newMatch = {};
-            var match = rawMatchData[mi];
+          $.get("tbaAPI.php", {
+            getMatchList: 1
+          }).done(function(data) {
+            if(data == null)
+              alert("Can't load matchlist from TBA; check if TBA Key was set in dbStatus");
+            else { 
+              rawMatchData = JSON.parse(data)["response"];
+              localMatchList = {};
+              for (let mi in rawMatchData) {
+                var newMatch = {};
+                var match = rawMatchData[mi];
+              
+                newMatch["comp_level"] = match["comp_level"];
+                newMatch["match_number"] = match["match_number"];
+                if(match["comp_level"] == "sf")
+                  newMatch["match_number"] = match["set_number"];
             
-            newMatch["comp_level"] = match["comp_level"];
-            newMatch["match_number"] = match["match_number"];
-            if(match["comp_level"] == "sf")
-              newMatch["match_number"] = match["set_number"];
+                newMatch["red_teams"] = match["alliances"]["red"]["team_keys"];
+                newMatch["blue_teams"] = match["alliances"]["blue"]["team_keys"];
+                newMatch["time"] = null;
+                if (newMatch["time"] == null && match["actual_time"] != null) {
+                    newMatch["time"] = match["actual_time"];
+                }
+                if (newMatch["time"] == null && match["predicted_time"] != null) {
+                    newMatch["time"] = match["predicted_time"];
+                }
+                // if (newMatch["time"] == null && match["time"] != null){ newMatch["time"] = match["time"]; }
+                localMatchList[makeKey(newMatch["match_number"], newMatch["comp_level"])] = newMatch;
           
-            newMatch["red_teams"] = match["alliances"]["red"]["team_keys"];
-            newMatch["blue_teams"] = match["alliances"]["blue"]["team_keys"];
-            newMatch["time"] = null;
-            if (newMatch["time"] == null && match["actual_time"] != null) {
-                newMatch["time"] = match["actual_time"];
+                if (newMatch["red_teams"].includes(ourTeam) || newMatch["blue_teams"].includes(ourTeam)) {
+                  var keyw = newMatch["comp_level"]+newMatch["match_number"];
+                  ourMatches[keyw] = newMatch;
+                }
+              }
+              createOurMatchTable();
+              successFunction();
             }
-            if (newMatch["time"] == null && match["predicted_time"] != null) {
-                newMatch["time"] = match["predicted_time"];
-            }
-            // if (newMatch["time"] == null && match["time"] != null){ newMatch["time"] = match["time"]; }
-            localMatchList[makeKey(newMatch["match_number"], newMatch["comp_level"])] = newMatch;
-        
-            if (newMatch["red_teams"].includes(ourTeam) || newMatch["blue_teams"].includes(ourTeam)) {
-                var keyw = newMatch["comp_level"]+newMatch["match_number"];
-                ourMatches[keyw] = newMatch;
-            }
-          }
-          createOurMatchTable();
-          successFunction();
-        });
+          });
       } else {
         successFunction();
       }
@@ -1002,7 +1008,27 @@
     }
 
     function displayTeam(color, index, teamNum) {
-      $("#" + color + index + "TeamNumber").html("<a class='text-white' href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a>");
+      // Get team name from TBA
+      $.get("tbaAPI.php", {
+        getTeamInfo: teamNum
+      }).done(function(data) {
+        var teamname = "XX";
+        if(data == null)
+          alert("Can't load teamName from TBA; check if TBA Key was set in dbStatus");
+        else { 
+          console.log("matchSheet: getTeamInfo: data = "+data);
+          teamInfo = JSON.parse(data)["response"];
+          teamname = teamInfo["nickname"];
+          console.log("matchSheet: for "+teamNum+", teamname = "+teamname);
+        }
+        if(teamname != "XX") {
+          $("#" + color + index + "TeamNumber").html("<a class='text-white' href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a> - "+teamname);
+        } else {
+          $("#" + color + index + "TeamNumber").html("<a class='text-white' href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a>");
+        }
+      });
+
+      // Load team scouted information
       var rd = localMatchData[teamNum];
       if (rd != null) {
         var row = "<tr>";

@@ -80,7 +80,8 @@ else if (isset($_GET["getAllStrategicData"]))
   echo (json_encode($db->readAllStrategicData($eventCode)));
 }
 
-/*else if (isset($_GET["getAllStrategicData"]))
+/*HOLD->
+else if (isset($_GET["getAllStrategicData"]))
 {
   // Get all strategic data
   $strategicData = $db->readStrategicData($eventCode);
@@ -90,13 +91,14 @@ else if (isset($_GET["getAllStrategicData"]))
     $out[$row["teamnumber"]] = $row;
   }
   echo (json_encode($out));
-} */
+} <-HOLD*/
 else if (isset($_GET["getTeamStrategicData"]))
 {
   // Get all data for a team
   echo (json_encode($db->readTeamStrategicData($_GET["getTeamStrategicData"], $eventCode)));
 }
-/*else if (isset($_GET["getTeamStrategicData"]))
+/*HOLD->
+else if (isset($_GET["getTeamStrategicData"]))
 {
   // Get all data for a team
   echo (json_encode($db->readTeamStrategicData($_GET["getTeamData"], $eventCode)));
@@ -112,7 +114,7 @@ else if (isset($_GET["getTeamStrategicData"]))
     } 
   }
   echo (json_encode($out));
-} */
+}<-HOLD */
 else if (isset($_GET["getTeamImages"]))
 {
   // Get all images for a team

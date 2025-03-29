@@ -37,7 +37,7 @@ class tbaHandler
       error_log("Can't read TheBlueAlliance data because no TBA Key was set!");
       return $out;
     }
-    else error_log("READING BlueAlliance data");
+    else error_log("READING BlueAlliance data: uri = $uri");
     $url = $this->apiURL . $uri . "?X-TBA-Auth-Key=" . $this->tbaApiKey;
     $ch = curl_init();
     curl_setopt_array(
@@ -53,6 +53,7 @@ class tbaHandler
     $response = curl_exec($ch);
     if (curl_errno($ch))
     {
+      error_log("!!! Error READING BlueAlliance data: $ch");
       throw new Exception(curl_error($ch));
     }
     curl_close($ch);
@@ -88,9 +89,7 @@ class tbaHandler
 
   function readURIFromDB($uri)
   {
-    /*
-        If uri not in db, then return empty
-      */
+    // If uri not in db, then return empty
     $sql = "SELECT expiryTime, response from " . $this->tbaTableName . " where requestURI='" . $uri . "'";
     $prepared_statement = $this->dbConnection->prepare($sql);
     $prepared_statement->execute();
@@ -132,8 +131,17 @@ class tbaHandler
     return $apiResponse;
   }
 
-  // Team List Operations 
+  // Get Team Info
+  function getTeamInfo($teamnum)
+  {
+    // URI should be "/team/frc<teamnum>", so add "frc" if needed.
+    $requestURI = "/team/" . $teamnum;
+    if (strpos($teamnum,"frc") == false)
+      $requestURI = "/team/frc" . $teamnum;
+    return $this->makeDBCachedCall($requestURI);
+  }
 
+  // Team List Operations 
   function getTeamList($eventCode)
   {
     $requestURI = "/event/" . $eventCode . "/teams";
@@ -456,13 +464,12 @@ class tbaHandler
 
 
     $teamLookup = $this->teamListToLookup($simpleTeamList);
-//HERE
     $TLCount = sizeof($teamLookup);  //TEST
-    error_log("  ===> teamLookup size = $TLCount");
+//    error_log("  ===> teamLookup size = $TLCount");
 
 
     $teamCount = sizeof($simpleTeamList);
-    error_log("  ===> simpleTeamList size = $teamCount");
+//    error_log("  ===> simpleTeamList size = $teamCount");
 
     $simpleMatchData = $this->getSimpleMatches($eventCode);
     $simpleMatchData = $this->removeElimMatches($simpleMatchData);

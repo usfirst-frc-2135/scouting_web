@@ -354,23 +354,6 @@ class matchDataProcessor {
       }
       console.log("  --> endgame climb points = "+endgameClimbPoints);  //TEST
 
-//REMOVE      var autonCoralFloor = (this.data[i]["autonCoralFloor"]);
-//REMOVE      var autonCoralStation = (this.data[i]["autonCoralStation"]);
-//REMOVE      var autonAlgaeFloor = (this.data[i]["autonAlgaeFloor"]);
-//REMOVE      var autonAlgaeReef = (this.data[i]["autonAlgaeReef"]);
-        
-//REMOVE      var teleopAlgaeFloor = (this.data[i]["teleopAlgaeFloorPickup"]);
-//REMOVE      var teleopCoralFloor = (this.data[i]["teleopCoralFloorPickup"]);
-        
-//REMOVE      var startClimbing = (this.data[i]["endgameStartClimbing"]);
-//REMOVE      pdata[tn]["autonCoralFloorPercent"] += autonCoralFloor;
-//REMOVE      pdata[tn]["autonCoralStationPercent"] += autonCoralStation;
-//REMOVE      pdata[tn]["autonAlgaeFloorPercent"] += autonAlgaeFloor;
-//REMOVE      pdata[tn]["autonAlgaeReefPercent"] += autonAlgaeReef;
-        
-//REMOVE      pdata[tn]["teleopAlgaeFloor"] += teleopAlgaeFloor;
-//REMOVE      pdata[tn]["teleopCoralFloor"] += teleopCoralFloor;
-      
       var totalCoral = totalAutoCoral + totalTeleopCoral;
       var totalAlgae = totalAutoAlgae + totalTeleopAlgae;
       var totalCoralPoints = totalAutoCoralPoints + totalTeleopCoralPoints;
@@ -416,13 +399,6 @@ class matchDataProcessor {
       pdata[tn]["avgTotalTeleopAlgaePoints"] += totalTeleopAlgaePoints;
       pdata[tn]["maxTotalTeleopAlgaePoints"] = Math.max(pdata[tn]["maxTotalTeleopAlgaePoints"], totalTeleopAlgaePoints);
         
-      /*pdata[tn]["avgAutoCoral"] += totalAutoCoral;
-      pdata[tn]["maxAutoCoral"] = Math.max(pdata[tn]["maxAutoCoral"], totalAutoCoral);
-//      console.log("   -> avgautopoints = "+pdata[tn]["avgautopoints"]); //TEST
-
-      pdata[tn]["avgteleopnotes"] += totalTeleopNotes;
-      pdata[tn]["maxteleopnotes"] = Math.max(pdata[tn]["maxteleopnotes"], totalTeleopNotes);*/
-		
       pdata[tn]["avgEndgamePoints"] += endgameClimbPoints;
       pdata[tn]["maxEndgamePoints"] = Math.max(pdata[tn]["maxEndgamePoints"], endgameClimbPoints);
 	
@@ -511,12 +487,6 @@ class matchDataProcessor {
       pdata[key]["reefzoneGHpercent"] = Math.round(100 * pdata[key]["reefzoneGHpercent"] / pdata[key]["totalmatches"]);
       pdata[key]["reefzoneIJpercent"] = Math.round(100 * pdata[key]["reefzoneIJpercent"] / pdata[key]["totalmatches"]);
       pdata[key]["reefzoneKLpercent"] = Math.round(100 * pdata[key]["reefzoneKLpercent"] / pdata[key]["totalmatches"]);
-      console.log(" ---> reefzoneAB Percentage used: " + pdata[key]["reefzoneABpercent"]); //TEST
-      console.log(" ---> reefzoneCD Percentage used: " + pdata[key]["reefzoneCDpercent"]); //TEST
-      console.log(" ---> reefzoneEF Percentage used: " + pdata[key]["reefzoneEFpercent"]); //TEST
-      console.log(" ---> reefzoneGH Percentage used: " + pdata[key]["reefzoneGHpercent"]); //TEST
-      console.log(" ---> reefzoneIJ Percentage used: " + pdata[key]["reefzoneIJpercent"]); //TEST
-      console.log(" ---> reefzoneKL Percentage used: " + pdata[key]["reefzoneKLpercent"]); //TEST
 
       pdata[key]["avgTotalPoints"] = Math.round(10 * pdata[key]["avgTotalPoints"] / pdata[key]["totalmatches"]) / 10;
       pdata[key]["avgTotalAutoPoints"] = Math.round(10 * pdata[key]["avgTotalAutoPoints"] / pdata[key]["totalmatches"]) / 10;
@@ -555,16 +525,6 @@ class matchDataProcessor {
       pdata[key]["avgTeleopAlgaeNet"] = Math.round(10 * pdata[key]["avgTeleopAlgaeNet"] / pdata[key]["totalmatches"]) / 10;
       pdata[key]["avgTeleopAlgaeProc"] = Math.round(10 * pdata[key]["avgTeleopAlgaeProc"] / pdata[key]["totalmatches"]) / 10;
 	
-      //pdata[key]["avgautonamps"] = Math.round(10 * pdata[key]["avgautonamps"] / pdata[key]["totalmatches"]) / 10;
-      //pdata[key]["avgautonspeaker"] = Math.round(10 * pdata[key]["avgautonspeaker"] / pdata[key]["totalmatches"]) / 10;
-
-      //pdata[key]["trapPercentage"] = Math.round(100 * pdata[key]["trapPercentage"] / pdata[key]["totalmatches"]);
-      //pdata[key]["spotlitPercentage"] = Math.round(100 * pdata[key]["spotlitPercentage"] / pdata[key]["totalmatches"]);
-//      console.log("   >> number of traps is = " + pdata[key]["trapPercentage"]);
-//      console.log("   >> spotlit (percentage) is = "+ pdata[key]["spotlitPercentage"]);
-		
-//      console.log("  ===> totalmatches = "+pdata[key]["totalmatches"]); //TEST
-        
       pdata[key]["endgameClimbPercent"][0] = Math.round(100 * pdata[key]["endgameClimbPercent"][0] / pdata[key]["totalmatches"]);
       pdata[key]["endgameClimbPercent"][1] = Math.round(100 * pdata[key]["endgameClimbPercent"][1] / pdata[key]["totalmatches"]);
       pdata[key]["endgameClimbPercent"][2] = Math.round(100 * pdata[key]["endgameClimbPercent"][2] / pdata[key]["totalmatches"]);
