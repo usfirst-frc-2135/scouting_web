@@ -38,9 +38,26 @@
     $("#pitScoutTable").html("");
     var row = "";
     for (let teamNum of teamList) {
-      row += "<tr>";
+      $.get("tbaAPI.php", {
+        getTeamInfo: teamNum
+      }).done(function(data) {
+        var teamname = "XX";
+        if(data == null)
+          alert("Can't load teamName from TBA; check if TBA Key was set in dbStatus");
+        else { 
+          console.log("index: getTeamInfo: data = "+data);
+          teamInfo = JSON.parse(data)["response"];
+          teamname = teamInfo["nickname"];
+          console.log("index: for "+teamNum+", teamname = "+teamname);
+        }
+        row += "<tr>";
+        if(teamname != "XX") {
+          row += "  <td>" + "<a class='text-black' href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a> - " + teamname + "</td>";
+        } else {
+          row += "  <td>" + "<a class='text-black' href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a>" + "</td>";
+        }
+        
       // row += "  <td>"+teamNum+"</td>";
-      row += "  <td>" + "<a class='text-black' href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a>" + "</td>";
       if (allPitData[teamNum] != null) {
         row += "  <td class='bg-success'>Yes</td>";
       } else {
@@ -56,8 +73,9 @@
         row += "  <td>No</td>";
       }
       row += "</tr>";
-    }
     $("#pitScoutTable").html(row);
+      });
+    };
   }
 
   // Assumes the entries are team numbers or match numbers. Note a team number could 
