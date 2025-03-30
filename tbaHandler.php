@@ -134,6 +134,7 @@ class tbaHandler
   // Get Team Info
   function getTeamInfo($teamnum)
   {
+    error_log(">>> getTeamInfo() starting for $teamnum");  
     // URI should be "/team/frc<teamnum>", so add "frc" if needed.
     $requestURI = "/team/" . $teamnum;
     if (strpos($teamnum,"frc") == false)
@@ -241,6 +242,36 @@ class tbaHandler
     }
     return $out;
   }
+
+  ///// getTeamListAndNames function /////
+  function getTeamListAndNames($eventCode)
+  {
+    error_log("starting getTeamListAndNames for eventCode: $eventCode");  
+
+    // If eventCode is "COMPX", just exit.
+    if(strstr($eventCode,'COMPX') )   {
+      error_log("skipping getTeamListAndNames for COMPX");  
+      $aout = array();
+      return $aout;
+    }
+
+    $out = array();
+    $tl = $this->getTeamList($eventCode);
+  
+    // Go thru all the teams and get the team name.
+    foreach ($tl["response"] as $teamRow)
+    {
+      $teamInfo = array();
+      $teamNum = $teamRow["team_number"];
+      $teamname = $teamRow["nickname"];
+//      error_log("  ---> name for $teamNum = $teamname");  
+      $teamInfo["teamnum"] = $teamNum;
+      $teamInfo["teamname"] = $teamname;
+      array_push($out, $teamInfo);
+    }
+    return $out;
+  }
+
 
   function teamListToLookup($teamList)
   {
@@ -506,9 +537,11 @@ class tbaHandler
     return $out;
   }
 
+
+  ///// getStrategicMatches function /////
   function getStrategicMatches($eventCode)
   {
-    error_log("---> starting getStrategicMatches for eventCode: $eventCode");  
+    error_log("starting getStrategicMatches for eventCode: $eventCode");  
 
     // If eventCode is "COMPX", just exit.
     if(strstr($eventCode,'COMPX') )   {

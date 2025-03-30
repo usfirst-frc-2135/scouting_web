@@ -29,6 +29,7 @@
   var allPitData = {};
   var teamList = [];
   var picLookup = {};
+  var teamNames = {};
   var eventCode = null;
 
   function createTable() {
@@ -38,26 +39,14 @@
     $("#pitScoutTable").html("");
     var row = "";
     for (let teamNum of teamList) {
-      $.get("tbaAPI.php", {
-        getTeamInfo: teamNum
-      }).done(function(data) {
-        var teamname = "XX";
-        if(data == null)
-          alert("Can't load teamName from TBA; check if TBA Key was set in dbStatus");
-        else { 
-          console.log("index: getTeamInfo: data = "+data);
-          teamInfo = JSON.parse(data)["response"];
-          teamname = teamInfo["nickname"];
-          console.log("index: for "+teamNum+", teamname = "+teamname);
-        }
-        row += "<tr>";
-        if(teamname != "XX") {
-          row += "  <td>" + "<a class='text-black' href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a> - " + teamname + "</td>";
-        } else {
-          row += "  <td>" + "<a class='text-black' href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a>" + "</td>";
-        }
+      var teamname = teamNames[teamNum];
+      row += "<tr>";
+      if(teamname != "XX") {
+        row += "  <td>" + "<a class='text-black' href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a> - " + teamname + "</td>";
+      } else {
+        row += "  <td>" + "<a class='text-black' href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a>" + "</td>";
+      }
         
-      // row += "  <td>"+teamNum+"</td>";
       if (allPitData[teamNum] != null) {
         row += "  <td class='bg-success'>Yes</td>";
       } else {
@@ -73,22 +62,35 @@
         row += "  <td>No</td>";
       }
       row += "</tr>";
-    $("#pitScoutTable").html(row);
-      });
-    };
+      $("#pitScoutTable").html(row);
+    }
   }
 
-  // Assumes the entries are team numbers or match numbers. Note a team number could 
-  // end in a "B", "C", "D", or "E", in which case we want to strip that off and just 
-  // use the number for the comparison.
+  // The entries are team numbers with " - <teamName>" at the end. We want to strip off the appended
+  // teamName so it's just the team number for comparison. 
+  // Note a team number could end in a "B", "C", "D", or "E", in which case we strip the letter off 
+  // and just use the number for the comparison.
   function sortTable() {
     var table = document.getElementById("psTable");
     var rows = Array.prototype.slice.call(table.querySelectorAll("tbody> tr"));
     rows.sort(function(rowA,rowB) {
+//      console.log(" >>>> starting rows.sort()");
       var cellA = rowA.cells[0].textContent.trim();
+//      console.log("   >>> cellA = "+cellA);
       var cellB = rowB.cells[0].textContent.trim();
+//      console.log("     >>> cellB = "+cellB);
 
-      // Remove any letters at the last char for the sort comparison.
+      // Remove the " - <teamName>" from the end of the entry.
+//      console.log("===> cellA = "+cellA+ "; cellB = "+cellB);
+      const dashPosA = cellA.indexOf("-");
+      if(dashPosA != -1)
+        cellA = cellA.substr(0,dashPosA-1);
+      const dashPosB = cellB.indexOf("-");
+      if(dashPosB != -1)
+        cellB = cellB.substr(0,dashPosB-1);
+//      console.log("    ==> after: cellA = "+cellA+ "; cellB = "+cellB);
+
+      // Remove any letters at the last char in teamNum for the sort comparison.
       if (cellA.charAt(cellA.length-1) == "B" || cellA.charAt(cellA.length-1) == "C" ||
           cellA.charAt(cellA.length-1) == "D" || cellA.charAt(cellA.length-1) == "E")
       {      
@@ -118,36 +120,41 @@
       $("#pageTitle").html("Event Code: " + data);
     });
       
-      
+    // Get the list of teams and add the team names 
+    console.log("index: getting teamlist from tbaAPI");
     $.get("./tbaAPI.php", {
-      getTeamList: 1
+      getTeamListAndNames: 1
     }).done(function(data) {
-      console.log("index.php: getTeamList: data = "+data);
 
       if(data == null)
         alert("Can't load teamlist from TBA; check if TBA Key was set in dbStatus");
+      else {
+        var rawTeams = JSON.parse(data);
+        for (var i = 0; i < rawTeams.length; i++) {
+          var teamnum = rawTeams[i]["teamnum"];
+          var teamname = rawTeams[i]["teamname"];
+          teamList.push(teamnum);
+          teamNames[teamnum] = teamname;
+        }
 
-      teamList = JSON.parse(data);
-      createTable();
-      $.get("./readAPI.php", {
-        getTeamsImages: JSON.stringify(teamList)
-      }).done(function(data) {
-        console.log("index.php: getTeamsImages = "+data);
-        picLookup = JSON.parse(data);
-        createTable();
-        sorttable.makeSortable(document.getElementById("psTable"));
-        sortTable();
-      });
+        // Get all the team images
+        $.get("./readAPI.php", {
+          getTeamsImages: JSON.stringify(teamList)
+        }).done(function(data) {
+//          console.log("index.php: getTeamsImages = "+data);
+          picLookup = JSON.parse(data);
+
+          // Get all the teams pit scouted
+          $.get("./readAPI.php", {
+            getAllPitData: 1
+          }).done(function(data) {
+            allPitData = JSON.parse(data);
+            createTable();
+            sorttable.makeSortable(document.getElementById("psTable"));
+            sortTable();
+          });
+        });
+      }
     });
-
-    $.get("./readAPI.php", {
-      getAllPitData: 1
-    }).done(function(data) {
-      allPitData = JSON.parse(data);
-      createTable();
-      sorttable.makeSortable(document.getElementById("psTable"));
-      sortTable();
-    });
-
   });
 </script>
