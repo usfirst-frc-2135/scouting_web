@@ -58,6 +58,7 @@ else if (isset($_GET["getAllPitData"]))
   }
   echo (json_encode($out));
 }
+
 else if (isset($_GET["getTeamPitData"]))
 {
   // Get all pit data
@@ -80,23 +81,12 @@ else if (isset($_GET["getAllStrategicData"]))
   echo (json_encode($db->readAllStrategicData($eventCode)));
 }
 
-/*HOLD->
-else if (isset($_GET["getAllStrategicData"]))
-{
-  // Get all strategic data
-  $strategicData = $db->readStrategicData($eventCode);
-  $out = array();
-  foreach ($strategicData as $row)
-  {
-    $out[$row["teamnumber"]] = $row;
-  }
-  echo (json_encode($out));
-} <-HOLD*/
 else if (isset($_GET["getTeamStrategicData"]))
 {
   // Get all data for a team
   echo (json_encode($db->readTeamStrategicData($_GET["getTeamStrategicData"], $eventCode)));
 }
+
 /*HOLD->
 else if (isset($_GET["getTeamStrategicData"]))
 {
@@ -115,11 +105,13 @@ else if (isset($_GET["getTeamStrategicData"]))
   }
   echo (json_encode($out));
 }<-HOLD */
+
 else if (isset($_GET["getTeamImages"]))
 {
   // Get all images for a team
   echo (json_encode(getTeamPicture($_GET["getTeamImages"])));
 }
+
 else if (isset($_GET["getTeamsImages"]))
 {
   // Get all images for a set of teams
@@ -131,6 +123,7 @@ else if (isset($_GET["getTeamsImages"]))
   }
   echo (json_encode($imageObj));
 }
+
 else if (isset($_GET["config"]))
 {
   $output = array();

@@ -75,8 +75,8 @@
               <th scope="col" class="text-center">Block Station</th>
               <th scope="col" class="text-center">Note</th>
               <th scope="col" class="text-center">Pin</th>
-              <th scope="col" class="text-center">Barge Contact</th>
-              <th scope="col" class="text-center">Cage Contact</th>
+              <th scope="col" class="text-center">Auton Barge Contact</th>
+              <th scope="col" class="text-center">Auton Cage Contact</th>
               <th scope="col" class="text-center">Anchor Contact</th>
               <th scope="col" class="text-center">Barge Contact</th>
               <th scope="col" class="text-center">Reef Contact</th>

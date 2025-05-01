@@ -7,7 +7,7 @@
       <div>
         <div class="input-group mb-3">
           <input id="writeTeamNumber" type="text" class="form-control" placeholder="writeTeamNumber" aria-label="writeTeamNumber">
-          <button id="loadTeam" type="button" class="btn btn-primary">Load Team</button>
+          <button id="loadTeamButton" type="button" class="btn btn-primary">Load Team</button>
         </div>
       </div>
 
@@ -384,7 +384,7 @@
                             <th scope="col">MAX</th> 
                           </tr>
                         </thead>
-                        <tbody id="endgameStageTable">
+                        <tbody id="endgameTotalPtsTable">
                           <tr>
                             <th scope="row">Total Points</th>
                           </tr> 
@@ -399,7 +399,7 @@
                             <th scope="col">D</th>   
                           </tr>
                         </thead> 
-                        <tbody id="endgameHarmonyTable">
+                        <tbody id="endgameClimbTable">
                           <tr>
                             <th scope="row">Cage Climb %</th>
                           </tr>    
@@ -412,6 +412,115 @@
             </div>
           </div>
         </div>
+
+        <!-- Strategic Data collapsible table -->
+        <div class="card mb-3">
+          <div class="card-body">
+            <div class="overflow-auto">
+              <h5 class="text-center"> 
+                <a href="#collapseStrategicData" data-bs-toggle="collapse" aria-expanded="false"> Strategic Data </a> </h5>
+                <div class="collapse" id="collapseStrategicData">
+                <div class="overflow-auto" id="freezeStratTableDiv">
+                  <style type="text/css" media="screen">
+                    table tr {
+                      border: 1px solid black;
+                    }
+                    table td, table th {
+                      border-right: 1px solid black;
+                    }
+                  </style>
+                  <table id="sortableStrategicData" class="table table-striped table-hover sortable">
+                    <colgroup>
+                      <col span="2" style="background-color:transparent">
+                      <col span="1" style="background-color:#cfe2ff">
+                      <col span="1" style="background-color:transparent">
+                      <col span="1" style="background-color:#cfe2ff">
+                      <col span="1" style="background-color:transparent">
+                      <col span="1" style="background-color:#cfe2ff">
+                      <col span="1" style="background-color:#transparent">
+                      <col span="1" style="background-color:#cfe2ff">
+                      <col span="1" style="background-color:transparent">
+                      <col span="1" style="background-color:#cfe2ff">
+                      <col span="1" style="background-color:#transparent">
+                      <col span="1" style="background-color:#cfe2ff">
+                      <col span="1" style="background-color:#transparent">
+                      <col span="1" style="background-color:#cfe2ff">
+                      <col span="1" style="background-color:#transparent">
+                      <col span="1" style="background-color:#cfe2ff">
+                      <col span="1" style="background-color:#transparent">
+                      <col span="1" style="background-color:#cfe2ff">
+                      <col span="1" style="background-color:#transparent">
+                      <col span="1" style="background-color:#cfe2ff">
+                      <col span="1" style="background-color:#transparent">
+                      <col span="1" style="background-color:#cfe2ff">
+                      <col span="1" style="background-color:#transparent">
+                      <col span="1" style="background-color:#cfe2ff">
+                      <col span="1" style="background-color:#transparent">
+                      <col span="1" style="background-color:#cfe2ff">
+                    </colgroup>
+                    <thead>
+                      <style type="text/css" media="screen">
+                        #sortableStrategicData tr, #sortableStrategicData td, #sortableStrategicData th {
+                          border: 1px solid black;
+                        }
+                      </style>
+                      <tr>
+                         <th colspan="1"</th>
+                         <th colspan="24" class="text-center">Strategic Scouting Data</th>
+                      </tr>
+                      <tr>
+                         <th colspan="1"</th>
+                         <th colspan="1"</th>
+                         <th colspan="24" class="text-center">Table</th>
+                      </tr>
+                      <tr>
+                         <th colspan="1"</th>
+                         <th colspan="1"</th>
+                         <th colspan="2" class="text-center" style="background-color:#3686FF">Against Defense</th>
+                         <th colspan="3" class="text-center">Defense Tactics</th>
+                         <th colspan="8" class="text-center" style="background-color:#3686FF">Fouls</th>
+                         <th colspan="4" class="text-center">Auton</th>
+                         <th colspan="4" class="text-center" style="background-color:#3686FF">Teleop</th>
+                         <th colspan="2" class="text-center">Notes</th>
+                         <th colspan="1"</th>
+                      </tr>
+                      <tr>
+                        <th scope="col">Match</th>
+                        <th scope="col">Drive Skill</th>
+                        <th scope="col">Block</th>
+                        <th scope="col">Note</th>
+                        <th scope="col">Block Path</th>
+                        <th scope="col">Block Stn</th>
+                        <th scope="col">Note</th>
+                        <th scope="col">Pin</th>
+                        <th scope="col">Auton Barge Contact</th>
+                        <th scope="col">Auton Cage Contact</th>
+                        <th scope="col">Anchor Contact</th>
+                        <th scope="col">Barge Contact</th>
+                        <th scope="col">Reef Contact</th>
+                        <th scope="col">Cage Contact</th>
+                        <th scope="col">Contact Climbing Robot</th>
+                        <th scope="col">Get Floor Coral</th>
+                        <th scope="col">Get Stn Coral</th>  
+                        <th scope="col">Get Floor Algae</th>
+                        <th scope="col">Get Reef Algae</th>
+                        <th scope="col">Get Floor Coral</th>
+                        <th scope="col">Get Floor Algae</th>
+                        <th scope="col">Knock Algae</th>
+                        <th scope="col">Aquire Reef Algae</th>
+                        <th scope="col">Problem Note</th>
+                        <th scope="col">General Note</th>
+                        <th scope="col">Scout Name</th>
+                      </tr>
+                    </thead>
+                    <tbody id="strategicDataTable">
+                    </tbody>
+                  </table>
+                </div>
+                </div>
+              </div>
+            </div>
+          </div>
       </div>
     </div>
   </div>
@@ -421,6 +530,7 @@
 
 <script>
   var frozenTable = null;
+  var frozenStratTable = null;
     
   var chartDefined = false;
   var myChart;    
@@ -488,37 +598,15 @@
     writeTableRow("teleopTable", avgs, ["teleopcoralaccuracystr", "teleopCoralScoringPercent"]); 
     writeTableRow("teleopTable", avgs, ["teleopalgaeaccuracysstr", "teleopAlgaeScoringPercent"]); 
       
-    // Endgame Table
-      
+    /////// Endgame Table
     avgs["totalEndGamePointsstr"] = "<b>Total Points</b>";  
     avgs["endgameClimbPercent"]["endgameclimbstr"] = "<b>Cage Climb %</b>";  
       
-    writeTableRow("endgameStageTable", avgs, ["totalEndGamePointsstr", "avgEndgamePoints", "maxEndgamePoints"]);   
-    writeTableRow("endgameHarmonyTable", avgs["endgameClimbPercent"], ["endgameclimbstr", 0, 1, 2, 3,4]);
-      
-    /*
-    //Old endgame code *just for reference*
-    avgs["endgamestagepercent"]["endgamestagestr"] = "<b>Stage Level %</b>";
-    avgs["endgameharmonypercent"]["endgameharmonystr"] = "<b>Harmony Level %</b>";
-    avgs["trapPercentage"]["endgametrapstr"] = "<b>Trap Note %</b>";
-    var stageLevel = avgs["endgamestagepercent"];
-    stageLevel["stagestr"] = "<b>Stage Level %</b>";
-    var harmonyLevel = avgs["endgameharmonypercent"];
-    harmonyLevel["harmomystr"] = "<b>Harmony Level %</b>";
-    avgs["traprowstr"] = "<b>Trap Note %</b>";
-    writeTableRow("endgameStageTable", avgs["endgamestagepercent"], ["endgamestagestr", 0, 1, 2]);
-    document.getElementById("endgameStageTable").style.backgroundColor = "f0f0f0";
-    writeTableRow("endgameHarmonyTable", avgs["endgameharmonypercent"], ["endgameharmonystr", 0, 1, 2]);
-    document.getElementById("endgameHarmonyTable").style.backgroundColor = "f0f0f0";
-    avgs["trapPercentage"] = avgs["trapPercentage"];
-    writeTableRow("endgameTrapTable", avgs, ["traprowstr", "trapPercentage"]);
-    document.getElementById("endgameTrapTable").style.backgroundColor = "f0f0f0";
-    */
-       
+    writeTableRow("endgameTotalPtsTable", avgs, ["totalEndGamePointsstr", "avgEndgamePoints", "maxEndgamePoints"]);   
+    writeTableRow("endgameClimbTable", avgs["endgameClimbPercent"], ["endgameclimbstr", 0, 1, 2, 3,4]);
       
       
-    // Total Table
-      
+    /////// Total Table
     avgs["totalCoralstr"] = "<b>Total Coral Scored</b>";
     avgs["totalAlgaestr"] = "<b>Total Algae Scored</b>";
     avgs["totalCoralPointsstr"] = "<b>Total Coral Points</b>";
@@ -540,8 +628,7 @@
   }
 
   function loadTeamPics(teamPics) {
-    /* Takes list of Team Pic paths and loads them
-     */
+    // Takes list of Team Pic paths and loads them.
     var first = true;
     for (let uri of teamPics) {
       var tags = "";
@@ -614,6 +701,20 @@
     
   function sortAllMatchesTable() {
     var table = document.getElementById("sortableAllMatches");
+    var rows = Array.prototype.slice.call(table.querySelectorAll("tbody> tr"));
+    rows.sort(function(rowA,rowB) {
+      var cellA = rowA.cells[0].textContent.trim();
+      var cellB = rowB.cells[0].textContent.trim();
+      return(sortRows(cellA,cellB));
+    });
+    // Update the table body with the sorted rows.
+    rows.forEach(function(row) {
+      table.querySelector("tbody").appendChild(row);
+    });
+  }
+
+  function sortStrategicDataTable() {
+    var table = document.getElementById("sortableStrategicData");
     var rows = Array.prototype.slice.call(table.querySelectorAll("tbody> tr"));
     rows.sort(function(rowA,rowB) {
       var cellA = rowA.cells[0].textContent.trim();
@@ -713,6 +814,10 @@
     sortAllMatchesTable();
   }
 
+  function processStrategicData(stratData) {
+    dataToStrategicTable(stratData);
+  }
+
   function processMatchData(team, data) {
     var mdp = new matchDataProcessor(data);
     mdp.sortMatches(data);
@@ -732,6 +837,80 @@
     });
   }
     
+  // Converts a given "1" to yes, "0" to no, anything else to empty string.
+  function convertToYesNo(value) {
+    var convertedVal = "";
+    if(value == "1")
+      convertedVal = "yes";
+    else if(value == "0")
+      convertedVal = "-";
+    else if(value == "2")
+      convertedVal = "no";
+    else if(value == "3")
+      convertedVal = "-";
+    return convertedVal;
+  }
+
+  function dataToStrategicTable(dataObj) {
+    $("#strategicDataTable").html("");  // clear table
+    for (let i = 0; i < dataObj.length; i++) {
+      var driverability = dataObj[i]["driverability"];
+      var driveVal = "";
+      if(driverability == "1")
+        driveVal = "Jerky";
+      else if(driverability == "2")
+        driveVal = "Slow";
+      else if(driverability == "3")
+        driveVal = "Average";
+      else if(driverability == "4")
+        driveVal = "Quick";
+      else if(driverability == "5")
+        driveVal = "-";
+
+      var rowString = "<tr><td align=\"center\">" + dataObj[i]["matchnumber"] + "</td>" +
+          "<td align=\"center\">" + driveVal + "</td>" +
+          "<td align=\"center\">" + convertToYesNo(dataObj[i]["against_tactic1"]) + "</td>" +
+          "<td align=\"center\">" + dataObj[i]["against_comment"] + "</td>" +
+
+          "<td align=\"center\">" + convertToYesNo(dataObj[i]["defense_tactic1"]) + "</td>" +
+          "<td align=\"center\">" + convertToYesNo(dataObj[i]["defense_tactic2"]) + "</td>" +
+          "<td align=\"center\">" + dataObj[i]["defense_comment"] + "</td>" + 
+          
+          "<td align=\"center\">" + convertToYesNo(dataObj[i]["foul1"]) + "</td>" +
+          "<td align=\"center\">" + convertToYesNo(dataObj[i]["autonFoul1"]) + "</td>" +
+          "<td align=\"center\">" + convertToYesNo(dataObj[i]["autonFoul2"]) + "</td>" +
+          "<td align=\"center\">" + convertToYesNo(dataObj[i]["teleopFoul1"]) + "</td>" +
+          "<td align=\"center\">" + convertToYesNo(dataObj[i]["teleopFoul2"]) + "</td>" +
+          "<td align=\"center\">" + convertToYesNo(dataObj[i]["teleopFoul3"]) + "</td>" +
+          "<td align=\"center\">" + convertToYesNo(dataObj[i]["teleopFoul4"]) + "</td>" +  
+          "<td align=\"center\">" + convertToYesNo(dataObj[i]["endgameFoul1"]) + "</td>" +
+          
+          "<td align=\"center\">" + convertToYesNo(dataObj[i]["autonGetCoralFromFloor"]) + "</td>" +  
+          "<td align=\"center\">" + convertToYesNo(dataObj[i]["autonGetCoralFromStation"]) + "</td>" + 
+          "<td align=\"center\">" + convertToYesNo(dataObj[i]["autonGetAlgaeFromFloor"]) + "</td>" + 
+          "<td align=\"center\">" + convertToYesNo(dataObj[i]["autonGetAlgaeFromReef"]) + "</td>" + 
+          "<td align=\"center\">" + convertToYesNo(dataObj[i]["teleopFloorPickupAlgae"]) + "</td>" + 
+          "<td align=\"center\">" + convertToYesNo(dataObj[i]["teleopFloorPickupCoral"]) + "</td>" + 
+          "<td align=\"center\">" + convertToYesNo(dataObj[i]["teleopKnockOffAlgaeFromReef"]) + "</td>" + 
+          "<td align=\"center\">" + convertToYesNo(dataObj[i]["teleopAcquireAlgaeFromReef"]) + "</td>" + 
+          
+          "<td align=\"center\">" + dataObj[i]["problem_comment"] + "</td>" +
+          "<td align=\"center\">" + dataObj[i]["general_comment"] + "</td>" +
+          "<td align=\"center\">" + dataObj[i]["scoutname"] + "</td>" +  
+          "</tr>";
+      $("#strategicDataTable").append(rowString);
+    }
+    setTimeout(function() {
+      sorttable.makeSortable(document.getElementById("sortableStrategicData"));
+      frozenStratTable = $('#freezeStratTableDiv').freezeTable({
+        'backgroundColor': "white",
+        'columnKeep': true,
+        'frozenColVerticalOffset': 0
+      });
+    }, 1);
+    sortStrategicDataTable();
+  }
+
     
 
     //AUTON CORAL GRAPH STARTS HERE
@@ -1437,17 +1616,13 @@
     $("#pitRow2").html("");
     $("#comments").html("");
     $("#allMatchesTable").html("");
-    //$("#autoStartTable").html("");
+    $("#strategicDataTable").html("");
     $("#autoTable").html("");
     $("#autoTotalTable").html("");
-    //$("#autonChargeTable").html("");
     $("#teleopTable").html("");
     $("#teleopTotalTable").html("");
-    $("#endgameStageTable").html("");
-    $("#endgameHarmonyTable").html("");
-    $("#reefzoneTable").html("");
-    $("#reefzoneTotalTable").html(""); 
-    $("#endgameTrapTable").html("");
+    $("#endgameTotalPtsTable").html("");
+    $("#endgameClimbTable").html("");
     $("#totalTable").html("");
 
     // Get team name from TBA
@@ -1491,8 +1666,17 @@
       }).done(function(data) {
         pitData = JSON.parse(data);
         processPitData(pitData, matchData);
+
+        // Do the Strategic Data Table next.
+        $.get("readAPI.php", {
+          getTeamStrategicData: teamNum
+        }).done(function(data) {
+          stratData = JSON.parse(data);
+          processStrategicData(stratData);
+        });
       });
     });
+
   }
 
   $(document).ready(function() {
@@ -1501,12 +1685,17 @@
       loadTeam(initTeamNumber);
     }
 
-    $("#loadTeam").click(function() {
+    $("#loadTeamButton").click(function() {
       loadTeam($("#writeTeamNumber").val());
     });
     
     $("#sortableAllMatches").click(function() {
        if(frozenTable) {
+         frozenTable.update();
+       }
+    });
+    $("#sortableStrategicData").click(function() {
+       if(frozenStratTable) {
          frozenTable.update();
        }
     });
