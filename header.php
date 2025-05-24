@@ -1,6 +1,6 @@
 <?php header('Access-Control-Allow-Origin: *'); ?>
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
