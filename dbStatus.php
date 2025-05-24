@@ -1,5 +1,6 @@
+<?php include "header.php"; ?>
+
 <title>DB Status</title>
-<?php include("header.php") ?>
 
 <div class="container row-offcanvas row-offcanvas-left">
   <div class="well column  col-lg-12  col-sm-12 col-xs-12" id="content">
@@ -15,7 +16,7 @@
             <h4>Data Table Status: <span id="dataTableStatus" class="badge bg-warning">Not Connected</span></h4>
             <h4>TBA Table Status: <span id="TBATableStatus" class="badge bg-warning">Not Connected</span></h4>
             <h4>Pit Table Status: <span id="pitTableStatus" class="badge bg-warning">Not Connected</span></h4>
-  	    <h4>Strategic Table Status: <span id="strategicTableStatus" class="badge bg-warning">Not Connected</span></h4>
+            <h4>Strategic Table Status: <span id="strategicTableStatus" class="badge bg-warning">Not Connected</span></h4>
             <h4>Server: <span id="serverName" class="badge bg-primary">????</span></h4>
             <h4>Database: <span id="databaseName" class="badge bg-primary">????</span></h4>
             <h4>Username: <span id="userName" class="badge bg-primary">????</span></h4>
@@ -116,7 +117,9 @@
   </div>
 </div>
 </div>
-<?php include("footer.php") ?>
+
+<?php include "footer.php"; ?>
+
 <script>
 
   var myEventCode = null;
@@ -149,7 +152,7 @@
     setStatusBadge(statusArray["tbaTableExists"], "TBATableStatus");
     setStatusBadge(statusArray["pitTableExists"], "pitTableStatus");
     setStatusBadge(statusArray["strategicTableExists"], "strategicTableStatus");
-	  
+
     $("#dataP").prop('checked', statusArray["useP"]);
     $("#dataQm").prop('checked', statusArray["useQm"]);
     $("#dataQf").prop('checked', statusArray["useQf"]);
@@ -167,16 +170,16 @@
   };
   var id_to_written_map = {}
 
-  $(document).ready(function() {
+  $(document).ready(function () {
     $.post("dbAPI.php", {
       "getStatus": true
-    }, function(data) {
+    }, function (data) {
       updateStatusValues(JSON.parse(data));
     });
 
     for (const key in id_to_key_map) {
       id_to_written_map[key] = false;
-      $("#" + key).change(function() {
+      $("#" + key).change(function () {
         if ($("#" + key).val() == "") {
           $("#" + key).removeClass("bg-info");
           id_to_written_map[key] = false;
@@ -204,78 +207,78 @@
       //output: gets the API data from our server
       $.get("readAPI.php", {
         getAllData: 1
-      }).done(function(data) {
+      }).done(function (data) {
         var dataObj = JSON.parse(data);
       });
 
     }
 
-  // Returns a string with the comma-separated line of data for the given team.
-  function createCSVLine(localAverages,team) {
-    var onstagePercent = rnd(dummylocalAveragesLookup(localAverages,team, "endgamestagepercent"));
-    var trapPercent = rnd(dummylocalAveragesLookup(localAverages,team, "trapPercentage"));
-    var out = team+",";
-    out += dummylocalAveragesLookup(localAverages,team, "avgtotalnotes") + ",";
-    out += dummylocalAveragesLookup(localAverages,team, "maxtotalnotes") + ",";
-    out += dummylocalAveragesLookup(localAverages,team, "avgautonotes") + ",";
-    out += dummylocalAveragesLookup(localAverages,team, "avgteleopnotes") + ",";
-    out += dummylocalAveragesLookup(localAverages,team, "avgendgamepoints") + ",";
-    out += onstagePercent + ",";
-    out += trapPercent + ",";
-    out += dummylocalAveragesLookup(localAverages,team, "totaldied") + ",";
-    out += "-\n";    // Comment
-    return out;
-  }
-
-  function dummylocalAveragesLookup(localAverages,team, item) {
-    if (!localAverages) {
-      return "NA";
+    // Returns a string with the comma-separated line of data for the given team.
+    function createCSVLine(localAverages, team) {
+      var onstagePercent = rnd(dummylocalAveragesLookup(localAverages, team, "endgamestagepercent"));
+      var trapPercent = rnd(dummylocalAveragesLookup(localAverages, team, "trapPercentage"));
+      var out = team + ",";
+      out += dummylocalAveragesLookup(localAverages, team, "avgtotalnotes") + ",";
+      out += dummylocalAveragesLookup(localAverages, team, "maxtotalnotes") + ",";
+      out += dummylocalAveragesLookup(localAverages, team, "avgautonotes") + ",";
+      out += dummylocalAveragesLookup(localAverages, team, "avgteleopnotes") + ",";
+      out += dummylocalAveragesLookup(localAverages, team, "avgendgamepoints") + ",";
+      out += onstagePercent + ",";
+      out += trapPercent + ",";
+      out += dummylocalAveragesLookup(localAverages, team, "totaldied") + ",";
+      out += "-\n";    // Comment
+      return out;
     }
-    if (!(team in localAverages)) {
-      return "NA";
+
+    function dummylocalAveragesLookup(localAverages, team, item) {
+      if (!localAverages) {
+        return "NA";
+      }
+      if (!(team in localAverages)) {
+        return "NA";
+      }
+      if (item == "endgamestagepercent") {
+        return localAverages[team][item][2];
+      }
+      return localAverages[team][item];
     }
-    if (item == "endgamestagepercent") {
-      return localAverages[team][item][2];
+
+    function rnd(val) {
+      // Rounding helper function 
+      return Math.round((val + Number.EPSILON) * 100) / 100;
     }
-    return localAverages[team][item];
-  }
 
-  function rnd(val) {
-    // Rounding helper function 
-    return Math.round((val + Number.EPSILON) * 100) / 100;
-  }
+    function download_csv() {
+      console.log("starting download_csv() ");
+      $.get("readAPI.php", {
+        getAllData: 1
+      }).done(function (data) {
+        console.log("download_csv: getting mdp data ");
+        matchData = JSON.parse(data);
+        var mdp = new matchDataProcessor(matchData);
+        var csvStr = "Team,Avg Total Notes,Max Total Notes,Avg A Notes,Avg T Notes,Avg E Notes, Onstage%, Trap%, Total Died, Comment\n";
+        mdp.getSiteFilteredAverages(function (averageData) {
+          for (var key in averageData) {
+            csvStr += createCSVLine(averageData, key);  // key is team number
+          }
 
-  function download_csv() {
-    console.log("starting download_csv() ");
-    $.get("readAPI.php", {
-      getAllData: 1
-    }).done(function(data) {
-      console.log("download_csv: getting mdp data ");
-      matchData = JSON.parse(data);
-      var mdp = new matchDataProcessor(matchData);
-      var csvStr = "Team,Avg Total Notes,Max Total Notes,Avg A Notes,Avg T Notes,Avg E Notes, Onstage%, Trap%, Total Died, Comment\n";
-      mdp.getSiteFilteredAverages(function(averageData) {
-        for (var key in averageData) {
-          csvStr += createCSVLine(averageData,key);  // key is team number
-        }
-
-        console.log("csvStr = "+csvStr);
-        var hiddenElement = document.createElement('a');
-        var filename = myEventCode + ".csv";
-        console.log("CSV filename = "+filename);
-        hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csvStr);
-        hiddenElement.target = '_blank';
-        hiddenElement.download = filename;
-        hiddenElement.click();
+          console.log("csvStr = " + csvStr);
+          var hiddenElement = document.createElement('a');
+          var filename = myEventCode + ".csv";
+          console.log("CSV filename = " + filename);
+          hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csvStr);
+          hiddenElement.target = '_blank';
+          hiddenElement.download = filename;
+          hiddenElement.click();
+        });
       });
-    });
-  }
+    }
 
-    $("#exportData").on('click', function(event) {
+    $("#exportData").on('click', function (event) {
       download_csv();
     });
 
-    $("#writeConfig").on('click', function(event) {
+    $("#writeConfig").on('click', function (event) {
       var writeData = {};
       for (const key in id_to_key_map) {
         if ($("#" + key).val() != "" && id_to_written_map[key]) {
@@ -290,12 +293,12 @@
       writeData["strategictable"] = databaseName + "_st";
       writeData["writeConfig"] = JSON.stringify(writeData);
 
-      $.post("dbAPI.php", writeData, function(data) {
+      $.post("dbAPI.php", writeData, function (data) {
         updateStatusValues(JSON.parse(data));
       });
     });
 
-    $("#useData").on('click', function(event) {
+    $("#useData").on('click', function (event) {
       // Make data to send to API
       var useData = {};
       useData["useP"] = +$("#dataP").is(":checked");
@@ -308,23 +311,23 @@
       writeData["filterConfig"] = JSON.stringify(useData);
 
       // Make request
-      $.post("dbAPI.php", writeData, function(data) {
+      $.post("dbAPI.php", writeData, function (data) {
         updateStatusValues(JSON.parse(data));
       });
     });
 
-    $("#createDB").on('click', function(event) {
+    $("#createDB").on('click', function (event) {
       $.post("dbAPI.php", {
         "createDB": true
-      }, function(data) {
+      }, function (data) {
         updateStatusValues(JSON.parse(data));
       });
     });
 
-    $("#createTable").on('click', function(event) {
+    $("#createTable").on('click', function (event) {
       $.post("dbAPI.php", {
         "createTable": true
-      }, function(data) {
+      }, function (data) {
         updateStatusValues(JSON.parse(data));
       });
     });

@@ -1,4 +1,5 @@
 <?php
+
 include("dbHandler.php");
 include("tbaHandler.php");
 

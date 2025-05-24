@@ -1,4 +1,4 @@
 <?php
-   unlink($_GET['file']);
+unlink($_GET['file']);
 ?>
 

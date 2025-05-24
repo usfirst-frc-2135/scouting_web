@@ -1,5 +1,7 @@
 <?php
-require_once("dbHandler.php");
+
+require_once "dbHandler.php";
+
 $db = new dbHandler();
 $dbConfig = $db->readDbConfig();
 $db->connectToDB();
@@ -58,7 +60,6 @@ else if (isset($_GET["getAllPitData"]))
   }
   echo (json_encode($out));
 }
-
 else if (isset($_GET["getTeamPitData"]))
 {
   // Get all pit data
@@ -74,13 +75,11 @@ else if (isset($_GET["getTeamPitData"]))
   }
   echo (json_encode($out));
 }
-
 else if (isset($_GET["getAllStrategicData"]))
 {
   // Get all data
   echo (json_encode($db->readAllStrategicData($eventCode)));
 }
-
 else if (isset($_GET["getTeamStrategicData"]))
 {
   // Get all data for a team
@@ -105,13 +104,11 @@ else if (isset($_GET["getTeamStrategicData"]))
   }
   echo (json_encode($out));
 }<-HOLD */
-
 else if (isset($_GET["getTeamImages"]))
 {
   // Get all images for a team
   echo (json_encode(getTeamPicture($_GET["getTeamImages"])));
 }
-
 else if (isset($_GET["getTeamsImages"]))
 {
   // Get all images for a set of teams
@@ -123,7 +120,6 @@ else if (isset($_GET["getTeamsImages"]))
   }
   echo (json_encode($imageObj));
 }
-
 else if (isset($_GET["config"]))
 {
   $output = array();

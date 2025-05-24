@@ -1,5 +1,6 @@
+<?php include "header.php"; ?>
+
 <title>Raw COPR Data</title>
-<?php include("header.php") ?>
 <div class="container row-offcanvas row-offcanvas-left">
   <div class="well column  col-lg-12  col-sm-12 col-xs-12" id="content">
     <div class="row pt-3 pb-3 mb-3">
@@ -39,7 +40,7 @@
   }
 </style>
 
-<?php include("footer.php") ?>
+<?php include "footer.php"; ?>
 
 <script>
   var frozenTable = null;
@@ -86,7 +87,7 @@
     //output: gets the API data from our server
     $.get("tbaAPI.php", {
       getCOPRs: 1
-    }).done(function(data) {
+    }).done(function (data) {
       processData(data);
       sorttable.makeSortable(document.getElementById("dataTable"));
       frozenTable = $('#freezeTableDiv').freezeTable({
@@ -97,16 +98,16 @@
     });
   }
 
-  $(document).ready(function() {
+  $(document).ready(function () {
     requestAPI();
 
-    $("#loadEvent").click(function() {
+    $("#loadEvent").click(function () {
       $.get("tbaAPI.php", {
         getCOPRs: 1,
         eventcode: $("#eventCode").val()
-      }).done(function(data) {
+      }).done(function (data) {
         processData(data);
-        setTimeout(function() {
+        setTimeout(function () {
           sorttable.makeSortable(document.getElementById("dataTable"));
           frozenTable = $('#freezeTableDiv').freezeTable({
             'backgroundColor': "white",
@@ -117,7 +118,7 @@
       });
     });
 
-    $("#dataTable").click(function() {
+    $("#dataTable").click(function () {
       if (frozenTable) {
         frozenTable.update();
       }

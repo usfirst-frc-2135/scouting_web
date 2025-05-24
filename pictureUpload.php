@@ -1,14 +1,15 @@
+<?php include "header.php"; ?>
+
 <title>Picture Upload</title>
-<?php include("header.php") ?>
 
 <div class="container row-offcanvas row-offcanvas-left">
   <div class="well column  col-lg-12  col-sm-12 col-xs-12" id="content">
     <div class="row pt-3 pb-3 mb-3">
-        <div class="row g-3 justify-content-md-center">
-            <div class="row justify-content-md-center">
-              <h2 class="col-md-6"> Upload Robot Picture </h2>
-            </div>
+      <div class="row g-3 justify-content-md-center">
+        <div class="row justify-content-md-center">
+          <h2 class="col-md-6"> Upload Robot Picture </h2>
         </div>
+      </div>
 
       <div class="card col-md-6 mx-auto">
 
@@ -27,12 +28,12 @@
               <label for="teamNumber" class="form-label">Team Number</label>
               <input type="text" class="form-control" id="teamNumber" placeholder="#">
             </div>
-              
+
             <div class="mb-3">
               <label for="robotPic" class="form-label">Robot Picture</label>
               <input class="form-control" type="file" id="robotPic">
             </div>
-              
+
             <div class="mb-3">
               <label for="replacePic" class="form-label">Replace Existing Pictures</label>
               <input class="form-check-input" type="checkbox" id="replacePic">
@@ -48,12 +49,14 @@
 
   </div>
 </div>
-<?php include("footer.php") ?>
+
+<?php include "footer.php"; ?>
+
 <script>
-    
+
   const loadButton = document.getElementById("loadingButton");
   loadButton.style.visibility = 'hidden';
-    
+
   function showSuccessMessage(message) {
     $("#robotPic").val("");
     $("#teamNumber").val("");
@@ -88,69 +91,68 @@
     console.log(data);
   }
 
-  $(document).ready(function() {
-    $("#upload").on('click', function(event) {
-      if(document.getElementById("robotPic").value != "" && document.getElementById("teamNumber").value != "") {
+  $(document).ready(function () {
+    $("#upload").on('click', function (event) {
+      if (document.getElementById("robotPic").value != "" && document.getElementById("teamNumber").value != "") {
         const loadButton = document.getElementById("loadingButton");
         loadButton.style.visibility = 'visible';
-    
-      if ( $("#replacePic").is(":checked") == true) 
-      {
-        var teamNum = $("#teamNumber").val();
-        console.log("Going to remove existing photo for team #"+teamNum); 
 
-        // First get list of robot-pic files for this team.
-        $.get("readAPI.php", {
-          getTeamImages: teamNum 
-        }).done(function(data) {
-          var teamPics = JSON.parse(data);
+        if ($("#replacePic").is(":checked") == true) {
+          var teamNum = $("#teamNumber").val();
+          console.log("Going to remove existing photo for team #" + teamNum);
 
-          // If there are any existing pics, delete them.
-          for (let picFile of teamPics) {
-            $.ajax({
-              url:'deleteFile.php',
-              data: {'file' : "<?php echo dirname(__FILE__) . '/'?>" + picFile },
-              success:function(response){
-                console.log("Deleted existing picture: "+picFile); 
-              },
-              error:function(){
-                console.log("Could NOT delete existing picture: "+picFile); 
-              }
-            });
-          }
-        });
-        // Reload the list of team images 
-        $.get("readAPI.php", {
-          getTeamImages: teamNum 
-        }).done(function(data) {
-          console.log("Reloaded team images" );
+          // First get list of robot-pic files for this team.
+          $.get("readAPI.php", {
+            getTeamImages: teamNum
+          }).done(function (data) {
+            var teamPics = JSON.parse(data);
+
+            // If there are any existing pics, delete them.
+            for (let picFile of teamPics) {
+              $.ajax({
+                url: 'deleteFile.php',
+                data: { 'file': "<?php echo dirname(__FILE__) . '/' ?>" + picFile },
+                success: function (response) {
+                  console.log("Deleted existing picture: " + picFile);
+                },
+                error: function () {
+                  console.log("Could NOT delete existing picture: " + picFile);
+                }
+              });
+            }
+          });
+          // Reload the list of team images 
+          $.get("readAPI.php", {
+            getTeamImages: teamNum
+          }).done(function (data) {
+            console.log("Reloaded team images");
+          });
+        }
+
+        // Now upload the new pic
+        var uploadPost = new FormData();
+        uploadPost.append("teamPic", $("#robotPic")[0].files[0]);
+        uploadPost.append("teamNum", $("#teamNumber").val());
+        $.ajax({
+          type: "POST",
+          url: "writeAPI.php",
+          data: uploadPost,
+          cache: false,
+          contentType: false,
+          processData: false,
+          error: uploadError,
+          success: uploadSuccess
         });
       }
-          
-      // Now upload the new pic
-      var uploadPost = new FormData();
-      uploadPost.append("teamPic", $("#robotPic")[0].files[0]);
-      uploadPost.append("teamNum", $("#teamNumber").val());
-      $.ajax({
-        type: "POST",
-        url: "writeAPI.php",
-        data: uploadPost,
-        cache: false,
-        contentType: false,
-        processData: false,
-        error: uploadError,
-        success: uploadSuccess
-      });
-    }
-    else {
+      else {
         alert("Please fill out all fields!");
         const loadButton = document.getElementById("loadingButton");
         loadButton.style.visibility = 'hidden';
-    }
-    $("#closeMessage").on('click', function(event) {
-      $("#uploadMessage").hide();
-      $("#replacePic").prop("checked",false); 
-    });
+      }
+      $("#closeMessage").on('click', function (event) {
+        $("#uploadMessage").hide();
+        $("#replacePic").prop("checked", false);
+      });
     });
   });
 </script>

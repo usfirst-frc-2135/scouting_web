@@ -1,5 +1,6 @@
 <?php
-include("dbHandler.php");
+
+include "dbHandler.php";
 
 if (isset($_POST["getStatus"]))
 {

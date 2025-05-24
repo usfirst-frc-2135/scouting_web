@@ -33,11 +33,13 @@ class tbaHandler
   function readURIFromTBA($uri)
   {
     $out = array();
-    if ( $this->tbaApiKey == null) {
+    if ($this->tbaApiKey == null)
+    {
       error_log("Can't read TheBlueAlliance data because no TBA Key was set!");
       return $out;
     }
-    else error_log("READING BlueAlliance data: uri = $uri");
+    else
+      error_log("READING BlueAlliance data: uri = $uri");
     $url = $this->apiURL . $uri . "?X-TBA-Auth-Key=" . $this->tbaApiKey;
     $ch = curl_init();
     curl_setopt_array(
@@ -134,10 +136,10 @@ class tbaHandler
   // Get Team Info
   function getTeamInfo($teamnum)
   {
-    error_log(">>> getTeamInfo() starting for $teamnum");  
+    error_log(">>> getTeamInfo() starting for $teamnum");
     // URI should be "/team/frc<teamnum>", so add "frc" if needed.
     $requestURI = "/team/" . $teamnum;
-    if (strpos($teamnum,"frc") == false)
+    if (strpos($teamnum, "frc") == false)
       $requestURI = "/team/frc" . $teamnum;
     return $this->makeDBCachedCall($requestURI);
   }
@@ -153,11 +155,12 @@ class tbaHandler
   // So we must adjust the list to contain the multiple robot <teamNum><Letter>.
   function getSimpleTeamList($eventCode)
   {
-    error_log("starting getSimpleTeamList for eventCode: $eventCode");  
+    error_log("starting getSimpleTeamList for eventCode: $eventCode");
 
     // If eventCode is "COMPX", just exit.
-    if(strstr($eventCode,'COMPX') )   {
-      error_log("skipping getSimpleTeamList for COMPX");  
+    if (strstr($eventCode, 'COMPX'))
+    {
+      error_log("skipping getSimpleTeamList for COMPX");
       $aout = array();
       return $aout;
     }
@@ -167,23 +170,23 @@ class tbaHandler
 
     // FORNOW - only "mttd", "cacg", "cacc"  events are known multi-robot events. Add any others as needed.
     $bMultiRobots = false;
-    if(strstr($eventCode,'mttd') || strstr($eventCode,'cacg') || strstr($eventCode,'cacc'))   // Hardcoded multi-robot eventcode
+    if (strstr($eventCode, 'mttd') || strstr($eventCode, 'cacg') || strstr($eventCode, 'cacc'))   // Hardcoded multi-robot eventcode
     {
-      error_log("getTeamList: this is a multi-robot event");  
+      error_log("getTeamList: this is a multi-robot event");
       $bMultiRobots = true;
     }
 
     $ml = null;   // matchlist, only needed if multi-robot event
-    if($bMultiRobots == true)
+    if ($bMultiRobots == true)
     {
       $ml = $this->getMatches($eventCode);
-      error_log("getTeamList: going to adjust teamlist for multi-robots"); 
+      error_log("getTeamList: going to adjust teamlist for multi-robots");
     }
 
     foreach ($tl["response"] as $teamRow)
     {
-      if($bMultiRobots == true)
-      { 
+      if ($bMultiRobots == true)
+      {
         // If this is a multi-robot event, go thru  match list to get B/C/D/E robots and 
         // add them as separate teams.
         $teamnum = $teamRow["team_number"];
@@ -197,32 +200,34 @@ class tbaHandler
           // Put all this match's teams in $teams, then check for the current teamnumber.
           $teams = array();
           for ($j = 0; $j < 3; $j++)
-            array_push($teams, substr($match["alliances"]["red"]["team_keys"][$j],3));
+            array_push($teams, substr($match["alliances"]["red"]["team_keys"][$j], 3));
           for ($k = 0; $k < 3; $k++)
-            array_push($teams, substr($match["alliances"]["blue"]["team_keys"][$k],3));
+            array_push($teams, substr($match["alliances"]["blue"]["team_keys"][$k], 3));
           for ($m = 0; $m < 6; $m++)
           {
             $entryNum = "$teams[$m]";
-            $trimmedNum = substr($entryNum,0,-1); // trim off the last char in entryNum, for later matching
+            $trimmedNum = substr($entryNum, 0, -1); // trim off the last char in entryNum, for later matching
 
             // If trimmedNum is same as numStr AND it ends in a B/C/D/E/F, then it's a 
             // multiple robot for numStr team.
-            if(($trimmedNum == $numStr) && ((substr($entryNum,-1) == 'B') || 
-               (substr($entryNum,-1) == 'C') || (substr($entryNum,-1) == 'D') || 
-               (substr($entryNum,-1) == 'E') || (substr($entryNum,-1) == 'F')))
+            if (
+              ($trimmedNum == $numStr) && ((substr($entryNum, -1) == 'B') ||
+                (substr($entryNum, -1) == 'C') || (substr($entryNum, -1) == 'D') ||
+                (substr($entryNum, -1) == 'E') || (substr($entryNum, -1) == 'F'))
+            )
             {
               // Check if this entryNum is already in multiBots.
-              $w = sizeof($multiBots); 
+              $w = sizeof($multiBots);
               $bFoundInMultiBots = false;
               for ($x = 0; $x < $w; $x++)
               {
-                if(strcmp($multiBots[$x],$entryNum) == 0)
+                if (strcmp($multiBots[$x], $entryNum) == 0)
                 {
                   $bFoundInMultiBots = true;
                   break;
-                } 
+                }
               }
-              if($bFoundInMultiBots == false)
+              if ($bFoundInMultiBots == false)
               {
                 array_push($multiBots, $entryNum);  // add this multi-bot number.
               }
@@ -231,14 +236,15 @@ class tbaHandler
         }
 
         // Add the team numbers found (at least the basic number, even if no multiples found)
-        $n  = sizeof($multiBots);
+        $n = sizeof($multiBots);
         for ($j = 0; $j < $n; $j++)
         {
-//          error_log("-- Adding to out: $multiBots[$j]"); 
+          //          error_log("-- Adding to out: $multiBots[$j]"); 
           array_push($out, $multiBots[$j]);
         }
-      } 
-      else array_push($out, $teamRow["team_number"]);   // not mulit-bot case
+      }
+      else
+        array_push($out, $teamRow["team_number"]);   // not mulit-bot case
     }
     return $out;
   }
@@ -246,25 +252,26 @@ class tbaHandler
   ///// getTeamListAndNames function /////
   function getTeamListAndNames($eventCode)
   {
-    error_log("starting getTeamListAndNames for eventCode: $eventCode");  
+    error_log("starting getTeamListAndNames for eventCode: $eventCode");
 
     // If eventCode is "COMPX", just exit.
-    if(strstr($eventCode,'COMPX') )   {
-      error_log("skipping getTeamListAndNames for COMPX");  
+    if (strstr($eventCode, 'COMPX'))
+    {
+      error_log("skipping getTeamListAndNames for COMPX");
       $aout = array();
       return $aout;
     }
 
     $out = array();
     $tl = $this->getTeamList($eventCode);
-  
+
     // Go thru all the teams and get the team name.
     foreach ($tl["response"] as $teamRow)
     {
       $teamInfo = array();
       $teamNum = $teamRow["team_number"];
       $teamname = $teamRow["nickname"];
-//      error_log("  ---> name for $teamNum = $teamname");  
+      //      error_log("  ---> name for $teamNum = $teamname");  
       $teamInfo["teamnum"] = $teamNum;
       $teamInfo["teamname"] = $teamname;
       array_push($out, $teamInfo);
@@ -343,16 +350,16 @@ class tbaHandler
   // COPR Calculation 
   // NOTE: this will NOT work for events with multiple teams unless that event code is in 
   // the hard-coded list (see getTeamList()). The result is that there is no OPR data shown.
- 
+
   function choleskyDecomposition($A)
   {
     //  Args:
     //    $A - Must be square matrix that is symetric and positive definite
     //  Returns:
     //    array("L" => and "Lp" =>) decompositions
-    $n  = sizeof($A);
+    $n = sizeof($A);
 
-    $L  = array_fill(0, $n, array_fill(0, $n, 0));
+    $L = array_fill(0, $n, array_fill(0, $n, 0));
     $Lp = array_fill(0, $n, array_fill(0, $n, 0));
 
     for ($i = 0; $i < $n; $i++)
@@ -366,13 +373,14 @@ class tbaHandler
         }
         if ($i == $j)
         {
-          $L[$i][$j]  = sqrt($A[$i][$j] - $sum);
+          $L[$i][$j] = sqrt($A[$i][$j] - $sum);
           $Lp[$j][$i] = sqrt($A[$i][$j] - $sum);
         }
         else
         {
-          if($L[$j][$j] != 0 ) {
-            $L[$i][$j]  = (1 / $L[$j][$j]) * ($A[$i][$j] - $sum);
+          if ($L[$j][$j] != 0)
+          {
+            $L[$i][$j] = (1 / $L[$j][$j]) * ($A[$i][$j] - $sum);
             $Lp[$j][$i] = (1 / $L[$j][$j]) * ($A[$i][$j] - $sum);
             $test1 = (1 / $L[$j][$j]) * ($A[$i][$j] - $sum);
             $test2 = (1 / $L[$j][$j]) * ($A[$i][$j] - $sum);
@@ -380,7 +388,7 @@ class tbaHandler
           else
           {
             error_log("---> in choleskyDecomposition(): avoiding divide-by-0!");
-            $L[$i][$j]  = 0;
+            $L[$i][$j] = 0;
             $Lp[$j][$i] = 0;
           }
         }
@@ -408,12 +416,14 @@ class tbaHandler
       {
         $sum += $A[$i][$j] * $X[$j];
       }
-      if($A[$i][$i] != 0) {
+      if ($A[$i][$i] != 0)
+      {
         $X[$i] = ($B[$i] - $sum) / $A[$i][$i];
         $test3 = ($B[$i] - $sum) / $A[$i][$i];
       }
-      else {
-        error_log("---> in forwardSubstitution(): avoiding divide-by-0");  
+      else
+      {
+        error_log("---> in forwardSubstitution(): avoiding divide-by-0");
         $X[$i] = 0;
       }
     }
@@ -439,11 +449,13 @@ class tbaHandler
       {
         $sum += $A[$nm - $i][$nm - $j] * $X[$nm - $j];
       }
-      if($A[$nm - $i][$nm - $i] != 0) {
+      if ($A[$nm - $i][$nm - $i] != 0)
+      {
         $X[$nm - $i] = ($B[$nm - $i] - $sum) / $A[$nm - $i][$nm - $i];
         $test4 = ($B[$nm - $i] - $sum) / $A[$nm - $i][$nm - $i];
       }
-      else {
+      else
+      {
         error_log("---> in backwardSubstitution(): avoiding divide-by-0");
         $X[$nm - $i] = 0;
       }
@@ -500,19 +512,19 @@ class tbaHandler
 
 
     $teamCount = sizeof($simpleTeamList);
-//    error_log("  ===> simpleTeamList size = $teamCount");
+    //    error_log("  ===> simpleTeamList size = $teamCount");
 
     $simpleMatchData = $this->getSimpleMatches($eventCode);
     $simpleMatchData = $this->removeElimMatches($simpleMatchData);
     $simpleMatchData = $this->removeUnplayedMatches($simpleMatchData);
     $matchMatricies = $this->createABMatricies($teamCount, $teamLookup, $simpleMatchData);
 
-    $A    = $matchMatricies["A"];
-    $Bs   = $matchMatricies["B"];
-    $Xs   = array();
+    $A = $matchMatricies["A"];
+    $Bs = $matchMatricies["B"];
+    $Xs = array();
 
     $Lmat = $this->choleskyDecomposition($A);
-    $L  = $Lmat["L"];
+    $L = $Lmat["L"];
     $Lp = $Lmat["Lp"];
 
     foreach ($Bs as $component => $Ba)
@@ -541,45 +553,47 @@ class tbaHandler
   ///// getStrategicMatches function /////
   function getStrategicMatches($eventCode)
   {
-    error_log("starting getStrategicMatches for eventCode: $eventCode");  
+    error_log("starting getStrategicMatches for eventCode: $eventCode");
 
     // If eventCode is "COMPX", just exit.
-    if(strstr($eventCode,'COMPX') )   {
-      error_log("skipping getStrategicMatches for COMPX");  
+    if (strstr($eventCode, 'COMPX'))
+    {
+      error_log("skipping getStrategicMatches for COMPX");
       $aout = array();
       return $aout;
     }
 
     $out = array();
     $mdata = array();
-//    error_log("---> calling getMatches()");  
+    //    error_log("---> calling getMatches()");  
     $ml = $this->getMatches($eventCode);   // get all the matches at this event
-  
+
     // Go thru all the matches and figure out which ones are our matches.
     $ourMatches = array();
-//    error_log("---> going thru matches ");  
+    //    error_log("---> going thru matches ");  
     foreach ($ml["response"] as $match)
     {
       $complevel = $match["comp_level"];
-      if($complevel == "qm") {  // Only care about Qual matches
+      if ($complevel == "qm")
+      {  // Only care about Qual matches
         // Put all this match's teams in $teams, then check for our teamnumber.
         $matchnum = $match["match_number"];
         $teams = array();
         for ($j = 0; $j < 3; $j++)
-          array_push($teams, substr($match["alliances"]["red"]["team_keys"][$j],3));
+          array_push($teams, substr($match["alliances"]["red"]["team_keys"][$j], 3));
         for ($k = 0; $k < 3; $k++)
-          array_push($teams, substr($match["alliances"]["blue"]["team_keys"][$k],3));
+          array_push($teams, substr($match["alliances"]["blue"]["team_keys"][$k], 3));
         for ($m = 0; $m < 6; $m++)
         {
           // If team number is 2135, then this match is one of ours. 
           $entryNum = "$teams[$m]";
-          if($entryNum == "2135") 
+          if ($entryNum == "2135")
           {
-//            error_log("     ---> found one of our matches: $matchnum");  
+            //            error_log("     ---> found one of our matches: $matchnum");  
             $myMatch = array();  // store this match's num and teams in myMatch
             $myMatch["match_number"] = $matchnum;
             $myMatch["teams"] = $teams;
-            array_push($ourMatches,$myMatch);
+            array_push($ourMatches, $myMatch);
             break;
           }
         }
@@ -590,15 +604,15 @@ class tbaHandler
     // For each of our matches, go thru the teams in the match. Get the full match list for each team 
     // in the match and hang on to their list of matches that are earlier (lower number) than that match.
     // Those are matches we want to strategic scout. So store as match# and teams.
-    $msize = sizeof($ourMatches); 
-//    error_log(" ===> ourMatches size = $msize");  
+    $msize = sizeof($ourMatches);
+    //    error_log(" ===> ourMatches size = $msize");  
     for ($n = 0; $n < $msize; $n++)
     {
       $tmatch = array();
       $tmatch = $ourMatches[$n];
       $ourMatchNum = $tmatch["match_number"];
-      $intOurMatchnum = (int)$ourMatchNum; 
-//      error_log(" >>>> Looking at OUR match: $ourMatchNum");  
+      $intOurMatchnum = (int) $ourMatchNum;
+      //      error_log(" >>>> Looking at OUR match: $ourMatchNum");  
 
       // Get this match's teams; for each: get their match numbers. Any match# that is less than this 
       // match#, save it with that team number.
@@ -607,9 +621,9 @@ class tbaHandler
       for ($p = 0; $p < 6; $p++)
       {
         $tnum = "$mteams[$p]";
-//        error_log("   >>>> for match $ourMatchNum, looking at team: $tnum");  
+        //        error_log("   >>>> for match $ourMatchNum, looking at team: $tnum");  
         // If team number is 2135, skip.
-        if($tnum == "2135") 
+        if ($tnum == "2135")
           continue;
 
         // Get their match numbers.
@@ -617,68 +631,68 @@ class tbaHandler
         foreach ($ml["response"] as $bmatch)
         {
           $bcomplevel = $bmatch["comp_level"];
-          if($bcomplevel == "qm")  
+          if ($bcomplevel == "qm")
           {   // Only care about Qual matches
             // If this match is earlier than ourMatchNum, check if it has this $tnum.
             $bmatchnum = $bmatch["match_number"];
-//            error_log("      ===> looking at match $bmatchnum");  
-            $intbmatchnum = (int)$bmatchnum; 
-            if($intbmatchnum < $intOurMatchnum) 
+            //            error_log("      ===> looking at match $bmatchnum");  
+            $intbmatchnum = (int) $bmatchnum;
+            if ($intbmatchnum < $intOurMatchnum)
             {
               // This match is earlier than ourMatchNum, so check if it has this team.
- //             error_log("        ===> match $bmatchnum is earlier than $ourMatchNum ");  
+              //             error_log("        ===> match $bmatchnum is earlier than $ourMatchNum ");  
 
               $bteams = array();
               for ($j = 0; $j < 3; $j++)
-                array_push($bteams, substr($bmatch["alliances"]["red"]["team_keys"][$j],3));
+                array_push($bteams, substr($bmatch["alliances"]["red"]["team_keys"][$j], 3));
               for ($k = 0; $k < 3; $k++)
-                array_push($bteams, substr($bmatch["alliances"]["blue"]["team_keys"][$k],3));
+                array_push($bteams, substr($bmatch["alliances"]["blue"]["team_keys"][$k], 3));
               for ($m = 0; $m < 6; $m++)
               {
                 // If team number is 2135, then this match is one of ours. 
                 $entryNum = "$bteams[$m]";
-                if($entryNum == $tnum) 
+                if ($entryNum == $tnum)
                 {
-//                  error_log("     ---> found team $tnum! so save with match $bmatchnum");  
-                  $dsize = sizeof($out); 
+                  //                  error_log("     ---> found team $tnum! so save with match $bmatchnum");  
+                  $dsize = sizeof($out);
                   $bFoundInOut = 0;
                   for ($z = 0; $z < $dsize; $z++)
                   {
                     $dout = array();
                     $dout = $out[$z];
                     $dmnum = $dout["match_number"];
- //                   error_log("         ---> Looking at dout match# = $dmnum");  
-                    if( $dout["match_number"] == $bmatchnum)
+                    //                   error_log("         ---> Looking at dout match# = $dmnum");  
+                    if ($dout["match_number"] == $bmatchnum)
                     {
                       $bFoundInOut = 1;
-//                      error_log("       ---> found match $bmatchnum in out; save with team $tnum");  
+                      //                      error_log("       ---> found match $bmatchnum in out; save with team $tnum");  
                       $prev = $dout["teams"];
 
                       // If tnum is already in prev, then don't do anything.
-                      if(strpos($prev,$tnum) !== false)
+                      if (strpos($prev, $tnum) !== false)
                       {
-//                        error_log("            ===> IN OUT: match $bmatchnum already had team $tnum"); 
+                        //                        error_log("            ===> IN OUT: match $bmatchnum already had team $tnum"); 
                       }
-                      else 
+                      else
                       {
                         $str1 = ", ";
                         $prev .= $str1;   // append prev with str1
                         $prev .= $tnum;   // append with tnum
                         $dout["teams"] = $prev;
-//                        error_log("            ===> IN OUT: match $bmatchnum: now teams = $prev");  
+                        //                        error_log("            ===> IN OUT: match $bmatchnum: now teams = $prev");  
                         $out[$z] = $dout;
                       }
                       break;
                     }
                   }
-                  if( $bFoundInOut == 0)
-                  { 
+                  if ($bFoundInOut == 0)
+                  {
                     $dout = array();
                     $dout["match_number"] = $bmatchnum;
                     $dout["teams"] = $tnum;
-                    array_push($out,$dout);
-//                    error_log("           >>>> ADDING to out: match $bmatchnum: teams = $tnum");  
-              
+                    array_push($out, $dout);
+                    //                    error_log("           >>>> ADDING to out: match $bmatchnum: teams = $tnum");  
+
                   }
                 }
               }

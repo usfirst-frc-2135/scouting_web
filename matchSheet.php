@@ -1,5 +1,6 @@
+<?php include "header.php"; ?>
+
 <title>Match Sheet</title>
-<?php include("header.php") ?>
 
 <div class="container row-offcanvas row-offcanvas-left">
   <div class="well column  col-lg-12  col-sm-12 col-xs-12" id="content">
@@ -29,58 +30,65 @@
           </div>
         </div>
       </div>
-    
-    <!-- Custom button (collapsible section) -->
-    <div class="row g-3 justify-content-md-center">
+
+      <!-- Custom button (collapsible section) -->
+      <div class="row g-3 justify-content-md-center">
         <div class="g-4 col-md-6">
-            <button type="button btn-primary" id="custom" name="custom" value="Custom" class="collapsible">Custom</button>
-            <div class="content" id="customAlliance">
-                <style type="text/css" media="screen">
-                      .collapsible {
-                      background-color: #006fff;
-                      color: white;
-                      cursor: pointer;
-                      padding: 10px;
-                      width: 100%;
-                      border: none;
-                      text-align: left;
-                      outline: none;
-                      font-size: 16px;
-                    }
+          <button type="button btn-primary" id="custom" name="custom" value="Custom" class="collapsible">Custom</button>
+          <div class="content" id="customAlliance">
+            <style type="text/css" media="screen">
+              .collapsible {
+                background-color: #006fff;
+                color: white;
+                cursor: pointer;
+                padding: 10px;
+                width: 100%;
+                border: none;
+                text-align: left;
+                outline: none;
+                font-size: 16px;
+              }
 
-                    /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
-                    .active, .collapsible:hover {
-                      background-color: #0064e6;
-                    }
+              /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+              .active,
+              .collapsible:hover {
+                background-color: #0064e6;
+              }
 
-                    /* Style the collapsible content. Note: hidden by default */
-                    .content {
-                      padding: 0 5px;
-                      display: none;
-                      overflow: hidden;
-                      background-color: #f1f1f1;
-                    }
-                </style>
-                <div class="input-group mb-3">
-                <h4 id="red">Red Alliance:</h4>
-                <div class="input-group mb-3">
-                    <input id="writeTeamNumber1" type="text" class="form-control" placeholder="Red Team Number 1" aria-label="writeTeamNumber1"> 
-                    <input id="writeTeamNumber2" type="text" class="form-control" placeholder="Red Team Number 2" aria-label="writeTeamNumber2"> 
-                    <input id="writeTeamNumber3" type="text" class="form-control" placeholder="Red Team Number 3" aria-label="writeTeamNumber3"> 
-                </div>
+              /* Style the collapsible content. Note: hidden by default */
+              .content {
+                padding: 0 5px;
+                display: none;
+                overflow: hidden;
+                background-color: #f1f1f1;
+              }
+            </style>
+            <div class="input-group mb-3">
+              <h4 id="red">Red Alliance:</h4>
+              <div class="input-group mb-3">
+                <input id="writeTeamNumber1" type="text" class="form-control" placeholder="Red Team Number 1"
+                  aria-label="writeTeamNumber1">
+                <input id="writeTeamNumber2" type="text" class="form-control" placeholder="Red Team Number 2"
+                  aria-label="writeTeamNumber2">
+                <input id="writeTeamNumber3" type="text" class="form-control" placeholder="Red Team Number 3"
+                  aria-label="writeTeamNumber3">
+              </div>
             </div>
             <div class="input-group mb-3">
-                <h4 id="blue">Blue Alliance:</h4>
-                <div class="input-group mb-3">
-                    <input id="writeTeamNumber4" type="text" class="form-control" placeholder="Blue Team Number 1" aria-label="writeTeamNumber4"> 
-                    <input id="writeTeamNumber5" type="text" class="form-control" placeholder="Blue Team Number 2" aria-label="writeTeamNumber5"> 
-                    <input id="writeTeamNumber6" type="text" class="form-control" placeholder="Blue Team Number 3" aria-label="writeTeamNumber6"> 
-                </div>
+              <h4 id="blue">Blue Alliance:</h4>
+              <div class="input-group mb-3">
+                <input id="writeTeamNumber4" type="text" class="form-control" placeholder="Blue Team Number 1"
+                  aria-label="writeTeamNumber4">
+                <input id="writeTeamNumber5" type="text" class="form-control" placeholder="Blue Team Number 2"
+                  aria-label="writeTeamNumber5">
+                <input id="writeTeamNumber6" type="text" class="form-control" placeholder="Blue Team Number 3"
+                  aria-label="writeTeamNumber6">
+              </div>
             </div>
             <button type="button" class="button btn-primary" id="loadCustom">Load Custom Match</button>
           </div>
         </div>
-    </div>
+      </div>
 
       <div class="row g-3 justify-content-md-center">
         <div class="col-md-6">
@@ -88,14 +96,16 @@
           <h5 id="matchTime">Time:</h5>
           <table class="table table-bordered">
             <thead>
-                <style type="text/css" media="screen">
+              <style type="text/css" media="screen">
                 table tr {
-                    border: 1px solid black;
+                  border: 1px solid black;
                 }
-                table td, table th {
-                    border-right: 1px solid black;
+
+                table td,
+                table th {
+                  border-right: 1px solid black;
                 }
-                </style>
+              </style>
               <tr>
                 <th class="text-center"></th>
                 <th class="text-center">Red</th>
@@ -131,7 +141,7 @@
               <tr>
                 <td class="table-secondary">Total Predicted Points</td>
                 <td class="table-danger" id="redTotalPredictedPoints"></td>
-                <td class="table-primary" id="blueTotalPredictedPoints"></td>  
+                <td class="table-primary" id="blueTotalPredictedPoints"></td>
               </tr>
             </tbody>
           </table>
@@ -150,7 +160,8 @@
                         <h5 id="R0TeamNumber" class="card-title text-center">Team #</h5>
                       </div>
                       <div class="col-2">
-                        <button class="btn accordion-button collapsed bg-danger btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#flush-R0Collapse" aria-expanded="false" aria-controls="flush-R0Collapse">
+                        <button class="btn accordion-button collapsed bg-danger btn-sm" type="button" data-bs-toggle="collapse"
+                          data-bs-target="#flush-R0Collapse" aria-expanded="false" aria-controls="flush-R0Collapse">
 
                         </button>
                       </div>
@@ -199,7 +210,7 @@
                     <th scope="col">A%</th>
                     <th scope="col">Net</th>
                     <th scope="col">Proc</th>
-                      
+
                     <th scope="col">N</th>
                     <th scope="col">P</th>
                     <th scope="col">F</th>
@@ -226,7 +237,8 @@
                         <h5 id="R1TeamNumber" class="card-title text-center">Team #</h5>
                       </div>
                       <div class="col-2">
-                        <button class="btn accordion-button collapsed bg-danger btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#flush-R1Collapse" aria-expanded="false" aria-controls="flush-R1Collapse">
+                        <button class="btn accordion-button collapsed bg-danger btn-sm" type="button" data-bs-toggle="collapse"
+                          data-bs-target="#flush-R1Collapse" aria-expanded="false" aria-controls="flush-R1Collapse">
 
                         </button>
                       </div>
@@ -275,7 +287,7 @@
                     <th scope="col">A%</th>
                     <th scope="col">Net</th>
                     <th scope="col">Proc</th>
-                      
+
                     <th scope="col">N</th>
                     <th scope="col">P</th>
                     <th scope="col">F</th>
@@ -302,7 +314,8 @@
                         <h5 id="R2TeamNumber" class="card-title text-center">Team #</h5>
                       </div>
                       <div class="col-2">
-                        <button class="btn accordion-button collapsed bg-danger btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#flush-R2Collapse" aria-expanded="false" aria-controls="flush-R2Collapse">
+                        <button class="btn accordion-button collapsed bg-danger btn-sm" type="button" data-bs-toggle="collapse"
+                          data-bs-target="#flush-R2Collapse" aria-expanded="false" aria-controls="flush-R2Collapse">
 
                         </button>
                       </div>
@@ -351,7 +364,7 @@
                     <th scope="col">A%</th>
                     <th scope="col">Net</th>
                     <th scope="col">Proc</th>
-                      
+
                     <th scope="col">N</th>
                     <th scope="col">P</th>
                     <th scope="col">F</th>
@@ -379,7 +392,8 @@
                         <h5 id="B0TeamNumber" class="card-title text-center">Team #</h5>
                       </div>
                       <div class="col-2">
-                        <button class="btn accordion-button collapsed bg-primary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#flush-B0Collapse" aria-expanded="false" aria-controls="flush-B0Collapse">
+                        <button class="btn accordion-button collapsed bg-primary btn-sm" type="button" data-bs-toggle="collapse"
+                          data-bs-target="#flush-B0Collapse" aria-expanded="false" aria-controls="flush-B0Collapse">
 
                         </button>
                       </div>
@@ -428,7 +442,7 @@
                     <th scope="col">A%</th>
                     <th scope="col">Net</th>
                     <th scope="col">Proc</th>
-                      
+
                     <th scope="col">N</th>
                     <th scope="col">P</th>
                     <th scope="col">F</th>
@@ -455,7 +469,8 @@
                         <h5 id="B1TeamNumber" class="card-title text-center">Team #</h5>
                       </div>
                       <div class="col-2">
-                        <button class="btn accordion-button collapsed bg-primary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#flush-B1Collapse" aria-expanded="false" aria-controls="flush-B1Collapse">
+                        <button class="btn accordion-button collapsed bg-primary btn-sm" type="button" data-bs-toggle="collapse"
+                          data-bs-target="#flush-B1Collapse" aria-expanded="false" aria-controls="flush-B1Collapse">
 
                         </button>
                       </div>
@@ -504,7 +519,7 @@
                     <th scope="col">A%</th>
                     <th scope="col">Net</th>
                     <th scope="col">Proc</th>
-                      
+
                     <th scope="col">N</th>
                     <th scope="col">P</th>
                     <th scope="col">F</th>
@@ -531,7 +546,8 @@
                         <h5 id="B2TeamNumber" class="card-title text-center">Team #</h5>
                       </div>
                       <div class="col-2">
-                        <button class="btn accordion-button collapsed bg-primary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#flush-B2Collapse" aria-expanded="false" aria-controls="flush-B2Collapse">
+                        <button class="btn accordion-button collapsed bg-primary btn-sm" type="button" data-bs-toggle="collapse"
+                          data-bs-target="#flush-B2Collapse" aria-expanded="false" aria-controls="flush-B2Collapse">
 
                         </button>
                       </div>
@@ -580,7 +596,7 @@
                     <th scope="col">A%</th>
                     <th scope="col">Net</th>
                     <th scope="col">Proc</th>
-                      
+
                     <th scope="col">N</th>
                     <th scope="col">P</th>
                     <th scope="col">F</th>
@@ -599,15 +615,15 @@
     </div>
   </div>
 
-  <?php include("footer.php") ?>
+  <?php include "footer.php"; ?>
 
   <script>
-    
+
     var coll = document.getElementsByClassName("collapsible");
     var i;
 
     for (i = 0; i < coll.length; i++) {
-      coll[i].addEventListener("click", function() {
+      coll[i].addEventListener("click", function () {
         this.classList.toggle("active");
         var content = this.nextElementSibling;
         if (content.style.display === "block") {
@@ -617,7 +633,7 @@
         }
       });
     }
-      
+
     var localMatchData = null;
     var bUsingCustom = false;
     var localMatchList = null;
@@ -637,26 +653,26 @@
     function checkGet() {
       let sp = new URLSearchParams(window.location.search);
       if (!bUsingCustom) {
-          if (sp.has('matchNum') && sp.has('compLevel')) {
-            return [sp.get('matchNum'), sp.get('compLevel')];
+        if (sp.has('matchNum') && sp.has('compLevel')) {
+          return [sp.get('matchNum'), sp.get('compLevel')];
         }
       }
       if (bUsingCustom) {
-          if (sp.has('customTeamNum1') && sp.has('customTeamNum2') && sp.has('customTeamNum3') && sp.has('customTeamNum4') && sp.has('customTeamNum5') && sp.has('customTeamNum6')) {
-              return [sp.get('customTeamNum1'), sp.get('customTeamNum2'), sp.get('customTeamNum3'), sp.get('customTeamNum4'), sp.get('customTeamNum5'), sp.get('customTeamNum6')];
-          }
+        if (sp.has('customTeamNum1') && sp.has('customTeamNum2') && sp.has('customTeamNum3') && sp.has('customTeamNum4') && sp.has('customTeamNum5') && sp.has('customTeamNum6')) {
+          return [sp.get('customTeamNum1'), sp.get('customTeamNum2'), sp.get('customTeamNum3'), sp.get('customTeamNum4'), sp.get('customTeamNum5'), sp.get('customTeamNum6')];
+        }
       }
       return null;
     }
- 
+
     function loadMatchData(successFunction) {
       if (!localMatchData) {
         $.get("readAPI.php", {
           getAllData: 1
-        }).done(function(data) {
+        }).done(function (data) {
           data = JSON.parse(data);
           var mdp = new matchDataProcessor(data);
-          mdp.getSiteFilteredAverages(function(averageData) {
+          mdp.getSiteFilteredAverages(function (averageData) {
             localMatchData = averageData;
             successFunction();
           });
@@ -673,24 +689,24 @@
       }
       // Sort the matches
       // Sort for "p", then "qm", then "sf" then "f" matches
-      arrOurMatches.sort(function(matchA, matchB) {
-        var Aprefix = matchA["comp_level"]; 
-        var Bprefix = matchB["comp_level"]; 
+      arrOurMatches.sort(function (matchA, matchB) {
+        var Aprefix = matchA["comp_level"];
+        var Bprefix = matchB["comp_level"];
         var Anum = matchA["match_number"];
         var Bnum = matchB["match_number"];
-        if(Aprefix == Bprefix)
+        if (Aprefix == Bprefix)
           return (Anum - Bnum);
-        if(Aprefix == "p")
+        if (Aprefix == "p")
           return -1;
-        if(Bprefix == "p")
+        if (Bprefix == "p")
           return 1;
-        if(Aprefix == "qm")
+        if (Aprefix == "qm")
           return -1;
-        if(Bprefix == "qm")
+        if (Bprefix == "qm")
           return 1;
-        if(Aprefix == "sf")
+        if (Aprefix == "sf")
           return -1;
-        if(Bprefix == "sf")
+        if (Bprefix == "sf")
           return 1;
         return 1;
       });
@@ -705,41 +721,41 @@
       $("#ourMatches").html(row);
     }
 
-    
+
     function loadMatchList(successFunction) {
-      if(!bUsingCustom) {
+      if (!bUsingCustom) {
         if (!localMatchList) {
           $.get("tbaAPI.php", {
             getMatchList: 1
-          }).done(function(data) {
-            if(data == null)
+          }).done(function (data) {
+            if (data == null)
               alert("Can't load matchlist from TBA; check if TBA Key was set in dbStatus");
-            else { 
+            else {
               rawMatchData = JSON.parse(data)["response"];
               localMatchList = {};
               for (let mi in rawMatchData) {
                 var newMatch = {};
                 var match = rawMatchData[mi];
-              
+
                 newMatch["comp_level"] = match["comp_level"];
                 newMatch["match_number"] = match["match_number"];
-                if(match["comp_level"] == "sf")
+                if (match["comp_level"] == "sf")
                   newMatch["match_number"] = match["set_number"];
-            
+
                 newMatch["red_teams"] = match["alliances"]["red"]["team_keys"];
                 newMatch["blue_teams"] = match["alliances"]["blue"]["team_keys"];
                 newMatch["time"] = null;
                 if (newMatch["time"] == null && match["actual_time"] != null) {
-                    newMatch["time"] = match["actual_time"];
+                  newMatch["time"] = match["actual_time"];
                 }
                 if (newMatch["time"] == null && match["predicted_time"] != null) {
-                    newMatch["time"] = match["predicted_time"];
+                  newMatch["time"] = match["predicted_time"];
                 }
                 // if (newMatch["time"] == null && match["time"] != null){ newMatch["time"] = match["time"]; }
                 localMatchList[makeKey(newMatch["match_number"], newMatch["comp_level"])] = newMatch;
-          
+
                 if (newMatch["red_teams"].includes(ourTeam) || newMatch["blue_teams"].includes(ourTeam)) {
-                  var keyw = newMatch["comp_level"]+newMatch["match_number"];
+                  var keyw = newMatch["comp_level"] + newMatch["match_number"];
                   ourMatches[keyw] = newMatch;
                 }
               }
@@ -747,27 +763,26 @@
               successFunction();
             }
           });
-      } else {
+        } else {
+          successFunction();
+        }
+      }
+      else { // using custom
+        localMatchList = {};
+        var newMatch = {};
+        newMatch["comp_level"] = "qm";
+        newMatch["match_number"] = 1;
+        newMatch["red_teams"] = [customTeamNum1, customTeamNum2, customTeamNum3];
+        newMatch["blue_teams"] = [customTeamNum4, customTeamNum5, customTeamNum6]; //NEW
+        newMatch["time"] = "predicted_time"; //NEW
+        localMatchList["QM_1"] = newMatch;
+
+        //if (newMatch["red_teams"].includes(ourTeam) || newMatch["blue_teams"].includes(ourTeam)) {
+        //ourMatches[newMatch["match_number"]] = newMatch;
+
+        //createOurMatchTable();
         successFunction();
       }
-    } 
-        else { // using custom
-            localMatchList = {};
-            var newMatch = {};
-            newMatch["comp_level"] = "qm";
-            newMatch["match_number"] = 1;
-            newMatch["red_teams"] = [customTeamNum1, customTeamNum2, customTeamNum3];
-            newMatch["blue_teams"] = [customTeamNum4, customTeamNum5, customTeamNum6]; //NEW
-            newMatch["time"] = "predicted_time"; //NEW
-            localMatchList["QM_1"] = newMatch;
-        
-            //if (newMatch["red_teams"].includes(ourTeam) || newMatch["blue_teams"].includes(ourTeam)) {
-            //ourMatches[newMatch["match_number"]] = newMatch;
-          
-            //createOurMatchTable();
-            successFunction();
-            
-        }
     }
 
     function makeKey(matchNumber, compLevel) {
@@ -806,12 +821,12 @@
       // Pull Data
       localMatchNum = matchNum;
       localCompLevel = compLevel;
-      loadMatchData(function() {
+      loadMatchData(function () {
         loadMatchList(processMatchList)
       });
     }
-      
-      function loadCustom(teamNum1, teamNum2, teamNum3, teamNum4, teamNum5, teamNum6) {
+
+    function loadCustom(teamNum1, teamNum2, teamNum3, teamNum4, teamNum5, teamNum6) {
       // Clear Data
       $("#R0DataTable").html("");
       $("#R1DataTable").html("");
@@ -853,7 +868,7 @@
       customTeamNum4 = teamNum4;
       customTeamNum5 = teamNum5;
       customTeamNum6 = teamNum6;
-      loadMatchData(function() {
+      loadMatchData(function () {
         loadMatchList(processMatchList)
       });
     }
@@ -872,20 +887,20 @@
 
     function processMatchList() {
       // Get Match Vector
-      if(!bUsingCustom) {
-      matchVector = localMatchList[makeKey(localMatchNum, localCompLevel)];
-      if (!matchVector) {
-        alert(makeKey(localMatchNum, localCompLevel) + " does not exist!");
-        return;
+      if (!bUsingCustom) {
+        matchVector = localMatchList[makeKey(localMatchNum, localCompLevel)];
+        if (!matchVector) {
+          alert(makeKey(localMatchNum, localCompLevel) + " does not exist!");
+          return;
         }
       }
-        
-      if(bUsingCustom) {
-          customMatchVector = localMatchList["QM_1"];
-          if(!customMatchVector) {
-            alert("This does not exist!");
-            return;
-          }
+
+      if (bUsingCustom) {
+        customMatchVector = localMatchList["QM_1"];
+        if (!customMatchVector) {
+          alert("This does not exist!");
+          return;
+        }
       }
 
       // Update Team Boxes
@@ -898,7 +913,7 @@
         }
       }
 
-      if(bUsingCustom){
+      if (bUsingCustom) {
         for (let i in customMatchVector["red_teams"]) {
           displayTeam("R", i, strTeamToIntTeam(customMatchVector["red_teams"][i]));
         }
@@ -906,21 +921,21 @@
           displayTeam("B", i, strTeamToIntTeam(customMatchVector["blue_teams"][i]));
         }
       }
-          // Update Summary Box
+      // Update Summary Box
       if (!bUsingCustom) {
         updateSummary(matchVector["red_teams"], matchVector["blue_teams"]);
 
-          // Request Team Pics
+        // Request Team Pics
         sendPicRequest(matchVector["red_teams"], matchVector["blue_teams"]);
 
-          // Update Time
+        // Update Time
         updateTime(matchVector["time"]);
       }
       if (bUsingCustom) {
         updateSummary(customMatchVector["red_teams"], customMatchVector["blue_teams"]);
-          // Request Team Pics
+        // Request Team Pics
         sendPicRequest(customMatchVector["red_teams"], customMatchVector["blue_teams"]);
-        }
+      }
     }
 
     function updateSummary(redList, blueList) {
@@ -929,8 +944,8 @@
         "blue": 0
       };
       var avgTotalAlgae = {
-         "red": 0,
-         "blue": 0
+        "red": 0,
+        "blue": 0
       };
       var avgAutoPoints = {
         "red": 0,
@@ -948,7 +963,7 @@
         "red": 0,
         "blue": 0
       };
-        
+
       for (let i in redList) {
         teamNum = strTeamToIntTeam(redList[i]);
         var rd = localMatchData[teamNum];
@@ -973,7 +988,7 @@
           totalPredictedPoints["blue"] += rd["avgTotalPoints"];
         }
       }
-                
+
       $("#redTotalCoral").html(roundInt(avgTotalCoral["red"]));
       $("#redTotalAlgae").html(roundInt(avgTotalAlgae["red"]));
       $("#redAvgAutoPoints").html(roundInt(avgAutoPoints["red"]));
@@ -987,7 +1002,7 @@
       $("#blueAvgTeleopPoints").html(roundInt(avgTeleopPoints["blue"]));
       $("#blueAvgEndgamePoints").html(roundInt(avgEndgamePoints["blue"]));
       $("#blueTotalPredictedPoints").html(roundInt(totalPredictedPoints["blue"]));
-        
+
       document.getElementById("redTotalCoral").setAttribute("align", "center");
       document.getElementById("redTotalAlgae").setAttribute("align", "center");
       document.getElementById("redAvgAutoPoints").setAttribute("align", "center");
@@ -1011,18 +1026,18 @@
       // Get team name from TBA
       $.get("tbaAPI.php", {
         getTeamInfo: teamNum
-      }).done(function(data) {
+      }).done(function (data) {
         var teamname = "XX";
-        if(data == null)
+        if (data == null)
           alert("Can't load teamName from TBA; check if TBA Key was set in dbStatus");
-        else { 
-          console.log("matchSheet: getTeamInfo: data = "+data);
+        else {
+          console.log("matchSheet: getTeamInfo: data = " + data);
           teamInfo = JSON.parse(data)["response"];
           teamname = teamInfo["nickname"];
-          console.log("matchSheet: for "+teamNum+", teamname = "+teamname);
+          console.log("matchSheet: for " + teamNum + ", teamname = " + teamname);
         }
-        if(teamname != "XX") {
-          $("#" + color + index + "TeamNumber").html("<a class='text-white' href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a> - "+teamname);
+        if (teamname != "XX") {
+          $("#" + color + index + "TeamNumber").html("<a class='text-white' href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a> - " + teamname);
         } else {
           $("#" + color + index + "TeamNumber").html("<a class='text-white' href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a>");
         }
@@ -1061,21 +1076,21 @@
       for (let i in redList) {
         var tn = strTeamToIntTeam(redList[i]);
         if (tn !== "") {
-            picDB[tn] = "R" + i;
-            requestList.push(tn);
+          picDB[tn] = "R" + i;
+          requestList.push(tn);
         }
       }
       for (let i in blueList) {
         var tn = strTeamToIntTeam(blueList[i]);
         if (tn !== "") {
-            picDB[tn] = "B" + i;
-            requestList.push(tn);
+          picDB[tn] = "B" + i;
+          requestList.push(tn);
         }
       }
 
       $.get("readAPI.php", {
         getTeamsImages: JSON.stringify(requestList)
-      }).done(function(data) {
+      }).done(function (data) {
         var teamImages = JSON.parse(data);
         for (var team of Object.keys(teamImages)) {
           loadTeamPics(picDB[team], teamImages[team]);
@@ -1105,38 +1120,38 @@
       return team.replace(/^(frc)/, '');
     }
 
-    $(document).ready(function() {
+    $(document).ready(function () {
       var initialGet = checkGet();
       if (initialGet) {
         loadMatch(initialGet[0], initialGet[1]);
       }
-      $("#loadMatch").click(function() {
+      $("#loadMatch").click(function () {
         bUsingCustom = false;
         loadMatch($("#writeMatchNumber").val(), $("#writeCompLevel").val());
       });
-        
-      $("#loadCustom").click(function() {
+
+      $("#loadCustom").click(function () {
         bUsingCustom = true;
         var redTeamNum1 = document.getElementById("writeTeamNumber1").value;
         var blueTeamNum1 = document.getElementById("writeTeamNumber4").value;
         console.log(redTeamNum1);
         console.log(blueTeamNum1);
         if (redTeamNum1.trim() == "" && blueTeamNum1.trim() == "") {
-            alert("Please fill out Red Team Number 1 and Blue Team Number 1!");
-            return false;
+          alert("Please fill out Red Team Number 1 and Blue Team Number 1!");
+          return false;
         }
-        else if (redTeamNum1.trim() !== "" && blueTeamNum1.trim() !== ""){
-            loadCustom($("#writeTeamNumber1").val(), $("#writeTeamNumber2").val(), $("#writeTeamNumber3").val(), $("#writeTeamNumber4").val(), $("#writeTeamNumber5").val(), $("#writeTeamNumber6").val());
+        else if (redTeamNum1.trim() !== "" && blueTeamNum1.trim() !== "") {
+          loadCustom($("#writeTeamNumber1").val(), $("#writeTeamNumber2").val(), $("#writeTeamNumber3").val(), $("#writeTeamNumber4").val(), $("#writeTeamNumber5").val(), $("#writeTeamNumber6").val());
         }
         else {
-            alert("Please fill out red team number 1 and blue team number 1!");
+          alert("Please fill out red team number 1 and blue team number 1!");
         }
       });
 
-      loadMatchList(function() {});
+      loadMatchList(function () { });
 
     });
-      
+
   </script>
 
   <script type="text/javascript" src="./scripts/matchDataProcessor.js"></script>

@@ -1,22 +1,23 @@
+<?php include "header.php"; ?>
+
 <title>Pit Scouting</title>
-<?php include("header.php") ?>
 
 <div class="container row-offcanvas row-offcanvas-left">
   <div class="well column  col-lg-12  col-sm-12 col-xs-12" id="content">
     <div class="row pt-3 pb-3 mb-3">
-        <div class="row g-3 justify-content-md-center">
-            <div class="row justify-content-md-center">
-              <h2 class="col-md-6"> Pit Scouting </h2>
-            </div>
+      <div class="row g-3 justify-content-md-center">
+        <div class="row justify-content-md-center">
+          <h2 class="col-md-6"> Pit Scouting </h2>
         </div>
-        
+      </div>
+
       <div class="card col-md-6 mx-auto">
-          
+
         <div id="pitScoutingMessage" style="display: none" class="alert alert-dismissible fade show" role="alert">
           <div id="uploadMessageText"></div>
           <button type="button" class="btn-close" id="closeMessage" aria-label="Close"></button>
         </div>
-          
+
         <div class="card-body">
           <form id="pitScoutingForm" method="post" enctype="multipart/form-data">
             <div class="mb-3">
@@ -46,7 +47,7 @@
               <label class="form-check-label" for="pitScore3">5 (Pristine)</label>
             </div>
 
-            <p>   </p>
+            <p> </p>
             <div>
               <label class="form-label">Does your team have spare parts for the robot?</label>
             </div>
@@ -59,7 +60,7 @@
               <label class="form-check-label" for="sparePartsNo">No</label>
             </div>
 
-            <p>   </p>
+            <p> </p>
             <div>
               <label class="form-label">Does your robot have computer vision?</label>
             </div>
@@ -72,7 +73,7 @@
               <label class="form-check-label" for="computerVisionNo">No</label>
             </div>
 
-            <p>   </p>
+            <p> </p>
             <div>
               <label class="form-label">Does your robot have swerve drive?</label>
             </div>
@@ -85,7 +86,7 @@
               <label class="form-check-label" for="swerveDriveNo">No</label>
             </div>
 
-            <p>   </p>
+            <p> </p>
             <div class="mb-3">
               <label for="driveType" class="form-label">What programming language do you use?</label>
               <div class="input-group mb-3">
@@ -100,7 +101,7 @@
               </div>
             </div>
 
-            <p>   </p>
+            <p> </p>
             <div class="mb-3">
               <label for="driveMotors" class="form-label">What type of motors do you use on your drive train?</label>
               <div class="input-group mb-3">
@@ -114,7 +115,7 @@
               </div>
             </div>
 
-            <p>   </p>
+            <p> </p>
             <div>
               <label class="form-label">Preparedness/Professionalism</label>
               <label class="form-label" style="color:red;">(observe only, do not ask)</label>
@@ -131,8 +132,8 @@
               <input class="form-check-input" type="radio" name="preparednessGroup" id="preparednessScore3">
               <label class="form-check-label" for="preparednessScore3">5 (Excellent)</label>
             </div>
-    
-            <p>   </p>
+
+            <p> </p>
             <div class="d-grid gap-2 col-6 mx-auto">
               <button class="btn btn-primary" type="button" id="submitButton">Submit</button>
             </div>
@@ -143,7 +144,7 @@
   </div>
 </div>
 
-<?php include("footer.php") ?>
+<?php include "footer.php"; ?>
 
 <script>
   function verifyData() {
@@ -157,36 +158,36 @@
     }
 
     if ((!($("#pitScore1").is(':checked'))) && (!($("#pitScore2").is(':checked'))) && (!($("#pitScore3").is(':checked')))) {
-      if (isError == true) 
+      if (isError == true)
         errMsg += ", Pit Organization";
       else errMsg += " Pit Organization";
       isError = true;
     }
 
     if ((!($("#sparePartsYes").is(':checked'))) && (!($("#sparePartsNo").is(':checked')))) {
-      if (isError == true) 
+      if (isError == true)
         errMsg += ", Spare Parts";
       else errMsg += " Spare Parts";
       isError = true;
     }
-      
+
     if ((!($("#computerVisionYes").is(':checked'))) && (!($("#computerVisionNo").is(':checked')))) {
-      if (isError == true) 
+      if (isError == true)
         errMsg += ", Computer Vision";
       else errMsg += " Computer Vision";
       isError = true;
     }
 
     if ((!($("#swerveDriveYes").is(':checked'))) && (!($("#swerveDriveNo").is(':checked')))) {
-      if (isError == true) 
+      if (isError == true)
         errMsg += ", Swerve Drive";
       else errMsg += " Swerve Drive";
       isError = true;
     }
-      
+
     var progLanguage = $("#programmingLanguage").val();
     if (progLanguage != 1 && progLanguage != 2 && progLanguage != 3 && progLanguage != 4 && progLanguage != 5) {
-      if (isError == true) 
+      if (isError == true)
         errMsg += ", Programming Language";
       else errMsg += " Programming Language";
       isError = true;
@@ -194,14 +195,14 @@
 
     var driveMotors = $("#driveMotors").val();
     if (driveMotors != 1 && driveMotors != 2 && driveMotors != 3 && driveMotors != 4) {
-      if (isError == true) 
+      if (isError == true)
         errMsg += ", Drive Motors";
       else errMsg += " Drive Motors";
       isError = true;
     }
 
     if ((!($("#preparednessScore1").is(':checked'))) && (!($("#preparednessScore2").is(':checked'))) && (!($("#preparednessScore3").is(':checked')))) {
-      if (isError == true) 
+      if (isError == true)
         errMsg += ", Preparedness";
       else errMsg += " Preparedness";
       isError = true;
@@ -268,7 +269,7 @@
     if ($("#swerveDriveNo").is(':checked')) {
       dataToUse["swerve"] = 0;
     }
-      
+
     var progLang = $("#programmingLanguage").val();
     dataToUse["proglanguage"] = "Other";  // default
     if (progLang == 1) {
@@ -300,7 +301,7 @@
     if (driveMotors == 4) {
       dataToUse["drivemotors"] = "Cims";
     }
-      
+
     dataToUse["preparedness"] = 1;  // default
     if ($("#preparednessScore1").is(':checked')) {
       dataToUse["preparedness"] = 1;
@@ -314,7 +315,7 @@
 
     $.post("writeAPI.php", {
       writePitData: JSON.stringify(dataToUse)
-    }).done(function(data) {
+    }).done(function (data) {
       // Because success word may have a new-line at the end, don't do a direct compare
       if (data.indexOf('success') > -1) {
         alert("Success in submitting pit data!");
@@ -325,9 +326,9 @@
     });
   }
 
-  $(document).ready(function() {
+  $(document).ready(function () {
 
-    $("#submitButton").click(function() {
+    $("#submitButton").click(function () {
       if (!verifyData()) {
         writeDataToAPI();
       }

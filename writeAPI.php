@@ -1,5 +1,7 @@
 <?php
-include("dbHandler.php");
+
+include "dbHandler.php";
+
 $db = new dbHandler();
 $dbConfig = $db->readDbConfig();
 
@@ -55,19 +57,19 @@ if (isset($_POST["writeStrategicData"]))
 {
   $db->connectToDB();
   $args = json_decode($_POST["writeStrategicData"], true);
-  
+
   $args["eventcode"] = $eventCode;
   $msg = "success";
   $args["entrykey"] = $args["eventcode"] . "_" . $args["matchnumber"] . "_" . $args["teamnumber"];
-    try
-    {
-        $db->writeRowToStrategicTable($args);
-    }
-    catch (Exception $e)
-    {
-      error_log("! writeStrategicData() threw exception = $e");
-      $msg = "fail";
-    }
+  try
+  {
+    $db->writeRowToStrategicTable($args);
+  }
+  catch (Exception $e)
+  {
+    error_log("! writeStrategicData() threw exception = $e");
+    $msg = "fail";
+  }
   echo ($msg);
 }
 
@@ -76,8 +78,8 @@ if (isset($_POST["writePicklist"]))
   $plistData = $_POST["writePicklist"];
   $fileName = "$eventCode.csv";
   error_log("writePicklist fileName = $fileName");
-  $file = fopen($fileName,"w");
-  fwrite($file,$plistData);
+  $file = fopen($fileName, "w");
+  fwrite($file, $plistData);
   fclose($file);
 }
 
@@ -100,7 +102,7 @@ if (isset($_POST["teamNum"]) and isset($_FILES["teamPic"]))
     if ($_FILES["teamPic"]["size"] < 100000000)
     {
       // Check that the file type is a JPG or PNG
-      if ($imageFileType == "jpg" || $imageFileType == "JPG" || $imageFileType == "PNG" || $imageFileType == "png" || $imageFileType == "jpeg" || $imageFileType == "JPEG" || $imageFileType == "gif"  || $imageFileType == "GIF")
+      if ($imageFileType == "jpg" || $imageFileType == "JPG" || $imageFileType == "PNG" || $imageFileType == "png" || $imageFileType == "jpeg" || $imageFileType == "JPEG" || $imageFileType == "gif" || $imageFileType == "GIF")
       {
         $i = 0;
         $fileValid = false;

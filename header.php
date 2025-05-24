@@ -1,4 +1,5 @@
 <?php header('Access-Control-Allow-Origin: *'); ?>
+
 <!doctype html>
 <html lang="en">
 
@@ -23,6 +24,7 @@
       text-align: center;
       float: left;
     }
+
     /* .nav li {
          list-style-type: none;
          float: left;
@@ -37,9 +39,11 @@
       width: 76px;
       float: left;
     }
+
     .nav a:hover {
       color: #fff;
     }
+
     .nav li a.selected {
       text-decoration: none;
       list-style-type: none;
@@ -53,11 +57,13 @@
   </style>
 </head>
 
-<body class="bg-light"> <!-- planning to look somewhere to investigate how far the header expands, see if i can ... idk what it says after-->
+<body class="bg-light">
+  <!-- planning to look somewhere to investigate how far the header expands, see if i can ... idk what it says after-->
   <header class="navbar navbar-expand-md navbar-dark sticky-top bg-dark">
     <div class="container">
       <a class="navbar-brand" href="#">FRC 2135</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+        aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -74,23 +80,23 @@
           <li class="nav-item">
             <a class="nav-link" href="./teamLookup.php">Team Lookup</a>
           </li>
-	      <li class="nav-item">
+          <li class="nav-item">
             <a class="nav-link" href="./matchSheet.php">Match Sheet</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="./strategicData.php">Strategic Data</a>
           </li>
-	  <li class="nav-item">
+          <li class="nav-item">
             <a class="nav-link" href="./pitScouting.php">Pit Scouting</a>
           </li>
-	      <li class="nav-item">
+          <li class="nav-item">
             <a class="nav-link" href="./strategicScouting.php">Strategic Scouting</a>
           </li>
-	      <li class="nav-item">
+          <li class="nav-item">
             <a class="nav-link" href="./pictureUpload.php">Picture Upload</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="./qrScanner.php">QR Scanner</a> 
+            <a class="nav-link" href="./qrScanner.php">QR Scanner</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="./coprData.php">COPRs</a>
@@ -108,15 +114,15 @@
       </div>
     </div>
   </header>
-    
-<script>
-  const currentLocation = location.href;
-  const items = document.querySelectorAll("a");
-  const length = items.length;
-  
-  for (let i = 0; i < items.length; i++) {
-    if (items[i].href === currentLocation) {
-      items[i].className = "selected";
+
+  <script>
+    const currentLocation = location.href;
+    const items = document.querySelectorAll("a");
+    const length = items.length;
+
+    for (let i = 0; i < items.length; i++) {
+      if (items[i].href === currentLocation) {
+        items[i].className = "selected";
+      }
     }
-  }
-</script>
+  </script>
