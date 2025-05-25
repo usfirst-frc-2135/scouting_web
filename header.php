@@ -93,7 +93,7 @@
             <a class="nav-link" href="./strategicScouting.php">Strategic Scouting</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="./pictureUpload.php">Picture Upload</a>
+            <a class="nav-link" href="./photoUpload.php">Photo Upload</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="./qrScanner.php">QR Scanner</a>

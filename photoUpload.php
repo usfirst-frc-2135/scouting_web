@@ -1,13 +1,13 @@
 <?php include 'header.php'; ?>
 
-<title>Picture Upload</title>
+<title>Photo Upload</title>
 
 <div class="container row-offcanvas row-offcanvas-left">
   <div class="well column  col-lg-12  col-sm-12 col-xs-12" id="content">
     <div class="row pt-3 pb-3 mb-3">
       <div class="row g-3 justify-content-md-center">
         <div class="row justify-content-md-center">
-          <h2 class="col-md-6"> Upload Robot Picture </h2>
+          <h2 class="col-md-6"> Upload Robot Photo </h2>
         </div>
       </div>
 
@@ -30,12 +30,12 @@
             </div>
 
             <div class="mb-3">
-              <label for="robotPic" class="form-label">Robot Picture</label>
+              <label for="robotPic" class="form-label">Robot Photo</label>
               <input class="form-control" type="file" id="robotPic">
             </div>
 
             <div class="mb-3">
-              <label for="replacePic" class="form-label">Replace Existing Pictures</label>
+              <label for="replacePic" class="form-label">Replace Existing Photos</label>
               <input class="form-check-input" type="checkbox" id="replacePic">
             </div>
 
@@ -113,10 +113,10 @@
                 url: 'deleteFile.php',
                 data: { 'file': "<?php echo dirname(__FILE__) . '/' ?>" + picFile },
                 success: function (response) {
-                  console.log("Deleted existing picture: " + picFile);
+                  console.log("Deleted existing photo: " + picFile);
                 },
                 error: function () {
-                  console.log("Could NOT delete existing picture: " + picFile);
+                  console.log("Could NOT delete existing photo: " + picFile);
                 }
               });
             }

@@ -88,7 +88,7 @@ if (isset($_POST["teamNum"]) and isset($_FILES["teamPic"]))
   // For testing: add a delay
 //TEST  sleep(10); // 10 seconds delay
 
-  // Upload Picture API
+  // Upload Photo API
   $uploadSuccess = false;
   $errorMessage = "";
   $target_dir = "robot-pics/";

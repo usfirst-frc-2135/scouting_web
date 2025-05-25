@@ -7,7 +7,7 @@
     <div class="row pt-3 pb-3 mb-3">
       <div class="row g-3 justify-content-md-center">
         <div class="row justify-content-md-center">
-          <h2 class="col-md-6"> Stratgic Scouting </h2>
+          <h2 class="col-md-6"> Strategic Scouting </h2>
         </div>
       </div>
 
