@@ -5,7 +5,7 @@
 <div class="container row-offcanvas row-offcanvas-left">
   <div class="well column  col-lg-12  col-sm-12 col-xs-12" id="content">
     <div class="row pt-3 pb-3 mb-3">
-      <h1 id="COPRHeader">COPR Data: ???</h1>
+      <h2 id="COPRHeader">COPR Data: ???</h2>
 
       <div>
         <div class="input-group mb-3">
