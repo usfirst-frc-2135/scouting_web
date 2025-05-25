@@ -209,10 +209,6 @@ COMMENTED OUT FOR NOW-->
                 <th class="text-center" scope="col">F</th>
                 <th class="text-center" scope="col">S</th>
                 <th class="text-center" scope="col">D</th>
-                <!--<th class="text-center" scope="col">N</th>
-              <th class="text-center" scope="col">Bell</th>
-              <th class="text-center" scope="col">10s</th>
-              <th class="text-center" scope="col">5s</th>-->
                 <th class="text-center" scope="col">#</th>
               </tr>
 
