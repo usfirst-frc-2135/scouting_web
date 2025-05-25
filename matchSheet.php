@@ -1102,8 +1102,7 @@
     }
 
     function loadTeamPics(prefix, teamPics) {
-      /* Takes list of Team Pic paths and loads them
-       */
+      /* Takes list of Team Pic paths and loads them */
       var first = true;
       for (let uri of teamPics) {
         var tags = "";

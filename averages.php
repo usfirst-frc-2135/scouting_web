@@ -330,12 +330,6 @@ COMMENTED OUT FOR NOW-->
           "<td align=\"center\">" + dummyGet(endgameClimbPercentage, 3) + "</td>" +
           "<td align=\"center\">" + dummyGet(endgameClimbPercentage, 4) + "</td>" +
 
-          /*"<td align=\"center\">" + dummyGet(endgameClimbStartPercentage, 0) + "</td>" +
-          "<td align=\"center\">" + dummyGet(endgameClimbStartPercentage, 1) + "</td>" +
-          "<td align=\"center\">" + dummyGet(endgameClimbStartPercentage, 2) + "</td>" +*/
-
-          //"<td align=\"center\">" + dummyGet(scoutingData[teamNum], "trapPercentage") + "</td>" +
-          //"<td align=\"center\">" + dummyGet(scoutingData[teamNum], "spotlitPercentage") + "</td>" +
           "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "totaldied") + "</td>" +
           "</td>";
 
