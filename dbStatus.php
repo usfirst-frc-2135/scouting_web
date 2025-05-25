@@ -11,13 +11,14 @@
             Database Status
           </div>
           <div class="card-body">
-            <h4>SQL Server Status: <span id="serverStatus" class="badge bg-warning">Not Connected</span></h4>
-            <h4>Database Server Status: <span id="dbStatus" class="badge bg-warning">Not Connected</span></h4>
+            <h4>MySQL Server Status: <span id="serverStatus" class="badge bg-warning">Not Connected</span></h4>
+            <h4>Database Status: <span id="dbStatus" class="badge bg-warning">Not Connected</span></h4>
             <h4>Data Table Status: <span id="dataTableStatus" class="badge bg-warning">Not Connected</span></h4>
             <h4>TBA Table Status: <span id="TBATableStatus" class="badge bg-warning">Not Connected</span></h4>
             <h4>Pit Table Status: <span id="pitTableStatus" class="badge bg-warning">Not Connected</span></h4>
             <h4>Strategic Table Status: <span id="strategicTableStatus" class="badge bg-warning">Not Connected</span></h4>
-            <h4>Server: <span id="serverName" class="badge bg-primary">????</span></h4>
+            <hr />
+            <h4>MySQL Server: <span id="serverName" class="badge bg-primary">????</span></h4>
             <h4>Database: <span id="databaseName" class="badge bg-primary">????</span></h4>
             <h4>Username: <span id="userName" class="badge bg-primary">????</span></h4>
             <h4>TBA Key: <span id="tbaKey" class="badge bg-primary">????</span></h4>
@@ -25,8 +26,6 @@
           </div>
         </div>
 
-      </div>
-      <div class="col-lg-6 col-sm-6 col-xs-6 gx-3">
         <div class="overflow-auto">
           <div class="card">
             <div class="card-header">
@@ -61,15 +60,9 @@
             </div>
           </div>
         </div>
-        <div class="card">
-          <div class="card-header">
-            Export Data
-          </div>
-          <div class="card-body">
-            <button id="exportData" class="btn btn-primary">Export picklist data to CSV</button>
-          </div>
-        </div>
+      </div>
 
+      <div class="col-lg-6 col-sm-6 col-xs-6 gx-3">
         <div class="card">
           <div class="card-header">
             Database Config
@@ -146,8 +139,8 @@
     $("#eventCode").text(statusArray["eventcode"]);
     myEventCode = statusArray["eventcode"];
 
-    setStatusBadge(statusArray["dbExists"], "dbStatus");
     setStatusBadge(statusArray["serverExists"], "serverStatus");
+    setStatusBadge(statusArray["dbExists"], "dbStatus");
     setStatusBadge(statusArray["dataTableExists"], "dataTableStatus");
     setStatusBadge(statusArray["tbaTableExists"], "TBATableStatus");
     setStatusBadge(statusArray["pitTableExists"], "pitTableStatus");
@@ -213,71 +206,6 @@
 
     }
 
-    // Returns a string with the comma-separated line of data for the given team.
-    function createCSVLine(localAverages, team) {
-      var onstagePercent = rnd(dummylocalAveragesLookup(localAverages, team, "endgamestagepercent"));
-      var trapPercent = rnd(dummylocalAveragesLookup(localAverages, team, "trapPercentage"));
-      var out = team + ",";
-      out += dummylocalAveragesLookup(localAverages, team, "avgtotalnotes") + ",";
-      out += dummylocalAveragesLookup(localAverages, team, "maxtotalnotes") + ",";
-      out += dummylocalAveragesLookup(localAverages, team, "avgautonotes") + ",";
-      out += dummylocalAveragesLookup(localAverages, team, "avgteleopnotes") + ",";
-      out += dummylocalAveragesLookup(localAverages, team, "avgendgamepoints") + ",";
-      out += onstagePercent + ",";
-      out += trapPercent + ",";
-      out += dummylocalAveragesLookup(localAverages, team, "totaldied") + ",";
-      out += "-\n";    // Comment
-      return out;
-    }
-
-    function dummylocalAveragesLookup(localAverages, team, item) {
-      if (!localAverages) {
-        return "NA";
-      }
-      if (!(team in localAverages)) {
-        return "NA";
-      }
-      if (item == "endgamestagepercent") {
-        return localAverages[team][item][2];
-      }
-      return localAverages[team][item];
-    }
-
-    function rnd(val) {
-      // Rounding helper function 
-      return Math.round((val + Number.EPSILON) * 100) / 100;
-    }
-
-    function download_csv() {
-      console.log("starting download_csv() ");
-      $.get("readAPI.php", {
-        getAllData: 1
-      }).done(function (data) {
-        console.log("download_csv: getting mdp data ");
-        matchData = JSON.parse(data);
-        var mdp = new matchDataProcessor(matchData);
-        var csvStr = "Team,Avg Total Notes,Max Total Notes,Avg A Notes,Avg T Notes,Avg E Notes, Onstage%, Trap%, Total Died, Comment\n";
-        mdp.getSiteFilteredAverages(function (averageData) {
-          for (var key in averageData) {
-            csvStr += createCSVLine(averageData, key);  // key is team number
-          }
-
-          console.log("csvStr = " + csvStr);
-          var hiddenElement = document.createElement('a');
-          var filename = myEventCode + ".csv";
-          console.log("CSV filename = " + filename);
-          hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csvStr);
-          hiddenElement.target = '_blank';
-          hiddenElement.download = filename;
-          hiddenElement.click();
-        });
-      });
-    }
-
-    $("#exportData").on('click', function (event) {
-      download_csv();
-    });
-
     $("#writeConfig").on('click', function (event) {
       var writeData = {};
       for (const key in id_to_key_map) {
@@ -333,4 +261,5 @@
     });
   });
 </script>
+
 <script type="text/javascript" src="./scripts/matchDataProcessor.js"></script>
