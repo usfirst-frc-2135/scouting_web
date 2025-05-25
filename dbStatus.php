@@ -1,4 +1,4 @@
-<?php include "header.php"; ?>
+<?php include 'header.php'; ?>
 
 <title>DB Status</title>
 
@@ -118,7 +118,7 @@
 </div>
 </div>
 
-<?php include "footer.php"; ?>
+<?php include 'footer.php'; ?>
 
 <script>
 

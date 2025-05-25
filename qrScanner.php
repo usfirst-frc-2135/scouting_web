@@ -1,4 +1,4 @@
-<?php include "header.php"; ?>
+<?php include 'header.php'; ?>
 
 <title>QR Scanner</title>
 
@@ -39,6 +39,6 @@
   </div>
 </div>
 
-<?php include "footer.php"; ?>
+<?php include 'footer.php'; ?>
 
 <script src="./scripts/qrHandler.js"></script>

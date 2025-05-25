@@ -1,4 +1,4 @@
-<?php include "header.php"; ?>
+<?php include 'header.php'; ?>
 
 <title>Strategic Scouting</title>
 
@@ -258,7 +258,7 @@
 </div>
 
 
-<?php include "footer.php"; ?>
+<?php include 'footer.php'; ?>
 
 <script>
 

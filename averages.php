@@ -1,7 +1,8 @@
-<?php include "header.php"; ?>
+<?php include 'header.php'; ?>
 
 <!-- this was copy and pasted from rawData.php so the java will need to change -->
 <title>Averages</title>
+
 <div class="container row-offcanvas row-offcanvas-left">
   <div class="well column  col-lg-12  col-sm-12 col-xs-12" id="content">
 
@@ -224,7 +225,7 @@ COMMENTED OUT FOR NOW-->
     </div>
   </div>
 
-  <?php include "footer.php"; ?>
+  <?php include 'footer.php'; ?>
 
   <script type="text/javascript" src="./external/DataTables/DataTables-1.11.5/js/jquery.dataTables.min.js"></script>
   <script type="text/javascript" src="./scripts/matchDataProcessor.js"></script>

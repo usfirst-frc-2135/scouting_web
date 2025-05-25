@@ -1,6 +1,7 @@
-<?php include "header.php"; ?>
+<?php include 'header.php'; ?>
 
 <title>Strategic Data</title>
+
 <div class="container row-offcanvas row-offcanvas-left">
   <div class="well column  col-lg-12  col-sm-12 col-xs-12" id="content">
 
@@ -107,7 +108,7 @@
   </div>
 </div>
 
-<?php include "footer.php"; ?>
+<?php include 'footer.php'; ?>
 
 <script>
   var frozenTable = null;

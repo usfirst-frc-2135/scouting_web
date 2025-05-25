@@ -1,4 +1,4 @@
-<?php include "header.php"; ?>
+<?php include 'header.php'; ?>
 
 <title>2135 Scouting System</title>
 
@@ -23,7 +23,7 @@
   </div>
 </div>
 
-<?php include "footer.php"; ?>
+<?php include 'footer.php'; ?>
 
 <script>
   var allPitData = {};
