@@ -7,6 +7,7 @@
 
     <div class="row pt-3 pb-3 mb-3">
       <h2>Strategic Scouting Schedule</h2>
+
       <div class="col-md-3">
         <button id="createButton" type="button" class="btn btn-primary">Create Schedule</button>
       </div>

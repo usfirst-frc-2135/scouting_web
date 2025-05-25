@@ -7,6 +7,7 @@
 
     <div class="row pt-3 pb-3 mb-3">
       <h2>Strategic Scouting Data</h2>
+
       <div id="freezeTableDiv">
         <style type="text/css" media="screen">
           table tr {

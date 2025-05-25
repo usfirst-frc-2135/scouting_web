@@ -59,7 +59,7 @@
 
 <body class="bg-light">
   <!-- planning to look somewhere to investigate how far the header expands, see if i can ... idk what it says after-->
-  <header class="navbar navbar-expand-md navbar-dark sticky-top bg-dark">
+  <header class="navbar navbar-expand-lg bg-dark navbar-dark sticky-top">
     <div class="container">
       <a class="navbar-brand" href="#">FRC 2135</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"

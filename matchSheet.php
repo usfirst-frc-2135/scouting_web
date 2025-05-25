@@ -4,11 +4,14 @@
 
 <div class="container row-offcanvas row-offcanvas-left">
   <div class="well column  col-lg-12  col-sm-12 col-xs-12" id="content">
-    <div class="row g-3 justify-content-md-center">
+
+    <div class="row pt-3 pb-3 mb-3">
+      <div class="row justify-content-md-center">
+        <h2 class="col-md-6">Match Sheet</h2>
+      </div>
 
       <!-- Our team matches list -->
       <div class="row g-3 justify-content-md-center">
-
         <div class="col-md-6">
           <div id="ourMatches">
           </div>

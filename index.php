@@ -4,8 +4,10 @@
 
 <div class="container row-offcanvas row-offcanvas-left">
   <div class="well column  col-lg-12  col-sm-12 col-xs-12" id="content">
+
     <div class="row pt-3 pb-3 mb-3">
       <h2>2025 Scouting Database</h2>
+
       <h4 id="pageTitle">Event Code: </h4>
 
       <table id="psTable" class="table table-striped table-bordered table-hover sortable">
