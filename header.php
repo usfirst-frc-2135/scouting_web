@@ -11,6 +11,7 @@
   <link rel="icon" href="./images/favicon.ico">
   <link rel="icon" type="image/png" href="./images/favicon-32x32.png" sizes="32x32">
   <link href="./external/bootstrap-5.3.6-dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+  <link href="./external/DataTables/datatables.min.css" rel="stylesheet" crossorigin="anonymous">
   <style>
     /* a {
       color: #000;
