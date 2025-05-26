@@ -6,7 +6,7 @@ $db = new dbHandler();
 $dbConfig = $db->readDbConfig();
 $db->connectToDB();
 
-function getRobotPhot($team)
+function getRobotPhotos($team)
 {
   $imageList = array();
   $suffixList = array("png", "jpg", "jpeg");
@@ -107,7 +107,7 @@ else if (isset($_GET["getTeamStrategicData"]))
 else if (isset($_GET["getTeamImages"]))
 {
   // Get all images for a team
-  echo (json_encode(getRobotPhot($_GET["getTeamImages"])));
+  echo (json_encode(getRobotPhotos($_GET["getTeamImages"])));
 }
 else if (isset($_GET["getTeamsImages"]))
 {
@@ -116,7 +116,7 @@ else if (isset($_GET["getTeamsImages"]))
   $imageObj = array();
   foreach ($teamList as $team)
   {
-    $imageObj[$team] = getRobotPhot($team);
+    $imageObj[$team] = getRobotPhotos($team);
   }
   echo (json_encode($imageObj));
 }

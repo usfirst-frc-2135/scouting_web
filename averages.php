@@ -51,7 +51,7 @@ COMMENTED OUT FOR NOW-->
               border-right: 1px solid black;
             }
           </style>
-          <table id="rawDataTable" class="tableFixHead table table-striped table-bordered table-hover sortable" style="width:100%">
+          <table id="averageTable" class="tableFixHead table table-striped table-bordered table-hover sortable" style="width:100%">
             <colgroup>
               <col span="1" style="background-color:transparent">
               <col span="2" style="background-color:#cfe2ff">
@@ -223,23 +223,16 @@ COMMENTED OUT FOR NOW-->
 
   <?php include 'footer.php'; ?>
 
-  <script type="text/javascript" src="./external/DataTables/DataTables-1.11.5/js/jquery.dataTables.min.js"></script>
   <script type="text/javascript" src="./scripts/matchDataProcessor.js"></script>
 
   <script>
-    src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"
-
-    var teamList = new Set();
-    var scoutingData = {};
-    var tbaData = {};
-    var internalEloRank = {
-      "elo": {}
-    };
-
-    var rawdata = null;
+    // var tbaData = {};
+    var finalList = new Set();
+    var filteredData = {};
+    var allJsonData = null;
     var frozenTable = null;
 
-    function dummyGet(dict, key) {
+    function getDataValue(dict, key) {
       /* If key doesn't exist in given dict, return a 0. */
       // console.log(dict);
       if (!dict) {
@@ -251,113 +244,111 @@ COMMENTED OUT FOR NOW-->
       return 0;
     }
 
-    function dataToTable() {
+    function addHtmlToFinalTable() {
       /* Write data to table */
       $("#tableData").html(""); // Clear Table
-      for (let teamNum of teamList) {
-        var endgameClimbPercentage = dummyGet(scoutingData[teamNum], "endgameClimbPercent");
-        //var endgameClimbStartPercentage = dummyGet(scoutingData[teamNum], "endgameStartClimbPercent");
-        var endgameFoulPercentage = dummyGet(scoutingData[teamNum], "endgameFoulPercent");
+      for (let teamNum of finalList) {
+        var endgameClimbPercentage = getDataValue(filteredData[teamNum], "endgameClimbPercent");
+        var endgameFoulPercentage = getDataValue(filteredData[teamNum], "endgameFoulPercent");
 
         var rowString = "<tr>" +
           "<td align=\"center\"><a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a></td>" +
-          //"<td>" + dummyGet(tbaData[teamNum], "totalPoints") + "</td>" +
-          //HOLD"<td>" + dummyGet(internalEloRank["elo"], teamNum) + "</td>" +
-          "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgTotalPoints") + "</td>" +
-          "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxTotalPoints") + "</td>" +
-          "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgTotalCoral") + "</td>" +
-          "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxTotalCoral") + "</td>" +
-          "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgTotalAlgae") + "</td>" +
-          "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxTotalAlgae") + "</td>" +
-          "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgTotalAutoPoints") + "</td>" +
-          "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxTotalAutoPoints") + "</td>" +
-          "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgTotalAutoCoralPoints") + "</td>" +
-          "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxTotalAutoCoralPoints") + "</td>" +
-          "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgTotalAutoAlgaePoints") + "</td>" +
-          "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxTotalAutoAlgaePoints") + "</td>" +
-          "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgTotalTeleopPoints") + "</td>" +
-          "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxTotalTeleopPoints") + "</td>" +
-          "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgTotalTeleopCoralPoints") + "</td>" +
-          "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxTotalTeleopCoralPoints") + "</td>" +
-          "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgTotalTeleopAlgaePoints") + "</td>" +
-          "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxTotalTeleopAlgaePoints") + "</td>" +
-          "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgEndgamePoints") + "</td>" +
-          "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxEndgamePoints") + "</td>" +
+          //"<td>" + getDataValue(tbaData[teamNum], "totalPoints") + "</td>" +
+          "<td align=\"center\">" + getDataValue(filteredData[teamNum], "avgTotalPoints") + "</td>" +
+          "<td align=\"center\">" + getDataValue(filteredData[teamNum], "maxTotalPoints") + "</td>" +
+          "<td align=\"center\">" + getDataValue(filteredData[teamNum], "avgTotalCoral") + "</td>" +
+          "<td align=\"center\">" + getDataValue(filteredData[teamNum], "maxTotalCoral") + "</td>" +
+          "<td align=\"center\">" + getDataValue(filteredData[teamNum], "avgTotalAlgae") + "</td>" +
+          "<td align=\"center\">" + getDataValue(filteredData[teamNum], "maxTotalAlgae") + "</td>" +
+          "<td align=\"center\">" + getDataValue(filteredData[teamNum], "avgTotalAutoPoints") + "</td>" +
+          "<td align=\"center\">" + getDataValue(filteredData[teamNum], "maxTotalAutoPoints") + "</td>" +
+          "<td align=\"center\">" + getDataValue(filteredData[teamNum], "avgTotalAutoCoralPoints") + "</td>" +
+          "<td align=\"center\">" + getDataValue(filteredData[teamNum], "maxTotalAutoCoralPoints") + "</td>" +
+          "<td align=\"center\">" + getDataValue(filteredData[teamNum], "avgTotalAutoAlgaePoints") + "</td>" +
+          "<td align=\"center\">" + getDataValue(filteredData[teamNum], "maxTotalAutoAlgaePoints") + "</td>" +
+          "<td align=\"center\">" + getDataValue(filteredData[teamNum], "avgTotalTeleopPoints") + "</td>" +
+          "<td align=\"center\">" + getDataValue(filteredData[teamNum], "maxTotalTeleopPoints") + "</td>" +
+          "<td align=\"center\">" + getDataValue(filteredData[teamNum], "avgTotalTeleopCoralPoints") + "</td>" +
+          "<td align=\"center\">" + getDataValue(filteredData[teamNum], "maxTotalTeleopCoralPoints") + "</td>" +
+          "<td align=\"center\">" + getDataValue(filteredData[teamNum], "avgTotalTeleopAlgaePoints") + "</td>" +
+          "<td align=\"center\">" + getDataValue(filteredData[teamNum], "maxTotalTeleopAlgaePoints") + "</td>" +
+          "<td align=\"center\">" + getDataValue(filteredData[teamNum], "avgEndgamePoints") + "</td>" +
+          "<td align=\"center\">" + getDataValue(filteredData[teamNum], "maxEndgamePoints") + "</td>" +
 
-          "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgAutonCoral") + "</td>" +
-          "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxAutonCoral") + "</td>" +
-          "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgAutonCoralL1") + "</td>" +
-          "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxAutonCoralL1") + "</td>" +
-          "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgAutonCoralL2") + "</td>" +
-          "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxAutonCoralL2") + "</td>" +
-          "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgAutonCoralL3") + "</td>" +
-          "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxAutonCoralL3") + "</td>" +
-          "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgAutonCoralL4") + "</td>" +
-          "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxAutonCoralL4") + "</td>" +
-          "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgAutonAlgae") + "</td>" +
-          "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxAutonAlgae") + "</td>" +
-          "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgAutonAlgaeNet") + "</td>" +
-          "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxAutonAlgaeNet") + "</td>" +
-          "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgAutonAlgaeProc") + "</td>" +
-          "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxAutonAlgaeProc") + "</td>" +
+          "<td align=\"center\">" + getDataValue(filteredData[teamNum], "avgAutonCoral") + "</td>" +
+          "<td align=\"center\">" + getDataValue(filteredData[teamNum], "maxAutonCoral") + "</td>" +
+          "<td align=\"center\">" + getDataValue(filteredData[teamNum], "avgAutonCoralL1") + "</td>" +
+          "<td align=\"center\">" + getDataValue(filteredData[teamNum], "maxAutonCoralL1") + "</td>" +
+          "<td align=\"center\">" + getDataValue(filteredData[teamNum], "avgAutonCoralL2") + "</td>" +
+          "<td align=\"center\">" + getDataValue(filteredData[teamNum], "maxAutonCoralL2") + "</td>" +
+          "<td align=\"center\">" + getDataValue(filteredData[teamNum], "avgAutonCoralL3") + "</td>" +
+          "<td align=\"center\">" + getDataValue(filteredData[teamNum], "maxAutonCoralL3") + "</td>" +
+          "<td align=\"center\">" + getDataValue(filteredData[teamNum], "avgAutonCoralL4") + "</td>" +
+          "<td align=\"center\">" + getDataValue(filteredData[teamNum], "maxAutonCoralL4") + "</td>" +
+          "<td align=\"center\">" + getDataValue(filteredData[teamNum], "avgAutonAlgae") + "</td>" +
+          "<td align=\"center\">" + getDataValue(filteredData[teamNum], "maxAutonAlgae") + "</td>" +
+          "<td align=\"center\">" + getDataValue(filteredData[teamNum], "avgAutonAlgaeNet") + "</td>" +
+          "<td align=\"center\">" + getDataValue(filteredData[teamNum], "maxAutonAlgaeNet") + "</td>" +
+          "<td align=\"center\">" + getDataValue(filteredData[teamNum], "avgAutonAlgaeProc") + "</td>" +
+          "<td align=\"center\">" + getDataValue(filteredData[teamNum], "maxAutonAlgaeProc") + "</td>" +
 
-          "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "teleopCoralScoringPercent") + "</td>" +
-          "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgTeleopCoralScored") + "</td>" +
-          "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxTeleopCoralScored") + "</td>" +
-          "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgTeleopCoralL1") + "</td>" +
-          "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxTeleopCoralL1") + "</td>" +
-          "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgTeleopCoralL2") + "</td>" +
-          "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxTeleopCoralL2") + "</td>" +
-          "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgTeleopCoralL3") + "</td>" +
-          "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxTeleopCoralL3") + "</td>" +
-          "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgTeleopCoralL4") + "</td>" +
-          "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxTeleopCoralL4") + "</td>" +
-          "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "teleopAlgaeScoringPercent") + "</td>" +
-          "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgTeleopAlgaeScored") + "</td>" +
-          "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxTeleopAlgaeScored") + "</td>" +
-          "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgTeleopAlgaeNet") + "</td>" +
-          "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxTeleopAlgaeNet") + "</td>" +
-          "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "avgTeleopAlgaeProc") + "</td>" +
-          "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "maxTeleopAlgaeProc") + "</td>" +
+          "<td align=\"center\">" + getDataValue(filteredData[teamNum], "teleopCoralScoringPercent") + "</td>" +
+          "<td align=\"center\">" + getDataValue(filteredData[teamNum], "avgTeleopCoralScored") + "</td>" +
+          "<td align=\"center\">" + getDataValue(filteredData[teamNum], "maxTeleopCoralScored") + "</td>" +
+          "<td align=\"center\">" + getDataValue(filteredData[teamNum], "avgTeleopCoralL1") + "</td>" +
+          "<td align=\"center\">" + getDataValue(filteredData[teamNum], "maxTeleopCoralL1") + "</td>" +
+          "<td align=\"center\">" + getDataValue(filteredData[teamNum], "avgTeleopCoralL2") + "</td>" +
+          "<td align=\"center\">" + getDataValue(filteredData[teamNum], "maxTeleopCoralL2") + "</td>" +
+          "<td align=\"center\">" + getDataValue(filteredData[teamNum], "avgTeleopCoralL3") + "</td>" +
+          "<td align=\"center\">" + getDataValue(filteredData[teamNum], "maxTeleopCoralL3") + "</td>" +
+          "<td align=\"center\">" + getDataValue(filteredData[teamNum], "avgTeleopCoralL4") + "</td>" +
+          "<td align=\"center\">" + getDataValue(filteredData[teamNum], "maxTeleopCoralL4") + "</td>" +
+          "<td align=\"center\">" + getDataValue(filteredData[teamNum], "teleopAlgaeScoringPercent") + "</td>" +
+          "<td align=\"center\">" + getDataValue(filteredData[teamNum], "avgTeleopAlgaeScored") + "</td>" +
+          "<td align=\"center\">" + getDataValue(filteredData[teamNum], "maxTeleopAlgaeScored") + "</td>" +
+          "<td align=\"center\">" + getDataValue(filteredData[teamNum], "avgTeleopAlgaeNet") + "</td>" +
+          "<td align=\"center\">" + getDataValue(filteredData[teamNum], "maxTeleopAlgaeNet") + "</td>" +
+          "<td align=\"center\">" + getDataValue(filteredData[teamNum], "avgTeleopAlgaeProc") + "</td>" +
+          "<td align=\"center\">" + getDataValue(filteredData[teamNum], "maxTeleopAlgaeProc") + "</td>" +
 
-          "<td align=\"center\">" + dummyGet(endgameClimbPercentage, 0) + "</td>" +
-          "<td align=\"center\">" + dummyGet(endgameClimbPercentage, 1) + "</td>" +
-          "<td align=\"center\">" + dummyGet(endgameClimbPercentage, 2) + "</td>" +
-          "<td align=\"center\">" + dummyGet(endgameClimbPercentage, 3) + "</td>" +
-          "<td align=\"center\">" + dummyGet(endgameClimbPercentage, 4) + "</td>" +
+          "<td align=\"center\">" + getDataValue(endgameClimbPercentage, 0) + "</td>" +
+          "<td align=\"center\">" + getDataValue(endgameClimbPercentage, 1) + "</td>" +
+          "<td align=\"center\">" + getDataValue(endgameClimbPercentage, 2) + "</td>" +
+          "<td align=\"center\">" + getDataValue(endgameClimbPercentage, 3) + "</td>" +
+          "<td align=\"center\">" + getDataValue(endgameClimbPercentage, 4) + "</td>" +
 
-          "<td align=\"center\">" + dummyGet(scoutingData[teamNum], "totaldied") + "</td>" +
+          "<td align=\"center\">" + getDataValue(filteredData[teamNum], "totaldied") + "</td>" +
           "</td>";
 
         $("#tableData").append(rowString);
       }
     }
 
-    function addTeamKVToTeamList(data) {
-      // Build a teamList from either our data or TBA data
+    function addKeysToFinalList(data) {
+      // Build a team list from either our data or TBA data
       for (var key in data) {
-        teamList.add(key);
+        finalList.add(key);
       }
     }
 
     function requestAPI() {
-      // Gets data from our local scouting data
+      // Gets SQL data from our local scouting data
       $.get("readAPI.php", {
         getAllData: 1
-      }).done(function (data) {
-        data = JSON.parse(data);
-        rawdata = data;
-        var mdp = new matchDataProcessor(data);
+      }).done(function (readData) {
+        jsonData = JSON.parse(readData);
+        allJsonData = jsonData;
+        var mdp = new matchDataProcessor(jsonData);
         // mdp.removePracticeMatches();
         mdp.getSiteFilteredAverages(function (averageData) {
-          scoutingData = {
+          filteredData = {
             ...averageData
           };
-          //console.log(scoutingData);
-          addTeamKVToTeamList(scoutingData);
-          dataToTable();
+          //console.log(filteredData);
+          addKeysToFinalList(filteredData);
+          addHtmlToFinalTable();
           setTimeout(function () {
-            sorttable.makeSortable(document.getElementById("rawDataTable"))
+            sorttable.makeSortable(document.getElementById("averageTable"))
             frozenTable = $('#freezeTableDiv').freezeTable({
               backgroundColor: "white",
               'columnKeep': true,
@@ -366,51 +357,18 @@ COMMENTED OUT FOR NOW-->
           }, 1);
         });
       });
-
-/*HOLD--> ELO column is commented out for now
-    // Get internal ranking data
-    $.get("readAPI.php", {
-        getInternalRankings: 1
-      }).done(function (data) {
-        var data = JSON.parse(data);
-        internalEloRank = {
-          ...data
-        };
-        dataToTable();
-      });
-< --HOLD */
-
-/*HOLD->
-    // Gets data from our TBA API
-    $.get("tbaAPI.php", {
-      getCOPRs: 1
-    }).done(function(data) {
-      data = JSON.parse(data)["data"];
-      addTeamKVToTeamList(data);
-      tbaData = data;
-      dataToTable();
-      setTimeout(function() {
-        sorttable.makeSortable(document.getElementById("rawDataTable"))
-        frozenTable = $('#freezeTableDiv').freezeTable({
-          backgroundColor: "white",
-          'columnKeep': true,
-          'frozenColVerticalOffset': 0
-        });
-      }, 1);
-    }); 
-<-HOLD */
-  }
+    }
 
     function filterAndShow() {
       var start = $("#startPrefix").val() + $("#startMatch").val();
       var end = $("#endPrefix").val() + $("#endMatch").val();
-      var mdp = new matchDataProcessor(rawdata);
+      var mdp = new matchDataProcessor(allJsonData);
       mdp.filterMatches(start, end);
-      scoutingData = mdp.getAverages();
-      addTeamKVToTeamList(scoutingData);
-      dataToTable();
+      filteredData = mdp.getAverages();
+      addKeysToFinalList(filteredData);
+      addHtmlToFinalTable();
       setTimeout(function () {
-        sorttable.makeSortable(document.getElementById("rawDataTable"))
+        sorttable.makeSortable(document.getElementById("averageTable"))
         frozenTable = $('#freezeTableDiv').freezeTable({
           backgroundColor: "white",
           'columnKeep': true,
@@ -420,14 +378,15 @@ COMMENTED OUT FOR NOW-->
     }
 
     $(document).ready(function () {
-      requestAPI();
+      requestAPI(); // Retrieve all data
 
       $("#filterData").click(function () {
-        filterAndShow();
+        filterAndShow();  // Select desired data
       });
 
-      $("#rawDataTable").click(function () {
-        frozenTable.update();
+      $("#averageTable").click(function () {
+        frozenTable.update(); // Update frozen panes
       });
-    });
+    }
+    );
   </script>
