@@ -13,33 +13,32 @@
   <link href="./external/bootstrap-5.3.6-dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
   <link href="./external/DataTables/datatables.min.css" rel="stylesheet" crossorigin="anonymous">
   <style>
-    /* a {
-      color: #000;
+    .nav .navbar {
       text-decoration: none;
-    } */
-    .nav {
-      text-decoration: none;
-      border-radius: 10px;
-      padding: 0px 10px;
       margin: auto;
+      float: none;
       text-align: center;
-      float: left;
     }
 
-    /* .nav li {
-         list-style-type: none;
-         float: left;
-         margin: 0;
-         padding: 0;
-         overflow: hidden;
-        } */
-    .nav li a {
-      display: inline-block;
-      color: #A9A9A9;
+    li {
+      text-decoration: none;
       margin: auto;
-      width: 76px;
-      float: left;
+      float: none;
+      list-style-type: none;
+      overflow: hidden;
     }
+
+    .nav li a {
+      text-decoration: none;
+      margin: auto;
+      float: none;
+      text-align: center;
+      list-style-type: none;
+      display: block;
+      width: 80px;
+      color: #A9A9A9;
+    }
+
 
     .nav a:hover {
       color: #fff;
@@ -47,11 +46,11 @@
 
     .nav li a.selected {
       text-decoration: none;
-      list-style-type: none;
       margin: auto;
+      float: none;
       text-align: center;
-      float: left;
-      padding: 10px 0px;
+      list-style-type: none;
+      width: 80px;
       background-color: #0d6efd;
       color: #fff;
     }
