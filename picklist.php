@@ -1,12 +1,13 @@
-<?php include 'header.php'; ?>
-
-<title>Pick List</title>
+<?php
+$title = 'Pick List';
+require 'header.php';
+?>
 
 <div class="container row-offcanvas row-offcanvas-left">
   <div class="well column  col-lg-12  col-sm-12 col-xs-12" id="content">
 
     <div class="row pt-3 pb-3 mb-3">
-      <h2 id="pickListName">Pick List</h2>
+      <h2 id="pickListName"><?php echo $title; ?></h2>
     </div>
   </div>
 

@@ -1,12 +1,13 @@
-<?php include 'header.php'; ?>
-
-<title>Raw COPR Data</title>
+<?php
+$title = 'Event COPRs';
+require 'header.php';
+?>
 
 <div class="container row-offcanvas row-offcanvas-left">
   <div class="well column  col-lg-12  col-sm-12 col-xs-12" id="content">
 
     <div class="row pt-3 pb-3 mb-3">
-      <h2 id="COPRHeader">COPR Data: ???</h2>
+      <h2 id="COPRHeader"><?php echo $title; ?>: ???</h2>
 
       <div>
         <div class="input-group mb-3">
@@ -69,7 +70,7 @@
   }
 
   function setHeader(ec) {
-    $("#COPRHeader").html("COPR Data: " + ec);
+    $("#COPRHeader").html("Event COPRs: " + ec);
   }
 
   function processData(data) {

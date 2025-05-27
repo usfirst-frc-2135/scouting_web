@@ -1,12 +1,13 @@
-<?php include 'header.php'; ?>
-
-<title>DB Status</title>
+<?php
+$title = 'Database Status';
+require 'header.php';
+?>
 
 <div class="container row-offcanvas row-offcanvas-left">
   <div class="well column  col-lg-12  col-sm-12 col-xs-12" id="content">
 
     <div class="row pt-3 pb-3 mb-3">
-      <h2>DB Status</h2>
+      <h2><?php echo $title; ?></h2>
 
       <div class="row pt-3 pb-3 mb-3">
         <div class="col-lg-6 col-sm-6 col-xs-6 gx-3">

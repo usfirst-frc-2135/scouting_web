@@ -4,6 +4,7 @@
 <html lang="en">
 
 <head>
+  <title><?php echo $title; ?></title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="">
@@ -35,7 +36,7 @@
       text-align: center;
       list-style-type: none;
       display: block;
-      width: 80px;
+      width: 84px;
       color: #A9A9A9;
     }
 
@@ -50,7 +51,7 @@
       float: none;
       text-align: center;
       list-style-type: none;
-      width: 80px;
+      width: 76px;
       background-color: #0d6efd;
       color: #fff;
     }
@@ -69,28 +70,10 @@
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="nav" style="text-align:center">
           <li class="nav-item">
-            <a class="nav-link" href="./index.php">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="./rawData.php">Raw Data</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="./averages.php">Averages</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="./teamLookup.php">Team Lookup</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="./matchSheet.php">Match Sheet</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="./strategicData.php">Strategic Data</a>
+            <a class="nav-link" href="./index.php">Scouting Status</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="./pitScouting.php">Pit Scouting</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="./strategicScouting.php">Strategic Scouting</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="./photoUpload.php">Photo Upload</a>
@@ -99,16 +82,34 @@
             <a class="nav-link" href="./qrScanner.php">QR Scanner</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="./coprData.php">COPRs</a>
+            <a class="nav-link" href="./rawData.php">Match Data</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="./picklist.php">Picklist</a>
+            <a class="nav-link" href="./averages.php">Match Averages</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="./strategicSchedule.php">Strategic Schedule</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="./dbStatus.php">DB Status</a>
+            <a class="nav-link" href="./strategicScouting.php">Strategic Scouting</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./strategicData.php">Strategic Data</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./teamLookup.php">Team Lookup</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./matchSheet.php">Match Sheet</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./picklist.php">Picklist</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./coprData.php">Event COPRs</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./dbStatus.php">Database Status</a>
           </li>
         </ul>
       </div>

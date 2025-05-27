@@ -1,13 +1,13 @@
-<?php include 'header.php'; ?>
-
-<!-- this was copy and pasted from rawData.php so the java will need to change -->
-<title>Averages</title>
+<?php
+$title = 'Match Averages';
+require 'header.php';
+?>
 
 <div class="container row-offcanvas row-offcanvas-left">
   <div class="well column  col-lg-12  col-sm-12 col-xs-12" id="content">
 
     <div class="row pt-3 pb-3 mb-3">
-      <h2>Averages</h2>
+      <h2><?php echo $title; ?></h2>
 
       <!--  COMMENTED OUT FOR NOW
       <div class="col-md-2">
@@ -90,7 +90,7 @@ COMMENTED OUT FOR NOW-->
             <thead>
               <tr>
                 <th colspan="1" class="text-center"></th>
-                <th colspan="63" class="text-center fw-bold" style="background-color:#e8f1ff">Averages</th>
+                <th colspan="63" class="text-center fw-bold" style="background-color:#e8f1ff">Match Averages</th>
               </tr>
               <tr>
                 <th colspan="1" class="text-center"></th>

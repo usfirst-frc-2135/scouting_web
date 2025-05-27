@@ -1,12 +1,13 @@
-<?php include 'header.php'; ?>
-
-<title>2135 Scouting System</title>
+<?php
+$title = 'Scouting Status';
+require 'header.php';
+?>
 
 <div class="container row-offcanvas row-offcanvas-left">
   <div class="well column  col-lg-12  col-sm-12 col-xs-12" id="content">
 
     <div class="row pt-3 pb-3 mb-3">
-      <h2>2025 Scouting Database</h2>
+      <h2><?php echo $title; ?></h2>
 
       <h4 id="pageTitle">Event Code: </h4>
 
