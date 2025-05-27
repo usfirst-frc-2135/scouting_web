@@ -1,5 +1,5 @@
 <?php
-$title = 'Pick List';
+$title = 'Event Picklist';
 require 'header.php';
 ?>
 

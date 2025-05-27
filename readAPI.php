@@ -52,9 +52,9 @@ else if (isset($_GET["getTeamData"]))
 else if (isset($_GET["getAllPitData"]))
 {
   // Get all pit data
-  $rawData = $db->readPitData($eventCode);
+  $matchData = $db->readPitData($eventCode);
   $out = array();
-  foreach ($rawData as $row)
+  foreach ($matchData as $row)
   {
     $out[$row["teamnumber"]] = $row;
   }
@@ -63,9 +63,9 @@ else if (isset($_GET["getAllPitData"]))
 else if (isset($_GET["getTeamPitData"]))
 {
   // Get all pit data
-  $rawData = $db->readPitData($eventCode);
+  $matchData = $db->readPitData($eventCode);
   $out = array();
-  foreach ($rawData as $row)
+  foreach ($matchData as $row)
   {
     if ($row["teamnumber"] == $_GET["getTeamPitData"])
     {

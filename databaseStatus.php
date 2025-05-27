@@ -17,7 +17,7 @@ require 'header.php';
             </div>
             <div class="card-body">
               <h4>MySQL Server Status: <span id="serverStatus" class="badge bg-warning">Not Connected</span></h4>
-              <h4>Database Status: <span id="dbStatus" class="badge bg-warning">Not Connected</span></h4>
+              <h4>Database Status: <span id="databaseStatus" class="badge bg-warning">Not Connected</span></h4>
               <h4>Data Table Status: <span id="dataTableStatus" class="badge bg-warning">Not Connected</span></h4>
               <h4>TBA Table Status: <span id="TBATableStatus" class="badge bg-warning">Not Connected</span></h4>
               <h4>Pit Table Status: <span id="pitTableStatus" class="badge bg-warning">Not Connected</span></h4>
@@ -145,7 +145,7 @@ require 'header.php';
     myEventCode = statusArray["eventcode"];
 
     setStatusBadge(statusArray["serverExists"], "serverStatus");
-    setStatusBadge(statusArray["dbExists"], "dbStatus");
+    setStatusBadge(statusArray["dbExists"], "databaseStatus");
     setStatusBadge(statusArray["dataTableExists"], "dataTableStatus");
     setStatusBadge(statusArray["tbaTableExists"], "TBATableStatus");
     setStatusBadge(statusArray["pitTableExists"], "pitTableStatus");

@@ -184,9 +184,9 @@ require 'header.php';
     $.get("readAPI.php", {
       getAllData: 1
     }).done(function (data) {
-      console.log("===> rawData: data = " + data);
+      console.log("===> matchData: data = " + data);
       var dataObj = JSON.parse(data);
-      console.log("===> rawData: dataObj size = " + dataObj.length);
+      console.log("===> matchData: dataObj size = " + dataObj.length);
       dataToTable(dataObj);
       setTimeout(function () {
         sorttable.makeSortable(document.getElementById("rawDataTable"));

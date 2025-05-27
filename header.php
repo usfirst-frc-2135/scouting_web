@@ -76,16 +76,16 @@
             <a class="nav-link" href="./pitScouting.php">Pit Scouting</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="./photoUpload.php">Photo Upload</a>
+            <a class="nav-link" href="./pitPhotoUpload.php">Photo Upload</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="./qrScanner.php">QR Scanner</a>
+            <a class="nav-link" href="./matchQrScanner.php">QR Scanner</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="./rawData.php">Match Data</a>
+            <a class="nav-link" href="./matchData.php">Match Data</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="./averages.php">Match Averages</a>
+            <a class="nav-link" href="./matchAverages.php">Match Averages</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="./strategicSchedule.php">Strategic Schedule</a>
@@ -103,13 +103,13 @@
             <a class="nav-link" href="./matchSheet.php">Match Sheet</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="./picklist.php">Picklist</a>
+            <a class="nav-link" href="./eventPicklist.php">Event Picklist</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="./coprData.php">Event COPRs</a>
+            <a class="nav-link" href="./eventCoprData.php">Event COPRs</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="./dbStatus.php">Database Status</a>
+            <a class="nav-link" href="./databaseStatus.php">Database Status</a>
           </li>
         </ul>
       </div>
