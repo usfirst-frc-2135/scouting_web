@@ -9,13 +9,11 @@ require 'header.php';
     <div class="row pt-3 pb-3 mb-3">
       <h2><?php echo $title; ?></h2>
 
-      <div class="row pt-3 pb-3 mb-3 gx-3">
-        <div>
+      <div class="row pt-3 pb-3 mb-3">
           <div class="input-group mb-3">
-            <input id="writeTeamNumber" type="text" class="form-control" placeholder="writeTeamNumber" aria-label="writeTeamNumber">
+          <input id="writeTeamNumber" type="text" class="form-control" placeholder="FRC team number" aria-label="writeTeamNumber">
             <button id="loadTeamButton" type="button" class="btn btn-primary">Load Team</button>
           </div>
-        </div>
 
         <!-- First column of data starts here -->
         <div class="col-lg-6 col-sm-6 col-xs-6 gx-3">

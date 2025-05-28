@@ -23,17 +23,17 @@ require 'header.php';
 
             <div class="mb-3">
               <label for="teamNumber" class="form-label">Team Number </label>
-              <input type="text" class="form-control" id="teamNumber">
+              <input type="text" class="form-control" id="teamNumber" placeholder="FRC team number">
             </div>
 
             <div class="mb-3">
               <label for="matchNumber" class="form-label">Match Number </label>
-              <input type="text" class="form-control" id="matchNumber">
+              <input type="text" class="form-control" id="matchNumber" placeholder="Match number">
             </div>
 
             <div class="mb-3">
               <label for="scoutName" class="form-label">Scout Name</label>
-              <input type="text" class="form-control" id="scoutName">
+              <input type="text" class="form-control" id="scoutName" placeholder="First name, last initial">
             </div>
 
             <!-- Autonomous Mode -->

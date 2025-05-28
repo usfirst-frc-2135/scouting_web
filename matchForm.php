@@ -28,11 +28,11 @@ require 'header.php';
         <div class="col-md-6 ">
           <div class="input-group">
             <label for="teamNumber" class="form-label pg-2">Team Number</label>
-            <input type="number" class="form-control" id="teamNumber">
+            <input type="number" class="form-control" id="teamNumber" placeholder="FRC team number">
           </div>
           <div class="input-group">
             <label for="scoutName" class="form-label pg-2">Scout Name</label>
-            <input type="text" class="form-control" id="scoutName">
+            <input type="text" class="form-control" id="scoutName" placeholder="First name, last initial">
           </div>
         </div>
       </div>

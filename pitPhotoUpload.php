@@ -26,7 +26,7 @@ require 'header.php';
           <form id="uploadForm" method="post" enctype="multipart/form-data">
             <div class="mb-3">
               <label for="teamNumber" class="form-label">Team Number</label>
-              <input type="text" class="form-control" id="teamNumber" placeholder="#">
+              <input type="text" class="form-control" id="teamNumber" placeholder="FRC team numer">
             </div>
 
             <div class="mb-3">

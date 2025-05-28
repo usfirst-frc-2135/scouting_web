@@ -9,12 +9,10 @@ require 'header.php';
     <div class="row pt-3 pb-3 mb-3">
       <h2 id="COPRHeader"><?php echo $title; ?>: ???</h2>
 
-      <div>
         <div class="input-group mb-3">
-          <input id="eventCode" type="text" class="form-control" placeholder="eventCode" aria-label="eventCode">
+        <input id="eventCode" type="text" class="form-control" placeholder="FRC event code" aria-label="eventCode">
           <button id="loadEvent" type="button" class="btn btn-primary">Load Event</button>
         </div>
-      </div>
 
       <div class="table-responsive">
         <div id="freezeTableDiv">
