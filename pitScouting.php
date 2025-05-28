@@ -110,7 +110,7 @@ require 'header.php';
                   <option value="1">Krakens</option>
                   <option value="2">Neos</option>
                   <option value="3">Falcons</option>
-                  <option value="4">Cims</option>
+                  <option value="4">CIMs</option>
                 </select>
               </div>
             </div>
@@ -299,7 +299,7 @@ require 'header.php';
       dataToUse["drivemotors"] = "Falcons";
     }
     if (driveMotors == 4) {
-      dataToUse["drivemotors"] = "Cims";
+      dataToUse["drivemotors"] = "CIMs";
     }
 
     dataToUse["preparedness"] = 1;  // default

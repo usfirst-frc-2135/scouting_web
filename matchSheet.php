@@ -733,7 +733,7 @@ require 'header.php';
             getMatchList: 1
           }).done(function (data) {
             if (data == null)
-              alert("Can't load matchlist from TBA; check if TBA Key was set in dbStatus");
+              alert("Can't load matchlist from TBA; check if TBA Key was set in db_config.ini");
             else {
               rawMatchData = JSON.parse(data)["response"];
               localMatchList = {};
@@ -1033,7 +1033,7 @@ require 'header.php';
       }).done(function (data) {
         var teamname = "XX";
         if (data == null)
-          alert("Can't load teamName from TBA; check if TBA Key was set in dbStatus");
+          alert("Can't load teamName from TBA; check if TBA Key was set in db_config.ini");
         else {
           console.log("matchSheet: getTeamInfo: data = " + data);
           teamInfo = JSON.parse(data)["response"];
