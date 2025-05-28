@@ -4,7 +4,7 @@ require 'header.php';
 ?>
 
 <div class="container row-offcanvas row-offcanvas-left">
-  <div class="well column  col-lg-12  col-sm-12 col-xs-12" id="content">
+  <div class="column card-lg-12 col-sm-12 col-xs-12" id="content">
 
     <div class="row pt-3 pb-3 mb-3">
       <div class="row justify-content-md-center">
@@ -22,12 +22,12 @@ require 'header.php';
           <form id="pitScoutingForm" method="post" enctype="multipart/form-data">
             <div class="mb-3">
               <label for="teamNumber" class="form-label">Team Number </label>
-              <input type="text" class="form-control" id="teamNumber">
+              <input type="text" class="form-control" id="teamNumber" placeholder="FRC team number">
             </div>
 
             <div class="mb-3">
               <label for="batteries" class="form-label">Count the number of batteries they have</label>
-              <input type="text" class="form-control" id="batteries">
+              <input type="text" class="form-control" id="batteries" placeholder="Battery count">
             </div>
 
             <div>
