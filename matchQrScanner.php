@@ -14,7 +14,7 @@ require 'header.php';
       <div class="row pt-3 pb-3 mb-3">
         <div class="d-grid col-6 mt-3 mx-auto">
           <div id="interactive" class="viewport">
-            <video autoplay="true" id="camera"></video>
+            <video autoplay="true" id="camera" class="col-12"></video>
           </div>
           <select id="cameraSelect" class="form-select form-select mb-3" aria-label=".form-select-lg example">
           </select>

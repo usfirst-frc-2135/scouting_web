@@ -7,13 +7,14 @@ require 'header.php';
   <div class="column card-lg-12 col-sm-12 col-xs-12" id="content">
 
     <div class="row pt-3 pb-3 mb-3">
-      <h2><?php echo $title; ?></h2>
+      <h2 class="col-md-3"><?php echo $title; ?></h2>
 
       <div class="col-md-3">
         <button id="createButton" type="button" class="btn btn-primary">Create Schedule</button>
       </div>
     </div>
   </div>
+
   <div class="col-md-4">
     <div id="freezeTableDiv">
       <style type="text/css" media="screen">
