@@ -103,9 +103,6 @@
             <a class="nav-link" href="./matchSheet.php">Match Sheet</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="./eventPicklist.php">Event Picklist</a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link" href="./eventCoprData.php">Event COPRs</a>
           </li>
           <li class="nav-item">
