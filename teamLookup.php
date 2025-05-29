@@ -8,437 +8,178 @@ require 'header.php';
 
     <div class="row pt-3 pb-3 mb-3">
       <h2><?php echo $title; ?></h2>
+    </div>
 
       <div class="row pt-3 pb-3 mb-3">
-        <div class="input-group mb-3">
-          <input id="writeTeamNumber" type="text" class="form-control" placeholder="FRC team number" aria-label="writeTeamNumber">
-          <button id="loadTeamButton" type="button" class="btn btn-primary">Load Team</button>
-        </div>
+      <div class="input-group mb-3">
+        <input id="writeTeamNumber" type="text" class="form-control" placeholder="FRC team number" aria-label="writeTeamNumber">
+        <button id="loadTeamButton" type="button" class="btn btn-primary">Load Team</button>
+      </div>
 
-        <!-- First column of data starts here -->
-        <div class="col-lg-6 col-sm-6 col-xs-6 gx-3">
-          <div class="card mb-3">
-            <div class="card-body">
-              <h5 id="teamTitle" class="card-title">Team # </h5>
-              <!-- Robot photo carousel section -->
-              <div id="robotPicsCarousel" class="carousel slide" data-bs-ride="carousel">
-                <div id="robotPics" class="carousel-inner">
+      <!-- First column of data starts here -->
+      <div class="col-lg-6 col-sm-6 col-xs-6 gx-3">
+        <div class="card mb-3">
+          <div class="card-body">
+            <h5 id="teamTitle" class="card-title">Team # </h5>
+            <!-- Robot photo carousel section -->
+            <div id="robotPicsCarousel" class="carousel slide" data-bs-ride="carousel">
+              <div id="robotPics" class="carousel-inner">
 
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#robotPicsCarousel" data-bs-slide="prev">
-                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                  <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#robotPicsCarousel" data-bs-slide="next">
-                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                  <span class="visually-hidden">Next</span>
-                </button>
               </div>
-
-              <!-- Auton Coral collapsible graph -->
-              <div class="card mb-3">
-                <div class="card-body">
-                  <div class="overflow-auto">
-                    <h5 class="text-center">
-                      <a href="#collapseAutonCoralGraph" data-bs-toggle="collapse" aria-expanded="false"> Auton Coral Graph</a>
-                    </h5>
-                    <div class="collapse" id="collapseAutonCoralGraph">
-                      <canvas id="myChart" width="400" height="400"></canvas>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Auton collapsible graph -->
-              <div class="card mb-3">
-                <div class="card-body">
-                  <div class="overflow-auto">
-                    <h5 class="text-center">
-                      <a href="#collapseAutonGraph" data-bs-toggle="collapse" aria-expanded="false"> Auton Graph</a>
-                    </h5>
-                    <div class="collapse" id="collapseAutonGraph">
-                      <canvas id="myChart2" width="400" height="400"></canvas>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Teleop Coral collapsible graph -->
-              <div class="card mb-3">
-                <div class="card-body">
-                  <div class="overflow-auto">
-                    <h5 class="text-center">
-                      <a href="#collapseTeleopCoralGraph" data-bs-toggle="collapse" aria-expanded="false"> Teleop Coral Graph</a>
-                    </h5>
-                    <div class="collapse" id="collapseTeleopCoralGraph">
-                      <canvas id="myChart3" width="400" height="400"></canvas>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Teleop collapsible graph -->
-              <div class="card mb-3">
-                <div class="card-body">
-                  <div class="overflow-auto">
-                    <h5 class="text-center">
-                      <a href="#collapseTeleopGraph" data-bs-toggle="collapse" aria-expanded="false"> Teleop Graph</a>
-                    </h5>
-                    <div class="collapse" id="collapseTeleopGraph">
-                      <canvas id="myChart4" width="400" height="400"></canvas>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Endgame collapsible graph -->
-              <div class="card mb-3">
-                <div class="card-body">
-                  <div class="overflow-auto">
-                    <h5 class="text-center">
-                      <a href="#collapseEndgameGraph" data-bs-toggle="collapse" aria-expanded="false"> Endgame Graph</a>
-                    </h5>
-                    <div class="collapse" id="collapseEndgameGraph">
-                      <canvas id="myChart5" width="400" height="400"></canvas>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Pit Scouting 1st row -->
-              <div class="overflow-auto">
-                <table class="table table-striped">
-                  <thead>
-                    <colgroup>
-                      <col span="1" style="background-color:transparent">
-                      <col span="1" style="background-color:#cfe2ff">
-                      <col span="1" style="background-color:transparent">
-                      <col span="1" style="background-color:#cfe2ff">
-                      <col span="1" style="background-color:transparent">
-                    </colgroup>
-                    <tr>
-                      <th scope="col" style="width:25%">Batt</th>
-                      <th scope="col" style="width:25%">Pit</th>
-                      <th scope="col" style="width:25%">Spare Parts</th>
-                      <th scope="col" style="width:25%">Vision</th>
-                    </tr>
-                  </thead>
-                  <tbody id="pitRow1">
-                  </tbody>
-                </table>
-              </div>
-
-              <!-- Pit Scouting 2nd row -->
-              <div class="overflow-auto">
-                <table class="table table-striped">
-                  <thead>
-                    <colgroup>
-                      <col span="1" style="background-color:transparent">
-                      <col span="1" style="background-color:#cfe2ff">
-                      <col span="1" style="background-color:transparent">
-                      <col span="1" style="background-color:#cfe2ff">
-                      <col span="1" style="background-color:transparent">
-                      <col span="1" style="background-color:#cfe2ff">
-                    </colgroup>
-                    <tr>
-                      <th scope="col" style="width:25%">Drive Motors</th>
-                      <th scope="col" style="width:25%">Prep</th>
-                      <th scope="col" style="width:25%">Swerve</th>
-                      <th scope="col" style="width:25%">Lang</th>
-                    </tr>
-                  </thead>
-                  <tbody id="pitRow2">
-                  </tbody>
-                </table>
-              </div>
-
-
+              <button class="carousel-control-prev" type="button" data-bs-target="#robotPicsCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#robotPicsCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
             </div>
 
-
-            <!-- Comments section -->
-            <div class="overflow-auto">
-              <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th scope="col">Comments</th>
-                    <th scope="col">Scout</th>
-                  </tr>
-                </thead>
-                <tbody id="comments">
-                </tbody>
-              </table>
-            </div>
-
-            <!-- All Matches collapsible table -->
+            <!-- Auton Coral collapsible graph -->
             <div class="card mb-3">
               <div class="card-body">
                 <div class="overflow-auto">
                   <h5 class="text-center">
-                    <a href="#collapseAllMatches" data-bs-toggle="collapse" aria-expanded="false"> All Matches </a>
+                    <a href="#collapseAutonCoralGraph" data-bs-toggle="collapse" aria-expanded="false"> Auton Coral Graph</a>
                   </h5>
-                  <div class="collapse" id="collapseAllMatches">
-                    <div class="overflow-auto" id="freezeTableDiv">
-                      <style type="text/css" media="screen">
-                        table tr {
-                          border: 1px solid black;
-                        }
-
-                        table td,
-                        table th {
-                          border-right: 1px solid black;
-                        }
-                      </style>
-                      <table id="sortableAllMatches" class="table table-striped table-hover sortable">
-                        <colgroup>
-                          <col span="2" style="background-color:transparent">
-                          <col span="1" style="background-color:#cfe2ff">
-                          <col span="1" style="background-color:transparent">
-                          <col span="1" style="background-color:#cfe2ff">
-                          <col span="1" style="background-color:transparent">
-                          <col span="1" style="background-color:#cfe2ff">
-                          <col span="1" style="background-color:#transparent">
-                          <col span="1" style="background-color:#cfe2ff">
-                          <col span="1" style="background-color:transparent">
-                          <col span="1" style="background-color:#cfe2ff">
-                          <col span="1" style="background-color:#transparent">
-                          <col span="1" style="background-color:#cfe2ff">
-                          <col span="1" style="background-color:#transparent">
-                          <col span="1" style="background-color:#cfe2ff">
-                          <col span="1" style="background-color:#transparent">
-                          <col span="1" style="background-color:#cfe2ff">
-                          <col span="1" style="background-color:#transparent">
-                          <col span="1" style="background-color:#cfe2ff">
-                          <col span="1" style="background-color:#transparent">
-                          <col span="1" style="background-color:#cfe2ff">
-                        </colgroup>
-                        <thead>
-                          <style type="text/css" media="screen">
-                            #sortableAllMatches tr,
-                            #sortableAllMatches td,
-                            #sortableAllMatches th {
-                              border: 1px solid black;
-                            }
-                          </style>
-                          <tr>
-                            <th scope="col">Match</th>
-                            <th scope="col">Auton Leave</th>
-                            <th scope="col">Auton Coral L1</th>
-                            <th scope="col">Auton Coral L2</th>
-                            <th scope="col">Auton Coral L3</th>
-                            <th scope="col">Auton Coral L4</th>
-                            <th scope="col">Auton Algae Net</th>
-                            <th scope="col">Auton Algae Proc</th>
-                            <th scope="col">Acquired Coral</th>
-                            <th scope="col">Acquired Algae</th>
-                            <th scope="col">Teleop Coral L1</th>
-                            <th scope="col">Teleop Coral L2</th>
-                            <th scope="col">Teleop Coral L3</th>
-                            <th scope="col">Teleop Coral L4</th>
-                            <th scope="col">Teleop Algae Net</th>
-                            <th scope="col">Teleop Algae Proc</th>
-                            <th scope="col">Cage Climb</th>
-                            <th scope="col">Died</th>
-                            <th scope="col">Scout Name</th>
-                          </tr>
-                        </thead>
-                        <tbody id="allMatchesTable">
-                        </tbody>
-                      </table>
-                    </div>
+                  <div class="collapse" id="collapseAutonCoralGraph">
+                    <canvas id="myChart" width="400" height="400"></canvas>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
 
-        <!-- Second Column of Data starts here -->
-        <div class="col-lg-6 col-sm-6 col-xs-6 gx-3">
-          <div class="card mb-3">
-            <div class="card-body">
-
-              <!-- Match Total Points section -->
-              <div class="card mb-3">
-                <div class="card-body">
-                  <div class="overflow-auto">
-                    <h5 class="text-center">Match Totals </h5>
-                    <table class="table table-striped">
-                      <thead>
-                        <tr>
-                          <td>&nbsp;</td>
-                          <th scope="col">AVG</th>
-                          <th scope="col">MAX</th>
-                        </tr>
-                      </thead>
-                      <tbody id="totalTable">
-                        <tr>
-                          <th scope="row">Total Coral Scored</th>
-                        </tr>
-                        <tr>
-                          <th scope="row">Total Algae Scored</th>
-                        </tr>
-                        <tr>
-                          <th scope="row">Total Coral Points</th>
-                        </tr>
-                        <tr>
-                          <th scope="row">Total Algae Points</th>
-                        </tr>
-                      </tbody>
-                      <tfoot id="matchTotalTable">
-                    </table>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Auton Points section -->
-              <div class="card mb-3">
-                <div class="card-header">
-                  <div class="overflow-auto">
-                    <h5 class="text-center"> <a href="#collapseAuton" data-bs-toggle="collapse" aria-expanded="false"> Auton </a>
-                    </h5>
-                    <div class="collapse" id="collapseAuton">
-                      <div class="card card-body">
-                        <table class="table table-striped">
-                          <thead>
-                            <tr>
-                              <td>&nbsp;</td>
-                              <th scope="col">AVG</th>
-                              <th scope="col">MAX</th>
-                            </tr>
-                          </thead>
-                          <tbody id="autoTable">
-                            <tr>
-                              <th scope="row">Total Points</th>
-                            </tr>
-                            <tr>
-                              <th scope="row">Total Coral Scored</th>
-                            </tr>
-                            <tr>
-                              <th scope="row">Total Algae Scored</th>
-                            </tr>
-                            <tr>
-                              <th scope="row">Total Coral Points</th>
-                            </tr>
-                            <tr>
-                              <th scope="row">Total Algae Points</th>
-                            </tr>
-                          </tbody>
-                          <tfoot id="autoTotalTable">
-                            <tr>
-                              <th scope="col">Total Notes</th>
-                            </tr>
-                          </tfoot>
-                        </table>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Teleop Points section -->
-              <div class="card mb-3">
-                <div class="card-header">
-                  <div class="overflow-auto">
-                    <h5 class="text-center"> <a href="#collapseTeleop" data-bs-toggle="collapse" aria-expanded="false"> Teleop </a>
-                    </h5>
-                    <div class="collapse" id="collapseTeleop">
-                      <div class="card card-body">
-                        <table class="table table-striped">
-                          <thead>
-                            <tr>
-                              <td>&nbsp;</td>
-                              <th scope="col">AVG</th>
-                              <th scope="col">MAX</th>
-                            </tr>
-                          </thead>
-                          <tbody id="teleopTable">
-                            <tr>
-                              <th scope="row">Total Points</th>
-                            </tr>
-                            <tr>
-                              <th scope="row">Total Coral Scored</th>
-                            </tr>
-                            <tr>
-                              <th scope="row">Total Algae Scored</th>
-                            </tr>
-                            <tr>
-                              <th scope="row">Total Coral Points</th>
-                            </tr>
-                            <tr>
-                              <th scope="row">Total Algae Points</th>
-                            </tr>
-                            <tr>
-                              <th scope="row">Coral Acc%</th>
-                            </tr>
-                            <tr>
-                              <th scope="row">Algae Acc%</th>
-                            </tr>
-                          </tbody>
-                          <tfoot id="teleopTotalTable">
-                          </tfoot>
-                        </table>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Endgame Points section -->
-              <div class="card mb-3">
-                <div class="card-header">
-                  <div class="overflow-auto">
-                    <h5 class="text-center"> <a href="#collapseEndgame" data-bs-toggle="collapse" aria-expanded="false"> Endgame
-                      </a>
-                    </h5>
-                    <div class="collapse" id="collapseEndgame">
-                      <div class="card card-body">
-                        <table class="table">
-                          <thead>
-                            <tr>
-                              <td>&nbsp;</td>
-                              <th scope="col">AVG</th>
-                              <th scope="col">MAX</th>
-                            </tr>
-                          </thead>
-                          <tbody id="endgameTotalPtsTable">
-                            <tr>
-                              <th scope="row">Total Points</th>
-                            </tr>
-                          </tbody>
-                          <thead>
-                            <tr>
-                              <td>&nbsp;</td>
-                              <th scope="col">N</th>
-                              <th scope="col">P</th>
-                              <th scope="col">F</th>
-                              <th scope="col">S</th>
-                              <th scope="col">D</th>
-                            </tr>
-                          </thead>
-                          <tbody id="endgameClimbTable">
-                            <tr>
-                              <th scope="row">Cage Climb %</th>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
+            <!-- Auton collapsible graph -->
+            <div class="card mb-3">
+              <div class="card-body">
+                <div class="overflow-auto">
+                  <h5 class="text-center">
+                    <a href="#collapseAutonGraph" data-bs-toggle="collapse" aria-expanded="false"> Auton Graph</a>
+                  </h5>
+                  <div class="collapse" id="collapseAutonGraph">
+                    <canvas id="myChart2" width="400" height="400"></canvas>
                   </div>
                 </div>
               </div>
             </div>
+
+            <!-- Teleop Coral collapsible graph -->
+            <div class="card mb-3">
+              <div class="card-body">
+                <div class="overflow-auto">
+                  <h5 class="text-center">
+                    <a href="#collapseTeleopCoralGraph" data-bs-toggle="collapse" aria-expanded="false"> Teleop Coral Graph</a>
+                  </h5>
+                  <div class="collapse" id="collapseTeleopCoralGraph">
+                    <canvas id="myChart3" width="400" height="400"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Teleop collapsible graph -->
+            <div class="card mb-3">
+              <div class="card-body">
+                <div class="overflow-auto">
+                  <h5 class="text-center">
+                    <a href="#collapseTeleopGraph" data-bs-toggle="collapse" aria-expanded="false"> Teleop Graph</a>
+                  </h5>
+                  <div class="collapse" id="collapseTeleopGraph">
+                    <canvas id="myChart4" width="400" height="400"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Endgame collapsible graph -->
+            <div class="card mb-3">
+              <div class="card-body">
+                <div class="overflow-auto">
+                  <h5 class="text-center">
+                    <a href="#collapseEndgameGraph" data-bs-toggle="collapse" aria-expanded="false"> Endgame Graph</a>
+                  </h5>
+                  <div class="collapse" id="collapseEndgameGraph">
+                    <canvas id="myChart5" width="400" height="400"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pit Scouting 1st row -->
+            <div class="overflow-auto">
+              <table class="table table-striped">
+                <thead>
+                  <colgroup>
+                    <col span="1" style="background-color:transparent">
+                    <col span="1" style="background-color:#cfe2ff">
+                    <col span="1" style="background-color:transparent">
+                    <col span="1" style="background-color:#cfe2ff">
+                    <col span="1" style="background-color:transparent">
+                  </colgroup>
+                  <tr>
+                    <th scope="col" style="width:25%">Batt</th>
+                    <th scope="col" style="width:25%">Pit</th>
+                    <th scope="col" style="width:25%">Spare Parts</th>
+                    <th scope="col" style="width:25%">Vision</th>
+                  </tr>
+                </thead>
+                <tbody id="pitRow1">
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Pit Scouting 2nd row -->
+            <div class="overflow-auto">
+              <table class="table table-striped">
+                <thead>
+                  <colgroup>
+                    <col span="1" style="background-color:transparent">
+                    <col span="1" style="background-color:#cfe2ff">
+                    <col span="1" style="background-color:transparent">
+                    <col span="1" style="background-color:#cfe2ff">
+                    <col span="1" style="background-color:transparent">
+                    <col span="1" style="background-color:#cfe2ff">
+                  </colgroup>
+                  <tr>
+                    <th scope="col" style="width:25%">Drive Motors</th>
+                    <th scope="col" style="width:25%">Prep</th>
+                    <th scope="col" style="width:25%">Swerve</th>
+                    <th scope="col" style="width:25%">Lang</th>
+                  </tr>
+                </thead>
+                <tbody id="pitRow2">
+                </tbody>
+              </table>
+            </div>
+
+
           </div>
 
-          <!-- Strategic Data collapsible table -->
+
+          <!-- Comments section -->
+          <div class="overflow-auto">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">Comments</th>
+                  <th scope="col">Scout</th>
+                </tr>
+              </thead>
+              <tbody id="comments">
+              </tbody>
+            </table>
+          </div>
+
+          <!-- All Matches collapsible table -->
           <div class="card mb-3">
             <div class="card-body">
               <div class="overflow-auto">
                 <h5 class="text-center">
-                  <a href="#collapseStrategicData" data-bs-toggle="collapse" aria-expanded="false"> Strategic Data </a>
+                  <a href="#collapseAllMatches" data-bs-toggle="collapse" aria-expanded="false"> All Matches </a>
                 </h5>
-                <div class="collapse" id="collapseStrategicData">
-                  <div class="overflow-auto" id="freezeStratTableDiv">
+                <div class="collapse" id="collapseAllMatches">
+                  <div class="overflow-auto" id="freezeTableDiv">
                     <style type="text/css" media="screen">
                       table tr {
                         border: 1px solid black;
@@ -449,7 +190,7 @@ require 'header.php';
                         border-right: 1px solid black;
                       }
                     </style>
-                    <table id="sortableStrategicData" class="table table-striped table-hover sortable">
+                    <table id="sortableAllMatches" class="table table-striped table-hover sortable">
                       <colgroup>
                         <col span="2" style="background-color:transparent">
                         <col span="1" style="background-color:#cfe2ff">
@@ -471,74 +212,333 @@ require 'header.php';
                         <col span="1" style="background-color:#cfe2ff">
                         <col span="1" style="background-color:#transparent">
                         <col span="1" style="background-color:#cfe2ff">
-                        <col span="1" style="background-color:#transparent">
-                        <col span="1" style="background-color:#cfe2ff">
-                        <col span="1" style="background-color:#transparent">
-                        <col span="1" style="background-color:#cfe2ff">
-                        <col span="1" style="background-color:#transparent">
-                        <col span="1" style="background-color:#cfe2ff">
                       </colgroup>
                       <thead>
                         <style type="text/css" media="screen">
-                          #sortableStrategicData tr,
-                          #sortableStrategicData td,
-                          #sortableStrategicData th {
+                          #sortableAllMatches tr,
+                          #sortableAllMatches td,
+                          #sortableAllMatches th {
                             border: 1px solid black;
                           }
                         </style>
                         <tr>
-                          <th colspan="1"> </th>
-                          <th colspan="24" class="text-center">Strategic Scouting Data</th>
-                        </tr>
-                        <tr>
-                          <th colspan="1"> </th>
-                          <th colspan="1"> </th>
-                          <th colspan="24" class="text-center">Table</th>
-                        </tr>
-                        <tr>
-                          <th colspan="1"> </th>
-                          <th colspan="1"> </th>
-                          <th colspan="2" class="text-center" style="background-color:#3686FF">Against Defense</th>
-                          <th colspan="3" class="text-center">Defense Tactics</th>
-                          <th colspan="8" class="text-center" style="background-color:#3686FF">Fouls</th>
-                          <th colspan="4" class="text-center">Auton</th>
-                          <th colspan="4" class="text-center" style="background-color:#3686FF">Teleop</th>
-                          <th colspan="2" class="text-center">Notes</th>
-                          <th colspan="1"> </th>
-                        </tr>
-                        <tr>
                           <th scope="col">Match</th>
-                          <th scope="col">Drive Skill</th>
-                          <th scope="col">Block</th>
-                          <th scope="col">Note</th>
-                          <th scope="col">Block Path</th>
-                          <th scope="col">Block Stn</th>
-                          <th scope="col">Note</th>
-                          <th scope="col">Pin</th>
-                          <th scope="col">Auton Barge Contact</th>
-                          <th scope="col">Auton Cage Contact</th>
-                          <th scope="col">Anchor Contact</th>
-                          <th scope="col">Barge Contact</th>
-                          <th scope="col">Reef Contact</th>
-                          <th scope="col">Cage Contact</th>
-                          <th scope="col">Contact Climbing Robot</th>
-                          <th scope="col">Get Floor Coral</th>
-                          <th scope="col">Get Stn Coral</th>
-                          <th scope="col">Get Floor Algae</th>
-                          <th scope="col">Get Reef Algae</th>
-                          <th scope="col">Get Floor Coral</th>
-                          <th scope="col">Get Floor Algae</th>
-                          <th scope="col">Knock Algae</th>
-                          <th scope="col">Aquire Reef Algae</th>
-                          <th scope="col">Problem Note</th>
-                          <th scope="col">General Note</th>
+                          <th scope="col">Auton Leave</th>
+                          <th scope="col">Auton Coral L1</th>
+                          <th scope="col">Auton Coral L2</th>
+                          <th scope="col">Auton Coral L3</th>
+                          <th scope="col">Auton Coral L4</th>
+                          <th scope="col">Auton Algae Net</th>
+                          <th scope="col">Auton Algae Proc</th>
+                          <th scope="col">Acquired Coral</th>
+                          <th scope="col">Acquired Algae</th>
+                          <th scope="col">Teleop Coral L1</th>
+                          <th scope="col">Teleop Coral L2</th>
+                          <th scope="col">Teleop Coral L3</th>
+                          <th scope="col">Teleop Coral L4</th>
+                          <th scope="col">Teleop Algae Net</th>
+                          <th scope="col">Teleop Algae Proc</th>
+                          <th scope="col">Cage Climb</th>
+                          <th scope="col">Died</th>
                           <th scope="col">Scout Name</th>
                         </tr>
                       </thead>
-                      <tbody id="strategicDataTable">
+                      <tbody id="allMatchesTable">
                       </tbody>
                     </table>
                   </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Second Column of Data starts here -->
+      <div class="col-lg-6 col-sm-6 col-xs-6 gx-3">
+        <div class="card mb-3">
+          <div class="card-body">
+
+            <!-- Match Total Points section -->
+            <div class="card mb-3">
+              <div class="card-body">
+                <div class="overflow-auto">
+                  <h5 class="text-center">Match Totals </h5>
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <td>&nbsp;</td>
+                        <th scope="col">AVG</th>
+                        <th scope="col">MAX</th>
+                      </tr>
+                    </thead>
+                    <tbody id="totalTable">
+                      <tr>
+                        <th scope="row">Total Coral Scored</th>
+                      </tr>
+                      <tr>
+                        <th scope="row">Total Algae Scored</th>
+                      </tr>
+                      <tr>
+                        <th scope="row">Total Coral Points</th>
+                      </tr>
+                      <tr>
+                        <th scope="row">Total Algae Points</th>
+                      </tr>
+                    </tbody>
+                    <tfoot id="matchTotalTable">
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <!-- Auton Points section -->
+            <div class="card mb-3">
+              <div class="card-header">
+                <div class="overflow-auto">
+                  <h5 class="text-center"> <a href="#collapseAuton" data-bs-toggle="collapse" aria-expanded="false"> Auton </a>
+                  </h5>
+                  <div class="collapse" id="collapseAuton">
+                    <div class="card card-body">
+                      <table class="table table-striped">
+                        <thead>
+                          <tr>
+                            <td>&nbsp;</td>
+                            <th scope="col">AVG</th>
+                            <th scope="col">MAX</th>
+                          </tr>
+                        </thead>
+                        <tbody id="autoTable">
+                          <tr>
+                            <th scope="row">Total Points</th>
+                          </tr>
+                          <tr>
+                            <th scope="row">Total Coral Scored</th>
+                          </tr>
+                          <tr>
+                            <th scope="row">Total Algae Scored</th>
+                          </tr>
+                          <tr>
+                            <th scope="row">Total Coral Points</th>
+                          </tr>
+                          <tr>
+                            <th scope="row">Total Algae Points</th>
+                          </tr>
+                        </tbody>
+                        <tfoot id="autoTotalTable">
+                          <tr>
+                            <th scope="col">Total Notes</th>
+                          </tr>
+                        </tfoot>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Teleop Points section -->
+            <div class="card mb-3">
+              <div class="card-header">
+                <div class="overflow-auto">
+                  <h5 class="text-center"> <a href="#collapseTeleop" data-bs-toggle="collapse" aria-expanded="false"> Teleop </a>
+                  </h5>
+                  <div class="collapse" id="collapseTeleop">
+                    <div class="card card-body">
+                      <table class="table table-striped">
+                        <thead>
+                          <tr>
+                            <td>&nbsp;</td>
+                            <th scope="col">AVG</th>
+                            <th scope="col">MAX</th>
+                          </tr>
+                        </thead>
+                        <tbody id="teleopTable">
+                          <tr>
+                            <th scope="row">Total Points</th>
+                          </tr>
+                          <tr>
+                            <th scope="row">Total Coral Scored</th>
+                          </tr>
+                          <tr>
+                            <th scope="row">Total Algae Scored</th>
+                          </tr>
+                          <tr>
+                            <th scope="row">Total Coral Points</th>
+                          </tr>
+                          <tr>
+                            <th scope="row">Total Algae Points</th>
+                          </tr>
+                          <tr>
+                            <th scope="row">Coral Acc%</th>
+                          </tr>
+                          <tr>
+                            <th scope="row">Algae Acc%</th>
+                          </tr>
+                        </tbody>
+                        <tfoot id="teleopTotalTable">
+                        </tfoot>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Endgame Points section -->
+            <div class="card mb-3">
+              <div class="card-header">
+                <div class="overflow-auto">
+                  <h5 class="text-center"> <a href="#collapseEndgame" data-bs-toggle="collapse" aria-expanded="false"> Endgame
+                    </a>
+                  </h5>
+                  <div class="collapse" id="collapseEndgame">
+                    <div class="card card-body">
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <td>&nbsp;</td>
+                            <th scope="col">AVG</th>
+                            <th scope="col">MAX</th>
+                          </tr>
+                        </thead>
+                        <tbody id="endgameTotalPtsTable">
+                          <tr>
+                            <th scope="row">Total Points</th>
+                          </tr>
+                        </tbody>
+                        <thead>
+                          <tr>
+                            <td>&nbsp;</td>
+                            <th scope="col">N</th>
+                            <th scope="col">P</th>
+                            <th scope="col">F</th>
+                            <th scope="col">S</th>
+                            <th scope="col">D</th>
+                          </tr>
+                        </thead>
+                        <tbody id="endgameClimbTable">
+                          <tr>
+                            <th scope="row">Cage Climb %</th>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Strategic Data collapsible table -->
+        <div class="card mb-3">
+          <div class="card-body">
+            <div class="overflow-auto">
+              <h5 class="text-center">
+                <a href="#collapseStrategicData" data-bs-toggle="collapse" aria-expanded="false"> Strategic Data </a>
+              </h5>
+              <div class="collapse" id="collapseStrategicData">
+                <div class="overflow-auto" id="freezeStratTableDiv">
+                  <style type="text/css" media="screen">
+                    table tr {
+                      border: 1px solid black;
+                    }
+
+                    table td,
+                    table th {
+                      border-right: 1px solid black;
+                    }
+                  </style>
+                  <table id="sortableStrategicData" class="table table-striped table-hover sortable">
+                    <colgroup>
+                      <col span="2" style="background-color:transparent">
+                      <col span="1" style="background-color:#cfe2ff">
+                      <col span="1" style="background-color:transparent">
+                      <col span="1" style="background-color:#cfe2ff">
+                      <col span="1" style="background-color:transparent">
+                      <col span="1" style="background-color:#cfe2ff">
+                      <col span="1" style="background-color:#transparent">
+                      <col span="1" style="background-color:#cfe2ff">
+                      <col span="1" style="background-color:transparent">
+                      <col span="1" style="background-color:#cfe2ff">
+                      <col span="1" style="background-color:#transparent">
+                      <col span="1" style="background-color:#cfe2ff">
+                      <col span="1" style="background-color:#transparent">
+                      <col span="1" style="background-color:#cfe2ff">
+                      <col span="1" style="background-color:#transparent">
+                      <col span="1" style="background-color:#cfe2ff">
+                      <col span="1" style="background-color:#transparent">
+                      <col span="1" style="background-color:#cfe2ff">
+                      <col span="1" style="background-color:#transparent">
+                      <col span="1" style="background-color:#cfe2ff">
+                      <col span="1" style="background-color:#transparent">
+                      <col span="1" style="background-color:#cfe2ff">
+                      <col span="1" style="background-color:#transparent">
+                      <col span="1" style="background-color:#cfe2ff">
+                      <col span="1" style="background-color:#transparent">
+                      <col span="1" style="background-color:#cfe2ff">
+                    </colgroup>
+                    <thead>
+                      <style type="text/css" media="screen">
+                        #sortableStrategicData tr,
+                        #sortableStrategicData td,
+                        #sortableStrategicData th {
+                          border: 1px solid black;
+                        }
+                      </style>
+                      <tr>
+                        <th colspan="1"> </th>
+                        <th colspan="24" class="text-center">Strategic Scouting Data</th>
+                      </tr>
+                      <tr>
+                        <th colspan="1"> </th>
+                        <th colspan="1"> </th>
+                        <th colspan="24" class="text-center">Table</th>
+                      </tr>
+                      <tr>
+                        <th colspan="1"> </th>
+                        <th colspan="1"> </th>
+                        <th colspan="2" class="text-center" style="background-color:#3686FF">Against Defense</th>
+                        <th colspan="3" class="text-center">Defense Tactics</th>
+                        <th colspan="8" class="text-center" style="background-color:#3686FF">Fouls</th>
+                        <th colspan="4" class="text-center">Auton</th>
+                        <th colspan="4" class="text-center" style="background-color:#3686FF">Teleop</th>
+                        <th colspan="2" class="text-center">Notes</th>
+                        <th colspan="1"> </th>
+                      </tr>
+                      <tr>
+                        <th scope="col">Match</th>
+                        <th scope="col">Drive Skill</th>
+                        <th scope="col">Block</th>
+                        <th scope="col">Note</th>
+                        <th scope="col">Block Path</th>
+                        <th scope="col">Block Stn</th>
+                        <th scope="col">Note</th>
+                        <th scope="col">Pin</th>
+                        <th scope="col">Auton Barge Contact</th>
+                        <th scope="col">Auton Cage Contact</th>
+                        <th scope="col">Anchor Contact</th>
+                        <th scope="col">Barge Contact</th>
+                        <th scope="col">Reef Contact</th>
+                        <th scope="col">Cage Contact</th>
+                        <th scope="col">Contact Climbing Robot</th>
+                        <th scope="col">Get Floor Coral</th>
+                        <th scope="col">Get Stn Coral</th>
+                        <th scope="col">Get Floor Algae</th>
+                        <th scope="col">Get Reef Algae</th>
+                        <th scope="col">Get Floor Coral</th>
+                        <th scope="col">Get Floor Algae</th>
+                        <th scope="col">Knock Algae</th>
+                        <th scope="col">Aquire Reef Algae</th>
+                        <th scope="col">Problem Note</th>
+                        <th scope="col">General Note</th>
+                        <th scope="col">Scout Name</th>
+                      </tr>
+                    </thead>
+                    <tbody id="strategicDataTable">
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>

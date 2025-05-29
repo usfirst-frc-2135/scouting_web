@@ -8,104 +8,104 @@ require 'header.php';
 
     <div class="row pt-3 pb-3 mb-3">
       <h2><?php echo $title; ?></h2>
+    </div>
 
-      <div id="freezeTableDiv">
-        <style type="text/css" media="screen">
-          table tr {
-            border: 1px solid black;
-          }
+    <div id="freezeTableDiv">
+      <style type="text/css" media="screen">
+        table tr {
+          border: 1px solid black;
+        }
 
-          table td,
-          table th {
-            border-right: 1px solid black;
-          }
-        </style>
-        <table id="rawDataTable" class="table table-striped table-hover sortable">
-          <colgroup>
-            <col span="2" style="background-color:transparent">
-            <col span="1" style="background-color:#cfe2ff">
-            <col span="1" style="background-color:transparent">
-            <col span="1" style="background-color:#cfe2ff">
-            <col span="1" style="background-color:transparent">
-            <col span="1" style="background-color:#cfe2ff">
-            <col span="1" style="background-color:#transparent">
-            <col span="1" style="background-color:#cfe2ff">
-            <col span="1" style="background-color:transparent">
-            <col span="1" style="background-color:#cfe2ff">
-            <col span="1" style="background-color:#transparent">
-            <col span="1" style="background-color:#cfe2ff">
-            <col span="1" style="background-color:#transparent">
-            <col span="1" style="background-color:#cfe2ff">
-            <col span="1" style="background-color:#transparent">
-            <col span="1" style="background-color:#cfe2ff">
-            <col span="1" style="background-color:#transparent">
-            <col span="1" style="background-color:#cfe2ff">
-            <col span="1" style="background-color:#transparent">
-            <col span="1" style="background-color:#cfe2ff">
-            <col span="1" style="background-color:#transparent">
-            <col span="1" style="background-color:#cfe2ff">
-            <col span="1" style="background-color:#transparent">
-            <col span="1" style="background-color:#cfe2ff">
-            <col span="1" style="background-color:#transparent">
-          </colgroup>
-          <thead>
-            <tr>
-              <th colspan="1"> </th>
-              <th colspan="1"> </th>
-              <th colspan="24" class="text-center">Strategic Scouting Data</th>
-            </tr>
-            <tr>
-              <th colspan="1"> </th>
-              <th colspan="1"> </th>
-              <th colspan="24" class="text-center">Table</th>
-            </tr>
-            <tr>
-              <th colspan="1"> </th>
-              <th colspan="1"> </th>
-              <th colspan="1"> </th>
-              <th colspan="2" class="text-center" style="background-color:#3686FF">Against Defense</th>
-              <th colspan="3" class="text-center">Defense Tactics</th>
-              <th colspan="8" class="text-center" style="background-color:#3686FF">Fouls</th>
-              <th colspan="4" class="text-center">Auton</th>
-              <th colspan="4" class="text-center" style="background-color:#3686FF">Teleop</th>
-              <th colspan="2" class="text-center">Notes</th>
-              <th colspan="1"> </th>
-            </tr>
-            <tr>
-              <th scope="col" class="text-center">Team</th>
-              <th scope="col" class="text-center">Match</th>
-              <th scope="col" class="text-center">Drive Skill</th>
-              <th scope="col" class="text-center">Block</th>
-              <th scope="col" class="text-center">Note</th>
-              <th scope="col" class="text-center">Block Path</th>
-              <th scope="col" class="text-center">Block Station</th>
-              <th scope="col" class="text-center">Note</th>
-              <th scope="col" class="text-center">Pin</th>
-              <th scope="col" class="text-center">Auton Barge Contact</th>
-              <th scope="col" class="text-center">Auton Cage Contact</th>
-              <th scope="col" class="text-center">Anchor Contact</th>
-              <th scope="col" class="text-center">Barge Contact</th>
-              <th scope="col" class="text-center">Reef Contact</th>
-              <th scope="col" class="text-center">Cage Contact</th>
-              <th scope="col" class="text-center">Contact Climbing Robot</th>
-              <th scope="col" class="text-center">Get Floor Coral</th>
-              <th scope="col" class="text-center">Get Stn Coral</th>
-              <th scope="col" class="text-center">Get Floor Algae</th>
-              <th scope="col" class="text-center">Get Reef Algae</th>
-              <th scope="col" class="text-center">Get Floor Coral</th>
-              <th scope="col" class="text-center">Get Floor Algae</th>
-              <th scope="col" class="text-center">Knock Algae</th>
-              <th scope="col" class="text-center">Acquire Reef Algae</th>
-              <th scope="col" class="text-center">Problem Note</th>
-              <th scope="col" class="text-center">General Note</th>
-              <th scope="col" class="text-center">Scout</th>
-            </tr>
-          </thead>
-          <tbody id="tableData">
-          </tbody>
-        </table>
+        table td,
+        table th {
+          border-right: 1px solid black;
+        }
+      </style>
+      <table id="rawDataTable" class="table table-striped table-hover sortable">
+        <colgroup>
+          <col span="2" style="background-color:transparent">
+          <col span="1" style="background-color:#cfe2ff">
+          <col span="1" style="background-color:transparent">
+          <col span="1" style="background-color:#cfe2ff">
+          <col span="1" style="background-color:transparent">
+          <col span="1" style="background-color:#cfe2ff">
+          <col span="1" style="background-color:#transparent">
+          <col span="1" style="background-color:#cfe2ff">
+          <col span="1" style="background-color:transparent">
+          <col span="1" style="background-color:#cfe2ff">
+          <col span="1" style="background-color:#transparent">
+          <col span="1" style="background-color:#cfe2ff">
+          <col span="1" style="background-color:#transparent">
+          <col span="1" style="background-color:#cfe2ff">
+          <col span="1" style="background-color:#transparent">
+          <col span="1" style="background-color:#cfe2ff">
+          <col span="1" style="background-color:#transparent">
+          <col span="1" style="background-color:#cfe2ff">
+          <col span="1" style="background-color:#transparent">
+          <col span="1" style="background-color:#cfe2ff">
+          <col span="1" style="background-color:#transparent">
+          <col span="1" style="background-color:#cfe2ff">
+          <col span="1" style="background-color:#transparent">
+          <col span="1" style="background-color:#cfe2ff">
+          <col span="1" style="background-color:#transparent">
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="1"> </th>
+            <th colspan="1"> </th>
+            <th colspan="24" class="text-center">Strategic Scouting Data</th>
+          </tr>
+          <tr>
+            <th colspan="1"> </th>
+            <th colspan="1"> </th>
+            <th colspan="24" class="text-center">Table</th>
+          </tr>
+          <tr>
+            <th colspan="1"> </th>
+            <th colspan="1"> </th>
+            <th colspan="1"> </th>
+            <th colspan="2" class="text-center" style="background-color:#3686FF">Against Defense</th>
+            <th colspan="3" class="text-center">Defense Tactics</th>
+            <th colspan="8" class="text-center" style="background-color:#3686FF">Fouls</th>
+            <th colspan="4" class="text-center">Auton</th>
+            <th colspan="4" class="text-center" style="background-color:#3686FF">Teleop</th>
+            <th colspan="2" class="text-center">Notes</th>
+            <th colspan="1"> </th>
+          </tr>
+          <tr>
+            <th scope="col" class="text-center">Team</th>
+            <th scope="col" class="text-center">Match</th>
+            <th scope="col" class="text-center">Drive Skill</th>
+            <th scope="col" class="text-center">Block</th>
+            <th scope="col" class="text-center">Note</th>
+            <th scope="col" class="text-center">Block Path</th>
+            <th scope="col" class="text-center">Block Station</th>
+            <th scope="col" class="text-center">Note</th>
+            <th scope="col" class="text-center">Pin</th>
+            <th scope="col" class="text-center">Auton Barge Contact</th>
+            <th scope="col" class="text-center">Auton Cage Contact</th>
+            <th scope="col" class="text-center">Anchor Contact</th>
+            <th scope="col" class="text-center">Barge Contact</th>
+            <th scope="col" class="text-center">Reef Contact</th>
+            <th scope="col" class="text-center">Cage Contact</th>
+            <th scope="col" class="text-center">Contact Climbing Robot</th>
+            <th scope="col" class="text-center">Get Floor Coral</th>
+            <th scope="col" class="text-center">Get Stn Coral</th>
+            <th scope="col" class="text-center">Get Floor Algae</th>
+            <th scope="col" class="text-center">Get Reef Algae</th>
+            <th scope="col" class="text-center">Get Floor Coral</th>
+            <th scope="col" class="text-center">Get Floor Algae</th>
+            <th scope="col" class="text-center">Knock Algae</th>
+            <th scope="col" class="text-center">Acquire Reef Algae</th>
+            <th scope="col" class="text-center">Problem Note</th>
+            <th scope="col" class="text-center">General Note</th>
+            <th scope="col" class="text-center">Scout</th>
+          </tr>
+        </thead>
+        <tbody id="tableData">
+        </tbody>
+      </table>
 
-      </div>
     </div>
   </div>
 </div>
@@ -335,10 +335,13 @@ require 'header.php';
     });
   }
 
+  //
+  // Process the generated html
+  //
   $(document).ready(function () {
     requestAPI();
-    // sorttable.makeSortable(document.getElementById("rawDataTable"));
 
+    // Submit the strategic form data
     $("#rawDataTable").click(function () {
       if (frozenTable) {
         frozenTable.update();

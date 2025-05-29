@@ -8,23 +8,23 @@ require 'header.php';
 
     <div class="row pt-3 pb-3 mb-3">
       <h2 id="COPRHeader"><?php echo $title; ?>: ???</h2>
+    </div>
 
-      <div class="input-group mb-3">
+    <div class="input-group mb-3">
         <input id="eventCode" type="text" class="form-control" placeholder="FRC event code" aria-label="eventCode">
         <button id="loadEvent" type="button" class="btn btn-primary">Load Event</button>
-      </div>
+    </div>
 
-      <div class="table-responsive">
-        <div id="freezeTableDiv">
-          <table id="dataTable" class="table table-striped table-hover">
-            <thead>
-              <tr id="tableKeys">
-              </tr>
-            </thead>
-            <tbody id="tableData">
-            </tbody>
-          </table>
-        </div>
+    <div class="table-responsive">
+      <div id="freezeTableDiv">
+        <table id="dataTable" class="table table-striped table-hover">
+          <thead>
+            <tr id="tableKeys">
+            </tr>
+          </thead>
+          <tbody id="tableData">
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
@@ -90,12 +90,12 @@ require 'header.php';
       getCOPRs: 1
     }).done(function (data) {
       processData(data);
-      sorttable.makeSortable(document.getElementById("dataTable"));
-      frozenTable = $('#freezeTableDiv').freezeTable({
-        'backgroundColor': "white",
-        'columnNum': 1,
-        'frozenColVerticalOffset': 0
-      });
+        sorttable.makeSortable(document.getElementById("dataTable"));
+        frozenTable = $('#freezeTableDiv').freezeTable({
+          'backgroundColor': "white",
+          'columnNum': 1,
+          'frozenColVerticalOffset': 0
+        });
     });
   }
 

@@ -12,35 +12,36 @@ require 'header.php';
       <div class="col-md-3">
         <button id="createButton" type="button" class="btn btn-primary">Create Schedule</button>
       </div>
+      </div>
     </div>
-  </div>
 
   <div class="col-md-4">
-    <div id="freezeTableDiv">
-      <style type="text/css" media="screen">
-        table tr {
-          border: 1px solid black;
-        }
+      <div id="freezeTableDiv">
+        <style type="text/css" media="screen">
+          table tr {
+            border: 1px solid black;
+          }
 
-        table td,
-        table th {
-          border-right: 1px solid black;
-        }
-      </style>
-      <table id="matchTable" class="table table-striped table-hover sortable">
-        <colgroup>
-          <col span="1" style="background-color:transparent">
-          <col span="1" style="background-color:#cfe2ff">
-        </colgroup>
-        <thead>
-          <tr>
-            <th class="text-center" scope="col">Match</th>
-            <th class="text-center" scope="col">Teams</th>
-          </tr>
-        </thead>
-        <tbody id="tableData">
-        </tbody>
-      </table>
+          table td,
+          table th {
+            border-right: 1px solid black;
+          }
+        </style>
+        <table id="matchTable" class="table table-striped table-hover sortable">
+          <colgroup>
+            <col span="1" style="background-color:transparent">
+            <col span="1" style="background-color:#cfe2ff">
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="text-center" scope="col">Match</th>
+              <th class="text-center" scope="col">Teams</th>
+            </tr>
+          </thead>
+          <tbody id="tableData">
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>

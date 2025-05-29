@@ -8,6 +8,7 @@ require 'header.php';
 
     <div class="row pt-3 pb-3 mb-3 gx-3">
       <h2><?php echo $title; ?></h2>
+    </div>
 
       <div class="row g-3 justify-content-md-center">
         <div class="input-group mb-3 justify-content-md-center">

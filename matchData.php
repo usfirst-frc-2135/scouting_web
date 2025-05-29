@@ -8,80 +8,80 @@ require 'header.php';
 
     <div class="row pt-3 pb-3 mb-3">
       <h2><?php echo $title; ?></h2>
+    </div>
 
-      <div id="freezeTableDiv">
-        <style type="text/css" media="screen">
-          table tr {
-            border: 1px solid black;
-          }
+    <div id="freezeTableDiv">
+      <style type="text/css" media="screen">
+        table tr {
+          border: 1px solid black;
+        }
 
-          table td,
-          table th {
-            border-right: 1px solid black;
-          }
-        </style>
-        <table id="rawDataTable" class="table table-striped table-hover sortable">
-          <colgroup>
-            <col span="2" style="background-color:transparent">
-            <col span="1" style="background-color:#cfe2ff">
-            <col span="1" style="background-color:transparent">
-            <col span="1" style="background-color:#cfe2ff">
-            <col span="1" style="background-color:transparent">
-            <col span="1" style="background-color:#cfe2ff">
-            <col span="1" style="background-color:#transparent">
-            <col span="1" style="background-color:#cfe2ff">
-            <col span="1" style="background-color:transparent">
-            <col span="1" style="background-color:#cfe2ff">
-            <col span="1" style="background-color:#transparent">
-            <col span="1" style="background-color:#cfe2ff">
-            <col span="1" style="background-color:#transparent">
-            <col span="1" style="background-color:#cfe2ff">
-            <col span="1" style="background-color:#transparent">
-            <col span="1" style="background-color:#cfe2ff">
-            <col span="1" style="background-color:#transparent">
-            <col span="1" style="background-color:#cfe2ff">
-            <col span="1" style="background-color:#transparent">
-          </colgroup>
-          <thead>
-            <tr>
-              <th colspan="1"> </th>
-              <th colspan="1"> </th>
-              <th colspan="19" class="text-center">Raw Scouted Data</th>
-            </tr>
-            <tr>
-              <th colspan="1"> </th>
-              <th colspan="1"> </th>
-              <th colspan="19" class="text-center">Table</th>
-            </tr>
-            <tr>
-              <th scope="col">Match</th>
-              <th scope="col">Team</th>
-              <th scope="col">Auton Leave</th>
-              <th scope="col">Auton Coral L1</th>
-              <th scope="col">Auton Coral L2</th>
-              <th scope="col">Auton Coral L3</th>
-              <th scope="col">Auton Coral L4</th>
-              <th scope="col">Auton Algae Net</th>
-              <th scope="col">Auton Algae Proc</th>
-              <th scope="col">Acq'd Coral</th>
-              <th scope="col">Acq'd Algae</th>
-              <th scope="col">Teleop Coral L1</th>
-              <th scope="col">Teleop Coral L2</th>
-              <th scope="col">Teleop Coral L3</th>
-              <th scope="col">Teleop Coral L4</th>
-              <th scope="col">Teleop Algae Net</th>
-              <th scope="col">Teleop Algae Proc</th>
-              <th scope="col">Cage Climb</th>
-              <th scope="col">Died</th>
-              <th scope="col">Scout Name</th>
-              <th scope="col">Comment</th>
-            </tr>
-          </thead>
-          <tbody id="tableData">
-          </tbody>
-        </table>
+        table td,
+        table th {
+          border-right: 1px solid black;
+        }
+      </style>
+      <table id="rawDataTable" class="table table-striped table-hover sortable">
+        <colgroup>
+          <col span="2" style="background-color:transparent">
+          <col span="1" style="background-color:#cfe2ff">
+          <col span="1" style="background-color:transparent">
+          <col span="1" style="background-color:#cfe2ff">
+          <col span="1" style="background-color:transparent">
+          <col span="1" style="background-color:#cfe2ff">
+          <col span="1" style="background-color:#transparent">
+          <col span="1" style="background-color:#cfe2ff">
+          <col span="1" style="background-color:transparent">
+          <col span="1" style="background-color:#cfe2ff">
+          <col span="1" style="background-color:#transparent">
+          <col span="1" style="background-color:#cfe2ff">
+          <col span="1" style="background-color:#transparent">
+          <col span="1" style="background-color:#cfe2ff">
+          <col span="1" style="background-color:#transparent">
+          <col span="1" style="background-color:#cfe2ff">
+          <col span="1" style="background-color:#transparent">
+          <col span="1" style="background-color:#cfe2ff">
+          <col span="1" style="background-color:#transparent">
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="1"> </th>
+            <th colspan="1"> </th>
+            <th colspan="19" class="text-center">Raw Scouted Data</th>
+          </tr>
+          <tr>
+            <th colspan="1"> </th>
+            <th colspan="1"> </th>
+            <th colspan="19" class="text-center">Table</th>
+          </tr>
+          <tr>
+            <th scope="col">Match</th>
+            <th scope="col">Team</th>
+            <th scope="col">Auton Leave</th>
+            <th scope="col">Auton Coral L1</th>
+            <th scope="col">Auton Coral L2</th>
+            <th scope="col">Auton Coral L3</th>
+            <th scope="col">Auton Coral L4</th>
+            <th scope="col">Auton Algae Net</th>
+            <th scope="col">Auton Algae Proc</th>
+            <th scope="col">Acq'd Coral</th>
+            <th scope="col">Acq'd Algae</th>
+            <th scope="col">Teleop Coral L1</th>
+            <th scope="col">Teleop Coral L2</th>
+            <th scope="col">Teleop Coral L3</th>
+            <th scope="col">Teleop Coral L4</th>
+            <th scope="col">Teleop Algae Net</th>
+            <th scope="col">Teleop Algae Proc</th>
+            <th scope="col">Cage Climb</th>
+            <th scope="col">Died</th>
+            <th scope="col">Scout Name</th>
+            <th scope="col">Comment</th>
+          </tr>
+        </thead>
+        <tbody id="tableData">
+        </tbody>
+      </table>
 
-      </div>
     </div>
   </div>
 </div>
@@ -149,7 +149,7 @@ require 'header.php';
     return 1;
   };
 
-  //NOTE: data object keywords should match the database definition in dbHander.php
+  // NOTE: data object keywords should match the database definition in dbHander.php
   function dataToTable(dataObj) {
     for (let i = 0; i < dataObj.length; i++) {
       var rowString = "<tr><td align=\"center\">" + dataObj[i]["matchnumber"] + "</td>" +
@@ -180,7 +180,7 @@ require 'header.php';
   }
 
   function requestAPI() {
-    //output: gets the API data from our server
+    // output: gets the API data from our server
     $.get("readAPI.php", {
       getAllData: 1
     }).done(function (data) {

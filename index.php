@@ -8,21 +8,21 @@ require 'header.php';
 
     <div class="row pt-3 pb-3 mb-3">
       <h2><?php echo $title; ?></h2>
-
-      <h4 id="pageTitle">Event Code: </h4>
-
-      <table id="psTable" class="table table-striped table-bordered table-hover sortable">
-        <thead>
-          <tr>
-            <td>Team</td>
-            <td>Pit Scouted?</td>
-            <td>Photo Taken?</td>
-          </tr>
-        </thead>
-        <tbody id="pitScoutTable">
-        </tbody>
-      </table>
     </div>
+
+    <h4 id="pageTitle">Event Code: </h4>
+
+    <table id="psTable" class="table table-striped table-bordered table-hover sortable">
+      <thead>
+        <tr>
+          <td>Team</td>
+          <td>Pit Scouted?</td>
+          <td>Photo Taken?</td>
+        </tr>
+      </thead>
+      <tbody id="pitScoutTable">
+      </tbody>
+    </table>
   </div>
 </div>
 
