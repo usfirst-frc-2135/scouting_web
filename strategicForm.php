@@ -445,17 +445,20 @@ require 'header.php';
     }).done(function (data) {
       // Because success word may have a new-line at the end, don't do a direct compare
       if (data.indexOf('success') > -1) {
-        alert("Success in submitting strategic scouting data!");
+        alert("Success in submitting Strategic Form data!");
         clearForm();
       } else {
-        alert("Failure in submitting strategic scouting!");
+        alert("Failure in submitting Strategic Form!");
       }
     });
   }
 
-
+  //
+  // Process the generated html
+  //
   $(document).ready(function () {
 
+    // Submit the strategic form data
     $("#submitButton").click(function () {
       if (!verifyData()) {
         writeDataToAPI();

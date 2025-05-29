@@ -326,8 +326,12 @@ require 'header.php';
     });
   }
 
+  //
+  // Process the generated html
+  //
   $(document).ready(function () {
 
+    // Submit the match data form
     $("#submitButton").click(function () {
       if (!verifyData()) {
         writeDataToAPI();
