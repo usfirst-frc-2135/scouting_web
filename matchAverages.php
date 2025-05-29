@@ -43,7 +43,7 @@ require 'header.php';
     </div>
 COMMENTED OUT FOR NOW-->
 
-    <div class="row pt-3 pb-3 mb-3">
+    <div class="row mb-3">
       <div class="overflow-auto" id="freezeTableDiv">
         <style type="text/css" media="screen">
           table tr {
@@ -523,16 +523,16 @@ COMMENTED OUT FOR NOW-->
     }).done(function (data) {
       matchData = JSON.parse(data);
 
-        // Get OPR data 
-        console.log("getting OPR data");
-        $.get("tbaAPI.php", {
-          getCOPRs: 1
-        }).done(function (data) {
-          data = JSON.parse(data)["data"];
-          oprData = data;
-          console.log("--> setting oprData");
+      // Get OPR data 
+      console.log("getting OPR data");
+      $.get("tbaAPI.php", {
+        getCOPRs: 1
+      }).done(function (data) {
+        data = JSON.parse(data)["data"];
+        oprData = data;
+        console.log("--> setting oprData");
         processData(matchData);
-        });
+      });
     });
   }
 
