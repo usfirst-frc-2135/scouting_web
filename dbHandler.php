@@ -68,10 +68,11 @@ class dbHandler
     return (new PDO($dsn, $dbConfig["username"], $dbConfig["password"], $opt));
   }
 
-  function writeRowToTable($data)
+  public function writeRowToMatchTable($data)
   {
     $dbConfig = $this->readDbConfig();
-    $sql = "INSERT INTO " . $dbConfig["datatable"] . "(entrykey,
+    $sql = "INSERT INTO " . $dbConfig["datatable"] .
+      "(entrykey,
                        teamnumber,
                        autonStartPos,
                        autonLeave,
@@ -183,7 +184,7 @@ class dbHandler
     return $out;
   }
 
-  function readAllData($eventCode)
+  public function readAllMatchTable($eventCode)
   {
     $dbConfig = $this->readDbConfig();
     $sql = "SELECT teamnumber,
@@ -232,7 +233,7 @@ class dbHandler
     return $this->enforceDataTyping($result);
   }
 
-  function readTeamData($teamNumber, $eventCode)
+  function readTeamFromMatchTable($teamNumber, $eventCode)
   {
     $dbConfig = $this->readDbConfig();
     $sql = "SELECT teamnumber,
@@ -286,7 +287,8 @@ class dbHandler
   function writeRowToPitTable($data)
   {
     $dbConfig = $this->readDbConfig();
-    $sql = "INSERT INTO " . $dbConfig["pittable"] . "(entrykey,
+    $sql = "INSERT INTO " . $dbConfig["pittable"] .
+      "(entrykey,
                        eventcode,
                        teamnumber,
                        numbatteries,
@@ -312,7 +314,7 @@ class dbHandler
     $prepared_statement->execute($data);
   }
 
-  function readPitData($eventCode)
+  function readAllPitTable($eventCode)
   {
     $dbConfig = $this->readDbConfig();
     $sql = "SELECT teamnumber,
@@ -398,7 +400,7 @@ class dbHandler
     $prepared_statement->execute($data);
   }
 
-  function readAllStrategicData($eventCode)
+  function readAllStrategicTable($eventCode)
   {
     $dbConfig = $this->readDbConfig();
     $sql = "SELECT teamnumber,
@@ -427,14 +429,15 @@ class dbHandler
                    teleopFoul4,
                    endgameFoul1,
                    problem_comment,
-                   general_comment from " . $dbConfig["strategictable"] . " where eventcode='" . $eventCode . "'";
+        general_comment from " . $dbConfig["strategictable"] . " where 
+        eventcode='" . $eventCode . "'";
     $prepared_statement = $this->conn->prepare($sql);
     $prepared_statement->execute();
     $result = $prepared_statement->fetchAll();
     return $result;
   }
 
-  function readTeamStrategicData($teamNumber, $eventCode)
+  function readTeamFromStrategicTable($teamNumber, $eventCode)
   {
     $dbConfig = $this->readDbConfig();
     $sql = "SELECT teamnumber,
@@ -619,9 +622,9 @@ class dbHandler
     }
   }
 
-  function readDbConfig()
+  // Read and return the database configutration file
+  public function readDbConfig()
   {
-    // Read dbIniFile
     // If File doesn't exist, instantiate array as empty
     try
     {

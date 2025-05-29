@@ -42,17 +42,17 @@ if (isset($_GET["eventCode"]))
 if (isset($_GET["getAllData"]))
 {
   // Get all data
-  echo (json_encode($db->readAllData($eventCode)));
+  echo (json_encode($db->readAllMatchTable($eventCode)));
 }
 else if (isset($_GET["getTeamData"]))
 {
   // Get all data for a team
-  echo (json_encode($db->readTeamData($_GET["getTeamData"], $eventCode)));
+  echo (json_encode($db->readTeamFromMatchTable($_GET["getTeamData"], $eventCode)));
 }
 else if (isset($_GET["getAllPitData"]))
 {
   // Get all pit data
-  $matchData = $db->readPitData($eventCode);
+  $matchData = $db->readAllPitTable($eventCode);
   $out = array();
   foreach ($matchData as $row)
   {
@@ -63,7 +63,7 @@ else if (isset($_GET["getAllPitData"]))
 else if (isset($_GET["getTeamPitData"]))
 {
   // Get all pit data
-  $matchData = $db->readPitData($eventCode);
+  $matchData = $db->readAllPitTable($eventCode);
   $out = array();
   foreach ($matchData as $row)
   {
@@ -78,21 +78,21 @@ else if (isset($_GET["getTeamPitData"]))
 else if (isset($_GET["getAllStrategicData"]))
 {
   // Get all data
-  echo (json_encode($db->readAllStrategicData($eventCode)));
+  echo (json_encode($db->readAllStrategicTable($eventCode)));
 }
 else if (isset($_GET["getTeamStrategicData"]))
 {
   // Get all data for a team
-  echo (json_encode($db->readTeamStrategicData($_GET["getTeamStrategicData"], $eventCode)));
+  echo (json_encode($db->readTeamFromStrategicTable($_GET["getTeamStrategicData"], $eventCode)));
 }
 
 /*HOLD->
 else if (isset($_GET["getTeamStrategicData"]))
 {
   // Get all data for a team
-  echo (json_encode($db->readTeamStrategicData($_GET["getTeamData"], $eventCode)));
+  echo (json_encode($db->readTeamFromStrategicTable($_GET["getTeamData"], $eventCode)));
   // Get all strategic data
-  $strategicData = $db->readTeamStrategicData($eventCode);
+  $strategicData = $db->readTeamFromStrategicTable($eventCode);
   $out = array();
   foreach ($strategicData as $row)
   {

@@ -22,11 +22,11 @@ if (isset($_POST["writeData"]))
     $dat[$i]["entrykey"] = $dat[$i]["eventcode"] . "_" . $dat[$i]["matchnumber"] . "_" . $dat[$i]["teamnumber"];
     try
     {
-      $db->writeRowToTable($dat[$i]);
+      $db->writeRowToMatchTable($dat[$i]);
     }
     catch (Exception $e)
     {
-      error_log("! writeRowToTable() threw exception = $e");
+      error_log("! writeRowToMatchTable() threw exception = $e");
       $msg = "fail";
     }
   }
@@ -41,7 +41,7 @@ if (isset($_POST["writeSingleData"]))
   // echo($_POST["writeData"]);
   $dat["eventcode"] = $eventCode;
   $dat["entrykey"] = $dat["eventcode"] . "_" . $dat["matchnumber"] . "_" . $dat["teamnumber"];
-  $db->writeRowToTable($dat);
+  $db->writeRowToMatchTable($dat);
   echo ("success");
 }
 
