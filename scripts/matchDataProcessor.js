@@ -105,7 +105,7 @@ class matchDataProcessor {
 
   getSiteFilter(successFunction) {
     if (!this.siteFilter) {
-      $.post("dbAPI.php", { "getStatus": true }, function (data) {
+      $.post("dbAPI.php", { "getDBStatus": true }, function (data) {
         data = JSON.parse(data);
         var localSiteFilter = {};
         localSiteFilter["useP"] = data["useP"];
@@ -142,7 +142,7 @@ class matchDataProcessor {
 
   getSiteFilteredAverages(successFunction) {
     var temp_this = this;
-    $.post("dbAPI.php", { "getStatus": true }, function (data) {
+    $.post("dbAPI.php", { "getDBStatus": true }, function (data) {
       data = JSON.parse(data);
       var localSiteFilter = {};
       localSiteFilter["useP"] = data["useP"];

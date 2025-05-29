@@ -671,7 +671,7 @@ require 'header.php';
   function getFilteredData(team, successFunction) {
     //      console.log(">> starting getSiteFilteredData for team " + team);
     var temp_this = this;
-    $.post("dbAPI.php", { "getStatus": true }, function (data) {
+    $.post("dbAPI.php", { "getDBStatus": true }, function (data) {
       dbdata = JSON.parse(data);
       var localSiteFilter = {};
       localSiteFilter["useP"] = dbdata["useP"];

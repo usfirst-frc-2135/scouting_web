@@ -702,7 +702,8 @@ class dbHandler
     fclose($fp);
   }
 
-  function getStatus()
+  // Check database status by connecting to server, database, and each table
+  public function getDBStatus()
   {
     $dbConfig = $this->readDbConfig();
     $out = array();

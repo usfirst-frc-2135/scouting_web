@@ -171,10 +171,22 @@ require 'header.php';
 
   var id_to_written_map = {}
 
+
+  // function requestAPI() {
+  //   //output: gets the data from our server
+  //   $.get("readAPI.php", {
+  //     getAllData: 1
+  //   }).done(function (data) {
+  //     var dataObj = JSON.parse(data);
+  //   });
+  // }
+
+  //
   // Process the generated html
+  //
   $(document).ready(function () {
     $.post("dbAPI.php", {
-      "getStatus": true
+      "getDBStatus": true
     }, function (data) {
       updateStatusValues(JSON.parse(data));
     });
@@ -205,15 +217,6 @@ require 'header.php';
         }
       });
     }
-
-    // function requestAPI() {
-    //   //output: gets the API data from our server
-    //   $.get("readAPI.php", {
-    //     getAllData: 1
-    //   }).done(function (data) {
-    //     var dataObj = JSON.parse(data);
-    //   });
-    // }
 
     // Write the db_config file
     $("#writeConfig").on('click', function (event) {
