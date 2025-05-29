@@ -18,6 +18,7 @@ require 'header.php';
           <button type="button" class="btn-close" id="closeMessage" aria-label="Close"></button>
         </div>
 
+        <!-- Strategic Entry Form -->
         <div class="card-body mb-3">
           <form id="strategicForm" method="post" enctype="multipart/form-data">
 
@@ -235,13 +236,13 @@ require 'header.php';
               </div>
             </div>
             <!-- End Comments section -->
-
-            <!-- Submit button -->
-            <div class="d-grid gap-2 col-6 mx-auto">
-              <button class="btn btn-primary" type="button" id="submitButton">Submit</button>
-            </div>
-
           </form>
+
+          <!-- Submit button -->
+          <div class="d-grid gap-2 col-6 mx-auto">
+            <button class="btn btn-primary" type="button" id="submitButton">Submit</button>
+          </div>
+
         </div>
       </div>
     </div>

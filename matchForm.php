@@ -6,309 +6,304 @@ require 'header.php';
 <div class="container row-offcanvas row-offcanvas-left">
   <div class="column card-lg-12 col-sm-12 col-xs-12" id="content">
 
-    <div class="row pt-3 pb-3 mb-3 gx-3">
-      <h2><?php echo $title; ?></h2>
-    </div>
-
-    <div class="row justify-content-md-center">
-        <div class="input-group mb-3 justify-content-md-center">
-          <h3>Match Info</h3>
-        </div>
-        <div class="col-md-6 ">
-          <div class="input-group">
-            <select class="form-select" id="compLevel" aria-label="Comp Level Select">
-              <option value="p">P</option>
-              <option value="qm">QM</option>
-              <option value="qf">QF</option>
-              <option value="sf">SF</option>
-              <option value="f">F</option>
-            </select>
-            <input id="matchNumber" type="text" class="form-control" placeholder="Match Number" aria-label="matchNumber">
-          </div>
-        </div>
-        <div class="col-md-6 ">
-          <div class="input-group">
-            <label for="teamNumber" class="form-label pg-2">Team Number</label>
-            <input type="number" class="form-control" id="teamNumber" placeholder="FRC team number">
-          </div>
-          <div class="input-group">
-            <label for="scoutName" class="form-label pg-2">Scout Name</label>
-            <input type="text" class="form-control" id="scoutName" placeholder="First name, last initial">
-          </div>
-        </div>
+    <div class="row pt-3 pb-3 mb-3">
+      <div class="row justify-content-md-center">
+        <h2 class="col-md-6"><?php echo $title; ?></h2>
       </div>
 
-      <div class="row g-3 justify-content-md-center">
-        <div class="input-group mb-3 justify-content-md-center">
-          <h3>Auto</h3>
-        </div>
-        <!--<div class="col-md-6 ">
-          <div class="input-group g-5">
-            <h4 class="">Auto Start Position</h4>
-            <img src="./images/startingPositionB.png" class="card-img-top" alt="starting position image">
-            <select class="form-select" id="autoStartPosition">
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-            </select>
-          </div> -->
-      </div>
-      <div class="col-md-6 g-5">
-        <div class="row">
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" name="exitCommunity" id="exitCommunity">
-            <label class="form-check-label" for="exitCommunity">Exited Community?</label>
-          </div>
+      <div class="card col-md-6 mx-auto">
+
+        <div id="matchScoutingMessage" style="display: none" class="alert alert-dismissible fade show" role="alert">
+          <div id="uploadMessageText"></div>
+          <button type="button" class="btn-close" id="closeMessage" aria-label="Close"></button>
         </div>
 
-        <div class="row">
-
-
-          <div class="col-md-6 g-5">
-            <div class="row">
-              <button class="btn btn-primary btn-info" style="width:100%" type="button" id="plusAutoConesBottom">+</button>
+        <!-- Match Entry Form -->
+        <div class="card-body mb-3">
+          <form id="matchForm" method="post" enctype="multipart/form-data">
+            <div>
+              <h3>Match Info</h3>
             </div>
-            <div class="row">
-              <b id="autoConesBottom">Auto Cones Bottom: 0</b>
+            <div class="mb-3">
+              <label for="teamNumber" class="form-label">Team Number</label>
+              <input type="number" class="form-control" id="teamNumber" placeholder="FRC team number">
             </div>
-            <div class="row">
-              <button class="btn btn-primary btn-warning" style="width:100%" type="button" id="minusAutoConesBottom">-</button>
-            </div>
-            <br>
-          </div>
-
-
-          <div class="col-md-6 g-5">
-            <div class="row">
-              <button class="btn btn-primary btn-info" style="width:100%" type="button" id="plusAutoConesMiddle">+</button>
-            </div>
-            <div class="row">
-              <b id="autoConesMiddle">Auto Cones Middle: 0</b>
-            </div>
-            <div class="row">
-              <button class="btn btn-primary btn-warning" style="width:100%" type="button" id="minusAutoConesMiddle">-</button>
-            </div>
-            <br>
-          </div>
-
-
-          <div class="col-md-6 g-5">
-            <div class="row">
-              <button class="btn btn-primary btn-info" style="width:100%" type="button" id="plusAutoConesTop">+</button>
-            </div>
-            <div class="row">
-              <b id="autoConesTop">Auto Cones Top: 0</b>
-            </div>
-            <div class="row">
-              <button class="btn btn-primary btn-warning" style="width:100%" type="button" id="minusAutoConesTop">-</button>
-            </div>
-            <br>
-          </div>
-
-          <div class="col-md-6 g-5">
-            <div class="row">
-              <button class="btn btn-primary btn-info" style="width:100%" type="button" id="plusAutoCubesBottom">+</button>
-            </div>
-            <div class="row">
-              <b id="autoCubesBottom">Auto Cubes Bottom: 0</b>
-            </div>
-            <div class="row">
-              <button class="btn btn-primary btn-warning" style="width:100%" type="button" id="minusAutoCubesBottom">-</button>
-            </div>
-            <br>
-          </div>
-
-
-          <div class="col-md-6 g-5">
-            <div class="row">
-              <button class="btn btn-primary btn-info" style="width:100%" type="button" id="plusAutoCubesMiddle">+</button>
-            </div>
-            <div class="row">
-              <b id="autoCubesMiddle">Auto Cubes Middle: 0</b>
-            </div>
-            <div class="row">
-              <button class="btn btn-primary btn-warning" style="width:100%" type="button" id="minusAutoCubesMiddle">-</button>
-            </div>
-            <br>
-          </div>
-
-
-          <div class="col-md-6 g-5">
-            <div class="row">
-              <button class="btn btn-primary btn-info" style="width:100%" type="button" id="plusAutoCubesTop">+</button>
-            </div>
-            <div class="row">
-              <b id="autoCubesTop">Auto Cubes Top: 0</b>
-            </div>
-            <div class="row">
-              <button class="btn btn-primary btn-warning" style="width:100%" type="button" id="minusAutoCubesTop">-</button>
-            </div>
-            <br>
-          </div>
-
-          <div class="col-md-6 g-5">
-            <div class="row">
-              <div class="form-check form-check-inline">
-                <label class="form-check-label" for="autochargestation">Auto Charge Station?</label>
-                <select class="form-select" id="autochargestation">
-                  <option value="0">None</option>
-                  <option value="1">Docked</option>
-                  <option value="2">Engaged</option>
+            <div class="mb-3">
+              <span>Match Number</span>
+              <div class="input-group">
+                <select class="form-select" id="compLevel" aria-label="Comp Level Select">
+                  <option value="p">P</option>
+                  <option value="qm">QM</option>
+                  <option value="qf">QF</option>
+                  <option value="sf">SF</option>
+                  <option value="f">F</option>
                 </select>
+                <input id="matchNumber" type="text" class="form-control" placeholder="Match Number" aria-label="Match Number">
               </div>
-              <br>
             </div>
+            <div class="mb-3">
+              <label for="scoutName" class="form-label">Scout Name</label>
+              <input type="text" class="form-control" id="scoutName" placeholder="First name, last initial">
+            </div>
+
+            <!-- Autonomous Mode -->
+            <div class="card mb-3" style="background-color:#D5E6DE">
+              <div class="card-header fw-bold">
+                Autonomous Mode
+              </div>
+              <div class="card-body">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" name="exitCommunity" id="exitCommunity">
+                  <label class="form-check-label" for="exitCommunity">Exited Community?</label>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="row">
+                      <button class="btn btn-primary btn-info" style="width:100%" type="button" id="plusAutoConesBottom">+</button>
+                    </div>
+                    <div class="row">
+                      <b id="autoConesBottom">Auto Cones Bottom: 0</b>
+                    </div>
+                    <div class="row">
+                      <button class="btn btn-primary btn-warning" style="width:100%" type="button"
+                        id="minusAutoConesBottom">-</button>
+                    </div>
+                    <br>
+                  </div>
+
+
+                  <div class="col-md-6">
+                    <div class="row">
+                      <button class="btn btn-primary btn-info" style="width:100%" type="button" id="plusAutoConesMiddle">+</button>
+                    </div>
+                    <div class="row">
+                      <b id="autoConesMiddle">Auto Cones Middle: 0</b>
+                    </div>
+                    <div class="row">
+                      <button class="btn btn-primary btn-warning" style="width:100%" type="button"
+                        id="minusAutoConesMiddle">-</button>
+                    </div>
+                    <br>
+                  </div>
+
+
+                  <div class="col-md-6">
+                    <div class="row">
+                      <button class="btn btn-primary btn-info" style="width:100%" type="button" id="plusAutoConesTop">+</button>
+                    </div>
+                    <div class="row">
+                      <b id="autoConesTop">Auto Cones Top: 0</b>
+                    </div>
+                    <div class="row">
+                      <button class="btn btn-primary btn-warning" style="width:100%" type="button" id="minusAutoConesTop">-</button>
+                    </div>
+                    <br>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="row">
+                      <button class="btn btn-primary btn-info" style="width:100%" type="button" id="plusAutoCubesBottom">+</button>
+                    </div>
+                    <div class="row">
+                      <b id="autoCubesBottom">Auto Cubes Bottom: 0</b>
+                    </div>
+                    <div class="row">
+                      <button class="btn btn-primary btn-warning" style="width:100%" type="button"
+                        id="minusAutoCubesBottom">-</button>
+                    </div>
+                    <br>
+                  </div>
+
+
+                  <div class="col-md-6">
+                    <div class="row">
+                      <button class="btn btn-primary btn-info" style="width:100%" type="button" id="plusAutoCubesMiddle">+</button>
+                    </div>
+                    <div class="row">
+                      <b id="autoCubesMiddle">Auto Cubes Middle: 0</b>
+                    </div>
+                    <div class="row">
+                      <button class="btn btn-primary btn-warning" style="width:100%" type="button"
+                        id="minusAutoCubesMiddle">-</button>
+                    </div>
+                    <br>
+                  </div>
+
+
+                  <div class="col-md-6">
+                    <div class="row">
+                      <button class="btn btn-primary btn-info" style="width:100%" type="button" id="plusAutoCubesTop">+</button>
+                    </div>
+                    <div class="row">
+                      <b id="autoCubesTop">Auto Cubes Top: 0</b>
+                    </div>
+                    <div class="row">
+                      <button class="btn btn-primary btn-warning" style="width:100%" type="button" id="minusAutoCubesTop">-</button>
+                    </div>
+                    <br>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="form-check form-check-inline">
+                        <label class="form-check-label" for="autochargestation">Auto Charge Station?</label>
+                        <select class="form-select" id="autochargestation">
+                          <option value="0">None</option>
+                          <option value="1">Docked</option>
+                          <option value="2">Engaged</option>
+                        </select>
+                      </div>
+                      <br>
+                    </div>
+                  </div>
+
+                  <br>
+                </div>
+              </div>
+            </div>
+            <!-- end Autonomous Mode -->
+
+            <!-- Telop Mode -->
+            <div class="card mb-3" style="background-color:#D6F3FB">
+              <div class="card-header fw-bold">
+                Teleop Mode
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <button class="btn btn-primary btn-info" style="width:100%" type="button" id="plusTeleopConesBottom">+</button>
+                </div>
+                <div class="row">
+                  <b id="teleopConesBottom">Teleop Cones Bottom: 0</b>
+                </div>
+                <div class="row">
+                  <button class="btn btn-primary btn-warning" style="width:100%" type="button"
+                    id="minusTeleopConesBottom">-</button>
+                </div>
+                <br>
+
+                <div class="row">
+                  <button class="btn btn-primary btn-info" style="width:100%" type="button" id="plusTeleopConesMiddle">+</button>
+                </div>
+                <div class="row">
+                  <b id="teleopConesMiddle">Teleop Cones Middle: 0</b>
+                </div>
+                <div class="row">
+                  <button class="btn btn-primary btn-warning" style="width:100%" type="button"
+                    id="minusTeleopConesMiddle">-</button>
+                </div>
+                <br>
+
+                <div class="row">
+                  <button class="btn btn-primary btn-info" style="width:100%" type="button" id="plusTeleopConesTop">+</button>
+                </div>
+                <div class="row">
+                  <b id="teleopConesTop">Teleop Cones Top: 0</b>
+                </div>
+                <div class="row">
+                  <button class="btn btn-primary btn-warning" style="width:100%" type="button" id="minusTeleopConesTop">-</button>
+                </div>
+                <br>
+
+                <div class="row">
+                  <button class="btn btn-primary btn-info" style="width:100%" type="button" id="plusTeleopCubesBottom">+</button>
+                </div>
+                <div class="row">
+                  <b id="teleopCubesBottom">Teleop Cubes Bottom: 0</b>
+                </div>
+                <div class="row">
+                  <button class="btn btn-primary btn-warning" style="width:100%" type="button"
+                    id="minusTeleopCubesBottom">-</button>
+                </div>
+                <br>
+
+                <div class="row">
+                  <button class="btn btn-primary btn-info" style="width:100%" type="button" id="plusTeleopCubesMiddle">+</button>
+                </div>
+                <div class="row">
+                  <b id="teleopCubesMiddle">Teleop Cubes Middle: 0</b>
+                </div>
+                <div class="row">
+                  <button class="btn btn-primary btn-warning" style="width:100%" type="button"
+                    id="minusTeleopCubesMiddle">-</button>
+                </div>
+                <br>
+
+                <div class="row">
+                  <button class="btn btn-primary btn-info" style="width:100%" type="button" id="plusTeleopCubesTop">+</button>
+                </div>
+                <div class="row">
+                  <b id="teleopCubesTop">Teleop Cubes Top: 0</b>
+                </div>
+                <div class="row">
+                  <button class="btn btn-primary btn-warning" style="width:100%" type="button" id="minusTeleopCubesTop">-</button>
+                </div>
+                <br>
+              </div>
+
+              <div class="row">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" name="pickedupCube" id="pickedupCube">
+                  <label class="form-check-label" for="pickedupCube">Picked Up Cube?</label>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" name="pickedupUprightCone" id="pickedupUprightCone">
+                  <label class="form-check-label" for="pickedupUprightCone">Picked Up Upright Cone?</label>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" name="pickedupTippedCone" id="pickedupTippedCone">
+                  <label class="form-check-label" for="pickedupTippedCone">Picked Up Tipped Cone</label>
+                </div>
+              </div>
+            </div>
+            <!-- end Teleop Mode -->
+
+            <!-- End Game -->
+            <div class="card mb-3" style="background-color:#FBE6D3">
+              <div class="card-header fw-bold">
+                End Game
+              </div>
+              <div class="row">
+                <div class="form-check form-check-inline">
+                  <label class="form-check-label" for="endgamechargestation">Charge Station?</label>
+                  <select class="form-select" id="endgamechargestation">
+                    <option value="0">None</option>
+                    <option value="1">Parked</option>
+                    <option value="2">Docked</option>
+                    <option value="3">Engaged</option>
+                  </select>
+                </div>
+
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" name="dead" id="dead">
+                  <label class="form-check-label" for="dead">Dead?</label>
+                </div>
+              </div>
+
+              <div>
+                <label for="generalComment" class="form-label">General comment:</label>
+                <input type="text" class="form-control" id="generalComment">
+              </div>
+            </div>
+          </form>
+          <!-- End Comments section -->
+
+          <!-- Submit button -->
+          <div class="row justify-content-md-center">
+            <button class="btn btn-primary" style="width:100%" type="button" id="submitForm">Submit</button>
           </div>
-
-          <br>
+          </form>
         </div>
-      </div>
-    </div>
-
-    <div class="row g-3 justify-content-md-center">
-      <div class="input-group mb-3 justify-content-md-center">
-        <h3>Teleop</h3>
-      </div>
-      <div class="col-md-6 g-5">
-        <div class="row">
-          <button class="btn btn-primary btn-info" style="width:100%" type="button" id="plusTeleopConesBottom">+</button>
-        </div>
-        <div class="row">
-          <b id="teleopConesBottom">Teleop Cones Bottom: 0</b>
-        </div>
-        <div class="row">
-          <button class="btn btn-primary btn-warning" style="width:100%" type="button" id="minusTeleopConesBottom">-</button>
-        </div>
-        <br>
-      </div>
-
-
-      <div class="col-md-6 g-5">
-        <div class="row">
-          <button class="btn btn-primary btn-info" style="width:100%" type="button" id="plusTeleopConesMiddle">+</button>
-        </div>
-        <div class="row">
-          <b id="teleopConesMiddle">Teleop Cones Middle: 0</b>
-        </div>
-        <div class="row">
-          <button class="btn btn-primary btn-warning" style="width:100%" type="button" id="minusTeleopConesMiddle">-</button>
-        </div>
-        <br>
-      </div>
-
-
-      <div class="col-md-6 g-5">
-        <div class="row">
-          <button class="btn btn-primary btn-info" style="width:100%" type="button" id="plusTeleopConesTop">+</button>
-        </div>
-        <div class="row">
-          <b id="teleopConesTop">Teleop Cones Top: 0</b>
-        </div>
-        <div class="row">
-          <button class="btn btn-primary btn-warning" style="width:100%" type="button" id="minusTeleopConesTop">-</button>
-        </div>
-        <br>
-      </div>
-
-      <div class="col-md-6 g-5">
-        <div class="row">
-          <button class="btn btn-primary btn-info" style="width:100%" type="button" id="plusTeleopCubesBottom">+</button>
-        </div>
-        <div class="row">
-          <b id="teleopCubesBottom">Teleop Cubes Bottom: 0</b>
-        </div>
-        <div class="row">
-          <button class="btn btn-primary btn-warning" style="width:100%" type="button" id="minusTeleopCubesBottom">-</button>
-        </div>
-        <br>
-      </div>
-
-
-      <div class="col-md-6 g-5">
-        <div class="row">
-          <button class="btn btn-primary btn-info" style="width:100%" type="button" id="plusTeleopCubesMiddle">+</button>
-        </div>
-        <div class="row">
-          <b id="teleopCubesMiddle">Teleop Cubes Middle: 0</b>
-        </div>
-        <div class="row">
-          <button class="btn btn-primary btn-warning" style="width:100%" type="button" id="minusTeleopCubesMiddle">-</button>
-        </div>
-        <br>
-      </div>
-
-
-      <div class="col-md-6 g-5">
-        <div class="row">
-          <button class="btn btn-primary btn-info" style="width:100%" type="button" id="plusTeleopCubesTop">+</button>
-        </div>
-        <div class="row">
-          <b id="teleopCubesTop">Teleop Cubes Top: 0</b>
-        </div>
-        <div class="row">
-          <button class="btn btn-primary btn-warning" style="width:100%" type="button" id="minusTeleopCubesTop">-</button>
-        </div>
-        <br>
-      </div>
-
-      <div class="row">
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="checkbox" name="pickedupCube" id="pickedupCube">
-          <label class="form-check-label" for="pickedupCube">Picked Up Cube?</label>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="checkbox" name="pickedupUprightCone" id="pickedupUprightCone">
-          <label class="form-check-label" for="pickedupUprightCone">Picked Up Upright Cone?</label>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="checkbox" name="pickedupTippedCone" id="pickedupTippedCone">
-          <label class="form-check-label" for="pickedupTippedCone">Picked Up Tipped Cone</label>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="col-md-6 g-5">
-      <div class="row">
-        <div class="form-check form-check-inline">
-          <label class="form-check-label" for="endgamechargestation">Charge Station?</label>
-          <select class="form-select" id="endgamechargestation">
-            <option value="0">None</option>
-            <option value="1">Parked</option>
-            <option value="2">Docked</option>
-            <option value="3">Engaged</option>
-          </select>
-        </div>
-
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="checkbox" name="dead" id="dead">
-          <label class="form-check-label" for="dead">Dead?</label>
-        </div>
-      </div>
-
-      <div class="row">
-        <p>Comment</p>
-        <textarea id="comment" class='form-control' rows='4'></textarea>
       </div>
     </div>
   </div>
-
-  <div class="row g-3 justify-content-md-center">
-    <button class="btn btn-primary" style="width:100%" type="button" id="submitForm">Submit</button>
-  </div>
-
 </div>
-<!-- </div> -->
-<!-- </div> -->
 
 <?php include 'footer.php'; ?>
 
