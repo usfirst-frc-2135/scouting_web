@@ -73,7 +73,7 @@
             <a class="nav-link" href="./index.php">Scouting Status</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="./pitForm.php">Pit Scout Form</a>
+            <a class="nav-link" href="./pitForm.php">Pit Scouting</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="./pitPhotoUpload.php">Photo Upload</a>
@@ -91,7 +91,7 @@
             <a class="nav-link" href="./strategicSchedule.php">Strategic Schedule</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="./strategicForm.php">Strategic Form</a>
+            <a class="nav-link" href="./strategicForm.php">Strategic Scouting</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="./strategicData.php">Strategic Data</a>

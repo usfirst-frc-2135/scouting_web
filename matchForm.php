@@ -1,5 +1,5 @@
 <?php
-$title = 'Match Form';
+$title = 'Match Scouting Form';
 require 'header.php';
 ?>
 
