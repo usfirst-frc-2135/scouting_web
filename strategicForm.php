@@ -18,7 +18,7 @@ require 'header.php';
           <button type="button" class="btn-close" id="closeMessage" aria-label="Close"></button>
         </div>
 
-        <div class="card-body">
+        <div class="card-body mb-3">
           <form id="strategicForm" method="post" enctype="multipart/form-data">
 
             <div class="mb-3">
@@ -37,13 +37,13 @@ require 'header.php';
             </div>
 
             <!-- Autonomous Mode -->
-            <div class="card" style="background-color:#cfe2ff">
-              <div class="card-header">
-                <b>Autonomous Mode</b>
+            <div class="card mb-3" style="background-color:#D5E6DE">
+              <div class="card-header fw-bold">
+                Autonomous Mode
               </div>
               <div class="card-body">
                 <div>
-                  <label class="form-label"><b>Auton - Get coral from:</b></label>
+                  <span class="fw-bold">Auton - Get coral from:</span>
                 </div>
                 <div class="form-check form-check-inline">
                   <label for="autonGetCoralFromFloor" class="form-label">Floor</label>
@@ -53,9 +53,8 @@ require 'header.php';
                   <label for="autonGetCoralFromStation" class="form-label">Coral Station</label>
                   <input class="form-check-input" type="checkbox" id="autonGetCoralFromStation">
                 </div>
-                <p> </p>
                 <div>
-                  <label class="form-label"><b>Auton - Get algae from:</b></label>
+                  <span class="fw-bold">Auton - Get algae from:</span>
                 </div>
                 <div class="form-check form-check-inline">
                   <label for="autonGetAlgaeFromFloor" class="form-label">Floor</label>
@@ -67,9 +66,8 @@ require 'header.php';
                 </div>
 
                 <!-- Auton - Committed fouls section -->
-                <p> </p>
                 <div>
-                  <label class="form-label"><b>Auton - Committed fouls:</b></label>
+                  <span class="fw-bold">Auton - Committed fouls:</span>
                 </div>
                 <div class="form-check form-check-inline">
                   <label for="autonFoul1" class="form-label">Contact with opposing robot in their barge zone</label>
@@ -84,15 +82,15 @@ require 'header.php';
             <!-- end Autonomous Mode -->
 
             <!-- Teleop Mode -->
-            <div class="card" style="background-color:#c8f1ff">
-              <div class="card-header">
-                <b>Teleop Mode</b>
+            <div class="card mb-3" style="background-color:#D6F3FB">
+              <div class="card-header fw-bold">
+                Teleop Mode
               </div>
               <div class="card-body">
 
                 <!-- Teleop - Floor pickup section -->
                 <div>
-                  <label class="form-label"><b>Teleop - Floor pickup:</b></label>
+                  <span class="fw-bold">Teleop - Floor pickup:</span>
                 </div>
                 <div class="form-check form-check-inline">
                   <label for="teleopFloorPickupCoral" class="form-label">Coral</label>
@@ -103,9 +101,8 @@ require 'header.php';
                   <input class="form-check-input" type="checkbox" id="teleopFloorPickupAlgae">
                 </div>
                 <!-- Teleop - Algae from reef section -->
-                <p> </p>
                 <div>
-                  <label class="form-label"><b>Teleop - Algae from reef:</b></label>
+                  <span class="fw-bold">Teleop - Algae from reef:</span>
                 </div>
                 <div class="form-check form-check-inline">
                   <label for="teleopKnockOffAlgaeFromReef" class="form-label">Knock off algae from reef</label>
@@ -117,9 +114,8 @@ require 'header.php';
                 </div>
 
                 <!-- Driver ability section -->
-                <p> </p>
                 <div>
-                  <label class="form-label"><b>Driver ability/speed:</b></label>
+                  <span class="fw-bold">Driver ability/speed:</span>
                 </div>
                 <div class="form-check form-check-inline">
                   <input class="form-check-input" type="radio" name="driverAbilityGroup" id="driveScore1">
@@ -143,9 +139,8 @@ require 'header.php';
                 </div>
 
                 <!-- Against defensive robot section -->
-                <p> </p>
                 <div>
-                  <label class="form-label"><b>Against defensive robot:</b></label>
+                  <span class="fw-bold">Against defensive robot:</span>
                 </div>
                 <div class="form-check form-check-inline">
                   <label for="againstTactic1" class="form-label">Path Blocked (able to escape quickly?)</label>
@@ -157,7 +152,7 @@ require 'header.php';
                 </div>
                 <p> </p>
                 <div>
-                  <label class="form-label"><b>Endgame: Climbing Foul:</b></label>
+                  <span class="fw-bold">Endgame: Climbing Foul:</span>
                 </div>
                 <div class="form-check form-check-inline">
                   <label for="teleopFoul1" class="form-label">Contact with anchor when climbing</label>
@@ -168,14 +163,14 @@ require 'header.php';
             <!-- end Teleop Mode -->
 
             <!-- Playing Defense Section -->
-            <div class="card" style="background-color:#e8f1ff">
-              <div class="card-header">
-                <b>Playing Defense</b>
+            <div class="card mb-3" style="background-color:#FBE6D3">
+              <div class="card-header fw-bold">
+                Playing Defense
               </div>
               <div class="card-body">
                 <!-- Defense tactics section -->
                 <div>
-                  <label class="form-label"><b>Defense tactics played:</b></label>
+                  <span class="fw-bold">Defense tactics played:</span>
                 </div>
                 <div class="form-check form-check-inline">
                   <label for="defenseTactic1" class="form-label">Blocking loading station (how long detained?)</label>
@@ -191,9 +186,8 @@ require 'header.php';
                 </div>
 
                 <!-- Committed fouls section -->
-                <p> </p>
                 <div>
-                  <label class="form-label"><b>Committed fouls:</b></label>
+                  <span class="fw-bold">Committed fouls:</span>
                 </div>
                 <div class="form-check form-check-inline">
                   <label for="foul1" class="form-label">Pinning for 3 count</label>
@@ -213,9 +207,8 @@ require 'header.php';
                 </div>
 
                 <!-- Endgame fouls section -->
-                <p> </p>
                 <div>
-                  <label class="form-label"><b>Endgame fouls:</b></label>
+                  <span class="fw-bold">Endgame fouls:</span>
                 </div>
                 <div class="form-check form-check-inline">
                   <label for="endgameFoul1" class="form-label">Contact with opposing robot while it is touching its cage</label>
@@ -225,18 +218,17 @@ require 'header.php';
             </div>
 
             <!-- Comments section -->
-            <div class="card" style="background-color:#83b4ff">
-              <div class="card-header">
-                <b>Comments</b>
+            <div class="card mb-3" style="background-color:#F8F9FA">
+              <div class="card-header fw-bold">
+                Comments
               </div>
               <div class="card-body">
-                <div class="mb-3">
+                <div>
                   <label for="problemComment" class="form-label">Problems robot ran into on the field:</label>
                   <input type="text" class="form-control" id="problemComment">
                 </div>
 
-                <p> </p>
-                <div class="mb-3">
+                <div>
                   <label for="generalComment" class="form-label">General comment:</label>
                   <input type="text" class="form-control" id="generalComment">
                 </div>
@@ -245,7 +237,6 @@ require 'header.php';
             <!-- End Comments section -->
 
             <!-- Submit button -->
-            <p> </p>
             <div class="d-grid gap-2 col-6 mx-auto">
               <button class="btn btn-primary" type="button" id="submitButton">Submit</button>
             </div>
