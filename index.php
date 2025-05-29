@@ -117,7 +117,7 @@ require 'header.php';
   }
 
   //
-  // Create the page
+  // Process the generated html
   //
   $(document).ready(function () {
     // Make the header
@@ -128,12 +128,12 @@ require 'header.php';
     });
 
     // Get the list of teams and add the team names 
-    console.log("index: getting teamlist from tbaAPI using db_config.ini event code");
+    console.log("index: getting teamlist from tbaAPI using db_config event code");
     $.get("./tbaAPI.php", {
       getTeamListAndNames: 1
     }).done(function (data) {
       if (data == null)
-        alert("Can't load teamlist from TBA; check if TBA Key was set in db_config.ini");
+        alert("Can't load teamlist from TBA; check if TBA Key was set in db_config");
       else {
         var jsonTeamList = JSON.parse(data);
         for (var i = 0; i < jsonTeamList.length; i++) {

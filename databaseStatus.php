@@ -11,6 +11,7 @@ require 'header.php';
 
       <div class="row pt-3 pb-3 mb-3">
         <div class="col-lg-6 col-sm-6 col-xs-6 gx-3">
+          <!-- Status Card -->
           <div class="card">
             <div class="card-header">
               Database Status
@@ -31,10 +32,11 @@ require 'header.php';
             </div>
           </div>
 
+          <!-- Match filter button card -->
           <div class="overflow-auto">
             <div class="card">
               <div class="card-header">
-                Select Data to Use
+              Select Match Data to Use
               </div>
               <div class="card-body d-grid gap-4">
                 <div class="p-2">
@@ -67,6 +69,7 @@ require 'header.php';
           </div>
         </div>
 
+        <!-- DB Config text entry card -->
         <div class="col-lg-6 col-sm-6 col-xs-6 gx-3">
           <div class="card">
             <div class="card-header">
@@ -98,20 +101,16 @@ require 'header.php';
                 <input type="text" class="form-control" id="writeEventCode" aria-describedby="tbaEventCode">
               </div>
 
-              <button id="writeConfig" class="btn btn-primary">Write Config</button>
-              <button id="createDB" class="btn btn-primary">Create DB</button>
-              <button id="createTable" class="btn btn-primary">Create Table</button>
+              <div class="mb-3">
+                <button id="writeConfig" class="btn btn-primary">Write Config</button>
+                <button id="createDB" class="btn btn-primary">Create DB</button>
+                <button id="createTable" class="btn btn-primary">Create Table</button>
+              </div>
             </div>
           </div>
 
         </div>
-
-        <!-- DB Exists Badge -->
-
-        <!-- Create DB - DB Name + Create -->
-        <!-- Write Admin Credentials - Admin Name Write -->
       </div>
-
     </div>
   </div>
 </div>
@@ -122,6 +121,7 @@ require 'header.php';
 
   var myEventCode = null;
 
+  // Set the status badges for an item
   function setStatusBadge(isSuccess, id) {
     if (isSuccess) {
       $("#" + id).text("Connected");
@@ -136,6 +136,7 @@ require 'header.php';
     }
   }
 
+  // Update all status badges for DB connection
   function updateStatusValues(statusArray) {
     $("#serverName").text(statusArray["server"]);
     $("#databaseName").text(statusArray["db"]);
@@ -158,6 +159,7 @@ require 'header.php';
     $("#dataF").prop('checked', statusArray["useF"]);
   }
 
+  // Map form form-control IDs to labels for db_config
   var id_to_key_map = {
     "writeServer": "server",
     "writeDatabase": "db",
@@ -166,8 +168,10 @@ require 'header.php';
     "writeTBAKey": "tbakey",
     "writeEventCode": "eventcode",
   };
+
   var id_to_written_map = {}
 
+  // Process the generated html
   $(document).ready(function () {
     $.post("dbAPI.php", {
       "getStatus": true
@@ -175,6 +179,7 @@ require 'header.php';
       updateStatusValues(JSON.parse(data));
     });
 
+    // Loop through handling all text fields
     for (const key in id_to_key_map) {
       id_to_written_map[key] = false;
       $("#" + key).change(function () {
@@ -201,16 +206,16 @@ require 'header.php';
       });
     }
 
-    function requestAPI() {
-      //output: gets the API data from our server
-      $.get("readAPI.php", {
-        getAllData: 1
-      }).done(function (data) {
-        var dataObj = JSON.parse(data);
-      });
+    // function requestAPI() {
+    //   //output: gets the API data from our server
+    //   $.get("readAPI.php", {
+    //     getAllData: 1
+    //   }).done(function (data) {
+    //     var dataObj = JSON.parse(data);
+    //   });
+    // }
 
-    }
-
+    // Write the db_config file
     $("#writeConfig").on('click', function (event) {
       var writeData = {};
       for (const key in id_to_key_map) {
@@ -231,6 +236,7 @@ require 'header.php';
       });
     });
 
+    // Update the match type filters
     $("#useData").on('click', function (event) {
       // Make data to send to API
       var useData = {};
@@ -249,6 +255,7 @@ require 'header.php';
       });
     });
 
+    // Create a new database
     $("#createDB").on('click', function (event) {
       $.post("dbAPI.php", {
         "createDB": true
@@ -257,6 +264,7 @@ require 'header.php';
       });
     });
 
+    // Create new tables in database
     $("#createTable").on('click', function (event) {
       $.post("dbAPI.php", {
         "createTable": true

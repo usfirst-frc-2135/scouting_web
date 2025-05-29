@@ -1651,7 +1651,7 @@ require 'header.php';
     }).done(function (data) {
       var teamname = "XX";
       if (data == null)
-        alert("Can't load teamName from TBA; check if TBA Key was set in db_config.ini");
+        alert("Can't load teamName from TBA; check if TBA Key was set in db_config");
       else {
         console.log("teamLookup: getTeamInfo: data = " + data);
         teamInfo = JSON.parse(data)["response"];
@@ -1699,26 +1699,34 @@ require 'header.php';
 
   }
 
+  //
+  // Process the generated html
+  //
   $(document).ready(function () {
     var initTeamNumber = checkGet()
     if (initTeamNumber) {
       loadTeam(initTeamNumber);
     }
 
+    // Load team data for the number entered
     $("#loadTeamButton").click(function () {
       loadTeam($("#writeTeamNumber").val());
     });
 
+    // Keep the frozen match data updated
     $("#sortableAllMatches").click(function () {
       if (frozenTable) {
         frozenTable.update();
       }
     });
+
+    // Keep the frozen strategy table updated
     $("#sortableStrategicData").click(function () {
       if (frozenStratTable) {
         frozenTable.update();
       }
     });
   });
+
 </script>
 <script type="text/javascript" src="./scripts/matchDataProcessor.js"></script>

@@ -539,9 +539,14 @@ require 'header.php';
     });
   }
 
+  //
+  // Process the generated html
+  //
   $(document).ready(function () {
     console.log("==> matchForm.php: ready() starting");
     attach_gamepiece_scoring();
+
+    // Submit the match data form 
     $("#submitForm").click(function () {
       var form_data = get_form_data();
       submit(form_data);

@@ -85,7 +85,7 @@ require 'header.php';
   }
 
   function requestAPI() {
-    //output: gets the API data from our server
+    //output: gets the COPR data from TBA
     $.get("tbaAPI.php", {
       getCOPRs: 1
     }).done(function (data) {
@@ -99,6 +99,9 @@ require 'header.php';
     });
   }
 
+  //
+  // Process the generated html
+  //
   $(document).ready(function () {
     requestAPI();
 

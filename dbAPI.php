@@ -2,6 +2,7 @@
 
 include "dbHandler.php";
 
+// Handle database requests for update
 if (isset($_POST["getStatus"]))
 {
   $db = new dbHandler();
@@ -32,6 +33,7 @@ else if (isset($_POST["createDB"]))
 else if (isset($_POST["createTable"]))
 {
   $db = new dbHandler();
+
   try
   {
     $db->createDataTable();
@@ -40,6 +42,7 @@ else if (isset($_POST["createTable"]))
   {
     error_log($e);
   }
+
   try
   {
     $db->createTBATable();
@@ -48,6 +51,7 @@ else if (isset($_POST["createTable"]))
   {
     error_log($e);
   }
+
   try
   {
     $db->createPitTable();
@@ -56,6 +60,7 @@ else if (isset($_POST["createTable"]))
   {
     error_log($e);
   }
+
   try
   {
     $db->createStrategicTable();
@@ -64,6 +69,11 @@ else if (isset($_POST["createTable"]))
   {
     error_log($e);
   }
+
   $stat = $db->getStatus();
   echo json_encode($stat);
+}
+else
+{
+  error_log("dbAPI.php called without a valid request");
 }

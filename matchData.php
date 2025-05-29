@@ -200,10 +200,13 @@ require 'header.php';
     });
   }
 
+  //
+  // Process the generated html
+  //
   $(document).ready(function () {
     requestAPI();
-    // sorttable.makeSortable(document.getElementById("rawDataTable"));
 
+    // Keep the frozen pane updated 
     $("#rawDataTable").click(function () {
       if (frozenTable) {
         frozenTable.update();

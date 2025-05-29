@@ -53,6 +53,7 @@ class dbHandler
   }
 
   function connectToServer()
+  // Connect to the server holding the database
   {
 
     $dbConfig = $this->readDbConfig();
@@ -624,12 +625,12 @@ class dbHandler
     // If File doesn't exist, instantiate array as empty
     try
     {
-      error_log("dbHandler: readDbConfig(): reading db_config.ini file");
+      error_log("dbHandler: readDbConfig(): reading db_config file");
       $ini_arr = parse_ini_file($this->dbIniFile);
     }
     catch (Exception $e)
     {
-      error_log("  dbHandler: no existing db_config.ini file, so  creating a new one");
+      error_log("  dbHandler: no existing db_config file, so  creating a new one");
       $ini_arr = array();
     }
 
@@ -641,7 +642,7 @@ class dbHandler
         $ini_arr[$key] = "";
       }
 
-      # Specific checking
+      # Specific checking for match filters
       if ($key == "useP" || $key == "useQm" || $key == "useQf" || $key == "useSf" || $key == "useF")
       {
         if ($ini_arr[$key] == "")
@@ -757,7 +758,7 @@ class dbHandler
       $out["ServerExists"] = false;
     }
 
-    // Table Connection
+    // Match data able Connection
     try
     {
       $dsn = "mysql:host=" . $dbConfig["server"] . ";dbname=" . $dbConfig["db"] . ";charset=" . $this->charset;
@@ -771,6 +772,7 @@ class dbHandler
       $out["dataTableExists"] = false;
     }
 
+    // TBA table Connection
     try
     {
       $dsn = "mysql:host=" . $dbConfig["server"] . ";dbname=" . $dbConfig["db"] . ";charset=" . $this->charset;
@@ -784,6 +786,7 @@ class dbHandler
       $out["tbaTableExists"] = false;
     }
 
+    // Pit table Connection
     try
     {
       $dsn = "mysql:host=" . $dbConfig["server"] . ";dbname=" . $dbConfig["db"] . ";charset=" . $this->charset;
@@ -797,6 +800,7 @@ class dbHandler
       $out["pitTableExists"] = false;
     }
 
+    // Strategic table Connection
     try
     {
       $dsn = "mysql:host=" . $dbConfig["server"] . ";dbname=" . $dbConfig["db"] . ";charset=" . $this->charset;

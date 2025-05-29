@@ -91,7 +91,12 @@ require 'header.php';
     console.log(data);
   }
 
+  //
+  // Process the generated html
+  //
   $(document).ready(function () {
+
+    // Upload photo to the server
     $("#upload").on('click', function (event) {
       if (document.getElementById("robotPic").value != "" && document.getElementById("teamNumber").value != "") {
         const loadButton = document.getElementById("loadingButton");

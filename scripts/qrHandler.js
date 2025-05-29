@@ -18,7 +18,7 @@ function qrStringToList(dataString) {
 
 function validateQrList(dataList) {
   var dataListSize = dataList.length;
-  console.log("===> validateQrList(): dataList.length = "+dataList.length);
+  console.log("===> validateQrList(): dataList.length = " + dataList.length);
   if (dataList.length != 41) {
     return false;
   }
@@ -148,10 +148,10 @@ function scanCamera(reader, id) {
     if (result) {
       var dataList = qrStringToList(result.text);
       dataList = padList(dataList);
-        console.log("scanCamera: dataList = "+dataList);
+      console.log("scanCamera: dataList = " + dataList);
       if (validateQrList(dataList)) {
         alertSuccessfulScan();
-	    addQrData(qrListToDict(dataList));
+        addQrData(qrListToDict(dataList));
       }
       else {
         alert("QR data failed validation!");
@@ -229,11 +229,13 @@ function submitFunction() {
   });
 }
 
+//
+// Process the generated html
+//
 $(document).ready(function () {
   const reader = new ZXing.BrowserQRCodeReader();
 
   createCameraSelect(reader);
 
   submitFunction();
-
 });

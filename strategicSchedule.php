@@ -106,8 +106,12 @@ require 'header.php';
     });
   }
 
-
+  //
+  // Process the generated html
+  //
   $(document).ready(function () {
+
+    // Create the strategic match schedule
     $("#createButton").click(function () {
       console.log("--->>> Create Schedule button clicked!");
       determineMatches();

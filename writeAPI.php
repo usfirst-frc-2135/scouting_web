@@ -32,6 +32,7 @@ if (isset($_POST["writeData"]))
   }
   echo ($msg);
 }
+
 if (isset($_POST["writeSingleData"]))
 {
   // Write Data API
@@ -43,6 +44,7 @@ if (isset($_POST["writeSingleData"]))
   $db->writeRowToTable($dat);
   echo ("success");
 }
+
 if (isset($_POST["writePitData"]))
 {
   $db->connectToDB();
@@ -53,6 +55,7 @@ if (isset($_POST["writePitData"]))
   $db->writeRowToPitTable($args);
   echo ("success");
 }
+
 if (isset($_POST["writeStrategicData"]))
 {
   $db->connectToDB();

@@ -733,7 +733,7 @@ require 'header.php';
             getMatchList: 1
           }).done(function (data) {
             if (data == null)
-              alert("Can't load matchlist from TBA; check if TBA Key was set in db_config.ini");
+              alert("Can't load matchlist from TBA; check if TBA Key was set in db_config");
             else {
               rawMatchData = JSON.parse(data)["response"];
               localMatchList = {};
@@ -1033,7 +1033,7 @@ require 'header.php';
       }).done(function (data) {
         var teamname = "XX";
         if (data == null)
-          alert("Can't load teamName from TBA; check if TBA Key was set in db_config.ini");
+          alert("Can't load teamName from TBA; check if TBA Key was set in db_config");
         else {
           console.log("matchSheet: getTeamInfo: data = " + data);
           teamInfo = JSON.parse(data)["response"];
@@ -1123,16 +1123,21 @@ require 'header.php';
       return team.replace(/^(frc)/, '');
     }
 
+    //
+    // Process the generated html
+    //
     $(document).ready(function () {
       var initialGet = checkGet();
       if (initialGet) {
         loadMatch(initialGet[0], initialGet[1]);
       }
+      // Load all the match sheet data
       $("#loadMatch").click(function () {
         bUsingCustom = false;
         loadMatch($("#writeMatchNumber").val(), $("#writeCompLevel").val());
       });
 
+      // Open and set the custom settings
       $("#loadCustom").click(function () {
         bUsingCustom = true;
         var redTeamNum1 = document.getElementById("writeTeamNumber1").value;
@@ -1152,7 +1157,6 @@ require 'header.php';
       });
 
       loadMatchList(function () { });
-
     });
 
   </script>
