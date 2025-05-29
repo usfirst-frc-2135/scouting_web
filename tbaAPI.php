@@ -8,10 +8,10 @@ $dbConfig = $db->readDbConfig();
 $tba = new tbaHandler($dbConfig["tbakey"], $dbConfig["tbatable"], $db->connectToDB());
 
 $eventCode = $dbConfig["eventcode"];
-if (isset($_GET["eventcode"]))
+if (isset($_GET["eventCode"]))
 {
   // Used to over ride the written event code
-  $eventCode = $_GET["eventcode"];
+  $eventCode = $_GET["eventCode"];
 }
 
 if (isset($_GET["getEventCode"]))
