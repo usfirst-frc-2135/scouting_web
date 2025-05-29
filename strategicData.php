@@ -266,7 +266,7 @@ require 'header.php';
     return convertedVal;
   }
 
-  function dataToTable(dataObj, pitData) {
+  function buildStrategicDataTable(dataObj, pitData) {
     for (let i = 0; i < dataObj.length; i++) {
       var driverability = dataObj[i]["driverability"];
       var driveVal = "";
@@ -322,7 +322,7 @@ require 'header.php';
       getAllStrategicData: 1
     }).done(function (data) {
       var dataObj = JSON.parse(data);
-      dataToTable(dataObj);
+      buildStrategicDataTable(dataObj);
       setTimeout(function () {
         sorttable.makeSortable(document.getElementById("rawDataTable"));
         frozenTable = $('#freezeTableDiv').freezeTable({

@@ -46,7 +46,7 @@ require 'header.php';
 <script>
   var frozenTable = null;
 
-  function dataToTable(dataObj, keys) {
+  function buildCOPRDataTable(dataObj, keys) {
     $("#tableData").html("");
     for (let team in dataObj) {
       var row = '<tr>';
@@ -79,7 +79,7 @@ require 'header.php';
 
     setHeader(ec);
     keysToTable(keys);
-    dataToTable(data, keys);
+    buildCOPRDataTable(data, keys);
     // sorttable.makeSortable($("#dataTable"));
     // sorttable.makeSortable(document.getElementById("dataTable"));
   }
@@ -89,13 +89,16 @@ require 'header.php';
     $.get("tbaAPI.php", {
       getCOPRs: 1
     }).done(function (data) {
+      console.log("==> requestAPI:\n" + data);
       processData(data);
+      setTimeout(function () {
         sorttable.makeSortable(document.getElementById("dataTable"));
         frozenTable = $('#freezeTableDiv').freezeTable({
           'backgroundColor': "white",
           'columnNum': 1,
           'frozenColVerticalOffset': 0
         });
+      }, 500);
     });
   }
 
@@ -106,20 +109,7 @@ require 'header.php';
     requestAPI();
 
     $("#loadEvent").click(function () {
-      $.get("tbaAPI.php", {
-        getCOPRs: 1,
-        eventcode: $("#eventCode").val()
-      }).done(function (data) {
-        processData(data);
-        setTimeout(function () {
-          sorttable.makeSortable(document.getElementById("dataTable"));
-          frozenTable = $('#freezeTableDiv').freezeTable({
-            'backgroundColor': "white",
-            'columnNum': 1,
-            'frozenColVerticalOffset': 0
-          });
-        }, 200);
-      });
+      requestAPI();
     });
 
     $("#dataTable").click(function () {

@@ -150,7 +150,7 @@ require 'header.php';
   };
 
   // NOTE: data object keywords should match the database definition in dbHander.php
-  function dataToTable(dataObj) {
+  function buildMatchDataTable(dataObj) {
     for (let i = 0; i < dataObj.length; i++) {
       var rowString = "<tr><td align=\"center\">" + dataObj[i]["matchnumber"] + "</td>" +
         "<td align=\"center\">" + dataObj[i]["teamnumber"] + "</td>" +
@@ -187,7 +187,7 @@ require 'header.php';
       console.log("===> matchData: data = " + data);
       var dataObj = JSON.parse(data);
       console.log("===> matchData: dataObj size = " + dataObj.length);
-      dataToTable(dataObj);
+      buildMatchDataTable(dataObj);
       setTimeout(function () {
         sorttable.makeSortable(document.getElementById("rawDataTable"));
         frozenTable = $('#freezeTableDiv').freezeTable({
