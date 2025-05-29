@@ -1,5 +1,5 @@
 <?php
-$title = 'Pit Scout Form';
+$title = 'Pit Scouting Form';
 require 'header.php';
 ?>
 
@@ -20,9 +20,29 @@ require 'header.php';
 
         <div class="card-body">
           <form id="pitScoutingForm" method="post" enctype="multipart/form-data">
+
             <div class="mb-3">
               <label for="teamNumber" class="form-label">Team Number </label>
               <input type="text" class="form-control" id="teamNumber" placeholder="FRC team number">
+            </div>
+
+            <div class="mb-3">
+              <div>
+                <span>Pit Organization</span>
+                <span class="text-danger"> (observe only, do not ask)</span>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="pitOrgGroup" id="pitScore1">
+                <label class="form-check-label" for="pitScore1">1 (Unorganized)</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="pitOrgGroup" id="pitScore2">
+                <label class="form-check-label" for="pitScore2">3 (Average)</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="pitOrgGroup" id="pitScore3">
+                <label class="form-check-label" for="pitScore3">5 (Pristine)</label>
+              </div>
             </div>
 
             <div class="mb-3">
@@ -30,65 +50,50 @@ require 'header.php';
               <input type="text" class="form-control" id="batteries" placeholder="Battery count">
             </div>
 
-            <div>
-              <label class="form-label">Pit Organization</label>
-              <label class="form-label" style="color:red;">(observe only, do not ask)</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="pitOrgGroup" id="pitScore1">
-              <label class="form-check-label" for="pitScore1">1 (Little Organization)</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="pitOrgGroup" id="pitScore2">
-              <label class="form-check-label" for="pitScore2">3 (Average)</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="pitOrgGroup" id="pitScore3">
-              <label class="form-check-label" for="pitScore3">5 (Pristine)</label>
-            </div>
-
-            <p> </p>
-            <div>
-              <label class="form-label">Does your team have spare parts for the robot?</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="sparePartsGroup" id="sparePartsYes">
-              <label class="form-check-label" for="sparePartsYes">Yes</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="sparePartsGroup" id="sparePartsNo">
-              <label class="form-check-label" for="sparePartsNo">No</label>
-            </div>
-
-            <p> </p>
-            <div>
-              <label class="form-label">Does your robot have computer vision?</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="computerVisionGroup" id="computerVisionYes">
-              <label class="form-check-label" for="computerVisionYes">Yes</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="computerVisionGroup" id="computerVisionNo">
-              <label class="form-check-label" for="computerVisionNo">No</label>
-            </div>
-
-            <p> </p>
-            <div>
-              <label class="form-label">Does your robot have swerve drive?</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="swerveDriveGroup" id="swerveDriveYes">
-              <label class="form-check-label" for="swerveDriveYes">Yes</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="swerveDriveGroup" id="swerveDriveNo">
-              <label class="form-check-label" for="swerveDriveNo">No</label>
-            </div>
-
-            <p> </p>
             <div class="mb-3">
-              <label for="driveType" class="form-label">What programming language do you use?</label>
+              <div>
+                <span>Does your team have spare parts for the robot?</span>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="sparePartsGroup" id="sparePartsYes">
+                <label class="form-check-label" for="sparePartsYes">Yes</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="sparePartsGroup" id="sparePartsNo">
+                <label class="form-check-label" for="sparePartsNo">No</label>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <div>
+                <span>Does your robot have computer vision?</span>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="computerVisionGroup" id="computerVisionYes">
+                <label class="form-check-label" for="computerVisionYes">Yes</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="computerVisionGroup" id="computerVisionNo">
+                <label class="form-check-label" for="computerVisionNo">No</label>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <div>
+                <span>Does your robot have swerve drive?</span>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="swerveDriveGroup" id="swerveDriveYes">
+                <label class="form-check-label" for="swerveDriveYes">Yes</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="swerveDriveGroup" id="swerveDriveNo">
+                <label class="form-check-label" for="swerveDriveNo">No</label>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="programmingLanguage" class="form-label">What programming language do you use?</label>
               <div class="input-group mb-3">
                 <select class="form-select" id="programmingLanguage">
                   <option selected value="0">Choose...</option>
@@ -101,7 +106,6 @@ require 'header.php';
               </div>
             </div>
 
-            <p> </p>
             <div class="mb-3">
               <label for="driveMotors" class="form-label">What type of motors do you use on your drive train?</label>
               <div class="input-group mb-3">
@@ -115,22 +119,23 @@ require 'header.php';
               </div>
             </div>
 
-            <p> </p>
-            <div>
-              <label class="form-label">Preparedness/Professionalism</label>
-              <label class="form-label" style="color:red;">(observe only, do not ask)</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="preparednessGroup" id="preparednessScore1">
-              <label class="form-check-label" for="preparednessScore1">1 (Minimal)</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="preparednessGroup" id="preparednessScore2">
-              <label class="form-check-label" for="preparednessScore2">3 (Average)</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="preparednessGroup" id="preparednessScore3">
-              <label class="form-check-label" for="preparednessScore3">5 (Excellent)</label>
+            <div class="mb-3">
+              <div>
+                <span>Preparedness/Professionalism</span>
+                <span class="text-danger"> (observe only, do not ask)</span>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="preparednessGroup" id="preparednessScore1">
+                <label class="form-check-label" for="preparednessScore1">1 (Minimal)</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="preparednessGroup" id="preparednessScore2">
+                <label class="form-check-label" for="preparednessScore2">3 (Average)</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="preparednessGroup" id="preparednessScore3">
+                <label class="form-check-label" for="preparednessScore3">5 (Excellent)</label>
+              </div>
             </div>
 
             <p> </p>
