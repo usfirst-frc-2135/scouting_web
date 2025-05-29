@@ -171,16 +171,6 @@ require 'header.php';
 
   var id_to_written_map = {}
 
-
-  // function requestAPI() {
-  //   //output: gets the data from our server
-  //   $.get("readAPI.php", {
-  //     getAllData: 1
-  //   }).done(function (data) {
-  //     var dataObj = JSON.parse(data);
-  //   });
-  // }
-
   //
   // Process the generated html
   //

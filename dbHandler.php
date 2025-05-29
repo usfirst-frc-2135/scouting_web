@@ -16,14 +16,6 @@ class dbHandler
     "password",
     "eventcode",
     "tbakey",
-    "fbapikey",
-    "fbauthdomain",
-    "fbdburl",
-    "fbprojectid",
-    "fbstoragebucket",
-    "fbsenderid",
-    "fbappid",
-    "fbmeasurementid",
     "datatable",
     "tbatable",
     "pittable",
@@ -35,7 +27,8 @@ class dbHandler
     "useF"
   );
 
-  function connectToDB()
+  // Connect to the database
+  public function connectToDB()
   {
     if (!$this->alreadyConnected)
     {
@@ -716,14 +709,6 @@ class dbHandler
     $out["tbakey"] = substr($dbConfig["tbakey"], 0, 3) . "******";
     $out["eventcode"] = $dbConfig["eventcode"];
     $out["username"] = substr($dbConfig["username"], 0, 1) . "*****";
-    $out["fbapikey"] = substr($dbConfig["fbapikey"], 0, 1) . "*****";
-    $out["fbauthdomain"] = $dbConfig["fbauthdomain"];
-    $out["fbdburl"] = substr($dbConfig["fbdburl"], 0, 1) . "*****";
-    $out["fbprojectid"] = substr($dbConfig["fbprojectid"], 0, 1) . "*****";
-    $out["fbstoragebucket"] = substr($dbConfig["fbstoragebucket"], 0, 1) . "*****";
-    $out["fbsenderid"] = substr($dbConfig["fbsenderid"], 0, 1) . "*****";
-    $out["fbappid"] = substr($dbConfig["fbappid"], 0, 1) . "*****";
-    $out["fbmeasurementid"] = substr($dbConfig["fbmeasurementid"], 0, 1) . "*****";
     $out["dbExists"] = false;
     $out["serverExists"] = false;
     $out["dataTableExists"] = false;
