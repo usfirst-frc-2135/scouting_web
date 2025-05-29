@@ -13,20 +13,11 @@ require 'header.php';
 
       <div class="card col-md-6 mx-auto">
 
-        <button class="btn btn-primary" id="loadingButton">
-          <span class="spinner-border spinner-border-sm"></span>
-          Loading..
-        </button>
-        <div id="uploadMessage" style="display: none" class="alert alert-dismissible fade show" role="alert">
-          <div id="uploadMessageText"></div>
-          <button type="button" class="btn-close" id="closeMessage" aria-label="Close"></button>
-        </div>
-
         <div class="card-body">
           <form id="uploadForm" method="post" enctype="multipart/form-data">
             <div class="mb-3">
               <label for="teamNumber" class="form-label">Team Number</label>
-              <input type="text" class="form-control" id="teamNumber" placeholder="FRC team numer">
+              <input type="text" class="form-control" id="teamNumber" placeholder="FRC team number">
             </div>
 
             <div class="mb-3">
@@ -44,6 +35,16 @@ require 'header.php';
             </div>
           </form>
         </div>
+
+        <button class="btn btn-primary" id="loadingButton">
+          <span class="spinner-border spinner-border-sm"></span>
+          Loading..
+        </button>
+        <div id="uploadMessage" style="display: none" class="alert alert-dismissible fade show" role="alert">
+          <div id="uploadMessageText"></div>
+          <button type="button" class="btn-close" id="closeMessage" aria-label="Close"></button>
+        </div>
+
       </div>
     </div>
 
