@@ -11,14 +11,14 @@ require 'header.php';
         <h2 class="col-md-6"><?php echo $title; ?></h2>
       </div>
 
-      <div class="row pt-3 pb-3 mb-3">
-        <div class="d-grid col-6 mt-3 mx-auto">
-          <div id="interactive" class="viewport">
+      <div class="row mb-3">
+        <div class="card d-grid col-6 mx-auto">
+          <div id="interactive" class="viewport mt-3">
             <video autoplay="true" id="camera" class="col-12"></video>
           </div>
           <select id="cameraSelect" class="form-select form-select mb-3" aria-label=".form-select-lg example">
           </select>
-          <button id="submitData" type="button" class="btn btn-success"> Click to Submit Data: 0</button>
+          <button id="submitData" type="button" class="btn btn-success mb-3"> Click to Submit Data: 0</button>
         </div>
       </div>
 

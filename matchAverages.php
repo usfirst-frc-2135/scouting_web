@@ -7,13 +7,12 @@ require 'header.php';
   <div class="column card-lg-12 col-sm-12 col-xs-12" id="content">
 
     <div class="row pt-3 pb-3 mb-3">
-      <h2 class="col-10"><?php echo $title; ?></h2>
+      <h2 class="col-6"><?php echo $title; ?></h2>
 
-      <div class="col-2 mb-3">
+      <div class="col-2">
         <button type="button" id="download_csv_file" class="btn btn-primary">Download CSV File</button>
       </div>
     </div>
-
     <!--  COMMENTED OUT FOR NOW
       <div class="col-md-2">
         <div class="input-group">

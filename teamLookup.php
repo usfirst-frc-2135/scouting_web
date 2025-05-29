@@ -10,7 +10,7 @@ require 'header.php';
       <h2><?php echo $title; ?></h2>
     </div>
 
-      <div class="row pt-3 pb-3 mb-3">
+    <div class="row mb-3">
       <div class="input-group mb-3">
         <input id="writeTeamNumber" type="text" class="form-control" placeholder="FRC team number" aria-label="writeTeamNumber">
         <button id="loadTeamButton" type="button" class="btn btn-primary">Load Team</button>

@@ -1,5 +1,5 @@
 <?php
-$title = 'Match Scout Form';
+$title = 'Match Form';
 require 'header.php';
 ?>
 
@@ -10,7 +10,7 @@ require 'header.php';
       <h2><?php echo $title; ?></h2>
     </div>
 
-      <div class="row g-3 justify-content-md-center">
+    <div class="row justify-content-md-center">
         <div class="input-group mb-3 justify-content-md-center">
           <h3>Match Info</h3>
         </div>

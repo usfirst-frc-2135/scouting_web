@@ -7,15 +7,14 @@ require 'header.php';
   <div class="column card-lg-12 col-sm-12 col-xs-12" id="content">
 
     <div class="row pt-3 pb-3 mb-3">
-      <h2 class="col-md-3"><?php echo $title; ?></h2>
+      <h2 class="col-md-6"><?php echo $title; ?></h2>
 
-      <div class="col-md-3">
-        <button id="createButton" type="button" class="btn btn-primary">Create Schedule</button>
-      </div>
+      <div class="col-2">
+        <button type="button" id="createButton" class="btn btn-primary">Create Schedule</button>
       </div>
     </div>
 
-  <div class="col-md-4">
+    <div class="col-md-6">
       <div id="freezeTableDiv">
         <style type="text/css" media="screen">
           table tr {
@@ -49,7 +48,7 @@ require 'header.php';
 <?php include 'footer.php'; ?>
 
 <script>
-  function dataToTable(dataObj) {
+  function buildStrategicSchedule(dataObj) {
     $("#tableData").html(""); // Clear table
     for (let i = 0; i < dataObj.length; i++) {
       var matchNum = dataObj[i]["match_number"];
@@ -102,7 +101,7 @@ require 'header.php';
       getStrategicMatches: 1
     }).done(function (data) {
       var dataObj = JSON.parse(data);
-      dataToTable(dataObj);
+      buildStrategicSchedule(dataObj);
       sortTable("matchTable");
     });
   }
