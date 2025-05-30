@@ -52,114 +52,62 @@ require 'header.php';
                 Autonomous Mode
               </div>
               <div class="card-body">
+                <!-- Checkboxes -->
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="checkbox" name="exitCommunity" id="exitCommunity">
-                  <label class="form-check-label" for="exitCommunity">Exited Community?</label>
+                  <input id="exitCommunity class=" form-check-input" type="checkbox" name="exitCommunity"">
+                  <label for=" exitCommunity" class=" form-check-label">Exited Community?</label>
+                </div>
+
+                <!-- Cones -->
+                <div class="input-group mb-3 fw-bold">
+                  <button id="minusAutoConesTop" class="btn btn-primary btn-warning" type="button">-</button>
+                  <span>Auto Cones Top: 0</span>
+                  <button id="plusAutoConesTop" class="btn btn-primary btn-info" type="button">+</button>
+                </div>
+
+                <div class="input-group mb-3 fw-bold">
+                  <button id="minusAutoConesMiddle" class="btn btn-primary btn-warning" type="button">-</button>
+                  <span id="autoConesMiddle">Auto Cones Middle: 0</span>
+                  <button id="plusAutoConesMiddle" class="btn btn-primary btn-info" type="button">+</button>
+                </div>
+
+                <div class="input-group mb-3 fw-bold">
+                  <button id="minusAutoConesBottom" class="btn btn-primary btn-warning" type="button">-</button>
+                  <span>Auto Cones Bottom: 0</span>
+                  <button id="plusAutoConesBottom" class="btn btn-primary btn-info" type="button">+</button>
+                </div>
+
+                <!-- Cubes -->
+                <div class="input-group mb-3 fw-bold">
+                  <button id="minusAutoCubesTop" class="btn btn-primary btn-warning" type="button">-</button>
+                  <span id="autoCubesTop">Auto Cubes Top: 0</span>
+                  <button id="plusAutoCubesTop" class="btn btn-primary btn-info" type="button">+</button>
+                </div>
+
+                <div class="input-group mb-3 fw-bold">
+                  <button id="minusAutoCubesMiddle" class="btn btn-primary btn-warning" type="button">-</button>
+                  <span id="autoCubesMiddle">Auto Cubes Middle: 0</span>
+                  <button id="plusAutoCubesMiddle" class="btn btn-primary btn-info" type="button">+</button>
+                </div>
+
+                <div class="input-group mb-3 fw-bold">
+                  <button id="minusAutoCubesBottom" class="btn btn-primary btn-warning" type="button">-</button>
+                  <span id="autoCubesBottom">Auto Cubes Bottom: 0</span>
+                  <button id="plusAutoCubesBottom" class="btn btn-primary btn-info" type="button">+</button>
                 </div>
 
                 <div class="row">
-                  <div class="col-md-6">
-                    <div class="row">
-                      <button class="btn btn-primary btn-info" style="width:100%" type="button" id="plusAutoConesBottom">+</button>
-                    </div>
-                    <div class="row">
-                      <b id="autoConesBottom">Auto Cones Bottom: 0</b>
-                    </div>
-                    <div class="row">
-                      <button class="btn btn-primary btn-warning" style="width:100%" type="button"
-                        id="minusAutoConesBottom">-</button>
-                    </div>
-                    <br>
+                  <div class="form-check form-check-inline">
+                    <label for="autochargestation" class="form-check-label">Auto Charge Station?</label>
+                    <select id="autochargestation" class="form-select">
+                      <option value="0">None</option>
+                      <option value="1">Docked</option>
+                      <option value="2">Engaged</option>
+                    </select>
                   </div>
-
-
-                  <div class="col-md-6">
-                    <div class="row">
-                      <button class="btn btn-primary btn-info" style="width:100%" type="button" id="plusAutoConesMiddle">+</button>
-                    </div>
-                    <div class="row">
-                      <b id="autoConesMiddle">Auto Cones Middle: 0</b>
-                    </div>
-                    <div class="row">
-                      <button class="btn btn-primary btn-warning" style="width:100%" type="button"
-                        id="minusAutoConesMiddle">-</button>
-                    </div>
-                    <br>
-                  </div>
-
-
-                  <div class="col-md-6">
-                    <div class="row">
-                      <button class="btn btn-primary btn-info" style="width:100%" type="button" id="plusAutoConesTop">+</button>
-                    </div>
-                    <div class="row">
-                      <b id="autoConesTop">Auto Cones Top: 0</b>
-                    </div>
-                    <div class="row">
-                      <button class="btn btn-primary btn-warning" style="width:100%" type="button" id="minusAutoConesTop">-</button>
-                    </div>
-                    <br>
-                  </div>
-
-                  <div class="col-md-6">
-                    <div class="row">
-                      <button class="btn btn-primary btn-info" style="width:100%" type="button" id="plusAutoCubesBottom">+</button>
-                    </div>
-                    <div class="row">
-                      <b id="autoCubesBottom">Auto Cubes Bottom: 0</b>
-                    </div>
-                    <div class="row">
-                      <button class="btn btn-primary btn-warning" style="width:100%" type="button"
-                        id="minusAutoCubesBottom">-</button>
-                    </div>
-                    <br>
-                  </div>
-
-
-                  <div class="col-md-6">
-                    <div class="row">
-                      <button class="btn btn-primary btn-info" style="width:100%" type="button" id="plusAutoCubesMiddle">+</button>
-                    </div>
-                    <div class="row">
-                      <b id="autoCubesMiddle">Auto Cubes Middle: 0</b>
-                    </div>
-                    <div class="row">
-                      <button class="btn btn-primary btn-warning" style="width:100%" type="button"
-                        id="minusAutoCubesMiddle">-</button>
-                    </div>
-                    <br>
-                  </div>
-
-
-                  <div class="col-md-6">
-                    <div class="row">
-                      <button class="btn btn-primary btn-info" style="width:100%" type="button" id="plusAutoCubesTop">+</button>
-                    </div>
-                    <div class="row">
-                      <b id="autoCubesTop">Auto Cubes Top: 0</b>
-                    </div>
-                    <div class="row">
-                      <button class="btn btn-primary btn-warning" style="width:100%" type="button" id="minusAutoCubesTop">-</button>
-                    </div>
-                    <br>
-                  </div>
-
-                  <div class="col-md-6">
-                    <div class="row">
-                      <div class="form-check form-check-inline">
-                        <label class="form-check-label" for="autochargestation">Auto Charge Station?</label>
-                        <select class="form-select" id="autochargestation">
-                          <option value="0">None</option>
-                          <option value="1">Docked</option>
-                          <option value="2">Engaged</option>
-                        </select>
-                      </div>
-                      <br>
-                    </div>
-                  </div>
-
-                  <br>
                 </div>
+
+                <br>
               </div>
             </div>
             <!-- end Autonomous Mode -->
@@ -170,96 +118,60 @@ require 'header.php';
                 Teleop Mode
               </div>
               <div class="card-body">
-                <div class="row">
-                  <button class="btn btn-primary btn-info" style="width:100%" type="button" id="plusTeleopConesBottom">+</button>
-                </div>
-                <div class="row">
-                  <b id="teleopConesBottom">Teleop Cones Bottom: 0</b>
-                </div>
-                <div class="row">
-                  <button class="btn btn-primary btn-warning" style="width:100%" type="button"
-                    id="minusTeleopConesBottom">-</button>
-                </div>
-                <br>
 
-                <div class="row">
-                  <button class="btn btn-primary btn-info" style="width:100%" type="button" id="plusTeleopConesMiddle">+</button>
+                <!-- Cones -->
+                <div class="input-group mb-3 fw-bold">
+                  <button id="plusTeleopConesTop" class="btn btn-primary btn-warning" type="button">+</button>
+                  <span>Teleop Cones Top: 0</span>
+                  <button id="minusTeleopConesTop" class="btn btn-primary btn-info" type="button">-</button>
                 </div>
-                <div class="row">
-                  <b id="teleopConesMiddle">Teleop Cones Middle: 0</b>
-                </div>
-                <div class="row">
-                  <button class="btn btn-primary btn-warning" style="width:100%" type="button"
-                    id="minusTeleopConesMiddle">-</button>
-                </div>
-                <br>
 
-                <div class="row">
-                  <button class="btn btn-primary btn-info" style="width:100%" type="button" id="plusTeleopConesTop">+</button>
+                <div class="input-group mb-3 fw-bold">
+                  <button id="plusTeleopConesMiddle" class="btn btn-primary btn-warning" type="button">+</button>
+                  <span>Teleop Cones Middle: 0</span>
+                  <button id="minusTeleopConesMiddle" class="btn btn-primary btn-info" type="button">-</button>
                 </div>
-                <div class="row">
-                  <b id="teleopConesTop">Teleop Cones Top: 0</b>
-                </div>
-                <div class="row">
-                  <button class="btn btn-primary btn-warning" style="width:100%" type="button" id="minusTeleopConesTop">-</button>
-                </div>
-                <br>
 
-                <div class="row">
-                  <button class="btn btn-primary btn-info" style="width:100%" type="button" id="plusTeleopCubesBottom">+</button>
+                <div class="input-group mb-3 fw-bold">
+                  <button id="plusTeleopConesBottom" class="btn btn-primary btn-warning" type="button">+</button>
+                  <span>Teleop Cones Bottom: 0</span>
+                  <button id="minusTeleopConesBottom" class="btn btn-primary btn-info" type="button">-</button>
                 </div>
-                <div class="row">
-                  <b id="teleopCubesBottom">Teleop Cubes Bottom: 0</b>
-                </div>
-                <div class="row">
-                  <button class="btn btn-primary btn-warning" style="width:100%" type="button"
-                    id="minusTeleopCubesBottom">-</button>
-                </div>
-                <br>
 
-                <div class="row">
-                  <button class="btn btn-primary btn-info" style="width:100%" type="button" id="plusTeleopCubesMiddle">+</button>
+                <!-- Cubes -->
+                <div class="input-group mb-3 fw-bold">
+                  <button id="plusTeleopCubesTop" class="btn btn-primary btn-warning" type="button">+</button>
+                  <span>Teleop Cubes Top: 0</span>
+                  <button id="minusTeleopCubesTop" class="btn btn-primary btn-info" type="button">-</button>
                 </div>
-                <div class="row">
-                  <b id="teleopCubesMiddle">Teleop Cubes Middle: 0</b>
-                </div>
-                <div class="row">
-                  <button class="btn btn-primary btn-warning" style="width:100%" type="button"
-                    id="minusTeleopCubesMiddle">-</button>
-                </div>
-                <br>
 
-                <div class="row">
-                  <button class="btn btn-primary btn-info" style="width:100%" type="button" id="plusTeleopCubesTop">+</button>
+                <div class="input-group mb-3 fw-bold">
+                  <button id="plusTeleopCubesMiddle" class="btn btn-primary btn-warning" type="button">+</button>
+                  <span>Teleop Cubes Middle: 0</span>
+                  <button id="minusTeleopCubesMiddle" class="btn btn-primary btn-info" type="button">-</button>
                 </div>
-                <div class="row">
-                  <b id="teleopCubesTop">Teleop Cubes Top: 0</b>
-                </div>
-                <div class="row">
-                  <button class="btn btn-primary btn-warning" style="width:100%" type="button" id="minusTeleopCubesTop">-</button>
-                </div>
-                <br>
-              </div>
 
-              <div class="row">
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="checkbox" name="pickedupCube" id="pickedupCube">
-                  <label class="form-check-label" for="pickedupCube">Picked Up Cube?</label>
+                <div class="input-group mb-3 fw-bold">
+                  <button id="plusTeleopCubesBottom" class="btn btn-primary btn-warning" type="button">+</button>
+                  <span>Teleop Cubes Bottom: 0</span>
+                  <button id="minusTeleopCubesBottom" class="btn btn-primary btn-info" type="button">-</button>
                 </div>
               </div>
 
-              <div class="row">
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="checkbox" name="pickedupUprightCone" id="pickedupUprightCone">
-                  <label class="form-check-label" for="pickedupUprightCone">Picked Up Upright Cone?</label>
-                </div>
+              <!-- Checkboxes -->
+              <div class="form-check form-check-inline">
+                <input id="pickedupCube" class="form-check-input" type="checkbox" name="pickedupCube">
+                <label for="pickedupCube" class="form-check-label">Picked Up Cube?</label>
               </div>
 
-              <div class="row">
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="checkbox" name="pickedupTippedCone" id="pickedupTippedCone">
-                  <label class="form-check-label" for="pickedupTippedCone">Picked Up Tipped Cone</label>
-                </div>
+              <div class="form-check form-check-inline">
+                <input id="pickedupUprightCone" class="form-check-input" type="checkbox" name="pickedupUprightCone">
+                <label for="pickedupUprightCone" class="form-check-label">Picked Up Upright Cone?</label>
+              </div>
+
+              <div class="form-check form-check-inline">
+                <input id="pickedupTippedCone" class="form-check-input" type="checkbox" name="pickedupTippedCone">
+                <label for="pickedupTippedCone" class="form-check-label">Picked Up Tipped Cone</label>
               </div>
             </div>
             <!-- end Teleop Mode -->
@@ -269,10 +181,11 @@ require 'header.php';
               <div class="card-header fw-bold">
                 End Game
               </div>
-              <div class="row">
+              <div class="card-body">
+
                 <div class="form-check form-check-inline">
-                  <label class="form-check-label" for="endgamechargestation">Charge Station?</label>
-                  <select class="form-select" id="endgamechargestation">
+                  <label for="endgamechargestation" class="form-check-label">Charge Station?</label>
+                  <select id="endgamechargestation" class="form-select">
                     <option value="0">None</option>
                     <option value="1">Parked</option>
                     <option value="2">Docked</option>
@@ -281,14 +194,14 @@ require 'header.php';
                 </div>
 
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="checkbox" name="dead" id="dead">
-                  <label class="form-check-label" for="dead">Dead?</label>
+                  <input id="dead" class="form-check-input" type="checkbox" name="dead">
+                  <label for="dead" class="form-check-label">Dead?</label>
                 </div>
-              </div>
 
-              <div>
-                <label for="generalComment" class="form-label">General comment:</label>
-                <input type="text" class="form-control" id="generalComment">
+                <div>
+                  <label for="generalComment" class="form-label">General comment:</label>
+                  <input id="generalComment" class="form-control" type="text">
+                </div>
               </div>
             </div>
           </form>
@@ -296,7 +209,7 @@ require 'header.php';
 
           <!-- Submit button -->
           <div class="row justify-content-md-center">
-            <button class="btn btn-primary" style="width:100%" type="button" id="submitForm">Submit</button>
+            <button id="submitForm" class="btn btn-primary" style="width:100%" type="button">Submit</button>
           </div>
           </form>
         </div>

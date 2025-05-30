@@ -11,19 +11,18 @@ require 'header.php';
         <h2 class="col-md-6"><?php echo $title; ?></h2>
       </div>
 
-      <!-- Our team matches list -->
-      <div class="row g-3 justify-content-md-center">
-        <div class="col-md-6">
+      <div class="card col-md-6 mx-auto">
+        <!-- Our team matches list -->
+        <h5>2135 Match Links</h5>
+        <div class="row mb-3">
           <div id="ourMatches">
           </div>
         </div>
-      </div>
 
-      <!-- Load Match buttons -->
-      <div class="row g-3 justify-content-md-center">
-        <div class="g-4 col-md-6">
-          <div class="input-group mb-3">
-            <select class="form-select" id="writeCompLevel" aria-label="Comp Level Select">
+        <!-- Load Match buttons -->
+        <div class="row mb-3">
+          <div class="input-group">
+            <select id="writeCompLevel" class="form-select" aria-label="Comp Level Select">
               <option value="QM">QM</option>
               <option value="QF">QF</option>
               <option value="SF">SF</option>
@@ -31,12 +30,11 @@ require 'header.php';
             </select>
             <input id="writeMatchNumber" class="form-control" type="text" placeholder="Match Number" aria-label="writeMatchNumber">
             <button id="loadMatch" class="btn btn-primary" type="button">Load Match</button>
+          </div>
         </div>
-      </div>
 
-      <!-- Custom button (collapsible section) -->
-      <div class="row g-3 justify-content-md-center">
-        <div class="g-4 col-md-6">
+        <!-- Custom button (collapsible section) -->
+        <div class="row mb-3">
           <button id="custom" class="collapsible" type="button btn-primary" name="custom" value="Custom">Enter Custom Match</button>
           <div id="customAlliance" class="content">
             <style type="text/css" media="screen">
@@ -89,11 +87,11 @@ require 'header.php';
               </div>
             </div>
             <button id="loadCustom" class="button btn-primary" type="button">Load Custom Match</button>
+          </div>
         </div>
-      </div>
 
-      <div class="row g-3 justify-content-md-center">
-        <div class="col-md-6">
+        <!-- Match overview card -->
+        <div class="row mb-3">
           <h4 id="matchTitle">Match:</h4>
           <h5 id="matchTime">Time:</h5>
           <table class="table table-bordered">
@@ -150,7 +148,8 @@ require 'header.php';
         </div>
       </div>
 
-      <div class="row pt-3 pb-3 mb-3 gx-3">
+      <!-- Team cards -->
+      <div class="row mb-3 gx-3">
         <div class="col-lg-4 col-sm-4 col-xs-4 gx-3">
           <div class="card text-white bg-danger mb-3">
             <div class="card-head">
@@ -382,7 +381,7 @@ require 'header.php';
           </div>
         </div>
       </div>
-      <div class="row pt-3 pb-3 mb-3 gx-3">
+      <div class="row mb-3 gx-3">
         <div class="col-lg-4 col-sm-4 col-xs-4 gx-3">
           <div class="card text-white bg-primary mb-3">
             <div class="card-head">
@@ -712,14 +711,16 @@ require 'header.php';
           return 1;
         return 1;
       });
+
       $("#ourMatches").html("");
-      var row = 'Our Matches: ';
+      var row = '';
       for (let i in arrOurMatches) {
         if (i != 0) {
-          row += ", ";
+          row += " ";
         }
-        row += '<a class="text-black" href="./matchSheet.php?matchNum=' + arrOurMatches[i]["match_number"] + '&compLevel=' + arrOurMatches[i]["comp_level"] + '">' + arrOurMatches[i]["comp_level"] + arrOurMatches[i]["match_number"] + '</a>';
+        row += '<a class="btn btn-dark btn-sm" href="./matchSheet.php?matchNum=' + arrOurMatches[i]["match_number"] + '&compLevel=' + arrOurMatches[i]["comp_level"] + '">' + arrOurMatches[i]["comp_level"] + arrOurMatches[i]["match_number"] + '</a>';
       }
+
       $("#ourMatches").html(row);
     }
 
