@@ -98,7 +98,7 @@ function addQrData(dataObj) {
         $("<td>").text(dataObj["teamnumber"]),
         $("<td>").text(dataObj["scoutname"]),
         $("<td>").append(
-          "<button id='" + key + "_delete' value='" + key + "' type='button' class='btn btn-danger deleteRowButton'>Delete</button>"
+          "<button id='" + key + "_delete' value='" + key + "' class='btn btn-danger deleteRowButton type='button''>Delete</button>"
         )
       ]).prop("id", key + "_row")
     );

@@ -209,7 +209,7 @@ require 'header.php';
 
           <!-- Submit button -->
           <div class="row justify-content-md-center">
-            <button id="submitForm" class="btn btn-primary" style="width:100%" type="button">Submit</button>
+            <button id="submitForm" class="btn btn-primary" type="button" style="width:100%">Submit</button>
           </div>
           </form>
         </div>

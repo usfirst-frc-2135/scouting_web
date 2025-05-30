@@ -13,7 +13,7 @@ require 'header.php';
 
       <div class="card col-md-6 mx-auto">
 
-        <div id="strategicScoutingMessage" style="display: none" class="alert alert-dismissible fade show" role="alert">
+        <div id="strategicScoutingMessage" class="alert alert-dismissible fade show" style="display: none" role="alert">
           <div id="uploadMessageText"></div>
           <button id="closeMessage" class="btn-close" type="button" aria-label="Close"></button>
         </div>
