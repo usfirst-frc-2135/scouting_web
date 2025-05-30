@@ -42,7 +42,7 @@ require 'header.php';
         </button>
         <div id="uploadMessage" class="alert alert-dismissible fade show" style="display: none" role="alert">
           <div id="uploadMessageText"></div>
-          <button id="closeMessage" class="btn-close" type="button" aria-label="Close"></button>
+          <button id="closeMessage" class="btn-close" type="button" aria-label="Photo Upload Close"></button>
         </div>
 
       </div>

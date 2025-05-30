@@ -23,7 +23,7 @@ require 'header.php';
             <option class="dropdown-item" value="sf">Sf</option>
             <option class="dropdown-item" value="f">F</option>
           </select>
-          <input id="startMatch" class="form-control" type="text" aria-label="Text input with dropdown button">
+          <input id="startMatch" class="form-control" type="text" aria-label="Start Match Filter">
         </div>
       </div>
 
@@ -36,7 +36,7 @@ require 'header.php';
             <option class="dropdown-item" value="sf">Sf</option>
             <option class="dropdown-item" value="f">F</option>
           </select>
-          <input id="endMatch" class="form-control" type="text" aria-label="Text input with dropdown button">
+          <input id="endMatch" class="form-control" type="text" aria-label="End Match Filter">
           <button id="filterData" class="btn btn-primary" type="button">Filter Data</button>
         </div>
       </div>

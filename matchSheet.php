@@ -28,7 +28,7 @@ require 'header.php';
               <option value="SF">SF</option>
               <option value="F">F</option>
             </select>
-            <input id="writeMatchNumber" class="form-control" type="text" placeholder="Match Number" aria-label="writeMatchNumber">
+            <input id="writeMatchNumber" class="form-control" type="text" placeholder="Match Number" aria-label="Match Number">
             <button id="loadMatch" class="btn btn-primary" type="button">Load Match</button>
           </div>
         </div>
@@ -67,23 +67,17 @@ require 'header.php';
             <div class="input-group mb-3">
               <h4 id="red">Red Alliance:</h4>
               <div class="input-group mb-3">
-                <input id="writeTeamNumber1" class="form-control" type="text" placeholder="Red Team Number 1"
-                  aria-label="writeTeamNumber1">
-                <input id="writeTeamNumber2" class="form-control" type="text" placeholder="Red Team Number 2"
-                  aria-label="writeTeamNumber2">
-                <input id="writeTeamNumber3" class="form-control" type="text" placeholder="Red Team Number 3"
-                  aria-label="writeTeamNumber3">
+                <input id="writeTeamNumber1" class="form-control" type="text" placeholder="Red Team 1" aria-label="Red Team 1">
+                <input id="writeTeamNumber2" class="form-control" type="text" placeholder="Red Team 2" aria-label="Red Team 2">
+                <input id="writeTeamNumber3" class="form-control" type="text" placeholder="Red Team 3" aria-label="Red Team 3">
               </div>
             </div>
             <div class="input-group mb-3">
               <h4 id="blue">Blue Alliance:</h4>
               <div class="input-group mb-3">
-                <input id="writeTeamNumber4" class="form-control" type="text" placeholder="Blue Team Number 1"
-                  aria-label="writeTeamNumber4">
-                <input id="writeTeamNumber5" class="form-control" type="text" placeholder="Blue Team Number 2"
-                  aria-label="writeTeamNumber5">
-                <input id="writeTeamNumber6" class="form-control" type="text" placeholder="Blue Team Number 3"
-                  aria-label="writeTeamNumber6">
+                <input id="writeTeamNumber4" class="form-control" type="text" placeholder="Blue Team 1" aria-label="Blue Team 1">
+                <input id="writeTeamNumber5" class="form-control" type="text" placeholder="Blue Team 2" aria-label="Blue Team 2">
+                <input id="writeTeamNumber6" class="form-control" type="text" placeholder="Blue Team 3" aria-label="Blue Team 3">
               </div>
             </div>
             <button id="loadCustom" class="button btn-primary" type="button">Load Custom Match</button>
