@@ -123,8 +123,8 @@ require 'header.php';
                   <label for="driveScore1" class="form-check-label">1 - Jerky</label>
                 </div>
                 <div class="form-check form-check-inline">
-                  <input id="driveScore2 class=" form-check-input" type="radio" name="driverAbilityGroup"">
-                  <label for=" driveScore2" class=" form-check-label">2 - Slow</label>
+                  <input id="driveScore2" class="form-check-input" type="radio" name="driverAbilityGroup">
+                  <label for="driveScore2" class=" form-check-label">2 - Slow</label>
                 </div>
                 <div class="form-check form-check-inline">
                   <input id="driveScore3" class="form-check-input" type="radio" name="driverAbilityGroup">

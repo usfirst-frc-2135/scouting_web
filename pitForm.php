@@ -93,9 +93,9 @@ require 'header.php';
             </div>
 
             <div class="mb-3">
-              <label for="programmingLanguage" class="form-label">What programming language do you use?</label>
+              <span>What programming language do you use?</span>
               <div class="input-group mb-3">
-                <select class="form-select">
+                <select id="programmingLanguage" class="form-select">
                   <option id="programmingLanguage" selected value="0">Choose...</option>
                   <option id="java" value="1">Java</option>
                   <option id="labView" value="2">LabView</option>
@@ -107,7 +107,7 @@ require 'header.php';
             </div>
 
             <div class="mb-3">
-              <label for="driveMotors" class="form-label">What type of motors do you use on your drive train?</label>
+              <span>What type of motors do you use on your drive train?</span>
               <div class="input-group mb-3">
                 <select id="driveMotors" class="form-select">
                   <option selected>Choose...</option>
