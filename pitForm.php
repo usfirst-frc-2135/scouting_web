@@ -4,7 +4,7 @@ require 'header.php';
 ?>
 
 <div class="container row-offcanvas row-offcanvas-left">
-  <div class="column card-lg-12 col-sm-12 col-xs-12" id="content">
+  <div id="content" class="column card-lg-12 col-sm-12 col-xs-12">
 
     <div class="row pt-3 pb-3 mb-3">
       <div class="row justify-content-md-center">
@@ -13,9 +13,9 @@ require 'header.php';
 
       <div class="card col-md-6 mx-auto">
 
-        <div id="pitScoutingMessage" style="display: none" class="alert alert-dismissible fade show" role="alert">
+        <div id="pitScoutingMessage" class="alert alert-dismissible fade show" style="display: none" role="alert">
           <div id="uploadMessageText"></div>
-          <button type="button" class="btn-close" id="closeMessage" aria-label="Close"></button>
+          <button id="closeMessage" class="btn-close" type="button" aria-label="Close"></button>
         </div>
 
         <div class="card-body">
@@ -23,7 +23,7 @@ require 'header.php';
 
             <div class="mb-3">
               <label for="teamNumber" class="form-label">Team Number </label>
-              <input type="text" class="form-control" id="teamNumber" placeholder="FRC team number">
+              <input id="teamNumber" class="form-control" type="text" placeholder="FRC team number">
             </div>
 
             <div class="mb-3">
@@ -32,22 +32,22 @@ require 'header.php';
                 <span class="text-danger"> (observe only, do not ask)</span>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="pitOrgGroup" id="pitScore1">
-                <label class="form-check-label" for="pitScore1">1 (Unorganized)</label>
+                <input id="pitScore1" class="form-check-input" type="radio" name="pitOrgGroup">
+                <label for="pitScore1" class="form-check-label">1 (Unorganized)</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="pitOrgGroup" id="pitScore2">
-                <label class="form-check-label" for="pitScore2">3 (Average)</label>
+                <input id="pitScore2" class="form-check-input" type="radio" name="pitOrgGroup">
+                <label for="pitScore2" class="form-check-label">3 (Average)</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="pitOrgGroup" id="pitScore3">
-                <label class="form-check-label" for="pitScore3">5 (Pristine)</label>
+                <input id="pitScore3" class="form-check-input" type="radio" name="pitOrgGroup">
+                <label for="pitScore3" class="form-check-label">5 (Pristine)</label>
               </div>
             </div>
 
             <div class="mb-3">
               <label for="batteries" class="form-label">Count the number of batteries they have</label>
-              <input type="text" class="form-control" id="batteries" placeholder="Battery count">
+              <input id="batteries" class="form-control" type="text" placeholder="Battery count">
             </div>
 
             <div class="mb-3">
@@ -55,12 +55,12 @@ require 'header.php';
                 <span>Does your team have spare parts for the robot?</span>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="sparePartsGroup" id="sparePartsYes">
-                <label class="form-check-label" for="sparePartsYes">Yes</label>
+                <input id="sparePartsYes" class="form-check-input" type="radio" name="sparePartsGroup">
+                <label for="sparePartsYes" class="form-check-label">Yes</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="sparePartsGroup" id="sparePartsNo">
-                <label class="form-check-label" for="sparePartsNo">No</label>
+                <input id="sparePartsNo" class="form-check-input" type="radio" name="sparePartsGroup">
+                <label for="sparePartsNo" class="form-check-label">No</label>
               </div>
             </div>
 
@@ -69,12 +69,12 @@ require 'header.php';
                 <span>Does your robot have computer vision?</span>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="computerVisionGroup" id="computerVisionYes">
-                <label class="form-check-label" for="computerVisionYes">Yes</label>
+                <input id="computerVisionYes" class="form-check-input" type="radio" name="computerVisionGroup">
+                <label for="computerVisionYes" class="form-check-label">Yes</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="computerVisionGroup" id="computerVisionNo">
-                <label class="form-check-label" for="computerVisionNo">No</label>
+                <input id="computerVisionNo" class="form-check-input" type="radio" name="computerVisionGroup">
+                <label for="computerVisionNo" class="form-check-label">No</label>
               </div>
             </div>
 
@@ -83,20 +83,20 @@ require 'header.php';
                 <span>Does your robot have swerve drive?</span>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="swerveDriveGroup" id="swerveDriveYes">
-                <label class="form-check-label" for="swerveDriveYes">Yes</label>
+                <input id="swerveDriveYes" class="form-check-input" type="radio" name="swerveDriveGroup">
+                <label for="swerveDriveYes" class="form-check-label">Yes</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="swerveDriveGroup" id="swerveDriveNo">
-                <label class="form-check-label" for="swerveDriveNo">No</label>
+                <input id="swerveDriveNo" class="form-check-input" type="radio" name="swerveDriveGroup">
+                <label for="swerveDriveNo" class="form-check-label">No</label>
               </div>
             </div>
 
             <div class="mb-3">
               <label for="programmingLanguage" class="form-label">What programming language do you use?</label>
               <div class="input-group mb-3">
-                <select class="form-select" id="programmingLanguage">
-                  <option selected value="0">Choose...</option>
+                <select class="form-select">
+                  <option id="programmingLanguage" selected value="0">Choose...</option>
                   <option id="java" value="1">Java</option>
                   <option id="labView" value="2">LabView</option>
                   <option id="C++" value="3">C++</option>
@@ -109,7 +109,7 @@ require 'header.php';
             <div class="mb-3">
               <label for="driveMotors" class="form-label">What type of motors do you use on your drive train?</label>
               <div class="input-group mb-3">
-                <select class="form-select" id="driveMotors">
+                <select id="driveMotors" class="form-select">
                   <option selected>Choose...</option>
                   <option value="1">Krakens</option>
                   <option value="2">Neos</option>
@@ -125,22 +125,22 @@ require 'header.php';
                 <span class="text-danger"> (observe only, do not ask)</span>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="preparednessGroup" id="preparednessScore1">
-                <label class="form-check-label" for="preparednessScore1">1 (Minimal)</label>
+                <input id="preparednessScore1" class="form-check-input" type="radio" name="preparednessGroup">
+                <label for="preparednessScore1" class="form-check-label">1 (Minimal)</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="preparednessGroup" id="preparednessScore2">
-                <label class="form-check-label" for="preparednessScore2">3 (Average)</label>
+                <input id="preparednessScore2" class="form-check-input" type="radio" name="preparednessGroup">
+                <label for="preparednessScore2" class="form-check-label">3 (Average)</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="preparednessGroup" id="preparednessScore3">
-                <label class="form-check-label" for="preparednessScore3">5 (Excellent)</label>
+                <input id="preparednessScore3" class="form-check-input" type="radio" name="preparednessGroup">
+                <label for="preparednessScore3" class="form-check-label">5 (Excellent)</label>
               </div>
             </div>
 
             <p> </p>
             <div class="d-grid gap-2 col-6 mx-auto">
-              <button class="btn btn-primary" type="button" id="submitButton">Submit</button>
+              <button id="submitButton" class="btn btn-primary" type="button">Submit</button>
             </div>
           </form>
         </div>

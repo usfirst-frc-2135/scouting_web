@@ -4,14 +4,14 @@ require 'header.php';
 ?>
 
 <div class="container row-offcanvas row-offcanvas-left">
-  <div class="column card-lg-12 col-sm-12 col-xs-12" id="content">
+  <div id="content" class="column card-lg-12 col-sm-12 col-xs-12">
 
     <div class="row pt-3 pb-3 mb-3">
       <h2 id="COPRHeader"><?php echo $title; ?>: ???</h2>
     </div>
 
     <div class="input-group mb-3">
-      <button id="loadEvent" type="button" class="btn btn-primary">Reload COPRs</button>
+      <button id="loadEvent" class="btn btn-primary" type="button">Reload COPRs</button>
     </div>
 
     <div class="table-responsive">

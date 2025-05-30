@@ -4,7 +4,7 @@ require 'header.php';
 ?>
 
 <div class="container row-offcanvas row-offcanvas-left">
-  <div class="column card-lg-12 col-sm-12 col-xs-12" id="content">
+  <div id="content" class="column card-lg-12 col-sm-12 col-xs-12">
 
     <div class="row pt-3 pb-3 mb-3">
       <div class="row justify-content-md-center">
@@ -29,17 +29,16 @@ require 'header.php';
               <option value="SF">SF</option>
               <option value="F">F</option>
             </select>
-            <input id="writeMatchNumber" type="text" class="form-control" placeholder="Match Number" aria-label="writeMatchNumber">
-            <button id="loadMatch" type="button" class="btn btn-primary">Load Match</button>
-          </div>
+            <input id="writeMatchNumber" class="form-control" type="text" placeholder="Match Number" aria-label="writeMatchNumber">
+            <button id="loadMatch" class="btn btn-primary" type="button">Load Match</button>
         </div>
       </div>
 
       <!-- Custom button (collapsible section) -->
       <div class="row g-3 justify-content-md-center">
         <div class="g-4 col-md-6">
-          <button type="button btn-primary" id="custom" name="custom" value="Custom" class="collapsible">Custom</button>
-          <div class="content" id="customAlliance">
+          <button id="custom" class="collapsible" type="button btn-primary" name="custom" value="Custom">Enter Custom Match</button>
+          <div id="customAlliance" class="content">
             <style type="text/css" media="screen">
               .collapsible {
                 background-color: #006fff;
@@ -70,27 +69,26 @@ require 'header.php';
             <div class="input-group mb-3">
               <h4 id="red">Red Alliance:</h4>
               <div class="input-group mb-3">
-                <input id="writeTeamNumber1" type="text" class="form-control" placeholder="Red Team Number 1"
+                <input id="writeTeamNumber1" class="form-control" type="text" placeholder="Red Team Number 1"
                   aria-label="writeTeamNumber1">
-                <input id="writeTeamNumber2" type="text" class="form-control" placeholder="Red Team Number 2"
+                <input id="writeTeamNumber2" class="form-control" type="text" placeholder="Red Team Number 2"
                   aria-label="writeTeamNumber2">
-                <input id="writeTeamNumber3" type="text" class="form-control" placeholder="Red Team Number 3"
+                <input id="writeTeamNumber3" class="form-control" type="text" placeholder="Red Team Number 3"
                   aria-label="writeTeamNumber3">
               </div>
             </div>
             <div class="input-group mb-3">
               <h4 id="blue">Blue Alliance:</h4>
               <div class="input-group mb-3">
-                <input id="writeTeamNumber4" type="text" class="form-control" placeholder="Blue Team Number 1"
+                <input id="writeTeamNumber4" class="form-control" type="text" placeholder="Blue Team Number 1"
                   aria-label="writeTeamNumber4">
-                <input id="writeTeamNumber5" type="text" class="form-control" placeholder="Blue Team Number 2"
+                <input id="writeTeamNumber5" class="form-control" type="text" placeholder="Blue Team Number 2"
                   aria-label="writeTeamNumber5">
-                <input id="writeTeamNumber6" type="text" class="form-control" placeholder="Blue Team Number 3"
+                <input id="writeTeamNumber6" class="form-control" type="text" placeholder="Blue Team Number 3"
                   aria-label="writeTeamNumber6">
               </div>
             </div>
-            <button type="button" class="button btn-primary" id="loadCustom">Load Custom Match</button>
-          </div>
+            <button id="loadCustom" class="button btn-primary" type="button">Load Custom Match</button>
         </div>
       </div>
 
@@ -119,33 +117,33 @@ require 'header.php';
             <tbody>
               <tr>
                 <td class="table-secondary">Avg Total Coral</td>
-                <td class="table-danger" id="redTotalCoral"></td>
-                <td class="table-primary" id="blueTotalCoral"></td>
+                <td id="redTotalCoral" class="table-danger"></td>
+                <td id="blueTotalCoral" class="table-primary"></td>
               </tr>
               <tr>
                 <td class="table-secondary">Avg Total Algae</td>
-                <td class="table-danger" id="redTotalAlgae"></td>
-                <td class="table-primary" id="blueTotalAlgae"></td>
+                <td id="redTotalAlgae" class="table-danger"></td>
+                <td id="blueTotalAlgae" class="table-primary"></td>
               </tr>
               <tr>
                 <td class="table-secondary">Avg Auton Points</td>
-                <td class="table-danger" id="redAvgAutoPoints"></td>
-                <td class="table-primary" id="blueAvgAutoPoints"></td>
+                <td id="redAvgAutoPoints" class="table-danger"></td>
+                <td id="blueAvgAutoPoints" class="table-primary"></td>
               </tr>
               <tr>
                 <td class="table-secondary">Avg Teleop Points</td>
-                <td class="table-danger" id="redAvgTeleopPoints"></td>
-                <td class="table-primary" id="blueAvgTeleopPoints"></td>
+                <td id="redAvgTeleopPoints" class="table-danger"></td>
+                <td id="blueAvgTeleopPoints" class="table-primary"></td>
               </tr>
               <tr>
                 <td class="table-secondary">Avg Endgame Points</td>
-                <td class="table-danger" id="redAvgEndgamePoints"></td>
-                <td class="table-primary" id="blueAvgEndgamePoints"></td>
+                <td id="redAvgEndgamePoints" class="table-danger"></td>
+                <td id="blueAvgEndgamePoints" class="table-primary"></td>
               </tr>
               <tr>
                 <td class="table-secondary">Total Predicted Points</td>
-                <td class="table-danger" id="redTotalPredictedPoints"></td>
-                <td class="table-primary" id="blueTotalPredictedPoints"></td>
+                <td id="redTotalPredictedPoints" class="table-danger"></td>
+                <td id="blueTotalPredictedPoints" class="table-primary"></td>
               </tr>
             </tbody>
           </table>
@@ -156,9 +154,9 @@ require 'header.php';
         <div class="col-lg-4 col-sm-4 col-xs-4 gx-3">
           <div class="card text-white bg-danger mb-3">
             <div class="card-head">
-              <div class="accordion accordion-flush bg-danger" id="R0Flush">
+              <div id="R0Flush" class="accordion accordion-flush bg-danger">
                 <div class="accordion-item bg-danger">
-                  <h2 class="accordion-header bg-danger" id="flush-headingOne">
+                  <h2 id="flush-headingOne" class="accordion-header bg-danger">
                     <div class="row">
                       <div class="col-10">
                         <h5 id="R0TeamNumber" class="card-title text-center">Team #</h5>
@@ -233,9 +231,9 @@ require 'header.php';
         <div class="col-lg-4 col-sm-4 col-xs-4 gx-3">
           <div class="card text-white bg-danger mb-3">
             <div class="card-head">
-              <div class="accordion accordion-flush bg-danger" id="R1Flush">
+              <div id="R1Flush" class="accordion accordion-flush bg-danger">
                 <div class="accordion-item bg-danger">
-                  <h2 class="accordion-header bg-danger" id="flush-headingOne">
+                  <h2 id="flush-headingOne" class="accordion-header bg-danger">
                     <div class="row">
                       <div class="col-10">
                         <h5 id="R1TeamNumber" class="card-title text-center">Team #</h5>
@@ -310,9 +308,9 @@ require 'header.php';
         <div class="col-lg-4 col-sm-4 col-xs-4 gx-3">
           <div class="card text-white bg-danger mb-3">
             <div class="card-head">
-              <div class="accordion accordion-flush bg-danger" id="R2Flush">
+              <div id="R2Flush" class="accordion accordion-flush bg-danger">
                 <div class="accordion-item bg-danger">
-                  <h2 class="accordion-header bg-danger" id="flush-headingOne">
+                  <h2 id="flush-headingOne" class="accordion-header bg-danger">
                     <div class="row">
                       <div class="col-10">
                         <h5 id="R2TeamNumber" class="card-title text-center">Team #</h5>
@@ -388,9 +386,9 @@ require 'header.php';
         <div class="col-lg-4 col-sm-4 col-xs-4 gx-3">
           <div class="card text-white bg-primary mb-3">
             <div class="card-head">
-              <div class="accordion accordion-flush bg-primary" id="B0Flush">
+              <div id="B0Flush" class="accordion accordion-flush bg-primary">
                 <div class="accordion-item bg-primary">
-                  <h2 class="accordion-header bg-primary" id="flush-headingOne">
+                  <h2 id="flush-headingOne" class="accordion-header bg-primary">
                     <div class="row">
                       <div class="col-10">
                         <h5 id="B0TeamNumber" class="card-title text-center">Team #</h5>
@@ -465,9 +463,9 @@ require 'header.php';
         <div class="col-lg-4 col-sm-4 col-xs-4 gx-3">
           <div class="card text-white bg-primary mb-3">
             <div class="card-head">
-              <div class="accordion accordion-flush bg-primary" id="B1Flush">
+              <div id="B1Flush" class="accordion accordion-flush bg-primary">
                 <div class="accordion-item bg-primary">
-                  <h2 class="accordion-header bg-primary" id="flush-headingOne">
+                  <h2 id="flush-headingOne" class="accordion-header bg-primary">
                     <div class="row">
                       <div class="col-10">
                         <h5 id="B1TeamNumber" class="card-title text-center">Team #</h5>
@@ -542,9 +540,9 @@ require 'header.php';
         <div class="col-lg-4 col-sm-4 col-xs-4 gx-3">
           <div class="card text-white bg-primary mb-3">
             <div class="card-head">
-              <div class="accordion accordion-flush bg-primary" id="B2Flush">
+              <div id="B2Flush" class="accordion accordion-flush bg-primary">
                 <div class="accordion-item bg-primary">
-                  <h2 class="accordion-header bg-primary" id="flush-headingOne">
+                  <h2 id="flush-headingOne" class="accordion-header bg-primary">
                     <div class="row">
                       <div class="col-10">
                         <h5 id="B2TeamNumber" class="card-title text-center">Team #</h5>

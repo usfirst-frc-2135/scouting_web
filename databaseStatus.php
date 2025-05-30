@@ -4,7 +4,7 @@ require 'header.php';
 ?>
 
 <div class="container row-offcanvas row-offcanvas-left">
-  <div class="column card-lg-12 col-sm-12 col-xs-12" id="content">
+  <div id="content" class="column card-lg-12 col-sm-12 col-xs-12">
 
     <div class="row pt-3 pb-3 mb-3">
       <h2><?php echo $title; ?></h2>
@@ -42,24 +42,24 @@ require 'header.php';
             <div class="card-body d-grid gap-4">
               <div class="p-2">
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="checkbox" name="dataGroup" id="dataP">
-                  <label class="form-check-label" for="dataP">Practice</label>
+                  <input id="dataP" class="form-check-input" type="checkbox" name="dataGroup">
+                  <label for="dataP" class="form-check-label">Practice</label>
                 </div>
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="checkbox" name="dataGroup" id="dataQm">
-                  <label class="form-check-label" for="dataQm">Quals</label>
+                  <input id="dataQm" class="form-check-input" type="checkbox" name="dataGroup">
+                  <label for="dataQm" class="form-check-label">Quals</label>
                 </div>
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="checkbox" name="dataGroup" id="dataQf">
-                  <label class="form-check-label" for="dataQf">Quarterfinals</label>
+                  <input id="dataQf" class="form-check-input" type="checkbox" name="dataGroup">
+                  <label for="dataQf" class="form-check-label">Quarterfinals</label>
                 </div>
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="checkbox" name="dataGroup" id="dataSf">
-                  <label class="form-check-label" for="dataSf">Semifinals</label>
+                  <input id="dataSf" class="form-check-input" type="checkbox" name="dataGroup">
+                  <label for="dataSf" class="form-check-label">Semifinals</label>
                 </div>
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="checkbox" name="dataGroup" id="dataF">
-                  <label class="form-check-label" for="dataF">Finals</label>
+                  <input id="dataF" class="form-check-input" type="checkbox" name="dataGroup">
+                  <label for="dataF" class="form-check-label">Finals</label>
                 </div>
               </div>
               <div class="p-2">
@@ -79,27 +79,27 @@ require 'header.php';
           <div class="card-body">
             <div class="mb-3">
               <label for="writeServer" class="form-label"> MySQL Server URL</label>
-              <input type="text" class="form-control" id="writeServer" aria-describedby="serverName">
+              <input id="writeServer" class="form-control" type="text" aria-describedby="serverName">
             </div>
             <div class="mb-3">
               <label for="writeDatabase" class="form-label">Database Name</label>
-              <input type="text" class="form-control" id="writeDatabase" aria-describedby="databaseName">
+              <input id="writeDatabase" class="form-control" type="text" aria-describedby="databaseName">
             </div>
             <div class="mb-3">
               <label for="writeUsername" class="form-label">User Name</label>
-              <input type="text" class="form-control" id="writeUsername" aria-describedby="userName">
+              <input id="writeUsername" class="form-control" type="text" aria-describedby="userName">
             </div>
             <div class="mb-3">
               <label for="writePassword" class="form-label">Password</label>
-              <input type="password" class="form-control" id="writePassword" aria-describedby="password">
+              <input id="writePassword" class="form-control" type="password" aria-describedby="password">
             </div>
             <div class="mb-3">
               <label for="writeTBAKey" class="form-label">TBA Key</label>
-              <input type="text" class="form-control" id="writeTBAKey" aria-describedby="tbaKey">
+              <input id="writeTBAKey" class="form-control" type="text" aria-describedby="tbaKey">
             </div>
             <div class="mb-3">
               <label for="writeEventCode" class="form-label">Event Code</label>
-              <input type="text" class="form-control" id="writeEventCode" aria-describedby="tbaEventCode">
+              <input id="writeEventCode" class="form-control" type="text" aria-describedby="tbaEventCode">
             </div>
 
             <div class="mb-3">

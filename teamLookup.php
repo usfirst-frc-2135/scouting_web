@@ -4,7 +4,7 @@ require 'header.php';
 ?>
 
 <div class="container row-offcanvas row-offcanvas-left">
-  <div class="column card-lg-12 col-sm-12 col-xs-12" id="content">
+  <div id="content" class="column card-lg-12 col-sm-12 col-xs-12">
 
     <div class="row pt-3 pb-3 mb-3">
       <h2><?php echo $title; ?></h2>
@@ -12,8 +12,8 @@ require 'header.php';
 
     <div class="row mb-3">
       <div class="input-group mb-3">
-        <input id="writeTeamNumber" type="text" class="form-control" placeholder="FRC team number" aria-label="writeTeamNumber">
-        <button id="loadTeamButton" type="button" class="btn btn-primary">Load Team</button>
+        <input id="writeTeamNumber" class="form-control" type="text" placeholder="FRC team number" aria-label="writeTeamNumber">
+        <button id="loadTeamButton" class="btn btn-primary" type="button">Load Team</button>
       </div>
 
       <!-- First column of data starts here -->
@@ -43,7 +43,7 @@ require 'header.php';
                   <h5 class="text-center">
                     <a href="#collapseAutonCoralGraph" data-bs-toggle="collapse" aria-expanded="false"> Auton Coral Graph</a>
                   </h5>
-                  <div class="collapse" id="collapseAutonCoralGraph">
+                  <div id="collapseAutonCoralGraph" class="collapse">
                     <canvas id="myChart" width="400" height="400"></canvas>
                   </div>
                 </div>
@@ -57,7 +57,7 @@ require 'header.php';
                   <h5 class="text-center">
                     <a href="#collapseAutonGraph" data-bs-toggle="collapse" aria-expanded="false"> Auton Graph</a>
                   </h5>
-                  <div class="collapse" id="collapseAutonGraph">
+                  <div id="collapseAutonGraph" class="collapse">
                     <canvas id="myChart2" width="400" height="400"></canvas>
                   </div>
                 </div>
@@ -71,7 +71,7 @@ require 'header.php';
                   <h5 class="text-center">
                     <a href="#collapseTeleopCoralGraph" data-bs-toggle="collapse" aria-expanded="false"> Teleop Coral Graph</a>
                   </h5>
-                  <div class="collapse" id="collapseTeleopCoralGraph">
+                  <div id="collapseTeleopCoralGraph" class="collapse">
                     <canvas id="myChart3" width="400" height="400"></canvas>
                   </div>
                 </div>
@@ -85,7 +85,7 @@ require 'header.php';
                   <h5 class="text-center">
                     <a href="#collapseTeleopGraph" data-bs-toggle="collapse" aria-expanded="false"> Teleop Graph</a>
                   </h5>
-                  <div class="collapse" id="collapseTeleopGraph">
+                  <div id="collapseTeleopGraph" class="collapse">
                     <canvas id="myChart4" width="400" height="400"></canvas>
                   </div>
                 </div>
@@ -99,7 +99,7 @@ require 'header.php';
                   <h5 class="text-center">
                     <a href="#collapseEndgameGraph" data-bs-toggle="collapse" aria-expanded="false"> Endgame Graph</a>
                   </h5>
-                  <div class="collapse" id="collapseEndgameGraph">
+                  <div id="collapseEndgameGraph" class="collapse">
                     <canvas id="myChart5" width="400" height="400"></canvas>
                   </div>
                 </div>
@@ -178,8 +178,8 @@ require 'header.php';
                 <h5 class="text-center">
                   <a href="#collapseAllMatches" data-bs-toggle="collapse" aria-expanded="false"> All Matches </a>
                 </h5>
-                <div class="collapse" id="collapseAllMatches">
-                  <div class="overflow-auto" id="freezeTableDiv">
+                <div id="collapseAllMatches" class="collapse">
+                  <div id="freezeTableDiv" class="overflow-auto">
                     <style type="text/css" media="screen">
                       table tr {
                         border: 1px solid black;
@@ -298,7 +298,7 @@ require 'header.php';
                 <div class="overflow-auto">
                   <h5 class="text-center"> <a href="#collapseAuton" data-bs-toggle="collapse" aria-expanded="false"> Auton </a>
                   </h5>
-                  <div class="collapse" id="collapseAuton">
+                  <div id="collapseAuton" class="collapse">
                     <div class="card card-body">
                       <table class="table table-striped">
                         <thead>
@@ -343,7 +343,7 @@ require 'header.php';
                 <div class="overflow-auto">
                   <h5 class="text-center"> <a href="#collapseTeleop" data-bs-toggle="collapse" aria-expanded="false"> Teleop </a>
                   </h5>
-                  <div class="collapse" id="collapseTeleop">
+                  <div id="collapseTeleop" class="collapse">
                     <div class="card card-body">
                       <table class="table table-striped">
                         <thead>
@@ -392,7 +392,7 @@ require 'header.php';
                   <h5 class="text-center"> <a href="#collapseEndgame" data-bs-toggle="collapse" aria-expanded="false"> Endgame
                     </a>
                   </h5>
-                  <div class="collapse" id="collapseEndgame">
+                  <div id="collapseEndgame" class="collapse">
                     <div class="card card-body">
                       <table class="table">
                         <thead>
@@ -438,8 +438,8 @@ require 'header.php';
               <h5 class="text-center">
                 <a href="#collapseStrategicData" data-bs-toggle="collapse" aria-expanded="false"> Strategic Data </a>
               </h5>
-              <div class="collapse" id="collapseStrategicData">
-                <div class="overflow-auto" id="freezeStratTableDiv">
+              <div id="collapseStrategicData" class="collapse">
+                <div id="freezeStratTableDiv" class="overflow-auto">
                   <style type="text/css" media="screen">
                     table tr {
                       border: 1px solid black;

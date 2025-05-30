@@ -67,7 +67,7 @@
         aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarCollapse">
+      <div id="navbarCollapse" class="collapse navbar-collapse">
         <ul class="nav" style="text-align:center">
           <li class="nav-item">
             <a class="nav-link" href="./index.php">Scouting Status</a>

@@ -10,41 +10,41 @@ require 'header.php';
       <h2 class="col-6"><?php echo $title; ?></h2>
 
       <div class="col-2">
-        <button type="button" id="download_csv_file" class="btn btn-primary">Download CSV File</button>
+        <button id="download_csv_file" class="btn btn-primary" type="button">Download CSV File</button>
       </div>
     </div>
     <!--  COMMENTED OUT FOR NOW
       <div class="col-md-2">
         <div class="input-group">
-          <select class="form-select mb-3" id="startPrefix">
+          <select id="startPrefix" class="form-select mb-3">
             <option class="dropdown-item" value="p">P</option>
             <option class="dropdown-item" value="qm" selected>Qm</option>
             <option class="dropdown-item" value="qf">Qf</option>
             <option class="dropdown-item" value="sf">Sf</option>
             <option class="dropdown-item" value="f">F</option>
           </select>
-          <input type="text" id="startMatch" class="form-control" aria-label="Text input with dropdown button">
+          <input id="startMatch" class="form-control" type="text" aria-label="Text input with dropdown button">
         </div>
       </div>
 
       <div class="col-md-3">
         <div class="input-group">
-          <select class="form-select mb-3" id="endPrefix">
+          <select id="endPrefix class="form-select mb-3"">
             <option class="dropdown-item" value="p">P</option>
             <option class="dropdown-item" value="qm" selected>Qm</option>
             <option class="dropdown-item" value="qf">Qf</option>
             <option class="dropdown-item" value="sf">Sf</option>
             <option class="dropdown-item" value="f">F</option>
           </select>
-          <input type="text" id="endMatch" class="form-control" aria-label="Text input with dropdown button">
-          <button id="filterData" type="button" class="btn btn-primary">Filter Data</button>
+          <input id="endMatch" class="form-control" type="text" aria-label="Text input with dropdown button">
+          <button id="filterData" class="btn btn-primary" type="button">Filter Data</button>
         </div>
       </div>
     </div>
 COMMENTED OUT FOR NOW-->
 
     <div class="row mb-3">
-      <div class="overflow-auto" id="freezeTableDiv">
+      <div id="freezeTableDiv" class="overflow-auto">
         <style type="text/css" media="screen">
           table tr {
             border: 1px solid black;

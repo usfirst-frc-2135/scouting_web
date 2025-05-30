@@ -4,7 +4,7 @@ require 'header.php';
 ?>
 
 <div class="container row-offcanvas row-offcanvas-left">
-  <div class="column card-lg-12 col-sm-12 col-xs-12" id="content">
+  <div id="content" class="column card-lg-12 col-sm-12 col-xs-12">
 
     <div class="row pt-3 pb-3 mb-3">
       <div class="row justify-content-md-center">
@@ -17,32 +17,32 @@ require 'header.php';
           <form id="uploadForm" method="post" enctype="multipart/form-data">
             <div class="mb-3">
               <label for="teamNumber" class="form-label">Team Number</label>
-              <input type="text" class="form-control" id="teamNumber" placeholder="FRC team number">
+              <input id="teamNumber" class="form-control" type="text" placeholder="FRC team number">
             </div>
 
             <div class="mb-3">
               <label for="robotPic" class="form-label">Robot Photo</label>
-              <input class="form-control" type="file" id="robotPic">
+              <input id="robotPic" class="form-control" type="file">
             </div>
 
             <div class="mb-3">
               <label for="replacePic" class="form-label">Replace Existing Photos</label>
-              <input class="form-check-input" type="checkbox" id="replacePic">
+              <input id="replacePic" class="form-check-input" type="checkbox">
             </div>
 
             <div class="d-grid gap-2 col-6 mx-auto">
-              <button class="btn btn-primary" type="button" id="upload">Upload</button>
+              <button id="upload" class="btn btn-primary" type="button">Upload</button>
             </div>
           </form>
         </div>
 
-        <button class="btn btn-primary" id="loadingButton">
+        <button id="loadingButton" class="btn btn-primary">
           <span class="spinner-border spinner-border-sm"></span>
           Loading..
         </button>
-        <div id="uploadMessage" style="display: none" class="alert alert-dismissible fade show" role="alert">
+        <div id="uploadMessage" class="alert alert-dismissible fade show" style="display: none" role="alert">
           <div id="uploadMessageText"></div>
-          <button type="button" class="btn-close" id="closeMessage" aria-label="Close"></button>
+          <button id="closeMessage" class="btn-close" type="button" aria-label="Close"></button>
         </div>
 
       </div>

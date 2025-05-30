@@ -4,7 +4,7 @@ require 'header.php';
 ?>
 
 <div class="container row-offcanvas row-offcanvas-left">
-  <div class="column card-lg-12 col-sm-12 col-xs-12" id="content">
+  <div id="content" class="column card-lg-12 col-sm-12 col-xs-12">
 
     <div class="row pt-3 pb-3 mb-3">
       <div class="row justify-content-md-center">
@@ -15,7 +15,7 @@ require 'header.php';
 
         <div id="strategicScoutingMessage" style="display: none" class="alert alert-dismissible fade show" role="alert">
           <div id="uploadMessageText"></div>
-          <button type="button" class="btn-close" id="closeMessage" aria-label="Close"></button>
+          <button id="closeMessage" class="btn-close" type="button" aria-label="Close"></button>
         </div>
 
         <!-- Strategic Entry Form -->
@@ -24,17 +24,17 @@ require 'header.php';
 
             <div class="mb-3">
               <label for="teamNumber" class="form-label">Team Number </label>
-              <input type="text" class="form-control" id="teamNumber" placeholder="FRC team number">
+              <input id="teamNumber" class="form-control" type="text" placeholder="FRC team number">
             </div>
 
             <div class="mb-3">
               <label for="matchNumber" class="form-label">Match Number </label>
-              <input type="text" class="form-control" id="matchNumber" placeholder="Match number">
+              <input id="matchNumber" class="form-control" type="text" placeholder="Match number">
             </div>
 
             <div class="mb-3">
               <label for="scoutName" class="form-label">Scout Name</label>
-              <input type="text" class="form-control" id="scoutName" placeholder="First name, last initial">
+              <input id="scoutName" class="form-control" type="text" placeholder="First name, last initial">
             </div>
 
             <!-- Autonomous Mode -->
@@ -48,22 +48,22 @@ require 'header.php';
                 </div>
                 <div class="form-check form-check-inline">
                   <label for="autonGetCoralFromFloor" class="form-label">Floor</label>
-                  <input class="form-check-input" type="checkbox" id="autonGetCoralFromFloor">
+                  <input id="autonGetCoralFromFloor" class="form-check-input" type="checkbox">
                 </div>
                 <div class="form-check form-check-inline">
                   <label for="autonGetCoralFromStation" class="form-label">Coral Station</label>
-                  <input class="form-check-input" type="checkbox" id="autonGetCoralFromStation">
+                  <input id="autonGetCoralFromStation" class="form-check-input" type="checkbox">
                 </div>
                 <div>
                   <span class="fw-bold">Auton - Get algae from:</span>
                 </div>
                 <div class="form-check form-check-inline">
                   <label for="autonGetAlgaeFromFloor" class="form-label">Floor</label>
-                  <input class="form-check-input" type="checkbox" id="autonGetAlgaeFromFloor">
+                  <input id="autonGetAlgaeFromFloor" class="form-check-input" type="checkbox">
                 </div>
                 <div class="form-check form-check-inline">
                   <label for="autonGetAlgaeFromReef" class="form-label">Reef</label>
-                  <input class="form-check-input" type="checkbox" id="autonGetAlgaeFromReef">
+                  <input id="autonGetAlgaeFromReef" class="form-check-input" type="checkbox">
                 </div>
 
                 <!-- Auton - Committed fouls section -->
@@ -72,11 +72,11 @@ require 'header.php';
                 </div>
                 <div class="form-check form-check-inline">
                   <label for="autonFoul1" class="form-label">Contact with opposing robot in their barge zone</label>
-                  <input class="form-check-input" type="checkbox" id="autonFoul1">
+                  <input id="autonFoul1" class="form-check-input" type="checkbox">
                 </div>
                 <div class="form-check form-check-inline">
                   <label for="autonFoul2" class="form-label">Contact with opposing cage</label>
-                  <input class="form-check-input" type="checkbox" id="autonFoul2">
+                  <input id="autonFoul2" class="form-check-input" type="checkbox">
                 </div>
               </div>
             </div>
@@ -95,11 +95,11 @@ require 'header.php';
                 </div>
                 <div class="form-check form-check-inline">
                   <label for="teleopFloorPickupCoral" class="form-label">Coral</label>
-                  <input class="form-check-input" type="checkbox" id="teleopFloorPickupCoral">
+                  <input id="teleopFloorPickupCoral" class="form-check-input" type="checkbox">
                 </div>
                 <div class="form-check form-check-inline">
                   <label for="teleopFloorPickupAlgae" class="form-label">Algae</label>
-                  <input class="form-check-input" type="checkbox" id="teleopFloorPickupAlgae">
+                  <input id="teleopFloorPickupAlgae" class="form-check-input" type="checkbox">
                 </div>
                 <!-- Teleop - Algae from reef section -->
                 <div>
@@ -107,11 +107,11 @@ require 'header.php';
                 </div>
                 <div class="form-check form-check-inline">
                   <label for="teleopKnockOffAlgaeFromReef" class="form-label">Knock off algae from reef</label>
-                  <input class="form-check-input" type="checkbox" id="teleopKnockOffAlgaeFromReef">
+                  <input id="teleopKnockOffAlgaeFromReef" class="form-check-input" type="checkbox">
                 </div>
                 <div class="form-check form-check-inline">
                   <label for="teleopAcquireAlgaeFromReef" class="form-label">Acquire algae from reef</label>
-                  <input class="form-check-input" type="checkbox" id="teleopAcquireAlgaeFromReef">
+                  <input id="teleopAcquireAlgaeFromReef" class="form-check-input" type="checkbox">
                 </div>
 
                 <!-- Driver ability section -->
@@ -119,24 +119,24 @@ require 'header.php';
                   <span class="fw-bold">Driver ability/speed:</span>
                 </div>
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="driverAbilityGroup" id="driveScore1">
-                  <label class="form-check-label" for="driveScore1">1 - Jerky</label>
+                  <input id="driveScore1" class="form-check-input" type="radio" name="driverAbilityGroup">
+                  <label for="driveScore1" class="form-check-label">1 - Jerky</label>
                 </div>
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="driverAbilityGroup" id="driveScore2">
-                  <label class="form-check-label" for="driveScore2">2 - Slow</label>
+                  <input id="driveScore2 class=" form-check-input" type="radio" name="driverAbilityGroup"">
+                  <label for=" driveScore2" class=" form-check-label">2 - Slow</label>
                 </div>
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="driverAbilityGroup" id="driveScore3">
-                  <label class="form-check-label" for="driveScore3">3 - Average</label>
+                  <input id="driveScore3" class="form-check-input" type="radio" name="driverAbilityGroup">
+                  <label for="driveScore3" class="form-check-label">3 - Average</label>
                 </div>
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="driverAbilityGroup" id="driveScore4">
-                  <label class="form-check-label" for="driveScore4">4 - Quick/agile</label>
+                  <input id="driveScore4" class="form-check-input" type="radio" name="driverAbilityGroup">
+                  <label for="driveScore4" class="form-check-label">4 - Quick/agile</label>
                 </div>
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="driverAbilityGroup" id="driveScore5">
-                  <label class="form-check-label" for="driveScore5">5 - N/A</label>
+                  <input id="driveScore5" class="form-check-input" type="radio" name="driverAbilityGroup">
+                  <label for="driveScore5" class="form-check-label">5 - N/A</label>
                 </div>
 
                 <!-- Against defensive robot section -->
@@ -145,11 +145,11 @@ require 'header.php';
                 </div>
                 <div class="form-check form-check-inline">
                   <label for="againstTactic1" class="form-label">Path Blocked (able to escape quickly?)</label>
-                  <input class="form-check-input" type="checkbox" id="againstTactic1">
+                  <input id="againstTactic1" class="form-check-input" type="checkbox">
                 </div>
                 <div class="mb-3">
                   <label for="againstComment" class="form-label">Against defense note: </label>
-                  <input type="text" class="form-control" id="againstComment">
+                  <input id="againstComment" class="form-control" type="text">
                 </div>
                 <p> </p>
                 <div>
@@ -157,7 +157,7 @@ require 'header.php';
                 </div>
                 <div class="form-check form-check-inline">
                   <label for="teleopFoul1" class="form-label">Contact with anchor when climbing</label>
-                  <input class="form-check-input" type="checkbox" id="teleopFoul1">
+                  <input id="teleopFoul1" class="form-check-input" type="checkbox">
                 </div>
               </div>
             </div>
@@ -175,15 +175,15 @@ require 'header.php';
                 </div>
                 <div class="form-check form-check-inline">
                   <label for="defenseTactic1" class="form-label">Blocking loading station (how long detained?)</label>
-                  <input class="form-check-input" type="checkbox" id="defenseTactic1">
+                  <input id="defenseTactic1" class="form-check-input" type="checkbox">
                 </div>
                 <div class="form-check form-check-inline">
                   <label for="defenseTactic2" class="form-label">Blocking path (how long detained? where?)</label>
-                  <input class="form-check-input" type="checkbox" id="defenseTactic2">
+                  <input id="defenseTactic2" class="form-check-input" type="checkbox">
                 </div>
                 <div class="mb-3">
                   <label for="defenseComment" class="form-label">Defense note: </label>
-                  <input type="text" class="form-control" id="defenseComment">
+                  <input id="defenseComment" class="form-control" type="text">
                 </div>
 
                 <!-- Committed fouls section -->
@@ -192,19 +192,19 @@ require 'header.php';
                 </div>
                 <div class="form-check form-check-inline">
                   <label for="foul1" class="form-label">Pinning for 3 count</label>
-                  <input class="form-check-input" type="checkbox" id="foul1">
+                  <input id="foul1" class="form-check-input" type="checkbox">
                 </div>
                 <div class="form-check form-check-inline">
                   <label for="teleopFoul3" class="form-label">Contact with opposing robot in their reef zone</label>
-                  <input class="form-check-input" type="checkbox" id="teleopFoul3">
+                  <input id="teleopFoul3" class="form-check-input" type="checkbox">
                 </div>
                 <div class="form-check form-check-inline">
                   <label for="teleopFoul2" class="form-label">Contact with opposing robot in their barge zone</label>
-                  <input class="form-check-input" type="checkbox" id="teleopFoul2">
+                  <input id="teleopFoul2" class="form-check-input" type="checkbox">
                 </div>
                 <div class="form-check form-check-inline">
                   <label for="teleopFoul4" class="form-label">Contact with opposing cage </label>
-                  <input class="form-check-input" type="checkbox" id="teleopFoul4">
+                  <input id="teleopFoul4" class="form-check-input" type="checkbox">
                 </div>
 
                 <!-- Endgame fouls section -->
@@ -213,7 +213,7 @@ require 'header.php';
                 </div>
                 <div class="form-check form-check-inline">
                   <label for="endgameFoul1" class="form-label">Contact with opposing robot while it is touching its cage</label>
-                  <input class="form-check-input" type="checkbox" id="endgameFoul1">
+                  <input id="endgameFoul1" class="form-check-input" type="checkbox">
                 </div>
               </div>
             </div>
@@ -226,12 +226,12 @@ require 'header.php';
               <div class="card-body">
                 <div>
                   <label for="problemComment" class="form-label">Problems robot ran into on the field:</label>
-                  <input type="text" class="form-control" id="problemComment">
+                  <input id="problemComment" class="form-control" type="text">
                 </div>
 
                 <div>
                   <label for="generalComment" class="form-label">General comment:</label>
-                  <input type="text" class="form-control" id="generalComment">
+                  <input id="generalComment" class="form-control" type="text">
                 </div>
               </div>
             </div>
@@ -240,7 +240,7 @@ require 'header.php';
 
           <!-- Submit button -->
           <div class="d-grid gap-2 col-6 mx-auto">
-            <button class="btn btn-primary" type="button" id="submitButton">Submit</button>
+            <button id="submitButton" class="btn btn-primary" type="button">Submit</button>
           </div>
 
         </div>

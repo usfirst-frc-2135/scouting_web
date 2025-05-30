@@ -4,7 +4,7 @@ require 'header.php';
 ?>
 
 <div class="container row-offcanvas row-offcanvas-left">
-  <div class="column card-lg-12 col-sm-12 col-xs-12" id="content">
+  <div id="content" class="column card-lg-12 col-sm-12 col-xs-12">
 
     <div class="row pt-3 pb-3 mb-3">
       <div class="row justify-content-md-center">
@@ -13,9 +13,9 @@ require 'header.php';
 
       <div class="card col-md-6 mx-auto">
 
-        <div id="matchScoutingMessage" style="display: none" class="alert alert-dismissible fade show" role="alert">
+        <div id="matchScoutingMessage" class="alert alert-dismissible fade show" style="display: none" role="alert">
           <div id="uploadMessageText"></div>
-          <button type="button" class="btn-close" id="closeMessage" aria-label="Close"></button>
+          <button id="closeMessage" class="btn-close" type="button" aria-label="Close"></button>
         </div>
 
         <!-- Match Entry Form -->
@@ -26,24 +26,24 @@ require 'header.php';
             </div>
             <div class="mb-3">
               <label for="teamNumber" class="form-label">Team Number</label>
-              <input type="number" class="form-control" id="teamNumber" placeholder="FRC team number">
+              <input id="teamNumber" class="form-control" type="number" placeholder="FRC team number">
             </div>
             <div class="mb-3">
               <span>Match Number</span>
               <div class="input-group">
-                <select class="form-select" id="compLevel" aria-label="Comp Level Select">
+                <select id="compLevel" class="form-select" aria-label="Comp Level Select">
                   <option value="p">P</option>
                   <option value="qm">QM</option>
                   <option value="qf">QF</option>
                   <option value="sf">SF</option>
                   <option value="f">F</option>
                 </select>
-                <input id="matchNumber" type="text" class="form-control" placeholder="Match Number" aria-label="Match Number">
+                <input id="matchNumber" class="form-control" type="text" placeholder="Match Number" aria-label="Match Number">
               </div>
             </div>
             <div class="mb-3">
               <label for="scoutName" class="form-label">Scout Name</label>
-              <input type="text" class="form-control" id="scoutName" placeholder="First name, last initial">
+              <input id="scoutName" class="form-control" type="text" placeholder="First name, last initial">
             </div>
 
             <!-- Autonomous Mode -->

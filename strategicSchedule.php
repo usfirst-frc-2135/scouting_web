@@ -4,13 +4,13 @@ require 'header.php';
 ?>
 
 <div class="container row-offcanvas row-offcanvas-left">
-  <div class="column card-lg-12 col-sm-12 col-xs-12" id="content">
+  <div id="content" class="column card-lg-12 col-sm-12 col-xs-12">
 
     <div class="row pt-3 pb-3 mb-3">
       <h2 class="col-md-6"><?php echo $title; ?></h2>
 
       <div class="col-2">
-        <button type="button" id="createButton" class="btn btn-primary">Create Schedule</button>
+        <button id="createButton" class="btn btn-primary" type="button">Create Schedule</button>
       </div>
     </div>
 

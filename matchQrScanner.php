@@ -4,7 +4,7 @@ require 'header.php';
 ?>
 
 <div class="container row-offcanvas row-offcanvas-left">
-  <div class="column card-lg-12 col-sm-12 col-xs-12" id="content">
+  <div id="content" class="column card-lg-12 col-sm-12 col-xs-12">
 
     <div class="row pt-3 pb-3 mb-3">
       <div class="row justify-content-md-center">
@@ -14,11 +14,11 @@ require 'header.php';
       <div class="row mb-3">
         <div class="card d-grid col-6 mx-auto">
           <div id="interactive" class="viewport mt-3">
-            <video autoplay="true" id="camera" class="col-12"></video>
+            <video id="camera" class="col-12" autoplay="true"></video>
           </div>
           <select id="cameraSelect" class="form-select form-select mb-3" aria-label=".form-select-lg example">
           </select>
-          <button id="submitData" type="button" class="btn btn-success mb-3"> Click to Submit Data: 0</button>
+          <button id="submitData" class="btn btn-success mb-3" type="button"> Click to Submit Data: 0</button>
         </div>
       </div>
 
