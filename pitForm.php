@@ -19,7 +19,7 @@ require 'header.php';
         </div>
 
         <div class="card-body">
-          <form id="pitScoutingForm" method="post" enctype="multipart/form-data">
+          <form id="pitScoutingForm" method="post" enctype="multipart/form-data" name="pitScoutingForm">
 
             <div class="mb-3">
               <label for="teamNumber" class="form-label">Team Number </label>

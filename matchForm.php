@@ -61,40 +61,42 @@ require 'header.php';
 
                 <!-- Cones -->
                 <div class="input-group mb-3 fw-bold">
-                  <button id="minusAutoConesTop" class="btn btn-primary btn-warning" type="button">-</button>
-                  <span>Auto Cones Top: 0</span>
-                  <button id="plusAutoConesTop" class="btn btn-primary btn-info" type="button">+</button>
+                  <button id="autoConesTopMinus" class="btn btn-danger col-1" type="button">-</button>
+                  <span id="autoConesTop" class="input-group-text bg-warning col-8">Auto Cones Top: 0</span>
+                  <button id="autoConesTopPlus" class="btn btn-success col-1" type="button">+</button>
                 </div>
 
                 <div class="input-group mb-3 fw-bold">
-                  <button id="minusAutoConesMiddle" class="btn btn-primary btn-warning" type="button">-</button>
-                  <span id="autoConesMiddle">Auto Cones Middle: 0</span>
-                  <button id="plusAutoConesMiddle" class="btn btn-primary btn-info" type="button">+</button>
+                  <button id="autoConesMiddleMinus" class="btn btn-danger col-1" type="button">-</button>
+                  <span id="autoConesMiddle" class="input-group-text bg-warning col-8">Auto Cones Middle: 0</span>
+                  <button id="autoConesMiddlePlus" class="btn btn-success col-1" type="button">+</button>
                 </div>
 
                 <div class="input-group mb-3 fw-bold">
-                  <button id="minusAutoConesBottom" class="btn btn-primary btn-warning" type="button">-</button>
-                  <span>Auto Cones Bottom: 0</span>
-                  <button id="plusAutoConesBottom" class="btn btn-primary btn-info" type="button">+</button>
+                  <button id="autoConesBottomMinus" class="btn btn-danger col-1" type="button">-</button>
+                  <span id="autoConesBottom" class="input-group-text bg-warning col-8">Auto Cones Bottom: 0</span>
+                  <button id="autoConesBottomPlus" class="btn btn-success col-1" type="button">+</button>
                 </div>
 
                 <!-- Cubes -->
                 <div class="input-group mb-3 fw-bold">
-                  <button id="minusAutoCubesTop" class="btn btn-primary btn-warning" type="button">-</button>
-                  <span id="autoCubesTop">Auto Cubes Top: 0</span>
-                  <button id="plusAutoCubesTop" class="btn btn-primary btn-info" type="button">+</button>
+                  <button id="autoCubesTopMinus" class="btn btn-danger col-1" type="button">-</button>
+                  <span id="autoCubesTop" class="input-group-text col-8" style="background-color:#9B72EF">Auto Cubes Top: 0</span>
+                  <button id="autoCubesTopPlus" class="btn btn-success col-1" type="button">+</button>
                 </div>
 
                 <div class="input-group mb-3 fw-bold">
-                  <button id="minusAutoCubesMiddle" class="btn btn-primary btn-warning" type="button">-</button>
-                  <span id="autoCubesMiddle">Auto Cubes Middle: 0</span>
-                  <button id="plusAutoCubesMiddle" class="btn btn-primary btn-info" type="button">+</button>
+                  <button id="autoCubesMiddleMinus" class="btn btn-danger col-1" type="button">-</button>
+                  <span id="autoCubesMiddle" class="input-group-text col-8" style="background-color:#9B72EF">Auto Cubes Middle:
+                    0</span>
+                  <button id="autoCubesMiddlePlus" class="btn btn-success col-1" type="button">+</button>
                 </div>
 
                 <div class="input-group mb-3 fw-bold">
-                  <button id="minusAutoCubesBottom" class="btn btn-primary btn-warning" type="button">-</button>
-                  <span id="autoCubesBottom">Auto Cubes Bottom: 0</span>
-                  <button id="plusAutoCubesBottom" class="btn btn-primary btn-info" type="button">+</button>
+                  <button id="autoCubesBottomMinus" class="btn btn-danger col-1" type="button">-</button>
+                  <span id="autoCubesBottom" class="input-group-text col-8" style="background-color:#9B72EF">Auto Cubes Bottom:
+                    0</span>
+                  <button id="autoCubesBottomPlus" class="btn btn-success col-1" type="button">+</button>
                 </div>
 
                 <div class="form-check">
@@ -118,40 +120,43 @@ require 'header.php';
 
                 <!-- Cones -->
                 <div class="input-group mb-3 fw-bold">
-                  <button id="plusTeleopConesTop" class="btn btn-primary btn-warning" type="button">+</button>
-                  <span>Teleop Cones Top: 0</span>
-                  <button id="minusTeleopConesTop" class="btn btn-primary btn-info" type="button">-</button>
+                  <button id="teleopConesTopMinus" class="btn btn-danger col-1" type="button">-</button>
+                  <span id="teleopConesTop" class="input-group-text bg-warning col-8">Teleop Cones Top: 0</span>
+                  <button id="teleopConesTopPlus" class="btn btn-success col-1" type="button">+</button>
                 </div>
 
                 <div class="input-group mb-3 fw-bold">
-                  <button id="plusTeleopConesMiddle" class="btn btn-primary btn-warning" type="button">+</button>
-                  <span>Teleop Cones Middle: 0</span>
-                  <button id="minusTeleopConesMiddle" class="btn btn-primary btn-info" type="button">-</button>
+                  <button id="teleopConesMiddleMinus" class="btn btn-danger col-1" type="button">-</button>
+                  <span id="teleopConesMiddle" class="input-group-text bg-warning col-8">Teleop Cones Middle: 0</span>
+                  <button id="teleopConesMiddlePlus" class="btn btn-success col-1" type="button">+</button>
                 </div>
 
                 <div class="input-group mb-3 fw-bold">
-                  <button id="plusTeleopConesBottom" class="btn btn-primary btn-warning" type="button">+</button>
-                  <span>Teleop Cones Bottom: 0</span>
-                  <button id="minusTeleopConesBottom" class="btn btn-primary btn-info" type="button">-</button>
+                  <button id="teleopConesBottomMinus" class="btn btn-danger col-1" type="button">-</button>
+                  <span id="teleopConesBottom" class="input-group-text bg-warning col-8">Teleop Cones Bottom: 0</span>
+                  <button id="teleopConesBottomPlus" class="btn btn-success col-1" type="button">+</button>
                 </div>
 
                 <!-- Cubes -->
                 <div class="input-group mb-3 fw-bold">
-                  <button id="plusTeleopCubesTop" class="btn btn-primary btn-warning" type="button">+</button>
-                  <span>Teleop Cubes Top: 0</span>
-                  <button id="minusTeleopCubesTop" class="btn btn-primary btn-info" type="button">-</button>
+                  <button id="teleopCubesTopMinus" class="btn btn-danger col-1" type="button">-</button>
+                  <span id="teleopCubesTop" class="input-group-text col-8" style="background-color:#9B72EF">Teleop Cubes Top:
+                    0</span>
+                  <button id="teleopCubesTopPlus" class="btn btn-success col-1" type="button">+</button>
                 </div>
 
                 <div class="input-group mb-3 fw-bold">
-                  <button id="plusTeleopCubesMiddle" class="btn btn-primary btn-warning" type="button">+</button>
-                  <span>Teleop Cubes Middle: 0</span>
-                  <button id="minusTeleopCubesMiddle" class="btn btn-primary btn-info" type="button">-</button>
+                  <button id="teleopCubesMiddleMinus" class="btn btn-danger col-1" type="button">-</button>
+                  <span id="teleopCubesMiddle" class="input-group-text col-8" style="background-color:#9B72EF">Teleop Cubes Middle:
+                    0</span>
+                  <button id="teleopCubesMiddlePlus" class="btn btn-success col-1" type="button">+</button>
                 </div>
 
                 <div class="input-group mb-3 fw-bold">
-                  <button id="plusTeleopCubesBottom" class="btn btn-primary btn-warning" type="button">+</button>
-                  <span>Teleop Cubes Bottom: 0</span>
-                  <button id="minusTeleopCubesBottom" class="btn btn-primary btn-info" type="button">-</button>
+                  <button id="teleopCubesBottomMinus" class="btn btn-danger col-1" type="button">-</button>
+                  <span id="teleopCubesBottom" class="input-group-text col-8" style="background-color:#9B72EF">Teleop Cubes Bottom:
+                    0</span>
+                  <button id="teleopCubesBottomPlus" class="btn btn-success col-1" type="button">+</button>
                 </div>
 
                 <!-- Checkboxes -->
@@ -233,93 +238,93 @@ require 'header.php';
 
   function attach_gamepiece_scoring() {
     console.log("==> matchForm.php: attach_gamepiece_scoring() starting");
-    $("#plusAutoConesBottom").click(function () {
+    $("#autoConesBottomPlus").click(function () {
       auto_conesbottom += 1;
       $("#autoConesBottom").html("Auto Cones Bottom: " + auto_conesbottom);
     });
 
-    $("#minusAutoConesBottom").click(function () {
+    $("#autoConesBottomMinus").click(function () {
       auto_conesbottom = Math.max(auto_conesbottom - 1, 0);
       $("#autoConesBottom").html("Auto Cones Bottom: " + auto_conesbottom);
     });
 
-    $("#plusAutoConesMiddle").click(function () {
+    $("#autoConesMiddlePlus").click(function () {
       auto_conesmiddle += 1;
       $("#autoConesMiddle").html("Auto Cones Middle: " + auto_conesmiddle);
     });
 
-    $("#minusAutoConesMiddle").click(function () {
+    $("#autoConesMiddleMinus").click(function () {
       auto_conesmiddle = Math.max(auto_conesmiddle - 1, 0);
       $("#autoConesMiddle").html("Auto Cones Middle: " + auto_conesmiddle);
     });
 
-    $("#plusAutoConesTop").click(function () {
+    $("#autoConesTopPlus").click(function () {
       auto_conestop += 1;
       $("#autoConesTop").html("Auto Cones Top: " + auto_conestop);
     });
 
-    $("#minusAutoConesTop").click(function () {
+    $("#autoConesTopMinus").click(function () {
       auto_conestop = Math.max(auto_conestop - 1, 0);
       $("#autoConesTop").html("Auto Cones Top: " + auto_conestop);
     });
 
-    $("#plusAutoCubesBottom").click(function () {
+    $("#autoCubesBottomPlus").click(function () {
       auto_cubesbottom += 1;
       $("#autoCubesBottom").html("Auto Cubes Bottom: " + auto_cubesbottom);
     });
 
-    $("#minusAutoCubesBottom").click(function () {
+    $("#autoCubesBottomMinus").click(function () {
       auto_cubesbottom = Math.max(auto_cubesbottom - 1, 0);
       $("#autoCubesBottom").html("Auto Cubes Bottom: " + auto_cubesbottom);
     });
 
-    $("#plusAutoCubesMiddle").click(function () {
+    $("#autoCubesMiddlePlus").click(function () {
       auto_cubesmiddle += 1;
       $("#autoConesMiddle").html("Auto Cubes Middle: " + auto_cubesmiddle);
     });
 
-    $("#minusAutoCubesMiddle").click(function () {
+    $("#autoCubesMiddleMinus").click(function () {
       auto_cubesmiddle = Math.max(auto_cubesmiddle - 1, 0);
       $("#autoCubesMiddle").html("Auto Cubes Middle: " + auto_cubesmiddle);
     });
 
-    $("#plusAutoCubesTop").click(function () {
+    $("#autoCubesTopPlus").click(function () {
       auto_cubestop += 1;
       $("#autoCubesTop").html("Auto Cubes Top: " + auto_cubestop);
     });
 
-    $("#minusAutoCubesTop").click(function () {
+    $("#autoCubesTopMinus").click(function () {
       auto_cubestop = Math.max(auto_cubestop - 1, 0);
       $("#autoCubesTop").html("Auto Cubes Top: " + auto_cubestop);
     });
 
 
-    $("#plusTeleopConesBottom").click(function () {
+    $("#teleopConesBottomPlus").click(function () {
       teleop_conesbottom += 1;
       $("#teleopConesBottom").html("Teleop Cones Bottom: " + teleop_conesbottom);
     });
 
-    $("#minusTeleopConesBottom").click(function () {
+    $("#teleopConesBottomMinus").click(function () {
       teleop_conesbottom = Math.max(teleop_conesbottom - 1, 0);
       $("#teleopConesBottom").html("Teleop Cones Bottom: " + teleop_conesbottom);
     });
 
-    $("#plusTeleopConesMiddle").click(function () {
+    $("#teleopConesMiddlePlus").click(function () {
       teleop_conesmiddle += 1;
       $("#teleopConesMiddle").html("Teleop Cones Middle: " + teleop_conesmiddle);
     });
 
-    $("#minusTeleopConesMiddle").click(function () {
+    $("#teleopConesMiddleMinus").click(function () {
       teleop_conesmiddle = Math.max(teleop_conesmiddle - 1, 0);
       $("#teleopConesMiddle").html("Teleop Cones Middle: " + teleop_conesmiddle);
     });
 
-    $("#plusTeleopConesTop").click(function () {
+    $("#teleopConesTopPlus").click(function () {
       teleop_conestop += 1;
       $("#teleopConesTop").html("Teleop Cones Top: " + teleop_conestop);
     });
 
-    $("#minusTeleopConesTop").click(function () {
+    $("#teleopConesTopMinus").click(function () {
       teleop_conestop = Math.max(teleop_conestop - 1, 0);
       $("#teleopConesTop").html("Teleop Cones Top: " + teleop_conestop);
     });
@@ -344,12 +349,12 @@ require 'header.php';
       $("#teleopCubesMiddle").html("Teleop Cubes Middle: " + teleop_cubesmiddle);
     });
 
-    $("#plusTeleopCubesTop").click(function () {
+    $("#teleopCubesTopPlus").click(function () {
       teleop_cubestop += 1;
       $("#teleopCubesTop").html("Teleop Cubes Top: " + teleop_cubestop);
     });
 
-    $("#minusTeleopCubesTop").click(function () {
+    $("#teleopCubesTopMinus").click(function () {
       teleop_cubestop = Math.max(teleop_cubestop - 1, 0);
       $("#teleopCubesTop").html("Teleop Cubes Top: " + teleop_cubestop);
     });
