@@ -42,23 +42,23 @@ require 'header.php';
             <div class="card-body d-grid gap-4">
               <div class="p-2">
                 <div class="form-check form-check-inline">
-                  <input id="dataP" class="form-check-input" type="checkbox" name="dataGroup">
+                  <input id="dataP" class="form-check-input" type="checkbox" name="filterGroup">
                   <label for="dataP" class="form-check-label">Practice</label>
                 </div>
                 <div class="form-check form-check-inline">
-                  <input id="dataQm" class="form-check-input" type="checkbox" name="dataGroup">
+                  <input id="dataQm" class="form-check-input" type="checkbox" name="filterGroup">
                   <label for="dataQm" class="form-check-label">Quals</label>
                 </div>
                 <div class="form-check form-check-inline">
-                  <input id="dataQf" class="form-check-input" type="checkbox" name="dataGroup">
+                  <input id="dataQf" class="form-check-input" type="checkbox" name="filterGroup">
                   <label for="dataQf" class="form-check-label">Quarterfinals</label>
                 </div>
                 <div class="form-check form-check-inline">
-                  <input id="dataSf" class="form-check-input" type="checkbox" name="dataGroup">
+                  <input id="dataSf" class="form-check-input" type="checkbox" name="filterGroup">
                   <label for="dataSf" class="form-check-label">Semifinals</label>
                 </div>
                 <div class="form-check form-check-inline">
-                  <input id="dataF" class="form-check-input" type="checkbox" name="dataGroup">
+                  <input id="dataF" class="form-check-input" type="checkbox" name="filterGroup">
                   <label for="dataF" class="form-check-label">Finals</label>
                 </div>
               </div>

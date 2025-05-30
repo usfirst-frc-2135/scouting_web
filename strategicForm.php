@@ -20,7 +20,7 @@ require 'header.php';
 
         <!-- Strategic Entry Form -->
         <div class="card-body mb-3">
-          <form id="strategicForm" method="post" enctype="multipart/form-data">
+          <form id="strategicForm" method="post" enctype="multipart/form-data" name="strategicForm">
 
             <div class="mb-3">
               <label for="teamNumber" class="form-label">Team Number </label>
@@ -151,7 +151,6 @@ require 'header.php';
                   <label for="againstComment" class="form-label">Against defense note: </label>
                   <input id="againstComment" class="form-control" type="text">
                 </div>
-                <p> </p>
                 <div>
                   <span class="fw-bold">Endgame: Climbing Foul:</span>
                 </div>

@@ -20,7 +20,7 @@ require 'header.php';
 
         <!-- Match Entry Form -->
         <div class="card-body mb-3">
-          <form id="matchForm" method="post" enctype="multipart/form-data">
+          <form id="matchForm" method="post" enctype="multipart/form-data" name="matchForm">
             <div>
               <h3>Match Info</h3>
             </div>
@@ -51,9 +51,10 @@ require 'header.php';
               <div class="card-header fw-bold">
                 Autonomous Mode
               </div>
+
               <div class="card-body">
                 <!-- Checkboxes -->
-                <div class="form-check form-check-inline">
+                <div class="form-check form-check-inline mb-3">
                   <input id="exitCommunity" class="form-check-input" type="checkbox" name="exitCommunity">
                   <label for=" exitCommunity" class=" form-check-label">Exited Community?</label>
                 </div>
@@ -96,18 +97,14 @@ require 'header.php';
                   <button id="plusAutoCubesBottom" class="btn btn-primary btn-info" type="button">+</button>
                 </div>
 
-                <div class="row">
-                  <div class="form-check form-check-inline">
-                    <label for="autochargestation" class="form-check-label">Auto Charge Station?</label>
-                    <select id="autochargestation" class="form-select">
-                      <option value="0">None</option>
-                      <option value="1">Docked</option>
-                      <option value="2">Engaged</option>
-                    </select>
-                  </div>
+                <div class="form-check">
+                  <label for="autochargestation" class="form-check-label">Auto Charge Station?</label>
+                  <select id="autochargestation" class="form-select">
+                    <option value="0">None</option>
+                    <option value="1">Docked</option>
+                    <option value="2">Engaged</option>
+                  </select>
                 </div>
-
-                <br>
               </div>
             </div>
             <!-- end Autonomous Mode -->
@@ -156,22 +153,22 @@ require 'header.php';
                   <span>Teleop Cubes Bottom: 0</span>
                   <button id="minusTeleopCubesBottom" class="btn btn-primary btn-info" type="button">-</button>
                 </div>
-              </div>
 
-              <!-- Checkboxes -->
-              <div class="form-check form-check-inline">
-                <input id="pickedupCube" class="form-check-input" type="checkbox" name="pickedupCube">
-                <label for="pickedupCube" class="form-check-label">Picked Up Cube?</label>
-              </div>
+                <!-- Checkboxes -->
+                <div class="form-check form-check-inline">
+                  <input id="pickedupCube" class="form-check-input" type="checkbox" name="pickedupCube">
+                  <label for="pickedupCube" class="form-check-label">Picked Up Cube?</label>
+                </div>
 
-              <div class="form-check form-check-inline">
-                <input id="pickedupUprightCone" class="form-check-input" type="checkbox" name="pickedupUprightCone">
-                <label for="pickedupUprightCone" class="form-check-label">Picked Up Upright Cone?</label>
-              </div>
+                <div class="form-check form-check-inline">
+                  <input id="pickedupUprightCone" class="form-check-input" type="checkbox" name="pickedupUprightCone">
+                  <label for="pickedupUprightCone" class="form-check-label">Picked Up Upright Cone?</label>
+                </div>
 
-              <div class="form-check form-check-inline">
-                <input id="pickedupTippedCone" class="form-check-input" type="checkbox" name="pickedupTippedCone">
-                <label for="pickedupTippedCone" class="form-check-label">Picked Up Tipped Cone</label>
+                <div class="form-check form-check-inline">
+                  <input id="pickedupTippedCone" class="form-check-input" type="checkbox" name="pickedupTippedCone">
+                  <label for="pickedupTippedCone" class="form-check-label">Picked Up Tipped Cone</label>
+                </div>
               </div>
             </div>
             <!-- end Teleop Mode -->
@@ -183,7 +180,7 @@ require 'header.php';
               </div>
               <div class="card-body">
 
-                <div class="form-check form-check-inline">
+                <div class="form-check mb-3">
                   <label for="endgamechargestation" class="form-check-label">Charge Station?</label>
                   <select id="endgamechargestation" class="form-select">
                     <option value="0">None</option>
@@ -193,7 +190,7 @@ require 'header.php';
                   </select>
                 </div>
 
-                <div class="form-check form-check-inline">
+                <div class="form-check form-check-inline mb-3">
                   <input id="dead" class="form-check-input" type="checkbox" name="dead">
                   <label for="dead" class="form-check-label">Dead?</label>
                 </div>
@@ -208,7 +205,7 @@ require 'header.php';
           <!-- End Comments section -->
 
           <!-- Submit button -->
-          <div class="row justify-content-md-center">
+          <div class="d-grid gap-2 col-6 mx-auto">
             <button id="submitForm" class="btn btn-primary" type="button" style="width:100%">Submit</button>
           </div>
           </form>

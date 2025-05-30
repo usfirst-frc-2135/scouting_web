@@ -18,7 +18,9 @@ require 'header.php';
           </div>
           <select id="cameraSelect" class="form-select form-select mb-3" aria-label=".form-select-lg example">
           </select>
-          <button id="submitData" class="btn btn-success mb-3" type="button"> Click to Submit Data: 0</button>
+          <div class="d-grid gap-2 col-6 mx-auto">
+            <button id="submitData" class="btn btn-success mb-3" type="button"> Click to Submit Data: 0</button>
+          </div>
         </div>
       </div>
 
