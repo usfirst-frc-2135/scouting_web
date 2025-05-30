@@ -54,7 +54,7 @@ require 'header.php';
               <div class="card-body">
                 <!-- Checkboxes -->
                 <div class="form-check form-check-inline">
-                  <input id="exitCommunity class=" form-check-input" type="checkbox" name="exitCommunity"">
+                  <input id="exitCommunity" class="form-check-input" type="checkbox" name="exitCommunity">
                   <label for=" exitCommunity" class=" form-check-label">Exited Community?</label>
                 </div>
 
