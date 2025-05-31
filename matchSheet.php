@@ -11,9 +11,9 @@ require 'header.php';
         <h2 class="col-md-6"><?php echo $title; ?></h2>
       </div>
 
-      <div class="card col-md-6 mx-auto">
+      <div class="col-md-6 mx-auto">
 
-        <div class="card">
+        <div class="card mb-3">
           <!-- Our team matches list -->
           <h5>2135 Match Links</h5>
           <div class="row mb-3">
