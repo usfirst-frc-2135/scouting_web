@@ -44,7 +44,8 @@ require 'header.php';
 COMMENTED OUT FOR NOW-->
 
     <div class="row mb-3">
-      <div id="freezeTableDiv" class="overflow-auto">
+
+      <div id="freeze-table" class="freeze-table overflow-auto">
         <style type="text/css" media="screen">
           table tr {
             border: 1px solid black;
@@ -353,9 +354,19 @@ COMMENTED OUT FOR NOW-->
         addHtmlToFinalTable();
         setTimeout(function () {
           sorttable.makeSortable(document.getElementById("averageTable"))
-          frozenTable = $('#freezeTableDiv').freezeTable({
-            backgroundColor: "white",
+          frozenTable = $('#freeze-table').freezeTable({
+            'freezeHead': true,
+            'freezeColumn': true,
+            'freezeColumnHead': true,
+            'scrollBar': true,
+            'fixedNavbar': '.navbar',
+            'scrollable': true,
+            'fastMode': true,
+            // 'container': '#navbar',
+            'columnNum': 1,
             'columnKeep': true,
+            'columnBorderWidth': 2,
+            'backgroundColor': 'blue',
             'frozenColVerticalOffset': 0
           });
         }, 1);
@@ -373,9 +384,19 @@ COMMENTED OUT FOR NOW-->
     addHtmlToFinalTable();
     setTimeout(function () {
       sorttable.makeSortable(document.getElementById("averageTable"))
-      frozenTable = $('#freezeTableDiv').freezeTable({
-        backgroundColor: "white",
+      frozenTable = $('#freeze-table').freezeTable({
+        'freezeHead': true,
+        'freezeColumn': true,
+        'freezeColumnHead': true,
+        'scrollBar': true,
+        'fixedNavbar': '.navbar',
+        'scrollable': true,
+        'fastMode': true,
+        // 'container': '#navbar',
+        'columnNum': 1,
         'columnKeep': true,
+        'columnBorderWidth': 2,
+        'backgroundColor': 'blue',
         'frozenColVerticalOffset': 0
       });
     }, 1);

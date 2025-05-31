@@ -10,7 +10,7 @@ require 'header.php';
       <h2><?php echo $title; ?></h2>
     </div>
 
-    <div id="freezeTableDiv">
+    <div id="freeze-table" class="freeze-table overflow-auto">
       <style type="text/css" media="screen">
         table tr {
           border: 1px solid black;
@@ -21,7 +21,7 @@ require 'header.php';
           border-right: 1px solid black;
         }
       </style>
-      <table id="rawDataTable" class="table table-striped table-hover sortable">
+      <table id="matchDataTable" class="table table-striped table-hover sortable">
         <colgroup>
           <col span="2" style="background-color:transparent">
           <col span="1" style="background-color:#cfe2ff">
@@ -92,7 +92,7 @@ require 'header.php';
   var frozenTable = null;
 
   function sortTable() {
-    var table = document.getElementById("rawDataTable");
+    var table = document.getElementById("matchDataTable");
     var rows = Array.prototype.slice.call(table.querySelectorAll("tbody> tr"));
     rows.sort(function (rowA, rowB) {
       var cellA = rowA.cells[0].textContent.trim();
@@ -189,10 +189,20 @@ require 'header.php';
       console.log("===> matchData: dataObj size = " + dataObj.length);
       buildMatchDataTable(dataObj);
       setTimeout(function () {
-        sorttable.makeSortable(document.getElementById("rawDataTable"));
-        frozenTable = $('#freezeTableDiv').freezeTable({
-          'backgroundColor': "white",
+        sorttable.makeSortable(document.getElementById("matchDataTable"));
+        frozenTable = $('#freeze-table').freezeTable({
+          'freezeHead': true,
+          'freezeColumn': true,
+          'freezeColumnHead': true,
+          'scrollBar': true,
+          'fixedNavbar': '.navbar',
+          'scrollable': true,
+          'fastMode': true,
+          // 'container': '#navbar',
           'columnNum': 2,
+          'columnKeep': true,
+          'columnBorderWidth': 2,
+          'backgroundColor': 'white',
           'frozenColVerticalOffset': 0
         });
       }, 1);
@@ -207,7 +217,7 @@ require 'header.php';
     requestAPI();
 
     // Keep the frozen pane updated 
-    $("#rawDataTable").click(function () {
+    $("#matchDataTable").click(function () {
       if (frozenTable) {
         frozenTable.update();
       }

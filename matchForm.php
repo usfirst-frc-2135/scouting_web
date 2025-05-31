@@ -459,8 +459,9 @@ require 'header.php';
 
     // Submit the match data form 
     $("#submitForm").click(function () {
-      var form_data = get_form_data();
-      submit(form_data);
+      alert("This match form is NOT configured for 2025 game!");
+      // var form_data = get_form_data();
+      // submit(form_data);
     });
   });
 </script>

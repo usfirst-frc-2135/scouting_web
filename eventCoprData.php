@@ -14,17 +14,15 @@ require 'header.php';
       <button id="loadEvent" class="btn btn-primary" type="button">Reload COPRs</button>
     </div>
 
-    <div class="table-responsive">
-      <div id="freezeTableDiv">
-        <table id="dataTable" class="table table-striped table-hover">
-          <thead>
-            <tr id="tableKeys">
-            </tr>
-          </thead>
-          <tbody id="tableData">
-          </tbody>
-        </table>
-      </div>
+    <div id="freeze-table" class="freeze-table">
+      <table id="coprTable" class="table table-striped table-hover">
+        <thead>
+          <tr id="tableKeys">
+          </tr>
+        </thead>
+        <tbody id="tableData">
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
@@ -79,8 +77,6 @@ require 'header.php';
     setHeader(ec);
     keysToTable(keys);
     buildCOPRDataTable(data, keys);
-    // sorttable.makeSortable($("#dataTable"));
-    // sorttable.makeSortable(document.getElementById("dataTable"));
   }
 
   function requestAPI() {
@@ -91,10 +87,20 @@ require 'header.php';
       console.log("==> requestAPI:\n" + data);
       processData(data);
       setTimeout(function () {
-        sorttable.makeSortable(document.getElementById("dataTable"));
-        frozenTable = $('#freezeTableDiv').freezeTable({
-          'backgroundColor': "white",
+        sorttable.makeSortable(document.getElementById("coprTable"));
+        frozenTable = $('#freeze-table').freezeTable({
+          'freezeHead': true,
+          'freezeColumn': true,
+          'freezeColumnHead': true,
+          'scrollBar': true,
+          'fixedNavbar': '.navbar',
+          'scrollable': true,
+          'fastMode': true,
+          // 'container': '#navbar',
           'columnNum': 1,
+          'columnKeep': true,
+          'columnBorderWidth': 2,
+          'backgroundColor': 'blue',
           'frozenColVerticalOffset': 0
         });
       }, 500);
@@ -111,7 +117,7 @@ require 'header.php';
       requestAPI();
     });
 
-    $("#dataTable").click(function () {
+    $("#coprTable").click(function () {
       if (frozenTable) {
         frozenTable.update();
       }

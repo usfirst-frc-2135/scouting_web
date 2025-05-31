@@ -15,7 +15,8 @@ require 'header.php';
     </div>
 
     <div class="col-md-6">
-      <div id="freezeTableDiv">
+
+      <div>
         <style type="text/css" media="screen">
           table tr {
             border: 1px solid black;

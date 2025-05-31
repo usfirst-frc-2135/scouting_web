@@ -179,7 +179,7 @@ require 'header.php';
                   <a href="#collapseAllMatches" data-bs-toggle="collapse" aria-expanded="false"> All Matches </a>
                 </h5>
                 <div id="collapseAllMatches" class="collapse">
-                  <div id="freezeTableDiv" class="overflow-auto">
+                  <div id="freeze-table" class="freeze-table overflow-auto">
                     <style type="text/css" media="screen">
                       table tr {
                         border: 1px solid black;
@@ -439,7 +439,7 @@ require 'header.php';
                 <a href="#collapseStrategicData" data-bs-toggle="collapse" aria-expanded="false"> Strategic Data </a>
               </h5>
               <div id="collapseStrategicData" class="collapse">
-                <div id="freezeStratTableDiv" class="overflow-auto">
+                <div id="freeze-table-2" class="freeze-table overflow-auto">
                   <style type="text/css" media="screen">
                     table tr {
                       border: 1px solid black;
@@ -552,8 +552,8 @@ require 'header.php';
 <?php include 'footer.php'; ?>
 
 <script>
-  var frozenTable = null;
-  var frozenStratTable = null;
+  var frozenTableMatches = null;
+  var frozenTableStrategy = null;
 
   var chartDefined = false;
   var myChart;
@@ -828,9 +828,19 @@ require 'header.php';
     }
     setTimeout(function () {
       sorttable.makeSortable(document.getElementById("sortableAllMatches"));
-      frozenTable = $('#freezeTableDiv').freezeTable({
-        'backgroundColor': "white",
+      frozenTableMatches = $('#freeze-table').freezeTable({
+        'freezeHead': true,
+        'freezeColumn': true,
+        'freezeColumnHead': true,
+        'scrollBar': true,
+        'fixedNavbar': '.navbar',
+        'scrollable': true,
+        'fastMode': true,
+        // 'container': '#navbar',
+        'columnNum': 1,
         'columnKeep': true,
+        'columnBorderWidth': 2,
+        'backgroundColor': 'blue',
         'frozenColVerticalOffset': 0
       });
     }, 1);
@@ -926,7 +936,7 @@ require 'header.php';
 
     setTimeout(function () {
       sorttable.makeSortable(document.getElementById("sortableStrategicData"));
-      frozenStratTable = $('#freezeStratTableDiv').freezeTable({
+      frozenTableStrategy = $('#freeze-table-2').freezeTable({
         'backgroundColor': "white",
         'columnKeep': true,
         'frozenColVerticalOffset': 0
@@ -1715,15 +1725,15 @@ require 'header.php';
 
     // Keep the frozen match data updated
     $("#sortableAllMatches").click(function () {
-      if (frozenTable) {
-        frozenTable.update();
+      if (frozenTableMatches) {
+        frozenTableMatches.update();
       }
     });
 
     // Keep the frozen strategy table updated
     $("#sortableStrategicData").click(function () {
-      if (frozenStratTable) {
-        frozenTable.update();
+      if (frozenTableStrategy) {
+        frozenTableStrategy.update();
       }
     });
   });
