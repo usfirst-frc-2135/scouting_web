@@ -36,7 +36,7 @@ else if (isset($_POST["createTable"]))
 
   try
   {
-    $db->createDataTable();
+    $db->createMatchTable();
   }
   catch (Exception $e)
   {

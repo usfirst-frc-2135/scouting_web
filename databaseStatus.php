@@ -20,7 +20,7 @@ require 'header.php';
           <div class="card-body">
             <h4>MySQL Server Status: <span id="serverStatus" class="badge bg-warning">Not Connected</span></h4>
             <h4>Database Status: <span id="databaseStatus" class="badge bg-warning">Not Connected</span></h4>
-            <h4>Data Table Status: <span id="dataTableStatus" class="badge bg-warning">Not Connected</span></h4>
+            <h4>Match Table Status: <span id="matchTableStatus" class="badge bg-warning">Not Connected</span></h4>
             <h4>TBA Table Status: <span id="TBATableStatus" class="badge bg-warning">Not Connected</span></h4>
             <h4>Pit Table Status: <span id="pitTableStatus" class="badge bg-warning">Not Connected</span></h4>
             <h4>Strategic Table Status: <span id="strategicTableStatus" class="badge bg-warning">Not Connected</span></h4>
@@ -147,7 +147,7 @@ require 'header.php';
 
     setStatusBadge(statusArray["serverExists"], "serverStatus");
     setStatusBadge(statusArray["dbExists"], "databaseStatus");
-    setStatusBadge(statusArray["dataTableExists"], "dataTableStatus");
+    setStatusBadge(statusArray["matchTableExists"], "matchTableStatus");
     setStatusBadge(statusArray["tbaTableExists"], "TBATableStatus");
     setStatusBadge(statusArray["pitTableExists"], "pitTableStatus");
     setStatusBadge(statusArray["strategicTableExists"], "strategicTableStatus");
@@ -189,7 +189,7 @@ require 'header.php';
           $("#" + key).removeClass("bg-info");
           id_to_written_map[key] = false;
           if (key == "writeDatabase") {
-            id_to_written_map["writeDataTable"] = false;
+            id_to_written_map["writeMatchTable"] = false;
             id_to_written_map["writeTBATable"] = false;
             id_to_written_map["writePitTable"] = false;
             id_to_written_map["writeStrategicTable"] = false;
@@ -199,7 +199,7 @@ require 'header.php';
           id_to_written_map[key] = true;
           if (key == "writeDatabase") {
             // Mark tables in id_to_written_map 
-            id_to_written_map["writeDataTable"] = true;
+            id_to_written_map["writeMatchTable"] = true;
             id_to_written_map["writeTBATable"] = true;
             id_to_written_map["writePitTable"] = true;
             id_to_written_map["writeStrategicTable"] = true;

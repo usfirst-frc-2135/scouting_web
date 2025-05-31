@@ -480,7 +480,7 @@ class dbHandler
     }
   }
 
-  public function createDataTable()
+  public function createMatchTable()
   {
     $conn = $this->connectToDB();
     $dbConfig = $this->readDbConfig();
@@ -705,7 +705,7 @@ class dbHandler
     $out["username"] = substr($dbConfig["username"], 0, 1) . "*****";
     $out["dbExists"] = false;
     $out["serverExists"] = false;
-    $out["dataTableExists"] = false;
+    $out["matchTableExists"] = false;
     $out["tbaTableExists"] = false;
     $out["pitTableExists"] = false;
     $out["strategicTableExists"] = false;
@@ -748,11 +748,11 @@ class dbHandler
       $conn = new PDO($dsn, $dbConfig["username"], $dbConfig["password"]);
       $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
       $val = $conn->query('SELECT * from ' . $dbConfig["datatable"]);
-      $out["dataTableExists"] = true;
+      $out["matchTableExists"] = true;
     }
     catch (PDOException $e)
     {
-      $out["dataTableExists"] = false;
+      $out["matchTableExists"] = false;
     }
 
     // TBA table Connection
