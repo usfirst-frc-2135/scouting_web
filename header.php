@@ -13,7 +13,14 @@
   <link rel="icon" type="image/png" href="./images/favicon-32x32.png" sizes="32x32">
   <link href="./external/bootstrap-5.3.6-dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
   <link href="./external/DataTables/datatables.min.css" rel="stylesheet" crossorigin="anonymous">
+
   <style>
+    .form-check-input {
+      border: 1px;
+      border-style: solid;
+      border-color: rgba(0, 0, 0, .5);
+    }
+
     .nav .navbar {
       text-decoration: none;
       margin: auto;
@@ -29,7 +36,7 @@
       overflow: hidden;
     }
 
-    .nav li a {
+    .nav a {
       text-decoration: none;
       margin: auto;
       float: none;
@@ -41,11 +48,11 @@
     }
 
 
-    .nav a:hover {
+    .nav li a:hover {
       color: #fff;
     }
 
-    .nav li a.selected {
+    .nav li .selected {
       text-decoration: none;
       margin: auto;
       float: none;
