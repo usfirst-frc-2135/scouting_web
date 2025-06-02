@@ -36,7 +36,7 @@ require 'header.php';
               </button>
             </div>
 
-            <!-- Auton Coral collapsible graph -->
+            <!-- Auton collapsible graph -->
             <div class="card mb-3">
               <div class="card-body">
                 <div class="overflow-auto">
@@ -44,21 +44,7 @@ require 'header.php';
                     <a href="#collapseAutonCoralGraph" data-bs-toggle="collapse" aria-expanded="false"> Auton Coral Graph</a>
                   </h5>
                   <div id="collapseAutonCoralGraph" class="collapse">
-                    <canvas id="myChart" width="400" height="400"></canvas>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Auton collapsible graph -->
-            <div class="card mb-3">
-              <div class="card-body">
-                <div class="overflow-auto">
-                  <h5 class="text-center">
-                    <a href="#collapseAutonGraph" data-bs-toggle="collapse" aria-expanded="false"> Auton Graph</a>
-                  </h5>
-                  <div id="collapseAutonGraph" class="collapse">
-                    <canvas id="myChart2" width="400" height="400"></canvas>
+                    <canvas id="autoChart" width="400" height="400"></canvas>
                   </div>
                 </div>
               </div>
@@ -567,8 +553,8 @@ require 'header.php';
   var frozenTableMatches = null;
   var frozenTableStrategy = null;
 
-  var chartDefined = false;
-  var myChart;
+  var autoChartDefined = false;
+  var autoChart;
 
   var chart2Defined = false;
   var myChart2;
@@ -873,7 +859,6 @@ require 'header.php';
       filteredData = fData;
       dataToCommentTable(filteredData);
       dataToMatchTable(filteredData);
-      dataToAutonCoralGraph(filteredData);
       dataToAutonGraph(filteredData);
       dataToTeleopCoralGraph(filteredData);
       dataToTeleopGraph(filteredData);
@@ -957,114 +942,158 @@ require 'header.php';
   }
 
 
-  //AUTON CORAL GRAPH STARTS HERE
+  //AUTON GRAPH STARTS HERE
 
-  function dataToAutonCoralGraph(matchdata) {
+  function dataToAutonGraph(matchdata) {
 
     // Declare variables
     var match_list = []; // List of matches to use as x lables
-
     var datasets = []; // Each entry is a dict with a label and data attribute
-
+    var autonLeaveTips = []; // holds custom tooltips for auton leave start line data      
+    var autonAlgaeProcTips = []; // holds custom tooltips for auton algae processor
+    var autonAlgaeNetTips = []; // holds custom tooltips for auton algae net
     var autonCoralL1Tips = []; // holds custom tooltips for auton coral L1
-
     var autonCoralL2Tips = []; // holds custom tooltips for auton coral L2
-
     var autonCoralL3Tips = []; // holds custom tooltips for auton coral L3
-
     var autonCoralL4Tips = []; // holds custom tooltips for auton coral 4      
 
-
+    datasets.push({
+      label: "Leave Start Line",
+      data: [],
+      backgroundColor: 'Red'
+    });
+    datasets.push({
+      label: "Processor",
+      data: [],
+      backgroundColor: 'Orange'
+    });
+    datasets.push({
+      label: "Net",
+      data: [],
+      backgroundColor: 'Yellow'
+    });
     datasets.push({
       label: "L1",
       data: [],
-      borderColor: 'Red'
+      backgroundColor: 'Green'
     });
     datasets.push({
       label: "L2",
       data: [],
-      borderColor: 'Green'
+      backgroundColor: 'Blue'
     });
     datasets.push({
       label: "L3",
       data: [],
-      borderColor: 'Orange'
+      backgroundColor: 'Indigo'
     });
     datasets.push({
       label: "L4",
       data: [],
-      borderColor: 'Blue'
-
+      backgroundColor: 'Violet'
     });
+
     // Go thru each matchdata QR code string and build up a table of the data, so we can
     // later sort it so the matches are listed in the right order. 
     var mydata = [];
     for (let i = 0; i < matchdata.length; i++) {
       var matchnum = matchdata[i]["matchnumber"];
+      var autonLeave = matchdata[i]["autonLeave"];
+      var autonAlgaeProcessor = matchdata[i]["autonAlgaeProcessor"];
+      var autonAlgaeNet = matchdata[i]["autonAlgaeNet"];
       var autonCoralOne = matchdata[i]["autonCoralL1"];
       var autonCoralTwo = matchdata[i]["autonCoralL2"];
       var autonCoralThree = matchdata[i]["autonCoralL3"];
       var autonCoralFour = matchdata[i]["autonCoralL4"];
       mydata.push({
         matchnum: matchnum,
+        leave: autonLeave,
+        processor: autonAlgaeProcessor,
+        net: autonAlgaeNet,
         one: autonCoralOne,
         two: autonCoralTwo,
         three: autonCoralThree,
         four: autonCoralFour
       });
     }
+
     mydata.sort(function (rowA, rowB) {
       var cellA = rowA["matchnum"];
       var cellB = rowB["matchnum"];
       return (sortRows(cellA, cellB));
     });
+
     // Build data sets; go thru each mydata row and populate the graph datasets.
     for (let i = 0; i < mydata.length; i++) {
       var matchnum = mydata[i]["matchnum"];
       match_list.push(matchnum);
 
+      // Get auton leave start line data
+      var autonLeaveStartingZone = mydata[i]["leave"];
+      datasets[0]["data"].push(autonLeaveStartingZone);
+      var clevel = "No";
+      if (autonLeaveStartingZone == 1)
+        clevel = "Yes";
+      var tipStr = "Leave Start Line" + clevel;
+      autonLeaveTips.push({ xlabel: matchnum, tip: tipStr });
+
+      // Get auton algae processor data
+      var autonAlgaeProcessor = mydata[i]["processor"];
+      datasets[1]["data"].push(autonAlgaeProcessor);
+      var tooltipStr = "Processor=" + autonAlgaeProcessor;
+      autonAlgaeProcTips.push({ xlabel: matchnum, tip: tooltipStr });
+
+      // Get auton algae net data
+      var autonAlgaeNet = mydata[i]["net"];
+      datasets[2]["data"].push(autonAlgaeNet);
+      var tooltipStr = "Net=" + autonAlgaeNet;
+      autonAlgaeNetTips.push({ xlabel: matchnum, tip: tooltipStr });
+
       // Get auton coral level one
       var autonCoralOne = mydata[i]["one"];
-      datasets[0]["data"].push(autonCoralOne);
+      datasets[3]["data"].push(autonCoralOne);
       var tooltipStr = "L1=" + autonCoralOne;
       autonCoralL1Tips.push({ xlabel: matchnum, tip: tooltipStr });
 
       // Get auton coral level two
       var autonCoralTwo = mydata[i]["two"];
-      datasets[1]["data"].push(autonCoralTwo);
+      datasets[4]["data"].push(autonCoralTwo);
       var tooltipStr = "L2=" + autonCoralTwo;
       autonCoralL2Tips.push({ xlabel: matchnum, tip: tooltipStr });
 
       // Get auton coral level three
       var autonCoralThree = mydata[i]["three"];
-      datasets[2]["data"].push(autonCoralThree);
+      datasets[5]["data"].push(autonCoralThree);
       var tooltipStr = "L3=" + autonCoralThree;
       autonCoralL3Tips.push({ xlabel: matchnum, tip: tooltipStr });
 
       // Get auton coral level four
       var autonCoralFour = mydata[i]["four"];
-      datasets[3]["data"].push(autonCoralFour);
+      datasets[6]["data"].push(autonCoralFour);
       var tooltipStr = "L4=" + autonCoralFour;
       autonCoralL4Tips.push({ xlabel: matchnum, tip: tooltipStr });
     }
 
     // Define the graph as a line chart:
-    if (chartDefined) {
-      myChart.destroy();
+    if (autoChartDefined) {
+      autoChart.destroy();
     }
-    chartDefined = true;
+    autoChartDefined = true;
 
-    const ctx = document.getElementById('myChart').getContext('2d');
-    myChart = new Chart(ctx, {
-      type: 'line',
+    const ctx = document.getElementById('autoChart').getContext('2d');
+    autoChart = new Chart(ctx, {
+      type: 'bar',
       data: {
         labels: match_list,
         datasets: datasets
       },
       options: {
         scales: {
+          x: {
+            stacked: true
+          },
           y: {
-            beginAtZero: true
+            stacked: true
           }
         },
         plugins: {
@@ -1075,7 +1104,31 @@ require 'header.php';
                 var matchnum = tooltipItem.label;
                 var tipStr = datasets[toolIndex].label;
 
-                if (toolIndex == 0) {   // Auton Amp Notes
+                if (toolIndex == 0) {   // Auton leave
+                  for (let i = 0; i < autonLeaveTips.length; i++) {
+                    if (autonLeaveTips[i].xlabel == matchnum) {
+                      tipStr = autonLeaveTips[i].tip;
+                      break;
+                    }
+                  }
+                }
+                else if (toolIndex == 1) {   // Auton algae processor
+                  for (let i = 0; i < autonAlgaeProcTips.length; i++) {
+                    if (autonAlgaeProcTips[i].xlabel == matchnum) {
+                      tipStr = autonAlgaeProcTips[i].tip;
+                      break;
+                    }
+                  }
+                }
+                else if (toolIndex == 2) {   // Auton algae net
+                  for (let i = 0; i < autonAlgaeNetTips.length; i++) {
+                    if (autonAlgaeNetTips[i].xlabel == matchnum) {
+                      tipStr = autonAlgaeNetTips[i].tip;
+                      break;
+                    }
+                  }
+                }
+                else if (toolIndex == 3) {   // Auton Amp Notes
                   for (let i = 0; i < autonCoralL1Tips.length; i++) {
                     if (autonCoralL1Tips[i].xlabel == matchnum) {
                       tipStr = autonCoralL1Tips[i].tip;
@@ -1083,7 +1136,7 @@ require 'header.php';
                     }
                   }
                 }
-                else if (toolIndex == 1) {   // Auton coral
+                else if (toolIndex == 4) {   // Auton coral
                   for (let i = 0; i < autonCoralL2Tips.length; i++) {
                     if (autonCoralL2Tips[i].xlabel == matchnum) {
                       tipStr = autonCoralL2Tips[i].tip;
@@ -1091,7 +1144,7 @@ require 'header.php';
                     }
                   }
                 }
-                else if (toolIndex == 2) {   // Auton coral
+                else if (toolIndex == 5) {   // Auton coral
                   for (let i = 0; i < autonCoralL3Tips.length; i++) {
                     if (autonCoralL3Tips[i].xlabel == matchnum) {
                       tipStr = autonCoralL3Tips[i].tip;
@@ -1099,7 +1152,7 @@ require 'header.php';
                     }
                   }
                 }
-                else if (toolIndex == 3) {   // Auton coral
+                else if (toolIndex == 6) {   // Auton coral
                   for (let i = 0; i < autonCoralL4Tips.length; i++) {
                     if (autonCoralL4Tips[i].xlabel == matchnum) {
                       tipStr = autonCoralL4Tips[i].tip;
@@ -1116,145 +1169,8 @@ require 'header.php';
     });
   }
 
-
   //AUTON CORAL GRAPH ENDS HERE
 
-
-  function dataToAutonGraph(matchdata) {
-
-    // Declare variables
-    var match_list = []; // List of matches to use as x lables
-
-    var datasets = []; // Each entry is a dict with a label and data attribute
-
-    var autonAlgaeNetTips = []; // holds custom tooltips for auton algae net
-
-    var autonAlgaeProcTips = []; // holds custom tooltips for auton algae processor
-
-    var autonLeaveTips = []; // holds custom tooltips for auton leave starting zone data      
-
-
-    datasets.push({
-      label: "Net",
-      data: [],
-      borderColor: 'Green'
-    });
-    datasets.push({
-      label: "Processor",
-      data: [],
-      borderColor: 'Orange'
-    });
-    datasets.push({
-      label: "Leave Starting Zone",
-      data: [],
-      borderColor: 'Blue'
-
-    });
-    // Go thru each matchdata QR code string and build up a table of the data, so we can
-    // later sort it so the matches are listed in the right order. 
-    var mydata = [];
-    for (let i = 0; i < matchdata.length; i++) {
-      var matchnum = matchdata[i]["matchnumber"];
-      var autonAlgaeNet = matchdata[i]["autonAlgaeNet"];
-      var autonAlgaeProcessor = matchdata[i]["autonAlgaeProcessor"];
-      var autonLeave = matchdata[i]["autonLeave"];
-      mydata.push({
-        matchnum: matchnum,
-        algae: autonAlgaeNet,
-        leave: autonLeave,
-        processor: autonAlgaeProcessor
-      });
-    }
-    mydata.sort(function (rowA, rowB) {
-      var cellA = rowA["matchnum"];
-      var cellB = rowB["matchnum"];
-      return (sortRows(cellA, cellB));
-    });
-    // Build data sets; go thru each mydata row and populate the graph datasets.
-    for (let i = 0; i < mydata.length; i++) {
-      var matchnum = mydata[i]["matchnum"];
-      match_list.push(matchnum);
-      // Get auton algae net data
-      var autonAlgaeNet = mydata[i]["algae"];
-      datasets[0]["data"].push(autonAlgaeNet);
-      var tooltipStr = "Net=" + autonAlgaeNet;
-      autonAlgaeNetTips.push({ xlabel: matchnum, tip: tooltipStr });
-
-      // Get auton algae processor data
-      var autonAlgaeProcessor = mydata[i]["processor"];
-      datasets[1]["data"].push(autonAlgaeProcessor);
-      var tooltipStr = "Processor=" + autonAlgaeProcessor;
-      autonAlgaeProcTips.push({ xlabel: matchnum, tip: tooltipStr });
-
-      // Get auton leave starting zone data
-      var autonLeaveStartingZone = mydata[i]["leave"];
-      datasets[2]["data"].push(autonLeaveStartingZone);
-      var clevel = "No";
-      if (autonLeaveStartingZone == 1)
-        clevel = "Yes";
-      var tipStr = "Leave Starting Zone=" + clevel;
-      autonLeaveTips.push({ xlabel: matchnum, tip: tipStr });
-    }
-
-    // Define the graph as a line chart:
-    if (chart2Defined) {
-      myChart2.destroy();
-    }
-    chart2Defined = true;
-
-    const ctx = document.getElementById('myChart2').getContext('2d');
-    myChart2 = new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: match_list,
-        datasets: datasets
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true
-          }
-        },
-        plugins: {
-          tooltip: {
-            callbacks: {  // Special tooltip handling
-              label: function (tooltipItem, ddata) {
-                var toolIndex = tooltipItem.datasetIndex;
-                var matchnum = tooltipItem.label;
-                var tipStr = datasets[toolIndex].label;
-
-                if (toolIndex == 0) {   // Auton algae net
-                  for (let i = 0; i < autonAlgaeNetTips.length; i++) {
-                    if (autonAlgaeNetTips[i].xlabel == matchnum) {
-                      tipStr = autonAlgaeNetTips[i].tip;
-                      break;
-                    }
-                  }
-                }
-                else if (toolIndex == 1) {   // Auton algae processor
-                  for (let i = 0; i < autonAlgaeProcTips.length; i++) {
-                    if (autonAlgaeProcTips[i].xlabel == matchnum) {
-                      tipStr = autonAlgaeProcTips[i].tip;
-                      break;
-                    }
-                  }
-                }
-                else if (toolIndex == 2) {   // Auton leave
-                  for (let i = 0; i < autonLeaveTips.length; i++) {
-                    if (autonLeaveTips[i].xlabel == matchnum) {
-                      tipStr = autonLeaveTips[i].tip;
-                      break;
-                    }
-                  }
-                }
-                return tipStr;
-              }
-            }
-          }
-        }
-      }
-    });
-  }
 
   //TELEOP CORAL GRAPH STARTS HERE
 
@@ -1278,22 +1194,22 @@ require 'header.php';
     datasets.push({
       label: "L1",
       data: [],
-      borderColor: 'Red'
+      backgroundColor: 'Red'
     });
     datasets.push({
       label: "L2",
       data: [],
-      borderColor: 'Green'
+      backgroundColor: 'Green'
     });
     datasets.push({
       label: "L3",
       data: [],
-      borderColor: 'Orange'
+      backgroundColor: 'Orange'
     });
     datasets.push({
       label: "L4",
       data: [],
-      borderColor: 'Blue'
+      backgroundColor: 'Blue'
 
     });
     // Go thru each matchdata QR code string and build up a table of the data, so we can
@@ -1356,15 +1272,18 @@ require 'header.php';
 
     const ctx = document.getElementById('myChart3').getContext('2d');
     myChart3 = new Chart(ctx, {
-      type: 'line',
+      type: 'bar',
       data: {
         labels: match_list,
         datasets: datasets
       },
       options: {
         scales: {
+          x: {
+            stacked: true
+          },
           y: {
-            beginAtZero: true
+            stacked: true
           }
         },
         plugins: {
@@ -1433,12 +1352,12 @@ require 'header.php';
     datasets.push({
       label: "Processor",
       data: [],
-      borderColor: 'MediumOrchid'
+      backgroundColor: 'MediumOrchid'
     });
     datasets.push({
       label: "Net",
       data: [],
-      borderColor: 'Blue'
+      backgroundColor: 'Blue'
     });
 
     // Go thru each matchdata QR code string and build up a table of the data, so we can 
@@ -1485,15 +1404,18 @@ require 'header.php';
     chart4Defined = true;
     const ctx = document.getElementById('myChart4').getContext('2d');
     myChart4 = new Chart(ctx, {
-      type: 'line',
+      type: 'bar',
       data: {
         labels: match_list,
         datasets: datasets
       },
       options: {
         scales: {
+          x: {
+            stacked: true
+          },
           y: {
-            beginAtZero: true
+            stacked: true
           }
         },
         plugins: {
@@ -1539,7 +1461,7 @@ require 'header.php';
     datasets.push({
       label: "Cage Climb",
       data: [],
-      borderColor: 'SteelBlue'
+      backgroundColor: 'SteelBlue'
     });
 
     // Go thru each matchdata QR code string and build up a table of the data, so we can
@@ -1587,15 +1509,18 @@ require 'header.php';
     chart5Defined = true;
     const ctx = document.getElementById('myChart5').getContext('2d');
     myChart5 = new Chart(ctx, {
-      type: 'line',
+      type: 'bar',
       data: {
         labels: match_list,
         datasets: datasets
       },
       options: {
         scales: {
+          x: {
+            stacked: true
+          },
           y: {
-            beginAtZero: true
+            stacked: true
           }
         },
         plugins: {
