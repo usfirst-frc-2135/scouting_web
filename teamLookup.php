@@ -106,69 +106,7 @@ require 'header.php';
               </div>
             </div>
 
-            <!-- Pit Scouting 1st row -->
-            <div class="overflow-auto">
-              <table class="table table-striped">
-                <thead>
-                  <colgroup>
-                    <col span="1" style="background-color:transparent">
-                    <col span="1" style="background-color:#cfe2ff">
-                    <col span="1" style="background-color:transparent">
-                    <col span="1" style="background-color:#cfe2ff">
-                    <col span="1" style="background-color:transparent">
-                  </colgroup>
-                  <tr>
-                    <th scope="col" style="width:25%">Batt</th>
-                    <th scope="col" style="width:25%">Pit</th>
-                    <th scope="col" style="width:25%">Spare Parts</th>
-                    <th scope="col" style="width:25%">Vision</th>
-                  </tr>
-                </thead>
-                <tbody id="pitRow1">
-                </tbody>
-              </table>
-            </div>
 
-            <!-- Pit Scouting 2nd row -->
-            <div class="overflow-auto">
-              <table class="table table-striped">
-                <thead>
-                  <colgroup>
-                    <col span="1" style="background-color:transparent">
-                    <col span="1" style="background-color:#cfe2ff">
-                    <col span="1" style="background-color:transparent">
-                    <col span="1" style="background-color:#cfe2ff">
-                    <col span="1" style="background-color:transparent">
-                    <col span="1" style="background-color:#cfe2ff">
-                  </colgroup>
-                  <tr>
-                    <th scope="col" style="width:25%">Drive Motors</th>
-                    <th scope="col" style="width:25%">Prep</th>
-                    <th scope="col" style="width:25%">Swerve</th>
-                    <th scope="col" style="width:25%">Lang</th>
-                  </tr>
-                </thead>
-                <tbody id="pitRow2">
-                </tbody>
-              </table>
-            </div>
-
-
-          </div>
-
-
-          <!-- Comments section -->
-          <div class="overflow-auto">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th scope="col">Comments</th>
-                  <th scope="col">Scout</th>
-                </tr>
-              </thead>
-              <tbody id="comments">
-              </tbody>
-            </table>
           </div>
 
           <!-- here -->
@@ -470,8 +408,70 @@ require 'header.php';
           <div class="card-body">
             <div class="overflow-auto">
               <h5 class="text-center">
-                <a href="#collapseStrategicData" data-bs-toggle="collapse" aria-expanded="false"> Pit Data </a>
+                <a href="#collapsePitData" data-bs-toggle="collapse" aria-expanded="false"> Pit Data </a>
               </h5>
+            </div>
+            <!-- Pit Scouting 1st row -->
+            <div id="collapsePitData" class="collapse">
+              <div class="overflow-auto">
+                <table class="table table-striped">
+                  <thead>
+                    <colgroup>
+                      <col span="1" style="background-color:transparent">
+                      <col span="1" style="background-color:#cfe2ff">
+                      <col span="1" style="background-color:transparent">
+                      <col span="1" style="background-color:#cfe2ff">
+                      <col span="1" style="background-color:transparent">
+                    </colgroup>
+                    <tr>
+                      <th scope="col" style="width:25%">Batt</th>
+                      <th scope="col" style="width:25%">Pit</th>
+                      <th scope="col" style="width:25%">Spare Parts</th>
+                      <th scope="col" style="width:25%">Vision</th>
+                    </tr>
+                  </thead>
+                  <tbody id="pitRow1">
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Pit Scouting 2nd row -->
+              <div class="overflow-auto">
+                <table class="table table-striped">
+                  <thead>
+                    <colgroup>
+                      <col span="1" style="background-color:transparent">
+                      <col span="1" style="background-color:#cfe2ff">
+                      <col span="1" style="background-color:transparent">
+                      <col span="1" style="background-color:#cfe2ff">
+                      <col span="1" style="background-color:transparent">
+                      <col span="1" style="background-color:#cfe2ff">
+                    </colgroup>
+                    <tr>
+                      <th scope="col" style="width:25%">Drive Motors</th>
+                      <th scope="col" style="width:25%">Prep</th>
+                      <th scope="col" style="width:25%">Swerve</th>
+                      <th scope="col" style="width:25%">Lang</th>
+                    </tr>
+                  </thead>
+                  <tbody id="pitRow2">
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Comments section -->
+              <div class="overflow-auto">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th scope="col">Comments</th>
+                      <th scope="col">Scout</th>
+                    </tr>
+                  </thead>
+                  <tbody id="comments">
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>
@@ -1728,6 +1728,15 @@ require 'header.php';
     if (initTeamNumber) {
       loadTeam(initTeamNumber);
     }
+
+    // Pressing enter in team number field loads the page
+    var input = document.getElementById("enterTeamNumber");
+    input.addEventListener("keypress", function (event) {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        document.getElementById("loadTeamButton").click();
+      }
+    });
 
     // Load team data for the number entered
     $("#loadTeamButton").click(function () {
