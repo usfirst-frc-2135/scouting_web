@@ -7,7 +7,7 @@ require 'header.php';
   <div class="column card-lg-12 col-sm-12 col-xs-12" id="content">
 
     <div class="row pt-3 pb-3 mb-3">
-      <h2 class="col-6"><?php echo $title; ?></h2>
+      <h2 class="col-4"><?php echo $title; ?></h2>
 
       <div class="col-2">
         <button id="download_csv_file" class="btn btn-primary" type="button">Download CSV File</button>
@@ -56,7 +56,7 @@ COMMENTED OUT FOR NOW-->
             border-right: 1px solid black;
           }
         </style>
-        <table id="averageTable" class="tableFixHead table table-striped table-bordered table-hover sortable" style="width:100%">
+        <table id="averageTable" class="table table-striped table-bordered table-hover sortable" style="width:100%">
           <colgroup>
             <col span="1" style="background-color:transparent">
             <col span="2" style="background-color:#cfe2ff">

@@ -7,7 +7,7 @@ require 'header.php';
   <div id="content" class="column card-lg-12 col-sm-12 col-xs-12">
 
     <div class="row pt-3 pb-3 mb-3">
-      <h2 class="col-md-6"><?php echo $title; ?></h2>
+      <h2 class="col-md-4"><?php echo $title; ?></h2>
 
       <div class="col-2">
         <button id="createButton" class="btn btn-primary" type="button">Create Schedule</button>

@@ -7,11 +7,11 @@ require 'header.php';
   <div id="content" class="column card-lg-12 col-sm-12 col-xs-12">
 
     <div class="row pt-3 pb-3 mb-3">
-      <h2 id="COPRHeader"><?php echo $title; ?>: ???</h2>
-    </div>
+      <h2 id="COPRHeader" class="col-4"><?php echo $title; ?>: ???</h2>
 
-    <div class="input-group mb-3">
-      <button id="loadEvent" class="btn btn-primary" type="button">Reload COPRs</button>
+      <div class="col-2">
+        <button id="loadEvent" class="btn btn-primary" type="button">Reload COPRs</button>
+      </div>
     </div>
 
     <div id="freeze-table" class="freeze-table">
