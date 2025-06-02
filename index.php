@@ -17,7 +17,7 @@ require 'header.php';
         <tr>
           <td>Team</td>
           <td>Pit Scouted?</td>
-          <td>Photo Taken?</td>
+          <td>Photo Uploaded?</td>
         </tr>
       </thead>
       <tbody id="pitScoutTable">

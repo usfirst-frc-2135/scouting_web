@@ -24,25 +24,25 @@ require 'header.php';
           <!-- Load Match buttons -->
           <div class="card mb-3">
             <div class="input-group">
-              <select id="writeCompLevel" class="form-select" aria-label="Comp Level Select">
+              <select id="enterMatchLevel" class="form-select" aria-label="Comp Level Select">
                 <option value="QM">QM</option>
                 <option value="QF">QF</option>
                 <option value="SF">SF</option>
                 <option value="F">F</option>
               </select>
-              <input id="writeMatchNumber" class="form-control" type="text" placeholder="Match Number" aria-label="Match Number">
+              <input id="enterMatchNumber" class="form-control" type="text" placeholder="Match Number" aria-label="Match Number">
               <button id="loadMatch" class="btn btn-primary" type="button">Load Match</button>
             </div>
           </div>
 
-          <!-- Custom button (collapsible section) -->
+          <!-- Custom match button (collapsible section) -->
           <div class="card mb-3">
-            <button id="custom" class="collapsible btn-primary" type="button" name="custom" value="Custom">Enter Custom
+            <button id="customMatch" class="collapsible btn-secondary" type="button" name="customMatch" value="Custom">Enter Custom
               Match</button>
             <div id="customAlliance" class="content">
               <style type="text/css" media="screen">
                 .collapsible {
-                  background-color: #006fff;
+                  background-color: #6E757C;
                   color: white;
                   cursor: pointer;
                   padding: 10px;
@@ -56,7 +56,7 @@ require 'header.php';
                 /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
                 .active,
                 .collapsible:hover {
-                  background-color: #0064e6;
+                  background-color: #6E757C;
                 }
 
                 /* Style the collapsible content. Note: hidden by default */
@@ -70,23 +70,23 @@ require 'header.php';
               <div class="input-group mb-3">
                 <h5 id="red">Red Alliance:</h5>
                 <div class="input-group mb-3">
-                  <input id="writeTeamNumber1" class="form-control" style="background-color:#F3D8DA" type="text"
-                    placeholder="Red Team 1" aria-label="Red Team 1">
-                  <input id="writeTeamNumber2" class="form-control" style="background-color:#F3D8DA" type="text"
-                    placeholder="Red Team 2" aria-label="Red Team 2">
-                  <input id="writeTeamNumber3" class="form-control" style="background-color:#F3D8DA" type="text"
-                    placeholder="Red Team 3" aria-label="Red Team 3">
+                  <input id="enterTeam1" class="form-control" style="background-color:#F3D8DA" type="text" placeholder="Red Team 1"
+                    aria-label="Red Team 1">
+                  <input id="enterTeam2" class="form-control" style="background-color:#F3D8DA" type="text" placeholder="Red Team 2"
+                    aria-label="Red Team 2">
+                  <input id="enterTeam3" class="form-control" style="background-color:#F3D8DA" type="text" placeholder="Red Team 3"
+                    aria-label="Red Team 3">
                 </div>
               </div>
               <div class="input-group mb-3">
                 <h5 id="blue">Blue Alliance:</h5>
                 <div class="input-group mb-3">
-                  <input id="writeTeamNumber4" class="form-control" style="background-color:#D3E1FC" type="text"
-                    placeholder="Blue Team 1" aria-label="Blue Team 1">
-                  <input id="writeTeamNumber5" class="form-control" style="background-color:#D3E1FC" type="text"
-                    placeholder="Blue Team 2" aria-label="Blue Team 2">
-                  <input id="writeTeamNumber6" class="form-control" style="background-color:#D3E1FC" type="text"
-                    placeholder="Blue Team 3" aria-label="Blue Team 3">
+                  <input id="enterTeam4" class="form-control" style="background-color:#D3E1FC" type="text" placeholder="Blue Team 1"
+                    aria-label="Blue Team 1">
+                  <input id="enterTeam5" class="form-control" style="background-color:#D3E1FC" type="text" placeholder="Blue Team 2"
+                    aria-label="Blue Team 2">
+                  <input id="enterTeam6" class="form-control" style="background-color:#D3E1FC" type="text" placeholder="Blue Team 3"
+                    aria-label="Blue Team 3">
                 </div>
               </div>
               <button id="loadCustom" class="button btn-primary mb-3" type="button">Load Custom Match</button>
@@ -843,12 +843,12 @@ require 'header.php';
     $("#B0DataTable").html("");
     $("#B1DataTable").html("");
     $("#B2DataTable").html("");
-    $("#writeTeamNumber1").html("");
-    $("#writeTeamNumber2").html("");
-    $("#writeTeamNumber3").html("");
-    $("#writeTeamNumber4").html("");
-    $("#writeTeamNumber5").html("");
-    $("#writeTeamNumber6").html("");
+    $("#enterTeam1").html("");
+    $("#enterTeam2").html("");
+    $("#enterTeam3").html("");
+    $("#enterTeam4").html("");
+    $("#enterTeam5").html("");
+    $("#enterTeam6").html("");
     $("#redTotalCoral").html("");
     $("#redTotalAlgae").html("");
     $("#redAvgAutoPoints").html("");
@@ -1139,14 +1139,14 @@ require 'header.php';
     // Load all the match sheet data
     $("#loadMatch").click(function () {
       bUsingCustom = false;
-      loadMatch($("#writeMatchNumber").val(), $("#writeCompLevel").val());
+      loadMatch($("#enterMatchNumber").val(), $("#enterMatchLevel").val());
     });
 
     // Open and set the custom settings
     $("#loadCustom").click(function () {
       bUsingCustom = true;
-      var redTeamNum1 = document.getElementById("writeTeamNumber1").value;
-      var blueTeamNum1 = document.getElementById("writeTeamNumber4").value;
+      var redTeamNum1 = document.getElementById("enterTeam1").value;
+      var blueTeamNum1 = document.getElementById("enterTeam4").value;
       console.log(redTeamNum1);
       console.log(blueTeamNum1);
       if (redTeamNum1.trim() == "" && blueTeamNum1.trim() == "") {
@@ -1154,7 +1154,7 @@ require 'header.php';
         return false;
       }
       else if (redTeamNum1.trim() !== "" && blueTeamNum1.trim() !== "") {
-        loadCustom($("#writeTeamNumber1").val(), $("#writeTeamNumber2").val(), $("#writeTeamNumber3").val(), $("#writeTeamNumber4").val(), $("#writeTeamNumber5").val(), $("#writeTeamNumber6").val());
+        loadCustom($("#enterTeam1").val(), $("#enterTeam2").val(), $("#enterTeam3").val(), $("#enterTeam4").val(), $("#enterTeam5").val(), $("#enterTeam6").val());
       }
       else {
         alert("Please fill out red team number 1 and blue team number 1!");

@@ -45,10 +45,10 @@ if (isset($_POST["writeSingleData"]))
   echo ("success");
 }
 
-if (isset($_POST["writePitData"]))
+if (isset($_POST["writePitTable"]))
 {
   $db->connectToDB();
-  $args = json_decode($_POST["writePitData"], true);
+  $args = json_decode($_POST["writePitTable"], true);
 
   $args["entrykey"] = $eventCode . "_" . $args["teamnumber"];
   $args["eventcode"] = $eventCode;

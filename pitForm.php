@@ -239,7 +239,7 @@ require 'header.php';
     $("#preparednessScore3").prop("checked", false);
   }
 
-  function writeDataToAPI() {
+  function writeFormToPitTable() {
     var dataToUse = {};
     dataToUse["teamnumber"] = $("#teamNumber").val();
     dataToUse["numbatteries"] = $("#batteries").val();
@@ -319,7 +319,7 @@ require 'header.php';
     }
 
     $.post("writeAPI.php", {
-      writePitData: JSON.stringify(dataToUse)
+      writePitTable: JSON.stringify(dataToUse)
     }).done(function (data) {
       // Because success word may have a new-line at the end, don't do a direct compare
       if (data.indexOf('success') > -1) {
@@ -339,7 +339,7 @@ require 'header.php';
     // Submit the match data form
     $("#submitButton").click(function () {
       if (!verifyData()) {
-        writeDataToAPI();
+        writeFormToPitTable();
       }
     });
 

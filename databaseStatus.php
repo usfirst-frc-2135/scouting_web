@@ -63,7 +63,7 @@ require 'header.php';
                 </div>
               </div>
               <div class="p-2">
-                <button id="useData" class="btn btn-primary">Use this data</button>
+                <button id="filterData" class="btn btn-primary">Use this data</button>
               </div>
             </div>
           </div>
@@ -78,32 +78,32 @@ require 'header.php';
           </div>
           <div class="card-body">
             <div class="mb-3">
-              <label for="writeServer" class="form-label"> MySQL Server URL</label>
-              <input id="writeServer" class="form-control" type="text" aria-describedby="serverName">
+              <label for="enterServerURL" class="form-label"> MySQL Server URL</label>
+              <input id="enterServerURL" class="form-control" type="text" aria-describedby="serverName">
             </div>
             <div class="mb-3">
-              <label for="writeDatabase" class="form-label">Database Name</label>
-              <input id="writeDatabase" class="form-control" type="text" aria-describedby="databaseName">
+              <label for="enterDBName" class="form-label">Database Name</label>
+              <input id="enterDBName" class="form-control" type="text" aria-describedby="databaseName">
             </div>
             <div class="mb-3">
-              <label for="writeUsername" class="form-label">User Name</label>
-              <input id="writeUsername" class="form-control" type="text" aria-describedby="userName">
+              <label for="enterUserName" class="form-label">User Name</label>
+              <input id="enterUserName" class="form-control" type="text" aria-describedby="userName">
             </div>
             <div class="mb-3">
-              <label for="writePassword" class="form-label">Password</label>
-              <input id="writePassword" class="form-control" type="password" aria-describedby="password">
+              <label for="enterPassword" class="form-label">Password</label>
+              <input id="enterPassword" class="form-control" type="password" aria-describedby="password">
             </div>
             <div class="mb-3">
-              <label for="writeTBAKey" class="form-label">TBA Key</label>
-              <input id="writeTBAKey" class="form-control" type="text" aria-describedby="tbaKey">
+              <label for="enterTBAKey" class="form-label">TBA Key</label>
+              <input id="enterTBAKey" class="form-control" type="text" aria-describedby="tbaKey">
             </div>
             <div class="mb-3">
-              <label for="writeEventCode" class="form-label">Event Code</label>
-              <input id="writeEventCode" class="form-control" type="text" aria-describedby="tbaEventCode">
+              <label for="enterEventCode" class="form-label">Event Code</label>
+              <input id="enterEventCode" class="form-control" type="text" aria-describedby="tbaEventCode">
             </div>
 
             <div class="mb-3">
-              <button id="writeConfig" class="btn btn-primary">Write Config</button>
+              <button id="writeConfigFile" class="btn btn-primary">Write Config File</button>
               <button id="createDB" class="btn btn-primary">Create DB</button>
               <button id="createTable" class="btn btn-primary">Create Table</button>
             </div>
@@ -161,12 +161,12 @@ require 'header.php';
 
   // Map form form-control IDs to labels for db_config
   var id_to_key_map = {
-    "writeServer": "server",
-    "writeDatabase": "db",
-    "writeUsername": "username",
-    "writePassword": "password",
-    "writeTBAKey": "tbakey",
-    "writeEventCode": "eventcode",
+    "enterServerURL": "server",
+    "enterDBName": "db",
+    "enterUserName": "username",
+    "enterPassword": "password",
+    "enterTBAKey": "tbakey",
+    "enterEventCode": "eventcode",
   };
 
   var id_to_written_map = {}
@@ -188,7 +188,7 @@ require 'header.php';
         if ($("#" + key).val() == "") {
           $("#" + key).removeClass("bg-info");
           id_to_written_map[key] = false;
-          if (key == "writeDatabase") {
+          if (key == "enterDBName") {
             id_to_written_map["writeMatchTable"] = false;
             id_to_written_map["writeTBATable"] = false;
             id_to_written_map["writePitTable"] = false;
@@ -197,7 +197,7 @@ require 'header.php';
         } else {
           $("#" + key).addClass("bg-info");
           id_to_written_map[key] = true;
-          if (key == "writeDatabase") {
+          if (key == "enterDBName") {
             // Mark tables in id_to_written_map 
             id_to_written_map["writeMatchTable"] = true;
             id_to_written_map["writeTBATable"] = true;
@@ -209,41 +209,41 @@ require 'header.php';
     }
 
     // Write the db_config file
-    $("#writeConfig").on('click', function (event) {
-      var writeData = {};
+    $("#writeConfigFile").on('click', function (event) {
+      var configData = {};
       for (const key in id_to_key_map) {
         if ($("#" + key).val() != "" && id_to_written_map[key]) {
-          writeData[id_to_key_map[key]] = $("#" + key).val();
+          configData[id_to_key_map[key]] = $("#" + key).val();
         }
       }
       // Create table names from database name.
-      var databaseName = ($("#" + "writeDatabase").val());
-      writeData["datatable"] = databaseName + "_dt";
-      writeData["tbatable"] = databaseName + "_tba";
-      writeData["pittable"] = databaseName + "_pt";
-      writeData["strategictable"] = databaseName + "_st";
-      writeData["writeConfig"] = JSON.stringify(writeData);
+      var databaseName = ($("#" + "enterDBName").val());
+      configData["datatable"] = databaseName + "_dt";
+      configData["tbatable"] = databaseName + "_tba";
+      configData["pittable"] = databaseName + "_pt";
+      configData["strategictable"] = databaseName + "_st";
+      configData["writeConfigFile"] = JSON.stringify(configData);
 
-      $.post("dbAPI.php", writeData, function (data) {
+      $.post("dbAPI.php", configData, function (data) {
         updateStatusValues(JSON.parse(data));
       });
     });
 
     // Update the match type filters
-    $("#useData").on('click', function (event) {
+    $("#filterData").on('click', function (event) {
       // Make data to send to API
-      var useData = {};
-      useData["useP"] = +$("#dataP").is(":checked");
-      useData["useQm"] = +$("#dataQm").is(":checked");
-      useData["useQf"] = +$("#dataQf").is(":checked");
-      useData["useSf"] = +$("#dataSf").is(":checked");
-      useData["useF"] = +$("#dataF").is(":checked");
+      var filterData = {};
+      filterData["useP"] = +$("#dataP").is(":checked");
+      filterData["useQm"] = +$("#dataQm").is(":checked");
+      filterData["useQf"] = +$("#dataQf").is(":checked");
+      filterData["useSf"] = +$("#dataSf").is(":checked");
+      filterData["useF"] = +$("#dataF").is(":checked");
 
-      var writeData = {}
-      writeData["filterConfig"] = JSON.stringify(useData);
+      var configInfo = {}
+      configInfo["filterConfig"] = JSON.stringify(filterData);
 
       // Make request
-      $.post("dbAPI.php", writeData, function (data) {
+      $.post("dbAPI.php", configInfo, function (data) {
         updateStatusValues(JSON.parse(data));
       });
     });

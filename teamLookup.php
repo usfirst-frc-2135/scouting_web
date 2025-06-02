@@ -12,7 +12,7 @@ require 'header.php';
 
     <div class="row mb-3">
       <div class="input-group mb-3">
-        <input id="writeTeamNumber" class="form-control" type="text" placeholder="FRC team number" aria-label="Team Number">
+        <input id="enterTeamNumber" class="form-control" type="text" placeholder="FRC team number" aria-label="Team Number">
         <button id="loadTeamButton" class="btn btn-primary" type="button">Load Team</button>
       </div>
 
@@ -651,7 +651,6 @@ require 'header.php';
     writeTableRow("totalTable", avgs, ["totalAlgaestr", "avgTotalAlgae", "maxTotalAlgae"]);
     writeTableRow("totalTable", avgs, ["totalCoralPointsstr", "avgTotalCoralPoints", "maxTotalCoralPoints"]);
     writeTableRow("totalTable", avgs, ["totalAlgaePointsstr", "avgTotalAlgaePoints", "maxTotalAlgaePoints"]);
-
   }
 
   function checkGet() {
@@ -1732,7 +1731,7 @@ require 'header.php';
 
     // Load team data for the number entered
     $("#loadTeamButton").click(function () {
-      loadTeam($("#writeTeamNumber").val());
+      loadTeam($("#enterTeamNumber").val());
     });
 
     // Keep the frozen match data updated
