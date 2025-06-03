@@ -24,14 +24,18 @@
       /* navbar button text should be white */
       color: "white";
     }
+
+    ul.nav a:hover {
+      color: #fff !important;
+    }
   </style>
 </head>
 
 <body class="bg-light">
-  <!-- planning to look somewhere to investigate how far the header expands, see if i can ... idk what it says after-->
   <header>
+    <!-- Create collapsible navbar and navigation buttons -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-      <a class="navbar-brand text-light" href="#">FRC 2135</a>
+      <a class="navbar-brand text-white" href="#">FRC 2135</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
         aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
