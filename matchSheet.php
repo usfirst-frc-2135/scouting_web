@@ -11,91 +11,79 @@ require 'header.php';
         <h2 class="col-md-6"><?php echo $title; ?></h2>
       </div>
 
-      <div class="col-md-6 mx-auto">
+      <div class="card col-md-6 mx-auto">
 
-        <div class="card mb-3">
-          <!-- Our team matches list -->
+        <!-- Our team matches list -->
+        <div class="card mb-3 p-3" style="background-color: #F8F9FA">
           <h5>2135 Match Links</h5>
           <div class="row mb-3">
             <div id="ourMatches">
             </div>
           </div>
+        </div>
 
-          <!-- Load Match buttons -->
-          <div class="card mb-3">
-            <div class="input-group">
-              <select id="enterMatchLevel" class="form-select" aria-label="Comp Level Select">
-                <option value="QM">QM</option>
-                <option value="QF">QF</option>
-                <option value="SF">SF</option>
-                <option value="F">F</option>
-              </select>
-              <input id="enterMatchNumber" class="form-control" type="text" placeholder="Match Number" aria-label="Match Number">
-              <button id="loadMatch" class="btn btn-primary" type="button">Load Match</button>
-            </div>
+        <!-- Load Match buttons -->
+        <div class="card mb-3">
+          <div class="input-group">
+            <select id="enterMatchLevel" class="form-select" aria-label="Comp Level Select">
+              <option value="QM">QM</option>
+              <option value="QF">QF</option>
+              <option value="SF">SF</option>
+              <option value="F">F</option>
+            </select>
+            <input id="enterMatchNumber" class="form-control" type="text" placeholder="Match Number" aria-label="Match Number">
+            <button id="loadMatch" class="btn btn-primary" type="button">Load Match</button>
           </div>
+        </div>
 
-          <!-- Custom match button (collapsible section) -->
-          <div class="card mb-3">
-            <button id="customMatch" class="collapsible btn-secondary" type="button" name="customMatch" value="Custom">Enter Custom
-              Match</button>
-            <div id="customAlliance" class="content">
-              <style type="text/css" media="screen">
-                .collapsible {
-                  background-color: #6E757C;
-                  color: white;
-                  cursor: pointer;
-                  padding: 10px;
-                  width: 100%;
-                  border: none;
-                  text-align: left;
-                  outline: none;
-                  font-size: 16px;
-                }
-
-                /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
-                .active,
-                .collapsible:hover {
-                  background-color: #6E757C;
-                }
-
-                /* Style the collapsible content. Note: hidden by default */
-                .content {
-                  padding: 0 5px;
-                  display: none;
-                  overflow: hidden;
-                  background-color: #f1f1f1;
-                }
-              </style>
-              <div class="input-group mb-3">
-                <h5 id="red">Red Alliance:</h5>
-                <div class="input-group mb-3">
-                  <input id="enterTeam1" class="form-control" style="background-color:#F3D8DA" type="text" placeholder="Red Team 1"
-                    aria-label="Red Team 1">
-                  <input id="enterTeam2" class="form-control" style="background-color:#F3D8DA" type="text" placeholder="Red Team 2"
-                    aria-label="Red Team 2">
-                  <input id="enterTeam3" class="form-control" style="background-color:#F3D8DA" type="text" placeholder="Red Team 3"
-                    aria-label="Red Team 3">
+        <!-- Custom match button (collapsible section) -->
+        <div class="card mb-3">
+          <div id="customMatch" class="accordion">
+            <style type="text/css" media="screen">
+              .input-group .input {
+                border: 1px solid black;
+              }
+            </style>
+            <div class="accordion-item" style="background-color: #F8F9FA">
+              <h2 class="accordion-header">
+                <button class="accordion-button text-light bg-secondary" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#matchEntry" aria-expanded="false" aria-controls="matchEntry">
+                  Enter Custom Match
+                </button>
+              </h2>
+              <div id="matchEntry" class="accordion-collapse collapse" data-bs-parent="#customMatch">
+                <div class="accordion-body">
+                  <div class="input-group mb-3">
+                    <h5 id="red">Red Alliance:</h5>
+                    <div class="input-group mb-3">
+                      <input id="enterRed1" class="form-control border border-black" style="background-color:#F3D8DA" type="text"
+                        placeholder="Red Team 1" aria-label="Red Team 1">
+                      <input id="enterRed2" class="form-control border border-black" style="background-color:#F3D8DA" type="text"
+                        placeholder="Red Team 2" aria-label="Red Team 2">
+                      <input id="enterRed3" class="form-control border border-black" style="background-color:#F3D8DA" type="text"
+                        placeholder="Red Team 3" aria-label="Red Team 3">
+                    </div>
+                  </div>
+                  <div class="input-group mb-3">
+                    <h5 id="blue">Blue Alliance:</h5>
+                    <div class="input-group mb-3">
+                      <input id="enterBlue1" class="form-control border border-black" style="background-color:#D3E1FC" type="text"
+                        placeholder="Blue Team 1" aria-label="Blue Team 1">
+                      <input id="enterBlue2" class="form-control border border-black" style="background-color:#D3E1FC" type="text"
+                        placeholder="Blue Team 2" aria-label="Blue Team 2">
+                      <input id="enterBlue3" class="form-control border border-black" style="background-color:#D3E1FC" type="text"
+                        placeholder="Blue Team 3" aria-label="Blue Team 3">
+                    </div>
+                  </div>
+                  <button id="loadCustom" class="btn btn-primary mb-3" type="button">Load Custom Match</button>
                 </div>
               </div>
-              <div class="input-group mb-3">
-                <h5 id="blue">Blue Alliance:</h5>
-                <div class="input-group mb-3">
-                  <input id="enterTeam4" class="form-control" style="background-color:#D3E1FC" type="text" placeholder="Blue Team 1"
-                    aria-label="Blue Team 1">
-                  <input id="enterTeam5" class="form-control" style="background-color:#D3E1FC" type="text" placeholder="Blue Team 2"
-                    aria-label="Blue Team 2">
-                  <input id="enterTeam6" class="form-control" style="background-color:#D3E1FC" type="text" placeholder="Blue Team 3"
-                    aria-label="Blue Team 3">
-                </div>
-              </div>
-              <button id="loadCustom" class="button btn-primary mb-3" type="button">Load Custom Match</button>
             </div>
           </div>
         </div>
 
         <!-- Match overview card -->
-        <div class="card mb-3">
+        <div class="card mb-3 p-3" style="background-color: #F8F9FA">
           <h4 id="matchTitle">Match:</h4>
           <h5 id="matchTime">Time:</h5>
           <table class="table table-bordered">
@@ -150,6 +138,7 @@ require 'header.php';
             </tbody>
           </table>
         </div>
+
       </div>
     </div>
   </div>
@@ -169,7 +158,6 @@ require 'header.php';
                   <div class="col-2">
                     <button class="btn accordion-button collapsed bg-danger btn-sm" type="button" data-bs-toggle="collapse"
                       data-bs-target="#flush-R0Collapse" aria-expanded="false" aria-controls="flush-R0Collapse">
-
                     </button>
                   </div>
                 </div>
@@ -177,7 +165,6 @@ require 'header.php';
               <div id="flush-R0Collapse" class="accordion-collapse collapse show">
                 <div id="R0PicsCarousel" class="carousel slide" data-interval="false">
                   <div id="R0RobotPics" class="carousel-inner">
-
                   </div>
                   <button class="carousel-control-prev" type="button" data-bs-target="#R0PicsCarousel" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -620,7 +607,6 @@ require 'header.php';
     </div>
   </div>
 </div>
-</div>
 
 <?php include 'footer.php'; ?>
 
@@ -646,12 +632,12 @@ require 'header.php';
   var localMatchList = null;
   var localMatchNum = null;
   var localCompLevel = null;
-  var customTeamNum1 = "-";
-  var customTeamNum2 = "-";
-  var customTeamNum3 = "-";
-  var customTeamNum4 = "-";
-  var customTeamNum5 = "-";
-  var customTeamNum6 = "-";
+  var customRedTeam1 = "-";
+  var customRedTeam2 = "-";
+  var customRedTeam3 = "-";
+  var customBlueTeam1 = "-";
+  var customBlueTeam2 = "-";
+  var customBlueTeam3 = "-";
   var rawMatchData = null;
   var picDB = {};
   var ourTeam = "frc2135";
@@ -665,8 +651,8 @@ require 'header.php';
       }
     }
     if (bUsingCustom) {
-      if (sp.has('customTeamNum1') && sp.has('customTeamNum2') && sp.has('customTeamNum3') && sp.has('customTeamNum4') && sp.has('customTeamNum5') && sp.has('customTeamNum6')) {
-        return [sp.get('customTeamNum1'), sp.get('customTeamNum2'), sp.get('customTeamNum3'), sp.get('customTeamNum4'), sp.get('customTeamNum5'), sp.get('customTeamNum6')];
+      if (sp.has('customRedTeam1') && sp.has('customRedTeam2') && sp.has('customRedTeam3') && sp.has('customBlueTeam1') && sp.has('customBlueTeam2') && sp.has('customBlueTeam3')) {
+        return [sp.get('customRedTeam1'), sp.get('customRedTeam2'), sp.get('customRedTeam3'), sp.get('customBlueTeam1'), sp.get('customBlueTeam2'), sp.get('customBlueTeam3')];
       }
     }
     return null;
@@ -724,7 +710,7 @@ require 'header.php';
       if (i != 0) {
         row += " ";
       }
-      row += '<a class="btn btn-secondary btn-sm mb-3" href="./matchSheet.php?matchNum=' + arrOurMatches[i]["match_number"] + '&compLevel=' + arrOurMatches[i]["comp_level"] + '">' + arrOurMatches[i]["comp_level"] + arrOurMatches[i]["match_number"] + '</a>';
+      row += '<a class="btn btn-secondary btn-sm m-1" href="./matchSheet.php?matchNum=' + arrOurMatches[i]["match_number"] + '&compLevel=' + arrOurMatches[i]["comp_level"] + '">' + arrOurMatches[i]["comp_level"] + arrOurMatches[i]["match_number"] + '</a>';
     }
 
     $("#ourMatches").html(row);
@@ -781,8 +767,8 @@ require 'header.php';
       var newMatch = {};
       newMatch["comp_level"] = "qm";
       newMatch["match_number"] = 1;
-      newMatch["red_teams"] = [customTeamNum1, customTeamNum2, customTeamNum3];
-      newMatch["blue_teams"] = [customTeamNum4, customTeamNum5, customTeamNum6]; //NEW
+      newMatch["red_teams"] = [customRedTeam1, customRedTeam2, customRedTeam3];
+      newMatch["blue_teams"] = [customBlueTeam1, customBlueTeam2, customBlueTeam3]; //NEW
       newMatch["time"] = "predicted_time"; //NEW
       localMatchList["QM_1"] = newMatch;
 
@@ -835,7 +821,7 @@ require 'header.php';
     });
   }
 
-  function loadCustom(teamNum1, teamNum2, teamNum3, teamNum4, teamNum5, teamNum6) {
+  function loadCustom(redTeam1, redTeam2, redTeam3, blueTeam1, blueTeam2, blueTeam3) {
     // Clear Data
     $("#R0DataTable").html("");
     $("#R1DataTable").html("");
@@ -843,12 +829,12 @@ require 'header.php';
     $("#B0DataTable").html("");
     $("#B1DataTable").html("");
     $("#B2DataTable").html("");
-    $("#enterTeam1").html("");
-    $("#enterTeam2").html("");
-    $("#enterTeam3").html("");
-    $("#enterTeam4").html("");
-    $("#enterTeam5").html("");
-    $("#enterTeam6").html("");
+    $("#enterRed1").html("");
+    $("#enterRed2").html("");
+    $("#enterRed3").html("");
+    $("#enterBlue1").html("");
+    $("#enterBlue2").html("");
+    $("#enterBlue3").html("");
     $("#redTotalCoral").html("");
     $("#redTotalAlgae").html("");
     $("#redAvgAutoPoints").html("");
@@ -871,12 +857,12 @@ require 'header.php';
     // Write Match Number
     //$("#matchTitle").html("Match " + compLevel + " " + matchNum);
     // Pull Data
-    customTeamNum1 = teamNum1;
-    customTeamNum2 = teamNum2;
-    customTeamNum3 = teamNum3;
-    customTeamNum4 = teamNum4;
-    customTeamNum5 = teamNum5;
-    customTeamNum6 = teamNum6;
+    customRedTeam1 = redTeam1;
+    customRedTeam2 = redTeam2;
+    customRedTeam3 = redTeam3;
+    customBlueTeam1 = blueTeam1;
+    customBlueTeam2 = blueTeam2;
+    customBlueTeam3 = blueTeam3;
     loadMatchData(function () {
       loadMatchList(processMatchList)
     });
@@ -1145,8 +1131,8 @@ require 'header.php';
     // Open and set the custom settings
     $("#loadCustom").click(function () {
       bUsingCustom = true;
-      var redTeamNum1 = document.getElementById("enterTeam1").value;
-      var blueTeamNum1 = document.getElementById("enterTeam4").value;
+      var redTeamNum1 = document.getElementById("enterRed1").value;
+      var blueTeamNum1 = document.getElementById("enterBlue1").value;
       console.log(redTeamNum1);
       console.log(blueTeamNum1);
       if (redTeamNum1.trim() == "" && blueTeamNum1.trim() == "") {
@@ -1154,7 +1140,7 @@ require 'header.php';
         return false;
       }
       else if (redTeamNum1.trim() !== "" && blueTeamNum1.trim() !== "") {
-        loadCustom($("#enterTeam1").val(), $("#enterTeam2").val(), $("#enterTeam3").val(), $("#enterTeam4").val(), $("#enterTeam5").val(), $("#enterTeam6").val());
+        loadCustom($("#enterRed1").val(), $("#enterRed2").val(), $("#enterRed3").val(), $("#enterBlue1").val(), $("#enterBlue2").val(), $("#enterBlue3").val());
       }
       else {
         alert("Please fill out red team number 1 and blue team number 1!");
