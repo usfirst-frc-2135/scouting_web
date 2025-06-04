@@ -12,6 +12,7 @@ require 'header.php';
 
     <div class="row mb-3">
       <div class="col-lg-6 col-sm-6 col-xs-6 gx-3">
+
         <!-- Status Card -->
         <div class="card">
           <div class="card-header">
@@ -103,7 +104,7 @@ require 'header.php';
             </div>
 
             <div class="mb-3">
-              <button id="writeConfigFile" class="btn btn-primary">Write Config File</button>
+              <button id="writeConfig" class="btn btn-primary">Write Config File</button>
               <button id="createDB" class="btn btn-primary">Create DB</button>
               <button id="createTable" class="btn btn-primary">Create Table</button>
             </div>
@@ -177,11 +178,11 @@ require 'header.php';
   $(document).ready(function () {
     $.post("dbAPI.php", {
       "getDBStatus": true
-    }, function (data) {
-      updateStatusValues(JSON.parse(data));
+    }, function (statusData) {
+      updateStatusValues(JSON.parse(statusData));
     });
 
-    // Loop through handling all text fields
+    // Loop through handling all fields
     for (const key in id_to_key_map) {
       id_to_written_map[key] = false;
       $("#" + key).change(function () {
@@ -209,7 +210,7 @@ require 'header.php';
     }
 
     // Write the db_config file
-    $("#writeConfigFile").on('click', function (event) {
+    $("#writeConfig").on('click', function (event) {
       var configData = {};
       for (const key in id_to_key_map) {
         if ($("#" + key).val() != "" && id_to_written_map[key]) {
@@ -222,10 +223,10 @@ require 'header.php';
       configData["tbatable"] = databaseName + "_tba";
       configData["pittable"] = databaseName + "_pt";
       configData["strategictable"] = databaseName + "_st";
-      configData["writeConfigFile"] = JSON.stringify(configData);
+      configData["writeConfig"] = JSON.stringify(configData);
 
-      $.post("dbAPI.php", configData, function (data) {
-        updateStatusValues(JSON.parse(data));
+      $.post("dbAPI.php", configData, function (statusData) {
+        updateStatusValues(JSON.parse(statusData));
       });
     });
 
@@ -243,8 +244,8 @@ require 'header.php';
       configInfo["filterConfig"] = JSON.stringify(filterData);
 
       // Make request
-      $.post("dbAPI.php", configInfo, function (data) {
-        updateStatusValues(JSON.parse(data));
+      $.post("dbAPI.php", configInfo, function (statusData) {
+        updateStatusValues(JSON.parse(statusData));
       });
     });
 
@@ -252,8 +253,8 @@ require 'header.php';
     $("#createDB").on('click', function (event) {
       $.post("dbAPI.php", {
         "createDB": true
-      }, function (data) {
-        updateStatusValues(JSON.parse(data));
+      }, function (statusData) {
+        updateStatusValues(JSON.parse(statusData));
       });
     });
 
@@ -261,8 +262,8 @@ require 'header.php';
     $("#createTable").on('click', function (event) {
       $.post("dbAPI.php", {
         "createTable": true
-      }, function (data) {
-        updateStatusValues(JSON.parse(data));
+      }, function (statusData) {
+        updateStatusValues(JSON.parse(statusData));
       });
     });
   });
