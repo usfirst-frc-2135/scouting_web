@@ -586,5 +586,3 @@ COMMENTED OUT FOR NOW-->
   });
 
 </script>
-
-<script type="text/javascript" src="./scripts/matchDataProcessor.js"></script>

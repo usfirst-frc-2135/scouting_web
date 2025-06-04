@@ -32,62 +32,60 @@
 </head>
 
 <body class="bg-light">
-  <header>
-    <!-- Create collapsible navbar and navigation buttons -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-      <a class="navbar-brand text-white" href="#">FRC 2135</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
-        aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+  <!-- Create collapsible navbar and navigation buttons -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <a class="navbar-brand text-white" href="#">FRC 2135</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+      aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-      <div id="navbarCollapse" class="collapse navbar-collapse">
-        <ul class="navbar-nav mr-auto">
-          <ul class="nav nav-pills nav-justified">
-            <li class="nav-item">
-              <a class="nav-link text-secondary active" data-toggle="pill" href="./index.php">Scouting Status</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-secondary" data-toggle="pill" href="./pitForm.php">Pit Scouting</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-secondary" data-toggle="pill" href="./pitPhotoUpload.php">Photo Upload</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-secondary" data-toggle="pill" href="./matchQrScanner.php">QR Scanner</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-secondary" data-toggle="pill" href="./matchData.php">Match Data</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-secondary" data-toggle="pill" href="./matchAverages.php">Match Averages</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-secondary" data-toggle="pill" href="./strategicSchedule.php">Strategic Schedule</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-secondary" data-toggle="pill" href="./strategicForm.php">Strategic Scouting</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-secondary" data-toggle="pill" href="./strategicData.php">Strategic Data</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-secondary" data-toggle="pill" href="./teamLookup.php">Team Lookup</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-secondary" data-toggle="pill" href="./matchSheet.php">Match Sheet</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-secondary" data-toggle="pill" href="./eventCoprData.php">Event COPRs</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-secondary" data-toggle="pill" href="./databaseStatus.php">Database Status</a>
-            </li>
-          </ul>
+    <div id="navbarCollapse" class="collapse navbar-collapse">
+      <ul class="navbar-nav mr-auto">
+        <ul class="nav nav-pills nav-justified">
+          <li class="nav-item">
+            <a class="nav-link text-secondary active" data-toggle="pill" href="./index.php">Scouting Status</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-secondary" data-toggle="pill" href="./pitForm.php">Pit Scouting</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-secondary" data-toggle="pill" href="./pitPhotoUpload.php">Photo Upload</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-secondary" data-toggle="pill" href="./matchQrScanner.php">QR Scanner</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-secondary" data-toggle="pill" href="./matchData.php">Match Data</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-secondary" data-toggle="pill" href="./matchAverages.php">Match Averages</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-secondary" data-toggle="pill" href="./strategicSchedule.php">Strategic Schedule</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-secondary" data-toggle="pill" href="./strategicForm.php">Strategic Scouting</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-secondary" data-toggle="pill" href="./strategicData.php">Strategic Data</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-secondary" data-toggle="pill" href="./teamLookup.php">Team Lookup</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-secondary" data-toggle="pill" href="./matchSheet.php">Match Sheet</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-secondary" data-toggle="pill" href="./eventCoprData.php">Event COPRs</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-secondary" data-toggle="pill" href="./databaseStatus.php">Database Status</a>
+          </li>
         </ul>
-      </div>
-    </nav>
-  </header>
+      </ul>
+    </div>
+  </nav>
 
   <script>
     // Handle navbar button state toggles

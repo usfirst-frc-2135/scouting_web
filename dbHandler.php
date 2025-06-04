@@ -48,7 +48,6 @@ class dbHandler
   // Connect to the server holding the database
   private function connectToServer()
   {
-
     $dbConfig = $this->readDbConfig();
     $dsn = "mysql:host=" . $dbConfig["server"] . ";charset=" . $this->charset;
     $opt = [
