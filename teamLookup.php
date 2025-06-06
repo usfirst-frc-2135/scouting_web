@@ -22,7 +22,7 @@ require 'header.php';
           <div class="card-body">
             <h5 id="teamTitle" class="card-title">Team # </h5>
             <!-- Robot photo carousel section -->
-            <div id="robotPicsCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div id="robotPicsCarousel" class="carousel slide mb-3" data-bs-ride="carousel">
               <div id="robotPics" class="carousel-inner">
 
               </div>
@@ -44,7 +44,7 @@ require 'header.php';
                     <a href="#collapseAutonCoralGraph" data-bs-toggle="collapse" aria-expanded="false"> Auton Coral Graph</a>
                   </h5>
                   <div id="collapseAutonCoralGraph" class="collapse">
-                    <canvas id="autoChart" width="400" height="400"></canvas>
+                    <canvas id="autoChart" width="400" height="360"></canvas>
                   </div>
                 </div>
               </div>
@@ -58,7 +58,7 @@ require 'header.php';
                     <a href="#collapseTeleopCoralGraph" data-bs-toggle="collapse" aria-expanded="false"> Teleop Coral Graph</a>
                   </h5>
                   <div id="collapseTeleopCoralGraph" class="collapse">
-                    <canvas id="myChart3" width="400" height="400"></canvas>
+                    <canvas id="myChart3" width="400" height="360"></canvas>
                   </div>
                 </div>
               </div>
@@ -72,7 +72,7 @@ require 'header.php';
                     <a href="#collapseEndgameGraph" data-bs-toggle="collapse" aria-expanded="false"> Endgame Graph</a>
                   </h5>
                   <div id="collapseEndgameGraph" class="collapse">
-                    <canvas id="myChart5" width="400" height="400"></canvas>
+                    <canvas id="myChart5" width="400" height="360"></canvas>
                   </div>
                 </div>
               </div>
