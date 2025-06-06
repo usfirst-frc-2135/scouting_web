@@ -10,8 +10,6 @@ require 'header.php';
       <h2><?php echo $title; ?></h2>
     </div>
 
-    <h4 id="pageTitle">Event Code: </h4>
-
     <table id="psTable" class="table table-striped table-bordered table-hover sortable">
       <thead>
         <tr>
@@ -124,13 +122,6 @@ require 'header.php';
       getEventCode: true
     }, function (data) {
       $("#navbarEventCode").html(data);
-    });
-
-    // Make the header
-    $.get("./tbaAPI.php", {
-      getEventCode: true
-    }, function (data) {
-      $("#pageTitle").html("Event Code: " + data);
     });
 
     // Get the list of teams and add the team names 
