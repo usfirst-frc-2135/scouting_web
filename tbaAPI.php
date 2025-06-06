@@ -22,7 +22,7 @@ else if (isset($_GET["getTeamInfo"]))
 {
   echo (json_encode($tba->getTeamInfo($_GET["getTeamInfo"])));
 }
-else if (isset($_GET["getTeamList"]))
+else if (isset($_GET["getSimpleTeamList"]))
 {
   echo (json_encode($tba->getSimpleTeamList($eventCode)));
 }
@@ -32,7 +32,7 @@ else if (isset($_GET["getTeamListAndNames"]))
 }
 else if (isset($_GET["getMatchList"]))
 {
-  echo (json_encode($tba->getMatches($eventCode)));
+  echo (json_encode($tba->getMatchList($eventCode)));
 }
 else if (isset($_GET["getStrategicMatches"]))
 {

@@ -30,7 +30,7 @@ class tbaHandler
     $this->apiURL = "https://www.thebluealliance.com/api/v3";
   }
 
-  function readURIFromTBA($uri)
+  private function readURIFromTBA($uri)
   {
     $out = array();
     if ($this->tbaApiKey == null)
@@ -89,7 +89,7 @@ class tbaHandler
     return $out;
   }
 
-  function readURIFromDB($uri)
+  private function readURIFromDB($uri)
   {
     // If uri not in db, then return empty
     $sql = "SELECT expiryTime, response from " . $this->tbaTableName . " where requestURI='" . $uri . "'";
@@ -106,7 +106,7 @@ class tbaHandler
     return $out;
   }
 
-  function writeResponseToDB($uri, $response)
+  private function writeResponseToDB($uri, $response)
   {
     $replaceValues = array();
     $replaceValues["requestURI"] = $uri;
@@ -118,7 +118,7 @@ class tbaHandler
     $prepared_statement->execute($replaceValues);
   }
 
-  function makeDBCachedCall($uri)
+  private function makeDBCachedCall($uri)
   {
     $currTime = time();
     $dbResponse = $this->readURIFromDB($uri);
@@ -134,7 +134,7 @@ class tbaHandler
   }
 
   // Get Team Info
-  function getTeamInfo($teamnum)
+  public function getTeamInfo($teamnum)
   {
     error_log(">>> getTeamInfo() starting for $teamnum");
     // URI should be "/team/frc<teamnum>", so add "frc" if needed.
@@ -145,7 +145,7 @@ class tbaHandler
   }
 
   // Team List Operations 
-  function getTeamList($eventCode)
+  private function getTeamList($eventCode)
   {
     $requestURI = "/event/" . $eventCode . "/teams";
     return $this->makeDBCachedCall($requestURI);
@@ -153,7 +153,7 @@ class tbaHandler
 
   // NOTE: for events that have multiple robots, the teamlist only lists the basic team numbers.
   // So we must adjust the list to contain the multiple robot <teamNum><Letter>.
-  function getSimpleTeamList($eventCode)
+  public function getSimpleTeamList($eventCode)
   {
     error_log("starting getSimpleTeamList for eventCode: $eventCode");
 
@@ -179,8 +179,8 @@ class tbaHandler
     $ml = null;   // matchlist, only needed if multi-robot event
     if ($bMultiRobots == true)
     {
-      $ml = $this->getMatches($eventCode);
       error_log("getTeamList: going to adjust teamlist for multi-robots");
+      $ml = $this->getMatchList($eventCode);
     }
 
     foreach ($tl["response"] as $teamRow)
@@ -251,7 +251,7 @@ class tbaHandler
   }
 
   ///// getTeamListAndNames function /////
-  function getTeamListAndNames($eventCode)
+  public function getTeamListAndNames($eventCode)
   {
     error_log("starting getTeamListAndNames for eventCode: $eventCode");
 
@@ -281,7 +281,7 @@ class tbaHandler
   }
 
 
-  function teamListToLookup($teamList)
+  private function teamListToLookup($teamList)
   {
     $out = array();
     $i = 0;
@@ -296,19 +296,19 @@ class tbaHandler
 
   /*********** Match Data Operations ***********/
 
-  function getMatches($eventCode)
+  public function getMatchList($eventCode)
   {
     $requestURI = "/event/" . $eventCode . "/matches";
     return $this->makeDBCachedCall($requestURI);
   }
 
-  function getSimpleMatches($eventCode)
+  private function getSimpleMatches($eventCode)
   {
-    $ml = $this->getMatches($eventCode);
+    $ml = $this->getMatchList($eventCode);
     return $ml["response"];
   }
 
-  function removeElimMatches($matchData)
+  private function removeElimMatches($matchData)
   {
     $out = array();
     foreach ($matchData as $matchRow)
@@ -321,7 +321,7 @@ class tbaHandler
     return $out;
   }
 
-  function removeUnplayedMatches($matchData)
+  private function removeUnplayedMatches($matchData)
   {
     $out = array();
     foreach ($matchData as $matchRow)
@@ -334,7 +334,7 @@ class tbaHandler
     return $out;
   }
 
-  function getNumericalBreakdownKeys($matchData)
+  private function getNumericalBreakdownKeys($matchData)
   {
     $sampleBreakdown = $matchData[0]["score_breakdown"]["red"];
     $out = array();
@@ -350,9 +350,9 @@ class tbaHandler
 
   // COPR Calculation 
   // NOTE: this will NOT work for events with multiple teams unless that event code is in 
-  // the hard-coded list (see getTeamList()). The result is that there is no OPR data shown.
+  // the hard-coded list (see getSimpleTeamList()). The result is that there is no OPR data shown.
 
-  function choleskyDecomposition($A)
+  private function choleskyDecomposition($A)
   {
     //  Args:
     //    $A - Must be square matrix that is symetric and positive definite
@@ -399,7 +399,7 @@ class tbaHandler
     return array("L" => $L, "Lp" => $Lp);
   }
 
-  function forwardSubstitution($A, $B)
+  private function forwardSubstitution($A, $B)
   {
     /*
       Args:
@@ -431,7 +431,7 @@ class tbaHandler
     return $X;
   }
 
-  function backwardSubstitution($A, $B)
+  private function backwardSubstitution($A, $B)
   {
     /*
       Args:
@@ -464,7 +464,7 @@ class tbaHandler
     return $X;
   }
 
-  function createABMatricies($teamCount, $teamLookup, $simpleMatchData)
+  private function createABMatricies($teamCount, $teamLookup, $simpleMatchData)
   {
     $aMatrix = array_fill(0, $teamCount, array_fill(0, $teamCount, 0)); // Just for who plays in what matchData
     $bVectors = array(); // Set of data we want to solve for
@@ -501,7 +501,7 @@ class tbaHandler
     return array("A" => $aMatrix, "B" => $bVectors);
   }
 
-  function getComponentOPRS($eventCode)
+  public function getComponentOPRS($eventCode)
   {
     error_log("===> getComponentOPRS(): getting simpleTeamList");
     $simpleTeamList = $this->getSimpleTeamList($eventCode);
@@ -552,7 +552,7 @@ class tbaHandler
 
 
   ///// getStrategicMatches function /////
-  function getStrategicMatches($eventCode)
+  public function getStrategicMatches($eventCode)
   {
     error_log("starting getStrategicMatches for eventCode: $eventCode");
 
@@ -566,8 +566,8 @@ class tbaHandler
 
     $out = array();
     $mdata = array();
-    // error_log("---> calling getMatches()");
-    $ml = $this->getMatches($eventCode);   // get all the matches at this event
+    // error_log("---> calling getMatchList()");
+    $ml = $this->getMatchList($eventCode);   // get all the matches at this event
 
     // Go thru all the matches and figure out which ones are our matches.
     $ourMatches = array();
