@@ -207,7 +207,7 @@ require 'header.php';
           'backgroundColor': 'white',
           'frozenColVerticalOffset': 0
         });
-      }, 1);
+      }, 1000);
       sortTable();
     });
   }

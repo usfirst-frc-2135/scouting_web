@@ -103,7 +103,7 @@ require 'header.php';
           'backgroundColor': 'blue',
           'frozenColVerticalOffset': 0
         });
-      }, 500);
+      }, 1000);
     });
   }
 

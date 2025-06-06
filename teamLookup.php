@@ -826,7 +826,7 @@ require 'header.php';
         'backgroundColor': 'blue',
         'frozenColVerticalOffset': 0
       });
-    }, 1);
+    }, 1000);
     sortAllMatchesTable();
   }
 
@@ -922,7 +922,7 @@ require 'header.php';
         'columnKeep': true,
         'frozenColVerticalOffset': 0
       });
-    }, 1);
+    }, 1000);
     sortStrategicDataTable();
   }
 

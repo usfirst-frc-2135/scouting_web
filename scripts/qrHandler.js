@@ -168,7 +168,7 @@ function alertSuccessfulScan() {
 
   }
   $("#content").addClass("bg-success");
-  var timeoutFunction = setTimeout(function () { $("#content").removeClass("bg-success"); }, 500);
+  var timeoutFunction = setTimeout(function () { $("#content").removeClass("bg-success"); }, 1000);
 }
 
 /*

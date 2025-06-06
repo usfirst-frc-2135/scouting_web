@@ -369,7 +369,7 @@ COMMENTED OUT FOR NOW-->
             'backgroundColor': 'blue',
             'frozenColVerticalOffset': 0
           });
-        }, 1);
+        }, 1000);
       });
     });
   }
@@ -399,7 +399,7 @@ COMMENTED OUT FOR NOW-->
         'backgroundColor': 'blue',
         'frozenColVerticalOffset': 0
       });
-    }, 1);
+    }, 1000);
   }
 
   // CSV File functions

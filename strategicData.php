@@ -340,7 +340,7 @@ require 'header.php';
           'backgroundColor': 'blue',
           'frozenColVerticalOffset': 0
         });
-      }, 1);
+      }, 1000);
       sortTable();
     });
   }
