@@ -27,7 +27,7 @@ require 'header.php';
   </div>
 </div>
 
-<style>
+<style type="text/css" media="screen">
   th:first-child,
   td:first-child,
   tr {

@@ -14,7 +14,7 @@
   <link href="./external/bootstrap-5.3.6-dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
   <link href="./external/DataTables/datatables.min.css" rel="stylesheet" crossorigin="anonymous">
 
-  <style>
+  <style type="text/css" media="screen">
     .form-check-input {
       /* darken check box borders */
       border-color: rgba(0, 0, 0, .5);
