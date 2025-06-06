@@ -40,188 +40,194 @@ require 'header.php';
           <button id="filterData" class="btn btn-primary" type="button">Filter Data</button>
         </div>
       </div>
-    </div>
 COMMENTED OUT FOR NOW-->
 
     <div class="row mb-3">
 
-      <div id="freeze-table" class="freeze-table overflow-auto">
-        <style type="text/css" media="screen">
-          table tr {
-            border: 1px solid black;
-          }
+      <!-- <div id="freeze-table" class="freeze-table overflow-auto"> -->
+      <style type="text/css" media="screen">
+        table tr {
+          border: 1px solid black;
+        }
 
-          table td,
-          table th {
-            border-right: 1px solid black;
-          }
-        </style>
-        <table id="averageTable" class="table table-striped table-bordered table-hover sortable" style="width:100%">
-          <colgroup>
-            <col span="1" style="background-color:transparent">
-            <col span="2" style="background-color:#cfe2ff">
-            <col span="2" style="background-color:transparent">
-            <col span="2" style="background-color:#cfe2ff">
-            <col span="2" style="background-color:transparent">
-            <col span="2" style="background-color:#cfe2ff">
-            <col span="2" style="background-color:transparent">
-            <col span="2" style="background-color:#cfe2ff">
-            <col span="2" style="background-color:transparent">
-            <col span="2" style="background-color:#cfe2ff">
-            <col span="2" style="background-color:transparent">
-            <col span="2" style="background-color:#B5D3FF">
-            <col span="2" style="background-color:transparent">
-            <col span="2" style="background-color:#B5D3FF">
-            <col span="2" style="background-color:transparent">
-            <col span="2" style="background-color:#B5D3FF">
-            <col span="2" style="background-color:#transparent">
-            <col span="2" style="background-color:cfe2ff">
-            <col span="2" style="background-color:#transparent">
-            <col span="3" style="background-color:#b5d3ff">
-            <col span="2" style="background-color:transparent">
-            <col span="2" style="background-color:#b5d3ff">
-            <col span="2" style="background-color:transparent">
-            <col span="2" style="background-color:#b5d3ff">
-            <col span="3" style="background-color:transparent">
-            <col span="2" style="background-color:#cfe2ff">
-            <col span="2" style="background-color:transparent">
-            <col span="1" style="background-color:#B5D3FF">
-            <col span="1" style="background-color:transparent">
-            <col span="1" style="background-color:#B5D3FF">
-            <col span="1" style="background-color:transparent">
-            <col span="1" style="background-color:#B5D3FF">
-            <col span="1" style="background-color:transparent">
-          </colgroup>
-          <thead>
-            <tr>
+        table td,
+        table th {
+          border-right: 1px solid black;
+        }
+
+        thead {
+          position: sticky;
+          top: 56px;
+          background: white;
+        }
+      </style>
+
+      <table id="averageTable" class="table table-striped table-bordered table-hover sortable" style="width:100%">
+        <colgroup>
+          <col span="1" style="background-color:transparent">
+          <col span="2" style="background-color:#cfe2ff">
+          <col span="2" style="background-color:transparent">
+          <col span="2" style="background-color:#cfe2ff">
+          <col span="2" style="background-color:transparent">
+          <col span="2" style="background-color:#cfe2ff">
+          <col span="2" style="background-color:transparent">
+          <col span="2" style="background-color:#cfe2ff">
+          <col span="2" style="background-color:transparent">
+          <col span="2" style="background-color:#cfe2ff">
+          <col span="2" style="background-color:transparent">
+          <col span="2" style="background-color:#B5D3FF">
+          <col span="2" style="background-color:transparent">
+          <col span="2" style="background-color:#B5D3FF">
+          <col span="2" style="background-color:transparent">
+          <col span="2" style="background-color:#B5D3FF">
+          <col span="2" style="background-color:#transparent">
+          <col span="2" style="background-color:cfe2ff">
+          <col span="2" style="background-color:#transparent">
+          <col span="3" style="background-color:#b5d3ff">
+          <col span="2" style="background-color:transparent">
+          <col span="2" style="background-color:#b5d3ff">
+          <col span="2" style="background-color:transparent">
+          <col span="2" style="background-color:#b5d3ff">
+          <col span="3" style="background-color:transparent">
+          <col span="2" style="background-color:#cfe2ff">
+          <col span="2" style="background-color:transparent">
+          <col span="1" style="background-color:#B5D3FF">
+          <col span="1" style="background-color:transparent">
+          <col span="1" style="background-color:#B5D3FF">
+          <col span="1" style="background-color:transparent">
+          <col span="1" style="background-color:#B5D3FF">
+          <col span="1" style="background-color:transparent">
+        </colgroup>
+        <thead>
+          <!-- <tr>
               <th colspan="1" class="text-center"></th>
               <th colspan="63" class="text-center fw-bold" style="background-color:#e8f1ff">Match Averages</th>
             </tr>
             <tr>
               <th colspan="1" class="text-center"></th>
               <th colspan="63" class="text-center fw-bold" style="background-color:#e8f1ff">Table</th>
-            </tr>
-            <tr>
-              <th colspan="1" class="text-center"></th>
-              <th colspan="20" class="text-center fw-bold" style="background-color:#e8f1ff"></th>
-              <th colspan="16" class="text-center fw-bold" style="background-color:#83B4FF">Auton Game Pieces</th>
-              <th colspan="18" class="text-center fw-bold" style="background-color:#cfe2ff">Teleop Game Pieces</th>
-              <th colspan="6" class="text-center fw-bold" style="background-color:#e8f1ff"></th>
-            </tr>
-            <tr>
-              <th colspan="1" class="text-center"></th>
-              <th colspan="6" class="text-center fw-bold" style="background-color:#83B4FF">Totals</th>
-              <th colspan="6" class="text-center">Auton</th>
-              <th colspan="6" class="text-center fw-bold" style="background-color:#83B4FF">Teleop</th>
-              <th colspan="2" class="text-center">Endgame</th>
-              <th colspan="10" class="text-center fw-bold" style="background-color:#3686FF">Coral</th>
-              <th colspan="6" class="text-center">Algae</th>
-              <th colspan="11" class="text-center fw-bold" style="background-color:#3686FF">Coral</th>
-              <th colspan="7" class="text-center">Algae</th>
-              <th colspan="5" class="text-center fw-bold" style="background-color:#3686FF">Endgame</th>
-              <th colspan="1" class="text-center"></th>
-            </tr>
-            <tr>
-              <th colspan="1" class="text-center"></th>
-              <th colspan="2" class="text-center fw-bold" style="background-color:#3686FF">Points</th>
-              <th colspan="2" class="text-center fw-bold">Coral</th>
-              <th colspan="2" class="text-center fw-bold" style="background-color:#3686FF">Algae</th>
-              <th colspan="2" class="text-center">Points</th>
-              <th colspan="2" class="text-center" style="background-color:#3686FF">Coral Pts</th>
-              <th colspan="2" class="text-center">Algae Pts</th>
-              <th colspan="2" class="text-center" style="background-color:#3686FF">Points</th>
-              <th colspan="2" class="text-center">Coral Pts</th>
-              <th colspan="2" class="text-center" style="background-color:#3686FF">Algae Pts</th>
-              <th colspan="2" class="text-center">Points</th>
-              <th colspan="2" class="text-center">Total</th>
-              <th colspan="2" class="text-center">L1</th>
-              <th colspan="2" class="text-center">L2</th>
-              <th colspan="2" class="text-center">L3</th>
-              <th colspan="2" class="text-center">L4</th>
-              <th colspan="2" class="text-center">Total</th>
-              <th colspan="2" class="text-center">Net</th>
-              <th colspan="2" class="text-center">Proc</th>
-              <th colspan="3" class="text-center">Total</th>
-              <th colspan="2" class="text-center">L1</th>
-              <th colspan="2" class="text-center">L2</th>
-              <th colspan="2" class="text-center">L3</th>
-              <th colspan="2" class="text-center">L4</th>
-              <th colspan="3" class="text-center">Total</th>
-              <th colspan="2" class="text-center">Net</th>
-              <th colspan="2" class="text-center">Proc</th>
-              <th colspan="5" class="text-center fw-bold" style="background-color:#3686FF">Climb%</th>
-              <th colspan="1" class="text-center">Died</th>
-            </tr>
-            <tr>
-              <th scope="col">Team</th>
-              <th scope="col">Avg</th>
-              <th scope="col">Max</th>
-              <th scope="col">Avg</th>
-              <th scope="col">Max</th>
-              <th scope="col">Avg</th>
-              <th scope="col">Max</th>
-              <th scope="col">Avg</th>
-              <th scope="col">Max</th>
-              <th scope="col">Avg</th>
-              <th scope="col">Max</th>
-              <th scope="col">Avg</th>
-              <th scope="col">Max</th>
-              <th scope="col">Avg</th>
-              <th scope="col">Max</th>
-              <th scope="col">Avg</th>
-              <th scope="col">Max</th>
-              <th scope="col">Avg</th>
-              <th scope="col">Max</th>
-              <th scope="col">Avg</th>
-              <th scope="col">Max</th>
-              <th scope="col">Avg</th>
-              <th scope="col">Max</th>
-              <th scope="col">Avg</th>
-              <th scope="col">Max</th>
-              <th scope="col">Avg</th>
-              <th scope="col">Max</th>
-              <th scope="col">Avg</th>
-              <th scope="col">Max</th>
-              <th scope="col">Avg</th>
-              <th scope="col">Max</th>
-              <th scope="col">Avg</th>
-              <th scope="col">Max</th>
-              <th scope="col">Avg</th>
-              <th scope="col">Max</th>
-              <th scope="col">Avg</th>
-              <th scope="col">Max</th>
-              <th scope="col">Acc%</th>
-              <th scope="col">Avg</th>
-              <th scope="col">Max</th>
-              <th scope="col">Avg</th>
-              <th scope="col">Max</th>
-              <th scope="col">Avg</th>
-              <th scope="col">Max</th>
-              <th scope="col">Avg</th>
-              <th scope="col">Max</th>
-              <th scope="col">Avg</th>
-              <th scope="col">Max</th>
-              <th scope="col">Acc%</th>
-              <th scope="col">Avg</th>
-              <th scope="col">Max</th>
-              <th scope="col">Avg</th>
-              <th scope="col">Max</th>
-              <th scope="col">Avg</th>
-              <th scope="col">Max</th>
+            </tr> -->
+          <tr>
+            <th colspan="1" class="text-center"></th>
+            <th colspan="20" class="text-center fw-bold" style="background-color:#e8f1ff"></th>
+            <th colspan="16" class="text-center fw-bold" style="background-color:#83B4FF">Auton Game Pieces</th>
+            <th colspan="18" class="text-center fw-bold" style="background-color:#cfe2ff">Teleop Game Pieces</th>
+            <th colspan="6" class="text-center fw-bold" style="background-color:#e8f1ff"></th>
+          </tr>
+          <tr>
+            <th colspan="1" class="text-center"></th>
+            <th colspan="6" class="text-center fw-bold" style="background-color:#83B4FF">Totals</th>
+            <th colspan="6" class="text-center">Auton</th>
+            <th colspan="6" class="text-center fw-bold" style="background-color:#83B4FF">Teleop</th>
+            <th colspan="2" class="text-center">Endgame</th>
+            <th colspan="10" class="text-center fw-bold" style="background-color:#3686FF">Coral</th>
+            <th colspan="6" class="text-center">Algae</th>
+            <th colspan="11" class="text-center fw-bold" style="background-color:#3686FF">Coral</th>
+            <th colspan="7" class="text-center">Algae</th>
+            <th colspan="5" class="text-center fw-bold" style="background-color:#3686FF">Endgame</th>
+            <th colspan="1" class="text-center"></th>
+          </tr>
+          <tr>
+            <th colspan="1" class="text-center"></th>
+            <th colspan="2" class="text-center fw-bold" style="background-color:#3686FF">Points</th>
+            <th colspan="2" class="text-center fw-bold">Coral</th>
+            <th colspan="2" class="text-center fw-bold" style="background-color:#3686FF">Algae</th>
+            <th colspan="2" class="text-center">Points</th>
+            <th colspan="2" class="text-center" style="background-color:#3686FF">Coral Pts</th>
+            <th colspan="2" class="text-center">Algae Pts</th>
+            <th colspan="2" class="text-center" style="background-color:#3686FF">Points</th>
+            <th colspan="2" class="text-center">Coral Pts</th>
+            <th colspan="2" class="text-center" style="background-color:#3686FF">Algae Pts</th>
+            <th colspan="2" class="text-center">Points</th>
+            <th colspan="2" class="text-center">Total</th>
+            <th colspan="2" class="text-center">L1</th>
+            <th colspan="2" class="text-center">L2</th>
+            <th colspan="2" class="text-center">L3</th>
+            <th colspan="2" class="text-center">L4</th>
+            <th colspan="2" class="text-center">Total</th>
+            <th colspan="2" class="text-center">Net</th>
+            <th colspan="2" class="text-center">Proc</th>
+            <th colspan="3" class="text-center">Total</th>
+            <th colspan="2" class="text-center">L1</th>
+            <th colspan="2" class="text-center">L2</th>
+            <th colspan="2" class="text-center">L3</th>
+            <th colspan="2" class="text-center">L4</th>
+            <th colspan="3" class="text-center">Total</th>
+            <th colspan="2" class="text-center">Net</th>
+            <th colspan="2" class="text-center">Proc</th>
+            <th colspan="5" class="text-center fw-bold" style="background-color:#3686FF">Climb%</th>
+            <th colspan="1" class="text-center">Died</th>
+          </tr>
+          <tr>
+            <th scope="col">Team</th>
+            <th scope="col">Avg</th>
+            <th scope="col">Max</th>
+            <th scope="col">Avg</th>
+            <th scope="col">Max</th>
+            <th scope="col">Avg</th>
+            <th scope="col">Max</th>
+            <th scope="col">Avg</th>
+            <th scope="col">Max</th>
+            <th scope="col">Avg</th>
+            <th scope="col">Max</th>
+            <th scope="col">Avg</th>
+            <th scope="col">Max</th>
+            <th scope="col">Avg</th>
+            <th scope="col">Max</th>
+            <th scope="col">Avg</th>
+            <th scope="col">Max</th>
+            <th scope="col">Avg</th>
+            <th scope="col">Max</th>
+            <th scope="col">Avg</th>
+            <th scope="col">Max</th>
+            <th scope="col">Avg</th>
+            <th scope="col">Max</th>
+            <th scope="col">Avg</th>
+            <th scope="col">Max</th>
+            <th scope="col">Avg</th>
+            <th scope="col">Max</th>
+            <th scope="col">Avg</th>
+            <th scope="col">Max</th>
+            <th scope="col">Avg</th>
+            <th scope="col">Max</th>
+            <th scope="col">Avg</th>
+            <th scope="col">Max</th>
+            <th scope="col">Avg</th>
+            <th scope="col">Max</th>
+            <th scope="col">Avg</th>
+            <th scope="col">Max</th>
+            <th scope="col">Acc%</th>
+            <th scope="col">Avg</th>
+            <th scope="col">Max</th>
+            <th scope="col">Avg</th>
+            <th scope="col">Max</th>
+            <th scope="col">Avg</th>
+            <th scope="col">Max</th>
+            <th scope="col">Avg</th>
+            <th scope="col">Max</th>
+            <th scope="col">Avg</th>
+            <th scope="col">Max</th>
+            <th scope="col">Acc%</th>
+            <th scope="col">Avg</th>
+            <th scope="col">Max</th>
+            <th scope="col">Avg</th>
+            <th scope="col">Max</th>
+            <th scope="col">Avg</th>
+            <th scope="col">Max</th>
 
-              <th class="text-center" scope="col">N</th>
-              <th class="text-center" scope="col">P</th>
-              <th class="text-center" scope="col">F</th>
-              <th class="text-center" scope="col">S</th>
-              <th class="text-center" scope="col">D</th>
-              <th class="text-center" scope="col">#</th>
-            </tr>
+            <th class="text-center" scope="col">N</th>
+            <th class="text-center" scope="col">P</th>
+            <th class="text-center" scope="col">F</th>
+            <th class="text-center" scope="col">S</th>
+            <th class="text-center" scope="col">D</th>
+            <th class="text-center" scope="col">#</th>
+          </tr>
 
-          </thead>
-          <tbody id="tableData">
-          </tbody>
-        </table>
-      </div>
+        </thead>
+        <tbody id="tableData">
+        </tbody>
+      </table>
+      <!-- </div> -->
     </div>
   </div>
 </div>
@@ -338,7 +344,7 @@ COMMENTED OUT FOR NOW-->
 
   function requestAPI() {
     // Gets SQL data from our local scouting data
-    $.get("readAPI.php", {
+    $.get("./readAPI.php", {
       getAllData: 1
     }).done(function (readData) {
       jsonData = JSON.parse(readData);
@@ -539,14 +545,14 @@ COMMENTED OUT FOR NOW-->
     console.log("starting writeCSVFile()");
 
     console.log("getting raw data");
-    $.get("readAPI.php", {
+    $.get("./readAPI.php", {
       getAllData: 1
     }).done(function (data) {
       matchData = JSON.parse(data);
 
       // Get OPR data 
       console.log("getting OPR data");
-      $.get("tbaAPI.php", {
+      $.get("./tbaAPI.php", {
         getCOPRs: 1
       }).done(function (data) {
         data = JSON.parse(data)["data"];

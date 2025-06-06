@@ -78,7 +78,7 @@
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Event</a>
             <ul class="dropdown-menu text-secondary bg-dark">
               <a class="dropdown-item text-secondary" data-toggle="pill" href="./matchSheet.php">Match Sheet</a>
-              <a class="dropdown-item text-secondary" data-toggle="pill" href="./matchAverages.php">Event Averages</a>
+              <a class="dropdown-item text-secondary" data-toggle="pill" href="./eventAverages.php">Event Averages</a>
               <a class="dropdown-item text-secondary" data-toggle="pill" href="./strategicData.php">Strategic Data</a>
               <a class="dropdown-item text-secondary" data-toggle="pill" href="./eventCoprData.php">Event COPRs</a>
             </ul>
