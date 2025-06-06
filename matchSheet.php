@@ -720,7 +720,7 @@ require 'header.php';
   function loadMatchList(successFunction) {
     if (!bUsingCustom) {
       if (!localMatchList) {
-        $.get("tbaAPI.php", {
+        $.get("./tbaAPI.php", {
           getMatchList: 1
         }).done(function (data) {
           if (data == null)
@@ -1019,7 +1019,7 @@ require 'header.php';
 
   function displayTeam(color, index, teamNum) {
     // Get team name from TBA
-    $.get("tbaAPI.php", {
+    $.get("./tbaAPI.php", {
       getTeamInfo: teamNum
     }).done(function (data) {
       var teamname = "XX";
@@ -1118,6 +1118,13 @@ require 'header.php';
   // Process the generated html
   //
   $(document).ready(function () {
+    // Update the navbar with the event code
+    $.get("./tbaAPI.php", {
+      getEventCode: true
+    }, function (data) {
+      $("#navbarEventCode").html(data);
+    });
+
     var initialGet = checkGet();
     if (initialGet) {
       loadMatch(initialGet[0], initialGet[1]);

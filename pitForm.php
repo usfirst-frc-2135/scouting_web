@@ -335,6 +335,12 @@ require 'header.php';
   // Process the generated html
   //
   $(document).ready(function () {
+    // Update the navbar with the event code
+    $.get("./tbaAPI.php", {
+      getEventCode: true
+    }, function (data) {
+      $("#navbarEventCode").html(data);
+    });
 
     // Submit the match data form
     $("#submitButton").click(function () {

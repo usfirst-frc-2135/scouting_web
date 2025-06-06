@@ -98,7 +98,7 @@ require 'header.php';
   // Figure out which matches and teams for strategic scouts 
   function determineMatches() {
     console.log("---> starting determineMatches()");
-    $.get("tbaAPI.php", {
+    $.get("./tbaAPI.php", {
       getStrategicMatches: 1
     }).done(function (data) {
       var dataObj = JSON.parse(data);
@@ -111,6 +111,13 @@ require 'header.php';
   // Process the generated html
   //
   $(document).ready(function () {
+    // Update the navbar with the event code
+    $.get("./tbaAPI.php", {
+      getEventCode: true
+    }, function (data) {
+      $("#navbarEventCode").html(data);
+    });
+
 
     // Create the strategic match schedule
     $("#createButton").click(function () {

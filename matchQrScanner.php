@@ -44,4 +44,14 @@ require 'header.php';
 
 <?php include 'footer.php'; ?>
 
+<script>
+  $(document).ready(function () {
+    $.get("./tbaAPI.php", {
+      getEventCode: true
+    }, function (data) {
+      $("#navbarEventCode").html(data);
+    });
+  });
+</script>
+
 <script src="./scripts/qrHandler.js"></script>

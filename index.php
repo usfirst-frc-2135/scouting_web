@@ -120,6 +120,12 @@ require 'header.php';
   // Process the generated html
   //
   $(document).ready(function () {
+    $.get("./tbaAPI.php", {
+      getEventCode: true
+    }, function (data) {
+      $("#navbarEventCode").html(data);
+    });
+
     // Make the header
     $.get("./tbaAPI.php", {
       getEventCode: true
@@ -128,7 +134,7 @@ require 'header.php';
     });
 
     // Get the list of teams and add the team names 
-    console.log("index: getting teamlist from tbaAPI using db_config event code");
+    console.log("index: getting teamlist from TBA using db_config event code");
     $.get("./tbaAPI.php", {
       getTeamListAndNames: 1
     }).done(function (data) {

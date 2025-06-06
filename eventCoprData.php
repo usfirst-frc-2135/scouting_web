@@ -81,7 +81,7 @@ require 'header.php';
 
   function requestAPI() {
     //output: gets the COPR data from TBA
-    $.get("tbaAPI.php", {
+    $.get("./tbaAPI.php", {
       getCOPRs: 1
     }).done(function (data) {
       console.log("==> requestAPI:\n" + data);
@@ -111,6 +111,13 @@ require 'header.php';
   // Process the generated html
   //
   $(document).ready(function () {
+    // Update the navbar with the event code
+    $.get("./tbaAPI.php", {
+      getEventCode: true
+    }, function (data) {
+      $("#navbarEventCode").html(data);
+    });
+
     requestAPI();
 
     $("#loadEvent").click(function () {

@@ -96,6 +96,13 @@ require 'header.php';
   // Process the generated html
   //
   $(document).ready(function () {
+    // Update the navbar with the event code
+    $.get("./tbaAPI.php", {
+      getEventCode: true
+    }, function (data) {
+      $("#navbarEventCode").html(data);
+    });
+
 
     // Upload photo to the server
     $("#upload").on('click', function (event) {
