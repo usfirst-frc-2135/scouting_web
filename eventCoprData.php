@@ -14,16 +14,16 @@ require 'header.php';
       </div>
     </div>
 
-    <div id="freeze-table" class="freeze-table">
-      <table id="coprTable" class="table table-striped table-hover">
-        <thead>
-          <tr id="tableKeys">
-          </tr>
-        </thead>
-        <tbody id="tableData">
-        </tbody>
-      </table>
-    </div>
+    <!-- <div id="freeze-table" class="freeze-table"> -->
+    <table id="coprTable" class="table table-striped table-hover">
+      <thead>
+        <tr id="tableKeys">
+        </tr>
+      </thead>
+      <tbody id="tableData">
+      </tbody>
+    </table>
+    <!-- </div> -->
   </div>
 </div>
 
@@ -35,6 +35,12 @@ require 'header.php';
     left: 0px;
     z-index: 1;
     background: rgba(255, 255, 255, 1);
+  }
+
+  thead {
+    position: sticky;
+    top: 56px;
+    background: white;
   }
 </style>
 
