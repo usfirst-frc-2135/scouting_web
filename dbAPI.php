@@ -75,5 +75,5 @@ else if (isset($_POST["createTable"]))
 }
 else
 {
-  error_log("dbAPI.php called without a valid request");
+  error_log("./dbAPI.php called without a valid request");
 }

@@ -431,7 +431,7 @@ require 'header.php';
     dataToUse["problem_comment"] = $("#problemComment").val();
     dataToUse["general_comment"] = $("#generalComment").val();
 
-    $.post("writeAPI.php", {
+    $.post("./writeAPI.php", {
       writeStrategicData: JSON.stringify(dataToUse)
     }).done(function (data) {
       // Because success word may have a new-line at the end, don't do a direct compare

@@ -660,7 +660,7 @@ require 'header.php';
 
   function loadMatchData(successFunction) {
     if (!localMatchData) {
-      $.get("readAPI.php", {
+      $.get("./readAPI.php", {
         getAllData: 1
       }).done(function (data) {
         data = JSON.parse(data);
@@ -1083,7 +1083,7 @@ require 'header.php';
       }
     }
 
-    $.get("readAPI.php", {
+    $.get("./readAPI.php", {
       getTeamsImages: JSON.stringify(requestList)
     }).done(function (data) {
       var teamImages = JSON.parse(data);

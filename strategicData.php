@@ -318,7 +318,7 @@ require 'header.php';
 
   function requestAPI() {
     // get Strategic Scouting Data
-    $.get("readAPI.php", {
+    $.get("./readAPI.php", {
       getAllStrategicData: 1
     }).done(function (data) {
       var dataObj = JSON.parse(data);

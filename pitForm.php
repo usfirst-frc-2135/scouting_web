@@ -318,7 +318,7 @@ require 'header.php';
       dataToUse["preparedness"] = 5;
     }
 
-    $.post("writeAPI.php", {
+    $.post("./writeAPI.php", {
       writePitTable: JSON.stringify(dataToUse)
     }).done(function (data) {
       // Because success word may have a new-line at the end, don't do a direct compare
