@@ -47,7 +47,7 @@ require 'header.php';
 <script>
   // Update the navbar with the event code
   $(document).ready(function () {
-    $.get("./tbaAPI.php", {
+    $.get("api/tbaAPI.php", {
       getEventCode: true
     }, function (data) {
       $("#navbarEventCode").html(data);

@@ -248,7 +248,6 @@ require 'header.php';
   </div>
 </div>
 
-
 <?php include 'footer.php'; ?>
 
 <script>
@@ -275,7 +274,6 @@ require 'header.php';
     }
     return isError;
   }
-
 
   function clearForm() {
     $("#scoutName").val("");
@@ -431,7 +429,7 @@ require 'header.php';
     dataToUse["problem_comment"] = $("#problemComment").val();
     dataToUse["general_comment"] = $("#generalComment").val();
 
-    $.post("./writeAPI.php", {
+    $.post("api/writeAPI.php", {
       writeStrategicData: JSON.stringify(dataToUse)
     }).done(function (data) {
       // Because success word may have a new-line at the end, don't do a direct compare
@@ -449,12 +447,11 @@ require 'header.php';
   //
   $(document).ready(function () {
     // Update the navbar with the event code
-    $.get("./tbaAPI.php", {
+    $.get("api/tbaAPI.php", {
       getEventCode: true
     }, function (data) {
       $("#navbarEventCode").html(data);
     });
-
 
     // Submit the strategic form data
     $("#submitButton").click(function () {

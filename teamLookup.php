@@ -78,7 +78,6 @@ require 'header.php';
               </div>
             </div>
 
-
           </div>
 
           <!-- here -->
@@ -612,7 +611,6 @@ require 'header.php';
     writeTableRow("endgameTotalPtsTable", avgs, ["totalEndGamePointsstr", "avgEndgamePoints", "maxEndgamePoints"]);
     writeTableRow("endgameClimbTable", avgs["endgameClimbPercent"], ["endgameclimbstr", 0, 1, 2, 3, 4]);
 
-
     /////// Total Table
     avgs["totalCoralstr"] = "<b>Total Coral Scored</b>";
     avgs["totalAlgaestr"] = "<b>Total Algae Scored</b>";
@@ -654,7 +652,7 @@ require 'header.php';
   function getFilteredData(team, successFunction) {
     //      console.log(">> starting getSiteFilteredData for team " + team);
     var temp_this = this;
-    $.post("./dbAPI.php", { "getDBStatus": true }, function (data) {
+    $.post("api/dbAPI.php", { "getDBStatus": true }, function (data) {
       dbdata = JSON.parse(data);
       var localSiteFilter = {};
       localSiteFilter["useP"] = dbdata["useP"];
@@ -666,7 +664,7 @@ require 'header.php';
       //          console.log(">>> useP = " + localSiteFilter["useP"]);
       //          console.log(">>> useQm = " + localSiteFilter["useQm"]);
       //temp_this.applySiteFilter();
-      $.get("./readAPI.php", {
+      $.get("api/readAPI.php", {
         getTeamData: team
       }).done(function (data) {
         matchData = JSON.parse(data);
@@ -826,7 +824,7 @@ require 'header.php';
         'backgroundColor': 'blue',
         'frozenColVerticalOffset': 0
       });
-    }, 1000);
+    }, 100);
     sortAllMatchesTable();
   }
 
@@ -922,10 +920,9 @@ require 'header.php';
         'columnKeep': true,
         'frozenColVerticalOffset': 0
       });
-    }, 1000);
+    }, 100);
     sortStrategicDataTable();
   }
-
 
   // AUTON GRAPH STARTS HERE
 
@@ -1156,7 +1153,6 @@ require 'header.php';
 
   // AUTON GRAPH ENDS HERE
 
-
   // TELEOP GRAPH STARTS HERE
 
   function dataToTeleopGraph(matchdata) {
@@ -1170,7 +1166,6 @@ require 'header.php';
     var teleopCoralL2Tips = []; // holds custom tooltips for teleop coral L2
     var teleopCoralL3Tips = []; // holds custom tooltips for teleop coral L3
     var teleopCoralL4Tips = []; // holds custom tooltips for teleop coral 4      
-
 
     datasets.push({
       label: "Processor",
@@ -1359,7 +1354,6 @@ require 'header.php';
     });
   }
 
-
   // TELEOP GRAPH ENDS HERE
 
   // ENDGAME GRAPH STARTS HERE
@@ -1507,7 +1501,7 @@ require 'header.php';
     $("#totalTable").html("");
 
     // Get team name from TBA
-    $.get("./tbaAPI.php", {
+    $.get("api/tbaAPI.php", {
       getTeamInfo: teamNum
     }).done(function (data) {
       var teamname = "XX";
@@ -1527,29 +1521,30 @@ require 'header.php';
     });
 
     // Add new images
-    $.get("./readAPI.php", {
+    $.get("api/readAPI.php", {
       getTeamImages: teamNum
     }).done(function (data) {
       var listOfImages = JSON.parse(data);
+      console.log("PHOTO CHECK: " + listOfImages);
       loadTeamPics(listOfImages);
     });
 
     // Add Match Scouting Data
-    $.get("./readAPI.php", {
+    $.get("api/readAPI.php", {
       getTeamData: teamNum
     }).done(function (data) {
       matchData = JSON.parse(data);
       processMatchData(teamNum, matchData);
 
       // Do the Pit Scouting Data here because it also needs the matchData.
-      $.get("./readAPI.php", {
+      $.get("api/readAPI.php", {
         getTeamPitData: teamNum
       }).done(function (data) {
         pitData = JSON.parse(data);
         processPitData(pitData, matchData);
 
         // Do the Strategic Data Table next.
-        $.get("./readAPI.php", {
+        $.get("api/readAPI.php", {
           getTeamStrategicData: teamNum
         }).done(function (data) {
           stratData = JSON.parse(data);
@@ -1565,7 +1560,7 @@ require 'header.php';
   //
   $(document).ready(function () {
     // Update the navbar with the event code
-    $.get("./tbaAPI.php", {
+    $.get("api/tbaAPI.php", {
       getEventCode: true
     }, function (data) {
       $("#navbarEventCode").html(data);

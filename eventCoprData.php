@@ -82,7 +82,7 @@ require 'header.php';
 
   function requestAPI() {
     //output: gets the COPR data from TBA
-    $.get("./tbaAPI.php", {
+    $.get("api/tbaAPI.php", {
       getCOPRs: 1
     }).done(function (data) {
       console.log("==> requestAPI:\n" + data);
@@ -104,7 +104,7 @@ require 'header.php';
           'backgroundColor': 'blue',
           'frozenColVerticalOffset': 0
         });
-      }, 1000);
+      }, 500);
     });
   }
 
@@ -113,7 +113,7 @@ require 'header.php';
   //
   $(document).ready(function () {
     // Update the navbar with the event code
-    $.get("./tbaAPI.php", {
+    $.get("api/tbaAPI.php", {
       getEventCode: true
     }, function (data) {
       $("#navbarEventCode").html(data);

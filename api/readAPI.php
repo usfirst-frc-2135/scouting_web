@@ -19,7 +19,8 @@ function getRobotPhotos($team)
     while (true)
     {
       $image_url = "robot-pics/" . $teamLower . "-" . $i . "." . $suffix;
-      if (file_exists($image_url) == 1)
+      // We are down one directory level, but returned URL should be relative to index.php
+      if (file_exists("../$image_url") == 1)
       {
         array_push($imageList, $image_url);
       }

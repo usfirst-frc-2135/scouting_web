@@ -118,7 +118,7 @@ require 'header.php';
   // Process the generated html
   //
   $(document).ready(function () {
-    $.get("./tbaAPI.php", {
+    $.get("api/tbaAPI.php", {
       getEventCode: true
     }, function (data) {
       $("#navbarEventCode").html(data);
@@ -126,7 +126,7 @@ require 'header.php';
 
     // Get the list of teams and add the team names 
     console.log("index: getting teamlist from TBA using db_config event code");
-    $.get("./tbaAPI.php", {
+    $.get("api/tbaAPI.php", {
       getTeamListAndNames: 1
     }).done(function (data) {
       if (data == null)
@@ -141,13 +141,13 @@ require 'header.php';
         }
 
         // Get all the team images
-        $.get("./readAPI.php", {
+        $.get("api/readAPI.php", {
           getTeamsImages: JSON.stringify(teamList)
         }).done(function (data) {
-          // console.log("index.php: getTeamsImages = " + data);
+          console.log("index.php: getTeamsImages:\n" + data);
           jsonImageList = JSON.parse(data);
           // Get all the teams pit scouted
-          $.get("./readAPI.php", {
+          $.get("api/readAPI.php", {
             getAllPitData: 1
           }).done(function (data) {
             jsonPitList = JSON.parse(data);

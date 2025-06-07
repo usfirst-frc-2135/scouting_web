@@ -298,7 +298,6 @@ require 'header.php';
       $("#autoCubesTop").html("Auto Cubes Top: " + auto_cubestop);
     });
 
-
     $("#teleopConesBottomPlus").click(function () {
       teleop_conesbottom += 1;
       $("#teleopConesBottom").html("Teleop Cones Bottom: " + teleop_conesbottom);
@@ -358,7 +357,6 @@ require 'header.php';
       teleop_cubestop = Math.max(teleop_cubestop - 1, 0);
       $("#teleopCubesTop").html("Teleop Cubes Top: " + teleop_cubestop);
     });
-
 
   }
 
@@ -437,7 +435,7 @@ require 'header.php';
 
   function submit(form_data) {
     console.log("==> matchForm.php: submit() starting");
-    $.post("./writeAPI.php", {
+    $.post("api/writeAPI.php", {
       "writeSingleData": JSON.stringify(form_data)
     }, function (data) {
       // Because success word may have a new-line at the end, don't do a direct compare
@@ -455,7 +453,7 @@ require 'header.php';
   //
   $(document).ready(function () {
     // Update the navbar with the event code
-    $.get("./tbaAPI.php", {
+    $.get("api/tbaAPI.php", {
       getEventCode: true
     }, function (data) {
       $("#navbarEventCode").html(data);

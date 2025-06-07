@@ -89,7 +89,7 @@ if (isset($_POST["writePicklist"]))
 if (isset($_POST["teamNum"]) and isset($_FILES["teamPic"]))
 {
   // For testing: add a delay
-//TEST  sleep(10); // 10 seconds delay
+  // TEST  sleep(10); // 10 seconds delay
 
   // Upload Photo API
   $uploadSuccess = false;
@@ -113,7 +113,7 @@ if (isset($_POST["teamNum"]) and isset($_FILES["teamPic"]))
         // Check that the file names that we want are not taken
         while ($i < 20)
         {
-          $newFileName = strtolower($target_file . '-' . $i . '.' . $imageFileType);
+          $newFileName = strtolower("../" . $target_file . '-' . $i . '.' . $imageFileType);
           if (file_exists($newFileName))
           {
             $i++;

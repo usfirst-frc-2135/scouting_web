@@ -318,7 +318,7 @@ require 'header.php';
       dataToUse["preparedness"] = 5;
     }
 
-    $.post("./writeAPI.php", {
+    $.post("api/writeAPI.php", {
       writePitTable: JSON.stringify(dataToUse)
     }).done(function (data) {
       // Because success word may have a new-line at the end, don't do a direct compare
@@ -336,7 +336,7 @@ require 'header.php';
   //
   $(document).ready(function () {
     // Update the navbar with the event code
-    $.get("./tbaAPI.php", {
+    $.get("api/tbaAPI.php", {
       getEventCode: true
     }, function (data) {
       $("#navbarEventCode").html(data);

@@ -257,7 +257,6 @@ require 'header.php';
     return (cellA_num - cellB_num);
   }
 
-
   // Converts a given "1" to yes, "0" to no, anything else to empty string.
   function convertToYesNo(value) {
     var convertedVal = "";
@@ -324,7 +323,7 @@ require 'header.php';
 
   function requestAPI() {
     // get Strategic Scouting Data
-    $.get("./readAPI.php", {
+    $.get("api/readAPI.php", {
       getAllStrategicData: 1
     }).done(function (data) {
       var dataObj = JSON.parse(data);
@@ -346,7 +345,7 @@ require 'header.php';
           'backgroundColor': 'blue',
           'frozenColVerticalOffset': 0
         });
-      }, 1000);
+      }, 100);
       sortTable();
     });
   }
@@ -356,7 +355,7 @@ require 'header.php';
   //
   $(document).ready(function () {
     // Update the navbar with the event code
-    $.get("./tbaAPI.php", {
+    $.get("api/tbaAPI.php", {
       getEventCode: true
     }, function (data) {
       $("#navbarEventCode").html(data);

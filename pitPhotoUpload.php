@@ -11,6 +11,7 @@ require 'header.php';
         <h2 class="col-md-6"><?php echo $title; ?></h2>
       </div>
 
+      <!-- Main photo upload card -->
       <div class="card col-md-6 mx-auto">
 
         <div class="card-body">
@@ -46,6 +47,7 @@ require 'header.php';
         </div>
 
       </div>
+
     </div>
 
   </div>
@@ -97,12 +99,11 @@ require 'header.php';
   //
   $(document).ready(function () {
     // Update the navbar with the event code
-    $.get("./tbaAPI.php", {
+    $.get("api/tbaAPI.php", {
       getEventCode: true
     }, function (data) {
       $("#navbarEventCode").html(data);
     });
-
 
     // Upload photo to the server
     $("#upload").on('click', function (event) {
@@ -110,12 +111,13 @@ require 'header.php';
         const loadButton = document.getElementById("loadingButton");
         loadButton.style.visibility = 'visible';
 
+        // Replace checkbox is ticked
         if ($("#replacePic").is(":checked") == true) {
           var teamNum = $("#teamNumber").val();
-          console.log("Going to remove existing photo for team #" + teamNum);
+          console.log("Going to remove existing photos for team #" + teamNum);
 
           // First get list of robot-pic files for this team.
-          $.get("./readAPI.php", {
+          $.get("api/readAPI.php", {
             getTeamImages: teamNum
           }).done(function (data) {
             var teamPics = JSON.parse(data);
@@ -134,12 +136,15 @@ require 'header.php';
               });
             }
           });
+
           // Reload the list of team images 
-          $.get("./readAPI.php", {
-            getTeamImages: teamNum
-          }).done(function (data) {
-            console.log("Reloaded team images");
-          });
+          setTimeout(function () {
+            $.get("api/readAPI.php", {
+              getTeamImages: teamNum
+            }).done(function (data) {
+              console.log("Reloaded team images:\n" + data);
+            });
+          }, 500);
         }
 
         // Now upload the new pic
@@ -148,7 +153,7 @@ require 'header.php';
         uploadPost.append("teamNum", $("#teamNumber").val());
         $.ajax({
           type: "POST",
-          url: "./writeAPI.php",
+          url: "api/writeAPI.php",
           data: uploadPost,
           cache: false,
           contentType: false,
@@ -162,6 +167,7 @@ require 'header.php';
         const loadButton = document.getElementById("loadingButton");
         loadButton.style.visibility = 'hidden';
       }
+
       $("#closeMessage").on('click', function (event) {
         $("#uploadMessage").hide();
         $("#replacePic").prop("checked", false);

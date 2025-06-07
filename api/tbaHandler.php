@@ -280,7 +280,6 @@ class tbaHandler
     return $out;
   }
 
-
   private function teamListToLookup($teamList)
   {
     $out = array();
@@ -506,11 +505,9 @@ class tbaHandler
     error_log("===> getComponentOPRS(): getting simpleTeamList");
     $simpleTeamList = $this->getSimpleTeamList($eventCode);
 
-
     $teamLookup = $this->teamListToLookup($simpleTeamList);
     $TLCount = sizeof($teamLookup);  //TEST
     // error_log("  ===> teamLookup size = $TLCount");
-
 
     $teamCount = sizeof($simpleTeamList);
     // error_log("  ===> simpleTeamList size = $teamCount");
@@ -549,7 +546,6 @@ class tbaHandler
 
     return $out;
   }
-
 
   ///// getStrategicMatches function /////
   public function getStrategicMatches($eventCode)

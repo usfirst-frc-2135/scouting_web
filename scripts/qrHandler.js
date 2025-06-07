@@ -168,7 +168,7 @@ function alertSuccessfulScan() {
 
   }
   $("#content").addClass("bg-success");
-  var timeoutFunction = setTimeout(function () { $("#content").removeClass("bg-success"); }, 1000);
+  var timeoutFunction = setTimeout(function () { $("#content").removeClass("bg-success"); }, 500);
 }
 
 /*
@@ -216,7 +216,7 @@ function submitFunction() {
     for (const [key, value] of Object.entries(scannedData)) {
       indexedData.push(value);
     }
-    $.post("./writeAPI.php", { "writeData": JSON.stringify(indexedData) }, function (data) {
+    $.post("api/writeAPI.php", { "writeData": JSON.stringify(indexedData) }, function (data) {
       // Because success word may have a new-line at the end, don't do a direct compare
       if (data.indexOf('success') > -1) {
         alert("Data Successfully Submitted! Clearing Data.");

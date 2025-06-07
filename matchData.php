@@ -191,7 +191,7 @@ require 'header.php';
 
   function requestAPI() {
     // output: gets the API data from our server
-    $.get("./readAPI.php", {
+    $.get("api/readAPI.php", {
       getAllData: 1
     }).done(function (data) {
       console.log("===> matchData: data = " + data);
@@ -215,7 +215,7 @@ require 'header.php';
           'backgroundColor': 'white',
           'frozenColVerticalOffset': 0
         });
-      }, 1000);
+      }, 100);
       sortTable();
     });
   }
@@ -225,7 +225,7 @@ require 'header.php';
   //
   $(document).ready(function () {
     // Update the navbar with the event code
-    $.get("./tbaAPI.php", {
+    $.get("api/tbaAPI.php", {
       getEventCode: true
     }, function (data) {
       $("#navbarEventCode").html(data);

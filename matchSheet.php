@@ -660,7 +660,7 @@ require 'header.php';
 
   function loadMatchData(successFunction) {
     if (!localMatchData) {
-      $.get("./readAPI.php", {
+      $.get("api/readAPI.php", {
         getAllData: 1
       }).done(function (data) {
         data = JSON.parse(data);
@@ -716,11 +716,10 @@ require 'header.php';
     $("#ourMatches").html(row);
   }
 
-
   function loadMatchList(successFunction) {
     if (!bUsingCustom) {
       if (!localMatchList) {
-        $.get("./tbaAPI.php", {
+        $.get("api/tbaAPI.php", {
           getMatchList: 1
         }).done(function (data) {
           if (data == null)
@@ -1019,7 +1018,7 @@ require 'header.php';
 
   function displayTeam(color, index, teamNum) {
     // Get team name from TBA
-    $.get("./tbaAPI.php", {
+    $.get("api/tbaAPI.php", {
       getTeamInfo: teamNum
     }).done(function (data) {
       var teamname = "XX";
@@ -1083,7 +1082,7 @@ require 'header.php';
       }
     }
 
-    $.get("./readAPI.php", {
+    $.get("api/readAPI.php", {
       getTeamsImages: JSON.stringify(requestList)
     }).done(function (data) {
       var teamImages = JSON.parse(data);
@@ -1119,7 +1118,7 @@ require 'header.php';
   //
   $(document).ready(function () {
     // Update the navbar with the event code
-    $.get("./tbaAPI.php", {
+    $.get("api/tbaAPI.php", {
       getEventCode: true
     }, function (data) {
       $("#navbarEventCode").html(data);

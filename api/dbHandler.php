@@ -5,7 +5,7 @@
 
 class dbHandler
 {
-  private $dbIniFile = "../../db_config.ini";
+  private $dbIniFile = "../../../db_config.ini";
   private $charset = "utf8";
   private $conn = null;
   private $alreadyConnected = false;
@@ -324,7 +324,6 @@ class dbHandler
     $result = $prepared_statement->fetchAll();
     return $result;
   }
-
 
   public function writeRowToStrategicTable($data)
   {

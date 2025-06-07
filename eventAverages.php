@@ -344,7 +344,7 @@ COMMENTED OUT FOR NOW-->
 
   function requestAPI() {
     // Gets SQL data from our local scouting data
-    $.get("./readAPI.php", {
+    $.get("api/readAPI.php", {
       getAllData: 1
     }).done(function (readData) {
       jsonData = JSON.parse(readData);
@@ -375,7 +375,7 @@ COMMENTED OUT FOR NOW-->
             'backgroundColor': 'blue',
             'frozenColVerticalOffset': 0
           });
-        }, 1000);
+        }, 100);
       });
     });
   }
@@ -405,7 +405,7 @@ COMMENTED OUT FOR NOW-->
         'backgroundColor': 'blue',
         'frozenColVerticalOffset': 0
       });
-    }, 1000);
+    }, 100);
   }
 
   // CSV File functions
@@ -438,7 +438,6 @@ COMMENTED OUT FOR NOW-->
     return 0;
   }
 
-
   function getEndGameClimb(dict, key) {
     /* If key doesn't exist in given dict, return a 0. */
     // console.log(dict);
@@ -450,7 +449,6 @@ COMMENTED OUT FOR NOW-->
     }
     return 0;
   }
-
 
   // Returns a string with the comma-separated line of data for the given team.
   function createCSVLine(localAverages, team) {
@@ -545,14 +543,14 @@ COMMENTED OUT FOR NOW-->
     console.log("starting writeCSVFile()");
 
     console.log("getting raw data");
-    $.get("./readAPI.php", {
+    $.get("api/readAPI.php", {
       getAllData: 1
     }).done(function (data) {
       matchData = JSON.parse(data);
 
       // Get OPR data 
       console.log("getting OPR data");
-      $.get("./tbaAPI.php", {
+      $.get("api/tbaAPI.php", {
         getCOPRs: 1
       }).done(function (data) {
         data = JSON.parse(data)["data"];
@@ -568,7 +566,7 @@ COMMENTED OUT FOR NOW-->
   //
   $(document).ready(function () {
     // Update the navbar with the event code
-    $.get("./tbaAPI.php", {
+    $.get("api/tbaAPI.php", {
       getEventCode: true
     }, function (data) {
       $("#navbarEventCode").html(data);
@@ -576,7 +574,7 @@ COMMENTED OUT FOR NOW-->
 
     requestAPI(); // Retrieve all data
 
-    $.get("./tbaAPI.php", {
+    $.get("api/tbaAPI.php", {
       getEventCode: true
     }, function (data) {
       eventCode = data;

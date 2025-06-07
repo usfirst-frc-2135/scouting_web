@@ -56,11 +56,8 @@ require 'header.php';
       var rowString = "<tr><td align=\"center\">" + matchNum + "</td>" +
         "<td align=\"center\">" + dataObj[i]["teams"] + "</td>" + "</td>";
       $("#tableData").append(rowString);
-
-
     }
   }
-
 
   function sortTable(id) {
     // Assumes the entries are team numbers or match numbers. Note a team number could have end in 
@@ -98,7 +95,7 @@ require 'header.php';
   // Figure out which matches and teams for strategic scouts 
   function determineMatches() {
     console.log("---> starting determineMatches()");
-    $.get("./tbaAPI.php", {
+    $.get("api/tbaAPI.php", {
       getStrategicMatches: 1
     }).done(function (data) {
       var dataObj = JSON.parse(data);
@@ -112,12 +109,11 @@ require 'header.php';
   //
   $(document).ready(function () {
     // Update the navbar with the event code
-    $.get("./tbaAPI.php", {
+    $.get("api/tbaAPI.php", {
       getEventCode: true
     }, function (data) {
       $("#navbarEventCode").html(data);
     });
-
 
     // Create the strategic match schedule
     $("#createButton").click(function () {

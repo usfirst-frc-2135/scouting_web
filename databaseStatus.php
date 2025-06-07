@@ -177,13 +177,13 @@ require 'header.php';
   //
   $(document).ready(function () {
     // Update the navbar with the event code
-    $.get("./tbaAPI.php", {
+    $.get("api/tbaAPI.php", {
       getEventCode: true
     }, function (data) {
       $("#navbarEventCode").html(data);
     });
 
-    $.post("./dbAPI.php", {
+    $.post("api/dbAPI.php", {
       "getDBStatus": true
     }, function (statusData) {
       updateStatusValues(JSON.parse(statusData));
@@ -232,7 +232,7 @@ require 'header.php';
       configData["strategictable"] = databaseName + "_st";
       configData["writeConfig"] = JSON.stringify(configData);
 
-      $.post("./dbAPI.php", configData, function (statusData) {
+      $.post("api/dbAPI.php", configData, function (statusData) {
         updateStatusValues(JSON.parse(statusData));
       });
     });
@@ -251,14 +251,14 @@ require 'header.php';
       configInfo["filterConfig"] = JSON.stringify(filterData);
 
       // Make request
-      $.post("./dbAPI.php", configInfo, function (statusData) {
+      $.post("api/dbAPI.php", configInfo, function (statusData) {
         updateStatusValues(JSON.parse(statusData));
       });
     });
 
     // Create a new database
     $("#createDB").on('click', function (event) {
-      $.post("./dbAPI.php", {
+      $.post("api/dbAPI.php", {
         "createDB": true
       }, function (statusData) {
         updateStatusValues(JSON.parse(statusData));
@@ -267,7 +267,7 @@ require 'header.php';
 
     // Create new tables in database
     $("#createTable").on('click', function (event) {
-      $.post("./dbAPI.php", {
+      $.post("api/dbAPI.php", {
         "createTable": true
       }, function (statusData) {
         updateStatusValues(JSON.parse(statusData));
