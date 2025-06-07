@@ -42,10 +42,10 @@ if (isset($_GET["eventCode"]))
   $eventCode = $_GET["eventCode"];
 }
 
-if (isset($_GET["getAllData"]))
+if (isset($_GET["getAllMatchData"]))
 {
   // Get all data
-  echo (json_encode($db->readAllMatchTable($eventCode)));
+  echo (json_encode($db->readAllFromMatchTable($eventCode)));
 }
 else if (isset($_GET["getTeamData"]))
 {
@@ -81,7 +81,7 @@ else if (isset($_GET["getTeamPitData"]))
 else if (isset($_GET["getAllStrategicData"]))
 {
   // Get all data
-  echo (json_encode($db->readAllStrategicTable($eventCode)));
+  echo (json_encode($db->readAllFromStrategicTable($eventCode)));
 }
 else if (isset($_GET["getTeamStrategicData"]))
 {

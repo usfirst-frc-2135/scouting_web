@@ -349,7 +349,7 @@ COMMENTED OUT FOR NOW-->
   function requestAPI() {
     // Gets SQL data from our local scouting data
     $.get("api/readAPI.php", {
-      getAllData: 1
+      getAllMatchData: 1
     }).done(function (readData) {
       jsonData = JSON.parse(readData);
       allJsonData = jsonData;
@@ -548,7 +548,7 @@ COMMENTED OUT FOR NOW-->
 
     console.log("getting raw data");
     $.get("api/readAPI.php", {
-      getAllData: 1
+      getAllMatchData: 1
     }).done(function (data) {
       matchData = JSON.parse(data);
 

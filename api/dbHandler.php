@@ -175,7 +175,7 @@ class dbHandler
     return $out;
   }
 
-  public function readAllMatchTable($eventCode)
+  public function readAllFromMatchTable($eventCode)
   {
     $dbConfig = $this->readDbConfig();
     $sql = "SELECT teamnumber,
@@ -391,7 +391,7 @@ class dbHandler
     $prepared_statement->execute($data);
   }
 
-  public function readAllStrategicTable($eventCode)
+  public function readAllFromStrategicTable($eventCode)
   {
     $dbConfig = $this->readDbConfig();
     $sql = "SELECT teamnumber,

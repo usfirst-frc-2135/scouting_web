@@ -665,7 +665,7 @@ require 'header.php';
   function loadMatchData(successFunction) {
     if (!localMatchData) {
       $.get("api/readAPI.php", {
-        getAllData: 1
+        getAllMatchData: 1
       }).done(function (data) {
         data = JSON.parse(data);
         var mdp = new matchDataProcessor(data);

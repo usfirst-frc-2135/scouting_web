@@ -196,7 +196,7 @@ require 'header.php';
   function requestAPI() {
     // output: gets the API data from our server
     $.get("api/readAPI.php", {
-      getAllData: 1
+      getAllMatchData: 1
     }).done(function (data) {
       console.log("===> matchData: data = " + data);
       var dataObj = JSON.parse(data);
