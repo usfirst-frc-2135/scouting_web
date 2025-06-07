@@ -6,6 +6,7 @@ require 'header.php';
 <div class="container row-offcanvas row-offcanvas-left">
   <div id="content" class="column card-lg-12 col-sm-12 col-xs-12">
 
+    <!-- Page Title -->
     <div class="row pt-3 pb-3 mb-3">
       <h2 class="col-md-4"><?php echo $title; ?></h2>
 
@@ -14,7 +15,7 @@ require 'header.php';
       </div>
     </div>
 
-    <!-- Main card to hold the QR scanner -->
+    <!-- Main column to hold the strategic match schedule -->
     <div class="col-md-6">
 
       <div>
@@ -48,6 +49,8 @@ require 'header.php';
 </div>
 
 <?php include 'footer.php'; ?>
+
+<!-- Javascript page handlers -->
 
 <script>
   function buildStrategicSchedule(dataObj) {

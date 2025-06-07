@@ -121,6 +121,8 @@ require 'header.php';
 
 <?php include 'footer.php'; ?>
 
+<!-- Javascript page handlers -->
+
 <script>
   var frozenTable = null;
 

@@ -119,7 +119,7 @@ require 'header.php';
 
 <?php include 'footer.php'; ?>
 
-<!-- Javascript handlers -->
+<!-- Javascript page handlers -->
 
 <script>
 
@@ -186,6 +186,7 @@ require 'header.php';
       $("#navbarEventCode").html(data);
     });
 
+    // Update the database statuses
     $.post("api/dbAPI.php", {
       "getDBStatus": true
     }, function (statusData) {

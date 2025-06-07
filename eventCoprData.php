@@ -49,7 +49,7 @@ require 'header.php';
 
 <?php include 'footer.php'; ?>
 
-<!-- Page Title -->
+<!-- Javascript page handlers -->
 
 <script>
   var frozenTable = null;

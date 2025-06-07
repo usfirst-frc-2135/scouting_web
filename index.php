@@ -29,6 +29,8 @@ require 'header.php';
 
 <?php include 'footer.php'; ?>
 
+<!-- Javascript page handlers -->
+
 <script>
   var teamList = [];
   var teamNames = {};

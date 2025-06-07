@@ -48,6 +48,8 @@ require 'header.php';
 
 <?php include 'footer.php'; ?>
 
+<!-- Javascript page handlers -->
+
 <script>
   // Update the navbar with the event code
   $(document).ready(function () {

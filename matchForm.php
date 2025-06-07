@@ -224,6 +224,8 @@ require 'header.php';
 
 <?php include 'footer.php'; ?>
 
+<!-- Javascript page handlers -->
+
 <script>
   var auto_conesbottom = 0;
   var auto_conesmiddle = 0;
