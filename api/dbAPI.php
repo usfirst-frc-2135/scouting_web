@@ -1,8 +1,9 @@
 <?php
-
+/*
+  Handle database requests for update
+*/
 include "dbHandler.php";
 
-// Handle database requests for update
 if (isset($_POST["getDBStatus"]))
 {
   $db = new dbHandler();

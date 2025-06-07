@@ -14,6 +14,7 @@ require 'header.php';
       </div>
     </div>
 
+    <!-- Main card to hold the QR scanner -->
     <div class="col-md-6">
 
       <div>

@@ -6,6 +6,7 @@ require 'header.php';
 <div class="container row-offcanvas row-offcanvas-left">
   <div class="column card-lg-12 col-sm-12 col-xs-12" id="content">
 
+    <!-- Page Title -->
     <div class="row pt-3 pb-3 mb-3">
       <h2 class="col-4"><?php echo $title; ?></h2>
 
@@ -42,6 +43,7 @@ require 'header.php';
       </div>
 COMMENTED OUT FOR NOW-->
 
+    <!-- Main row to hold the table -->
     <div class="row mb-3">
 
       <!-- <div id="freeze-table" class="freeze-table overflow-auto"> -->
@@ -233,6 +235,8 @@ COMMENTED OUT FOR NOW-->
 </div>
 
 <?php include 'footer.php'; ?>
+
+<!-- Javascript page handlers -->
 
 <script type="text/javascript" src="./scripts/matchDataProcessor.js"></script>
 

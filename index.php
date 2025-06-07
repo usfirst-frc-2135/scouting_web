@@ -6,9 +6,12 @@ require 'header.php';
 <div class="container row-offcanvas row-offcanvas-left">
   <div id="content" class="column card-lg-12  col-sm-12 col-xs-12">
 
+    <!-- Page Title -->
     <div class="row pt-3 pb-3 mb-3">
       <h2><?php echo $title; ?></h2>
     </div>
+
+    <!-- Main row to hold the table -->
 
     <table id="psTable" class="table table-striped table-bordered table-hover sortable">
       <thead>

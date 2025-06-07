@@ -2,7 +2,6 @@
 /*
   MySQL database handler
 */
-
 class dbHandler
 {
   private $dbIniFile = "../../../db_config.ini";

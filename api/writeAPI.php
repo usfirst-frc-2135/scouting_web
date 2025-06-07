@@ -1,5 +1,7 @@
 <?php
-
+/*
+  Handle read requests 
+*/
 include "dbHandler.php";
 
 $db = new dbHandler();

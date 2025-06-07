@@ -6,10 +6,12 @@ require 'header.php';
 <div class="container row-offcanvas row-offcanvas-left">
   <div id="content" class="column card-lg-12 col-sm-12 col-xs-12">
 
+    <!-- Page Title -->
     <div class="row pt-3 pb-3 mb-3">
       <h2><?php echo $title; ?></h2>
     </div>
 
+    <!-- Main row to hold the team lookup form -->
     <div class="row mb-3">
       <div class="input-group mb-3">
         <input id="enterTeamNumber" class="form-control" type="text" placeholder="FRC team number" aria-label="Team Number">
@@ -533,6 +535,8 @@ require 'header.php';
 </div>
 
 <?php include 'footer.php'; ?>
+
+<!-- Javascript page handlers -->
 
 <script>
   var frozenTableMatches = null;

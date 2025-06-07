@@ -39,7 +39,9 @@ class tbaHandler
       return $out;
     }
     else
+    {
       error_log("READING BlueAlliance data: uri = $uri");
+    }
     $url = $this->apiURL . $uri . "?X-TBA-Auth-Key=" . $this->tbaApiKey;
     $ch = curl_init();
     curl_setopt_array(

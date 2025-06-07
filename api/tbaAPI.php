@@ -1,5 +1,7 @@
 <?php
-
+/*
+  Handle the blue alliance requests for update
+*/
 include("dbHandler.php");
 include("tbaHandler.php");
 

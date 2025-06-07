@@ -1,5 +1,7 @@
 <?php
-
+/*
+  Handle read requests 
+*/
 require_once "dbHandler.php";
 
 $db = new dbHandler();
