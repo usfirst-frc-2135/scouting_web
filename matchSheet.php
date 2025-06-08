@@ -1087,7 +1087,7 @@ require 'header.php';
     }
 
     $.get("api/readAPI.php", {
-      getTeamsImages: JSON.stringify(requestList)
+      getAllTeamImages: JSON.stringify(requestList)
     }).done(function (data) {
       var teamImages = JSON.parse(data);
       for (var team of Object.keys(teamImages)) {

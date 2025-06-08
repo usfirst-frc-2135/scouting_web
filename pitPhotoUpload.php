@@ -121,7 +121,7 @@ require 'header.php';
 
           // First get list of robot-pic files for this team.
           $.get("api/readAPI.php", {
-            getTeamImages: teamNum
+            getImagesForTeam: teamNum
           }).done(function (data) {
             var teamPics = JSON.parse(data);
 
@@ -143,7 +143,7 @@ require 'header.php';
           // Reload the list of team images 
           setTimeout(function () {
             $.get("api/readAPI.php", {
-              getTeamImages: teamNum
+              getImagesForTeam: teamNum
             }).done(function (data) {
               console.log("Reloaded team images:\n" + data);
             });

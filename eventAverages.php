@@ -242,13 +242,13 @@ COMMENTED OUT FOR NOW-->
 
 <script>
   // var tbaData = {};
-  var finalList = new Set();
+  var finalTeamList = new Set();
   var filteredData = {};
-  var allJsonData = null;
+  var jsonMatchData = null;
   var frozenTable = null;
 
+  // Lookup value for a key in the passed dictionary (team in match data)
   function getDataValue(dict, key) {
-    /* If key doesn't exist in given dict, return a 0. */
     // console.log(dict);
     if (!dict) {
       return 0;
@@ -259,10 +259,10 @@ COMMENTED OUT FOR NOW-->
     return 0;
   }
 
+  // Create and the HTML table for display
   function addHtmlToFinalTable() {
-    /* Write data to table */
     $("#tableData").html(""); // Clear Table
-    for (let teamNum of finalList) {
+    for (let teamNum of finalTeamList) {
       var endgameClimbPercentage = getDataValue(filteredData[teamNum], "endgameClimbPercent");
       var endgameFoulPercentage = getDataValue(filteredData[teamNum], "endgameFoulPercent");
 
@@ -339,22 +339,21 @@ COMMENTED OUT FOR NOW-->
     }
   }
 
+  // Add a team (key) to the final team list
   function addKeysToFinalList(data) {
-    // Build a team list from either our data or TBA data
     for (var key in data) {
-      finalList.add(key);
+      finalTeamList.add(key);
     }
   }
 
+  // Get all match data, filter it, create final HTML table, and sort it
   function requestAPI() {
-    // Gets SQL data from our local scouting data
     $.get("api/readAPI.php", {
       getAllMatchData: 1
     }).done(function (readData) {
       jsonData = JSON.parse(readData);
-      allJsonData = jsonData;
+      jsonMatchData = jsonData;
       var mdp = new matchDataProcessor(jsonData);
-      // mdp.removePracticeMatches();
       mdp.getSiteFilteredAverages(function (averageData) {
         filteredData = {
           ...averageData
@@ -384,10 +383,11 @@ COMMENTED OUT FOR NOW-->
     });
   }
 
+  // Update table when match filters are changed
   function filterAndShow() {
     var start = $("#startPrefix").val() + $("#startMatch").val();
     var end = $("#endPrefix").val() + $("#endMatch").val();
-    var mdp = new matchDataProcessor(allJsonData);
+    var mdp = new matchDataProcessor(jsonMatchData);
     mdp.filterMatches(start, end);
     filteredData = mdp.getAverages();
     addKeysToFinalList(filteredData);
@@ -415,7 +415,7 @@ COMMENTED OUT FOR NOW-->
   // CSV File functions
 
   var eventCode = null;
-  var oprData = {};          // for TBA OPR data
+  var tbaCoprData = {};          // for TBA OPR data
 
   function localAveragesLookup(localAverages, team, item) {
     if (!localAverages) {
@@ -458,7 +458,7 @@ COMMENTED OUT FOR NOW-->
   function createCSVLine(localAverages, team) {
     var oprTP = 0;
     var pitLocation = 0;
-    oprTP = getOprTotalPoints(oprData[team]);
+    oprTP = getOprTotalPoints(tbaCoprData[team]);
     //var trapPercent = rnd(localAveragesLookup(localAverages,team, "trapPercentage"));
     var teleopCoralScoringAcc = rnd(localAveragesLookup(localAverages, team, "teleopCoralScoringPercent"));
     var teleopAlgaeScoringAcc = rnd(localAveragesLookup(localAverages, team, "teleopAlgaeScoringPercent"));
@@ -523,8 +523,9 @@ COMMENTED OUT FOR NOW-->
     return out;
   }
 
+  // 
   function processData(matchData) {
-    console.log("setting up mdp ");
+    console.log("process match data - setting up mdp");
     var mdp = new matchDataProcessor(matchData);
     var csvStr = "Team,Pit Location,OPR,Total Coral Avg,Total Coral Max,Total Algae Avg,Total Algae Max,Auto Pts Avg,Auto Pts Max,Tel Pts Avg,Tel Pts Max,End Pts Avg,End Pts Max,Total Pts Avg,Total Pts Max,Auto Coral Avg,Auto Coral Max,Auto L1 Avg,Auto L1 Max,Auto L2 Avg,Auto L2 Max,Auto L3 Avg,Auto L3 Max,Auto L4 Avg,Auto L4 Max,Auto Algae Avg,Auto Algae Max,Auto Net Avg,Auto Net Max,Auto Proc Avg,Auto Proc Max,Tel Coral Avg,Tel Coral Max,Tel L1 Avg,Tel L1 Max,Tel L2 Avg,Tel L2 Max,Tel L3 Avg,Tel L3 Max,Tel L4 Avg,Tel L4 Max,Tel Coral Acc,Tel Algae Avg,Tel Algae Max,Tel Net Avg,Tel Net Max,Tel Proc Avg,Tel Proc Max,Tel Algae Acc,End N/A,End Park,End Fall,End Shal,End Deep, Total Died, Note\n";
     mdp.getSiteFilteredAverages(function (averageData) {
@@ -535,7 +536,7 @@ COMMENTED OUT FOR NOW-->
 
       var hiddenElement = document.createElement('a');
       var filename = eventCode + ".csv";
-      console.log("CSV filename = " + filename);
+      console.log("CSV filename: " + filename);
       hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csvStr);
       hiddenElement.target = '_blank';
       hiddenElement.download = filename;
@@ -543,23 +544,22 @@ COMMENTED OUT FOR NOW-->
     });
   }
 
+  // Retrieve match data and OPRs data and write out CSV file
   function writeCSVFile() {
-    console.log("starting writeCSVFile()");
-
-    console.log("getting raw data");
+    console.log("starting CSV file write - retrieve match data");
     $.get("api/readAPI.php", {
       getAllMatchData: 1
     }).done(function (data) {
       matchData = JSON.parse(data);
 
       // Get OPR data 
-      console.log("getting OPR data");
+      console.log("getting OPR data from TBA");
       $.get("api/tbaAPI.php", {
         getCOPRs: 1
       }).done(function (data) {
         data = JSON.parse(data)["data"];
-        oprData = data;
-        console.log("--> setting oprData");
+        tbaCoprData = data;
+        console.log("--> setting tbaCoprData");
         processData(matchData);
       });
     });
@@ -574,28 +574,23 @@ COMMENTED OUT FOR NOW-->
       getEventCode: true
     }, function (data) {
       $("#navbarEventCode").html(data);
+      eventCode = data;
     });
 
     requestAPI(); // Retrieve all data
 
-    $.get("api/tbaAPI.php", {
-      getEventCode: true
-    }, function (data) {
-      eventCode = data;
-    });
-
     // Filter out unwanted matches
     $("#filterData").click(function () {
-      filterAndShow();  // Select desired data
+      filterAndShow();
     });
 
     // Keep the frozen pane updated 
     $("#averageTable").click(function () {
-      frozenTable.update(); // Update frozen panes
+      frozenTable.update();
     });
 
+    // Write out picklist CSV file to client's download dir.
     $("#download_csv_file").on('click', function (event) {
-      // Write out picklist CSV file to client's download dir.
       writeCSVFile();
     });
   });

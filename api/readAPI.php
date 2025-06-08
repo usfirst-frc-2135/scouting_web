@@ -107,15 +107,15 @@ else if (isset($_GET["getTeamStrategicData"]))
   }
   echo (json_encode($out));
 }<-HOLD */
-else if (isset($_GET["getTeamImages"]))
+else if (isset($_GET["getImagesForTeam"]))
 {
   // Get all images for a team
-  echo (json_encode(getRobotPhotos($_GET["getTeamImages"])));
+  echo (json_encode(getRobotPhotos($_GET["getImagesForTeam"])));
 }
-else if (isset($_GET["getTeamsImages"]))
+else if (isset($_GET["getAllTeamImages"]))
 {
   // Get all images for a set of teams
-  $teamList = json_decode($_GET["getTeamsImages"], true);
+  $teamList = json_decode($_GET["getAllTeamImages"], true);
   $imageObj = array();
   foreach ($teamList as $team)
   {

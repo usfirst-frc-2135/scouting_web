@@ -1526,7 +1526,7 @@ require 'header.php';
 
     // Add new images
     $.get("api/readAPI.php", {
-      getTeamImages: teamNum
+      getImagesForTeam: teamNum
     }).done(function (data) {
       var listOfImages = JSON.parse(data);
       console.log("PHOTO CHECK: " + listOfImages);

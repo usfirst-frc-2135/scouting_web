@@ -147,9 +147,9 @@ require 'header.php';
 
         // Get all the team images
         $.get("api/readAPI.php", {
-          getTeamsImages: JSON.stringify(teamList)
+          getAllTeamImages: JSON.stringify(teamList)
         }).done(function (data) {
-          console.log("index.php: getTeamsImages:\n" + data);
+          console.log("index.php: getAllTeamImages:\n" + data);
           jsonImageList = JSON.parse(data);
           // Get all the teams pit scouted
           $.get("api/readAPI.php", {
