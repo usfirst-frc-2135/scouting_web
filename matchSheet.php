@@ -649,7 +649,7 @@ require 'header.php';
 
   // Check source URL for match specifier
   function checkGet() {
-    console.log("==> matchSheet.php: checkGet() starting");
+    console.log("==> matchSheet.php: checkGet()");
     let sp = new URLSearchParams(window.location.search);
     if (!bUsingCustom) {
       if (sp.has('compLevel') && sp.has('matchNum')) {
@@ -666,7 +666,7 @@ require 'header.php';
 
   // Load match data for all matches
   function loadMatchData(successFunction) {
-    console.log("==> matchSheet.php: loadMatchData() starting");
+    console.log("==> matchSheet.php: loadMatchData()");
     if (!localMatchData) {
       $.get("api/readAPI.php", {
         getAllMatchData: 1
@@ -686,7 +686,7 @@ require 'header.php';
 
   // Build the list of HTML links to our matches at this event
   function createMatchHtmlLinks(matches) {
-    console.log("==> matchSheet.php: createMatchHtmlLinks() starting");
+    console.log("==> matchSheet.php: createMatchHtmlLinks()");
     var arrOurMatches = [];
     for (let key in matches) {
       arrOurMatches.push(matches[key]);
@@ -729,7 +729,7 @@ require 'header.php';
 
   // Build match links for our matchs at this event
   function buildOurMatchLinks(successFunction) {
-    console.log("==> matchSheet.php: buildOurMatchLinks() starting");
+    console.log("==> matchSheet.php: buildOurMatchLinks()");
     if (!bUsingCustom) {
       if (!localMatchList) {
         $.get("api/tbaAPI.php", {
@@ -799,7 +799,7 @@ require 'header.php';
   }
 
   function loadMatchSheet(compLevel, matchNum) {
-    console.log("==> matchSheet.php: loadMatchSheet() starting");
+    console.log("==> matchSheet.php: loadMatchSheet()");
     // Clear Data
     $("#R0DataTable").html("");
     $("#R1DataTable").html("");
@@ -837,7 +837,7 @@ require 'header.php';
   }
 
   function loadCustomMatch(redTeam1, redTeam2, redTeam3, blueTeam1, blueTeam2, blueTeam3) {
-    console.log("==> matchSheet.php: loadCustomMatch() starting");
+    console.log("==> matchSheet.php: loadCustomMatch()");
     // Clear Data
     $("#R0DataTable").html("");
     $("#R1DataTable").html("");
@@ -901,6 +901,7 @@ require 'header.php';
     if (!bUsingCustom) {
       matchVector = localMatchList[makeKey(localCompLevel, localMatchNum)];
       if (!matchVector) {
+        console.warn("processMatchList: Match does not exist: " + makeKey(localCompLevel, localMatchNum))
         alert("Match " + makeKey(localCompLevel, localMatchNum) + " does not exist!");
         return;
       }
@@ -909,7 +910,8 @@ require 'header.php';
     if (bUsingCustom) {
       customMatchVector = localMatchList["QM_1"];
       if (!customMatchVector) {
-        alert("This does not exist!");
+        console.warn("processMatchList: Match does not exist: QM_1");
+        alert("Match does not exist!");
         return;
       }
     }
@@ -1034,7 +1036,7 @@ require 'header.php';
   }
 
   function buildTeamBox(color, index, teamNum) {
-    console.log("==> matchSheet.php: buildTeamBox() starting");
+    console.log("==> matchSheet.php: buildTeamBox()");
     // Get team name from TBA
     $.get("api/tbaAPI.php", {
       getTeamInfo: teamNum
@@ -1086,7 +1088,7 @@ require 'header.php';
 
   // Build team photo image list
   function sendPhotoRequest(redList, blueList) {
-    console.log("==> matchSheet.php: sendPhotoRequest() starting");
+    console.log("==> matchSheet.php: sendPhotoRequest()");
     var requestList = [];
     for (let i in redList) {
       var tn = strTeamToIntTeam(redList[i]);
@@ -1167,6 +1169,7 @@ require 'header.php';
       console.log(redTeamNum1);
       console.log(blueTeamNum1);
       if (redTeamNum1.trim() == "" && blueTeamNum1.trim() == "") {
+        console.warn("loadCustomMatch: No Red or Blue team 1 entered!");
         alert("Please fill out Red Team Number 1 and Blue Team Number 1!");
         return false;
       }

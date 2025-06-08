@@ -54,7 +54,7 @@ require 'header.php';
 
 <script>
   function buildStrategicSchedule(dataObj) {
-    console.log("==> strategicSchedule.php: buildStrategicSchedule() starting");
+    console.log("==> strategicSchedule.php: buildStrategicSchedule()");
     $("#tableData").html(""); // Clear table
     for (let i = 0; i < dataObj.length; i++) {
       var matchNum = dataObj[i]["match_number"];
@@ -65,7 +65,7 @@ require 'header.php';
   }
 
   function sortStrategicTable(id) {
-    console.log("==> strategicSchedule.php: sortStrategicTable() starting");
+    console.log("==> strategicSchedule.php: sortStrategicTable()");
     // Assumes the entries are team numbers or match numbers. Note a team number could have end in 
     // a "B", "C", "D", or "E", in which case we want to strip that off and just use the number for
     // the comparison.
@@ -100,7 +100,7 @@ require 'header.php';
 
   // Figure out which matches and teams for strategic scouts 
   function buildScheduleTable() {
-    console.log("==> strategicSchedule.php: buildScheduleTable() starting");
+    console.log("==> strategicSchedule.php: buildScheduleTable()");
     $.get("api/tbaAPI.php", {
       getStrategicMatches: 1
     }).done(function (strategicData) {

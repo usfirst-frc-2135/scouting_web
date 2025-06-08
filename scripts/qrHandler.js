@@ -18,21 +18,23 @@ function qrStringToList(dataString) {
 
 function validateQrList(dataList) {
   var dataListSize = dataList.length;
-  console.log("===> validateQrList(): dataList.length = " + dataList.length);
-  if (dataList.length != 41) {
+  const validLength = 41;
+  console.log("===> validateQrList(): dataList.length = " + dataList.length + " (valid " + validLength + ")");
+  if (dataList.length != validLength) {
+    console.warn("   ===> validateQrList(): returning false! ");
     return false;
   }
   console.log("   ===> validateQrList(): returning true! ");
   return true;
 }
-//update this data list length whenever new data is added to the table
+// update this data list length whenever new data is added to the table
 function padList(dataList) {
   if (dataList.length == 40) {
     dataList.push("");
   }
   return dataList;
 }
-//IMPORTANT! also need to adjust data list size in "validateQrList" and "padList"!!!
+// IMPORTANT! also need to adjust data list size in "validateQrList" and "padList"!!!
 function qrListToDict(dataList) {
   out = {};
   out["teamnumber"] = dataList[0];
@@ -154,7 +156,7 @@ function scanCamera(reader, id) {
         addQrData(qrListToDict(dataList));
       }
       else {
-        alert("QR data failed validation!");
+        alert("QR content failed validation!");
       }
     }
   });
@@ -216,16 +218,19 @@ function submitFunction() {
     for (const [key, value] of Object.entries(scannedData)) {
       indexedData.push(value);
     }
-    $.post("api/writeAPI.php", { "writeData": JSON.stringify(indexedData) }, function (data) {
-      // Because success word may have a new-line at the end, don't do a direct compare
-      if (data.indexOf('success') > -1) {
-        alert("Data Successfully Submitted! Clearing Data.");
-        clearData();
-        $("#submitData").html("Click to Submit Data: " + scannedCount);
-      } else {
-        alert("Data NOT Submitted.");
-      }
-    });
+    $.post("api/writeAPI.php",
+      {
+        "writeData": JSON.stringify(indexedData)
+      }, function (returnCode) {
+        // Because success word may have a new-line at the end, don't do a direct compare
+        if (returnCode.indexOf('success') > -1) {
+          alert("Data Successfully Submitted! Clearing Data.");
+          clearData();
+          $("#submitData").html("Click to Submit Data: " + scannedCount);
+        } else {
+          alert("Data NOT Submitted.");
+        }
+      });
   });
 }
 

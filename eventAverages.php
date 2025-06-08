@@ -251,17 +251,21 @@ COMMENTED OUT FOR NOW-->
   function getDataValue(dict, key) {
     // console.log(dict);
     if (!dict) {
-      return 0;
+      console.warn("getDataValue: Dictionary not found! " + dict);
     }
-    if (key in dict) {
+    else if (key in dict) {
       return dict[key];
     }
+    else {
+      console.warn("getDataValue: Key not found in dictionary! " + key + " " + dict);
+    }
+
     return 0;
   }
 
   // Create and the HTML table for display
   function addHtmlToFinalTable() {
-    console.log("==> eventAverages.php: addHtmlToFinalTable() starting");
+    console.log("==> eventAverages.php: addHtmlToFinalTable()");
     $("#tableData").html(""); // Clear Table
     for (let teamNum of _finalTeamList) {
       var endgameClimbPercentage = getDataValue(_filteredData[teamNum], "endgameClimbPercent");
@@ -341,16 +345,16 @@ COMMENTED OUT FOR NOW-->
   }
 
   // Add a team (key) to the final team list
-  function addKeysToFinalList(data) {
-    console.log("==> eventAverages.php: addKeysToFinalList() starting");
-    for (var key in data) {
+  function addKeysToFinalList(dataObj) {
+    console.log("==> eventAverages.php: addKeysToFinalList()");
+    for (var key in dataObj) {
       _finalTeamList.add(key);
     }
   }
 
   // Get all match data, filter it, create final HTML table, and sort it
   function readMatchDataAndBuildTable() {
-    console.log("==> eventAverages.php: readAllMatchDataAndBuildTable() starting");
+    console.log("==> eventAverages.php: readAllMatchDataAndBuildTable()");
     $.get("api/readAPI.php", {
       getAllMatchData: 1
     }).done(function (readData) {
@@ -389,7 +393,7 @@ COMMENTED OUT FOR NOW-->
 
   // Update table when match filters are changed
   function filterAndShow() {
-    console.log("==> eventAverages.php: filterAndShow() starting");
+    console.log("==> eventAverages.php: filterAndShow()");
     var start = $("#startPrefix").val() + $("#startMatch").val();
     var end = $("#endPrefix").val() + $("#endMatch").val();
     var mdp = new matchDataProcessor(_jsonMatchData);
@@ -423,15 +427,17 @@ COMMENTED OUT FOR NOW-->
   var tbaCoprData = {};          // for TBA OPR data
 
   // Retrieve an average value from data for a team
-  function localAveragesLookup(localAverages, team, item) {
-    console.log("==> eventAverages.php: localAveragesLookup() starting");
-    if (!localAverages) {
+  function lookupAverage(teamAverages, team, item) {
+    console.log("==> eventAverages.php: lookupAverage()");
+    if (!teamAverages) {
+      console.warn("lookupAverages: No team averages!")
       return "NA";
     }
-    if (!(team in localAverages)) {
+    if (!(team in teamAverages)) {
+      console.warn("lookupAverages: Team not in list!")
       return "NA";
     }
-    return localAverages[team][item];
+    return teamAverages[team][item];
   }
 
   // Round to 2 decimal places
@@ -440,89 +446,78 @@ COMMENTED OUT FOR NOW-->
     return Math.round((val + Number.EPSILON) * 100) / 100;
   }
 
-  function getOprTotalPoints(dict) {
-    if (!dict) {
-      return 0;
-    }
-    if ("totalPoints" in dict) {
-      return dict["totalPoints"];
-    }
-    return 0;
-  }
-
   // Returns a string with the comma-separated line of data for the given team.
-  function createCSVLine(localAverages, team) {
-    console.log("==> eventAverages.php: createCSVLine() starting");
-    var oprTP = 0;
+  function createCSVLine(evtAvgs, team) {
+    console.log("==> eventAverages.php: createCSVLine()");
     var pitLocation = 0;
-    oprTP = getOprTotalPoints(tbaCoprData[team]);
-    //var trapPercent = rnd(localAveragesLookup(localAverages,team, "trapPercentage"));
-    var teleopCoralScoringAcc = rnd(localAveragesLookup(localAverages, team, "teleopCoralScoringPercent"));
-    var teleopAlgaeScoringAcc = rnd(localAveragesLookup(localAverages, team, "teleopAlgaeScoringPercent"));
-    var endgameClimbPercent = localAveragesLookup(localAverages, team, "endgameClimbPercent");
-    //var endgameharmonyPercentage = localAveragesLookup(localAverages,team, "endgameharmonypercent");
+    var oprTP = getDataValue(tbaCoprData[team], "totalPoints");
+    //var trapPercent = rnd(lookupAverage(evtAvgs,team, "trapPercentage"));
+    var teleopCoralScoringAcc = rnd(lookupAverage(evtAvgs, team, "teleopCoralScoringPercent"));
+    var teleopAlgaeScoringAcc = rnd(lookupAverage(evtAvgs, team, "teleopAlgaeScoringPercent"));
+    var endgameClimbPercent = lookupAverage(evtAvgs, team, "endgameClimbPercent");
+    //var endgameharmonyPercentage = lookupAverage(evtAvgs,team, "endgameharmonypercent");
     var out = team + ",";
     out += pitLocation + ",";
     out += oprTP + ",";
-    out += localAveragesLookup(localAverages, team, "avgTotalCoral") + ",";
-    out += localAveragesLookup(localAverages, team, "maxTotalCoral") + ",";
-    out += localAveragesLookup(localAverages, team, "avgTotalAlgae") + ",";
-    out += localAveragesLookup(localAverages, team, "maxTotalAlgae") + ",";
-    out += localAveragesLookup(localAverages, team, "avgTotalAutoPoints") + ",";
-    out += localAveragesLookup(localAverages, team, "maxTotalAutoPoints") + ",";
-    out += localAveragesLookup(localAverages, team, "avgTotalTeleopPoints") + ",";
-    out += localAveragesLookup(localAverages, team, "maxTotalTeleopPoints") + ",";
-    out += localAveragesLookup(localAverages, team, "avgEndgamePoints") + ",";
-    out += localAveragesLookup(localAverages, team, "maxEndgamePoints") + ",";
-    out += localAveragesLookup(localAverages, team, "avgTotalPoints") + ",";
-    out += localAveragesLookup(localAverages, team, "maxTotalPoints") + ",";
-    out += localAveragesLookup(localAverages, team, "avgAutonCoral") + ",";
-    out += localAveragesLookup(localAverages, team, "maxAutonCoral") + ",";
-    out += localAveragesLookup(localAverages, team, "avgAutonCoralL1") + ",";
-    out += localAveragesLookup(localAverages, team, "maxAutonCoralL1") + ",";
-    out += localAveragesLookup(localAverages, team, "avgAutonCoralL2") + ",";
-    out += localAveragesLookup(localAverages, team, "maxAutonCoralL2") + ",";
-    out += localAveragesLookup(localAverages, team, "avgAutonCoralL3") + ",";
-    out += localAveragesLookup(localAverages, team, "maxAutonCoralL3") + ",";
-    out += localAveragesLookup(localAverages, team, "avgAutonCoralL4") + ",";
-    out += localAveragesLookup(localAverages, team, "maxAutonCoralL4") + ",";
-    out += localAveragesLookup(localAverages, team, "avgAutonAlgae") + ",";
-    out += localAveragesLookup(localAverages, team, "maxAutonAlgae") + ",";
-    out += localAveragesLookup(localAverages, team, "avgAutonAlgaeNet") + ",";
-    out += localAveragesLookup(localAverages, team, "maxAutonAlgaeNet") + ",";
-    out += localAveragesLookup(localAverages, team, "avgAutonAlgaeProc") + ",";
-    out += localAveragesLookup(localAverages, team, "maxAutonAlgaeProc") + ",";
-    out += localAveragesLookup(localAverages, team, "avgTeleopCoralScored") + ",";
-    out += localAveragesLookup(localAverages, team, "maxTeleopCoralScored") + ",";
-    out += localAveragesLookup(localAverages, team, "avgTeleopCoralL1") + ",";
-    out += localAveragesLookup(localAverages, team, "maxTeleopCoralL1") + ",";
-    out += localAveragesLookup(localAverages, team, "avgTeleopCoralL2") + ",";
-    out += localAveragesLookup(localAverages, team, "maxTeleopCoralL2") + ",";
-    out += localAveragesLookup(localAverages, team, "avgTeleopCoralL3") + ",";
-    out += localAveragesLookup(localAverages, team, "maxTeleopCoralL3") + ",";
-    out += localAveragesLookup(localAverages, team, "avgTeleopCoralL4") + ",";
-    out += localAveragesLookup(localAverages, team, "maxTeleopCoralL4") + ",";
-    out += localAveragesLookup(localAverages, team, "teleopCoralScoringPercent") + ",";
-    out += localAveragesLookup(localAverages, team, "avgTeleopAlgaeScored") + ",";
-    out += localAveragesLookup(localAverages, team, "maxTeleopAlgaeScored") + ",";
-    out += localAveragesLookup(localAverages, team, "avgTeleopAlgaeNet") + ",";
-    out += localAveragesLookup(localAverages, team, "maxTeleopAlgaeNet") + ",";
-    out += localAveragesLookup(localAverages, team, "avgTeleopAlgaeProc") + ",";
-    out += localAveragesLookup(localAverages, team, "maxTeleopAlgaeProc") + ",";
-    out += localAveragesLookup(localAverages, team, "teleopAlgaeScoringPercent") + ",";
+    out += lookupAverage(evtAvgs, team, "avgTotalCoral") + ",";
+    out += lookupAverage(evtAvgs, team, "maxTotalCoral") + ",";
+    out += lookupAverage(evtAvgs, team, "avgTotalAlgae") + ",";
+    out += lookupAverage(evtAvgs, team, "maxTotalAlgae") + ",";
+    out += lookupAverage(evtAvgs, team, "avgTotalAutoPoints") + ",";
+    out += lookupAverage(evtAvgs, team, "maxTotalAutoPoints") + ",";
+    out += lookupAverage(evtAvgs, team, "avgTotalTeleopPoints") + ",";
+    out += lookupAverage(evtAvgs, team, "maxTotalTeleopPoints") + ",";
+    out += lookupAverage(evtAvgs, team, "avgEndgamePoints") + ",";
+    out += lookupAverage(evtAvgs, team, "maxEndgamePoints") + ",";
+    out += lookupAverage(evtAvgs, team, "avgTotalPoints") + ",";
+    out += lookupAverage(evtAvgs, team, "maxTotalPoints") + ",";
+    out += lookupAverage(evtAvgs, team, "avgAutonCoral") + ",";
+    out += lookupAverage(evtAvgs, team, "maxAutonCoral") + ",";
+    out += lookupAverage(evtAvgs, team, "avgAutonCoralL1") + ",";
+    out += lookupAverage(evtAvgs, team, "maxAutonCoralL1") + ",";
+    out += lookupAverage(evtAvgs, team, "avgAutonCoralL2") + ",";
+    out += lookupAverage(evtAvgs, team, "maxAutonCoralL2") + ",";
+    out += lookupAverage(evtAvgs, team, "avgAutonCoralL3") + ",";
+    out += lookupAverage(evtAvgs, team, "maxAutonCoralL3") + ",";
+    out += lookupAverage(evtAvgs, team, "avgAutonCoralL4") + ",";
+    out += lookupAverage(evtAvgs, team, "maxAutonCoralL4") + ",";
+    out += lookupAverage(evtAvgs, team, "avgAutonAlgae") + ",";
+    out += lookupAverage(evtAvgs, team, "maxAutonAlgae") + ",";
+    out += lookupAverage(evtAvgs, team, "avgAutonAlgaeNet") + ",";
+    out += lookupAverage(evtAvgs, team, "maxAutonAlgaeNet") + ",";
+    out += lookupAverage(evtAvgs, team, "avgAutonAlgaeProc") + ",";
+    out += lookupAverage(evtAvgs, team, "maxAutonAlgaeProc") + ",";
+    out += lookupAverage(evtAvgs, team, "avgTeleopCoralScored") + ",";
+    out += lookupAverage(evtAvgs, team, "maxTeleopCoralScored") + ",";
+    out += lookupAverage(evtAvgs, team, "avgTeleopCoralL1") + ",";
+    out += lookupAverage(evtAvgs, team, "maxTeleopCoralL1") + ",";
+    out += lookupAverage(evtAvgs, team, "avgTeleopCoralL2") + ",";
+    out += lookupAverage(evtAvgs, team, "maxTeleopCoralL2") + ",";
+    out += lookupAverage(evtAvgs, team, "avgTeleopCoralL3") + ",";
+    out += lookupAverage(evtAvgs, team, "maxTeleopCoralL3") + ",";
+    out += lookupAverage(evtAvgs, team, "avgTeleopCoralL4") + ",";
+    out += lookupAverage(evtAvgs, team, "maxTeleopCoralL4") + ",";
+    out += lookupAverage(evtAvgs, team, "teleopCoralScoringPercent") + ",";
+    out += lookupAverage(evtAvgs, team, "avgTeleopAlgaeScored") + ",";
+    out += lookupAverage(evtAvgs, team, "maxTeleopAlgaeScored") + ",";
+    out += lookupAverage(evtAvgs, team, "avgTeleopAlgaeNet") + ",";
+    out += lookupAverage(evtAvgs, team, "maxTeleopAlgaeNet") + ",";
+    out += lookupAverage(evtAvgs, team, "avgTeleopAlgaeProc") + ",";
+    out += lookupAverage(evtAvgs, team, "maxTeleopAlgaeProc") + ",";
+    out += lookupAverage(evtAvgs, team, "teleopAlgaeScoringPercent") + ",";
     out += getDataValue(endgameClimbPercent, 0) + ",";
     out += getDataValue(endgameClimbPercent, 1) + ",";
     out += getDataValue(endgameClimbPercent, 2) + ",";
     out += getDataValue(endgameClimbPercent, 3) + ",";
     out += getDataValue(endgameClimbPercent, 4) + ",";
-    out += localAveragesLookup(localAverages, team, "totaldied") + ",";
+    out += lookupAverage(evtAvgs, team, "totaldied") + ",";
     out += "-\n";    // NOTE
     return out;
   }
 
   // 
   function processData(matchData) {
-    console.log("==> eventAverages.php: processData() starting");
+    console.log("==> eventAverages.php: processData()");
     var mdp = new matchDataProcessor(matchData);
     var csvStr = "Team,Pit Location,OPR,Total Coral Avg,Total Coral Max,Total Algae Avg,Total Algae Max,Auto Pts Avg,Auto Pts Max,Tel Pts Avg,Tel Pts Max,End Pts Avg,End Pts Max,Total Pts Avg,Total Pts Max,Auto Coral Avg,Auto Coral Max,Auto L1 Avg,Auto L1 Max,Auto L2 Avg,Auto L2 Max,Auto L3 Avg,Auto L3 Max,Auto L4 Avg,Auto L4 Max,Auto Algae Avg,Auto Algae Max,Auto Net Avg,Auto Net Max,Auto Proc Avg,Auto Proc Max,Tel Coral Avg,Tel Coral Max,Tel L1 Avg,Tel L1 Max,Tel L2 Avg,Tel L2 Max,Tel L3 Avg,Tel L3 Max,Tel L4 Avg,Tel L4 Max,Tel Coral Acc,Tel Algae Avg,Tel Algae Max,Tel Net Avg,Tel Net Max,Tel Proc Avg,Tel Proc Max,Tel Algae Acc,End N/A,End Park,End Fall,End Shal,End Deep, Total Died, Note\n";
     mdp.getSiteFilteredAverages(function (averageData) {
@@ -543,21 +538,20 @@ COMMENTED OUT FOR NOW-->
 
   // Retrieve match data and OPRs data and write out CSV file
   function writeCSVFile() {
-    console.log("==> eventAverages.php: writeCSVFile() starting");
+    console.log("==> eventAverages.php: writeCSVFile()");
     $.get("api/readAPI.php", {
       getAllMatchData: 1
     }).done(function (allMatchData) {
       console.log("==> getAllMatchData:");
       matchData = JSON.parse(allMatchData);
 
-      // Get OPR data 
-      console.log("getting OPR data from TBA");
+      // Get OPR data from TBA
       $.get("api/tbaAPI.php", {
         getCOPRs: 1
-      }).done(function (data) {
+      }).done(function (coprData) {
         console.log("==> getCOPRs:");
-        data = JSON.parse(data)["data"];
-        tbaCoprData = data;
+        coprData = JSON.parse(coprData)["coprData"];
+        tbaCoprData = coprData;
         processData(matchData);
       });
     });

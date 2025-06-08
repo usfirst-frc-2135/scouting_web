@@ -64,7 +64,7 @@ require 'header.php';
   loadButton.style.visibility = 'hidden';
 
   function showSuccessMessage(message) {
-    console.log("==> pitPhotoUpload.php: showSuccessMessage() starting");
+    console.log("==> pitPhotoUpload.php: showSuccessMessage()" + message);
     $("#robotPic").val("");
     $("#teamNumber").val("");
 
@@ -75,28 +75,25 @@ require 'header.php';
   }
 
   function showErrorMessage(message) {
+    console.log("==> pitPhotoUpload.php: showErrorMessage(): " + message);
+
     $("#uploadMessageText").text(message);
     $("#uploadMessage").removeClass("alert-success");
     $("#uploadMessage").addClass("alert-danger");
     $("#uploadMessage").show();
   }
 
-  function uploadError(data) {
-    showErrorMessage(data);
-  }
-
-  function uploadSuccess(data) {
-    console.log("==> pitPhotoUpload.php: uploadSuccess() starting");
-    data = JSON.parse(data);
+  function uploadSuccess(msg) {
+    console.log("==> pitPhotoUpload.php: uploadSuccess(): " + msg);
+    msg = JSON.parse(msg);
     const loadButton = document.getElementById("loadingButton");
-    if (data["success"]) {
+    if (msg["success"]) {
       loadButton.style.visibility = 'hidden';
       showSuccessMessage("Upload successful, clearing form!");
     } else {
       loadButton.style.visibility = 'hidden';
-      showErrorMessage(data["message"]);
+      showErrorMessage(msg["message"]);
     }
-    console.log(data);
   }
 
   //
@@ -125,9 +122,9 @@ require 'header.php';
           // First get list of robot-pic files for this team.
           $.get("api/readAPI.php", {
             getImagesForTeam: teamNum
-          }).done(function (data) {
+          }).done(function (imagesData) {
             console.log("==> getImagesForTeam");
-            var teamPics = JSON.parse(data);
+            var teamPics = JSON.parse(imagesData);
 
             // If there are any existing pics, delete them.
             for (let picFile of teamPics) {
@@ -138,7 +135,7 @@ require 'header.php';
                   console.log("Deleted existing photo: " + picFile);
                 },
                 error: function () {
-                  console.log("Could NOT delete existing photo: " + picFile);
+                  console.error("Could NOT delete existing photo: " + picFile);
                 }
               });
             }
@@ -165,7 +162,7 @@ require 'header.php';
           cache: false,
           contentType: false,
           processData: false,
-          error: uploadError,
+          error: showErrorMessage,
           success: uploadSuccess
         });
       }

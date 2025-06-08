@@ -75,15 +75,15 @@ require 'header.php';
     $("#tableKeys").html(header);
   }
 
-  function processCoprData(data) {
-    console.log("==> eventCoprData.php: processCoprData() starting");
-    var dataObj = JSON.parse(data);
-    var data = dataObj["data"];
+  function processCoprData(coprData) {
+    console.log("==> eventCoprData.php: processCoprData()");
+    var dataObj = JSON.parse(coprData);
+    var coprData = dataObj["data"];
     var keys = dataObj["keys"];
     var ec = dataObj["eventCode"];
 
     keysToTable(keys);
-    buildCoprDataTable(data, keys);
+    buildCoprDataTable(coprData, keys);
   }
 
   function readTbaAndBuildCoprTable() {

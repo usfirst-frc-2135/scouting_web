@@ -257,7 +257,7 @@ require 'header.php';
 <script>
 
   function verifyStrategicForm() {
-    console.log("==> strategicForm.php: clearStrategicForm() starting");
+    console.log("==> strategicForm.php: clearStrategicForm()");
     var isError = false;
     var errMsg = "Please enter values for these fields:";
 
@@ -281,7 +281,7 @@ require 'header.php';
   }
 
   function clearStrategicForm() {
-    console.log("==> strategicForm.php: clearStrategicForm() starting");
+    console.log("==> strategicForm.php: clearStrategicForm()");
     $("#scoutName").val("");
     $("#teamNumber").val("");
     $("#matchNumber").val("");
@@ -323,7 +323,7 @@ require 'header.php';
   }
 
   function writeStrategicFormToTable() {
-    console.log("==> strategicForm.php: writeStrategicFormToTable() starting");
+    console.log("==> strategicForm.php: writeStrategicFormToTable()");
     var dataToUse = {};
 
     // Clean up teamnumber before writing to table.
@@ -438,10 +438,10 @@ require 'header.php';
 
     $.post("api/writeAPI.php", {
       writeStrategicData: JSON.stringify(dataToUse)
-    }).done(function (data) {
+    }).done(function (returnCode) {
       console.log("==> writeStrategicData");
       // Because success word may have a new-line at the end, don't do a direct compare
-      if (data.indexOf('success') > -1) {
+      if (returnCode.indexOf('success') > -1) {
         alert("Success in submitting Strategic Form data!");
         clearStrategicForm();
       } else {

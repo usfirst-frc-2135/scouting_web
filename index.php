@@ -65,7 +65,7 @@ require 'header.php';
                 </div>
               </div>
               <div class="p-2">
-                <button id="filterData" class="btn btn-primary">Use this data</button>
+                <button id="filterData" class="btn btn-primary">Use these matches</button>
               </div>
             </div>
           </div>
@@ -127,6 +127,7 @@ require 'header.php';
 
   // Set the status badges for an item
   function setStatusBadge(isSuccess, id) {
+    console.log("==> index.php: setStatusBadge()");
     if (isSuccess) {
       $("#" + id).text("Connected");
       $("#" + id).addClass("bg-success");
@@ -142,6 +143,7 @@ require 'header.php';
 
   // Update all status badges for DB connection
   function updateStatusValues(statusArray) {
+    console.log("==> index.php: updateStatusValues()");
     $("#serverName").text(statusArray["server"]);
     $("#databaseName").text(statusArray["db"]);
     $("#userName").text(statusArray["username"]);
@@ -191,6 +193,7 @@ require 'header.php';
     $.post("api/dbAPI.php", {
       "getDBStatus": true
     }, function (statusData) {
+      console.log("==> getDBStatus");
       updateStatusValues(JSON.parse(statusData));
     });
 
@@ -266,6 +269,7 @@ require 'header.php';
       $.post("api/dbAPI.php", {
         "createDB": true
       }, function (statusData) {
+        console.log("==> createDB");
         updateStatusValues(JSON.parse(statusData));
       });
     });
@@ -274,7 +278,8 @@ require 'header.php';
     $("#createTable").on('click', function (event) {
       $.post("api/dbAPI.php", {
         "createTable": true
-      }, function (statusData) {
+      }, function (createTable) {
+        console.log("==> createDB");
         updateStatusValues(JSON.parse(statusData));
       });
     });

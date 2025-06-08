@@ -60,7 +60,7 @@ require 'header.php';
                     <a href="#collapseTeleopCoralGraph" data-bs-toggle="collapse" aria-expanded="false"> Teleop Coral Graph</a>
                   </h5>
                   <div id="collapseTeleopCoralGraph" class="collapse">
-                    <canvas id="myChart3" width="400" height="360"></canvas>
+                    <canvas id="teleopChart" width="400" height="360"></canvas>
                   </div>
                 </div>
               </div>
@@ -74,7 +74,7 @@ require 'header.php';
                     <a href="#collapseEndgameGraph" data-bs-toggle="collapse" aria-expanded="false"> Endgame Graph</a>
                   </h5>
                   <div id="collapseEndgameGraph" class="collapse">
-                    <canvas id="myChart5" width="400" height="360"></canvas>
+                    <canvas id="endgameChart" width="400" height="360"></canvas>
                   </div>
                 </div>
               </div>
@@ -545,17 +545,11 @@ require 'header.php';
   var autoChartDefined = false;
   var autoChart;
 
-  var chart2Defined = false;
-  var myChart2;
+  var teleopChartDefined = false;
+  var teleopChart;
 
-  var chart3Defined = false;
-  var myChart3;
-
-  var chart4Defined = false;
-  var myChart4;
-
-  var chart5Defined = false;
-  var myChart5;
+  var endgameChartDefined = false;
+  var endgameChart;
 
   function writeTableRow(tbodyID, dict, keys) {
     var row = "<tr>";
@@ -576,7 +570,7 @@ require 'header.php';
   }
 
   function dataToAvgTables(avgs) {
-    console.log("==> teamLookup.php: dataToAvgTables() starting");
+    console.log("==> teamLookup.php: dataToAvgTables()");
 
     //Auton Table  
     avgs["autonpointsstr"] = "<b>Total Points</b>";
@@ -628,8 +622,9 @@ require 'header.php';
     writeTableRow("totalTable", avgs, ["totalAlgaePointsstr", "avgTotalAlgaePoints", "maxTotalAlgaePoints"]);
   }
 
+  // Check if our URL directs to a specific team
   function checkGet() {
-    console.log("==> teamLookup.php: checkGet() starting");
+    console.log("==> teamLookup.php: checkGet()");
     let sp = new URLSearchParams(window.location.search);
     if (sp.has('teamNum')) {
       return sp.get('teamNum')
@@ -638,7 +633,7 @@ require 'header.php';
   }
 
   function loadTeamPics(teamPics) {
-    console.log("==> teamLookup.php: loadTeamPics() starting");
+    console.log("==> teamLookup.php: loadTeamPics()");
     // Takes list of Team Pic paths and loads them.
     var first = true;
     for (let uri of teamPics) {
@@ -655,60 +650,64 @@ require 'header.php';
     }
   }
 
-  //filters out the match type as specified in the db status page
+  // filters out the match type as specified in the db status page
   function getFilteredData(team, successFunction) {
-    //      console.log(">> starting getSiteFilteredData for team " + team);
+    console.log("==> teamLookup.php: loadTeamPics(): " + team);
     var temp_this = this;
-    $.post("api/dbAPI.php", { "getDBStatus": true }, function (data) {
-      dbdata = JSON.parse(data);
-      var localSiteFilter = {};
-      localSiteFilter["useP"] = dbdata["useP"];
-      localSiteFilter["useQm"] = dbdata["useQm"];
-      localSiteFilter["useQf"] = dbdata["useQf"];
-      localSiteFilter["useSf"] = dbdata["useSf"];
-      localSiteFilter["useF"] = dbdata["useF"];
-      //temp_this.siteFilter = { ...localSiteFilter };
-      //          console.log(">>> useP = " + localSiteFilter["useP"]);
-      //          console.log(">>> useQm = " + localSiteFilter["useQm"]);
-      //temp_this.applySiteFilter();
-      $.get("api/readAPI.php", {
-        getTeamData: team
-      }).done(function (data) {
-        console.log("==> getTeamData");
-        matchData = JSON.parse(data);
+    $.post("api/dbAPI.php",
+      {
+        "getDBStatus": true
+      }, function (dbStatus) {
+        console.log("==> getDBStatus");
+        dbdata = JSON.parse(dbStatus);
+        var localSiteFilter = {};
+        localSiteFilter["useP"] = dbdata["useP"];
+        localSiteFilter["useQm"] = dbdata["useQm"];
+        localSiteFilter["useQf"] = dbdata["useQf"];
+        localSiteFilter["useSf"] = dbdata["useSf"];
+        localSiteFilter["useF"] = dbdata["useF"];
+        //temp_this.siteFilter = { ...localSiteFilter };
+        //          console.log(">>> useP = " + localSiteFilter["useP"]);
+        //          console.log(">>> useQm = " + localSiteFilter["useQm"]);
+        //temp_this.applySiteFilter();
+        $.get("api/readAPI.php", {
+          getTeamData: team
+        }).done(function (matchData) {
+          console.log("==> getTeamData");
+          matchData = JSON.parse(matchData);
 
-        var new_data = [];
-        for (var i = 0; i < matchData.length; i++) {
-          var mn = matchData[i]["matchnumber"];
-          var mt = "-";
-          var match_str = mn.toLowerCase();
-          if (match_str.search("p") != -1) {
-            mt = "p";
-          }
-          else if (match_str.search("qm") != -1) {
-            mt = "qm";
-          }
-          else if (match_str.search("qf") != -1) {
-            mt = "qf";
-          }
-          else if (match_str.search("sf") != -1) {
-            mt = "sf";
-          }
-          else if (match_str.search("f") != -1) {
-            mt = "f";
-          }
+          var new_data = [];
+          for (var i = 0; i < matchData.length; i++) {
+            var mn = matchData[i]["matchnumber"];
+            var mt = "-";
+            var match_str = mn.toLowerCase();
+            if (match_str.search("p") != -1) {
+              mt = "p";
+            }
+            else if (match_str.search("qm") != -1) {
+              mt = "qm";
+            }
+            else if (match_str.search("qf") != -1) {
+              mt = "qf";
+            }
+            else if (match_str.search("sf") != -1) {
+              mt = "sf";
+            }
+            else if (match_str.search("f") != -1) {
+              mt = "f";
+            }
 
-          if (mt == "p" && localSiteFilter["useP"]) { new_data.push(matchData[i]); }
-          else if (mt == "qm" && localSiteFilter["useQm"]) { new_data.push(matchData[i]); }
-          else if (mt == "qf" && localSiteFilter["useQf"]) { new_data.push(matchData[i]); }
-          else if (mt == "sf" && localSiteFilter["useSf"]) { new_data.push(matchData[i]); }
-          else if (mt == "f" && localSiteFilter["useF"]) { new_data.push(matchData[i]); }
-        }
-        matchData = [...new_data];
+            if (mt == "p" && localSiteFilter["useP"]) { new_data.push(matchData[i]); }
+            else if (mt == "qm" && localSiteFilter["useQm"]) { new_data.push(matchData[i]); }
+            else if (mt == "qf" && localSiteFilter["useQf"]) { new_data.push(matchData[i]); }
+            else if (mt == "sf" && localSiteFilter["useSf"]) { new_data.push(matchData[i]); }
+            else if (mt == "f" && localSiteFilter["useF"]) { new_data.push(matchData[i]); }
+          }
+          matchData = [...new_data];
 
-        successFunction(matchData);
+          successFunction(matchData);
+        });
       });
-    });
   }
 
   function sortAllMatchesTable() {
@@ -784,7 +783,7 @@ require 'header.php';
   };
 
   function dataToMatchTable(dataObj) {
-    console.log("==> teamLookup.php: dataToMatchTable() starting");
+    console.log("==> teamLookup.php: dataToMatchTable()");
     $("#allMatchesTable").html("");  // clear table
     for (let i = 0; i < dataObj.length; i++) {
       var rowString = "<tr><td align=\"center\">" + dataObj[i]["matchnumber"] + "</td>" +
@@ -841,10 +840,10 @@ require 'header.php';
     dataToStrategicTable(stratData);
   }
 
-  function processMatchData(team, data) {
-    console.log("==> teamLookup.php: processMatchData() starting");
-    var mdp = new matchDataProcessor(data);
-    mdp.sortMatches(data);
+  function processMatchData(team, matchData) {
+    console.log("==> teamLookup.php: processMatchData()");
+    var mdp = new matchDataProcessor(matchData);
+    mdp.sortMatches(matchData);
     mdp.getSiteFilteredAverages(function (averageData) {
       processedData = averageData[team];
       dataToAvgTables(processedData);
@@ -874,7 +873,7 @@ require 'header.php';
   }
 
   function dataToStrategicTable(dataObj) {
-    console.log("==> teamLookup.php: dataToStrategicTable() starting");
+    console.log("==> teamLookup.php: dataToStrategicTable()");
     $("#strategicDataTable").html("");  // clear table
     for (let i = 0; i < dataObj.length; i++) {
       var driverability = dataObj[i]["driverability"];
@@ -938,10 +937,10 @@ require 'header.php';
   // AUTON GRAPH STARTS HERE
 
   function dataToAutonGraph(matchdata) {
-    console.log("==> teamLookup.php: dataToAutonGraph() starting");
+    console.log("==> teamLookup.php: dataToAutonGraph()");
 
     // Declare variables
-    var match_list = []; // List of matches to use as x lables
+    var matchList = []; // List of matches to use as x lables
     var datasets = []; // Each entry is a dict with a label and data attribute
     var autonLeaveTips = []; // holds custom tooltips for auton leave start line data      
     var autonAlgaeProcTips = []; // holds custom tooltips for auton algae processor
@@ -1020,7 +1019,7 @@ require 'header.php';
     // Build data sets; go thru each mydata row and populate the graph datasets.
     for (let i = 0; i < mydata.length; i++) {
       var matchnum = mydata[i]["matchnum"];
-      match_list.push(matchnum);
+      matchList.push(matchnum);
 
       // Get auton leave start line data
       var autonLeaveStartingZone = mydata[i]["leave"];
@@ -1078,7 +1077,7 @@ require 'header.php';
     autoChart = new Chart(ctx, {
       type: 'bar',
       data: {
-        labels: match_list,
+        labels: matchList,
         datasets: datasets
       },
       options: {
@@ -1168,10 +1167,10 @@ require 'header.php';
   // TELEOP GRAPH STARTS HERE
 
   function dataToTeleopGraph(matchdata) {
-    console.log("==> teamLookup.php: dataToTeleopGraph() starting");
+    console.log("==> teamLookup.php: dataToTeleopGraph()");
 
     // Declare variables
-    var match_list = []; // List of matches to use as x lables
+    var matchList = []; // List of matches to use as x lables
     var datasets = []; // Each entry is a dict with a label and data attribute
     var teleopAlgaeProcessorTips = []; // holds custom tooltips for teleop speaker notes
     var teleopAlgaeNetTips = [];//holds custom tooltips for if amplification used
@@ -1241,7 +1240,7 @@ require 'header.php';
     // Build data sets; go thru each mydata row and populate the graph datasets.
     for (let i = 0; i < mydata.length; i++) {
       var matchnum = mydata[i]["matchnum"];
-      match_list.push(matchnum);
+      matchList.push(matchnum);
 
       // Get teleop algae processor
       var teleopAlgaeProcessor = mydata[i]["teleopprocessor"];
@@ -1281,16 +1280,16 @@ require 'header.php';
     }
 
     // Define the graph as a line chart:
-    if (chart3Defined) {
-      myChart3.destroy();
+    if (teleopChartDefined) {
+      teleopChart.destroy();
     }
-    chart3Defined = true;
+    teleopChartDefined = true;
 
-    const ctx = document.getElementById('myChart3').getContext('2d');
-    myChart3 = new Chart(ctx, {
+    const ctx = document.getElementById('teleopChart').getContext('2d');
+    teleopChart = new Chart(ctx, {
       type: 'bar',
       data: {
-        labels: match_list,
+        labels: matchList,
         datasets: datasets
       },
       options: {
@@ -1372,8 +1371,8 @@ require 'header.php';
   // ENDGAME GRAPH STARTS HERE
 
   function dataToEndgameGraph(matchdata) {
-    console.log("==> teamLookup.php: dataToEndgameGraph() starting");
-    var match_list = [];
+    console.log("==> teamLookup.php: dataToEndgameGraph()");
+    var matchList = [];
 
     var datasets = [];
 
@@ -1405,7 +1404,7 @@ require 'header.php';
     // Build data sets; go thru each mydata row and populate the graph datasets.
     for (let i = 0; i < mydata.length; i++) {
       var matchnum = mydata[i]["matchnum"];
-      match_list.push(matchnum);
+      matchList.push(matchnum);
 
       // Get endgame climb cage level
       var cageClimb = mydata[i]["cage"];
@@ -1424,15 +1423,15 @@ require 'header.php';
 
     }
 
-    if (chart5Defined) {
-      myChart5.destroy();
+    if (endgameChartDefined) {
+      endgameChart.destroy();
     }
-    chart5Defined = true;
-    const ctx = document.getElementById('myChart5').getContext('2d');
-    myChart5 = new Chart(ctx, {
+    endgameChartDefined = true;
+    const ctx = document.getElementById('endgameChart').getContext('2d');
+    endgameChart = new Chart(ctx, {
       type: 'bar',
       data: {
-        labels: match_list,
+        labels: matchList,
         datasets: datasets
       },
       options: {
@@ -1471,12 +1470,12 @@ require 'header.php';
 
   // ENDGAME GRAPH END HERE
 
-  // function processCommentData(data) {
-  //   dataToCommentTable(data);
+  // function processCommentData(commentData) {
+  //   dataToCommentTable(commentData);
   // }
 
   function processPitData(pitData, matchData) {
-    console.log("==> teamLookup.php: processPitData() starting");
+    console.log("==> teamLookup.php: processPitData()");
     if (!pitData || !pitData.length) {
       // row one    
       pitData["sparepartsstring"] = pitData["spareparts"] ? "yes" : "no";
@@ -1489,16 +1488,13 @@ require 'header.php';
       pitData["projlanguage"];
     }
 
-    // first row 
     writeTableRow("pitRow1", pitData, ["numbatteries", "pitorg", "sparepartsstring", "computervisionstring"]);
-    // second row
     writeTableRow("pitRow2", pitData, ["drivemotors", "preparedness", "swervedrivestring", "proglanguage"]);
-    // three row
   }
 
   // This is the main function that runs when we want to load a new team 
   function loadTeamSheet(teamNum) {
-    console.log("==> teamLookup.php: loadTeamSheet() starting");
+    console.log("==> teamLookup.php: loadTeamSheet()");
     // Clear existing data
     $("#robotPics").html("");
     $("#teamTitle").html("");
@@ -1518,14 +1514,14 @@ require 'header.php';
     // Get team name from TBA
     $.get("api/tbaAPI.php", {
       getTeamInfo: teamNum
-    }).done(function (data) {
+    }).done(function (teamInfo) {
       console.log("==> getTeamInfo");
       var teamname = "XX";
-      if (data == null)
+      if (teamInfo == null)
         alert("Can't load teamName from TBA; check if TBA Key was set in db_config");
       else {
-        console.log("teamLookup: getTeamInfo: data = " + data);
-        teamInfo = JSON.parse(data)["response"];
+        console.log("teamLookup: getTeamInfo:\n" + teamInfo);
+        teamInfo = JSON.parse(teamInfo)["response"];
         teamname = teamInfo["nickname"];
         console.log("teamLookup: for " + teamNum + ", teamname = " + teamname);
       }
@@ -1539,9 +1535,9 @@ require 'header.php';
     // Add new images
     $.get("api/readAPI.php", {
       getImagesForTeam: teamNum
-    }).done(function (data) {
+    }).done(function (teamImages) {
       console.log("==> getImagesForTeam");
-      var listOfImages = JSON.parse(data);
+      var listOfImages = JSON.parse(teamImages);
       console.log("PHOTO CHECK: " + listOfImages);
       loadTeamPics(listOfImages);
     });
@@ -1549,25 +1545,25 @@ require 'header.php';
     // Add Match Scouting Data
     $.get("api/readAPI.php", {
       getTeamData: teamNum
-    }).done(function (data) {
+    }).done(function (matchData) {
       console.log("==> getTeamData");
-      matchData = JSON.parse(data);
-      processMatchData(teamNum, matchData);
+      jsonMatchData = JSON.parse(matchData);
+      processMatchData(teamNum, jsonMatchData);
 
       // Do the Pit Scouting Data here because it also needs the matchData.
       $.get("api/readAPI.php", {
         getTeamPitData: teamNum
-      }).done(function (data) {
+      }).done(function (teamPitData) {
         console.log("==> getTeamPitData");
-        pitData = JSON.parse(data);
+        pitData = JSON.parse(teamPitData);
         processPitData(pitData, matchData);
 
         // Do the Strategic Data Table next.
         $.get("api/readAPI.php", {
           getTeamStrategicData: teamNum
-        }).done(function (data) {
+        }).done(function (strategicData) {
           console.log("==> getTeamStrategicData");
-          stratData = JSON.parse(data);
+          stratData = JSON.parse(strategicData);
           processStrategicData(stratData);
         });
       });

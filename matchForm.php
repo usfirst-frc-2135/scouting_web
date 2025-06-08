@@ -241,7 +241,7 @@ require 'header.php';
   var teleop_cubestop = 0;
 
   function attachGamepieceScoring() {
-    console.log("==> matchForm.php: attachGamepieceScoring() starting");
+    console.log("==> matchForm.php: attachGamepieceScoring()");
     $("#autoConesBottomPlus").click(function () {
       auto_conesbottom += 1;
       $("#autoConesBottom").html("Auto Cones Bottom: " + auto_conesbottom);
@@ -365,7 +365,7 @@ require 'header.php';
   }
 
   function getFormData() {
-    console.log("==> matchForm.php: getFormData() starting");
+    console.log("==> matchForm.php: getFormData()");
     var out = {};
     var match_level = $("#compLevel").val();
     var match_number = $("#matchNumber").val();
@@ -406,7 +406,7 @@ require 'header.php';
   }
 
   function clear_data() {
-    console.log("==> matchForm.php: clear_data() starting");
+    console.log("==> matchForm.php: clear_data()");
     $("#matchNumber").val("");
     //$("#startpos").val("0");
     auto_conesbottom = 0;
@@ -438,12 +438,12 @@ require 'header.php';
   }
 
   function submitMatchData(form_data) {
-    console.log("==> matchForm.php: submitMatchData() starting");
+    console.log("==> matchForm.php: submitMatchData()");
     $.post("api/writeAPI.php", {
       "writeSingleData": JSON.stringify(form_data)
-    }, function (data) {
+    }, function (returnCode) {
       // Because success word may have a new-line at the end, don't do a direct compare
-      if (data.indexOf('success') > -1) {
+      if (returnCode.indexOf('success') > -1) {
         alert("Data Successfully Submitted! Clearing Data.");
         clear_data();
       } else {

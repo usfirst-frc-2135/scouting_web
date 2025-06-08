@@ -157,7 +157,7 @@ require 'header.php';
 
 <script>
   function verifyPitForm() {
-    console.log("==> pitForm.php: verifyPitForm() starting");
+    console.log("==> pitForm.php: verifyPitForm()");
     var isError = false;
     var errMsg = "Please enter values for these fields:";
 
@@ -225,7 +225,7 @@ require 'header.php';
   }
 
   function clearPitForm() {
-    console.log("==> pitForm.php: clearPitForm() starting");
+    console.log("==> pitForm.php: clearPitForm()");
     $("#teamNumber").val("");
     $("#batteries").val("");
     $("#preloadAndLeave").val("0");
@@ -246,7 +246,7 @@ require 'header.php';
   }
 
   function writeFormToPitTable() {
-    console.log("==> pitForm.php: writeFormToPitTable() starting");
+    console.log("==> pitForm.php: writeFormToPitTable()");
     var dataToUse = {};
     dataToUse["teamnumber"] = $("#teamNumber").val();
     dataToUse["numbatteries"] = $("#batteries").val();
@@ -327,10 +327,10 @@ require 'header.php';
 
     $.post("api/writeAPI.php", {
       writePitTable: JSON.stringify(dataToUse)
-    }).done(function (data) {
+    }).done(function (returnCode) {
       console.log("==> writePitTable");
       // Because success word may have a new-line at the end, don't do a direct compare
-      if (data.indexOf('success') > -1) {
+      if (returnCode.indexOf('success') > -1) {
         alert("Success in submitting pit data!");
         clearPitForm();
       } else {

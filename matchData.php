@@ -165,7 +165,7 @@ require 'header.php';
 
   // NOTE: data object keywords should match the database definition in dbHander.php
   function buildMatchDataTable(dataObj) {
-    console.log("==> matchData.php: buildMatchDataTable() starting");
+    console.log("==> matchData.php: buildMatchDataTable()");
     for (let i = 0; i < dataObj.length; i++) {
       var rowString = "<tr><td align=\"center\">" + dataObj[i]["matchnumber"] + "</td>" +
         "<td align=\"center\">" + dataObj[i]["teamnumber"] + "</td>" +
@@ -195,13 +195,13 @@ require 'header.php';
   }
 
   function readMatchDataAndBuildTable() {
-    console.log("==> matchData.php: readMatchDataAndBuildTable() starting");
+    console.log("==> matchData.php: readMatchDataAndBuildTable()");
     // output: gets the API data from our server
     $.get("api/readAPI.php", {
       getAllMatchData: 1
-    }).done(function (data) {
-      console.log("===> getAllMatchData: data:\n" + data);
-      var dataObj = JSON.parse(data);
+    }).done(function (matchData) {
+      console.log("===> getAllMatchData:\n" + matchData);
+      var dataObj = JSON.parse(matchData);
       buildMatchDataTable(dataObj);
       setTimeout(function () {
         sorttable.makeSortable(document.getElementById("matchDataTable"));

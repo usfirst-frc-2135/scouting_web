@@ -127,7 +127,7 @@ require 'header.php';
   var frozenTable = null;
 
   function sortTable() {
-    console.log("==> strategicData.php: sortTable() starting");
+    console.log("==> strategicData.php: sortTable()");
     // Assumes the entries are team numbers or match numbers. Note a team number could have end in 
     // a "B", "C", "D", or "E".
 
@@ -150,7 +150,7 @@ require 'header.php';
   }
 
   function sortOnMatch(matchA, matchB) {
-    console.log("==> strategicData.php: sortOnMatch() starting");
+    console.log("==> strategicData.php: sortOnMatch()");
     matchA = matchA.toUpperCase();  // make upper case
     matchB = matchB.toUpperCase();  // make upper case
     Aprefix = "qm";  // assume qm if there is no prefix
@@ -196,7 +196,7 @@ require 'header.php';
   // team number and may have a B, C, D, or E letter at the end. Note the letter may be lower case.
   // If team numbers are the same, then sort by match num (2nd col).
   function sortRows(cellA, cellB, matchA, matchB) {
-    console.log("==> strategicData.php: sortRows() starting");
+    console.log("==> strategicData.php: sortRows()");
 
     cellA = cellA.toUpperCase();  // make letter upper case
     cellB = cellB.toUpperCase();
@@ -278,7 +278,7 @@ require 'header.php';
   }
 
   function buildStrategicDataTable(dataObj, pitData) {
-    console.log("==> strategicData.php: buildStrategicDataTable() starting");
+    console.log("==> strategicData.php: buildStrategicDataTable()");
     for (let i = 0; i < dataObj.length; i++) {
       var driverability = dataObj[i]["driverability"];
       var driveVal = "";
@@ -329,12 +329,12 @@ require 'header.php';
 
   // get Strategic Scouting Data
   function readStrategicDataAndBuildTable() {
-    console.log("==> strategicData.php: readStrategicDataAndBuildTable() starting");
+    console.log("==> strategicData.php: readStrategicDataAndBuildTable()");
     $.get("api/readAPI.php", {
       getAllStrategicData: 1
-    }).done(function (data) {
+    }).done(function (strategicData) {
       console.log("==> getAllStrategicData");
-      var dataObj = JSON.parse(data);
+      var dataObj = JSON.parse(strategicData);
       buildStrategicDataTable(dataObj);
       setTimeout(function () {
         sorttable.makeSortable(document.getElementById("strategicDataTable"));

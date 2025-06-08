@@ -10,23 +10,24 @@ class matchDataProcessor {
     this.siteFilter = null;
   }
 
-  getMatchTuple(match_str) {
-    match_str = match_str.toLowerCase();
-    if (match_str.search("p") != -1) {
-      return ["p", parseInt(match_str.substr(1))];
+  getMatchTuple(matchStr) {
+    matchStr = matchStr.toLowerCase();
+    if (matchStr.search("p") != -1) {
+      return ["p", parseInt(matchStr.substr(1))];
     }
-    if (match_str.search("qm") != -1) {
-      return ["qm", parseInt(match_str.substr(2))];
+    if (matchStr.search("qm") != -1) {
+      return ["qm", parseInt(matchStr.substr(2))];
     }
-    if (match_str.search("qf") != -1) {
-      return ["qf", parseInt(match_str.substr(2))];
+    if (matchStr.search("qf") != -1) {
+      return ["qf", parseInt(matchStr.substr(2))];
     }
-    if (match_str.search("sf") != -1) {
-      return ["sf", parseInt(match_str.substr(2))];
+    if (matchStr.search("sf") != -1) {
+      return ["sf", parseInt(matchStr.substr(2))];
     }
-    if (match_str.search("f") != -1) {
-      return ["f", parseInt(match_str.substr(1))];
+    if (matchStr.search("f") != -1) {
+      return ["f", parseInt(matchStr.substr(1))];
     }
+    console.warn("getMatchTuple: Invalid prefix! " + matchStr)
     return null;
   }
 
@@ -77,8 +78,8 @@ class matchDataProcessor {
     this.data = new_data;
   }
 
+  // Rounding helper function 
   rnd(val) {
-    // Rounding helper function 
     return Math.round((val + Number.EPSILON) * 100) / 100;
   }
 
@@ -98,24 +99,29 @@ class matchDataProcessor {
   sortMatches(newData) {
     newData.sort((a, b) => {
       var compare = this.matchLessEqualThan(a["matchnumber"], b["matchnumber"]);
-      if (compare) { return -1; }
+      if (compare) {
+        return -1;
+      }
       return 1;
     });
   }
 
   getSiteFilter(successFunction) {
     if (!this.siteFilter) {
-      $.post("api/dbAPI.php", { "getDBStatus": true }, function (data) {
-        data = JSON.parse(data);
-        var localSiteFilter = {};
-        localSiteFilter["useP"] = data["useP"];
-        localSiteFilter["useQm"] = data["useQm"];
-        localSiteFilter["useQf"] = data["useQf"];
-        localSiteFilter["useSf"] = data["useSf"];
-        localSiteFilter["useF"] = data["useF"];
-        this.siteFilter = { ...localSiteFilter };
-        successFunction();
-      });
+      $.post("api/dbAPI.php",
+        {
+          "getDBStatus": true
+        }, function (dbStatus) {
+          dbStatus = JSON.parse(dbStatus);
+          var localSiteFilter = {};
+          localSiteFilter["useP"] = dbStatus["useP"];
+          localSiteFilter["useQm"] = dbStatus["useQm"];
+          localSiteFilter["useQf"] = dbStatus["useQf"];
+          localSiteFilter["useSf"] = dbStatus["useSf"];
+          localSiteFilter["useF"] = dbStatus["useF"];
+          this.siteFilter = { ...localSiteFilter };
+          successFunction();
+        });
     }
     else {
       successFunction();
@@ -142,20 +148,23 @@ class matchDataProcessor {
 
   getSiteFilteredAverages(successFunction) {
     var temp_this = this;
-    $.post("api/dbAPI.php", { "getDBStatus": true }, function (data) {
-      data = JSON.parse(data);
-      var localSiteFilter = {};
-      localSiteFilter["useP"] = data["useP"];
-      localSiteFilter["useQm"] = data["useQm"];
-      localSiteFilter["useQf"] = data["useQf"];
-      localSiteFilter["useSf"] = data["useSf"];
-      localSiteFilter["useF"] = data["useF"];
-      temp_this.siteFilter = { ...localSiteFilter };
+    $.post("api/dbAPI.php",
+      {
+        "getDBStatus": true
+      }, function (dbStatus) {
+        dbStatus = JSON.parse(dbStatus);
+        var localSiteFilter = {};
+        localSiteFilter["useP"] = dbStatus["useP"];
+        localSiteFilter["useQm"] = dbStatus["useQm"];
+        localSiteFilter["useQf"] = dbStatus["useQf"];
+        localSiteFilter["useSf"] = dbStatus["useSf"];
+        localSiteFilter["useF"] = dbStatus["useF"];
+        temp_this.siteFilter = { ...localSiteFilter };
 
-      temp_this.applySiteFilter();
+        temp_this.applySiteFilter();
 
-      successFunction(temp_this.getAverages());
-    });
+        successFunction(temp_this.getAverages());
+      });
   }
 
   getAverages() {

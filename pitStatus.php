@@ -38,8 +38,9 @@ require 'header.php';
   var jsonImageList = {};
 
   function createPitTable() {
-    console.log("==> pitStatus.php: createPitTable() starting");
+    console.log("==> pitStatus.php: createPitTable()");
     if (jsonPitList == null || teamList == null) {
+      console.warn("createPitTable: pit data and team list are missing!")
       return null;
     }
 
@@ -80,7 +81,7 @@ require 'header.php';
   // Note a team number could end in a "B", "C", "D", or "E", in which case we strip the letter off 
   // and just use the number for the comparison.
   function sortTable() {
-    console.log("==> pitStatus.php: sortTable() starting");
+    console.log("==> pitStatus.php: sortTable()");
     var table = document.getElementById("psTable");
     var rows = Array.prototype.slice.call(table.querySelectorAll("tbody> tr"));
 
@@ -136,12 +137,12 @@ require 'header.php';
     console.log("index: getting teamlist from TBA using db_config event code");
     $.get("api/tbaAPI.php", {
       getTeamListAndNames: 1
-    }).done(function (data) {
+    }).done(function (teamListNames) {
       console.log("==> getTeamListAndNames");
-      if (data == null)
+      if (teamList == null)
         alert("Can't load teamlist from TBA; check if TBA Key was set in db_config");
       else {
-        var jsonTeamList = JSON.parse(data);
+        var jsonTeamList = JSON.parse(teamListNames);
         for (var i = 0; i < jsonTeamList.length; i++) {
           var teamNum = jsonTeamList[i]["teamnum"];
           var teamName = jsonTeamList[i]["teamname"];
@@ -152,15 +153,15 @@ require 'header.php';
         // Get all the team images
         $.get("api/readAPI.php", {
           getAllTeamImages: JSON.stringify(teamList)
-        }).done(function (data) {
-          console.log("pitStatus.php: getAllTeamImages:\n" + data);
-          jsonImageList = JSON.parse(data);
+        }).done(function (teamImages) {
+          console.log("pitStatus.php: getAllTeamImages:\n" + teamImages);
+          jsonImageList = JSON.parse(teamImages);
           // Get all the teams pit scouted
           $.get("api/readAPI.php", {
             getAllPitData: 1
-          }).done(function (data) {
+          }).done(function (pitData) {
             console.log("==> getAllPitData");
-            jsonPitList = JSON.parse(data);
+            jsonPitList = JSON.parse(pitData);
             createPitTable();
             sorttable.makeSortable(document.getElementById("psTable"));
             sortTable();
