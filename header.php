@@ -35,7 +35,7 @@
 <body class="bg-light">
   <!-- Create collapsible navbar and navigation buttons -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-    <a class="navbar-brand text-white" href="#">
+    <a class="navbar-brand text-white" href="./index.php">
       <img src="./images/favicon-32x32.png" alt="Logo" width="24" height="24" class="d-inline-block align-text-top">
       <span id="navbarEventCode"> ????</span>
     </a>
@@ -50,7 +50,7 @@
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Teams</a>
             <ul class="dropdown-menu text-secondary bg-dark">
-              <a class="dropdown-item text-secondary" data-toggle="pill" href="./index.php">Team Status</a>
+              <a class="dropdown-item text-secondary" data-toggle="pill" href="./pitStatus.php">Pit Status</a>
               <a class="dropdown-item text-secondary" data-toggle="pill" href="./teamLookup.php">Team Lookup</a>
               <a class="dropdown-item text-secondary" data-toggle="pill" href="./pitPhotoUpload.php">Photo Upload</a>
               <a class="dropdown-item text-secondary" data-toggle="pill" href="./pitForm.php">Pit Form</a>
@@ -84,9 +84,6 @@
             </ul>
           </li>
 
-          <li class="nav-item">
-            <a class="nav-link text-secondary" data-toggle="pill" href="./databaseStatus.php">Database</a>
-          </li>
         </ul>
       </ul>
     </div>

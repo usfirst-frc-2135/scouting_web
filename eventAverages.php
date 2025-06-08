@@ -1,5 +1,5 @@
 <?php
-$title = 'Match Averages';
+$title = 'Event Averages';
 require 'header.php';
 ?>
 
@@ -103,7 +103,7 @@ COMMENTED OUT FOR NOW-->
         <thead>
           <!-- <tr>
               <th colspan="1" class="text-center"></th>
-              <th colspan="63" class="text-center fw-bold" style="background-color:#e8f1ff">Match Averages</th>
+              <th colspan="63" class="text-center fw-bold" style="background-color:#e8f1ff">Event Averages</th>
             </tr>
             <tr>
               <th colspan="1" class="text-center"></th>
@@ -417,6 +417,7 @@ COMMENTED OUT FOR NOW-->
   var eventCode = null;
   var tbaCoprData = {};          // for TBA OPR data
 
+  // Retrieve an average value from data for a team
   function localAveragesLookup(localAverages, team, item) {
     if (!localAverages) {
       return "NA";
@@ -427,6 +428,7 @@ COMMENTED OUT FOR NOW-->
     return localAverages[team][item];
   }
 
+  // Round to 2 decimal places
   function rnd(val) {
     // Rounding helper function 
     return Math.round((val + Number.EPSILON) * 100) / 100;
