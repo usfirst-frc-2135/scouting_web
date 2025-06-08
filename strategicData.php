@@ -127,6 +127,7 @@ require 'header.php';
   var frozenTable = null;
 
   function sortTable() {
+    console.log("==> strategicData.php: sortTable() starting");
     // Assumes the entries are team numbers or match numbers. Note a team number could have end in 
     // a "B", "C", "D", or "E".
 
@@ -149,6 +150,7 @@ require 'header.php';
   }
 
   function sortOnMatch(matchA, matchB) {
+    console.log("==> strategicData.php: sortOnMatch() starting");
     matchA = matchA.toUpperCase();  // make upper case
     matchB = matchB.toUpperCase();  // make upper case
     Aprefix = "qm";  // assume qm if there is no prefix
@@ -194,6 +196,7 @@ require 'header.php';
   // team number and may have a B, C, D, or E letter at the end. Note the letter may be lower case.
   // If team numbers are the same, then sort by match num (2nd col).
   function sortRows(cellA, cellB, matchA, matchB) {
+    console.log("==> strategicData.php: sortRows() starting");
 
     cellA = cellA.toUpperCase();  // make letter upper case
     cellB = cellB.toUpperCase();
@@ -264,19 +267,18 @@ require 'header.php';
 
   // Converts a given "1" to yes, "0" to no, anything else to empty string.
   function convertToYesNo(value) {
-    var convertedVal = "";
-    if (value == "1")
-      convertedVal = "yes";
-    else if (value == "0")
-      convertedVal = "-";
-    else if (value == "2")
-      convertedVal = "no";
-    else if (value == "3")
-      convertedVal = "-";
-    return convertedVal;
+    switch (String(value)) {
+      case "1":
+        return "yes";
+      case "2":
+        return "no";
+      default:
+        return "-";
+    }
   }
 
   function buildStrategicDataTable(dataObj, pitData) {
+    console.log("==> strategicData.php: buildStrategicDataTable() starting");
     for (let i = 0; i < dataObj.length; i++) {
       var driverability = dataObj[i]["driverability"];
       var driveVal = "";
@@ -322,15 +324,16 @@ require 'header.php';
         "<td align=\"center\">" + dataObj[i]["scoutname"] + "</td>" +
         "</td>";
       $("#tableData").append(rowString);
-      console.log(convertToYesNo(dataObj[i]["autonGetCoralFromFloor"]));
     }
   }
 
-  function requestAPI() {
-    // get Strategic Scouting Data
+  // get Strategic Scouting Data
+  function readStrategicDataAndBuildTable() {
+    console.log("==> strategicData.php: readStrategicDataAndBuildTable() starting");
     $.get("api/readAPI.php", {
       getAllStrategicData: 1
     }).done(function (data) {
+      console.log("==> getAllStrategicData");
       var dataObj = JSON.parse(data);
       buildStrategicDataTable(dataObj);
       setTimeout(function () {
@@ -362,11 +365,12 @@ require 'header.php';
     // Update the navbar with the event code
     $.get("api/tbaAPI.php", {
       getEventCode: true
-    }, function (data) {
-      $("#navbarEventCode").html(data);
+    }, function (eventCode) {
+      console.log("==> strategicData.php - getEventCode: " + eventCode);
+      $("#navbarEventCode").html(eventCode);
     });
 
-    requestAPI();
+    readStrategicDataAndBuildTable();
 
     // Submit the strategic form data
     $("#strategicDataTable").click(function () {

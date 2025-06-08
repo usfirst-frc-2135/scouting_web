@@ -576,6 +576,7 @@ require 'header.php';
   }
 
   function dataToAvgTables(avgs) {
+    console.log("==> teamLookup.php: dataToAvgTables() starting");
 
     //Auton Table  
     avgs["autonpointsstr"] = "<b>Total Points</b>";
@@ -628,6 +629,7 @@ require 'header.php';
   }
 
   function checkGet() {
+    console.log("==> teamLookup.php: checkGet() starting");
     let sp = new URLSearchParams(window.location.search);
     if (sp.has('teamNum')) {
       return sp.get('teamNum')
@@ -636,6 +638,7 @@ require 'header.php';
   }
 
   function loadTeamPics(teamPics) {
+    console.log("==> teamLookup.php: loadTeamPics() starting");
     // Takes list of Team Pic paths and loads them.
     var first = true;
     for (let uri of teamPics) {
@@ -671,6 +674,7 @@ require 'header.php';
       $.get("api/readAPI.php", {
         getTeamData: team
       }).done(function (data) {
+        console.log("==> getTeamData");
         matchData = JSON.parse(data);
 
         var new_data = [];
@@ -780,6 +784,7 @@ require 'header.php';
   };
 
   function dataToMatchTable(dataObj) {
+    console.log("==> teamLookup.php: dataToMatchTable() starting");
     $("#allMatchesTable").html("");  // clear table
     for (let i = 0; i < dataObj.length; i++) {
       var rowString = "<tr><td align=\"center\">" + dataObj[i]["matchnumber"] + "</td>" +
@@ -837,6 +842,7 @@ require 'header.php';
   }
 
   function processMatchData(team, data) {
+    console.log("==> teamLookup.php: processMatchData() starting");
     var mdp = new matchDataProcessor(data);
     mdp.sortMatches(data);
     mdp.getSiteFilteredAverages(function (averageData) {
@@ -868,6 +874,7 @@ require 'header.php';
   }
 
   function dataToStrategicTable(dataObj) {
+    console.log("==> teamLookup.php: dataToStrategicTable() starting");
     $("#strategicDataTable").html("");  // clear table
     for (let i = 0; i < dataObj.length; i++) {
       var driverability = dataObj[i]["driverability"];
@@ -931,6 +938,7 @@ require 'header.php';
   // AUTON GRAPH STARTS HERE
 
   function dataToAutonGraph(matchdata) {
+    console.log("==> teamLookup.php: dataToAutonGraph() starting");
 
     // Declare variables
     var match_list = []; // List of matches to use as x lables
@@ -1160,6 +1168,7 @@ require 'header.php';
   // TELEOP GRAPH STARTS HERE
 
   function dataToTeleopGraph(matchdata) {
+    console.log("==> teamLookup.php: dataToTeleopGraph() starting");
 
     // Declare variables
     var match_list = []; // List of matches to use as x lables
@@ -1363,6 +1372,7 @@ require 'header.php';
   // ENDGAME GRAPH STARTS HERE
 
   function dataToEndgameGraph(matchdata) {
+    console.log("==> teamLookup.php: dataToEndgameGraph() starting");
     var match_list = [];
 
     var datasets = [];
@@ -1461,11 +1471,12 @@ require 'header.php';
 
   // ENDGAME GRAPH END HERE
 
-  function processCommentData(data) {
-    dataToCommentTable(data);
-  }
+  // function processCommentData(data) {
+  //   dataToCommentTable(data);
+  // }
 
   function processPitData(pitData, matchData) {
+    console.log("==> teamLookup.php: processPitData() starting");
     if (!pitData || !pitData.length) {
       // row one    
       pitData["sparepartsstring"] = pitData["spareparts"] ? "yes" : "no";
@@ -1483,11 +1494,11 @@ require 'header.php';
     // second row
     writeTableRow("pitRow2", pitData, ["drivemotors", "preparedness", "swervedrivestring", "proglanguage"]);
     // three row
-
   }
 
   // This is the main function that runs when we want to load a new team 
-  function loadTeam(teamNum) {
+  function loadTeamSheet(teamNum) {
+    console.log("==> teamLookup.php: loadTeamSheet() starting");
     // Clear existing data
     $("#robotPics").html("");
     $("#teamTitle").html("");
@@ -1508,6 +1519,7 @@ require 'header.php';
     $.get("api/tbaAPI.php", {
       getTeamInfo: teamNum
     }).done(function (data) {
+      console.log("==> getTeamInfo");
       var teamname = "XX";
       if (data == null)
         alert("Can't load teamName from TBA; check if TBA Key was set in db_config");
@@ -1528,6 +1540,7 @@ require 'header.php';
     $.get("api/readAPI.php", {
       getImagesForTeam: teamNum
     }).done(function (data) {
+      console.log("==> getImagesForTeam");
       var listOfImages = JSON.parse(data);
       console.log("PHOTO CHECK: " + listOfImages);
       loadTeamPics(listOfImages);
@@ -1537,6 +1550,7 @@ require 'header.php';
     $.get("api/readAPI.php", {
       getTeamData: teamNum
     }).done(function (data) {
+      console.log("==> getTeamData");
       matchData = JSON.parse(data);
       processMatchData(teamNum, matchData);
 
@@ -1544,6 +1558,7 @@ require 'header.php';
       $.get("api/readAPI.php", {
         getTeamPitData: teamNum
       }).done(function (data) {
+        console.log("==> getTeamPitData");
         pitData = JSON.parse(data);
         processPitData(pitData, matchData);
 
@@ -1551,6 +1566,7 @@ require 'header.php';
         $.get("api/readAPI.php", {
           getTeamStrategicData: teamNum
         }).done(function (data) {
+          console.log("==> getTeamStrategicData");
           stratData = JSON.parse(data);
           processStrategicData(stratData);
         });
@@ -1566,13 +1582,14 @@ require 'header.php';
     // Update the navbar with the event code
     $.get("api/tbaAPI.php", {
       getEventCode: true
-    }, function (data) {
-      $("#navbarEventCode").html(data);
+    }, function (eventCode) {
+      console.log("==> teamLookup.php - getEventCode: " + eventCode);
+      $("#navbarEventCode").html(eventCode);
     });
 
     var initTeamNumber = checkGet()
     if (initTeamNumber) {
-      loadTeam(initTeamNumber);
+      loadTeamSheet(initTeamNumber);
     }
 
     // Pressing enter in team number field loads the page
@@ -1586,7 +1603,7 @@ require 'header.php';
 
     // Load team data for the number entered
     $("#loadTeamButton").click(function () {
-      loadTeam($("#enterTeamNumber").val());
+      loadTeamSheet($("#enterTeamNumber").val());
     });
 
     // Keep the frozen match data updated
@@ -1603,6 +1620,6 @@ require 'header.php';
       }
     });
   });
-
 </script>
+
 <script type="text/javascript" src="./scripts/matchDataProcessor.js"></script>

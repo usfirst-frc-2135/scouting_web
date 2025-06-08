@@ -242,10 +242,10 @@ COMMENTED OUT FOR NOW-->
 
 <script>
   // var tbaData = {};
-  var finalTeamList = new Set();
-  var filteredData = {};
-  var jsonMatchData = null;
-  var frozenTable = null;
+  var _finalTeamList = new Set();
+  var _filteredData = {};
+  var _jsonMatchData = null;
+  var _frozenTable = null;
 
   // Lookup value for a key in the passed dictionary (team in match data)
   function getDataValue(dict, key) {
@@ -261,70 +261,71 @@ COMMENTED OUT FOR NOW-->
 
   // Create and the HTML table for display
   function addHtmlToFinalTable() {
+    console.log("==> eventAverages.php: addHtmlToFinalTable() starting");
     $("#tableData").html(""); // Clear Table
-    for (let teamNum of finalTeamList) {
-      var endgameClimbPercentage = getDataValue(filteredData[teamNum], "endgameClimbPercent");
-      var endgameFoulPercentage = getDataValue(filteredData[teamNum], "endgameFoulPercent");
+    for (let teamNum of _finalTeamList) {
+      var endgameClimbPercentage = getDataValue(_filteredData[teamNum], "endgameClimbPercent");
+      var endgameFoulPercentage = getDataValue(_filteredData[teamNum], "endgameFoulPercent");
 
       var rowString = "<tr>" +
         "<td align=\"center\"><a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a></td>" +
         //"<td>" + getDataValue(tbaData[teamNum], "totalPoints") + "</td>" +
-        "<td align=\"center\">" + getDataValue(filteredData[teamNum], "avgTotalPoints") + "</td>" +
-        "<td align=\"center\">" + getDataValue(filteredData[teamNum], "maxTotalPoints") + "</td>" +
-        "<td align=\"center\">" + getDataValue(filteredData[teamNum], "avgTotalCoral") + "</td>" +
-        "<td align=\"center\">" + getDataValue(filteredData[teamNum], "maxTotalCoral") + "</td>" +
-        "<td align=\"center\">" + getDataValue(filteredData[teamNum], "avgTotalAlgae") + "</td>" +
-        "<td align=\"center\">" + getDataValue(filteredData[teamNum], "maxTotalAlgae") + "</td>" +
-        "<td align=\"center\">" + getDataValue(filteredData[teamNum], "avgTotalAutoPoints") + "</td>" +
-        "<td align=\"center\">" + getDataValue(filteredData[teamNum], "maxTotalAutoPoints") + "</td>" +
-        "<td align=\"center\">" + getDataValue(filteredData[teamNum], "avgTotalAutoCoralPoints") + "</td>" +
-        "<td align=\"center\">" + getDataValue(filteredData[teamNum], "maxTotalAutoCoralPoints") + "</td>" +
-        "<td align=\"center\">" + getDataValue(filteredData[teamNum], "avgTotalAutoAlgaePoints") + "</td>" +
-        "<td align=\"center\">" + getDataValue(filteredData[teamNum], "maxTotalAutoAlgaePoints") + "</td>" +
-        "<td align=\"center\">" + getDataValue(filteredData[teamNum], "avgTotalTeleopPoints") + "</td>" +
-        "<td align=\"center\">" + getDataValue(filteredData[teamNum], "maxTotalTeleopPoints") + "</td>" +
-        "<td align=\"center\">" + getDataValue(filteredData[teamNum], "avgTotalTeleopCoralPoints") + "</td>" +
-        "<td align=\"center\">" + getDataValue(filteredData[teamNum], "maxTotalTeleopCoralPoints") + "</td>" +
-        "<td align=\"center\">" + getDataValue(filteredData[teamNum], "avgTotalTeleopAlgaePoints") + "</td>" +
-        "<td align=\"center\">" + getDataValue(filteredData[teamNum], "maxTotalTeleopAlgaePoints") + "</td>" +
-        "<td align=\"center\">" + getDataValue(filteredData[teamNum], "avgEndgamePoints") + "</td>" +
-        "<td align=\"center\">" + getDataValue(filteredData[teamNum], "maxEndgamePoints") + "</td>" +
+        "<td align=\"center\">" + getDataValue(_filteredData[teamNum], "avgTotalPoints") + "</td>" +
+        "<td align=\"center\">" + getDataValue(_filteredData[teamNum], "maxTotalPoints") + "</td>" +
+        "<td align=\"center\">" + getDataValue(_filteredData[teamNum], "avgTotalCoral") + "</td>" +
+        "<td align=\"center\">" + getDataValue(_filteredData[teamNum], "maxTotalCoral") + "</td>" +
+        "<td align=\"center\">" + getDataValue(_filteredData[teamNum], "avgTotalAlgae") + "</td>" +
+        "<td align=\"center\">" + getDataValue(_filteredData[teamNum], "maxTotalAlgae") + "</td>" +
+        "<td align=\"center\">" + getDataValue(_filteredData[teamNum], "avgTotalAutoPoints") + "</td>" +
+        "<td align=\"center\">" + getDataValue(_filteredData[teamNum], "maxTotalAutoPoints") + "</td>" +
+        "<td align=\"center\">" + getDataValue(_filteredData[teamNum], "avgTotalAutoCoralPoints") + "</td>" +
+        "<td align=\"center\">" + getDataValue(_filteredData[teamNum], "maxTotalAutoCoralPoints") + "</td>" +
+        "<td align=\"center\">" + getDataValue(_filteredData[teamNum], "avgTotalAutoAlgaePoints") + "</td>" +
+        "<td align=\"center\">" + getDataValue(_filteredData[teamNum], "maxTotalAutoAlgaePoints") + "</td>" +
+        "<td align=\"center\">" + getDataValue(_filteredData[teamNum], "avgTotalTeleopPoints") + "</td>" +
+        "<td align=\"center\">" + getDataValue(_filteredData[teamNum], "maxTotalTeleopPoints") + "</td>" +
+        "<td align=\"center\">" + getDataValue(_filteredData[teamNum], "avgTotalTeleopCoralPoints") + "</td>" +
+        "<td align=\"center\">" + getDataValue(_filteredData[teamNum], "maxTotalTeleopCoralPoints") + "</td>" +
+        "<td align=\"center\">" + getDataValue(_filteredData[teamNum], "avgTotalTeleopAlgaePoints") + "</td>" +
+        "<td align=\"center\">" + getDataValue(_filteredData[teamNum], "maxTotalTeleopAlgaePoints") + "</td>" +
+        "<td align=\"center\">" + getDataValue(_filteredData[teamNum], "avgEndgamePoints") + "</td>" +
+        "<td align=\"center\">" + getDataValue(_filteredData[teamNum], "maxEndgamePoints") + "</td>" +
 
-        "<td align=\"center\">" + getDataValue(filteredData[teamNum], "avgAutonCoral") + "</td>" +
-        "<td align=\"center\">" + getDataValue(filteredData[teamNum], "maxAutonCoral") + "</td>" +
-        "<td align=\"center\">" + getDataValue(filteredData[teamNum], "avgAutonCoralL1") + "</td>" +
-        "<td align=\"center\">" + getDataValue(filteredData[teamNum], "maxAutonCoralL1") + "</td>" +
-        "<td align=\"center\">" + getDataValue(filteredData[teamNum], "avgAutonCoralL2") + "</td>" +
-        "<td align=\"center\">" + getDataValue(filteredData[teamNum], "maxAutonCoralL2") + "</td>" +
-        "<td align=\"center\">" + getDataValue(filteredData[teamNum], "avgAutonCoralL3") + "</td>" +
-        "<td align=\"center\">" + getDataValue(filteredData[teamNum], "maxAutonCoralL3") + "</td>" +
-        "<td align=\"center\">" + getDataValue(filteredData[teamNum], "avgAutonCoralL4") + "</td>" +
-        "<td align=\"center\">" + getDataValue(filteredData[teamNum], "maxAutonCoralL4") + "</td>" +
-        "<td align=\"center\">" + getDataValue(filteredData[teamNum], "avgAutonAlgae") + "</td>" +
-        "<td align=\"center\">" + getDataValue(filteredData[teamNum], "maxAutonAlgae") + "</td>" +
-        "<td align=\"center\">" + getDataValue(filteredData[teamNum], "avgAutonAlgaeNet") + "</td>" +
-        "<td align=\"center\">" + getDataValue(filteredData[teamNum], "maxAutonAlgaeNet") + "</td>" +
-        "<td align=\"center\">" + getDataValue(filteredData[teamNum], "avgAutonAlgaeProc") + "</td>" +
-        "<td align=\"center\">" + getDataValue(filteredData[teamNum], "maxAutonAlgaeProc") + "</td>" +
+        "<td align=\"center\">" + getDataValue(_filteredData[teamNum], "avgAutonCoral") + "</td>" +
+        "<td align=\"center\">" + getDataValue(_filteredData[teamNum], "maxAutonCoral") + "</td>" +
+        "<td align=\"center\">" + getDataValue(_filteredData[teamNum], "avgAutonCoralL1") + "</td>" +
+        "<td align=\"center\">" + getDataValue(_filteredData[teamNum], "maxAutonCoralL1") + "</td>" +
+        "<td align=\"center\">" + getDataValue(_filteredData[teamNum], "avgAutonCoralL2") + "</td>" +
+        "<td align=\"center\">" + getDataValue(_filteredData[teamNum], "maxAutonCoralL2") + "</td>" +
+        "<td align=\"center\">" + getDataValue(_filteredData[teamNum], "avgAutonCoralL3") + "</td>" +
+        "<td align=\"center\">" + getDataValue(_filteredData[teamNum], "maxAutonCoralL3") + "</td>" +
+        "<td align=\"center\">" + getDataValue(_filteredData[teamNum], "avgAutonCoralL4") + "</td>" +
+        "<td align=\"center\">" + getDataValue(_filteredData[teamNum], "maxAutonCoralL4") + "</td>" +
+        "<td align=\"center\">" + getDataValue(_filteredData[teamNum], "avgAutonAlgae") + "</td>" +
+        "<td align=\"center\">" + getDataValue(_filteredData[teamNum], "maxAutonAlgae") + "</td>" +
+        "<td align=\"center\">" + getDataValue(_filteredData[teamNum], "avgAutonAlgaeNet") + "</td>" +
+        "<td align=\"center\">" + getDataValue(_filteredData[teamNum], "maxAutonAlgaeNet") + "</td>" +
+        "<td align=\"center\">" + getDataValue(_filteredData[teamNum], "avgAutonAlgaeProc") + "</td>" +
+        "<td align=\"center\">" + getDataValue(_filteredData[teamNum], "maxAutonAlgaeProc") + "</td>" +
 
-        "<td align=\"center\">" + getDataValue(filteredData[teamNum], "teleopCoralScoringPercent") + "</td>" +
-        "<td align=\"center\">" + getDataValue(filteredData[teamNum], "avgTeleopCoralScored") + "</td>" +
-        "<td align=\"center\">" + getDataValue(filteredData[teamNum], "maxTeleopCoralScored") + "</td>" +
-        "<td align=\"center\">" + getDataValue(filteredData[teamNum], "avgTeleopCoralL1") + "</td>" +
-        "<td align=\"center\">" + getDataValue(filteredData[teamNum], "maxTeleopCoralL1") + "</td>" +
-        "<td align=\"center\">" + getDataValue(filteredData[teamNum], "avgTeleopCoralL2") + "</td>" +
-        "<td align=\"center\">" + getDataValue(filteredData[teamNum], "maxTeleopCoralL2") + "</td>" +
-        "<td align=\"center\">" + getDataValue(filteredData[teamNum], "avgTeleopCoralL3") + "</td>" +
-        "<td align=\"center\">" + getDataValue(filteredData[teamNum], "maxTeleopCoralL3") + "</td>" +
-        "<td align=\"center\">" + getDataValue(filteredData[teamNum], "avgTeleopCoralL4") + "</td>" +
-        "<td align=\"center\">" + getDataValue(filteredData[teamNum], "maxTeleopCoralL4") + "</td>" +
-        "<td align=\"center\">" + getDataValue(filteredData[teamNum], "teleopAlgaeScoringPercent") + "</td>" +
-        "<td align=\"center\">" + getDataValue(filteredData[teamNum], "avgTeleopAlgaeScored") + "</td>" +
-        "<td align=\"center\">" + getDataValue(filteredData[teamNum], "maxTeleopAlgaeScored") + "</td>" +
-        "<td align=\"center\">" + getDataValue(filteredData[teamNum], "avgTeleopAlgaeNet") + "</td>" +
-        "<td align=\"center\">" + getDataValue(filteredData[teamNum], "maxTeleopAlgaeNet") + "</td>" +
-        "<td align=\"center\">" + getDataValue(filteredData[teamNum], "avgTeleopAlgaeProc") + "</td>" +
-        "<td align=\"center\">" + getDataValue(filteredData[teamNum], "maxTeleopAlgaeProc") + "</td>" +
+        "<td align=\"center\">" + getDataValue(_filteredData[teamNum], "teleopCoralScoringPercent") + "</td>" +
+        "<td align=\"center\">" + getDataValue(_filteredData[teamNum], "avgTeleopCoralScored") + "</td>" +
+        "<td align=\"center\">" + getDataValue(_filteredData[teamNum], "maxTeleopCoralScored") + "</td>" +
+        "<td align=\"center\">" + getDataValue(_filteredData[teamNum], "avgTeleopCoralL1") + "</td>" +
+        "<td align=\"center\">" + getDataValue(_filteredData[teamNum], "maxTeleopCoralL1") + "</td>" +
+        "<td align=\"center\">" + getDataValue(_filteredData[teamNum], "avgTeleopCoralL2") + "</td>" +
+        "<td align=\"center\">" + getDataValue(_filteredData[teamNum], "maxTeleopCoralL2") + "</td>" +
+        "<td align=\"center\">" + getDataValue(_filteredData[teamNum], "avgTeleopCoralL3") + "</td>" +
+        "<td align=\"center\">" + getDataValue(_filteredData[teamNum], "maxTeleopCoralL3") + "</td>" +
+        "<td align=\"center\">" + getDataValue(_filteredData[teamNum], "avgTeleopCoralL4") + "</td>" +
+        "<td align=\"center\">" + getDataValue(_filteredData[teamNum], "maxTeleopCoralL4") + "</td>" +
+        "<td align=\"center\">" + getDataValue(_filteredData[teamNum], "teleopAlgaeScoringPercent") + "</td>" +
+        "<td align=\"center\">" + getDataValue(_filteredData[teamNum], "avgTeleopAlgaeScored") + "</td>" +
+        "<td align=\"center\">" + getDataValue(_filteredData[teamNum], "maxTeleopAlgaeScored") + "</td>" +
+        "<td align=\"center\">" + getDataValue(_filteredData[teamNum], "avgTeleopAlgaeNet") + "</td>" +
+        "<td align=\"center\">" + getDataValue(_filteredData[teamNum], "maxTeleopAlgaeNet") + "</td>" +
+        "<td align=\"center\">" + getDataValue(_filteredData[teamNum], "avgTeleopAlgaeProc") + "</td>" +
+        "<td align=\"center\">" + getDataValue(_filteredData[teamNum], "maxTeleopAlgaeProc") + "</td>" +
 
         "<td align=\"center\">" + getDataValue(endgameClimbPercentage, 0) + "</td>" +
         "<td align=\"center\">" + getDataValue(endgameClimbPercentage, 1) + "</td>" +
@@ -332,7 +333,7 @@ COMMENTED OUT FOR NOW-->
         "<td align=\"center\">" + getDataValue(endgameClimbPercentage, 3) + "</td>" +
         "<td align=\"center\">" + getDataValue(endgameClimbPercentage, 4) + "</td>" +
 
-        "<td align=\"center\">" + getDataValue(filteredData[teamNum], "totaldied") + "</td>" +
+        "<td align=\"center\">" + getDataValue(_filteredData[teamNum], "totaldied") + "</td>" +
         "</td>";
 
       $("#tableData").append(rowString);
@@ -341,29 +342,32 @@ COMMENTED OUT FOR NOW-->
 
   // Add a team (key) to the final team list
   function addKeysToFinalList(data) {
+    console.log("==> eventAverages.php: addKeysToFinalList() starting");
     for (var key in data) {
-      finalTeamList.add(key);
+      _finalTeamList.add(key);
     }
   }
 
   // Get all match data, filter it, create final HTML table, and sort it
-  function requestAPI() {
+  function readMatchDataAndBuildTable() {
+    console.log("==> eventAverages.php: readAllMatchDataAndBuildTable() starting");
     $.get("api/readAPI.php", {
       getAllMatchData: 1
     }).done(function (readData) {
+      console.log("==> getAllMatchData:");
       jsonData = JSON.parse(readData);
-      jsonMatchData = jsonData;
+      _jsonMatchData = jsonData;
       var mdp = new matchDataProcessor(jsonData);
       mdp.getSiteFilteredAverages(function (averageData) {
-        filteredData = {
+        _filteredData = {
           ...averageData
         };
-        //console.log(filteredData);
-        addKeysToFinalList(filteredData);
+        //console.log(_filteredData);
+        addKeysToFinalList(_filteredData);
         addHtmlToFinalTable();
         setTimeout(function () {
           sorttable.makeSortable(document.getElementById("averageTable"))
-          frozenTable = $('#freeze-table').freezeTable({
+          _frozenTable = $('#freeze-table').freezeTable({
             'freezeHead': true,
             'freezeColumn': true,
             'freezeColumnHead': true,
@@ -385,16 +389,17 @@ COMMENTED OUT FOR NOW-->
 
   // Update table when match filters are changed
   function filterAndShow() {
+    console.log("==> eventAverages.php: filterAndShow() starting");
     var start = $("#startPrefix").val() + $("#startMatch").val();
     var end = $("#endPrefix").val() + $("#endMatch").val();
-    var mdp = new matchDataProcessor(jsonMatchData);
+    var mdp = new matchDataProcessor(_jsonMatchData);
     mdp.filterMatches(start, end);
-    filteredData = mdp.getAverages();
-    addKeysToFinalList(filteredData);
+    _filteredData = mdp.getAverages();
+    addKeysToFinalList(_filteredData);
     addHtmlToFinalTable();
     setTimeout(function () {
       sorttable.makeSortable(document.getElementById("averageTable"))
-      frozenTable = $('#freeze-table').freezeTable({
+      _frozenTable = $('#freeze-table').freezeTable({
         'freezeHead': true,
         'freezeColumn': true,
         'freezeColumnHead': true,
@@ -414,11 +419,12 @@ COMMENTED OUT FOR NOW-->
 
   // CSV File functions
 
-  var eventCode = null;
+  var _eventCode = null;
   var tbaCoprData = {};          // for TBA OPR data
 
   // Retrieve an average value from data for a team
   function localAveragesLookup(localAverages, team, item) {
+    console.log("==> eventAverages.php: localAveragesLookup() starting");
     if (!localAverages) {
       return "NA";
     }
@@ -444,20 +450,9 @@ COMMENTED OUT FOR NOW-->
     return 0;
   }
 
-  function getEndGameClimb(dict, key) {
-    /* If key doesn't exist in given dict, return a 0. */
-    // console.log(dict);
-    if (!dict) {
-      return 0;
-    }
-    if (key in dict) {
-      return dict[key];
-    }
-    return 0;
-  }
-
   // Returns a string with the comma-separated line of data for the given team.
   function createCSVLine(localAverages, team) {
+    console.log("==> eventAverages.php: createCSVLine() starting");
     var oprTP = 0;
     var pitLocation = 0;
     oprTP = getOprTotalPoints(tbaCoprData[team]);
@@ -515,11 +510,11 @@ COMMENTED OUT FOR NOW-->
     out += localAveragesLookup(localAverages, team, "avgTeleopAlgaeProc") + ",";
     out += localAveragesLookup(localAverages, team, "maxTeleopAlgaeProc") + ",";
     out += localAveragesLookup(localAverages, team, "teleopAlgaeScoringPercent") + ",";
-    out += getEndGameClimb(endgameClimbPercent, 0) + ",";
-    out += getEndGameClimb(endgameClimbPercent, 1) + ",";
-    out += getEndGameClimb(endgameClimbPercent, 2) + ",";
-    out += getEndGameClimb(endgameClimbPercent, 3) + ",";
-    out += getEndGameClimb(endgameClimbPercent, 4) + ",";
+    out += getDataValue(endgameClimbPercent, 0) + ",";
+    out += getDataValue(endgameClimbPercent, 1) + ",";
+    out += getDataValue(endgameClimbPercent, 2) + ",";
+    out += getDataValue(endgameClimbPercent, 3) + ",";
+    out += getDataValue(endgameClimbPercent, 4) + ",";
     out += localAveragesLookup(localAverages, team, "totaldied") + ",";
     out += "-\n";    // NOTE
     return out;
@@ -527,7 +522,7 @@ COMMENTED OUT FOR NOW-->
 
   // 
   function processData(matchData) {
-    console.log("process match data - setting up mdp");
+    console.log("==> eventAverages.php: processData() starting");
     var mdp = new matchDataProcessor(matchData);
     var csvStr = "Team,Pit Location,OPR,Total Coral Avg,Total Coral Max,Total Algae Avg,Total Algae Max,Auto Pts Avg,Auto Pts Max,Tel Pts Avg,Tel Pts Max,End Pts Avg,End Pts Max,Total Pts Avg,Total Pts Max,Auto Coral Avg,Auto Coral Max,Auto L1 Avg,Auto L1 Max,Auto L2 Avg,Auto L2 Max,Auto L3 Avg,Auto L3 Max,Auto L4 Avg,Auto L4 Max,Auto Algae Avg,Auto Algae Max,Auto Net Avg,Auto Net Max,Auto Proc Avg,Auto Proc Max,Tel Coral Avg,Tel Coral Max,Tel L1 Avg,Tel L1 Max,Tel L2 Avg,Tel L2 Max,Tel L3 Avg,Tel L3 Max,Tel L4 Avg,Tel L4 Max,Tel Coral Acc,Tel Algae Avg,Tel Algae Max,Tel Net Avg,Tel Net Max,Tel Proc Avg,Tel Proc Max,Tel Algae Acc,End N/A,End Park,End Fall,End Shal,End Deep, Total Died, Note\n";
     mdp.getSiteFilteredAverages(function (averageData) {
@@ -537,7 +532,7 @@ COMMENTED OUT FOR NOW-->
       }
 
       var hiddenElement = document.createElement('a');
-      var filename = eventCode + ".csv";
+      var filename = _eventCode + ".csv";
       console.log("CSV filename: " + filename);
       hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csvStr);
       hiddenElement.target = '_blank';
@@ -548,20 +543,21 @@ COMMENTED OUT FOR NOW-->
 
   // Retrieve match data and OPRs data and write out CSV file
   function writeCSVFile() {
-    console.log("starting CSV file write - retrieve match data");
+    console.log("==> eventAverages.php: writeCSVFile() starting");
     $.get("api/readAPI.php", {
       getAllMatchData: 1
-    }).done(function (data) {
-      matchData = JSON.parse(data);
+    }).done(function (allMatchData) {
+      console.log("==> getAllMatchData:");
+      matchData = JSON.parse(allMatchData);
 
       // Get OPR data 
       console.log("getting OPR data from TBA");
       $.get("api/tbaAPI.php", {
         getCOPRs: 1
       }).done(function (data) {
+        console.log("==> getCOPRs:");
         data = JSON.parse(data)["data"];
         tbaCoprData = data;
-        console.log("--> setting tbaCoprData");
         processData(matchData);
       });
     });
@@ -574,12 +570,13 @@ COMMENTED OUT FOR NOW-->
     // Update the navbar with the event code
     $.get("api/tbaAPI.php", {
       getEventCode: true
-    }, function (data) {
-      $("#navbarEventCode").html(data);
-      eventCode = data;
+    }, function (eventCode) {
+      console.log("==> eventAverages.php - getEventCode: " + eventCode);
+      $("#navbarEventCode").html(eventCode);
+      _eventCode = eventCode;
     });
 
-    requestAPI(); // Retrieve all data
+    readMatchDataAndBuildTable(); // Retrieve all data
 
     // Filter out unwanted matches
     $("#filterData").click(function () {
@@ -588,7 +585,7 @@ COMMENTED OUT FOR NOW-->
 
     // Keep the frozen pane updated 
     $("#averageTable").click(function () {
-      frozenTable.update();
+      _frozenTable.update();
     });
 
     // Write out picklist CSV file to client's download dir.

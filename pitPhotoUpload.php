@@ -64,6 +64,7 @@ require 'header.php';
   loadButton.style.visibility = 'hidden';
 
   function showSuccessMessage(message) {
+    console.log("==> pitPhotoUpload.php: showSuccessMessage() starting");
     $("#robotPic").val("");
     $("#teamNumber").val("");
 
@@ -85,6 +86,7 @@ require 'header.php';
   }
 
   function uploadSuccess(data) {
+    console.log("==> pitPhotoUpload.php: uploadSuccess() starting");
     data = JSON.parse(data);
     const loadButton = document.getElementById("loadingButton");
     if (data["success"]) {
@@ -104,8 +106,9 @@ require 'header.php';
     // Update the navbar with the event code
     $.get("api/tbaAPI.php", {
       getEventCode: true
-    }, function (data) {
-      $("#navbarEventCode").html(data);
+    }, function (eventCode) {
+      console.log("==> pitPhotoUpload - getEventCode: " + eventCode);
+      $("#navbarEventCode").html(eventCode);
     });
 
     // Upload photo to the server
@@ -123,6 +126,7 @@ require 'header.php';
           $.get("api/readAPI.php", {
             getImagesForTeam: teamNum
           }).done(function (data) {
+            console.log("==> getImagesForTeam");
             var teamPics = JSON.parse(data);
 
             // If there are any existing pics, delete them.
@@ -144,8 +148,8 @@ require 'header.php';
           setTimeout(function () {
             $.get("api/readAPI.php", {
               getImagesForTeam: teamNum
-            }).done(function (data) {
-              console.log("Reloaded team images:\n" + data);
+            }).done(function (teamImages) {
+              console.log("==> getImagesForTeam\n" + teamImages);
             });
           }, 500);
         }

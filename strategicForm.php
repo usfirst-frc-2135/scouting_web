@@ -256,7 +256,8 @@ require 'header.php';
 
 <script>
 
-  function verifyData() {
+  function verifyStrategicForm() {
+    console.log("==> strategicForm.php: clearStrategicForm() starting");
     var isError = false;
     var errMsg = "Please enter values for these fields:";
 
@@ -279,7 +280,8 @@ require 'header.php';
     return isError;
   }
 
-  function clearForm() {
+  function clearStrategicForm() {
+    console.log("==> strategicForm.php: clearStrategicForm() starting");
     $("#scoutName").val("");
     $("#teamNumber").val("");
     $("#matchNumber").val("");
@@ -320,7 +322,8 @@ require 'header.php';
     $("#generalComment").val("");
   }
 
-  function writeDataToAPI() {
+  function writeStrategicFormToTable() {
+    console.log("==> strategicForm.php: writeStrategicFormToTable() starting");
     var dataToUse = {};
 
     // Clean up teamnumber before writing to table.
@@ -436,10 +439,11 @@ require 'header.php';
     $.post("api/writeAPI.php", {
       writeStrategicData: JSON.stringify(dataToUse)
     }).done(function (data) {
+      console.log("==> writeStrategicData");
       // Because success word may have a new-line at the end, don't do a direct compare
       if (data.indexOf('success') > -1) {
         alert("Success in submitting Strategic Form data!");
-        clearForm();
+        clearStrategicForm();
       } else {
         alert("Failure in submitting Strategic Form!");
       }
@@ -453,14 +457,15 @@ require 'header.php';
     // Update the navbar with the event code
     $.get("api/tbaAPI.php", {
       getEventCode: true
-    }, function (data) {
-      $("#navbarEventCode").html(data);
+    }, function (eventCode) {
+      console.log("==> strategicForm.php - getEventCode: " + eventCode);
+      $("#navbarEventCode").html(eventCode);
     });
 
     // Submit the strategic form data
     $("#submitButton").click(function () {
-      if (!verifyData()) {
-        writeDataToAPI();
+      if (!verifyStrategicForm()) {
+        writeStrategicFormToTable();
       }
     });
 

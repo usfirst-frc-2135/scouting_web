@@ -182,8 +182,9 @@ require 'header.php';
     // Update the navbar with the event code
     $.get("api/tbaAPI.php", {
       getEventCode: true
-    }, function (data) {
-      $("#navbarEventCode").html(data);
+    }, function (eventCode) {
+      console.log("==> index.php - getEventCode: " + eventCode);
+      $("#navbarEventCode").html(eventCode);
     });
 
     // Update the database statuses

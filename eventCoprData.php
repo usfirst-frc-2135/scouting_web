@@ -11,7 +11,7 @@ require 'header.php';
       <h2 id="COPRHeader" class="col-4"><?php echo $title; ?></h2>
 
       <div class="col-2">
-        <button id="loadEvent" class="btn btn-primary" type="button">Reload COPRs</button>
+        <button id="reloadEvent" class="btn btn-primary" type="button">Reload COPRs</button>
       </div>
     </div>
 
@@ -52,9 +52,9 @@ require 'header.php';
 <!-- Javascript page handlers -->
 
 <script>
-  var frozenTable = null;
+  var _frozenTable = null;
 
-  function buildCOPRDataTable(dataObj, keys) {
+  function buildCoprDataTable(dataObj, keys) {
     $("#tableData").html("");
     for (let team in dataObj) {
       var row = '<tr>';
@@ -75,26 +75,27 @@ require 'header.php';
     $("#tableKeys").html(header);
   }
 
-  function processData(data) {
+  function processCoprData(data) {
+    console.log("==> eventCoprData.php: processCoprData() starting");
     var dataObj = JSON.parse(data);
     var data = dataObj["data"];
     var keys = dataObj["keys"];
     var ec = dataObj["eventCode"];
 
     keysToTable(keys);
-    buildCOPRDataTable(data, keys);
+    buildCoprDataTable(data, keys);
   }
 
-  function requestAPI() {
+  function readTbaAndBuildCoprTable() {
     //output: gets the COPR data from TBA
     $.get("api/tbaAPI.php", {
       getCOPRs: 1
-    }).done(function (data) {
-      console.log("==> requestAPI:\n" + data);
-      processData(data);
+    }).done(function (coprData) {
+      console.log("==> getCOPRs");
+      processCoprData(coprData);
       setTimeout(function () {
         sorttable.makeSortable(document.getElementById("coprTable"));
-        frozenTable = $('#freeze-table').freezeTable({
+        _frozenTable = $('#freeze-table').freezeTable({
           'freezeHead': true,
           'freezeColumn': true,
           'freezeColumnHead': true,
@@ -120,19 +121,20 @@ require 'header.php';
     // Update the navbar with the event code
     $.get("api/tbaAPI.php", {
       getEventCode: true
-    }, function (data) {
-      $("#navbarEventCode").html(data);
+    }, function (eventCode) {
+      console.log("==> eventCoprData.php - getEventCode: " + eventCode);
+      $("#navbarEventCode").html(eventCode);
     });
 
-    requestAPI();
+    readTbaAndBuildCoprTable();
 
-    $("#loadEvent").click(function () {
-      requestAPI();
+    $("#reloadEvent").click(function () {
+      readTbaAndBuildCoprTable();
     });
 
     $("#coprTable").click(function () {
-      if (frozenTable) {
-        frozenTable.update();
+      if (_frozenTable) {
+        _frozenTable.update();
       }
     });
 

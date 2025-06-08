@@ -37,7 +37,8 @@ require 'header.php';
   var jsonPitList = {};
   var jsonImageList = {};
 
-  function createTable() {
+  function createPitTable() {
+    console.log("==> pitStatus.php: createPitTable() starting");
     if (jsonPitList == null || teamList == null) {
       return null;
     }
@@ -79,6 +80,7 @@ require 'header.php';
   // Note a team number could end in a "B", "C", "D", or "E", in which case we strip the letter off 
   // and just use the number for the comparison.
   function sortTable() {
+    console.log("==> pitStatus.php: sortTable() starting");
     var table = document.getElementById("psTable");
     var rows = Array.prototype.slice.call(table.querySelectorAll("tbody> tr"));
 
@@ -125,8 +127,9 @@ require 'header.php';
   $(document).ready(function () {
     $.get("api/tbaAPI.php", {
       getEventCode: true
-    }, function (data) {
-      $("#navbarEventCode").html(data);
+    }, function (eventCode) {
+      console.log("==> pitStatus.php - getEventCode: " + eventCode);
+      $("#navbarEventCode").html(eventCode);
     });
 
     // Get the list of teams and add the team names 
@@ -134,6 +137,7 @@ require 'header.php';
     $.get("api/tbaAPI.php", {
       getTeamListAndNames: 1
     }).done(function (data) {
+      console.log("==> getTeamListAndNames");
       if (data == null)
         alert("Can't load teamlist from TBA; check if TBA Key was set in db_config");
       else {
@@ -155,8 +159,9 @@ require 'header.php';
           $.get("api/readAPI.php", {
             getAllPitData: 1
           }).done(function (data) {
+            console.log("==> getAllPitData");
             jsonPitList = JSON.parse(data);
-            createTable();
+            createPitTable();
             sorttable.makeSortable(document.getElementById("psTable"));
             sortTable();
           });

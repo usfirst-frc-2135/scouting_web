@@ -240,8 +240,8 @@ require 'header.php';
   var teleop_cubesmiddle = 0;
   var teleop_cubestop = 0;
 
-  function attach_gamepiece_scoring() {
-    console.log("==> matchForm.php: attach_gamepiece_scoring() starting");
+  function attachGamepieceScoring() {
+    console.log("==> matchForm.php: attachGamepieceScoring() starting");
     $("#autoConesBottomPlus").click(function () {
       auto_conesbottom += 1;
       $("#autoConesBottom").html("Auto Cones Bottom: " + auto_conesbottom);
@@ -364,8 +364,8 @@ require 'header.php';
 
   }
 
-  function get_form_data() {
-    console.log("==> matchForm.php: get_form_data() starting");
+  function getFormData() {
+    console.log("==> matchForm.php: getFormData() starting");
     var out = {};
     var match_level = $("#compLevel").val();
     var match_number = $("#matchNumber").val();
@@ -437,8 +437,8 @@ require 'header.php';
     $("#comment").val("");
   }
 
-  function submit(form_data) {
-    console.log("==> matchForm.php: submit() starting");
+  function submitMatchData(form_data) {
+    console.log("==> matchForm.php: submitMatchData() starting");
     $.post("api/writeAPI.php", {
       "writeSingleData": JSON.stringify(form_data)
     }, function (data) {
@@ -459,18 +459,18 @@ require 'header.php';
     // Update the navbar with the event code
     $.get("api/tbaAPI.php", {
       getEventCode: true
-    }, function (data) {
-      $("#navbarEventCode").html(data);
+    }, function (eventCode) {
+      console.log("==> matchForm.php - getEventCode: " + eventCode);
+      $("#navbarEventCode").html(eventCode);
     });
 
-    console.log("==> matchForm.php: ready() starting");
-    attach_gamepiece_scoring();
+    attachGamepieceScoring();
 
     // Submit the match data form 
     $("#submitForm").click(function () {
       alert("This match form is NOT configured for 2025 game!");
-      // var form_data = get_form_data();
-      // submit(form_data);
+      // var formData = getFormData();
+      // submitMatchData(formData);
     });
   });
 </script>

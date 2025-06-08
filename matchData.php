@@ -165,6 +165,7 @@ require 'header.php';
 
   // NOTE: data object keywords should match the database definition in dbHander.php
   function buildMatchDataTable(dataObj) {
+    console.log("==> matchData.php: buildMatchDataTable() starting");
     for (let i = 0; i < dataObj.length; i++) {
       var rowString = "<tr><td align=\"center\">" + dataObj[i]["matchnumber"] + "</td>" +
         "<td align=\"center\">" + dataObj[i]["teamnumber"] + "</td>" +
@@ -193,14 +194,14 @@ require 'header.php';
     }
   }
 
-  function requestAPI() {
+  function readMatchDataAndBuildTable() {
+    console.log("==> matchData.php: readMatchDataAndBuildTable() starting");
     // output: gets the API data from our server
     $.get("api/readAPI.php", {
       getAllMatchData: 1
     }).done(function (data) {
-      console.log("===> matchData: data = " + data);
+      console.log("===> getAllMatchData: data:\n" + data);
       var dataObj = JSON.parse(data);
-      console.log("===> matchData: dataObj size = " + dataObj.length);
       buildMatchDataTable(dataObj);
       setTimeout(function () {
         sorttable.makeSortable(document.getElementById("matchDataTable"));
@@ -231,11 +232,12 @@ require 'header.php';
     // Update the navbar with the event code
     $.get("api/tbaAPI.php", {
       getEventCode: true
-    }, function (data) {
-      $("#navbarEventCode").html(data);
+    }, function (eventCode) {
+      console.log("==> matchData.php - getEventCode: " + eventCode);
+      $("#navbarEventCode").html(eventCode);
     });
 
-    requestAPI();
+    readMatchDataAndBuildTable();
 
     // Keep the frozen pane updated 
     $("#matchDataTable").click(function () {

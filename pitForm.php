@@ -156,7 +156,8 @@ require 'header.php';
 <!-- Javascript page handlers -->
 
 <script>
-  function verifyData() {
+  function verifyPitForm() {
+    console.log("==> pitForm.php: verifyPitForm() starting");
     var isError = false;
     var errMsg = "Please enter values for these fields:";
 
@@ -223,7 +224,8 @@ require 'header.php';
     return isError;
   }
 
-  function clearForm() {
+  function clearPitForm() {
+    console.log("==> pitForm.php: clearPitForm() starting");
     $("#teamNumber").val("");
     $("#batteries").val("");
     $("#preloadAndLeave").val("0");
@@ -244,6 +246,7 @@ require 'header.php';
   }
 
   function writeFormToPitTable() {
+    console.log("==> pitForm.php: writeFormToPitTable() starting");
     var dataToUse = {};
     dataToUse["teamnumber"] = $("#teamNumber").val();
     dataToUse["numbatteries"] = $("#batteries").val();
@@ -325,10 +328,11 @@ require 'header.php';
     $.post("api/writeAPI.php", {
       writePitTable: JSON.stringify(dataToUse)
     }).done(function (data) {
+      console.log("==> writePitTable");
       // Because success word may have a new-line at the end, don't do a direct compare
       if (data.indexOf('success') > -1) {
         alert("Success in submitting pit data!");
-        clearForm();
+        clearPitForm();
       } else {
         alert("Failure in submitting pit data!");
       }
@@ -342,13 +346,14 @@ require 'header.php';
     // Update the navbar with the event code
     $.get("api/tbaAPI.php", {
       getEventCode: true
-    }, function (data) {
-      $("#navbarEventCode").html(data);
+    }, function (eventCode) {
+      console.log("==> pitForm.php - getEventCode: " + eventCode);
+      $("#navbarEventCode").html(eventCode);
     });
 
     // Submit the match data form
     $("#submitButton").click(function () {
-      if (!verifyData()) {
+      if (!verifyPitForm()) {
         writeFormToPitTable();
       }
     });
