@@ -653,7 +653,7 @@ require 'header.php';
   // filters out the match type as specified in the db status page
   function getFilteredData(team, successFunction) {
     console.log("==> teamLookup.php: loadTeamPics(): " + team);
-    var temp_this = this;
+    var tempThis = this;
     $.post("api/dbAPI.php",
       {
         "getDBStatus": true
@@ -666,44 +666,44 @@ require 'header.php';
         localSiteFilter["useQf"] = dbdata["useQf"];
         localSiteFilter["useSf"] = dbdata["useSf"];
         localSiteFilter["useF"] = dbdata["useF"];
-        //temp_this.siteFilter = { ...localSiteFilter };
+        //tempThis.siteFilter = { ...localSiteFilter };
         //          console.log(">>> useP = " + localSiteFilter["useP"]);
         //          console.log(">>> useQm = " + localSiteFilter["useQm"]);
-        //temp_this.applySiteFilter();
+        //tempThis.applySiteFilter();
         $.get("api/readAPI.php", {
           getTeamData: team
         }).done(function (matchData) {
           console.log("==> getTeamData");
           matchData = JSON.parse(matchData);
 
-          var new_data = [];
+          var newData = [];
           for (var i = 0; i < matchData.length; i++) {
             var mn = matchData[i]["matchnumber"];
             var mt = "-";
-            var match_str = mn.toLowerCase();
-            if (match_str.search("p") != -1) {
+            var matchStr = mn.toLowerCase();
+            if (matchStr.search("p") != -1) {
               mt = "p";
             }
-            else if (match_str.search("qm") != -1) {
+            else if (matchStr.search("qm") != -1) {
               mt = "qm";
             }
-            else if (match_str.search("qf") != -1) {
+            else if (matchStr.search("qf") != -1) {
               mt = "qf";
             }
-            else if (match_str.search("sf") != -1) {
+            else if (matchStr.search("sf") != -1) {
               mt = "sf";
             }
-            else if (match_str.search("f") != -1) {
+            else if (matchStr.search("f") != -1) {
               mt = "f";
             }
 
-            if (mt == "p" && localSiteFilter["useP"]) { new_data.push(matchData[i]); }
-            else if (mt == "qm" && localSiteFilter["useQm"]) { new_data.push(matchData[i]); }
-            else if (mt == "qf" && localSiteFilter["useQf"]) { new_data.push(matchData[i]); }
-            else if (mt == "sf" && localSiteFilter["useSf"]) { new_data.push(matchData[i]); }
-            else if (mt == "f" && localSiteFilter["useF"]) { new_data.push(matchData[i]); }
+            if (mt == "p" && localSiteFilter["useP"]) { newData.push(matchData[i]); }
+            else if (mt == "qm" && localSiteFilter["useQm"]) { newData.push(matchData[i]); }
+            else if (mt == "qf" && localSiteFilter["useQf"]) { newData.push(matchData[i]); }
+            else if (mt == "sf" && localSiteFilter["useSf"]) { newData.push(matchData[i]); }
+            else if (mt == "f" && localSiteFilter["useF"]) { newData.push(matchData[i]); }
           }
-          matchData = [...new_data];
+          matchData = [...newData];
 
           successFunction(matchData);
         });

@@ -166,7 +166,7 @@ require 'header.php';
   }
 
   // Map form form-control IDs to labels for db_config
-  var id_to_key_map = {
+  var idToKeyMap = {
     "enterServerURL": "server",
     "enterDBName": "db",
     "enterUserName": "username",
@@ -175,7 +175,7 @@ require 'header.php';
     "enterEventCode": "eventcode",
   };
 
-  var id_to_written_map = {}
+  var idToWrittenMap = {}
 
   //
   // Process the generated html
@@ -198,27 +198,27 @@ require 'header.php';
     });
 
     // Loop through handling all fields
-    for (const key in id_to_key_map) {
-      id_to_written_map[key] = false;
+    for (const key in idToKeyMap) {
+      idToWrittenMap[key] = false;
       $("#" + key).change(function () {
         if ($("#" + key).val() == "") {
           $("#" + key).removeClass("bg-info");
-          id_to_written_map[key] = false;
+          idToWrittenMap[key] = false;
           if (key == "enterDBName") {
-            id_to_written_map["writeMatchTable"] = false;
-            id_to_written_map["writeTBATable"] = false;
-            id_to_written_map["writePitTable"] = false;
-            id_to_written_map["writeStrategicTable"] = false;
+            idToWrittenMap["writeMatchTable"] = false;
+            idToWrittenMap["writeTBATable"] = false;
+            idToWrittenMap["writePitTable"] = false;
+            idToWrittenMap["writeStrategicTable"] = false;
           }
         } else {
           $("#" + key).addClass("bg-info");
-          id_to_written_map[key] = true;
+          idToWrittenMap[key] = true;
           if (key == "enterDBName") {
-            // Mark tables in id_to_written_map 
-            id_to_written_map["writeMatchTable"] = true;
-            id_to_written_map["writeTBATable"] = true;
-            id_to_written_map["writePitTable"] = true;
-            id_to_written_map["writeStrategicTable"] = true;
+            // Mark tables in idToWrittenMap 
+            idToWrittenMap["writeMatchTable"] = true;
+            idToWrittenMap["writeTBATable"] = true;
+            idToWrittenMap["writePitTable"] = true;
+            idToWrittenMap["writeStrategicTable"] = true;
           }
         }
       });
@@ -227,9 +227,9 @@ require 'header.php';
     // Write the db_config file
     $("#writeConfig").on('click', function (event) {
       var configData = {};
-      for (const key in id_to_key_map) {
-        if ($("#" + key).val() != "" && id_to_written_map[key]) {
-          configData[id_to_key_map[key]] = $("#" + key).val();
+      for (const key in idToKeyMap) {
+        if ($("#" + key).val() != "" && idToWrittenMap[key]) {
+          configData[idToKeyMap[key]] = $("#" + key).val();
         }
       }
       // Create table names from database name.

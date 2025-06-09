@@ -628,7 +628,7 @@ class dbHandler
     }
     catch (Exception $e)
     {
-      error_log("  dbHandler: no existing db_config file, so  creating a new one");
+      error_log("dbHandler: no existing db_config file, so  creating a new one");
       $ini_arr = array();
     }
 

@@ -181,18 +181,18 @@ function createCameraSelect(reader) {
   reader.getVideoInputDevices().then((videoInputDevices) => {
 
     // Creates drop down menu to switch between cameras
-    var initial_id = null;
+    var initialId = null;
     if (videoInputDevices.length >= 1) {
       videoInputDevices.forEach((element) => {
-        if (initial_id == null) {
-          initial_id = element.deviceId;
+        if (initialId == null) {
+          initialId = element.deviceId;
         }
         $("#cameraSelect").append($('<option>', { value: element.deviceId, text: element.label }));
       });
     }
 
     // Creates default camera scanner based on saved data
-    scanCamera(reader, getDefaultDeviceID(initial_id));
+    scanCamera(reader, getDefaultDeviceID(initialId));
 
     // Binds drop down on change to select new camera when necessary
     $("#cameraSelect").change(function () {

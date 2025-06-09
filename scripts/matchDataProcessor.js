@@ -31,51 +31,51 @@ class matchDataProcessor {
     return null;
   }
 
-  matchLessEqualThan(start_match, end_match) {
-    var sm = this.getMatchTuple(start_match);
-    var em = this.getMatchTuple(end_match);
+  matchLessEqualThan(startMatch, endMatch) {
+    var sm = this.getMatchTuple(startMatch);
+    var em = this.getMatchTuple(endMatch);
 
     if (sm == null) {
-      start_match = "qm" + start_match;
-      sm = this.getMatchTuple(start_match);
+      startMatch = "qm" + startMatch;
+      sm = this.getMatchTuple(startMatch);
     }
 
     if (em == null) {
-      end_match = "qm" + end_match;
-      em = this.getMatchTuple(end_match);
+      endMatch = "qm" + endMatch;
+      em = this.getMatchTuple(endMatch);
     }
 
-    var type_prog = { "p": 0, "qm": 1, "qf": 2, "sf": 3, "f": 4 };
+    var typeProg = { "p": 0, "qm": 1, "qf": 2, "sf": 3, "f": 4 };
     if (sm == null || em == null) {
       return false;
     }
-    if (type_prog[sm[0]] < type_prog[em[0]]) {
+    if (typeProg[sm[0]] < typeProg[em[0]]) {
       return true;
     }
-    if (type_prog[sm[0]] > type_prog[em[0]]) {
+    if (typeProg[sm[0]] > typeProg[em[0]]) {
       return false;
     }
     return sm[1] <= em[1];
   }
 
-  ifMatchInRange(start_match, middle_match, end_match) {
-    return this.matchLessEqualThan(start_match, middle_match) && this.matchLessEqualThan(middle_match, end_match);
+  ifMatchInRange(startMatch, middleMatch, endMatch) {
+    return this.matchLessEqualThan(startMatch, middleMatch) && this.matchLessEqualThan(middleMatch, endMatch);
   }
 
-  filterMatches(start_match, end_match) {
-    //  Modify this.data to only include matches between start_match and end_match
-    var new_data = [];
+  filterMatches(startMatch, endMatch) {
+    //  Modify this.data to only include matches between start match and end match
+    var newData = [];
     for (var i = 0; i < this.data.length; i++) {
-      var mid_str = this.data[i]["matchnumber"];
-      if (this.getMatchTuple(mid_str) == null) {
-        mid_str = "qm" + mid_str;
+      var midStr = this.data[i]["matchnumber"];
+      if (this.getMatchTuple(midStr) == null) {
+        midStr = "qm" + midStr;
       }
-      if (this.ifMatchInRange(start_match, mid_str, end_match)) {
-        new_data.push(this.data[i]);
+      if (this.ifMatchInRange(startMatch, midStr, endMatch)) {
+        newData.push(this.data[i]);
       }
 
     }
-    this.data = new_data;
+    this.data = newData;
   }
 
   // Rounding helper function 
@@ -84,16 +84,16 @@ class matchDataProcessor {
   }
 
   removePracticeMatches() {
-    var new_data = [];
+    var newData = [];
     for (var i = 0; i < this.data.length; i++) {
-      var mid_str = this.data[i]["matchnumber"];
-      var mt = this.getMatchTuple(mid_str);
+      var midStr = this.data[i]["matchnumber"];
+      var mt = this.getMatchTuple(midStr);
       if (mt == null || mt != "p") {
-        new_data.push(this.data[i]);
+        newData.push(this.data[i]);
       }
 
     }
-    this.data = new_data;
+    this.data = newData;
   }
 
   sortMatches(newData) {
@@ -130,24 +130,24 @@ class matchDataProcessor {
 
   applySiteFilter() {
     //  Modify this.data to only include matches specified by the site filter
-    var new_data = [];
+    var newData = [];
     for (var i = 0; i < this.data.length; i++) {
       var mn = this.data[i]["matchnumber"];
       var mt = this.getMatchTuple(mn);
       if (mt == null) {
         mt = ["qm", null];
       }
-      if (mt[0] == "p" && this.siteFilter["useP"]) { new_data.push(this.data[i]); }
-      else if (mt[0] == "qm" && this.siteFilter["useQm"]) { new_data.push(this.data[i]); }
-      else if (mt[0] == "qf" && this.siteFilter["useQf"]) { new_data.push(this.data[i]); }
-      else if (mt[0] == "sf" && this.siteFilter["useSf"]) { new_data.push(this.data[i]); }
-      else if (mt[0] == "f" && this.siteFilter["useF"]) { new_data.push(this.data[i]); }
+      if (mt[0] == "p" && this.siteFilter["useP"]) { newData.push(this.data[i]); }
+      else if (mt[0] == "qm" && this.siteFilter["useQm"]) { newData.push(this.data[i]); }
+      else if (mt[0] == "qf" && this.siteFilter["useQf"]) { newData.push(this.data[i]); }
+      else if (mt[0] == "sf" && this.siteFilter["useSf"]) { newData.push(this.data[i]); }
+      else if (mt[0] == "f" && this.siteFilter["useF"]) { newData.push(this.data[i]); }
     }
-    this.data = [...new_data];
+    this.data = [...newData];
   }
 
   getSiteFilteredAverages(successFunction) {
-    var temp_this = this;
+    var tempThis = this;
     $.post("api/dbAPI.php",
       {
         "getDBStatus": true
@@ -159,11 +159,11 @@ class matchDataProcessor {
         localSiteFilter["useQf"] = dbStatus["useQf"];
         localSiteFilter["useSf"] = dbStatus["useSf"];
         localSiteFilter["useF"] = dbStatus["useF"];
-        temp_this.siteFilter = { ...localSiteFilter };
+        tempThis.siteFilter = { ...localSiteFilter };
 
-        temp_this.applySiteFilter();
+        tempThis.applySiteFilter();
 
-        successFunction(temp_this.getAverages());
+        successFunction(tempThis.getAverages());
       });
   }
 
