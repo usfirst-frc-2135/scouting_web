@@ -343,4 +343,4 @@ require 'header.php';
   });
 </script>
 
-<script src="./scripts/compareMatchNumbers.js"></script>
+<script type="text/javascript" src="./scripts/compareMatchNumbers.js"></script>

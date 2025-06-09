@@ -694,25 +694,7 @@ require 'header.php';
     // Sort the matches
     // Sort for "p", then "qm", then "sf" then "f" matches
     arrOurMatches.sort(function (matchA, matchB) {
-      var Aprefix = matchA["comp_level"];
-      var Bprefix = matchB["comp_level"];
-      var Anum = matchA["match_number"];
-      var Bnum = matchB["match_number"];
-      if (Aprefix == Bprefix)
-        return (Anum - Bnum);
-      if (Aprefix == "p")
-        return -1;
-      if (Bprefix == "p")
-        return 1;
-      if (Aprefix == "qm")
-        return -1;
-      if (Bprefix == "qm")
-        return 1;
-      if (Aprefix == "sf")
-        return -1;
-      if (Bprefix == "sf")
-        return 1;
-      return 1;
+      return compareMatchNumbers(matchA["comp_level"] + matchA["match_number"], matchB["comp_level"] + matchB["match_number"]);
     });
 
     $("#ourMatches").html("");
@@ -1187,4 +1169,5 @@ require 'header.php';
 
 </script>
 
+<script type="text/javascript" src="./scripts/compareMatchNumbers.js"></script>
 <script type="text/javascript" src="./scripts/matchDataProcessor.js"></script>

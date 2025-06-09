@@ -6,19 +6,28 @@
   Function Definition
 */
 
-// Returns 0 if rowA is before rowB; else returns 1. Assumes the row has a "matchnum" key
-// that is <prefix><number>, where prefix is "p", "qm" or "sf".
+//  Compare two alphanumeric match numbers in the form of [comp_level][match_num]
+//    (e.g. p1, qm1, qm43, sf1, etc.)
+//  This function is passed into a sort() to compare two rows. It can convert objects
+//  to strings, trim whitespace, and remove case differences.
+//
+//  Return:
+//    < 0   if matchA is before matchB
+//    0     if matches are equal
+//    > 0   if matchB is before matchA
+//
 function compareMatchNumbers(matchA, matchB) {
   // console.log("==> compareMatchNumbers: " + matchA + " <-> " + matchB);
 
-  // Pull apart prefix and number from matchnum (ie, "p", "qm", "sf")
+  // Normalize input parameters
   var aPrefix = "";
   var bPrefix = "";
   var aNum = "";
   var bNum = "";
-  matchA = matchA.toLowerCase();
-  matchB = matchA.toLowerCase();
+  matchA = matchA.toString().trim().toLowerCase();
+  matchB = matchB.toString().trim().toLowerCase();
 
+  // Pull apart prefix and number from matchnum (ie, "p", "qm", "sf")
   if (matchA.charAt(0) == "p") {
     aNum = matchA.substr(1, matchA.length);
     aPrefix = "p";
@@ -31,9 +40,8 @@ function compareMatchNumbers(matchA, matchB) {
     aNum = matchA.substr(2, matchA.length);
     aPrefix = "sf";
   }
-
   if (aPrefix == "") {
-    console.warn("compareMatchNumbers: matchA is invalid!")
+    console.warn("compareMatchNumbers: matchA is missing comp_level! - " + matchA)
     aPrefix = "qm";
   }
 
@@ -45,25 +53,30 @@ function compareMatchNumbers(matchA, matchB) {
     bNum = matchB.substr(2, matchB.length);
     bPrefix = "qm";
   }
-  else if (matchA.charAt(0) == "s") {   // "sf"
+  else if (matchB.charAt(0) == "s") {   // "sf"
     bNum = matchB.substr(2, matchB.length);
     bPrefix = "sf";
   }
-
   if (bPrefix == "") {
-    console.warn("compareMatchNumbers: matchB is invalid!")
-    bPrefix = "qm";
+    console.warn("compareMatchNumbers: matchB is missing comp_level! - " + matchB)
+    aPrefix = "qm";
   }
 
-  if (aPrefix == bPrefix) // Comp level is same, use numbers
-    return (aNum - bNum);
-  if (aPrefix == "p")     // A != B, practice matches always first
-    return 0;
-  if (bPrefix == "p")     // A !practice, so B is first
-    return 1;
-  if (aPrefix == "qm")    // A & B !practice, so A must be first
-    return 0;
+  var returnVal;
 
-  return 1;               // B must be first
+  if (aPrefix == bPrefix) // Comp level is same, use numbers
+    returnVal = (aNum - bNum);
+  else if (aPrefix == "p")     // A != B, practice matches always first
+    returnVal = -1;
+  else if (bPrefix == "p")     // A !practice, so B is first
+    returnVal = 1;
+  else if (aPrefix == "qm")    // A & B !practice, so A must be first
+    returnVal = -1;
+  else
+    returnVal = 1;          // B must be first
+
+  console.log("compareMatchNumbers: " + matchA + " " + matchB + " " + returnVal);
+
+  return returnVal;
 };
 
