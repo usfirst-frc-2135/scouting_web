@@ -242,6 +242,7 @@ require 'header.php';
 
   function attachGamepieceScoring() {
     console.log("==> matchForm.php: attachGamepieceScoring()");
+    // Auto cones
     $("#autoConesBottomPlus").click(function () {
       autoConesBottom += 1;
       $("#autoConesBottom").html("Auto Cones Bottom: " + autoConesBottom);
@@ -272,6 +273,7 @@ require 'header.php';
       $("#autoConesTop").html("Auto Cones Top: " + autoConesTop);
     });
 
+    // Auto cubes
     $("#autoCubesBottomPlus").click(function () {
       autoCubesBottom += 1;
       $("#autoCubesBottom").html("Auto Cubes Bottom: " + autoCubesBottom);
@@ -284,7 +286,7 @@ require 'header.php';
 
     $("#autoCubesMiddlePlus").click(function () {
       autoCubesMiddle += 1;
-      $("#autoConesMiddle").html("Auto Cubes Middle: " + autoCubesMiddle);
+      $("#autoCubesMiddle").html("Auto Cubes Middle: " + autoCubesMiddle);
     });
 
     $("#autoCubesMiddleMinus").click(function () {
@@ -302,6 +304,7 @@ require 'header.php';
       $("#autoCubesTop").html("Auto Cubes Top: " + autoCubesTop);
     });
 
+    // Teleop cones
     $("#teleopConesBottomPlus").click(function () {
       teleopConesBottom += 1;
       $("#teleopConesBottom").html("Teleop Cones Bottom: " + teleopConesBottom);
@@ -332,22 +335,23 @@ require 'header.php';
       $("#teleopConesTop").html("Teleop Cones Top: " + teleopConesTop);
     });
 
-    $("#plusTeleopCubesBottom").click(function () {
+    // Teleop cubes
+    $("#teleopCubesBottomPlus").click(function () {
       teleopCubesBottom += 1;
       $("#teleopCubesBottom").html("Teleop Cubes Bottom: " + teleopCubesBottom);
     });
 
-    $("#minusTeleopCubesBottom").click(function () {
+    $("#teleopCubesBottomMinus").click(function () {
       teleopCubesBottom = Math.max(teleopCubesBottom - 1, 0);
       $("#teleopCubesBottom").html("Teleop Cubes Bottom: " + teleopCubesBottom);
     });
 
-    $("#plusTeleopCubesMiddle").click(function () {
+    $("#teleopCubesMiddlePlus").click(function () {
       teleopCubesMiddle += 1;
-      $("#teleopConesMiddle").html("Teleop Cubes Middle: " + teleopCubesMiddle);
+      $("#teleopCubesMiddle").html("Teleop Cubes Middle: " + teleopCubesMiddle);
     });
 
-    $("#minusTeleopCubesMiddle").click(function () {
+    $("#teleopCubesMiddleMinus").click(function () {
       teleopCubesMiddle = Math.max(teleopCubesMiddle - 1, 0);
       $("#teleopCubesMiddle").html("Teleop Cubes Middle: " + teleopCubesMiddle);
     });
@@ -367,9 +371,9 @@ require 'header.php';
   function getFormData() {
     console.log("==> matchForm.php: getFormData()");
     var out = {};
-    var match_level = $("#compLevel").val();
-    var match_number = $("#matchNumber").val();
-    if (match_number != parseInt(match_number)) {
+    var matchLevel = $("#compLevel").val();
+    var matchNumber = $("#matchNumber").val();
+    if (matchNumber != parseInt(matchNumber)) {
       alert("Match number must be integer.");
       throw Error("Match number must be integer.");
     }
@@ -378,7 +382,7 @@ require 'header.php';
       alert("Team number must not be empty.");
       throw Error("Team number must not be empty.");
     }
-    out["matchnumber"] = match_level + match_number;
+    out["matchnumber"] = matchLevel + matchNumber;
     out["teamnumber"] = teamNumber;
     // out["startpos"] = $("#autoStartPosition").val();
     out["mobility"] = $("#exitCommunity").is(':checked') ? 1 : 0;
@@ -386,15 +390,15 @@ require 'header.php';
     out["autonconesmiddle"] = autoConesMiddle;
     out["autonconestop"] = autoConesTop;
     out["autoncubesbottom"] = autoCubesBottom;
-    out["autoncubesbottom"] = autoCubesMiddle;
-    out["autoncubesbottom"] = autoCubesTop;
+    out["autoncubesmiddle"] = autoCubesMiddle;
+    out["autoncubestop"] = autoCubesTop;
     out["autochargestation"] = $("#autochargestation").val();
     out["teleopconesbottom"] = teleopConesBottom;
     out["teleopconesmiddle"] = teleopConesMiddle;
     out["teleopconestop"] = teleopConesTop;
     out["teleopcubesbottom"] = teleopCubesBottom;
-    out["teleopcubesbottom"] = teleopCubesMiddle;
-    out["teleopcubesbottom"] = teleopCubesTop;
+    out["teleopcubesmiddle"] = teleopCubesMiddle;
+    out["teleopcubestop"] = teleopCubesTop;
     out["cubepickup"] = $("#pickedupCube").is(':checked') ? 1 : 0;
     out["uprightconepickup"] = $("#pickedupUprightCone").is(':checked') ? 1 : 0;
     out["tippedconepickup"] = $("#pickedupTippedCone").is(':checked') ? 1 : 0;
