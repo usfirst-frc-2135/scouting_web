@@ -149,48 +149,6 @@ require 'header.php';
     });
   }
 
-  function sortOnMatch(matchA, matchB) {
-    console.log("==> strategicData.php: sortOnMatch()");
-    matchA = matchA.toUpperCase();  // make upper case
-    matchB = matchB.toUpperCase();  // make upper case
-    Aprefix = "qm";  // assume qm if there is no prefix
-    Bprefix = "qm";
-    Amnum = matchA;
-    Bmnum = matchB;
-    if (matchA.charAt(0) == "Q") {        // QM
-      Amnum = matchA.substr(2, matchA.length);
-      Aprefix = "qm";
-    }
-    else if (matchA.charAt(0) == "P") {    // P
-      Amnum = matchA.substr(1, matchA.length);
-      Aprefix = "p";
-    }
-    else if (matchA.charAt(0) == "S") {    // SF
-      Amnum = matchA.substr(2, matchA.length);
-      Aprefix = "sf";
-    }
-    if (matchB.charAt(0) == "Q") {
-      Bmnum = matchB.substr(2, matchB.length);
-      Bprefix = "qm";
-    }
-    else if (matchB.charAt(0) == "P") {
-      Bmnum = matchB.substr(1, matchB.length);
-      Bprefix = "p";
-    }
-    else if (matchB.charAt(0) == "S") {
-      Bmnum = matchB.substr(2, matchB.length);
-      Bprefix = "sf";
-    }
-    if (Aprefix == Bprefix)
-      return (Amnum - Bmnum);
-    if (Aprefix == "p")
-      return (0);
-    if (Bprefix == "p")
-      return (1);
-    if (Aprefix == "qm")
-      return (0);
-    return 1;
-  }
 
   // Returns 0 if rowA is before rowB; else returns 1. Assumes the row has a
   // team number and may have a B, C, D, or E letter at the end. Note the letter may be lower case.
@@ -245,7 +203,7 @@ require 'header.php';
     {
       if (cellA == cellB)  // same team and letters
       {
-        return (sortOnMatch(matchA, matchB));
+        return (compareMatchNumbers(matchA, matchB));
       }
       return (cellA - cellB);
     }
@@ -256,7 +214,7 @@ require 'header.php';
       if (B_let == 0)  // no letter in cellB, so it will be before cellA
         return (1);
       if (A_let == B_let)  // letters are the same 
-        return (sortOnMatch(matchA, matchB));
+        return (compareMatchNumbers(matchA, matchB));
       if (A_let > B_let)  // cellA letter is higher than B
         return (1);
       return (0);
@@ -384,3 +342,5 @@ require 'header.php';
     });
   });
 </script>
+
+<script src="./scripts/compareMatchNumbers.js"></script>

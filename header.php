@@ -109,4 +109,5 @@
         items[i].classList.add("text-secondary");
       }
     }
+
   </script>
