@@ -6,9 +6,9 @@
 <head>
   <title><?php echo $title; ?></title>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="">
+  <meta name="description" content="Scouting Data Web">
   <meta name="author" content="FRC 2135">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="./images/favicon.ico">
   <link rel="icon" type="image/png" href="./images/favicon-32x32.png" sizes="32x32">
   <link href="./external/bootstrap-5.3.6-dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
@@ -109,5 +109,4 @@
         items[i].classList.add("text-secondary");
       }
     }
-
   </script>
