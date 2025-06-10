@@ -13,9 +13,8 @@ require 'header.php';
       </div>
 
       <!-- Main card to hold the QR scanner -->
-      <div class="row mb-3">
-
-        <div class="card d-grid col-6 mx-auto">
+      <div class="card col-md-6 mx-auto">
+        <div class="card-body">
           <div id="interactive" class="viewport mt-3">
             <video id="camera" class="col-12" autoplay="true"></video>
           </div>
@@ -25,24 +24,24 @@ require 'header.php';
             <button id="submitData" class="btn btn-success mb-3" type="button"> Click to Submit Data: 0</button>
           </div>
         </div>
-
       </div>
 
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">Event Code</th>
-            <th scope="col">Match Code</th>
-            <th scope="col">Team Number</th>
-            <th scope="col">Scout</th>
-            <th scope="col">Delete</th>
-          </tr>
-        </thead>
-        <tbody id="qrValidationTable">
-        </tbody>
-      </table>
-
     </div>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Event Code</th>
+          <th scope="col">Match Code</th>
+          <th scope="col">Team Number</th>
+          <th scope="col">Scout</th>
+          <th scope="col">Delete</th>
+        </tr>
+      </thead>
+      <tbody id="qrValidationTable">
+      </tbody>
+    </table>
+
   </div>
 </div>
 

@@ -382,6 +382,10 @@ require 'header.php';
       alert("Team number must not be empty.");
       throw Error("Team number must not be empty.");
     }
+    if (validateTeamNumber(teamNumber) <= 0) {
+      alert("TTeam number is an integer with optional letter.");
+      throw Error("Team number is an integer with optional letter.");
+    }
     out["matchnumber"] = matchLevel + matchNumber;
     out["teamnumber"] = teamNumber;
     // out["startpos"] = $("#autoStartPosition").val();
@@ -472,9 +476,11 @@ require 'header.php';
 
     // Submit the match data form 
     $("#submitForm").click(function () {
+      var formData = getFormData();
       alert("This match form is NOT configured for 2025 game!");
-      // var formData = getFormData();
       // submitMatchData(formData);
     });
   });
 </script>
+
+<script src="./scripts/validateTeamNumber.js"></script>
