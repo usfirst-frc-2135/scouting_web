@@ -81,27 +81,28 @@ require 'header.php';
           <div class="card-body">
             <div class="mb-3">
               <label for="enterServerURL" class="form-label"> MySQL Server URL</label>
-              <input id="enterServerURL" class="form-control" type="text" aria-describedby="serverName">
+              <input id="enterServerURL" class="form-control" type="text" placeholder="(localhost)" aria-describedby="serverName">
             </div>
             <div class="mb-3">
               <label for="enterDBName" class="form-label">Database Name</label>
-              <input id="enterDBName" class="form-control" type="text" aria-describedby="databaseName">
+              <input id="enterDBName" class="form-control" type="text" placeholder="scouting2025" aria-describedby="databaseName">
             </div>
             <div class="mb-3">
               <label for="enterUserName" class="form-label">User Name</label>
-              <input id="enterUserName" class="form-control" type="text" aria-describedby="userName">
+              <input id="enterUserName" class="form-control" type="text" placeholder="DB username" aria-describedby="userName">
             </div>
             <div class="mb-3">
               <label for="enterPassword" class="form-label">Password</label>
-              <input id="enterPassword" class="form-control" type="password" aria-describedby="password">
+              <input id="enterPassword" class="form-control" type="password" placeholder="DB password" aria-describedby="password">
             </div>
             <div class="mb-3">
               <label for="enterTBAKey" class="form-label">TBA Key</label>
-              <input id="enterTBAKey" class="form-control" type="text" aria-describedby="tbaKey">
+              <input id="enterTBAKey" class="form-control" type="text" placeholder="(from theBlueAlliance)"
+                aria-describedby="tbaKey">
             </div>
             <div class="mb-3">
               <label for="enterEventCode" class="form-label">Event Code</label>
-              <input id="enterEventCode" class="form-control" type="text" aria-describedby="tbaEventCode">
+              <input id="enterEventCode" class="form-control" type="text" placeholder="2025CAFR" aria-describedby="tbaEventCode">
             </div>
 
             <div class="mb-3">
@@ -126,7 +127,7 @@ require 'header.php';
   var myEventCode = null;
 
   // Set the status badges for an item
-  function setStatusBadge(isSuccess, id) {
+  function setStatusBadge(id, isSuccess) {
     console.log("==> index.php: setStatusBadge()");
     if (isSuccess) {
       $("#" + id).text("Connected");
@@ -151,12 +152,12 @@ require 'header.php';
     $("#eventCode").text(statusArray["eventcode"]);
     myEventCode = statusArray["eventcode"];
 
-    setStatusBadge(statusArray["serverExists"], "serverStatus");
-    setStatusBadge(statusArray["dbExists"], "databaseStatus");
-    setStatusBadge(statusArray["matchTableExists"], "matchTableStatus");
-    setStatusBadge(statusArray["tbaTableExists"], "TBATableStatus");
-    setStatusBadge(statusArray["pitTableExists"], "pitTableStatus");
-    setStatusBadge(statusArray["strategicTableExists"], "strategicTableStatus");
+    setStatusBadge("serverStatus", statusArray["serverExists"]);
+    setStatusBadge("databaseStatus", statusArray["dbExists"]);
+    setStatusBadge("matchTableStatus", statusArray["matchTableExists"]);
+    setStatusBadge("TBATableStatus", statusArray["tbaTableExists"]);
+    setStatusBadge("pitTableStatus", statusArray["pitTableExists"]);
+    setStatusBadge("strategicTableStatus", statusArray["strategicTableExists"]);
 
     $("#dataP").prop('checked', statusArray["useP"]);
     $("#dataQm").prop('checked', statusArray["useQm"]);
@@ -165,7 +166,7 @@ require 'header.php';
     $("#dataF").prop('checked', statusArray["useF"]);
   }
 
-  // Map form form-control IDs to labels for db_config
+  // Map form form-control IDs to the db_config labels that store them
   var idToKeyMap = {
     "enterServerURL": "server",
     "enterDBName": "db",
@@ -285,5 +286,3 @@ require 'header.php';
     });
   });
 </script>
-
-<script type="text/javascript" src="./scripts/matchDataProcessor.js"></script>
