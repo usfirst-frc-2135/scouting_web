@@ -2,8 +2,8 @@
 /*
   TBA Handler
 
-  The purpose of this object is to create a function that can deal with The Blue Alliance.
-  This will locally cache data in a MySQL server to limit TBA load and help with outages (IE a local server).
+  The purpose of this object is to deal with The Blue Alliance requests.
+  This will cache requests in our MySQL server to limit TBA load and help with outages.
 
   Any data from the TBA API will come out as follows
   {
@@ -12,7 +12,6 @@
     data : {}
   }
 */
-
 class tbaHandler
 {
   private $charset = "utf8";
@@ -24,10 +23,10 @@ class tbaHandler
 
   function __construct($tbaApiKey, $tbaTableName, $dbConnection)
   {
+    $this->apiURL = "https://www.thebluealliance.com/api/v3";
+    $this->dbConnection = $dbConnection;
     $this->tbaApiKey = $tbaApiKey;
     $this->tbaTableName = $tbaTableName;
-    $this->dbConnection = $dbConnection;
-    $this->apiURL = "https://www.thebluealliance.com/api/v3";
   }
 
   private function readURIFromTBA($uri)
@@ -252,15 +251,15 @@ class tbaHandler
     return $out;
   }
 
-  ///// getTeamListAndNames function /////
-  public function getTeamListAndNames($eventCode)
+  ///// getTeamNamesList function /////
+  public function getTeamNamesList($eventCode)
   {
-    error_log("starting getTeamListAndNames for eventCode: $eventCode");
+    error_log("starting getTeamNamesList for eventCode: $eventCode");
 
     // If eventCode is "COMPX", just exit.
     if (strstr($eventCode, 'COMPX'))
     {
-      error_log("skipping getTeamListAndNames for COMPX");
+      error_log("skipping getTeamNamesList for COMPX");
       $aout = array();
       return $aout;
     }

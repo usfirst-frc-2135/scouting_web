@@ -28,9 +28,9 @@ else if (isset($_GET["getSimpleTeamList"]))
 {
   echo (json_encode($tba->getSimpleTeamList($eventCode)));
 }
-else if (isset($_GET["getTeamListAndNames"]))
+else if (isset($_GET["getTeamNamesList"]))
 {
-  echo (json_encode($tba->getTeamListAndNames($eventCode)));
+  echo (json_encode($tba->getTeamNamesList($eventCode)));
 }
 else if (isset($_GET["getMatchList"]))
 {

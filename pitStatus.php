@@ -12,18 +12,37 @@ require 'header.php';
     </div>
 
     <!-- Main row to hold the table -->
+    <div class="row mb-3">
 
-    <table id="psTable" class="table table-striped table-bordered table-hover sortable">
-      <thead>
-        <tr>
-          <td>Team</td>
-          <td>Pit Scouted?</td>
-          <td>Photo Uploaded?</td>
-        </tr>
-      </thead>
-      <tbody id="pitScoutTable">
-      </tbody>
-    </table>
+      <style type="text/css" media="screen">
+        table tr {
+          border: 1px solid black;
+        }
+
+        table td,
+        table th {
+          border-right: 1px solid black;
+        }
+
+        thead {
+          position: sticky;
+          top: 56px;
+          background: white;
+        }
+      </style>
+
+      <table id="psTable" class="table table-striped table-bordered table-hover sortable">
+        <thead>
+          <tr>
+            <th class="sorttable_numeric">Team</th>
+            <th>Pit Scouted?</th>
+            <th>Photo Uploaded?</th>
+          </tr>
+        </thead>
+        <tbody id="pitScoutTable">
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
 
@@ -32,41 +51,33 @@ require 'header.php';
 <!-- Javascript page handlers -->
 
 <script>
-  var teamList = [];
-  var teamNames = {};
-  var jsonPitList = {};
-  var jsonImageList = {};
 
-  function createPitTable() {
-    console.log("==> pitStatus.php: createPitTable()");
-    if (jsonPitList == null || teamList == null) {
-      console.warn("createPitTable: pit data and team list are missing!")
+  function createPitStatusTable(teams, names, images, pitInfo) {
+    console.log("==> pitStatus.php: createPitStatusTable()");
+    if (teams == null || names == null || images == null || pitInfo == null) {
+      console.warn("createPitStatusTable: team, names, images, or pit lists are missing!")
       return null;
     }
 
     $("#pitScoutTable").html("");
     var row = "";
-    for (let teamNum of teamList) {
-      var teamName = teamNames[teamNum];
+    for (let teamNum of teams) {
+      var teamName = names[teamNum];
       row += "<tr>";
       if (teamName != "XX") {
-        row += "  <td>" + "<a class='text-black' href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a> - " + teamName + "</td>";
+        row += "  <td>" + "<a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a> - " + teamName + "</td>";
       } else {
-        row += "  <td>" + "<a class='text-black' href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a>" + "</td>";
+        row += "  <td>" + "<a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a>" + "</td>";
       }
 
-      if (jsonPitList[teamNum] != null) {
+      if (pitInfo[teamNum] != null) {
         row += "  <td class='bg-success'>Yes</td>";
       } else {
         row += "  <td>No</td>";
       }
 
-      if (jsonImageList[teamNum] != null) {
-        if (jsonImageList[teamNum].length > 0) {
-          row += "  <td class='bg-success'>Yes</td>";
-        } else {
-          row += "  <td>No</td>";
-        }
+      if ((images[teamNum] != null) && (images[teamNum].length > 0)) {
+        row += "  <td class='bg-success'>Yes</td>";
       } else {
         row += "  <td>No</td>";
       }
@@ -74,47 +85,19 @@ require 'header.php';
       row += "</tr>";
       $("#pitScoutTable").html(row);
     }
+
+    sortPitStatusTable("psTable");
   }
 
   // The entries are team numbers with " - <teamName>" at the end. We want to strip off the appended
-  // teamName so it's just the team number for comparison. 
-  // Note a team number could end in a "B", "C", "D", or "E", in which case we strip the letter off 
-  // and just use the number for the comparison.
-  function sortTable() {
-    console.log("==> pitStatus.php: sortTable()");
-    var table = document.getElementById("psTable");
+  // teamName so it's just the team number for comparison. Also, a team number could end in a "B", "C",
+  // "D", or "E", in which case we strip the letter off and just use the number for the comparison.
+  function sortPitStatusTable(tableId) {
+    console.log("==> pitStatus.php: sortTable(): id: " + tableId);
+    var table = document.getElementById(tableId);
     var rows = Array.prototype.slice.call(table.querySelectorAll("tbody> tr"));
 
-    rows.sort(function (rowA, rowB) {
-      // console.log(" >>>> starting rows.sort()");
-      var cellA = rowA.cells[0].textContent.trim();
-      // console.log("   >>> cellA = " + cellA);
-      var cellB = rowB.cells[0].textContent.trim();
-      // console.log("     >>> cellB = " + cellB);
-
-      // Remove the " - <teamName>" from the end of the entry.
-      // console.log("===> cellA = " + cellA + "; cellB = " + cellB);
-      const dashPosA = cellA.indexOf("-");
-      if (dashPosA != -1)
-        cellA = cellA.substr(0, dashPosA - 1);
-      const dashPosB = cellB.indexOf("-");
-      if (dashPosB != -1)
-        cellB = cellB.substr(0, dashPosB - 1);
-      // console.log("    ==> after: cellA = " + cellA + "; cellB = " + cellB);
-
-      // Remove any letters at the last char in teamNum for the sort comparison.
-      if (cellA.charAt(cellA.length - 1) == "B" || cellA.charAt(cellA.length - 1) == "C" ||
-        cellA.charAt(cellA.length - 1) == "D" || cellA.charAt(cellA.length - 1) == "E") {
-        cellA = cellA.substr(0, cellA.length - 1);
-      }
-
-      if (cellB.charAt(cellB.length - 1) == "B" || cellB.charAt(cellB.length - 1) == "C" ||
-        cellB.charAt(cellB.length - 1) == "D" || cellB.charAt(cellB.length - 1) == "E") {
-        cellB = cellB.substr(0, cellB.length - 1);
-      }
-
-      return (cellA - cellB);
-    });
+    rows.sort(function (rowA, rowB) { return compareTeamNumbers(rowA.cells[0].textContent, rowB.cells[0].textContent); });
 
     // Update the table body with the sorted rows.
     rows.forEach(function (row) {
@@ -136,38 +119,43 @@ require 'header.php';
     // Get the list of teams and add the team names 
     console.log("index: getting teamlist from TBA using db_config event code");
     $.get("api/tbaAPI.php", {
-      getTeamListAndNames: 1
-    }).done(function (teamListNames) {
-      console.log("==> getTeamListAndNames");
-      if (teamList == null)
+      getTeamNamesList: 1
+    }).done(function (teamNameList) {
+      console.log("==> getTeamNamesList");
+      var teamList = [];
+      var namesList = {};
+      if (teamNameList == null)
         alert("Can't load teamlist from TBA; check if TBA Key was set in db_config");
       else {
-        var jsonTeamList = JSON.parse(teamListNames);
+        var jsonTeamList = JSON.parse(teamNameList);
         for (var i = 0; i < jsonTeamList.length; i++) {
           var teamNum = jsonTeamList[i]["teamnum"];
           var teamName = jsonTeamList[i]["teamname"];
           teamList.push(teamNum);
-          teamNames[teamNum] = teamName;
+          namesList[teamNum] = teamName;
         }
 
         // Get all the team images
         $.get("api/readAPI.php", {
           getAllTeamImages: JSON.stringify(teamList)
-        }).done(function (teamImages) {
-          console.log("pitStatus.php: getAllTeamImages:\n" + teamImages);
-          jsonImageList = JSON.parse(teamImages);
+        }).done(function (teamImageList) {
+          console.log("pitStatus.php: getAllTeamImages:\n" + teamImageList);
+          jsonImageList = JSON.parse(teamImageList);
           // Get all the teams pit scouted
           $.get("api/readAPI.php", {
             getAllPitData: 1
-          }).done(function (pitData) {
+          }).done(function (pitDataList) {
             console.log("==> getAllPitData");
-            jsonPitList = JSON.parse(pitData);
-            createPitTable();
-            sorttable.makeSortable(document.getElementById("psTable"));
-            sortTable();
+            jsonPitList = JSON.parse(pitDataList);
+            createPitStatusTable(teamList, namesList, jsonImageList, jsonPitList);
+            // script instructions say this is needed, but it breaks table header sorting
+            // sorttable.makeSortable(document.getElementById("psTable"));
           });
         });
       }
     });
   });
+
 </script>
+
+<script type="text/javascript" src="./scripts/compareTeamNumbers.js"></script>
