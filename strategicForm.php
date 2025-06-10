@@ -23,15 +23,26 @@ require 'header.php';
         <!-- Strategic Entry Form -->
         <div class="card-body mb-3">
           <form id="strategicForm" method="post" enctype="multipart/form-data" name="strategicForm">
-
+            <div>
+              <h4>Match Info</h4>
+            </div>
             <div class="mb-3">
               <label for="teamNumber" class="form-label">Team Number </label>
               <input id="teamNumber" class="form-control" type="text" placeholder="FRC team number">
             </div>
 
             <div class="mb-3">
-              <label for="matchNumber" class="form-label">Match Number </label>
-              <input id="matchNumber" class="form-control" type="text" placeholder="Match number">
+              <span>Match Number</span>
+              <div class="input-group">
+                <select id="compLevel" class="form-select" aria-label="Comp Level Select">
+                  <option value="p">P</option>
+                  <option value="qm">QM</option>
+                  <option value="qf">QF</option>
+                  <option value="sf">SF</option>
+                  <option value="f">F</option>
+                </select>
+                <input id="matchNumber" class="form-control" type="text" placeholder="Match number">
+              </div>
             </div>
 
             <div class="mb-3">
@@ -262,7 +273,7 @@ require 'header.php';
     var errMsg = "Please enter values for these fields:";
 
     // Make sure there is a team number, scoutname and matchnum.
-    if ($("#teamNumber").val() == "") {
+    if ((($("#teamNumber").val() == "") || (validateTeamNumber(teamNum, null) <= 0))) {
       errMsg += " Team Number";
       isError = true;
     }
@@ -326,13 +337,17 @@ require 'header.php';
     console.log("==> strategicForm.php: writeStrategicFormToTable()");
     var dataToUse = {};
 
+    var matchLevel = $("#compLevel").val();
+    var matchNumber = $("#matchNumber").val();
+
     // Clean up teamnumber before writing to table.
-    var teamnum = $("#teamNumber").val();
-    teamnum = teamnum.toUpperCase();  // if there's a letter, make it upper case
-    teamnum = teamnum.replace(/[^0-9a-zA-Z]/g, '');  // remove any non-alphanumeric chars
+    var teamnum = validateTeamNumber($("#teamNumber").val(), null);
+    // Cleaned up by validate function
+    // teamnum = teamnum.toUpperCase();  // if there's a letter, make it upper case
+    // teamnum = teamnum.replace(/[^0-9a-zA-Z]/g, '');  // remove any non-alphanumeric chars
     dataToUse["scoutname"] = $("#scoutName").val();
     dataToUse["teamnumber"] = teamnum;
-    dataToUse["matchnumber"] = $("#matchNumber").val();
+    dataToUse["matchnumber"] = matchLevel + matchNumber;
 
     // Assume that some options were not checked at all.
     dataToUse["driverability"] = 0; // default
@@ -464,6 +479,11 @@ require 'header.php';
 
     // Submit the strategic form data
     $("#submitButton").click(function () {
+      // Should be:
+      // formData getFormData()
+      // if (validateStrategicData(formData))
+      //    submitStrategicData(formData);
+
       if (!verifyStrategicForm()) {
         writeStrategicFormToTable();
       }

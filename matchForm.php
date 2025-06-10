@@ -24,7 +24,7 @@ require 'header.php';
         <div class="card-body mb-3">
           <form id="matchForm" method="post" enctype="multipart/form-data" name="matchForm">
             <div>
-              <h3>Match Info</h3>
+              <h4>Match Info</h4>
             </div>
             <div class="mb-3">
               <label for="teamNumber" class="form-label">Team Number</label>
@@ -478,7 +478,10 @@ require 'header.php';
     $("#submitForm").click(function () {
       var formData = getFormData();
       alert("This match form is NOT configured for 2025 game!");
-      // submitMatchData(formData);
+      // Should be:
+      // formData getFormData()
+      // if (validateMatchData(formData))
+      //    submitMatchData(formData);
     });
   });
 </script>
