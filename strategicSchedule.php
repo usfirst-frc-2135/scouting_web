@@ -11,7 +11,7 @@ require 'header.php';
       <h2 class="col-md-4"><?php echo $title; ?></h2>
 
       <div class="col-2">
-        <button id="createButton" class="btn btn-primary" type="button">Create Schedule</button>
+        <button id="reloadButton" class="btn btn-primary" type="button">Reload Schedule</button>
       </div>
     </div>
 
@@ -28,6 +28,12 @@ require 'header.php';
           table th {
             border-right: 1px solid black;
           }
+
+          thead {
+            position: sticky;
+            top: 56px;
+            background: white;
+          }
         </style>
         <table id="matchTable" class="table table-striped table-hover sortable">
           <colgroup>
@@ -36,8 +42,8 @@ require 'header.php';
           </colgroup>
           <thead>
             <tr>
-              <th class="text-center" scope="col">Match</th>
-              <th class="text-center" scope="col">Teams</th>
+              <th class="text-center sorttable_numeric" scope="col">Match</th>
+              <th class="text-center sorttable_nosort" scope="col">Teams</th>
             </tr>
           </thead>
           <tbody id="tableData">
@@ -64,8 +70,8 @@ require 'header.php';
     }
   }
 
-  function sortStrategicTable(id) {
-    console.log("==> strategicSchedule.php: sortStrategicTable()");
+  function sortStrategicSchedule(id) {
+    console.log("==> strategicSchedule.php: sortStrategicSchedule()");
     // Assumes the entries are team numbers or match numbers. Note a team number could have end in 
     // a "B", "C", "D", or "E", in which case we want to strip that off and just use the number for
     // the comparison.
@@ -75,21 +81,7 @@ require 'header.php';
 
     // Sort the rows based on column 1 match number value
     rows.sort(function (rowA, rowB) {
-      var cellA = rowA.cells[0].textContent.trim();
-      var cellB = rowB.cells[0].textContent.trim();
-
-      // Remove any letters at the last char for the sort comparison.
-      if (cellA.charAt(cellA.length - 1) == "B" || cellA.charAt(cellA.length - 1) == "C" ||
-        cellA.charAt(cellA.length - 1) == "D" || cellA.charAt(cellA.length - 1) == "E") {
-        cellA = cellA.substr(0, cellA.length - 1);
-      }
-
-      if (cellB.charAt(cellB.length - 1) == "B" || cellB.charAt(cellB.length - 1) == "C" ||
-        cellB.charAt(cellB.length - 1) == "D" || cellB.charAt(cellB.length - 1) == "E") {
-        cellB = cellB.substr(0, cellB.length - 1);
-      }
-
-      return (cellA - cellB);
+      return compareTeamNumbers(rowA.cells[0].textContent, rowB.cells[0].textContent);
     });
 
     // Update the table body with the sorted rows 
@@ -107,7 +99,7 @@ require 'header.php';
       console.log("==> getStrategicMatches");
       var dataObj = JSON.parse(strategicData);
       buildStrategicSchedule(dataObj);
-      sortStrategicTable("matchTable");
+      sortStrategicSchedule("matchTable");
     });
   }
 
@@ -123,10 +115,14 @@ require 'header.php';
       $("#navbarEventCode").html(eventCode);
     });
 
+    buildScheduleTable();
+
     // Create the strategic match schedule
-    $("#createButton").click(function () {
+    $("#reloadButton").click(function () {
       console.log("--->>> Create Schedule button clicked!");
       buildScheduleTable();
     });
   });
 </script>
+
+<script type="text/javascript" src="./scripts/compareTeamNumbers.js"></script>
