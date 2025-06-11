@@ -902,41 +902,13 @@ require 'header.php';
     var autonCoralL3Tips = []; // holds custom tooltips for auton coral L3
     var autonCoralL4Tips = []; // holds custom tooltips for auton coral 4      
 
-    datasets.push({
-      label: "Leave Start Line",
-      data: [],
-      backgroundColor: 'Red'
-    });
-    datasets.push({
-      label: "Processor",
-      data: [],
-      backgroundColor: 'Orange'
-    });
-    datasets.push({
-      label: "Net",
-      data: [],
-      backgroundColor: 'Yellow'
-    });
-    datasets.push({
-      label: "L1",
-      data: [],
-      backgroundColor: 'Green'
-    });
-    datasets.push({
-      label: "L2",
-      data: [],
-      backgroundColor: 'Blue'
-    });
-    datasets.push({
-      label: "L3",
-      data: [],
-      backgroundColor: 'Indigo'
-    });
-    datasets.push({
-      label: "L4",
-      data: [],
-      backgroundColor: 'Violet'
-    });
+    datasets.push({ label: "Leave Start", data: [], backgroundColor: 'Red' });
+    datasets.push({ label: "Processor", data: [], backgroundColor: 'Orange' });
+    datasets.push({ label: "Net", data: [], backgroundColor: 'Yellow' });
+    datasets.push({ label: "L1", data: [], backgroundColor: 'Green' });
+    datasets.push({ label: "L2", data: [], backgroundColor: 'Blue' });
+    datasets.push({ label: "L3", data: [], backgroundColor: 'Indigo' });
+    datasets.push({ label: "L4", data: [], backgroundColor: 'Violet' });
 
     // Go thru each matchdata QR code string and build up a table of the data, so we can
     // later sort it so the matches are listed in the right order. 
@@ -1032,12 +1004,8 @@ require 'header.php';
       },
       options: {
         scales: {
-          x: {
-            stacked: true
-          },
-          y: {
-            stacked: true
-          }
+          x: { stacked: true },
+          y: { stacked: true }
         },
         plugins: {
           tooltip: {
@@ -1129,37 +1097,12 @@ require 'header.php';
     var teleopCoralL3Tips = []; // holds custom tooltips for teleop coral L3
     var teleopCoralL4Tips = []; // holds custom tooltips for teleop coral 4      
 
-    datasets.push({
-      label: "Processor",
-      data: [],
-      backgroundColor: 'Red'
-    });
-    datasets.push({
-      label: "Net",
-      data: [],
-      backgroundColor: 'Orange'
-    });
-    datasets.push({
-      label: "L1",
-      data: [],
-      backgroundColor: 'Yellow'
-    });
-    datasets.push({
-      label: "L2",
-      data: [],
-      backgroundColor: 'Green'
-    });
-    datasets.push({
-      label: "L3",
-      data: [],
-      backgroundColor: 'Blue'
-    });
-    datasets.push({
-      label: "L4",
-      data: [],
-      backgroundColor: 'Violet'
-
-    });
+    datasets.push({ label: "Processor", data: [], backgroundColor: 'Red' });
+    datasets.push({ label: "Net", data: [], backgroundColor: 'Orange' });
+    datasets.push({ label: "L1", data: [], backgroundColor: 'Yellow' });
+    datasets.push({ label: "L2", data: [], backgroundColor: 'Green' });
+    datasets.push({ label: "L3", data: [], backgroundColor: 'Blue' });
+    datasets.push({ label: "L4", data: [], backgroundColor: 'Violet' });
 
     // Go thru each matchdata QR code string and build up a table of the data, so we can
     // later sort it so the matches are listed in the right order. 
@@ -1242,12 +1185,8 @@ require 'header.php';
       },
       options: {
         scales: {
-          x: {
-            stacked: true
-          },
-          y: {
-            stacked: true
-          }
+          x: { stacked: true },
+          y: { stacked: true }
         },
         plugins: {
           tooltip: {
@@ -1326,11 +1265,7 @@ require 'header.php';
 
     var cageClimbTips = [];
 
-    datasets.push({
-      label: "Cage Climb",
-      data: [],
-      backgroundColor: 'SteelBlue'
-    });
+    datasets.push({ label: "Cage Climb", data: [], backgroundColor: 'SteelBlue' });
 
     // Go thru each matchdata QR code string and build up a table of the data, so we can
     // later sort it so the matches are listed in the right order. 
@@ -1382,12 +1317,8 @@ require 'header.php';
       },
       options: {
         scales: {
-          x: {
-            stacked: true
-          },
-          y: {
-            stacked: true
-          }
+          x: { stacked: true },
+          y: { stacked: true }
         },
         plugins: {
           tooltip: {
