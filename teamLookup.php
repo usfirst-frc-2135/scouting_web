@@ -12,13 +12,15 @@ require 'header.php';
     </div>
 
     <!-- Main row to hold the team lookup form -->
-    <div class="row mb-3">
+    <div class="row col-4 mb-3">
       <div class="input-group mb-3">
         <input id="enterTeamNumber" class="form-control" type="text" placeholder="FRC team number" aria-label="Team Number">
         <button id="loadTeamButton" class="btn btn-primary" type="button">Load Team</button>
       </div>
+    </div>
 
       <!-- First column of data starts here -->
+    <div class="row">
       <div class="col-lg-6 col-sm-6 col-xs-6 gx-3">
         <div class="card mb-3">
           <div class="card-body">

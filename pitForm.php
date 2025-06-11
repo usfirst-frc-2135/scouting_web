@@ -23,9 +23,13 @@ require 'header.php';
         <div class="card-body">
           <form id="pitScoutingForm" method="post" enctype="multipart/form-data" name="pitScoutingForm">
 
-            <div class="mb-3">
+            <div class="col-4 mb-3">
               <label for="teamNumber" class="form-label">Team Number </label>
               <input id="teamNumber" class="form-control" type="text" placeholder="FRC team number">
+            </div>
+            <div class="col-4 mb-3">
+              <label for="scoutName" class="form-label">Scout Name</label>
+              <input id="scoutName" class="form-control" type="text" placeholder="First name, last initial">
             </div>
 
             <div class="card col-md-12 mx-auto">
