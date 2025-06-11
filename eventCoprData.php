@@ -35,7 +35,7 @@ require 'header.php';
           background: rgba(255, 255, 255, 1);
         } */
       </style>
-      <table id="coprTable" class="table table-striped  table-bordered table-hover table-sm border-dark text-center sortable">
+      <table id="coprTable" class="table table-striped table-bordered table-hover table-sm border-dark text-center sortable">
         <thead>
           <tr id="tableKeys"></tr>
         </thead>
@@ -97,7 +97,6 @@ require 'header.php';
     var dataObj = JSON.parse(coprData);
     var coprData = dataObj["data"];
     var keys = dataObj["keys"];
-    var ec = dataObj["eventCode"];
 
     keysToTable(keys);
     buildCoprDataTable(coprData, keys);
