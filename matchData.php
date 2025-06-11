@@ -84,15 +84,16 @@ require 'header.php';
 
 <script>
   // var frozenTable = null;  // doesn't work with table-responsive
+  const team = 1;
 
-  function sortTable() {
+  function sortTable(tableData, index) {
     console.log("==> matchData.php: sortTable()");
-    var table = document.getElementById("matchDataTable");
+    var table = document.getElementById(tableData);
     var rows = Array.prototype.slice.call(table.querySelectorAll("tbody> tr"));
 
     // Sort the rows based on column 1 match number
     rows.sort(function (rowA, rowB) {
-      return (compareMatchNumbers(rowA.cells[0].textContent.trim(), rowB.cells[0].textContent.trim()));
+      return (compareMatchNumbers(rowA.cells[index].textContent.trim(), rowB.cells[index].textContent.trim()));
     });
     // Update the table body with the sorted rows.
     rows.forEach(function (row) {
@@ -161,7 +162,7 @@ require 'header.php';
         //   'frozenColVerticalOffset': 0
         // });
       }, 100);
-      sortTable();
+      sortTable("matchDataTable", team);
     });
   }
 

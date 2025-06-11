@@ -12,110 +12,93 @@ require 'header.php';
     </div>
 
     <!-- Main row to hold the strategic table -->
+    <div class="row col-12 mb-3">
 
-    <!-- <div id="freeze-table" class="freeze-table overflow-auto"> -->
-    <style type="text/css" media="screen">
-      table tr {
-        border: 1px solid black;
-      }
-
-      table td,
-      table th {
-        border-right: 1px solid black;
-      }
-
-      thead {
-        position: sticky;
-        top: 56px;
-        background: white;
-      }
-    </style>
-    <table id="strategicDataTable" class="table table-striped table-hover sortable">
-      <colgroup>
-        <col span="2" style="background-color:transparent">
-        <col span="1" style="background-color:#cfe2ff">
-        <col span="1" style="background-color:transparent">
-        <col span="1" style="background-color:#cfe2ff">
-        <col span="1" style="background-color:transparent">
-        <col span="1" style="background-color:#cfe2ff">
-        <col span="1" style="background-color:#transparent">
-        <col span="1" style="background-color:#cfe2ff">
-        <col span="1" style="background-color:transparent">
-        <col span="1" style="background-color:#cfe2ff">
-        <col span="1" style="background-color:#transparent">
-        <col span="1" style="background-color:#cfe2ff">
-        <col span="1" style="background-color:#transparent">
-        <col span="1" style="background-color:#cfe2ff">
-        <col span="1" style="background-color:#transparent">
-        <col span="1" style="background-color:#cfe2ff">
-        <col span="1" style="background-color:#transparent">
-        <col span="1" style="background-color:#cfe2ff">
-        <col span="1" style="background-color:#transparent">
-        <col span="1" style="background-color:#cfe2ff">
-        <col span="1" style="background-color:#transparent">
-        <col span="1" style="background-color:#cfe2ff">
-        <col span="1" style="background-color:#transparent">
-        <col span="1" style="background-color:#cfe2ff">
-        <col span="1" style="background-color:#transparent">
-      </colgroup>
-      <thead>
-        <!-- <tr>
-            <th colspan="1"> </th>
-            <th colspan="1"> </th>
-            <th colspan="24" class="text-center">Strategic Scouting Data</th>
-          </tr>
+      <!-- <div id="freeze-table" class="freeze-table overflow-auto"> -->
+      <style type="text/css" media="screen">
+        thead {
+          position: sticky;
+          top: 56px;
+          background: white;
+        }
+      </style>
+      <table id="strategicDataTable"
+        class="table table-striped table-bordered table-hover table-sm border-dark text-center sortable">
+        <colgroup>
+          <col span="2">
+          <col span="1">
+          <col span="1">
+          <col span="1">
+          <col span="1">
+          <col span="1">
+          <col span="1">
+          <col span="1">
+          <col span="1">
+          <col span="1">
+          <col span="1">
+          <col span="1">
+          <col span="1">
+          <col span="1">
+          <col span="1">
+          <col span="1">
+          <col span="1">
+          <col span="1">
+          <col span="1">
+          <col span="1">
+          <col span="1">
+          <col span="1">
+          <col span="1">
+          <col span="1">
+          <col span="1">
+        </colgroup>
+        <thead>
           <tr>
             <th colspan="1"> </th>
             <th colspan="1"> </th>
-            <th colspan="24" class="text-center">Table</th>
-          </tr> -->
-        <tr>
-          <th colspan="1"> </th>
-          <th colspan="1"> </th>
-          <th colspan="1"> </th>
-          <th colspan="2" class="text-center" style="background-color:#3686FF">Against Defense</th>
-          <th colspan="3" class="text-center">Defense Tactics</th>
-          <th colspan="8" class="text-center" style="background-color:#3686FF">Fouls</th>
-          <th colspan="4" class="text-center">Auton</th>
-          <th colspan="4" class="text-center" style="background-color:#3686FF">Teleop</th>
-          <th colspan="2" class="text-center">Notes</th>
-          <th colspan="1"> </th>
-        </tr>
-        <tr>
-          <th scope="col" class="text-center">Team</th>
-          <th scope="col" class="text-center">Match</th>
-          <th scope="col" class="text-center">Drive Skill</th>
-          <th scope="col" class="text-center">Block</th>
-          <th scope="col" class="text-center">Note</th>
-          <th scope="col" class="text-center">Block Path</th>
-          <th scope="col" class="text-center">Block Station</th>
-          <th scope="col" class="text-center">Note</th>
-          <th scope="col" class="text-center">Pin</th>
-          <th scope="col" class="text-center">Auton Barge Contact</th>
-          <th scope="col" class="text-center">Auton Cage Contact</th>
-          <th scope="col" class="text-center">Anchor Contact</th>
-          <th scope="col" class="text-center">Barge Contact</th>
-          <th scope="col" class="text-center">Reef Contact</th>
-          <th scope="col" class="text-center">Cage Contact</th>
-          <th scope="col" class="text-center">Contact Climbing Robot</th>
-          <th scope="col" class="text-center">Get Floor Coral</th>
-          <th scope="col" class="text-center">Get Stn Coral</th>
-          <th scope="col" class="text-center">Get Floor Algae</th>
-          <th scope="col" class="text-center">Get Reef Algae</th>
-          <th scope="col" class="text-center">Get Floor Coral</th>
-          <th scope="col" class="text-center">Get Floor Algae</th>
-          <th scope="col" class="text-center">Knock Algae</th>
-          <th scope="col" class="text-center">Acquire Reef Algae</th>
-          <th scope="col" class="text-center">Problem Note</th>
-          <th scope="col" class="text-center">General Note</th>
-          <th scope="col" class="text-center">Scout</th>
-        </tr>
-      </thead>
-      <tbody id="tableData">
-      </tbody>
-    </table>
+            <th colspan="1"> </th>
+            <th colspan="2" style="background-color:#cfe2ff">Against Defense</th>
+            <th colspan="8" style="background-color:#cfe2ff">Fouls</th>
+            <th colspan="4" style="background-color:transparent">Auton</th>
+            <th colspan="4" style="background-color:#cfe2ff">Teleop</th>
+            <th colspan="2" style="background-color:transparent">Notes</th>
+            <th colspan="1"> </th>
+          </tr>
+          <tr>
+            <th scope="col" style="background-color:transparent" class="sorttable_numeric">Team</th>
+            <th scope="col" style="background-color:transparent">Match</th>
+            <th scope="col" style="background-color:#cfe2ff">Drive Skill</th>
+            <th scope="col" style="background-color:transparent">Block</th>
+            <th scope="col" style="background-color:#cfe2ff">Note</th>
+            <th scope="col" style="background-color:transparent">Block Path</th>
+            <th scope="col" style="background-color:#cfe2ff">Block Station</th>
+            <th scope="col" style="background-color:transparent">Note</th>
+            <th scope="col" style="background-color:#cfe2ff">Pin</th>
+            <th scope="col" style="background-color:transparent">Auton Barge Contact</th>
+            <th scope="col" style="background-color:#cfe2ff">Auton Cage Contact</th>
+            <th scope="col" style="background-color:transparent">Anchor Contact</th>
+            <th scope="col" style="background-color:#cfe2ff">Barge Contact</th>
+            <th scope="col" style="background-color:transparent">Reef Contact</th>
+            <th scope="col" style="background-color:#cfe2ff">Cage Contact</th>
+            <th scope="col" style="background-color:transparent">Contact Climbing Robot</th>
+            <th scope="col" style="background-color:#cfe2ff">Get Floor Coral</th>
+            <th scope="col" style="background-color:transparent">Get Stn Coral</th>
+            <th scope="col" style="background-color:#cfe2ff">Get Floor Algae</th>
+            <th scope="col" style="background-color:transparent">Get Reef Algae</th>
+            <th scope="col" style="background-color:#cfe2ff">Get Floor Coral</th>
+            <th scope="col" style="background-color:transparent">Get Floor Algae</th>
+            <th scope="col" style="background-color:#cfe2ff">Knock Algae</th>
+            <th scope="col" style="background-color:transparent">Acquire Reef Algae</th>
+            <th scope="col" style="background-color:#cfe2ff">Problem Note</th>
+            <th scope="col" style="background-color:transparent">General Note</th>
+            <th scope="col" style="background-color:#cfe2ff">Scout Name</th>
+          </tr>
+        </thead>
+        <tbody id="tableData" class="table-group-divider">
+        </tbody>
+      </table>
 
-    <!-- </div> -->
+      <!-- </div> -->
+    </div>
   </div>
 </div>
 
@@ -124,24 +107,30 @@ require 'header.php';
 <!-- Javascript page handlers -->
 
 <script>
-  var frozenTable = null;
+  // var frozenTable = null;
+  const team = 0;
+  const match = 1;
 
-  function sortTable() {
+  function sortTable(tableData, teamIdx, matchIdx) {
     console.log("==> strategicData.php: sortTable()");
-    // Assumes the entries are team numbers or match numbers. Note a team number could have end in 
-    // a "B", "C", "D", or "E".
-
-    var table = document.getElementById("strategicDataTable");
+    var table = document.getElementById(tableData);
     var rows = Array.prototype.slice.call(table.querySelectorAll("tbody> tr"));
 
-    // Sort the rows based on column 1 team number value, then col2 match number
+    // Sort by match number
     rows.sort(function (rowA, rowB) {
-      var cellA = rowA.cells[0].textContent.trim(); // rowA team num
-      var cellB = rowB.cells[0].textContent.trim(); // rowB team num
-      var matchA = rowA.cells[1].textContent.trim(); // rowA match num              
-      var matchB = rowB.cells[1].textContent.trim(); // rowB match num                         
-      return (sortRows(cellA, cellB, matchA, matchB));
+      compareMatchNumbers(rowA.cells[matchIdx].textContent.trim(), rowB.cells[matchIdx].textContent.trim());
     });
+
+    for (var i = 0; i < rows.length; i++)
+      console.log("after match: " + i + " " + rows[i].cells[1].textContent.toString() + " " + rows[i].cells[0].textContent.toString());
+
+    // Sort by team number
+    rows.sort(function (rowA, rowB) {
+      compareTeamNumbers(rowA.cells[teamIdx].textContent, rowB.cells[teamIdx].textContent);
+    });
+
+    for (var i = 0; i < rows.length; i++)
+      console.log("after teams: " + i + " " + rows[i].cells[0].textContent.toString() + " " + rows[i].cells[1].textContent.toString());
 
     // Update the table body with the sorted rows 
     rows.forEach(function (row) {
@@ -149,137 +138,55 @@ require 'header.php';
     });
   }
 
-
-  // Returns 0 if rowA is before rowB; else returns 1. Assumes the row has a
-  // team number and may have a B, C, D, or E letter at the end. Note the letter may be lower case.
-  // If team numbers are the same, then sort by match num (2nd col).
-  function sortRows(cellA, cellB, matchA, matchB) {
-    console.log("==> strategicData.php: sortRows()");
-
-    cellA = cellA.toUpperCase();  // make letter upper case
-    cellB = cellB.toUpperCase();
-    cellA = cellA.replace(/[^0-9a-zA-Z]/g, '');  // remove any non-alphanumeric chars
-    cellB = cellB.replace(/[^0-9a-zA-Z]/g, '');  // remove any non-alphanumeric chars
-    var cellA_num = cellA;
-    var cellB_num = cellB;
-    var A_let = 0;
-    var B_let = 0;
-
-    if (cellA.charAt(cellA.length - 1) == "B") {
-      cellA_num = cellA.substr(0, cellA.length - 1);
-      A_let = 1;
-    }
-    else if (cellA.charAt(cellA.length - 1) == "C") {
-      cellA_num = cellA.substr(0, cellA.length - 1);
-      A_let = 2;
-    }
-    else if (cellA.charAt(cellA.length - 1) == "D") {
-      cellA_num = cellA.substr(0, cellA.length - 1);
-      A_let = 3;
-    }
-    else if (cellA.charAt(cellA.length - 1) == "E") {
-      cellA_num = cellA.substr(0, cellA.length - 1);
-      A_let = 4;
-    }
-    if (cellB.charAt(cellB.length - 1) == "B") {
-      cellB_num = cellB.substr(0, cellB.length - 1);
-      B_let = 1;
-    }
-    else if (cellB.charAt(cellB.length - 1) == "C") {
-      cellB_num = cellB.substr(0, cellB.length - 1);
-      B_let = 2;
-    }
-    else if (cellB.charAt(cellB.length - 1) == "D") {
-      cellB_num = cellB.substr(0, cellB.length - 1);
-      B_let = 3;
-    }
-    else if (cellB.charAt(cellB.length - 1) == "E") {
-      cellB_num = cellB.substr(0, cellB.length - 1);
-      B_let = 4;
-    }
-
-    // Now determine which cell goes first.
-    if (A_let == 0 && B_let == 0)   // no letters, so just compare team numbers.
-    {
-      if (cellA == cellB)  // same team and letters
-      {
-        return (compareMatchNumbers(matchA, matchB));
-      }
-      return (cellA - cellB);
-    }
-    if (cellA_num == cellB_num)   // same team number, with letters on at least one
-    {
-      if (A_let == 0)  // no letter in cellA, so it will be before cellB
-        return (0);
-      if (B_let == 0)  // no letter in cellB, so it will be before cellA
-        return (1);
-      if (A_let == B_let)  // letters are the same 
-        return (compareMatchNumbers(matchA, matchB));
-      if (A_let > B_let)  // cellA letter is higher than B
-        return (1);
-      return (0);
-    }
-    // not same team number, with letters, so just compare team number part
-    return (cellA_num - cellB_num);
-  }
-
   // Converts a given "1" to yes, "0" to no, anything else to empty string.
   function convertToYesNo(value) {
     switch (String(value)) {
-      case "1":
-        return "yes";
-      case "2":
-        return "no";
-      default:
-        return "-";
+      case "1": return "yes";
+      case "2": return "no";
+      default: return "-";
     }
   }
 
   function buildStrategicDataTable(dataObj, pitData) {
     console.log("==> strategicData.php: buildStrategicDataTable()");
     for (let i = 0; i < dataObj.length; i++) {
-      var driverability = dataObj[i]["driverability"];
       var driveVal = "";
-      if (driverability == "1")
-        driveVal = "Jerky";
-      else if (driverability == "2")
-        driveVal = "Slow";
-      else if (driverability == "3")
-        driveVal = "Average";
-      else if (driverability == "4")
-        driveVal = "Quick";
-      else if (driverability == "5")
-        driveVal = "-";
+      switch (dataObj[i]["driverability"]) {
+        case 1: driveVal = "Jerky";
+        case 2: driveVal = "Slow";
+        case 3: driveVal = "Average";
+        case 4: driveVal = "Quick";
+        default:
+        case 5: driveVal = "-";
+      }
 
-      var teamnum = dataObj[i]["teamnumber"];
-
-      var rowString = "<tr><td align=\"center\">" + teamnum + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["matchnumber"] + "</td>" +
-        "<td align=\"center\">" + driveVal + "</td>" +
-        "<td align=\"center\">" + convertToYesNo(dataObj[i]["against_tactic1"]) + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["against_comment"] + "</td>" +
-        "<td align=\"center\">" + convertToYesNo(dataObj[i]["defense_tactic1"]) + "</td>" +
-        "<td align=\"center\">" + convertToYesNo(dataObj[i]["defense_tactic2"]) + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["defense_comment"] + "</td>" +
-        "<td align=\"center\">" + convertToYesNo(dataObj[i]["foul1"]) + "</td>" +
-        "<td align=\"center\">" + convertToYesNo(dataObj[i]["autonFoul1"]) + "</td>" +
-        "<td align=\"center\">" + convertToYesNo(dataObj[i]["autonFoul2"]) + "</td>" +
-        "<td align=\"center\">" + convertToYesNo(dataObj[i]["teleopFoul1"]) + "</td>" +
-        "<td align=\"center\">" + convertToYesNo(dataObj[i]["teleopFoul2"]) + "</td>" +
-        "<td align=\"center\">" + convertToYesNo(dataObj[i]["teleopFoul3"]) + "</td>" +
-        "<td align=\"center\">" + convertToYesNo(dataObj[i]["teleopFoul4"]) + "</td>" +
-        "<td align=\"center\">" + convertToYesNo(dataObj[i]["endgameFoul1"]) + "</td>" +
-        "<td align=\"center\">" + convertToYesNo(dataObj[i]["autonGetCoralFromFloor"]) + "</td>" +
-        "<td align=\"center\">" + convertToYesNo(dataObj[i]["autonGetCoralFromStation"]) + "</td>" +
-        "<td align=\"center\">" + convertToYesNo(dataObj[i]["autonGetAlgaeFromFloor"]) + "</td>" +
-        "<td align=\"center\">" + convertToYesNo(dataObj[i]["autonGetAlgaeFromReef"]) + "</td>" +
-        "<td align=\"center\">" + convertToYesNo(dataObj[i]["teleopFloorPickupAlgae"]) + "</td>" +
-        "<td align=\"center\">" + convertToYesNo(dataObj[i]["teleopFloorPickupCoral"]) + "</td>" +
-        "<td align=\"center\">" + convertToYesNo(dataObj[i]["teleopKnockOffAlgaeFromReef"]) + "</td>" +
-        "<td align=\"center\">" + convertToYesNo(dataObj[i]["teleopAcquireAlgaeFromReef"]) + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["problem_comment"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["general_comment"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["scoutname"] + "</td>" +
+      var rowString = "<tr><td align=\"center\" style=\"background-color:transparent\">" + dataObj[i]["teamnumber"] + "</td>" +
+        "<td align=\"center\" style=\"background-color:transparent\">" + dataObj[i]["matchnumber"] + "</td>" +
+        "<td align=\"center\" style=\"background-color:#cfe2ff\">" + driveVal + "</td>" +
+        "<td align=\"center\" style=\"background-color:transparent\">" + convertToYesNo(dataObj[i]["against_tactic1"]) + "</td>" +
+        "<td align=\"center\" style=\"background-color:#cfe2ff\">" + dataObj[i]["against_comment"] + "</td>" +
+        "<td align=\"center\" style=\"background-color:transparent\">" + convertToYesNo(dataObj[i]["defense_tactic1"]) + "</td>" +
+        "<td align=\"center\" style=\"background-color:#cfe2ff\">" + convertToYesNo(dataObj[i]["defense_tactic2"]) + "</td>" +
+        "<td align=\"center\" style=\"background-color:transparent\">" + dataObj[i]["defense_comment"] + "</td>" +
+        "<td align=\"center\" style=\"background-color:#cfe2ff\">" + convertToYesNo(dataObj[i]["foul1"]) + "</td>" +
+        "<td align=\"center\" style=\"background-color:transparent\">" + convertToYesNo(dataObj[i]["autonFoul1"]) + "</td>" +
+        "<td align=\"center\" style=\"background-color:#cfe2ff\">" + convertToYesNo(dataObj[i]["autonFoul2"]) + "</td>" +
+        "<td align=\"center\" style=\"background-color:transparent\">" + convertToYesNo(dataObj[i]["teleopFoul1"]) + "</td>" +
+        "<td align=\"center\" style=\"background-color:#cfe2ff\">" + convertToYesNo(dataObj[i]["teleopFoul2"]) + "</td>" +
+        "<td align=\"center\" style=\"background-color:transparent\">" + convertToYesNo(dataObj[i]["teleopFoul3"]) + "</td>" +
+        "<td align=\"center\" style=\"background-color:#cfe2ff\">" + convertToYesNo(dataObj[i]["teleopFoul4"]) + "</td>" +
+        "<td align=\"center\" style=\"background-color:transparent\">" + convertToYesNo(dataObj[i]["endgameFoul1"]) + "</td>" +
+        "<td align=\"center\" style=\"background-color:#cfe2ff\">" + convertToYesNo(dataObj[i]["autonGetCoralFromFloor"]) + "</td>" +
+        "<td align=\"center\" style=\"background-color:transparent\">" + convertToYesNo(dataObj[i]["autonGetCoralFromStation"]) + "</td>" +
+        "<td align=\"center\" style=\"background-color:#cfe2ff\">" + convertToYesNo(dataObj[i]["autonGetAlgaeFromFloor"]) + "</td>" +
+        "<td align=\"center\" style=\"background-color:transparent\">" + convertToYesNo(dataObj[i]["autonGetAlgaeFromReef"]) + "</td>" +
+        "<td align=\"center\" style=\"background-color:#cfe2ff\">" + convertToYesNo(dataObj[i]["teleopFloorPickupAlgae"]) + "</td>" +
+        "<td align=\"center\" style=\"background-color:transparent\">" + convertToYesNo(dataObj[i]["teleopFloorPickupCoral"]) + "</td>" +
+        "<td align=\"center\" style=\"background-color:#cfe2ff\">" + convertToYesNo(dataObj[i]["teleopKnockOffAlgaeFromReef"]) + "</td>" +
+        "<td align=\"center\" style=\"background-color:transparent\">" + convertToYesNo(dataObj[i]["teleopAcquireAlgaeFromReef"]) + "</td>" +
+        "<td align=\"center\" style=\"background-color:#cfe2ff\">" + dataObj[i]["problem_comment"] + "</td>" +
+        "<td align=\"center\" style=\"background-color:transparent\">" + dataObj[i]["general_comment"] + "</td>" +
+        "<td align=\"center\" style=\"background-color:#cfe2ff\">" + dataObj[i]["scoutname"] + "</td>" +
         "</td>";
       $("#tableData").append(rowString);
     }
@@ -295,24 +202,27 @@ require 'header.php';
       var dataObj = JSON.parse(strategicData);
       buildStrategicDataTable(dataObj);
       setTimeout(function () {
-        sorttable.makeSortable(document.getElementById("strategicDataTable"));
-        frozenTable = $('#freeze-table').freezeTable({
-          'freezeHead': true,
-          'freezeColumn': true,
-          'freezeColumnHead': true,
-          'scrollBar': true,
-          'fixedNavbar': '.navbar',
-          'scrollable': true,
-          'fastMode': true,
-          // 'container': '#navbar',
-          'columnNum': 2,
-          'columnKeep': true,
-          'columnBorderWidth': 2,
-          'backgroundColor': 'blue',
-          'frozenColVerticalOffset': 0
-        });
+        // script instructions say this is needed, but it breaks table header sorting
+        // sorttable.makeSortable(document.getElementById("strategicDataTable"));
+        //
+        // freeze-table doesn't work with table-responsive
+        // frozenTable = $('#freeze-table').freezeTable({
+        //   'freezeHead': true,
+        //   'freezeColumn': true,
+        //   'freezeColumnHead': true,
+        //   'scrollBar': true,
+        //   'fixedNavbar': '.navbar',
+        //   'scrollable': true,
+        //   'fastMode': true,
+        //   // 'container': '#navbar',
+        //   'columnNum': 2,
+        //   'columnKeep': true,
+        //   'columnBorderWidth': 2,
+        //   'backgroundColor': 'blue',
+        //   'frozenColVerticalOffset': 0
+        // });
       }, 100);
-      sortTable();
+      sortTable("strategicDataTable", team, match);
     });
   }
 
@@ -332,15 +242,16 @@ require 'header.php';
 
     // Submit the strategic form data
     $("#strategicDataTable").click(function () {
-      if (frozenTable) {
-        frozenTable.update();
-      }
+      // if (frozenTable) {
+      //   frozenTable.update();
+      // }
     });
 
-    $(".table-scrollable").freezeTable({
-      'scrollable': true,
-    });
+    // $(".table-scrollable").freezeTable({
+    //   'scrollable': true,
+    // });
   });
 </script>
 
 <script type="text/javascript" src="./scripts/compareMatchNumbers.js"></script>
+<script type="text/javascript" src="./scripts/compareTeamNumbers.js"></script>

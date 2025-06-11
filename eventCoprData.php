@@ -16,43 +16,61 @@ require 'header.php';
     </div>
 
     <!-- Main row to hold the table -->
+    <div class="row col-12 mb-3">
 
-    <!-- <div id="freeze-table" class="freeze-table"> -->
-    <table id="coprTable" class="table table-striped table-hover">
-      <thead>
-        <tr id="tableKeys">
-        </tr>
-      </thead>
-      <tbody id="tableData">
-      </tbody>
-    </table>
-    <!-- </div> -->
+      <!-- <div id="freeze-table" class="freeze-table"> -->
+      <style type="text/css" media="screen">
+        thead {
+          position: sticky;
+          top: 56px;
+          background: white;
+        }
+
+        /* th:first-child,
+        td:first-child,
+        tr {
+          position: sticky;
+          left: 0px;
+          z-index: 1;
+          background: rgba(255, 255, 255, 1);
+        } */
+      </style>
+      <table id="coprTable" class="table table-striped  table-bordered table-hover table-sm border-dark text-center sortable">
+        <thead>
+          <tr id="tableKeys">
+          </tr>
+        </thead>
+        <tbody id="tableData" class="table-group-divider">
+        </tbody>
+      </table>
+      <!-- </div> -->
+    </div>
   </div>
 </div>
-
-<style type="text/css" media="screen">
-  th:first-child,
-  td:first-child,
-  tr {
-    position: sticky;
-    left: 0px;
-    z-index: 1;
-    background: rgba(255, 255, 255, 1);
-  }
-
-  thead {
-    position: sticky;
-    top: 56px;
-    background: white;
-  }
-</style>
 
 <?php include 'footer.php'; ?>
 
 <!-- Javascript page handlers -->
 
 <script>
-  var _frozenTable = null;
+  // var _frozenTable = null;
+
+  const team = 0;
+
+  function sortTable(tableData, teamIdx) {
+    console.log("==> matchData.php: sortTable()");
+    var table = document.getElementById(tableData);
+    var rows = Array.prototype.slice.call(table.querySelectorAll("tbody> tr"));
+
+    // Sort the rows based on column 1 match number
+    rows.sort(function (rowA, rowB) {
+      return (compareTeamNumbers(rowA.cells[teamIdx].textContent.trim(), rowB.cells[teamIdx].textContent.trim()));
+    });
+    // Update the table body with the sorted rows.
+    rows.forEach(function (row) {
+      table.querySelector("tbody").appendChild(row);
+    });
+  }
 
   function buildCoprDataTable(dataObj, keys) {
     $("#tableData").html("");
@@ -94,23 +112,25 @@ require 'header.php';
       console.log("==> getCOPRs");
       processCoprData(coprData);
       setTimeout(function () {
-        sorttable.makeSortable(document.getElementById("coprTable"));
-        _frozenTable = $('#freeze-table').freezeTable({
-          'freezeHead': true,
-          'freezeColumn': true,
-          'freezeColumnHead': true,
-          'scrollBar': true,
-          'fixedNavbar': '.navbar',
-          'scrollable': true,
-          'fastMode': true,
-          // 'container': '#navbar',
-          'columnNum': 1,
-          'columnKeep': true,
-          'columnBorderWidth': 2,
-          'backgroundColor': 'blue',
-          'frozenColVerticalOffset': 0
-        });
+        // script instructions say this is needed, but it breaks table header sorting
+        // sorttable.makeSortable(document.getElementById("coprTable"));
+        // _frozenTable = $('#freeze-table').freezeTable({
+        //   'freezeHead': true,
+        //   'freezeColumn': true,
+        //   'freezeColumnHead': true,
+        //   'scrollBar': true,
+        //   'fixedNavbar': '.navbar',
+        //   'scrollable': true,
+        //   'fastMode': true,
+        //   // 'container': '#navbar',
+        //   'columnNum': 1,
+        //   'columnKeep': true,
+        //   'columnBorderWidth': 2,
+        //   'backgroundColor': 'blue',
+        //   'frozenColVerticalOffset': 0
+        // });
       }, 500);
+      sortTable("coprTable", team);
     });
   }
 
@@ -133,10 +153,12 @@ require 'header.php';
     });
 
     $("#coprTable").click(function () {
-      if (_frozenTable) {
-        _frozenTable.update();
-      }
+      // if (_frozenTable) {
+      //   _frozenTable.update();
+      // }
     });
 
   });
 </script>
+
+<script type="text/javascript" src="./scripts/compareTeamNumbers.js"></script>
