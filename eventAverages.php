@@ -370,7 +370,8 @@ COMMENTED OUT FOR NOW-->
         addKeysToFinalList(_filteredData);
         addHtmlToFinalTable();
         setTimeout(function () {
-          sorttable.makeSortable(document.getElementById("averageTable"))
+          // script instructions say this is needed, but it breaks table header sorting
+          // sorttable.makeSortable(document.getElementById("averageTable"))
           _frozenTable = $('#freeze-table').freezeTable({
             'freezeHead': true,
             'freezeColumn': true,

@@ -768,7 +768,8 @@ require 'header.php';
       $("#allMatchesTable").append(rowString);
     }
     setTimeout(function () {
-      sorttable.makeSortable(document.getElementById("sortableAllMatches"));
+      // script instructions say this is needed, but it breaks table header sorting
+      // sorttable.makeSortable(document.getElementById("sortableAllMatches"));
       frozenTableMatches = $('#freeze-table').freezeTable({
         'freezeHead': true,
         'freezeColumn': true,
@@ -876,7 +877,8 @@ require 'header.php';
     }
 
     setTimeout(function () {
-      sorttable.makeSortable(document.getElementById("sortableStrategicData"));
+      // script instructions say this is needed, but it breaks table header sorting
+      // sorttable.makeSortable(document.getElementById("sortableStrategicData"));
       frozenTableStrategy = $('#freeze-table-2').freezeTable({
         'backgroundColor': "white",
         'columnKeep': true,

@@ -37,8 +37,7 @@ require 'header.php';
       </style>
       <table id="coprTable" class="table table-striped  table-bordered table-hover table-sm border-dark text-center sortable">
         <thead>
-          <tr id="tableKeys">
-          </tr>
+          <tr id="tableKeys"></tr>
         </thead>
         <tbody id="tableData" class="table-group-divider">
         </tbody>
@@ -152,6 +151,7 @@ require 'header.php';
       readTbaAndBuildCoprTable();
     });
 
+    // Keep the frozen pane updated 
     $("#coprTable").click(function () {
       // if (_frozenTable) {
       //   _frozenTable.update();
