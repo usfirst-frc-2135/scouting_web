@@ -15,15 +15,6 @@ require 'header.php';
     <div class="row mb-3">
 
       <style type="text/css" media="screen">
-        table tr {
-          border: 1px solid black;
-        }
-
-        table td,
-        table th {
-          border-right: 1px solid black;
-        }
-
         thead {
           position: sticky;
           top: 56px;
