@@ -12,88 +12,68 @@ require 'header.php';
     </div>
 
     <!-- Main row to hold the table -->
-    <div class="row mb-3">
+    <div class="row col-12 mb-3">
 
       <!-- <div id="freeze-table" class="freeze-table overflow-auto"> -->
       <style type="text/css" media="screen">
-        table tr {
-          border: 1px solid black;
-        }
-
-        table td,
-        table th {
-          border-right: 1px solid black;
-        }
-
         thead {
           position: sticky;
           top: 56px;
           background: white;
         }
       </style>
-
-      <table id="matchDataTable" class="table table-striped table-bordered table-hover sortable">
+      <table id="matchDataTable" class="table table-striped table-bordered table-hover table-sm border-dark sortable">
         <colgroup>
-          <col span="2" style="background-color:transparent">
-          <col span="1" style="background-color:#cfe2ff">
-          <col span="1" style="background-color:transparent">
-          <col span="1" style="background-color:#cfe2ff">
-          <col span="1" style="background-color:transparent">
-          <col span="1" style="background-color:#cfe2ff">
-          <col span="1" style="background-color:#transparent">
-          <col span="1" style="background-color:#cfe2ff">
-          <col span="1" style="background-color:transparent">
-          <col span="1" style="background-color:#cfe2ff">
-          <col span="1" style="background-color:#transparent">
-          <col span="1" style="background-color:#cfe2ff">
-          <col span="1" style="background-color:#transparent">
-          <col span="1" style="background-color:#cfe2ff">
-          <col span="1" style="background-color:#transparent">
-          <col span="1" style="background-color:#cfe2ff">
-          <col span="1" style="background-color:#transparent">
-          <col span="1" style="background-color:#cfe2ff">
-          <col span="1" style="background-color:#transparent">
+          <col span="2">
+          <col span="1">
+          <col span="1">
+          <col span="1">
+          <col span="1">
+          <col span="1">
+          <col span="1">
+          <col span="1">
+          <col span="1">
+          <col span="1">
+          <col span="1">
+          <col span="1">
+          <col span="1">
+          <col span="1">
+          <col span="1">
+          <col span="1">
+          <col span="1">
+          <col span="1">
+          <col span="1">
         </colgroup>
         <thead>
-          <!-- <tr>
-              <th colspan="1"> </th>
-              <th colspan="1"> </th>
-              <th colspan="19" class="text-center">Match Scouted Data</th>
-            </tr>
-            <tr>
-              <th colspan="1"> </th>
-              <th colspan="1"> </th>
-              <th colspan="19" class="text-center">Table</th>
-            </tr> -->
           <tr>
             <th scope="col">Match</th>
-            <th scope="col">Team</th>
-            <th scope="col">Auton Leave</th>
-            <th scope="col">Auton Coral L1</th>
-            <th scope="col">Auton Coral L2</th>
-            <th scope="col">Auton Coral L3</th>
-            <th scope="col">Auton Coral L4</th>
-            <th scope="col">Auton Algae Net</th>
-            <th scope="col">Auton Algae Proc</th>
-            <th scope="col">Acq'd Coral</th>
-            <th scope="col">Acq'd Algae</th>
-            <th scope="col">Teleop Coral L1</th>
-            <th scope="col">Teleop Coral L2</th>
-            <th scope="col">Teleop Coral L3</th>
-            <th scope="col">Teleop Coral L4</th>
-            <th scope="col">Teleop Algae Net</th>
-            <th scope="col">Teleop Algae Proc</th>
-            <th scope="col">Cage Climb</th>
-            <th scope="col">Died</th>
-            <th scope="col">Scout Name</th>
-            <th scope="col">Comment</th>
+            <th class="sorttable_numeric" scope="col">Team</th>
+            <th scope="col" style="background-color:#cfe2ff">Auton Leave</th>
+            <th scope="col" style="background-color:transparent">Auton Coral L1</th>
+            <th scope="col" style="background-color:#cfe2ff">Auton Coral L2</th>
+            <th scope="col" style="background-color:transparent">Auton Coral L3</th>
+            <th scope="col" style="background-color:#cfe2ff">Auton Coral L4</th>
+            <th scope="col" style="background-color:transparent">Auton Algae Net</th>
+            <th scope="col" style="background-color:#cfe2ff">Auton Algae Proc</th>
+            <th scope="col" style="background-color:transparent">Acq'd Coral</th>
+            <th scope="col" style="background-color:#cfe2ff">Acq'd Algae</th>
+            <th scope="col" style="background-color:transparent">Teleop Coral L1</th>
+            <th scope="col" style="background-color:#cfe2ff">Teleop Coral L2</th>
+            <th scope="col" style="background-color:transparent">Teleop Coral L3</th>
+            <th scope="col" style="background-color:#cfe2ff">Teleop Coral L4</th>
+            <th scope="col" style="background-color:transparent">Teleop Algae Net</th>
+            <th scope="col" style="background-color:#cfe2ff">Teleop Algae Proc</th>
+            <th scope="col" style="background-color:transparent">Cage Climb</th>
+            <th scope="col" style="background-color:#cfe2ff">Died</th>
+            <th scope="col" style="background-color:transparent">Scout Name</th>
+            <th scope="col" style="background-color:#cfe2ff">Comment</th>
           </tr>
         </thead>
-        <tbody id="tableData">
+        <tbody id="tableData" class="table-group-divider">
         </tbody>
       </table>
-
       <!-- </div> -->
+
     </div>
   </div>
 </div>
@@ -122,26 +102,26 @@ require 'header.php';
     console.log("==> matchData.php: buildMatchDataTable()");
     for (let i = 0; i < dataObj.length; i++) {
       var rowString = "<tr><td align=\"center\">" + dataObj[i]["matchnumber"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["teamnumber"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["autonLeave"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["autonCoralL1"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["autonCoralL2"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["autonCoralL3"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["autonCoralL4"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["autonAlgaeNet"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["autonAlgaeProcessor"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["acquiredCoral"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["acquiredAlgae"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["teleopCoralL1"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["teleopCoralL2"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["teleopCoralL3"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["teleopCoralL4"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["teleopAlgaeNet"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["teleopAlgaeProcessor"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["cageClimb"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["died"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["scoutname"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["comment"] + "</td>" +
+        "<td align=\"center\" style=\"background-color:transparent\">" + dataObj[i]["teamnumber"] + "</td>" +
+        "<td align=\"center\" style=\"background-color:#cfe2ff\">" + dataObj[i]["autonLeave"] + "</td>" +
+        "<td align=\"center\" style=\"background-color:transparent\">" + dataObj[i]["autonCoralL1"] + "</td>" +
+        "<td align=\"center\" style=\"background-color:#cfe2ff\">" + dataObj[i]["autonCoralL2"] + "</td>" +
+        "<td align=\"center\" style=\"background-color:transparent\">" + dataObj[i]["autonCoralL3"] + "</td>" +
+        "<td align=\"center\" style=\"background-color:#cfe2ff\">" + dataObj[i]["autonCoralL4"] + "</td>" +
+        "<td align=\"center\" style=\"background-color:transparent\">" + dataObj[i]["autonAlgaeNet"] + "</td>" +
+        "<td align=\"center\" style=\"background-color:#cfe2ff\">" + dataObj[i]["autonAlgaeProcessor"] + "</td>" +
+        "<td align=\"center\" style=\"background-color:transparent\">" + dataObj[i]["acquiredCoral"] + "</td>" +
+        "<td align=\"center\" style=\"background-color:#cfe2ff\">" + dataObj[i]["acquiredAlgae"] + "</td>" +
+        "<td align=\"center\" style=\"background-color:transparent\">" + dataObj[i]["teleopCoralL1"] + "</td>" +
+        "<td align=\"center\" style=\"background-color:#cfe2ff\">" + dataObj[i]["teleopCoralL2"] + "</td>" +
+        "<td align=\"center\" style=\"background-color:transparent\">" + dataObj[i]["teleopCoralL3"] + "</td>" +
+        "<td align=\"center\" style=\"background-color:#cfe2ff\">" + dataObj[i]["teleopCoralL4"] + "</td>" +
+        "<td align=\"center\" style=\"background-color:transparent\">" + dataObj[i]["teleopAlgaeNet"] + "</td>" +
+        "<td align=\"center\" style=\"background-color:#cfe2ff\">" + dataObj[i]["teleopAlgaeProcessor"] + "</td>" +
+        "<td align=\"center\" style=\"background-color:transparent\">" + dataObj[i]["cageClimb"] + "</td>" +
+        "<td align=\"center\" style=\"background-color:#cfe2ff\">" + dataObj[i]["died"] + "</td>" +
+        "<td align=\"center\" style=\"background-color:transparent\">" + dataObj[i]["scoutname"] + "</td>" +
+        "<td align=\"center\" style=\"background-color:#cfe2ff\">" + dataObj[i]["comment"] + "</td>" +
         "</tr>";
       $("#tableData").append(rowString);
 
