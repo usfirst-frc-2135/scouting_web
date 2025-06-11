@@ -22,7 +22,7 @@ require 'header.php';
           background: white;
         }
       </style>
-      <table id="matchDataTable" class="table table-striped table-bordered table-hover table-sm border-dark sortable">
+      <table id="matchDataTable" class="table table-striped table-bordered table-hover table-sm border-dark text-center sortable">
         <colgroup>
           <col span="2">
           <col span="1">
@@ -46,8 +46,8 @@ require 'header.php';
         </colgroup>
         <thead>
           <tr>
-            <th scope="col">Match</th>
-            <th class="sorttable_numeric" scope="col">Team</th>
+            <th scope="col" style="background-color:transparent">Match</th>
+            <th scope="col" style="background-color:transparent" class="sorttable_numeric">Team</th>
             <th scope="col" style="background-color:#cfe2ff">Auton Leave</th>
             <th scope="col" style="background-color:transparent">Auton Coral L1</th>
             <th scope="col" style="background-color:#cfe2ff">Auton Coral L2</th>
@@ -65,8 +65,8 @@ require 'header.php';
             <th scope="col" style="background-color:#cfe2ff">Teleop Algae Proc</th>
             <th scope="col" style="background-color:transparent">Cage Climb</th>
             <th scope="col" style="background-color:#cfe2ff">Died</th>
-            <th scope="col" style="background-color:transparent">Scout Name</th>
-            <th scope="col" style="background-color:#cfe2ff">Comment</th>
+            <th scope="col" style="background-color:transparent">Comment</th>
+            <th scope="col" style="background-color:#cfe2ff">Scout Name</th>
           </tr>
         </thead>
         <tbody id="tableData" class="table-group-divider">
@@ -83,11 +83,14 @@ require 'header.php';
 <!-- Javascript page handlers -->
 
 <script>
-  var frozenTable = null;
+  // var frozenTable = null;  // doesn't work with table-responsive
 
   function sortTable() {
+    console.log("==> matchData.php: sortTable()");
     var table = document.getElementById("matchDataTable");
     var rows = Array.prototype.slice.call(table.querySelectorAll("tbody> tr"));
+
+    // Sort the rows based on column 1 match number
     rows.sort(function (rowA, rowB) {
       return (compareMatchNumbers(rowA.cells[0].textContent.trim(), rowB.cells[0].textContent.trim()));
     });
@@ -101,7 +104,7 @@ require 'header.php';
   function buildMatchDataTable(dataObj) {
     console.log("==> matchData.php: buildMatchDataTable()");
     for (let i = 0; i < dataObj.length; i++) {
-      var rowString = "<tr><td align=\"center\">" + dataObj[i]["matchnumber"] + "</td>" +
+      var rowString = "<tr><td align=\"center\" style=\"background-color:transparent\">" + dataObj[i]["matchnumber"] + "</td>" +
         "<td align=\"center\" style=\"background-color:transparent\">" + dataObj[i]["teamnumber"] + "</td>" +
         "<td align=\"center\" style=\"background-color:#cfe2ff\">" + dataObj[i]["autonLeave"] + "</td>" +
         "<td align=\"center\" style=\"background-color:transparent\">" + dataObj[i]["autonCoralL1"] + "</td>" +
@@ -128,9 +131,9 @@ require 'header.php';
     }
   }
 
+  // get Match Scouting Data
   function readMatchDataAndBuildTable() {
     console.log("==> matchData.php: readMatchDataAndBuildTable()");
-    // output: gets the API data from our server
     $.get("api/readAPI.php", {
       getAllMatchData: 1
     }).done(function (matchData) {
@@ -138,22 +141,25 @@ require 'header.php';
       var dataObj = JSON.parse(matchData);
       buildMatchDataTable(dataObj);
       setTimeout(function () {
-        sorttable.makeSortable(document.getElementById("matchDataTable"));
-        frozenTable = $('#freeze-table').freezeTable({
-          'freezeHead': true,
-          'freezeColumn': true,
-          'freezeColumnHead': true,
-          'scrollBar': true,
-          'fixedNavbar': '.navbar',
-          'scrollable': true,
-          'fastMode': true,
-          // 'container': '#navbar',
-          'columnNum': 2,
-          'columnKeep': true,
-          'columnBorderWidth': 2,
-          'backgroundColor': 'white',
-          'frozenColVerticalOffset': 0
-        });
+        // script instructions say this is needed, but it breaks table header sorting
+        // sorttable.makeSortable(document.getElementById("matchDataTable"));
+        //
+        // freeze-table doesn't work with table-responsive
+        // frozenTable = $('#freeze-table').freezeTable({
+        //   'freezeHead': true,
+        //   'freezeColumn': true,
+        //   'freezeColumnHead': true,
+        //   'scrollBar': true,
+        //   'fixedNavbar': '.navbar',
+        //   'scrollable': true,
+        //   'fastMode': true,
+        //   // 'container': '#navbar',
+        //   'columnNum': 2,
+        //   'columnKeep': true,
+        //   'columnBorderWidth': 2,
+        //   'backgroundColor': 'white',
+        //   'frozenColVerticalOffset': 0
+        // });
       }, 100);
       sortTable();
     });
@@ -175,9 +181,9 @@ require 'header.php';
 
     // Keep the frozen pane updated 
     $("#matchDataTable").click(function () {
-      if (frozenTable) {
-        frozenTable.update();
-      }
+      // if (frozenTable) {
+      //   frozenTable.update();
+      // }
     });
   });
 </script>
