@@ -84,10 +84,10 @@ require 'header.php';
 
 <script>
   // var frozenTable = null;  // doesn't work with table-responsive
-  const team = 1;
+  const teamColumn = 1;
 
-  function sortTable(tableData, index) {
-    console.log("==> matchData.php: sortTable()");
+  function sortMatchTable(tableData, index) {
+    console.log("==> matchData.php: sortMatchTable()");
     var table = document.getElementById(tableData);
     var rows = Array.prototype.slice.call(table.querySelectorAll("tbody> tr"));
 
@@ -162,7 +162,7 @@ require 'header.php';
         //   'frozenColVerticalOffset': 0
         // });
       }, 100);
-      sortTable("matchDataTable", team);
+      sortMatchTable("matchDataTable", teamColumn);
     });
   }
 
@@ -181,11 +181,11 @@ require 'header.php';
     readMatchDataAndBuildTable();
 
     // Keep the frozen pane updated 
-    $("#matchDataTable").click(function () {
-      // if (frozenTable) {
-      //   frozenTable.update();
-      // }
-    });
+    // $("#matchDataTable").click(function () {
+    // if (frozenTable) {
+    //   frozenTable.update();
+    // }
+    // });
   });
 </script>
 

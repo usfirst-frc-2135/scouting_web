@@ -119,7 +119,7 @@ require 'header.php';
         alert("Can't load teamlist from TBA; check if TBA Key was set in db_config");
       else {
         var jsonTeamList = JSON.parse(teamNameList);
-        for (var i = 0; i < jsonTeamList.length; i++) {
+        for (let i in jsonTeamList) {
           var teamNum = jsonTeamList[i]["teamnum"];
           var teamName = jsonTeamList[i]["teamname"];
           teamList.push(teamNum);

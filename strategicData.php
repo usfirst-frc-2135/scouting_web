@@ -108,17 +108,17 @@ require 'header.php';
 
 <script>
   // var frozenTable = null;
-  const team = 0;
-  const match = 1;
+  const teamColumn = 0;
+  const matchColumn = 1;
 
-  function sortTable(tableData, teamIdx, matchIdx) {
-    console.log("==> strategicData.php: sortTable()");
+  function sortStrategicTable(tableData, teamCol, matchCol) {
+    console.log("==> strategicData.php: sortStrategicTable()");
     var table = document.getElementById(tableData);
     var rows = Array.prototype.slice.call(table.querySelectorAll("tbody> tr"));
 
     // Sort by match number
     rows.sort(function (rowA, rowB) {
-      compareMatchNumbers(rowA.cells[matchIdx].textContent.trim(), rowB.cells[matchIdx].textContent.trim());
+      compareMatchNumbers(rowA.cells[matchCol].textContent.trim(), rowB.cells[matchCol].textContent.trim());
     });
 
     for (var i = 0; i < rows.length; i++)
@@ -126,7 +126,7 @@ require 'header.php';
 
     // Sort by team number
     rows.sort(function (rowA, rowB) {
-      compareTeamNumbers(rowA.cells[teamIdx].textContent, rowB.cells[teamIdx].textContent);
+      compareTeamNumbers(rowA.cells[teamCol].textContent, rowB.cells[teamCol].textContent);
     });
 
     for (var i = 0; i < rows.length; i++)
@@ -222,7 +222,7 @@ require 'header.php';
         //   'frozenColVerticalOffset': 0
         // });
       }, 100);
-      sortTable("strategicDataTable", team, match);
+      sortStrategicTable("strategicDataTable", teamColumn, matchColumn);
     });
   }
 
