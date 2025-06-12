@@ -702,3 +702,6 @@ class tbaHandler
   }
 
 }
+
+?>
+

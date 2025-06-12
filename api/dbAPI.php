@@ -78,3 +78,6 @@ else
 {
   error_log("dbAPI.php called without a valid request");
 }
+
+?>
+

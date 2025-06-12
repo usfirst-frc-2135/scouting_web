@@ -163,5 +163,6 @@ if (isset($_POST["teamNum"]) and isset($_FILES["teamPic"]))
   $response["message"] = $errorMessage;
   echo (json_encode($response));
 }
+
 ?>
 

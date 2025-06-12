@@ -797,3 +797,6 @@ class dbHandler
     return $out;
   }
 }
+
+?>
+

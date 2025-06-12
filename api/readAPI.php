@@ -138,3 +138,6 @@ else if (isset($_GET["config"]))
   }
   echo (json_encode($output));
 }
+
+?>
+

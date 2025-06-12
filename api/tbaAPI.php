@@ -44,3 +44,6 @@ else if (isset($_GET["getCOPRs"]))
 {
   echo (json_encode($tba->getComponentOPRS($eventCode)));
 }
+
+?>
+
