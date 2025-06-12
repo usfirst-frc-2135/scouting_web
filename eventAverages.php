@@ -114,33 +114,33 @@ COMMENTED OUT FOR NOW-->
           </tr>
           <tr>
             <th colspan="1" style="background-color:transparent"></th>
-            <th colspan="2" style="background-color:#3686ff">Points</th>
+            <th colspan="2" style="background-color:#83b4ff">Points</th>
             <th colspan="2" style="background-color:transparent">Coral</th>
-            <th colspan="2" style="background-color:#3686ff">Algae</th>
+            <th colspan="2" style="background-color:#83b4ff">Algae</th>
             <th colspan="2" style="background-color:transparent">Points</th>
-            <th colspan="2" style="background-color:#3686ff">Coral Pts</th>
+            <th colspan="2" style="background-color:#83b4ff">Coral Pts</th>
             <th colspan="2" style="background-color:transparent">Algae Pts</th>
-            <th colspan="2" style="background-color:#3686ff">Points</th>
+            <th colspan="2" style="background-color:#83b4ff">Points</th>
             <th colspan="2" style="background-color:transparent">Coral Pts</th>
-            <th colspan="2" style="background-color:#3686ff">Algae Pts</th>
+            <th colspan="2" style="background-color:#83b4ff">Algae Pts</th>
             <th colspan="2" style="background-color:transparent">Points</th>
-            <th colspan="2" style="background-color:#3686ff">Total</th>
+            <th colspan="2" style="background-color:#83b4ff">Total</th>
             <th colspan="2" style="background-color:transparent">L1</th>
-            <th colspan="2" style="background-color:#3686ff">L2</th>
+            <th colspan="2" style="background-color:#83b4ff">L2</th>
             <th colspan="2" style="background-color:transparent">L3</th>
-            <th colspan="2" style="background-color:#3686ff">L4</th>
+            <th colspan="2" style="background-color:#83b4ff">L4</th>
             <th colspan="2" style="background-color:transparent">Total</th>
-            <th colspan="2" style="background-color:#3686ff">Net</th>
+            <th colspan="2" style="background-color:#83b4ff">Net</th>
             <th colspan="2" style="background-color:transparent">Proc</th>
-            <th colspan="3" style="background-color:#3686ff">Total</th>
+            <th colspan="3" style="background-color:#83b4ff">Total</th>
             <th colspan="2" style="background-color:transparent">L1</th>
-            <th colspan="2" style="background-color:#3686ff">L2</th>
+            <th colspan="2" style="background-color:#83b4ff">L2</th>
             <th colspan="2" style="background-color:transparent">L3</th>
-            <th colspan="2" style="background-color:#3686ff">L4</th>
+            <th colspan="2" style="background-color:#83b4ff">L4</th>
             <th colspan="3" style="background-color:transparent">Total</th>
-            <th colspan="2" style="background-color:#3686ff">Net</th>
+            <th colspan="2" style="background-color:#83b4ff">Net</th>
             <th colspan="2" style="background-color:transparent">Proc</th>
-            <th colspan="5" style="background-color:#3686ff">Climb%</th>
+            <th colspan="5" style="background-color:#83b4ff">Climb%</th>
             <th colspan="1" style="background-color:transparent">Died</th>
           </tr>
           <tr>

@@ -53,10 +53,11 @@ require 'header.php';
         </colgroup>
         <thead>
           <tr>
-            <th colspan="1"> </th>
-            <th colspan="1"> </th>
-            <th colspan="1"> </th>
+            <th colspan="1" style="background-color:transparent"> </th>
+            <th colspan="1" style="background-color:transparent"> </th>
+            <th colspan="1" style="background-color:#cfe2ff"> </th>
             <th colspan="2" style="background-color:#cfe2ff">Against Defense</th>
+            <th colspan="3" style="background-color:transparent">Defense Tactics</th>
             <th colspan="8" style="background-color:#cfe2ff">Fouls</th>
             <th colspan="4" style="background-color:transparent">Auton</th>
             <th colspan="4" style="background-color:#cfe2ff">Teleop</th>

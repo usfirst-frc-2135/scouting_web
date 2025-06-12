@@ -43,6 +43,7 @@ require 'header.php';
         </tbody>
       </table>
       <!-- </div> -->
+
     </div>
   </div>
 </div>
@@ -54,37 +55,41 @@ require 'header.php';
 <script>
   // var _frozenTable = null;
 
-  const team = 0;
+  const teamColumn = 0;
 
-  function sortTable(tableData, teamIdx) {
-    console.log("==> matchData.php: sortTable()");
+  // Sort the generated COPR table by team/match numbers
+  function sortCoprTable(tableData, teamCol) {
+    console.log("==> matchData.php: sortCoprTable()");
     var table = document.getElementById(tableData);
     var rows = Array.prototype.slice.call(table.querySelectorAll("tbody> tr"));
 
     // Sort the rows based on column 1 match number
     rows.sort(function (rowA, rowB) {
-      return (compareTeamNumbers(rowA.cells[teamIdx].textContent.trim(), rowB.cells[teamIdx].textContent.trim()));
+      return (compareTeamNumbers(rowA.cells[teamCol].textContent.trim(), rowB.cells[teamCol].textContent.trim()));
     });
+
     // Update the table body with the sorted rows.
     rows.forEach(function (row) {
       table.querySelector("tbody").appendChild(row);
     });
   }
 
-  function buildCoprDataTable(dataObj, keys) {
+  // Add team data to COPR table in html
+  function addDataToCoprTable(coprData, keys) {
     $("#tableData").html("");
-    for (let team in dataObj) {
+    for (let teamNum in coprData) {
       var row = '<tr>';
-      row += '<td>' + team + '</td>';
+      row += '<td>' + teamNum + '</td>';
       for (let j = 0; j < keys.length; j++) {
-        row += '<td>' + dataObj[team][keys[j]] + '</td>';
+        row += '<td>' + coprData[teamNum][keys[j]] + '</td>';
       }
       row += '</tr>';
       $("#tableData").append(row);
     }
   }
 
-  function keysToTable(keys) {
+  // Add data keys (fields) to COPR table in html
+  function addKeysToCoprTable(keys) {
     var header = '<th scope="col">Team</th>';
     for (let i = 0; i < keys.length; i++) {
       header += '<th scope="col">' + keys[i] + '</th>'
@@ -92,43 +97,45 @@ require 'header.php';
     $("#tableKeys").html(header);
   }
 
-  function processCoprData(coprData) {
-    console.log("==> eventCoprData.php: processCoprData()");
-    var dataObj = JSON.parse(coprData);
-    var coprData = dataObj["data"];
-    var keys = dataObj["keys"];
+  // Add data keys (fields) to COPR table in html
+  function buildCoprTable(coprData) {
+    console.log("==> eventCoprData.php: buildCoprTable()");
+    var jsonCoprData = JSON.parse(coprData);
+    var keys = jsonCoprData["keys"];
+    var data = jsonCoprData["data"];
 
-    keysToTable(keys);
-    buildCoprDataTable(coprData, keys);
+    addKeysToCoprTable(keys);
+    addDataToCoprTable(data, keys);
   }
 
-  function readTbaAndBuildCoprTable() {
+  // Retrive OPRs from TBA and build the COPR table to display
+  function getTbaAndBuildCoprTable() {
     //output: gets the COPR data from TBA
     $.get("api/tbaAPI.php", {
       getCOPRs: 1
-    }).done(function (coprData) {
+    }).done(function (getCoprData) {
       console.log("==> getCOPRs");
-      processCoprData(coprData);
+      buildCoprTable(getCoprData);
       setTimeout(function () {
         // script instructions say this is needed, but it breaks table header sorting
-        // sorttable.makeSortable(document.getElementById("coprTable"));
-        // _frozenTable = $('#freeze-table').freezeTable({
-        //   'freezeHead': true,
-        //   'freezeColumn': true,
-        //   'freezeColumnHead': true,
-        //   'scrollBar': true,
-        //   'fixedNavbar': '.navbar',
-        //   'scrollable': true,
-        //   'fastMode': true,
-        //   // 'container': '#navbar',
-        //   'columnNum': 1,
-        //   'columnKeep': true,
-        //   'columnBorderWidth': 2,
-        //   'backgroundColor': 'blue',
-        //   'frozenColVerticalOffset': 0
-        // });
+        sorttable.makeSortable(document.getElementById("coprTable"));
+        _frozenTable = $('#freeze-table').freezeTable({
+          'freezeHead': true,
+          'freezeColumn': true,
+          'freezeColumnHead': true,
+          'scrollBar': true,
+          'fixedNavbar': '.navbar',
+          'scrollable': true,
+          'fastMode': true,
+          // 'container': '#navbar',
+          'columnNum': 1,
+          'columnKeep': true,
+          'columnBorderWidth': 2,
+          'backgroundColor': 'blue',
+          'frozenColVerticalOffset': 0
+        });
       }, 500);
-      sortTable("coprTable", team);
+      sortCoprTable("coprTable", teamColumn);
     });
   }
 
@@ -144,18 +151,18 @@ require 'header.php';
       $("#navbarEventCode").html(eventCode);
     });
 
-    readTbaAndBuildCoprTable();
+    getTbaAndBuildCoprTable();
 
     $("#reloadEvent").click(function () {
-      readTbaAndBuildCoprTable();
+      getTbaAndBuildCoprTable();
     });
 
     // Keep the frozen pane updated 
-    $("#coprTable").click(function () {
-      // if (_frozenTable) {
-      //   _frozenTable.update();
-      // }
-    });
+    // $("#coprTable").click(function () {
+    // if (_frozenTable) {
+    //   _frozenTable.update();
+    // }
+    // });
 
   });
 </script>
