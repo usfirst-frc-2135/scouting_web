@@ -26,11 +26,11 @@ require 'header.php';
             <div>
               <h4>Match Info</h4>
             </div>
-            <div class="col-4 mb-3">
+            <div class="col-5 mb-3">
               <label for="teamNumber" class="form-label">Team Number</label>
               <input id="teamNumber" class="form-control" type="number" placeholder="FRC team number">
             </div>
-            <div class="row mb-3">
+            <div class="row col-12 mb-3">
               <span>Match Number</span>
               <div class="col-2">
                 <div class="input-group">
@@ -43,7 +43,7 @@ require 'header.php';
                   </select>
                 </div>
               </div>
-              <div class="col-4">
+              <div class="col-5">
                 <input id="matchNumber" class="form-control" type="text" placeholder="Match Number" aria-label="Match Number">
               </div>
             </div>
