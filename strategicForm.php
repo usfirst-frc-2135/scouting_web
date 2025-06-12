@@ -179,7 +179,7 @@ require 'header.php';
             <!-- end Teleop Mode -->
 
             <!-- Playing Defense Section -->
-            <div class="card mb-3" style="background-color:#FBE6D3">
+            <div class="card mb-3" style="background-color:#fbe6d3">
               <div class="card-header fw-bold">
                 Playing Defense
               </div>

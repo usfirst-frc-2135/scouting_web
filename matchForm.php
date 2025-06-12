@@ -47,7 +47,7 @@ require 'header.php';
                 <input id="matchNumber" class="form-control" type="text" placeholder="Match Number" aria-label="Match Number">
               </div>
             </div>
-            <div class="col-4 mb-3">
+            <div class="col-6 mb-3">
               <label for="scoutName" class="form-label">Scout Name</label>
               <input id="scoutName" class="form-control" type="text" placeholder="First name, last initial">
             </div>
