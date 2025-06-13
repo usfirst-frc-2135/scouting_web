@@ -24,8 +24,8 @@ function compareMatchNumbers(matchA, matchB) {
   var prefixB = "";
   var numA = "";
   var numB = "";
-  matchA = matchA.toString().trim().toLowerCase();
-  matchB = matchB.toString().trim().toLowerCase();
+  matchA = matchA.trim().toLowerCase();
+  matchB = matchB.trim().toLowerCase();
 
   // Pull apart prefix and number from matchnum (ie, "p", "qm", "sf")
   if (matchA.charAt(0) == "p") {
@@ -39,6 +39,10 @@ function compareMatchNumbers(matchA, matchB) {
   else if (matchA.charAt(0) == "s") {   // "sf"
     numA = matchA.substr(2, matchA.length);
     prefixA = "sf";
+  }
+  else if (matchA.charAt(0) == "f") {   // "qm"
+    numA = matchA.substr(1, matchA.length);
+    prefixA = "f";
   }
   if (prefixA == "") {
     console.warn("compareMatchNumbers: matchA is missing comp_level! - " + matchA)
@@ -59,6 +63,10 @@ function compareMatchNumbers(matchA, matchB) {
     numB = matchB.substr(2, matchB.length);
     prefixB = "sf";
   }
+  else if (matchB.charAt(0) == "f") {   // "qm"
+    numB = matchB.substr(1, matchB.length);
+    prefixB = "f";
+  }
   if (prefixB == "") {
     console.warn("compareMatchNumbers: matchB is missing comp_level! - " + matchB)
     prefixB = "qm";
@@ -66,12 +74,12 @@ function compareMatchNumbers(matchA, matchB) {
     matchB = prefixB + matchB;
   }
 
-  // console.log("compareMatchNumbers: " + prefixA + " " + numA + " " + matchA + " " + prefixB + " " + numB + " " + matchB);
+  // console.log("compareMatchNumbers: " + prefixA + numA + "/" + matchA + " " + prefixB + numB + "/" + matchB);
 
   var returnVal;
 
   if (prefixA == prefixB)   // Comp level is same, use numbers
-    returnVal = (numA - numB);
+    returnVal = (parseInt(numA) - parseInt(numB));
   else if (prefixA == "p")  // A != B, practice matches always first
     returnVal = -1;
   else if (prefixB == "p")  // A !practice, so B is first
