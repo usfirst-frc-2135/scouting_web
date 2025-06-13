@@ -32,7 +32,7 @@ require 'inc/header.php';
               <input id="scoutName" class="form-control" type="text" placeholder="First name, last initial">
             </div>
 
-            <div class="card col-md-12 mx-auto">
+            <div class="card col-md-12 mx-auto" style=" background-color:#AFE8F7">
               <div class="card-header">
                 <h5>Questions</h5>
               </div>
@@ -109,7 +109,7 @@ require 'inc/header.php';
               </div>
             </div>
 
-            <div class="card col-md-12 mx-auto">
+            <div class="card col-md-12 mx-auto" style=" background-color:#FBE7A5">
               <div class="card-header">
                 <h5>Observations<span class="text-danger"> (observe only, do not ask)</span></h5>
               </div>
