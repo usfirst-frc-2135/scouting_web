@@ -169,7 +169,7 @@ class tbaHandler
     $tl = $this->getTeamList($eventCode);
     $out = array();
 
-    // FORNOW - only "mttd", "cacg", "cacc"  events are known multi-robot events. Add any others as needed.
+    // FORNOW - only "mttd", "cacg", "cacc" events are known multi-robot events. Add any others as needed.
     $bMultiRobots = false;
     if (strstr($eventCode, 'mttd') || strstr($eventCode, 'cacg') || strstr($eventCode, 'cacc'))   // Hardcoded multi-robot eventcode
     {
@@ -273,7 +273,7 @@ class tbaHandler
       $teamInfo = array();
       $teamNum = $teamRow["team_number"];
       $teamname = $teamRow["nickname"];
-      // error_log("  ---> name for $teamNum = $teamname");
+      // error_log(" ---> name for $teamNum = $teamname");
       $teamInfo["teamnum"] = $teamNum;
       $teamInfo["teamname"] = $teamname;
       array_push($out, $teamInfo);
@@ -508,10 +508,10 @@ class tbaHandler
 
     $teamLookup = $this->teamListToLookup($simpleTeamList);
     $TLCount = sizeof($teamLookup);  //TEST
-    // error_log("  ===> teamLookup size = $TLCount");
+    // error_log(" ===> teamLookup size = $TLCount");
 
     $teamCount = sizeof($simpleTeamList);
-    // error_log("  ===> simpleTeamList size = $teamCount");
+    // error_log(" ===> simpleTeamList size = $teamCount");
 
     $simpleMatchData = $this->getSimpleMatches($eventCode);
     $simpleMatchData = $this->removeElimMatches($simpleMatchData);
@@ -587,7 +587,7 @@ class tbaHandler
           $entryNum = "$teams[$m]";
           if ($entryNum == "2135")
           {
-            // error_log("     ---> found one of our matches: $matchnum");
+            // error_log("  ---> found one of our matches: $matchnum");
             $myMatch = array();  // store this match's num and teams in myMatch
             $myMatch["match_number"] = $matchnum;
             $myMatch["teams"] = $teams;
@@ -610,7 +610,7 @@ class tbaHandler
       $tmatch = $ourMatches[$n];
       $ourMatchNum = $tmatch["match_number"];
       $intOurMatchnum = (int) $ourMatchNum;
-      // error_log(" >>>> Looking at OUR match: $ourMatchNum");
+      // error_log("  >>>> Looking at OUR match: $ourMatchNum");
 
       // Get this match's teams; for each: get their match numbers. Any match# that is less than this 
       // match#, save it with that team number.
@@ -625,7 +625,7 @@ class tbaHandler
           continue;
 
         // Get their match numbers.
-        // error_log("     ===> going to get match numbers for team: $tnum");
+        // error_log("   ===> going to get match numbers for team: $tnum");
         foreach ($ml["response"] as $bmatch)
         {
           $bcomplevel = $bmatch["comp_level"];
@@ -633,12 +633,12 @@ class tbaHandler
           {   // Only care about Qual matches
             // If this match is earlier than ourMatchNum, check if it has this $tnum.
             $bmatchnum = $bmatch["match_number"];
-            // error_log("      ===> looking at match $bmatchnum");
+            // error_log("    ===> looking at match $bmatchnum");
             $intbmatchnum = (int) $bmatchnum;
             if ($intbmatchnum < $intOurMatchnum)
             {
               // This match is earlier than ourMatchNum, so check if it has this team.
-              // error_log("        ===> match $bmatchnum is earlier than $ourMatchNum ");
+              // error_log("     ===> match $bmatchnum is earlier than $ourMatchNum ");
 
               $bteams = array();
               for ($j = 0; $j < 3; $j++)
@@ -651,7 +651,7 @@ class tbaHandler
                 $entryNum = "$bteams[$m]";
                 if ($entryNum == $tnum)
                 {
-                  // error_log("     ---> found team $tnum! so save with match $bmatchnum");
+                  // error_log("      ---> found team $tnum! so save with match $bmatchnum");
                   $dsize = sizeof($out);
                   $bFoundInOut = 0;
                   for ($z = 0; $z < $dsize; $z++)
@@ -659,17 +659,17 @@ class tbaHandler
                     $dout = array();
                     $dout = $out[$z];
                     $dmnum = $dout["match_number"];
-                    // error_log("         ---> Looking at dout match# = $dmnum");
+                    // error_log("       ---> Looking at dout match# = $dmnum");
                     if ($dout["match_number"] == $bmatchnum)
                     {
                       $bFoundInOut = 1;
-                      // error_log("       ---> found match $bmatchnum in out; save with team $tnum");
+                      // error_log("        ---> found match $bmatchnum in out; save with team $tnum");
                       $prev = $dout["teams"];
 
                       // If tnum is already in prev, then don't do anything.
                       if (strpos($prev, $tnum) !== false)
                       {
-                        // error_log("            ===> IN OUT: match $bmatchnum already had team $tnum");
+                        // error_log("          ===> IN OUT: match $bmatchnum already had team $tnum");
                       }
                       else
                       {
@@ -677,7 +677,7 @@ class tbaHandler
                         $prev .= $str1;   // append prev with str1
                         $prev .= $tnum;   // append with tnum
                         $dout["teams"] = $prev;
-                        // error_log("            ===> IN OUT: match $bmatchnum: now teams = $prev");
+                        // error_log("          ===> IN OUT: match $bmatchnum: now teams = $prev");
                         $out[$z] = $dout;
                       }
                       break;
@@ -689,7 +689,7 @@ class tbaHandler
                     $dout["match_number"] = $bmatchnum;
                     $dout["teams"] = $tnum;
                     array_push($out, $dout);
-                    // error_log("           >>>> ADDING to out: match $bmatchnum: teams = $tnum");
+                    // error_log("         >>>> ADDING to out: match $bmatchnum: teams = $tnum");
                   }
                 }
               }

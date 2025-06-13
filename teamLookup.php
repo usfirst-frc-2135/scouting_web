@@ -646,7 +646,7 @@ require 'inc/header.php';
         tags += "<div class='carousel-item'>";
       }
       first = false;
-      tags += "  <img src='./" + uri + "' class='d-block w-100'>";
+      tags += " <img src='./" + uri + "' class='d-block w-100'>";
       tags += "</div>";
       $("#robotPics").append(tags);
     }

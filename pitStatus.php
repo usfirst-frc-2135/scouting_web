@@ -56,7 +56,7 @@ require 'inc/header.php';
       var teamName = names[teamNum];
       row += "<tr>";
       if (teamName != "XX") {
-        row += "  <td>" + "<a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a> - " + teamName + "</td>";
+        row += " <td>" + "<a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a> - " + teamName + "</td>";
       } else {
         row += "  <td>" + "<a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a>" + "</td>";
       }
