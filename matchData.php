@@ -46,7 +46,7 @@ require 'inc/header.php';
         </colgroup>
         <thead>
           <tr>
-            <th scope="col" style="background-color:transparent">Match</th>
+            <th scope="col" style="background-color:transparent" class="sorttable_numeric">Match</th>
             <th scope="col" style="background-color:transparent" class="sorttable_numeric">Team</th>
             <th scope="col" style="background-color:#cfe2ff">Auton Leave</th>
             <th scope="col" style="background-color:transparent">Auton Coral L1</th>
@@ -84,24 +84,32 @@ require 'inc/header.php';
 
 <script>
   // var frozenTable = null;  // doesn't work with table-responsive
-  const teamColumn = 1;
+  const teamColumn = 0;
+  const matchColumn = 1;
 
-  function sortMatchTable(tableData, index) {
+  // Sort the html table data by team number
+  function sortMatchTable(tableData, teamCol, matchCol) {
     console.log("==> matchData.php: sortMatchTable()");
     var table = document.getElementById(tableData);
     var rows = Array.prototype.slice.call(table.querySelectorAll("tbody> tr"));
 
     // Sort the rows based on column 1 match number
     rows.sort(function (rowA, rowB) {
-      return (compareMatchNumbers(rowA.cells[index].textContent.trim(), rowB.cells[index].textContent.trim()));
+      return (compareTeamNumbers(rowA.cells[matchCol].textContent, rowB.cells[matchCol].textContent));
     });
+
+    // Sort the rows based on column 1 match number
+    rows.sort(function (rowA, rowB) {
+      return (compareMatchNumbers(rowA.cells[teamCol].textContent, rowB.cells[teamCol].textContent));
+    });
+
     // Update the table body with the sorted rows.
     rows.forEach(function (row) {
       table.querySelector("tbody").appendChild(row);
     });
   }
 
-  // NOTE: data object keywords should match the database definition in dbHander.php
+  // NOTE: data object keywords MUST match the database definition in dbHander.php
   function buildMatchDataTable(dataObj) {
     console.log("==> matchData.php: buildMatchDataTable()");
     for (let i = 0; i < dataObj.length; i++) {
@@ -163,7 +171,7 @@ require 'inc/header.php';
         //   'frozenColVerticalOffset': 0
         // });
       }, 100);
-      sortMatchTable("matchDataTable", teamColumn);
+      sortMatchTable("matchDataTable", teamColumn, matchColumn);
     });
   }
 
@@ -191,3 +199,4 @@ require 'inc/header.php';
 </script>
 
 <script type="text/javascript" src="./scripts/compareMatchNumbers.js"></script>
+<script type="text/javascript" src="./scripts/compareTeamNumbers.js"></script>
