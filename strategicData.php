@@ -161,7 +161,8 @@ require 'header.php';
         case 5: driveVal = "-";
       }
 
-      var rowString = "<tr><td align=\"center\" style=\"background-color:transparent\">" + dataObj[i]["teamnumber"] + "</td>" +
+      var teamNum = dataObj[i]["teamnumber"];
+      var rowString = "<tr><td style=\"background-color:transparent\"><a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</td>" +
         "<td align=\"center\" style=\"background-color:transparent\">" + dataObj[i]["matchnumber"] + "</td>" +
         "<td align=\"center\" style=\"background-color:#cfe2ff\">" + driveVal + "</td>" +
         "<td align=\"center\" style=\"background-color:transparent\">" + convertToYesNo(dataObj[i]["against_tactic1"]) + "</td>" +

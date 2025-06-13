@@ -105,8 +105,9 @@ require 'header.php';
   function buildMatchDataTable(dataObj) {
     console.log("==> matchData.php: buildMatchDataTable()");
     for (let i = 0; i < dataObj.length; i++) {
+      var teamNum = dataObj[i]["teamnumber"];
       var rowString = "<tr><td align=\"center\" style=\"background-color:transparent\">" + dataObj[i]["matchnumber"] + "</td>" +
-        "<td align=\"center\" style=\"background-color:transparent\">" + dataObj[i]["teamnumber"] + "</td>" +
+        "<td align=\"center\" style=\"background-color:transparent\"><a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</td>" +
         "<td align=\"center\" style=\"background-color:#cfe2ff\">" + dataObj[i]["autonLeave"] + "</td>" +
         "<td align=\"center\" style=\"background-color:transparent\">" + dataObj[i]["autonCoralL1"] + "</td>" +
         "<td align=\"center\" style=\"background-color:#cfe2ff\">" + dataObj[i]["autonCoralL2"] + "</td>" +
