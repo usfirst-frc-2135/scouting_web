@@ -671,7 +671,7 @@ require 'inc/header.php';
       //          console.log(">>> useP = " + localSiteFilter["useP"]);
       //          console.log(">>> useQm = " + localSiteFilter["useQm"]);
       //tempThis.applySiteFilter();
-      $.get("api/readAPI.php", {
+      $.get("api/dbReadAPI.php", {
         getTeamData: team
       }).done(function (matchData) {
         console.log("==> getTeamData");
@@ -1413,7 +1413,7 @@ require 'inc/header.php';
     });
 
     // Add new images
-    $.get("api/readAPI.php", {
+    $.get("api/dbReadAPI.php", {
       getImagesForTeam: teamNum
     }).done(function (teamImages) {
       console.log("==> getImagesForTeam");
@@ -1423,7 +1423,7 @@ require 'inc/header.php';
     });
 
     // Add Match Scouting Data
-    $.get("api/readAPI.php", {
+    $.get("api/dbReadAPI.php", {
       getTeamData: teamNum
     }).done(function (matchData) {
       console.log("==> getTeamData");
@@ -1431,7 +1431,7 @@ require 'inc/header.php';
       processMatchData(teamNum, jsonMatchData);
 
       // Do the Pit Scouting Data here because it also needs the matchData.
-      $.get("api/readAPI.php", {
+      $.get("api/dbReadAPI.php", {
         getTeamPitData: teamNum
       }).done(function (teamPitData) {
         console.log("==> getTeamPitData");
@@ -1439,7 +1439,7 @@ require 'inc/header.php';
         processPitData(pitData, matchData);
 
         // Do the Strategic Data Table next.
-        $.get("api/readAPI.php", {
+        $.get("api/dbReadAPI.php", {
           getTeamStrategicData: teamNum
         }).done(function (strategicData) {
           console.log("==> getTeamStrategicData");

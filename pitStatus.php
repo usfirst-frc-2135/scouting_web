@@ -127,13 +127,13 @@ require 'inc/header.php';
         }
 
         // Get all the team images
-        $.get("api/readAPI.php", {
+        $.get("api/dbReadAPI.php", {
           getAllTeamImages: JSON.stringify(teamList)
         }).done(function (teamImageList) {
           console.log("pitStatus.php: getAllTeamImages:\n" + teamImageList);
           jsonImageList = JSON.parse(teamImageList);
           // Get all the teams pit scouted
-          $.get("api/readAPI.php", {
+          $.get("api/dbReadAPI.php", {
             getAllPitData: 1
           }).done(function (pitDataList) {
             console.log("==> getAllPitData");

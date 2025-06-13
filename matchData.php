@@ -136,7 +136,7 @@ require 'inc/header.php';
   // get Match Scouting Data
   function readMatchDataAndBuildTable() {
     console.log("==> matchData.php: readMatchDataAndBuildTable()");
-    $.get("api/readAPI.php", {
+    $.get("api/dbReadAPI.php", {
       getAllMatchData: 1
     }).done(function (matchData) {
       console.log("===> getAllMatchData:\n" + matchData);

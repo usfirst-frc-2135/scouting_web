@@ -454,7 +454,7 @@ require 'inc/header.php';
     dataToUse["problem_comment"] = $("#problemComment").val();
     dataToUse["general_comment"] = $("#generalComment").val();
 
-    $.post("api/writeAPI.php", {
+    $.post("api/dbWriteAPI.php", {
       writeStrategicData: JSON.stringify(dataToUse)
     }).done(function (returnCode) {
       console.log("==> writeStrategicData");

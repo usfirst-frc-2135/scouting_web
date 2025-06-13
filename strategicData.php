@@ -197,7 +197,7 @@ require 'inc/header.php';
   // get Strategic Scouting Data
   function readStrategicDataAndBuildTable() {
     console.log("==> strategicData.php: readStrategicDataAndBuildTable()");
-    $.get("api/readAPI.php", {
+    $.get("api/dbReadAPI.php", {
       getAllStrategicData: 1
     }).done(function (strategicData) {
       console.log("==> getAllStrategicData");

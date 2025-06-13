@@ -668,7 +668,7 @@ require 'inc/header.php';
   function loadMatchData(successFunction) {
     console.log("==> matchSheet.php: loadMatchData()");
     if (!localMatchData) {
-      $.get("api/readAPI.php", {
+      $.get("api/dbReadAPI.php", {
         getAllMatchData: 1
       }).done(function (matchData) {
         console.log("==> getAllMatchData");
@@ -1087,7 +1087,7 @@ require 'inc/header.php';
       }
     }
 
-    $.get("api/readAPI.php", {
+    $.get("api/dbReadAPI.php", {
       getAllTeamImages: JSON.stringify(requestList)
     }).done(function (imageData) {
       console.log("==> getAllTeamImages");

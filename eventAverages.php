@@ -338,7 +338,7 @@ COMMENTED OUT FOR NOW-->
   // Get all match data, filter it, create final HTML table, and sort it
   function readMatchDataAndBuildTable() {
     console.log("==> eventAverages.php: readAllMatchDataAndBuildTable()");
-    $.get("api/readAPI.php", {
+    $.get("api/dbReadAPI.php", {
       getAllMatchData: 1
     }).done(function (readData) {
       console.log("==> getAllMatchData:");
@@ -523,7 +523,7 @@ COMMENTED OUT FOR NOW-->
   // Retrieve match data and OPRs data and write out CSV file
   function writeCSVFile() {
     console.log("==> eventAverages.php: writeCSVFile()");
-    $.get("api/readAPI.php", {
+    $.get("api/dbReadAPI.php", {
       getAllMatchData: 1
     }).done(function (allMatchData) {
       console.log("==> getAllMatchData:");

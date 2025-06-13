@@ -218,7 +218,7 @@ function submitFunction() {
     for (const [key, value] of Object.entries(scannedData)) {
       indexedData.push(value);
     }
-    $.post("api/writeAPI.php", {
+    $.post("api/dbWriteAPI.php", {
       writeData: JSON.stringify(indexedData)
     }, function (returnCode) {
       // Because success word may have a new-line at the end, don't do a direct compare

@@ -451,7 +451,7 @@ require 'inc/header.php';
 
   function submitMatchData(formData) {
     console.log("==> matchForm.php: submitMatchData()");
-    $.post("api/writeAPI.php", {
+    $.post("api/dbWriteAPI.php", {
       writeSingleData: JSON.stringify(formData)
     }, function (returnCode) {
       // Because success word may have a new-line at the end, don't do a direct compare

@@ -352,7 +352,7 @@ require 'inc/header.php';
     // Battery count
     dataToUse["numbatteries"] = $("#batteries").val();
 
-    $.post("api/writeAPI.php", {
+    $.post("api/dbWriteAPI.php", {
       writePitTable: JSON.stringify(dataToUse)
     }).done(function (returnCode) {
       console.log("==> writePitTable");

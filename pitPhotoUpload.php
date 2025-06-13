@@ -122,7 +122,7 @@ require 'inc/header.php';
             console.log("Going to remove existing photos for team #" + teamNum);
 
             // First get list of robot-pic files for this team.
-            $.get("api/readAPI.php", {
+            $.get("api/dbReadAPI.php", {
               getImagesForTeam: teamNum
             }).done(function (imagesData) {
               console.log("==> getImagesForTeam");
@@ -147,7 +147,7 @@ require 'inc/header.php';
 
           // Load/reload the list of team images 
           setTimeout(function () {
-            $.get("api/readAPI.php", {
+            $.get("api/dbReadAPI.php", {
               getImagesForTeam: teamNum
             }).done(function (teamImages) {
               console.log("==> getImagesForTeam\n" + teamImages);
@@ -158,7 +158,7 @@ require 'inc/header.php';
               uploadPost.append("teamNum", $("#teamNumber").val());
               $.ajax({
                 type: "POST",
-                url: "api/writeAPI.php",
+                url: "api/dbWriteAPI.php",
                 data: uploadPost,
                 cache: false,
                 contentType: false,

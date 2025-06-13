@@ -22,14 +22,12 @@ function getRobotPhotos($team)
     {
       $image_url = "robot-pics/" . $teamLower . "-" . $i . "." . $suffix;
       // We are down one directory level, but returned URL should be relative to index.php
-      if (file_exists("../$image_url") == 1)
+      if (file_exists("../$image_url") != 1)
       {
-        array_push($imageList, $image_url);
+        break; // Doesn't exist
       }
-      else
-      {
-        break;
-      }
+
+      array_push($imageList, $image_url);
       $i++;
     }
   }
