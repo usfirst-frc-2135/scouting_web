@@ -17,7 +17,7 @@ function getRobotPhotos($team)
   foreach ($suffixList as $suffix)
   {
     $i = 0;
-    // While files with the index exist
+    // While files with the index exists
     while (true)
     {
       $image_url = "robot-pics/" . $teamLower . "-" . $i . "." . $suffix;

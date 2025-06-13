@@ -905,13 +905,13 @@ require 'inc/header.php';
     var autonCoralL3Tips = []; // holds custom tooltips for auton coral L3
     var autonCoralL4Tips = []; // holds custom tooltips for auton coral 4      
 
-    datasets.push({ label: "Leave Start", data: [], backgroundColor: '#F9DB7B' });
+    datasets.push({ label: "Leave Start", data: [], backgroundColor: '#F7CF58' });
     datasets.push({ label: "Processor", data: [], backgroundColor: '#B4E7D6' });
     datasets.push({ label: "Net", data: [], backgroundColor: '#4C9F7C' });
-    datasets.push({ label: "L1", data: [], backgroundColor: '#F2D7E5' });
-    datasets.push({ label: "L2", data: [], backgroundColor: '#D98AB3' });
+    datasets.push({ label: "L1", data: [], backgroundColor: '#D98AB3' });
+    datasets.push({ label: "L2", data: [], backgroundColor: '#CE649B' });
     datasets.push({ label: "L3", data: [], backgroundColor: '#C54282' });
-    datasets.push({ label: "L4", data: [], backgroundColor: '#76274E' });
+    datasets.push({ label: "L4", data: [], backgroundColor: '#9D3468' });
 
     // Go thru each matchdata QR code string and build up a table of the data, so we can
     // later sort it so the matches are listed in the right order. 
@@ -1102,10 +1102,10 @@ require 'inc/header.php';
 
     datasets.push({ label: "Processor", data: [], backgroundColor: '#B4E7D6' });
     datasets.push({ label: "Net", data: [], backgroundColor: '#4C9F7C' });
-    datasets.push({ label: "L1", data: [], backgroundColor: '#F2D7E5' });
-    datasets.push({ label: "L2", data: [], backgroundColor: '#D98AB3' });
+    datasets.push({ label: "L1", data: [], backgroundColor: '#D98AB3' });
+    datasets.push({ label: "L2", data: [], backgroundColor: '#CE649B' });
     datasets.push({ label: "L3", data: [], backgroundColor: '#C54282' });
-    datasets.push({ label: "L4", data: [], backgroundColor: '#76274E' });
+    datasets.push({ label: "L4", data: [], backgroundColor: '#9D3468' });
 
     // Go thru each matchdata QR code string and build up a table of the data, so we can
     // later sort it so the matches are listed in the right order. 
@@ -1268,7 +1268,7 @@ require 'inc/header.php';
 
     var cageClimbTips = [];
 
-    datasets.push({ label: "Cage Climb", data: [], backgroundColor: 'SteelBlue' });
+    datasets.push({ label: "Cage Climb", data: [], backgroundColor: '#ED8537' });
 
     // Go thru each matchdata QR code string and build up a table of the data, so we can
     // later sort it so the matches are listed in the right order. 
