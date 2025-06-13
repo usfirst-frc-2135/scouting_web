@@ -58,7 +58,7 @@ function compareTeamNumbers(teamA, teamB) {
   if (returnVal == 0)
     returnVal = (parseInt(teamA) - parseInt(teamB));
 
-  console.log("compareTeamNumbers: " + teamA + " " + teamB + " " + returnVal);
+  // console.log("compareTeamNumbers: " + teamA + " " + teamB + " " + returnVal);
 
   return returnVal;
 }

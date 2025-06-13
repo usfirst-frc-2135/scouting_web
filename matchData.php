@@ -114,27 +114,27 @@ require 'inc/header.php';
     console.log("==> matchData.php: buildMatchDataTable()");
     for (let i = 0; i < dataObj.length; i++) {
       var teamNum = dataObj[i]["teamnumber"];
-      var rowString = "<tr><td align=\"center\" style=\"background-color:transparent\">" + dataObj[i]["matchnumber"] + "</td>" +
-        "<td align=\"center\" style=\"background-color:transparent\"><a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</td>" +
-        "<td align=\"center\" style=\"background-color:#cfe2ff\">" + dataObj[i]["autonLeave"] + "</td>" +
-        "<td align=\"center\" style=\"background-color:transparent\">" + dataObj[i]["autonCoralL1"] + "</td>" +
-        "<td align=\"center\" style=\"background-color:#cfe2ff\">" + dataObj[i]["autonCoralL2"] + "</td>" +
-        "<td align=\"center\" style=\"background-color:transparent\">" + dataObj[i]["autonCoralL3"] + "</td>" +
-        "<td align=\"center\" style=\"background-color:#cfe2ff\">" + dataObj[i]["autonCoralL4"] + "</td>" +
-        "<td align=\"center\" style=\"background-color:transparent\">" + dataObj[i]["autonAlgaeNet"] + "</td>" +
-        "<td align=\"center\" style=\"background-color:#cfe2ff\">" + dataObj[i]["autonAlgaeProcessor"] + "</td>" +
-        "<td align=\"center\" style=\"background-color:transparent\">" + dataObj[i]["acquiredCoral"] + "</td>" +
-        "<td align=\"center\" style=\"background-color:#cfe2ff\">" + dataObj[i]["acquiredAlgae"] + "</td>" +
-        "<td align=\"center\" style=\"background-color:transparent\">" + dataObj[i]["teleopCoralL1"] + "</td>" +
-        "<td align=\"center\" style=\"background-color:#cfe2ff\">" + dataObj[i]["teleopCoralL2"] + "</td>" +
-        "<td align=\"center\" style=\"background-color:transparent\">" + dataObj[i]["teleopCoralL3"] + "</td>" +
-        "<td align=\"center\" style=\"background-color:#cfe2ff\">" + dataObj[i]["teleopCoralL4"] + "</td>" +
-        "<td align=\"center\" style=\"background-color:transparent\">" + dataObj[i]["teleopAlgaeNet"] + "</td>" +
-        "<td align=\"center\" style=\"background-color:#cfe2ff\">" + dataObj[i]["teleopAlgaeProcessor"] + "</td>" +
-        "<td align=\"center\" style=\"background-color:transparent\">" + dataObj[i]["cageClimb"] + "</td>" +
-        "<td align=\"center\" style=\"background-color:#cfe2ff\">" + dataObj[i]["died"] + "</td>" +
-        "<td align=\"center\" style=\"background-color:transparent\">" + dataObj[i]["scoutname"] + "</td>" +
-        "<td align=\"center\" style=\"background-color:#cfe2ff\">" + dataObj[i]["comment"] + "</td>" +
+      var rowString = "<tr><td style=\"background-color:transparent\">" + dataObj[i]["matchnumber"] + "</td>" +
+        "<td style=\"background-color:transparent\"><a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</td>" +
+        "<td style=\"background-color:#cfe2ff\">" + dataObj[i]["autonLeave"] + "</td>" +
+        "<td style=\"background-color:transparent\">" + dataObj[i]["autonCoralL1"] + "</td>" +
+        "<td style=\"background-color:#cfe2ff\">" + dataObj[i]["autonCoralL2"] + "</td>" +
+        "<td style=\"background-color:transparent\">" + dataObj[i]["autonCoralL3"] + "</td>" +
+        "<td style=\"background-color:#cfe2ff\">" + dataObj[i]["autonCoralL4"] + "</td>" +
+        "<td style=\"background-color:transparent\">" + dataObj[i]["autonAlgaeNet"] + "</td>" +
+        "<td style=\"background-color:#cfe2ff\">" + dataObj[i]["autonAlgaeProcessor"] + "</td>" +
+        "<td style=\"background-color:transparent\">" + dataObj[i]["acquiredCoral"] + "</td>" +
+        "<td style=\"background-color:#cfe2ff\">" + dataObj[i]["acquiredAlgae"] + "</td>" +
+        "<td style=\"background-color:transparent\">" + dataObj[i]["teleopCoralL1"] + "</td>" +
+        "<td style=\"background-color:#cfe2ff\">" + dataObj[i]["teleopCoralL2"] + "</td>" +
+        "<td style=\"background-color:transparent\">" + dataObj[i]["teleopCoralL3"] + "</td>" +
+        "<td style=\"background-color:#cfe2ff\">" + dataObj[i]["teleopCoralL4"] + "</td>" +
+        "<td style=\"background-color:transparent\">" + dataObj[i]["teleopAlgaeNet"] + "</td>" +
+        "<td style=\"background-color:#cfe2ff\">" + dataObj[i]["teleopAlgaeProcessor"] + "</td>" +
+        "<td style=\"background-color:transparent\">" + dataObj[i]["cageClimb"] + "</td>" +
+        "<td style=\"background-color:#cfe2ff\">" + dataObj[i]["died"] + "</td>" +
+        "<td style=\"background-color:transparent\">" + dataObj[i]["scoutname"] + "</td>" +
+        "<td style=\"background-color:#cfe2ff\">" + dataObj[i]["comment"] + "</td>" +
         "</tr>";
       $("#tableData").append(rowString);
 
