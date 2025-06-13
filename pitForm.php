@@ -1,6 +1,6 @@
 <?php
 $title = 'Pit Scouting Form';
-require 'header.php';
+require 'inc/header.php';
 ?>
 
 <div class="container row-offcanvas row-offcanvas-left">
@@ -169,7 +169,7 @@ require 'header.php';
   </div>
 </div>
 
-<?php include 'footer.php'; ?>
+<?php include 'inc/footer.php'; ?>
 
 <!-- Javascript page handlers -->
 

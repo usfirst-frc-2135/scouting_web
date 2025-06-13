@@ -1,6 +1,6 @@
 <?php
 $title = 'Event Averages';
-require 'header.php';
+require 'inc/header.php';
 ?>
 
 <div class="container row-offcanvas row-offcanvas-left">
@@ -217,7 +217,7 @@ COMMENTED OUT FOR NOW-->
   </div>
 </div>
 
-<?php include 'footer.php'; ?>
+<?php include 'inc/footer.php'; ?>
 
 <!-- Javascript page handlers -->
 
