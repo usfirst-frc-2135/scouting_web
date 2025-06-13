@@ -218,19 +218,18 @@ function submitFunction() {
     for (const [key, value] of Object.entries(scannedData)) {
       indexedData.push(value);
     }
-    $.post("api/writeAPI.php",
-      {
-        "writeData": JSON.stringify(indexedData)
-      }, function (returnCode) {
-        // Because success word may have a new-line at the end, don't do a direct compare
-        if (returnCode.indexOf('success') > -1) {
-          alert("Data Successfully Submitted! Clearing Data.");
-          clearData();
-          $("#submitData").html("Click to Submit Data: " + scannedCount);
-        } else {
-          alert("Data NOT Submitted.");
-        }
-      });
+    $.post("api/writeAPI.php", {
+      writeData: JSON.stringify(indexedData)
+    }, function (returnCode) {
+      // Because success word may have a new-line at the end, don't do a direct compare
+      if (returnCode.indexOf('success') > -1) {
+        alert("Data Successfully Submitted! Clearing Data.");
+        clearData();
+        $("#submitData").html("Click to Submit Data: " + scannedCount);
+      } else {
+        alert("Data NOT Submitted.");
+      }
+    });
   });
 }
 

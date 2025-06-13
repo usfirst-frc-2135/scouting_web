@@ -32,7 +32,7 @@ require 'header.php';
             </div>
             <div class="row col-12 mb-3">
               <span>Match Number</span>
-              <div class="col-2">
+              <div class="col-3">
                 <div class="input-group">
                   <select id="compLevel" class="form-select" aria-label="Comp Level Select">
                     <option value="p">P</option>
@@ -452,7 +452,7 @@ require 'header.php';
   function submitMatchData(formData) {
     console.log("==> matchForm.php: submitMatchData()");
     $.post("api/writeAPI.php", {
-      "writeSingleData": JSON.stringify(formData)
+      writeSingleData: JSON.stringify(formData)
     }, function (returnCode) {
       // Because success word may have a new-line at the end, don't do a direct compare
       if (returnCode.indexOf('success') > -1) {

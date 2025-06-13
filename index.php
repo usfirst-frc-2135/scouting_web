@@ -192,7 +192,7 @@ require 'header.php';
 
     // Update the database statuses
     $.post("api/dbAPI.php", {
-      "getDBStatus": true
+      getDBStatus: true
     }, function (statusData) {
       console.log("==> getDBStatus");
       updateStatusValues(JSON.parse(statusData));
@@ -268,7 +268,7 @@ require 'header.php';
     // Create a new database
     $("#createDB").on('click', function (event) {
       $.post("api/dbAPI.php", {
-        "createDB": true
+        createDB: true
       }, function (statusData) {
         console.log("==> createDB");
         updateStatusValues(JSON.parse(statusData));
@@ -278,7 +278,7 @@ require 'header.php';
     // Create new tables in database
     $("#createTable").on('click', function (event) {
       $.post("api/dbAPI.php", {
-        "createTable": true
+        createTable: true
       }, function (createTable) {
         console.log("==> createDB");
         updateStatusValues(JSON.parse(statusData));

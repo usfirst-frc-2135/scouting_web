@@ -108,20 +108,19 @@ class matchDataProcessor {
 
   getSiteFilter(successFunction) {
     if (!this.siteFilter) {
-      $.post("api/dbAPI.php",
-        {
-          "getDBStatus": true
-        }, function (dbStatus) {
-          dbStatus = JSON.parse(dbStatus);
-          var localSiteFilter = {};
-          localSiteFilter["useP"] = dbStatus["useP"];
-          localSiteFilter["useQm"] = dbStatus["useQm"];
-          localSiteFilter["useQf"] = dbStatus["useQf"];
-          localSiteFilter["useSf"] = dbStatus["useSf"];
-          localSiteFilter["useF"] = dbStatus["useF"];
-          this.siteFilter = { ...localSiteFilter };
-          successFunction();
-        });
+      $.post("api/dbAPI.php", {
+        getDBStatus: true
+      }, function (dbStatus) {
+        dbStatus = JSON.parse(dbStatus);
+        var localSiteFilter = {};
+        localSiteFilter["useP"] = dbStatus["useP"];
+        localSiteFilter["useQm"] = dbStatus["useQm"];
+        localSiteFilter["useQf"] = dbStatus["useQf"];
+        localSiteFilter["useSf"] = dbStatus["useSf"];
+        localSiteFilter["useF"] = dbStatus["useF"];
+        this.siteFilter = { ...localSiteFilter };
+        successFunction();
+      });
     }
     else {
       successFunction();
@@ -148,23 +147,22 @@ class matchDataProcessor {
 
   getSiteFilteredAverages(successFunction) {
     var tempThis = this;
-    $.post("api/dbAPI.php",
-      {
-        "getDBStatus": true
-      }, function (dbStatus) {
-        dbStatus = JSON.parse(dbStatus);
-        var localSiteFilter = {};
-        localSiteFilter["useP"] = dbStatus["useP"];
-        localSiteFilter["useQm"] = dbStatus["useQm"];
-        localSiteFilter["useQf"] = dbStatus["useQf"];
-        localSiteFilter["useSf"] = dbStatus["useSf"];
-        localSiteFilter["useF"] = dbStatus["useF"];
-        tempThis.siteFilter = { ...localSiteFilter };
+    $.post("api/dbAPI.php", {
+      getDBStatus: true
+    }, function (dbStatus) {
+      dbStatus = JSON.parse(dbStatus);
+      var localSiteFilter = {};
+      localSiteFilter["useP"] = dbStatus["useP"];
+      localSiteFilter["useQm"] = dbStatus["useQm"];
+      localSiteFilter["useQf"] = dbStatus["useQf"];
+      localSiteFilter["useSf"] = dbStatus["useSf"];
+      localSiteFilter["useF"] = dbStatus["useF"];
+      tempThis.siteFilter = { ...localSiteFilter };
 
-        tempThis.applySiteFilter();
+      tempThis.applySiteFilter();
 
-        successFunction(tempThis.getAverages());
-      });
+      successFunction(tempThis.getAverages());
+    });
   }
 
   getAverages() {

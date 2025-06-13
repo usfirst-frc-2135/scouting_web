@@ -32,7 +32,7 @@ require 'header.php';
             </div>
             <div class="row col-12 mb-3">
               <span>Match Number</span>
-              <div class="col-2">
+              <div class="col-3">
                 <div class="input-group">
                   <select id="compLevel" class="form-select" aria-label="Comp Level Select">
                     <option value="p">P</option>
