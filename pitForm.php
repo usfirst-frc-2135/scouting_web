@@ -56,7 +56,7 @@ require 'inc/header.php';
                   <span>What type of motors do you use on your drive train?</span>
                   <div class="input-group mb-3">
                     <select id="driveMotors" class="form-select">
-                      <option selected>Choose...</option>
+                      <option selected>Choose ...</option>
                       <option value="1">Krakens</option>
                       <option value="2">Neos</option>
                       <option value="3">Falcons</option>
@@ -83,7 +83,7 @@ require 'inc/header.php';
                   <span>What programming language do you use?</span>
                   <div class="input-group mb-3">
                     <select id="programmingLanguage" class="form-select">
-                      <option id="programmingLanguage" selected value="0">Choose...</option>
+                      <option id="programmingLanguage" selected value="0">Choose ...</option>
                       <option id="java" value="1">Java</option>
                       <option id="labView" value="2">LabView</option>
                       <option id="C++" value="3">C++</option>
