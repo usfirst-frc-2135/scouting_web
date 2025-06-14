@@ -40,17 +40,12 @@ require 'inc/header.php';
 
         <!-- Custom match button (collapsible section) -->
         <div class="card mb-3">
-          <div id="customMatch" class="accordion">
-            <style type="text/css" media="screen">
-              .input-group .input {
-                border: 1px solid black;
-              }
-            </style>
+
+          <div id="customMatch" class="accordion accordian-flush">
             <div class="accordion-item" style="background-color: #F8F9FA">
               <h2 class="accordion-header">
                 <button class="accordion-button text-light bg-secondary" type="button" data-bs-toggle="collapse"
-                  data-bs-target="#matchEntry" aria-expanded="false" aria-controls="matchEntry">
-                  Enter Custom Match
+                  data-bs-target="#matchEntry" aria-expanded="false" aria-controls="matchEntry">Enter Custom Match
                 </button>
               </h2>
               <div id="matchEntry" class="accordion-collapse collapse" data-bs-parent="#customMatch">
@@ -88,20 +83,10 @@ require 'inc/header.php';
         <div class="card mb-3 p-3" style="background-color: #F8F9FA">
           <h4 id="matchTitle">Match:</h4>
           <h5 id="matchTime">Time:</h5>
-          <table class="table table-bordered">
+          <table class="table table-bordered table-sm border-dark">
             <thead>
-              <style type="text/css" media="screen">
-                table tr {
-                  border: 1px solid black;
-                }
-
-                table td,
-                table th {
-                  border-right: 1px solid black;
-                }
-              </style>
               <tr>
-                <th class="text-center"></th>
+                <th></th>
                 <th class="text-center">Red</th>
                 <th class="text-center">Blue</th>
               </tr>
@@ -145,468 +130,403 @@ require 'inc/header.php';
     </div>
   </div>
 
-  <!-- Team cards -->
+  <!-- Red Team cards -->
   <div class="row mb-3 gx-3">
+
+    <!-- Red0 - Red Team 1 -->
     <div class="col-lg-4 col-sm-4 col-xs-4 gx-3">
-      <div class="card text-white bg-danger mb-3">
-        <div class="card-head">
-          <div id="R0Flush" class="accordion accordion-flush bg-danger">
-            <div class="accordion-item bg-danger">
-              <h2 id="flush-headingOne" class="accordion-header bg-danger">
-                <div class="row">
-                  <div class="col-10">
-                    <h5 id="R0TeamNumber" class="card-title text-center">Team #</h5>
-                  </div>
-                  <div class="col-2">
-                    <button class="btn accordion-button collapsed bg-danger btn-sm" type="button" data-bs-toggle="collapse"
-                      data-bs-target="#flush-R0Collapse" aria-expanded="false" aria-controls="flush-R0Collapse">
-                    </button>
-                  </div>
-                </div>
-              </h2>
-              <div id="flush-R0Collapse" class="accordion-collapse collapse show">
-                <div id="R0PicsCarousel" class="carousel slide" data-interval="false">
-                  <div id="R0RobotPics" class="carousel-inner">
-                  </div>
-                  <button class="carousel-control-prev" type="button" data-bs-target="#R0PicsCarousel" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                  </button>
-                  <button class="carousel-control-next" type="button" data-bs-target="#R0PicsCarousel" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                  </button>
-                </div>
-              </div>
+      <div id="R0Flush" class="accordion accordion-flush text-white bg-danger mb-3">
+        <div class="accordion-item bg-danger">
+          <h6 id="R0flush-headingOne" class="accordion-header bg-danger">
+            <button class="accordion-button collapsed bg-danger btn-sm" type="button" data-bs-toggle="collapse"
+              data-bs-target="#flush-R0Collapse" aria-expanded="false" aria-controls="flush-R0Collapse">
+              <h6 id="R0TeamNumber" class="text-center text-white">Team #</h6>
+            </button>
+          </h6>
+
+          <div id="flush-R0Collapse" class="accordion-collapse collapse" data-bs-parent="#R0Flush">
+            <div id="R0PicsCarousel" class="carousel slide" data-interval="false">
+              <div id="R0RobotPics" class="carousel-inner"> </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#R0PicsCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#R0PicsCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
+
+            <div class="overflow-auto">
+              <table class="table table-bordered table-danger">
+                <thead>
+                  <tr>
+                    <th colspan="6" class="text-center fs-6">Auton</th>
+                    <th colspan="8" class="text-center fw-bold fs-6">Teleop</th>
+                    <th colspan="5" class="text-center fw-bold fs-6">Endgame</th>
+                  </tr>
+                  <tr>
+                    <th scope="col">L1</th>
+                    <th scope="col">L2</th>
+                    <th scope="col">L3</th>
+                    <th scope="col">L4</th>
+                    <th scope="col">Net</th>
+                    <th scope="col">Proc</th>
+
+                    <th scope="col">C%</th>
+                    <th scope="col">L1</th>
+                    <th scope="col">L2</th>
+                    <th scope="col">L3</th>
+                    <th scope="col">L4</th>
+                    <th scope="col">A%</th>
+                    <th scope="col">Net</th>
+                    <th scope="col">Proc</th>
+
+                    <th scope="col">N</th>
+                    <th scope="col">P</th>
+                    <th scope="col">F</th>
+                    <th scope="col">S</th>
+                    <th scope="col">D</th>
+                  </tr>
+                </thead>
+                <tbody id="R0DataTable"> </tbody>
+              </table>
             </div>
           </div>
-        </div>
 
-        <div class="overflow-auto">
-          <table class="table table-bordered table-danger">
-            <thead>
-              <tr>
-                <th colspan="6" class="text-center fs-6">Auton</th>
-                <th colspan="8" class="text-center fw-bold fs-6">Teleop</th>
-                <th colspan="5" class="text-center fw-bold fs-6">Endgame</th>
-              </tr>
-              <tr>
-                <th scope="col">L1</th>
-                <th scope="col">L2</th>
-                <th scope="col">L3</th>
-                <th scope="col">L4</th>
-                <th scope="col">Net</th>
-                <th scope="col">Proc</th>
-
-                <th scope="col">C%</th>
-                <th scope="col">L1</th>
-                <th scope="col">L2</th>
-                <th scope="col">L3</th>
-                <th scope="col">L4</th>
-                <th scope="col">A%</th>
-                <th scope="col">Net</th>
-                <th scope="col">Proc</th>
-
-                <th scope="col">N</th>
-                <th scope="col">P</th>
-                <th scope="col">F</th>
-                <th scope="col">S</th>
-                <th scope="col">D</th>
-              </tr>
-            </thead>
-            <tbody id="R0DataTable">
-
-            </tbody>
-          </table>
         </div>
       </div>
     </div>
 
+    <!-- Red1 - Red Team 2 -->
     <div class="col-lg-4 col-sm-4 col-xs-4 gx-3">
-      <div class="card text-white bg-danger mb-3">
-        <div class="card-head">
-          <div id="R1Flush" class="accordion accordion-flush bg-danger">
-            <div class="accordion-item bg-danger">
-              <h2 id="flush-headingOne" class="accordion-header bg-danger">
-                <div class="row">
-                  <div class="col-10">
-                    <h5 id="R1TeamNumber" class="card-title text-center">Team #</h5>
-                  </div>
-                  <div class="col-2">
-                    <button class="btn accordion-button collapsed bg-danger btn-sm" type="button" data-bs-toggle="collapse"
-                      data-bs-target="#flush-R1Collapse" aria-expanded="false" aria-controls="flush-R1Collapse">
+      <div id="R1Flush" class="accordion accordion-flush text-white bg-danger mb-3">
+        <div class="accordion-item bg-danger">
+          <h6 id="R1flush-headingOne" class="accordion-header bg-danger">
+            <button class="accordion-button collapsed bg-danger btn-sm" type="button" data-bs-toggle="collapse"
+              data-bs-target="#flush-R1Collapse" aria-expanded="false" aria-controls="flush-R1Collapse">
+              <h6 id="R1TeamNumber" class="text-center text-white">Team #</h6>
+            </button>
+          </h6>
 
-                    </button>
-                  </div>
-                </div>
-              </h2>
-              <div id="flush-R1Collapse" class="accordion-collapse collapse show">
-                <div id="R1PicsCarousel" class="carousel slide" data-interval="false">
-                  <div id="R1RobotPics" class="carousel-inner">
+          <div id="flush-R1Collapse" class="accordion-collapse collapse" data-bs-parent="#R1Flush">
+            <div id="R1PicsCarousel" class="carousel slide" data-interval="false">
+              <div id="R1RobotPics" class="carousel-inner"> </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#R1PicsCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#R1PicsCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
 
-                  </div>
-                  <button class="carousel-control-prev" type="button" data-bs-target="#R1PicsCarousel" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                  </button>
-                  <button class="carousel-control-next" type="button" data-bs-target="#R1PicsCarousel" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                  </button>
-                </div>
-              </div>
+            <div class="overflow-auto">
+              <table class="table table-bordered table-danger">
+                <thead>
+                  <tr>
+                    <th colspan="6" class="text-center fs-6">Auton</th>
+                    <th colspan="8" class="text-center fw-bold fs-6">Teleop</th>
+                    <th colspan="5" class="text-center fw-bold fs-6">Endgame</th>
+                  </tr>
+                  <tr>
+                    <th scope="col">L1</th>
+                    <th scope="col">L2</th>
+                    <th scope="col">L3</th>
+                    <th scope="col">L4</th>
+                    <th scope="col">Net</th>
+                    <th scope="col">Proc</th>
+
+                    <th scope="col">C%</th>
+                    <th scope="col">L1</th>
+                    <th scope="col">L2</th>
+                    <th scope="col">L3</th>
+                    <th scope="col">L4</th>
+                    <th scope="col">A%</th>
+                    <th scope="col">Net</th>
+                    <th scope="col">Proc</th>
+
+                    <th scope="col">N</th>
+                    <th scope="col">P</th>
+                    <th scope="col">F</th>
+                    <th scope="col">S</th>
+                    <th scope="col">D</th>
+                  </tr>
+                </thead>
+                <tbody id="R1DataTable"> </tbody>
+              </table>
             </div>
           </div>
-        </div>
 
-        <div class="overflow-auto">
-          <table class="table table-bordered table-danger">
-            <thead>
-              <tr>
-                <th colspan="6" class="text-center fs-6">Auton</th>
-                <th colspan="8" class="text-center fw-bold fs-6">Teleop</th>
-                <th colspan="5" class="text-center fw-bold fs-6">Endgame</th>
-              </tr>
-              <tr>
-                <th scope="col">L1</th>
-                <th scope="col">L2</th>
-                <th scope="col">L3</th>
-                <th scope="col">L4</th>
-                <th scope="col">Net</th>
-                <th scope="col">Proc</th>
-
-                <th scope="col">C%</th>
-                <th scope="col">L1</th>
-                <th scope="col">L2</th>
-                <th scope="col">L3</th>
-                <th scope="col">L4</th>
-                <th scope="col">A%</th>
-                <th scope="col">Net</th>
-                <th scope="col">Proc</th>
-
-                <th scope="col">N</th>
-                <th scope="col">P</th>
-                <th scope="col">F</th>
-                <th scope="col">S</th>
-                <th scope="col">D</th>
-              </tr>
-            </thead>
-            <tbody id="R1DataTable">
-
-            </tbody>
-          </table>
         </div>
       </div>
     </div>
 
+    <!-- Red2 - Red Team 3 -->
     <div class="col-lg-4 col-sm-4 col-xs-4 gx-3">
-      <div class="card text-white bg-danger mb-3">
-        <div class="card-head">
-          <div id="R2Flush" class="accordion accordion-flush bg-danger">
-            <div class="accordion-item bg-danger">
-              <h2 id="flush-headingOne" class="accordion-header bg-danger">
-                <div class="row">
-                  <div class="col-10">
-                    <h5 id="R2TeamNumber" class="card-title text-center">Team #</h5>
-                  </div>
-                  <div class="col-2">
-                    <button class="btn accordion-button collapsed bg-danger btn-sm" type="button" data-bs-toggle="collapse"
-                      data-bs-target="#flush-R2Collapse" aria-expanded="false" aria-controls="flush-R2Collapse">
+      <div id="R2Flush" class="accordion accordion-flush text-white bg-danger mb-3">
+        <div class="accordian-item">
+          <h6 id="R2flush-headingOne" class="accordion-header bg-danger">
+            <button class="accordion-button collapsed bg-danger btn-sm" type="button" data-bs-toggle="collapse"
+              data-bs-target="#flush-R2Collapse" aria-expanded="false" aria-controls="flush-R2Collapse">
+              <h6 id="R2TeamNumber" class="text-center text-white">Team #</h6>
+            </button>
+          </h6>
 
-                    </button>
-                  </div>
-                </div>
-              </h2>
-              <div id="flush-R2Collapse" class="accordion-collapse collapse show">
-                <div id="R2PicsCarousel" class="carousel slide" data-interval="false">
-                  <div id="R2RobotPics" class="carousel-inner">
+          <div id="flush-R2Collapse" class="accordion-collapse collapse" data-bs-parent="#R2Flush">
+            <div id="R2PicsCarousel" class="carousel slide" data-interval="false">
+              <div id="R2RobotPics" class="carousel-inner">
 
-                  </div>
-                  <button class="carousel-control-prev" type="button" data-bs-target="#R2PicsCarousel" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                  </button>
-                  <button class="carousel-control-next" type="button" data-bs-target="#R2PicsCarousel" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                  </button>
-                </div>
               </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#R2PicsCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#R2PicsCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
+
+            <div class="overflow-auto">
+              <table class="table table-bordered table-danger">
+                <thead>
+                  <tr>
+                    <th colspan="6" class="text-center fs-6">Auton</th>
+                    <th colspan="8" class="text-center fw-bold fs-6">Teleop</th>
+                    <th colspan="5" class="text-center fw-bold fs-6">Endgame</th>
+                  </tr>
+                  <tr>
+                    <th scope="col">L1</th>
+                    <th scope="col">L2</th>
+                    <th scope="col">L3</th>
+                    <th scope="col">L4</th>
+                    <th scope="col">Net</th>
+                    <th scope="col">Proc</th>
+
+                    <th scope="col">C%</th>
+                    <th scope="col">L1</th>
+                    <th scope="col">L2</th>
+                    <th scope="col">L3</th>
+                    <th scope="col">L4</th>
+                    <th scope="col">A%</th>
+                    <th scope="col">Net</th>
+                    <th scope="col">Proc</th>
+
+                    <th scope="col">N</th>
+                    <th scope="col">P</th>
+                    <th scope="col">F</th>
+                    <th scope="col">S</th>
+                    <th scope="col">D</th>
+                  </tr>
+                </thead>
+                <tbody id="R2DataTable"> </tbody>
+              </table>
             </div>
           </div>
-        </div>
 
-        <div class="overflow-auto">
-          <table class="table table-bordered table-danger">
-            <thead>
-              <tr>
-                <th colspan="6" class="text-center fs-6">Auton</th>
-                <th colspan="8" class="text-center fw-bold fs-6">Teleop</th>
-                <th colspan="5" class="text-center fw-bold fs-6">Endgame</th>
-              </tr>
-              <tr>
-                <th scope="col">L1</th>
-                <th scope="col">L2</th>
-                <th scope="col">L3</th>
-                <th scope="col">L4</th>
-                <th scope="col">Net</th>
-                <th scope="col">Proc</th>
-
-                <th scope="col">C%</th>
-                <th scope="col">L1</th>
-                <th scope="col">L2</th>
-                <th scope="col">L3</th>
-                <th scope="col">L4</th>
-                <th scope="col">A%</th>
-                <th scope="col">Net</th>
-                <th scope="col">Proc</th>
-
-                <th scope="col">N</th>
-                <th scope="col">P</th>
-                <th scope="col">F</th>
-                <th scope="col">S</th>
-                <th scope="col">D</th>
-              </tr>
-            </thead>
-            <tbody id="R2DataTable">
-
-            </tbody>
-          </table>
         </div>
       </div>
     </div>
   </div>
+
+  <!-- Blue Team cards -->
   <div class="row mb-3 gx-3">
+
+    <!-- Blue0 - Blue Team 1 -->
     <div class="col-lg-4 col-sm-4 col-xs-4 gx-3">
-      <div class="card text-white bg-primary mb-3">
-        <div class="card-head">
-          <div id="B0Flush" class="accordion accordion-flush bg-primary">
-            <div class="accordion-item bg-primary">
-              <h2 id="flush-headingOne" class="accordion-header bg-primary">
-                <div class="row">
-                  <div class="col-10">
-                    <h5 id="B0TeamNumber" class="card-title text-center">Team #</h5>
-                  </div>
-                  <div class="col-2">
-                    <button class="btn accordion-button collapsed bg-primary btn-sm" type="button" data-bs-toggle="collapse"
-                      data-bs-target="#flush-B0Collapse" aria-expanded="false" aria-controls="flush-B0Collapse">
+      <div id="B0Flush" class="accordion accordion-flush text-white bg-primary mb-3">
+        <div class="accordion-item bg-primary">
+          <h6 id="B0flush-headingOne" class="accordion-header bg-primary">
+            <button class="accordion-button collapsed bg-primary btn-sm" type="button" data-bs-toggle="collapse"
+              data-bs-target="#flush-B0Collapse" aria-expanded="false" aria-controls="flush-B0Collapse">
+              <h6 id="B0TeamNumber" class="text-center text-white">Team #</h6>
+            </button>
+          </h6>
+          <div id="flush-B0Collapse" class="accordion-collapse collapse" data-bs-parent="#B0Flush">
+            <div id="B0PicsCarousel" class="carousel slide" data-interval="false">
+              <div id="B0RobotPics" class="carousel-inner"> </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#B0PicsCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#B0PicsCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
 
-                    </button>
-                  </div>
-                </div>
-              </h2>
-              <div id="flush-B0Collapse" class="accordion-collapse collapse show">
-                <div id="B0PicsCarousel" class="carousel slide" data-interval="false">
-                  <div id="B0RobotPics" class="carousel-inner">
+            <div class="overflow-auto">
+              <table class="table table-bordered table-primary">
+                <thead>
+                  <tr>
+                    <th colspan="6" class="text-center fs-6">Auton</th>
+                    <th colspan="8" class="text-center fw-bold fs-6">Teleop</th>
+                    <th colspan="5" class="text-center fw-bold fs-6">Endgame</th>
+                  </tr>
+                  <tr>
+                    <th scope="col">L1</th>
+                    <th scope="col">L2</th>
+                    <th scope="col">L3</th>
+                    <th scope="col">L4</th>
+                    <th scope="col">Net</th>
+                    <th scope="col">Proc</th>
 
-                  </div>
-                  <button class="carousel-control-prev" type="button" data-bs-target="#B0PicsCarousel" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                  </button>
-                  <button class="carousel-control-next" type="button" data-bs-target="#B0PicsCarousel" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                  </button>
-                </div>
-              </div>
+                    <th scope="col">C%</th>
+                    <th scope="col">L1</th>
+                    <th scope="col">L2</th>
+                    <th scope="col">L3</th>
+                    <th scope="col">L4</th>
+                    <th scope="col">A%</th>
+                    <th scope="col">Net</th>
+                    <th scope="col">Proc</th>
+
+                    <th scope="col">N</th>
+                    <th scope="col">P</th>
+                    <th scope="col">F</th>
+                    <th scope="col">S</th>
+                    <th scope="col">D</th>
+                  </tr>
+                </thead>
+                <tbody id="B0DataTable"> </tbody>
+              </table>
             </div>
           </div>
-        </div>
 
-        <div class="overflow-auto">
-          <table class="table table-bordered table-primary">
-            <thead>
-              <tr>
-                <th colspan="6" class="text-center fs-6">Auton</th>
-                <th colspan="8" class="text-center fw-bold fs-6">Teleop</th>
-                <th colspan="5" class="text-center fw-bold fs-6">Endgame</th>
-              </tr>
-              <tr>
-                <th scope="col">L1</th>
-                <th scope="col">L2</th>
-                <th scope="col">L3</th>
-                <th scope="col">L4</th>
-                <th scope="col">Net</th>
-                <th scope="col">Proc</th>
-
-                <th scope="col">C%</th>
-                <th scope="col">L1</th>
-                <th scope="col">L2</th>
-                <th scope="col">L3</th>
-                <th scope="col">L4</th>
-                <th scope="col">A%</th>
-                <th scope="col">Net</th>
-                <th scope="col">Proc</th>
-
-                <th scope="col">N</th>
-                <th scope="col">P</th>
-                <th scope="col">F</th>
-                <th scope="col">S</th>
-                <th scope="col">D</th>
-              </tr>
-            </thead>
-            <tbody id="B0DataTable">
-
-            </tbody>
-          </table>
         </div>
       </div>
     </div>
 
+    <!-- Blue1 - Blue Team 2 -->
     <div class="col-lg-4 col-sm-4 col-xs-4 gx-3">
-      <div class="card text-white bg-primary mb-3">
-        <div class="card-head">
-          <div id="B1Flush" class="accordion accordion-flush bg-primary">
-            <div class="accordion-item bg-primary">
-              <h2 id="flush-headingOne" class="accordion-header bg-primary">
-                <div class="row">
-                  <div class="col-10">
-                    <h5 id="B1TeamNumber" class="card-title text-center">Team #</h5>
-                  </div>
-                  <div class="col-2">
-                    <button class="btn accordion-button collapsed bg-primary btn-sm" type="button" data-bs-toggle="collapse"
-                      data-bs-target="#flush-B1Collapse" aria-expanded="false" aria-controls="flush-B1Collapse">
+      <div id="B1Flush" class="accordion accordion-flush bg-primary">
+        <div class="accordion-item bg-primary">
+          <h6 id="B1flush-headingOne" class="accordion-header bg-primary">
+            <button class="btn accordion-button collapsed bg-primary btn-sm" type="button" data-bs-toggle="collapse"
+              data-bs-target="#flush-B1Collapse" aria-expanded="false" aria-controls="flush-B1Collapse">
+              <h6 id="B1TeamNumber" class="text-center text-white">Team #</h6>
+            </button>
+          </h6>
+          <div id="flush-B1Collapse" class="accordion-collapse collapse" data-bs-parent="#B1Flush">
+            <div id="B1PicsCarousel" class="carousel slide" data-interval="false">
+              <div id="B1RobotPics" class="carousel-inner"> </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#B1PicsCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#B1PicsCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
 
-                    </button>
-                  </div>
-                </div>
-              </h2>
-              <div id="flush-B1Collapse" class="accordion-collapse collapse show">
-                <div id="B1PicsCarousel" class="carousel slide" data-interval="false">
-                  <div id="B1RobotPics" class="carousel-inner">
+            <div class="overflow-auto">
+              <table class="table table-bordered table-primary">
+                <thead>
+                  <tr>
+                    <th colspan="6" class="text-center fs-6">Auton</th>
+                    <th colspan="8" class="text-center fw-bold fs-6">Teleop</th>
+                    <th colspan="5" class="text-center fw-bold fs-6">Endgame</th>
+                  </tr>
+                  <tr>
+                    <th scope="col">L1</th>
+                    <th scope="col">L2</th>
+                    <th scope="col">L3</th>
+                    <th scope="col">L4</th>
+                    <th scope="col">Net</th>
+                    <th scope="col">Proc</th>
 
-                  </div>
-                  <button class="carousel-control-prev" type="button" data-bs-target="#B1PicsCarousel" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                  </button>
-                  <button class="carousel-control-next" type="button" data-bs-target="#B1PicsCarousel" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                  </button>
-                </div>
-              </div>
+                    <th scope="col">C%</th>
+                    <th scope="col">L1</th>
+                    <th scope="col">L2</th>
+                    <th scope="col">L3</th>
+                    <th scope="col">L4</th>
+                    <th scope="col">A%</th>
+                    <th scope="col">Net</th>
+                    <th scope="col">Proc</th>
+
+                    <th scope="col">N</th>
+                    <th scope="col">P</th>
+                    <th scope="col">F</th>
+                    <th scope="col">S</th>
+                    <th scope="col">D</th>
+                  </tr>
+                </thead>
+                <tbody id="B1DataTable"></tbody>
+              </table>
             </div>
           </div>
-        </div>
 
-        <div class="overflow-auto">
-          <table class="table table-bordered table-primary">
-            <thead>
-              <tr>
-                <th colspan="6" class="text-center fs-6">Auton</th>
-                <th colspan="8" class="text-center fw-bold fs-6">Teleop</th>
-                <th colspan="5" class="text-center fw-bold fs-6">Endgame</th>
-              </tr>
-              <tr>
-                <th scope="col">L1</th>
-                <th scope="col">L2</th>
-                <th scope="col">L3</th>
-                <th scope="col">L4</th>
-                <th scope="col">Net</th>
-                <th scope="col">Proc</th>
-
-                <th scope="col">C%</th>
-                <th scope="col">L1</th>
-                <th scope="col">L2</th>
-                <th scope="col">L3</th>
-                <th scope="col">L4</th>
-                <th scope="col">A%</th>
-                <th scope="col">Net</th>
-                <th scope="col">Proc</th>
-
-                <th scope="col">N</th>
-                <th scope="col">P</th>
-                <th scope="col">F</th>
-                <th scope="col">S</th>
-                <th scope="col">D</th>
-              </tr>
-            </thead>
-            <tbody id="B1DataTable">
-
-            </tbody>
-          </table>
         </div>
       </div>
     </div>
 
+    <!-- Blue2 - Blue Team 3 -->
     <div class="col-lg-4 col-sm-4 col-xs-4 gx-3">
-      <div class="card text-white bg-primary mb-3">
-        <div class="card-head">
-          <div id="B2Flush" class="accordion accordion-flush bg-primary">
-            <div class="accordion-item bg-primary">
-              <h2 id="flush-headingOne" class="accordion-header bg-primary">
-                <div class="row">
-                  <div class="col-10">
-                    <h5 id="B2TeamNumber" class="card-title text-center">Team #</h5>
-                  </div>
-                  <div class="col-2">
-                    <button class="btn accordion-button collapsed bg-primary btn-sm" type="button" data-bs-toggle="collapse"
-                      data-bs-target="#flush-B2Collapse" aria-expanded="false" aria-controls="flush-B2Collapse">
+      <div id="B2Flush" class="accordion accordion-flush text-white bg-primary mb-3">
+        <div class="accordion-item bg-primary">
+          <h6 id="B2flush-headingOne" class="accordion-header bg-primary">
+            <button class="btn accordion-button collapsed bg-primary btn-sm" type="button" data-bs-toggle="collapse"
+              data-bs-target="#flush-B2Collapse" aria-expanded="false" aria-controls="flush-B2Collapse">
+              <h6 id="B2TeamNumber" class="text-center text-white">Team #</h6>
+            </button>
+          </h6>
 
-                    </button>
-                  </div>
-                </div>
-              </h2>
-              <div id="flush-B2Collapse" class="accordion-collapse collapse show">
-                <div id="B2PicsCarousel" class="carousel slide" data-interval="false">
-                  <div id="B2RobotPics" class="carousel-inner">
+          <div id="flush-B2Collapse" class="accordion-collapse collapse" data-bs-parent="#B2Flush">
+            <div id="B2PicsCarousel" class="carousel slide" data-interval="false">
+              <div id="B2RobotPics" class="carousel-inner"> </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#B2PicsCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#B2PicsCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
 
-                  </div>
-                  <button class="carousel-control-prev" type="button" data-bs-target="#B2PicsCarousel" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                  </button>
-                  <button class="carousel-control-next" type="button" data-bs-target="#B2PicsCarousel" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                  </button>
-                </div>
-              </div>
+            <div class="overflow-auto">
+              <table class="table table-bordered table-primary">
+                <thead>
+                  <tr>
+                    <th colspan="6" class="text-center fs-6">Auton</th>
+                    <th colspan="8" class="text-center fw-bold fs-6">Teleop</th>
+                    <th colspan="5" class="text-center fw-bold fs-6">Endgame</th>
+                  </tr>
+                  <tr>
+                    <th scope="col">L1</th>
+                    <th scope="col">L2</th>
+                    <th scope="col">L3</th>
+                    <th scope="col">L4</th>
+                    <th scope="col">Net</th>
+                    <th scope="col">Proc</th>
+
+                    <th scope="col">C%</th>
+                    <th scope="col">L1</th>
+                    <th scope="col">L2</th>
+                    <th scope="col">L3</th>
+                    <th scope="col">L4</th>
+                    <th scope="col">A%</th>
+                    <th scope="col">Net</th>
+                    <th scope="col">Proc</th>
+
+                    <th scope="col">N</th>
+                    <th scope="col">P</th>
+                    <th scope="col">F</th>
+                    <th scope="col">S</th>
+                    <th scope="col">D</th>
+                  </tr>
+                </thead>
+                <tbody id="B2DataTable"> </tbody>
+              </table>
             </div>
           </div>
-        </div>
 
-        <div class="overflow-auto">
-          <table class="table table-bordered table-primary">
-            <thead>
-              <tr>
-                <th colspan="6" class="text-center fs-6">Auton</th>
-                <th colspan="8" class="text-center fw-bold fs-6">Teleop</th>
-                <th colspan="5" class="text-center fw-bold fs-6">Endgame</th>
-              </tr>
-              <tr>
-                <th scope="col">L1</th>
-                <th scope="col">L2</th>
-                <th scope="col">L3</th>
-                <th scope="col">L4</th>
-                <th scope="col">Net</th>
-                <th scope="col">Proc</th>
-
-                <th scope="col">C%</th>
-                <th scope="col">L1</th>
-                <th scope="col">L2</th>
-                <th scope="col">L3</th>
-                <th scope="col">L4</th>
-                <th scope="col">A%</th>
-                <th scope="col">Net</th>
-                <th scope="col">Proc</th>
-
-                <th scope="col">N</th>
-                <th scope="col">P</th>
-                <th scope="col">F</th>
-                <th scope="col">S</th>
-                <th scope="col">D</th>
-              </tr>
-            </thead>
-            <tbody id="B2DataTable">
-
-            </tbody>
-          </table>
         </div>
       </div>
     </div>
+
   </div>
 </div>
 
