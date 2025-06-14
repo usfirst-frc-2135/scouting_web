@@ -25,6 +25,7 @@ require 'inc/header.php';
         <div class="card mb-3">
           <div class="card-body">
             <h5 id="teamTitle" class="card-title">Team # </h5>
+
             <!-- Robot photo carousel section -->
             <div id="robotPicsCarousel" class="carousel slide mb-3" data-bs-ride="carousel">
               <div id="robotPics" class="carousel-inner">
@@ -41,51 +42,44 @@ require 'inc/header.php';
             </div>
 
             <!-- Auton collapsible graph -->
-            <div class="card mb-3">
-              <div class="card-body">
-                <div class="overflow-auto">
-                  <h5 class="text-center">
-                    <a href="#collapseAutonCoralGraph" data-bs-toggle="collapse" aria-expanded="false"> Auton Coral Graph</a>
-                  </h5>
-                  <div id="collapseAutonCoralGraph" class="collapse">
-                    <canvas id="autoChart" width="400" height="360"></canvas>
-                  </div>
-                </div>
+            <div class="card mb-3" style="background-color:#D5E6DE">
+              <div class="card-header">
+                <h5 class="text-center">
+                  <a href="#collapseAutonCoralGraph" data-bs-toggle="collapse" aria-expanded="false">Auton Scoring</a>
+                </h5>
+              </div>
+              <div id="collapseAutonCoralGraph" class="card-body collapse">
+                <canvas id="autoChart" width="400" height="360"></canvas>
               </div>
             </div>
 
             <!-- Teleop collapsible graph -->
-            <div class="card mb-3">
-              <div class="card-body">
-                <div class="overflow-auto">
-                  <h5 class="text-center">
-                    <a href="#collapseTeleopCoralGraph" data-bs-toggle="collapse" aria-expanded="false"> Teleop Coral Graph</a>
-                  </h5>
-                  <div id="collapseTeleopCoralGraph" class="collapse">
-                    <canvas id="teleopChart" width="400" height="360"></canvas>
-                  </div>
-                </div>
+            <div class="card mb-3" style="background-color:#D6F3FB">
+              <div class="card-header">
+                <h5 class="text-center">
+                  <a href="#collapseTeleopCoralGraph" data-bs-toggle="collapse" aria-expanded="false"> Teleop Scoring</a>
+                </h5>
+              </div>
+              <div id="collapseTeleopCoralGraph" class="card-body collapse">
+                <canvas id="teleopChart" width="400" height="360"></canvas>
               </div>
             </div>
 
             <!-- Endgame collapsible graph -->
-            <div class="card mb-3">
-              <div class="card-body">
-                <div class="overflow-auto">
-                  <h5 class="text-center">
-                    <a href="#collapseEndgameGraph" data-bs-toggle="collapse" aria-expanded="false"> Endgame Graph</a>
-                  </h5>
-                  <div id="collapseEndgameGraph" class="collapse">
-                    <canvas id="endgameChart" width="400" height="360"></canvas>
-                  </div>
-                </div>
+            <div class="card mb-3" style="background-color:#FBE6D3">
+              <div class="card-header">
+                <h5 class="text-center">
+                  <a href="#collapseEndgameGraph" data-bs-toggle="collapse" aria-expanded="false"> Endgame Scoring</a>
+                </h5>
+              </div>
+              <div id="collapseEndgameGraph" class="card-body collapse">
+                <canvas id="endgameChart" width="400" height="360"></canvas>
               </div>
             </div>
 
           </div>
-
-          <!-- here -->
         </div>
+
       </div>
 
       <!-- Second Column of Data starts here -->
@@ -95,171 +89,201 @@ require 'inc/header.php';
 
             <!-- Match Total Points section -->
             <div class="card mb-3">
+              <div class="card-header">
+                <h5 class="text-center">Match Totals</h5>
+              </div>
               <div class="card-body">
-                <div class="overflow-auto">
-                  <h5 class="text-center">Match Totals </h5>
-                  <table class="table table-striped">
-                    <thead>
-                      <tr>
-                        <td>&nbsp;</td>
-                        <th scope="col">AVG</th>
-                        <th scope="col">MAX</th>
-                      </tr>
-                    </thead>
-                    <tbody id="totalTable">
-                      <tr>
-                        <th scope="row">Total Coral Scored</th>
-                      </tr>
-                      <tr>
-                        <th scope="row">Total Algae Scored</th>
-                      </tr>
-                      <tr>
-                        <th scope="row">Total Coral Points</th>
-                      </tr>
-                      <tr>
-                        <th scope="row">Total Algae Points</th>
-                      </tr>
-                    </tbody>
-                    <tfoot id="matchTotalTable">
-                  </table>
-                </div>
+                <table id="matchTotalTable"
+                  class="table table-striped table-bordered table-hover table-sm table-bordered border-dark text-center ">
+                  <thead>
+                    <tr>
+                      <th scope="col" style="text-align:left">Totals</th>
+                      <th scope="col">AVG</th>
+                      <th scope="col">MAX</th>
+                    </tr>
+                  </thead>
+                  <tbody id="totalTableBody">
+                    <tr>
+                      <th scope="row" style="text-align:left">Coral Scored</th>
+                      <td> </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <th scope="row" style="text-align:left">Algae Scored</th>
+                      <td> </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <th scope="row" style="text-align:left">Coral Points</th>
+                      <td> </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <th scope="row" style="text-align:left">Algae Points</th>
+                      <td> </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <th scope="row" style="text-align:left">Match Points</th>
+                      <td> </td>
+                      <td> </td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
 
             <!-- Auton Points section -->
-            <div class="card mb-3">
+            <div class="card mb-3" style="background-color:#D5E6DE">
               <div class="card-header">
-                <div class="overflow-auto">
-                  <h5 class="text-center"> <a href="#collapseAuton" data-bs-toggle="collapse" aria-expanded="false"> Auton </a>
-                  </h5>
-                  <div id="collapseAuton" class="collapse">
-                    <div class="card card-body">
-                      <table class="table table-striped">
-                        <thead>
-                          <tr>
-                            <td>&nbsp;</td>
-                            <th scope="col">AVG</th>
-                            <th scope="col">MAX</th>
-                          </tr>
-                        </thead>
-                        <tbody id="autoTable">
-                          <tr>
-                            <th scope="row">Total Points</th>
-                          </tr>
-                          <tr>
-                            <th scope="row">Total Coral Scored</th>
-                          </tr>
-                          <tr>
-                            <th scope="row">Total Algae Scored</th>
-                          </tr>
-                          <tr>
-                            <th scope="row">Total Coral Points</th>
-                          </tr>
-                          <tr>
-                            <th scope="row">Total Algae Points</th>
-                          </tr>
-                        </tbody>
-                        <tfoot id="autoTotalTable">
-                          <tr>
-                            <th scope="col">Total Notes</th>
-                          </tr>
-                        </tfoot>
-                      </table>
-                    </div>
-                  </div>
-                </div>
+                <h5 class="text-center"><a href="#collapseAuton" data-bs-toggle="collapse" aria-expanded="false">Auton</a></h5>
+              </div>
+              <div id="collapseAuton" class="card-body collapse">
+                <table id="autonTable"
+                  class="table table-striped table-bordered table-hover table-sm table-bordered border-dark text-center ">
+                  <thead>
+                    <tr>
+                      <th scope="col" style="text-align:left"></th>
+                      <th scope="col">AVG</th>
+                      <th scope="col">MAX</th>
+                    </tr>
+                  </thead>
+                  <tbody id="autoTableBody">
+                    <tr>
+                      <th scope="row" style="text-align:left">Auton Points</th>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <th scope="row" style="text-align:left">Coral Scored</th>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <th scope="row" style="text-align:left">Algae Scored</th>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <th scope="row" style="text-align:left">Coral Points</th>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <th scope="row" style="text-align:left">Algae Points</th>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
 
             <!-- Teleop Points section -->
-            <div class="card mb-3">
+            <div class="card mb-3" style="background-color:#D6F3FB">
               <div class="card-header">
-                <div class="overflow-auto">
-                  <h5 class="text-center"> <a href="#collapseTeleop" data-bs-toggle="collapse" aria-expanded="false"> Teleop </a>
-                  </h5>
-                  <div id="collapseTeleop" class="collapse">
-                    <div class="card card-body">
-                      <table class="table table-striped">
-                        <thead>
-                          <tr>
-                            <td>&nbsp;</td>
-                            <th scope="col">AVG</th>
-                            <th scope="col">MAX</th>
-                          </tr>
-                        </thead>
-                        <tbody id="teleopTable">
-                          <tr>
-                            <th scope="row">Total Points</th>
-                          </tr>
-                          <tr>
-                            <th scope="row">Total Coral Scored</th>
-                          </tr>
-                          <tr>
-                            <th scope="row">Total Algae Scored</th>
-                          </tr>
-                          <tr>
-                            <th scope="row">Total Coral Points</th>
-                          </tr>
-                          <tr>
-                            <th scope="row">Total Algae Points</th>
-                          </tr>
-                          <tr>
-                            <th scope="row">Coral Acc%</th>
-                          </tr>
-                          <tr>
-                            <th scope="row">Algae Acc%</th>
-                          </tr>
-                        </tbody>
-                        <tfoot id="teleopTotalTable">
-                        </tfoot>
-                      </table>
-                    </div>
-                  </div>
-                </div>
+                <h5 class="text-center"> <a href="#collapseTeleop" data-bs-toggle="collapse" aria-expanded="false"> Teleop </a>
+                </h5>
+              </div>
+              <div id="collapseTeleop" class="card-body collapse">
+                <table id="teleopTable"
+                  class="table table-striped table-bordered table-hover table-sm table-bordered border-dark text-center ">
+                  <thead>
+                    <tr>
+                      <th scope="col" style="text-align:left"></th>
+                      <th scope="col">AVG</th>
+                      <th scope="col">MAX</th>
+                    </tr>
+                  </thead>
+                  <tbody id="teleopTableBody">
+                    <tr>
+                      <th scope="row" style="text-align:left">Teleop Points</th>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <th scope="row" style="text-align:left">Coral Scored</th>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <th scope="row" style="text-align:left">Algae Scored</th>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <th scope="row" style="text-align:left">Coral Points</th>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <th scope="row" style="text-align:left">Algae Points</th>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <th scope="row" style="text-align:left">Coral Acc%</th>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <th scope="row" style="text-align:left">Algae Acc%</th>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
 
             <!-- Endgame Points section -->
-            <div class="card mb-3">
+            <div class="card mb-3" style="background-color:#FBE6D3">
               <div class="card-header">
-                <div class="overflow-auto">
-                  <h5 class="text-center"> <a href="#collapseEndgame" data-bs-toggle="collapse" aria-expanded="false"> Endgame
-                    </a>
-                  </h5>
-                  <div id="collapseEndgame" class="collapse">
-                    <div class="card card-body">
-                      <table class="table">
-                        <thead>
-                          <tr>
-                            <td>&nbsp;</td>
-                            <th scope="col">AVG</th>
-                            <th scope="col">MAX</th>
-                          </tr>
-                        </thead>
-                        <tbody id="endgameTotalPtsTable">
-                          <tr>
-                            <th scope="row">Total Points</th>
-                          </tr>
-                        </tbody>
-                        <thead>
-                          <tr>
-                            <td>&nbsp;</td>
-                            <th scope="col">N</th>
-                            <th scope="col">P</th>
-                            <th scope="col">F</th>
-                            <th scope="col">S</th>
-                            <th scope="col">D</th>
-                          </tr>
-                        </thead>
-                        <tbody id="endgameClimbTable">
-                          <tr>
-                            <th scope="row">Cage Climb %</th>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
+                <h5 class="text-center"> <a href="#collapseEndgame" data-bs-toggle="collapse" aria-expanded="false"> Endgame
+                  </a>
+                </h5>
+              </div>
+              <div id="collapseEndgame" class="card-body collapse">
+                <table id="endgameTotalPtsTable"
+                  class="table table-striped table-bordered table-hover table-sm table-bordered border-dark text-center ">
+                  <thead>
+                    <tr>
+                      <th scope="col" style="text-align:left"></th>
+                      <th scope="col">AVG</th>
+                      <th scope="col">MAX</th>
+                    </tr>
+                  </thead>
+                  <tbody id="endgameTotalPtsTableBody">
+                    <tr>
+                      <th scope="row" style="text-align:left">Endgame Points</th>
+                      <td> </td>
+                      <td> </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <table id="endgameClimbTable"
+                  class="table table-striped table-bordered table-hover table-sm table-bordered border-dark text-center ">
+                  <thead>
+                    <tr>
+                      <th scope="col" style="text-align:left"></th>
+                      <th scope="col">N</th>
+                      <th scope="col">P</th>
+                      <th scope="col">F</th>
+                      <th scope="col">S</th>
+                      <th scope="col">D</th>
+                    </tr>
+                  </thead>
+                  <tbody id="endgameClimbTableBody">
+                    <tr>
+                      <th scope="row" style="text-align:left">Cage Climb %</th>
+                      <td> </td>
+                      <td> </td>
+                      <td> </td>
+                      <td> </td>
+                      <td> </td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
@@ -267,268 +291,263 @@ require 'inc/header.php';
 
         <!-- Strategic Data collapsible table -->
         <div class="card mb-3">
-          <div class="card-body">
-            <div class="overflow-auto">
-              <h5 class="text-center">
-                <a href="#collapseStrategicData" data-bs-toggle="collapse" aria-expanded="false"> Strategic Data </a>
-              </h5>
-              <div id="collapseStrategicData" class="collapse">
-                <div id="freeze-table-2" class="freeze-table overflow-auto">
+          <div class="card-header">
+            <h5 class="text-center">
+              <a href="#collapseStrategicData" data-bs-toggle="collapse" aria-expanded="false">Strategic Scouting</a>
+            </h5>
+          </div>
+          <div id="collapseStrategicData" class="card-body collapse">
+            <div id="freeze-table-2" class="freeze-table overflow-auto">
+              <!-- <style type="text/css" media="screen">
+                  table tr {
+                    border: 1px solid black;
+                  }
+
+                  table td,
+                  table th {
+                    border-right: 1px solid black;
+                  }
+                </style> -->
+              <table id="sortableStrategicData" class="table table-striped table-sm bordered border-dark sortable">
+                <colgroup>
+                  <col span="2" style="background-color:transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:#transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:#transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:#transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:#transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:#transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:#transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:#transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:#transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:#transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                </colgroup>
+                <thead>
                   <style type="text/css" media="screen">
-                    table tr {
+                    #sortableStrategicData tr,
+                    #sortableStrategicData td,
+                    #sortableStrategicData th {
                       border: 1px solid black;
                     }
-
-                    table td,
-                    table th {
-                      border-right: 1px solid black;
-                    }
                   </style>
-                  <table id="sortableStrategicData" class="table table-striped table-hover sortable">
-                    <colgroup>
-                      <col span="2" style="background-color:transparent">
-                      <col span="1" style="background-color:#cfe2ff">
-                      <col span="1" style="background-color:transparent">
-                      <col span="1" style="background-color:#cfe2ff">
-                      <col span="1" style="background-color:transparent">
-                      <col span="1" style="background-color:#cfe2ff">
-                      <col span="1" style="background-color:#transparent">
-                      <col span="1" style="background-color:#cfe2ff">
-                      <col span="1" style="background-color:transparent">
-                      <col span="1" style="background-color:#cfe2ff">
-                      <col span="1" style="background-color:#transparent">
-                      <col span="1" style="background-color:#cfe2ff">
-                      <col span="1" style="background-color:#transparent">
-                      <col span="1" style="background-color:#cfe2ff">
-                      <col span="1" style="background-color:#transparent">
-                      <col span="1" style="background-color:#cfe2ff">
-                      <col span="1" style="background-color:#transparent">
-                      <col span="1" style="background-color:#cfe2ff">
-                      <col span="1" style="background-color:#transparent">
-                      <col span="1" style="background-color:#cfe2ff">
-                      <col span="1" style="background-color:#transparent">
-                      <col span="1" style="background-color:#cfe2ff">
-                      <col span="1" style="background-color:#transparent">
-                      <col span="1" style="background-color:#cfe2ff">
-                      <col span="1" style="background-color:#transparent">
-                      <col span="1" style="background-color:#cfe2ff">
-                    </colgroup>
-                    <thead>
-                      <style type="text/css" media="screen">
-                        #sortableStrategicData tr,
-                        #sortableStrategicData td,
-                        #sortableStrategicData th {
-                          border: 1px solid black;
-                        }
-                      </style>
-                      <tr>
-                        <th colspan="1"> </th>
-                        <th colspan="24" class="text-center">Strategic Scouting Data</th>
-                      </tr>
-                      <tr>
-                        <th colspan="1"> </th>
-                        <th colspan="1"> </th>
-                        <th colspan="24" class="text-center">Table</th>
-                      </tr>
-                      <tr>
-                        <th colspan="1"> </th>
-                        <th colspan="1"> </th>
-                        <th colspan="2" class="text-center" style="background-color:#3686FF">Against Defense</th>
-                        <th colspan="3" class="text-center">Defense Tactics</th>
-                        <th colspan="8" class="text-center" style="background-color:#3686FF">Fouls</th>
-                        <th colspan="4" class="text-center">Auton</th>
-                        <th colspan="4" class="text-center" style="background-color:#3686FF">Teleop</th>
-                        <th colspan="2" class="text-center">Notes</th>
-                        <th colspan="1"> </th>
-                      </tr>
-                      <tr>
-                        <th scope="col">Match</th>
-                        <th scope="col">Drive Skill</th>
-                        <th scope="col">Block</th>
-                        <th scope="col">Note</th>
-                        <th scope="col">Block Path</th>
-                        <th scope="col">Block Stn</th>
-                        <th scope="col">Note</th>
-                        <th scope="col">Pin</th>
-                        <th scope="col">Auton Barge Contact</th>
-                        <th scope="col">Auton Cage Contact</th>
-                        <th scope="col">Anchor Contact</th>
-                        <th scope="col">Barge Contact</th>
-                        <th scope="col">Reef Contact</th>
-                        <th scope="col">Cage Contact</th>
-                        <th scope="col">Contact Climbing Robot</th>
-                        <th scope="col">Get Floor Coral</th>
-                        <th scope="col">Get Stn Coral</th>
-                        <th scope="col">Get Floor Algae</th>
-                        <th scope="col">Get Reef Algae</th>
-                        <th scope="col">Get Floor Coral</th>
-                        <th scope="col">Get Floor Algae</th>
-                        <th scope="col">Knock Algae</th>
-                        <th scope="col">Aquire Reef Algae</th>
-                        <th scope="col">Problem Note</th>
-                        <th scope="col">General Note</th>
-                        <th scope="col">Scout Name</th>
-                      </tr>
-                    </thead>
-                    <tbody id="strategicDataTable">
-                    </tbody>
-                  </table>
-                </div>
-              </div>
+                  <tr>
+                    <th colspan="1"> </th>
+                    <th colspan="24" class="text-center">Strategic Scouting</th>
+                  </tr>
+                  <tr>
+                    <th colspan="1"> </th>
+                    <th colspan="1"> </th>
+                    <th colspan="24" class="text-center">Table</th>
+                  </tr>
+                  <tr>
+                    <th colspan="1"> </th>
+                    <th colspan="1"> </th>
+                    <th colspan="2" class="text-center" style="background-color:#3686FF">Against Defense</th>
+                    <th colspan="3" class="text-center">Defense Tactics</th>
+                    <th colspan="8" class="text-center" style="background-color:#3686FF">Fouls</th>
+                    <th colspan="4" class="text-center">Auton/th>
+                    <th colspan="4" class="text-center" style="background-color:#3686FF">Teleop</th>
+                    <th colspan="2" class="text-center">Notes</th>
+                    <th colspan="1"> </th>
+                  </tr>
+                  <tr>
+                    <th scope="col">Match</th>
+                    <th scope="col">Drive Skill</th>
+                    <th scope="col">Block</th>
+                    <th scope="col">Note</th>
+                    <th scope="col">Block Path</th>
+                    <th scope="col">Block Stn</th>
+                    <th scope="col">Note</th>
+                    <th scope="col">Pin</th>
+                    <th scope="col">Auton Barge Contact</th>
+                    <th scope="col">Auton Cage Contact</th>
+                    <th scope="col">Anchor Contact</th>
+                    <th scope="col">Barge Contact</th>
+                    <th scope="col">Reef Contact</th>
+                    <th scope="col">Cage Contact</th>
+                    <th scope="col">Contact Climbing Robot</th>
+                    <th scope="col">Get Floor Coral</th>
+                    <th scope="col">Get Stn Coral</th>
+                    <th scope="col">Get Floor Algae</th>
+                    <th scope="col">Get Reef Algae</th>
+                    <th scope="col">Get Floor Coral</th>
+                    <th scope="col">Get Floor Algae</th>
+                    <th scope="col">Knock Algae</th>
+                    <th scope="col">Aquire Reef Algae</th>
+                    <th scope="col">Problem Note</th>
+                    <th scope="col">General Note</th>
+                    <th scope="col">Scout Name</th>
+                  </tr>
+                </thead>
+                <tbody id="strategicDataTable">
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
 
+        <!-- Pit scouting collapsible table -->
         <div class="card mb-3">
-          <div class="card-body">
-            <div class="overflow-auto">
-              <h5 class="text-center">
-                <a href="#collapsePitData" data-bs-toggle="collapse" aria-expanded="false"> Pit Data </a>
-              </h5>
-            </div>
-            <!-- Pit Scouting 1st row -->
-            <div id="collapsePitData" class="collapse">
-              <div class="overflow-auto">
-                <table class="table table-striped">
-                  <thead>
-                    <colgroup>
-                      <col span="1" style="background-color:transparent">
-                      <col span="1" style="background-color:#cfe2ff">
-                      <col span="1" style="background-color:transparent">
-                      <col span="1" style="background-color:#cfe2ff">
-                      <col span="1" style="background-color:transparent">
-                    </colgroup>
-                    <tr>
-                      <th scope="col" style="width:25%">Batt</th>
-                      <th scope="col" style="width:25%">Pit</th>
-                      <th scope="col" style="width:25%">Spare Parts</th>
-                      <th scope="col" style="width:25%">Vision</th>
-                    </tr>
-                  </thead>
-                  <tbody id="pitRow1">
-                  </tbody>
-                </table>
-              </div>
+          <div class="card-header">
+            <h5 class="text-center">
+              <a href="#collapsePitData" data-bs-toggle="collapse" aria-expanded="false">Pit Scouting</a>
+            </h5>
+          </div>
+          <!-- Pit Scouting 1st row -->
+          <div id="collapsePitData" class="card-body collapse">
+            <table class="table table-striped table-sm table-bordered border-dark">
+              <thead>
+                <colgroup>
+                  <col span="1" style="background-color:transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:transparent">
+                </colgroup>
+                <tr>
+                  <th scope="col" style="width:25%">Swerve</th>
+                  <th scope="col" style="width:25%">Motors</th>
+                  <th scope="col" style="width:25%">Spares</th>
+                  <th scope="col" style="width:25%">Language</th>
+                </tr>
+              </thead>
+              <tbody id="pitRow1">
+              </tbody>
+            </table>
 
-              <!-- Pit Scouting 2nd row -->
-              <div class="overflow-auto">
-                <table class="table table-striped">
-                  <thead>
-                    <colgroup>
-                      <col span="1" style="background-color:transparent">
-                      <col span="1" style="background-color:#cfe2ff">
-                      <col span="1" style="background-color:transparent">
-                      <col span="1" style="background-color:#cfe2ff">
-                      <col span="1" style="background-color:transparent">
-                      <col span="1" style="background-color:#cfe2ff">
-                    </colgroup>
-                    <tr>
-                      <th scope="col" style="width:25%">Drive Motors</th>
-                      <th scope="col" style="width:25%">Prep</th>
-                      <th scope="col" style="width:25%">Swerve</th>
-                      <th scope="col" style="width:25%">Lang</th>
-                    </tr>
-                  </thead>
-                  <tbody id="pitRow2">
-                  </tbody>
-                </table>
-              </div>
+            <!-- Pit Scouting 2nd row -->
+            <table class="table table-striped table-sm table-bordered border-dark">
+              <thead>
+                <colgroup>
+                  <col span="1" style="background-color:transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                </colgroup>
+                <tr>
+                  <th scope="col" style="width:25%">Vision</th>
+                  <th scope="col" style="width:25%">Org</th>
+                  <th scope="col" style="width:25%">Prep</th>
+                  <th scope="col" style="width:25%">Batteries</th>
+                </tr>
+              </thead>
+              <tbody id="pitRow2">
+              </tbody>
+            </table>
 
-              <!-- Comments section -->
-              <div class="overflow-auto">
-                <table class="table table-striped">
-                  <thead>
-                    <tr>
-                      <th scope="col">Comments</th>
-                      <th scope="col">Scout</th>
-                    </tr>
-                  </thead>
-                  <tbody id="comments">
-                  </tbody>
-                </table>
-              </div>
-            </div>
           </div>
         </div>
 
-        <!-- All Matches collapsible table -->
+        <!-- Match scouting data collapsible table -->
         <div class="card mb-3">
-          <div class="card-body">
-            <div class="overflow-auto">
-              <h5 class="text-center">
-                <a href="#collapseAllMatches" data-bs-toggle="collapse" aria-expanded="false"> All Matches </a>
-              </h5>
-              <div id="collapseAllMatches" class="collapse">
-                <div id="freeze-table" class="freeze-table overflow-auto">
+          <div class="card-header">
+            <h5 class="text-center">
+              <a href="#collapseAllMatches" data-bs-toggle="collapse" aria-expanded="false">Match Scouting</a>
+            </h5>
+          </div>
+          <div id="collapseAllMatches" class="card-body collapse">
+            <div id="freeze-table" class="freeze-table overflow-auto">
+              <style type="text/css" media="screen">
+                table tr {
+                  border: 1px solid black;
+                }
+
+                table td,
+                table th {
+                  border-right: 1px solid black;
+                }
+              </style>
+              <table id="sortableAllMatches" class="table table-striped table-sm table-bordered border-dark sortable">
+                <colgroup>
+                  <col span="2" style="background-color:transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:#transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:#transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:#transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:#transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:#transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:#transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                </colgroup>
+                <thead>
                   <style type="text/css" media="screen">
-                    table tr {
+                    #sortableAllMatches tr,
+                    #sortableAllMatches td,
+                    #sortableAllMatches th {
                       border: 1px solid black;
                     }
-
-                    table td,
-                    table th {
-                      border-right: 1px solid black;
-                    }
                   </style>
-                  <table id="sortableAllMatches" class="table table-striped table-hover sortable">
-                    <colgroup>
-                      <col span="2" style="background-color:transparent">
-                      <col span="1" style="background-color:#cfe2ff">
-                      <col span="1" style="background-color:transparent">
-                      <col span="1" style="background-color:#cfe2ff">
-                      <col span="1" style="background-color:transparent">
-                      <col span="1" style="background-color:#cfe2ff">
-                      <col span="1" style="background-color:#transparent">
-                      <col span="1" style="background-color:#cfe2ff">
-                      <col span="1" style="background-color:transparent">
-                      <col span="1" style="background-color:#cfe2ff">
-                      <col span="1" style="background-color:#transparent">
-                      <col span="1" style="background-color:#cfe2ff">
-                      <col span="1" style="background-color:#transparent">
-                      <col span="1" style="background-color:#cfe2ff">
-                      <col span="1" style="background-color:#transparent">
-                      <col span="1" style="background-color:#cfe2ff">
-                      <col span="1" style="background-color:#transparent">
-                      <col span="1" style="background-color:#cfe2ff">
-                      <col span="1" style="background-color:#transparent">
-                      <col span="1" style="background-color:#cfe2ff">
-                    </colgroup>
-                    <thead>
-                      <style type="text/css" media="screen">
-                        #sortableAllMatches tr,
-                        #sortableAllMatches td,
-                        #sortableAllMatches th {
-                          border: 1px solid black;
-                        }
-                      </style>
-                      <tr>
-                        <th scope="col">Match</th>
-                        <th scope="col">Auton Leave</th>
-                        <th scope="col">Auton Coral L1</th>
-                        <th scope="col">Auton Coral L2</th>
-                        <th scope="col">Auton Coral L3</th>
-                        <th scope="col">Auton Coral L4</th>
-                        <th scope="col">Auton Algae Net</th>
-                        <th scope="col">Auton Algae Proc</th>
-                        <th scope="col">Acquired Coral</th>
-                        <th scope="col">Acquired Algae</th>
-                        <th scope="col">Teleop Coral L1</th>
-                        <th scope="col">Teleop Coral L2</th>
-                        <th scope="col">Teleop Coral L3</th>
-                        <th scope="col">Teleop Coral L4</th>
-                        <th scope="col">Teleop Algae Net</th>
-                        <th scope="col">Teleop Algae Proc</th>
-                        <th scope="col">Cage Climb</th>
-                        <th scope="col">Died</th>
-                        <th scope="col">Scout Name</th>
-                      </tr>
-                    </thead>
-                    <tbody id="allMatchesTable">
-                    </tbody>
-                  </table>
-                </div>
-              </div>
+                  <tr>
+                    <th scope="col">Match</th>
+                    <th scope="col">Auton Leave</th>
+                    <th scope="col">Auton Coral L1</th>
+                    <th scope="col">Auton Coral L2</th>
+                    <th scope="col">Auton Coral L3</th>
+                    <th scope="col">Auton Coral L4</th>
+                    <th scope="col">Auton Algae Net</th>
+                    <th scope="col">Auton Algae Proc</th>
+                    <th scope="col">Acquired Coral</th>
+                    <th scope="col">Acquired Algae</th>
+                    <th scope="col">Teleop Coral L1</th>
+                    <th scope="col">Teleop Coral L2</th>
+                    <th scope="col">Teleop Coral L3</th>
+                    <th scope="col">Teleop Coral L4</th>
+                    <th scope="col">Teleop Algae Net</th>
+                    <th scope="col">Teleop Algae Proc</th>
+                    <th scope="col">Cage Climb</th>
+                    <th scope="col">Died</th>
+                    <th scope="col">Scout Name</th>
+                  </tr>
+                </thead>
+                <tbody id="allMatchesTable">
+                </tbody>
+              </table>
             </div>
+
+            <!-- Comments section -->
+            <table class="table table-striped table-sm table-bordered border-dark">
+              <thead>
+                <tr>
+                  <th scope="col">Comments</th>
+                  <th scope="col">Scout</th>
+                </tr>
+              </thead>
+              <tbody id="comments">
+                <tr>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+
           </div>
         </div>
       </div>
@@ -553,11 +572,16 @@ require 'inc/header.php';
   var endgameChartDefined = false;
   var endgameChart;
 
-  function writeTableRow(tbodyID, dict, keys) {
+  function writeTableRow(tbodyID, dict, keys, length) {
     var row = "<tr>";
-    for (let i = 0; i < keys.length; i++) {
-      row += "<td>" + dict[keys[i]] + "</td>";
+    row += "<th  style='text-align:left'>" + dict[keys[0]] + "</th>";
+    for (let i = 1; i < length; i++) {
+      if (i < keys.length)
+        row += "<td>" + dict[keys[i]] + "</td>";
+      else
+        row += "<td></td>"
     }
+    row += "</th>";
     row += "</tr>";
     $("#" + tbodyID).append(row);
   }
@@ -567,7 +591,7 @@ require 'inc/header.php';
       if (commentObj[i].comment === "-") {
         continue;
       }
-      writeTableRow("comments", commentObj[i], ["comment", "scoutname"]);
+      writeTableRow("comments", commentObj[i], ["comment", "scoutname"], 2);
     }
   }
 
@@ -576,52 +600,58 @@ require 'inc/header.php';
 
     //Auton Table  
     avgs["autonpointsstr"] = "<b>Total Points</b>";
-    avgs["autontotalcoralstr"] = "<b>Total Coral Scored</b>";
-    avgs["autontotalalgaestr"] = "<b>Total Algae Scored</b>";
-    avgs["autoncoralpointsstr"] = "<b>Total Coral Points</b>";
-    avgs["autonalgaepointsstr"] = "<b>Total Algae Points</b>";
+    avgs["autontotalcoralstr"] = "<b>Coral Scored</b>";
+    avgs["autontotalalgaestr"] = "<b>Algae Scored</b>";
+    avgs["autoncoralpointsstr"] = "<b>Coral Points</b>";
+    avgs["autonalgaepointsstr"] = "<b>Algae Points</b>";
 
-    writeTableRow("autoTable", avgs, ["autonpointsstr", "avgTotalAutoPoints", "maxTotalAutoPoints"]);
-    writeTableRow("autoTable", avgs, ["autontotalcoralstr", "avgAutonCoral", "maxAutonCoral"]);
-    writeTableRow("autoTable", avgs, ["autontotalalgaestr", "avgAutonAlgae", "maxAutonAlgae"]);
-    writeTableRow("autoTable", avgs, ["autoncoralpointsstr", "avgTotalAutoCoralPoints", "maxTotalAutoCoralPoints"]);
-    writeTableRow("autoTable", avgs, ["autonalgaepointsstr", "avgTotalAutoAlgaePoints", "maxTotalAutoAlgaePoints"]);
+    writeTableRow("autoTableBody", avgs, ["autonpointsstr", "avgTotalAutoPoints", "maxTotalAutoPoints"], 3);
+    writeTableRow("autoTableBody", avgs, ["autontotalcoralstr", "avgAutonCoral", "maxAutonCoral"], 3);
+    writeTableRow("autoTableBody", avgs, ["autontotalalgaestr", "avgAutonAlgae", "maxAutonAlgae"], 3);
+    writeTableRow("autoTableBody", avgs, ["autoncoralpointsstr", "avgTotalAutoCoralPoints", "maxTotalAutoCoralPoints"], 3);
+    writeTableRow("autoTableBody", avgs, ["autonalgaepointsstr", "avgTotalAutoAlgaePoints", "maxTotalAutoAlgaePoints"], 3);
 
     // Teleop Table
 
-    avgs["teleoppointsstr"] = "<b>Total Points</b>";
-    avgs["teleoptotalcoralstr"] = "<b>Total Coral Scored</b>";
-    avgs["teleoptotalalgaestr"] = "<b>Total Algae Scored</b>";
-    avgs["teleopcoralpointsstr"] = "<b>Total Coral Points</b>";
-    avgs["teleopalgaepointsstr"] = "<b>Total Algae Points</b>";
+    avgs["teleoppointsstr"] = "<b>Points</b>";
+    avgs["teleoptotalcoralstr"] = "<b>Coral Scored</b>";
+    avgs["teleoptotalalgaestr"] = "<b>Algae Scored</b>";
+    avgs["teleopcoralpointsstr"] = "<b>Coral Points</b>";
+    avgs["teleopalgaepointsstr"] = "<b>Algae Points</b>";
     avgs["teleopcoralaccuracystr"] = "<b>Coral Acc%</b>";
     avgs["teleopalgaeaccuracysstr"] = "<b>Algae Acc%</b>";
 
-    writeTableRow("teleopTable", avgs, ["teleoppointsstr", "avgTotalTeleopPoints", "maxTotalTeleopPoints"]);
-    writeTableRow("teleopTable", avgs, ["teleoptotalcoralstr", "avgTeleopCoralScored", "maxTeleopCoralScored"]);
-    writeTableRow("teleopTable", avgs, ["teleoptotalalgaestr", "avgTeleopAlgaeScored", "maxTeleopAlgaeScored"]);
-    writeTableRow("teleopTable", avgs, ["teleopcoralpointsstr", "avgTotalTeleopCoralPoints", "maxTotalTeleopCoralPoints"]);
-    writeTableRow("teleopTable", avgs, ["teleopalgaepointsstr", "avgTotalTeleopAlgaePoints", "maxTotalTeleopAlgaePoints"]);
-    writeTableRow("teleopTable", avgs, ["teleopcoralaccuracystr", "teleopCoralScoringPercent"]);
-    writeTableRow("teleopTable", avgs, ["teleopalgaeaccuracysstr", "teleopAlgaeScoringPercent"]);
+    writeTableRow("teleopTableBody", avgs, ["teleoppointsstr", "avgTotalTeleopPoints", "maxTotalTeleopPoints"], 3);
+    writeTableRow("teleopTableBody", avgs, ["teleoptotalcoralstr", "avgTeleopCoralScored", "maxTeleopCoralScored"], 3);
+    writeTableRow("teleopTableBody", avgs, ["teleoptotalalgaestr", "avgTeleopAlgaeScored", "maxTeleopAlgaeScored"], 3);
+    writeTableRow("teleopTableBody", avgs, ["teleopcoralpointsstr", "avgTotalTeleopCoralPoints", "maxTotalTeleopCoralPoints"], 3);
+    writeTableRow("teleopTableBody", avgs, ["teleopalgaepointsstr", "avgTotalTeleopAlgaePoints", "maxTotalTeleopAlgaePoints"], 3);
+    writeTableRow("teleopTableBody", avgs, ["teleopcoralaccuracystr", "teleopCoralScoringPercent"], 3);
+    writeTableRow("teleopTableBody", avgs, ["teleopalgaeaccuracysstr", "teleopAlgaeScoringPercent"], 3);
 
     /////// Endgame Table
-    avgs["totalEndGamePointsstr"] = "<b>Total Points</b>";
+    avgs["totalEndGamePointsstr"] = "<b>Endgame Points</b>";
     avgs["endgameClimbPercent"]["endgameclimbstr"] = "<b>Cage Climb %</b>";
 
-    writeTableRow("endgameTotalPtsTable", avgs, ["totalEndGamePointsstr", "avgEndgamePoints", "maxEndgamePoints"]);
-    writeTableRow("endgameClimbTable", avgs["endgameClimbPercent"], ["endgameclimbstr", 0, 1, 2, 3, 4]);
+    writeTableRow("endgameTotalPtsTableBody", avgs, ["totalEndGamePointsstr", "avgEndgamePoints", "maxEndgamePoints"], 3);
+    writeTableRow("endgameClimbTableBody", avgs["endgameClimbPercent"], ["endgameclimbstr", 0, 1, 2, 3, 4], 6);
 
     /////// Total Table
-    avgs["totalCoralstr"] = "<b>Total Coral Scored</b>";
-    avgs["totalAlgaestr"] = "<b>Total Algae Scored</b>";
-    avgs["totalCoralPointsstr"] = "<b>Total Coral Points</b>";
-    avgs["totalAlgaePointsstr"] = "<b>Total Algae Points</b>";
+    avgs["totalCoralstr"] = "<b>Coral Scored</b>";
+    avgs["totalAlgaestr"] = "<b>Algae Scored</b>";
+    avgs["totalCoralPointsstr"] = "<b>Coral Points</b>";
+    avgs["totalAlgaePointsstr"] = "<b>Algae Points</b>";
 
-    writeTableRow("totalTable", avgs, ["totalCoralstr", "avgTotalCoral", "maxTotalCoral"]);
-    writeTableRow("totalTable", avgs, ["totalAlgaestr", "avgTotalAlgae", "maxTotalAlgae"]);
-    writeTableRow("totalTable", avgs, ["totalCoralPointsstr", "avgTotalCoralPoints", "maxTotalCoralPoints"]);
-    writeTableRow("totalTable", avgs, ["totalAlgaePointsstr", "avgTotalAlgaePoints", "maxTotalAlgaePoints"]);
+    writeTableRow("totalTableBody", avgs, ["totalCoralstr", "avgTotalCoral", "maxTotalCoral"], 3);
+    writeTableRow("totalTableBody", avgs, ["totalAlgaestr", "avgTotalAlgae", "maxTotalAlgae"], 3);
+    writeTableRow("totalTableBody", avgs, ["totalCoralPointsstr", "avgTotalCoralPoints", "maxTotalCoralPoints"], 3);
+    writeTableRow("totalTableBody", avgs, ["totalAlgaePointsstr", "avgTotalAlgaePoints", "maxTotalAlgaePoints"], 3);
+
+    avgs["totalMatchPointsStr"] = "<b>Match Points</b>";
+    avgs["avgTotalMatchPoints"] = avgs["avgTotalCoralPoints"] + avgs["avgTotalAlgaePoints", 3];
+    avgs["maxTotalMatchPoints"] = avgs["maxTotalCoralPoints"] + avgs["maxTotalAlgaePoints", 3];
+
+    writeTableRow("totalTableBody", avgs, ["totalMatchPointsStr", "avgTotalMatchPoints", "maxTotalMatchPoints"], 3);
   }
 
   // Check if our URL directs to a specific team
@@ -1368,8 +1398,8 @@ require 'inc/header.php';
       pitData["projlanguage"];
     }
 
-    writeTableRow("pitRow1", pitData, ["numbatteries", "pitorg", "sparepartsstring", "computervisionstring"]);
-    writeTableRow("pitRow2", pitData, ["drivemotors", "preparedness", "swervedrivestring", "proglanguage"]);
+    writeTableRow("pitRow1", pitData, ["swervedrivestring", "drivemotors", "sparepartsstring", "proglanguage"], 4);
+    writeTableRow("pitRow2", pitData, ["computervisionstring", "pitorg", "preparedness", "numbatteries"], 4);
   }
 
   // This is the main function that runs when we want to load a new team 
@@ -1378,18 +1408,16 @@ require 'inc/header.php';
     // Clear existing data
     $("#robotPics").html("");
     $("#teamTitle").html("");
+    $("#totalTableBody").html("");
+    $("#autoTableBody").html("");
+    $("#teleopTableBody").html("");
+    $("#endgameTotalPtsTableBody").html("");
+    $("#endgameClimbTableBody").html("");
     $("#pitRow1").html("");
     $("#pitRow2").html("");
     $("#comments").html("");
-    $("#allMatchesTable").html("");
     $("#strategicDataTable").html("");
-    $("#autoTable").html("");
-    $("#autoTotalTable").html("");
-    $("#teleopTable").html("");
-    $("#teleopTotalTable").html("");
-    $("#endgameTotalPtsTable").html("");
-    $("#endgameClimbTable").html("");
-    $("#totalTable").html("");
+    $("#allMatchesTable").html("");
 
     // Get team name from TBA
     $.get("api/tbaAPI.php", {
