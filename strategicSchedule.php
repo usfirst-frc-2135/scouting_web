@@ -11,7 +11,7 @@ require 'inc/header.php';
       <h2 class="col-md-4"><?php echo $title; ?></h2>
 
       <div class="col-2">
-        <button id="reloadButton" class="btn btn-primary" type="button">Reload Schedule</button>
+        <button id="reloadButton" class="btn btn-primary" type="button">Reload</button>
       </div>
     </div>
 

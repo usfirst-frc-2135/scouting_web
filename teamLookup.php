@@ -57,7 +57,7 @@ require 'inc/header.php';
             <div class="card mb-3" style="background-color:#D6F3FB">
               <div class="card-header">
                 <h5 class="text-center">
-                  <a href="#collapseTeleopCoralGraph" data-bs-toggle="collapse" aria-expanded="false"> Teleop Scoring</a>
+                  <a href="#collapseTeleopCoralGraph" data-bs-toggle="collapse" aria-expanded="false">Teleop Scoring</a>
                 </h5>
               </div>
               <div id="collapseTeleopCoralGraph" class="card-body collapse">
@@ -69,7 +69,7 @@ require 'inc/header.php';
             <div class="card mb-3" style="background-color:#FBE6D3">
               <div class="card-header">
                 <h5 class="text-center">
-                  <a href="#collapseEndgameGraph" data-bs-toggle="collapse" aria-expanded="false"> Endgame Scoring</a>
+                  <a href="#collapseEndgameGraph" data-bs-toggle="collapse" aria-expanded="false">Endgame Scoring</a>
                 </h5>
               </div>
               <div id="collapseEndgameGraph" class="card-body collapse">
@@ -182,7 +182,7 @@ require 'inc/header.php';
             <!-- Teleop Points section -->
             <div class="card mb-3" style="background-color:#D6F3FB">
               <div class="card-header">
-                <h5 class="text-center"> <a href="#collapseTeleop" data-bs-toggle="collapse" aria-expanded="false"> Teleop </a>
+                <h5 class="text-center"> <a href="#collapseTeleop" data-bs-toggle="collapse" aria-expanded="false">Teleop </a>
                 </h5>
               </div>
               <div id="collapseTeleop" class="card-body collapse">
@@ -239,7 +239,7 @@ require 'inc/header.php';
             <!-- Endgame Points section -->
             <div class="card mb-3" style="background-color:#FBE6D3">
               <div class="card-header">
-                <h5 class="text-center"> <a href="#collapseEndgame" data-bs-toggle="collapse" aria-expanded="false"> Endgame
+                <h5 class="text-center"> <a href="#collapseEndgame" data-bs-toggle="collapse" aria-expanded="false">Endgame
                   </a>
                 </h5>
               </div>
@@ -443,7 +443,7 @@ require 'inc/header.php';
                 </colgroup>
                 <tr>
                   <th scope="col" style="width:25%">Vision</th>
-                  <th scope="col" style="width:25%">Org</th>
+                  <th scope="col" style="width:25%">Pit</th>
                   <th scope="col" style="width:25%">Prep</th>
                   <th scope="col" style="width:25%">Batteries</th>
                 </tr>

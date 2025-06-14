@@ -11,7 +11,7 @@ require 'inc/header.php';
       <h2 class="col-4"><?php echo $title; ?></h2>
 
       <div class="col-2">
-        <button id="download_csv_file" class="btn btn-primary" type="button">Download CSV File</button>
+        <button id="download_csv_file" class="btn btn-primary" type="button">Download CSV</button>
       </div>
     </div>
     <!--  COMMENTED OUT FOR NOW
