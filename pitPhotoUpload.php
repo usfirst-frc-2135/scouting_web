@@ -39,8 +39,7 @@ require 'inc/header.php';
         </div>
 
         <button id="loadingButton" class="btn btn-primary">
-          <span class="spinner-border spinner-border-sm"></span>
-          Loading..
+          <span class="spinner-border spinner-border-sm"></span>Loading ...
         </button>
         <div id="uploadMessage" class="alert alert-dismissible fade show" style="display: none" role="alert">
           <div id="uploadMessageText"></div>

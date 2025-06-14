@@ -20,18 +20,18 @@ require 'inc/header.php';
             Database Status
           </div>
           <div class="card-body">
-            <h4>MySQL Server Status: <span id="serverStatus" class="badge bg-warning">Not Connected</span></h4>
-            <h4>Database Status: <span id="databaseStatus" class="badge bg-warning">Not Connected</span></h4>
-            <h4>Match Table Status: <span id="matchTableStatus" class="badge bg-warning">Not Connected</span></h4>
-            <h4>TBA Table Status: <span id="TBATableStatus" class="badge bg-warning">Not Connected</span></h4>
-            <h4>Pit Table Status: <span id="pitTableStatus" class="badge bg-warning">Not Connected</span></h4>
-            <h4>Strategic Table Status: <span id="strategicTableStatus" class="badge bg-warning">Not Connected</span></h4>
+            <h5>MySQL Server Status: <span id="serverStatus" class="badge bg-warning float-end">Not Connected</span></h5>
+            <h5>Database Status: <span id="databaseStatus" class="badge bg-warning float-end">Not Connected</span></h5>
+            <h5>Match Table Status: <span id="matchTableStatus" class="badge bg-warning float-end">Not Connected</span></h5>
+            <h5>TBA Table Status: <span id="TBATableStatus" class="badge bg-warning float-end">Not Connected</span></h5>
+            <h5>Pit Table Status: <span id="pitTableStatus" class="badge bg-warning float-end">Not Connected</span></h5>
+            <h5>Strategic Table Status: <span id="strategicTableStatus" class="badge bg-warning float-end">Not Connected</span></h5>
             <hr />
-            <h4>MySQL Server: <span id="serverName" class="badge bg-primary">????</span></h4>
-            <h4>Database: <span id="databaseName" class="badge bg-primary">????</span></h4>
-            <h4>Username: <span id="userName" class="badge bg-primary">????</span></h4>
-            <h4>TBA Key: <span id="tbaKey" class="badge bg-primary">????</span></h4>
-            <h4>Event Code: <span id="eventCode" class="badge bg-primary">????</span></h4>
+            <h5>MySQL Server: <span id="serverName" class="badge bg-primary float-end">????</span></h5>
+            <h5>Database: <span id="databaseName" class="badge bg-primary float-end">????</span></h5>
+            <h5>Username: <span id="userName" class="badge bg-primary float-end">????</span></h5>
+            <h5>TBA Key: <span id="tbaKey" class="badge bg-primary float-end">????</span></h5>
+            <h5>Event Code: <span id="eventCode" class="badge bg-primary float-end">????</span></h5>
           </div>
         </div>
 
@@ -105,9 +105,13 @@ require 'inc/header.php';
               <input id="enterEventCode" class="form-control" type="text" placeholder="2025CAFR" aria-describedby="tbaEventCode">
             </div>
 
-            <div class="mb-3">
+            <div class="row m-3 mx-auto">
               <button id="writeConfig" class="btn btn-primary">Write Config File</button>
+            </div>
+            <div class="row m-3 mx-auto">
               <button id="createDB" class="btn btn-primary">Create DB</button>
+            </div>
+            <div class="row m-3 mx-auto">
               <button id="createTable" class="btn btn-primary">Create Table</button>
             </div>
           </div>
