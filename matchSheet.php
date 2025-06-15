@@ -135,16 +135,16 @@ require 'inc/header.php';
 
     <!-- Red0 - Red Team 1 -->
     <div class="col-lg-4 col-sm-4 col-xs-4 gx-3">
-      <div id="R0Flush" class="accordion accordion-flush text-white bg-danger mb-3">
+      <div id="R0Flush" class="accordion accordion-flush text-light bg-danger mb-3">
         <div class="accordion-item bg-danger">
           <h6 id="R0flush-headingOne" class="accordion-header bg-danger">
             <button class="accordion-button collapsed bg-danger btn-sm" type="button" data-bs-toggle="collapse"
               data-bs-target="#flush-R0Collapse" aria-expanded="false" aria-controls="flush-R0Collapse">
-              <h6 id="R0TeamNumber" class="text-center text-white">Team #</h6>
+              <h6 id="R0TeamNumber" class="text-center text-light">Team #</h6>
             </button>
           </h6>
 
-          <div id="flush-R0Collapse" class="accordion-collapse collapse" data-bs-parent="#R0Flush">
+          <div id="flush-R0Collapse" class="accordion-collapse collapse show" data-bs-parent="#R0Flush">
             <div id="R0PicsCarousel" class="carousel slide" data-interval="false">
               <div id="R0RobotPics" class="carousel-inner"> </div>
               <button class="carousel-control-prev" type="button" data-bs-target="#R0PicsCarousel" data-bs-slide="prev">
@@ -156,42 +156,42 @@ require 'inc/header.php';
                 <span class="visually-hidden">Next</span>
               </button>
             </div>
+          </div>
 
-            <div class="overflow-auto">
-              <table class="table table-bordered table-danger">
-                <thead>
-                  <tr>
-                    <th colspan="6" class="text-center fs-6">Auton</th>
-                    <th colspan="8" class="text-center fw-bold fs-6">Teleop</th>
-                    <th colspan="5" class="text-center fw-bold fs-6">Endgame</th>
-                  </tr>
-                  <tr>
-                    <th scope="col">L1</th>
-                    <th scope="col">L2</th>
-                    <th scope="col">L3</th>
-                    <th scope="col">L4</th>
-                    <th scope="col">Net</th>
-                    <th scope="col">Proc</th>
+          <div class="overflow-auto">
+            <table class="table table-bordered table-danger table-sm">
+              <thead>
+                <tr>
+                  <th colspan="6" class="text-center fs-6">Auton</th>
+                  <th colspan="8" class="text-center fw-bold fs-6">Teleop</th>
+                  <th colspan="5" class="text-center fw-bold fs-6">Endgame</th>
+                </tr>
+                <tr>
+                  <th scope="col">L1</th>
+                  <th scope="col">L2</th>
+                  <th scope="col">L3</th>
+                  <th scope="col">L4</th>
+                  <th scope="col">Net</th>
+                  <th scope="col">Proc</th>
 
-                    <th scope="col">C%</th>
-                    <th scope="col">L1</th>
-                    <th scope="col">L2</th>
-                    <th scope="col">L3</th>
-                    <th scope="col">L4</th>
-                    <th scope="col">A%</th>
-                    <th scope="col">Net</th>
-                    <th scope="col">Proc</th>
+                  <th scope="col">C%</th>
+                  <th scope="col">L1</th>
+                  <th scope="col">L2</th>
+                  <th scope="col">L3</th>
+                  <th scope="col">L4</th>
+                  <th scope="col">A%</th>
+                  <th scope="col">Net</th>
+                  <th scope="col">Proc</th>
 
-                    <th scope="col">N</th>
-                    <th scope="col">P</th>
-                    <th scope="col">F</th>
-                    <th scope="col">S</th>
-                    <th scope="col">D</th>
-                  </tr>
-                </thead>
-                <tbody id="R0DataTable"> </tbody>
-              </table>
-            </div>
+                  <th scope="col">N</th>
+                  <th scope="col">P</th>
+                  <th scope="col">F</th>
+                  <th scope="col">S</th>
+                  <th scope="col">D</th>
+                </tr>
+              </thead>
+              <tbody id="R0DataTable"> </tbody>
+            </table>
           </div>
 
         </div>
@@ -200,16 +200,16 @@ require 'inc/header.php';
 
     <!-- Red1 - Red Team 2 -->
     <div class="col-lg-4 col-sm-4 col-xs-4 gx-3">
-      <div id="R1Flush" class="accordion accordion-flush text-white bg-danger mb-3">
+      <div id="R1Flush" class="accordion accordion-flush text-light bg-danger mb-3">
         <div class="accordion-item bg-danger">
           <h6 id="R1flush-headingOne" class="accordion-header bg-danger">
             <button class="accordion-button collapsed bg-danger btn-sm" type="button" data-bs-toggle="collapse"
               data-bs-target="#flush-R1Collapse" aria-expanded="false" aria-controls="flush-R1Collapse">
-              <h6 id="R1TeamNumber" class="text-center text-white">Team #</h6>
+              <h6 id="R1TeamNumber" class="text-center text-light">Team #</h6>
             </button>
           </h6>
 
-          <div id="flush-R1Collapse" class="accordion-collapse collapse" data-bs-parent="#R1Flush">
+          <div id="flush-R1Collapse" class="accordion-collapse collapse show" data-bs-parent="#R1Flush">
             <div id="R1PicsCarousel" class="carousel slide" data-interval="false">
               <div id="R1RobotPics" class="carousel-inner"> </div>
               <button class="carousel-control-prev" type="button" data-bs-target="#R1PicsCarousel" data-bs-slide="prev">
@@ -221,42 +221,42 @@ require 'inc/header.php';
                 <span class="visually-hidden">Next</span>
               </button>
             </div>
+          </div>
 
-            <div class="overflow-auto">
-              <table class="table table-bordered table-danger">
-                <thead>
-                  <tr>
-                    <th colspan="6" class="text-center fs-6">Auton</th>
-                    <th colspan="8" class="text-center fw-bold fs-6">Teleop</th>
-                    <th colspan="5" class="text-center fw-bold fs-6">Endgame</th>
-                  </tr>
-                  <tr>
-                    <th scope="col">L1</th>
-                    <th scope="col">L2</th>
-                    <th scope="col">L3</th>
-                    <th scope="col">L4</th>
-                    <th scope="col">Net</th>
-                    <th scope="col">Proc</th>
+          <div class="overflow-auto">
+            <table class="table table-bordered table-danger table-sm">
+              <thead>
+                <tr>
+                  <th colspan="6" class="text-center fs-6">Auton</th>
+                  <th colspan="8" class="text-center fw-bold fs-6">Teleop</th>
+                  <th colspan="5" class="text-center fw-bold fs-6">Endgame</th>
+                </tr>
+                <tr>
+                  <th scope="col">L1</th>
+                  <th scope="col">L2</th>
+                  <th scope="col">L3</th>
+                  <th scope="col">L4</th>
+                  <th scope="col">Net</th>
+                  <th scope="col">Proc</th>
 
-                    <th scope="col">C%</th>
-                    <th scope="col">L1</th>
-                    <th scope="col">L2</th>
-                    <th scope="col">L3</th>
-                    <th scope="col">L4</th>
-                    <th scope="col">A%</th>
-                    <th scope="col">Net</th>
-                    <th scope="col">Proc</th>
+                  <th scope="col">C%</th>
+                  <th scope="col">L1</th>
+                  <th scope="col">L2</th>
+                  <th scope="col">L3</th>
+                  <th scope="col">L4</th>
+                  <th scope="col">A%</th>
+                  <th scope="col">Net</th>
+                  <th scope="col">Proc</th>
 
-                    <th scope="col">N</th>
-                    <th scope="col">P</th>
-                    <th scope="col">F</th>
-                    <th scope="col">S</th>
-                    <th scope="col">D</th>
-                  </tr>
-                </thead>
-                <tbody id="R1DataTable"> </tbody>
-              </table>
-            </div>
+                  <th scope="col">N</th>
+                  <th scope="col">P</th>
+                  <th scope="col">F</th>
+                  <th scope="col">S</th>
+                  <th scope="col">D</th>
+                </tr>
+              </thead>
+              <tbody id="R1DataTable"> </tbody>
+            </table>
           </div>
 
         </div>
@@ -265,16 +265,16 @@ require 'inc/header.php';
 
     <!-- Red2 - Red Team 3 -->
     <div class="col-lg-4 col-sm-4 col-xs-4 gx-3">
-      <div id="R2Flush" class="accordion accordion-flush text-white bg-danger mb-3">
+      <div id="R2Flush" class="accordion accordion-flush text-light bg-danger mb-3">
         <div class="accordian-item">
           <h6 id="R2flush-headingOne" class="accordion-header bg-danger">
             <button class="accordion-button collapsed bg-danger btn-sm" type="button" data-bs-toggle="collapse"
               data-bs-target="#flush-R2Collapse" aria-expanded="false" aria-controls="flush-R2Collapse">
-              <h6 id="R2TeamNumber" class="text-center text-white">Team #</h6>
+              <h6 id="R2TeamNumber" class="text-center text-light">Team #</h6>
             </button>
           </h6>
 
-          <div id="flush-R2Collapse" class="accordion-collapse collapse" data-bs-parent="#R2Flush">
+          <div id="flush-R2Collapse" class="accordion-collapse collapse show" data-bs-parent="#R2Flush">
             <div id="R2PicsCarousel" class="carousel slide" data-interval="false">
               <div id="R2RobotPics" class="carousel-inner">
 
@@ -288,42 +288,42 @@ require 'inc/header.php';
                 <span class="visually-hidden">Next</span>
               </button>
             </div>
+          </div>
 
-            <div class="overflow-auto">
-              <table class="table table-bordered table-danger">
-                <thead>
-                  <tr>
-                    <th colspan="6" class="text-center fs-6">Auton</th>
-                    <th colspan="8" class="text-center fw-bold fs-6">Teleop</th>
-                    <th colspan="5" class="text-center fw-bold fs-6">Endgame</th>
-                  </tr>
-                  <tr>
-                    <th scope="col">L1</th>
-                    <th scope="col">L2</th>
-                    <th scope="col">L3</th>
-                    <th scope="col">L4</th>
-                    <th scope="col">Net</th>
-                    <th scope="col">Proc</th>
+          <div class="overflow-auto">
+            <table class="table table-bordered table-danger table-sm">
+              <thead>
+                <tr>
+                  <th colspan="6" class="text-center fs-6">Auton</th>
+                  <th colspan="8" class="text-center fw-bold fs-6">Teleop</th>
+                  <th colspan="5" class="text-center fw-bold fs-6">Endgame</th>
+                </tr>
+                <tr>
+                  <th scope="col">L1</th>
+                  <th scope="col">L2</th>
+                  <th scope="col">L3</th>
+                  <th scope="col">L4</th>
+                  <th scope="col">Net</th>
+                  <th scope="col">Proc</th>
 
-                    <th scope="col">C%</th>
-                    <th scope="col">L1</th>
-                    <th scope="col">L2</th>
-                    <th scope="col">L3</th>
-                    <th scope="col">L4</th>
-                    <th scope="col">A%</th>
-                    <th scope="col">Net</th>
-                    <th scope="col">Proc</th>
+                  <th scope="col">C%</th>
+                  <th scope="col">L1</th>
+                  <th scope="col">L2</th>
+                  <th scope="col">L3</th>
+                  <th scope="col">L4</th>
+                  <th scope="col">A%</th>
+                  <th scope="col">Net</th>
+                  <th scope="col">Proc</th>
 
-                    <th scope="col">N</th>
-                    <th scope="col">P</th>
-                    <th scope="col">F</th>
-                    <th scope="col">S</th>
-                    <th scope="col">D</th>
-                  </tr>
-                </thead>
-                <tbody id="R2DataTable"> </tbody>
-              </table>
-            </div>
+                  <th scope="col">N</th>
+                  <th scope="col">P</th>
+                  <th scope="col">F</th>
+                  <th scope="col">S</th>
+                  <th scope="col">D</th>
+                </tr>
+              </thead>
+              <tbody id="R2DataTable"> </tbody>
+            </table>
           </div>
 
         </div>
@@ -336,15 +336,15 @@ require 'inc/header.php';
 
     <!-- Blue0 - Blue Team 1 -->
     <div class="col-lg-4 col-sm-4 col-xs-4 gx-3">
-      <div id="B0Flush" class="accordion accordion-flush text-white bg-primary mb-3">
+      <div id="B0Flush" class="accordion accordion-flush text-light bg-primary mb-3">
         <div class="accordion-item bg-primary">
           <h6 id="B0flush-headingOne" class="accordion-header bg-primary">
             <button class="accordion-button collapsed bg-primary btn-sm" type="button" data-bs-toggle="collapse"
               data-bs-target="#flush-B0Collapse" aria-expanded="false" aria-controls="flush-B0Collapse">
-              <h6 id="B0TeamNumber" class="text-center text-white">Team #</h6>
+              <h6 id="B0TeamNumber" class="text-center text-light">Team #</h6>
             </button>
           </h6>
-          <div id="flush-B0Collapse" class="accordion-collapse collapse" data-bs-parent="#B0Flush">
+          <div id="flush-B0Collapse" class="accordion-collapse collapse show" data-bs-parent="#B0Flush">
             <div id="B0PicsCarousel" class="carousel slide" data-interval="false">
               <div id="B0RobotPics" class="carousel-inner"> </div>
               <button class="carousel-control-prev" type="button" data-bs-target="#B0PicsCarousel" data-bs-slide="prev">
@@ -356,42 +356,42 @@ require 'inc/header.php';
                 <span class="visually-hidden">Next</span>
               </button>
             </div>
+          </div>
 
-            <div class="overflow-auto">
-              <table class="table table-bordered table-primary">
-                <thead>
-                  <tr>
-                    <th colspan="6" class="text-center fs-6">Auton</th>
-                    <th colspan="8" class="text-center fw-bold fs-6">Teleop</th>
-                    <th colspan="5" class="text-center fw-bold fs-6">Endgame</th>
-                  </tr>
-                  <tr>
-                    <th scope="col">L1</th>
-                    <th scope="col">L2</th>
-                    <th scope="col">L3</th>
-                    <th scope="col">L4</th>
-                    <th scope="col">Net</th>
-                    <th scope="col">Proc</th>
+          <div class="overflow-auto">
+            <table class="table table-bordered table-primary table-sm">
+              <thead>
+                <tr>
+                  <th colspan="6" class="text-center fs-6">Auton</th>
+                  <th colspan="8" class="text-center fw-bold fs-6">Teleop</th>
+                  <th colspan="5" class="text-center fw-bold fs-6">Endgame</th>
+                </tr>
+                <tr>
+                  <th scope="col">L1</th>
+                  <th scope="col">L2</th>
+                  <th scope="col">L3</th>
+                  <th scope="col">L4</th>
+                  <th scope="col">Net</th>
+                  <th scope="col">Proc</th>
 
-                    <th scope="col">C%</th>
-                    <th scope="col">L1</th>
-                    <th scope="col">L2</th>
-                    <th scope="col">L3</th>
-                    <th scope="col">L4</th>
-                    <th scope="col">A%</th>
-                    <th scope="col">Net</th>
-                    <th scope="col">Proc</th>
+                  <th scope="col">C%</th>
+                  <th scope="col">L1</th>
+                  <th scope="col">L2</th>
+                  <th scope="col">L3</th>
+                  <th scope="col">L4</th>
+                  <th scope="col">A%</th>
+                  <th scope="col">Net</th>
+                  <th scope="col">Proc</th>
 
-                    <th scope="col">N</th>
-                    <th scope="col">P</th>
-                    <th scope="col">F</th>
-                    <th scope="col">S</th>
-                    <th scope="col">D</th>
-                  </tr>
-                </thead>
-                <tbody id="B0DataTable"> </tbody>
-              </table>
-            </div>
+                  <th scope="col">N</th>
+                  <th scope="col">P</th>
+                  <th scope="col">F</th>
+                  <th scope="col">S</th>
+                  <th scope="col">D</th>
+                </tr>
+              </thead>
+              <tbody id="B0DataTable"> </tbody>
+            </table>
           </div>
 
         </div>
@@ -400,15 +400,15 @@ require 'inc/header.php';
 
     <!-- Blue1 - Blue Team 2 -->
     <div class="col-lg-4 col-sm-4 col-xs-4 gx-3">
-      <div id="B1Flush" class="accordion accordion-flush bg-primary">
+      <div id="B1Flush" class="accordion accordion-flush bg-primary mb-3">
         <div class="accordion-item bg-primary">
           <h6 id="B1flush-headingOne" class="accordion-header bg-primary">
             <button class="btn accordion-button collapsed bg-primary btn-sm" type="button" data-bs-toggle="collapse"
               data-bs-target="#flush-B1Collapse" aria-expanded="false" aria-controls="flush-B1Collapse">
-              <h6 id="B1TeamNumber" class="text-center text-white">Team #</h6>
+              <h6 id="B1TeamNumber" class="text-center text-light">Team #</h6>
             </button>
           </h6>
-          <div id="flush-B1Collapse" class="accordion-collapse collapse" data-bs-parent="#B1Flush">
+          <div id="flush-B1Collapse" class="accordion-collapse collapse show" data-bs-parent="#B1Flush">
             <div id="B1PicsCarousel" class="carousel slide" data-interval="false">
               <div id="B1RobotPics" class="carousel-inner"> </div>
               <button class="carousel-control-prev" type="button" data-bs-target="#B1PicsCarousel" data-bs-slide="prev">
@@ -420,42 +420,42 @@ require 'inc/header.php';
                 <span class="visually-hidden">Next</span>
               </button>
             </div>
+          </div>
 
-            <div class="overflow-auto">
-              <table class="table table-bordered table-primary">
-                <thead>
-                  <tr>
-                    <th colspan="6" class="text-center fs-6">Auton</th>
-                    <th colspan="8" class="text-center fw-bold fs-6">Teleop</th>
-                    <th colspan="5" class="text-center fw-bold fs-6">Endgame</th>
-                  </tr>
-                  <tr>
-                    <th scope="col">L1</th>
-                    <th scope="col">L2</th>
-                    <th scope="col">L3</th>
-                    <th scope="col">L4</th>
-                    <th scope="col">Net</th>
-                    <th scope="col">Proc</th>
+          <div class="overflow-auto">
+            <table class="table table-bordered table-primary table-sm">
+              <thead>
+                <tr>
+                  <th colspan="6" class="text-center fs-6">Auton</th>
+                  <th colspan="8" class="text-center fw-bold fs-6">Teleop</th>
+                  <th colspan="5" class="text-center fw-bold fs-6">Endgame</th>
+                </tr>
+                <tr>
+                  <th scope="col">L1</th>
+                  <th scope="col">L2</th>
+                  <th scope="col">L3</th>
+                  <th scope="col">L4</th>
+                  <th scope="col">Net</th>
+                  <th scope="col">Proc</th>
 
-                    <th scope="col">C%</th>
-                    <th scope="col">L1</th>
-                    <th scope="col">L2</th>
-                    <th scope="col">L3</th>
-                    <th scope="col">L4</th>
-                    <th scope="col">A%</th>
-                    <th scope="col">Net</th>
-                    <th scope="col">Proc</th>
+                  <th scope="col">C%</th>
+                  <th scope="col">L1</th>
+                  <th scope="col">L2</th>
+                  <th scope="col">L3</th>
+                  <th scope="col">L4</th>
+                  <th scope="col">A%</th>
+                  <th scope="col">Net</th>
+                  <th scope="col">Proc</th>
 
-                    <th scope="col">N</th>
-                    <th scope="col">P</th>
-                    <th scope="col">F</th>
-                    <th scope="col">S</th>
-                    <th scope="col">D</th>
-                  </tr>
-                </thead>
-                <tbody id="B1DataTable"></tbody>
-              </table>
-            </div>
+                  <th scope="col">N</th>
+                  <th scope="col">P</th>
+                  <th scope="col">F</th>
+                  <th scope="col">S</th>
+                  <th scope="col">D</th>
+                </tr>
+              </thead>
+              <tbody id="B1DataTable"> </tbody>
+            </table>
           </div>
 
         </div>
@@ -464,16 +464,16 @@ require 'inc/header.php';
 
     <!-- Blue2 - Blue Team 3 -->
     <div class="col-lg-4 col-sm-4 col-xs-4 gx-3">
-      <div id="B2Flush" class="accordion accordion-flush text-white bg-primary mb-3">
+      <div id="B2Flush" class="accordion accordion-flush text-light bg-primary mb-3">
         <div class="accordion-item bg-primary">
           <h6 id="B2flush-headingOne" class="accordion-header bg-primary">
             <button class="btn accordion-button collapsed bg-primary btn-sm" type="button" data-bs-toggle="collapse"
               data-bs-target="#flush-B2Collapse" aria-expanded="false" aria-controls="flush-B2Collapse">
-              <h6 id="B2TeamNumber" class="text-center text-white">Team #</h6>
+              <h6 id="B2TeamNumber" class="text-center text-light">Team #</h6>
             </button>
           </h6>
 
-          <div id="flush-B2Collapse" class="accordion-collapse collapse" data-bs-parent="#B2Flush">
+          <div id="flush-B2Collapse" class="accordion-collapse collapse show" data-bs-parent="#B2Flush">
             <div id="B2PicsCarousel" class="carousel slide" data-interval="false">
               <div id="B2RobotPics" class="carousel-inner"> </div>
               <button class="carousel-control-prev" type="button" data-bs-target="#B2PicsCarousel" data-bs-slide="prev">
@@ -485,42 +485,42 @@ require 'inc/header.php';
                 <span class="visually-hidden">Next</span>
               </button>
             </div>
+          </div>
 
-            <div class="overflow-auto">
-              <table class="table table-bordered table-primary">
-                <thead>
-                  <tr>
-                    <th colspan="6" class="text-center fs-6">Auton</th>
-                    <th colspan="8" class="text-center fw-bold fs-6">Teleop</th>
-                    <th colspan="5" class="text-center fw-bold fs-6">Endgame</th>
-                  </tr>
-                  <tr>
-                    <th scope="col">L1</th>
-                    <th scope="col">L2</th>
-                    <th scope="col">L3</th>
-                    <th scope="col">L4</th>
-                    <th scope="col">Net</th>
-                    <th scope="col">Proc</th>
+          <div class="overflow-auto">
+            <table class="table table-bordered table-primary table-sm">
+              <thead>
+                <tr>
+                  <th colspan="6" class="text-center fs-6">Auton</th>
+                  <th colspan="8" class="text-center fw-bold fs-6">Teleop</th>
+                  <th colspan="5" class="text-center fw-bold fs-6">Endgame</th>
+                </tr>
+                <tr>
+                  <th scope="col">L1</th>
+                  <th scope="col">L2</th>
+                  <th scope="col">L3</th>
+                  <th scope="col">L4</th>
+                  <th scope="col">Net</th>
+                  <th scope="col">Proc</th>
 
-                    <th scope="col">C%</th>
-                    <th scope="col">L1</th>
-                    <th scope="col">L2</th>
-                    <th scope="col">L3</th>
-                    <th scope="col">L4</th>
-                    <th scope="col">A%</th>
-                    <th scope="col">Net</th>
-                    <th scope="col">Proc</th>
+                  <th scope="col">C%</th>
+                  <th scope="col">L1</th>
+                  <th scope="col">L2</th>
+                  <th scope="col">L3</th>
+                  <th scope="col">L4</th>
+                  <th scope="col">A%</th>
+                  <th scope="col">Net</th>
+                  <th scope="col">Proc</th>
 
-                    <th scope="col">N</th>
-                    <th scope="col">P</th>
-                    <th scope="col">F</th>
-                    <th scope="col">S</th>
-                    <th scope="col">D</th>
-                  </tr>
-                </thead>
-                <tbody id="B2DataTable"> </tbody>
-              </table>
-            </div>
+                  <th scope="col">N</th>
+                  <th scope="col">P</th>
+                  <th scope="col">F</th>
+                  <th scope="col">S</th>
+                  <th scope="col">D</th>
+                </tr>
+              </thead>
+              <tbody id="B2DataTable"> </tbody>
+            </table>
           </div>
 
         </div>
@@ -954,9 +954,9 @@ require 'inc/header.php';
         console.log("matchSheet: buildTeamBox() for " + teamNum + ", teamname = " + teamname);
       }
       if (teamname != "XX") {
-        $("#" + color + index + "TeamNumber").html("<a class='text-white' href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a> - " + teamname);
+        $("#" + color + index + "TeamNumber").html("<a class='text-light' href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a> - " + teamname);
       } else {
-        $("#" + color + index + "TeamNumber").html("<a class='text-white' href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a>");
+        $("#" + color + index + "TeamNumber").html("<a class='text-light' href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a>");
       }
     });
 
@@ -1068,8 +1068,7 @@ require 'inc/header.php';
       bUsingCustom = true;
       var redTeamNum1 = document.getElementById("enterRed1").value;
       var blueTeamNum1 = document.getElementById("enterBlue1").value;
-      console.log(redTeamNum1);
-      console.log(blueTeamNum1);
+      console.log("Custom match sheet: " + redTeamNum1 + " " + blueTeamNum1);
       if (redTeamNum1.trim() == "" && blueTeamNum1.trim() == "") {
         console.warn("loadCustomMatch: No Red or Blue team 1 entered!");
         alert("Please fill out Red Team Number 1 and Blue Team Number 1!");
