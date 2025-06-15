@@ -1335,11 +1335,12 @@ require 'inc/header.php';
     });
     getFilteredData(team, function (fData) {
       filteredData = fData;
-      dataToCommentTable(filteredData);
-      dataToMatchTable(filteredData);
       dataToAutonGraph(filteredData);
       dataToTeleopGraph(filteredData);
       dataToEndgameGraph(filteredData);
+      dataToMatchTable(filteredData);
+      dataToStrategicTable(filteredData);
+      dataToCommentTable(filteredData);
     });
   }
 
@@ -1375,8 +1376,8 @@ require 'inc/header.php';
   // }
 
   // This is the main function that runs when we want to load a new team 
-  function loadTeamSheet(teamNum) {
-    console.log("==> teamLookup.php: loadTeamSheet()");
+  function buildTeamLookupSheet(teamNum) {
+    console.log("==> teamLookup.php: buildTeamLookupSheet()");
     // Clear existing data
     $("#teamTitle").html("");
     $("#robotPics").html("");
@@ -1464,7 +1465,7 @@ require 'inc/header.php';
 
     var initTeamNumber = checkGet()
     if (initTeamNumber) {
-      loadTeamSheet(initTeamNumber);
+      buildTeamLookupSheet(initTeamNumber);
     }
 
     // Pressing enter in team number field loads the page
@@ -1478,7 +1479,7 @@ require 'inc/header.php';
 
     // Load team data for the number entered
     $("#loadTeamButton").click(function () {
-      loadTeamSheet($("#enterTeamNumber").val());
+      buildTeamLookupSheet($("#enterTeamNumber").val());
     });
 
     // Keep the frozen match data updated

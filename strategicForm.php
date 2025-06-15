@@ -296,6 +296,7 @@ require 'inc/header.php';
     console.log("==> strategicForm.php: clearStrategicForm()");
     $("#scoutName").val("");
     $("#teamNumber").val("");
+    $("#compLevel").val("");
     $("#matchNumber").val("");
     $("#driveScore1").prop("checked", false);
     $("#driveScore2").prop("checked", false);
@@ -338,7 +339,7 @@ require 'inc/header.php';
     console.log("==> strategicForm.php: writeStrategicFormToTable()");
     var dataToUse = {};
 
-    var matchLevel = $("#compLevel").val();
+    var compLevel = $("#compLevel").val();
     var matchNumber = $("#matchNumber").val();
 
     // Clean up teamnumber before writing to table.
@@ -348,7 +349,7 @@ require 'inc/header.php';
     // teamnum = teamnum.replace(/[^0-9a-zA-Z]/g, '');  // remove any non-alphanumeric chars
     dataToUse["scoutname"] = $("#scoutName").val();
     dataToUse["teamnumber"] = teamnum;
-    dataToUse["matchnumber"] = matchLevel + matchNumber;
+    dataToUse["matchnumber"] = compLevel + matchNumber;
 
     // Assume that some options were not checked at all.
     dataToUse["driverability"] = 0; // default

@@ -91,7 +91,6 @@ class matchDataProcessor {
       if (mt == null || mt != "p") {
         newData.push(this.data[i]);
       }
-
     }
     this.data = newData;
   }
@@ -177,6 +176,9 @@ class matchDataProcessor {
         // If this team doesn't have any data stored yet, initialize its data array.
         pdata[tn] = {};
 
+        pdata[tn]["avgTotalPoints"] = 0;
+        pdata[tn]["maxTotalPoints"] = 0;
+
         pdata[tn]["avgTotalCoral"] = 0;
         pdata[tn]["maxTotalCoral"] = 0;
         pdata[tn]["avgTotalAlgae"] = 0;
@@ -188,17 +190,8 @@ class matchDataProcessor {
         pdata[tn]["avgTotalTeleopPoints"] = 0;
         pdata[tn]["maxTotalTeleopPoints"] = 0;
 
-        //pdata[tn]["avgAutoPieces"] = 0;
-        //pdata[tn]["maxAutoPieces"] = 0;
-
-        //pdata[tn]["avgTeleopPieces"] = 0;
-        //pdata[tn]["maxTeleopPieces"] = 0;
-
         pdata[tn]["avgEndgamePoints"] = 0;
         pdata[tn]["maxEndgamePoints"] = 0;
-
-        pdata[tn]["avgTotalPoints"] = 0;
-        pdata[tn]["maxTotalPoints"] = 0;
 
         pdata[tn]["avgTotalCoralPoints"] = 0;
         pdata[tn]["maxTotalCoralPoints"] = 0;
