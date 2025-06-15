@@ -26,14 +26,14 @@ require 'inc/header.php';
             <div>
               <h4>Match Info</h4>
             </div>
-            <div class="col-5 mb-3">
+            <div class="mb-3">
               <label for="teamNumber" class="form-label">Team Number</label>
               <input id="teamNumber" class="form-control" type="number" placeholder="FRC team number">
             </div>
-            <div class="row col-12 mb-3">
+            <div class="rowmb-3">
               <span>Match Number</span>
-              <div class="col-3">
-                <div class="input-group">
+              <div class="input-group">
+                <div class="input-group-prepend">
                   <select id="compLevel" class="form-select" aria-label="Comp Level Select">
                     <option value="p">P</option>
                     <option value="qm">QM</option>
@@ -42,9 +42,9 @@ require 'inc/header.php';
                     <option value="f">F</option>
                   </select>
                 </div>
-              </div>
-              <div class="col-5">
-                <input id="matchNumber" class="form-control" type="text" placeholder="Match Number" aria-label="Match Number">
+                <div class="">
+                  <input id="matchNumber" class="form-control" type="text" placeholder="Match Number" aria-label="Match Number">
+                </div>
               </div>
             </div>
             <div class="col-6 mb-3">
@@ -67,9 +67,13 @@ require 'inc/header.php';
 
                 <!-- Cones -->
                 <div class="input-group mb-3 fw-bold">
-                  <button id="autoConesTopMinus" class="btn btn-danger col-1" type="button">-</button>
-                  <span id="autoConesTop" class="input-group-text bg-warning col-8">Auto Cones Top: 0</span>
-                  <button id="autoConesTopPlus" class="btn btn-success col-1" type="button">+</button>
+                  <div class="input-group-prepend">
+                    <button id="autoConesTopMinus" class="btn btn-danger" type="button">-</button>
+                  </div>
+                  <span id="autoConesTop" class="input-group-text bg-warning">Auto Cones Top: 0</span>
+                  <div class="input-group-prepend">
+                    <button id="autoConesTopPlus" class="btn btn-success" type="button">+</button>
+                  </div>
                 </div>
 
                 <div class="input-group mb-3 fw-bold">
@@ -153,14 +157,16 @@ require 'inc/header.php';
 
                 <div class="input-group mb-3 fw-bold">
                   <button id="teleopCubesMiddleMinus" class="btn btn-danger col-1" type="button">-</button>
-                  <span id="teleopCubesMiddle" class="input-group-text col-8" style="background-color:#9B72EF">Teleop Cubes Middle:
+                  <span id="teleopCubesMiddle" class="input-group-text col-8" style="background-color:#9B72EF">Teleop Cubes
+                    Middle:
                     0</span>
                   <button id="teleopCubesMiddlePlus" class="btn btn-success col-1" type="button">+</button>
                 </div>
 
                 <div class="input-group mb-3 fw-bold">
                   <button id="teleopCubesBottomMinus" class="btn btn-danger col-1" type="button">-</button>
-                  <span id="teleopCubesBottom" class="input-group-text col-8" style="background-color:#9B72EF">Teleop Cubes Bottom:
+                  <span id="teleopCubesBottom" class="input-group-text col-8" style="background-color:#9B72EF">Teleop Cubes
+                    Bottom:
                     0</span>
                   <button id="teleopCubesBottomPlus" class="btn btn-success col-1" type="button">+</button>
                 </div>

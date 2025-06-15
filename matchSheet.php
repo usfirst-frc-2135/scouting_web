@@ -27,14 +27,18 @@ require 'inc/header.php';
         <!-- Load Match buttons -->
         <div class="card mb-3">
           <div class="input-group">
-            <select id="enterMatchLevel" class="form-select" aria-label="Comp Level Select">
-              <option value="QM">QM</option>
-              <option value="QF">QF</option>
-              <option value="SF">SF</option>
-              <option value="F">F</option>
-            </select>
+            <div class="input-group-prepend">
+              <select id="enterMatchLevel" class="form-select" aria-label="Comp Level Select">
+                <option value="QM">QM</option>
+                <option value="QF">QF</option>
+                <option value="SF">SF</option>
+                <option value="F">F</option>
+              </select>
+            </div>
             <input id="enterMatchNumber" class="form-control" type="text" placeholder="Match Number" aria-label="Match Number">
-            <button id="loadMatch" class="btn btn-primary" type="button">Load Match</button>
+            <div class="input-group-append">
+              <button id="loadMatch" class="btn btn-primary" type="button">Load Match</button>
+            </div>
           </div>
         </div>
 
@@ -266,7 +270,7 @@ require 'inc/header.php';
     <!-- Red2 - Red Team 3 -->
     <div class="col-lg-4 col-sm-4 col-xs-4 gx-3">
       <div id="R2Flush" class="accordion accordion-flush text-light bg-danger mb-3">
-        <div class="accordian-item">
+        <div class="accordian-item bg-danger">
           <h6 id="R2flush-headingOne" class="accordion-header bg-danger">
             <button class="accordion-button collapsed bg-danger btn-sm" type="button" data-bs-toggle="collapse"
               data-bs-target="#flush-R2Collapse" aria-expanded="false" aria-controls="flush-R2Collapse">
@@ -276,9 +280,7 @@ require 'inc/header.php';
 
           <div id="flush-R2Collapse" class="accordion-collapse collapse show" data-bs-parent="#R2Flush">
             <div id="R2PicsCarousel" class="carousel slide" data-interval="false">
-              <div id="R2RobotPics" class="carousel-inner">
-
-              </div>
+              <div id="R2RobotPics" class="carousel-inner"> </div>
               <button class="carousel-control-prev" type="button" data-bs-target="#R2PicsCarousel" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
@@ -344,6 +346,7 @@ require 'inc/header.php';
               <h6 id="B0TeamNumber" class="text-center text-light">Team #</h6>
             </button>
           </h6>
+
           <div id="flush-B0Collapse" class="accordion-collapse collapse show" data-bs-parent="#B0Flush">
             <div id="B0PicsCarousel" class="carousel slide" data-interval="false">
               <div id="B0RobotPics" class="carousel-inner"> </div>
@@ -400,14 +403,15 @@ require 'inc/header.php';
 
     <!-- Blue1 - Blue Team 2 -->
     <div class="col-lg-4 col-sm-4 col-xs-4 gx-3">
-      <div id="B1Flush" class="accordion accordion-flush bg-primary mb-3">
+      <div id="B1Flush" class="accordion accordion-flush text-light bg-primary mb-3">
         <div class="accordion-item bg-primary">
           <h6 id="B1flush-headingOne" class="accordion-header bg-primary">
-            <button class="btn accordion-button collapsed bg-primary btn-sm" type="button" data-bs-toggle="collapse"
+            <button class="accordion-button collapsed bg-primary btn-sm" type="button" data-bs-toggle="collapse"
               data-bs-target="#flush-B1Collapse" aria-expanded="false" aria-controls="flush-B1Collapse">
               <h6 id="B1TeamNumber" class="text-center text-light">Team #</h6>
             </button>
           </h6>
+
           <div id="flush-B1Collapse" class="accordion-collapse collapse show" data-bs-parent="#B1Flush">
             <div id="B1PicsCarousel" class="carousel slide" data-interval="false">
               <div id="B1RobotPics" class="carousel-inner"> </div>
@@ -467,7 +471,7 @@ require 'inc/header.php';
       <div id="B2Flush" class="accordion accordion-flush text-light bg-primary mb-3">
         <div class="accordion-item bg-primary">
           <h6 id="B2flush-headingOne" class="accordion-header bg-primary">
-            <button class="btn accordion-button collapsed bg-primary btn-sm" type="button" data-bs-toggle="collapse"
+            <button class="accordion-button collapsed bg-primary btn-sm" type="button" data-bs-toggle="collapse"
               data-bs-target="#flush-B2Collapse" aria-expanded="false" aria-controls="flush-B2Collapse">
               <h6 id="B2TeamNumber" class="text-center text-light">Team #</h6>
             </button>

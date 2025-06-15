@@ -23,8 +23,12 @@ require 'inc/header.php';
             </div>
 
             <div class="mb-3">
-              <label for="robotPic" class="form-label">Robot Photo</label>
-              <input id="robotPic" class="form-control" type="file">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <label for="robotPic" class="form-label">Robot Photo</label>
+                  <input id="robotPic" class="form-control" type="file">
+                </div>
+              </div>
             </div>
 
             <div class="mb-3">

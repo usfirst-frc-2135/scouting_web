@@ -17,26 +17,30 @@ require 'inc/header.php';
     <!--  COMMENTED OUT FOR NOW
       <div class="col-md-2">
         <div class="input-group">
-          <select id="startPrefix" class="form-select mb-3">
-            <option class="dropdown-item" value="p">P</option>
-            <option class="dropdown-item" value="qm" selected>Qm</option>
-            <option class="dropdown-item" value="qf">Qf</option>
-            <option class="dropdown-item" value="sf">Sf</option>
-            <option class="dropdown-item" value="f">F</option>
-          </select>
+          <div class="input-group-prepend">
+            <select id="startPrefix" class="form-select mb-3">
+              <option class="dropdown-item" value="p">P</option>
+              <option class="dropdown-item" value="qm" selected>Qm</option>
+              <option class="dropdown-item" value="qf">Qf</option>
+              <option class="dropdown-item" value="sf">Sf</option>
+              <option class="dropdown-item" value="f">F</option>
+            </select>
+            </div>
           <input id="startMatch" class="form-control" type="text" aria-label="Start Match Filter">
         </div>
       </div>
 
       <div class="col-md-3">
         <div class="input-group">
-          <select id="endPrefix class="form-select mb-3"">
-            <option class="dropdown-item" value="p">P</option>
-            <option class="dropdown-item" value="qm" selected>Qm</option>
-            <option class="dropdown-item" value="qf">Qf</option>
-            <option class="dropdown-item" value="sf">Sf</option>
-            <option class="dropdown-item" value="f">F</option>
-          </select>
+          <div class="input-group-prepend">
+            <select id="endPrefix class="form-select mb-3"">
+              <option class="dropdown-item" value="p">P</option>
+              <option class="dropdown-item" value="qm" selected>Qm</option>
+              <option class="dropdown-item" value="qf">Qf</option>
+              <option class="dropdown-item" value="sf">Sf</option>
+              <option class="dropdown-item" value="f">F</option>
+            </select>
+            </div
           <input id="endMatch" class="form-control" type="text" aria-label="End Match Filter">
           <button id="filterData" class="btn btn-primary" type="button">Filter Data</button>
         </div>
