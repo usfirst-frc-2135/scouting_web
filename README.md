@@ -23,6 +23,10 @@ This  is stored in the "scouting_web" repo on the team's github at:
 
 https://github.com/usfirst-frc-2135/scouting_web
 
+## How to make changes to the web site?
+
+While the web scouting database is hosted on the team web site, it can be difficult to make changes, deploy, and test on a live web server. It is much easier to set up a web server on the development computer to add features and debug, and only deploy the scouting web pages once it's ready to release for production use. The team uses the application MAMP (Mac OS, Apache, MySQL, and Perl/Python/PHP) to host a development server right on the user's computer. With the right settings, the developer has a great deal of control and insight while running the pages that access the database.
+
 # Scouting App Settings
 
 ## Setting the event code for a new event:
@@ -76,7 +80,7 @@ The robot photo image files are uploaded from the __Picture Upload__ page. These
 
 __Database and Tables Files__
 
-When a new database and tables are created, a db config file is created:  
+When a new database and tables are created, a database (db) config file is created:  
 
 On the live team website (frc2135):
  - `/public_html/db_config.ini`
@@ -97,7 +101,7 @@ These files can be deleted once that database or table is no longer valid or use
 
 __Viewing Data in Tables__
 
-The way to look at the (local) database is by navigating to localhost/phpMyAdmin in your browser (if you can't find this, you should be able to navigate to http://localhost/MAMP/ which should have info on getting to phpMyAdmin). On the left you should see all the database names and you can click on one to show all the tables in that database. You can click on the table name and it should show you the structure and data in each table. This should show you everything you want to know about the tables.
+The way to access the database is by navigating to `localhost/phpMyAdmin` in your browser (if you can't find this, you should be able to navigate to http://localhost/MAMP/ which should have info on getting to phpMyAdmin). On the left you should see all the database names and you can click on one to show all the tables in that database. You can click on the table name and it should show you the structure and data in each table. This should show you everything you want to know about the tables.
 
 __Debugging PHP code__
 
