@@ -67,46 +67,66 @@ require 'inc/header.php';
 
                 <!-- Cones -->
                 <div class="input-group mb-3 fw-bold">
-                  <div class="input-group-prepend">
+                  <div class="input-group-prepend col-1">
                     <button id="autoConesTopMinus" class="btn btn-danger" type="button">-</button>
                   </div>
-                  <span id="autoConesTop" class="input-group-text bg-warning">Auto Cones Top: 0</span>
-                  <div class="input-group-prepend">
+                  <span id="autoConesTop" class="input-group-text col-8 bg-warning">Auto Cones Top: 0</span>
+                  <div class="input-group-append col-1">
                     <button id="autoConesTopPlus" class="btn btn-success" type="button">+</button>
                   </div>
                 </div>
 
                 <div class="input-group mb-3 fw-bold">
-                  <button id="autoConesMiddleMinus" class="btn btn-danger col-1" type="button">-</button>
-                  <span id="autoConesMiddle" class="input-group-text bg-warning col-8">Auto Cones Middle: 0</span>
-                  <button id="autoConesMiddlePlus" class="btn btn-success col-1" type="button">+</button>
+                  <div class="input-group-prepend col-1">
+                    <button id="autoConesMiddleMinus" class="btn btn-danger" type="button">-</button>
+                  </div>
+                  <span id="autoConesMiddle" class="input-group-text col-8 bg-warning">Auto Cones Middle: 0</span>
+                  <div class="input-group-append col-1">
+                    <button id="autoConesMiddlePlus" class="btn btn-success" type="button">+</button>
+                  </div>
                 </div>
 
                 <div class="input-group mb-3 fw-bold">
-                  <button id="autoConesBottomMinus" class="btn btn-danger col-1" type="button">-</button>
-                  <span id="autoConesBottom" class="input-group-text bg-warning col-8">Auto Cones Bottom: 0</span>
-                  <button id="autoConesBottomPlus" class="btn btn-success col-1" type="button">+</button>
+                  <div class="input-group-prepend col-1">
+                    <button id="autoConesBottomMinus" class="btn btn-danger" type="button">-</button>
+                  </div>
+                  <span id="autoConesBottom" class="input-group-text col-8 bg-warning">Auto Cones Bottom: 0</span>
+                  <div class="input-group-append col-1">
+                    <button id="autoConesBottomPlus" class="btn btn-success" type="button">+</button>
+                  </div>
                 </div>
 
                 <!-- Cubes -->
                 <div class="input-group mb-3 fw-bold">
-                  <button id="autoCubesTopMinus" class="btn btn-danger col-1" type="button">-</button>
+                  <div class="input-group-prepend col-1">
+                    <button id="autoCubesTopMinus" class="btn btn-danger" type="button">-</button>
+                  </div>
                   <span id="autoCubesTop" class="input-group-text col-8" style="background-color:#9B72EF">Auto Cubes Top: 0</span>
-                  <button id="autoCubesTopPlus" class="btn btn-success col-1" type="button">+</button>
+                  <div class="input-group-append col-1">
+                    <button id="autoCubesTopPlus" class="btn btn-success" type="button">+</button>
+                  </div>
                 </div>
 
                 <div class="input-group mb-3 fw-bold">
-                  <button id="autoCubesMiddleMinus" class="btn btn-danger col-1" type="button">-</button>
+                  <div class="input-group-prepend col-1">
+                    <button id="autoCubesMiddleMinus" class="btn btn-danger" type="button">-</button>
+                  </div>
                   <span id="autoCubesMiddle" class="input-group-text col-8" style="background-color:#9B72EF">Auto Cubes Middle:
                     0</span>
-                  <button id="autoCubesMiddlePlus" class="btn btn-success col-1" type="button">+</button>
+                  <div class="input-group-append col-1">
+                    <button id="autoCubesMiddlePlus" class="btn btn-success" type="button">+</button>
+                  </div>
                 </div>
 
                 <div class="input-group mb-3 fw-bold">
-                  <button id="autoCubesBottomMinus" class="btn btn-danger col-1" type="button">-</button>
+                  <div class="input-group-prepend col-1">
+                    <button id="autoCubesBottomMinus" class="btn btn-danger" type="button">-</button>
+                  </div>
                   <span id="autoCubesBottom" class="input-group-text col-8" style="background-color:#9B72EF">Auto Cubes Bottom:
                     0</span>
-                  <button id="autoCubesBottomPlus" class="btn btn-success col-1" type="button">+</button>
+                  <div class="input-group-append col-1">
+                    <button id="autoCubesBottomPlus" class="btn btn-success" type="button">+</button>
+                  </div>
                 </div>
 
                 <div class="form-check">
@@ -130,45 +150,69 @@ require 'inc/header.php';
 
                 <!-- Cones -->
                 <div class="input-group mb-3 fw-bold">
-                  <button id="teleopConesTopMinus" class="btn btn-danger col-1" type="button">-</button>
-                  <span id="teleopConesTop" class="input-group-text bg-warning col-8">Teleop Cones Top: 0</span>
-                  <button id="teleopConesTopPlus" class="btn btn-success col-1" type="button">+</button>
+                  <div class="input-group-prepend col-1">
+                    <button id="teleopConesTopMinus" class="btn btn-danger" type="button">-</button>
+                  </div>
+                  <span id="teleopConesTop" class="input-group-text col-8 bg-warning">Teleop Cones Top: 0</span>
+                  <div class="input-group-append col-1">
+                    <button id="teleopConesTopPlus" class="btn btn-success" type="button">+</button>
+                  </div>
                 </div>
 
                 <div class="input-group mb-3 fw-bold">
-                  <button id="teleopConesMiddleMinus" class="btn btn-danger col-1" type="button">-</button>
-                  <span id="teleopConesMiddle" class="input-group-text bg-warning col-8">Teleop Cones Middle: 0</span>
-                  <button id="teleopConesMiddlePlus" class="btn btn-success col-1" type="button">+</button>
+                  <div class="input-group-prepend col-1">
+                    <button id="teleopConesMiddleMinus" class="btn btn-danger" type="button">-</button>
+                  </div>
+                  <span id="teleopConesMiddle" class="input-group-text col-8 bg-warning">Teleop Cones Middle: 0</span>
+                  <div class="input-group-append col-1">
+                    <button id="teleopConesMiddlePlus" class="btn btn-success" type="button">+</button>
+                  </div>
                 </div>
 
                 <div class="input-group mb-3 fw-bold">
-                  <button id="teleopConesBottomMinus" class="btn btn-danger col-1" type="button">-</button>
-                  <span id="teleopConesBottom" class="input-group-text bg-warning col-8">Teleop Cones Bottom: 0</span>
-                  <button id="teleopConesBottomPlus" class="btn btn-success col-1" type="button">+</button>
+                  <div class="input-group-prepend col-1">
+                    <button id="teleopConesBottomMinus" class="btn btn-danger" type="button">-</button>
+                  </div>
+                  <span id="teleopConesBottom" class="input-group-text col-8 bg-warning">Teleop Cones Bottom: 0</span>
+                  <div class="input-group-append col-1">
+                    <button id="teleopConesBottomPlus" class="btn btn-success" type="button">+</button>
+                  </div>
                 </div>
 
                 <!-- Cubes -->
                 <div class="input-group mb-3 fw-bold">
-                  <button id="teleopCubesTopMinus" class="btn btn-danger col-1" type="button">-</button>
-                  <span id="teleopCubesTop" class="input-group-text col-8" style="background-color:#9B72EF">Teleop Cubes Top:
+                  <div class="input-group-prepend col-1">
+                    <button id="teleopCubesTopMinus" class="btn btn-danger" type="button">-</button>
+                  </div>
+                  <span id="teleopCubesTop" class="input-group-text col-8" style="background-color:#9B72EF">Teleop Cubes
+                    Top:
                     0</span>
-                  <button id="teleopCubesTopPlus" class="btn btn-success col-1" type="button">+</button>
+                  <div class="input-group-append col-1">
+                    <button id="teleopCubesTopPlus" class="btn btn-success" type="button">+</button>
+                  </div>
                 </div>
 
                 <div class="input-group mb-3 fw-bold">
-                  <button id="teleopCubesMiddleMinus" class="btn btn-danger col-1" type="button">-</button>
+                  <div class="input-group-prepend col-1">
+                    <button id="teleopCubesMiddleMinus" class="btn btn-danger" type="button">-</button>
+                  </div>
                   <span id="teleopCubesMiddle" class="input-group-text col-8" style="background-color:#9B72EF">Teleop Cubes
                     Middle:
                     0</span>
-                  <button id="teleopCubesMiddlePlus" class="btn btn-success col-1" type="button">+</button>
+                  <div class="input-group-append col-1">
+                    <button id="teleopCubesMiddlePlus" class="btn btn-success" type="button">+</button>
+                  </div>
                 </div>
 
                 <div class="input-group mb-3 fw-bold">
-                  <button id="teleopCubesBottomMinus" class="btn btn-danger col-1" type="button">-</button>
-                  <span id="teleopCubesBottom" class="input-group-text col-8" style="background-color:#9B72EF">Teleop Cubes
-                    Bottom:
+                  <div class="input-group-prepend col-1">
+                    <button id="teleopCubesBottomMinus" class="btn btn-danger" type="button">-</button>
+                  </div>
+                  <span id="teleopCubesBottom" class="input-group-text col-8" style="background-color:#9B72EF">Teleop Cubes Bottom:
                     0</span>
-                  <button id="teleopCubesBottomPlus" class="btn btn-success col-1" type="button">+</button>
+                  <div class="input-group-append col-1">
+                    <button id="teleopCubesBottomPlus" class="btn btn-success" type="button">+</button>
+                  </div>
                 </div>
 
                 <!-- Checkboxes -->
@@ -195,9 +239,11 @@ require 'inc/header.php';
               <div class="card-header fw-bold">
                 End Game
               </div>
+
               <div class="card-body">
 
-                <div class="form-check mb-3">
+                <div class="row">
+                  <div class="form-check form-check-inline mb-3">
                     <label for="endgamechargestation" class="form-check-label">Charge Station?</label>
                     <select id="endgamechargestation" class="form-select">
                       <option value="0">None</option>
@@ -206,13 +252,18 @@ require 'inc/header.php';
                       <option value="3">Engaged</option>
                     </select>
                   </div>
-
-                    <div class="form-check form-check-inline mb-3">
-                  <input id="dead" class="form-check-input" type="checkbox" name="dead">
-                      <label for="dead" class="form-check-label">Dead?</label>
                 </div>
 
-                <div>
+                <div class="row">
+                  <div class="col-1">
+                    <div class="form-check form-check-inline mb-3">
+                      <label for="dead" class="form-check-label">Dead?</label>
+                      <input id="dead" class="form-check-input" type="checkbox" name="dead">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
                   <label for="generalComment" class="form-label">General comment:</label>
                   <input id="generalComment" class="form-control" type="text">
                 </div>
