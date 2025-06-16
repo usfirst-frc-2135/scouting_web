@@ -45,7 +45,7 @@ require 'inc/header.php';
         <!-- Custom match button (collapsible section) -->
         <div class="card mb-3">
 
-          <div id="customMatch" class="accordion accordian-flush">
+          <div id="customMatch" class="accordion accordion-flush">
             <div class="accordion-item" style="background-color: #F8F9FA">
               <h2 class="accordion-header">
                 <button class="accordion-button text-light bg-secondary" type="button" data-bs-toggle="collapse"
@@ -270,7 +270,7 @@ require 'inc/header.php';
     <!-- Red2 - Red Team 3 -->
     <div class="col-lg-4 col-sm-4 col-xs-4 gx-3">
       <div id="R2Flush" class="accordion accordion-flush text-light bg-danger mb-3">
-        <div class="accordian-item bg-danger">
+        <div class="accordion-item bg-danger">
           <h6 id="R2flush-headingOne" class="accordion-header bg-danger">
             <button class="accordion-button collapsed bg-danger btn-sm" type="button" data-bs-toggle="collapse"
               data-bs-target="#flush-R2Collapse" aria-expanded="false" aria-controls="flush-R2Collapse">
@@ -540,7 +540,7 @@ require 'inc/header.php';
 
 <script>
 
-  // CHECK! Replaced by accordian controls
+  // CHECK! Replaced by accordion controls
   // var coll = document.getElementsByClassName("collapsible");
 
   // for (var i = 0; i < coll.length; i++) {

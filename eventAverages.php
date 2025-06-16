@@ -18,7 +18,7 @@ require 'inc/header.php';
     <!--  COMMENTED OUT FOR NOW -->
     <!-- Match Filter -->
     <div class="card col-4 mb-3">
-      <div id="customMatch" class="accordion accordian-flush">
+      <div id="customMatch" class="accordion accordion-flush">
         <div class="accordion-item" style="background-color: #F8F9FA">
           <h2 class="accordion-header">
             <button class="accordion-button text-light bg-secondary" type="button" data-bs-toggle="collapse"
