@@ -121,7 +121,7 @@ require 'inc/header.php';
                   </div>
                   <div class="form-check form-check-inline">
                     <input id="pitScore1" class="form-check-input" type="radio" name="pitOrgGroup">
-                    <label for="pitScore1" class="form-check-label">1 (Unorganized)</label>
+                    <label for="pitScore1" class="form-check-label">1 (Messy)</label>
                   </div>
                   <div class="form-check form-check-inline">
                     <input id="pitScore2" class="form-check-input" type="radio" name="pitOrgGroup">
