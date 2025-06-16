@@ -1,3 +1,10 @@
+
+<picture>
+ <source media="(prefers-color-scheme: dark)" srcset="YOUR-DARKMODE-IMAGE">
+ <source media="(prefers-color-scheme: light)" srcset="YOUR-LIGHTMODE-IMAGE">
+ <img alt="fav-icon" src="qr-code/Screenshot_20250612-190122.png">
+</picture>
+
 # Scouting Web App (github: scouting_web)
 
 ## What does it do?
@@ -23,20 +30,20 @@ https://github.com/usfirst-frc-2135/scouting_web
 To change the event code at the actual website scouting data: 
 - Go to the https://frc2135.org/scouting/2025/ path in your browser.
 - In the dbStatus page, you only need to change the event code to the one you want. (e.g. 2025cafr)
-- Scroll down to the bottom of the page and click "Write Config" (no other buttons need to be clicked). This writes a file onto the serve that changes the active event for everyone.
+- Scroll down to the bottom of the page and click "Write Config" (no other buttons need to be clicked). This writes a file onto the server that changes the active event for everyone.
 
 ## Normal dbStatus Settings for website
 
 The normal dbStatus settings are as shown below. They shouldn’t need to be edited to change the event code or access the picklist page:
+ 
+- Server URL:  `localhost` (^1)
+- Database Name:  `scouting2025_2`
+- User Name:  `scoutingsql`
+- Password:  `xxxxxxx` (ask for this) 
+- tbakey:  `w3if5pkJk5JxG4OJw3wuxEShriilntI6lijMZFCAn12QkOR4ltxcJ6nPWK0Kifnu`
 
-| ----------------- | ---------------------------------------------------------------- |
-| MySQL Server URL: | localhost (*1)                                                   |
-| Database Name:    | scouting2025_2                                                   |
-| User Name:        | scoutingsql                                                      |
-| Password:         | ************* (ask for this)                                     |
-| tbakey            | w3if5pkJk5JxG4OJw3wuxEShriilntI6lijMZFCAn12QkOR4ltxcJ6nPWK0Kifnu |
 
-(*1) (because the SQL code is executing on the server and can identify itself with "localhost")| 
+(^1) (because the SQL code is executing on the server and can identify itself with 'localhost')| 
 
 
 ### When creating a new database on the actual website:
@@ -45,68 +52,67 @@ To initially create a new database on the website, Mr. Mullins has to physically
 
 - Go to MySQL Databases
 - Create the new database (e.g. scouting2026)
-- Add the scoutingsql user with all privileges
+- Add the `scoutingsql` user with all privileges
 
 Tables within the database are created automatically when the scouting web app connects to a new database.
 
 ## Scouting Web App File Locations
 
-**Base Path**
+__Base Path__
 
-The Java script PHP files and directories (these are the files stored for the Scouring Web App in github) are found here (this is the <base_path>):
+The Java script PHP files and directories (these are the files stored for the Scouring Web App in github) are found here (this is the `<base_path>`):
 
 On the live team website (frc2135):
-- /public_html/scouting/2025/
+- `/public_html/scouting/2025/`
 
 For the localhost on a (Mac OS X) development computer:
-- /Applications/MAMP/htdocs/scouting_web/
+- `/Applications/MAMP/htdocs/scouting_web/`
 
-**Robot Image Files**
+__Robot Photo Image Files__
 
-The robot image files are uploaded from the Picture Upload page. These files should be deleted each year for the new challenge. They are placed in this location with this naming pattern:
+The robot photo image files are uploaded from the __Picture Upload__ page. These files should be deleted each year for the new challenge. They are placed in this location with this naming pattern:
 
-- <base_path>/robot-pics/<team_number>-<image_number>.<suffix>
+- `<base_path>/robot-pics/<team_number>-<image_number>.<suffix>` 
 
-
-**Database and Tables Files**
+__Database and Tables Files__
 
 When a new database and tables are created, a db config file is created:  
 
 On the live team website (frc2135):
-- /public_html/db_config.ini
+ - `/public_html/db_config.ini`
+  
 For the localhost on a (Mac OS X) development computer:
-- /Applications/MAMP/db_config.ini
+ - `/Applications/MAMP/db_config.ini`
 
 Files that seem to hold the database/table data are also created:
 
 On the live team website (frc2135):
-- /public_html/../.mysql_backup/<database_name>.sql.gz
+ - `/public_html/../.mysql_backup/<database_name>.sql.gz`
 (GZ file can be unzipped using “gzip -d <file>”)
 
 For the localhost on a (Mac OS X) development computer:
-          /Applications/MAMP/db/mysql57/<database_name>/<table_name>.frm and <table_name>.ibd
+ - `/Applications/MAMP/db/mysql57/<database_name>/<table_name>.frm` and `<table_name>.ibd`
 
 These files can be deleted once that database or table is no longer valid or used.
 
-**Viewing Data in Tables**
+__Viewing Data in Tables__
 
 The way to look at the (local) database is by navigating to localhost/phpMyAdmin in your browser (if you can't find this, you should be able to navigate to http://localhost/MAMP/ which should have info on getting to phpMyAdmin). On the left you should see all the database names and you can click on one to show all the tables in that database. You can click on the table name and it should show you the structure and data in each table. This should show you everything you want to know about the tables.
 
-**Debugging PHP code**
+__Debugging PHP code__
 
 For debugging PHP code, use this command to print out a message to the error log file:
 
 `error_log(“<msg_text>”);`
 
-Where <msg_text> can be appended with variable $var in this way:
-         error_log(“---> this is the data: $var”);
+Where <msg_text> can be appended with variable $var in this way:<br>
+
+         `error_log(“---> this is the data: $var”);`
 
 The issued message will be found near the bottom of the error log file, here:
 
 On the live team website (frc2135):
+- `/public_html/scouting/2025/error_log`
 
-- /public_html/scouting/2025/error_log
-  
 For the localhost on a (Mac OS X) development computer:
-
-- /Applications/MAMP/logs/php_error.log
+- `/Applications/MAMP/logs/php_error.log`
