@@ -8,19 +8,17 @@ require 'inc/header.php';
 
     <!-- Page Title -->
     <div class="row pt-3 pb-3 mb-3">
-      <div class="row justify-content-md-center">
+      <div class="row">
         <h2 class="col-md-6"><?php echo $title; ?></h2>
       </div>
 
       <!-- Main card to hold the match selection -->
-      <div class="card col-md-4 mx-auto">
+      <div class="card col-md-4 mx-auto mb-3">
 
         <!-- Our team matches list -->
-        <div class="card mb-3 p-3" style="background-color: #F8F9FA">
-          <h5>2135 Match Links</h5>
-          <div class="row mb-3">
-            <div id="ourMatches">
-            </div>
+        <h5 class="pt-3">2135 Match Links</h5>
+        <div class="row mb-3">
+          <div id="ourMatches">
           </div>
         </div>
 
@@ -76,61 +74,61 @@ require 'inc/header.php';
                         placeholder="Blue Team 3" aria-label="Blue Team 3">
                     </div>
                   </div>
-                  <button id="loadCustomMatch" class="btn btn-primary mb-3" type="button">Load Custom Match</button>
+                  <button id="loadCustomMatch" class="btn btn-primary" type="button">Load Custom Match</button>
                 </div>
               </div>
             </div>
           </div>
         </div>
-
-        <!-- Match overview card -->
-        <div class="card mb-3 p-3" style="background-color: #F8F9FA">
-          <h4 id="matchTitle">Match:</h4>
-          <h5 id="matchTime">Time:</h5>
-          <table class="table table-bordered table-sm border-dark">
-            <thead>
-              <tr>
-                <th></th>
-                <th class="text-center">Red</th>
-                <th class="text-center">Blue</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="table-secondary">Avg Total Coral</td>
-                <td id="redTotalCoral" class="table-danger"></td>
-                <td id="blueTotalCoral" class="table-primary"></td>
-              </tr>
-              <tr>
-                <td class="table-secondary">Avg Total Algae</td>
-                <td id="redTotalAlgae" class="table-danger"></td>
-                <td id="blueTotalAlgae" class="table-primary"></td>
-              </tr>
-              <tr>
-                <td class="table-secondary">Avg Auton Points</td>
-                <td id="redAvgAutoPoints" class="table-danger"></td>
-                <td id="blueAvgAutoPoints" class="table-primary"></td>
-              </tr>
-              <tr>
-                <td class="table-secondary">Avg Teleop Points</td>
-                <td id="redAvgTeleopPoints" class="table-danger"></td>
-                <td id="blueAvgTeleopPoints" class="table-primary"></td>
-              </tr>
-              <tr>
-                <td class="table-secondary">Avg Endgame Points</td>
-                <td id="redAvgEndgamePoints" class="table-danger"></td>
-                <td id="blueAvgEndgamePoints" class="table-primary"></td>
-              </tr>
-              <tr>
-                <td class="table-secondary">Total Predicted Points</td>
-                <td id="redTotalPredictedPoints" class="table-danger"></td>
-                <td id="blueTotalPredictedPoints" class="table-primary"></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
       </div>
+
+      <!-- Match overview card -->
+      <div class="card col-md-4 mx-auto mb-3 p-3">
+        <h5 id="matchTitle">Match:</h5>
+        <h5 id="matchTime">Time:</h5>
+        <table class="table table-bordered table-sm border-dark">
+          <thead>
+            <tr>
+              <th></th>
+              <th class="text-center">Red</th>
+              <th class="text-center">Blue</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="table-secondary">Avg Total Coral</td>
+              <td id="redTotalCoral" class="table-danger"></td>
+              <td id="blueTotalCoral" class="table-primary"></td>
+            </tr>
+            <tr>
+              <td class="table-secondary">Avg Total Algae</td>
+              <td id="redTotalAlgae" class="table-danger"></td>
+              <td id="blueTotalAlgae" class="table-primary"></td>
+            </tr>
+            <tr>
+              <td class="table-secondary">Avg Auton Points</td>
+              <td id="redAvgAutoPoints" class="table-danger"></td>
+              <td id="blueAvgAutoPoints" class="table-primary"></td>
+            </tr>
+            <tr>
+              <td class="table-secondary">Avg Teleop Points</td>
+              <td id="redAvgTeleopPoints" class="table-danger"></td>
+              <td id="blueAvgTeleopPoints" class="table-primary"></td>
+            </tr>
+            <tr>
+              <td class="table-secondary">Avg Endgame Points</td>
+              <td id="redAvgEndgamePoints" class="table-danger"></td>
+              <td id="blueAvgEndgamePoints" class="table-primary"></td>
+            </tr>
+            <tr>
+              <td class="table-secondary">Total Predicted Points</td>
+              <td id="redTotalPredictedPoints" class="table-danger"></td>
+              <td id="blueTotalPredictedPoints" class="table-primary"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
     </div>
   </div>
 
