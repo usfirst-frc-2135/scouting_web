@@ -25,15 +25,6 @@ require 'inc/header.php';
           top: 56px;
           background: white;
         }
-
-        /* th:first-child,
-        td:first-child,
-        tr {
-          position: sticky;
-          left: 0px;
-          z-index: 1;
-          background: rgba(255, 255, 255, 1);
-        } */
       </style>
       <table id="coprTable" class="table table-striped table-bordered table-hover table-sm border-dark text-center sortable">
         <thead>
@@ -79,7 +70,7 @@ require 'inc/header.php';
     $("#tableData").html("");
     for (let teamNum in coprData) {
       var row = '<tr>';
-      row += '<td>' + teamNum + '</td>';
+      row += '<td>' + "<a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + '</td>';
       for (let j = 0; j < keys.length; j++) {
         row += '<td>' + coprData[teamNum][keys[j]] + '</td>';
       }
