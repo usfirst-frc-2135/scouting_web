@@ -14,38 +14,54 @@ require 'inc/header.php';
         <button id="download_csv_file" class="btn btn-primary" type="button">Download CSV</button>
       </div>
     </div>
-    <!--  COMMENTED OUT FOR NOW
-      <div class="col-md-2">
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <select id="startPrefix" class="form-select mb-3">
-              <option class="dropdown-item" value="p">P</option>
-              <option class="dropdown-item" value="qm" selected>Qm</option>
-              <option class="dropdown-item" value="qf">Qf</option>
-              <option class="dropdown-item" value="sf">Sf</option>
-              <option class="dropdown-item" value="f">F</option>
-            </select>
-            </div>
-          <input id="startMatch" class="form-control" type="text" aria-label="Start Match Filter">
-        </div>
-      </div>
 
-      <div class="col-md-3">
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <select id="endPrefix class="form-select mb-3"">
-              <option class="dropdown-item" value="p">P</option>
-              <option class="dropdown-item" value="qm" selected>Qm</option>
-              <option class="dropdown-item" value="qf">Qf</option>
-              <option class="dropdown-item" value="sf">Sf</option>
-              <option class="dropdown-item" value="f">F</option>
-            </select>
-            </div
-          <input id="endMatch" class="form-control" type="text" aria-label="End Match Filter">
-          <button id="filterData" class="btn btn-primary" type="button">Filter Data</button>
+    <!--  COMMENTED OUT FOR NOW -->
+    <!-- Match Filter -->
+    <div class="card col-4 mb-3">
+      <div id="customMatch" class="accordion accordian-flush">
+        <div class="accordion-item" style="background-color: #F8F9FA">
+          <h2 class="accordion-header">
+            <button class="accordion-button text-light bg-secondary" type="button" data-bs-toggle="collapse"
+              data-bs-target="#filterEntry" aria-expanded="false" aria-controls="matchEntry">Filter Matches</button>
+          </h2>
+
+          <div id="filterEntry" class="accordion-collapse collapse" data-bs-parent="#customMatch">
+
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <select id="startPrefix" class="form-select mb-3" aria-label="Comp Level Select">
+                  <option value="p">P</option>
+                  <option value="qm" selected>QM</option>
+                  <option value="qf">QF</option>
+                  <option value="sf">SF</option>
+                  <option value="f">F</option>
+                </select>
+              </div>
+              <input id="startMatch" class="form-control col-2 mb-3" type="text" placeholder="Start"
+                aria-label="Start Match Filter">
+            </div>
+
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <select id="endPrefix" class="form-select mb-3" aria-label="Comp Level Select">
+                  <option value="p">P</option>
+                  <option value="qm" selected>QM</option>
+                  <option value="qf">QF</option>
+                  <option value="sf">SF</option>
+                  <option value="f">F</option>
+                </select>
+              </div>
+              <input id="endMatch" class="form-control col-2 mb-3" type="text" placeholder="End" aria-label="End Match Filter">
+            </div>
+
+            <div>
+              <button id="filterData" class="btn btn-primary btn-sm mb-3" type="button">Filter Data</button>
+            </div>
+          </div>
         </div>
       </div>
-COMMENTED OUT FOR NOW-->
+    </div>
+    <!-- COMMENTED OUT FOR NOW-->
 
     <!-- Main row to hold the table -->
     <div class="row mb-3">
