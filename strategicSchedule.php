@@ -111,7 +111,7 @@ require 'inc/header.php';
     $.get("api/tbaAPI.php", {
       getEventCode: true
     }, function (eventCode) {
-      console.log("==> strategicSchedule.php - getEventCode: " + eventCode);
+      console.log("==> strategicSchedule.php - getEventCode: " + eventCode.trim());
       $("#navbarEventCode").html(eventCode);
     });
 

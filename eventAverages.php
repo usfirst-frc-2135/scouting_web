@@ -553,7 +553,7 @@ COMMENTED OUT FOR NOW-->
     $.get("api/tbaAPI.php", {
       getEventCode: true
     }, function (eventCode) {
-      console.log("==> eventAverages.php - getEventCode: " + eventCode);
+      console.log("==> eventAverages.php - getEventCode: " + eventCode.trim());
       $("#navbarEventCode").html(eventCode);
       _eventCode = eventCode;
     });

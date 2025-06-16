@@ -103,7 +103,7 @@ require 'inc/header.php';
     $.get("api/tbaAPI.php", {
       getEventCode: true
     }, function (eventCode) {
-      console.log("==> pitStatus.php - getEventCode: " + eventCode);
+      console.log("==> pitStatus.php - getEventCode: " + eventCode.trim());
       $("#navbarEventCode").html(eventCode);
     });
 

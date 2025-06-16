@@ -374,7 +374,7 @@ require 'inc/header.php';
     $.get("api/tbaAPI.php", {
       getEventCode: true
     }, function (eventCode) {
-      console.log("==> pitForm.php - getEventCode: " + eventCode);
+      console.log("==> pitForm.php - getEventCode: " + eventCode.trim());
       $("#navbarEventCode").html(eventCode);
     });
 

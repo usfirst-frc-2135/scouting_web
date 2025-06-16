@@ -1051,7 +1051,7 @@ require 'inc/header.php';
     $.get("api/tbaAPI.php", {
       getEventCode: true
     }, function (eventCode) {
-      console.log("==> matchSheet.php - getEventCode: " + eventCode);
+      console.log("==> matchSheet.php - getEventCode: " + eventCode.trim());
       $("#navbarEventCode").html(eventCode);
     });
 

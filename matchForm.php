@@ -198,18 +198,18 @@ require 'inc/header.php';
               <div class="card-body">
 
                 <div class="form-check mb-3">
-                  <label for="endgamechargestation" class="form-check-label">Charge Station?</label>
-                  <select id="endgamechargestation" class="form-select">
-                    <option value="0">None</option>
-                    <option value="1">Parked</option>
-                    <option value="2">Docked</option>
-                    <option value="3">Engaged</option>
-                  </select>
-                </div>
+                    <label for="endgamechargestation" class="form-check-label">Charge Station?</label>
+                    <select id="endgamechargestation" class="form-select">
+                      <option value="0">None</option>
+                      <option value="1">Parked</option>
+                      <option value="2">Docked</option>
+                      <option value="3">Engaged</option>
+                    </select>
+                  </div>
 
-                <div class="form-check form-check-inline mb-3">
+                    <div class="form-check form-check-inline mb-3">
                   <input id="dead" class="form-check-input" type="checkbox" name="dead">
-                  <label for="dead" class="form-check-label">Dead?</label>
+                      <label for="dead" class="form-check-label">Dead?</label>
                 </div>
 
                 <div>
@@ -478,7 +478,7 @@ require 'inc/header.php';
     $.get("api/tbaAPI.php", {
       getEventCode: true
     }, function (eventCode) {
-      console.log("==> matchForm.php - getEventCode: " + eventCode);
+      console.log("==> matchForm.php - getEventCode: " + eventCode.trim());
       $("#navbarEventCode").html(eventCode);
     });
 
