@@ -26,25 +26,23 @@ require 'inc/header.php';
             <div>
               <h4>Match Info</h4>
             </div>
-            <div class="mb-3">
+            <div class="col-5 mb-3">
               <label for="teamNumber" class="form-label">Team Number</label>
               <input id="teamNumber" class="form-control" type="number" placeholder="FRC team number">
             </div>
-            <div class="rowmb-3">
+            <div class="row col-8 mb-3">
               <span>Match Number</span>
               <div class="input-group">
                 <div class="input-group-prepend">
                   <select id="compLevel" class="form-select" aria-label="Comp Level Select">
                     <option value="p">P</option>
-                    <option value="qm">QM</option>
+                    <option value="qm" selected>QM</option>
                     <option value="qf">QF</option>
                     <option value="sf">SF</option>
                     <option value="f">F</option>
                   </select>
                 </div>
-                <div class="">
-                  <input id="matchNumber" class="form-control" type="text" placeholder="Match Number" aria-label="Match Number">
-                </div>
+                <input id="matchNumber" class="form-control" type="text" placeholder="Match Number" aria-label="Match Number">
               </div>
             </div>
             <div class="col-6 mb-3">

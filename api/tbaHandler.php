@@ -21,7 +21,7 @@ class tbaHandler
   private $dbConnection;
   private $apiURL;
 
-  function __construct($tbaApiKey, $tbaTableName, $dbConnection)
+  public function __construct($tbaApiKey, $tbaTableName, $dbConnection)
   {
     $this->apiURL = "https://www.thebluealliance.com/api/v3";
     $this->dbConnection = $dbConnection;

@@ -30,13 +30,13 @@ require 'inc/header.php';
               <label for="teamNumber" class="form-label">Team Number </label>
               <input id="teamNumber" class="form-control" type="text" placeholder="FRC team number">
             </div>
-            <div class="row col-6 mb-3">
+            <div class="row col-8 mb-3">
               <span>Match Number</span>
               <div class="input-group">
                 <div class="input-group-prepend">
                   <select id="compLevel" class="form-select" aria-label="Comp Level Select">
                     <option value="p">P</option>
-                    <option value="qm">QM</option>
+                    <option value="qm" selected>QM</option>
                     <option value="qf">QF</option>
                     <option value="sf">SF</option>
                     <option value="f">F</option>
