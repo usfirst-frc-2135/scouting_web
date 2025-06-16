@@ -1,5 +1,5 @@
 <?php
-$title = 'Pit Status';
+$title = 'Pit Scouting Status';
 require 'inc/header.php';
 ?>
 

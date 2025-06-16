@@ -8,21 +8,21 @@ require 'inc/header.php';
 
     <!-- Page Title -->
     <div class="row pt-3 pb-3 mb-3">
-      <h2 class="col-4"><?php echo $title; ?></h2>
+      <h2 class="col-md-3"><?php echo $title; ?></h2>
 
-      <div class="col-2">
+      <div class="col-md-3">
         <button id="download_csv_file" class="btn btn-primary" type="button">Download CSV</button>
       </div>
     </div>
 
     <!--  COMMENTED OUT FOR NOW -->
     <!-- Match Filter -->
-    <div class="card col-4 mb-3">
+    <div class="card col-md-3 mb-3">
       <div id="customMatch" class="accordion accordion-flush">
         <div class="accordion-item" style="background-color: #F8F9FA">
           <h2 class="accordion-header">
             <button class="accordion-button text-light bg-secondary" type="button" data-bs-toggle="collapse"
-              data-bs-target="#filterEntry" aria-expanded="false" aria-controls="matchEntry">Filter Matches</button>
+              data-bs-target="#filterEntry" aria-expanded="false" aria-controls="matchEntry">Match Range Filter</button>
           </h2>
 
           <div id="filterEntry" class="accordion-collapse collapse" data-bs-parent="#customMatch">

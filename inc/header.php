@@ -34,7 +34,7 @@
 
 <body class="bg-light">
   <!-- Create collapsible navbar and navigation buttons -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+  <nav class="navbar navbar-expand-sm bg-dark sticky-top" data-bs-theme="dark">
     <a class="navbar-brand text-white" href="./index.php">
       <img src="./images/favicon-32x32.png" alt="Logo" width="24" height="24" class="d-inline-block align-text-top">
       <span id="navbarEventCode"> ????</span>
@@ -46,41 +46,45 @@
 
     <div id="navbarCollapse" class="collapse navbar-collapse">
       <ul class="navbar-nav mr-auto">
-        <ul class="nav nav-pills nav-justified">
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Teams</a>
-            <ul class="dropdown-menu text-secondary bg-dark">
-              <a class="dropdown-item text-secondary" data-toggle="pill" href="./pitStatus.php">Pit Status</a>
-              <a class="dropdown-item text-secondary" data-toggle="pill" href="./teamLookup.php">Team Lookup</a>
-              <a class="dropdown-item text-secondary" data-toggle="pill" href="./pitPhotoUpload.php">Photo Upload</a>
-              <a class="dropdown-item text-secondary" data-toggle="pill" href="./pitForm.php">Pit Form</a>
+        <ul class="nav nav-pills flex-column text-end justif">
+          <li class="nav-item dropdown text-end">
+            <a class="nav-link dropdown-toggle text-white-50" href="#" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">Teams</a>
+            <ul class="dropdown-menu text-end bg-dark">
+              <a class="dropdown-item text-white-50" data-toggle="pill" href="./pitStatus.php">Pit Status</a>
+              <a class="dropdown-item text-white-50" data-toggle="pill" href="./teamLookup.php">Team Lookup</a>
+              <a class="dropdown-item text-white-50" data-toggle="pill" href="./pitPhotoUpload.php">Photo Upload</a>
+              <a class="dropdown-item text-white-50" data-toggle="pill" href="./pitForm.php">Pit Form</a>
             </ul>
           </li>
 
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Matches</a>
-            <ul class="dropdown-menu text-secondary bg-dark">
-              <a class="dropdown-item text-secondary" data-toggle="pill" href="./matchQrScanner.php">QR Form</a>
-              <a class="dropdown-item text-secondary" data-toggle="pill" href="./matchForm.php">Match Form</a>
-              <a class="dropdown-item text-secondary" data-toggle="pill" href="./matchData.php">Match Data</a>
+          <li class="nav-item dropdown text-end">
+            <a class="nav-link dropdown-toggle text-white-50" href="#" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">Matches</a>
+            <ul class="dropdown-menu text-end bg-dark">
+              <a class="dropdown-item text-white-50" data-toggle="pill" href="./matchQrScanner.php">QR Form</a>
+              <a class="dropdown-item text-white-50" data-toggle="pill" href="./matchForm.php">Match Form</a>
+              <a class="dropdown-item text-white-50" data-toggle="pill" href="./matchData.php">Match Data</a>
             </ul>
           </li>
 
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Strategy</a>
-            <ul class="dropdown-menu text-secondary bg-dark">
-              <a class="dropdown-item text-secondary" data-toggle="pill" href="./strategicSchedule.php">Strategic Schedule</a>
-              <a class="dropdown-item text-secondary" data-toggle="pill" href="./strategicForm.php">Strategic Form</a>
+          <li class="nav-item dropdown text-end">
+            <a class="nav-link dropdown-toggle text-white-50" href="#" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">Strategy</a>
+            <ul class="dropdown-menu text-end bg-dark">
+              <a class="dropdown-item text-white-50" data-toggle="pill" href="./strategicSchedule.php">Strategic Schedule</a>
+              <a class="dropdown-item text-white-50" data-toggle="pill" href="./strategicForm.php">Strategic Form</a>
             </ul>
           </li>
 
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Event</a>
-            <ul class="dropdown-menu text-secondary bg-dark">
-              <a class="dropdown-item text-secondary" data-toggle="pill" href="./matchSheet.php">Match Sheet</a>
-              <a class="dropdown-item text-secondary" data-toggle="pill" href="./eventAverages.php">Event Averages</a>
-              <a class="dropdown-item text-secondary" data-toggle="pill" href="./strategicData.php">Strategic Data</a>
-              <a class="dropdown-item text-secondary" data-toggle="pill" href="./eventCoprData.php">Event COPRs</a>
+          <li class="nav-item dropdown text-end">
+            <a class="nav-link dropdown-toggle text-white-50" href="#" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">Event</a>
+            <ul class="dropdown-menu text-end bg-dark">
+              <a class="dropdown-item text-white-50" data-toggle="pill" href="./matchSheet.php">Match Sheet</a>
+              <a class="dropdown-item text-white-50" data-toggle="pill" href="./strategicData.php">Strategic Data</a>
+              <a class="dropdown-item text-white-50" data-toggle="pill" href="./eventAverages.php">Event Averages</a>
+              <a class="dropdown-item text-white-50" data-toggle="pill" href="./eventCoprData.php">Event COPRs</a>
             </ul>
           </li>
 

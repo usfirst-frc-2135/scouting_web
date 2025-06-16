@@ -13,7 +13,7 @@ require 'inc/header.php';
       </div>
 
       <!-- Main card to hold the match selection -->
-      <div class="card col-md-6 mx-auto">
+      <div class="card col-md-4 mx-auto">
 
         <!-- Our team matches list -->
         <div class="card mb-3 p-3" style="background-color: #F8F9FA">

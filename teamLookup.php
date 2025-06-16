@@ -1050,7 +1050,7 @@ require 'inc/header.php';
 
     // Teleop Table
 
-    avgs["teleoppointsstr"] = "<b>Points</b>";
+    avgs["teleoppointsstr"] = "<b>Total Points</b>";
     avgs["teleoptotalcoralstr"] = "<b>Coral Scored</b>";
     avgs["teleoptotalalgaestr"] = "<b>Algae Scored</b>";
     avgs["teleopcoralpointsstr"] = "<b>Coral Points</b>";
