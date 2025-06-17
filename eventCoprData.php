@@ -72,7 +72,7 @@ require 'inc/header.php';
       var row = '<tr>';
       row += '<td>' + "<a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + '</td>';
       for (let j = 0; j < keys.length; j++) {
-        row += '<td>' + coprData[teamNum][keys[j]] + '</td>';
+        row += '<td>' + coprData[teamNum][keys[j][0]] + '</td>';
       }
       row += '</tr>';
       $("#tableData").append(row);
@@ -83,29 +83,30 @@ require 'inc/header.php';
   function addKeysToCoprTable(keys) {
     var header = '<th scope="col">Team</th>';
     for (let i = 0; i < keys.length; i++) {
-      header += '<th scope="col">' + keys[i] + '</th>'
+      header += '<th scope="col">' + keys[i][1] + '</th>'
     }
     $("#tableKeys").html(header);
   }
 
-  // This table sets the order of the final COPR table
+  // This table controls the order and header names for the COPR table
+  // First column matches TBA keys for a match breakdown, column two is a preferred header name
   const coprKeys =
-    ["rp",
-      "totalPoints",
-      "autoPoints",
-      "autoMobilityPoints",
-      "autoCoralPoints",
-      "autoCoralCount",
-      "teleopPoints",
-      "teleopCoralPoints",
-      "teleopCoralCount",
-      "algaePoints",
-      "wallAlgaeCount",
-      "netAlgaeCount",
-      "endGameBargePoints",
-      "foulPoints",
-      "foulCount",
-      "techFoulCount"
+    [["rp", "RP"],
+    ["totalPoints", "Total Pts"],
+    ["autoPoints", "Auto Pts"],
+    ["autoMobilityPoints", "Leave"],
+    ["autoCoralPoints", "Auto Coral Pts"],
+    ["autoCoralCount", "Auto Coral Ct"],
+    ["teleopPoints", "Teleop Pts"],
+    ["teleopCoralPoints", "Teleop Coral Pts"],
+    ["teleopCoralCount", "Teleop Coral Ct"],
+    ["algaePoints", "Algae Pts"],
+    ["wallAlgaeCount", "Wall Algae Ct"],
+    ["netAlgaeCount", "Net Algae Ct"],
+    ["endGameBargePoints", "Climb Pts"],
+    ["foulPoints", "Foul Pts"],
+    ["foulCount", "Foul Ct"],
+    ["techFoulCount", "Tech Foul Ct"]
     ];
 
   // Add data keys (fields) to COPR table in html
