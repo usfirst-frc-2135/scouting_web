@@ -24,17 +24,17 @@ else if (isset($_GET["getTeamInfo"]))
 {
   echo (json_encode($tba->getTeamInfo($_GET["getTeamInfo"])));
 }
-else if (isset($_GET["getSimpleTeamList"]))
+else if (isset($_GET["getEventTeamNames"]))
 {
-  echo (json_encode($tba->getSimpleTeamList($eventCode)));
+  echo (json_encode($tba->getEventTeamNames($eventCode)));
 }
-else if (isset($_GET["getTeamNamesList"]))
+else if (isset($_GET["getEventMatches"]))
 {
-  echo (json_encode($tba->getTeamNamesList($eventCode)));
+  echo (json_encode($tba->getEventMatches($eventCode)));
 }
-else if (isset($_GET["getMatchList"]))
+else if (isset($_GET["getEventTeamsEx"]))
 {
-  echo (json_encode($tba->getMatchList($eventCode)));
+  echo (json_encode($tba->getEventTeamsEx($eventCode)));
 }
 else if (isset($_GET["getStrategicMatches"]))
 {

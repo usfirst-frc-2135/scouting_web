@@ -591,11 +591,11 @@ require 'inc/header.php';
     console.log("==> matchSheet.php: loadMatchData()");
     if (!localMatchData) {
       $.get("api/dbReadAPI.php", {
-        getAllMatchData: 1
-      }).done(function (matchData) {
-        console.log("==> getAllMatchData");
-        matchData = JSON.parse(matchData);
-        var mdp = new matchDataProcessor(matchData);
+        getEventMatches: 1
+      }).done(function (eventMatches) {
+        console.log("==> getEventMatches");
+        eventMatches = JSON.parse(eventMatches);
+        var mdp = new matchDataProcessor(eventMatches);
         mdp.getSiteFilteredAverages(function (averageData) {
           localMatchData = averageData;
           successFunction();
@@ -637,14 +637,14 @@ require 'inc/header.php';
     if (!bUsingCustom) {
       if (!localMatchList) {
         $.get("api/tbaAPI.php", {
-          getMatchList: 1
-        }).done(function (listData) {
-          console.log("==> getMatchList");
-          if (listData == null)
+          getEventMatches: 1
+        }).done(function (eventMatches) {
+          console.log("==> getEventMatches");
+          if (eventMatches == null)
             alert("Can't load matchlist from TBA; check if TBA Key was set in db_config");
           else {
             var ourMatches = {};
-            jsonMatchData = JSON.parse(listData)["response"];
+            jsonMatchData = JSON.parse(eventMatches)["response"];
             localMatchList = {};
             for (let mi in jsonMatchData) {
               var newMatch = {};

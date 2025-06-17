@@ -359,10 +359,10 @@ require 'inc/header.php';
   function readMatchDataAndBuildTable() {
     console.log("==> eventAverages.php: readAllMatchDataAndBuildTable()");
     $.get("api/dbReadAPI.php", {
-      getAllMatchData: 1
-    }).done(function (readData) {
-      console.log("==> getAllMatchData:");
-      jsonData = JSON.parse(readData);
+      getEventMatches: 1
+    }).done(function (eventMatches) {
+      console.log("==> getEventMatches:");
+      jsonData = JSON.parse(eventMatches);
       _jsonMatchData = jsonData;
       var mdp = new matchDataProcessor(jsonData);
       mdp.getSiteFilteredAverages(function (averageData) {
@@ -520,9 +520,9 @@ require 'inc/header.php';
   }
 
   // 
-  function processData(matchData) {
+  function processData(eventMatches) {
     console.log("==> eventAverages.php: processData()");
-    var mdp = new matchDataProcessor(matchData);
+    var mdp = new matchDataProcessor(eventMatches);
     var csvStr = "Team,Pit Location,OPR,Total Coral Avg,Total Coral Max,Total Algae Avg,Total Algae Max,Auto Pts Avg,Auto Pts Max,Tel Pts Avg,Tel Pts Max,End Pts Avg,End Pts Max,Total Pts Avg,Total Pts Max,Auto Coral Avg,Auto Coral Max,Auto L1 Avg,Auto L1 Max,Auto L2 Avg,Auto L2 Max,Auto L3 Avg,Auto L3 Max,Auto L4 Avg,Auto L4 Max,Auto Algae Avg,Auto Algae Max,Auto Net Avg,Auto Net Max,Auto Proc Avg,Auto Proc Max,Tel Coral Avg,Tel Coral Max,Tel L1 Avg,Tel L1 Max,Tel L2 Avg,Tel L2 Max,Tel L3 Avg,Tel L3 Max,Tel L4 Avg,Tel L4 Max,Tel Coral Acc,Tel Algae Avg,Tel Algae Max,Tel Net Avg,Tel Net Max,Tel Proc Avg,Tel Proc Max,Tel Algae Acc,End N/A,End Park,End Fall,End Shal,End Deep, Total Died, Note\n";
     mdp.getSiteFilteredAverages(function (averageData) {
       console.log("writing csv lines");
@@ -544,10 +544,10 @@ require 'inc/header.php';
   function writeCSVFile() {
     console.log("==> eventAverages.php: writeCSVFile()");
     $.get("api/dbReadAPI.php", {
-      getAllMatchData: 1
-    }).done(function (allMatchData) {
-      console.log("==> getAllMatchData:");
-      matchData = JSON.parse(allMatchData);
+      getEventMatches: 1
+    }).done(function (eventMatches) {
+      console.log("==> getEventMatches:");
+      allEventMatches = JSON.parse(eventMatches);
 
       // Get OPR data from TBA
       $.get("api/tbaAPI.php", {
@@ -556,7 +556,7 @@ require 'inc/header.php';
         console.log("==> getCOPRs:");
         coprData = JSON.parse(coprData)["coprData"];
         tbaCoprData = coprData;
-        processData(matchData);
+        processData(allEventMatches);
       });
     });
   }

@@ -199,9 +199,9 @@ require 'inc/header.php';
     // Update the database statuses
     $.post("api/dbAPI.php", {
       getDBStatus: true
-    }, function (statusData) {
+    }, function (dbStatus) {
       console.log("==> getDBStatus");
-      updateStatusValues(JSON.parse(statusData));
+      updateStatusValues(JSON.parse(dbStatus));
     });
 
     // Loop through handling all fields
@@ -247,8 +247,8 @@ require 'inc/header.php';
       configData["strategictable"] = databaseName + "_st";
       configData["writeConfig"] = JSON.stringify(configData);
 
-      $.post("api/dbAPI.php", configData, function (statusData) {
-        updateStatusValues(JSON.parse(statusData));
+      $.post("api/dbAPI.php", configData, function (statusValues) {
+        updateStatusValues(JSON.parse(statusValues));
       });
     });
 
@@ -266,8 +266,8 @@ require 'inc/header.php';
       configInfo["filterConfig"] = JSON.stringify(filterData);
 
       // Make request
-      $.post("api/dbAPI.php", configInfo, function (statusData) {
-        updateStatusValues(JSON.parse(statusData));
+      $.post("api/dbAPI.php", configInfo, function (statusValues) {
+        updateStatusValues(JSON.parse(statusValues));
       });
     });
 
@@ -275,9 +275,9 @@ require 'inc/header.php';
     $("#createDB").on('click', function (event) {
       $.post("api/dbAPI.php", {
         createDB: true
-      }, function (statusData) {
+      }, function (statusValues) {
         console.log("==> createDB");
-        updateStatusValues(JSON.parse(statusData));
+        updateStatusValues(JSON.parse(statusValues));
       });
     });
 
@@ -287,7 +287,7 @@ require 'inc/header.php';
         createTable: true
       }, function (createTable) {
         console.log("==> createDB");
-        updateStatusValues(JSON.parse(statusData));
+        updateStatusValues(JSON.parse(createTable));
       });
     });
   });

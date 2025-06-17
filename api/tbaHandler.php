@@ -1,4 +1,6 @@
 <?php
+require_once 'calculateCOPRs.php';
+
 /*
   TBA Handler
 
@@ -16,10 +18,10 @@ class tbaHandler
 {
   private $charset = "utf8";
   private $alreadyConnected = false;
+  private $apiURL;
+  private $dbConnection;
   private $tbaApiKey = null;
   private $tbaTableName;
-  private $dbConnection;
-  private $apiURL;
 
   public function __construct($tbaApiKey, $tbaTableName, $dbConnection)
   {
@@ -134,7 +136,7 @@ class tbaHandler
     return $apiResponse;
   }
 
-  // Get Team Info
+  ///// Get Info for a Team (name) /////
   public function getTeamInfo($teamnum)
   {
     error_log(">>> getTeamInfo() starting for $teamnum");
@@ -145,53 +147,52 @@ class tbaHandler
     return $this->makeDBCachedCall($requestURI);
   }
 
-  // Team List Operations 
-  private function getTeamList($eventCode)
+  ///// Get a list of Teams at an Event /////
+  private function getEventTeams($eventCode)
   {
     $requestURI = "/event/" . $eventCode . "/teams";
     return $this->makeDBCachedCall($requestURI);
   }
 
+  ///// Get a list of Teams at an Event AND Handle 2nd (or more) Robots /////
   // NOTE: for events that have multiple robots, the teamlist only lists the basic team numbers.
   // So we must adjust the list to contain the multiple robot <teamNum><Letter>.
-  public function getSimpleTeamList($eventCode)
+  public function getEventTeamsEx($eventCode)
   {
-    error_log("starting getSimpleTeamList for eventCode: $eventCode");
+    error_log("starting getEventTeamsEx for eventCode: $eventCode");
+    $out = array();
 
     // If eventCode is "COMPX", just exit.
     if (strstr($eventCode, 'COMPX'))
     {
-      error_log("skipping getSimpleTeamList for COMPX");
-      $aout = array();
-      return $aout;
+      error_log("skipping getEventTeamsEx for COMPX");
+      return $out;
     }
 
-    $tl = $this->getTeamList($eventCode);
-    $out = array();
+    $tl = $this->getEventTeams($eventCode);
 
     // FORNOW - only "mttd", "cacg", "cacc" events are known multi-robot events. Add any others as needed.
     $bMultiRobots = false;
     if (strstr($eventCode, 'mttd') || strstr($eventCode, 'cacg') || strstr($eventCode, 'cacc'))   // Hardcoded multi-robot eventcode
     {
-      error_log("getTeamList: this is a multi-robot event");
+      error_log("getEventTeamsEx: this is a multi-robot event");
       $bMultiRobots = true;
     }
 
     $ml = null;   // matchlist, only needed if multi-robot event
     if ($bMultiRobots == true)
     {
-      error_log("getTeamList: going to adjust teamlist for multi-robots");
-      $ml = $this->getMatchList($eventCode);
+      error_log("getEventTeamsEx: going to adjust teamlist for multi-robots");
+      $ml = $this->getEventMatches($eventCode);
     }
 
     foreach ($tl["response"] as $teamRow)
     {
+      // If this is a multi-robot event, go thru  match list to get B/C/D/E robots and add them as separate teams.
       if ($bMultiRobots == true)
       {
-        // If this is a multi-robot event, go thru  match list to get B/C/D/E robots and 
-        // add them as separate teams.
         $teamnum = $teamRow["team_number"];
-        $numStr = "$teamnum"; // $teadmnum needs to be converted to a string, for later
+        $numStr = "$teamnum"; // $teamnum needs to be converted to a string, for later
         $multiBots = array();
         array_push($multiBots, $teamnum);  // always add the plain team number
 
@@ -248,24 +249,24 @@ class tbaHandler
       else
         array_push($out, $teamRow["team_number"]);   // not mulit-bot case
     }
+
     return $out;
   }
 
-  ///// getTeamNamesList function /////
-  public function getTeamNamesList($eventCode)
+  ///// Get a List of Team Names at an Event /////
+  public function getEventTeamNames($eventCode)
   {
-    error_log("starting getTeamNamesList for eventCode: $eventCode");
+    error_log("starting getEventTeamNames for eventCode: $eventCode");
+    $out = [];
 
     // If eventCode is "COMPX", just exit.
     if (strstr($eventCode, 'COMPX'))
     {
-      error_log("skipping getTeamNamesList for COMPX");
-      $aout = array();
-      return $aout;
+      error_log("skipping getEventTeamNames for COMPX");
+      return $out;
     }
 
-    $out = array();
-    $tl = $this->getTeamList($eventCode);
+    $tl = $this->getEventTeams($eventCode);
 
     // Go thru all the teams and get the team name.
     foreach ($tl["response"] as $teamRow)
@@ -281,6 +282,17 @@ class tbaHandler
     return $out;
   }
 
+  /*********** Match Data Operations ***********/
+
+  ///// Get All Matches at an Event /////
+  public function getEventMatches($eventCode)
+  {
+    $requestURI = "/event/" . $eventCode . "/matches";
+    return $this->makeDBCachedCall($requestURI);
+  }
+
+  /*********** Event Data Operations ***********/
+
   private function teamListToLookup($teamList)
   {
     $out = array();
@@ -294,277 +306,39 @@ class tbaHandler
     return $out;
   }
 
-  /*********** Match Data Operations ***********/
-
-  public function getMatchList($eventCode)
-  {
-    $requestURI = "/event/" . $eventCode . "/matches";
-    return $this->makeDBCachedCall($requestURI);
-  }
-
-  private function getSimpleMatches($eventCode)
-  {
-    $ml = $this->getMatchList($eventCode);
-    return $ml["response"];
-  }
-
-  private function removeElimMatches($matchData)
-  {
-    $out = array();
-    foreach ($matchData as $matchRow)
-    {
-      if ($matchRow["comp_level"] == "qm")
-      {
-        array_push($out, $matchRow);
-      }
-    }
-    return $out;
-  }
-
-  private function removeUnplayedMatches($matchData)
-  {
-    $out = array();
-    foreach ($matchData as $matchRow)
-    {
-      if ($matchRow["alliances"]["red"]["score"] != -1)
-      {
-        array_push($out, $matchRow);
-      }
-    }
-    return $out;
-  }
-
-  private function getNumericalBreakdownKeys($matchData)
-  {
-    $sampleBreakdown = $matchData[0]["score_breakdown"]["red"];
-    $out = array();
-    foreach ($sampleBreakdown as $key => $value)
-    {
-      if (is_numeric($value))
-      {
-        array_push($out, $key);
-      }
-    }
-    return $out;
-  }
-
-  // COPR Calculation 
-  // NOTE: this will NOT work for events with multiple teams unless that event code is in 
-  // the hard-coded list (see getSimpleTeamList()). The result is that there is no OPR data shown.
-
-  private function choleskyDecomposition($A)
-  {
-    //  Args:
-    //    $A - Must be square matrix that is symetric and positive definite
-    //  Returns:
-    //    array("L" => and "Lp" =>) decompositions
-    $n = sizeof($A);
-
-    $L = array_fill(0, $n, array_fill(0, $n, 0));
-    $Lp = array_fill(0, $n, array_fill(0, $n, 0));
-
-    for ($i = 0; $i < $n; $i++)
-    {
-      for ($j = 0; $j <= $i; $j++)
-      {
-        $sum = 0;
-        for ($k = 0; $k < $j; $k++)
-        {
-          $sum += $L[$i][$k] * $L[$j][$k];
-        }
-        if ($i == $j)
-        {
-          $L[$i][$j] = sqrt($A[$i][$j] - $sum);
-          $Lp[$j][$i] = sqrt($A[$i][$j] - $sum);
-        }
-        else
-        {
-          if ($L[$j][$j] != 0)
-          {
-            $L[$i][$j] = (1 / $L[$j][$j]) * ($A[$i][$j] - $sum);
-            $Lp[$j][$i] = (1 / $L[$j][$j]) * ($A[$i][$j] - $sum);
-            $test1 = (1 / $L[$j][$j]) * ($A[$i][$j] - $sum);
-            $test2 = (1 / $L[$j][$j]) * ($A[$i][$j] - $sum);
-          }
-          else
-          {
-            error_log("---> in choleskyDecomposition(): avoiding divide-by-0!");
-            $L[$i][$j] = 0;
-            $Lp[$j][$i] = 0;
-          }
-        }
-      }
-    }
-
-    return array("L" => $L, "Lp" => $Lp);
-  }
-
-  private function forwardSubstitution($A, $B)
-  {
-    /*
-      Args:
-        $A - Lower Triangular Square Matrix
-        $B - Vector of Length of a side of $A
-      Returns:
-        $X - Solved vector
-      */
-    $n = sizeof($A);
-    $X = array_fill(0, $n, 0);
-    for ($i = 0; $i != $n; $i++)
-    {
-      $sum = 0;
-      for ($j = 0; $j < $i; $j++)
-      {
-        $sum += $A[$i][$j] * $X[$j];
-      }
-      if ($A[$i][$i] != 0)
-      {
-        $X[$i] = ($B[$i] - $sum) / $A[$i][$i];
-        $test3 = ($B[$i] - $sum) / $A[$i][$i];
-      }
-      else
-      {
-        error_log("---> in forwardSubstitution(): avoiding divide-by-0");
-        $X[$i] = 0;
-      }
-    }
-    return $X;
-  }
-
-  private function backwardSubstitution($A, $B)
-  {
-    /*
-      Args:
-        $A - Upper Triangular Square Matrix
-        $B - Vector of Length of a side of $A
-      Returns:
-        $X - Solved vector
-      */
-    $n = sizeof($A);
-    $nm = $n - 1;
-    $X = array_fill(0, $n, 0);
-    for ($i = 0; $i != $n; $i++)
-    {
-      $sum = 0;
-      for ($j = 0; $j < $i; $j++)
-      {
-        $sum += $A[$nm - $i][$nm - $j] * $X[$nm - $j];
-      }
-      if ($A[$nm - $i][$nm - $i] != 0)
-      {
-        $X[$nm - $i] = ($B[$nm - $i] - $sum) / $A[$nm - $i][$nm - $i];
-        $test4 = ($B[$nm - $i] - $sum) / $A[$nm - $i][$nm - $i];
-      }
-      else
-      {
-        error_log("---> in backwardSubstitution(): avoiding divide-by-0");
-        $X[$nm - $i] = 0;
-      }
-    }
-    return $X;
-  }
-
-  private function createABMatricies($teamCount, $teamLookup, $simpleMatchData)
-  {
-    $aMatrix = array_fill(0, $teamCount, array_fill(0, $teamCount, 0)); // Just for who plays in what matchData
-    $bVectors = array(); // Set of data we want to solve for
-
-    $coprKeys = $this->getNumericalBreakdownKeys($simpleMatchData);
-
-    // Initialize B Vectors
-    foreach ($coprKeys as $key)
-    {
-      $bVectors[$key] = array_fill(0, $teamCount, 0);
-    }
-
-    // Iterate through matches
-    foreach ($simpleMatchData as &$match)
-    {
-      foreach (array("red", "blue") as $color)
-      {
-        foreach ($match["alliances"][$color]["team_keys"] as $teamA)
-        {
-          // Modify A Matrix
-          foreach ($match["alliances"][$color]["team_keys"] as $teamB)
-          {
-            $aMatrix[$teamLookup[$teamA]][$teamLookup[$teamB]] += 1;
-          }
-          // Modify B Vectors
-          foreach ($coprKeys as $coprKey)
-          {
-            $bVectors[$coprKey][$teamLookup[$teamA]] += $match["score_breakdown"][$color][$coprKey];
-          }
-        }
-      }
-    }
-
-    return array("A" => $aMatrix, "B" => $bVectors);
-  }
-
+  ///// Create a Table of All COPRs for an Event /////
   public function getComponentOPRS($eventCode)
   {
-    error_log("===> getComponentOPRS(): getting simpleTeamList");
-    $simpleTeamList = $this->getSimpleTeamList($eventCode);
+    error_log("===> getComponentOPRS(): getting getEventTeamsEx");
+    $teamList = $this->getEventTeamsEx($eventCode);
 
-    $teamLookup = $this->teamListToLookup($simpleTeamList);
+    $teamLookup = $this->teamListToLookup($teamList);
     $TLCount = sizeof($teamLookup);  //TEST
     // error_log(" ===> teamLookup size = $TLCount");
 
-    $teamCount = sizeof($simpleTeamList);
-    // error_log(" ===> simpleTeamList size = $teamCount");
+    $teamCount = sizeof($teamList);
+    // error_log(" ===> teamList size = $teamCount");
 
-    $simpleMatchData = $this->getSimpleMatches($eventCode);
-    $simpleMatchData = $this->removeElimMatches($simpleMatchData);
-    $simpleMatchData = $this->removeUnplayedMatches($simpleMatchData);
-    $matchMatricies = $this->createABMatricies($teamCount, $teamLookup, $simpleMatchData);
-
-    $A = $matchMatricies["A"];
-    $Bs = $matchMatricies["B"];
-    $Xs = array();
-
-    $Lmat = $this->choleskyDecomposition($A);
-    $L = $Lmat["L"];
-    $Lp = $Lmat["Lp"];
-
-    foreach ($Bs as $component => $Ba)
-    {
-      $y = $this->forwardSubstitution($L, $Ba);
-      $x = $this->backwardSubstitution($Lp, $y);
-      $Xs[$component] = $x;
-    }
-
-    // Repackage Values into Team Value Dicts
-    $data = array();
-    foreach ($simpleTeamList as $team)
-    {
-      $data[$team] = array();
-      foreach ($Xs as $component => $x)
-      {
-        $data[$team][$component] = round($x[$teamLookup[$team]], 2);
-      }
-    }
-    $out = array("eventCode" => $eventCode, "data" => $data, "keys" => $this->getNumericalBreakdownKeys($simpleMatchData));
-
+    $matchData = $this->getEventMatches($eventCode)["response"];
+    $out = CalculateCOPRs::calculateCOPRS($eventCode, $teamCount, $teamList, $teamLookup, $matchData);
     return $out;
   }
 
-  ///// getStrategicMatches function /////
+  ///// Create a Table of Strategic Matches to Scout /////
   public function getStrategicMatches($eventCode)
   {
     error_log("starting getStrategicMatches for eventCode: $eventCode");
+    $out = array();
 
     // If eventCode is "COMPX", just exit.
     if (strstr($eventCode, 'COMPX'))
     {
       error_log("skipping getStrategicMatches for COMPX");
-      $aout = array();
-      return $aout;
+      return $out;
     }
 
-    $out = array();
-    $mdata = array();
-    // error_log("---> calling getMatchList()");
-    $ml = $this->getMatchList($eventCode);   // get all the matches at this event
+    // error_log("---> calling getEventMatches()");
+    $ml = $this->getEventMatches($eventCode);   // get all the matches at this event
 
     // Go thru all the matches and figure out which ones are our matches.
     $ourMatches = array();

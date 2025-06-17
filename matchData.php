@@ -145,10 +145,10 @@ require 'inc/header.php';
   function readMatchDataAndBuildTable() {
     console.log("==> matchData.php: readMatchDataAndBuildTable()");
     $.get("api/dbReadAPI.php", {
-      getAllMatchData: 1
-    }).done(function (matchData) {
-      console.log("===> getAllMatchData:\n" + matchData);
-      var dataObj = JSON.parse(matchData);
+      getEventMatches: 1
+    }).done(function (eventMatches) {
+      console.log("===> getEventMatches:\n" + eventMatches);
+      var dataObj = JSON.parse(eventMatches);
       buildMatchDataTable(dataObj);
       setTimeout(function () {
         // script instructions say this is needed, but it breaks table header sorting

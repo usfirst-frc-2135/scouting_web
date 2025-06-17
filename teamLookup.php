@@ -1095,14 +1095,14 @@ require 'inc/header.php';
       //          console.log(">>> useQm = " + localSiteFilter["useQm"]);
       //tempThis.applySiteFilter();
       $.get("api/dbReadAPI.php", {
-        getTeamData: team
-      }).done(function (getTeamData) {
-        console.log("==> getTeamData");
-        getTeamData = JSON.parse(getTeamData);
+        getTeamMatches: team
+      }).done(function (getTeamMatches) {
+        console.log("==> getTeamMatches");
+        getTeamMatches = JSON.parse(getTeamMatches);
 
         var newData = [];
-        for (var i = 0; i < getTeamData.length; i++) {
-          var mn = getTeamData[i]["matchnumber"];
+        for (var i = 0; i < getTeamMatches.length; i++) {
+          var mn = getTeamMatches[i]["matchnumber"];
           var mt = "-";
           var matchStr = mn.toLowerCase();
 
@@ -1112,15 +1112,15 @@ require 'inc/header.php';
           else if (matchStr.search("sf") != -1) { mt = "sf"; }
           else if (matchStr.search("f") != -1) { mt = "f"; }
 
-          if (mt == "p" && localSiteFilter["useP"]) { newData.push(getTeamData[i]); }
-          else if (mt == "qm" && localSiteFilter["useQm"]) { newData.push(getTeamData[i]); }
-          else if (mt == "qf" && localSiteFilter["useQf"]) { newData.push(getTeamData[i]); }
-          else if (mt == "sf" && localSiteFilter["useSf"]) { newData.push(getTeamData[i]); }
-          else if (mt == "f" && localSiteFilter["useF"]) { newData.push(getTeamData[i]); }
+          if (mt == "p" && localSiteFilter["useP"]) { newData.push(getTeamMatches[i]); }
+          else if (mt == "qm" && localSiteFilter["useQm"]) { newData.push(getTeamMatches[i]); }
+          else if (mt == "qf" && localSiteFilter["useQf"]) { newData.push(getTeamMatches[i]); }
+          else if (mt == "sf" && localSiteFilter["useSf"]) { newData.push(getTeamMatches[i]); }
+          else if (mt == "f" && localSiteFilter["useF"]) { newData.push(getTeamMatches[i]); }
         }
-        getTeamData = [...newData];
+        getTeamMatches = [...newData];
 
-        successFunction(getTeamData);
+        successFunction(getTeamMatches);
       });
     });
   }
@@ -1325,10 +1325,10 @@ require 'inc/header.php';
   }
 
   // Build the pit data table
-  function processMatchData(team, matchData) {
+  function processMatchData(team, allEventMatches) {
     console.log("==> teamLookup.php: processMatchData()");
-    var mdp = new matchDataProcessor(matchData);
-    mdp.sortMatches(matchData);
+    var mdp = new matchDataProcessor(allEventMatches);
+    mdp.sortMatches(allEventMatches);
     mdp.getSiteFilteredAverages(function (averageData) {
       processedData = averageData[team];
       dataToAvgTables(processedData);
@@ -1395,14 +1395,14 @@ require 'inc/header.php';
     // Get team name from TBA
     $.get("api/tbaAPI.php", {
       getTeamInfo: teamNum
-    }).done(function (teamInfo) {
+    }).done(function (teamData) {
       console.log("==> getTeamInfo");
       var teamname = "XX";
-      if (teamInfo == null)
+      if (teamData == null)
         alert("Can't load teamName from TBA; check if TBA Key was set in db_config");
       else {
-        console.log("teamLookup: getTeamInfo:\n" + teamInfo);
-        teamInfo = JSON.parse(teamInfo)["response"];
+        console.log("teamLookup: getTeamInfo:\n" + teamData);
+        teamInfo = JSON.parse(teamData)["response"];
         teamname = teamInfo["nickname"];
         console.log("teamLookup: for " + teamNum + ", teamname = " + teamname);
       }
@@ -1425,9 +1425,9 @@ require 'inc/header.php';
 
     // Add Match Scouting Data
     $.get("api/dbReadAPI.php", {
-      getTeamData: teamNum
+      getTeamMatches: teamNum
     }).done(function (getMatchData) {
-      console.log("==> getTeamData");
+      console.log("==> getTeamMatches");
       jsonMatchData = JSON.parse(getMatchData);
       processMatchData(teamNum, jsonMatchData);
 

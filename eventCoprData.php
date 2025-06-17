@@ -50,7 +50,7 @@ require 'inc/header.php';
 
   // Sort the generated COPR table by team/match numbers
   function sortCoprTable(tableData, teamCol) {
-    console.log("==> matchData.php: sortCoprTable()");
+    console.log("==> eventCoprData.php: sortCoprTable()");
     var table = document.getElementById(tableData);
     var rows = Array.prototype.slice.call(table.querySelectorAll("tbody> tr"));
 
@@ -104,9 +104,9 @@ require 'inc/header.php';
     //output: gets the COPR data from TBA
     $.get("api/tbaAPI.php", {
       getCOPRs: 1
-    }).done(function (getCoprData) {
+    }).done(function (coprs) {
       console.log("==> getCOPRs");
-      buildCoprTable(getCoprData);
+      buildCoprTable(coprs);
       setTimeout(function () {
         // script instructions say this is needed, but it breaks table header sorting
         sorttable.makeSortable(document.getElementById("coprTable"));

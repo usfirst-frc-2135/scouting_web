@@ -218,9 +218,11 @@ function submitFunction() {
     for (const [key, value] of Object.entries(scannedData)) {
       indexedData.push(value);
     }
+
     $.post("api/dbWriteAPI.php", {
-      writeData: JSON.stringify(indexedData)
+      writeTeamMatch: JSON.stringify(indexedData)
     }, function (returnCode) {
+      console.log("==> writeTeamMatch");
       // Because success word may have a new-line at the end, don't do a direct compare
       if (returnCode.indexOf('success') > -1) {
         alert("Data Successfully Submitted! Clearing Data.");

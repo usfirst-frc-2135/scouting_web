@@ -110,15 +110,15 @@ require 'inc/header.php';
     // Get the list of teams and add the team names 
     console.log("index: getting teamlist from TBA using db_config event code");
     $.get("api/tbaAPI.php", {
-      getTeamNamesList: 1
-    }).done(function (teamNameList) {
-      console.log("==> getTeamNamesList");
+      getEventTeamNames: 1
+    }).done(function (eventTeamNames) {
+      console.log("==> getEventTeamNames");
       var teamList = [];
       var namesList = {};
-      if (teamNameList == null)
+      if (eventTeamNames == null)
         alert("Can't load teamlist from TBA; check if TBA Key was set in db_config");
       else {
-        var jsonTeamList = JSON.parse(teamNameList);
+        var jsonTeamList = JSON.parse(eventTeamNames);
         for (let i in jsonTeamList) {
           var teamNum = jsonTeamList[i]["teamnum"];
           var teamName = jsonTeamList[i]["teamname"];

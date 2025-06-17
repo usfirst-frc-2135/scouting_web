@@ -13,11 +13,11 @@ if (isset($_GET["eventCode"]))
   $eventCode = $_GET["eventCode"];
 }
 
-if (isset($_POST["writeData"]))
+if (isset($_POST["writeTeamMatch"]))
 {
   // Write Data API
   $db->connectToDB();
-  $dat = json_decode($_POST["writeData"], true);
+  $dat = json_decode($_POST["writeTeamMatch"], true);
   $msg = "success";
   for ($i = 0; $i < count($dat); ++$i)
   {
@@ -40,7 +40,7 @@ if (isset($_POST["writeSingleData"]))
   // Write Data API
   $db->connectToDB();
   $dat = json_decode($_POST["writeSingleData"], true);
-  // echo($_POST["writeData"]);
+  // echo($_POST["writeTeamMatch"]);
   $dat["eventcode"] = $eventCode;
   $dat["entrykey"] = $dat["eventcode"] . "_" . $dat["matchnumber"] . "_" . $dat["teamnumber"];
   $db->writeRowToMatchTable($dat);
