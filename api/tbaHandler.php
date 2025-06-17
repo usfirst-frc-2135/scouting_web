@@ -320,8 +320,8 @@ class tbaHandler
     // error_log(" ===> teamList size = $teamCount");
 
     $matchData = $this->getEventMatches($eventCode)["response"];
-    $out = CalculateCOPRs::calculateCOPRS($eventCode, $teamCount, $teamList, $teamLookup, $matchData);
-    return $out;
+
+    return CalculateCOPRs::calculateCOPRS($eventCode, $teamCount, $teamList, $teamLookup, $matchData);
   }
 
   ///// Create a Table of Strategic Matches to Scout /////

@@ -88,6 +88,26 @@ require 'inc/header.php';
     $("#tableKeys").html(header);
   }
 
+  // This table sets the order of the final COPR table
+  const coprKeys =
+    ["rp",
+      "totalPoints",
+      "autoPoints",
+      "autoMobilityPoints",
+      "autoCoralPoints",
+      "autoCoralCount",
+      "teleopPoints",
+      "teleopCoralPoints",
+      "teleopCoralCount",
+      "algaePoints",
+      "wallAlgaeCount",
+      "netAlgaeCount",
+      "endGameBargePoints",
+      "foulPoints",
+      "foulCount",
+      "techFoulCount"
+    ];
+
   // Add data keys (fields) to COPR table in html
   function buildCoprTable(coprData) {
     console.log("==> eventCoprData.php: buildCoprTable()");
@@ -95,8 +115,13 @@ require 'inc/header.php';
     var keys = jsonCoprData["keys"];
     var data = jsonCoprData["data"];
 
-    addKeysToCoprTable(keys);
-    addDataToCoprTable(data, keys);
+    // Print the table then select the order in the array above
+    // for (key in keys) {
+    //   console.log("coprs: " + keys[i]);
+    // }
+
+    addKeysToCoprTable(coprKeys);
+    addDataToCoprTable(data, coprKeys);
   }
 
   // Retrive OPRs from TBA and build the COPR table to display
