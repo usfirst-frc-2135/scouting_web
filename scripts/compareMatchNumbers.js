@@ -29,19 +29,19 @@ function compareMatchNumbers(matchA, matchB) {
 
   // Pull apart prefix and number from matchnum (ie, "p", "qm", "sf")
   if (matchA.charAt(0) == "p") {
-    numA = matchA.substr(1, matchA.length);
+    numA = matchA.substring(1);
     prefixA = "p";
   }
   else if (matchA.charAt(0) == "q") {   // "qm"
-    numA = matchA.substr(2, matchA.length);
+    numA = matchA.substring(2);
     prefixA = "qm";
   }
   else if (matchA.charAt(0) == "s") {   // "sf"
-    numA = matchA.substr(2, matchA.length);
+    numA = matchA.substring(2);
     prefixA = "sf";
   }
   else if (matchA.charAt(0) == "f") {   // "qm"
-    numA = matchA.substr(1, matchA.length);
+    numA = matchA.substring(1);
     prefixA = "f";
   }
   if (prefixA == "") {
@@ -52,19 +52,19 @@ function compareMatchNumbers(matchA, matchB) {
   }
 
   if (matchB.charAt(0) == "p") {
-    numB = matchB.substr(1, matchB.length);
+    numB = matchB.substring(1);
     prefixB = "p";
   }
   else if (matchB.charAt(0) == "q") {   // "qm"
-    numB = matchB.substr(2, matchB.length);
+    numB = matchB.substring(2);
     prefixB = "qm";
   }
   else if (matchB.charAt(0) == "s") {   // "sf"
-    numB = matchB.substr(2, matchB.length);
+    numB = matchB.substring(2);
     prefixB = "sf";
   }
   else if (matchB.charAt(0) == "f") {   // "qm"
-    numB = matchB.substr(1, matchB.length);
+    numB = matchB.substring(1);
     prefixB = "f";
   }
   if (prefixB == "") {

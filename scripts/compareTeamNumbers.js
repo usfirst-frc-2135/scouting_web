@@ -38,9 +38,9 @@ function compareTeamNumbers(teamA, teamB) {
 
   // Remove leading "frc" if any
   if (teamA.startsWith("FRC"))
-    teamA = teamA.substr(3);
+    teamA = teamA.substring(3);
   if (teamB.startsWith("FRC"))
-    teamB = teamB.substr(3);
+    teamB = teamB.substring(3);
 
   // console.log("===> teamA = " + teamA + "; teamB = " + teamB);
 

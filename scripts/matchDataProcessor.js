@@ -13,19 +13,19 @@ class matchDataProcessor {
   getMatchTuple(matchStr) {
     matchStr = matchStr.toLowerCase();
     if (matchStr.search("p") != -1) {
-      return ["p", parseInt(matchStr.substr(1))];
+      return ["p", parseInt(matchStr.substring(1))];
     }
     if (matchStr.search("qm") != -1) {
-      return ["qm", parseInt(matchStr.substr(2))];
+      return ["qm", parseInt(matchStr.substring(2))];
     }
     if (matchStr.search("qf") != -1) {
-      return ["qf", parseInt(matchStr.substr(2))];
+      return ["qf", parseInt(matchStr.substring(2))];
     }
     if (matchStr.search("sf") != -1) {
-      return ["sf", parseInt(matchStr.substr(2))];
+      return ["sf", parseInt(matchStr.substring(2))];
     }
     if (matchStr.search("f") != -1) {
-      return ["f", parseInt(matchStr.substr(1))];
+      return ["f", parseInt(matchStr.substring(1))];
     }
     console.warn("getMatchTuple: Invalid prefix! " + matchStr)
     return null;
