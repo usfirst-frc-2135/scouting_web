@@ -31,10 +31,10 @@ function compareTeamNumbers(teamA, teamB) {
   // Remove the " - <teamName>" from the end of the entry.
   const dashPosA = teamA.indexOf("-");
   if (dashPosA != -1)
-    teamA = teamA.substr(0, dashPosA - 1);
+    teamA = teamA.substring(0, dashPosA - 1);
   const dashPosB = teamB.indexOf("-");
   if (dashPosB != -1)
-    teamB = teamB.substr(0, dashPosB - 1);
+    teamB = teamB.substring(0, dashPosB - 1);
 
   // Remove leading "frc" if any
   if (teamA.startsWith("FRC"))
@@ -46,13 +46,13 @@ function compareTeamNumbers(teamA, teamB) {
 
   // Remove any letters at the last char in teamNum for the sort comparison.
   if (isAlpha(teamA.charAt(teamA.length - 1)))
-    teamNumA = parseInt(teamA.substr(0, teamA.length - 1));
+    teamNumA = parseInt(teamA.substring(0, teamA.length - 1));
   else
-    teamNumA = parseInt(teamA.substr(0, teamA.length));
+    teamNumA = parseInt(teamA.substring(0, teamA.length));
   if (isAlpha(teamB.charAt(teamB.length - 1)))
-    teamNumB = parseInt(teamB.substr(0, teamB.length - 1));
+    teamNumB = parseInt(teamB.substring(0, teamB.length - 1));
   else
-    teamNumB = parseInt(teamB.substr(0, teamB.length));
+    teamNumB = parseInt(teamB.substring(0, teamB.length));
 
   returnVal = teamNumA - teamNumB;
   if (returnVal == 0)

@@ -576,7 +576,7 @@ require 'inc/header.php';
       suff = "PM"
     }
     var minutes = "0" + date.getMinutes();
-    $("#matchTime").html("Time: " + hours + ":" + minutes.substr(-2) + " " + suff);
+    $("#matchTime").html("Time: " + hours + ":" + minutes.substring(minutes.length - 2) + " " + suff);
   }
 
   function buildTeamBox(color, index, teamNum) {
