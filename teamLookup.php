@@ -1208,8 +1208,8 @@ require 'inc/header.php';
   // MAIN PROCESSORS HERE
 
   // Check if our URL directs to a specific team
-  function checkGet() {
-    console.log("=> teamLookup: checkGet()");
+  function checkURLForTeamSpec() {
+    console.log("=> teamLookup: checkURLForTeamSpec()");
     let sp = new URLSearchParams(window.location.search);
     if (sp.has('teamNum')) {
       return sp.get('teamNum')
@@ -1424,7 +1424,7 @@ require 'inc/header.php';
       $("#navbarEventCode").html(eventCode);
     });
 
-    var initTeamNumber = checkGet()
+    var initTeamNumber = checkURLForTeamSpec()
     if (initTeamNumber) {
       buildTeamLookupPage(initTeamNumber);
     }

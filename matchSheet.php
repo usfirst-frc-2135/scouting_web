@@ -538,23 +538,7 @@ require 'inc/header.php';
 
 <script>
 
-  // CHECK! Replaced by accordion controls
-  // var coll = document.getElementsByClassName("collapsible");
-
-  // for (var i = 0; i < coll.length; i++) {
-  //   coll[i].addEventListener("click", function () {
-  //     console.log("click");
-  //     this.classList.toggle("active");
-  //     var content = this.nextElementSibling;
-  //     if (content.style.display === "block") {
-  //       content.style.display = "none";
-  //     } else {
-  //       content.style.display = "block";
-  //     }
-  //   });
-  // }
-
-  var localMatchData = null;
+  var _allMatchData = null;
   var bUsingCustom = false;
   var localMatchList = null;
   var localMatchNum = null;
@@ -566,44 +550,199 @@ require 'inc/header.php';
   var customBlueTeam2 = "-";
   var customBlueTeam3 = "-";
   // var jsonMatchData = null;
-  var picDB = {};
-  var ourTeam = "frc2135";
+  var _picDB = {};
+  const _ourTeam = "frc2135";
 
-  // Check source URL for match specifier
-  function checkGet() {
-    console.log("==> matchSheet: checkGet()");
-    let sp = new URLSearchParams(window.location.search);
-    if (!bUsingCustom) {
-      if (sp.has('compLevel') && sp.has('matchNum')) {
-        return [sp.get('compLevel'), sp.get('matchNum')];
-      }
-    }
-    if (bUsingCustom) {
-      if (sp.has('customRedTeam1') && sp.has('customRedTeam2') && sp.has('customRedTeam3') && sp.has('customBlueTeam1') && sp.has('customBlueTeam2') && sp.has('customBlueTeam3')) {
-        return [sp.get('customRedTeam1'), sp.get('customRedTeam2'), sp.get('customRedTeam3'), sp.get('customBlueTeam1'), sp.get('customBlueTeam2'), sp.get('customBlueTeam3')];
-      }
-    }
-    return null;
+  // Utility to strip off leading "frc" from team number
+  function strTeamToIntTeam(team) {
+    return team.replace(/^(frc)/, '');
   }
 
-  // Load match data for all matches
-  function loadMatchData(successFunction) {
-    console.log("==> matchSheet: loadMatchData()");
-    if (!localMatchData) {
-      $.get("api/dbReadAPI.php", {
-        getEventMatches: 1
-      }).done(function (eventMatches) {
-        console.log("=> getEventMatches");
-        eventMatches = JSON.parse(eventMatches);
-        var mdp = new matchDataProcessor(eventMatches);
-        mdp.getSiteFilteredAverages(function (averageData) {
-          localMatchData = averageData;
-          successFunction();
-        });
-      });
-    } else {
-      successFunction();
+  // Round data to two decimal digits
+  function roundInt(val) {
+    return Math.round((val + Number.EPSILON) * 100) / 100;
+  }
+
+  function makeKey(compLevel, matchNumber) {
+    return compLevel.toUpperCase() + "_" + String(matchNumber).toUpperCase();
+  }
+
+  function updateMatchTime(time) {
+    var date = new Date(time * 1000);
+    var hours = date.getHours();
+    var suff = "AM";
+    if (hours > 12) {
+      hours = hours - 12;
+      suff = "PM"
     }
+    var minutes = "0" + date.getMinutes();
+    $("#matchTime").html("Time: " + hours + ":" + minutes.substr(-2) + " " + suff);
+  }
+
+  function buildTeamBox(color, index, teamNum) {
+    console.log("==> buildTeamBox: build the team box in the match sheet");
+    // Get team name from TBA
+    $.get("api/tbaAPI.php", {
+      getTeamInfo: teamNum
+    }).done(function (teamInfo) {
+      console.log("=> getTeamInfo");
+      var teamname = "XX";
+      if (teamInfo == null)
+        alert("Can't load teamName from TBA; check if TBA Key was set in db_config");
+      else {
+        // console.log("matchSheet: getTeamInfo:\n" + teamInfo);
+        jsonTeamInfo = JSON.parse(teamInfo)["response"];
+        teamname = jsonTeamInfo["nickname"];
+        console.log("==> matchSheet: buildTeamBox() for " + teamNum + ", teamname = " + teamname);
+      }
+      if (teamname != "XX") {
+        $("#" + color + index + "TeamNumber").html("<a class='text-light' href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a> - " + teamname);
+      } else {
+        $("#" + color + index + "TeamNumber").html("<a class='text-light' href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a>");
+      }
+    });
+
+    // Load team scouted information
+    var rd = _allMatchData[teamNum];
+    if (rd != null) {
+      var row = "<tr>";
+      row += "<td align=\"center\">" + rd["avgAutonCoralL1"] + "</td>";
+      row += "<td align=\"center\">" + rd["avgAutonCoralL2"] + "</td>";
+      row += "<td align=\"center\">" + rd["avgAutonCoralL3"] + "</td>";
+      row += "<td align=\"center\">" + rd["avgAutonCoralL4"] + "</td>";
+      row += "<td align=\"center\">" + rd["avgAutonAlgaeNet"] + "</td>";
+      row += "<td align=\"center\">" + rd["avgAutonAlgaeProc"] + "</td>";
+      row += "<td align=\"center\">" + rd["teleopCoralScoringPercent"] + "</td>";
+      row += "<td align=\"center\">" + rd["avgTeleopCoralL1"] + "</td>";
+      row += "<td align=\"center\">" + rd["avgTeleopCoralL2"] + "</td>";
+      row += "<td align=\"center\">" + rd["avgTeleopCoralL3"] + "</td>";
+      row += "<td align=\"center\">" + rd["avgTeleopCoralL4"] + "</td>";
+      row += "<td align=\"center\">" + rd["teleopAlgaeScoringPercent"] + "</td>";
+      row += "<td align=\"center\">" + rd["avgTeleopAlgaeNet"] + "</td>";
+      row += "<td align=\"center\">" + rd["avgTeleopAlgaeProc"] + "</td>";
+      row += "<td align=\"center\">" + rd["endgameClimbPercent"][0] + "</td>";
+      row += "<td align=\"center\">" + rd["endgameClimbPercent"][1] + "</td>";
+      row += "<td align=\"center\">" + rd["endgameClimbPercent"][2] + "</td>";
+      row += "<td align=\"center\">" + rd["endgameClimbPercent"][3] + "</td>";
+      row += "<td align=\"center\">" + rd["endgameClimbPercent"][4] + "</td>";
+      row += "</tr>";
+    }
+    $("#" + color + index + "DataTable").append(row);
+  }
+
+
+
+
+
+  function updateSummary(redList, blueList) {
+    var avgTotalCoral = { "red": 0, "blue": 0 };
+    var avgTotalAlgae = { "red": 0, "blue": 0 };
+    var avgAutoPoints = { "red": 0, "blue": 0 };
+    var avgTeleopPoints = { "red": 0, "blue": 0 };
+    var avgEndgamePoints = { "red": 0, "blue": 0 };
+    var totalPredictedPoints = { "red": 0, "blue": 0 };
+
+    for (let i in redList) {
+      teamNum = strTeamToIntTeam(redList[i]);
+      var rd = _allMatchData[teamNum];
+      if (rd != null) {
+        avgTotalCoral["red"] += rd["avgTotalCoral"];
+        avgTotalAlgae["red"] += rd["avgTotalAlgae"];
+        avgAutoPoints["red"] += rd["avgTotalAutoPoints"];
+        avgTeleopPoints["red"] += rd["avgTotalTeleopPoints"];
+        avgEndgamePoints["red"] += rd["avgEndgamePoints"];
+        totalPredictedPoints["red"] += rd["avgTotalPoints"];
+      }
+    }
+    for (let i in blueList) {
+      teamNum = strTeamToIntTeam(blueList[i]);
+      var rd = _allMatchData[teamNum];
+      if (rd != null) {
+        avgTotalCoral["blue"] += rd["avgTotalCoral"];
+        avgTotalAlgae["blue"] += rd["avgTotalAlgae"];
+        avgAutoPoints["blue"] += rd["avgTotalAutoPoints"];
+        avgTeleopPoints["blue"] += rd["avgTotalTeleopPoints"];
+        avgEndgamePoints["blue"] += rd["avgEndgamePoints"];
+        totalPredictedPoints["blue"] += rd["avgTotalPoints"];
+      }
+    }
+
+    $("#redTotalCoral").html(roundInt(avgTotalCoral["red"]));
+    $("#redTotalAlgae").html(roundInt(avgTotalAlgae["red"]));
+    $("#redAvgAutoPoints").html(roundInt(avgAutoPoints["red"]));
+    $("#redAvgTeleopPoints").html(roundInt(avgTeleopPoints["red"]));
+    $("#redAvgEndgamePoints").html(roundInt(avgEndgamePoints["red"]));
+    $("#redTotalPredictedPoints").html(roundInt(totalPredictedPoints["red"]));
+
+    $("#blueTotalCoral").html(roundInt(avgTotalCoral["blue"]));
+    $("#blueTotalAlgae").html(roundInt(avgTotalAlgae["blue"]));
+    $("#blueAvgAutoPoints").html(roundInt(avgAutoPoints["blue"]));
+    $("#blueAvgTeleopPoints").html(roundInt(avgTeleopPoints["blue"]));
+    $("#blueAvgEndgamePoints").html(roundInt(avgEndgamePoints["blue"]));
+    $("#blueTotalPredictedPoints").html(roundInt(totalPredictedPoints["blue"]));
+
+    document.getElementById("redTotalCoral").setAttribute("align", "center");
+    document.getElementById("redTotalAlgae").setAttribute("align", "center");
+    document.getElementById("redAvgAutoPoints").setAttribute("align", "center");
+    document.getElementById("redAvgTeleopPoints").setAttribute("align", "center");
+    document.getElementById("redAvgEndgamePoints").setAttribute("align", "center");
+    document.getElementById("redTotalPredictedPoints").setAttribute("align", "center");
+
+    document.getElementById("blueTotalCoral").setAttribute("align", "center");
+    document.getElementById("blueTotalAlgae").setAttribute("align", "center");
+    document.getElementById("blueAvgAutoPoints").setAttribute("align", "center");
+    document.getElementById("blueAvgTeleopPoints").setAttribute("align", "center");
+    document.getElementById("blueAvgEndgamePoints").setAttribute("align", "center");
+    document.getElementById("blueTotalPredictedPoints").setAttribute("align", "center");
+  }
+
+
+  // Takes list of Team Pic paths and loads them
+  function buildRobotPhotoLinks(prefix, teamPics) {
+    console.log("==> buildRobotPhotoLinks: build the entries in the photo carousels");
+    var first = true;
+    for (let uri of teamPics) {
+      var tags = "";
+      if (first) {
+        tags += "<div class='carousel-item active'>";
+      } else {
+        tags += "<div class='carousel-item'>";
+      }
+      first = false;
+      tags += " <img src='./" + uri + "' class='d-block w-100'>";
+      tags += "</div>";
+      $("#" + prefix + "RobotPics").append(tags);
+    }
+  }
+
+  // Build team photo image list
+  function sendPhotoRequest(redList, blueList) {
+    console.log("==> matchSheet: sendPhotoRequest()");
+    var requestList = [];
+    for (let i in redList) {
+      var tn = strTeamToIntTeam(redList[i]);
+      if (tn !== "") {
+        _picDB[tn] = "R" + i;
+        requestList.push(tn);
+      }
+    }
+    for (let i in blueList) {
+      var tn = strTeamToIntTeam(blueList[i]);
+      if (tn !== "") {
+        _picDB[tn] = "B" + i;
+        requestList.push(tn);
+      }
+    }
+
+    $.get("api/dbReadAPI.php", {
+      getAllTeamImages: JSON.stringify(requestList)
+    }).done(function (imageData) {
+      console.log("=> getAllTeamImages");
+      var teamImages = JSON.parse(imageData);
+      for (var team of Object.keys(teamImages)) {
+        buildRobotPhotoLinks(_picDB[team], teamImages[team]);
+      }
+    });
   }
 
   // Build the list of HTML links to our matches at this event
@@ -613,8 +752,7 @@ require 'inc/header.php';
     for (let key in matches) {
       arrOurMatches.push(matches[key]);
     }
-    // Sort the matches
-    // Sort for "p", then "qm", then "sf" then "f" matches
+
     arrOurMatches.sort(function (matchA, matchB) {
       return compareMatchNumbers(matchA["comp_level"] + matchA["match_number"], matchB["comp_level"] + matchB["match_number"]);
     });
@@ -629,175 +767,6 @@ require 'inc/header.php';
     }
 
     $("#ourMatches").html(row);
-  }
-
-  // Build match links for our matchs at this event
-  function buildOurMatchLinks(successFunction) {
-    console.log("==> matchSheet: buildOurMatchLinks()");
-    if (!bUsingCustom) {
-      if (!localMatchList) {
-        $.get("api/tbaAPI.php", {
-          getEventMatches: 1
-        }).done(function (eventMatches) {
-          console.log("=> getEventMatches");
-          if (eventMatches == null)
-            alert("Can't load matchlist from TBA; check if TBA Key was set in db_config");
-          else {
-            var ourMatches = {};
-            jsonMatchData = JSON.parse(eventMatches)["response"];
-            localMatchList = {};
-            for (let mi in jsonMatchData) {
-              var newMatch = {};
-              var match = jsonMatchData[mi];
-
-              newMatch["comp_level"] = match["comp_level"];
-              newMatch["match_number"] = match["match_number"];
-              if (match["comp_level"] == "sf")
-                newMatch["match_number"] = match["set_number"];
-
-              newMatch["red_teams"] = match["alliances"]["red"]["team_keys"];
-              newMatch["blue_teams"] = match["alliances"]["blue"]["team_keys"];
-              newMatch["time"] = null;
-              if (newMatch["time"] == null && match["actual_time"] != null) {
-                newMatch["time"] = match["actual_time"];
-              }
-              if (newMatch["time"] == null && match["predicted_time"] != null) {
-                newMatch["time"] = match["predicted_time"];
-              }
-              // if (newMatch["time"] == null && match["time"] != null){ newMatch["time"] = match["time"]; }
-              localMatchList[makeKey(newMatch["comp_level"], newMatch["match_number"])] = newMatch;
-
-              if (newMatch["red_teams"].includes(ourTeam) || newMatch["blue_teams"].includes(ourTeam)) {
-                var keyw = newMatch["comp_level"] + newMatch["match_number"];
-                ourMatches[keyw] = newMatch;
-              }
-            }
-            createMatchHtmlLinks(ourMatches);
-            successFunction();
-          }
-        });
-      } else {
-        successFunction();
-      }
-    }
-    else { // using custom
-      localMatchList = {};
-      var newMatch = {};
-      newMatch["comp_level"] = "qm";
-      newMatch["match_number"] = 1;
-      newMatch["red_teams"] = [customRedTeam1, customRedTeam2, customRedTeam3];
-      newMatch["blue_teams"] = [customBlueTeam1, customBlueTeam2, customBlueTeam3]; //NEW
-      newMatch["time"] = "predicted_time"; //NEW
-      localMatchList["QM_1"] = newMatch;
-
-      //if (newMatch["red_teams"].includes(ourTeam) || newMatch["blue_teams"].includes(ourTeam)) {
-      //ourMatches[newMatch["match_number"]] = newMatch;
-
-      //createMatchHtmlLinks();
-      successFunction();
-    }
-  }
-
-  function makeKey(compLevel, matchNumber) {
-    return compLevel.toUpperCase() + "_" + String(matchNumber).toUpperCase();
-  }
-
-  function loadMatchSheet(compLevel, matchNum) {
-    console.log("==> matchSheet: loadMatchSheet()");
-    // Clear Data
-    $("#R0DataTable").html("");
-    $("#R1DataTable").html("");
-    $("#R2DataTable").html("");
-    $("#B0DataTable").html("");
-    $("#B1DataTable").html("");
-    $("#B2DataTable").html("");
-    $("#redTotalCoral").html("");
-    $("#redTotalAlgae").html("");
-    $("#redAvgAutoPoints").html("");
-    $("#redAvgTeleopPoints").html("");
-    $("#redAvgEndgamePoints").html("");
-    $("#redTotalPredictedPoints").html("");
-    $("#blueTotalCoral").html("");
-    $("#blueTotalAlgae").html("");
-    $("#blueAvgAutoPoints").html("");
-    $("#blueAvgTeleopPoints").html("");
-    $("#blueAvgEndgamePoints").html("");
-    $("#blueTotalPredictedPoints").html("");
-    $("#R0RobotPics").html("");
-    $("#R1RobotPics").html("");
-    $("#R2RobotPics").html("");
-    $("#B0RobotPics").html("");
-    $("#B1RobotPics").html("");
-    $("#B2RobotPics").html("");
-    picDB = {};
-    // Write Match Number
-    $("#matchTitle").html("Match " + compLevel + " " + matchNum);
-    // Pull Data
-    localMatchNum = matchNum;
-    localCompLevel = compLevel;
-    loadMatchData(function () {
-      buildOurMatchLinks(processMatchList)
-    });
-  }
-
-  function loadCustomMatch(redTeam1, redTeam2, redTeam3, blueTeam1, blueTeam2, blueTeam3) {
-    console.log("==> matchSheet: loadCustomMatch()");
-    // Clear Data
-    $("#R0DataTable").html("");
-    $("#R1DataTable").html("");
-    $("#R2DataTable").html("");
-    $("#B0DataTable").html("");
-    $("#B1DataTable").html("");
-    $("#B2DataTable").html("");
-    $("#enterRed1").html("");
-    $("#enterRed2").html("");
-    $("#enterRed3").html("");
-    $("#enterBlue1").html("");
-    $("#enterBlue2").html("");
-    $("#enterBlue3").html("");
-    $("#redTotalCoral").html("");
-    $("#redTotalAlgae").html("");
-    $("#redAvgAutoPoints").html("");
-    $("#redAvgTeleopPoints").html("");
-    $("#redAvgEndgamePoints").html("");
-    $("#redTotalPredictedPoints").html("");
-    $("#blueTotalCoral").html("");
-    $("#blueTotalAlgae").html("");
-    $("#blueAvgAutoPoints").html("");
-    $("#blueAvgTeleopPoints").html("");
-    $("#blueAvgEndgamePoints").html("");
-    $("#blueTotalPredictedPoints").html("");
-    $("#R0RobotPics").html("");
-    $("#R1RobotPics").html("");
-    $("#R2RobotPics").html("");
-    $("#B0RobotPics").html("");
-    $("#B1RobotPics").html("");
-    $("#B2RobotPics").html("");
-    picDB = {};
-    // Write Match Number
-    //$("#matchTitle").html("Match " + compLevel + " " + matchNum);
-    // Pull Data
-    customRedTeam1 = redTeam1;
-    customRedTeam2 = redTeam2;
-    customRedTeam3 = redTeam3;
-    customBlueTeam1 = blueTeam1;
-    customBlueTeam2 = blueTeam2;
-    customBlueTeam3 = blueTeam3;
-    loadMatchData(function () {
-      buildOurMatchLinks(processMatchList)
-    });
-  }
-
-  function updateTime(time) {
-    var date = new Date(time * 1000);
-    var hours = date.getHours();
-    var suff = "AM";
-    if (hours > 12) {
-      hours = hours - 12;
-      suff = "PM"
-    }
-    var minutes = "0" + date.getMinutes();
-    $("#matchTime").html("Time: " + hours + ":" + minutes.substr(-2) + " " + suff);
   }
 
   function processMatchList() {
@@ -846,7 +815,7 @@ require 'inc/header.php';
       sendPhotoRequest(matchVector["red_teams"], matchVector["blue_teams"]);
 
       // Update Time
-      updateTime(matchVector["time"]);
+      updateMatchTime(matchVector["time"]);
     }
     if (bUsingCustom) {
       updateSummary(customMatchVector["red_teams"], customMatchVector["blue_teams"]);
@@ -855,171 +824,177 @@ require 'inc/header.php';
     }
   }
 
-  function updateSummary(redList, blueList) {
-    var avgTotalCoral = { "red": 0, "blue": 0 };
-    var avgTotalAlgae = { "red": 0, "blue": 0 };
-    var avgAutoPoints = { "red": 0, "blue": 0 };
-    var avgTeleopPoints = { "red": 0, "blue": 0 };
-    var avgEndgamePoints = { "red": 0, "blue": 0 };
-    var totalPredictedPoints = { "red": 0, "blue": 0 };
+  // Clear all existing data from the match sheet table
+  function clearMatchSheet() {
+    console.log("==> matchSheet: clearMatchSheet()");
+    // Clear Data
+    $("#R0DataTable").html("");
+    $("#R1DataTable").html("");
+    $("#R2DataTable").html("");
+    $("#B0DataTable").html("");
+    $("#B1DataTable").html("");
+    $("#B2DataTable").html("");
+    $("#redTotalCoral").html("");
+    $("#redTotalAlgae").html("");
+    $("#redAvgAutoPoints").html("");
+    $("#redAvgTeleopPoints").html("");
+    $("#redAvgEndgamePoints").html("");
+    $("#redTotalPredictedPoints").html("");
+    $("#blueTotalCoral").html("");
+    $("#blueTotalAlgae").html("");
+    $("#blueAvgAutoPoints").html("");
+    $("#blueAvgTeleopPoints").html("");
+    $("#blueAvgEndgamePoints").html("");
+    $("#blueTotalPredictedPoints").html("");
+    $("#R0RobotPics").html("");
+    $("#R1RobotPics").html("");
+    $("#R2RobotPics").html("");
+    $("#B0RobotPics").html("");
+    $("#B1RobotPics").html("");
+    $("#B2RobotPics").html("");
+    $("#enterRed1").html("");
+    $("#enterRed2").html("");
+    $("#enterRed3").html("");
+    $("#enterBlue1").html("");
+    $("#enterBlue2").html("");
+    $("#enterBlue3").html("");
 
-    for (let i in redList) {
-      teamNum = strTeamToIntTeam(redList[i]);
-      var rd = localMatchData[teamNum];
-      if (rd != null) {
-        avgTotalCoral["red"] += rd["avgTotalCoral"];
-        avgTotalAlgae["red"] += rd["avgTotalAlgae"];
-        avgAutoPoints["red"] += rd["avgTotalAutoPoints"];
-        avgTeleopPoints["red"] += rd["avgTotalTeleopPoints"];
-        avgEndgamePoints["red"] += rd["avgEndgamePoints"];
-        totalPredictedPoints["red"] += rd["avgTotalPoints"];
-      }
-    }
-    for (let i in blueList) {
-      teamNum = strTeamToIntTeam(blueList[i]);
-      var rd = localMatchData[teamNum];
-      if (rd != null) {
-        avgTotalCoral["blue"] += rd["avgTotalCoral"];
-        avgTotalAlgae["blue"] += rd["avgTotalAlgae"];
-        avgAutoPoints["blue"] += rd["avgTotalAutoPoints"];
-        avgTeleopPoints["blue"] += rd["avgTotalTeleopPoints"];
-        avgEndgamePoints["blue"] += rd["avgEndgamePoints"];
-        totalPredictedPoints["blue"] += rd["avgTotalPoints"];
-      }
-    }
-
-    $("#redTotalCoral").html(roundInt(avgTotalCoral["red"]));
-    $("#redTotalAlgae").html(roundInt(avgTotalAlgae["red"]));
-    $("#redAvgAutoPoints").html(roundInt(avgAutoPoints["red"]));
-    $("#redAvgTeleopPoints").html(roundInt(avgTeleopPoints["red"]));
-    $("#redAvgEndgamePoints").html(roundInt(avgEndgamePoints["red"]));
-    $("#redTotalPredictedPoints").html(roundInt(totalPredictedPoints["red"]));
-
-    $("#blueTotalCoral").html(roundInt(avgTotalCoral["blue"]));
-    $("#blueTotalAlgae").html(roundInt(avgTotalAlgae["blue"]));
-    $("#blueAvgAutoPoints").html(roundInt(avgAutoPoints["blue"]));
-    $("#blueAvgTeleopPoints").html(roundInt(avgTeleopPoints["blue"]));
-    $("#blueAvgEndgamePoints").html(roundInt(avgEndgamePoints["blue"]));
-    $("#blueTotalPredictedPoints").html(roundInt(totalPredictedPoints["blue"]));
-
-    document.getElementById("redTotalCoral").setAttribute("align", "center");
-    document.getElementById("redTotalAlgae").setAttribute("align", "center");
-    document.getElementById("redAvgAutoPoints").setAttribute("align", "center");
-    document.getElementById("redAvgTeleopPoints").setAttribute("align", "center");
-    document.getElementById("redAvgEndgamePoints").setAttribute("align", "center");
-    document.getElementById("redTotalPredictedPoints").setAttribute("align", "center");
-
-    document.getElementById("blueTotalCoral").setAttribute("align", "center");
-    document.getElementById("blueTotalAlgae").setAttribute("align", "center");
-    document.getElementById("blueAvgAutoPoints").setAttribute("align", "center");
-    document.getElementById("blueAvgTeleopPoints").setAttribute("align", "center");
-    document.getElementById("blueAvgEndgamePoints").setAttribute("align", "center");
-    document.getElementById("blueTotalPredictedPoints").setAttribute("align", "center");
+    _picDB = {};
   }
 
-  function roundInt(val) {
-    return Math.round((val + Number.EPSILON) * 100) / 100;
+  // Load match data for all matches
+  function loadMatchData(successFunction) {
+    console.log("==> matchSheet: loadMatchData()");
+    if (!_allMatchData) {
+      $.get("api/dbReadAPI.php", {
+        getEventMatches: 1
+      }).done(function (eventMatches) {
+        console.log("=> getEventMatches");
+        eventMatches = JSON.parse(eventMatches);
+        var mdp = new matchDataProcessor(eventMatches);
+        mdp.getSiteFilteredAverages(function (averageData) {
+          _allMatchData = averageData;
+          successFunction();
+        });
+      });
+    } else {
+      successFunction();
+    }
   }
 
-  function buildTeamBox(color, index, teamNum) {
-    console.log("==> matchSheet: buildTeamBox()");
-    // Get team name from TBA
-    $.get("api/tbaAPI.php", {
-      getTeamInfo: teamNum
-    }).done(function (teamInfo) {
-      console.log("=> getTeamInfo");
-      var teamname = "XX";
-      if (teamInfo == null)
-        alert("Can't load teamName from TBA; check if TBA Key was set in db_config");
-      else {
-        jsonTeamInfo = JSON.parse(teamInfo)["response"];
-        teamname = jsonTeamInfo["nickname"];
-        console.log("==> matchSheet: buildTeamBox() for " + teamNum + ", teamname = " + teamname);
-      }
-      if (teamname != "XX") {
-        $("#" + color + index + "TeamNumber").html("<a class='text-light' href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a> - " + teamname);
+  // Build match links for our matchs at this event 
+  function buildOurMatchLinks(successFunction) {
+    console.log("==> matchSheet: buildOurMatchLinks()");
+    if (!bUsingCustom) {
+      if (!localMatchList) {
+        $.get("api/tbaAPI.php", {
+          getEventMatches: 1
+        }).done(function (eventMatches) {
+          console.log("=> getEventMatches");
+          if (eventMatches == null)
+            alert("Can't load matchlist from TBA; check if TBA Key was set in db_config");
+          else {
+            var ourMatches = {};
+            jsonMatchData = JSON.parse(eventMatches)["response"];
+            localMatchList = {};
+            for (let mi in jsonMatchData) {
+              var newMatch = {};
+              var match = jsonMatchData[mi];
+
+              newMatch["comp_level"] = match["comp_level"];
+              newMatch["match_number"] = match["match_number"];
+              if (match["comp_level"] == "sf")
+                newMatch["match_number"] = match["set_number"];
+
+              newMatch["red_teams"] = match["alliances"]["red"]["team_keys"];
+              newMatch["blue_teams"] = match["alliances"]["blue"]["team_keys"];
+              newMatch["time"] = null;
+              if (newMatch["time"] == null && match["actual_time"] != null) {
+                newMatch["time"] = match["actual_time"];
+              }
+              if (newMatch["time"] == null && match["predicted_time"] != null) {
+                newMatch["time"] = match["predicted_time"];
+              }
+              // if (newMatch["time"] == null && match["time"] != null){ newMatch["time"] = match["time"]; }
+              localMatchList[makeKey(newMatch["comp_level"], newMatch["match_number"])] = newMatch;
+
+              // Create list of matches for our team
+              if (newMatch["red_teams"].includes(_ourTeam) || newMatch["blue_teams"].includes(_ourTeam)) {
+                var keyw = newMatch["comp_level"] + newMatch["match_number"];
+                ourMatches[keyw] = newMatch;
+              }
+            }
+            createMatchHtmlLinks(ourMatches);
+            successFunction();
+          }
+        });
       } else {
-        $("#" + color + index + "TeamNumber").html("<a class='text-light' href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a>");
+        successFunction();
       }
-    });
-
-    // Load team scouted information
-    var rd = localMatchData[teamNum];
-    if (rd != null) {
-      var row = "<tr>";
-      row += "<td align=\"center\">" + rd["avgAutonCoralL1"] + "</td>";
-      row += "<td align=\"center\">" + rd["avgAutonCoralL2"] + "</td>";
-      row += "<td align=\"center\">" + rd["avgAutonCoralL3"] + "</td>";
-      row += "<td align=\"center\">" + rd["avgAutonCoralL4"] + "</td>";
-      row += "<td align=\"center\">" + rd["avgAutonAlgaeNet"] + "</td>";
-      row += "<td align=\"center\">" + rd["avgAutonAlgaeProc"] + "</td>";
-      row += "<td align=\"center\">" + rd["teleopCoralScoringPercent"] + "</td>";
-      row += "<td align=\"center\">" + rd["avgTeleopCoralL1"] + "</td>";
-      row += "<td align=\"center\">" + rd["avgTeleopCoralL2"] + "</td>";
-      row += "<td align=\"center\">" + rd["avgTeleopCoralL3"] + "</td>";
-      row += "<td align=\"center\">" + rd["avgTeleopCoralL4"] + "</td>";
-      row += "<td align=\"center\">" + rd["teleopAlgaeScoringPercent"] + "</td>";
-      row += "<td align=\"center\">" + rd["avgTeleopAlgaeNet"] + "</td>";
-      row += "<td align=\"center\">" + rd["avgTeleopAlgaeProc"] + "</td>";
-      row += "<td align=\"center\">" + rd["endgameClimbPercent"][0] + "</td>";
-      row += "<td align=\"center\">" + rd["endgameClimbPercent"][1] + "</td>";
-      row += "<td align=\"center\">" + rd["endgameClimbPercent"][2] + "</td>";
-      row += "<td align=\"center\">" + rd["endgameClimbPercent"][3] + "</td>";
-      row += "<td align=\"center\">" + rd["endgameClimbPercent"][4] + "</td>";
-      row += "</tr>";
     }
-    $("#" + color + index + "DataTable").append(row);
+    else { // using custom
+      localMatchList = {};
+      var newMatch = {};
+      newMatch["comp_level"] = "qm";
+      newMatch["match_number"] = 1;
+      newMatch["red_teams"] = [customRedTeam1, customRedTeam2, customRedTeam3];
+      newMatch["blue_teams"] = [customBlueTeam1, customBlueTeam2, customBlueTeam3]; //NEW
+      newMatch["time"] = "predicted_time"; //NEW
+      localMatchList["QM_1"] = newMatch;
+
+      //if (newMatch["red_teams"].includes(_ourTeam) || newMatch["blue_teams"].includes(_ourTeam)) {
+      //ourMatches[newMatch["match_number"]] = newMatch;
+
+      //createMatchHtmlLinks();
+      successFunction();
+    }
+  }
+  // Check source URL for match specifier
+  function checkURLForMatchSpec() {
+    console.log("==> matchSheet: checkURLForMatchSpec()");
+    let sp = new URLSearchParams(window.location.search);
+    if (!bUsingCustom) {
+      if (sp.has('compLevel') && sp.has('matchNum')) {
+        return [sp.get('compLevel'), sp.get('matchNum')];
+      }
+    }
+    if (bUsingCustom) {
+      if (sp.has('customRedTeam1') && sp.has('customRedTeam2') && sp.has('customRedTeam3') && sp.has('customBlueTeam1') && sp.has('customBlueTeam2') && sp.has('customBlueTeam3')) {
+        return [sp.get('customRedTeam1'), sp.get('customRedTeam2'), sp.get('customRedTeam3'), sp.get('customBlueTeam1'), sp.get('customBlueTeam2'), sp.get('customBlueTeam3')];
+      }
+    }
+    return null;
   }
 
-  // Build team photo image list
-  function sendPhotoRequest(redList, blueList) {
-    console.log("==> matchSheet: sendPhotoRequest()");
-    var requestList = [];
-    for (let i in redList) {
-      var tn = strTeamToIntTeam(redList[i]);
-      if (tn !== "") {
-        picDB[tn] = "R" + i;
-        requestList.push(tn);
-      }
-    }
-    for (let i in blueList) {
-      var tn = strTeamToIntTeam(blueList[i]);
-      if (tn !== "") {
-        picDB[tn] = "B" + i;
-        requestList.push(tn);
-      }
-    }
-
-    $.get("api/dbReadAPI.php", {
-      getAllTeamImages: JSON.stringify(requestList)
-    }).done(function (imageData) {
-      console.log("=> getAllTeamImages");
-      var teamImages = JSON.parse(imageData);
-      for (var team of Object.keys(teamImages)) {
-        buildRobotPhotoLinks(picDB[team], teamImages[team]);
-      }
+  // Build the match sheet from this event
+  function loadEventMatchSheet(compLevel, matchNum) {
+    console.log("==> matchSheet: loadEventMatchSheet()");
+    clearMatchSheet();
+    // Write Match Number
+    $("#matchTitle").html("Match " + compLevel + " " + matchNum);
+    // Pull Data
+    localMatchNum = matchNum;
+    localCompLevel = compLevel;
+    loadMatchData(function () {
+      buildOurMatchLinks(processMatchList)
     });
   }
 
-  // Takes list of Team Pic paths and loads them
-  function buildRobotPhotoLinks(prefix, teamPics) {
-    var first = true;
-    for (let uri of teamPics) {
-      var tags = "";
-      if (first) {
-        tags += "<div class='carousel-item active'>";
-      } else {
-        tags += "<div class='carousel-item'>";
-      }
-      first = false;
-      tags += " <img src='./" + uri + "' class='d-block w-100'>";
-      tags += "</div>";
-      $("#" + prefix + "RobotPics").append(tags);
-    }
-  }
-
-  function strTeamToIntTeam(team) {
-    return team.replace(/^(frc)/, '');
+  // Build a custom red and blue alliance matchsheet
+  function loadCustomMatch(redTeam1, redTeam2, redTeam3, blueTeam1, blueTeam2, blueTeam3) {
+    clearMatchSheet();
+    // Write Match Number
+    //$("#matchTitle").html("Match " + compLevel + " " + matchNum);
+    // Pull Data
+    customRedTeam1 = redTeam1;
+    customRedTeam2 = redTeam2;
+    customRedTeam3 = redTeam3;
+    customBlueTeam1 = blueTeam1;
+    customBlueTeam2 = blueTeam2;
+    customBlueTeam3 = blueTeam3;
+    loadMatchData(function () {
+      buildOurMatchLinks(processMatchList)
+    });
   }
 
   //
@@ -1035,19 +1010,22 @@ require 'inc/header.php';
     });
 
     // Check URL for source match to load
-    var initialGet = checkGet();
-    if (initialGet) {
-      loadMatchSheet(initialGet[0], initialGet[1]);
+    var matchSpec = checkURLForMatchSpec();
+    if (matchSpec) {
+      console.log("==> matchsheet: building from URL spec!");
+      loadEventMatchSheet(matchSpec[0], matchSpec[1]);
     }
 
     // Load the match sheet data from form entry 
     $("#loadMatch").click(function () {
+      console.log("=> matchsheet: load event match!");
       bUsingCustom = false;
-      loadMatchSheet($("#enterMatchLevel").val(), $("#enterMatchNumber").val());
+      loadEventMatchSheet($("#enterMatchLevel").val(), $("#enterMatchNumber").val());
     });
 
     // Open and set the custom match selected
     $("#loadCustomMatch").click(function () {
+      console.log("=> matchsheet: load custom match!");
       bUsingCustom = true;
       var redTeamNum1 = document.getElementById("enterRed1").value;
       var blueTeamNum1 = document.getElementById("enterBlue1").value;
