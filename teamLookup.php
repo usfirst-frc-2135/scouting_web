@@ -268,11 +268,11 @@ require 'inc/header.php';
                   <thead>
                     <tr>
                       <th scope="col" style="text-align:left"></th>
-                      <th scope="col">N</th>
-                      <th scope="col">P</th>
-                      <th scope="col">F</th>
-                      <th scope="col">S</th>
-                      <th scope="col">D</th>
+                      <th style="width:12%" scope="col">N</th>
+                      <th style="width:12%" scope="col">F</th>
+                      <th style="width:12%" scope="col">P</th>
+                      <th style="width:12%" scope="col">S</th>
+                      <th style="width:12%" scope="col">D</th>
                     </tr>
                   </thead>
                   <tbody id="endgameClimbTableBody">
@@ -499,25 +499,9 @@ require 'inc/header.php';
                 </tbody>
               </table>
             </div>
-
-            <!-- Comments section -->
-            <table class="table table-striped table-sm table-bordered border-dark">
-              <thead>
-                <tr>
-                  <th scope="col">Comments</th>
-                  <th scope="col">Scout</th>
-                </tr>
-              </thead>
-              <tbody id="comments">
-                <tr>
-                  <td></td>
-                  <td></td>
-                </tr>
-              </tbody>
-            </table>
-
           </div>
         </div>
+
       </div>
     </div>
   </div>
@@ -541,10 +525,10 @@ require 'inc/header.php';
   var frozenTableStrategy = null;
 
 
-  // AUTON GRAPH STARTS HERE
+  ///// AUTON GRAPH STARTS HERE /////
 
-  function dataToAutonGraph(matchdata) {
-    console.log("==> teamLookup.php: dataToAutonGraph()");
+  function loadAutonGraph(matchdata) {
+    console.log("==> teamLookup: loadAutonGraph()");
 
     // Declare variables
     var matchList = []; // List of matches to use as x lables
@@ -735,12 +719,12 @@ require 'inc/header.php';
     });
   }
 
-  // AUTON GRAPH ENDS HERE
+  ///// AUTON GRAPH ENDS HERE /////
 
-  // TELEOP GRAPH STARTS HERE
+  ///// TELEOP GRAPH STARTS HERE /////
 
-  function dataToTeleopGraph(matchdata) {
-    console.log("==> teamLookup.php: dataToTeleopGraph()");
+  function loadTeleopGraph(matchdata) {
+    console.log("==> teamLookup: loadTeleopGraph()");
 
     // Declare variables
     var matchList = []; // List of matches to use as x lables
@@ -908,12 +892,12 @@ require 'inc/header.php';
     });
   }
 
-  // TELEOP GRAPH ENDS HERE
+  ///// TELEOP GRAPH ENDS HERE /////
 
-  // ENDGAME GRAPH STARTS HERE
+  ///// ENDGAME GRAPH STARTS HERE /////
 
-  function dataToEndgameGraph(matchdata) {
-    console.log("==> teamLookup.php: dataToEndgameGraph()");
+  function loadEndgameGraph(matchdata) {
+    console.log("==> teamLookup: loadEndgameGraph()");
     var matchList = [];
     var datasets = [];
     var cageClimbTips = [];
@@ -998,7 +982,7 @@ require 'inc/header.php';
     });
   }
 
-  // ENDGAME GRAPH END HERE
+  ///// ENDGAME GRAPH END HERE /////
 
   // Create an html table row with tr and td cells
   function writeTableRow(tbodyID, dict, keys, length) {
@@ -1016,73 +1000,73 @@ require 'inc/header.php';
   }
 
   // Generate all of the table data and fill them
-  function dataToAvgTables(avgs) {
-    console.log("==> teamLookup.php: dataToAvgTables()");
+  function loadAvgData(avgs) {
+    console.log("==> teamLookup: loadAvgData()");
 
     /////// Match Totals Table
-    avgs["totalCoralstr"] = "<b>Coral Scored</b>";
-    avgs["totalAlgaestr"] = "<b>Algae Scored</b>";
-    avgs["totalCoralPointsstr"] = "<b>Coral Points</b>";
-    avgs["totalAlgaePointsstr"] = "<b>Algae Points</b>";
+    avgs["totalCoralStr"] = "<b>Coral Scored</b>";
+    avgs["totalAlgaeStr"] = "<b>Algae Scored</b>";
+    avgs["totalCoralPointsStr"] = "<b>Coral Points</b>";
+    avgs["totalAlgaePointsStr"] = "<b>Algae Points</b>";
 
-    writeTableRow("totalTableBody", avgs, ["totalCoralstr", "avgTotalCoral", "maxTotalCoral"], 3);
-    writeTableRow("totalTableBody", avgs, ["totalAlgaestr", "avgTotalAlgae", "maxTotalAlgae"], 3);
-    writeTableRow("totalTableBody", avgs, ["totalCoralPointsstr", "avgTotalCoralPoints", "maxTotalCoralPoints"], 3);
-    writeTableRow("totalTableBody", avgs, ["totalAlgaePointsstr", "avgTotalAlgaePoints", "maxTotalAlgaePoints"], 3);
+    writeTableRow("totalTableBody", avgs, ["totalCoralStr", "avgTotalCoral", "maxTotalCoral"], 3);
+    writeTableRow("totalTableBody", avgs, ["totalAlgaeStr", "avgTotalAlgae", "maxTotalAlgae"], 3);
+    writeTableRow("totalTableBody", avgs, ["totalCoralPointsStr", "avgTotalCoralPoints", "maxTotalCoralPoints"], 3);
+    writeTableRow("totalTableBody", avgs, ["totalAlgaePointsStr", "avgTotalAlgaePoints", "maxTotalAlgaePoints"], 3);
 
     avgs["totalMatchPointsStr"] = "<b>Match Points</b>";
-    avgs["avgTotalMatchPoints"] = avgs["avgTotalCoralPoints"] + avgs["avgTotalAlgaePoints", 3];
-    avgs["maxTotalMatchPoints"] = avgs["maxTotalCoralPoints"] + avgs["maxTotalAlgaePoints", 3];
+    avgs["avgTotalMatchPoints"] = avgs["avgTotalCoralPoints"] + avgs["avgTotalAlgaePoints"];
+    avgs["maxTotalMatchPoints"] = avgs["maxTotalCoralPoints"] + avgs["maxTotalAlgaePoints"];
     writeTableRow("totalTableBody", avgs, ["totalMatchPointsStr", "avgTotalMatchPoints", "maxTotalMatchPoints"], 3);
 
     //Auton Table  
-    avgs["autonpointsstr"] = "<b>Total Points</b>";
-    avgs["autontotalcoralstr"] = "<b>Coral Scored</b>";
-    avgs["autontotalalgaestr"] = "<b>Algae Scored</b>";
-    avgs["autoncoralpointsstr"] = "<b>Coral Points</b>";
-    avgs["autonalgaepointsstr"] = "<b>Algae Points</b>";
+    avgs["autonpointsStr"] = "<b>Total Points</b>";
+    avgs["autontotalcoralStr"] = "<b>Coral Scored</b>";
+    avgs["autontotalalgaeStr"] = "<b>Algae Scored</b>";
+    avgs["autoncoralpointsStr"] = "<b>Coral Points</b>";
+    avgs["autonalgaepointsStr"] = "<b>Algae Points</b>";
 
-    writeTableRow("autoTableBody", avgs, ["autonpointsstr", "avgTotalAutoPoints", "maxTotalAutoPoints"], 3);
-    writeTableRow("autoTableBody", avgs, ["autontotalcoralstr", "avgAutonCoral", "maxAutonCoral"], 3);
-    writeTableRow("autoTableBody", avgs, ["autontotalalgaestr", "avgAutonAlgae", "maxAutonAlgae"], 3);
-    writeTableRow("autoTableBody", avgs, ["autoncoralpointsstr", "avgTotalAutoCoralPoints", "maxTotalAutoCoralPoints"], 3);
-    writeTableRow("autoTableBody", avgs, ["autonalgaepointsstr", "avgTotalAutoAlgaePoints", "maxTotalAutoAlgaePoints"], 3);
+    writeTableRow("autoTableBody", avgs, ["autonpointsStr", "avgTotalAutoPoints", "maxTotalAutoPoints"], 3);
+    writeTableRow("autoTableBody", avgs, ["autontotalcoralStr", "avgAutonCoral", "maxAutonCoral"], 3);
+    writeTableRow("autoTableBody", avgs, ["autontotalalgaeStr", "avgAutonAlgae", "maxAutonAlgae"], 3);
+    writeTableRow("autoTableBody", avgs, ["autoncoralpointsStr", "avgTotalAutoCoralPoints", "maxTotalAutoCoralPoints"], 3);
+    writeTableRow("autoTableBody", avgs, ["autonalgaepointsStr", "avgTotalAutoAlgaePoints", "maxTotalAutoAlgaePoints"], 3);
 
     // Teleop Table
 
-    avgs["teleoppointsstr"] = "<b>Total Points</b>";
-    avgs["teleoptotalcoralstr"] = "<b>Coral Scored</b>";
-    avgs["teleoptotalalgaestr"] = "<b>Algae Scored</b>";
-    avgs["teleopcoralpointsstr"] = "<b>Coral Points</b>";
-    avgs["teleopalgaepointsstr"] = "<b>Algae Points</b>";
-    avgs["teleopcoralaccuracystr"] = "<b>Coral Acc%</b>";
-    avgs["teleopalgaeaccuracysstr"] = "<b>Algae Acc%</b>";
+    avgs["teleoppointsStr"] = "<b>Total Points</b>";
+    avgs["teleoptotalcoralStr"] = "<b>Coral Scored</b>";
+    avgs["teleoptotalalgaeStr"] = "<b>Algae Scored</b>";
+    avgs["teleopcoralpointsStr"] = "<b>Coral Points</b>";
+    avgs["teleopalgaepointsStr"] = "<b>Algae Points</b>";
+    avgs["teleopcoralaccuracyStr"] = "<b>Coral Acc%</b>";
+    avgs["teleopalgaeaccuracysStr"] = "<b>Algae Acc%</b>";
 
-    writeTableRow("teleopTableBody", avgs, ["teleoppointsstr", "avgTotalTeleopPoints", "maxTotalTeleopPoints"], 3);
-    writeTableRow("teleopTableBody", avgs, ["teleoptotalcoralstr", "avgTeleopCoralScored", "maxTeleopCoralScored"], 3);
-    writeTableRow("teleopTableBody", avgs, ["teleoptotalalgaestr", "avgTeleopAlgaeScored", "maxTeleopAlgaeScored"], 3);
-    writeTableRow("teleopTableBody", avgs, ["teleopcoralpointsstr", "avgTotalTeleopCoralPoints", "maxTotalTeleopCoralPoints"], 3);
-    writeTableRow("teleopTableBody", avgs, ["teleopalgaepointsstr", "avgTotalTeleopAlgaePoints", "maxTotalTeleopAlgaePoints"], 3);
-    writeTableRow("teleopTableBody", avgs, ["teleopcoralaccuracystr", "teleopCoralScoringPercent"], 3);
-    writeTableRow("teleopTableBody", avgs, ["teleopalgaeaccuracysstr", "teleopAlgaeScoringPercent"], 3);
+    writeTableRow("teleopTableBody", avgs, ["teleoppointsStr", "avgTotalTeleopPoints", "maxTotalTeleopPoints"], 3);
+    writeTableRow("teleopTableBody", avgs, ["teleoptotalcoralStr", "avgTeleopCoralScored", "maxTeleopCoralScored"], 3);
+    writeTableRow("teleopTableBody", avgs, ["teleoptotalalgaeStr", "avgTeleopAlgaeScored", "maxTeleopAlgaeScored"], 3);
+    writeTableRow("teleopTableBody", avgs, ["teleopcoralpointsStr", "avgTotalTeleopCoralPoints", "maxTotalTeleopCoralPoints"], 3);
+    writeTableRow("teleopTableBody", avgs, ["teleopalgaepointsStr", "avgTotalTeleopAlgaePoints", "maxTotalTeleopAlgaePoints"], 3);
+    writeTableRow("teleopTableBody", avgs, ["teleopcoralaccuracyStr", "teleopCoralScoringPercent"], 3);
+    writeTableRow("teleopTableBody", avgs, ["teleopalgaeaccuracysStr", "teleopAlgaeScoringPercent"], 3);
 
     /////// Endgame Table
-    avgs["totalEndGamePointsstr"] = "<b>Endgame Points</b>";
-    avgs["endgameClimbPercent"]["endgameclimbstr"] = "<b>Cage Climb %</b>";
+    avgs["totalEndGamePointsStr"] = "<b>Endgame Points</b>";
+    avgs["endgameClimbPercent"]["endgameclimbStr"] = "<b>Cage Climb %</b>";
 
-    writeTableRow("endgameTotalPtsTableBody", avgs, ["totalEndGamePointsstr", "avgEndgamePoints", "maxEndgamePoints"], 3);
-    writeTableRow("endgameClimbTableBody", avgs["endgameClimbPercent"], ["endgameclimbstr", 0, 1, 2, 3, 4], 6);
+    writeTableRow("endgameTotalPtsTableBody", avgs, ["totalEndGamePointsStr", "avgEndgamePoints", "maxEndgamePoints"], 3);
+    writeTableRow("endgameClimbTableBody", avgs["endgameClimbPercent"], ["endgameclimbStr", 0, 2, 1, 3, 4], 6);
   }
 
   // filters out the match type as specified in the db status page
   function getFilteredData(team, successFunction) {
-    console.log("==> teamLookup.php: loadTeamPics(): " + team);
+    console.log("==> teamLookup: getFilteredData(): " + team);
     var tempThis = this;
 
     $.post("api/dbAPI.php", {
       getDBStatus: true
     }, function (dbStatus) {
-      console.log("==> getDBStatus");
+      console.log("=> getDBStatus");
       dbdata = JSON.parse(dbStatus);
       var localSiteFilter = {};
       localSiteFilter["useP"] = dbdata["useP"];
@@ -1097,7 +1081,7 @@ require 'inc/header.php';
       $.get("api/dbReadAPI.php", {
         getTeamMatches: team
       }).done(function (getTeamMatches) {
-        console.log("==> getTeamMatches");
+        console.log("=> getTeamMatches");
         getTeamMatches = JSON.parse(getTeamMatches);
 
         var newData = [];
@@ -1126,7 +1110,7 @@ require 'inc/header.php';
   }
 
   // Gets the matches and puts them into the html rows
-  function sortMatchDataTable() {
+  function sortMatchData() {
     var table = document.getElementById("sortableAllMatches");
     var rows = Array.prototype.slice.call(table.querySelectorAll("tbody> tr"));
     rows.sort(function (rowA, rowB) {
@@ -1139,7 +1123,7 @@ require 'inc/header.php';
   }
 
   // Gets the strategic match info and puts them into the html rows
-  function sortStrategicDataTable() {
+  function sortStrategicData() {
     var table = document.getElementById("sortableStrategicData");
     var rows = Array.prototype.slice.call(table.querySelectorAll("tbody> tr"));
     rows.sort(function (rowA, rowB) {
@@ -1152,8 +1136,8 @@ require 'inc/header.php';
   }
 
   // Builds the match data table
-  function dataToMatchTable(dataObj) {
-    console.log("==> teamLookup.php: dataToMatchTable()");
+  function loadMatchTable(dataObj) {
+    console.log("==> teamLookup: loadMatchTable()");
     $("#matchDataTable").html("");  // clear table
     for (let i = 0; i < dataObj.length; i++) {
       var rowString = "<tr><td align=\"center\">" + dataObj[i]["matchnumber"] + "</td>" +
@@ -1204,7 +1188,7 @@ require 'inc/header.php';
         'frozenColVerticalOffset': 0
       });
     }, 100);
-    sortMatchDataTable();
+    sortMatchData();
   }
 
   // Converts a given "1" to yes, "0" to no, anything else to empty string.
@@ -1221,8 +1205,77 @@ require 'inc/header.php';
     return convertedVal;
   }
 
-  function dataToStrategicTable(dataObj) {
-    console.log("==> teamLookup.php: dataToStrategicTable()");
+  // MAIN PROCESSORS HERE
+
+  // Check if our URL directs to a specific team
+  function checkGet() {
+    console.log("=> teamLookup: checkGet()");
+    let sp = new URLSearchParams(window.location.search);
+    if (sp.has('teamNum')) {
+      return sp.get('teamNum')
+    }
+    return null;
+  }
+
+  // Takes list of Team Pic paths and loads them.
+  function loadTeamPics(teamPics) {
+    console.log("==> teamLookup: loadTeamPics()");
+    var first = true;
+    for (let uri of teamPics) {
+      var tags = "";
+      if (first) {
+        tags += "<div class='carousel-item active'>";
+      } else {
+        tags += "<div class='carousel-item'>";
+      }
+      first = false;
+      tags += " <img src='./" + uri + "' class='d-block w-100'>";
+      tags += "</div>";
+      $("#robotPics").append(tags);
+    }
+  }
+
+  // Build the pit data table
+  function loadMatchData(team, allEventMatches) {
+    console.log("==> teamLookup: loadMatchData()");
+    var mdp = new matchDataProcessor(allEventMatches);
+    mdp.sortMatches(allEventMatches);
+    mdp.getSiteFilteredAverages(function (averageData) {
+      processedData = averageData[team];
+      loadAvgData(processedData);
+    });
+    getFilteredData(team, function (fData) {
+      filteredData = fData;
+      loadAutonGraph(filteredData);
+      loadTeleopGraph(filteredData);
+      loadEndgameGraph(filteredData);
+      loadMatchTable(filteredData);
+    });
+  }
+
+  // Build the pit data table
+  function loadPitData(pitData) {
+    console.log("==> teamLookup: loadPitData()");
+    if (!pitData || !pitData.length) {
+      // row one    
+      pitData["swervedrivestring"] = pitData["swerve"] ? "yes" : "no";
+      pitData["drivemotors"];
+      pitData["sparepartsstring"] = pitData["spareparts"] ? "yes" : "no";
+      pitData["proglanguage"];
+
+      // row two    
+      pitData["computervisionstring"] = pitData["computervision"] ? "yes" : "no";
+      pitData["pitorg"];
+      pitData["preparedness"];
+      pitData["numbatteries"];
+    }
+
+    writeTableRow("pitRow1", pitData, ["swervedrivestring", "drivemotors", "sparepartsstring", "proglanguage"], 4);
+    writeTableRow("pitRow2", pitData, ["computervisionstring", "pitorg", "preparedness", "numbatteries"], 4);
+  }
+
+  function loadStrategicData(dataObj) {
+    console.log("==> teamLookup: dataToStrategicTable()");
     $("#strategicDataTable").html("");  // clear table
     for (let i = 0; i < dataObj.length; i++) {
       var driverability = dataObj[i]["driverability"];
@@ -1281,103 +1334,12 @@ require 'inc/header.php';
         'frozenColVerticalOffset': 0
       });
     }, 100);
-    sortStrategicDataTable();
+    sortStrategicData();
   }
-
-  // Pull comments from match data scouting data
-  function dataToCommentTable(commentObj) {
-    for (let i = 0; i < commentObj.length; i++) {
-      if (commentObj[i].comment === "-") {
-        continue;
-      }
-      writeTableRow("comments", commentObj[i], ["comment", "scoutname"], 2);
-    }
-  }
-
-  // MAIN PROCESSORS HERE
-
-  // Check if our URL directs to a specific team
-  function checkGet() {
-    console.log("==> teamLookup.php: checkGet()");
-    let sp = new URLSearchParams(window.location.search);
-    if (sp.has('teamNum')) {
-      return sp.get('teamNum')
-    }
-    return null;
-  }
-
-  // Takes list of Team Pic paths and loads them.
-  function loadTeamPics(teamPics) {
-    console.log("==> teamLookup.php: loadTeamPics()");
-    var first = true;
-    for (let uri of teamPics) {
-      var tags = "";
-      if (first) {
-        tags += "<div class='carousel-item active'>";
-      } else {
-        tags += "<div class='carousel-item'>";
-      }
-      first = false;
-      tags += " <img src='./" + uri + "' class='d-block w-100'>";
-      tags += "</div>";
-      $("#robotPics").append(tags);
-    }
-  }
-
-  // Build the pit data table
-  function processMatchData(team, allEventMatches) {
-    console.log("==> teamLookup.php: processMatchData()");
-    var mdp = new matchDataProcessor(allEventMatches);
-    mdp.sortMatches(allEventMatches);
-    mdp.getSiteFilteredAverages(function (averageData) {
-      processedData = averageData[team];
-      dataToAvgTables(processedData);
-    });
-    getFilteredData(team, function (fData) {
-      filteredData = fData;
-      dataToAutonGraph(filteredData);
-      dataToTeleopGraph(filteredData);
-      dataToEndgameGraph(filteredData);
-      dataToMatchTable(filteredData);
-      dataToStrategicTable(filteredData);
-      dataToCommentTable(filteredData);
-    });
-  }
-
-  // Build the strategic data table
-  function processStrategicData(stratData) {
-    dataToStrategicTable(stratData);
-  }
-
-  // Build the pit data table
-  function processPitData(pitData) {
-    console.log("==> teamLookup.php: processPitData()");
-    if (!pitData || !pitData.length) {
-      // row one    
-      pitData["swervedrivestring"] = pitData["swerve"] ? "yes" : "no";
-      pitData["drivemotors"];
-      pitData["sparepartsstring"] = pitData["spareparts"] ? "yes" : "no";
-      pitData["proglanguage"];
-
-      // row two    
-      pitData["computervisionstring"] = pitData["computervision"] ? "yes" : "no";
-      pitData["pitorg"];
-      pitData["preparedness"];
-      pitData["numbatteries"];
-    }
-
-    writeTableRow("pitRow1", pitData, ["swervedrivestring", "drivemotors", "sparepartsstring", "proglanguage"], 4);
-    writeTableRow("pitRow2", pitData, ["computervisionstring", "pitorg", "preparedness", "numbatteries"], 4);
-  }
-
-  // Build the comment data table
-  // function processCommentData(commentData) {
-  //   dataToCommentTable(commentData);
-  // }
 
   // This is the main function that runs when we want to load a new team 
-  function buildTeamLookupSheet(teamNum) {
-    console.log("==> teamLookup.php: buildTeamLookupSheet()");
+  function buildTeamLookupPage(teamNum) {
+    console.log("==> teamLookup: buildTeamLookupPage()");
     // Clear existing data
     $("#teamTitle").html("");
     $("#robotPics").html("");
@@ -1388,23 +1350,22 @@ require 'inc/header.php';
     $("#endgameClimbTableBody").html("");
     $("#pitRow1").html("");
     $("#pitRow2").html("");
-    $("#comments").html("");
     $("#strategicDataTable").html("");
     $("#matchDataTable").html("");
 
     // Get team name from TBA
     $.get("api/tbaAPI.php", {
       getTeamInfo: teamNum
-    }).done(function (teamData) {
-      console.log("==> getTeamInfo");
+    }).done(function (teamInfo) {
+      console.log("=> getTeamInfo");
       var teamname = "XX";
-      if (teamData == null)
+      if (teamInfo == null)
         alert("Can't load teamName from TBA; check if TBA Key was set in db_config");
       else {
-        console.log("teamLookup: getTeamInfo:\n" + teamData);
-        teamInfo = JSON.parse(teamData)["response"];
-        teamname = teamInfo["nickname"];
-        console.log("teamLookup: for " + teamNum + ", teamname = " + teamname);
+        // console.log("==> teamLookup: getTeamInfo:\n" + teamInfo);
+        jsonTeamInfo = JSON.parse(teamInfo)["response"];
+        teamname = jsonTeamInfo["nickname"];
+        console.log("==> teamLookup: for " + teamNum + ", teamname = " + teamname);
       }
       if (teamname != "XX") {
         $("#teamTitle").html(teamNum + " - " + teamname);
@@ -1417,35 +1378,35 @@ require 'inc/header.php';
     $.get("api/dbReadAPI.php", {
       getImagesForTeam: teamNum
     }).done(function (teamImages) {
-      console.log("==> getImagesForTeam");
+      console.log("=> getImagesForTeam");
       var jsonTeamImages = JSON.parse(teamImages);
-      console.log("PHOTO CHECK: " + jsonTeamImages);
+      console.log("==> PHOTOS: " + jsonTeamImages);
       loadTeamPics(jsonTeamImages);
     });
 
     // Add Match Scouting Data
     $.get("api/dbReadAPI.php", {
       getTeamMatches: teamNum
-    }).done(function (getMatchData) {
-      console.log("==> getTeamMatches");
-      jsonMatchData = JSON.parse(getMatchData);
-      processMatchData(teamNum, jsonMatchData);
+    }).done(function (teamMatches) {
+      console.log("=> getTeamMatches");
+      jsonMatchData = JSON.parse(teamMatches);
+      loadMatchData(teamNum, jsonMatchData);
 
       // Do the Pit Scouting Data
       $.get("api/dbReadAPI.php", {
         getTeamPitData: teamNum
       }).done(function (teamPitData) {
-        console.log("==> getTeamPitData");
+        console.log("=> getTeamPitData\n");
         jsonPitData = JSON.parse(teamPitData);
-        processPitData(jsonPitData);
+        loadPitData(jsonPitData);
 
         // Do the Strategic Data Table.
         $.get("api/dbReadAPI.php", {
           getTeamStrategicData: teamNum
         }).done(function (strategicData) {
-          console.log("==> getTeamStrategicData");
+          console.log("=> getTeamStrategicData");
           jsonStratData = JSON.parse(strategicData);
-          processStrategicData(jsonStratData);
+          loadStrategicData(jsonStratData);
         });
       });
     });
@@ -1459,13 +1420,13 @@ require 'inc/header.php';
     $.get("api/tbaAPI.php", {
       getEventCode: true
     }, function (eventCode) {
-      console.log("==> teamLookup.php - getEventCode: " + eventCode.trim());
+      console.log("=> teamLookup: getEventCode: " + eventCode.trim());
       $("#navbarEventCode").html(eventCode);
     });
 
     var initTeamNumber = checkGet()
     if (initTeamNumber) {
-      buildTeamLookupSheet(initTeamNumber);
+      buildTeamLookupPage(initTeamNumber);
     }
 
     // Pressing enter in team number field loads the page
@@ -1479,7 +1440,7 @@ require 'inc/header.php';
 
     // Load team data for the number entered
     $("#loadTeamButton").click(function () {
-      buildTeamLookupSheet($("#enterTeamNumber").val());
+      buildTeamLookupPage($("#enterTeamNumber").val());
     });
 
     // Keep the frozen match data updated

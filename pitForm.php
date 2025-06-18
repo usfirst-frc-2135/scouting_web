@@ -175,7 +175,7 @@ require 'inc/header.php';
 
 <script>
   function verifyPitForm() {
-    console.log("==> pitForm.php: verifyPitForm()");
+    console.log("==> pitForm: verifyPitForm()");
     var isError = false;
     var errMsg = "Please enter values for these fields:";
     var teamNum = $("#teamNumber").val();
@@ -244,7 +244,7 @@ require 'inc/header.php';
   }
 
   function clearPitForm() {
-    console.log("==> pitForm.php: clearPitForm()");
+    console.log("==> pitForm: clearPitForm()");
     $("#teamNumber").val("");
     $("#swerveDriveYes").prop("checked", false);
     $("#swerveDriveNo").prop("checked", false);
@@ -264,7 +264,7 @@ require 'inc/header.php';
   }
 
   function writeFormToPitTable() {
-    console.log("==> pitForm.php: writeFormToPitTable()");
+    console.log("==> pitForm: writeFormToPitTable()");
     var dataToUse = {};
     dataToUse["teamnumber"] = $("#teamNumber").val();
 
@@ -355,7 +355,7 @@ require 'inc/header.php';
     $.post("api/dbWriteAPI.php", {
       writePitTable: JSON.stringify(dataToUse)
     }).done(function (returnCode) {
-      console.log("==> writePitTable");
+      console.log("=> writePitTable");
       // Because success word may have a new-line at the end, don't do a direct compare
       if (returnCode.indexOf('success') > -1) {
         alert("Success in submitting pit data!");
@@ -374,7 +374,7 @@ require 'inc/header.php';
     $.get("api/tbaAPI.php", {
       getEventCode: true
     }, function (eventCode) {
-      console.log("==> pitForm.php - getEventCode: " + eventCode.trim());
+      console.log("=> pitForm: getEventCode: " + eventCode.trim());
       $("#navbarEventCode").html(eventCode);
     });
 

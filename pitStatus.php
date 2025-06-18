@@ -43,10 +43,10 @@ require 'inc/header.php';
 
 <script>
 
-  function createPitStatusTable(teams, names, images, pitInfo) {
-    console.log("==> pitStatus.php: createPitStatusTable()");
+  function buildPitStatusPage(teams, names, images, pitInfo) {
+    console.log("==> pitStatus: buildPitStatusPage()");
     if (teams == null || names == null || images == null || pitInfo == null) {
-      console.warn("createPitStatusTable: team, names, images, or pit lists are missing!")
+      console.warn("buildPitStatusPage: team, names, images, or pit lists are missing!")
       return null;
     }
 
@@ -84,7 +84,7 @@ require 'inc/header.php';
   // teamName so it's just the team number for comparison. Also, a team number could end in a "B", "C",
   // "D", or "E", in which case we strip the letter off and just use the number for the comparison.
   function sortPitStatusTable(tableId) {
-    console.log("==> pitStatus.php: sortTable(): id: " + tableId);
+    console.log("==> pitStatus: sortTable(): id: " + tableId);
     var table = document.getElementById(tableId);
     var rows = Array.prototype.slice.call(table.querySelectorAll("tbody> tr"));
 
@@ -103,16 +103,15 @@ require 'inc/header.php';
     $.get("api/tbaAPI.php", {
       getEventCode: true
     }, function (eventCode) {
-      console.log("==> pitStatus.php - getEventCode: " + eventCode.trim());
+      console.log("=> pitStatus: getEventCode: " + eventCode.trim());
       $("#navbarEventCode").html(eventCode);
     });
 
     // Get the list of teams and add the team names 
-    console.log("index: getting teamlist from TBA using db_config event code");
     $.get("api/tbaAPI.php", {
       getEventTeamNames: 1
     }).done(function (eventTeamNames) {
-      console.log("==> getEventTeamNames");
+      console.log("=> getEventTeamNames");
       var teamList = [];
       var namesList = {};
       if (eventTeamNames == null)
@@ -130,15 +129,15 @@ require 'inc/header.php';
         $.get("api/dbReadAPI.php", {
           getAllTeamImages: JSON.stringify(teamList)
         }).done(function (teamImageList) {
-          console.log("pitStatus.php: getAllTeamImages:\n" + teamImageList);
+          console.log("=> pitStatus: getAllTeamImages");
           jsonImageList = JSON.parse(teamImageList);
           // Get all the teams pit scouted
           $.get("api/dbReadAPI.php", {
             getAllPitData: 1
           }).done(function (pitDataList) {
-            console.log("==> getAllPitData");
+            console.log("=> getAllPitData");
             jsonPitList = JSON.parse(pitDataList);
-            createPitStatusTable(teamList, namesList, jsonImageList, jsonPitList);
+            buildPitStatusPage(teamList, namesList, jsonImageList, jsonPitList);
             // script instructions say this is needed, but it breaks table header sorting
             // sorttable.makeSortable(document.getElementById("psTable"));
           });

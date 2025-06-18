@@ -222,7 +222,7 @@ function submitFunction() {
     $.post("api/dbWriteAPI.php", {
       writeTeamMatch: JSON.stringify(indexedData)
     }, function (returnCode) {
-      console.log("==> writeTeamMatch");
+      console.log("=> writeTeamMatch");
       // Because success word may have a new-line at the end, don't do a direct compare
       if (returnCode.indexOf('success') > -1) {
         alert("Data Successfully Submitted! Clearing Data.");

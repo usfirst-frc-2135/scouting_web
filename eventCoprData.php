@@ -131,7 +131,7 @@ require 'inc/header.php';
     $.get("api/tbaAPI.php", {
       getCOPRs: 1
     }).done(function (coprs) {
-      console.log("==> getCOPRs");
+      console.log("=> getCOPRs");
       buildCoprTable(coprs);
       setTimeout(function () {
         // script instructions say this is needed, but it breaks table header sorting
@@ -164,7 +164,7 @@ require 'inc/header.php';
     $.get("api/tbaAPI.php", {
       getEventCode: true
     }, function (eventCode) {
-      console.log("==> eventCoprData.php - getEventCode: " + eventCode.trim());
+      console.log("=> eventCoprData.php - getEventCode: " + eventCode.trim());
       $("#navbarEventCode").html(eventCode);
     });
 

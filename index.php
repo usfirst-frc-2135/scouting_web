@@ -192,7 +192,7 @@ require 'inc/header.php';
     $.get("api/tbaAPI.php", {
       getEventCode: true
     }, function (eventCode) {
-      console.log("==> index.php - getEventCode: " + eventCode.trim());
+      console.log("=> index.php - getEventCode: " + eventCode.trim());
       $("#navbarEventCode").html(eventCode);
     });
 
@@ -200,7 +200,7 @@ require 'inc/header.php';
     $.post("api/dbAPI.php", {
       getDBStatus: true
     }, function (dbStatus) {
-      console.log("==> getDBStatus");
+      console.log("=> getDBStatus");
       updateStatusValues(JSON.parse(dbStatus));
     });
 
@@ -276,7 +276,7 @@ require 'inc/header.php';
       $.post("api/dbAPI.php", {
         createDB: true
       }, function (statusValues) {
-        console.log("==> createDB");
+        console.log("=> createDB");
         updateStatusValues(JSON.parse(statusValues));
       });
     });
@@ -286,7 +286,7 @@ require 'inc/header.php';
       $.post("api/dbAPI.php", {
         createTable: true
       }, function (createTable) {
-        console.log("==> createDB");
+        console.log("=> createDB");
         updateStatusValues(JSON.parse(createTable));
       });
     });

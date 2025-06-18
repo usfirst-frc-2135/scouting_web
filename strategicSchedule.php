@@ -59,8 +59,8 @@ require 'inc/header.php';
 <!-- Javascript page handlers -->
 
 <script>
-  function buildStrategicSchedule(dataObj) {
-    console.log("==> strategicSchedule.php: buildStrategicSchedule()");
+  function loadStrategicSchedule(dataObj) {
+    console.log("==> strategicSchedule: loadStrategicSchedule()");
     $("#tableData").html(""); // Clear table
     for (let i = 0; i < dataObj.length; i++) {
       var matchNum = dataObj[i]["match_number"];
@@ -71,7 +71,7 @@ require 'inc/header.php';
   }
 
   function sortStrategicSchedule(id) {
-    console.log("==> strategicSchedule.php: sortStrategicSchedule()");
+    console.log("==> strategicSchedule: sortStrategicSchedule()");
     // Assumes the entries are team numbers or match numbers. Note a team number could have end in 
     // a "B", "C", "D", or "E", in which case we want to strip that off and just use the number for
     // the comparison.
@@ -92,13 +92,13 @@ require 'inc/header.php';
 
   // Figure out which matches and teams for strategic scouts 
   function buildScheduleTable() {
-    console.log("==> strategicSchedule.php: buildScheduleTable()");
+    console.log("==> strategicSchedule: buildScheduleTable()");
     $.get("api/tbaAPI.php", {
       getStrategicMatches: 1
     }).done(function (strategicData) {
-      console.log("==> getStrategicMatches");
+      console.log("=> getStrategicMatches");
       var dataObj = JSON.parse(strategicData);
-      buildStrategicSchedule(dataObj);
+      loadStrategicSchedule(dataObj);
       sortStrategicSchedule("matchTable");
     });
   }
@@ -111,7 +111,7 @@ require 'inc/header.php';
     $.get("api/tbaAPI.php", {
       getEventCode: true
     }, function (eventCode) {
-      console.log("==> strategicSchedule.php - getEventCode: " + eventCode.trim());
+      console.log("=> strategicSchedule: getEventCode: " + eventCode.trim());
       $("#navbarEventCode").html(eventCode);
     });
 
@@ -119,7 +119,7 @@ require 'inc/header.php';
 
     // Create the strategic match schedule
     $("#reloadButton").click(function () {
-      console.log("--->>> Create Schedule button clicked!");
+      console.log("=> Create Schedule button clicked!");
       buildScheduleTable();
     });
   });

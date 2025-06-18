@@ -88,8 +88,8 @@ require 'inc/header.php';
   const matchColumn = 1;
 
   // Sort the html table data by team number
-  function sortMatchTable(tableData, teamCol, matchCol) {
-    console.log("==> matchData.php: sortMatchTable()");
+  function sortMatchData(tableData, teamCol, matchCol) {
+    console.log("==> matchData: sortMatchData()");
     var table = document.getElementById(tableData);
     var rows = Array.prototype.slice.call(table.querySelectorAll("tbody> tr"));
 
@@ -110,8 +110,8 @@ require 'inc/header.php';
   }
 
   // NOTE: data object keywords MUST match the database definition in dbHander.php
-  function buildMatchDataTable(dataObj) {
-    console.log("==> matchData.php: buildMatchDataTable()");
+  function loadMatchData(dataObj) {
+    console.log("==> matchData: loadMatchData()");
     for (let i = 0; i < dataObj.length; i++) {
       var teamNum = dataObj[i]["teamnumber"];
       var rowString = "<tr><td style=\"background-color:transparent\">" + dataObj[i]["matchnumber"] + "</td>" +
@@ -141,15 +141,13 @@ require 'inc/header.php';
     }
   }
 
-  // get Match Scouting Data
-  function readMatchDataAndBuildTable() {
-    console.log("==> matchData.php: readMatchDataAndBuildTable()");
+  function buildMatchDataTable() {
     $.get("api/dbReadAPI.php", {
       getEventMatches: 1
     }).done(function (eventMatches) {
-      console.log("===> getEventMatches:\n" + eventMatches);
+      console.log("=> getEventMatches");
       var dataObj = JSON.parse(eventMatches);
-      buildMatchDataTable(dataObj);
+      loadMatchData(dataObj);
       setTimeout(function () {
         // script instructions say this is needed, but it breaks table header sorting
         // sorttable.makeSortable(document.getElementById("matchDataTable"));
@@ -171,7 +169,7 @@ require 'inc/header.php';
         //   'frozenColVerticalOffset': 0
         // });
       }, 100);
-      sortMatchTable("matchDataTable", teamColumn, matchColumn);
+      sortMatchData("matchDataTable", teamColumn, matchColumn);
     });
   }
 
@@ -183,11 +181,11 @@ require 'inc/header.php';
     $.get("api/tbaAPI.php", {
       getEventCode: true
     }, function (eventCode) {
-      console.log("==> matchData.php - getEventCode: " + eventCode.trim());
+      console.log("=> matchData: getEventCode: " + eventCode.trim());
       $("#navbarEventCode").html(eventCode);
     });
 
-    readMatchDataAndBuildTable();
+    buildMatchDataTable();
 
     // Keep the frozen pane updated 
     // $("#matchDataTable").click(function () {

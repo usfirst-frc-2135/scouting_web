@@ -112,8 +112,8 @@ require 'inc/header.php';
   const teamColumn = 0;
   const matchColumn = 1;
 
-  function sortStrategicTable(tableData, teamCol, matchCol) {
-    console.log("==> strategicData.php: sortStrategicTable()");
+  function sortStrategicData(tableData, teamCol, matchCol) {
+    console.log("==> strategicData: sortStrategicData()");
     var table = document.getElementById(tableData);
     var rows = Array.prototype.slice.call(table.querySelectorAll("tbody> tr"));
 
@@ -142,8 +142,8 @@ require 'inc/header.php';
     }
   }
 
-  function buildStrategicDataTable(dataObj, pitData) {
-    console.log("==> strategicData.php: buildStrategicDataTable()");
+  function loadStrategicData(dataObj, pitData) {
+    console.log("==> strategicData: loadStrategicData()");
     for (let i = 0; i < dataObj.length; i++) {
       var driveVal = "";
       switch (dataObj[i]["driverability"]) {
@@ -189,14 +189,14 @@ require 'inc/header.php';
   }
 
   // get Strategic Scouting Data
-  function readStrategicDataAndBuildTable() {
-    console.log("==> strategicData.php: readStrategicDataAndBuildTable()");
+  function buildStrategicDataTable() {
+    console.log("==> strategicData: buildStrategicDataTable()");
     $.get("api/dbReadAPI.php", {
       getAllStrategicData: 1
     }).done(function (strategicData) {
-      console.log("==> getAllStrategicData");
+      console.log("=> getAllStrategicData");
       var dataObj = JSON.parse(strategicData);
-      buildStrategicDataTable(dataObj);
+      loadStrategicData(dataObj);
       setTimeout(function () {
         // script instructions say this is needed, but it breaks table header sorting
         // sorttable.makeSortable(document.getElementById("strategicDataTable"));
@@ -218,7 +218,7 @@ require 'inc/header.php';
         //   'frozenColVerticalOffset': 0
         // });
       }, 100);
-      sortStrategicTable("strategicDataTable", teamColumn, matchColumn);
+      sortStrategicData("strategicDataTable", teamColumn, matchColumn);
     });
   }
 
@@ -230,11 +230,11 @@ require 'inc/header.php';
     $.get("api/tbaAPI.php", {
       getEventCode: true
     }, function (eventCode) {
-      console.log("==> strategicData.php - getEventCode: " + eventCode.trim());
+      console.log("=> strategicData: getEventCode: " + eventCode.trim());
       $("#navbarEventCode").html(eventCode);
     });
 
-    readStrategicDataAndBuildTable();
+    buildStrategicDataTable();
 
     // Submit the strategic form data
     // $("#strategicDataTable").click(function () {

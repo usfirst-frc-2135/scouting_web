@@ -299,8 +299,8 @@ require 'inc/header.php';
   var teleopCubesMiddle = 0;
   var teleopCubesTop = 0;
 
-  function attachGamepieceScoring() {
-    console.log("==> matchForm.php: attachGamepieceScoring()");
+  function attachFormButtons() {
+    console.log("=> matchForm: attachFormButtons()");
     // Auto cones
     $("#autoConesBottomPlus").click(function () {
       autoConesBottom += 1;
@@ -428,7 +428,7 @@ require 'inc/header.php';
   }
 
   function getFormData() {
-    console.log("==> matchForm.php: getFormData()");
+    console.log("==> matchForm: getFormData()");
     var out = {};
     var matchLevel = $("#compLevel").val();
     var matchNumber = $("#matchNumber").val();
@@ -472,8 +472,8 @@ require 'inc/header.php';
     return out;
   }
 
-  function clearData() {
-    console.log("==> matchForm.php: clearData()");
+  function clearFormData() {
+    console.log("==> matchForm: clearFormData()");
     $("#matchNumber").val("");
     //$("#startpos").val("0");
     autoConesBottom = 0;
@@ -505,14 +505,14 @@ require 'inc/header.php';
   }
 
   function submitMatchData(formData) {
-    console.log("==> matchForm.php: submitMatchData()");
+    console.log("==> matchForm: submitMatchData()");
     $.post("api/dbWriteAPI.php", {
       writeSingleData: JSON.stringify(formData)
     }, function (returnCode) {
       // Because success word may have a new-line at the end, don't do a direct compare
       if (returnCode.indexOf('success') > -1) {
         alert("Data Successfully Submitted! Clearing Data.");
-        clearData();
+        clearFormData();
       } else {
         alert("Data NOT Submitted. Please Check Network Connectivity.");
       }
@@ -527,11 +527,11 @@ require 'inc/header.php';
     $.get("api/tbaAPI.php", {
       getEventCode: true
     }, function (eventCode) {
-      console.log("==> matchForm.php - getEventCode: " + eventCode.trim());
+      console.log("=> matchForm: getEventCode: " + eventCode.trim());
       $("#navbarEventCode").html(eventCode);
     });
 
-    attachGamepieceScoring();
+    attachFormButtons();
 
     // Submit the match data form 
     $("#submitForm").click(function () {

@@ -74,7 +74,7 @@ function compareMatchNumbers(matchA, matchB) {
     matchB = prefixB + matchB;
   }
 
-  // console.log("compareMatchNumbers: " + prefixA + numA + "/" + matchA + " " + prefixB + numB + "/" + matchB);
+  // console.log("==> compareMatchNumbers: " + prefixA + numA + "/" + matchA + " " + prefixB + numB + "/" + matchB);
 
   var returnVal;
 
@@ -89,7 +89,7 @@ function compareMatchNumbers(matchA, matchB) {
   else
     returnVal = 1;          // B must be first
 
-  // console.log("compareMatchNumbers: " + matchA + " " + matchB + " " + returnVal);
+  // console.log("==> compareMatchNumbers: " + matchA + " " + matchB + " " + returnVal);
 
   return returnVal;
 };

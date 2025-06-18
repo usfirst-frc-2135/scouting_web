@@ -67,7 +67,7 @@ require 'inc/header.php';
   loadButton.style.visibility = 'hidden';
 
   function showSuccessMessage(message) {
-    console.log("==> pitPhotoUpload.php: showSuccessMessage()" + message);
+    console.log("==> pitPhotoUpload: showSuccessMessage()" + message);
     $("#robotPic").val("");
     $("#teamNumber").val("");
 
@@ -78,7 +78,7 @@ require 'inc/header.php';
   }
 
   function showErrorMessage(message) {
-    console.log("==> pitPhotoUpload.php: showErrorMessage(): " + message);
+    console.log("==> pitPhotoUpload: showErrorMessage(): " + message);
 
     $("#uploadMessageText").text(message);
     $("#uploadMessage").removeClass("alert-success");
@@ -87,7 +87,7 @@ require 'inc/header.php';
   }
 
   function uploadSuccess(msg) {
-    console.log("==> pitPhotoUpload.php: uploadSuccess(): " + msg);
+    console.log("==> pitPhotoUpload: uploadSuccess(): " + msg);
     msg = JSON.parse(msg);
     const loadButton = document.getElementById("loadingButton");
     if (msg["success"]) {
@@ -107,12 +107,13 @@ require 'inc/header.php';
     $.get("api/tbaAPI.php", {
       getEventCode: true
     }, function (eventCode) {
-      console.log("==> pitPhotoUpload - getEventCode: " + eventCode);
+      console.log("=> pitPhotoUpload - getEventCode: " + eventCode);
       $("#navbarEventCode").html(eventCode);
     });
 
     // Upload photo to the server
     $("#upload").on('click', function (event) {
+      console.log("=> pitPhotoUpload: upload clicked!");
       if (document.getElementById("robotPic").value != "" && document.getElementById("teamNumber").value != "") {
         var teamNum = $("#teamNumber").val();
 
@@ -122,13 +123,13 @@ require 'inc/header.php';
 
           // Replace checkbox is ticked
           if ($("#replacePic").is(":checked") == true) {
-            console.log("Going to remove existing photos for team #" + teamNum);
+            console.log("==> Going to remove existing photos for team #" + teamNum);
 
             // First get list of robot-pic files for this team.
             $.get("api/dbReadAPI.php", {
               getImagesForTeam: teamNum
             }).done(function (imagesData) {
-              console.log("==> getImagesForTeam");
+              console.log("=> getImagesForTeam");
               var teamImages = JSON.parse(imagesData);
 
               // If there are any existing images, delete them.
@@ -137,7 +138,7 @@ require 'inc/header.php';
                   url: 'api/deleteFile.php',
                   data: { 'file': "<?php echo dirname(__FILE__) . '/' ?>" + picFile },
                   success: function (response) {
-                    console.log("Deleted existing photo: " + picFile);
+                    console.log("==> Deleted existing photo: " + picFile);
                     $("#replacePic").prop("checked", false);
                   },
                   error: function () {
@@ -153,7 +154,7 @@ require 'inc/header.php';
             $.get("api/dbReadAPI.php", {
               getImagesForTeam: teamNum
             }).done(function (teamImages) {
-              console.log("==> getImagesForTeam\n" + teamImages);
+              console.log("=> getImagesForTeam\n" + teamImages);
 
               // Now upload the new image
               var uploadPost = new FormData();
