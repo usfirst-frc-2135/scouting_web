@@ -11,7 +11,7 @@ require 'inc/header.php';
       <h2 class="col-md-3"><?php echo $title; ?></h2>
 
       <div class="col-md-3">
-        <button id="download_csv_file" class="btn btn-primary" type="button">Download CSV</button>
+        <button id="downloadCsvFile" class="btn btn-primary" type="button">Download CSV</button>
       </div>
     </div>
 
@@ -164,68 +164,68 @@ require 'inc/header.php';
             <th colspan="1" style="background-color:transparent">Died</th>
           </tr>
           <tr>
-            <th scope="col" style="background-color:transparent" class="sorttable_numeric">Team</th>
-            <th scope="col" style="background-color:#cfe2ff">Avg</th>
-            <th scope="col" style="background-color:#cfe2ff">Max</th>
-            <th scope="col" style="background-color:transparent">Avg</th>
-            <th scope="col" style="background-color:transparent">Max</th>
-            <th scope="col" style="background-color:#cfe2ff">Avg</th>
-            <th scope="col" style="background-color:#cfe2ff">Max</th>
-            <th scope="col" style="background-color:transparent">Avg</th>
-            <th scope="col" style="background-color:transparent">Max</th>
-            <th scope="col" style="background-color:#cfe2ff">Avg</th>
-            <th scope="col" style="background-color:#cfe2ff">Max</th>
-            <th scope="col" style="background-color:transparent">Avg</th>
-            <th scope="col" style="background-color:transparent">Max</th>
-            <th scope="col" style="background-color:#cfe2ff">Avg</th>
-            <th scope="col" style="background-color:#cfe2ff">Max</th>
-            <th scope="col" style="background-color:transparent">Avg</th>
-            <th scope="col" style="background-color:transparent">Max</th>
-            <th scope="col" style="background-color:#cfe2ff">Avg</th>
-            <th scope="col" style="background-color:#cfe2ff">Max</th>
-            <th scope="col" style="background-color:transparent">Avg</th>
-            <th scope="col" style="background-color:transparent">Max</th>
-            <th scope="col" style="background-color:#cfe2ff">Avg</th>
-            <th scope="col" style="background-color:#cfe2ff">Max</th>
-            <th scope="col" style="background-color:transparent">Avg</th>
-            <th scope="col" style="background-color:transparent">Max</th>
-            <th scope="col" style="background-color:#cfe2ff">Avg</th>
-            <th scope="col" style="background-color:#cfe2ff">Max</th>
-            <th scope="col" style="background-color:transparent">Avg</th>
-            <th scope="col" style="background-color:transparent">Max</th>
-            <th scope="col" style="background-color:#cfe2ff">Avg</th>
-            <th scope="col" style="background-color:#cfe2ff">Max</th>
-            <th scope="col" style="background-color:transparent">Avg</th>
-            <th scope="col" style="background-color:transparent">Max</th>
-            <th scope="col" style="background-color:#cfe2ff">Avg</th>
-            <th scope="col" style="background-color:#cfe2ff">Max</th>
-            <th scope="col" style="background-color:transparent">Avg</th>
-            <th scope="col" style="background-color:transparent">Max</th>
-            <th scope="col" style="background-color:#cfe2ff">Acc%</th>
-            <th scope="col" style="background-color:#cfe2ff">Avg</th>
-            <th scope="col" style="background-color:#cfe2ff">Max</th>
-            <th scope="col" style="background-color:transparent">Avg</th>
-            <th scope="col" style="background-color:transparent">Max</th>
-            <th scope="col" style="background-color:#cfe2ff">Avg</th>
-            <th scope="col" style="background-color:#cfe2ff">Max</th>
-            <th scope="col" style="background-color:transparent">Avg</th>
-            <th scope="col" style="background-color:transparent">Max</th>
-            <th scope="col" style="background-color:#cfe2ff">Avg</th>
-            <th scope="col" style="background-color:#cfe2ff">Max</th>
-            <th scope="col" style="background-color:transparent">Acc%</th>
-            <th scope="col" style="background-color:transparent">Avg</th>
-            <th scope="col" style="background-color:transparent">Max</th>
-            <th scope="col" style="background-color:#cfe2ff">Avg</th>
-            <th scope="col" style="background-color:#cfe2ff">Max</th>
-            <th scope="col" style="background-color:transparent">Avg</th>
-            <th scope="col" style="background-color:transparent">Max</th>
+            <th scope="col" class="sorttable_numeric" style="background-color:transparent">Team</th>
+            <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
+            <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
+            <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
+            <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
+            <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
+            <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
+            <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
+            <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
+            <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
+            <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
+            <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
+            <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
+            <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
+            <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
+            <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
+            <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
+            <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
+            <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
+            <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
+            <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
+            <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
+            <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
+            <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
+            <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
+            <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
+            <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
+            <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
+            <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
+            <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
+            <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
+            <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
+            <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
+            <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
+            <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
+            <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
+            <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
+            <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Acc%</th>
+            <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
+            <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
+            <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
+            <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
+            <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
+            <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
+            <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
+            <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
+            <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
+            <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
+            <th scope="col" class="sorttable_numeric" style="background-color:transparent">Acc%</th>
+            <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
+            <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
+            <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
+            <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
+            <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
+            <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
 
-            <th scope="col" style="background-color:#cfe2ff">N</th>
-            <th scope="col" style="background-color:transparent">P</th>
-            <th scope="col" style="background-color:#cfe2ff">F</th>
-            <th scope="col" style="background-color:transparent">S</th>
-            <th scope="col" style="background-color:#cfe2ff">D</th>
-            <th scope="col" style="background-color:transparent">#</th>
+            <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">N</th>
+            <th scope="col" class="sorttable_numeric" style="background-color:transparent">P</th>
+            <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">F</th>
+            <th scope="col" class="sorttable_numeric" style="background-color:transparent">S</th>
+            <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">D</th>
+            <th scope="col" class="sorttable_numeric" style="background-color:transparent">#</th>
           </tr>
 
         </thead>
@@ -244,15 +244,11 @@ require 'inc/header.php';
 <script type="text/javascript" src="./scripts/matchDataProcessor.js"></script>
 
 <script>
-  // var tbaData = {};
-  var _finalTeamList = new Set();
-  var _filteredData = {};
   var _jsonMatchData = null;
   // var _frozenTable = null;
 
   // Lookup value for a key in the passed dictionary (team in match data)
   function getDataValue(dict, key) {
-    // console.log(dict);
     if (!dict) {
       console.warn("getDataValue: Dictionary not found! " + dict);
     }
@@ -262,77 +258,86 @@ require 'inc/header.php';
     else {
       console.warn("getDataValue: Key not found in dictionary! " + key + " " + dict);
     }
-
     return 0;
   }
 
+  // Add a team (key) to the final team list
+  function addKeysToTable(dataObj) {
+    console.log("==> eventAverages: addKeysToTable()");
+    var keyList = new Set();
+    for (var teamNum in dataObj) {
+      keyList.add(teamNum);
+    }
+    return keyList;
+  }
+
   // Create and the HTML table for display
-  function addHtmlToFinalTable() {
-    console.log("==> eventAverages.php: addHtmlToFinalTable()");
+  function addAveragesToTable(teamList, avgData) {
+    console.log("==> eventAverages: addAveragesToTable()");
     $("#tableData").html(""); // Clear Table
-    for (let teamNum of _finalTeamList) {
-      var endgameClimbPercentage = getDataValue(_filteredData[teamNum], "endgameClimbPercent");
-      var endgameFoulPercentage = getDataValue(_filteredData[teamNum], "endgameFoulPercent");
+    for (let teamNum of teamList) {
+      var endgameClimbPercentage = getDataValue(avgData[teamNum], "endgameClimbPercent");
+      var endgameFoulPercentage = getDataValue(avgData[teamNum], "endgameFoulPercent");
 
       var rowString = "<tr>" +
         "<td style=\"background-color:transparent\"><a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a></td>" +
         //"<td>" + getDataValue(tbaData[teamNum], "totalPoints") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(_filteredData[teamNum], "avgTotalPoints") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(_filteredData[teamNum], "maxTotalPoints") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(_filteredData[teamNum], "avgTotalCoral") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(_filteredData[teamNum], "maxTotalCoral") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(_filteredData[teamNum], "avgTotalAlgae") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(_filteredData[teamNum], "maxTotalAlgae") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(_filteredData[teamNum], "avgTotalAutoPoints") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(_filteredData[teamNum], "maxTotalAutoPoints") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(_filteredData[teamNum], "avgTotalAutoCoralPoints") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(_filteredData[teamNum], "maxTotalAutoCoralPoints") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(_filteredData[teamNum], "avgTotalAutoAlgaePoints") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(_filteredData[teamNum], "maxTotalAutoAlgaePoints") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(_filteredData[teamNum], "avgTotalTeleopPoints") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(_filteredData[teamNum], "maxTotalTeleopPoints") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(_filteredData[teamNum], "avgTotalTeleopCoralPoints") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(_filteredData[teamNum], "maxTotalTeleopCoralPoints") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(_filteredData[teamNum], "avgTotalTeleopAlgaePoints") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(_filteredData[teamNum], "maxTotalTeleopAlgaePoints") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(_filteredData[teamNum], "avgEndgamePoints") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(_filteredData[teamNum], "maxEndgamePoints") + "</td>" +
+        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "avgTotalPoints") + "</td>" +
+        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "maxTotalPoints") + "</td>" +
+        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "avgTotalCoral") + "</td>" +
+        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "maxTotalCoral") + "</td>" +
+        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "avgTotalAlgae") + "</td>" +
+        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "maxTotalAlgae") + "</td>" +
+        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "avgTotalAutoPoints") + "</td>" +
+        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "maxTotalAutoPoints") + "</td>" +
+        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "avgTotalAutoCoralPoints") + "</td>" +
+        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "maxTotalAutoCoralPoints") + "</td>" +
+        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "avgTotalAutoAlgaePoints") + "</td>" +
+        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "maxTotalAutoAlgaePoints") + "</td>" +
+        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "avgTotalTeleopPoints") + "</td>" +
+        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "maxTotalTeleopPoints") + "</td>" +
+        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "avgTotalTeleopCoralPoints") + "</td>" +
+        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "maxTotalTeleopCoralPoints") + "</td>" +
+        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "avgTotalTeleopAlgaePoints") + "</td>" +
+        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "maxTotalTeleopAlgaePoints") + "</td>" +
+        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "avgEndgamePoints") + "</td>" +
+        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "maxEndgamePoints") + "</td>" +
 
-        "<td style=\"background-color:transparent\">" + getDataValue(_filteredData[teamNum], "avgAutonCoral") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(_filteredData[teamNum], "maxAutonCoral") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(_filteredData[teamNum], "avgAutonCoralL1") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(_filteredData[teamNum], "maxAutonCoralL1") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(_filteredData[teamNum], "avgAutonCoralL2") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(_filteredData[teamNum], "maxAutonCoralL2") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(_filteredData[teamNum], "avgAutonCoralL3") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(_filteredData[teamNum], "maxAutonCoralL3") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(_filteredData[teamNum], "avgAutonCoralL4") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(_filteredData[teamNum], "maxAutonCoralL4") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(_filteredData[teamNum], "avgAutonAlgae") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(_filteredData[teamNum], "maxAutonAlgae") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(_filteredData[teamNum], "avgAutonAlgaeNet") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(_filteredData[teamNum], "maxAutonAlgaeNet") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(_filteredData[teamNum], "avgAutonAlgaeProc") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(_filteredData[teamNum], "maxAutonAlgaeProc") + "</td>" +
+        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "avgAutonCoral") + "</td>" +
+        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "maxAutonCoral") + "</td>" +
+        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "avgAutonCoralL1") + "</td>" +
+        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "maxAutonCoralL1") + "</td>" +
+        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "avgAutonCoralL2") + "</td>" +
+        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "maxAutonCoralL2") + "</td>" +
+        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "avgAutonCoralL3") + "</td>" +
+        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "maxAutonCoralL3") + "</td>" +
+        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "avgAutonCoralL4") + "</td>" +
+        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "maxAutonCoralL4") + "</td>" +
+        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "avgAutonAlgae") + "</td>" +
+        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "maxAutonAlgae") + "</td>" +
+        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "avgAutonAlgaeNet") + "</td>" +
+        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "maxAutonAlgaeNet") + "</td>" +
+        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "avgAutonAlgaeProc") + "</td>" +
+        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "maxAutonAlgaeProc") + "</td>" +
 
-        "<td style=\"background-color:transparent\">" + getDataValue(_filteredData[teamNum], "teleopCoralScoringPercent") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(_filteredData[teamNum], "avgTeleopCoralScored") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(_filteredData[teamNum], "maxTeleopCoralScored") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(_filteredData[teamNum], "avgTeleopCoralL1") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(_filteredData[teamNum], "maxTeleopCoralL1") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(_filteredData[teamNum], "avgTeleopCoralL2") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(_filteredData[teamNum], "maxTeleopCoralL2") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(_filteredData[teamNum], "avgTeleopCoralL3") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(_filteredData[teamNum], "maxTeleopCoralL3") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(_filteredData[teamNum], "avgTeleopCoralL4") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(_filteredData[teamNum], "maxTeleopCoralL4") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(_filteredData[teamNum], "teleopAlgaeScoringPercent") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(_filteredData[teamNum], "avgTeleopAlgaeScored") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(_filteredData[teamNum], "maxTeleopAlgaeScored") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(_filteredData[teamNum], "avgTeleopAlgaeNet") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(_filteredData[teamNum], "maxTeleopAlgaeNet") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(_filteredData[teamNum], "avgTeleopAlgaeProc") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(_filteredData[teamNum], "maxTeleopAlgaeProc") + "</td>" +
+        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "teleopCoralScoringPercent") + "</td>" +
+        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "avgTeleopCoralScored") + "</td>" +
+        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "maxTeleopCoralScored") + "</td>" +
+        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "avgTeleopCoralL1") + "</td>" +
+        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "maxTeleopCoralL1") + "</td>" +
+        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "avgTeleopCoralL2") + "</td>" +
+        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "maxTeleopCoralL2") + "</td>" +
+        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "avgTeleopCoralL3") + "</td>" +
+        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "maxTeleopCoralL3") + "</td>" +
+        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "avgTeleopCoralL4") + "</td>" +
+        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "maxTeleopCoralL4") + "</td>" +
+        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "teleopAlgaeScoringPercent") + "</td>" +
+        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "avgTeleopAlgaeScored") + "</td>" +
+        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "maxTeleopAlgaeScored") + "</td>" +
+        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "avgTeleopAlgaeNet") + "</td>" +
+        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "maxTeleopAlgaeNet") + "</td>" +
+        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "avgTeleopAlgaeProc") + "</td>" +
+        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "maxTeleopAlgaeProc") + "</td>" +
 
         "<td style=\"background-color:transparent\">" + getDataValue(endgameClimbPercentage, 0) + "</td>" +
         "<td style=\"background-color:transparent\">" + getDataValue(endgameClimbPercentage, 1) + "</td>" +
@@ -340,71 +345,23 @@ require 'inc/header.php';
         "<td style=\"background-color:transparent\">" + getDataValue(endgameClimbPercentage, 3) + "</td>" +
         "<td style=\"background-color:transparent\">" + getDataValue(endgameClimbPercentage, 4) + "</td>" +
 
-        "<td style=\"background-color:transparent\">" + getDataValue(_filteredData[teamNum], "totaldied") + "</td>" +
+        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "totaldied") + "</td>" +
         "</td>";
 
       $("#tableData").append(rowString);
     }
   }
 
-  // Add a team (key) to the final team list
-  function addKeysToFinalList(dataObj) {
-    console.log("==> eventAverages.php: addKeysToFinalList()");
-    for (var key in dataObj) {
-      _finalTeamList.add(key);
-    }
-  }
-
-  // Get all match data, filter it, create final HTML table, and sort it
-  function readMatchDataAndBuildTable() {
-    console.log("==> eventAverages.php: readAllMatchDataAndBuildTable()");
-    $.get("api/dbReadAPI.php", {
-      getEventMatches: 1
-    }).done(function (eventMatches) {
-      console.log("==> getEventMatches:");
-      jsonData = JSON.parse(eventMatches);
-      _jsonMatchData = jsonData;
-      var mdp = new matchDataProcessor(jsonData);
-      mdp.getSiteFilteredAverages(function (averageData) {
-        _filteredData = {
-          ...averageData
-        };
-        //console.log(_filteredData);
-        addKeysToFinalList(_filteredData);
-        addHtmlToFinalTable();
-        setTimeout(function () {
-          // script instructions say this is needed, but it breaks table header sorting
-          // sorttable.makeSortable(document.getElementById("averageTable"))
-          // _frozenTable = $('#freeze-table').freezeTable({
-          //   'freezeHead': true,
-          //   'freezeColumn': true,
-          //   'freezeColumnHead': true,
-          //   'scrollBar': true,
-          //   'fixedNavbar': '.navbar',
-          //   'scrollable': true,
-          //   'fastMode': true,
-          //   // 'container': '#navbar',
-          //   'columnNum': 1,
-          //   'columnKeep': true,
-          //   'columnBorderWidth': 2,
-          //   'backgroundColor': 'blue',
-          //   'frozenColVerticalOffset': 0
-          // });
-        }, 100);
-      });
-    });
-  }
-
   // Update table when match filters are changed
-  function filterAndShow() {
-    console.log("==> eventAverages.php: filterAndShow()");
+  function filterEventMatchData() {
+    console.log("==> eventAverages: filterEventMatchData()");
     var start = $("#startPrefix").val() + $("#startMatch").val();
     var end = $("#endPrefix").val() + $("#endMatch").val();
     var mdp = new matchDataProcessor(_jsonMatchData);
-    mdp.filterMatches(start, end);
-    _filteredData = mdp.getAverages();
-    addKeysToFinalList(_filteredData);
-    addHtmlToFinalTable();
+    mdp.filterEventMatches(start, end);
+    var filteredData = mdp.getAverages();
+    teamList = addKeysToTable(filteredData);
+    addAveragesToTable(teamList, fitleredData);
     setTimeout(function () {
       // sorttable.makeSortable(document.getElementById("averageTable"))
       // _frozenTable = $('#freeze-table').freezeTable({
@@ -427,12 +384,9 @@ require 'inc/header.php';
 
   // CSV File functions
 
-  var _eventCode = null;
-  var tbaCoprData = {};          // for TBA OPR data
-
   // Retrieve an average value from data for a team
   function lookupAverage(teamAverages, team, item) {
-    console.log("==> eventAverages.php: lookupAverage()");
+    console.log("==> eventAverages: lookupAverage()");
     if (!teamAverages) {
       console.warn("lookupAverages: No team averages!")
       return "NA";
@@ -451,10 +405,10 @@ require 'inc/header.php';
   }
 
   // Returns a string with the comma-separated line of data for the given team.
-  function createCSVLine(evtAvgs, team) {
-    console.log("==> eventAverages.php: createCSVLine()");
+  function createCSVLine(team, evtAvgs, coprs) {
+    console.log("==> eventAverages: createCSVLine()" + team);  // TODO: team number is a number instead of a string (key)!
     var pitLocation = 0;
-    var oprTP = getDataValue(tbaCoprData[team], "totalPoints");
+    var oprTP = getDataValue(coprs[team], "totalPoints");
     //var trapPercent = rnd(lookupAverage(evtAvgs,team, "trapPercentage"));
     var teleopCoralScoringAcc = rnd(lookupAverage(evtAvgs, team, "teleopCoralScoringPercent"));
     var teleopAlgaeScoringAcc = rnd(lookupAverage(evtAvgs, team, "teleopAlgaeScoringPercent"));
@@ -520,19 +474,20 @@ require 'inc/header.php';
   }
 
   // 
-  function processData(eventMatches) {
-    console.log("==> eventAverages.php: processData()");
+  function processEventMatches(eventCode, eventMatches, coprs) {
+    console.log("==> eventAverages: processEventMatches()");
     var mdp = new matchDataProcessor(eventMatches);
     var csvStr = "Team,Pit Location,OPR,Total Coral Avg,Total Coral Max,Total Algae Avg,Total Algae Max,Auto Pts Avg,Auto Pts Max,Tel Pts Avg,Tel Pts Max,End Pts Avg,End Pts Max,Total Pts Avg,Total Pts Max,Auto Coral Avg,Auto Coral Max,Auto L1 Avg,Auto L1 Max,Auto L2 Avg,Auto L2 Max,Auto L3 Avg,Auto L3 Max,Auto L4 Avg,Auto L4 Max,Auto Algae Avg,Auto Algae Max,Auto Net Avg,Auto Net Max,Auto Proc Avg,Auto Proc Max,Tel Coral Avg,Tel Coral Max,Tel L1 Avg,Tel L1 Max,Tel L2 Avg,Tel L2 Max,Tel L3 Avg,Tel L3 Max,Tel L4 Avg,Tel L4 Max,Tel Coral Acc,Tel Algae Avg,Tel Algae Max,Tel Net Avg,Tel Net Max,Tel Proc Avg,Tel Proc Max,Tel Algae Acc,End N/A,End Park,End Fall,End Shal,End Deep, Total Died, Note\n";
+
     mdp.getSiteFilteredAverages(function (averageData) {
-      console.log("writing csv lines");
       for (var key in averageData) {
-        csvStr += createCSVLine(averageData, key);  // key is team number
+        console.log("key: " + key);
+        csvStr += createCSVLine(key, averageData, coprs);  // key is team number
       }
 
       var hiddenElement = document.createElement('a');
-      var filename = _eventCode + ".csv";
-      console.log("CSV filename: " + filename);
+      var filename = eventCode + ".csv";
+      console.log("eventAverages: processEventMatches() CSV filename: " + filename);
       hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csvStr);
       hiddenElement.target = '_blank';
       hiddenElement.download = filename;
@@ -541,23 +496,66 @@ require 'inc/header.php';
   }
 
   // Retrieve match data and OPRs data and write out CSV file
-  function writeCSVFile() {
-    console.log("==> eventAverages.php: writeCSVFile()");
+  function downloadEventCSVFile(eventCode) {
+    console.log("==> eventAverages: downloadEventCSVFile()");
     $.get("api/dbReadAPI.php", {
       getEventMatches: 1
     }).done(function (eventMatches) {
-      console.log("==> getEventMatches:");
+      console.log("=> getEventMatches:");
       allEventMatches = JSON.parse(eventMatches);
 
       // Get OPR data from TBA
       $.get("api/tbaAPI.php", {
         getCOPRs: 1
-      }).done(function (coprData) {
-        console.log("==> getCOPRs:");
-        coprData = JSON.parse(coprData)["coprData"];
-        tbaCoprData = coprData;
-        processData(allEventMatches);
+      }).done(function (getCoprs) {
+        console.log("=> getCOPRs: " + getCoprs);
+        jsonCoprData = JSON.parse(getCoprs)["coprData"];
+        console.log("COPRS: " + jsonCoprData);
+        processEventMatches(eventCode, allEventMatches, jsonCoprData);
       });
+    });
+  }
+
+  // Get all match data, filter it, create final HTML table, and sort it
+  function buildAveragesTable() {
+    console.log("==> eventAverages: buildAveragesTable()");
+    $.get("api/dbReadAPI.php", {
+      getEventMatches: 1
+    }).done(function (eventMatches) {
+      console.log("=> getEventMatches:");
+      _jsonMatchData = JSON.parse(eventMatches);
+      var mdp = new matchDataProcessor(_jsonMatchData);
+      mdp.getSiteFilteredAverages(function (averageData) {
+        var filteredData = {
+          ...averageData
+        };
+        addKeysToTable(filteredData);
+        var keyList = new Set();
+        for (var teamNum in filteredData) {
+          keyList.add(teamNum);
+        }
+        addAveragesToTable(keyList, filteredData);
+        setTimeout(function () {
+          // script instructions say this is needed, but it breaks table header sorting
+          // sorttable.makeSortable(document.getElementById("averageTable"))
+          // _frozenTable = $('#freeze-table').freezeTable({
+          //   'freezeHead': true,
+          //   'freezeColumn': true,
+          //   'freezeColumnHead': true,
+          //   'scrollBar': true,
+          //   'fixedNavbar': '.navbar',
+          //   'scrollable': true,
+          //   'fastMode': true,
+          //   // 'container': '#navbar',
+          //   'columnNum': 1,
+          //   'columnKeep': true,
+          //   'columnBorderWidth': 2,
+          //   'backgroundColor': 'blue',
+          //   'frozenColVerticalOffset': 0
+          // });
+        }, 100);
+      });
+      return
     });
   }
 
@@ -565,20 +563,22 @@ require 'inc/header.php';
   // Process the generated html
   //
   $(document).ready(function () {
+    var tbaEventCode;
+
     // Update the navbar with the event code
     $.get("api/tbaAPI.php", {
       getEventCode: true
     }, function (eventCode) {
-      console.log("==> eventAverages.php - getEventCode: " + eventCode.trim());
+      console.log("=> eventAverages: getEventCode: " + eventCode.trim());
       $("#navbarEventCode").html(eventCode);
-      _eventCode = eventCode;
+      tbaEventCode = eventCode;
     });
 
-    readMatchDataAndBuildTable(); // Retrieve all data
+    buildAveragesTable(); // Retrieve all data
 
     // Filter out unwanted matches
     $("#filterData").click(function () {
-      filterAndShow();
+      filterEventMatchData();
     });
 
     // Keep the frozen pane updated 
@@ -587,8 +587,8 @@ require 'inc/header.php';
     // });
 
     // Write out picklist CSV file to client's download dir.
-    $("#download_csv_file").on('click', function (event) {
-      writeCSVFile();
+    $("#downloadCsvFile").on('click', function (event) {
+      downloadEventCSVFile(tbaEventCode);
     });
   });
 
