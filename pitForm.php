@@ -176,9 +176,9 @@ require 'inc/header.php';
 <script>
   function verifyPitForm() {
     console.log("==> pitForm: verifyPitForm()");
-    var isError = false;
-    var errMsg = "Please enter values for these fields:";
-    var teamNum = $("#teamNumber").val();
+    let isError = false;
+    let errMsg = "Please enter values for these fields:";
+    let teamNum = $("#teamNumber").val();
 
     // Make sure each piece of data has a value selected.
     if ((($("#teamNumber").val() == "") || (validateTeamNumber(teamNum, null) <= 0))) {
@@ -193,7 +193,7 @@ require 'inc/header.php';
       isError = true;
     }
 
-    var driveMotors = $("#driveMotors").val();
+    let driveMotors = $("#driveMotors").val();
     if (driveMotors != 1 && driveMotors != 2 && driveMotors != 3 && driveMotors != 4) {
       if (isError == true)
         errMsg += ", Drive Motors";
@@ -208,7 +208,7 @@ require 'inc/header.php';
       isError = true;
     }
 
-    var progLanguage = $("#programmingLanguage").val();
+    let progLanguage = $("#programmingLanguage").val();
     if (progLanguage != 1 && progLanguage != 2 && progLanguage != 3 && progLanguage != 4 && progLanguage != 5) {
       if (isError == true)
         errMsg += ", Programming Language";
@@ -265,7 +265,7 @@ require 'inc/header.php';
 
   function writeFormToPitTable() {
     console.log("==> pitForm: writeFormToPitTable()");
-    var dataToUse = {};
+    let dataToUse = {};
     dataToUse["teamnumber"] = $("#teamNumber").val();
 
     // Swerve
@@ -277,7 +277,7 @@ require 'inc/header.php';
     }
 
     // Drive motors
-    var driveMotors = $("#driveMotors").val()
+    let driveMotors = $("#driveMotors").val()
     if (driveMotors == 1) {
       dataToUse["drivemotors"] = "Krakens";
     }
@@ -300,7 +300,7 @@ require 'inc/header.php';
     }
 
     // Software language
-    var progLang = $("#programmingLanguage").val();
+    let progLang = $("#programmingLanguage").val();
     dataToUse["proglanguage"] = "Other";  // default
     if (progLang == 1) {
       dataToUse["proglanguage"] = "Java";
@@ -361,7 +361,7 @@ require 'inc/header.php';
         alert("Success in submitting pit data!");
         clearPitForm();
       } else {
-        alert("Failure in submitting pit data!");
+        alert("Failure in submitting Pit Form!");
       }
     });
   }

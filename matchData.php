@@ -83,15 +83,15 @@ require 'inc/header.php';
 <!-- Javascript page handlers -->
 
 <script>
-  // var frozenTable = null;  // doesn't work with table-responsive
+  // let frozenTable = null;  // doesn't work with table-responsive
   const teamColumn = 0;
   const matchColumn = 1;
 
   // Sort the html table data by team number
   function sortMatchData(tableData, teamCol, matchCol) {
     console.log("==> matchData: sortMatchData()");
-    var table = document.getElementById(tableData);
-    var rows = Array.prototype.slice.call(table.querySelectorAll("tbody> tr"));
+    let table = document.getElementById(tableData);
+    let rows = Array.prototype.slice.call(table.querySelectorAll("tbody> tr"));
 
     // Sort the rows based on column 1 match number
     rows.sort(function (rowA, rowB) {
@@ -113,8 +113,8 @@ require 'inc/header.php';
   function loadMatchData(dataObj) {
     console.log("==> matchData: loadMatchData()");
     for (let i = 0; i < dataObj.length; i++) {
-      var teamNum = dataObj[i]["teamnumber"];
-      var rowString = "<tr><td style=\"background-color:transparent\">" + dataObj[i]["matchnumber"] + "</td>" +
+      let teamNum = dataObj[i]["teamnumber"];
+      let rowString = "<tr><td style=\"background-color:transparent\">" + dataObj[i]["matchnumber"] + "</td>" +
         "<td style=\"background-color:transparent\"><a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</td>" +
         "<td style=\"background-color:#cfe2ff\">" + dataObj[i]["autonLeave"] + "</td>" +
         "<td style=\"background-color:transparent\">" + dataObj[i]["autonCoralL1"] + "</td>" +
@@ -146,7 +146,7 @@ require 'inc/header.php';
       getEventMatches: 1
     }).done(function (eventMatches) {
       console.log("=> getEventMatches");
-      var dataObj = JSON.parse(eventMatches);
+      let dataObj = JSON.parse(eventMatches);
       loadMatchData(dataObj);
       setTimeout(function () {
         // script instructions say this is needed, but it breaks table header sorting

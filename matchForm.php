@@ -286,18 +286,18 @@ require 'inc/header.php';
 <!-- Javascript page handlers -->
 
 <script>
-  var autoConesBottom = 0;
-  var autoConesMiddle = 0;
-  var autoConesTop = 0;
-  var autoCubesBottom = 0;
-  var autoCubesMiddle = 0;
-  var autoCubesTop = 0;
-  var teleopConesBottom = 0;
-  var teleopConesMiddle = 0;
-  var teleopConesTop = 0;
-  var teleopCubesBottom = 0;
-  var teleopCubesMiddle = 0;
-  var teleopCubesTop = 0;
+  let autoConesBottom = 0;
+  let autoConesMiddle = 0;
+  let autoConesTop = 0;
+  let autoCubesBottom = 0;
+  let autoCubesMiddle = 0;
+  let autoCubesTop = 0;
+  let teleopConesBottom = 0;
+  let teleopConesMiddle = 0;
+  let teleopConesTop = 0;
+  let teleopCubesBottom = 0;
+  let teleopCubesMiddle = 0;
+  let teleopCubesTop = 0;
 
   function attachFormButtons() {
     console.log("=> matchForm: attachFormButtons()");
@@ -429,14 +429,14 @@ require 'inc/header.php';
 
   function getFormData() {
     console.log("==> matchForm: getFormData()");
-    var out = {};
-    var matchLevel = $("#compLevel").val();
-    var matchNumber = $("#matchNumber").val();
+    let out = {};
+    let matchLevel = $("#compLevel").val();
+    let matchNumber = $("#matchNumber").val();
     if (matchNumber != parseInt(matchNumber)) {
       alert("Match number must be integer.");
       throw Error("Match number must be integer.");
     }
-    var teamNumber = $("#teamNumber").val();
+    let teamNumber = $("#teamNumber").val();
     if (teamNumber == "") {
       alert("Team number must not be empty.");
       throw Error("Team number must not be empty.");
@@ -535,7 +535,7 @@ require 'inc/header.php';
 
     // Submit the match data form 
     $("#submitForm").click(function () {
-      var formData = getFormData();
+      let formData = getFormData();
       alert("This match form is NOT configured for 2025 game!");
       // Should be:
       // formData getFormData()

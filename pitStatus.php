@@ -51,9 +51,9 @@ require 'inc/header.php';
     }
 
     $("#pitScoutTable").html("");
-    var row = "";
+    let row = "";
     for (let teamNum of teams) {
-      var teamName = names[teamNum];
+      let teamName = names[teamNum];
       row += "<tr>";
       if (teamName != "XX") {
         row += " <td>" + "<a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a> - " + teamName + "</td>";
@@ -85,8 +85,8 @@ require 'inc/header.php';
   // "D", or "E", in which case we strip the letter off and just use the number for the comparison.
   function sortPitStatusTable(tableId) {
     console.log("==> pitStatus: sortTable(): id: " + tableId);
-    var table = document.getElementById(tableId);
-    var rows = Array.prototype.slice.call(table.querySelectorAll("tbody> tr"));
+    let table = document.getElementById(tableId);
+    let rows = Array.prototype.slice.call(table.querySelectorAll("tbody> tr"));
 
     rows.sort(function (rowA, rowB) { return compareTeamNumbers(rowA.cells[0].textContent, rowB.cells[0].textContent); });
 
@@ -112,15 +112,15 @@ require 'inc/header.php';
       getEventTeamNames: 1
     }).done(function (eventTeamNames) {
       console.log("=> getEventTeamNames");
-      var teamList = [];
-      var namesList = {};
+      let teamList = [];
+      let namesList = {};
       if (eventTeamNames == null)
         alert("Can't load teamlist from TBA; check if TBA Key was set in db_config");
       else {
-        var jsonTeamList = JSON.parse(eventTeamNames);
+        let jsonTeamList = JSON.parse(eventTeamNames);
         for (let i in jsonTeamList) {
-          var teamNum = jsonTeamList[i]["teamnum"];
-          var teamName = jsonTeamList[i]["teamname"];
+          let teamNum = jsonTeamList[i]["teamnum"];
+          let teamName = jsonTeamList[i]["teamname"];
           teamList.push(teamNum);
           namesList[teamNum] = teamName;
         }

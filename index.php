@@ -130,7 +130,7 @@ require 'inc/header.php';
 
 <script>
 
-  var myEventCode = null;
+  let myEventCode = null;
 
   // Set the status badges for an item
   function setStatusBadge(id, isSuccess) {
@@ -173,7 +173,7 @@ require 'inc/header.php';
   }
 
   // Map form form-control IDs to the db_config labels that store them
-  var idToKeyMap = {
+  let idToKeyMap = {
     "enterServerURL": "server",
     "enterDBName": "db",
     "enterUserName": "username",
@@ -182,7 +182,7 @@ require 'inc/header.php';
     "enterEventCode": "eventcode",
   };
 
-  var idToWrittenMap = {}
+  let idToWrittenMap = {}
 
   //
   // Process the generated html
@@ -233,14 +233,14 @@ require 'inc/header.php';
 
     // Write the db_config file
     $("#writeConfig").on('click', function (event) {
-      var configData = {};
+      let configData = {};
       for (const key in idToKeyMap) {
         if ($("#" + key).val() != "" && idToWrittenMap[key]) {
           configData[idToKeyMap[key]] = $("#" + key).val();
         }
       }
       // Create table names from database name.
-      var databaseName = ($("#" + "enterDBName").val());
+      let databaseName = ($("#" + "enterDBName").val());
       configData["datatable"] = databaseName + "_dt";
       configData["tbatable"] = databaseName + "_tba";
       configData["pittable"] = databaseName + "_pt";
@@ -255,14 +255,14 @@ require 'inc/header.php';
     // Update the match type filters
     $("#filterData").on('click', function (event) {
       // Make data to send to API
-      var filterData = {};
+      let filterData = {};
       filterData["useP"] = +$("#dataP").is(":checked");
       filterData["useQm"] = +$("#dataQm").is(":checked");
       filterData["useQf"] = +$("#dataQf").is(":checked");
       filterData["useSf"] = +$("#dataSf").is(":checked");
       filterData["useF"] = +$("#dataF").is(":checked");
 
-      var configInfo = {}
+      let configInfo = {}
       configInfo["filterConfig"] = JSON.stringify(filterData);
 
       // Make request

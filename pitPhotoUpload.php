@@ -115,7 +115,7 @@ require 'inc/header.php';
     $("#upload").on('click', function (event) {
       console.log("=> pitPhotoUpload: upload clicked!");
       if (document.getElementById("robotPic").value != "" && document.getElementById("teamNumber").value != "") {
-        var teamNum = $("#teamNumber").val();
+        let teamNum = $("#teamNumber").val();
 
         if (validateTeamNumber(teamNum, null) > 0) {
           const loadButton = document.getElementById("loadingButton");
@@ -130,7 +130,7 @@ require 'inc/header.php';
               getImagesForTeam: teamNum
             }).done(function (imagesData) {
               console.log("=> getImagesForTeam");
-              var teamImages = JSON.parse(imagesData);
+              let teamImages = JSON.parse(imagesData);
 
               // If there are any existing images, delete them.
               for (let picFile of teamImages) {
@@ -157,7 +157,7 @@ require 'inc/header.php';
               console.log("=> getImagesForTeam\n" + teamImages);
 
               // Now upload the new image
-              var uploadPost = new FormData();
+              let uploadPost = new FormData();
               uploadPost.append("teamPic", $("#robotPic")[0].files[0]);
               uploadPost.append("teamNum", $("#teamNumber").val());
               $.ajax({

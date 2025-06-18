@@ -28,11 +28,11 @@ function isNumeric(str) {
 function validateTeamNumber(teamName, teamList) {
   // console.log("==> validateTeamNumber: " + teamA + " <-> " + teamB);
 
-  var teamNumber = -1;  // 
+  let teamNumber = -1;  // 
 
   if (typeof teamName === 'string' || teamName instanceof String) {
     if (!/\s/.test(teamName)) {
-      var lastChar = teamName.substring(teamName.length - 1);
+      let lastChar = teamName.substring(teamName.length - 1);
       if (isAlpha(lastChar)) {
         teamName = teamName.substring(0, teamName.length - 1);
       }

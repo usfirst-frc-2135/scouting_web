@@ -270,11 +270,12 @@ require 'inc/header.php';
 
   function verifyStrategicForm() {
     console.log("==> strategicForm.php: clearStrategicForm()");
-    var isError = false;
-    var errMsg = "Please enter values for these fields:";
+    let isError = false;
+    let errMsg = "Please enter values for these fields:";
 
     // Make sure there is a team number, scoutname and matchnum.
-    if ((($("#teamNumber").val() == "") || (validateTeamNumber(teamNum, null) <= 0))) {
+    let teamNum = $("#teamNumber").val();
+    if (((teamNum == "") || (validateTeamNumber(teamNum, null) <= 0))) {
       errMsg += " Team Number";
       isError = true;
     }
@@ -337,13 +338,13 @@ require 'inc/header.php';
 
   function writeStrategicFormToTable() {
     console.log("==> strategicForm.php: writeStrategicFormToTable()");
-    var dataToUse = {};
+    let dataToUse = {};
 
-    var compLevel = $("#compLevel").val();
-    var matchNumber = $("#matchNumber").val();
+    let compLevel = $("#compLevel").val();
+    let matchNumber = $("#matchNumber").val();
 
     // Clean up teamnumber before writing to table.
-    var teamnum = validateTeamNumber($("#teamNumber").val(), null);
+    let teamnum = validateTeamNumber($("#teamNumber").val(), null);
     // Cleaned up by validate function
     // teamnum = teamnum.toUpperCase();  // if there's a letter, make it upper case
     // teamnum = teamnum.replace(/[^0-9a-zA-Z]/g, '');  // remove any non-alphanumeric chars

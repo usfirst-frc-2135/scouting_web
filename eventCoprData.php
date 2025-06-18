@@ -44,15 +44,15 @@ require 'inc/header.php';
 <!-- Javascript page handlers -->
 
 <script>
-  // var _frozenTable = null;
+  // let _frozenTable = null;
 
   const teamColumn = 0;
 
   // Sort the generated COPR table by team/match numbers
   function sortCoprTable(tableData, teamCol) {
     console.log("==> eventCoprData.php: sortCoprTable()");
-    var table = document.getElementById(tableData);
-    var rows = Array.prototype.slice.call(table.querySelectorAll("tbody> tr"));
+    let table = document.getElementById(tableData);
+    let rows = Array.prototype.slice.call(table.querySelectorAll("tbody> tr"));
 
     // Sort the rows based on column 1 match number
     rows.sort(function (rowA, rowB) {
@@ -69,7 +69,7 @@ require 'inc/header.php';
   function addDataToCoprTable(coprData, keys) {
     $("#tableData").html("");
     for (let teamNum in coprData) {
-      var row = '<tr>';
+      let row = '<tr>';
       row += '<td>' + "<a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + '</td>';
       for (let j = 0; j < keys.length; j++) {
         row += '<td>' + coprData[teamNum][keys[j][0]] + '</td>';
@@ -81,7 +81,7 @@ require 'inc/header.php';
 
   // Add data keys (fields) to COPR table in html
   function addKeysToCoprTable(keys) {
-    var header = '<th scope="col">Team</th>';
+    let header = '<th scope="col">Team</th>';
     for (let i = 0; i < keys.length; i++) {
       header += '<th scope="col">' + keys[i][1] + '</th>'
     }
@@ -112,9 +112,9 @@ require 'inc/header.php';
   // Add data keys (fields) to COPR table in html
   function buildCoprTable(coprData) {
     console.log("==> eventCoprData.php: buildCoprTable()");
-    var jsonCoprData = JSON.parse(coprData);
-    var keys = jsonCoprData["keys"];
-    var data = jsonCoprData["data"];
+    let jsonCoprData = JSON.parse(coprData);
+    let keys = jsonCoprData["keys"];
+    let data = jsonCoprData["data"];
 
     // Print the table then select the order in the array above
     // for (key in keys) {

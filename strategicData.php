@@ -108,14 +108,14 @@ require 'inc/header.php';
 <!-- Javascript page handlers -->
 
 <script>
-  // var frozenTable = null;
+  // let frozenTable = null;
   const teamColumn = 0;
   const matchColumn = 1;
 
   function sortStrategicData(tableData, teamCol, matchCol) {
     console.log("==> strategicData: sortStrategicData()");
-    var table = document.getElementById(tableData);
-    var rows = Array.prototype.slice.call(table.querySelectorAll("tbody> tr"));
+    let table = document.getElementById(tableData);
+    let rows = Array.prototype.slice.call(table.querySelectorAll("tbody> tr"));
 
     // Sort by match number
     rows.sort(function (rowA, rowB) {
@@ -145,7 +145,7 @@ require 'inc/header.php';
   function loadStrategicData(dataObj, pitData) {
     console.log("==> strategicData: loadStrategicData()");
     for (let i = 0; i < dataObj.length; i++) {
-      var driveVal = "";
+      let driveVal = "";
       switch (dataObj[i]["driverability"]) {
         case 1: driveVal = "Jerky";
         case 2: driveVal = "Slow";
@@ -155,8 +155,8 @@ require 'inc/header.php';
         case 5: driveVal = "-";
       }
 
-      var teamNum = dataObj[i]["teamnumber"];
-      var rowString = "<tr><td style=\"background-color:transparent\"><a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</td>" +
+      let teamNum = dataObj[i]["teamnumber"];
+      let rowString = "<tr><td style=\"background-color:transparent\"><a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</td>" +
         "<td style=\"background-color:transparent\">" + dataObj[i]["matchnumber"] + "</td>" +
         "<td style=\"background-color:#cfe2ff\">" + driveVal + "</td>" +
         "<td style=\"background-color:transparent\">" + convertToYesNo(dataObj[i]["against_tactic1"]) + "</td>" +
@@ -195,7 +195,7 @@ require 'inc/header.php';
       getAllStrategicData: 1
     }).done(function (strategicData) {
       console.log("=> getAllStrategicData");
-      var dataObj = JSON.parse(strategicData);
+      let dataObj = JSON.parse(strategicData);
       loadStrategicData(dataObj);
       setTimeout(function () {
         // script instructions say this is needed, but it breaks table header sorting

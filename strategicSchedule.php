@@ -63,8 +63,8 @@ require 'inc/header.php';
     console.log("==> strategicSchedule: loadStrategicSchedule()");
     $("#tableData").html(""); // Clear table
     for (let i = 0; i < dataObj.length; i++) {
-      var matchNum = dataObj[i]["match_number"];
-      var rowString = "<tr><td align=\"center\">" + matchNum + "</td>" +
+      let matchNum = dataObj[i]["match_number"];
+      let rowString = "<tr><td align=\"center\">" + matchNum + "</td>" +
         "<td align=\"center\">" + dataObj[i]["teams"] + "</td>" + "</td>";
       $("#tableData").append(rowString);
     }
@@ -76,8 +76,8 @@ require 'inc/header.php';
     // a "B", "C", "D", or "E", in which case we want to strip that off and just use the number for
     // the comparison.
 
-    var table = document.getElementById(id);
-    var rows = Array.prototype.slice.call(table.querySelectorAll("tbody> tr"));
+    let table = document.getElementById(id);
+    let rows = Array.prototype.slice.call(table.querySelectorAll("tbody> tr"));
 
     // Sort the rows based on column 1 match number value
     rows.sort(function (rowA, rowB) {
@@ -97,7 +97,7 @@ require 'inc/header.php';
       getStrategicMatches: 1
     }).done(function (strategicData) {
       console.log("=> getStrategicMatches");
-      var dataObj = JSON.parse(strategicData);
+      let dataObj = JSON.parse(strategicData);
       loadStrategicSchedule(dataObj);
       sortStrategicSchedule("matchTable");
     });
