@@ -493,3 +493,5 @@ require 'inc/header.php';
 
   });
 </script>
+
+<script src="./scripts/validateTeamNumber.js"></script>

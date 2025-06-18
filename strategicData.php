@@ -249,5 +249,5 @@ require 'inc/header.php';
   });
 </script>
 
-<script type="text/javascript" src="./scripts/compareMatchNumbers.js"></script>
-<script type="text/javascript" src="./scripts/compareTeamNumbers.js"></script>
+<script src="./scripts/compareMatchNumbers.js"></script>
+<script src="./scripts/compareTeamNumbers.js"></script>
