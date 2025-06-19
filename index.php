@@ -208,10 +208,10 @@ require 'inc/header.php';
     for (const key in idToKeyMap) {
       idToWrittenMap[key] = false;
       $("#" + key).change(function () {
-        if ($("#" + key).val() == "") {
+        if ($("#" + key).val() === "") {
           $("#" + key).removeClass("bg-info");
           idToWrittenMap[key] = false;
-          if (key == "enterDBName") {
+          if (key === "enterDBName") {
             idToWrittenMap["writeMatchTable"] = false;
             idToWrittenMap["writeTBATable"] = false;
             idToWrittenMap["writePitTable"] = false;
@@ -220,7 +220,7 @@ require 'inc/header.php';
         } else {
           $("#" + key).addClass("bg-info");
           idToWrittenMap[key] = true;
-          if (key == "enterDBName") {
+          if (key === "enterDBName") {
             // Mark tables in idToWrittenMap 
             idToWrittenMap["writeMatchTable"] = true;
             idToWrittenMap["writeTBATable"] = true;

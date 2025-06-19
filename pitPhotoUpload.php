@@ -122,7 +122,7 @@ require 'inc/header.php';
           loadButton.style.visibility = 'visible';
 
           // Replace checkbox is ticked
-          if ($("#replacePic").is(":checked") == true) {
+          if ($("#replacePic").is(":checked") === true) {
             console.log("==> Going to remove existing photos for team #" + teamNum);
 
             // First get list of robot-pic files for this team.

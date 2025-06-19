@@ -30,7 +30,7 @@ function validateQrList(dataList) {
 }
 // update this data list length whenever more data is added to the table
 function padList(dataList) {
-  if (dataList.length == 40) {
+  if (dataList.length === 40) {
     dataList.push("");
   }
   return dataList;
@@ -135,7 +135,7 @@ function setDefaultDeviceID(id) {
 */
 function getDefaultDeviceID(id) {
   let defaultId = localStorage.getItem("cameraDefaultID");
-  if (defaultId == null) {
+  if (defaultId === null) {
     return id;
   }
   else {
@@ -185,7 +185,7 @@ function createCameraSelect(reader) {
     let initialId = null;
     if (videoInputDevices.length >= 1) {
       videoInputDevices.forEach((element) => {
-        if (initialId == null) {
+        if (initialId === null) {
           initialId = element.deviceId;
         }
         $("#cameraSelect").append($('<option>', { value: element.deviceId, text: element.label }));

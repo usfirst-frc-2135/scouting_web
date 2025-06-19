@@ -181,13 +181,13 @@ require 'inc/header.php';
     let teamNum = $("#teamNumber").val();
 
     // Make sure each piece of data has a value selected.
-    if ((($("#teamNumber").val() == "") || (validateTeamNumber(teamNum, null) <= 0))) {
+    if ((($("#teamNumber").val() === "") || (validateTeamNumber(teamNum, null) <= 0))) {
       errMsg += " Team Number";
       isError = true;
     }
 
     if ((!($("#swerveDriveYes").is(':checked'))) && (!($("#swerveDriveNo").is(':checked')))) {
-      if (isError == true)
+      if (isError === true)
         errMsg += ", Swerve Drive";
       else errMsg += " Swerve Drive";
       isError = true;
@@ -195,14 +195,14 @@ require 'inc/header.php';
 
     let driveMotors = $("#driveMotors").val();
     if (driveMotors != 1 && driveMotors != 2 && driveMotors != 3 && driveMotors != 4) {
-      if (isError == true)
+      if (isError === true)
         errMsg += ", Drive Motors";
       else errMsg += " Drive Motors";
       isError = true;
     }
 
     if ((!($("#sparePartsYes").is(':checked'))) && (!($("#sparePartsNo").is(':checked')))) {
-      if (isError == true)
+      if (isError === true)
         errMsg += ", Spare Parts";
       else errMsg += " Spare Parts";
       isError = true;
@@ -210,28 +210,28 @@ require 'inc/header.php';
 
     let progLanguage = $("#programmingLanguage").val();
     if (progLanguage != 1 && progLanguage != 2 && progLanguage != 3 && progLanguage != 4 && progLanguage != 5) {
-      if (isError == true)
+      if (isError === true)
         errMsg += ", Programming Language";
       else errMsg += " Programming Language";
       isError = true;
     }
 
     if ((!($("#computerVisionYes").is(':checked'))) && (!($("#computerVisionNo").is(':checked')))) {
-      if (isError == true)
+      if (isError === true)
         errMsg += ", Computer Vision";
       else errMsg += " Computer Vision";
       isError = true;
     }
 
     if ((!($("#pitScore1").is(':checked'))) && (!($("#pitScore2").is(':checked'))) && (!($("#pitScore3").is(':checked')))) {
-      if (isError == true)
+      if (isError === true)
         errMsg += ", Pit Organization";
       else errMsg += " Pit Organization";
       isError = true;
     }
 
     if ((!($("#preparednessScore1").is(':checked'))) && (!($("#preparednessScore2").is(':checked'))) && (!($("#preparednessScore3").is(':checked')))) {
-      if (isError == true)
+      if (isError === true)
         errMsg += ", Preparedness";
       else errMsg += " Preparedness";
       isError = true;
@@ -278,16 +278,16 @@ require 'inc/header.php';
 
     // Drive motors
     let driveMotors = $("#driveMotors").val()
-    if (driveMotors == 1) {
+    if (driveMotors === 1) {
       dataToUse["drivemotors"] = "Krakens";
     }
-    if (driveMotors == 2) {
+    if (driveMotors === 2) {
       dataToUse["drivemotors"] = "NEOs";
     }
-    if (driveMotors == 3) {
+    if (driveMotors === 3) {
       dataToUse["drivemotors"] = "Falcons";
     }
-    if (driveMotors == 4) {
+    if (driveMotors === 4) {
       dataToUse["drivemotors"] = "CIMs";
     }
 
@@ -302,19 +302,19 @@ require 'inc/header.php';
     // Software language
     let progLang = $("#programmingLanguage").val();
     dataToUse["proglanguage"] = "Other";  // default
-    if (progLang == 1) {
+    if (progLang === 1) {
       dataToUse["proglanguage"] = "Java";
     }
-    else if (progLang == 2) {
+    else if (progLang === 2) {
       dataToUse["proglanguage"] = "LabView";
     }
-    else if (progLang == 3) {
+    else if (progLang === 3) {
       dataToUse["proglanguage"] = "C++";
     }
-    else if (progLang == 4) {
+    else if (progLang === 4) {
       dataToUse["proglanguage"] = "Python";
     }
-    else if (progLang == 5) {
+    else if (progLang === 5) {
       dataToUse["proglanguage"] = "Other";
     }
 

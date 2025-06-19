@@ -275,15 +275,15 @@ require 'inc/header.php';
 
     // Make sure there is a team number, scoutname and matchnum.
     let teamNum = $("#teamNumber").val();
-    if (((teamNum == "") || (validateTeamNumber(teamNum, null) <= 0))) {
+    if (((teamNum === "") || (validateTeamNumber(teamNum, null) <= 0))) {
       errMsg += " Team Number";
       isError = true;
     }
-    if ($("#matchNumber").val() == "") {
+    if ($("#matchNumber").val() === "") {
       errMsg += " Match Number";
       isError = true;
     }
-    if ($("#scoutName").val() == "") {
+    if ($("#scoutName").val() === "") {
       errMsg += " Scout Name";
       isError = true;
     }

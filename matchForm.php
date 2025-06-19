@@ -437,7 +437,7 @@ require 'inc/header.php';
       throw Error("Match number must be integer.");
     }
     let teamNumber = $("#teamNumber").val();
-    if (teamNumber == "") {
+    if (teamNumber === "") {
       alert("Team number must not be empty.");
       throw Error("Team number must not be empty.");
     }

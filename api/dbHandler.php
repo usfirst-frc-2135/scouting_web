@@ -161,7 +161,7 @@ class dbHandler
     {
       foreach ($row as $key => $value)
       {
-        if ($key == "autonStartPos" || $key == "autonLeave" || $key == "reefzoneAB" || $key == "reefzoneCD" || $key == "reefzoneEF" || $key == "reefzoneGH" || $key == "reefzoneIJ" || $key == "reefzoneKL" || $key == "autonCoralL1" || $key == "autonCoralL2" || $key == "autonCoralL3" || $key == "autonCoralL4" || $key == "autonAlgaeNet" || $key == "autonAlgaeProcessor" || $key == "autonCoralFloor" || $key == "autonCoralStation" || $key == "autonAlgaeFloor" || $key == "autonAlgaeReef" || $key == "acquiredCoral" || $key == "acquiredAlgae" || $key == "teleopAlgaeFloorPickup" || $key == "teleopCoralFloorPickup" || $key == "teleopKnockOffAlgae" || $key == "teleopAlgaeFromReef" || $key == "teleopHoldBoth" || $key == "teleopCoralL1" || $key == "teleopCoralL2" || $key == "teleopCoralL3" || $key == "teleopCoralL4" || $key == "teleopAlgaeNet" || $key == "teleopAlgaeProcessor" || $key == "defenseLevel" || $key == "cageClimb" || $key == "startClimb" || $key == "died")
+        if ($key === "autonStartPos" || $key === "autonLeave" || $key === "reefzoneAB" || $key === "reefzoneCD" || $key === "reefzoneEF" || $key === "reefzoneGH" || $key === "reefzoneIJ" || $key === "reefzoneKL" || $key === "autonCoralL1" || $key === "autonCoralL2" || $key === "autonCoralL3" || $key === "autonCoralL4" || $key === "autonAlgaeNet" || $key === "autonAlgaeProcessor" || $key === "autonCoralFloor" || $key === "autonCoralStation" || $key === "autonAlgaeFloor" || $key === "autonAlgaeReef" || $key === "acquiredCoral" || $key === "acquiredAlgae" || $key === "teleopAlgaeFloorPickup" || $key === "teleopCoralFloorPickup" || $key === "teleopKnockOffAlgae" || $key === "teleopAlgaeFromReef" || $key === "teleopHoldBoth" || $key === "teleopCoralL1" || $key === "teleopCoralL2" || $key === "teleopCoralL3" || $key === "teleopCoralL4" || $key === "teleopAlgaeNet" || $key === "teleopAlgaeProcessor" || $key === "defenseLevel" || $key === "cageClimb" || $key === "startClimb" || $key === "died")
         {
           $row[$key] = $this->enforceInt($value);
         }
@@ -641,9 +641,9 @@ class dbHandler
       }
 
       # Specific checking for match filters
-      if ($key == "useP" || $key == "useQm" || $key == "useQf" || $key == "useSf" || $key == "useF")
+      if ($key === "useP" || $key === "useQm" || $key === "useQf" || $key === "useSf" || $key === "useF")
       {
-        $ini_arr[$key] = ($ini_arr[$key] == "" || $ini_arr[$key] == "1" || $ini_arr[$key] == "true");
+        $ini_arr[$key] = ($ini_arr[$key] === "" || $ini_arr[$key] === "1" || $ini_arr[$key] === "true");
       }
     }
     return $ini_arr;

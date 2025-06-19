@@ -590,7 +590,7 @@ require 'inc/header.php';
     }).done(function (teamInfo) {
       console.log("=> getTeamInfo");
       let teamname = "XX";
-      if (teamInfo == null)
+      if (teamInfo === null)
         alert("Can't load teamName from TBA; check if TBA Key was set in db_config");
       else {
         // console.log("matchSheet: getTeamInfo:\n" + teamInfo);
@@ -891,7 +891,7 @@ require 'inc/header.php';
           getEventMatches: 1
         }).done(function (eventMatches) {
           console.log("=> getEventMatches");
-          if (eventMatches == null)
+          if (eventMatches === null)
             alert("Can't load matchlist from TBA; check if TBA Key was set in db_config");
           else {
             let ourMatches = {};
@@ -903,19 +903,19 @@ require 'inc/header.php';
 
               newMatch["comp_level"] = match["comp_level"];
               newMatch["match_number"] = match["match_number"];
-              if (match["comp_level"] == "sf")
+              if (match["comp_level"] === "sf")
                 newMatch["match_number"] = match["set_number"];
 
               newMatch["red_teams"] = match["alliances"]["red"]["team_keys"];
               newMatch["blue_teams"] = match["alliances"]["blue"]["team_keys"];
               newMatch["time"] = null;
-              if (newMatch["time"] == null && match["actual_time"] != null) {
+              if (newMatch["time"] === null && match["actual_time"] != null) {
                 newMatch["time"] = match["actual_time"];
               }
-              if (newMatch["time"] == null && match["predicted_time"] != null) {
+              if (newMatch["time"] === null && match["predicted_time"] != null) {
                 newMatch["time"] = match["predicted_time"];
               }
-              // if (newMatch["time"] == null && match["time"] != null){ newMatch["time"] = match["time"]; }
+              // if (newMatch["time"] === null && match["time"] != null){ newMatch["time"] = match["time"]; }
               localMatchList[makeKey(newMatch["comp_level"], newMatch["match_number"])] = newMatch;
 
               // Create list of matches for our team
@@ -1030,7 +1030,7 @@ require 'inc/header.php';
       let redTeamNum1 = document.getElementById("enterRed1").value;
       let blueTeamNum1 = document.getElementById("enterBlue1").value;
       console.log("==> Custom match sheet: " + redTeamNum1 + " " + blueTeamNum1);
-      if (redTeamNum1.trim() == "" && blueTeamNum1.trim() == "") {
+      if (redTeamNum1.trim() === "" && blueTeamNum1.trim() === "") {
         console.warn("loadCustomMatch: No Red or Blue team 1 entered!");
         alert("Please fill out Red Team Number 1 and Blue Team Number 1!");
         return false;

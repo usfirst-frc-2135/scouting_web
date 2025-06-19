@@ -587,7 +587,7 @@ require 'inc/header.php';
       let autonLeaveStartingZone = mydata[i]["leave"];
       datasets[0]["data"].push(autonLeaveStartingZone);
       let clevel = "No";
-      if (autonLeaveStartingZone == 1)
+      if (autonLeaveStartingZone === 1)
         clevel = "Yes";
       let tipStr = "Leave Start Line" + clevel;
       autonLeaveTips.push({ xlabel: matchnum, tip: tipStr });
@@ -655,57 +655,57 @@ require 'inc/header.php';
                 let matchnum = tooltipItem.label;
                 let tipStr = datasets[toolIndex].label;
 
-                if (toolIndex == 0) {   // Auton leave
+                if (toolIndex === 0) {   // Auton leave
                   for (let i = 0; i < autonLeaveTips.length; i++) {
-                    if (autonLeaveTips[i].xlabel == matchnum) {
+                    if (autonLeaveTips[i].xlabel === matchnum) {
                       tipStr = autonLeaveTips[i].tip;
                       break;
                     }
                   }
                 }
-                else if (toolIndex == 1) {   // Auton algae processor
+                else if (toolIndex === 1) {   // Auton algae processor
                   for (let i = 0; i < autonAlgaeProcTips.length; i++) {
-                    if (autonAlgaeProcTips[i].xlabel == matchnum) {
+                    if (autonAlgaeProcTips[i].xlabel === matchnum) {
                       tipStr = autonAlgaeProcTips[i].tip;
                       break;
                     }
                   }
                 }
-                else if (toolIndex == 2) {   // Auton algae net
+                else if (toolIndex === 2) {   // Auton algae net
                   for (let i = 0; i < autonAlgaeNetTips.length; i++) {
-                    if (autonAlgaeNetTips[i].xlabel == matchnum) {
+                    if (autonAlgaeNetTips[i].xlabel === matchnum) {
                       tipStr = autonAlgaeNetTips[i].tip;
                       break;
                     }
                   }
                 }
-                else if (toolIndex == 3) {   // Auton Amp Notes
+                else if (toolIndex === 3) {   // Auton Amp Notes
                   for (let i = 0; i < autonCoralL1Tips.length; i++) {
-                    if (autonCoralL1Tips[i].xlabel == matchnum) {
+                    if (autonCoralL1Tips[i].xlabel === matchnum) {
                       tipStr = autonCoralL1Tips[i].tip;
                       break;
                     }
                   }
                 }
-                else if (toolIndex == 4) {   // Auton coral
+                else if (toolIndex === 4) {   // Auton coral
                   for (let i = 0; i < autonCoralL2Tips.length; i++) {
-                    if (autonCoralL2Tips[i].xlabel == matchnum) {
+                    if (autonCoralL2Tips[i].xlabel === matchnum) {
                       tipStr = autonCoralL2Tips[i].tip;
                       break;
                     }
                   }
                 }
-                else if (toolIndex == 5) {   // Auton coral
+                else if (toolIndex === 5) {   // Auton coral
                   for (let i = 0; i < autonCoralL3Tips.length; i++) {
-                    if (autonCoralL3Tips[i].xlabel == matchnum) {
+                    if (autonCoralL3Tips[i].xlabel === matchnum) {
                       tipStr = autonCoralL3Tips[i].tip;
                       break;
                     }
                   }
                 }
-                else if (toolIndex == 6) {   // Auton coral
+                else if (toolIndex === 6) {   // Auton coral
                   for (let i = 0; i < autonCoralL4Tips.length; i++) {
-                    if (autonCoralL4Tips[i].xlabel == matchnum) {
+                    if (autonCoralL4Tips[i].xlabel === matchnum) {
                       tipStr = autonCoralL4Tips[i].tip;
                       break;
                     }
@@ -837,49 +837,49 @@ require 'inc/header.php';
                 let matchnum = tooltipItem.label;
                 let tipStr = datasets[toolIndex].label;
 
-                if (toolIndex == 0) {   // Teleop algae processor
+                if (toolIndex === 0) {   // Teleop algae processor
                   for (let i = 0; i < teleopAlgaeProcessorTips.length; i++) {
-                    if (teleopAlgaeProcessorTips[i].xlabel == matchnum) {
+                    if (teleopAlgaeProcessorTips[i].xlabel === matchnum) {
                       tipStr = teleopAlgaeProcessorTips[i].tip;
                       break;
                     }
                   }
                 }
-                else if (toolIndex == 1) {   // Teleop Algae Net
+                else if (toolIndex === 1) {   // Teleop Algae Net
                   for (let i = 0; i < teleopAlgaeNetTips.length; i++) {
-                    if (teleopAlgaeNetTips[i].xlabel == matchnum) {
+                    if (teleopAlgaeNetTips[i].xlabel === matchnum) {
                       tipStr = teleopAlgaeNetTips[i].tip;
                       break;
                     }
                   }
                 }
-                if (toolIndex == 2) {   // teleop coral level one
+                if (toolIndex === 2) {   // teleop coral level one
                   for (let i = 0; i < teleopCoralL1Tips.length; i++) {
-                    if (teleopCoralL1Tips[i].xlabel == matchnum) {
+                    if (teleopCoralL1Tips[i].xlabel === matchnum) {
                       tipStr = teleopCoralL1Tips[i].tip;
                       break;
                     }
                   }
                 }
-                else if (toolIndex == 3) {   // teleop coral level two
+                else if (toolIndex === 3) {   // teleop coral level two
                   for (let i = 0; i < teleopCoralL2Tips.length; i++) {
-                    if (teleopCoralL2Tips[i].xlabel == matchnum) {
+                    if (teleopCoralL2Tips[i].xlabel === matchnum) {
                       tipStr = teleopCoralL2Tips[i].tip;
                       break;
                     }
                   }
                 }
-                else if (toolIndex == 4) {   // teleop coral level three
+                else if (toolIndex === 4) {   // teleop coral level three
                   for (let i = 0; i < teleopCoralL3Tips.length; i++) {
-                    if (teleopCoralL3Tips[i].xlabel == matchnum) {
+                    if (teleopCoralL3Tips[i].xlabel === matchnum) {
                       tipStr = teleopCoralL3Tips[i].tip;
                       break;
                     }
                   }
                 }
-                else if (toolIndex == 5) {   // teleop coral level four
+                else if (toolIndex === 5) {   // teleop coral level four
                   for (let i = 0; i < teleopCoralL4Tips.length; i++) {
-                    if (teleopCoralL4Tips[i].xlabel == matchnum) {
+                    if (teleopCoralL4Tips[i].xlabel === matchnum) {
                       tipStr = teleopCoralL4Tips[i].tip;
                       break;
                     }
@@ -930,13 +930,13 @@ require 'inc/header.php';
       let cageClimb = mydata[i]["cage"];
       datasets[0]["data"].push(cageClimb);
       let clevel = "N/A";
-      if (cageClimb == 1)
+      if (cageClimb === 1)
         clevel = "Parked";
-      if (cageClimb == 2)
+      if (cageClimb === 2)
         clevel = "Fell";
-      if (cageClimb == 3)
+      if (cageClimb === 3)
         clevel = "Shallow";
-      if (cageClimb == 4)
+      if (cageClimb === 4)
         clevel = "Deep";
       let tipStr = "Cage Climb =" + clevel;
       cageClimbTips.push({ xlabel: matchnum, tip: tipStr });
@@ -967,9 +967,9 @@ require 'inc/header.php';
                 let matchnum = tooltipItem.label;
                 let tipStr = datasets[toolIndex].label;
 
-                if (toolIndex == 0) {   // Cage Climb
+                if (toolIndex === 0) {   // Cage Climb
                   for (let i = 0; i < cageClimbTips.length; i++) {
-                    if (cageClimbTips[i].xlabel == matchnum) {
+                    if (cageClimbTips[i].xlabel === matchnum) {
                       tipStr = cageClimbTips[i].tip;
                       break;
                     }
@@ -1098,11 +1098,11 @@ require 'inc/header.php';
           else if (matchStr.search("sf") != -1) { mt = "sf"; }
           else if (matchStr.search("f") != -1) { mt = "f"; }
 
-          if (mt == "p" && localSiteFilter["useP"]) { newData.push(getTeamMatches[i]); }
-          else if (mt == "qm" && localSiteFilter["useQm"]) { newData.push(getTeamMatches[i]); }
-          else if (mt == "qf" && localSiteFilter["useQf"]) { newData.push(getTeamMatches[i]); }
-          else if (mt == "sf" && localSiteFilter["useSf"]) { newData.push(getTeamMatches[i]); }
-          else if (mt == "f" && localSiteFilter["useF"]) { newData.push(getTeamMatches[i]); }
+          if (mt === "p" && localSiteFilter["useP"]) { newData.push(getTeamMatches[i]); }
+          else if (mt === "qm" && localSiteFilter["useQm"]) { newData.push(getTeamMatches[i]); }
+          else if (mt === "qf" && localSiteFilter["useQf"]) { newData.push(getTeamMatches[i]); }
+          else if (mt === "sf" && localSiteFilter["useSf"]) { newData.push(getTeamMatches[i]); }
+          else if (mt === "f" && localSiteFilter["useF"]) { newData.push(getTeamMatches[i]); }
         }
         getTeamMatches = [...newData];
 
@@ -1196,13 +1196,13 @@ require 'inc/header.php';
   // Converts a given "1" to yes, "0" to no, anything else to empty string.
   function convertToYesNo(value) {
     let convertedVal = "";
-    if (value == "1")
+    if (value === "1")
       convertedVal = "yes";
-    else if (value == "0")
+    else if (value === "0")
       convertedVal = "-";
-    else if (value == "2")
+    else if (value === "2")
       convertedVal = "no";
-    else if (value == "3")
+    else if (value === "3")
       convertedVal = "-";
     return convertedVal;
   }
@@ -1282,15 +1282,15 @@ require 'inc/header.php';
     for (let i = 0; i < dataObj.length; i++) {
       let driverability = dataObj[i]["driverability"];
       let driveVal = "";
-      if (driverability == "1")
+      if (driverability === "1")
         driveVal = "Jerky";
-      else if (driverability == "2")
+      else if (driverability === "2")
         driveVal = "Slow";
-      else if (driverability == "3")
+      else if (driverability === "3")
         driveVal = "Average";
-      else if (driverability == "4")
+      else if (driverability === "4")
         driveVal = "Quick";
-      else if (driverability == "5")
+      else if (driverability === "5")
         driveVal = "-";
 
       let rowString = "<tr><td align=\"center\">" + dataObj[i]["matchnumber"] + "</td>" +
@@ -1339,7 +1339,7 @@ require 'inc/header.php';
     sortStrategicData();
   }
 
-  // This is the main function that runs when we want to load a new team 
+  // This is the main function that runs when we want to load a team 
   function buildTeamLookupPage(teamNum) {
     console.log("==> teamLookup: buildTeamLookupPage()");
     // Clear existing data
@@ -1361,7 +1361,7 @@ require 'inc/header.php';
     }).done(function (teamInfo) {
       console.log("=> getTeamInfo");
       let teamname = "XX";
-      if (teamInfo == null)
+      if (teamInfo === null)
         alert("Can't load teamName from TBA; check if TBA Key was set in db_config");
       else {
         // console.log("==> teamLookup: getTeamInfo:\n" + teamInfo);

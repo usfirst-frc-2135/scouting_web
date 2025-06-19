@@ -35,18 +35,18 @@ class matchDataProcessor {
     let sm = this.getMatchTuple(startMatch);
     let em = this.getMatchTuple(endMatch);
 
-    if (sm == null) {
+    if (sm === null) {
       startMatch = "qm" + startMatch;
       sm = this.getMatchTuple(startMatch);
     }
 
-    if (em == null) {
+    if (em === null) {
       endMatch = "qm" + endMatch;
       em = this.getMatchTuple(endMatch);
     }
 
     let typeProg = { "p": 0, "qm": 1, "qf": 2, "sf": 3, "f": 4 };
-    if (sm == null || em == null) {
+    if (sm === null || em === null) {
       return false;
     }
     if (typeProg[sm[0]] < typeProg[em[0]]) {
@@ -67,7 +67,7 @@ class matchDataProcessor {
     let newData = [];
     for (let i = 0; i < this.data.length; i++) {
       let midStr = this.data[i]["matchnumber"];
-      if (this.getMatchTuple(midStr) == null) {
+      if (this.getMatchTuple(midStr) === null) {
         midStr = "qm" + midStr;
       }
       if (this.ifMatchInRange(startMatch, midStr, endMatch)) {
@@ -88,7 +88,7 @@ class matchDataProcessor {
     for (let i = 0; i < this.data.length; i++) {
       let midStr = this.data[i]["matchnumber"];
       let mt = this.getMatchTuple(midStr);
-      if (mt == null || mt != "p") {
+      if (mt === null || mt != "p") {
         newData.push(this.data[i]);
       }
     }
@@ -132,14 +132,14 @@ class matchDataProcessor {
     for (let i = 0; i < this.data.length; i++) {
       let mn = this.data[i]["matchnumber"];
       let mt = this.getMatchTuple(mn);
-      if (mt == null) {
+      if (mt === null) {
         mt = ["qm", null];
       }
-      if (mt[0] == "p" && this.siteFilter["useP"]) { newData.push(this.data[i]); }
-      else if (mt[0] == "qm" && this.siteFilter["useQm"]) { newData.push(this.data[i]); }
-      else if (mt[0] == "qf" && this.siteFilter["useQf"]) { newData.push(this.data[i]); }
-      else if (mt[0] == "sf" && this.siteFilter["useSf"]) { newData.push(this.data[i]); }
-      else if (mt[0] == "f" && this.siteFilter["useF"]) { newData.push(this.data[i]); }
+      if (mt[0] === "p" && this.siteFilter["useP"]) { newData.push(this.data[i]); }
+      else if (mt[0] === "qm" && this.siteFilter["useQm"]) { newData.push(this.data[i]); }
+      else if (mt[0] === "qf" && this.siteFilter["useQf"]) { newData.push(this.data[i]); }
+      else if (mt[0] === "sf" && this.siteFilter["useSf"]) { newData.push(this.data[i]); }
+      else if (mt[0] === "f" && this.siteFilter["useF"]) { newData.push(this.data[i]); }
     }
     this.data = [...newData];
   }
@@ -283,7 +283,7 @@ class matchDataProcessor {
 
       let autonLeave = (this.data[i]["autonLeave"]);
       let autonLeavePoints = 0;
-      if (parseInt(autonLeave) == 1)
+      if (parseInt(autonLeave) === 1)
         autonLeavePoints = 3;
       // HOLD      console.log(" --> auton Leave points = "+autonLeavePoints);  //TEST
 
@@ -337,16 +337,16 @@ class matchDataProcessor {
 
       let endgameClimbPoints = 0;
       let climbLevel = (this.data[i]["cageClimb"]);
-      if (climbLevel == 1) {
+      if (climbLevel === 1) {
         endgameClimbPoints = 2;
       }
-      else if (climbLevel == 2) {
+      else if (climbLevel === 2) {
         endgameClimbPoints = 2;
       }
-      else if (climbLevel == 3) {
+      else if (climbLevel === 3) {
         endgameClimbPoints = 6;
       }
-      else if (climbLevel == 4) {
+      else if (climbLevel === 4) {
         endgameClimbPoints = 12;
       }
       // HOLD      console.log(" --> endgame climb points = "+endgameClimbPoints);  //TEST

@@ -68,7 +68,7 @@ else if (isset($_GET["getTeamPitData"]))
   $out = array();
   foreach ($matchData as $row)
   {
-    if ($row["teamnumber"] == $_GET["getTeamPitData"])
+    if ($row["teamnumber"] === $_GET["getTeamPitData"])
     {
       $out = $row;
       break;
@@ -108,7 +108,7 @@ else if (isset($_GET["config"]))
   $output["response"] = False;
   if (isset($_GET["secret"]))
   {
-    if (strcmp($_GET["secret"], "CHANGE_PER_SERVER") == 0)
+    if (strcmp($_GET["secret"], "CHANGE_PER_SERVER") === 0)
     {
       $output["response"] = True;
       $output["eventcode"] = $dbConfig["eventcode"];

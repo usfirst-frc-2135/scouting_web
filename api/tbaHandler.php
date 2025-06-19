@@ -34,7 +34,7 @@ class tbaHandler
   private function readURIFromTBA($uri)
   {
     $out = array();
-    if ($this->tbaApiKey == null)
+    if ($this->tbaApiKey === null)
     {
       error_log("Can't read TheBlueAlliance data because no TBA Key was set!");
       return $out;
@@ -70,15 +70,15 @@ class tbaHandler
     foreach (explode("\r\n", $headers) as $hdr)
     {
       $kv = explode(":", $hdr, 2);
-      if (sizeof($kv) == 2)
+      if (sizeof($kv) === 2)
       {
         list($key, $value) = $kv;
-        if ($key == "Cache-Control")
+        if ($key === "Cache-Control")
         {
           foreach (explode(",", $value) as $cacheControlKV)
           {
             $cacheKV = explode("=", $cacheControlKV, 2);
-            if (count($cacheKV) == 2 and strcmp($cacheKV[0], "max-age"))
+            if (count($cacheKV) === 2 and strcmp($cacheKV[0], "max-age"))
             {
               $maxAge = intval($cacheKV[1]);
             }
@@ -142,7 +142,7 @@ class tbaHandler
     error_log(">>> getTeamInfo() starting for $teamnum");
     // URI should be "/team/frc<teamnum>", so add "frc" if needed.
     $requestURI = "/team/" . $teamnum;
-    if (strpos($teamnum, "frc") == false)
+    if (strpos($teamnum, "frc") === false)
       $requestURI = "/team/frc" . $teamnum;
     return $this->makeDBCachedCall($requestURI);
   }
@@ -180,7 +180,7 @@ class tbaHandler
     }
 
     $ml = null;   // matchlist, only needed if multi-robot event
-    if ($bMultiRobots == true)
+    if ($bMultiRobots === true)
     {
       error_log("getEventTeamsEx: going to adjust teamlist for multi-robots");
       $ml = $this->getEventMatches($eventCode);
@@ -189,7 +189,7 @@ class tbaHandler
     foreach ($tl["response"] as $teamRow)
     {
       // If this is a multi-robot event, go thru  match list to get B/C/D/E robots and add them as separate teams.
-      if ($bMultiRobots == true)
+      if ($bMultiRobots === true)
       {
         $teamnum = $teamRow["team_number"];
         $numStr = "$teamnum"; // $teamnum needs to be converted to a string, for later
@@ -214,9 +214,9 @@ class tbaHandler
             // If trimmedNum is same as numStr AND it ends in a B/C/D/E/F, then it's a 
             // multiple robot for numStr team.
             if (
-              ($trimmedNum == $numStr) && ((substr($entryNum, -1) == 'B') ||
-                (substr($entryNum, -1) == 'C') || (substr($entryNum, -1) == 'D') ||
-                (substr($entryNum, -1) == 'E') || (substr($entryNum, -1) == 'F'))
+              ($trimmedNum === $numStr) && ((substr($entryNum, -1) === 'B') ||
+                (substr($entryNum, -1) === 'C') || (substr($entryNum, -1) === 'D') ||
+                (substr($entryNum, -1) === 'E') || (substr($entryNum, -1) === 'F'))
             )
             {
               // Check if this entryNum is already in multiBots.
@@ -224,13 +224,13 @@ class tbaHandler
               $bFoundInMultiBots = false;
               for ($x = 0; $x < $w; $x++)
               {
-                if (strcmp($multiBots[$x], $entryNum) == 0)
+                if (strcmp($multiBots[$x], $entryNum) === 0)
                 {
                   $bFoundInMultiBots = true;
                   break;
                 }
               }
-              if ($bFoundInMultiBots == false)
+              if ($bFoundInMultiBots === false)
               {
                 array_push($multiBots, $entryNum);  // add this multi-bot number.
               }
@@ -346,7 +346,7 @@ class tbaHandler
     foreach ($ml["response"] as $match)
     {
       $complevel = $match["comp_level"];
-      if ($complevel == "qm")
+      if ($complevel === "qm")
       {  // Only care about Qual matches
         // Put all this match's teams in $teams, then check for our teamnumber.
         $matchnum = $match["match_number"];
@@ -359,7 +359,7 @@ class tbaHandler
         {
           // If team number is 2135, then this match is one of ours. 
           $entryNum = "$teams[$m]";
-          if ($entryNum == "2135")
+          if ($entryNum === "2135")
           {
             // error_log("  ---> found one of our matches: $matchnum");
             $myMatch = array();  // store this match's num and teams in myMatch
@@ -395,7 +395,7 @@ class tbaHandler
         $tnum = "$mteams[$p]";
         // error_log("   >>>> for match $ourMatchNum, looking at team: $tnum");
         // If team number is 2135, skip.
-        if ($tnum == "2135")
+        if ($tnum === "2135")
           continue;
 
         // Get their match numbers.
@@ -403,7 +403,7 @@ class tbaHandler
         foreach ($ml["response"] as $bmatch)
         {
           $bcomplevel = $bmatch["comp_level"];
-          if ($bcomplevel == "qm")
+          if ($bcomplevel === "qm")
           {   // Only care about Qual matches
             // If this match is earlier than ourMatchNum, check if it has this $tnum.
             $bmatchnum = $bmatch["match_number"];
@@ -423,7 +423,7 @@ class tbaHandler
               {
                 // If team number is 2135, then this match is one of ours. 
                 $entryNum = "$bteams[$m]";
-                if ($entryNum == $tnum)
+                if ($entryNum === $tnum)
                 {
                   // error_log("      ---> found team $tnum! so save with match $bmatchnum");
                   $dsize = sizeof($out);
@@ -434,7 +434,7 @@ class tbaHandler
                     $dout = $out[$z];
                     $dmnum = $dout["match_number"];
                     // error_log("       ---> Looking at dout match# = $dmnum");
-                    if ($dout["match_number"] == $bmatchnum)
+                    if ($dout["match_number"] === $bmatchnum)
                     {
                       $bFoundInOut = 1;
                       // error_log("        ---> found match $bmatchnum in out; save with team $tnum");
@@ -457,7 +457,7 @@ class tbaHandler
                       break;
                     }
                   }
-                  if ($bFoundInOut == 0)
+                  if ($bFoundInOut === 0)
                   {
                     $dout = array();
                     $dout["match_number"] = $bmatchnum;

@@ -45,7 +45,7 @@ require 'inc/header.php';
 
   function buildPitStatusPage(teams, names, images, pitInfo) {
     console.log("==> pitStatus: buildPitStatusPage()");
-    if (teams == null || names == null || images == null || pitInfo == null) {
+    if (teams === null || names === null || images === null || pitInfo === null) {
       console.warn("buildPitStatusPage: team, names, images, or pit lists are missing!")
       return null;
     }
@@ -114,7 +114,7 @@ require 'inc/header.php';
       console.log("=> getEventTeamNames");
       let teamList = [];
       let namesList = {};
-      if (eventTeamNames == null)
+      if (eventTeamNames === null)
         alert("Can't load teamlist from TBA; check if TBA Key was set in db_config");
       else {
         let jsonTeamList = JSON.parse(eventTeamNames);
