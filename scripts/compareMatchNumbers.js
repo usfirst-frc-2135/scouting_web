@@ -20,10 +20,10 @@ function compareMatchNumbers(matchA, matchB) {
   // console.log("==> compareMatchNumbers: " + matchA + " <-> " + matchB);
 
   // Normalize input parameters
-  var prefixA = "";
-  var prefixB = "";
-  var numA = "";
-  var numB = "";
+  let prefixA = "";
+  let prefixB = "";
+  let numA = "";
+  let numB = "";
   matchA = matchA.trim().toLowerCase();
   matchB = matchB.trim().toLowerCase();
 
@@ -76,7 +76,7 @@ function compareMatchNumbers(matchA, matchB) {
 
   // console.log("==> compareMatchNumbers: " + prefixA + numA + "/" + matchA + " " + prefixB + numB + "/" + matchB);
 
-  var returnVal;
+  let returnVal;
 
   if (prefixA == prefixB)   // Comp level is same, use numbers
     returnVal = (parseInt(numA) - parseInt(numB));

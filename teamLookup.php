@@ -512,17 +512,17 @@ require 'inc/header.php';
 <!-- Javascript page handlers -->
 
 <script>
-  var autoChartDefined = false;
-  var autoChart;
+  let autoChartDefined = false;
+  let autoChart;
 
-  var teleopChartDefined = false;
-  var teleopChart;
+  let teleopChartDefined = false;
+  let teleopChart;
 
-  var endgameChartDefined = false;
-  var endgameChart;
+  let endgameChartDefined = false;
+  let endgameChart;
 
-  var frozenTableMatches = null;
-  var frozenTableStrategy = null;
+  let frozenTableMatches = null;
+  let frozenTableStrategy = null;
 
 
   ///// AUTON GRAPH STARTS HERE /////
@@ -531,15 +531,15 @@ require 'inc/header.php';
     console.log("==> teamLookup: loadAutonGraph()");
 
     // Declare variables
-    var matchList = []; // List of matches to use as x lables
-    var datasets = []; // Each entry is a dict with a label and data attribute
-    var autonLeaveTips = []; // holds custom tooltips for auton leave start line data      
-    var autonAlgaeProcTips = []; // holds custom tooltips for auton algae processor
-    var autonAlgaeNetTips = []; // holds custom tooltips for auton algae net
-    var autonCoralL1Tips = []; // holds custom tooltips for auton coral L1
-    var autonCoralL2Tips = []; // holds custom tooltips for auton coral L2
-    var autonCoralL3Tips = []; // holds custom tooltips for auton coral L3
-    var autonCoralL4Tips = []; // holds custom tooltips for auton coral 4      
+    let matchList = []; // List of matches to use as x lables
+    let datasets = []; // Each entry is a dict with a label and data attribute
+    let autonLeaveTips = []; // holds custom tooltips for auton leave start line data      
+    let autonAlgaeProcTips = []; // holds custom tooltips for auton algae processor
+    let autonAlgaeNetTips = []; // holds custom tooltips for auton algae net
+    let autonCoralL1Tips = []; // holds custom tooltips for auton coral L1
+    let autonCoralL2Tips = []; // holds custom tooltips for auton coral L2
+    let autonCoralL3Tips = []; // holds custom tooltips for auton coral L3
+    let autonCoralL4Tips = []; // holds custom tooltips for auton coral 4      
 
     datasets.push({ label: "Leave Start", data: [], backgroundColor: '#F7CF58' });
     datasets.push({ label: "Processor", data: [], backgroundColor: '#B4E7D6' });
@@ -551,16 +551,16 @@ require 'inc/header.php';
 
     // Go thru each matchdata QR code string and build up a table of the data, so we can
     // later sort it so the matches are listed in the right order. 
-    var mydata = [];
+    let mydata = [];
     for (let i = 0; i < matchdata.length; i++) {
-      var matchnum = matchdata[i]["matchnumber"];
-      var autonLeave = matchdata[i]["autonLeave"];
-      var autonAlgaeProcessor = matchdata[i]["autonAlgaeProcessor"];
-      var autonAlgaeNet = matchdata[i]["autonAlgaeNet"];
-      var autonCoralOne = matchdata[i]["autonCoralL1"];
-      var autonCoralTwo = matchdata[i]["autonCoralL2"];
-      var autonCoralThree = matchdata[i]["autonCoralL3"];
-      var autonCoralFour = matchdata[i]["autonCoralL4"];
+      let matchnum = matchdata[i]["matchnumber"];
+      let autonLeave = matchdata[i]["autonLeave"];
+      let autonAlgaeProcessor = matchdata[i]["autonAlgaeProcessor"];
+      let autonAlgaeNet = matchdata[i]["autonAlgaeNet"];
+      let autonCoralOne = matchdata[i]["autonCoralL1"];
+      let autonCoralTwo = matchdata[i]["autonCoralL2"];
+      let autonCoralThree = matchdata[i]["autonCoralL3"];
+      let autonCoralFour = matchdata[i]["autonCoralL4"];
       mydata.push({
         matchnum: matchnum,
         leave: autonLeave,
@@ -579,52 +579,53 @@ require 'inc/header.php';
 
     // Build data sets; go thru each mydata row and populate the graph datasets.
     for (let i = 0; i < mydata.length; i++) {
-      var matchnum = mydata[i]["matchnum"];
+      let matchnum = mydata[i]["matchnum"];
       matchList.push(matchnum);
+      let tooltipStr = "";
 
       // Get auton leave start line data
-      var autonLeaveStartingZone = mydata[i]["leave"];
+      let autonLeaveStartingZone = mydata[i]["leave"];
       datasets[0]["data"].push(autonLeaveStartingZone);
-      var clevel = "No";
+      let clevel = "No";
       if (autonLeaveStartingZone == 1)
         clevel = "Yes";
-      var tipStr = "Leave Start Line" + clevel;
+      let tipStr = "Leave Start Line" + clevel;
       autonLeaveTips.push({ xlabel: matchnum, tip: tipStr });
 
       // Get auton algae processor data
-      var autonAlgaeProcessor = mydata[i]["processor"];
+      let autonAlgaeProcessor = mydata[i]["processor"];
       datasets[1]["data"].push(autonAlgaeProcessor);
-      var tooltipStr = "Processor=" + autonAlgaeProcessor;
+      tooltipStr = "Processor=" + autonAlgaeProcessor;
       autonAlgaeProcTips.push({ xlabel: matchnum, tip: tooltipStr });
 
       // Get auton algae net data
-      var autonAlgaeNet = mydata[i]["net"];
+      let autonAlgaeNet = mydata[i]["net"];
       datasets[2]["data"].push(autonAlgaeNet);
-      var tooltipStr = "Net=" + autonAlgaeNet;
+      tooltipStr = "Net=" + autonAlgaeNet;
       autonAlgaeNetTips.push({ xlabel: matchnum, tip: tooltipStr });
 
       // Get auton coral level one
-      var autonCoralOne = mydata[i]["one"];
+      let autonCoralOne = mydata[i]["one"];
       datasets[3]["data"].push(autonCoralOne);
-      var tooltipStr = "L1=" + autonCoralOne;
+      tooltipStr = "L1=" + autonCoralOne;
       autonCoralL1Tips.push({ xlabel: matchnum, tip: tooltipStr });
 
       // Get auton coral level two
-      var autonCoralTwo = mydata[i]["two"];
+      let autonCoralTwo = mydata[i]["two"];
       datasets[4]["data"].push(autonCoralTwo);
-      var tooltipStr = "L2=" + autonCoralTwo;
+      tooltipStr = "L2=" + autonCoralTwo;
       autonCoralL2Tips.push({ xlabel: matchnum, tip: tooltipStr });
 
       // Get auton coral level three
-      var autonCoralThree = mydata[i]["three"];
+      let autonCoralThree = mydata[i]["three"];
       datasets[5]["data"].push(autonCoralThree);
-      var tooltipStr = "L3=" + autonCoralThree;
+      tooltipStr = "L3=" + autonCoralThree;
       autonCoralL3Tips.push({ xlabel: matchnum, tip: tooltipStr });
 
       // Get auton coral level four
-      var autonCoralFour = mydata[i]["four"];
+      let autonCoralFour = mydata[i]["four"];
       datasets[6]["data"].push(autonCoralFour);
-      var tooltipStr = "L4=" + autonCoralFour;
+      tooltipStr = "L4=" + autonCoralFour;
       autonCoralL4Tips.push({ xlabel: matchnum, tip: tooltipStr });
     }
 
@@ -650,9 +651,9 @@ require 'inc/header.php';
           tooltip: {
             callbacks: {  // Special tooltip handling
               label: function (tooltipItem, ddata) {
-                var toolIndex = tooltipItem.datasetIndex;
-                var matchnum = tooltipItem.label;
-                var tipStr = datasets[toolIndex].label;
+                let toolIndex = tooltipItem.datasetIndex;
+                let matchnum = tooltipItem.label;
+                let tipStr = datasets[toolIndex].label;
 
                 if (toolIndex == 0) {   // Auton leave
                   for (let i = 0; i < autonLeaveTips.length; i++) {
@@ -727,14 +728,14 @@ require 'inc/header.php';
     console.log("==> teamLookup: loadTeleopGraph()");
 
     // Declare variables
-    var matchList = []; // List of matches to use as x lables
-    var datasets = []; // Each entry is a dict with a label and data attribute
-    var teleopAlgaeProcessorTips = []; // holds custom tooltips for teleop speaker notes
-    var teleopAlgaeNetTips = [];//holds custom tooltips for if amplification used
-    var teleopCoralL1Tips = []; // holds custom tooltips for teleop coral L1
-    var teleopCoralL2Tips = []; // holds custom tooltips for teleop coral L2
-    var teleopCoralL3Tips = []; // holds custom tooltips for teleop coral L3
-    var teleopCoralL4Tips = []; // holds custom tooltips for teleop coral 4      
+    let matchList = []; // List of matches to use as x lables
+    let datasets = []; // Each entry is a dict with a label and data attribute
+    let teleopAlgaeProcessorTips = []; // holds custom tooltips for teleop speaker notes
+    let teleopAlgaeNetTips = [];//holds custom tooltips for if amplification used
+    let teleopCoralL1Tips = []; // holds custom tooltips for teleop coral L1
+    let teleopCoralL2Tips = []; // holds custom tooltips for teleop coral L2
+    let teleopCoralL3Tips = []; // holds custom tooltips for teleop coral L3
+    let teleopCoralL4Tips = []; // holds custom tooltips for teleop coral 4      
 
     datasets.push({ label: "Processor", data: [], backgroundColor: '#B4E7D6' });
     datasets.push({ label: "Net", data: [], backgroundColor: '#4C9F7C' });
@@ -745,15 +746,15 @@ require 'inc/header.php';
 
     // Go thru each matchdata QR code string and build up a table of the data, so we can
     // later sort it so the matches are listed in the right order. 
-    var mydata = [];
+    let mydata = [];
     for (let i = 0; i < matchdata.length; i++) {
-      var matchnum = matchdata[i]["matchnumber"];
-      var teleopAlgaeProcessor = matchdata[i]["teleopAlgaeProcessor"];
-      var teleopAlgaeNet = matchdata[i]["teleopAlgaeNet"];
-      var teleopCoralOne = matchdata[i]["teleopCoralL1"];
-      var teleopCoralTwo = matchdata[i]["teleopCoralL2"];
-      var teleopCoralThree = matchdata[i]["teleopCoralL3"];
-      var teleopCoralFour = matchdata[i]["teleopCoralL4"];
+      let matchnum = matchdata[i]["matchnumber"];
+      let teleopAlgaeProcessor = matchdata[i]["teleopAlgaeProcessor"];
+      let teleopAlgaeNet = matchdata[i]["teleopAlgaeNet"];
+      let teleopCoralOne = matchdata[i]["teleopCoralL1"];
+      let teleopCoralTwo = matchdata[i]["teleopCoralL2"];
+      let teleopCoralThree = matchdata[i]["teleopCoralL3"];
+      let teleopCoralFour = matchdata[i]["teleopCoralL4"];
       mydata.push({
         matchnum: matchnum,
         teleopprocessor: teleopAlgaeProcessor,
@@ -769,43 +770,44 @@ require 'inc/header.php';
     });
     // Build data sets; go thru each mydata row and populate the graph datasets.
     for (let i = 0; i < mydata.length; i++) {
-      var matchnum = mydata[i]["matchnum"];
+      let matchnum = mydata[i]["matchnum"];
       matchList.push(matchnum);
+      let tooltipStr = "";
 
       // Get teleop algae processor
-      var teleopAlgaeProcessor = mydata[i]["teleopprocessor"];
+      let teleopAlgaeProcessor = mydata[i]["teleopprocessor"];
       datasets[0]["data"].push(teleopAlgaeProcessor);
-      var tooltipStr1 = "Processor=" + teleopAlgaeProcessor;
+      let tooltipStr1 = "Processor=" + teleopAlgaeProcessor;
       teleopAlgaeProcessorTips.push({ xlabel: matchnum, tip: tooltipStr1 });
 
       //Get teleop algae net
-      var teleopAlgaeNet = mydata[i]["teleopnet"];
+      let teleopAlgaeNet = mydata[i]["teleopnet"];
       datasets[1]["data"].push(teleopAlgaeNet);
-      var tooltipStr3 = "Net =" + teleopAlgaeNet;
+      let tooltipStr3 = "Net =" + teleopAlgaeNet;
       teleopAlgaeNetTips.push({ xlabel: matchnum, tip: tooltipStr3 });
 
       // Get teleop coral level one
-      var teleopCoralOne = mydata[i]["levelone"];
+      let teleopCoralOne = mydata[i]["levelone"];
       datasets[2]["data"].push(teleopCoralOne);
-      var tooltipStr = "L1=" + teleopCoralOne;
+      tooltipStr = "L1=" + teleopCoralOne;
       teleopCoralL1Tips.push({ xlabel: matchnum, tip: tooltipStr });
 
       // Get teleop coral level two
-      var teleopCoralTwo = mydata[i]["leveltwo"];
+      let teleopCoralTwo = mydata[i]["leveltwo"];
       datasets[3]["data"].push(teleopCoralTwo);
-      var tooltipStr = "L2=" + teleopCoralTwo;
+      tooltipStr = "L2=" + teleopCoralTwo;
       teleopCoralL2Tips.push({ xlabel: matchnum, tip: tooltipStr });
 
       // Get teleop coral level three
-      var teleopCoralThree = mydata[i]["levelthree"];
+      let teleopCoralThree = mydata[i]["levelthree"];
       datasets[4]["data"].push(teleopCoralThree);
-      var tooltipStr = "L3=" + teleopCoralThree;
+      tooltipStr = "L3=" + teleopCoralThree;
       teleopCoralL3Tips.push({ xlabel: matchnum, tip: tooltipStr });
 
       // Get teleop coral level four
-      var teleopCoralFour = mydata[i]["levelfour"];
+      let teleopCoralFour = mydata[i]["levelfour"];
       datasets[5]["data"].push(teleopCoralFour);
-      var tooltipStr = "L4=" + teleopCoralFour;
+      tooltipStr = "L4=" + teleopCoralFour;
       teleopCoralL4Tips.push({ xlabel: matchnum, tip: tooltipStr });
     }
 
@@ -831,9 +833,9 @@ require 'inc/header.php';
           tooltip: {
             callbacks: {  // Special tooltip handling
               label: function (tooltipItem, ddata) {
-                var toolIndex = tooltipItem.datasetIndex;
-                var matchnum = tooltipItem.label;
-                var tipStr = datasets[toolIndex].label;
+                let toolIndex = tooltipItem.datasetIndex;
+                let matchnum = tooltipItem.label;
+                let tipStr = datasets[toolIndex].label;
 
                 if (toolIndex == 0) {   // Teleop algae processor
                   for (let i = 0; i < teleopAlgaeProcessorTips.length; i++) {
@@ -898,18 +900,18 @@ require 'inc/header.php';
 
   function loadEndgameGraph(matchdata) {
     console.log("==> teamLookup: loadEndgameGraph()");
-    var matchList = [];
-    var datasets = [];
-    var cageClimbTips = [];
+    let matchList = [];
+    let datasets = [];
+    let cageClimbTips = [];
 
     datasets.push({ label: "Cage Climb", data: [], backgroundColor: '#ED8537' });
 
     // Go thru each matchdata QR code string and build up a table of the data, so we can
     // later sort it so the matches are listed in the right order. 
-    var mydata = [];
+    let mydata = [];
     for (let i = 0; i < matchdata.length; i++) {
-      var matchnum = matchdata[i]["matchnumber"];
-      var cageClimb = matchdata[i]["cageClimb"];
+      let matchnum = matchdata[i]["matchnumber"];
+      let cageClimb = matchdata[i]["cageClimb"];
       mydata.push({
         matchnum: matchnum,
         cage: cageClimb,
@@ -921,13 +923,13 @@ require 'inc/header.php';
 
     // Build data sets; go thru each mydata row and populate the graph datasets.
     for (let i = 0; i < mydata.length; i++) {
-      var matchnum = mydata[i]["matchnum"];
+      let matchnum = mydata[i]["matchnum"];
       matchList.push(matchnum);
 
       // Get endgame climb cage level
-      var cageClimb = mydata[i]["cage"];
+      let cageClimb = mydata[i]["cage"];
       datasets[0]["data"].push(cageClimb);
-      var clevel = "N/A";
+      let clevel = "N/A";
       if (cageClimb == 1)
         clevel = "Parked";
       if (cageClimb == 2)
@@ -936,7 +938,7 @@ require 'inc/header.php';
         clevel = "Shallow";
       if (cageClimb == 4)
         clevel = "Deep";
-      var tipStr = "Cage Climb =" + clevel;
+      let tipStr = "Cage Climb =" + clevel;
       cageClimbTips.push({ xlabel: matchnum, tip: tipStr });
 
     }
@@ -961,9 +963,9 @@ require 'inc/header.php';
           tooltip: {
             callbacks: {  // Special tooltip handling
               label: function (tooltipItem, ddata) {
-                var toolIndex = tooltipItem.datasetIndex;
-                var matchnum = tooltipItem.label;
-                var tipStr = datasets[toolIndex].label;
+                let toolIndex = tooltipItem.datasetIndex;
+                let matchnum = tooltipItem.label;
+                let tipStr = datasets[toolIndex].label;
 
                 if (toolIndex == 0) {   // Cage Climb
                   for (let i = 0; i < cageClimbTips.length; i++) {
@@ -986,7 +988,7 @@ require 'inc/header.php';
 
   // Create an html table row with tr and td cells
   function writeTableRow(tbodyID, dict, keys, length) {
-    var row = "<tr>";
+    let row = "<tr>";
     row += "<th  style='text-align:left'>" + dict[keys[0]] + "</th>";
     for (let i = 1; i < length; i++) {
       if (i < keys.length)
@@ -1061,14 +1063,14 @@ require 'inc/header.php';
   // filters out the match type as specified in the db status page
   function getFilteredData(team, successFunction) {
     console.log("==> teamLookup: getFilteredData(): " + team);
-    var tempThis = this;
+    let tempThis = this;
 
     $.post("api/dbAPI.php", {
       getDBStatus: true
     }, function (dbStatus) {
       console.log("=> getDBStatus");
       dbdata = JSON.parse(dbStatus);
-      var localSiteFilter = {};
+      let localSiteFilter = {};
       localSiteFilter["useP"] = dbdata["useP"];
       localSiteFilter["useQm"] = dbdata["useQm"];
       localSiteFilter["useQf"] = dbdata["useQf"];
@@ -1084,11 +1086,11 @@ require 'inc/header.php';
         console.log("=> getTeamMatches");
         getTeamMatches = JSON.parse(getTeamMatches);
 
-        var newData = [];
-        for (var i = 0; i < getTeamMatches.length; i++) {
-          var mn = getTeamMatches[i]["matchnumber"];
-          var mt = "-";
-          var matchStr = mn.toLowerCase();
+        let newData = [];
+        for (let i = 0; i < getTeamMatches.length; i++) {
+          let mn = getTeamMatches[i]["matchnumber"];
+          let mt = "-";
+          let matchStr = mn.toLowerCase();
 
           if (matchStr.search("p") != -1) { mt = "p"; }
           else if (matchStr.search("qm") != -1) { mt = "qm"; }
@@ -1111,8 +1113,8 @@ require 'inc/header.php';
 
   // Gets the matches and puts them into the html rows
   function sortMatchData() {
-    var table = document.getElementById("sortableAllMatches");
-    var rows = Array.prototype.slice.call(table.querySelectorAll("tbody> tr"));
+    let table = document.getElementById("sortableAllMatches");
+    let rows = Array.prototype.slice.call(table.querySelectorAll("tbody> tr"));
     rows.sort(function (rowA, rowB) {
       return (compareMatchNumbers(rowA.cells[0].textContent.trim(), rowB.cells[0].textContent.trim()));
     });
@@ -1124,8 +1126,8 @@ require 'inc/header.php';
 
   // Gets the strategic match info and puts them into the html rows
   function sortStrategicData() {
-    var table = document.getElementById("sortableStrategicData");
-    var rows = Array.prototype.slice.call(table.querySelectorAll("tbody> tr"));
+    let table = document.getElementById("sortableStrategicData");
+    let rows = Array.prototype.slice.call(table.querySelectorAll("tbody> tr"));
     rows.sort(function (rowA, rowB) {
       return (compareMatchNumbers(rowA.cells[0].textContent.trim(), rowB.cells[0].textContent.trim()));
     });
@@ -1140,7 +1142,7 @@ require 'inc/header.php';
     console.log("==> teamLookup: loadMatchTable()");
     $("#matchDataTable").html("");  // clear table
     for (let i = 0; i < dataObj.length; i++) {
-      var rowString = "<tr><td align=\"center\">" + dataObj[i]["matchnumber"] + "</td>" +
+      let rowString = "<tr><td align=\"center\">" + dataObj[i]["matchnumber"] + "</td>" +
         "<td align=\"center\">" + dataObj[i]["autonLeave"] + "</td>" +
 
         "<td align=\"center\">" + dataObj[i]["autonCoralL1"] + "</td>" +
@@ -1193,7 +1195,7 @@ require 'inc/header.php';
 
   // Converts a given "1" to yes, "0" to no, anything else to empty string.
   function convertToYesNo(value) {
-    var convertedVal = "";
+    let convertedVal = "";
     if (value == "1")
       convertedVal = "yes";
     else if (value == "0")
@@ -1220,9 +1222,9 @@ require 'inc/header.php';
   // Takes list of Team Pic paths and loads them.
   function loadTeamPics(teamPics) {
     console.log("==> teamLookup: loadTeamPics()");
-    var first = true;
+    let first = true;
     for (let uri of teamPics) {
-      var tags = "";
+      let tags = "";
       if (first) {
         tags += "<div class='carousel-item active'>";
       } else {
@@ -1238,7 +1240,7 @@ require 'inc/header.php';
   // Build the pit data table
   function loadMatchData(team, allEventMatches) {
     console.log("==> teamLookup: loadMatchData()");
-    var mdp = new matchDataProcessor(allEventMatches);
+    let mdp = new matchDataProcessor(allEventMatches);
     mdp.sortMatches(allEventMatches);
     mdp.getSiteFilteredAverages(function (averageData) {
       processedData = averageData[team];
@@ -1278,8 +1280,8 @@ require 'inc/header.php';
     console.log("==> teamLookup: dataToStrategicTable()");
     $("#strategicDataTable").html("");  // clear table
     for (let i = 0; i < dataObj.length; i++) {
-      var driverability = dataObj[i]["driverability"];
-      var driveVal = "";
+      let driverability = dataObj[i]["driverability"];
+      let driveVal = "";
       if (driverability == "1")
         driveVal = "Jerky";
       else if (driverability == "2")
@@ -1291,7 +1293,7 @@ require 'inc/header.php';
       else if (driverability == "5")
         driveVal = "-";
 
-      var rowString = "<tr><td align=\"center\">" + dataObj[i]["matchnumber"] + "</td>" +
+      let rowString = "<tr><td align=\"center\">" + dataObj[i]["matchnumber"] + "</td>" +
         "<td align=\"center\">" + driveVal + "</td>" +
         "<td align=\"center\">" + convertToYesNo(dataObj[i]["against_tactic1"]) + "</td>" +
         "<td align=\"center\">" + dataObj[i]["against_comment"] + "</td>" +
@@ -1358,7 +1360,7 @@ require 'inc/header.php';
       getTeamInfo: teamNum
     }).done(function (teamInfo) {
       console.log("=> getTeamInfo");
-      var teamname = "XX";
+      let teamname = "XX";
       if (teamInfo == null)
         alert("Can't load teamName from TBA; check if TBA Key was set in db_config");
       else {
@@ -1379,7 +1381,7 @@ require 'inc/header.php';
       getImagesForTeam: teamNum
     }).done(function (teamImages) {
       console.log("=> getImagesForTeam");
-      var jsonTeamImages = JSON.parse(teamImages);
+      let jsonTeamImages = JSON.parse(teamImages);
       console.log("==> PHOTOS: " + jsonTeamImages);
       loadTeamPics(jsonTeamImages);
     });
@@ -1424,13 +1426,13 @@ require 'inc/header.php';
       $("#navbarEventCode").html(eventCode);
     });
 
-    var initTeamNumber = checkURLForTeamSpec()
+    let initTeamNumber = checkURLForTeamSpec()
     if (initTeamNumber) {
       buildTeamLookupPage(initTeamNumber);
     }
 
     // Pressing enter in team number field loads the page
-    var input = document.getElementById("enterTeamNumber");
+    let input = document.getElementById("enterTeamNumber");
     input.addEventListener("keypress", function (event) {
       if (event.key === "Enter") {
         event.preventDefault();

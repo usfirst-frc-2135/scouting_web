@@ -7,7 +7,7 @@
 */
 
 // Test for an alphabetic character
-var isAlpha = function (ch) {
+let isAlpha = function (ch) {
   return /^[A-Z]$/i.test(ch);
 }
 

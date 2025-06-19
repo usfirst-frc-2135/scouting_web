@@ -538,19 +538,19 @@ require 'inc/header.php';
 
 <script>
 
-  var _allMatchData = null;
-  var bUsingCustom = false;
-  var localMatchList = null;
-  var localMatchNum = null;
-  var localCompLevel = null;
-  var customRedTeam1 = "-";
-  var customRedTeam2 = "-";
-  var customRedTeam3 = "-";
-  var customBlueTeam1 = "-";
-  var customBlueTeam2 = "-";
-  var customBlueTeam3 = "-";
-  // var jsonMatchData = null;
-  var _picDB = {};
+  let _allMatchData = null;
+  let bUsingCustom = false;
+  let localMatchList = null;
+  let localMatchNum = null;
+  let localCompLevel = null;
+  let customRedTeam1 = "-";
+  let customRedTeam2 = "-";
+  let customRedTeam3 = "-";
+  let customBlueTeam1 = "-";
+  let customBlueTeam2 = "-";
+  let customBlueTeam3 = "-";
+  // let jsonMatchData = null;
+  let _picDB = {};
   const _ourTeam = "frc2135";
 
   // Utility to strip off leading "frc" from team number
@@ -568,14 +568,14 @@ require 'inc/header.php';
   }
 
   function updateMatchTime(time) {
-    var date = new Date(time * 1000);
-    var hours = date.getHours();
-    var suff = "AM";
+    let date = new Date(time * 1000);
+    let hours = date.getHours();
+    let suff = "AM";
     if (hours > 12) {
       hours = hours - 12;
       suff = "PM"
     }
-    var minutes = "0" + date.getMinutes();
+    let minutes = "0" + date.getMinutes();
     $("#matchTime").html("Time: " + hours + ":" + minutes.substring(minutes.length - 2) + " " + suff);
   }
 
@@ -586,7 +586,7 @@ require 'inc/header.php';
       getTeamInfo: teamNum
     }).done(function (teamInfo) {
       console.log("=> getTeamInfo");
-      var teamname = "XX";
+      let teamname = "XX";
       if (teamInfo == null)
         alert("Can't load teamName from TBA; check if TBA Key was set in db_config");
       else {
@@ -603,9 +603,10 @@ require 'inc/header.php';
     });
 
     // Load team scouted information
-    var rd = _allMatchData[teamNum];
+    let rd = _allMatchData[teamNum];
+    let row;
     if (rd != null) {
-      var row = "<tr>";
+      row = "<tr>";
       row += "<td align=\"center\">" + rd["avgAutonCoralL1"] + "</td>";
       row += "<td align=\"center\">" + rd["avgAutonCoralL2"] + "</td>";
       row += "<td align=\"center\">" + rd["avgAutonCoralL3"] + "</td>";
@@ -635,16 +636,16 @@ require 'inc/header.php';
 
 
   function updateSummary(redList, blueList) {
-    var avgTotalCoral = { "red": 0, "blue": 0 };
-    var avgTotalAlgae = { "red": 0, "blue": 0 };
-    var avgAutoPoints = { "red": 0, "blue": 0 };
-    var avgTeleopPoints = { "red": 0, "blue": 0 };
-    var avgEndgamePoints = { "red": 0, "blue": 0 };
-    var totalPredictedPoints = { "red": 0, "blue": 0 };
+    let avgTotalCoral = { "red": 0, "blue": 0 };
+    let avgTotalAlgae = { "red": 0, "blue": 0 };
+    let avgAutoPoints = { "red": 0, "blue": 0 };
+    let avgTeleopPoints = { "red": 0, "blue": 0 };
+    let avgEndgamePoints = { "red": 0, "blue": 0 };
+    let totalPredictedPoints = { "red": 0, "blue": 0 };
 
     for (let i in redList) {
       teamNum = strTeamToIntTeam(redList[i]);
-      var rd = _allMatchData[teamNum];
+      let rd = _allMatchData[teamNum];
       if (rd != null) {
         avgTotalCoral["red"] += rd["avgTotalCoral"];
         avgTotalAlgae["red"] += rd["avgTotalAlgae"];
@@ -656,7 +657,7 @@ require 'inc/header.php';
     }
     for (let i in blueList) {
       teamNum = strTeamToIntTeam(blueList[i]);
-      var rd = _allMatchData[teamNum];
+      let rd = _allMatchData[teamNum];
       if (rd != null) {
         avgTotalCoral["blue"] += rd["avgTotalCoral"];
         avgTotalAlgae["blue"] += rd["avgTotalAlgae"];
@@ -700,9 +701,9 @@ require 'inc/header.php';
   // Takes list of Team Pic paths and loads them
   function buildRobotPhotoLinks(prefix, teamPics) {
     console.log("==> buildRobotPhotoLinks: build the entries in the photo carousels");
-    var first = true;
+    let first = true;
     for (let uri of teamPics) {
-      var tags = "";
+      let tags = "";
       if (first) {
         tags += "<div class='carousel-item active'>";
       } else {
@@ -718,16 +719,16 @@ require 'inc/header.php';
   // Build team photo image list
   function sendPhotoRequest(redList, blueList) {
     console.log("==> matchSheet: sendPhotoRequest()");
-    var requestList = [];
+    let requestList = [];
     for (let i in redList) {
-      var tn = strTeamToIntTeam(redList[i]);
+      let tn = strTeamToIntTeam(redList[i]);
       if (tn !== "") {
         _picDB[tn] = "R" + i;
         requestList.push(tn);
       }
     }
     for (let i in blueList) {
-      var tn = strTeamToIntTeam(blueList[i]);
+      let tn = strTeamToIntTeam(blueList[i]);
       if (tn !== "") {
         _picDB[tn] = "B" + i;
         requestList.push(tn);
@@ -738,8 +739,8 @@ require 'inc/header.php';
       getAllTeamImages: JSON.stringify(requestList)
     }).done(function (imageData) {
       console.log("=> getAllTeamImages");
-      var teamImages = JSON.parse(imageData);
-      for (var team of Object.keys(teamImages)) {
+      let teamImages = JSON.parse(imageData);
+      for (let team of Object.keys(teamImages)) {
         buildRobotPhotoLinks(_picDB[team], teamImages[team]);
       }
     });
@@ -748,7 +749,7 @@ require 'inc/header.php';
   // Build the list of HTML links to our matches at this event
   function createMatchHtmlLinks(matches) {
     console.log("==> matchSheet: createMatchHtmlLinks()");
-    var arrOurMatches = [];
+    let arrOurMatches = [];
     for (let key in matches) {
       arrOurMatches.push(matches[key]);
     }
@@ -758,7 +759,7 @@ require 'inc/header.php';
     });
 
     $("#ourMatches").html("");
-    var row = '';
+    let row = '';
     for (let i in arrOurMatches) {
       if (i != 0) {
         row += " ";
@@ -871,7 +872,7 @@ require 'inc/header.php';
       }).done(function (eventMatches) {
         console.log("=> getEventMatches");
         eventMatches = JSON.parse(eventMatches);
-        var mdp = new matchDataProcessor(eventMatches);
+        let mdp = new matchDataProcessor(eventMatches);
         mdp.getSiteFilteredAverages(function (averageData) {
           _allMatchData = averageData;
           successFunction();
@@ -894,12 +895,12 @@ require 'inc/header.php';
           if (eventMatches == null)
             alert("Can't load matchlist from TBA; check if TBA Key was set in db_config");
           else {
-            var ourMatches = {};
+            let ourMatches = {};
             jsonMatchData = JSON.parse(eventMatches)["response"];
             localMatchList = {};
             for (let mi in jsonMatchData) {
-              var newMatch = {};
-              var match = jsonMatchData[mi];
+              let newMatch = {};
+              let match = jsonMatchData[mi];
 
               newMatch["comp_level"] = match["comp_level"];
               newMatch["match_number"] = match["match_number"];
@@ -920,7 +921,7 @@ require 'inc/header.php';
 
               // Create list of matches for our team
               if (newMatch["red_teams"].includes(_ourTeam) || newMatch["blue_teams"].includes(_ourTeam)) {
-                var keyw = newMatch["comp_level"] + newMatch["match_number"];
+                let keyw = newMatch["comp_level"] + newMatch["match_number"];
                 ourMatches[keyw] = newMatch;
               }
             }
@@ -934,7 +935,7 @@ require 'inc/header.php';
     }
     else { // using custom
       localMatchList = {};
-      var newMatch = {};
+      let newMatch = {};
       newMatch["comp_level"] = "qm";
       newMatch["match_number"] = 1;
       newMatch["red_teams"] = [customRedTeam1, customRedTeam2, customRedTeam3];
@@ -1010,7 +1011,7 @@ require 'inc/header.php';
     });
 
     // Check URL for source match to load
-    var matchSpec = checkURLForMatchSpec();
+    let matchSpec = checkURLForMatchSpec();
     if (matchSpec) {
       console.log("==> matchsheet: building from URL spec!");
       loadEventMatchSheet(matchSpec[0], matchSpec[1]);
@@ -1027,8 +1028,8 @@ require 'inc/header.php';
     $("#loadCustomMatch").click(function () {
       console.log("=> matchsheet: load custom match!");
       bUsingCustom = true;
-      var redTeamNum1 = document.getElementById("enterRed1").value;
-      var blueTeamNum1 = document.getElementById("enterBlue1").value;
+      let redTeamNum1 = document.getElementById("enterRed1").value;
+      let blueTeamNum1 = document.getElementById("enterBlue1").value;
       console.log("==> Custom match sheet: " + redTeamNum1 + " " + blueTeamNum1);
       if (redTeamNum1.trim() == "" && blueTeamNum1.trim() == "") {
         console.warn("loadCustomMatch: No Red or Blue team 1 entered!");

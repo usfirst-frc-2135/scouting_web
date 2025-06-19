@@ -32,8 +32,8 @@ class matchDataProcessor {
   }
 
   matchLessEqualThan(startMatch, endMatch) {
-    var sm = this.getMatchTuple(startMatch);
-    var em = this.getMatchTuple(endMatch);
+    let sm = this.getMatchTuple(startMatch);
+    let em = this.getMatchTuple(endMatch);
 
     if (sm == null) {
       startMatch = "qm" + startMatch;
@@ -45,7 +45,7 @@ class matchDataProcessor {
       em = this.getMatchTuple(endMatch);
     }
 
-    var typeProg = { "p": 0, "qm": 1, "qf": 2, "sf": 3, "f": 4 };
+    let typeProg = { "p": 0, "qm": 1, "qf": 2, "sf": 3, "f": 4 };
     if (sm == null || em == null) {
       return false;
     }
@@ -64,9 +64,9 @@ class matchDataProcessor {
 
   filterMatches(startMatch, endMatch) {
     //  Modify this.data to only include matches between start match and end match
-    var newData = [];
-    for (var i = 0; i < this.data.length; i++) {
-      var midStr = this.data[i]["matchnumber"];
+    let newData = [];
+    for (let i = 0; i < this.data.length; i++) {
+      let midStr = this.data[i]["matchnumber"];
       if (this.getMatchTuple(midStr) == null) {
         midStr = "qm" + midStr;
       }
@@ -84,10 +84,10 @@ class matchDataProcessor {
   }
 
   removePracticeMatches() {
-    var newData = [];
-    for (var i = 0; i < this.data.length; i++) {
-      var midStr = this.data[i]["matchnumber"];
-      var mt = this.getMatchTuple(midStr);
+    let newData = [];
+    for (let i = 0; i < this.data.length; i++) {
+      let midStr = this.data[i]["matchnumber"];
+      let mt = this.getMatchTuple(midStr);
       if (mt == null || mt != "p") {
         newData.push(this.data[i]);
       }
@@ -97,7 +97,7 @@ class matchDataProcessor {
 
   sortMatches(newData) {
     newData.sort((a, b) => {
-      var compare = this.matchLessEqualThan(a["matchnumber"], b["matchnumber"]);
+      let compare = this.matchLessEqualThan(a["matchnumber"], b["matchnumber"]);
       if (compare) {
         return -1;
       }
@@ -111,7 +111,7 @@ class matchDataProcessor {
         getDBStatus: true
       }, function (dbStatus) {
         dbStatus = JSON.parse(dbStatus);
-        var localSiteFilter = {};
+        let localSiteFilter = {};
         localSiteFilter["useP"] = dbStatus["useP"];
         localSiteFilter["useQm"] = dbStatus["useQm"];
         localSiteFilter["useQf"] = dbStatus["useQf"];
@@ -128,10 +128,10 @@ class matchDataProcessor {
 
   applySiteFilter() {
     //  Modify this.data to only include matches specified by the site filter
-    var newData = [];
-    for (var i = 0; i < this.data.length; i++) {
-      var mn = this.data[i]["matchnumber"];
-      var mt = this.getMatchTuple(mn);
+    let newData = [];
+    for (let i = 0; i < this.data.length; i++) {
+      let mn = this.data[i]["matchnumber"];
+      let mt = this.getMatchTuple(mn);
       if (mt == null) {
         mt = ["qm", null];
       }
@@ -145,12 +145,12 @@ class matchDataProcessor {
   }
 
   getSiteFilteredAverages(successFunction) {
-    var tempThis = this;
+    let tempThis = this;
     $.post("api/dbAPI.php", {
       getDBStatus: true
     }, function (dbStatus) {
       dbStatus = JSON.parse(dbStatus);
-      var localSiteFilter = {};
+      let localSiteFilter = {};
       localSiteFilter["useP"] = dbStatus["useP"];
       localSiteFilter["useQm"] = dbStatus["useQm"];
       localSiteFilter["useQf"] = dbStatus["useQf"];
@@ -165,11 +165,11 @@ class matchDataProcessor {
   }
 
   getAverages() {
-    var pdata = {}; // to hold returning data for all matches and all teams
+    let pdata = {}; // to hold returning data for all matches and all teams
 
     // For each team, go thru all its matches and do the calculations for the averages data.
-    for (var i = 0; i < this.data.length; i++) {
-      var tn = this.data[i]["teamnumber"];
+    for (let i = 0; i < this.data.length; i++) {
+      let tn = this.data[i]["teamnumber"];
       console.log("===> doing MDP calculations for team (" + i + "): " + tn);  // TEST
 
       if (!(tn in pdata)) {
@@ -281,62 +281,62 @@ class matchDataProcessor {
       pdata[tn]["reefzoneIJpercent"] += this.data[i]["reefzoneIJ"];
       pdata[tn]["reefzoneKLpercent"] += this.data[i]["reefzoneKL"];
 
-      var autonLeave = (this.data[i]["autonLeave"]);
-      var autonLeavePoints = 0;
+      let autonLeave = (this.data[i]["autonLeave"]);
+      let autonLeavePoints = 0;
       if (parseInt(autonLeave) == 1)
         autonLeavePoints = 3;
       // HOLD      console.log(" --> auton Leave points = "+autonLeavePoints);  //TEST
 
-      var currentAutonCoralL1 = (this.data[i]["autonCoralL1"]);
+      let currentAutonCoralL1 = (this.data[i]["autonCoralL1"]);
       // HOLD      console.log(" --> auton coral L1 = "+currentAutonCoralL1);  //TEST
-      var currentAutonCoralL2 = (this.data[i]["autonCoralL2"]);
+      let currentAutonCoralL2 = (this.data[i]["autonCoralL2"]);
       // HOLD      console.log(" --> auton coral L2 = "+currentAutonCoralL2);  //TEST
-      var currentAutonCoralL3 = (this.data[i]["autonCoralL3"]);
+      let currentAutonCoralL3 = (this.data[i]["autonCoralL3"]);
       // HOLD      console.log(" --> auton coral L3 = "+currentAutonCoralL3);  //TEST
-      var currentAutonCoralL4 = (this.data[i]["autonCoralL4"]);
+      let currentAutonCoralL4 = (this.data[i]["autonCoralL4"]);
       // HOLD      console.log(" --> auton coral L4 = "+currentAutonCoralL4);  //TEST
-      var currentAutonAlgaeNet = (this.data[i]["autonAlgaeNet"]);
+      let currentAutonAlgaeNet = (this.data[i]["autonAlgaeNet"]);
       // HOLD      console.log(" --> auton algae net = "+currentAutonAlgaeNet);  //TEST
-      var currentAutonAlgaeProcessor = (this.data[i]["autonAlgaeProcessor"]);
+      let currentAutonAlgaeProcessor = (this.data[i]["autonAlgaeProcessor"]);
       // HOLD      console.log(" --> auton algae proc = "+currentAutonAlgaeProcessor);  //TEST
 
-      var totalAutoCoral = parseInt(currentAutonCoralL1) + parseInt(currentAutonCoralL2) + parseInt(currentAutonCoralL3) + parseInt(currentAutonCoralL4);
+      let totalAutoCoral = parseInt(currentAutonCoralL1) + parseInt(currentAutonCoralL2) + parseInt(currentAutonCoralL3) + parseInt(currentAutonCoralL4);
       // HOLD      console.log(" --> total auton coral = "+totalAutoCoral);  //TEST
 
-      var totalAutoCoralPoints = (parseInt(currentAutonCoralL1) * 3) + (parseInt(currentAutonCoralL2) * 4) + (parseInt(currentAutonCoralL3) * 6) + (parseInt(currentAutonCoralL4) * 7);
+      let totalAutoCoralPoints = (parseInt(currentAutonCoralL1) * 3) + (parseInt(currentAutonCoralL2) * 4) + (parseInt(currentAutonCoralL3) * 6) + (parseInt(currentAutonCoralL4) * 7);
       // HOLD      console.log(" --> total auton coral pts = "+totalAutoCoralPoints);  //TEST
 
-      var totalAutoAlgae = parseInt(currentAutonAlgaeNet) + parseInt(currentAutonAlgaeProcessor);
-      var totalAutoAlgaePoints = (parseInt(currentAutonAlgaeNet) * 4) + (parseInt(currentAutonAlgaeProcessor) * 6)
+      let totalAutoAlgae = parseInt(currentAutonAlgaeNet) + parseInt(currentAutonAlgaeProcessor);
+      let totalAutoAlgaePoints = (parseInt(currentAutonAlgaeNet) * 4) + (parseInt(currentAutonAlgaeProcessor) * 6)
       // HOLD      console.log(" --> total auton algae = "+totalAutoAlgae);  //TEST
       // HOLD      console.log(" --> total auton algae pts = "+totalAutoAlgaePoints);  //TEST
 
-      var currentTeleopCoralL1 = (this.data[i]["teleopCoralL1"]);
-      var currentTeleopCoralL2 = (this.data[i]["teleopCoralL2"]);
-      var currentTeleopCoralL3 = (this.data[i]["teleopCoralL3"]);
-      var currentTeleopCoralL4 = (this.data[i]["teleopCoralL4"]);
-      var currentTeleopAlgaeNet = (this.data[i]["teleopAlgaeNet"]);
-      var currentTeleopAlgaeProcessor = (this.data[i]["teleopAlgaeProcessor"]);
+      let currentTeleopCoralL1 = (this.data[i]["teleopCoralL1"]);
+      let currentTeleopCoralL2 = (this.data[i]["teleopCoralL2"]);
+      let currentTeleopCoralL3 = (this.data[i]["teleopCoralL3"]);
+      let currentTeleopCoralL4 = (this.data[i]["teleopCoralL4"]);
+      let currentTeleopAlgaeNet = (this.data[i]["teleopAlgaeNet"]);
+      let currentTeleopAlgaeProcessor = (this.data[i]["teleopAlgaeProcessor"]);
 
-      var totalTeleopCoral = (parseInt(currentTeleopCoralL1)) + (parseInt(currentTeleopCoralL2)) + (parseInt(currentTeleopCoralL3)) + (parseInt(currentTeleopCoralL4));
-      var totalTeleopCoralPoints = (parseInt(currentTeleopCoralL1) * 2) + (parseInt(currentTeleopCoralL2) * 3) + (parseInt(currentTeleopCoralL3) * 4) + (parseInt(currentTeleopCoralL4) * 5);
+      let totalTeleopCoral = (parseInt(currentTeleopCoralL1)) + (parseInt(currentTeleopCoralL2)) + (parseInt(currentTeleopCoralL3)) + (parseInt(currentTeleopCoralL4));
+      let totalTeleopCoralPoints = (parseInt(currentTeleopCoralL1) * 2) + (parseInt(currentTeleopCoralL2) * 3) + (parseInt(currentTeleopCoralL3) * 4) + (parseInt(currentTeleopCoralL4) * 5);
       // HOLD      console.log(" --> total teleop coral = "+totalTeleopCoral);  //TEST
       // HOLD      console.log(" --> total teleop coral pts = "+totalTeleopCoralPoints);  //TEST
 
-      var totalTeleopAlgae = (parseInt(currentTeleopAlgaeNet)) + (parseInt(currentTeleopAlgaeProcessor));
-      var totalTeleopAlgaePoints = (parseInt(currentTeleopAlgaeNet) * 4) + (parseInt(currentTeleopAlgaeProcessor) * 6);
+      let totalTeleopAlgae = (parseInt(currentTeleopAlgaeNet)) + (parseInt(currentTeleopAlgaeProcessor));
+      let totalTeleopAlgaePoints = (parseInt(currentTeleopAlgaeNet) * 4) + (parseInt(currentTeleopAlgaeProcessor) * 6);
       // HOLD      console.log(" --> total teleop algae = "+totalTeleopAlgae);  //TEST
       // HOLD      console.log(" --> total teleop algae pts = "+totalTeleopAlgaePoints);  //TEST
 
-      var currentTeleopCoralAcquired = (this.data[i]["acquiredCoral"]);
-      var currentTeleopAlgaeAcquired = (this.data[i]["acquiredAlgae"]);
+      let currentTeleopCoralAcquired = (this.data[i]["acquiredCoral"]);
+      let currentTeleopAlgaeAcquired = (this.data[i]["acquiredAlgae"]);
       pdata[tn]["totalTeleopCoral"] += parseInt(totalTeleopCoral);
       pdata[tn]["teleopAcquireCoral"] += parseInt(currentTeleopCoralAcquired);
       pdata[tn]["totalTeleopAlgae"] += parseInt(totalTeleopAlgae);
       pdata[tn]["teleopAcquireAlgae"] += parseInt(currentTeleopAlgaeAcquired);
 
-      var endgameClimbPoints = 0;
-      var climbLevel = (this.data[i]["cageClimb"]);
+      let endgameClimbPoints = 0;
+      let climbLevel = (this.data[i]["cageClimb"]);
       if (climbLevel == 1) {
         endgameClimbPoints = 2;
       }
@@ -351,13 +351,13 @@ class matchDataProcessor {
       }
       // HOLD      console.log(" --> endgame climb points = "+endgameClimbPoints);  //TEST
 
-      var totalCoral = totalAutoCoral + totalTeleopCoral;
-      var totalAlgae = totalAutoAlgae + totalTeleopAlgae;
-      var totalCoralPoints = totalAutoCoralPoints + totalTeleopCoralPoints;
-      var totalAlgaePoints = totalAutoAlgaePoints + totalTeleopAlgaePoints;
-      var totalAutoPoints = autonLeavePoints + totalAutoCoralPoints + totalAutoAlgaePoints;
-      var totalTeleopPoints = totalTeleopCoralPoints + totalTeleopAlgaePoints;
-      var totalPoints = totalAutoPoints + totalTeleopPoints + endgameClimbPoints;
+      let totalCoral = totalAutoCoral + totalTeleopCoral;
+      let totalAlgae = totalAutoAlgae + totalTeleopAlgae;
+      let totalCoralPoints = totalAutoCoralPoints + totalTeleopCoralPoints;
+      let totalAlgaePoints = totalAutoAlgaePoints + totalTeleopAlgaePoints;
+      let totalAutoPoints = autonLeavePoints + totalAutoCoralPoints + totalAutoAlgaePoints;
+      let totalTeleopPoints = totalTeleopCoralPoints + totalTeleopAlgaePoints;
+      let totalPoints = totalAutoPoints + totalTeleopPoints + endgameClimbPoints;
       // HOLD      console.log("    ==> totalCoralPoints = "+totalCoralPoints);  //TEST
       // HOLD      console.log("    ==> totalAlgaePoints = "+totalAlgaePoints);  //TEST
       // HOLD      console.log("    ==> totalAutoPoints = "+totalAutoPoints);  //TEST
@@ -399,19 +399,19 @@ class matchDataProcessor {
       pdata[tn]["avgEndgamePoints"] += endgameClimbPoints;
       pdata[tn]["maxEndgamePoints"] = Math.max(pdata[tn]["maxEndgamePoints"], endgameClimbPoints);
 
-      var currentAutonCoral = (parseInt(totalAutoCoral));
+      let currentAutonCoral = (parseInt(totalAutoCoral));
       pdata[tn]["avgAutonCoral"] += currentAutonCoral;
       pdata[tn]["maxAutonCoral"] = Math.max(pdata[tn]["maxAutonCoral"], currentAutonCoral);
 
-      var currentAutonAlgae = (parseInt(totalAutoAlgae));
+      let currentAutonAlgae = (parseInt(totalAutoAlgae));
       pdata[tn]["avgAutonAlgae"] += currentAutonAlgae;
       pdata[tn]["maxAutonAlgae"] = Math.max(pdata[tn]["maxAutonAlgae"], currentAutonAlgae);
 
-      var currentTeleopCoral = (parseInt(totalTeleopCoral));
+      let currentTeleopCoral = (parseInt(totalTeleopCoral));
       pdata[tn]["avgTeleopCoralScored"] += currentTeleopCoral;
       pdata[tn]["maxTeleopCoralScored"] = Math.max(pdata[tn]["maxTeleopCoralScored"], currentTeleopCoral);
 
-      var currentTeleopAlgae = (parseInt(totalTeleopAlgae));
+      let currentTeleopAlgae = (parseInt(totalTeleopAlgae));
       pdata[tn]["avgTeleopAlgaeScored"] += currentTeleopAlgae;
       pdata[tn]["maxTeleopAlgaeScored"] = Math.max(pdata[tn]["maxTeleopAlgaeScored"], currentTeleopAlgae);
 
@@ -457,23 +457,23 @@ class matchDataProcessor {
     }
 
     // Go thru each team in pdata and do the avg, max and percent calculations.
-    for (var key in pdata) {
+    for (let key in pdata) {
       console.log("===> doing MDP averages, max for team: " + key);  // TEST
       // HOLD      console.log(">>>> Calculations for team " + key);
       // Calculate the accuracy percentage before the actual AVG is calculated.
-      var totalCoralAcquired = (parseInt(pdata[key]["teleopAcquireCoral"]));
+      let totalCoralAcquired = (parseInt(pdata[key]["teleopAcquireCoral"]));
       // HOLD      console.log("  ---> total (teleop) coral acquired: " + totalCoralAcquired); //TEST
       // If there are no coral acq'd, don't bother doing the calculation here.
       if (totalCoralAcquired != 0) {
-        var teleopCoralPercent = (parseInt(pdata[key]["avgTeleopCoralScored"])) / totalCoralAcquired;
+        let teleopCoralPercent = (parseInt(pdata[key]["avgTeleopCoralScored"])) / totalCoralAcquired;
         pdata[key]["teleopCoralScoringPercent"] = Math.round(100 * teleopCoralPercent);
         // HOLD        console.log("   ---> Coral Scoring Percentage: " + pdata[key]["teleopCoralScoringPercent"]); //TEST
       }
-      var totalAlgaeAcquired = (parseInt(pdata[key]["teleopAcquireAlgae"]));
+      let totalAlgaeAcquired = (parseInt(pdata[key]["teleopAcquireAlgae"]));
       // HOLD      console.log("  ---> total (teleop) algae acquired: " + totalAlgaeAcquired); //TEST
       // If there are no algae acquired, don't bother doing the calculation here.
       if (totalAlgaeAcquired != 0) {
-        var teleopAlgaePercent = (parseInt(pdata[key]["avgTeleopAlgaeScored"])) / totalAlgaeAcquired;
+        let teleopAlgaePercent = (parseInt(pdata[key]["avgTeleopAlgaeScored"])) / totalAlgaeAcquired;
         pdata[key]["teleopAlgaeScoringPercent"] = Math.round(100 * teleopAlgaePercent);
         // HOLD        console.log("   ---> Algae Scoring Percentage: " + pdata[key]["teleopAlgaeScoringPercent"]); //TEST
       }
