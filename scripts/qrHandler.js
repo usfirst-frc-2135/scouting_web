@@ -28,7 +28,7 @@ function validateQrList(dataList) {
   console.log("   ===> validateQrList(): returning true! ");
   return true;
 }
-// update this data list length whenever new data is added to the table
+// update this data list length whenever more data is added to the table
 function padList(dataList) {
   if (dataList.length == 40) {
     dataList.push("");
@@ -181,7 +181,7 @@ function alertSuccessfulScan() {
 function createCameraSelect(reader) {
   reader.getVideoInputDevices().then((videoInputDevices) => {
 
-    // Creates drop down menu to switch between cameras
+    // Creates drop down menu to change between cameras
     let initialId = null;
     if (videoInputDevices.length >= 1) {
       videoInputDevices.forEach((element) => {
@@ -195,7 +195,7 @@ function createCameraSelect(reader) {
     // Creates default camera scanner based on saved data
     scanCamera(reader, getDefaultDeviceID(initialId));
 
-    // Binds drop down on change to select new camera when necessary
+    // Binds drop down on change to select another camera when necessary
     $("#cameraSelect").change(function () {
       let selCamID = $("#cameraSelect").val();
       scanCamera(reader, selCamID);
@@ -224,7 +224,7 @@ function submitFunction() {
       writeTeamMatch: JSON.stringify(indexedData)
     }, function (response) {
       console.log("=> writeTeamMatch: " + JSON.stringify(response));
-      // Because success word may have a new-line at the end, don't do a direct compare
+      // Because success word may have a newline at the end, don't do a direct compare
       if (response.indexOf('success') > -1) {
         alert("Data Successfully Submitted! Clearing Data.");
         clearData();

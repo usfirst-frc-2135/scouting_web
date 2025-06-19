@@ -446,7 +446,7 @@ class matchDataProcessor {
 
       pdata[tn]["maxTeleopAlgaeNet"] = Math.max(pdata[tn]["maxTeleopAlgaeNet"], currentTeleopAlgaeNet);
       pdata[tn]["maxTeleopAlgaeProc"] = Math.max(pdata[tn]["maxTeleopAlgaeProc"], currentTeleopAlgaeProcessor);
-      // For boolean data, we are just incrementing that data instead of adding the new value here.
+      // For boolean data, we are just incrementing that data instead of adding the value here.
       pdata[tn]["endgameClimbPercent"][this.data[i]["cageClimb"]] += 1;
       // HOLD pdata[tn]["endgameStartClimbPercent"][this.data[i]["endgameStartClimbing"]] += 1;
 

@@ -509,7 +509,7 @@ require 'inc/header.php';
     $.post("api/dbWriteAPI.php", {
       writeSingleData: JSON.stringify(formData)
     }, function (returnCode) {
-      // Because success word may have a new-line at the end, don't do a direct compare
+      // Because success word may have a newline at the end, don't do a direct compare
       if (returnCode.indexOf('success') > -1) {
         alert("Data Successfully Submitted! Clearing Data.");
         clearFormData();

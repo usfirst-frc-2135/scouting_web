@@ -264,9 +264,9 @@ require 'inc/header.php';
   // Add a team (key) to the final team list
   function addKeysToTable(dataObj) {
     console.log("==> eventAverages: addKeysToTable()");
-    let keyList = new Set();
+    let keyList = [];
     for (let teamNum in dataObj) {
-      keyList.add(teamNum);
+      keyList.push(teamNum);
     }
     return keyList;
   }
@@ -529,12 +529,8 @@ require 'inc/header.php';
         let filteredData = {
           ...averageData
         };
-        addKeysToTable(filteredData);
-        let keyList = new Set();
-        for (let teamNum in filteredData) {
-          keyList.add(teamNum);
-        }
-        addAveragesToTable(keyList, filteredData);
+        let teamList = addKeysToTable(filteredData);
+        addAveragesToTable(teamList, filteredData);
         setTimeout(function () {
           // script instructions say this is needed, but it breaks table header sorting
           // sorttable.makeSortable(document.getElementById("averageTable"))

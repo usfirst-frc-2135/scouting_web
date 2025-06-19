@@ -156,7 +156,7 @@ require 'inc/header.php';
             }).done(function (teamImages) {
               console.log("=> getImagesForTeam\n" + teamImages);
 
-              // Now upload the new image
+              // Now upload the selected image
               let uploadPost = new FormData();
               uploadPost.append("teamPic", $("#robotPic")[0].files[0]);
               uploadPost.append("teamNum", $("#teamNumber").val());

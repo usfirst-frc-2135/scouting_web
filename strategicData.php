@@ -147,12 +147,12 @@ require 'inc/header.php';
     for (let i = 0; i < dataObj.length; i++) {
       let driveVal = "";
       switch (dataObj[i]["driverability"]) {
-        case 1: driveVal = "Jerky";
-        case 2: driveVal = "Slow";
-        case 3: driveVal = "Average";
-        case 4: driveVal = "Quick";
+        case 1: driveVal = "Jerky"; break;
+        case 2: driveVal = "Slow"; break;
+        case 3: driveVal = "Average"; break;
+        case 4: driveVal = "Quick"; break;
         default:
-        case 5: driveVal = "-";
+        case 5: driveVal = "-"; break;
       }
 
       let teamNum = dataObj[i]["teamnumber"];

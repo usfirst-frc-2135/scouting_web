@@ -563,10 +563,12 @@ require 'inc/header.php';
     return Math.round((val + Number.EPSILON) * 100) / 100;
   }
 
+  // Create a match key in the form QM_1
   function makeKey(compLevel, matchNumber) {
     return compLevel.toUpperCase() + "_" + String(matchNumber).toUpperCase();
   }
 
+  // Update time from system time in msec
   function updateMatchTime(time) {
     let date = new Date(time * 1000);
     let hours = date.getHours();
@@ -579,6 +581,7 @@ require 'inc/header.php';
     $("#matchTime").html("Time: " + hours + ":" + minutes.substring(minutes.length - 2) + " " + suff);
   }
 
+  // Load the info into the team box
   function buildTeamBox(color, index, teamNum) {
     console.log("==> buildTeamBox: build the team box in the match sheet");
     // Get team name from TBA
@@ -630,10 +633,6 @@ require 'inc/header.php';
     }
     $("#" + color + index + "DataTable").append(row);
   }
-
-
-
-
 
   function updateSummary(redList, blueList) {
     let avgTotalCoral = { "red": 0, "blue": 0 };

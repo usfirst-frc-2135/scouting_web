@@ -1376,7 +1376,7 @@ require 'inc/header.php';
       }
     });
 
-    // Add new images
+    // Add images for the team
     $.get("api/dbReadAPI.php", {
       getImagesForTeam: teamNum
     }).done(function (teamImages) {

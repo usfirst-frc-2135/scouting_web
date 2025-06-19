@@ -458,7 +458,7 @@ require 'inc/header.php';
       writeStrategicData: JSON.stringify(dataToUse)
     }).done(function (returnCode) {
       console.log("=> writeStrategicData");
-      // Because success word may have a new-line at the end, don't do a direct compare
+      // Because success word may have a newline at the end, don't do a direct compare
       if (returnCode.indexOf('success') > -1) {
         alert("Success in submitting Strategic Form data!");
         clearStrategicForm();
