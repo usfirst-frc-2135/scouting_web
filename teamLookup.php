@@ -395,7 +395,7 @@ require 'inc/header.php';
           </div>
           <!-- Pit Scouting 1st row -->
           <div id="collapsePitData" class="card-body collapse">
-            <table class="table table-striped table-sm table-bordered border-dark">
+            <table class="table table-striped table-sm table-bordered border-dark text-center">
               <thead>
                 <colgroup>
                   <col span="1" style="background-color:transparent">
@@ -416,7 +416,7 @@ require 'inc/header.php';
             </table>
 
             <!-- Pit Scouting 2nd row -->
-            <table class="table table-striped table-sm table-bordered border-dark">
+            <table class="table table-striped table-sm table-bordered border-dark text-center">
               <thead>
                 <colgroup>
                   <col span="1" style="background-color:transparent">
@@ -991,12 +991,8 @@ require 'inc/header.php';
     let row = "<tr>";
     row += "<th  style='text-align:left'>" + dict[keys[0]] + "</th>";
     for (let i = 1; i < length; i++) {
-      if (i < keys.length)
-        row += "<td>" + dict[keys[i]] + "</td>";
-      else
-        row += "<td></td>"
+      row += (i < keys.length) ? "<td>" + dict[keys[i]] + "</td>" : "<td></td>";
     }
-    row += "</th>";
     row += "</tr>";
     $("#" + tbodyID).append(row);
   }
@@ -1255,6 +1251,16 @@ require 'inc/header.php';
     });
   }
 
+  // Create an html table row with tr and td cells
+  function writePitTableRow(tbodyID, dict, keys, length) {
+    let row = "<tr>";
+    for (let i = 0; i < length; i++) {
+      row += (i < keys.length) ? "<td>" + dict[keys[i]] + "</td>" : "<td></td>";
+    }
+    row += "</tr>";
+    $("#" + tbodyID).append(row);
+  }
+
   // Build the pit data table
   function loadPitData(pitData) {
     console.log("==> teamLookup: loadPitData()");
@@ -1272,8 +1278,8 @@ require 'inc/header.php';
       pitData["numbatteries"];
     }
 
-    writeTableRow("pitRow1", pitData, ["swervedrivestring", "drivemotors", "sparepartsstring", "proglanguage"], 4);
-    writeTableRow("pitRow2", pitData, ["computervisionstring", "pitorg", "preparedness", "numbatteries"], 4);
+    writePitTableRow("pitRow1", pitData, ["swervedrivestring", "drivemotors", "sparepartsstring", "proglanguage"], 4);
+    writePitTableRow("pitRow2", pitData, ["computervisionstring", "pitorg", "preparedness", "numbatteries"], 4);
   }
 
   function loadStrategicData(dataObj) {
