@@ -645,7 +645,7 @@ require 'inc/header.php';
       options: {
         scales: {
           x: { stacked: true },
-          y: { stacked: true }
+          y: { stacked: true, min: 0, ticks: { precision: 0 }, max: 5 }
         },
         plugins: {
           tooltip: {
@@ -827,7 +827,7 @@ require 'inc/header.php';
       options: {
         scales: {
           x: { stacked: true },
-          y: { stacked: true }
+          y: { stacked: true, min: 0, ticks: { precision: 0 }, max: 12 }
         },
         plugins: {
           tooltip: {
@@ -957,7 +957,7 @@ require 'inc/header.php';
       options: {
         scales: {
           x: { stacked: true },
-          y: { stacked: true }
+          y: { stacked: true, min: 0, ticks: { precision: 0 }, max: 4 }
         },
         plugins: {
           tooltip: {
