@@ -512,6 +512,7 @@ require 'inc/header.php';
 <!-- Javascript page handlers -->
 
 <script>
+
   let autoChartDefined = false;
   let autoChart;
 

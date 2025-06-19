@@ -44,6 +44,7 @@ require 'inc/header.php';
 <!-- Javascript page handlers -->
 
 <script>
+
   // let _frozenTable = null;
 
   const teamColumn = 0;
@@ -65,6 +66,15 @@ require 'inc/header.php';
     });
   }
 
+  // Add data keys (fields) to COPR table in html
+  function addKeysToCoprTable(keys) {
+    let header = '<th scope="col">Team</th>';
+    for (let i = 0; i < keys.length; i++) {
+      header += '<th scope="col">' + keys[i][1] + '</th>'
+    }
+    $("#tableKeys").html(header);
+  }
+
   // Add team data to COPR table in html
   function addDataToCoprTable(coprData, keys) {
     $("#tableData").html("");
@@ -77,15 +87,6 @@ require 'inc/header.php';
       row += '</tr>';
       $("#tableData").append(row);
     }
-  }
-
-  // Add data keys (fields) to COPR table in html
-  function addKeysToCoprTable(keys) {
-    let header = '<th scope="col">Team</th>';
-    for (let i = 0; i < keys.length; i++) {
-      header += '<th scope="col">' + keys[i][1] + '</th>'
-    }
-    $("#tableKeys").html(header);
   }
 
   // This table controls the order and header names for the COPR table
@@ -110,8 +111,8 @@ require 'inc/header.php';
     ];
 
   // Add data keys (fields) to COPR table in html
-  function buildCoprTable(coprData) {
-    console.log("==> eventCoprData.php: buildCoprTable()");
+  function loadCoprTable(coprData) {
+    console.log("==> eventCoprData.php: loadCoprTable()");
     let jsonCoprData = JSON.parse(coprData);
     let keys = jsonCoprData["keys"];
     let data = jsonCoprData["data"];
@@ -126,31 +127,31 @@ require 'inc/header.php';
   }
 
   // Retrive OPRs from TBA and build the COPR table to display
-  function getTbaAndBuildCoprTable() {
+  function buildTbaCoprTable() {
     //output: gets the COPR data from TBA
     $.get("api/tbaAPI.php", {
       getCOPRs: 1
     }).done(function (coprs) {
       console.log("=> getCOPRs");
-      buildCoprTable(coprs);
+      loadCoprTable(coprs);
       setTimeout(function () {
         // script instructions say this is needed, but it breaks table header sorting
-        sorttable.makeSortable(document.getElementById("coprTable"));
-        _frozenTable = $('#freeze-table').freezeTable({
-          'freezeHead': true,
-          'freezeColumn': true,
-          'freezeColumnHead': true,
-          'scrollBar': true,
-          'fixedNavbar': '.navbar',
-          'scrollable': true,
-          'fastMode': true,
-          // 'container': '#navbar',
-          'columnNum': 1,
-          'columnKeep': true,
-          'columnBorderWidth': 2,
-          'backgroundColor': 'blue',
-          'frozenColVerticalOffset': 0
-        });
+        // sorttable.makeSortable(document.getElementById("coprTable"));
+        // _frozenTable = $('#freeze-table').freezeTable({
+        //   'freezeHead': true,
+        //   'freezeColumn': true,
+        //   'freezeColumnHead': true,
+        //   'scrollBar': true,
+        //   'fixedNavbar': '.navbar',
+        //   'scrollable': true,
+        //   'fastMode': true,
+        //   // 'container': '#navbar',
+        //   'columnNum': 1,
+        //   'columnKeep': true,
+        //   'columnBorderWidth': 2,
+        //   'backgroundColor': 'blue',
+        //   'frozenColVerticalOffset': 0
+        // });
       }, 500);
       sortCoprTable("coprTable", teamColumn);
     });
@@ -168,10 +169,10 @@ require 'inc/header.php';
       $("#navbarEventCode").html(eventCode);
     });
 
-    getTbaAndBuildCoprTable();
+    buildTbaCoprTable();
 
     $("#reloadEvent").click(function () {
-      getTbaAndBuildCoprTable();
+      buildTbaCoprTable();
     });
 
     // Keep the frozen pane updated 

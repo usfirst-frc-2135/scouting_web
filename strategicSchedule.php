@@ -59,6 +59,7 @@ require 'inc/header.php';
 <!-- Javascript page handlers -->
 
 <script>
+
   function loadStrategicSchedule(dataObj) {
     console.log("==> strategicSchedule: loadStrategicSchedule()");
     $("#tableData").html(""); // Clear table

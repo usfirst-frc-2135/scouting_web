@@ -50,6 +50,7 @@ require 'inc/header.php';
 <!-- Javascript page handlers -->
 
 <script>
+
   // Update the navbar with the event code
   $(document).ready(function () {
     $.get("api/tbaAPI.php", {
@@ -59,6 +60,7 @@ require 'inc/header.php';
       $("#navbarEventCode").html(eventCode);
     });
   });
+
 </script>
 
 <script src="./scripts/qrHandler.js"></script>

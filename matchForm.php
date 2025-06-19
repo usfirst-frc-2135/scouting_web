@@ -286,148 +286,138 @@ require 'inc/header.php';
 <!-- Javascript page handlers -->
 
 <script>
-  let autoConesBottom = 0;
-  let autoConesMiddle = 0;
-  let autoConesTop = 0;
-  let autoCubesBottom = 0;
-  let autoCubesMiddle = 0;
-  let autoCubesTop = 0;
-  let teleopConesBottom = 0;
-  let teleopConesMiddle = 0;
-  let teleopConesTop = 0;
-  let teleopCubesBottom = 0;
-  let teleopCubesMiddle = 0;
-  let teleopCubesTop = 0;
 
-  function attachFormButtons() {
+  // Create button event linkages
+  function attachFormButtons(auto, teleop) {
     console.log("=> matchForm: attachFormButtons()");
     // Auto cones
     $("#autoConesBottomPlus").click(function () {
-      autoConesBottom += 1;
-      $("#autoConesBottom").html("Auto Cones Bottom: " + autoConesBottom);
+      auto.cones.bottom += 1;
+      $("#autoConesBottom").html("Auto Cones Bottom: " + auto.cones.bottom);
     });
 
     $("#autoConesBottomMinus").click(function () {
-      autoConesBottom = Math.max(autoConesBottom - 1, 0);
-      $("#autoConesBottom").html("Auto Cones Bottom: " + autoConesBottom);
+      auto.cones.bottom = Math.max(auto.cones.bottom - 1, 0);
+      $("#autoConesBottom").html("Auto Cones Bottom: " + auto.cones.bottom);
     });
 
     $("#autoConesMiddlePlus").click(function () {
-      autoConesMiddle += 1;
-      $("#autoConesMiddle").html("Auto Cones Middle: " + autoConesMiddle);
+      auto.cones.middle += 1;
+      $("#autoConesMiddle").html("Auto Cones Middle: " + auto.cones.middle);
     });
 
     $("#autoConesMiddleMinus").click(function () {
-      autoConesMiddle = Math.max(autoConesMiddle - 1, 0);
-      $("#autoConesMiddle").html("Auto Cones Middle: " + autoConesMiddle);
+      auto.cones.middle = Math.max(auto.cones.middle - 1, 0);
+      $("#autoConesMiddle").html("Auto Cones Middle: " + auto.cones.middle);
     });
 
     $("#autoConesTopPlus").click(function () {
-      autoConesTop += 1;
-      $("#autoConesTop").html("Auto Cones Top: " + autoConesTop);
+      auto.cones.top += 1;
+      $("#autoConesTop").html("Auto Cones Top: " + auto.cones.top);
     });
 
     $("#autoConesTopMinus").click(function () {
-      autoConesTop = Math.max(autoConesTop - 1, 0);
-      $("#autoConesTop").html("Auto Cones Top: " + autoConesTop);
+      auto.cones.top = Math.max(auto.cones.top - 1, 0);
+      $("#autoConesTop").html("Auto Cones Top: " + auto.cones.top);
     });
 
     // Auto cubes
     $("#autoCubesBottomPlus").click(function () {
-      autoCubesBottom += 1;
-      $("#autoCubesBottom").html("Auto Cubes Bottom: " + autoCubesBottom);
+      auto.cubes.bottom += 1;
+      $("#autoCubesBottom").html("Auto Cubes Bottom: " + auto.cubes.bottom);
     });
 
     $("#autoCubesBottomMinus").click(function () {
-      autoCubesBottom = Math.max(autoCubesBottom - 1, 0);
-      $("#autoCubesBottom").html("Auto Cubes Bottom: " + autoCubesBottom);
+      auto.cubes.bottom = Math.max(auto.cubes.bottom - 1, 0);
+      $("#autoCubesBottom").html("Auto Cubes Bottom: " + auto.cubes.bottom);
     });
 
     $("#autoCubesMiddlePlus").click(function () {
-      autoCubesMiddle += 1;
-      $("#autoCubesMiddle").html("Auto Cubes Middle: " + autoCubesMiddle);
+      auto.cubes.middle += 1;
+      $("#autoCubesMiddle").html("Auto Cubes Middle: " + auto.cubes.middle);
     });
 
     $("#autoCubesMiddleMinus").click(function () {
-      autoCubesMiddle = Math.max(autoCubesMiddle - 1, 0);
-      $("#autoCubesMiddle").html("Auto Cubes Middle: " + autoCubesMiddle);
+      auto.cubes.middle = Math.max(auto.cubes.middle - 1, 0);
+      $("#autoCubesMiddle").html("Auto Cubes Middle: " + auto.cubes.middle);
     });
 
     $("#autoCubesTopPlus").click(function () {
-      autoCubesTop += 1;
-      $("#autoCubesTop").html("Auto Cubes Top: " + autoCubesTop);
+      auto.cubes.top += 1;
+      $("#autoCubesTop").html("Auto Cubes Top: " + auto.cubes.top);
     });
 
     $("#autoCubesTopMinus").click(function () {
-      autoCubesTop = Math.max(autoCubesTop - 1, 0);
-      $("#autoCubesTop").html("Auto Cubes Top: " + autoCubesTop);
+      auto.cubes.top = Math.max(auto.cubes.top - 1, 0);
+      $("#autoCubesTop").html("Auto Cubes Top: " + auto.cubes.top);
     });
 
     // Teleop cones
     $("#teleopConesBottomPlus").click(function () {
-      teleopConesBottom += 1;
-      $("#teleopConesBottom").html("Teleop Cones Bottom: " + teleopConesBottom);
+      teleop.cones.bottom += 1;
+      $("#teleopConesBottom").html("Teleop Cones Bottom: " + teleop.cones.bottom);
     });
 
     $("#teleopConesBottomMinus").click(function () {
-      teleopConesBottom = Math.max(teleopConesBottom - 1, 0);
-      $("#teleopConesBottom").html("Teleop Cones Bottom: " + teleopConesBottom);
+      teleop.cones.bottom = Math.max(teleop.cones.bottom - 1, 0);
+      $("#teleopConesBottom").html("Teleop Cones Bottom: " + teleop.cones.bottom);
     });
 
     $("#teleopConesMiddlePlus").click(function () {
-      teleopConesMiddle += 1;
-      $("#teleopConesMiddle").html("Teleop Cones Middle: " + teleopConesMiddle);
+      teleop.cones.middle += 1;
+      $("#teleopConesMiddle").html("Teleop Cones Middle: " + teleop.cones.middle);
     });
 
     $("#teleopConesMiddleMinus").click(function () {
-      teleopConesMiddle = Math.max(teleopConesMiddle - 1, 0);
-      $("#teleopConesMiddle").html("Teleop Cones Middle: " + teleopConesMiddle);
+      teleop.cones.middle = Math.max(teleop.cones.middle - 1, 0);
+      $("#teleopConesMiddle").html("Teleop Cones Middle: " + teleop.cones.middle);
     });
 
     $("#teleopConesTopPlus").click(function () {
-      teleopConesTop += 1;
-      $("#teleopConesTop").html("Teleop Cones Top: " + teleopConesTop);
+      teleop.cones.top += 1;
+      $("#teleopConesTop").html("Teleop Cones Top: " + teleop.cones.top);
     });
 
     $("#teleopConesTopMinus").click(function () {
-      teleopConesTop = Math.max(teleopConesTop - 1, 0);
-      $("#teleopConesTop").html("Teleop Cones Top: " + teleopConesTop);
+      teleop.cones.top = Math.max(teleop.cones.top - 1, 0);
+      $("#teleopConesTop").html("Teleop Cones Top: " + teleop.cones.top);
     });
 
     // Teleop cubes
     $("#teleopCubesBottomPlus").click(function () {
-      teleopCubesBottom += 1;
-      $("#teleopCubesBottom").html("Teleop Cubes Bottom: " + teleopCubesBottom);
+      teleop.cubes.bottom += 1;
+      $("#teleopCubesBottom").html("Teleop Cubes Bottom: " + teleop.cubes.bottom);
     });
 
     $("#teleopCubesBottomMinus").click(function () {
-      teleopCubesBottom = Math.max(teleopCubesBottom - 1, 0);
-      $("#teleopCubesBottom").html("Teleop Cubes Bottom: " + teleopCubesBottom);
+      teleop.cubes.bottom = Math.max(teleop.cubes.bottom - 1, 0);
+      $("#teleopCubesBottom").html("Teleop Cubes Bottom: " + teleop.cubes.bottom);
     });
 
     $("#teleopCubesMiddlePlus").click(function () {
-      teleopCubesMiddle += 1;
-      $("#teleopCubesMiddle").html("Teleop Cubes Middle: " + teleopCubesMiddle);
+      teleop.cubes.middle += 1;
+      $("#teleopCubesMiddle").html("Teleop Cubes Middle: " + teleop.cubes.middle);
     });
 
     $("#teleopCubesMiddleMinus").click(function () {
-      teleopCubesMiddle = Math.max(teleopCubesMiddle - 1, 0);
-      $("#teleopCubesMiddle").html("Teleop Cubes Middle: " + teleopCubesMiddle);
+      teleop.cubes.middle = Math.max(teleop.cubes.middle - 1, 0);
+      $("#teleopCubesMiddle").html("Teleop Cubes Middle: " + teleop.cubes.middle);
     });
 
     $("#teleopCubesTopPlus").click(function () {
-      teleopCubesTop += 1;
-      $("#teleopCubesTop").html("Teleop Cubes Top: " + teleopCubesTop);
+      teleop.cubes.top += 1;
+      $("#teleopCubesTop").html("Teleop Cubes Top: " + teleop.cubes.top);
     });
 
     $("#teleopCubesTopMinus").click(function () {
-      teleopCubesTop = Math.max(teleopCubesTop - 1, 0);
-      $("#teleopCubesTop").html("Teleop Cubes Top: " + teleopCubesTop);
+      teleop.cubes.top = Math.max(teleop.cubes.top - 1, 0);
+      $("#teleopCubesTop").html("Teleop Cubes Top: " + teleop.cubes.top);
     });
 
   }
 
-  function getFormData() {
+  // Retrieve the form data and prepare for submission
+  function getFormData(auto, teleop) {
     console.log("==> matchForm: getFormData()");
     let out = {};
     let matchLevel = $("#compLevel").val();
@@ -447,21 +437,20 @@ require 'inc/header.php';
     }
     out["matchnumber"] = matchLevel + matchNumber;
     out["teamnumber"] = teamNumber;
-    // out["startpos"] = $("#autoStartPosition").val();
     out["mobility"] = $("#exitCommunity").is(':checked') ? 1 : 0;
-    out["autonconesbottom"] = autoConesBottom;
-    out["autonconesmiddle"] = autoConesMiddle;
-    out["autonconestop"] = autoConesTop;
-    out["autoncubesbottom"] = autoCubesBottom;
-    out["autoncubesmiddle"] = autoCubesMiddle;
-    out["autoncubestop"] = autoCubesTop;
+    out["autonconesbottom"] = auto.cones.bottom;
+    out["autonconesmiddle"] = auto.cones.middle;
+    out["autonconestop"] = auto.cones.top;
+    out["autoncubesbottom"] = auto.cubes.bottom;
+    out["autoncubesmiddle"] = auto.cubes.middle;
+    out["autoncubestop"] = auto.cubes.bottom;
     out["autochargestation"] = $("#autochargestation").val();
-    out["teleopconesbottom"] = teleopConesBottom;
-    out["teleopconesmiddle"] = teleopConesMiddle;
-    out["teleopconestop"] = teleopConesTop;
-    out["teleopcubesbottom"] = teleopCubesBottom;
-    out["teleopcubesmiddle"] = teleopCubesMiddle;
-    out["teleopcubestop"] = teleopCubesTop;
+    out["teleopconesbottom"] = teleop.cones.bottom;
+    out["teleopconesmiddle"] = teleop.cones.middle;
+    out["teleopconestop"] = teleop.cones.top;
+    out["teleopcubesbottom"] = teleop.cubes.bottom;
+    out["teleopcubesmiddle"] = teleop.cubes.middle;
+    out["teleopcubestop"] = teleop.cubes.top;
     out["cubepickup"] = $("#pickedupCube").is(':checked') ? 1 : 0;
     out["uprightconepickup"] = $("#pickedupUprightCone").is(':checked') ? 1 : 0;
     out["tippedconepickup"] = $("#pickedupTippedCone").is(':checked') ? 1 : 0;
@@ -472,45 +461,47 @@ require 'inc/header.php';
     return out;
   }
 
+  // Clear all form fields
   function clearFormData() {
     console.log("==> matchForm: clearFormData()");
     $("#matchNumber").val("");
     //$("#startpos").val("0");
-    autoConesBottom = 0;
-    autoConesMiddle = 0;
-    autoConesTop = 0;
-    autoCubesBottom = 0;
-    autoCubesMiddle = 0;
-    autoCubesTop = 0;
-    teleopConesBottom = 0;
-    teleopConesMiddle = 0;
-    teleopConesTop = 0;
-    teleopCubesBottom = 0;
-    teleopCubesMiddle = 0;
-    teleopCubesTop = 0;
-    $("#autoConesBottom").html("Auto Cones Bottom: " + autoConesBottom);
-    $("#autoConesMiddle").html("Auto Cones Middle: " + autoConesMiddle);
-    $("#autoConesTop").html("Auto Cones Top: " + autoConesTop);
-    $("#autoCubesBottom").html("Auto Cubes Bottom: " + autoCubesBottom);
-    $("#autoCubesMiddle").html("Auto Cubes Middle: " + autoCubesMiddle);
-    $("#autoCubesTop").html("Auto Cubes Top: " + autoCubesTop);
-    $("#teleopConesBottom").html("Teleop Cones Bottom: " + teleopConesBottom);
-    $("#teleopConesMiddle").html("Teleop Cones Middle: " + teleopConesMiddle);
-    $("#teleopConesTop").html("Teleop Cones Top: " + teleopConesTop);
-    $("#teleopCubesBottom").html("Teleop Cubes Bottom: " + teleopCubesBottom);
-    $("#teleopCubesMiddle").html("Teleop Cubes Middle: " + teleopCubesMiddle);
-    $("#teleopCubesTop").html("Teleop Cubes Top: " + teleopCubesTop);
+    auto.cones.bottom = 0;
+    auto.cones.middle = 0;
+    auto.cones.top = 0;
+    auto.cubes.bottom = 0;
+    auto.cubes.middle = 0;
+    auto.cubes.top = 0;
+    teleop.cones.bottom = 0;
+    teleop.cones.middle = 0;
+    teleop.cones.top = 0;
+    teleop.cubes.bottom = 0;
+    teleop.cubes.middle = 0;
+    teleop.cubes.top = 0;
+    $("#autoConesBottom").html("Auto Cones Bottom: " + auto.cones.bottom);
+    $("#autoConesMiddle").html("Auto Cones Middle: " + auto.cones.middle);
+    $("#autoConesTop").html("Auto Cones Top: " + auto.cones.top);
+    $("#autoCubesBottom").html("Auto Cubes Bottom: " + auto.cubes.bottom);
+    $("#autoCubesMiddle").html("Auto Cubes Middle: " + auto.cubes.middle);
+    $("#autoCubesTop").html("Auto Cubes Top: " + auto.cubes.top);
+    $("#teleopConesBottom").html("Teleop Cones Bottom: " + teleop.cones.bottom);
+    $("#teleopConesMiddle").html("Teleop Cones Middle: " + teleop.cones.middle);
+    $("#teleopConesTop").html("Teleop Cones Top: " + teleop.cones.top);
+    $("#teleopCubesBottom").html("Teleop Cubes Bottom: " + teleop.cubes.bottom);
+    $("#teleopCubesMiddle").html("Teleop Cubes Middle: " + teleop.cubes.middle);
+    $("#teleopCubesTop").html("Teleop Cubes Top: " + teleop.cubes.top);
     $("#teamNumber").val("");
     $("#comment").val("");
   }
 
+  // Submit the match data form to the database
   function submitMatchData(formData) {
     console.log("==> matchForm: submitMatchData()");
     $.post("api/dbWriteAPI.php", {
       writeSingleData: JSON.stringify(formData)
-    }, function (returnCode) {
+    }, function (response) {
       // Because success word may have a newline at the end, don't do a direct compare
-      if (returnCode.indexOf('success') > -1) {
+      if (response.indexOf('success') > -1) {
         alert("Data Successfully Submitted! Clearing Data.");
         clearFormData();
       } else {
@@ -523,6 +514,15 @@ require 'inc/header.php';
   // Process the generated html
   //
   $(document).ready(function () {
+    const auto = {
+      cones: { bottom: 0, middle: 0, top: 0 },
+      cubes: { bottom: 0, middle: 0, top: 0 }
+    };
+    const teleop = {
+      cones: { bottom: 0, middle: 0, top: 0 },
+      cubes: { bottom: 0, middle: 0, top: 0 }
+    };
+
     // Update the navbar with the event code
     $.get("api/tbaAPI.php", {
       getEventCode: true
@@ -531,12 +531,13 @@ require 'inc/header.php';
       $("#navbarEventCode").html(eventCode);
     });
 
-    attachFormButtons();
+    attachFormButtons(auto, teleop);
 
     // Submit the match data form 
     $("#submitForm").click(function () {
-      let formData = getFormData();
+      let formData = getFormData(auto, teleop);
       alert("This match form is NOT configured for 2025 game!");
+
       // Should be:
       // formData getFormData()
       // if (validateMatchData(formData))

@@ -66,6 +66,7 @@ require 'inc/header.php';
   const loadButton = document.getElementById("loadingButton");
   loadButton.style.visibility = 'hidden';
 
+  // Display success to user
   function showSuccessMessage(message) {
     console.log("==> pitPhotoUpload: showSuccessMessage()" + message);
     $("#robotPic").val("");
@@ -77,6 +78,7 @@ require 'inc/header.php';
     $("#uploadMessage").show();
   }
 
+  // Display error to user
   function showErrorMessage(message) {
     console.log("==> pitPhotoUpload: showErrorMessage(): " + message);
 
@@ -86,6 +88,7 @@ require 'inc/header.php';
     $("#uploadMessage").show();
   }
 
+  // Display success to user
   function uploadSuccess(msg) {
     console.log("==> pitPhotoUpload: uploadSuccess(): " + msg);
     msg = JSON.parse(msg);

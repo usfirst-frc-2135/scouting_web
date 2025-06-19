@@ -108,6 +108,7 @@ require 'inc/header.php';
 <!-- Javascript page handlers -->
 
 <script>
+
   // let frozenTable = null;
   const teamColumn = 0;
   const matchColumn = 1;

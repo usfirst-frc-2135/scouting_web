@@ -174,6 +174,8 @@ require 'inc/header.php';
 <!-- Javascript page handlers -->
 
 <script>
+
+  // Verify pit form data
   function verifyPitForm() {
     console.log("==> pitForm: verifyPitForm()");
     let isError = false;
@@ -188,52 +190,52 @@ require 'inc/header.php';
 
     if ((!($("#swerveDriveYes").is(':checked'))) && (!($("#swerveDriveNo").is(':checked')))) {
       if (isError === true)
-        errMsg += ", Swerve Drive";
-      else errMsg += " Swerve Drive";
+        errMsg += ",";
+      errMsg += " Swerve Drive";
       isError = true;
     }
 
     let driveMotors = $("#driveMotors").val();
     if (driveMotors != 1 && driveMotors != 2 && driveMotors != 3 && driveMotors != 4) {
       if (isError === true)
-        errMsg += ", Drive Motors";
-      else errMsg += " Drive Motors";
+        errMsg += ",";
+      errMsg += " Drive Motors";
       isError = true;
     }
 
     if ((!($("#sparePartsYes").is(':checked'))) && (!($("#sparePartsNo").is(':checked')))) {
       if (isError === true)
-        errMsg += ", Spare Parts";
-      else errMsg += " Spare Parts";
+        errMsg += ",";
+      errMsg += " Spare Parts";
       isError = true;
     }
 
     let progLanguage = $("#programmingLanguage").val();
     if (progLanguage != 1 && progLanguage != 2 && progLanguage != 3 && progLanguage != 4 && progLanguage != 5) {
       if (isError === true)
-        errMsg += ", Programming Language";
-      else errMsg += " Programming Language";
+        errMsg += ",";
+      errMsg += " Programming Language";
       isError = true;
     }
 
     if ((!($("#computerVisionYes").is(':checked'))) && (!($("#computerVisionNo").is(':checked')))) {
       if (isError === true)
-        errMsg += ", Computer Vision";
-      else errMsg += " Computer Vision";
+        errMsg += ",";
+      errMsg += " Computer Vision";
       isError = true;
     }
 
     if ((!($("#pitScore1").is(':checked'))) && (!($("#pitScore2").is(':checked'))) && (!($("#pitScore3").is(':checked')))) {
       if (isError === true)
-        errMsg += ", Pit Organization";
-      else errMsg += " Pit Organization";
+        errMsg += ",";
+      errMsg += " Pit Organization";
       isError = true;
     }
 
     if ((!($("#preparednessScore1").is(':checked'))) && (!($("#preparednessScore2").is(':checked'))) && (!($("#preparednessScore3").is(':checked')))) {
       if (isError === true)
-        errMsg += ", Preparedness";
-      else errMsg += " Preparedness";
+        errMsg += ",";
+      errMsg += " Preparedness";
       isError = true;
     }
 
@@ -243,6 +245,7 @@ require 'inc/header.php';
     return isError;
   }
 
+  // Clear pit form html fields
   function clearPitForm() {
     console.log("==> pitForm: clearPitForm()");
     $("#teamNumber").val("");
@@ -263,6 +266,7 @@ require 'inc/header.php';
     $("#batteries").val("");
   }
 
+  // Clear html fields to pit table DB
   function writeFormToPitTable() {
     console.log("==> pitForm: writeFormToPitTable()");
     let dataToUse = {};
@@ -341,14 +345,14 @@ require 'inc/header.php';
 
     $.post("api/dbWriteAPI.php", {
       writePitTable: JSON.stringify(dataToUse)
-    }).done(function (returnCode) {
+    }).done(function (response) {
       console.log("=> writePitTable");
       // Because success word may have a newline at the end, don't do a direct compare
-      if (returnCode.indexOf('success') > -1) {
+      if (response.indexOf('success') > -1) {
         alert("Success in submitting pit data!");
         clearPitForm();
       } else {
-        alert("Failure in submitting Pit Form!");
+        alert("Failure in submitting Pit Form! (is this a duplicate?)");
       }
     });
   }

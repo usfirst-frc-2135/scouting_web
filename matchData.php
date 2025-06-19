@@ -83,6 +83,7 @@ require 'inc/header.php';
 <!-- Javascript page handlers -->
 
 <script>
+
   // let frozenTable = null;  // doesn't work with table-responsive
   const teamColumn = 0;
   const matchColumn = 1;
@@ -109,7 +110,8 @@ require 'inc/header.php';
     });
   }
 
-  // NOTE: data object keywords MUST match the database definition in dbHander.php
+  // Load match data to page
+  // NOTE: data object keywords MUST match the database definition in dbHandler.php
   function loadMatchData(dataObj) {
     console.log("==> matchData: loadMatchData()");
     for (let i = 0; i < dataObj.length; i++) {
@@ -141,6 +143,7 @@ require 'inc/header.php';
     }
   }
 
+  // Acquire match data and build the page
   function buildMatchDataTable() {
     $.get("api/dbReadAPI.php", {
       getEventMatches: 1

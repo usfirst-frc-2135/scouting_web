@@ -130,7 +130,7 @@ require 'inc/header.php';
 
 <script>
 
-  let myEventCode = null;
+  let myEventCode = "";
 
   // Set the status badges for an item
   function setStatusBadge(id, isSuccess) {

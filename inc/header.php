@@ -95,6 +95,7 @@
   </nav>
 
   <script>
+
     // Handle navbar button state toggles
     const currentLocation = location.href;
     const items = document.querySelectorAll("a");

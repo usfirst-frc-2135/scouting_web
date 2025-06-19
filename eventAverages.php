@@ -244,8 +244,15 @@ require 'inc/header.php';
 <script src="./scripts/matchDataProcessor.js"></script>
 
 <script>
+
   let _jsonMatchData = null;
   // let _frozenTable = null;
+
+  // Round to 2 decimal places
+  function rnd(val) {
+    // Rounding helper function 
+    return Math.round((val + Number.EPSILON) * 100) / 100;
+  }
 
   // Lookup value for a key in the passed dictionary (team in match data)
   function getDataValue(dict, key) {
@@ -258,17 +265,7 @@ require 'inc/header.php';
     else {
       console.warn("getDataValue: Key not found in dictionary! " + key + " " + dict);
     }
-    return 0;
-  }
-
-  // Add a team (key) to the final team list
-  function addKeysToTable(dataObj) {
-    console.log("==> eventAverages: addKeysToTable()");
-    let keyList = [];
-    for (let teamNum in dataObj) {
-      keyList.push(teamNum);
-    }
-    return keyList;
+    return "";
   }
 
   // Create and the HTML table for display
@@ -277,7 +274,6 @@ require 'inc/header.php';
     $("#tableData").html(""); // Clear Table
     for (let teamNum of teamList) {
       let endgameClimbPercentage = getDataValue(avgData[teamNum], "endgameClimbPercent");
-      let endgameFoulPercentage = getDataValue(avgData[teamNum], "endgameFoulPercent");
 
       let rowString = "<tr>" +
         "<td style=\"background-color:transparent\"><a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a></td>" +
@@ -352,6 +348,16 @@ require 'inc/header.php';
     }
   }
 
+  // Add a team (key) to the final team list
+  function addKeysToMatchTable(dataObj) {
+    console.log("==> eventAverages: addKeysToMatchTable()");
+    let keyList = [];
+    for (let teamNum in dataObj) {
+      keyList.push(teamNum);
+    }
+    return keyList;
+  }
+
   // Update table when match filters are changed
   function filterEventMatchData() {
     console.log("==> eventAverages: filterEventMatchData()");
@@ -360,7 +366,7 @@ require 'inc/header.php';
     let mdp = new matchDataProcessor(_jsonMatchData);
     mdp.filterEventMatches(start, end);
     let filteredData = mdp.getAverages();
-    teamList = addKeysToTable(filteredData);
+    let teamList = addKeysToMatchTable(filteredData);
     addAveragesToTable(teamList, fitleredData);
     setTimeout(function () {
       // sorttable.makeSortable(document.getElementById("averageTable"))
@@ -386,7 +392,7 @@ require 'inc/header.php';
 
   // Retrieve an average value from data for a team
   function lookupAverage(teamAverages, team, item) {
-    console.log("==> eventAverages: lookupAverage()");
+    // console.log("==> eventAverages: lookupAverage()");
     if (!teamAverages) {
       console.warn("lookupAverages: No team averages!")
       return "NA";
@@ -398,15 +404,8 @@ require 'inc/header.php';
     return teamAverages[team][item];
   }
 
-  // Round to 2 decimal places
-  function rnd(val) {
-    // Rounding helper function 
-    return Math.round((val + Number.EPSILON) * 100) / 100;
-  }
-
   // Returns a string with the comma-separated line of data for the given team.
-  function createCSVLine(team, evtAvgs, coprs) {
-    console.log("==> eventAverages: createCSVLine()" + team);  // TODO: team number is a number instead of a string (key)!
+  function createCSVLine(team, evtAvgs, coprs) {  // TODO: team number is a number instead of a string (key)!
     let pitLocation = 0;
     let oprTP = getDataValue(coprs[team], "totalPoints");
     //let trapPercent = rnd(lookupAverage(evtAvgs,team, "trapPercentage"));
@@ -473,46 +472,24 @@ require 'inc/header.php';
     return out;
   }
 
-  // 
-  function processEventMatches(eventCode, eventMatches, coprs) {
-    console.log("==> eventAverages: processEventMatches()");
+  // Merge data into CSV file and write it
+  function createCSVFile(eventCode, eventMatches, coprs) {
+    console.log("==> eventAverages: createCSVFile()");
     let mdp = new matchDataProcessor(eventMatches);
     let csvStr = "Team,Pit Location,OPR,Total Coral Avg,Total Coral Max,Total Algae Avg,Total Algae Max,Auto Pts Avg,Auto Pts Max,Tel Pts Avg,Tel Pts Max,End Pts Avg,End Pts Max,Total Pts Avg,Total Pts Max,Auto Coral Avg,Auto Coral Max,Auto L1 Avg,Auto L1 Max,Auto L2 Avg,Auto L2 Max,Auto L3 Avg,Auto L3 Max,Auto L4 Avg,Auto L4 Max,Auto Algae Avg,Auto Algae Max,Auto Net Avg,Auto Net Max,Auto Proc Avg,Auto Proc Max,Tel Coral Avg,Tel Coral Max,Tel L1 Avg,Tel L1 Max,Tel L2 Avg,Tel L2 Max,Tel L3 Avg,Tel L3 Max,Tel L4 Avg,Tel L4 Max,Tel Coral Acc,Tel Algae Avg,Tel Algae Max,Tel Net Avg,Tel Net Max,Tel Proc Avg,Tel Proc Max,Tel Algae Acc,End N/A,End Park,End Fall,End Shal,End Deep, Total Died, Note\n";
 
     mdp.getSiteFilteredAverages(function (averageData) {
       for (let key in averageData) {
-        console.log("key: " + key);
         csvStr += createCSVLine(key, averageData, coprs);  // key is team number
       }
 
       let hiddenElement = document.createElement('a');
-      let filename = eventCode + ".csv";
-      console.log("eventAverages: processEventMatches() CSV filename: " + filename);
+      let filename = eventCode.trim() + ".csv";
+      console.log("eventAverages: createCSVFile() CSV filename: " + filename);
       hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csvStr);
       hiddenElement.target = '_blank';
       hiddenElement.download = filename;
       hiddenElement.click();
-    });
-  }
-
-  // Retrieve match data and OPRs data and write out CSV file
-  function downloadEventCSVFile(eventCode) {
-    console.log("==> eventAverages: downloadEventCSVFile()");
-    $.get("api/dbReadAPI.php", {
-      getEventMatches: 1
-    }).done(function (eventMatches) {
-      console.log("=> getEventMatches:");
-      allEventMatches = JSON.parse(eventMatches);
-
-      // Get OPR data from TBA
-      $.get("api/tbaAPI.php", {
-        getCOPRs: 1
-      }).done(function (getCoprs) {
-        console.log("=> getCOPRs: " + getCoprs);
-        jsonCoprData = JSON.parse(getCoprs)["coprData"];
-        console.log("COPRS: " + jsonCoprData);
-        processEventMatches(eventCode, allEventMatches, jsonCoprData);
-      });
     });
   }
 
@@ -529,7 +506,7 @@ require 'inc/header.php';
         let filteredData = {
           ...averageData
         };
-        let teamList = addKeysToTable(filteredData);
+        let teamList = addKeysToMatchTable(filteredData);
         addAveragesToTable(teamList, filteredData);
         setTimeout(function () {
           // script instructions say this is needed, but it breaks table header sorting
@@ -552,6 +529,26 @@ require 'inc/header.php';
         }, 100);
       });
       return
+    });
+  }
+
+  // Retrieve match data and OPRs data and write out CSV file
+  function downloadCSVFile(eventCode) {
+    console.log("==> eventAverages: downloadCSVFile()");
+    $.get("api/dbReadAPI.php", {
+      getEventMatches: 1
+    }).done(function (eventMatches) {
+      console.log("=> getEventMatches:");
+      let jsonEventMatches = JSON.parse(eventMatches);
+
+      // Get OPR data from TBA
+      $.get("api/tbaAPI.php", {
+        getCOPRs: 1
+      }).done(function (getCoprs) {
+        console.log("=> getCOPRs");
+        let jsonCoprData = JSON.parse(getCoprs)["data"];
+        createCSVFile(eventCode, jsonEventMatches, jsonCoprData);
+      });
     });
   }
 
@@ -584,7 +581,7 @@ require 'inc/header.php';
 
     // Write out picklist CSV file to client's download dir.
     $("#downloadCsvFile").on('click', function (event) {
-      downloadEventCSVFile(tbaEventCode);
+      downloadCSVFile(tbaEventCode);
     });
   });
 

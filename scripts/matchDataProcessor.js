@@ -170,7 +170,7 @@ class matchDataProcessor {
     // For each team, go thru all its matches and do the calculations for the averages data.
     for (let i = 0; i < this.data.length; i++) {
       let tn = this.data[i]["teamnumber"];
-      console.log("===> doing MDP calculations for team (" + i + "): " + tn);  // TEST
+      // console.log("===> doing MDP calculations for team (" + i + "): " + tn);  // TEST
 
       if (!(tn in pdata)) {
         // If this team doesn't have any data stored yet, initialize its data array.
@@ -458,7 +458,7 @@ class matchDataProcessor {
 
     // Go thru each team in pdata and do the avg, max and percent calculations.
     for (let key in pdata) {
-      console.log("===> doing MDP averages, max for team: " + key);  // TEST
+      // console.log("===> doing MDP averages, max for team: " + key);  // TEST
       // HOLD      console.log(">>>> Calculations for team " + key);
       // Calculate the accuracy percentage before the actual AVG is calculated.
       let totalCoralAcquired = (parseInt(pdata[key]["teleopAcquireCoral"]));

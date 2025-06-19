@@ -456,10 +456,10 @@ require 'inc/header.php';
 
     $.post("api/dbWriteAPI.php", {
       writeStrategicData: JSON.stringify(dataToUse)
-    }).done(function (returnCode) {
+    }).done(function (response) {
       console.log("=> writeStrategicData");
       // Because success word may have a newline at the end, don't do a direct compare
-      if (returnCode.indexOf('success') > -1) {
+      if (response.indexOf('success') > -1) {
         alert("Success in submitting Strategic Form data!");
         clearStrategicForm();
       } else {
