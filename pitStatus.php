@@ -43,10 +43,26 @@ require 'inc/header.php';
 
 <script>
 
+  // Sort the pit status table by team number
+  function sortPitStatusTable(tableId) {
+    console.log("==> pitStatus: sortTable(): id: " + tableId);
+    let table = document.getElementById(tableId);
+    let rows = Array.prototype.slice.call(table.querySelectorAll("tbody> tr"));
+
+    rows.sort(function (rowA, rowB) {
+      return compareTeamNumbers(rowA.cells[0].textContent, rowB.cells[0].textContent);
+    });
+
+    rows.forEach(function (row) {
+      table.querySelector("tbody").appendChild(row);
+    });
+  }
+
+  // Build the pit status table
   function buildPitStatusPage(teams, names, images, pitInfo) {
     console.log("==> pitStatus: buildPitStatusPage()");
     if (teams === null || names === null || images === null || pitInfo === null) {
-      console.warn("buildPitStatusPage: team, names, images, or pit lists are missing!")
+      console.warn("buildPitStatusPage: team, names, images, or pit data are missing!")
       return null;
     }
 
@@ -58,42 +74,24 @@ require 'inc/header.php';
       if (teamName != "XX") {
         row += " <td>" + "<a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a> - " + teamName + "</td>";
       } else {
-        row += "  <td>" + "<a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a>" + "</td>";
+        row += " <td>" + "<a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a>" + "</td>";
       }
 
       if (pitInfo[teamNum] != null) {
-        row += "  <td class='bg-success'>Yes</td>";
+        row += " <td class='bg-success'>Yes</td>";
       } else {
-        row += "  <td>No</td>";
+        row += " <td>No</td>";
       }
 
       if ((images[teamNum] != null) && (images[teamNum].length > 0)) {
-        row += "  <td class='bg-success'>Yes</td>";
+        row += " <td class='bg-success'>Yes</td>";
       } else {
-        row += "  <td>No</td>";
+        row += " <td>No</td>";
       }
 
       row += "</tr>";
       $("#pitScoutTable").html(row);
     }
-
-    sortPitStatusTable("psTable");
-  }
-
-  // The entries are team numbers with " - <teamName>" at the end. We want to strip off the appended
-  // teamName so it's just the team number for comparison. Also, a team number could end in a "B", "C",
-  // "D", or "E", in which case we strip the letter off and just use the number for the comparison.
-  function sortPitStatusTable(tableId) {
-    console.log("==> pitStatus: sortTable(): id: " + tableId);
-    let table = document.getElementById(tableId);
-    let rows = Array.prototype.slice.call(table.querySelectorAll("tbody> tr"));
-
-    rows.sort(function (rowA, rowB) { return compareTeamNumbers(rowA.cells[0].textContent, rowB.cells[0].textContent); });
-
-    // Update the table body with the sorted rows.
-    rows.forEach(function (row) {
-      table.querySelector("tbody").appendChild(row);
-    });
   }
 
   //
@@ -138,6 +136,7 @@ require 'inc/header.php';
             console.log("=> getAllPitData");
             jsonPitList = JSON.parse(pitDataList);
             buildPitStatusPage(teamList, namesList, jsonImageList, jsonPitList);
+            sortPitStatusTable("psTable");
             // script instructions say this is needed, but it breaks table header sorting
             // sorttable.makeSortable(document.getElementById("psTable"));
           });

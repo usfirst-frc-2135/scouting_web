@@ -1194,11 +1194,11 @@ require 'inc/header.php';
   function convertToYesNo(value) {
     let convertedVal = "";
     if (value === "1")
-      convertedVal = "yes";
+      convertedVal = "Yes";
     else if (value === "0")
       convertedVal = "-";
     else if (value === "2")
-      convertedVal = "no";
+      convertedVal = "No";
     else if (value === "3")
       convertedVal = "-";
     return convertedVal;
@@ -1267,13 +1267,13 @@ require 'inc/header.php';
     console.log("==> teamLookup: loadPitData()");
     if (!pitData || !pitData.length) {
       // row one    
-      pitData["swervedrivestring"] = pitData["swerve"] ? "yes" : "no";
+      pitData["swervedrivestring"] = pitData["swerve"] ? "Yes" : "No";
       pitData["drivemotors"];
-      pitData["sparepartsstring"] = pitData["spareparts"] ? "yes" : "no";
+      pitData["sparepartsstring"] = pitData["spareparts"] ? "Yes" : "No";
       pitData["proglanguage"];
 
       // row two    
-      pitData["computervisionstring"] = pitData["computervision"] ? "yes" : "no";
+      pitData["computervisionstring"] = pitData["computervision"] ? "Yes" : "No";
       pitData["pitorg"];
       pitData["preparedness"];
       pitData["numbatteries"];

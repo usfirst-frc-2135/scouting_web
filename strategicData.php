@@ -137,8 +137,8 @@ require 'inc/header.php';
   // Converts a given "1" to yes, "0" to no, anything else to empty string.
   function convertToYesNo(value) {
     switch (String(value)) {
-      case "1": return "yes";
-      case "2": return "no";
+      case "1": return "Yes";
+      case "2": return "No";
       default: return "-";
     }
   }
@@ -189,7 +189,7 @@ require 'inc/header.php';
     }
   }
 
-  // get Strategic Scouting Data
+  // Retrive strategic scouting data and load the table
   function buildStrategicDataTable() {
     console.log("==> strategicData: buildStrategicDataTable()");
     $.get("api/dbReadAPI.php", {
