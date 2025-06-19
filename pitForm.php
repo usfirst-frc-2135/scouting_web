@@ -245,7 +245,7 @@ require 'inc/header.php';
     return isError;
   }
 
-  // Clear pit form html fields
+  // Clear pit form fields
   function clearPitForm() {
     console.log("==> pitForm: clearPitForm()");
     $("#teamNumber").val("");
@@ -266,7 +266,7 @@ require 'inc/header.php';
     $("#batteries").val("");
   }
 
-  // Clear html fields to pit table DB
+  // Write pit data form fields to DB table
   function writeFormToPitTable() {
     console.log("==> pitForm: writeFormToPitTable()");
     let dataToUse = {};

@@ -336,6 +336,7 @@ require 'inc/header.php';
     $("#generalComment").val("");
   }
 
+  // Write strategic form data to DB table
   function writeStrategicFormToTable() {
     console.log("==> strategicForm.php: writeStrategicFormToTable()");
     let dataToUse = {};

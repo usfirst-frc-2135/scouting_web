@@ -113,6 +113,7 @@ require 'inc/header.php';
   const teamColumn = 0;
   const matchColumn = 1;
 
+  // Sort strategic data table rows
   function sortStrategicData(tableData, teamCol, matchCol) {
     console.log("==> strategicData: sortStrategicData()");
     let table = document.getElementById(tableData);
@@ -134,8 +135,8 @@ require 'inc/header.php';
     });
   }
 
-  // Converts a given "1" to yes, "0" to no, anything else to empty string.
-  function convertToYesNo(value) {
+  // Converts a given "1" to yes, "2" to no, anything else to a dash.
+  function toYesNo(value) {
     switch (String(value)) {
       case "1": return "Yes";
       case "2": return "No";
@@ -143,7 +144,8 @@ require 'inc/header.php';
     }
   }
 
-  function loadStrategicData(dataObj, pitData) {
+  // Load the strategic data into the table
+  function loadStrategicData(dataObj) {
     console.log("==> strategicData: loadStrategicData()");
     for (let i = 0; i < dataObj.length; i++) {
       let driveVal = "";
@@ -160,27 +162,27 @@ require 'inc/header.php';
       let rowString = "<tr><td style=\"background-color:transparent\"><a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</td>" +
         "<td style=\"background-color:transparent\">" + dataObj[i]["matchnumber"] + "</td>" +
         "<td style=\"background-color:#cfe2ff\">" + driveVal + "</td>" +
-        "<td style=\"background-color:transparent\">" + convertToYesNo(dataObj[i]["against_tactic1"]) + "</td>" +
+        "<td style=\"background-color:transparent\">" + toYesNo(dataObj[i]["against_tactic1"]) + "</td>" +
         "<td style=\"background-color:#cfe2ff\">" + dataObj[i]["against_comment"] + "</td>" +
-        "<td style=\"background-color:transparent\">" + convertToYesNo(dataObj[i]["defense_tactic1"]) + "</td>" +
-        "<td style=\"background-color:#cfe2ff\">" + convertToYesNo(dataObj[i]["defense_tactic2"]) + "</td>" +
+        "<td style=\"background-color:transparent\">" + toYesNo(dataObj[i]["defense_tactic1"]) + "</td>" +
+        "<td style=\"background-color:#cfe2ff\">" + toYesNo(dataObj[i]["defense_tactic2"]) + "</td>" +
         "<td style=\"background-color:transparent\">" + dataObj[i]["defense_comment"] + "</td>" +
-        "<td style=\"background-color:#cfe2ff\">" + convertToYesNo(dataObj[i]["foul1"]) + "</td>" +
-        "<td style=\"background-color:transparent\">" + convertToYesNo(dataObj[i]["autonFoul1"]) + "</td>" +
-        "<td style=\"background-color:#cfe2ff\">" + convertToYesNo(dataObj[i]["autonFoul2"]) + "</td>" +
-        "<td style=\"background-color:transparent\">" + convertToYesNo(dataObj[i]["teleopFoul1"]) + "</td>" +
-        "<td style=\"background-color:#cfe2ff\">" + convertToYesNo(dataObj[i]["teleopFoul2"]) + "</td>" +
-        "<td style=\"background-color:transparent\">" + convertToYesNo(dataObj[i]["teleopFoul3"]) + "</td>" +
-        "<td style=\"background-color:#cfe2ff\">" + convertToYesNo(dataObj[i]["teleopFoul4"]) + "</td>" +
-        "<td style=\"background-color:transparent\">" + convertToYesNo(dataObj[i]["endgameFoul1"]) + "</td>" +
-        "<td style=\"background-color:#cfe2ff\">" + convertToYesNo(dataObj[i]["autonGetCoralFromFloor"]) + "</td>" +
-        "<td style=\"background-color:transparent\">" + convertToYesNo(dataObj[i]["autonGetCoralFromStation"]) + "</td>" +
-        "<td style=\"background-color:#cfe2ff\">" + convertToYesNo(dataObj[i]["autonGetAlgaeFromFloor"]) + "</td>" +
-        "<td style=\"background-color:transparent\">" + convertToYesNo(dataObj[i]["autonGetAlgaeFromReef"]) + "</td>" +
-        "<td style=\"background-color:#cfe2ff\">" + convertToYesNo(dataObj[i]["teleopFloorPickupAlgae"]) + "</td>" +
-        "<td style=\"background-color:transparent\">" + convertToYesNo(dataObj[i]["teleopFloorPickupCoral"]) + "</td>" +
-        "<td style=\"background-color:#cfe2ff\">" + convertToYesNo(dataObj[i]["teleopKnockOffAlgaeFromReef"]) + "</td>" +
-        "<td style=\"background-color:transparent\">" + convertToYesNo(dataObj[i]["teleopAcquireAlgaeFromReef"]) + "</td>" +
+        "<td style=\"background-color:#cfe2ff\">" + toYesNo(dataObj[i]["foul1"]) + "</td>" +
+        "<td style=\"background-color:transparent\">" + toYesNo(dataObj[i]["autonFoul1"]) + "</td>" +
+        "<td style=\"background-color:#cfe2ff\">" + toYesNo(dataObj[i]["autonFoul2"]) + "</td>" +
+        "<td style=\"background-color:transparent\">" + toYesNo(dataObj[i]["teleopFoul1"]) + "</td>" +
+        "<td style=\"background-color:#cfe2ff\">" + toYesNo(dataObj[i]["teleopFoul2"]) + "</td>" +
+        "<td style=\"background-color:transparent\">" + toYesNo(dataObj[i]["teleopFoul3"]) + "</td>" +
+        "<td style=\"background-color:#cfe2ff\">" + toYesNo(dataObj[i]["teleopFoul4"]) + "</td>" +
+        "<td style=\"background-color:transparent\">" + toYesNo(dataObj[i]["endgameFoul1"]) + "</td>" +
+        "<td style=\"background-color:#cfe2ff\">" + toYesNo(dataObj[i]["autonGetCoralFromFloor"]) + "</td>" +
+        "<td style=\"background-color:transparent\">" + toYesNo(dataObj[i]["autonGetCoralFromStation"]) + "</td>" +
+        "<td style=\"background-color:#cfe2ff\">" + toYesNo(dataObj[i]["autonGetAlgaeFromFloor"]) + "</td>" +
+        "<td style=\"background-color:transparent\">" + toYesNo(dataObj[i]["autonGetAlgaeFromReef"]) + "</td>" +
+        "<td style=\"background-color:#cfe2ff\">" + toYesNo(dataObj[i]["teleopFloorPickupAlgae"]) + "</td>" +
+        "<td style=\"background-color:transparent\">" + toYesNo(dataObj[i]["teleopFloorPickupCoral"]) + "</td>" +
+        "<td style=\"background-color:#cfe2ff\">" + toYesNo(dataObj[i]["teleopKnockOffAlgaeFromReef"]) + "</td>" +
+        "<td style=\"background-color:transparent\">" + toYesNo(dataObj[i]["teleopAcquireAlgaeFromReef"]) + "</td>" +
         "<td style=\"background-color:#cfe2ff\">" + dataObj[i]["problem_comment"] + "</td>" +
         "<td style=\"background-color:transparent\">" + dataObj[i]["general_comment"] + "</td>" +
         "<td style=\"background-color:#cfe2ff\">" + dataObj[i]["scoutname"] + "</td>" +

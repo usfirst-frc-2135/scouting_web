@@ -494,7 +494,7 @@ require 'inc/header.php';
     $("#comment").val("");
   }
 
-  // Submit the match data form to the database
+  // Write the match data form to the DB table
   function submitMatchData(formData) {
     console.log("==> matchForm: submitMatchData()");
     $.post("api/dbWriteAPI.php", {

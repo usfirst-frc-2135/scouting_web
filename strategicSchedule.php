@@ -60,17 +60,7 @@ require 'inc/header.php';
 
 <script>
 
-  function loadStrategicSchedule(dataObj) {
-    console.log("==> strategicSchedule: loadStrategicSchedule()");
-    $("#tableData").html(""); // Clear table
-    for (let i = 0; i < dataObj.length; i++) {
-      let matchNum = dataObj[i]["match_number"];
-      let rowString = "<tr><td align=\"center\">" + matchNum + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["teams"] + "</td>" + "</td>";
-      $("#tableData").append(rowString);
-    }
-  }
-
+  // Sort strategic schedule rows by match number
   function sortStrategicSchedule(id) {
     console.log("==> strategicSchedule: sortStrategicSchedule()");
     // Assumes the entries are team numbers or match numbers. Note a team number could have end in 
@@ -91,7 +81,19 @@ require 'inc/header.php';
     });
   }
 
-  // Figure out which matches and teams for strategic scouts 
+  // Load strategic schedule rows
+  function loadStrategicSchedule(dataObj) {
+    console.log("==> strategicSchedule: loadStrategicSchedule()");
+    $("#tableData").html(""); // Clear table
+    for (let i = 0; i < dataObj.length; i++) {
+      let matchNum = dataObj[i]["match_number"];
+      let rowString = "<tr><td align=\"center\">" + matchNum + "</td>" +
+        "<td align=\"center\">" + dataObj[i]["teams"] + "</td>" + "</td>";
+      $("#tableData").append(rowString);
+    }
+  }
+
+  // Figure out which teams/matches for strategic scouting table
   function buildScheduleTable() {
     console.log("==> strategicSchedule: buildScheduleTable()");
     $.get("api/tbaAPI.php", {
