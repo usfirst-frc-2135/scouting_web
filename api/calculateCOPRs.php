@@ -13,7 +13,7 @@ class CalculateCOPRs
     $out = array();
     foreach ($matchData as $matchRow)
     {
-      if ($matchRow["comp_level"] == "qm")
+      if ($matchRow["comp_level"] === "qm")
       {
         array_push($out, $matchRow);
       }
@@ -72,7 +72,7 @@ class CalculateCOPRs
         {
           $sum += $L[$i][$k] * $L[$j][$k];
         }
-        if ($i == $j)
+        if ($i === $j)
         {
           $L[$i][$j] = sqrt($A[$i][$j] - $sum);
           $Lp[$j][$i] = sqrt($A[$i][$j] - $sum);
