@@ -56,7 +56,7 @@ require 'inc/header.php';
                   <span>What type of motors do you use on your drive train?</span>
                   <div class="input-group mb-3">
                     <select id="driveMotors" class="form-select">
-                      <option selected>Choose ...</option>
+                      <option selected value="0">Choose ...</option>
                       <option value="1">Krakens</option>
                       <option value="2">Neos</option>
                       <option value="3">Falcons</option>
@@ -83,7 +83,7 @@ require 'inc/header.php';
                   <span>What programming language do you use?</span>
                   <div class="input-group mb-3">
                     <select id="programmingLanguage" class="form-select">
-                      <option id="programmingLanguage" selected value="0">Choose ...</option>
+                      <option selected value="0">Choose ...</option>
                       <option id="java" value="1">Java</option>
                       <option id="labView" value="2">LabView</option>
                       <option id="C++" value="3">C++</option>
@@ -278,17 +278,12 @@ require 'inc/header.php';
 
     // Drive motors
     let driveMotors = $("#driveMotors").val()
-    if (driveMotors === 1) {
-      dataToUse["drivemotors"] = "Krakens";
-    }
-    if (driveMotors === 2) {
-      dataToUse["drivemotors"] = "NEOs";
-    }
-    if (driveMotors === 3) {
-      dataToUse["drivemotors"] = "Falcons";
-    }
-    if (driveMotors === 4) {
-      dataToUse["drivemotors"] = "CIMs";
+    switch (driveMotors) {
+      case "1": dataToUse["drivemotors"] = "Krakens"; break;
+      case "2": dataToUse["drivemotors"] = "NEOs"; break;
+      case "3": dataToUse["drivemotors"] = "Falcons"; break;
+      case "4": dataToUse["drivemotors"] = "CIMs"; break;
+      default: dataToUse["drivemotors"] = "Missing"; break;
     }
 
     // Spare parts
@@ -301,21 +296,13 @@ require 'inc/header.php';
 
     // Software language
     let progLang = $("#programmingLanguage").val();
-    dataToUse["proglanguage"] = "Other";  // default
-    if (progLang === 1) {
-      dataToUse["proglanguage"] = "Java";
-    }
-    else if (progLang === 2) {
-      dataToUse["proglanguage"] = "LabView";
-    }
-    else if (progLang === 3) {
-      dataToUse["proglanguage"] = "C++";
-    }
-    else if (progLang === 4) {
-      dataToUse["proglanguage"] = "Python";
-    }
-    else if (progLang === 5) {
-      dataToUse["proglanguage"] = "Other";
+    switch (progLang) {
+      case "1": dataToUse["proglanguage"] = "Java"; break;
+      case "2": dataToUse["proglanguage"] = "LabView"; break;
+      case "3": dataToUse["proglanguage"] = "C++"; break;
+      case "4": dataToUse["proglanguage"] = "Python"; break;
+      case "5": dataToUse["proglanguage"] = "Other"; break;
+      default: dataToUse["proglanguage"] = "Missing"; break;
     }
 
     // Computer vision

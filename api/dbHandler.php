@@ -227,7 +227,8 @@ class dbHandler
   public function readTeamFromMatchTable($teamNumber, $eventCode)
   {
     $dbConfig = $this->readDbConfig();
-    $sql = "SELECT teamnumber,
+    $sql = "SELECT 
+        teamnumber,
         autonStartPos,
         autonLeave,
         reefzoneAB,
@@ -290,7 +291,8 @@ class dbHandler
         proglanguage,
         drivemotors,
         preparedness)
-      VALUES(:entrykey,
+      VALUES
+        (:entrykey,
         :eventcode,
         :teamnumber,
         :numbatteries,
