@@ -578,7 +578,7 @@ require 'inc/header.php';
       suff = "PM"
     }
     let minutes = "0" + date.getMinutes();
-    $("#matchTime").html("Time: " + hours + ":" + minutes.substring(minutes.length - 2) + " " + suff);
+    document.getElementById("matchTime").innerHTML = "Time: " + hours + ":" + minutes.substring(minutes.length - 2) + " " + suff;
   }
 
   // Load the info into the team box
@@ -667,19 +667,19 @@ require 'inc/header.php';
       }
     }
 
-    $("#redTotalCoral").html(roundInt(avgTotalCoral["red"]));
-    $("#redTotalAlgae").html(roundInt(avgTotalAlgae["red"]));
-    $("#redAvgAutoPoints").html(roundInt(avgAutoPoints["red"]));
-    $("#redAvgTeleopPoints").html(roundInt(avgTeleopPoints["red"]));
-    $("#redAvgEndgamePoints").html(roundInt(avgEndgamePoints["red"]));
-    $("#redTotalPredictedPoints").html(roundInt(totalPredictedPoints["red"]));
+    document.getElementById("redTotalCoral").innerHTML = roundInt(avgTotalCoral["red"]);
+    document.getElementById("redTotalAlgae").innerHTML = roundInt(avgTotalAlgae["red"]);
+    document.getElementById("redAvgAutoPoints").innerHTML = roundInt(avgAutoPoints["red"]);
+    document.getElementById("redAvgTeleopPoints").innerHTML = roundInt(avgTeleopPoints["red"]);
+    document.getElementById("redAvgEndgamePoints").innerHTML = roundInt(avgEndgamePoints["red"]);
+    document.getElementById("redTotalPredictedPoints").innerHTML = roundInt(totalPredictedPoints["red"]);
 
-    $("#blueTotalCoral").html(roundInt(avgTotalCoral["blue"]));
-    $("#blueTotalAlgae").html(roundInt(avgTotalAlgae["blue"]));
-    $("#blueAvgAutoPoints").html(roundInt(avgAutoPoints["blue"]));
-    $("#blueAvgTeleopPoints").html(roundInt(avgTeleopPoints["blue"]));
-    $("#blueAvgEndgamePoints").html(roundInt(avgEndgamePoints["blue"]));
-    $("#blueTotalPredictedPoints").html(roundInt(totalPredictedPoints["blue"]));
+    document.getElementById("blueTotalCoral").innerHTML = roundInt(avgTotalCoral["blue"]);
+    document.getElementById("blueTotalAlgae").innerHTML = roundInt(avgTotalAlgae["blue"]);
+    document.getElementById("blueAvgAutoPoints").innerHTML = roundInt(avgAutoPoints["blue"]);
+    document.getElementById("blueAvgTeleopPoints").innerHTML = roundInt(avgTeleopPoints["blue"]);
+    document.getElementById("blueAvgEndgamePoints").innerHTML = roundInt(avgEndgamePoints["blue"]);
+    document.getElementById("blueTotalPredictedPoints").innerHTML = roundInt(totalPredictedPoints["blue"]);
 
     document.getElementById("redTotalCoral").setAttribute("align", "center");
     document.getElementById("redTotalAlgae").setAttribute("align", "center");
@@ -757,7 +757,7 @@ require 'inc/header.php';
       return compareMatchNumbers(matchA["comp_level"] + matchA["match_number"], matchB["comp_level"] + matchB["match_number"]);
     });
 
-    $("#ourMatches").html("");
+    document.getElementById("ourMatches").innerHTML = "";
     let row = '';
     for (let i in arrOurMatches) {
       if (i != 0) {
@@ -766,7 +766,7 @@ require 'inc/header.php';
       row += '<a class="btn btn-secondary btn-sm m-1" href="./matchSheet.php?matchNum=' + arrOurMatches[i]["match_number"] + '&compLevel=' + arrOurMatches[i]["comp_level"] + '">' + arrOurMatches[i]["comp_level"] + arrOurMatches[i]["match_number"] + '</a>';
     }
 
-    $("#ourMatches").html(row);
+    document.getElementById("ourMatches").innerHTML = row;
   }
 
   function processMatchList() {
@@ -828,36 +828,40 @@ require 'inc/header.php';
   function clearMatchSheet() {
     console.log("==> matchSheet: clearMatchSheet()");
     // Clear Data
-    $("#R0DataTable").html("");
-    $("#R1DataTable").html("");
-    $("#R2DataTable").html("");
-    $("#B0DataTable").html("");
-    $("#B1DataTable").html("");
-    $("#B2DataTable").html("");
-    $("#redTotalCoral").html("");
-    $("#redTotalAlgae").html("");
-    $("#redAvgAutoPoints").html("");
-    $("#redAvgTeleopPoints").html("");
-    $("#redAvgEndgamePoints").html("");
-    $("#redTotalPredictedPoints").html("");
-    $("#blueTotalCoral").html("");
-    $("#blueTotalAlgae").html("");
-    $("#blueAvgAutoPoints").html("");
-    $("#blueAvgTeleopPoints").html("");
-    $("#blueAvgEndgamePoints").html("");
-    $("#blueTotalPredictedPoints").html("");
-    $("#R0RobotPics").html("");
-    $("#R1RobotPics").html("");
-    $("#R2RobotPics").html("");
-    $("#B0RobotPics").html("");
-    $("#B1RobotPics").html("");
-    $("#B2RobotPics").html("");
-    $("#enterRed1").html("");
-    $("#enterRed2").html("");
-    $("#enterRed3").html("");
-    $("#enterBlue1").html("");
-    $("#enterBlue2").html("");
-    $("#enterBlue3").html("");
+    document.getElementById("R0DataTable").innerHTML = "";
+    document.getElementById("R1DataTable").innerHTML = "";
+    document.getElementById("R2DataTable").innerHTML = "";
+    document.getElementById("B0DataTable").innerHTML = "";
+    document.getElementById("B1DataTable").innerHTML = "";
+    document.getElementById("B2DataTable").innerHTML = "";
+
+    document.getElementById("redTotalCoral").innerHTML = "";
+    document.getElementById("redTotalAlgae").innerHTML = "";
+    document.getElementById("redAvgAutoPoints").innerHTML = "";
+    document.getElementById("redAvgTeleopPoints").innerHTML = "";
+    document.getElementById("redAvgEndgamePoints").innerHTML = "";
+    document.getElementById("redTotalPredictedPoints").innerHTML = "";
+
+    document.getElementById("blueTotalCoral").innerHTML = "";
+    document.getElementById("blueTotalAlgae").innerHTML = "";
+    document.getElementById("blueAvgAutoPoints").innerHTML = "";
+    document.getElementById("blueAvgTeleopPoints").innerHTML = "";
+    document.getElementById("blueAvgEndgamePoints").innerHTML = "";
+    document.getElementById("blueTotalPredictedPoints").innerHTML = "";
+
+    document.getElementById("R0RobotPics").innerHTML = "";
+    document.getElementById("R1RobotPics").innerHTML = "";
+    document.getElementById("R2RobotPics").innerHTML = "";
+    document.getElementById("B0RobotPics").innerHTML = "";
+    document.getElementById("B1RobotPics").innerHTML = "";
+    document.getElementById("B2RobotPics").innerHTML = "";
+
+    document.getElementById("enterRed1").innerHTML = "";
+    document.getElementById("enterRed2").innerHTML = "";
+    document.getElementById("enterRed3").innerHTML = "";
+    document.getElementById("enterBlue1").innerHTML = "";
+    document.getElementById("enterBlue2").innerHTML = "";
+    document.getElementById("enterBlue3").innerHTML = "";
 
     _picDB = {};
   }
@@ -971,7 +975,7 @@ require 'inc/header.php';
     console.log("==> matchSheet: loadEventMatchSheet()");
     clearMatchSheet();
     // Write Match Number
-    $("#matchTitle").html("Match " + compLevel + " " + matchNum);
+    document.getElementById("matchTitle").innerHTML = "Match " + compLevel + " " + matchNum;
     // Pull Data
     localMatchNum = matchNum;
     localCompLevel = compLevel;
@@ -984,7 +988,7 @@ require 'inc/header.php';
   function loadCustomMatch(redTeam1, redTeam2, redTeam3, blueTeam1, blueTeam2, blueTeam3) {
     clearMatchSheet();
     // Write Match Number
-    //$("#matchTitle").html("Match " + compLevel + " " + matchNum);
+    document.getElementById("matchTitle").innerHTML = "Match CUSTOM";
     // Pull Data
     customRedTeam1 = redTeam1;
     customRedTeam2 = redTeam2;

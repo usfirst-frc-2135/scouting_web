@@ -92,7 +92,7 @@ function addQrData(dataObj) {
     // Modify global variables
     scannedData[key] = dataObj;
     ++scannedCount;
-    $("#submitData").html("Submit Data: " + scannedCount);
+    document.getElementById("submitData").innerHTML = "Submit Data: " + scannedCount;
     // Modify table
     $("#qrValidationTable").append(
       $("<tr>").append([
@@ -117,7 +117,7 @@ function removeQrData(dataKey) {
     // Modify global variables
     delete scannedData[dataKey];
     --scannedCount;
-    $("#submitData").html("Submit Data: " + scannedCount);
+    document.getElementById("submitData").innerHTML = "Submit Data: " + scannedCount;
     // Modify table
     $("#" + dataKey + "_row").remove();
   }
@@ -205,7 +205,7 @@ function createCameraSelect(reader) {
 }
 
 function clearData() {
-  $("#qrValidationTable").html("");
+  document.getElementById("qrValidationTable").innerHTML = "";
   scannedCount = 0;
   scannedData = {};
 }
@@ -228,7 +228,7 @@ function submitFunction() {
       if (response.indexOf('success') > -1) {
         alert("Data Successfully Submitted! Clearing Data.");
         clearData();
-        $("#submitData").html("Click to Submit Data: " + scannedCount);
+        document.getElementById("submitData").innerHTML = "Click to Submit Data: " + scannedCount;
       } else {
         alert("Data NOT Submitted. (is this a duplicate?)");
       }

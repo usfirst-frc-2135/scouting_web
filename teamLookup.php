@@ -994,7 +994,7 @@ require 'inc/header.php';
   // Loads the match data table
   function teamMatchDataTable(dataObj) {
     console.log("==> teamLookup: teamMatchDataTable()");
-    $("#matchDataTable").html("");  // clear table
+    document.getElementById("matchDataTable").innerHTML = "";     // clear table
     for (let i = 0; i < dataObj.length; i++) {
       let rowString = "<tr><td align=\"center\">" + dataObj[i]["matchnumber"] + "</td>" +
         "<td align=\"center\">" + dataObj[i]["autonLeave"] + "</td>" +
@@ -1138,7 +1138,7 @@ require 'inc/header.php';
   // Load the strategic data table for this team
   function loadStrategicData(dataObj) {
     console.log("==> teamLookup: loadStrategicData()");
-    $("#strategicDataTable").html("");  // clear table
+    document.getElementById("strategicDataTable").innerHTML = "";     // clear table
     for (let i = 0; i < dataObj.length; i++) {
       let driverability = dataObj[i]["driverability"];
       let driveVal = "";
@@ -1203,17 +1203,17 @@ require 'inc/header.php';
   function buildTeamLookupPage(teamNum) {
     console.log("==> teamLookup: buildTeamLookupPage()");
     // Clear existing data
-    $("#teamTitle").html("");
-    $("#robotPics").html("");
-    $("#totalTableBody").html("");
-    $("#autoTableBody").html("");
-    $("#teleopTableBody").html("");
-    $("#endgameTotalPtsTableBody").html("");
-    $("#endgameClimbTableBody").html("");
-    $("#pitRow1").html("");
-    $("#pitRow2").html("");
-    $("#strategicDataTable").html("");
-    $("#matchDataTable").html("");
+    document.getElementById("teamTitle").innerHTML = "";
+    document.getElementById("robotPics").innerHTML = "";
+    document.getElementById("totalTableBody").innerHTML = "";
+    document.getElementById("autoTableBody").innerHTML = "";
+    document.getElementById("teleopTableBody").innerHTML = "";
+    document.getElementById("endgameTotalPtsTableBody").innerHTML = "";
+    document.getElementById("endgameClimbTableBody").innerHTML = "";
+    document.getElementById("pitRow1").innerHTML = "";
+    document.getElementById("pitRow2").innerHTML = "";
+    document.getElementById("strategicDataTable").innerHTML = "";
+    document.getElementById("matchDataTable").innerHTML = "";
 
     // Get team name from TBA
     $.get("api/tbaAPI.php", {
@@ -1230,9 +1230,9 @@ require 'inc/header.php';
         console.log("==> teamLookup: for " + teamNum + ", teamname = " + teamname);
       }
       if (teamname != "XX") {
-        $("#teamTitle").html(teamNum + " - " + teamname);
+        document.getElementById("teamTitle").innerHTML = teamNum + " - " + teamname;
       } else {
-        $("#teamTitle").html("Team " + teamNum);
+        document.getElementById("teamTitle").innerHTML = teamNum;
       }
     });
 
