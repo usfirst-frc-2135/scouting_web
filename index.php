@@ -192,8 +192,9 @@ require 'inc/header.php';
     $.get("api/tbaAPI.php", {
       getEventCode: true
     }, function (eventCode) {
-      console.log("=> index.php - getEventCode: " + eventCode.trim());
-      $("#navbarEventCode").html(eventCode);
+      eventCode = eventCode.trim();
+      console.log("=> index: getEventCode: " + eventCode);
+      document.getElementById("navbarEventCode").innerHTML = eventCode;
     });
 
     // Update the database statuses

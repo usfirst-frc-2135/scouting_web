@@ -233,8 +233,9 @@ require 'inc/header.php';
     $.get("api/tbaAPI.php", {
       getEventCode: true
     }, function (eventCode) {
-      console.log("=> strategicData: getEventCode: " + eventCode.trim());
-      $("#navbarEventCode").html(eventCode);
+      eventCode = eventCode.trim();
+      console.log("=> stategicData: getEventCode: " + eventCode);
+      document.getElementById("navbarEventCode").innerHTML = eventCode;
     });
 
     buildStrategicDataTable();

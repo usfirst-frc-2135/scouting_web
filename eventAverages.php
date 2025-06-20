@@ -562,8 +562,9 @@ require 'inc/header.php';
     $.get("api/tbaAPI.php", {
       getEventCode: true
     }, function (eventCode) {
-      console.log("=> eventAverages: getEventCode: " + eventCode.trim());
-      $("#navbarEventCode").html(eventCode);
+      eventCode = eventCode.trim();
+      console.log("=> eventAverages.php: getEventCode: " + eventCode);
+      document.getElementById("navbarEventCode").innerHTML = eventCode;
       tbaEventCode = eventCode;
     });
 

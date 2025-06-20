@@ -110,8 +110,9 @@ require 'inc/header.php';
     $.get("api/tbaAPI.php", {
       getEventCode: true
     }, function (eventCode) {
-      console.log("=> pitPhotoUpload - getEventCode: " + eventCode);
-      $("#navbarEventCode").html(eventCode);
+      eventCode = eventCode.trim();
+      console.log("=> pitPhotoUpload: getEventCode: " + eventCode);
+      document.getElementById("navbarEventCode").innerHTML = eventCode;
     });
 
     // Upload photo to the server

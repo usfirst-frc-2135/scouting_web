@@ -527,8 +527,9 @@ require 'inc/header.php';
     $.get("api/tbaAPI.php", {
       getEventCode: true
     }, function (eventCode) {
-      console.log("=> matchForm: getEventCode: " + eventCode.trim());
-      $("#navbarEventCode").html(eventCode);
+      eventCode = eventCode.trim();
+      console.log("=> matchForm: getEventCode: " + eventCode);
+      document.getElementById("navbarEventCode").innerHTML = eventCode;
     });
 
     attachFormButtons(auto, teleop);

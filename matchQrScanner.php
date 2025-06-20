@@ -56,8 +56,9 @@ require 'inc/header.php';
     $.get("api/tbaAPI.php", {
       getEventCode: true
     }, function (eventCode) {
-      console.log("=> matchQrScanner: getEventCode: " + eventCode.trim());
-      $("#navbarEventCode").html(eventCode);
+      eventCode = eventCode.trim();
+      console.log("=> matchQrScanner: getEventCode: " + eventCode);
+      document.getElementById("navbarEventCode").innerHTML = eventCode;
     });
   });
 
