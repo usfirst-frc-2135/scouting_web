@@ -130,8 +130,6 @@ require 'inc/header.php';
 
 <script>
 
-  let myEventCode = "";
-
   // Set the status badges for an item
   function setStatusBadge(id, isSuccess) {
     console.log("==> index.php: setStatusBadge()");
@@ -151,12 +149,11 @@ require 'inc/header.php';
   // Update all status badges for DB connection
   function updateStatusValues(statusArray) {
     console.log("==> index.php: updateStatusValues()");
-    $("#serverName").text(statusArray["server"]);
-    $("#databaseName").text(statusArray["db"]);
-    $("#userName").text(statusArray["username"]);
-    $("#tbaKey").text(statusArray["tbakey"]);
-    $("#eventCode").text(statusArray["eventcode"]);
-    myEventCode = statusArray["eventcode"];
+    document.getElementById("serverName").innerText = statusArray["server"];
+    document.getElementById("databaseName").innerText = statusArray["db"];
+    document.getElementById("userName").innerText = statusArray["username"];
+    document.getElementById("tbaKey").innerText = statusArray["tbakey"];
+    document.getElementById("eventCode").innerText = statusArray["eventcode"];
 
     setStatusBadge("serverStatus", statusArray["serverExists"]);
     setStatusBadge("databaseStatus", statusArray["dbExists"]);
@@ -165,11 +162,11 @@ require 'inc/header.php';
     setStatusBadge("pitTableStatus", statusArray["pitTableExists"]);
     setStatusBadge("strategicTableStatus", statusArray["strategicTableExists"]);
 
-    $("#dataP").prop('checked', statusArray["useP"]);
-    $("#dataQm").prop('checked', statusArray["useQm"]);
-    $("#dataQf").prop('checked', statusArray["useQf"]);
-    $("#dataSf").prop('checked', statusArray["useSf"]);
-    $("#dataF").prop('checked', statusArray["useF"]);
+    document.getElementById("dataP").checked = statusArray["useP"];
+    document.getElementById("dataQm").checked = statusArray["useQm"];
+    document.getElementById("dataQf").checked = statusArray["useQf"];
+    document.getElementById("dataSf").checked = statusArray["useSf"];
+    document.getElementById("dataF").checked = statusArray["useF"];
   }
 
   // Map form form-control IDs to the db_config labels that store them
@@ -233,7 +230,7 @@ require 'inc/header.php';
     }
 
     // Write the db_config file
-    $("#writeConfig").on('click', function (event) {
+    document.getElementById("writeConfig").addEventListener('click', function () {
       let configData = {};
       for (const key in idToKeyMap) {
         if ($("#" + key).val() != "" && idToWrittenMap[key]) {
@@ -241,7 +238,7 @@ require 'inc/header.php';
         }
       }
       // Create table names from database name.
-      let databaseName = ($("#" + "enterDBName").val());
+      let databaseName = document.getElementById("enterDBName").innerText;
       configData["datatable"] = databaseName + "_dt";
       configData["tbatable"] = databaseName + "_tba";
       configData["pittable"] = databaseName + "_pt";
@@ -254,14 +251,14 @@ require 'inc/header.php';
     });
 
     // Update the match type filters
-    $("#filterData").on('click', function (event) {
+    document.getElementById("filterData").addEventListener('click', function () {
       // Make data to send to API
       let filterData = {};
-      filterData["useP"] = +$("#dataP").is(":checked");
-      filterData["useQm"] = +$("#dataQm").is(":checked");
-      filterData["useQf"] = +$("#dataQf").is(":checked");
-      filterData["useSf"] = +$("#dataSf").is(":checked");
-      filterData["useF"] = +$("#dataF").is(":checked");
+      filterData["useP"] = +document.getElementById("dataP").checked;
+      filterData["useQm"] = +document.getElementById("dataQf").checked;
+      filterData["useQf"] = +document.getElementById("dataQm").checked;
+      filterData["useSf"] = +document.getElementById("dataSf").checked;
+      filterData["useF"] = +document.getElementById("dataF").checked;
 
       let configInfo = {}
       configInfo["filterConfig"] = JSON.stringify(filterData);
@@ -273,7 +270,7 @@ require 'inc/header.php';
     });
 
     // Create a new database
-    $("#createDB").on('click', function (event) {
+    document.getElementById("createDB").addEventListener('click', function () {
       $.post("api/dbAPI.php", {
         createDB: true
       }, function (statusValues) {
@@ -283,7 +280,7 @@ require 'inc/header.php';
     });
 
     // Create new tables in database
-    $("#createTable").on('click', function (event) {
+    document.getElementById("createTable").addEventListener('click', function () {
       $.post("api/dbAPI.php", {
         createTable: true
       }, function (createTable) {

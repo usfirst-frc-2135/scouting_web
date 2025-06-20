@@ -571,7 +571,7 @@ require 'inc/header.php';
     buildAveragesTable(); // Retrieve all data
 
     // Filter out unwanted matches
-    $("#filterData").click(function () {
+    document.getElementById("filterData").addEventListener('click', function () {
       filterEventMatchData();
     });
 
@@ -581,7 +581,7 @@ require 'inc/header.php';
     // });
 
     // Write out picklist CSV file to client's download dir.
-    $("#downloadCsvFile").on('click', function (event) {
+    document.getElementById("downloadCsvFile").addEventListener('click', function () {
       downloadCSVFile(tbaEventCode);
     });
   });

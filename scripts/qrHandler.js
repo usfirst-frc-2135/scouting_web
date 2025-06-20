@@ -106,7 +106,7 @@ function addQrData(dataObj) {
       ]).prop("id", key + "_row")
     );
     // Add delete button
-    $("#" + key + "_delete").on('click', function (event) {
+    document.getElementById(key + "_delete").addEventListener('click', function () {
       removeQrData($(this).val());
     });
   }
@@ -119,7 +119,7 @@ function removeQrData(dataKey) {
     --scannedCount;
     document.getElementById("submitData").innerHTML = "Submit Data: " + scannedCount;
     // Modify table
-    $("#" + dataKey + "_row").remove();
+    document.getElementById(dataKey + "_row").remove();
   }
 }
 
@@ -170,8 +170,10 @@ function alertSuccessfulScan() {
   catch (exception) {
 
   }
-  $("#content").addClass("bg-success");
-  let timeoutFunction = setTimeout(function () { $("#content").removeClass("bg-success"); }, 500);
+  document.getElementById("content").classList.add("bg-success");
+  let timeoutFunction = setTimeout(function () {
+    document.getElementById("content").classList.remove("bg-success");
+  }, 500);
 }
 
 /*
@@ -197,7 +199,7 @@ function createCameraSelect(reader) {
 
     // Binds drop down on change to select another camera when necessary
     $("#cameraSelect").change(function () {
-      let selCamID = $("#cameraSelect").val();
+      let selCamID = document.getElementById("cameraSelect").value;
       scanCamera(reader, selCamID);
       setDefaultDeviceID(selCamID);
     });
@@ -214,7 +216,7 @@ function clearData() {
   Submit Function
 */
 function submitFunction() {
-  $("#submitData").on('click', function (event) {
+  document.getElementById("submitData").addEventListener('click', function () {
     let indexedData = [];
     for (const [key, value] of Object.entries(scannedData)) {
       indexedData.push(value);
