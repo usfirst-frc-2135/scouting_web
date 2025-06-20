@@ -84,7 +84,7 @@ require 'inc/header.php';
   // Load strategic schedule rows
   function loadStrategicSchedule(dataObj) {
     console.log("==> strategicSchedule: loadStrategicSchedule()");
-    $("#tableData").html(""); // Clear table
+    document.getElementById("tableData").innerHTML = "";    // Clear table
     for (let i = 0; i < dataObj.length; i++) {
       let matchNum = dataObj[i]["match_number"];
       let rowString = "<tr><td align=\"center\">" + matchNum + "</td>" +

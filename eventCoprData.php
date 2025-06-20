@@ -72,12 +72,12 @@ require 'inc/header.php';
     for (let i = 0; i < keys.length; i++) {
       header += '<th scope="col">' + keys[i][1] + '</th>'
     }
-    $("#tableKeys").html(header);
+    document.getElementById("tableKeys").innerHTML = header;
   }
 
   // Add team data to COPR table in html
   function addDataToCoprTable(coprData, keys) {
-    $("#tableData").html("");
+    document.getElementById("tableData").innerHTML = "";
     for (let teamNum in coprData) {
       let row = '<tr>';
       row += '<td>' + "<a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + '</td>';

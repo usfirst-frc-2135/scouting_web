@@ -271,7 +271,7 @@ require 'inc/header.php';
   // Create and the HTML table for display
   function addAveragesToTable(teamList, avgData) {
     console.log("==> eventAverages: addAveragesToTable()");
-    $("#tableData").html(""); // Clear Table
+    document.getElementById("tableData").innerHTML = (""); // Clear Table
     for (let teamNum of teamList) {
       let endgameClimbPercentage = getDataValue(avgData[teamNum], "endgameClimbPercent");
 

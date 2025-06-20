@@ -66,7 +66,7 @@ require 'inc/header.php';
       return null;
     }
 
-    $("#pitScoutTable").html("");
+    document.getElementById("pitScoutTable").innerHTML = "";
     let row = "";
     for (let teamNum of teams) {
       let teamName = names[teamNum];
@@ -90,7 +90,7 @@ require 'inc/header.php';
       }
 
       row += "</tr>";
-      $("#pitScoutTable").html(row);
+      document.getElementById("pitScoutTable").innerHTML = row;
     }
   }
 
