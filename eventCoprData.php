@@ -9,10 +9,6 @@ require 'inc/header.php';
     <!-- Page Title -->
     <div class="row pt-3 pb-3 mb-3">
       <h2 id="COPRHeader" class="col-4"><?php echo $title; ?></h2>
-
-      <div class="col-2">
-        <button id="reloadEvent" class="btn btn-primary" type="button">Reload</button>
-      </div>
     </div>
 
     <!-- Main row to hold the table -->
@@ -171,10 +167,6 @@ require 'inc/header.php';
     });
 
     buildTbaCoprTable();
-
-    $("#reloadEvent").click(function () {
-      buildTbaCoprTable();
-    });
 
     // Keep the frozen pane updated 
     // $("#coprTable").click(function () {

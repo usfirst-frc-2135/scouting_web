@@ -42,7 +42,7 @@ require 'inc/header.php';
           </form>
         </div>
 
-        <button id="loadingButton" class="btn btn-primary">
+        <button id="loadingButton" class="btn btn-primary mb-3">
           <span class="spinner-border spinner-border-sm"></span>Loading ...
         </button>
         <div id="uploadMessage" class="alert alert-dismissible fade show" style="display: none" role="alert">
@@ -72,20 +72,20 @@ require 'inc/header.php';
     $("#robotPic").val("");
     $("#teamNumber").val("");
 
-    $("#uploadMessageText").text(message);
-    $("#uploadMessage").addClass("alert-success");
-    $("#uploadMessage").removeClass("alert-danger");
-    $("#uploadMessage").show();
+    document.getElementById("uploadMessageText").innerHTML = message;
+    document.getElementById("uploadMessage").classList.add("alert-success");
+    document.getElementById("uploadMessage").classList.remove("alert-danger");
+    document.getElementById("uploadMessage").style.display = "block";
   }
 
   // Display error to user
   function showErrorMessage(message) {
     console.log("==> pitPhotoUpload: showErrorMessage(): " + message);
 
-    $("#uploadMessageText").text(message);
-    $("#uploadMessage").removeClass("alert-success");
-    $("#uploadMessage").addClass("alert-danger");
-    $("#uploadMessage").show();
+    document.getElementById("uploadMessageText").innerHTML = message;
+    document.getElementById("uploadMessage").classList.add("alert-danger");
+    document.getElementById("uploadMessage").classList.remove("alert-success");
+    document.getElementById("uploadMessage").style.display = "block";
   }
 
   // Display success to user
@@ -119,14 +119,14 @@ require 'inc/header.php';
     $("#upload").on('click', function (event) {
       console.log("=> pitPhotoUpload: upload clicked!");
       if (document.getElementById("robotPic").value != "" && document.getElementById("teamNumber").value != "") {
-        let teamNum = $("#teamNumber").val();
+        let teamNum = document.getElementById("teamNumber").value;
 
         if (validateTeamNumber(teamNum, null) > 0) {
           const loadButton = document.getElementById("loadingButton");
           loadButton.style.visibility = 'visible';
 
           // Replace checkbox is ticked
-          if ($("#replacePic").is(":checked") === true) {
+          if (document.getElementById("replacePic").checked === true) {
             console.log("==> Going to remove existing photos for team #" + teamNum);
 
             // First get list of robot-pic files for this team.
@@ -143,7 +143,7 @@ require 'inc/header.php';
                   data: { 'file': "<?php echo dirname(__FILE__) . '/' ?>" + picFile },
                   success: function (response) {
                     console.log("==> Deleted existing photo: " + picFile);
-                    $("#replacePic").prop("checked", false);
+                    document.getElementById("replacePic").checked = false;
                   },
                   error: function () {
                     console.error("Could NOT delete existing photo: " + picFile);
@@ -163,7 +163,7 @@ require 'inc/header.php';
               // Now upload the selected image
               let uploadPost = new FormData();
               uploadPost.append("teamPic", $("#robotPic")[0].files[0]);
-              uploadPost.append("teamNum", $("#teamNumber").val());
+              uploadPost.append("teamNum", document.getElementById("teamNumber").value);
               $.ajax({
                 type: "POST",
                 url: "api/dbWriteAPI.php",
@@ -189,9 +189,9 @@ require 'inc/header.php';
         loadButton.style.visibility = 'hidden';
       }
 
-      $("#closeMessage").on('click', function (event) {
+      document.getElementById("closeMessage").addEventListener('click', function () {
         $("#uploadMessage").hide();
-        $("#replacePic").prop("checked", false);
+        document.getElementById("replacePic").checked = false;
       });
     });
   });

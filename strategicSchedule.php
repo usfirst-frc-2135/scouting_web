@@ -9,10 +9,6 @@ require 'inc/header.php';
     <!-- Page Title -->
     <div class="row pt-3 pb-3 mb-3">
       <h2 class="col-md-4"><?php echo $title; ?></h2>
-
-      <div class="col-2">
-        <button id="reloadButton" class="btn btn-primary" type="button">Reload</button>
-      </div>
     </div>
 
     <!-- Main column to hold the strategic match schedule -->
@@ -120,12 +116,6 @@ require 'inc/header.php';
     });
 
     buildScheduleTable();
-
-    // Create the strategic match schedule
-    $("#reloadButton").click(function () {
-      console.log("=> Create Schedule button clicked!");
-      buildScheduleTable();
-    });
   });
 </script>
 

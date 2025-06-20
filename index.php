@@ -45,23 +45,23 @@ require 'inc/header.php';
               <div class="row">
                 <div class="col">
                   <div class="form-check">
-                    <input id="dataP" class="form-check-input" type="checkbox" name="filterGroup">
+                    <input id="dataP" class="form-check-input" type="checkbox" name="dataP">
                     <label for="dataP" class="form-check-label">Practice</label>
                   </div>
                   <div class="form-check">
-                    <input id="dataQm" class="form-check-input" type="checkbox" name="filterGroup">
+                    <input id="dataQm" class="form-check-input" type="checkbox" name="dataQm">
                     <label for="dataQm" class="form-check-label">Quals</label>
                   </div>
                   <div class="form-check">
-                    <input id="dataQf" class="form-check-input" type="checkbox" name="filterGroup">
+                    <input id="dataQf" class="form-check-input" type="checkbox" name="dataQf">
                     <label for="dataQf" class="form-check-label">Quarterfinals</label>
                   </div>
                   <div class="form-check">
-                    <input id="dataSf" class="form-check-input" type="checkbox" name="filterGroup">
+                    <input id="dataSf" class="form-check-input" type="checkbox" name="dataSf">
                     <label for="dataSf" class="form-check-label">Semifinals</label>
                   </div>
                   <div class="form-check">
-                    <input id="dataF" class="form-check-input" type="checkbox" name="filterGroup">
+                    <input id="dataF" class="form-check-input" type="checkbox" name="dataF">
                     <label for="dataF" class="form-check-label">Finals</label>
                   </div>
                 </div>
@@ -136,15 +136,15 @@ require 'inc/header.php';
   function setStatusBadge(id, isSuccess) {
     console.log("==> index.php: setStatusBadge()");
     if (isSuccess) {
-      $("#" + id).text("Connected");
-      $("#" + id).addClass("bg-success");
-      $("#" + id).removeClass("bg-warning");
-      $("#" + id).removeClass("bg-danger");
+      document.getElementById(id).innerText = "Connected";
+      document.getElementById(id).classList.add("bg-success");
+      document.getElementById(id).classList.remove("bg-warning");
+      document.getElementById(id).classList.remove("bg-danger");
     } else {
-      $("#" + id).text("Not Connected");
-      $("#" + id).addClass("bg-danger");
-      $("#" + id).removeClass("bg-warning");
-      $("#" + id).removeClass("bg-success");
+      document.getElementById(id).innerText = "Not Connected";
+      document.getElementById(id).classList.add("bg-danger");
+      document.getElementById(id).classList.remove("bg-warning");
+      document.getElementById(id).classList.remove("bg-success");
     }
   }
 
@@ -209,8 +209,8 @@ require 'inc/header.php';
     for (const key in idToKeyMap) {
       idToWrittenMap[key] = false;
       $("#" + key).change(function () {
-        if ($("#" + key).val() === "") {
-          $("#" + key).removeClass("bg-info");
+        if (document.getElementById(key).innerText === "") {
+          document.getElementById(key).classList.remove("bg-info");
           idToWrittenMap[key] = false;
           if (key === "enterDBName") {
             idToWrittenMap["writeMatchTable"] = false;
@@ -219,7 +219,7 @@ require 'inc/header.php';
             idToWrittenMap["writeStrategicTable"] = false;
           }
         } else {
-          $("#" + key).addClass("bg-info");
+          document.getElementById(key).classList.add("bg-info");
           idToWrittenMap[key] = true;
           if (key === "enterDBName") {
             // Mark tables in idToWrittenMap 
