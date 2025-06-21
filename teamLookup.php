@@ -95,7 +95,7 @@ require 'inc/header.php';
                 <h5 class="text-center">Match Totals</h5>
               </div>
               <div class="card-body">
-                <table id="matchTotalTable"
+                <table id="matchSheetTable"
                   class="table table-striped table-bordered table-hover table-sm table-bordered border-dark text-center ">
                   <thead>
                     <tr>
@@ -104,7 +104,7 @@ require 'inc/header.php';
                       <th scope="col">MAX</th>
                     </tr>
                   </thead>
-                  <tbody id="totalTableBody">
+                  <tbody>
                     <tr>
                       <th scope="row" style="text-align:left">Coral Scored</th>
                       <td> </td>
@@ -150,7 +150,7 @@ require 'inc/header.php';
                       <th scope="col">MAX</th>
                     </tr>
                   </thead>
-                  <tbody id="autoTableBody">
+                  <tbody>
                     <tr>
                       <th scope="row" style="text-align:left">Auton Points</th>
                       <td></td>
@@ -197,7 +197,7 @@ require 'inc/header.php';
                       <th scope="col">MAX</th>
                     </tr>
                   </thead>
-                  <tbody id="teleopTableBody">
+                  <tbody>
                     <tr>
                       <th scope="row" style="text-align:left">Teleop Points</th>
                       <td></td>
@@ -255,7 +255,7 @@ require 'inc/header.php';
                       <th scope="col">MAX</th>
                     </tr>
                   </thead>
-                  <tbody id="endgameTotalPtsTableBody">
+                  <tbody>
                     <tr>
                       <th scope="row" style="text-align:left">Endgame Points</th>
                       <td> </td>
@@ -275,7 +275,7 @@ require 'inc/header.php';
                       <th style="width:12%" scope="col">D</th>
                     </tr>
                   </thead>
-                  <tbody id="endgameClimbTableBody">
+                  <tbody>
                     <tr>
                       <th scope="row" style="text-align:left">Cage Climb %</th>
                       <td> </td>
@@ -300,7 +300,7 @@ require 'inc/header.php';
           </div>
           <div id="collapseStrategicData" class="card-body collapse">
             <div id="freeze-table-2" class="freeze-table overflow-auto">
-              <table id="sortableStrategicData" class="table table-striped table-sm bordered border-dark sortable">
+              <table id="strategicDataTable" class="table table-striped table-sm bordered border-dark sortable">
                 <colgroup>
                   <col span="2" style="background-color:transparent">
                   <col span="1" style="background-color:#cfe2ff">
@@ -379,8 +379,7 @@ require 'inc/header.php';
                     <th scope="col">Scout Name</th>
                   </tr>
                 </thead>
-                <tbody id="strategicDataTable">
-                </tbody>
+                <tbody> </tbody>
               </table>
             </div>
           </div>
@@ -395,7 +394,7 @@ require 'inc/header.php';
           </div>
           <!-- Pit Scouting 1st row -->
           <div id="collapsePitData" class="card-body collapse">
-            <table class="table table-striped table-sm table-bordered border-dark text-center">
+            <table id="pitTable1" class="table table-striped table-sm table-bordered border-dark text-center">
               <thead>
                 <colgroup>
                   <col span="1" style="background-color:transparent">
@@ -411,12 +410,11 @@ require 'inc/header.php';
                   <th scope="col" style="width:25%">Language</th>
                 </tr>
               </thead>
-              <tbody id="pitRow1">
-              </tbody>
+              <tbody> </tbody>
             </table>
 
             <!-- Pit Scouting 2nd row -->
-            <table class="table table-striped table-sm table-bordered border-dark text-center">
+            <table id="pitTable2" class="table table-striped table-sm table-bordered border-dark text-center">
               <thead>
                 <colgroup>
                   <col span="1" style="background-color:transparent">
@@ -433,8 +431,7 @@ require 'inc/header.php';
                   <th scope="col" style="width:25%">Batteries</th>
                 </tr>
               </thead>
-              <tbody id="pitRow2">
-              </tbody>
+              <tbody> </tbody>
             </table>
 
           </div>
@@ -449,7 +446,7 @@ require 'inc/header.php';
           </div>
           <div id="collapseAllMatches" class="card-body collapse">
             <div id="freeze-table" class="freeze-table overflow-auto">
-              <table id="sortableAllMatches" class="table table-striped table-sm table-bordered border-dark sortable">
+              <table id="matchDataTable" class="table table-striped table-sm table-bordered border-dark sortable">
                 <colgroup>
                   <col span="2" style="background-color:transparent">
                   <col span="1" style="background-color:#cfe2ff">
@@ -495,8 +492,7 @@ require 'inc/header.php';
                     <th scope="col">Scout Name</th>
                   </tr>
                 </thead>
-                <tbody id="matchDataTable">
-                </tbody>
+                <tbody> </tbody>
               </table>
             </div>
           </div>
@@ -850,14 +846,15 @@ require 'inc/header.php';
   ///// ENDGAME GRAPH END HERE /////
 
   // Create an html table row with tr and td cells
-  function writeAverageTableRow(tbodyID, dict, keys, length) {
+  function writeAverageTableRow(tableID, dict, keys, length) {
+    let tableRef = document.getElementById(tableID);
     let row = "<tr>";
     row += "<th  style='text-align:left'>" + dict[keys[0]] + "</th>";
     for (let i = 1; i < length; i++) {
       row += (i < keys.length) ? "<td>" + dict[keys[i]] + "</td>" : "<td></td>";
     }
     row += "</tr>";
-    $("#" + tbodyID).append(row);
+    tableRef.querySelector('tbody').insertRow().innerHTML = row;
   }
 
   // Generate all of the table data and fill them
@@ -870,15 +867,15 @@ require 'inc/header.php';
     avgs["totalCoralPointsStr"] = "<b>Coral Points</b>";
     avgs["totalAlgaePointsStr"] = "<b>Algae Points</b>";
 
-    writeAverageTableRow("totalTableBody", avgs, ["totalCoralStr", "avgTotalCoral", "maxTotalCoral"], 3);
-    writeAverageTableRow("totalTableBody", avgs, ["totalAlgaeStr", "avgTotalAlgae", "maxTotalAlgae"], 3);
-    writeAverageTableRow("totalTableBody", avgs, ["totalCoralPointsStr", "avgTotalCoralPoints", "maxTotalCoralPoints"], 3);
-    writeAverageTableRow("totalTableBody", avgs, ["totalAlgaePointsStr", "avgTotalAlgaePoints", "maxTotalAlgaePoints"], 3);
+    writeAverageTableRow("matchSheetTable", avgs, ["totalCoralStr", "avgTotalCoral", "maxTotalCoral"], 3);
+    writeAverageTableRow("matchSheetTable", avgs, ["totalAlgaeStr", "avgTotalAlgae", "maxTotalAlgae"], 3);
+    writeAverageTableRow("matchSheetTable", avgs, ["totalCoralPointsStr", "avgTotalCoralPoints", "maxTotalCoralPoints"], 3);
+    writeAverageTableRow("matchSheetTable", avgs, ["totalAlgaePointsStr", "avgTotalAlgaePoints", "maxTotalAlgaePoints"], 3);
 
     avgs["totalMatchPointsStr"] = "<b>Match Points</b>";
     avgs["avgTotalMatchPoints"] = avgs["avgTotalCoralPoints"] + avgs["avgTotalAlgaePoints"];
     avgs["maxTotalMatchPoints"] = avgs["maxTotalCoralPoints"] + avgs["maxTotalAlgaePoints"];
-    writeAverageTableRow("totalTableBody", avgs, ["totalMatchPointsStr", "avgTotalMatchPoints", "maxTotalMatchPoints"], 3);
+    writeAverageTableRow("matchSheetTable", avgs, ["totalMatchPointsStr", "avgTotalMatchPoints", "maxTotalMatchPoints"], 3);
 
     //Auton Table  
     avgs["autonpointsStr"] = "<b>Total Points</b>";
@@ -887,11 +884,11 @@ require 'inc/header.php';
     avgs["autoncoralpointsStr"] = "<b>Coral Points</b>";
     avgs["autonalgaepointsStr"] = "<b>Algae Points</b>";
 
-    writeAverageTableRow("autoTableBody", avgs, ["autonpointsStr", "avgTotalAutoPoints", "maxTotalAutoPoints"], 3);
-    writeAverageTableRow("autoTableBody", avgs, ["autontotalcoralStr", "avgAutonCoral", "maxAutonCoral"], 3);
-    writeAverageTableRow("autoTableBody", avgs, ["autontotalalgaeStr", "avgAutonAlgae", "maxAutonAlgae"], 3);
-    writeAverageTableRow("autoTableBody", avgs, ["autoncoralpointsStr", "avgTotalAutoCoralPoints", "maxTotalAutoCoralPoints"], 3);
-    writeAverageTableRow("autoTableBody", avgs, ["autonalgaepointsStr", "avgTotalAutoAlgaePoints", "maxTotalAutoAlgaePoints"], 3);
+    writeAverageTableRow("autonTable", avgs, ["autonpointsStr", "avgTotalAutoPoints", "maxTotalAutoPoints"], 3);
+    writeAverageTableRow("autonTable", avgs, ["autontotalcoralStr", "avgAutonCoral", "maxAutonCoral"], 3);
+    writeAverageTableRow("autonTable", avgs, ["autontotalalgaeStr", "avgAutonAlgae", "maxAutonAlgae"], 3);
+    writeAverageTableRow("autonTable", avgs, ["autoncoralpointsStr", "avgTotalAutoCoralPoints", "maxTotalAutoCoralPoints"], 3);
+    writeAverageTableRow("autonTable", avgs, ["autonalgaepointsStr", "avgTotalAutoAlgaePoints", "maxTotalAutoAlgaePoints"], 3);
 
     // Teleop Table
 
@@ -903,20 +900,20 @@ require 'inc/header.php';
     avgs["teleopcoralaccuracyStr"] = "<b>Coral Acc%</b>";
     avgs["teleopalgaeaccuracysStr"] = "<b>Algae Acc%</b>";
 
-    writeAverageTableRow("teleopTableBody", avgs, ["teleoppointsStr", "avgTotalTeleopPoints", "maxTotalTeleopPoints"], 3);
-    writeAverageTableRow("teleopTableBody", avgs, ["teleoptotalcoralStr", "avgTeleopCoralScored", "maxTeleopCoralScored"], 3);
-    writeAverageTableRow("teleopTableBody", avgs, ["teleoptotalalgaeStr", "avgTeleopAlgaeScored", "maxTeleopAlgaeScored"], 3);
-    writeAverageTableRow("teleopTableBody", avgs, ["teleopcoralpointsStr", "avgTotalTeleopCoralPoints", "maxTotalTeleopCoralPoints"], 3);
-    writeAverageTableRow("teleopTableBody", avgs, ["teleopalgaepointsStr", "avgTotalTeleopAlgaePoints", "maxTotalTeleopAlgaePoints"], 3);
-    writeAverageTableRow("teleopTableBody", avgs, ["teleopcoralaccuracyStr", "teleopCoralScoringPercent"], 3);
-    writeAverageTableRow("teleopTableBody", avgs, ["teleopalgaeaccuracysStr", "teleopAlgaeScoringPercent"], 3);
+    writeAverageTableRow("teleopTable", avgs, ["teleoppointsStr", "avgTotalTeleopPoints", "maxTotalTeleopPoints"], 3);
+    writeAverageTableRow("teleopTable", avgs, ["teleoptotalcoralStr", "avgTeleopCoralScored", "maxTeleopCoralScored"], 3);
+    writeAverageTableRow("teleopTable", avgs, ["teleoptotalalgaeStr", "avgTeleopAlgaeScored", "maxTeleopAlgaeScored"], 3);
+    writeAverageTableRow("teleopTable", avgs, ["teleopcoralpointsStr", "avgTotalTeleopCoralPoints", "maxTotalTeleopCoralPoints"], 3);
+    writeAverageTableRow("teleopTable", avgs, ["teleopalgaepointsStr", "avgTotalTeleopAlgaePoints", "maxTotalTeleopAlgaePoints"], 3);
+    writeAverageTableRow("teleopTable", avgs, ["teleopcoralaccuracyStr", "teleopCoralScoringPercent"], 3);
+    writeAverageTableRow("teleopTable", avgs, ["teleopalgaeaccuracysStr", "teleopAlgaeScoringPercent"], 3);
 
     /////// Endgame Table
     avgs["totalEndGamePointsStr"] = "<b>Endgame Points</b>";
     avgs["endgameClimbPercent"]["endgameclimbStr"] = "<b>Cage Climb %</b>";
 
-    writeAverageTableRow("endgameTotalPtsTableBody", avgs, ["totalEndGamePointsStr", "avgEndgamePoints", "maxEndgamePoints"], 3);
-    writeAverageTableRow("endgameClimbTableBody", avgs["endgameClimbPercent"], ["endgameclimbStr", 0, 2, 1, 3, 4], 6);
+    writeAverageTableRow("endgameTotalPtsTable", avgs, ["totalEndGamePointsStr", "avgEndgamePoints", "maxEndgamePoints"], 3);
+    writeAverageTableRow("endgameClimbTable", avgs["endgameClimbPercent"], ["endgameclimbStr", 0, 2, 1, 3, 4], 6);
   }
 
   // filters out the match type as specified in the db status page
@@ -968,33 +965,34 @@ require 'inc/header.php';
   }
 
   // Gets the matches and puts them into the html rows
-  function sortMatchData(table, matchCol) {
-    let rows = Array.prototype.slice.call(table.querySelectorAll("tbody> tr"));
+  function sortMatchData(tableRef, matchCol) {
+    let rows = Array.prototype.slice.call(tableRef.querySelectorAll("tbody> tr"));
     rows.sort(function (rowA, rowB) {
       return (compareMatchNumbers(rowA.cells[matchCol].textContent.trim(), rowB.cells[matchCol].textContent.trim()));
     });
     // Update the table body with the sorted rows.
     rows.forEach(function (row) {
-      table.querySelector("tbody").appendChild(row);
+      tableRef.querySelector("tbody").appendChild(row);
     });
   }
 
   // Gets the strategic match info and puts them into the html rows
-  function sortStrategicData(table, matchCol) {
-    let rows = Array.prototype.slice.call(table.querySelectorAll("tbody> tr"));
+  function sortStrategicData(tableRef, matchCol) {
+    let rows = Array.prototype.slice.call(tableRef.querySelectorAll("tbody> tr"));
     rows.sort(function (rowA, rowB) {
       return (compareMatchNumbers(rowA.cells[matchCol].textContent.trim(), rowB.cells[matchCol].textContent.trim()));
     });
     // Update the table body with the sorted rows.
     rows.forEach(function (row) {
-      table.querySelector("tbody").appendChild(row);
+      tableRef.querySelector("tbody").appendChild(row);
     });
   }
 
   // Loads the match data table
   function teamMatchDataTable(dataObj) {
     console.log("==> teamLookup: teamMatchDataTable()");
-    document.getElementById("matchDataTable").innerHTML = "";     // clear table
+    let tableRef = document.getElementById("matchDataTable");
+    tableRef.querySelector('tbody').innerHTML = "";     // clear table
     for (let i = 0; i < dataObj.length; i++) {
       let rowString = "<tr><td align=\"center\">" + dataObj[i]["matchnumber"] + "</td>" +
         "<td align=\"center\">" + dataObj[i]["autonLeave"] + "</td>" +
@@ -1023,11 +1021,11 @@ require 'inc/header.php';
         "<td align=\"center\">" + dataObj[i]["scoutname"] + "</td>" +
         "<td align=\"center\">" + dataObj[i]["comment"] + "</td>" +
         "</tr>";
-      $("#matchDataTable").append(rowString);
+      tableRef.querySelector('tbody').insertRow().innerHTML = rowString;
     }
     setTimeout(function () {
       // script instructions say this is needed, but it breaks table header sorting
-      // sorttable.makeSortable(document.getElementById("sortableAllMatches"));
+      // sorttable.makeSortable(document.getElementById("matchDataTable"));
       frozenTableMatches = $('#freeze-table').freezeTable({
         'freezeHead': true,
         'freezeColumn': true,
@@ -1044,7 +1042,7 @@ require 'inc/header.php';
         'frozenColVerticalOffset': 0
       });
     }, 100);
-    sortMatchData(document.getElementById("sortableAllMatches"), matchColumn);
+    sortMatchData(document.getElementById("matchDataTable"), matchColumn);
   }
 
   // Converts a given "1" to yes, "0" to no, anything else to empty string.
@@ -1105,13 +1103,13 @@ require 'inc/header.php';
   }
 
   // Create a row in the pit data table
-  function writePitTableRow(tbodyID, dict, keys, length) {
+  function writePitTableRow(tableID, dict, keys, length) {
     let row = "<tr>";
     for (let i = 0; i < length; i++) {
       row += (i < keys.length) ? "<td>" + dict[keys[i]] + "</td>" : "<td></td>";
     }
     row += "</tr>";
-    $("#" + tbodyID).append(row);
+    document.getElementById(tableID).querySelector('tbody').innerHTML = row;
   }
 
   // Load the pit data table for this team
@@ -1131,14 +1129,15 @@ require 'inc/header.php';
       pitData["numbatteries"];
     }
 
-    writePitTableRow("pitRow1", pitData, ["swervedrivestring", "drivemotors", "sparepartsstring", "proglanguage"], 4);
-    writePitTableRow("pitRow2", pitData, ["computervisionstring", "pitorg", "preparedness", "numbatteries"], 4);
+    writePitTableRow("pitTable1", pitData, ["swervedrivestring", "drivemotors", "sparepartsstring", "proglanguage"], 4);
+    writePitTableRow("pitTable2", pitData, ["computervisionstring", "pitorg", "preparedness", "numbatteries"], 4);
   }
 
   // Load the strategic data table for this team
   function loadStrategicData(dataObj) {
     console.log("==> teamLookup: loadStrategicData()");
-    document.getElementById("strategicDataTable").innerHTML = "";     // clear table
+    let tableRef = document.getElementById("strategicDataTable");
+    tableRef.querySelector('tbody').innerHTML = "";     // clear table
     for (let i = 0; i < dataObj.length; i++) {
       let driverability = dataObj[i]["driverability"];
       let driveVal = "";
@@ -1184,7 +1183,7 @@ require 'inc/header.php';
         "<td align=\"center\">" + dataObj[i]["general_comment"] + "</td>" +
         "<td align=\"center\">" + dataObj[i]["scoutname"] + "</td>" +
         "</tr>";
-      $("#strategicDataTable").append(rowString);
+      tableRef.querySelector('tbody').innerHTML = rowString;
     }
 
     setTimeout(function () {
@@ -1205,15 +1204,15 @@ require 'inc/header.php';
     // Clear existing data
     document.getElementById("teamTitle").innerHTML = "";
     document.getElementById("robotPics").innerHTML = "";
-    document.getElementById("totalTableBody").innerHTML = "";
-    document.getElementById("autoTableBody").innerHTML = "";
-    document.getElementById("teleopTableBody").innerHTML = "";
-    document.getElementById("endgameTotalPtsTableBody").innerHTML = "";
-    document.getElementById("endgameClimbTableBody").innerHTML = "";
-    document.getElementById("pitRow1").innerHTML = "";
-    document.getElementById("pitRow2").innerHTML = "";
-    document.getElementById("strategicDataTable").innerHTML = "";
-    document.getElementById("matchDataTable").innerHTML = "";
+    document.getElementById("matchSheetTable").querySelector('tbody').innerHTML = "";
+    document.getElementById("autonTable").querySelector('tbody').innerHTML = "";
+    document.getElementById("teleopTable").querySelector('tbody').innerHTML = "";
+    document.getElementById("endgameTotalPtsTable").querySelector('tbody').innerHTML = "";
+    document.getElementById("endgameClimbTable").querySelector('tbody').innerHTML = "";
+    document.getElementById("pitTable1").querySelector('tbody').innerHTML = "";
+    document.getElementById("pitTable2").querySelector('tbody').innerHTML = "";
+    document.getElementById("strategicDataTable").querySelector('tbody').innerHTML = "";
+    document.getElementById("matchDataTable").querySelector('tbody').innerHTML = "";
 
     // Get team name from TBA
     $.get("api/tbaAPI.php", {
@@ -1303,19 +1302,19 @@ require 'inc/header.php';
     });
 
     // Load team data for the number entered
-    $("#loadTeamButton").click(function () {
+    document.getElementById("loadTeamButton").addEventListener('click', function () {
       buildTeamLookupPage($("#enterTeamNumber").val());
     });
 
     // Keep the frozen match data updated
-    // $("#sortableAllMatches").click(function () {
+    //  document.getElementById("matchDataTable").addEventListener('click', function () {
     //   if (frozenTableMatches) {
     //     frozenTableMatches.update();
     //   }
     // });
 
     // // Keep the frozen strategy table updated
-    // $("#sortableStrategicData").click(function () {
+    //  document.getElementById("sortableStrategicData").addEventListener('click', function () {
     //   if (frozenTableStrategy) {
     //     frozenTableStrategy.update();
     //   }

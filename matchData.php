@@ -69,7 +69,7 @@ require 'inc/header.php';
             <th scope="col" style="background-color:#cfe2ff">Scout Name</th>
           </tr>
         </thead>
-        <tbody id="tableData" class="table-group-divider">
+        <tbody class="table-group-divider">
         </tbody>
       </table>
       <!-- </div> -->
@@ -91,8 +91,8 @@ require 'inc/header.php';
   // Sort the html table data by team number
   function sortMatchData(tableData, teamCol, matchCol) {
     console.log("==> matchData: sortMatchData()");
-    let table = document.getElementById(tableData);
-    let rows = Array.prototype.slice.call(table.querySelectorAll("tbody> tr"));
+    let tableRef = document.getElementById(tableData);
+    let rows = Array.prototype.slice.call(tableRef.querySelectorAll("tbody> tr"));
 
     // Sort the rows based on column 1 match number
     rows.sort(function (rowA, rowB) {
@@ -106,7 +106,7 @@ require 'inc/header.php';
 
     // Update the table body with the sorted rows.
     rows.forEach(function (row) {
-      table.querySelector("tbody").appendChild(row);
+      tableRef.querySelector("tbody").appendChild(row);
     });
   }
 
@@ -114,6 +114,8 @@ require 'inc/header.php';
   // NOTE: data object keywords MUST match the database definition in dbHandler.php
   function loadMatchData(dataObj) {
     console.log("==> matchData: loadMatchData()");
+    let tbodyRef = document.querySelector('#matchDataTable tbody');;
+    tbodyRef.innerHTML = ""; // Clear Table
     for (let i = 0; i < dataObj.length; i++) {
       let teamNum = dataObj[i]["teamnumber"];
       let rowString = "<tr><td style=\"background-color:transparent\">" + dataObj[i]["matchnumber"] + "</td>" +
@@ -138,8 +140,7 @@ require 'inc/header.php';
         "<td style=\"background-color:transparent\">" + dataObj[i]["scoutname"] + "</td>" +
         "<td style=\"background-color:#cfe2ff\">" + dataObj[i]["comment"] + "</td>" +
         "</tr>";
-      $("#tableData").append(rowString);
-
+      tbodyRef.insertRow().innerHTML = rowString;
     }
   }
 

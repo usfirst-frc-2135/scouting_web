@@ -42,7 +42,7 @@ require 'inc/header.php';
               <th class="text-center sorttable_nosort" scope="col">Teams</th>
             </tr>
           </thead>
-          <tbody id="tableData">
+          <tbody>
           </tbody>
         </table>
       </div>
@@ -63,8 +63,8 @@ require 'inc/header.php';
     // a "B", "C", "D", or "E", in which case we want to strip that off and just use the number for
     // the comparison.
 
-    let table = document.getElementById(id);
-    let rows = Array.prototype.slice.call(table.querySelectorAll("tbody> tr"));
+    let tableRef = document.getElementById(id);
+    let rows = Array.prototype.slice.call(tableRef.querySelectorAll("tbody> tr"));
 
     // Sort the rows based on column 1 match number value
     rows.sort(function (rowA, rowB) {
@@ -73,19 +73,20 @@ require 'inc/header.php';
 
     // Update the table body with the sorted rows 
     rows.forEach(function (row) {
-      table.querySelector("tbody").appendChild(row);
+      tableRef.querySelector("tbody").appendChild(row);
     });
   }
 
   // Load strategic schedule rows
   function loadStrategicSchedule(dataObj) {
     console.log("==> strategicSchedule: loadStrategicSchedule()");
-    document.getElementById("tableData").innerHTML = "";    // Clear table
+    let tbodyRef = document.querySelector('#matchTable tbody');;
+    tbodyRef.innerHTML = ""; // Clear Table
     for (let i = 0; i < dataObj.length; i++) {
       let matchNum = dataObj[i]["match_number"];
       let rowString = "<tr><td align=\"center\">" + matchNum + "</td>" +
         "<td align=\"center\">" + dataObj[i]["teams"] + "</td>" + "</td>";
-      $("#tableData").append(rowString);
+      tbodyRef.insertRow().innerHTML = rowString;
     }
   }
 

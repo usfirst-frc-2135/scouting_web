@@ -116,8 +116,8 @@ require 'inc/header.php';
   // Sort strategic data table rows
   function sortStrategicData(tableData, teamCol, matchCol) {
     console.log("==> strategicData: sortStrategicData()");
-    let table = document.getElementById(tableData);
-    let rows = Array.prototype.slice.call(table.querySelectorAll("tbody> tr"));
+    let tableRef = document.getElementById(tableData);
+    let rows = Array.prototype.slice.call(tableRef.querySelectorAll("tbody> tr"));
 
     // Sort by match number
     rows.sort(function (rowA, rowB) {
@@ -131,7 +131,7 @@ require 'inc/header.php';
 
     // Update the table body with the sorted rows 
     rows.forEach(function (row) {
-      table.querySelector("tbody").appendChild(row);
+      tableRef.querySelector("tbody").appendChild(row);
     });
   }
 
@@ -147,6 +147,9 @@ require 'inc/header.php';
   // Load the strategic data into the table
   function loadStrategicData(dataObj) {
     console.log("==> strategicData: loadStrategicData()");
+    let tableRef = document.getElementById("strategicDataTable");
+    tableRef.querySelector('tbody').innerHTML = "";   // Clear Table
+
     for (let i = 0; i < dataObj.length; i++) {
       let driveVal = "";
       switch (dataObj[i]["driverability"]) {
@@ -187,7 +190,7 @@ require 'inc/header.php';
         "<td style=\"background-color:transparent\">" + dataObj[i]["general_comment"] + "</td>" +
         "<td style=\"background-color:#cfe2ff\">" + dataObj[i]["scoutname"] + "</td>" +
         "</tr>";
-      $("#tableData").append(rowString);
+      tableRef.querySelector('tbody').insertRow().innerHTML = rowString;
     }
   }
 

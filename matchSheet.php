@@ -161,7 +161,7 @@ require 'inc/header.php';
           </div>
 
           <div class="overflow-auto">
-            <table class="table table-bordered table-danger table-sm">
+            <table id="R0DataTable" class="table table-bordered table-danger table-sm">
               <thead>
                 <tr>
                   <th colspan="6" class="text-center fs-6">Auton</th>
@@ -192,7 +192,7 @@ require 'inc/header.php';
                   <th scope="col">D</th>
                 </tr>
               </thead>
-              <tbody id="R0DataTable"> </tbody>
+              <tbody> </tbody>
             </table>
           </div>
 
@@ -226,7 +226,7 @@ require 'inc/header.php';
           </div>
 
           <div class="overflow-auto">
-            <table class="table table-bordered table-danger table-sm">
+            <table id="R1DataTable" class="table table-bordered table-danger table-sm">
               <thead>
                 <tr>
                   <th colspan="6" class="text-center fs-6">Auton</th>
@@ -257,7 +257,7 @@ require 'inc/header.php';
                   <th scope="col">D</th>
                 </tr>
               </thead>
-              <tbody id="R1DataTable"> </tbody>
+              <tbody> </tbody>
             </table>
           </div>
 
@@ -291,7 +291,7 @@ require 'inc/header.php';
           </div>
 
           <div class="overflow-auto">
-            <table class="table table-bordered table-danger table-sm">
+            <table id="R2DataTable" class="table table-bordered table-danger table-sm">
               <thead>
                 <tr>
                   <th colspan="6" class="text-center fs-6">Auton</th>
@@ -322,7 +322,7 @@ require 'inc/header.php';
                   <th scope="col">D</th>
                 </tr>
               </thead>
-              <tbody id="R2DataTable"> </tbody>
+              <tbody> </tbody>
             </table>
           </div>
 
@@ -360,7 +360,7 @@ require 'inc/header.php';
           </div>
 
           <div class="overflow-auto">
-            <table class="table table-bordered table-primary table-sm">
+            <table id="B0DataTable" class="table table-bordered table-primary table-sm">
               <thead>
                 <tr>
                   <th colspan="6" class="text-center fs-6">Auton</th>
@@ -391,7 +391,7 @@ require 'inc/header.php';
                   <th scope="col">D</th>
                 </tr>
               </thead>
-              <tbody id="B0DataTable"> </tbody>
+              <tbody> </tbody>
             </table>
           </div>
 
@@ -425,7 +425,7 @@ require 'inc/header.php';
           </div>
 
           <div class="overflow-auto">
-            <table class="table table-bordered table-primary table-sm">
+            <table id="B1DataTable" class="table table-bordered table-primary table-sm">
               <thead>
                 <tr>
                   <th colspan="6" class="text-center fs-6">Auton</th>
@@ -456,7 +456,7 @@ require 'inc/header.php';
                   <th scope="col">D</th>
                 </tr>
               </thead>
-              <tbody id="B1DataTable"> </tbody>
+              <tbody> </tbody>
             </table>
           </div>
 
@@ -490,7 +490,7 @@ require 'inc/header.php';
           </div>
 
           <div class="overflow-auto">
-            <table class="table table-bordered table-primary table-sm">
+            <table id="B2DataTable" class="table table-bordered table-primary table-sm">
               <thead>
                 <tr>
                   <th colspan="6" class="text-center fs-6">Auton</th>
@@ -521,7 +521,7 @@ require 'inc/header.php';
                   <th scope="col">D</th>
                 </tr>
               </thead>
-              <tbody id="B2DataTable"> </tbody>
+              <tbody> </tbody>
             </table>
           </div>
 
@@ -607,6 +607,8 @@ require 'inc/header.php';
 
     // Load team scouted information
     let rd = _allMatchData[teamNum];
+    let tableRef = document.getElementById(color + index + "DataTable");
+    tableRef.querySelector('tbody').innerHTML = "";
     let row;
     if (rd != null) {
       row = "<tr>";
@@ -631,7 +633,7 @@ require 'inc/header.php';
       row += "<td align=\"center\">" + rd["endgameClimbPercent"][4] + "</td>";
       row += "</tr>";
     }
-    $("#" + color + index + "DataTable").append(row);
+    tableRef.querySelector('tbody').insertRow().innerHTML = row;
   }
 
   function updateSummary(redList, blueList) {
@@ -828,12 +830,12 @@ require 'inc/header.php';
   function clearMatchSheet() {
     console.log("==> matchSheet: clearMatchSheet()");
     // Clear Data
-    document.getElementById("R0DataTable").innerHTML = "";
-    document.getElementById("R1DataTable").innerHTML = "";
-    document.getElementById("R2DataTable").innerHTML = "";
-    document.getElementById("B0DataTable").innerHTML = "";
-    document.getElementById("B1DataTable").innerHTML = "";
-    document.getElementById("B2DataTable").innerHTML = "";
+    document.getElementById("R0DataTable").querySelector('tbody').innerHTML = "";
+    document.getElementById("R1DataTable").querySelector('tbody').innerHTML = "";
+    document.getElementById("R2DataTable").querySelector('tbody').innerHTML = "";
+    document.getElementById("B0DataTable").querySelector('tbody').innerHTML = "";
+    document.getElementById("B1DataTable").querySelector('tbody').innerHTML = "";
+    document.getElementById("B2DataTable").querySelector('tbody').innerHTML = "";
 
     document.getElementById("redTotalCoral").innerHTML = "";
     document.getElementById("redTotalAlgae").innerHTML = "";

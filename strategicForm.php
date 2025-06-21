@@ -483,7 +483,7 @@ require 'inc/header.php';
     });
 
     // Submit the strategic form data
-    $("#submitButton").click(function () {
+    document.getElementById("submitButton").addEventListener('click', function () {
       // Should be:
       // formData getFormData()
       // if (validateStrategicData(formData))

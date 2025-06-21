@@ -116,7 +116,7 @@ require 'inc/header.php';
     });
 
     // Upload photo to the server
-    $("#upload").on('click', function (event) {
+    document.getElementById("upload").addEventListener('click', function () {
       console.log("=> pitPhotoUpload: upload clicked!");
       if (document.getElementById("robotPic").value != "" && document.getElementById("teamNumber").value != "") {
         let teamNum = document.getElementById("teamNumber").value;

@@ -46,15 +46,15 @@ require 'inc/header.php';
   // Sort the pit status table by team number
   function sortPitStatusTable(tableId) {
     console.log("==> pitStatus: sortTable(): id: " + tableId);
-    let table = document.getElementById(tableId);
-    let rows = Array.prototype.slice.call(table.querySelectorAll("tbody> tr"));
+    let tableRef = document.getElementById(tableId);
+    let rows = Array.prototype.slice.call(tableRef.querySelectorAll("tbody> tr"));
 
     rows.sort(function (rowA, rowB) {
       return compareTeamNumbers(rowA.cells[0].textContent, rowB.cells[0].textContent);
     });
 
     rows.forEach(function (row) {
-      table.querySelector("tbody").appendChild(row);
+      tableRef.querySelector('tbody').appendChild(row);
     });
   }
 

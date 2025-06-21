@@ -229,7 +229,7 @@ require 'inc/header.php';
           </tr>
 
         </thead>
-        <tbody id="tableData" class="table-group-divider">
+        <tbody class="table-group-divider">
         </tbody>
       </table>
       <!-- </div> -->
@@ -271,7 +271,8 @@ require 'inc/header.php';
   // Create and the HTML table for display
   function addAveragesToTable(teamList, avgData) {
     console.log("==> eventAverages: addAveragesToTable()");
-    document.getElementById("tableData").innerHTML = (""); // Clear Table
+    let tableRef = document.getElementById("averageTable");
+    tableRef.querySelector('tbody').innerHTML = ""; // Clear Table
     for (let teamNum of teamList) {
       let endgameClimbPercentage = getDataValue(avgData[teamNum], "endgameClimbPercent");
 
@@ -344,7 +345,7 @@ require 'inc/header.php';
         "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "totaldied") + "</td>" +
         "</td>";
 
-      $("#tableData").append(rowString);
+      tableRef.querySelector('tbody').insertRow().innerHTML = rowString;
     }
   }
 

@@ -26,7 +26,7 @@ require 'inc/header.php';
         <thead>
           <tr id="tableKeys"></tr>
         </thead>
-        <tbody id="tableData" class="table-group-divider">
+        <tbody class="table-group-divider">
         </tbody>
       </table>
       <!-- </div> -->
@@ -48,8 +48,8 @@ require 'inc/header.php';
   // Sort the generated COPR table by team/match numbers
   function sortCoprTable(tableData, teamCol) {
     console.log("==> eventCoprData.php: sortCoprTable()");
-    let table = document.getElementById(tableData);
-    let rows = Array.prototype.slice.call(table.querySelectorAll("tbody> tr"));
+    let tableRef = document.getElementById(tableData);
+    let rows = Array.prototype.slice.call(tableRef.querySelectorAll("tbody> tr"));
 
     // Sort the rows based on column 1 match number
     rows.sort(function (rowA, rowB) {
@@ -58,7 +58,7 @@ require 'inc/header.php';
 
     // Update the table body with the sorted rows.
     rows.forEach(function (row) {
-      table.querySelector("tbody").appendChild(row);
+      tableRef.querySelector("tbody").appendChild(row);
     });
   }
 
@@ -73,7 +73,8 @@ require 'inc/header.php';
 
   // Add team data to COPR table in html
   function addDataToCoprTable(coprData, keys) {
-    document.getElementById("tableData").innerHTML = "";
+    let tableRef = document.getElementById("coprTable");
+    tableRef.querySelector('tbody').innerHTML = ""; // Clear Table
     for (let teamNum in coprData) {
       let row = '<tr>';
       row += '<td>' + "<a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + '</td>';
@@ -81,7 +82,7 @@ require 'inc/header.php';
         row += '<td>' + coprData[teamNum][keys[j][0]] + '</td>';
       }
       row += '</tr>';
-      $("#tableData").append(row);
+      tableRef.querySelector('tbody').insertRow().innerHTML = row;
     }
   }
 
