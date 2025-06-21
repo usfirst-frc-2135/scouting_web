@@ -421,13 +421,13 @@ require 'inc/header.php';
   function getFormData(auto, teleop) {
     console.log("==> matchForm: getFormData()");
     let out = {};
-    let matchLevel = $("#compLevel").val();
-    let matchNumber = $("#matchNumber").val();
+    let matchLevel = document.getElementById("compLevel").value;
+    let matchNumber = document.getElementById("matchNumber").value;
     if (matchNumber != parseInt(matchNumber)) {
       alert("Match number must be integer.");
       throw Error("Match number must be integer.");
     }
-    let teamNumber = $("#teamNumber").val();
+    let teamNumber = document.getElementById("teamNumber").value;
     if (teamNumber === "") {
       alert("Team number must not be empty.");
       throw Error("Team number must not be empty.");
@@ -445,7 +445,7 @@ require 'inc/header.php';
     out["autoncubesbottom"] = auto.cubes.bottom;
     out["autoncubesmiddle"] = auto.cubes.middle;
     out["autoncubestop"] = auto.cubes.bottom;
-    out["autochargestation"] = $("#autochargestation").val();
+    out["autochargestation"] = document.getElementById("autochargestation").value;
     out["teleopconesbottom"] = teleop.cones.bottom;
     out["teleopconesmiddle"] = teleop.cones.middle;
     out["teleopconestop"] = teleop.cones.top;
@@ -455,18 +455,17 @@ require 'inc/header.php';
     out["cubepickup"] = $("#pickedupCube").is(':checked') ? 1 : 0;
     out["uprightconepickup"] = $("#pickedupUprightCone").is(':checked') ? 1 : 0;
     out["tippedconepickup"] = $("#pickedupTippedCone").is(':checked') ? 1 : 0;
-    out["endgamechargestation"] = $("#endgamechargestation").val();
+    out["endgamechargestation"] = document.getElementById("endgamechargestation").value;
     out["died"] = $("#dead").is(':checked') ? 1 : 0;
-    out["scoutname"] = $("#scoutName").val();
-    out["comment"] = $("#comment").val();
+    out["scoutname"] = document.getElementById("scoutName").value;
+    out["comment"] = document.getElementById("generalComment").innerText;
     return out;
   }
 
   // Clear all form fields
   function clearFormData() {
     console.log("==> matchForm: clearFormData()");
-    $("#matchNumber").val("");
-    //$("#startpos").val("0");
+    document.getElementById("matchNumber").value = "";
     auto.cones.bottom = 0;
     auto.cones.middle = 0;
     auto.cones.top = 0;
@@ -491,8 +490,8 @@ require 'inc/header.php';
     document.getElementById("teleopCubesBottom").innerHTML = "Teleop Cubes Bottom: " + teleop.cubes.bottom;
     document.getElementById("teleopCubesMiddle").innerHTML = "Teleop Cubes Middle: " + teleop.cubes.middle;
     document.getElementById("teleopCubesTop").innerHTML = "Teleop Cubes Top: " + teleop.cubes.top;
-    $("#teamNumber").val("");
-    $("#comment").val("");
+    document.getElementById("teamNumber").value = "";
+    document.getElementById("generalComment").innerText = "";
   }
 
   // Write the match data form to the DB table

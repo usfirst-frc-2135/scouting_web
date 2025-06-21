@@ -80,7 +80,7 @@ require 'inc/header.php';
   // Load strategic schedule rows
   function loadStrategicSchedule(dataObj) {
     console.log("==> strategicSchedule: loadStrategicSchedule()");
-    let tbodyRef = document.querySelector('#matchTable tbody');;
+    let tbodyRef = document.getElementById("matchTable").querySelector('tbody');;
     tbodyRef.innerHTML = ""; // Clear Table
     for (let i = 0; i < dataObj.length; i++) {
       let matchNum = dataObj[i]["match_number"];

@@ -62,7 +62,7 @@ class matchDataProcessor {
     return this.matchLessEqualThan(startMatch, middleMatch) && this.matchLessEqualThan(middleMatch, endMatch);
   }
 
-  filterMatches(startMatch, endMatch) {
+  filterEventMatches(startMatch, endMatch) {
     //  Modify this.data to only include matches between start match and end match
     let newData = [];
     for (let i = 0; i < this.data.length; i++) {

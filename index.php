@@ -205,8 +205,9 @@ require 'inc/header.php';
     // Loop through handling all fields
     for (const key in idToKeyMap) {
       idToWrittenMap[key] = false;
-      $("#" + key).change(function () {
-        if (document.getElementById(key).innerText === "") {
+      let elementRef = document.getElementById(key);
+      elementRef.change(function () {
+        if (elementRef.innerText === "") {
           document.getElementById(key).classList.remove("bg-info");
           idToWrittenMap[key] = false;
           if (key === "enterDBName") {
@@ -216,7 +217,7 @@ require 'inc/header.php';
             idToWrittenMap["writeStrategicTable"] = false;
           }
         } else {
-          document.getElementById(key).classList.add("bg-info");
+          elementRef.classList.add("bg-info");
           idToWrittenMap[key] = true;
           if (key === "enterDBName") {
             // Mark tables in idToWrittenMap 
@@ -231,14 +232,23 @@ require 'inc/header.php';
 
     // Write the db_config file
     document.getElementById("writeConfig").addEventListener('click', function () {
+      for (const key in idToKeyMap) {
+        if (document.getElementById(key).value == "") {
+          console.warn("Enter all fields: server URL, database name, username, password, TBA key, and event code.");
+          alert("Enter all fields: server URL, database name, username, password, TBA key, and event code.")
+          return;
+        }
+      }
+
       let configData = {};
       for (const key in idToKeyMap) {
-        if ($("#" + key).val() != "" && idToWrittenMap[key]) {
-          configData[idToKeyMap[key]] = $("#" + key).val();
+        if (idToWrittenMap[key]) {
+          configData[idToKeyMap[key]] = document.getElementById(key).value;
         }
       }
       // Create table names from database name.
-      let databaseName = document.getElementById("enterDBName").innerText;
+      let databaseName = document.getElementById("enterDBName").value;
+      console.log("index: " + databaseName);
       configData["datatable"] = databaseName + "_dt";
       configData["tbatable"] = databaseName + "_tba";
       configData["pittable"] = databaseName + "_pt";

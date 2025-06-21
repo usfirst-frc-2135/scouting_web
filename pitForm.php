@@ -180,10 +180,10 @@ require 'inc/header.php';
     console.log("==> pitForm: verifyPitForm()");
     let isError = false;
     let errMsg = "Please enter values for these fields:";
-    let teamNum = $("#teamNumber").val();
+    let teamNum = document.getElementById("teamNumber").value;
 
     // Make sure each piece of data has a value selected.
-    if ((($("#teamNumber").val() === "") || (validateTeamNumber(teamNum, null) <= 0))) {
+    if (((document.getElementById("teamNumber").value === "") || (validateTeamNumber(teamNum, null) <= 0))) {
       errMsg += " Team Number";
       isError = true;
     }
@@ -195,7 +195,7 @@ require 'inc/header.php';
       isError = true;
     }
 
-    let driveMotors = $("#driveMotors").val();
+    let driveMotors = document.getElementById("driveMotors").value;
     if (driveMotors != 1 && driveMotors != 2 && driveMotors != 3 && driveMotors != 4) {
       if (isError === true)
         errMsg += ",";
@@ -210,7 +210,7 @@ require 'inc/header.php';
       isError = true;
     }
 
-    let progLanguage = $("#programmingLanguage").val();
+    let progLanguage = document.getElementById("programmingLanguage").value;
     if (progLanguage != 1 && progLanguage != 2 && progLanguage != 3 && progLanguage != 4 && progLanguage != 5) {
       if (isError === true)
         errMsg += ",";
@@ -248,13 +248,13 @@ require 'inc/header.php';
   // Clear pit form fields
   function clearPitForm() {
     console.log("==> pitForm: clearPitForm()");
-    $("#teamNumber").val("");
+    document.getElementById("teamNumber").value = "";
     $("#swerveDriveYes").prop("checked", false);
     $("#swerveDriveNo").prop("checked", false);
-    $("#driveMotors").val("0");
+    document.getElementById("driveMotors").value = "0";
     $("#sparePartsYes").prop("checked", false);
     $("#sparePartsNo").prop("checked", false);
-    $("#programmingLanguage").val("0");
+    document.getElementById("programmingLanguage").value = "0";
     $("#computerVisionYes").prop("checked", false);
     $("#computerVisionNo").prop("checked", false);
     $("#pitScore1").prop("checked", false);
@@ -263,14 +263,14 @@ require 'inc/header.php';
     $("#preparednessScore1").prop("checked", false);
     $("#preparednessScore2").prop("checked", false);
     $("#preparednessScore3").prop("checked", false);
-    $("#batteries").val("");
+    document.getElementById("batteries").value = "";
   }
 
   // Write pit data form fields to DB table
   function writeFormToPitTable() {
     console.log("==> pitForm: writeFormToPitTable()");
     let dataToUse = {};
-    dataToUse["teamnumber"] = $("#teamNumber").val();
+    dataToUse["teamnumber"] = document.getElementById("teamNumber").value;
 
     // Swerve
     if ($("#swerveDriveYes").is(':checked')) {
@@ -281,7 +281,7 @@ require 'inc/header.php';
     }
 
     // Drive motors
-    let driveMotors = $("#driveMotors").val()
+    let driveMotors = document.getElementById("driveMotors").value;
     switch (driveMotors) {
       case "1": dataToUse["drivemotors"] = "Krakens"; break;
       case "2": dataToUse["drivemotors"] = "NEOs"; break;
@@ -299,7 +299,7 @@ require 'inc/header.php';
     }
 
     // Software language
-    let progLang = $("#programmingLanguage").val();
+    let progLang = document.getElementById("programmingLanguage").value;
     switch (progLang) {
       case "1": dataToUse["proglanguage"] = "Java"; break;
       case "2": dataToUse["proglanguage"] = "LabView"; break;
@@ -341,7 +341,7 @@ require 'inc/header.php';
     }
 
     // Battery count
-    dataToUse["numbatteries"] = $("#batteries").val();
+    dataToUse["numbatteries"] = document.getElementById("batteries").value;
 
     $.post("api/dbWriteAPI.php", {
       writePitTable: JSON.stringify(dataToUse)

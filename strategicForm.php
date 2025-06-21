@@ -274,16 +274,16 @@ require 'inc/header.php';
     let errMsg = "Please enter values for these fields:";
 
     // Make sure there is a team number, scoutname and matchnum.
-    let teamNum = $("#teamNumber").val();
+    let teamNum = document.getElementById("teamNumber").value;
     if (((teamNum === "") || (validateTeamNumber(teamNum, null) <= 0))) {
       errMsg += " Team Number";
       isError = true;
     }
-    if ($("#matchNumber").val() === "") {
+    if (document.getElementById("matchNumber").value === "") {
       errMsg += " Match Number";
       isError = true;
     }
-    if ($("#scoutName").val() === "") {
+    if (document.getElementById("scoutName").value === "") {
       errMsg += " Scout Name";
       isError = true;
     }
@@ -295,10 +295,10 @@ require 'inc/header.php';
 
   function clearStrategicForm() {
     console.log("==> strategicForm.php: clearStrategicForm()");
-    $("#scoutName").val("");
-    $("#teamNumber").val("");
-    $("#compLevel").val("");
-    $("#matchNumber").val("");
+    document.getElementById("scoutName").value = "";
+    document.getElementById("teamNumber").value = "";
+    document.getElementById("compLevel").value = "";
+    document.getElementById("matchNumber").value = "";
     $("#driveScore1").prop("checked", false);
     $("#driveScore2").prop("checked", false);
     $("#driveScore3").prop("checked", false);
@@ -307,10 +307,10 @@ require 'inc/header.php';
 
     $("#defenseTactic1").prop("checked", false);
     $("#defenseTactic2").prop("checked", false);
-    $("#defenseComment").val("");
+    document.getElementById("defenseComment").value = "";
 
     $("#againstTactic1").prop("checked", false);
-    $("#againstComment").val("");
+    document.getElementById("againstComment").value = "";
 
     $("#foul1").prop("checked", false);
 
@@ -332,8 +332,8 @@ require 'inc/header.php';
 
     $("#endgameFoul1").prop("checked", false);
 
-    $("#problemComment").val("");
-    $("#generalComment").val("");
+    document.getElementById("problemComment").value = "";
+    document.getElementById("generalComment").value = "";
   }
 
   // Write strategic form data to DB table
@@ -341,15 +341,15 @@ require 'inc/header.php';
     console.log("==> strategicForm.php: writeStrategicFormToTable()");
     let dataToUse = {};
 
-    let compLevel = $("#compLevel").val();
-    let matchNumber = $("#matchNumber").val();
+    let compLevel = document.getElementById("compLevel").value;
+    let matchNumber = document.getElementById("matchNumber").value;
 
     // Clean up teamnumber before writing to table.
-    let teamnum = validateTeamNumber($("#teamNumber").val(), null);
+    let teamnum = validateTeamNumber(document.getElementById("teamNumber").value, null);
     // Cleaned up by validate function
     // teamnum = teamnum.toUpperCase();  // if there's a letter, make it upper case
     // teamnum = teamnum.replace(/[^0-9a-zA-Z]/g, '');  // remove any non-alphanumeric chars
-    dataToUse["scoutname"] = $("#scoutName").val();
+    dataToUse["scoutname"] = document.getElementById("scoutName").value;
     dataToUse["teamnumber"] = teamnum;
     dataToUse["matchnumber"] = compLevel + matchNumber;
 
@@ -379,13 +379,13 @@ require 'inc/header.php';
     if ($("#defenseTactic2").is(':checked')) {
       dataToUse["defense_tactic2"] = 1;
     }
-    dataToUse["defense_comment"] = $("#defenseComment").val();
+    dataToUse["defense_comment"] = document.getElementById("defenseComment").value;
 
     dataToUse["against_tactic1"] = 0;     // default
     if ($("#againstTactic1").is(':checked')) {
       dataToUse["against_tactic1"] = 1;
     }
-    dataToUse["against_comment"] = $("#againstComment").val();
+    dataToUse["against_comment"] = document.getElementById("againstComment").value;
 
     dataToUse["foul1"] = 0;     // default
     dataToUse["autonFoul1"] = 0;     // default
@@ -452,8 +452,8 @@ require 'inc/header.php';
       dataToUse["endgameFoul1"] = 1;
     }
 
-    dataToUse["problem_comment"] = $("#problemComment").val();
-    dataToUse["general_comment"] = $("#generalComment").val();
+    dataToUse["problem_comment"] = document.getElementById("problemComment").value;
+    dataToUse["general_comment"] = document.getElementById("generalComment").value;
 
     $.post("api/dbWriteAPI.php", {
       writeStrategicData: JSON.stringify(dataToUse)

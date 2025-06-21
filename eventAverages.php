@@ -29,7 +29,7 @@ require 'inc/header.php';
 
             <div class="input-group">
               <div class="input-group-prepend">
-                <select id="startPrefix" class="form-select mb-3" aria-label="Comp Level Select">
+                <select id="startCompLevel" class="form-select mb-3" aria-label="Comp Level Select">
                   <option value="p">P</option>
                   <option value="qm" selected>QM</option>
                   <option value="qf">QF</option>
@@ -37,13 +37,13 @@ require 'inc/header.php';
                   <option value="f">F</option>
                 </select>
               </div>
-              <input id="startMatch" class="form-control col-2 mb-3" type="text" placeholder="Start"
+              <input id="startMatchNum" class="form-control col-2 mb-3" type="text" placeholder="Start"
                 aria-label="Start Match Filter">
             </div>
 
             <div class="input-group">
               <div class="input-group-prepend">
-                <select id="endPrefix" class="form-select mb-3" aria-label="Comp Level Select">
+                <select id="endCompLevel" class="form-select mb-3" aria-label="Comp Level Select">
                   <option value="p">P</option>
                   <option value="qm" selected>QM</option>
                   <option value="qf">QF</option>
@@ -51,7 +51,7 @@ require 'inc/header.php';
                   <option value="f">F</option>
                 </select>
               </div>
-              <input id="endMatch" class="form-control col-2 mb-3" type="text" placeholder="End" aria-label="End Match Filter">
+              <input id="endMatchNum" class="form-control col-2 mb-3" type="text" placeholder="End" aria-label="End Match Filter">
             </div>
 
             <div>
@@ -362,13 +362,14 @@ require 'inc/header.php';
   // Update table when match filters are changed
   function filterEventMatchData() {
     console.log("==> eventAverages: filterEventMatchData()");
-    let start = $("#startPrefix").val() + $("#startMatch").val();
-    let end = $("#endPrefix").val() + $("#endMatch").val();
+    let startMatch = document.getElementById("startCompLevel").value + document.getElementById("startMatchNum").value;
+    let endMatch = document.getElementById("endCompLevel").value + document.getElementById("endMatchNum").value;
+    console.log("eventAverages: filterEventMatches: " + startMatch + " to " + endMatch);
     let mdp = new matchDataProcessor(_jsonMatchData);
-    mdp.filterEventMatches(start, end);
+    mdp.filterEventMatches(startMatch, endMatch);
     let filteredData = mdp.getAverages();
     let teamList = addKeysToMatchTable(filteredData);
-    addAveragesToTable(teamList, fitleredData);
+    addAveragesToTable(teamList, filteredData);
     setTimeout(function () {
       // sorttable.makeSortable(document.getElementById("averageTable"))
       // _frozenTable = $('#freeze-table').freezeTable({

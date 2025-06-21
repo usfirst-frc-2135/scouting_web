@@ -1027,7 +1027,7 @@ require 'inc/header.php';
     $("#loadMatch").click(function () {
       console.log("=> matchsheet: load event match!");
       bUsingCustom = false;
-      loadEventMatchSheet($("#enterMatchLevel").val(), $("#enterMatchNumber").val());
+      loadEventMatchSheet(document.getElementById("enterMatchLevel").value, document.getElementById("enterMatchNumber").value);
     });
 
     // Open and set the custom match selected
@@ -1043,7 +1043,13 @@ require 'inc/header.php';
         return false;
       }
       else if (redTeamNum1.trim() !== "" && blueTeamNum1.trim() !== "") {
-        loadCustomMatch($("#enterRed1").val(), $("#enterRed2").val(), $("#enterRed3").val(), $("#enterBlue1").val(), $("#enterBlue2").val(), $("#enterBlue3").val());
+        loadCustomMatch(
+          document.getElementById("enterRed1").value,
+          document.getElementById("enterRed2").value,
+          document.getElementById("enterRed3").value,
+          document.getElementById("enterBlue1").value,
+          document.getElementById("enterBlue2").value,
+          document.getElementById("enterBlue3").value);
       }
       else {
         alert("Please fill out red team number 1 and blue team number 1!");

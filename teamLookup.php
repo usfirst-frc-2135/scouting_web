@@ -847,14 +847,14 @@ require 'inc/header.php';
 
   // Create an html table row with tr and td cells
   function writeAverageTableRow(tableID, dict, keys, length) {
-    let tableRef = document.getElementById(tableID);
+    let tbodyRef = document.getElementById(tableID).querySelector('tbody');
     let row = "<tr>";
     row += "<th  style='text-align:left'>" + dict[keys[0]] + "</th>";
     for (let i = 1; i < length; i++) {
       row += (i < keys.length) ? "<td>" + dict[keys[i]] + "</td>" : "<td></td>";
     }
     row += "</tr>";
-    tableRef.querySelector('tbody').insertRow().innerHTML = row;
+    tbodyRef.insertRow().innerHTML = row;
   }
 
   // Generate all of the table data and fill them
@@ -991,8 +991,8 @@ require 'inc/header.php';
   // Loads the match data table
   function teamMatchDataTable(dataObj) {
     console.log("==> teamLookup: teamMatchDataTable()");
-    let tableRef = document.getElementById("matchDataTable");
-    tableRef.querySelector('tbody').innerHTML = "";     // clear table
+    let tbodyRef = document.getElementById("matchDataTable").querySelector('tbody');
+    tbodyRef.innerHTML = "";     // clear table
     for (let i = 0; i < dataObj.length; i++) {
       let rowString = "<tr><td align=\"center\">" + dataObj[i]["matchnumber"] + "</td>" +
         "<td align=\"center\">" + dataObj[i]["autonLeave"] + "</td>" +
@@ -1021,7 +1021,7 @@ require 'inc/header.php';
         "<td align=\"center\">" + dataObj[i]["scoutname"] + "</td>" +
         "<td align=\"center\">" + dataObj[i]["comment"] + "</td>" +
         "</tr>";
-      tableRef.querySelector('tbody').insertRow().innerHTML = rowString;
+      tbodyRef.insertRow().innerHTML = rowString;
     }
     setTimeout(function () {
       // script instructions say this is needed, but it breaks table header sorting
@@ -1104,12 +1104,13 @@ require 'inc/header.php';
 
   // Create a row in the pit data table
   function writePitTableRow(tableID, dict, keys, length) {
+    let tbodyRef = document.getElementById(tableID).querySelector('tbody');
     let row = "<tr>";
     for (let i = 0; i < length; i++) {
       row += (i < keys.length) ? "<td>" + dict[keys[i]] + "</td>" : "<td></td>";
     }
     row += "</tr>";
-    document.getElementById(tableID).querySelector('tbody').innerHTML = row;
+    tbodyRef.insertRow().innerHTML = row;
   }
 
   // Load the pit data table for this team
@@ -1136,8 +1137,8 @@ require 'inc/header.php';
   // Load the strategic data table for this team
   function loadStrategicData(dataObj) {
     console.log("==> teamLookup: loadStrategicData()");
-    let tableRef = document.getElementById("strategicDataTable");
-    tableRef.querySelector('tbody').innerHTML = "";     // clear table
+    let tbodyRef = document.getElementById("strategicDataTable").querySelector('tbody');
+    tbodyRef.innerHTML = "";     // clear table
     for (let i = 0; i < dataObj.length; i++) {
       let driverability = dataObj[i]["driverability"];
       let driveVal = "";
@@ -1183,7 +1184,7 @@ require 'inc/header.php';
         "<td align=\"center\">" + dataObj[i]["general_comment"] + "</td>" +
         "<td align=\"center\">" + dataObj[i]["scoutname"] + "</td>" +
         "</tr>";
-      tableRef.querySelector('tbody').innerHTML = rowString;
+      tbodyRef.innerHTML = rowString;
     }
 
     setTimeout(function () {
@@ -1303,7 +1304,7 @@ require 'inc/header.php';
 
     // Load team data for the number entered
     document.getElementById("loadTeamButton").addEventListener('click', function () {
-      buildTeamLookupPage($("#enterTeamNumber").val());
+      buildTeamLookupPage(document.getElementById("enterTeamNumber").value);
     });
 
     // Keep the frozen match data updated

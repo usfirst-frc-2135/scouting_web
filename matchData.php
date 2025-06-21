@@ -114,7 +114,7 @@ require 'inc/header.php';
   // NOTE: data object keywords MUST match the database definition in dbHandler.php
   function loadMatchData(dataObj) {
     console.log("==> matchData: loadMatchData()");
-    let tbodyRef = document.querySelector('#matchDataTable tbody');;
+    let tbodyRef = document.getElementById("matchDataTable").querySelector('tbody');;
     tbodyRef.innerHTML = ""; // Clear Table
     for (let i = 0; i < dataObj.length; i++) {
       let teamNum = dataObj[i]["teamnumber"];

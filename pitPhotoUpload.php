@@ -69,8 +69,8 @@ require 'inc/header.php';
   // Display success to user
   function showSuccessMessage(message) {
     console.log("==> pitPhotoUpload: showSuccessMessage()" + message);
-    $("#robotPic").val("");
-    $("#teamNumber").val("");
+    document.getElementById("robotPic").value = "";
+    document.getElementById("teamNumber").value = "";
 
     document.getElementById("uploadMessageText").innerHTML = message;
     document.getElementById("uploadMessage").classList.add("alert-success");
