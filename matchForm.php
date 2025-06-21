@@ -536,7 +536,7 @@ require 'inc/header.php';
     attachFormButtons(auto, teleop);
 
     // Submit the match data form 
-    $("#submitForm").click(function () {
+    document.getElementById("submitForm").addEventListener('click', function () {
       let formData = getFormData(auto, teleop);
       alert("This match form is NOT configured for 2025 game!");
 

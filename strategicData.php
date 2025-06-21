@@ -244,11 +244,10 @@ require 'inc/header.php';
     buildStrategicDataTable();
 
     // Submit the strategic form data
-    // $("#strategicDataTable").click(function () {
-    //   // if (frozenTable) {
-    //   frozenTable.update();
-    // }
-    // });
+    // document.getElementById("strategicDataTable").addEventListener('click', function () {
+    //     // if (frozenTable) {
+    //     frozenTable.update();
+    //   }
 
     // $(".table-scrollable").freezeTable({
     //   'scrollable': true,

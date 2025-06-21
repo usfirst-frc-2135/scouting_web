@@ -170,7 +170,7 @@ require 'inc/header.php';
     buildTbaCoprTable();
 
     // Keep the frozen pane updated 
-    // $("#coprTable").click(function () {
+    // document.getElementById("coprTable").addEventListener('click', function () {
     // if (_frozenTable) {
     //   _frozenTable.update();
     // }

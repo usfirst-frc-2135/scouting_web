@@ -371,7 +371,7 @@ require 'inc/header.php';
     });
 
     // Submit the match data form
-    $("#submitButton").click(function () {
+    document.getElementById("submitButton").addEventListener('click', function () {
       if (!verifyPitForm()) {
         writeFormToPitTable();
       }

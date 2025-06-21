@@ -193,7 +193,7 @@ require 'inc/header.php';
     buildMatchDataTable();
 
     // Keep the frozen pane updated 
-    // $("#matchDataTable").click(function () {
+    // document.getElementById("matchDataTable").addEventListener('click', function () {
     // if (frozenTable) {
     //   frozenTable.update();
     // }

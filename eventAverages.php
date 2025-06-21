@@ -576,8 +576,8 @@ require 'inc/header.php';
       filterEventMatchData();
     });
 
-    // Keep the frozen pane updated 
-    // $("#averageTable").click(function () {
+    // Keep the frozen pane updated
+    // document.getElementById("averageTable").addEventListener('click', function () {
     //   _frozenTable.update();
     // });
 
