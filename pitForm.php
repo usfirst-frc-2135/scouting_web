@@ -188,7 +188,7 @@ require 'inc/header.php';
       isError = true;
     }
 
-    if ((!($("#swerveDriveYes").is(':checked'))) && (!($("#swerveDriveNo").is(':checked')))) {
+    if (!document.getElementById("swerveDriveYes").checked && !document.getElementById("swerveDriveNo").checked) {
       if (isError === true)
         errMsg += ",";
       errMsg += " Swerve Drive";
@@ -203,7 +203,7 @@ require 'inc/header.php';
       isError = true;
     }
 
-    if ((!($("#sparePartsYes").is(':checked'))) && (!($("#sparePartsNo").is(':checked')))) {
+    if (!document.getElementById("sparePartsYes").checked && !document.getElementById("sparePartsNo").checked) {
       if (isError === true)
         errMsg += ",";
       errMsg += " Spare Parts";
@@ -218,21 +218,21 @@ require 'inc/header.php';
       isError = true;
     }
 
-    if ((!($("#computerVisionYes").is(':checked'))) && (!($("#computerVisionNo").is(':checked')))) {
+    if (!document.getElementById("computerVisionYes").checked && !document.getElementById("computerVisionNo").checked) {
       if (isError === true)
         errMsg += ",";
       errMsg += " Computer Vision";
       isError = true;
     }
 
-    if ((!($("#pitScore1").is(':checked'))) && (!($("#pitScore2").is(':checked'))) && (!($("#pitScore3").is(':checked')))) {
+    if (!document.getElementById("pitScore1").checked && !document.getElementById("pitScore2").checked && !document.getElementById("pitScore3").checked) {
       if (isError === true)
         errMsg += ",";
       errMsg += " Pit Organization";
       isError = true;
     }
 
-    if ((!($("#preparednessScore1").is(':checked'))) && (!($("#preparednessScore2").is(':checked'))) && (!($("#preparednessScore3").is(':checked')))) {
+    if (!document.getElementById("preparednessScore1").checked && !document.getElementById("preparednessScore2").checked && !document.getElementById("preparednessScore3").checked) {
       if (isError === true)
         errMsg += ",";
       errMsg += " Preparedness";
@@ -249,20 +249,20 @@ require 'inc/header.php';
   function clearPitForm() {
     console.log("==> pitForm: clearPitForm()");
     document.getElementById("teamNumber").value = "";
-    $("#swerveDriveYes").prop("checked", false);
-    $("#swerveDriveNo").prop("checked", false);
+    document.getElementById("swerveDriveYes").checked = false;
+    document.getElementById("swerveDriveNo").checked = false;
     document.getElementById("driveMotors").value = "0";
-    $("#sparePartsYes").prop("checked", false);
-    $("#sparePartsNo").prop("checked", false);
+    document.getElementById("sparePartsYes").checked = false;
+    document.getElementById("sparePartsNo").checked = false;
     document.getElementById("programmingLanguage").value = "0";
-    $("#computerVisionYes").prop("checked", false);
-    $("#computerVisionNo").prop("checked", false);
-    $("#pitScore1").prop("checked", false);
-    $("#pitScore2").prop("checked", false);
-    $("#pitScore3").prop("checked", false);
-    $("#preparednessScore1").prop("checked", false);
-    $("#preparednessScore2").prop("checked", false);
-    $("#preparednessScore3").prop("checked", false);
+    document.getElementById("computerVisionYes").checked = false;
+    document.getElementById("computerVisionNo").checked = false;
+    document.getElementById("pitScore1").checked = false;
+    document.getElementById("pitScore2").checked = false;
+    document.getElementById("pitScore3").checked = false;
+    document.getElementById("preparednessScore1").checked = false;
+    document.getElementById("preparednessScore2").checked = false;
+    document.getElementById("preparednessScore3").checked = false;
     document.getElementById("batteries").value = "";
   }
 
@@ -273,10 +273,10 @@ require 'inc/header.php';
     dataToUse["teamnumber"] = document.getElementById("teamNumber").value;
 
     // Swerve
-    if ($("#swerveDriveYes").is(':checked')) {
+    if (document.getElementById("swerveDriveYes").checked) {
       dataToUse["swerve"] = 1;
     }
-    if ($("#swerveDriveNo").is(':checked')) {
+    if (document.getElementById("swerveDriveNo").checked) {
       dataToUse["swerve"] = 0;
     }
 
@@ -291,10 +291,10 @@ require 'inc/header.php';
     }
 
     // Spare parts
-    if ($("#sparePartsYes").is(':checked')) {
+    if (document.getElementById("sparePartsYes").checked) {
       dataToUse["spareparts"] = 1;
     }
-    if ($("#sparePartsNo").is(':checked')) {
+    if (document.getElementById("sparePartsNo").checked) {
       dataToUse["spareparts"] = 0;
     }
 
@@ -310,33 +310,33 @@ require 'inc/header.php';
     }
 
     // Computer vision
-    if ($("#computerVisionYes").is(':checked')) {
+    if (document.getElementById("computerVisionYes").checked) {
       dataToUse["computervision"] = 1;
     }
-    if ($("#computerVisionNo").is(':checked')) {
+    if (document.getElementById("computerVisionNo").checked) {
       dataToUse["computervision"] = 0;
     }
 
     // Pit organization
-    if ($("#pitScore1").is(':checked')) {
+    if (document.getElementById("pitScore1").checked) {
       dataToUse["pitorg"] = 1;
     }
-    if ($("#pitScore2").is(':checked')) {
+    if (document.getElementById("pitScore2").checked) {
       dataToUse["pitorg"] = 3;
     }
-    if ($("#pitScore3").is(':checked')) {
+    if (document.getElementById("pitScore3").checked) {
       dataToUse["pitorg"] = 5;
     }
 
     // Overall readiness
     dataToUse["preparedness"] = 1;  // default
-    if ($("#preparednessScore1").is(':checked')) {
+    if (document.getElementById("preparednessScore1").checked) {
       dataToUse["preparedness"] = 1;
     }
-    else if ($("#preparednessScore2").is(':checked')) {
+    else if (document.getElementById("preparednessScore2").checked) {
       dataToUse["preparedness"] = 3;
     }
-    else if ($("#preparednessScore3").is(':checked')) {
+    else if (document.getElementById("preparednessScore3").checked) {
       dataToUse["preparedness"] = 5;
     }
 

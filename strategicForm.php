@@ -355,34 +355,34 @@ require 'inc/header.php';
 
     // Assume that some options were not checked at all.
     dataToUse["driverability"] = 0; // default
-    if ($("#driveScore1").is(':checked')) {
+    if (document.getElementById("driveScore1").checked) {
       dataToUse["driverability"] = 1;
     }
-    if ($("#driveScore2").is(':checked')) {
+    if (document.getElementById("driveScore2").checked) {
       dataToUse["driverability"] = 2;
     }
-    if ($("#driveScore3").is(':checked')) {
+    if (document.getElementById("driveScore3").checked) {
       dataToUse["driverability"] = 3;
     }
-    if ($("#driveScore4").is(':checked')) {
+    if (document.getElementById("driveScore4").checked) {
       dataToUse["driverability"] = 4;
     }
-    if ($("#driveScore5").is(':checked')) {
+    if (document.getElementById("driveScore5").checked) {
       dataToUse["driverability"] = 5;
     }
 
     dataToUse["defense_tactic1"] = 0;     // default
     dataToUse["defense_tactic2"] = 0;     // default
-    if ($("#defenseTactic1").is(':checked')) {
+    if (document.getElementById("defenseTactic1").checked) {
       dataToUse["defense_tactic1"] = 1;
     }
-    if ($("#defenseTactic2").is(':checked')) {
+    if (document.getElementById("defenseTactic2").checked) {
       dataToUse["defense_tactic2"] = 1;
     }
     dataToUse["defense_comment"] = document.getElementById("defenseComment").value;
 
     dataToUse["against_tactic1"] = 0;     // default
-    if ($("#againstTactic1").is(':checked')) {
+    if (document.getElementById("againstTactic1").checked) {
       dataToUse["against_tactic1"] = 1;
     }
     dataToUse["against_comment"] = document.getElementById("againstComment").value;
@@ -403,52 +403,52 @@ require 'inc/header.php';
     dataToUse["teleopFloorPickupCoral"] = 0;     // default
     dataToUse["teleopFloorPickupAlgae"] = 0;     // default
     dataToUse["endgameFoul1"] = 0;     // default
-    if ($("#foul1").is(':checked')) {
+    if (document.getElementById("foul1").checked) {
       dataToUse["foul1"] = 1;
     }
-    if ($("#autonFoul1").is(':checked')) {
+    if (document.getElementById("autonFoul1").checked) {
       dataToUse["autonFoul1"] = 1;
     }
-    if ($("#autonFoul2").is(':checked')) {
+    if (document.getElementById("autonFoul2").checked) {
       dataToUse["autonFoul2"] = 1;
     }
-    if ($("#autonGetCoralFromFloor").is(':checked')) {
+    if (document.getElementById("autonGetCoralFromFloor").checked) {
       dataToUse["autonGetCoralFromFloor"] = 1;
     }
-    if ($("#autonGetCoralFromStation").is(':checked')) {
+    if (document.getElementById("autonGetCoralFromStation").checked) {
       dataToUse["autonGetCoralFromStation"] = 1;
     }
-    if ($("#autonGetAlgaeFromFloor").is(':checked')) {
+    if (document.getElementById("autonGetAlgaeFromFloor").checked) {
       dataToUse["autonGetAlgaeFromFloor"] = 1;
     }
-    if ($("#autonGetAlgaeFromReef").is(':checked')) {
+    if (document.getElementById("autonGetAlgaeFromReef").checked) {
       dataToUse["autonGetAlgaeFromReef"] = 1;
     }
-    if ($("#teleopFoul1").is(':checked')) {
+    if (document.getElementById("teleopFoul1").checked) {
       dataToUse["teleopFoul1"] = 1;
     }
-    if ($("#teleopFoul2").is(':checked')) {
+    if (document.getElementById("teleopFoul2").checked) {
       dataToUse["teleopFoul2"] = 1;
     }
-    if ($("#teleopFoul3").is(':checked')) {
+    if (document.getElementById("teleopFoul3").checked) {
       dataToUse["teleopFoul3"] = 1;
     }
-    if ($("#teleopFoul4").is(':checked')) {
+    if (document.getElementById("teleopFoul4").checked) {
       dataToUse["teleopFoul4"] = 1;
     }
-    if ($("#teleopKnockOffAlgaeFromReef").is(':checked')) {
+    if (document.getElementById("teleopKnockOffAlgaeFromReef").checked) {
       dataToUse["teleopKnockOffAlgaeFromReef"] = 1;
     }
-    if ($("#teleopAcquireAlgaeFromReef").is(':checked')) {
+    if (document.getElementById("teleopAcquireAlgaeFromReef").checked) {
       dataToUse["teleopAcquireAlgaeFromReef"] = 1;
     }
-    if ($("#teleopFloorPickupCoral").is(':checked')) {
+    if (document.getElementById("teleopFloorPickupCoral").checked) {
       dataToUse["teleopFloorPickupCoral"] = 1;
     }
-    if ($("#teleopFloorPickupAlgae").is(':checked')) {
+    if (document.getElementById("teleopFloorPickupAlgae").checked) {
       dataToUse["teleopFloorPickupAlgae"] = 1;
     }
-    if ($("#endgameFoul1").is(':checked')) {
+    if (document.getElementById("endgameFoul1").checked) {
       dataToUse["endgameFoul1"] = 1;
     }
 
