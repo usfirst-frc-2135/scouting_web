@@ -395,14 +395,13 @@ require 'inc/header.php';
           <!-- Pit Scouting 1st row -->
           <div id="collapsePitData" class="card-body collapse">
             <table id="pitTable1" class="table table-striped table-sm table-bordered border-dark text-center">
+              <colgroup>
+                <col span="1" style="background-color:transparent">
+                <col span="1" style="background-color:#cfe2ff">
+                <col span="1" style="background-color:transparent">
+                <col span="1" style="background-color:#cfe2ff">
+              </colgroup>
               <thead>
-                <colgroup>
-                  <col span="1" style="background-color:transparent">
-                  <col span="1" style="background-color:#cfe2ff">
-                  <col span="1" style="background-color:transparent">
-                  <col span="1" style="background-color:#cfe2ff">
-                  <col span="1" style="background-color:transparent">
-                </colgroup>
                 <tr>
                   <th scope="col" style="width:25%">Swerve</th>
                   <th scope="col" style="width:25%">Motors</th>
@@ -415,15 +414,13 @@ require 'inc/header.php';
 
             <!-- Pit Scouting 2nd row -->
             <table id="pitTable2" class="table table-striped table-sm table-bordered border-dark text-center">
+              <colgroup>
+                <col span="1" style="background-color:transparent">
+                <col span="1" style="background-color:#cfe2ff">
+                <col span="1" style="background-color:transparent">
+                <col span="1" style="background-color:#cfe2ff">
+              </colgroup>
               <thead>
-                <colgroup>
-                  <col span="1" style="background-color:transparent">
-                  <col span="1" style="background-color:#cfe2ff">
-                  <col span="1" style="background-color:transparent">
-                  <col span="1" style="background-color:#cfe2ff">
-                  <col span="1" style="background-color:transparent">
-                  <col span="1" style="background-color:#cfe2ff">
-                </colgroup>
                 <tr>
                   <th scope="col" style="width:25%">Vision</th>
                   <th scope="col" style="width:25%">Pit</th>

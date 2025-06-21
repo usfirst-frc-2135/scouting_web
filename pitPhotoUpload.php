@@ -190,7 +190,7 @@ require 'inc/header.php';
       }
 
       document.getElementById("closeMessage").addEventListener('click', function () {
-        $("#uploadMessage").hide();
+        document.getElementByID("uploadMessage").style.display = "none";
         document.getElementById("replacePic").checked = false;
       });
     });

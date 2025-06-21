@@ -299,38 +299,38 @@ require 'inc/header.php';
     document.getElementById("teamNumber").value = "";
     document.getElementById("compLevel").value = "";
     document.getElementById("matchNumber").value = "";
-    $("#driveScore1").prop("checked", false);
-    $("#driveScore2").prop("checked", false);
-    $("#driveScore3").prop("checked", false);
-    $("#driveScore4").prop("checked", false);
-    $("#driveScore5").prop("checked", false);
+    document.getElementById("driveScore1").checked = false;
+    document.getElementById("driveScore2").checked = false;
+    document.getElementById("driveScore3").checked = false;
+    document.getElementById("driveScore4").checked = false;
+    document.getElementById("driveScore5").checked = false;
 
-    $("#defenseTactic1").prop("checked", false);
-    $("#defenseTactic2").prop("checked", false);
+    document.getElementById("defenseTactic1").checked = false;
+    document.getElementById("defenseTactic2").checked = false;
     document.getElementById("defenseComment").value = "";
 
-    $("#againstTactic1").prop("checked", false);
+    document.getElementById("againstTactic1").checked = false;
     document.getElementById("againstComment").value = "";
 
-    $("#foul1").prop("checked", false);
+    document.getElementById("foul1").checked = false;
 
-    $("#autonFoul1").prop("checked", false);
-    $("#autonFoul2").prop("checked", false);
-    $("#autonGetCoralFromFloor").prop("checked", false);
-    $("#autonGetCoralFromStation").prop("checked", false);
-    $("#autonGetAlgaeFromFloor").prop("checked", false);
-    $("#autonGetAlgaeFromReef").prop("checked", false);
+    document.getElementById("autonFoul1").checked = false;
+    document.getElementById("autonFoul2").checked = false;
+    document.getElementById("autonGetCoralFromFloor").checked = false;
+    document.getElementById("autonGetCoralFromStation").checked = false;
+    document.getElementById("autonGetAlgaeFromFloor").checked = false;
+    document.getElementById("autonGetAlgaeFromReef").checked = false;
 
-    $("#teleopFoul1").prop("checked", false);
-    $("#teleopFoul2").prop("checked", false);
-    $("#teleopFoul3").prop("checked", false);
-    $("#teleopFoul4").prop("checked", false);
-    $("#teleopKnockOffAlgaeFromReef").prop("checked", false);
-    $("#teleopAcquireAlgaeFromReef").prop("checked", false);
-    $("#teleopFloorPickupCoral").prop("checked", false);
-    $("#teleopFloorPickupAlgae").prop("checked", false);
+    document.getElementById("teleopFoul1").checked = false;
+    document.getElementById("teleopFoul2").checked = false;
+    document.getElementById("teleopFoul3").checked = false;
+    document.getElementById("teleopFoul4").checked = false;
+    document.getElementById("teleopKnockOffAlgaeFromReef").checked = false;
+    document.getElementById("teleopAcquireAlgaeFromReef").checked = false;
+    document.getElementById("teleopFloorPickupCoral").checked = false;
+    document.getElementById("teleopFloorPickupAlgae").checked = false;
 
-    $("#endgameFoul1").prop("checked", false);
+    document.getElementById("endgameFoul1").checked = false;
 
     document.getElementById("problemComment").value = "";
     document.getElementById("generalComment").value = "";

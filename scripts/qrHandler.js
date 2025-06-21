@@ -198,7 +198,7 @@ function createCameraSelect(reader) {
     scanCamera(reader, getDefaultDeviceID(initialId));
 
     // Binds drop down on change to select another camera when necessary
-    $("#cameraSelect").change(function () {
+    document.getElementById("cameraSelect").addEventListener('change', function () {
       let selCamID = document.getElementById("cameraSelect").value;
       scanCamera(reader, selCamID);
       setDefaultDeviceID(selCamID);

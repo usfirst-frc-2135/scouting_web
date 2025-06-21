@@ -598,10 +598,11 @@ require 'inc/header.php';
         teamname = jsonTeamInfo["nickname"];
         console.log("==> matchSheet: buildTeamBox() for " + teamNum + ", teamname = " + teamname);
       }
+      let elementRef = document.getElementById(color + index + "TeamNumber");
       if (teamname != "XX") {
-        $("#" + color + index + "TeamNumber").html("<a class='text-light' href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a> - " + teamname);
+        elementRef.innerHTML = "<a class='text-light' href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a> - " + teamname;
       } else {
-        $("#" + color + index + "TeamNumber").html("<a class='text-light' href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a>");
+        elementRef.innerHTML = "<a class='text-light' href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a>";
       }
     });
 
@@ -1024,14 +1025,14 @@ require 'inc/header.php';
     }
 
     // Load the match sheet data from form entry 
-    $("#loadMatch").click(function () {
+    document.getElementById("loadMatch").addEventListener('click', function () {
       console.log("=> matchsheet: load event match!");
       bUsingCustom = false;
       loadEventMatchSheet(document.getElementById("enterMatchLevel").value, document.getElementById("enterMatchNumber").value);
     });
 
     // Open and set the custom match selected
-    $("#loadCustomMatch").click(function () {
+    document.getElementById("loadCustomMatch").addEventListener('click', function () {
       console.log("=> matchsheet: load custom match!");
       bUsingCustom = true;
       let redTeamNum1 = document.getElementById("enterRed1").value;
