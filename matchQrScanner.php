@@ -18,7 +18,7 @@ require 'inc/header.php';
           <div id="interactive" class="viewport mt-3">
             <video id="camera" class="col-12" autoplay="true"></video>
           </div>
-          <select id="cameraSelect" class="form-select form-select mb-3" aria-label="Camera Select">
+          <select id="cameraSelect" class="form-select mb-3" aria-label="Camera Select">
           </select>
           <div class="d-grid gap-2 col-6 mx-auto">
             <button id="submitData" class="btn btn-success mb-3" type="button">Click to Submit Data: 0</button>

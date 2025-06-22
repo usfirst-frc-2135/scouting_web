@@ -26,12 +26,15 @@ require 'inc/header.php';
               <div class="input-group">
                 <div class="input-group-prepend">
                   <label for="robotPic" class="form-label">Robot Photo</label>
-                  <input id="robotPic" class="form-control" type="file">
+                  <input id="robotPic" class="form-control mb-3" type="file">
                 </div>
+              </div>
+              <div class="row text-center">
+                <output id="photoList"></output>
               </div>
             </div>
 
-            <div class="mb-3">
+            <div class="text-center mb-3">
               <label for="replacePic" class="form-label">Replace Existing Photos</label>
               <input id="replacePic" class="form-check-input" type="checkbox">
             </div>
@@ -102,6 +105,22 @@ require 'inc/header.php';
     }
   }
 
+  function handleFileSelect(evt) {
+    var files = evt.target.files;
+    var f = files[0];
+    var reader = new FileReader();
+    reader.onload = (
+      function (theFile) {
+        return function (e) {
+          document.getElementById('photoList').innerHTML = [
+            '<img src="', e.target.result, '" title="', theFile.name, '" width="300" />'
+          ].join('');
+        };
+      }
+    )(f);
+    reader.readAsDataURL(f);
+  }
+
   //
   // Process the generated html
   //
@@ -115,6 +134,14 @@ require 'inc/header.php';
       console.log("=> pitPhotoUpload: getEventCode: " + eventCode);
       document.getElementById("navbarEventCode").innerHTML = eventCode;
     });
+
+    if (window.FileReader) {
+      //then your code goes here 
+    } else {
+      alert('This browser does not support FileReader');
+    }
+
+    document.getElementById('robotPic').addEventListener('change', handleFileSelect, false);
 
     // Upload photo to the server
     document.getElementById("upload").addEventListener('click', function () {
