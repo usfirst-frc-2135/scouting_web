@@ -16,30 +16,21 @@ require 'inc/header.php';
 
       <div>
         <style type="text/css" media="screen">
-          table tr {
-            border: 1px solid black;
-          }
-
-          table td,
-          table th {
-            border-right: 1px solid black;
-          }
-
           thead {
             position: sticky;
             top: 56px;
             background: white;
           }
         </style>
-        <table id="matchTable" class="table table-striped table-hover sortable">
+        <table id="matchTable" class="table table-striped table-bordered table-hover border-dark text-center sortable">
           <colgroup>
             <col span="1" style="background-color:transparent">
             <col span="1" style="background-color:#cfe2ff">
           </colgroup>
           <thead>
             <tr>
-              <th class="text-center sorttable_numeric" scope="col">Match</th>
-              <th class="text-center sorttable_nosort" scope="col">Teams</th>
+              <th class="sorttable_numeric" scope="col">Match</th>
+              <th class="sorttable_nosort" scope="col">Teams</th>
             </tr>
           </thead>
           <tbody class="table-group-divider"> </tbody>
@@ -85,8 +76,8 @@ require 'inc/header.php';
     tbodyRef.innerHTML = ""; // Clear Table
     for (let i = 0; i < dataObj.length; i++) {
       let matchNum = dataObj[i]["comp_level"] + dataObj[i]["match_number"];
-      let rowString = "<tr><td align=\"center\">" + matchNum + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["teams"] + "</td>" + "</td>";
+      let rowString = "<tr><td>" + matchNum + "</td>" +
+        "<td>" + dataObj[i]["teams"] + "</td>" + "</td>";
       tbodyRef.insertRow().innerHTML = rowString;
     }
   }
