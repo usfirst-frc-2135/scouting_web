@@ -311,7 +311,7 @@ class tbaHandler
   ///// Create a Table of All COPRs for an Event /////
   public function getComponentOPRS($eventCode)
   {
-    error_log("===> getComponentOPRS(): getting getEventTeamsEx");
+    error_log("===> getComponentOPRS: getting getEventTeamsEx");
     $teamList = $this->getEventTeamsEx($eventCode);
 
     $teamLookup = $this->teamListToLookup($teamList);

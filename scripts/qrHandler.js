@@ -3,12 +3,12 @@
 */
 let scannedData = {};
 let scannedCount = 0;
-// let localStore = window.localStorage;
 
 /*
   Function Definition
 */
 
+// Convert the scanned QR string to a list
 function qrStringToList(dataString) {
   let out = dataString.trim().split("\t");
   for (let i = 0; i < out.length; ++i) {
@@ -22,10 +22,10 @@ function validateQrList(dataList) {
   const validLength = 41;
   console.log("===> validateQrList(): dataList.length = " + dataListSize + " (valid " + validLength + ")");
   if (dataListSize != validLength) {
-    console.warn("   ===> validateQrList(): returning false! ");
+    console.warn("   ===> validaateQrList: returning false! ");
     return false;
   }
-  console.log("   ===> validateQrList(): returning true! ");
+  console.log("   ===> validaateQrList: returning true! ");
   return true;
 }
 // update this data list length whenever more data is added to the table

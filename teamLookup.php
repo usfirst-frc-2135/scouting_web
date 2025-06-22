@@ -911,7 +911,7 @@ require 'inc/header.php';
 
   // filters out the match type as specified in the db status page
   function getFilteredData(team, successFunction) {
-    console.log("==> teamLookup: getFilteredData(): " + team);
+    console.log("==> teamLookup: getFilteredData: " + team);
     let tempThis = this;
 
     $.post("api/dbAPI.php", {

@@ -45,7 +45,7 @@ require 'inc/header.php';
 
   // Sort the pit status table by team number
   function sortPitStatusTable(tableId) {
-    console.log("==> pitStatus: sortTable(): id: " + tableId);
+    console.log("==> pitStatus: sortTable: id: " + tableId);
     let tableRef = document.getElementById(tableId);
     let rows = Array.prototype.slice.call(tableRef.querySelectorAll("tbody > tr")); // All <tr> in <tbody>
 

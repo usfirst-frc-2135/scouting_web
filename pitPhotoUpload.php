@@ -83,7 +83,7 @@ require 'inc/header.php';
 
   // Display error to user
   function showErrorMessage(message) {
-    console.log("==> pitPhotoUpload: showErrorMessage(): " + message);
+    console.log("==> pitPhotoUpload: showErrorMessage: " + message);
 
     document.getElementById("uploadMessageText").innerHTML = message;
     document.getElementById("uploadMessage").classList.add("alert-danger");
@@ -93,7 +93,7 @@ require 'inc/header.php';
 
   // Display success to user
   function uploadSuccess(msg) {
-    console.log("==> pitPhotoUpload: uploadSuccess(): " + msg);
+    console.log("==> pitPhotoUpload: uploadSuccess: " + msg);
     msg = JSON.parse(msg);
     const loadButton = document.getElementById("loadingButton");
     if (msg["success"]) {

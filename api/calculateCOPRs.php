@@ -88,7 +88,7 @@ class CalculateCOPRs
           }
           else
           {
-            error_log("---> in choleskyDecomposition(): avoiding divide-by-0!");
+            error_log("---> in choleskyDecomposition: avoiding divide-by-0!");
             $L[$i][$j] = 0;
             $Lp[$j][$i] = 0;
           }
@@ -124,7 +124,7 @@ class CalculateCOPRs
       }
       else
       {
-        error_log("---> in forwardSubstitution(): avoiding divide-by-0");
+        error_log("---> in forwardSubstitution: avoiding divide-by-0");
         $X[$i] = 0;
       }
     }
@@ -157,7 +157,7 @@ class CalculateCOPRs
       }
       else
       {
-        error_log("---> in backwardSubstitution(): avoiding divide-by-0");
+        error_log("---> in backwardSubstitution: avoiding divide-by-0");
         $X[$nm - $i] = 0;
       }
     }
