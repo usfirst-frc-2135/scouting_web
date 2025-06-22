@@ -26,8 +26,7 @@ require 'inc/header.php';
         <thead>
           <tr id="tableKeys"></tr>
         </thead>
-        <tbody class="table-group-divider">
-        </tbody>
+        <tbody class="table-group-divider"> </tbody>
       </table>
       <!-- </div> -->
 

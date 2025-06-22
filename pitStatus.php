@@ -30,8 +30,7 @@ require 'inc/header.php';
             <th>Photo Uploaded?</th>
           </tr>
         </thead>
-        <tbody id="pitScoutTable">
-        </tbody>
+        <tbody class="table-group-divider"> </tbody>
       </table>
     </div>
   </div>
@@ -66,7 +65,7 @@ require 'inc/header.php';
       return null;
     }
 
-    document.getElementById("pitScoutTable").innerHTML = "";
+    document.getElementById("psTable").querySelector('tbody').innerHTML = "";
     let row = "";
     for (let teamNum of teams) {
       let teamName = names[teamNum];
@@ -90,7 +89,7 @@ require 'inc/header.php';
       }
 
       row += "</tr>";
-      document.getElementById("pitScoutTable").innerHTML = row;
+      document.getElementById("psTable").querySelector('tbody').innerHTML = row;
     }
   }
 

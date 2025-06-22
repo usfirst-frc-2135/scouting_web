@@ -42,7 +42,7 @@ require 'inc/header.php';
               <th class="text-center sorttable_nosort" scope="col">Teams</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody class="table-group-divider">
           </tbody>
         </table>
       </div>

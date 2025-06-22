@@ -15,7 +15,6 @@ require 'inc/header.php';
       </div>
     </div>
 
-    <!--  COMMENTED OUT FOR NOW -->
     <!-- Match Filter -->
     <div class="card col-md-3 mb-3">
       <div id="customMatch" class="accordion accordion-flush">
@@ -61,7 +60,6 @@ require 'inc/header.php';
         </div>
       </div>
     </div>
-    <!-- COMMENTED OUT FOR NOW-->
 
     <!-- Main row to hold the table -->
     <div class="row mb-3">
@@ -112,13 +110,6 @@ require 'inc/header.php';
           <col span="1" style="background-color:transparent">
         </colgroup>
         <thead>
-          <!-- <tr>
-            <th colspan="1"></th>
-            <th colspan="20" style="background-color:#e8f1ff"></th>
-            <th colspan="16" style="background-color:#d5e6de">Auton Game Pieces</th>
-            <th colspan="18" style="background-color:#d6f3fB">Teleop Game Pieces</th>
-            <th colspan="6" style="background-color:#fbe6d3">End Game</th>
-          </tr> -->
           <tr>
             <th colspan="1" style="background-color:transparent"></th>
             <th colspan="6" style="background-color:#83b4ff">Totals</th>
@@ -229,8 +220,7 @@ require 'inc/header.php';
           </tr>
 
         </thead>
-        <tbody class="table-group-divider">
-        </tbody>
+        <tbody class="table-group-divider"> </tbody>
       </table>
       <!-- </div> -->
     </div>
@@ -240,8 +230,6 @@ require 'inc/header.php';
 <?php include 'inc/footer.php'; ?>
 
 <!-- Javascript page handlers -->
-
-<script src="./scripts/matchDataProcessor.js"></script>
 
 <script>
 
@@ -590,3 +578,5 @@ require 'inc/header.php';
   });
 
 </script>
+
+<script src="./scripts/matchDataProcessor.js"></script>

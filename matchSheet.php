@@ -94,7 +94,7 @@ require 'inc/header.php';
               <th class="text-center">Blue</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody class="table-group-divider">
             <tr>
               <td class="table-secondary">Avg Total Coral</td>
               <td id="redTotalCoral" class="table-danger"></td>
@@ -192,7 +192,7 @@ require 'inc/header.php';
                   <th scope="col">D</th>
                 </tr>
               </thead>
-              <tbody> </tbody>
+              <tbody class="table-group-divider"> </tbody>
             </table>
           </div>
 
@@ -257,7 +257,7 @@ require 'inc/header.php';
                   <th scope="col">D</th>
                 </tr>
               </thead>
-              <tbody> </tbody>
+              <tbody class="table-group-divider"> </tbody>
             </table>
           </div>
 
@@ -322,7 +322,7 @@ require 'inc/header.php';
                   <th scope="col">D</th>
                 </tr>
               </thead>
-              <tbody> </tbody>
+              <tbody class="table-group-divider"> </tbody>
             </table>
           </div>
 
@@ -391,7 +391,7 @@ require 'inc/header.php';
                   <th scope="col">D</th>
                 </tr>
               </thead>
-              <tbody> </tbody>
+              <tbody class="table-group-divider"> </tbody>
             </table>
           </div>
 
@@ -456,7 +456,7 @@ require 'inc/header.php';
                   <th scope="col">D</th>
                 </tr>
               </thead>
-              <tbody> </tbody>
+              <tbody class="table-group-divider"> </tbody>
             </table>
           </div>
 
@@ -521,7 +521,7 @@ require 'inc/header.php';
                   <th scope="col">D</th>
                 </tr>
               </thead>
-              <tbody> </tbody>
+              <tbody class="table-group-divider"> </tbody>
             </table>
           </div>
 

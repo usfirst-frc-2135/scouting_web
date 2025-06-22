@@ -38,8 +38,7 @@ require 'inc/header.php';
           <th scope="col">Delete</th>
         </tr>
       </thead>
-      <tbody id="qrValidationTable">
-      </tbody>
+      <tbody id="qrValidationTable" class="table-group-divider"> </tbody>
     </table>
 
   </div>

@@ -104,7 +104,7 @@ require 'inc/header.php';
                       <th scope="col">MAX</th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody class="table-group-divider">
                     <tr>
                       <th scope="row" style="text-align:left">Coral Scored</th>
                       <td> </td>
@@ -150,31 +150,31 @@ require 'inc/header.php';
                       <th scope="col">MAX</th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody class="table-group-divider">
                     <tr>
                       <th scope="row" style="text-align:left">Auton Points</th>
-                      <td></td>
-                      <td></td>
+                      <td> </td>
+                      <td> </td>
                     </tr>
                     <tr>
                       <th scope="row" style="text-align:left">Coral Scored</th>
-                      <td></td>
-                      <td></td>
+                      <td> </td>
+                      <td> </td>
                     </tr>
                     <tr>
                       <th scope="row" style="text-align:left">Algae Scored</th>
-                      <td></td>
-                      <td></td>
+                      <td> </td>
+                      <td> </td>
                     </tr>
                     <tr>
                       <th scope="row" style="text-align:left">Coral Points</th>
-                      <td></td>
-                      <td></td>
+                      <td> </td>
+                      <td> </td>
                     </tr>
                     <tr>
                       <th scope="row" style="text-align:left">Algae Points</th>
-                      <td></td>
-                      <td></td>
+                      <td> </td>
+                      <td> </td>
                     </tr>
                   </tbody>
                 </table>
@@ -197,41 +197,41 @@ require 'inc/header.php';
                       <th scope="col">MAX</th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody class="table-group-divider">
                     <tr>
                       <th scope="row" style="text-align:left">Teleop Points</th>
-                      <td></td>
-                      <td></td>
+                      <td> </td>
+                      <td> </td>
                     </tr>
                     <tr>
                       <th scope="row" style="text-align:left">Coral Scored</th>
-                      <td></td>
-                      <td></td>
+                      <td> </td>
+                      <td> </td>
                     </tr>
                     <tr>
                       <th scope="row" style="text-align:left">Algae Scored</th>
-                      <td></td>
-                      <td></td>
+                      <td> </td>
+                      <td> </td>
                     </tr>
                     <tr>
                       <th scope="row" style="text-align:left">Coral Points</th>
-                      <td></td>
-                      <td></td>
+                      <td> </td>
+                      <td> </td>
                     </tr>
                     <tr>
                       <th scope="row" style="text-align:left">Algae Points</th>
-                      <td></td>
-                      <td></td>
+                      <td> </td>
+                      <td> </td>
                     </tr>
                     <tr>
                       <th scope="row" style="text-align:left">Coral Acc%</th>
-                      <td></td>
-                      <td></td>
+                      <td> </td>
+                      <td> </td>
                     </tr>
                     <tr>
                       <th scope="row" style="text-align:left">Algae Acc%</th>
-                      <td></td>
-                      <td></td>
+                      <td> </td>
+                      <td> </td>
                     </tr>
                   </tbody>
                 </table>
@@ -255,7 +255,7 @@ require 'inc/header.php';
                       <th scope="col">MAX</th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody class="table-group-divider">
                     <tr>
                       <th scope="row" style="text-align:left">Endgame Points</th>
                       <td> </td>
@@ -275,7 +275,7 @@ require 'inc/header.php';
                       <th style="width:12%" scope="col">D</th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody class="table-group-divider">
                     <tr>
                       <th scope="row" style="text-align:left">Cage Climb %</th>
                       <td> </td>
@@ -370,7 +370,7 @@ require 'inc/header.php';
                     <th scope="col">Scout Name</th>
                   </tr>
                 </thead>
-                <tbody> </tbody>
+                <tbody class="table-group-divider"> </tbody>
               </table>
             </div>
           </div>
@@ -400,7 +400,7 @@ require 'inc/header.php';
                   <th scope="col" style="width:25%">Language</th>
                 </tr>
               </thead>
-              <tbody> </tbody>
+              <tbody class="table-group-divider"> </tbody>
             </table>
 
             <!-- Pit Scouting 2nd row -->
@@ -419,7 +419,7 @@ require 'inc/header.php';
                   <th scope="col" style="width:25%">Batteries</th>
                 </tr>
               </thead>
-              <tbody> </tbody>
+              <tbody class="table-group-divider"> </tbody>
             </table>
 
           </div>
@@ -480,7 +480,7 @@ require 'inc/header.php';
                     <th scope="col">Scout Name</th>
                   </tr>
                 </thead>
-                <tbody> </tbody>
+                <tbody class="table-group-divider"> </tbody>
               </table>
             </div>
           </div>
@@ -844,7 +844,7 @@ require 'inc/header.php';
     let row = "<tr>";
     row += "<th  style='text-align:left'>" + dict[keys[0]] + "</th>";
     for (let i = 1; i < length; i++) {
-      row += (i < keys.length) ? "<td>" + dict[keys[i]] + "</td>" : "<td></td>";
+      row += (i < keys.length) ? "<td>" + dict[keys[i]] + "</td>" : "<td> </td>";
     }
     row += "</tr>";
     tbodyRef.insertRow().innerHTML = row;
@@ -1100,7 +1100,7 @@ require 'inc/header.php';
     let tbodyRef = document.getElementById(tableID).querySelector('tbody');
     let row = "<tr>";
     for (let i = 0; i < length; i++) {
-      row += (i < keys.length) ? "<td>" + dict[keys[i]] + "</td>" : "<td></td>";
+      row += (i < keys.length) ? "<td>" + dict[keys[i]] + "</td>" : "<td> </td>";
     }
     row += "</tr>";
     tbodyRef.insertRow().innerHTML = row;

@@ -94,7 +94,7 @@ require 'inc/header.php';
             <th scope="col" style="background-color:#cfe2ff">Scout Name</th>
           </tr>
         </thead>
-        <tbody id="tableData" class="table-group-divider">
+        <tbody class="table-group-divider">
         </tbody>
       </table>
 
