@@ -958,7 +958,8 @@ require 'inc/header.php';
   }
 
   // Gets the matches and puts them into the html rows
-  function sortMatchData(tableRef, matchCol) {
+  function sortMatchData(tableId, matchCol) {
+    let tableRef = document.getElementById(tableId);
     let rows = Array.prototype.slice.call(tableRef.querySelectorAll("tbody > tr"));
     rows.sort(function (rowA, rowB) {
       return (compareMatchNumbers(rowA.cells[matchCol].textContent.trim(), rowB.cells[matchCol].textContent.trim()));
@@ -970,7 +971,8 @@ require 'inc/header.php';
   }
 
   // Gets the strategic match info and puts them into the html rows
-  function sortStrategicData(tableRef, matchCol) {
+  function sortStrategicData(tableId, matchCol) {
+    let tableRef = document.getElementById(tableId);
     let rows = Array.prototype.slice.call(tableRef.querySelectorAll("tbody > tr"));
     rows.sort(function (rowA, rowB) {
       return (compareMatchNumbers(rowA.cells[matchCol].textContent.trim(), rowB.cells[matchCol].textContent.trim()));
@@ -1035,7 +1037,7 @@ require 'inc/header.php';
       //   'frozenColVerticalOffset': 0
       // });
     }, 100);
-    sortMatchData(document.getElementById("matchDataTable"), matchColumn);
+    sortMatchData("matchDataTable", matchColumn);
   }
 
   // Converts a given "1" to yes, "0" to no, anything else to empty string.
@@ -1189,7 +1191,7 @@ require 'inc/header.php';
       //   'frozenColVerticalOffset': 0
       // });
     }, 100);
-    sortStrategicData(document.getElementById("strategicDataTable"), matchColumn);
+    sortStrategicData("strategicDataTable", matchColumn);
   }
 
   // This is the main function that runs when we want to load a team 

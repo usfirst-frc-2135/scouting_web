@@ -88,9 +88,9 @@ require 'inc/header.php';
   const matchColumn = 1;
 
   // Sort the html table data by team number
-  function sortMatchData(tableData, teamCol, matchCol) {
+  function sortMatchData(tableId, teamCol, matchCol) {
     console.log("==> matchData: sortMatchData()");
-    let tableRef = document.getElementById(tableData);
+    let tableRef = document.getElementById(tableId);
     let rows = Array.prototype.slice.call(tableRef.querySelectorAll("tbody > tr"));
 
     // Sort the rows based on column 1 match number

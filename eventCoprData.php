@@ -45,9 +45,9 @@ require 'inc/header.php';
   const teamColumn = 0;
 
   // Sort the generated COPR table by team/match numbers
-  function sortCoprTable(tableData, teamCol) {
+  function sortCoprTable(tableId, teamCol) {
     console.log("==> eventCoprData.php: sortCoprTable()");
-    let tableRef = document.getElementById(tableData);
+    let tableRef = document.getElementById(tableId);
     let rows = Array.prototype.slice.call(tableRef.querySelectorAll("tbody > tr"));
 
     // Sort the rows based on column 1 match number

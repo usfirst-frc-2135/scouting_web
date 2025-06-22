@@ -113,9 +113,9 @@ require 'inc/header.php';
   const matchColumn = 1;
 
   // Sort strategic data table rows
-  function sortStrategicData(tableData, teamCol, matchCol) {
+  function sortStrategicData(tableId, teamCol, matchCol) {
     console.log("==> strategicData: sortStrategicData()");
-    let tableRef = document.getElementById(tableData);
+    let tableRef = document.getElementById(tableId);
     let rows = Array.prototype.slice.call(tableRef.querySelectorAll("tbody > tr"));
 
     // Sort by match number
