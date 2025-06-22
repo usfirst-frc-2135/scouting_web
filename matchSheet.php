@@ -86,42 +86,42 @@ require 'inc/header.php';
       <div class="card col-md-4 mx-auto mb-3 p-3">
         <h5 id="matchTitle">Match:</h5>
         <h5 id="matchTime">Time:</h5>
-        <table class="table table-bordered table-sm border-dark">
+        <table class="table table-bordered table-sm border-dark text-center">
           <thead>
             <tr>
               <th></th>
-              <th class="text-center">Red</th>
-              <th class="text-center">Blue</th>
+              <th>Red</th>
+              <th>Blue</th>
             </tr>
           </thead>
           <tbody class="table-group-divider">
             <tr>
-              <td class="table-secondary">Avg Total Coral</td>
+              <td class="text-start table-secondary">Avg Total Coral</td>
               <td id="redTotalCoral" class="table-danger"></td>
               <td id="blueTotalCoral" class="table-primary"></td>
             </tr>
             <tr>
-              <td class="table-secondary">Avg Total Algae</td>
+              <td class="text-start table-secondary">Avg Total Algae</td>
               <td id="redTotalAlgae" class="table-danger"></td>
               <td id="blueTotalAlgae" class="table-primary"></td>
             </tr>
             <tr>
-              <td class="table-secondary">Avg Auton Points</td>
+              <td class="text-start table-secondary">Avg Auton Points</td>
               <td id="redAvgAutoPoints" class="table-danger"></td>
               <td id="blueAvgAutoPoints" class="table-primary"></td>
             </tr>
             <tr>
-              <td class="table-secondary">Avg Teleop Points</td>
+              <td class="text-start table-secondary">Avg Teleop Points</td>
               <td id="redAvgTeleopPoints" class="table-danger"></td>
               <td id="blueAvgTeleopPoints" class="table-primary"></td>
             </tr>
             <tr>
-              <td class="table-secondary">Avg Endgame Points</td>
+              <td class="text-start table-secondary">Avg Endgame Points</td>
               <td id="redAvgEndgamePoints" class="table-danger"></td>
               <td id="blueAvgEndgamePoints" class="table-primary"></td>
             </tr>
             <tr>
-              <td class="table-secondary">Total Predicted Points</td>
+              <td class="text-start table-secondary">Total Predicted Points</td>
               <td id="redTotalPredictedPoints" class="table-danger"></td>
               <td id="blueTotalPredictedPoints" class="table-primary"></td>
             </tr>
@@ -161,12 +161,12 @@ require 'inc/header.php';
           </div>
 
           <div class="overflow-auto">
-            <table id="R0DataTable" class="table table-bordered table-danger table-sm">
+            <table id="R0DataTable" class="table table-bordered table-danger table-sm text-center">
               <thead>
                 <tr>
                   <th colspan="6" class="text-center fs-6">Auton</th>
-                  <th colspan="8" class="text-center fw-bold fs-6">Teleop</th>
-                  <th colspan="5" class="text-center fw-bold fs-6">Endgame</th>
+                  <th colspan="8" class="text-center fs-6">Teleop</th>
+                  <th colspan="5" class="text-center fs-6">Endgame</th>
                 </tr>
                 <tr>
                   <th scope="col">L1</th>
@@ -226,12 +226,12 @@ require 'inc/header.php';
           </div>
 
           <div class="overflow-auto">
-            <table id="R1DataTable" class="table table-bordered table-danger table-sm">
+            <table id="R1DataTable" class="table table-bordered table-danger table-sm text-center">
               <thead>
                 <tr>
                   <th colspan="6" class="text-center fs-6">Auton</th>
-                  <th colspan="8" class="text-center fw-bold fs-6">Teleop</th>
-                  <th colspan="5" class="text-center fw-bold fs-6">Endgame</th>
+                  <th colspan="8" class="text-center fs-6">Teleop</th>
+                  <th colspan="5" class="text-center fs-6">Endgame</th>
                 </tr>
                 <tr>
                   <th scope="col">L1</th>
@@ -291,12 +291,12 @@ require 'inc/header.php';
           </div>
 
           <div class="overflow-auto">
-            <table id="R2DataTable" class="table table-bordered table-danger table-sm">
+            <table id="R2DataTable" class="table table-bordered table-danger table-sm text-center">
               <thead>
                 <tr>
                   <th colspan="6" class="text-center fs-6">Auton</th>
-                  <th colspan="8" class="text-center fw-bold fs-6">Teleop</th>
-                  <th colspan="5" class="text-center fw-bold fs-6">Endgame</th>
+                  <th colspan="8" class="text-center fs-6">Teleop</th>
+                  <th colspan="5" class="text-center fs-6">Endgame</th>
                 </tr>
                 <tr>
                   <th scope="col">L1</th>
@@ -360,12 +360,12 @@ require 'inc/header.php';
           </div>
 
           <div class="overflow-auto">
-            <table id="B0DataTable" class="table table-bordered table-primary table-sm">
+            <table id="B0DataTable" class="table table-bordered table-primary table-sm text-center">
               <thead>
                 <tr>
                   <th colspan="6" class="text-center fs-6">Auton</th>
-                  <th colspan="8" class="text-center fw-bold fs-6">Teleop</th>
-                  <th colspan="5" class="text-center fw-bold fs-6">Endgame</th>
+                  <th colspan="8" class="text-center fs-6">Teleop</th>
+                  <th colspan="5" class="text-center fs-6">Endgame</th>
                 </tr>
                 <tr>
                   <th scope="col">L1</th>
@@ -425,12 +425,12 @@ require 'inc/header.php';
           </div>
 
           <div class="overflow-auto">
-            <table id="B1DataTable" class="table table-bordered table-primary table-sm">
+            <table id="B1DataTable" class="table table-bordered table-primary table-sm text-center">
               <thead>
                 <tr>
                   <th colspan="6" class="text-center fs-6">Auton</th>
-                  <th colspan="8" class="text-center fw-bold fs-6">Teleop</th>
-                  <th colspan="5" class="text-center fw-bold fs-6">Endgame</th>
+                  <th colspan="8" class="text-center fs-6">Teleop</th>
+                  <th colspan="5" class="text-center fs-6">Endgame</th>
                 </tr>
                 <tr>
                   <th scope="col">L1</th>
@@ -490,12 +490,12 @@ require 'inc/header.php';
           </div>
 
           <div class="overflow-auto">
-            <table id="B2DataTable" class="table table-bordered table-primary table-sm">
+            <table id="B2DataTable" class="table table-bordered table-primary table-sm text-center">
               <thead>
                 <tr>
                   <th colspan="6" class="text-center fs-6">Auton</th>
-                  <th colspan="8" class="text-center fw-bold fs-6">Teleop</th>
-                  <th colspan="5" class="text-center fw-bold fs-6">Endgame</th>
+                  <th colspan="8" class="text-center fs-6">Teleop</th>
+                  <th colspan="5" class="text-center fs-6">Endgame</th>
                 </tr>
                 <tr>
                   <th scope="col">L1</th>
@@ -613,25 +613,25 @@ require 'inc/header.php';
     let row;
     if (rd != null) {
       row = "<tr>";
-      row += "<td align=\"center\">" + rd["avgAutonCoralL1"] + "</td>";
-      row += "<td align=\"center\">" + rd["avgAutonCoralL2"] + "</td>";
-      row += "<td align=\"center\">" + rd["avgAutonCoralL3"] + "</td>";
-      row += "<td align=\"center\">" + rd["avgAutonCoralL4"] + "</td>";
-      row += "<td align=\"center\">" + rd["avgAutonAlgaeNet"] + "</td>";
-      row += "<td align=\"center\">" + rd["avgAutonAlgaeProc"] + "</td>";
-      row += "<td align=\"center\">" + rd["teleopCoralScoringPercent"] + "</td>";
-      row += "<td align=\"center\">" + rd["avgTeleopCoralL1"] + "</td>";
-      row += "<td align=\"center\">" + rd["avgTeleopCoralL2"] + "</td>";
-      row += "<td align=\"center\">" + rd["avgTeleopCoralL3"] + "</td>";
-      row += "<td align=\"center\">" + rd["avgTeleopCoralL4"] + "</td>";
-      row += "<td align=\"center\">" + rd["teleopAlgaeScoringPercent"] + "</td>";
-      row += "<td align=\"center\">" + rd["avgTeleopAlgaeNet"] + "</td>";
-      row += "<td align=\"center\">" + rd["avgTeleopAlgaeProc"] + "</td>";
-      row += "<td align=\"center\">" + rd["endgameClimbPercent"][0] + "</td>";
-      row += "<td align=\"center\">" + rd["endgameClimbPercent"][1] + "</td>";
-      row += "<td align=\"center\">" + rd["endgameClimbPercent"][2] + "</td>";
-      row += "<td align=\"center\">" + rd["endgameClimbPercent"][3] + "</td>";
-      row += "<td align=\"center\">" + rd["endgameClimbPercent"][4] + "</td>";
+      row += "<td>" + rd["avgAutonCoralL1"] + "</td>";
+      row += "<td>" + rd["avgAutonCoralL2"] + "</td>";
+      row += "<td>" + rd["avgAutonCoralL3"] + "</td>";
+      row += "<td>" + rd["avgAutonCoralL4"] + "</td>";
+      row += "<td>" + rd["avgAutonAlgaeNet"] + "</td>";
+      row += "<td>" + rd["avgAutonAlgaeProc"] + "</td>";
+      row += "<td>" + rd["teleopCoralScoringPercent"] + "</td>";
+      row += "<td>" + rd["avgTeleopCoralL1"] + "</td>";
+      row += "<td>" + rd["avgTeleopCoralL2"] + "</td>";
+      row += "<td>" + rd["avgTeleopCoralL3"] + "</td>";
+      row += "<td>" + rd["avgTeleopCoralL4"] + "</td>";
+      row += "<td>" + rd["teleopAlgaeScoringPercent"] + "</td>";
+      row += "<td>" + rd["avgTeleopAlgaeNet"] + "</td>";
+      row += "<td>" + rd["avgTeleopAlgaeProc"] + "</td>";
+      row += "<td>" + rd["endgameClimbPercent"][0] + "</td>";
+      row += "<td>" + rd["endgameClimbPercent"][1] + "</td>";
+      row += "<td>" + rd["endgameClimbPercent"][2] + "</td>";
+      row += "<td>" + rd["endgameClimbPercent"][3] + "</td>";
+      row += "<td>" + rd["endgameClimbPercent"][4] + "</td>";
       row += "</tr>";
     }
     tableRef.querySelector('tbody').insertRow().innerHTML = row;
@@ -683,20 +683,6 @@ require 'inc/header.php';
     document.getElementById("blueAvgTeleopPoints").innerHTML = roundInt(avgTeleopPoints["blue"]);
     document.getElementById("blueAvgEndgamePoints").innerHTML = roundInt(avgEndgamePoints["blue"]);
     document.getElementById("blueTotalPredictedPoints").innerHTML = roundInt(totalPredictedPoints["blue"]);
-
-    document.getElementById("redTotalCoral").setAttribute("align", "center");
-    document.getElementById("redTotalAlgae").setAttribute("align", "center");
-    document.getElementById("redAvgAutoPoints").setAttribute("align", "center");
-    document.getElementById("redAvgTeleopPoints").setAttribute("align", "center");
-    document.getElementById("redAvgEndgamePoints").setAttribute("align", "center");
-    document.getElementById("redTotalPredictedPoints").setAttribute("align", "center");
-
-    document.getElementById("blueTotalCoral").setAttribute("align", "center");
-    document.getElementById("blueTotalAlgae").setAttribute("align", "center");
-    document.getElementById("blueAvgAutoPoints").setAttribute("align", "center");
-    document.getElementById("blueAvgTeleopPoints").setAttribute("align", "center");
-    document.getElementById("blueAvgEndgamePoints").setAttribute("align", "center");
-    document.getElementById("blueTotalPredictedPoints").setAttribute("align", "center");
   }
 
 

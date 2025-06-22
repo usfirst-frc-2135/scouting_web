@@ -22,15 +22,16 @@ require 'inc/header.php';
         }
       </style>
 
-      <table id="psTable" class="table table-striped table-bordered table-hover sortable">
+      <table id="psTable" class="table table-striped table-bordered table-hover text-center sortable">
         <thead>
           <tr>
-            <th class="sorttable_numeric">Team</th>
+            <th class="text-start sorttable_numeric">Team</th>
             <th>Pit Scouted?</th>
             <th>Photo Uploaded?</th>
           </tr>
         </thead>
-        <tbody class="table-group-divider"> </tbody>
+        <tbody class=" table-group-divider">
+        </tbody>
       </table>
     </div>
   </div>
@@ -71,9 +72,9 @@ require 'inc/header.php';
       let teamName = names[teamNum];
       row += "<tr>";
       if (teamName != "XX") {
-        row += " <td>" + "<a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a> - " + teamName + "</td>";
+        row += " <td class='text-start'>" + "<a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a> - " + teamName + "</td>";
       } else {
-        row += " <td>" + "<a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a>" + "</td>";
+        row += " <td class='text-start'>" + "<a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a>" + "</td>";
       }
 
       if (pitInfo[teamNum] != null) {

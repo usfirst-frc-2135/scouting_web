@@ -24,7 +24,7 @@ require 'inc/header.php';
       </style>
       <table id="coprTable" class="table table-striped table-bordered table-hover table-sm border-dark text-center sortable">
         <thead>
-          <tr id="tableKeys"></tr>
+          <tr></tr>
         </thead>
         <tbody class="table-group-divider"> </tbody>
       </table>
@@ -62,17 +62,19 @@ require 'inc/header.php';
   }
 
   // Add data keys (fields) to COPR table in html
-  function addKeysToCoprTable(keys) {
-    let header = '<th scope="col">Team</th>';
+  function addKeysToCoprTable(tableId, keys) {
+    let tableRef = document.getElementById(tableId);
+    tableRef.querySelector('thead').innerHTML = ""; // Clear header
+    let header = '<th scope="col" class="sorttable_numeric">Team</th>';
     for (let i = 0; i < keys.length; i++) {
-      header += '<th scope="col">' + keys[i][1] + '</th>'
+      header += '<th scope="col" class="sorttable_numeric">' + keys[i][1] + '</th>'
     }
-    document.getElementById("tableKeys").innerHTML = header;
+    tableRef.querySelector('thead').insertRow().innerHTML = header;
   }
 
   // Add team data to COPR table in html
-  function addDataToCoprTable(coprData, keys) {
-    let tableRef = document.getElementById("coprTable");
+  function addDataToCoprTable(tableId, coprData, keys) {
+    let tableRef = document.getElementById(tableId);
     tableRef.querySelector('tbody').innerHTML = ""; // Clear Table
     for (let teamNum in coprData) {
       let row = '<tr>';
@@ -118,8 +120,8 @@ require 'inc/header.php';
     //   console.log("coprs: " + keys[i]);
     // }
 
-    addKeysToCoprTable(coprKeys);
-    addDataToCoprTable(data, coprKeys);
+    addKeysToCoprTable("coprTable", coprKeys);
+    addDataToCoprTable("coprTable", data, coprKeys);
   }
 
   // Retrive OPRs from TBA and build the COPR table to display

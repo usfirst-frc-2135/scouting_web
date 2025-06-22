@@ -298,7 +298,8 @@ require 'inc/header.php';
           </div>
           <div id="collapseStrategicData" class="card-body collapse">
             <div id="freeze-table-2" class="freeze-table overflow-auto">
-              <table id="strategicDataTable" class="table table-striped table-bordered table-hover table-sm border-dark sortable">
+              <table id="strategicDataTable"
+                class="table table-striped table-bordered table-hover table-sm border-dark text-center sortable">
                 <colgroup>
                   <col span="2" style="background-color:transparent">
                   <col span="1" style="background-color:#cfe2ff">
@@ -432,7 +433,8 @@ require 'inc/header.php';
           </div>
           <div id="collapseAllMatches" class="card-body collapse">
             <div id="freeze-table" class="freeze-table overflow-auto">
-              <table id="matchDataTable" class="table table-striped table-bordered table-hover table-sm border-dark sortable">
+              <table id="matchDataTable"
+                class="table table-striped table-bordered table-hover table-sm border-dark text-center sortable">
                 <colgroup>
                   <col span="2" style="background-color:transparent">
                   <col span="1" style="background-color:#cfe2ff">
@@ -987,32 +989,32 @@ require 'inc/header.php';
     let tbodyRef = document.getElementById("matchDataTable").querySelector('tbody');
     tbodyRef.innerHTML = "";     // clear table
     for (let i = 0; i < dataObj.length; i++) {
-      let rowString = "<tr><td align=\"center\">" + dataObj[i]["matchnumber"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["autonLeave"] + "</td>" +
+      let rowString = "<tr><td>" + dataObj[i]["matchnumber"] + "</td>" +
+        "<td>" + dataObj[i]["autonLeave"] + "</td>" +
 
-        "<td align=\"center\">" + dataObj[i]["autonCoralL1"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["autonCoralL2"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["autonCoralL3"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["autonCoralL4"] + "</td>" +
+        "<td>" + dataObj[i]["autonCoralL1"] + "</td>" +
+        "<td>" + dataObj[i]["autonCoralL2"] + "</td>" +
+        "<td>" + dataObj[i]["autonCoralL3"] + "</td>" +
+        "<td>" + dataObj[i]["autonCoralL4"] + "</td>" +
 
-        "<td align=\"center\">" + dataObj[i]["autonAlgaeNet"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["autonAlgaeProcessor"] + "</td>" +
+        "<td>" + dataObj[i]["autonAlgaeNet"] + "</td>" +
+        "<td>" + dataObj[i]["autonAlgaeProcessor"] + "</td>" +
 
-        "<td align=\"center\">" + dataObj[i]["acquiredCoral"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["acquiredAlgae"] + "</td>" +
+        "<td>" + dataObj[i]["acquiredCoral"] + "</td>" +
+        "<td>" + dataObj[i]["acquiredAlgae"] + "</td>" +
 
-        "<td align=\"center\">" + dataObj[i]["teleopCoralL1"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["teleopCoralL2"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["teleopCoralL3"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["teleopCoralL4"] + "</td>" +
+        "<td>" + dataObj[i]["teleopCoralL1"] + "</td>" +
+        "<td>" + dataObj[i]["teleopCoralL2"] + "</td>" +
+        "<td>" + dataObj[i]["teleopCoralL3"] + "</td>" +
+        "<td>" + dataObj[i]["teleopCoralL4"] + "</td>" +
 
-        "<td align=\"center\">" + dataObj[i]["teleopAlgaeNet"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["teleopAlgaeProcessor"] + "</td>" +
+        "<td>" + dataObj[i]["teleopAlgaeNet"] + "</td>" +
+        "<td>" + dataObj[i]["teleopAlgaeProcessor"] + "</td>" +
 
-        "<td align=\"center\">" + dataObj[i]["cageClimb"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["died"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["scoutname"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["comment"] + "</td>" +
+        "<td>" + dataObj[i]["cageClimb"] + "</td>" +
+        "<td>" + dataObj[i]["died"] + "</td>" +
+        "<td>" + dataObj[i]["scoutname"] + "</td>" +
+        "<td>" + dataObj[i]["comment"] + "</td>" +
         "</tr>";
       tbodyRef.insertRow().innerHTML = rowString;
     }
@@ -1146,36 +1148,36 @@ require 'inc/header.php';
       else if (driverability === "5")
         driveVal = "-";
 
-      let rowString = "<tr><td align=\"center\">" + dataObj[i]["matchnumber"] + "</td>" +
-        "<td align=\"center\">" + driveVal + "</td>" +
-        "<td align=\"center\">" + toYesNo(dataObj[i]["against_tactic1"]) + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["against_comment"] + "</td>" +
+      let rowString = "<tr><td>" + dataObj[i]["matchnumber"] + "</td>" +
+        "<td>" + driveVal + "</td>" +
+        "<td>" + toYesNo(dataObj[i]["against_tactic1"]) + "</td>" +
+        "<td>" + dataObj[i]["against_comment"] + "</td>" +
 
-        "<td align=\"center\">" + toYesNo(dataObj[i]["defense_tactic1"]) + "</td>" +
-        "<td align=\"center\">" + toYesNo(dataObj[i]["defense_tactic2"]) + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["defense_comment"] + "</td>" +
+        "<td>" + toYesNo(dataObj[i]["defense_tactic1"]) + "</td>" +
+        "<td>" + toYesNo(dataObj[i]["defense_tactic2"]) + "</td>" +
+        "<td>" + dataObj[i]["defense_comment"] + "</td>" +
 
-        "<td align=\"center\">" + toYesNo(dataObj[i]["foul1"]) + "</td>" +
-        "<td align=\"center\">" + toYesNo(dataObj[i]["autonFoul1"]) + "</td>" +
-        "<td align=\"center\">" + toYesNo(dataObj[i]["autonFoul2"]) + "</td>" +
-        "<td align=\"center\">" + toYesNo(dataObj[i]["teleopFoul1"]) + "</td>" +
-        "<td align=\"center\">" + toYesNo(dataObj[i]["teleopFoul2"]) + "</td>" +
-        "<td align=\"center\">" + toYesNo(dataObj[i]["teleopFoul3"]) + "</td>" +
-        "<td align=\"center\">" + toYesNo(dataObj[i]["teleopFoul4"]) + "</td>" +
-        "<td align=\"center\">" + toYesNo(dataObj[i]["endgameFoul1"]) + "</td>" +
+        "<td>" + toYesNo(dataObj[i]["foul1"]) + "</td>" +
+        "<td>" + toYesNo(dataObj[i]["autonFoul1"]) + "</td>" +
+        "<td>" + toYesNo(dataObj[i]["autonFoul2"]) + "</td>" +
+        "<td>" + toYesNo(dataObj[i]["teleopFoul1"]) + "</td>" +
+        "<td>" + toYesNo(dataObj[i]["teleopFoul2"]) + "</td>" +
+        "<td>" + toYesNo(dataObj[i]["teleopFoul3"]) + "</td>" +
+        "<td>" + toYesNo(dataObj[i]["teleopFoul4"]) + "</td>" +
+        "<td>" + toYesNo(dataObj[i]["endgameFoul1"]) + "</td>" +
 
-        "<td align=\"center\">" + toYesNo(dataObj[i]["autonGetCoralFromFloor"]) + "</td>" +
-        "<td align=\"center\">" + toYesNo(dataObj[i]["autonGetCoralFromStation"]) + "</td>" +
-        "<td align=\"center\">" + toYesNo(dataObj[i]["autonGetAlgaeFromFloor"]) + "</td>" +
-        "<td align=\"center\">" + toYesNo(dataObj[i]["autonGetAlgaeFromReef"]) + "</td>" +
-        "<td align=\"center\">" + toYesNo(dataObj[i]["teleopFloorPickupAlgae"]) + "</td>" +
-        "<td align=\"center\">" + toYesNo(dataObj[i]["teleopFloorPickupCoral"]) + "</td>" +
-        "<td align=\"center\">" + toYesNo(dataObj[i]["teleopKnockOffAlgaeFromReef"]) + "</td>" +
-        "<td align=\"center\">" + toYesNo(dataObj[i]["teleopAcquireAlgaeFromReef"]) + "</td>" +
+        "<td>" + toYesNo(dataObj[i]["autonGetCoralFromFloor"]) + "</td>" +
+        "<td>" + toYesNo(dataObj[i]["autonGetCoralFromStation"]) + "</td>" +
+        "<td>" + toYesNo(dataObj[i]["autonGetAlgaeFromFloor"]) + "</td>" +
+        "<td>" + toYesNo(dataObj[i]["autonGetAlgaeFromReef"]) + "</td>" +
+        "<td>" + toYesNo(dataObj[i]["teleopFloorPickupAlgae"]) + "</td>" +
+        "<td>" + toYesNo(dataObj[i]["teleopFloorPickupCoral"]) + "</td>" +
+        "<td>" + toYesNo(dataObj[i]["teleopKnockOffAlgaeFromReef"]) + "</td>" +
+        "<td>" + toYesNo(dataObj[i]["teleopAcquireAlgaeFromReef"]) + "</td>" +
 
-        "<td align=\"center\">" + dataObj[i]["problem_comment"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["general_comment"] + "</td>" +
-        "<td align=\"center\">" + dataObj[i]["scoutname"] + "</td>" +
+        "<td>" + dataObj[i]["problem_comment"] + "</td>" +
+        "<td>" + dataObj[i]["general_comment"] + "</td>" +
+        "<td>" + dataObj[i]["scoutname"] + "</td>" +
         "</tr>";
       tbodyRef.innerHTML = rowString;
     }
