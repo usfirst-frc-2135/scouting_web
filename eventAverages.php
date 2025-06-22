@@ -395,7 +395,7 @@ require 'inc/header.php';
   }
 
   // Returns a string with the comma-separated line of data for the given team.
-  function createCSVLine(team, evtAvgs, coprs) {  // TODO: team number is a number instead of a string (key)!
+  function createCSVLine(team, evtAvgs, coprs) {
     let pitLocation = 0;
     let oprTP = getDataValue(coprs[team], "totalPoints");
     //let trapPercent = rnd(lookupAverage(evtAvgs,team, "trapPercentage"));

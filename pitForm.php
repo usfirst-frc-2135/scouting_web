@@ -273,7 +273,7 @@ require 'inc/header.php';
     let dataToUse = {};
     dataToUse["teamnumber"] = document.getElementById("teamNumber").value;
 
-    // dataToUse["scoutname"] = document.getElementById("scoutName").value; // TODO: enable once db is changed
+    // TODO: dataToUse["scoutname"] = document.getElementById("scoutName").value; // enable once db is changed
 
     // Swerve
     if (document.getElementById("swerveDriveYes").checked) {

@@ -1,6 +1,8 @@
 <?php
 require_once 'calculateCOPRs.php';
 
+define("OURTEAM", "2135");
+
 /*
   TBA Handler
 
@@ -341,34 +343,37 @@ class tbaHandler
     $ml = $this->getEventMatches($eventCode);   // get all the matches at this event
 
     // Go thru all the matches and figure out which ones are our matches.
-    $ourMatches = array();
+    $ourMatches = array();  // Our matches at the event
+    $allMatches = array();   // All matches at the event
     // error_log("---> going thru matches ");
     foreach ($ml["response"] as $match)
     {
-      $complevel = $match["comp_level"];
-      if ($complevel === "qm")
-      {  // Only care about Qual matches
-        // Put all this match's teams in $teams, then check for our teamnumber.
-        $matchnum = $match["match_number"];
-        $teams = array();
-        for ($j = 0; $j < 3; $j++)
-          array_push($teams, substr($match["alliances"]["red"]["team_keys"][$j], 3));
-        for ($k = 0; $k < 3; $k++)
-          array_push($teams, substr($match["alliances"]["blue"]["team_keys"][$k], 3));
-        for ($m = 0; $m < 6; $m++)
+      $matchInfo = array();
+      $matchInfo["comp_level"] = $match["comp_level"];
+      $matchInfo["match_number"] = $match["match_number"];
+      $matchInfo["actual_time"] = $match["actual_time"];
+
+      // Put all this match's teams in $teams, then check for our teamnumber.
+      $teams = array();
+      for ($j = 0; $j < 3; $j++)
+        array_push($teams, substr($match["alliances"]["red"]["team_keys"][$j], 3));
+      for ($k = 0; $k < 3; $k++)
+        array_push($teams, substr($match["alliances"]["blue"]["team_keys"][$k], 3));
+      for ($m = 0; $m < 6; $m++)
+      {
+        // If team number is ours, then this match is one of ours. 
+        $entryNum = "$teams[$m]";
+        if ($entryNum === OURTEAM)
         {
-          // If team number is 2135, then this match is one of ours. 
-          $entryNum = "$teams[$m]";
-          if ($entryNum === "2135")
-          {
-            // error_log("  ---> found one of our matches: $matchnum");
-            $myMatch = array();  // store this match's num and teams in myMatch
-            $myMatch["match_number"] = $matchnum;
-            $myMatch["teams"] = $teams;
-            array_push($ourMatches, $myMatch);
-            break;
-          }
+          // error_log("  ---> found one of our matches: $matchnum");
+          $myMatch = array();  // store this match's num and teams in myMatch
+          $myMatch["comp_level"] = $match["comp_level"];
+          $myMatch["match_number"] = $match["match_number"];
+          $myMatch["teams"] = $teams;
+          array_push($ourMatches, $myMatch);
+          break;
         }
+        array_push($allMatches, $matchInfo);
       }
     }
 
@@ -460,6 +465,7 @@ class tbaHandler
                   if ($bFoundInOut === 0)
                   {
                     $dout = array();
+                    $dout["comp_level"] = $bcomplevel;
                     $dout["match_number"] = $bmatchnum;
                     $dout["teams"] = $tnum;
                     array_push($out, $dout);
@@ -472,6 +478,9 @@ class tbaHandler
         }
       }
     }
+
+    // TODO: Merge $out with our matches into the $allMatches array and send it out
+
     return $out;
   }
 
