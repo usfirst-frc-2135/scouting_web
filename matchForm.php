@@ -513,7 +513,8 @@ require 'inc/header.php';
   //
   // Process the generated html
   //
-  $(document).ready(function () {
+  document.addEventListener("DOMContentLoaded", () => {
+
     const auto = {
       cones: { bottom: 0, middle: 0, top: 0 },
       cubes: { bottom: 0, middle: 0, top: 0 }

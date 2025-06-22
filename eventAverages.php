@@ -557,7 +557,8 @@ require 'inc/header.php';
   //
   // Process the generated html
   //
-  $(document).ready(function () {
+  document.addEventListener("DOMContentLoaded", () => {
+
     let tbaEventCode;
 
     // Update the navbar with the event code

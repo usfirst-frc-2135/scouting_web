@@ -1014,21 +1014,21 @@ require 'inc/header.php';
     setTimeout(function () {
       // script instructions say this is needed, but it breaks table header sorting
       // sorttable.makeSortable(document.getElementById("matchDataTable"));
-      frozenTableMatches = $('#freeze-table').freezeTable({
-        'freezeHead': true,
-        'freezeColumn': true,
-        'freezeColumnHead': true,
-        'scrollBar': true,
-        'fixedNavbar': '.navbar',
-        'scrollable': true,
-        'fastMode': true,
-        // 'container': '#navbar',
-        'columnNum': 1,
-        'columnKeep': true,
-        'columnBorderWidth': 2,
-        'backgroundColor': 'blue',
-        'frozenColVerticalOffset': 0
-      });
+      // frozenTableMatches = $('#freeze-table').freezeTable({
+      //   'freezeHead': true,
+      //   'freezeColumn': true,
+      //   'freezeColumnHead': true,
+      //   'scrollBar': true,
+      //   'fixedNavbar': '.navbar',
+      //   'scrollable': true,
+      //   'fastMode': true,
+      //   // 'container': '#navbar',
+      //   'columnNum': 1,
+      //   'columnKeep': true,
+      //   'columnBorderWidth': 2,
+      //   'backgroundColor': 'blue',
+      //   'frozenColVerticalOffset': 0
+      // });
     }, 100);
     sortMatchData(document.getElementById("matchDataTable"), matchColumn);
   }
@@ -1178,11 +1178,11 @@ require 'inc/header.php';
     setTimeout(function () {
       // script instructions say this is needed, but it breaks table header sorting
       // sorttable.makeSortable(document.getElementById("strategicDataTable"));
-      frozenTableStrategy = $('#freeze-table-2').freezeTable({
-        'backgroundColor': "white",
-        'columnKeep': true,
-        'frozenColVerticalOffset': 0
-      });
+      // frozenTableStrategy = $('#freeze-table-2').freezeTable({
+      //   'backgroundColor': "white",
+      //   'columnKeep': true,
+      //   'frozenColVerticalOffset': 0
+      // });
     }, 100);
     sortStrategicData(document.getElementById("strategicDataTable"), matchColumn);
   }
@@ -1265,7 +1265,8 @@ require 'inc/header.php';
   //
   // Process the generated html
   //
-  $(document).ready(function () {
+  document.addEventListener("DOMContentLoaded", () => {
+
     // Update the navbar with the event code
     $.get("api/tbaAPI.php", {
       getEventCode: true

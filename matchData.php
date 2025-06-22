@@ -180,7 +180,8 @@ require 'inc/header.php';
   //
   // Process the generated html
   //
-  $(document).ready(function () {
+  document.addEventListener("DOMContentLoaded", () => {
+
     // Update the navbar with the event code
     $.get("api/tbaAPI.php", {
       getEventCode: true

@@ -52,7 +52,8 @@ require 'inc/header.php';
 <script>
 
   // Update the navbar with the event code
-  $(document).ready(function () {
+  document.addEventListener("DOMContentLoaded", () => {
+
     $.get("api/tbaAPI.php", {
       getEventCode: true
     }, function (eventCode) {

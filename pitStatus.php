@@ -97,7 +97,8 @@ require 'inc/header.php';
   //
   // Process the generated html
   //
-  $(document).ready(function () {
+  document.addEventListener("DOMContentLoaded", () => {
+
     $.get("api/tbaAPI.php", {
       getEventCode: true
     }, function (eventCode) {

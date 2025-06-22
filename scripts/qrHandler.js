@@ -244,7 +244,8 @@ function submitFunction() {
 //
 // Process the generated html
 //
-$(document).ready(function () {
+document.addEventListener("DOMContentLoaded", () => {
+
   const reader = new ZXing.BrowserQRCodeReader();
 
   createCameraSelect(reader);
