@@ -507,6 +507,11 @@ require 'inc/header.php';
   let frozenTableMatches = null;
   let frozenTableStrategy = null;
 
+  // Rounding helper function 
+  function rnd(val) {
+    return Math.round((val + Number.EPSILON) * 100) / 100;
+  }
+
   ///// AUTON GRAPH STARTS HERE /////
 
   function loadAutonGraph(matchdata) {
@@ -861,8 +866,8 @@ require 'inc/header.php';
     writeAverageTableRow("matchSheetTable", avgs, ["totalAlgaePointsStr", "avgTotalAlgaePoints", "maxTotalAlgaePoints"], 3);
 
     avgs["totalMatchPointsStr"] = "<b>Match Points</b>";
-    avgs["avgTotalMatchPoints"] = avgs["avgTotalCoralPoints"] + avgs["avgTotalAlgaePoints"];
-    avgs["maxTotalMatchPoints"] = avgs["maxTotalCoralPoints"] + avgs["maxTotalAlgaePoints"];
+    avgs["avgTotalMatchPoints"] = rnd(avgs["avgTotalCoralPoints"] + avgs["avgTotalAlgaePoints"]);
+    avgs["maxTotalMatchPoints"] = rnd(avgs["maxTotalCoralPoints"] + avgs["maxTotalAlgaePoints"]);
     writeAverageTableRow("matchSheetTable", avgs, ["totalMatchPointsStr", "avgTotalMatchPoints", "maxTotalMatchPoints"], 3);
 
     //Auton Table  

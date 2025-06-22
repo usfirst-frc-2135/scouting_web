@@ -918,10 +918,9 @@ require 'inc/header.php';
               newMatch["red_teams"] = match["alliances"]["red"]["team_keys"];
               newMatch["blue_teams"] = match["alliances"]["blue"]["team_keys"];
               newMatch["time"] = null;
-              if (newMatch["time"] === null && match["actual_time"] != null) {
+              if (match["actual_time"] != null) {
                 newMatch["time"] = match["actual_time"];
-              }
-              if (newMatch["time"] === null && match["predicted_time"] != null) {
+              } else if (match["predicted_time"] != null) {
                 newMatch["time"] = match["predicted_time"];
               }
               // if (newMatch["time"] === null && match["time"] != null){ newMatch["time"] = match["time"]; }

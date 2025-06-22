@@ -249,6 +249,7 @@ require 'inc/header.php';
   function clearPitForm() {
     console.log("==> pitForm: clearPitForm()");
     document.getElementById("teamNumber").value = "";
+    document.getElementById("scoutName").value = "";
     document.getElementById("swerveDriveYes").checked = false;
     document.getElementById("swerveDriveNo").checked = false;
     document.getElementById("driveMotors").value = "0";
@@ -271,6 +272,8 @@ require 'inc/header.php';
     console.log("==> pitForm: writeFormToPitTable()");
     let dataToUse = {};
     dataToUse["teamnumber"] = document.getElementById("teamNumber").value;
+
+    // dataToUse["scoutname"] = document.getElementById("scoutName").value; // TODO: enable once db is changed
 
     // Swerve
     if (document.getElementById("swerveDriveYes").checked) {
