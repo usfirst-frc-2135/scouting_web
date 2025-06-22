@@ -14,21 +14,42 @@ require 'inc/header.php';
     <!-- Main row to hold the table -->
     <div class="row col-12 mb-3">
 
-      <!-- <div id="freeze-table" class="freeze-table"> -->
-      <style type="text/css" media="screen">
-        thead {
-          position: sticky;
-          top: 56px;
-          background: white;
-        }
-      </style>
-      <table id="coprTable" class="table table-striped table-bordered table-hover table-sm border-dark text-center sortable">
-        <thead>
-          <tr></tr>
-        </thead>
-        <tbody class="table-group-divider"> </tbody>
-      </table>
-      <!-- </div> -->
+      <div id="freeze-table" class="freeze-table">
+        <style type="text/css" media="screen">
+          thead {
+            position: sticky;
+            top: 56px;
+            background: white;
+          }
+        </style>
+        <table id="coprTable" class="table table-striped table-bordered table-hover table-sm border-dark text-center sortable">
+          <colgroup>
+            <col span="1">
+            <col span="1">
+            <col span="1">
+            <col span="1">
+            <col span="1">
+            <col span="1">
+            <col span="1">
+            <col span="1">
+            <col span="1">
+            <col span="1">
+            <col span="1">
+            <col span="1">
+            <col span="1">
+            <col span="1">
+            <col span="1">
+            <col span="1">
+            <col span="1">
+          </colgroup>
+          <thead>
+            <tr></tr>
+          </thead>
+          <tbody class="table-group-divider">
+            <td></td>
+          </tbody>
+        </table>
+      </div>
 
     </div>
   </div>
@@ -65,10 +86,11 @@ require 'inc/header.php';
   function addKeysToCoprTable(tableId, keys) {
     let tableRef = document.getElementById(tableId);
     tableRef.querySelector('thead').innerHTML = ""; // Clear header
-    let header = '<th scope="col" class="sorttable_numeric">Team</th>';
+    let header = '<tr><th scope="col" class="sorttable_numeric">Team</th>';
     for (let i = 0; i < keys.length; i++) {
       header += '<th scope="col" class="sorttable_numeric">' + keys[i][1] + '</th>'
     }
+    header += '</tr>';
     tableRef.querySelector('thead').insertRow().innerHTML = header;
   }
 
