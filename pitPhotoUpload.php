@@ -136,10 +136,10 @@ require 'inc/header.php';
       document.getElementById("navbarEventCode").innerHTML = eventCode;
     });
 
-    if (window.FileReader) {
-      //then your code goes here 
-    } else {
-      alert('This browser does not support FileReader');
+    if (!window.FileReader) {
+      alert("This browser does not support 'FileReader'");
+      console.warn("This browser does not support 'FileReader'");
+      return;
     }
 
     document.getElementById('robotPic').addEventListener('change', handleFileSelect, false);
