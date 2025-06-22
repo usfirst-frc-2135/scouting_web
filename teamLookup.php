@@ -332,15 +332,6 @@ require 'inc/header.php';
                 <thead>
                   <tr>
                     <th colspan="1"> </th>
-                    <th colspan="24" class="text-center">Strategic Scouting</th>
-                  </tr>
-                  <tr>
-                    <th colspan="1"> </th>
-                    <th colspan="1"> </th>
-                    <th colspan="24" class="text-center">Table</th>
-                  </tr>
-                  <tr>
-                    <th colspan="1"> </th>
                     <th colspan="1"> </th>
                     <th colspan="2" class="text-center" style="background-color:#3686FF">Against Defense</th>
                     <th colspan="3" class="text-center">Defense Tactics</th>
@@ -1077,7 +1068,7 @@ require 'inc/header.php';
       first = false;
       tags += " <img src='./" + uri + "' class='d-block w-100'>";
       tags += "</div>";
-      $("#robotPics").append(tags);
+      document.getElementById("robotPics").innerHTML += tags;
     }
   }
 
@@ -1186,14 +1177,14 @@ require 'inc/header.php';
 
     setTimeout(function () {
       // script instructions say this is needed, but it breaks table header sorting
-      // sorttable.makeSortable(document.getElementById("sortableStrategicData"));
+      // sorttable.makeSortable(document.getElementById("strategicDataTable"));
       frozenTableStrategy = $('#freeze-table-2').freezeTable({
         'backgroundColor': "white",
         'columnKeep': true,
         'frozenColVerticalOffset': 0
       });
     }, 100);
-    sortStrategicData(document.getElementById("sortableStrategicData"), matchColumn);
+    sortStrategicData(document.getElementById("strategicDataTable"), matchColumn);
   }
 
   // This is the main function that runs when we want to load a team 
@@ -1312,7 +1303,7 @@ require 'inc/header.php';
     // });
 
     // // Keep the frozen strategy table updated
-    //  document.getElementById("sortableStrategicData").addEventListener('click', function () {
+    //  document.getElementById("strategicDataTable").addEventListener('click', function () {
     //   if (frozenTableStrategy) {
     //     frozenTableStrategy.update();
     //   }

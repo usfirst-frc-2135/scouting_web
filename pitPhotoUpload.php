@@ -162,7 +162,7 @@ require 'inc/header.php';
 
               // Now upload the selected image
               let uploadPost = new FormData();
-              uploadPost.append("teamPic", $("#robotPic")[0].files[0]);
+              uploadPost.append("teamPic", document.getElementById("robotPic").files[0]);
               uploadPost.append("teamNum", document.getElementById("teamNumber").value);
               $.ajax({
                 type: "POST",

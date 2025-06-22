@@ -704,6 +704,8 @@ require 'inc/header.php';
   function buildRobotPhotoLinks(prefix, teamPics) {
     console.log("==> buildRobotPhotoLinks: build the entries in the photo carousels");
     let first = true;
+    let elementRef = document.getElementById(prefix + "RobotPics");
+    elementRef.innerHTML = "";
     for (let uri of teamPics) {
       let tags = "";
       if (first) {
@@ -714,7 +716,7 @@ require 'inc/header.php';
       first = false;
       tags += " <img src='./" + uri + "' class='d-block w-100'>";
       tags += "</div>";
-      $("#" + prefix + "RobotPics").append(tags);
+      elementRef.innerHTML += tags;
     }
   }
 

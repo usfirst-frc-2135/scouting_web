@@ -221,20 +221,23 @@ function submitFunction() {
     for (const [key, value] of Object.entries(scannedData)) {
       indexedData.push(value);
     }
-
-    $.post("api/dbWriteAPI.php", {
-      writeTeamMatch: JSON.stringify(indexedData)
-    }, function (response) {
-      console.log("=> writeTeamMatch: " + JSON.stringify(response));
-      // Because success word may have a newline at the end, don't do a direct compare
-      if (response.indexOf('success') > -1) {
-        alert("Data Successfully Submitted! Clearing Data.");
-        clearData();
-        document.getElementById("submitData").innerHTML = "Click to Submit Data: " + scannedCount;
-      } else {
-        alert("Data NOT Submitted. (is this a duplicate?)");
-      }
-    });
+    if (indexedData.length == 0)
+      alert("Data NOT Submitted. (no entries found!)");
+    else {
+      $.post("api/dbWriteAPI.php", {
+        writeTeamMatch: JSON.stringify(indexedData)
+      }, function (response) {
+        console.log("=> writeTeamMatch: " + JSON.stringify(response));
+        // Because success word may have a newline at the end, don't do a direct compare
+        if (response.indexOf('success') > -1) {
+          alert("Data Successfully Submitted! Clearing Data.");
+          clearData();
+          document.getElementById("submitData").innerHTML = "Click to Submit Data: " + scannedCount;
+        } else {
+          alert("Data NOT Submitted. (is this a duplicate?)");
+        }
+      });
+    }
   });
 }
 
