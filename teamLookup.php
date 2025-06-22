@@ -959,7 +959,7 @@ require 'inc/header.php';
 
   // Gets the matches and puts them into the html rows
   function sortMatchData(tableRef, matchCol) {
-    let rows = Array.prototype.slice.call(tableRef.querySelectorAll("tbody> tr"));
+    let rows = Array.prototype.slice.call(tableRef.querySelectorAll("tbody > tr"));
     rows.sort(function (rowA, rowB) {
       return (compareMatchNumbers(rowA.cells[matchCol].textContent.trim(), rowB.cells[matchCol].textContent.trim()));
     });
@@ -971,7 +971,7 @@ require 'inc/header.php';
 
   // Gets the strategic match info and puts them into the html rows
   function sortStrategicData(tableRef, matchCol) {
-    let rows = Array.prototype.slice.call(tableRef.querySelectorAll("tbody> tr"));
+    let rows = Array.prototype.slice.call(tableRef.querySelectorAll("tbody > tr"));
     rows.sort(function (rowA, rowB) {
       return (compareMatchNumbers(rowA.cells[matchCol].textContent.trim(), rowB.cells[matchCol].textContent.trim()));
     });

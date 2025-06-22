@@ -116,7 +116,7 @@ require 'inc/header.php';
   function sortStrategicData(tableData, teamCol, matchCol) {
     console.log("==> strategicData: sortStrategicData()");
     let tableRef = document.getElementById(tableData);
-    let rows = Array.prototype.slice.call(tableRef.querySelectorAll("tbody> tr"));
+    let rows = Array.prototype.slice.call(tableRef.querySelectorAll("tbody > tr"));
 
     // Sort by match number
     rows.sort(function (rowA, rowB) {

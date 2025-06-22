@@ -48,7 +48,7 @@ require 'inc/header.php';
   function sortCoprTable(tableData, teamCol) {
     console.log("==> eventCoprData.php: sortCoprTable()");
     let tableRef = document.getElementById(tableData);
-    let rows = Array.prototype.slice.call(tableRef.querySelectorAll("tbody> tr"));
+    let rows = Array.prototype.slice.call(tableRef.querySelectorAll("tbody > tr"));
 
     // Sort the rows based on column 1 match number
     rows.sort(function (rowA, rowB) {

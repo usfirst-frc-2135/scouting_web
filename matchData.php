@@ -65,8 +65,8 @@ require 'inc/header.php';
             <th scope="col" style="background-color:#cfe2ff">Teleop Algae Proc</th>
             <th scope="col" style="background-color:transparent">Cage Climb</th>
             <th scope="col" style="background-color:#cfe2ff">Died</th>
-            <th scope="col" style="background-color:transparent">Comment</th>
-            <th scope="col" style="background-color:#cfe2ff">Scout Name</th>
+            <th scope="col" style="background-color:transparent">Scout Name</th>
+            <th scope="col" style="background-color:#cfe2ff">Comment</th>
           </tr>
         </thead>
         <tbody class="table-group-divider"> </tbody>
@@ -91,7 +91,7 @@ require 'inc/header.php';
   function sortMatchData(tableData, teamCol, matchCol) {
     console.log("==> matchData: sortMatchData()");
     let tableRef = document.getElementById(tableData);
-    let rows = Array.prototype.slice.call(tableRef.querySelectorAll("tbody> tr"));
+    let rows = Array.prototype.slice.call(tableRef.querySelectorAll("tbody > tr"));
 
     // Sort the rows based on column 1 match number
     rows.sort(function (rowA, rowB) {
