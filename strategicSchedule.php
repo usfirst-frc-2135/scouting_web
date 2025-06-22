@@ -42,8 +42,7 @@ require 'inc/header.php';
               <th class="text-center sorttable_nosort" scope="col">Teams</th>
             </tr>
           </thead>
-          <tbody class="table-group-divider">
-          </tbody>
+          <tbody class="table-group-divider"> </tbody>
         </table>
       </div>
     </div>
@@ -56,19 +55,21 @@ require 'inc/header.php';
 
 <script>
 
+  const matchColumn = 0;
+
   // Sort strategic schedule rows by match number
-  function sortStrategicSchedule(id) {
+  function sortStrategicSchedule(tableId) {
     console.log("==> strategicSchedule: sortStrategicSchedule()");
     // Assumes the entries are team numbers or match numbers. Note a team number could have end in 
     // a "B", "C", "D", or "E", in which case we want to strip that off and just use the number for
     // the comparison.
 
-    let tableRef = document.getElementById(id);
+    let tableRef = document.getElementById(tableId);
     let rows = Array.prototype.slice.call(tableRef.querySelectorAll("tbody> tr"));
 
-    // Sort the rows based on column 1 match number value
+    // Sort the rows based on match number value
     rows.sort(function (rowA, rowB) {
-      return compareTeamNumbers(rowA.cells[0].textContent, rowB.cells[0].textContent);
+      return compareMatchNumbers(rowA.cells[matchColumn].textContent, rowB.cells[matchColumn].textContent);
     });
 
     // Update the table body with the sorted rows 
@@ -78,12 +79,12 @@ require 'inc/header.php';
   }
 
   // Load strategic schedule rows
-  function loadStrategicSchedule(dataObj) {
+  function loadStrategicSchedule(dataObj, tableId) {
     console.log("==> strategicSchedule: loadStrategicSchedule()");
-    let tbodyRef = document.getElementById("matchTable").querySelector('tbody');;
+    let tbodyRef = document.getElementById(tableId).querySelector('tbody');;
     tbodyRef.innerHTML = ""; // Clear Table
     for (let i = 0; i < dataObj.length; i++) {
-      let matchNum = dataObj[i]["match_number"];
+      let matchNum = dataObj[i]["comp_level"] + dataObj[i]["match_number"];
       let rowString = "<tr><td align=\"center\">" + matchNum + "</td>" +
         "<td align=\"center\">" + dataObj[i]["teams"] + "</td>" + "</td>";
       tbodyRef.insertRow().innerHTML = rowString;
@@ -98,7 +99,7 @@ require 'inc/header.php';
     }).done(function (strategicData) {
       console.log("=> getStrategicMatches");
       let dataObj = JSON.parse(strategicData);
-      loadStrategicSchedule(dataObj);
+      loadStrategicSchedule(dataObj, "matchTable");
       sortStrategicSchedule("matchTable");
     });
   }
@@ -122,4 +123,4 @@ require 'inc/header.php';
   });
 </script>
 
-<script src="./scripts/compareTeamNumbers.js"></script>
+<script src="./scripts/compareMatchNumbers.js"></script>
