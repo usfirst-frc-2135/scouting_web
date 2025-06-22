@@ -121,6 +121,7 @@ require 'inc/header.php';
     reader.readAsDataURL(f);
   }
 
+  /////////////////////////////////////////////////////////////////////////////
   //
   // Process the generated html
   //
