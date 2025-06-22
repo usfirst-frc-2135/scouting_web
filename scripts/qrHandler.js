@@ -112,7 +112,7 @@ function addQrScanToTable(tableId, dataObj) {
 
     // Add delete button
     document.getElementById(key + "_delete").addEventListener('click', function () {
-      removeQrScanEntry($(this).val());
+      removeQrScanEntry(this.value);
     });
   }
 }
@@ -185,7 +185,7 @@ function alertSuccessfulScan() {
   Function bound to the QR Reader
   Handles reading the different cameras connected to device
 */
-function createCameraSelector(reader) {
+function createCameraSelector(cameraId, reader) {
 
   reader.getVideoInputDevices().then((videoInputDevices) => {
     // Creates drop down menu to change between cameras
@@ -195,7 +195,7 @@ function createCameraSelector(reader) {
         if (initialId === null) {
           initialId = element.deviceId;
         }
-        $("#cameraSelect").append($('<option>', { value: element.deviceId, text: element.label }));
+        $(cameraId).append($("<option>", { value: element.deviceId, text: element.label }));
       });
     }
 
@@ -203,8 +203,8 @@ function createCameraSelector(reader) {
     scanCamera(reader, getDefaultDeviceID(initialId));
 
     // Binds drop down on change to select another camera when necessary
-    document.getElementById("cameraSelect").addEventListener('change', function () {
-      let selCamID = document.getElementById("cameraSelect").value;
+    document.getElementById(cameraId).addEventListener('change', function () {
+      let selCamID = document.getElementById(cameraId).value;
       scanCamera(reader, selCamID);
       setDefaultDeviceID(selCamID);
     });
@@ -251,7 +251,7 @@ function submitScannedData() {
 document.addEventListener("DOMContentLoaded", () => {
 
   const reader = new ZXing.BrowserQRCodeReader();
-  createCameraSelector(reader);
+  createCameraSelector("cameraSelector", reader);
 
   document.getElementById("submitData").addEventListener('click', function () {
     submitScannedData();
