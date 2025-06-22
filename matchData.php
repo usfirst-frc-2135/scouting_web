@@ -91,7 +91,7 @@ require 'inc/header.php';
   function sortMatchData(tableId, teamCol, matchCol) {
     console.log("==> matchData: sortMatchData()");
     let tableRef = document.getElementById(tableId);
-    let rows = Array.prototype.slice.call(tableRef.querySelectorAll("tbody > tr"));
+    let rows = Array.prototype.slice.call(tableRef.querySelectorAll("tbody > tr")); // All <tr> in <tbody>
 
     // Sort the rows based on column 1 match number
     rows.sort(function (rowA, rowB) {

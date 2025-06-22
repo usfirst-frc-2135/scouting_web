@@ -46,7 +46,7 @@ require 'inc/header.php';
   function sortPitStatusTable(tableId) {
     console.log("==> pitStatus: sortTable(): id: " + tableId);
     let tableRef = document.getElementById(tableId);
-    let rows = Array.prototype.slice.call(tableRef.querySelectorAll("tbody > tr"));
+    let rows = Array.prototype.slice.call(tableRef.querySelectorAll("tbody > tr")); // All <tr> in <tbody>
 
     rows.sort(function (rowA, rowB) {
       return compareTeamNumbers(rowA.cells[0].textContent, rowB.cells[0].textContent);
