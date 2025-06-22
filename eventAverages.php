@@ -358,24 +358,10 @@ require 'inc/header.php';
     let filteredData = mdp.getAverages();
     let teamList = addKeysToMatchTable(filteredData);
     addAveragesToTable(teamList, filteredData);
-    setTimeout(function () {
-      // sorttable.makeSortable(document.getElementById("averageTable"))
-      // _frozenTable = $('#freeze-table').freezeTable({
-      //   'freezeHead': true,
-      //   'freezeColumn': true,
-      //   'freezeColumnHead': true,
-      //   'scrollBar': true,
-      //   'fixedNavbar': '.navbar',
-      //   'scrollable': true,
-      //   'fastMode': true,
-      //   // 'container': '#navbar',
-      //   'columnNum': 1,
-      //   'columnKeep': true,
-      //   'columnBorderWidth': 2,
-      //   'backgroundColor': 'blue',
-      //   'frozenColVerticalOffset': 0
-      // });
-    }, 100);
+    // setTimeout(function () {
+    //   // sorttable.makeSortable(document.getElementById("myTable"))      // Already sortable
+    //   // _frozenTable = $('#freeze-table').freezeTable({});              // Still investigating
+    // }, 1);
   }
 
   // CSV File functions
@@ -498,25 +484,10 @@ require 'inc/header.php';
         };
         let teamList = addKeysToMatchTable(filteredData);
         addAveragesToTable(teamList, filteredData);
-        setTimeout(function () {
-          // script instructions say this is needed, but it breaks table header sorting
-          // sorttable.makeSortable(document.getElementById("averageTable"))
-          // _frozenTable = $('#freeze-table').freezeTable({
-          //   'freezeHead': true,
-          //   'freezeColumn': true,
-          //   'freezeColumnHead': true,
-          //   'scrollBar': true,
-          //   'fixedNavbar': '.navbar',
-          //   'scrollable': true,
-          //   'fastMode': true,
-          //   // 'container': '#navbar',
-          //   'columnNum': 1,
-          //   'columnKeep': true,
-          //   'columnBorderWidth': 2,
-          //   'backgroundColor': 'blue',
-          //   'frozenColVerticalOffset': 0
-          // });
-        }, 100);
+        // setTimeout(function () {
+        //   // sorttable.makeSortable(document.getElementById("myTable"))      // Already sortable
+        //   // _frozenTable = $('#freeze-table').freezeTable({});              // Still investigating
+        // }, 1);
       });
       return
     });

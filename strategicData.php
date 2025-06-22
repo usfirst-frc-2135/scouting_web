@@ -202,28 +202,11 @@ require 'inc/header.php';
       console.log("=> getAllStrategicData");
       let dataObj = JSON.parse(strategicData);
       loadStrategicData(dataObj);
-      setTimeout(function () {
-        // script instructions say this is needed, but it breaks table header sorting
-        // sorttable.makeSortable(document.getElementById("strategicDataTable"));
-        //
-        // freeze-table doesn't work with table-responsive
-        // frozenTable = $('#freeze-table').freezeTable({
-        //   'freezeHead': true,
-        //   'freezeColumn': true,
-        //   'freezeColumnHead': true,
-        //   'scrollBar': true,
-        //   'fixedNavbar': '.navbar',
-        //   'scrollable': true,
-        //   'fastMode': true,
-        //   // 'container': '#navbar',
-        //   'columnNum': 2,
-        //   'columnKeep': true,
-        //   'columnBorderWidth': 2,
-        //   'backgroundColor': 'blue',
-        //   'frozenColVerticalOffset': 0
-        // });
-      }, 100);
       sortStrategicData("strategicDataTable", teamColumn, matchColumn);
+      // setTimeout(function () {
+      //   // sorttable.makeSortable(document.getElementById("myTable"))      // Already sortable
+      //   // _frozenTable = $('#freeze-table').freezeTable({});              // Still investigating
+      // }, 1);
     });
   }
 
@@ -250,7 +233,7 @@ require 'inc/header.php';
     //     frozenTable.update();
     //   }
 
-    // $(".table-scrollable").freezeTable({
+    // $('.table-scrollable').freezeTable({
     //   'scrollable': true,
     // });
   });

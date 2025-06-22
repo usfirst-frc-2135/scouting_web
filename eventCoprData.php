@@ -14,42 +14,42 @@ require 'inc/header.php';
     <!-- Main row to hold the table -->
     <div class="row col-12 mb-3">
 
-      <div id="freeze-table" class="freeze-table">
-        <style type="text/css" media="screen">
-          thead {
-            position: sticky;
-            top: 56px;
-            background: white;
-          }
-        </style>
-        <table id="coprTable" class="table table-striped table-bordered table-hover table-sm border-dark text-center sortable">
-          <colgroup>
-            <col span="1">
-            <col span="1">
-            <col span="1">
-            <col span="1">
-            <col span="1">
-            <col span="1">
-            <col span="1">
-            <col span="1">
-            <col span="1">
-            <col span="1">
-            <col span="1">
-            <col span="1">
-            <col span="1">
-            <col span="1">
-            <col span="1">
-            <col span="1">
-            <col span="1">
-          </colgroup>
-          <thead>
-            <tr></tr>
-          </thead>
-          <tbody class="table-group-divider">
-            <td></td>
-          </tbody>
-        </table>
-      </div>
+      <!-- <div id="freeze-table" class="freeze-table"> -->
+      <style type="text/css" media="screen">
+        thead {
+          position: sticky;
+          top: 56px;
+          background: white;
+        }
+      </style>
+      <table id="coprTable" class="table table-striped table-bordered table-hover table-sm border-dark text-center sortable">
+        <colgroup>
+          <col span="1">
+          <col span="1">
+          <col span="1">
+          <col span="1">
+          <col span="1">
+          <col span="1">
+          <col span="1">
+          <col span="1">
+          <col span="1">
+          <col span="1">
+          <col span="1">
+          <col span="1">
+          <col span="1">
+          <col span="1">
+          <col span="1">
+          <col span="1">
+          <col span="1">
+        </colgroup>
+        <thead>
+          <tr></tr>
+        </thead>
+        <tbody class="table-group-divider">
+          <td></td>
+        </tbody>
+      </table>
+      <!-- </div> -->
 
     </div>
   </div>
@@ -60,8 +60,6 @@ require 'inc/header.php';
 <!-- Javascript page handlers -->
 
 <script>
-
-  // let _frozenTable = null;
 
   const teamColumn = 0;
 
@@ -147,33 +145,19 @@ require 'inc/header.php';
   }
 
   // Retrive OPRs from TBA and build the COPR table to display
-  function buildTbaCoprTable() {
+  function buildTbaCoprTable(frozenTable) {
     //output: gets the COPR data from TBA
     $.get("api/tbaAPI.php", {
       getCOPRs: 1
     }).done(function (coprs) {
       console.log("=> getCOPRs");
       loadCoprTable(coprs);
-      setTimeout(function () {
-        // script instructions say this is needed, but it breaks table header sorting
-        // sorttable.makeSortable(document.getElementById("coprTable"));
-        // _frozenTable = $('#freeze-table').freezeTable({
-        //   'freezeHead': true,
-        //   'freezeColumn': true,
-        //   'freezeColumnHead': true,
-        //   'scrollBar': true,
-        //   'fixedNavbar': '.navbar',
-        //   'scrollable': true,
-        //   'fastMode': true,
-        //   // 'container': '#navbar',
-        //   'columnNum': 1,
-        //   'columnKeep': true,
-        //   'columnBorderWidth': 2,
-        //   'backgroundColor': 'blue',
-        //   'frozenColVerticalOffset': 0
-        // });
-      }, 500);
       sortCoprTable("coprTable", teamColumn);
+      sorttable.makeSortable(document.getElementById("coprTable"));
+      // setTimeout(function () {
+      //   // sorttable.makeSortable(document.getElementById("myTable"))      // Already sortable
+      //   // _frozenTable = $('#freeze-table').freezeTable({});              // Still investigating
+      // }, 200);
     });
   }
 
@@ -182,6 +166,8 @@ require 'inc/header.php';
   // Process the generated html
   //
   document.addEventListener("DOMContentLoaded", () => {
+
+    let _frozenTable = null;
 
     // Update the navbar with the event code
     $.get("api/tbaAPI.php", {
@@ -192,14 +178,14 @@ require 'inc/header.php';
       document.getElementById("navbarEventCode").innerHTML = eventCode;
     });
 
-    buildTbaCoprTable();
+    buildTbaCoprTable(_frozenTable);
 
-    // Keep the frozen pane updated 
-    // document.getElementById("coprTable").addEventListener('click', function () {
-    // if (_frozenTable) {
-    //   _frozenTable.update();
-    // }
-    // });
+    // Keep the frozen pane updated
+    document.getElementById("coprTable").addEventListener('click', function () {
+      if (_frozenTable) {
+        _frozenTable.update();
+      }
+    });
 
   });
 </script>
