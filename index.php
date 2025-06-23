@@ -170,7 +170,7 @@ require 'inc/header.php';
   }
 
   // Map form form-control IDs to the db_config labels that store them
-  let idToKeyMap = {
+  const idToKeyMap = {
     "enterServerURL": "server",
     "enterDBName": "db",
     "enterUserName": "username",
@@ -208,7 +208,7 @@ require 'inc/header.php';
     for (const key in idToKeyMap) {
       idToWrittenMap[key] = false;
       let elementRef = document.getElementById(key);
-      elementRef.change(function () {
+      elementRef.addEventListener("change", function (evt) {
         if (elementRef.innerText === "") {
           document.getElementById(key).classList.remove("bg-info");
           idToWrittenMap[key] = false;
