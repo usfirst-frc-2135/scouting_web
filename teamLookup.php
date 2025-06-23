@@ -841,12 +841,10 @@ require 'inc/header.php';
   // Create an html table row with tr and td cells
   function writeAverageTableRow(tableID, dict, keys, length) {
     let tbodyRef = document.getElementById(tableID).querySelector('tbody');
-    let row = "<tr>";
-    row += "<th  style='text-align:left'>" + dict[keys[0]] + "</th>";
+    let row = "<th  style='text-align:left'>" + dict[keys[0]] + "</th>";
     for (let i = 1; i < length; i++) {
       row += (i < keys.length) ? "<td>" + dict[keys[i]] + "</td>" : "<td> </td>";
     }
-    row += "</tr>";
     tbodyRef.insertRow().innerHTML = row;
   }
 
@@ -989,7 +987,7 @@ require 'inc/header.php';
     let tbodyRef = document.getElementById("matchDataTable").querySelector('tbody');
     tbodyRef.innerHTML = "";     // clear table
     for (let i = 0; i < dataObj.length; i++) {
-      let rowString = "<tr><td>" + dataObj[i]["matchnumber"] + "</td>" +
+      let rowString = "<td>" + dataObj[i]["matchnumber"] + "</td>" +
         "<td>" + dataObj[i]["autonLeave"] + "</td>" +
 
         "<td>" + dataObj[i]["autonCoralL1"] + "</td>" +
@@ -1014,8 +1012,7 @@ require 'inc/header.php';
         "<td>" + dataObj[i]["cageClimb"] + "</td>" +
         "<td>" + dataObj[i]["died"] + "</td>" +
         "<td>" + dataObj[i]["scoutname"] + "</td>" +
-        "<td>" + dataObj[i]["comment"] + "</td>" +
-        "</tr>";
+        "<td>" + dataObj[i]["comment"] + "</td>";
       tbodyRef.insertRow().innerHTML = rowString;
     }
     sortMatchData("matchDataTable", matchColumn);
@@ -1086,11 +1083,10 @@ require 'inc/header.php';
   // Create a row in the pit data table
   function writePitTableRow(tableID, dict, keys, length) {
     let tbodyRef = document.getElementById(tableID).querySelector('tbody');
-    let row = "<tr>";
+    let row = "";
     for (let i = 0; i < length; i++) {
       row += (i < keys.length) ? "<td>" + dict[keys[i]] + "</td>" : "<td> </td>";
     }
-    row += "</tr>";
     tbodyRef.insertRow().innerHTML = row;
   }
 
@@ -1134,7 +1130,7 @@ require 'inc/header.php';
       else if (driverability === "5")
         driveVal = "-";
 
-      let rowString = "<tr><td>" + dataObj[i]["matchnumber"] + "</td>" +
+      let rowString = "<td>" + dataObj[i]["matchnumber"] + "</td>" +
         "<td>" + driveVal + "</td>" +
         "<td>" + toYesNo(dataObj[i]["against_tactic1"]) + "</td>" +
         "<td>" + dataObj[i]["against_comment"] + "</td>" +
@@ -1163,8 +1159,7 @@ require 'inc/header.php';
 
         "<td>" + dataObj[i]["problem_comment"] + "</td>" +
         "<td>" + dataObj[i]["general_comment"] + "</td>" +
-        "<td>" + dataObj[i]["scoutname"] + "</td>" +
-        "</tr>";
+        "<td>" + dataObj[i]["scoutname"] + "</td>";
       tbodyRef.innerHTML = rowString;
     }
     sortStrategicData("strategicDataTable", matchColumn);

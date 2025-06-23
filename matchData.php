@@ -117,7 +117,7 @@ require 'inc/header.php';
     tbodyRef.innerHTML = ""; // Clear Table
     for (let i = 0; i < dataObj.length; i++) {
       let teamNum = dataObj[i]["teamnumber"];
-      let rowString = "<tr><td style=\"background-color:transparent\">" + dataObj[i]["matchnumber"] + "</td>" +
+      let rowString = "<td style=\"background-color:transparent\">" + dataObj[i]["matchnumber"] + "</td>" +
         "<td style=\"background-color:transparent\"><a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</td>" +
         "<td style=\"background-color:#cfe2ff\">" + dataObj[i]["autonLeave"] + "</td>" +
         "<td style=\"background-color:transparent\">" + dataObj[i]["autonCoralL1"] + "</td>" +
@@ -137,8 +137,7 @@ require 'inc/header.php';
         "<td style=\"background-color:transparent\">" + dataObj[i]["cageClimb"] + "</td>" +
         "<td style=\"background-color:#cfe2ff\">" + dataObj[i]["died"] + "</td>" +
         "<td style=\"background-color:transparent\">" + dataObj[i]["scoutname"] + "</td>" +
-        "<td style=\"background-color:#cfe2ff\">" + dataObj[i]["comment"] + "</td>" +
-        "</tr>";
+        "<td style=\"background-color:#cfe2ff\">" + dataObj[i]["comment"] + "</td>";
       tbodyRef.insertRow().innerHTML = rowString;
     }
   }

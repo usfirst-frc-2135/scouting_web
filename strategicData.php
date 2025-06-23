@@ -161,7 +161,7 @@ require 'inc/header.php';
       }
 
       let teamNum = dataObj[i]["teamnumber"];
-      let rowString = "<tr><td style=\"background-color:transparent\"><a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</td>" +
+      let rowString = "<td style=\"background-color:transparent\"><a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</td>" +
         "<td style=\"background-color:transparent\">" + dataObj[i]["matchnumber"] + "</td>" +
         "<td style=\"background-color:#cfe2ff\">" + driveVal + "</td>" +
         "<td style=\"background-color:transparent\">" + toYesNo(dataObj[i]["against_tactic1"]) + "</td>" +
@@ -187,8 +187,7 @@ require 'inc/header.php';
         "<td style=\"background-color:transparent\">" + toYesNo(dataObj[i]["teleopAcquireAlgaeFromReef"]) + "</td>" +
         "<td style=\"background-color:#cfe2ff\">" + dataObj[i]["problem_comment"] + "</td>" +
         "<td style=\"background-color:transparent\">" + dataObj[i]["general_comment"] + "</td>" +
-        "<td style=\"background-color:#cfe2ff\">" + dataObj[i]["scoutname"] + "</td>" +
-        "</tr>";
+        "<td style=\"background-color:#cfe2ff\">" + dataObj[i]["scoutname"] + "</td>";
       tableRef.querySelector('tbody').insertRow().innerHTML = rowString;
     }
   }

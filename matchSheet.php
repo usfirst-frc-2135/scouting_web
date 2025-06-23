@@ -610,9 +610,8 @@ require 'inc/header.php';
     let rd = _allMatchData[teamNum];
     let tableRef = document.getElementById(color + index + "DataTable");
     tableRef.querySelector('tbody').innerHTML = "";
-    let row;
+    let row = "";
     if (rd != null) {
-      row = "<tr>";
       row += "<td>" + rd["avgAutonCoralL1"] + "</td>";
       row += "<td>" + rd["avgAutonCoralL2"] + "</td>";
       row += "<td>" + rd["avgAutonCoralL3"] + "</td>";
@@ -632,7 +631,6 @@ require 'inc/header.php';
       row += "<td>" + rd["endgameClimbPercent"][2] + "</td>";
       row += "<td>" + rd["endgameClimbPercent"][3] + "</td>";
       row += "<td>" + rd["endgameClimbPercent"][4] + "</td>";
-      row += "</tr>";
     }
     tableRef.querySelector('tbody').insertRow().innerHTML = row;
   }

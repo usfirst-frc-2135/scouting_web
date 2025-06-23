@@ -23,25 +23,6 @@ require 'inc/header.php';
         }
       </style>
       <table id="coprTable" class="table table-striped table-bordered table-hover table-sm border-dark text-center sortable">
-        <colgroup>
-          <col span="1">
-          <col span="1">
-          <col span="1">
-          <col span="1">
-          <col span="1">
-          <col span="1">
-          <col span="1">
-          <col span="1">
-          <col span="1">
-          <col span="1">
-          <col span="1">
-          <col span="1">
-          <col span="1">
-          <col span="1">
-          <col span="1">
-          <col span="1">
-          <col span="1">
-        </colgroup>
         <thead>
           <tr></tr>
         </thead>
@@ -84,11 +65,12 @@ require 'inc/header.php';
   function addKeysToCoprTable(tableId, keys) {
     let tableRef = document.getElementById(tableId);
     tableRef.querySelector('thead').innerHTML = ""; // Clear header
-    let header = '<tr><th scope="col" class="sorttable_numeric">Team</th>';
+    let header = '<th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Team</th>';
     for (let i = 0; i < keys.length; i++) {
-      header += '<th scope="col" class="sorttable_numeric">' + keys[i][1] + '</th>'
+      let color = (i % 2 == 1) ? "#cfe2ff" : "transparent";
+      header += '<th scope="col" class="sorttable_numeric" style="background-color:' + color + '">' + keys[i][1] + '</th>';
     }
-    header += '</tr>';
+    // console.log("header: " + header);
     tableRef.querySelector('thead').insertRow().innerHTML = header;
   }
 
@@ -97,12 +79,12 @@ require 'inc/header.php';
     let tableRef = document.getElementById(tableId);
     tableRef.querySelector('tbody').innerHTML = ""; // Clear Table
     for (let teamNum in coprData) {
-      let row = '<tr>';
-      row += '<td>' + "<a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + '</td>';
+      let row = '<td style="background-color:#cfe2ff">' + "<a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + '</td>';
       for (let j = 0; j < keys.length; j++) {
-        row += '<td>' + coprData[teamNum][keys[j][0]] + '</td>';
+        let color = (j % 2 == 1) ? "#cfe2ff" : "transparent";
+        row += '<td style="background-color:' + color + '">' + coprData[teamNum][keys[j][0]] + '</td>';
       }
-      row += '</tr>';
+      // console.log("row: " + row);
       tableRef.querySelector('tbody').insertRow().innerHTML = row;
     }
   }

@@ -264,7 +264,7 @@ require 'inc/header.php';
     for (let teamNum of teamList) {
       let endgameClimbPercentage = getDataValue(avgData[teamNum], "endgameClimbPercent");
 
-      let rowString = "<tr>" +
+      let rowString =
         "<td style=\"background-color:transparent\"><a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a></td>" +
         //"<td>" + getDataValue(tbaData[teamNum], "totalPoints") + "</td>" +
         "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "avgTotalPoints") + "</td>" +
@@ -330,8 +330,7 @@ require 'inc/header.php';
         "<td style=\"background-color:transparent\">" + getDataValue(endgameClimbPercentage, 3) + "</td>" +
         "<td style=\"background-color:transparent\">" + getDataValue(endgameClimbPercentage, 4) + "</td>" +
 
-        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "totaldied") + "</td>" +
-        "</td>";
+        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "totaldied") + "</td>";
 
       tableRef.querySelector('tbody').insertRow().innerHTML = rowString;
     }

@@ -76,8 +76,7 @@ require 'inc/header.php';
     tbodyRef.innerHTML = ""; // Clear Table
     for (let i = 0; i < dataObj.length; i++) {
       let matchNum = dataObj[i]["comp_level"] + dataObj[i]["match_number"];
-      let rowString = "<tr><td>" + matchNum + "</td>" +
-        "<td>" + dataObj[i]["teams"] + "</td>" + "</td>";
+      let rowString = "<td>" + matchNum + "</td>" + "<td>" + dataObj[i]["teams"] + "</td>";
       tbodyRef.insertRow().innerHTML = rowString;
     }
   }
