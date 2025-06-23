@@ -8,53 +8,53 @@ require 'inc/header.php';
 
     <!-- Page Title -->
     <div class="row pt-3 pb-3 mb-3">
-      <h2 class="col-md-3"><?php echo $title; ?></h2>
+      <h2 class="col-md-4"><?php echo $title; ?></h2>
 
-      <div class="col-md-3">
+      <div class="col-md-4">
         <button id="downloadCsvFile" class="btn btn-primary" type="button">Download CSV</button>
       </div>
-    </div>
 
-    <!-- Match Filter -->
-    <div class="card col-md-3 mb-3">
-      <div id="customMatch" class="accordion accordion-flush">
-        <div class="accordion-item" style="background-color: #F8F9FA">
-          <h2 class="accordion-header">
-            <button class="accordion-button text-light bg-secondary" type="button" data-bs-toggle="collapse"
-              data-bs-target="#filterEntry" aria-expanded="false" aria-controls="matchEntry">Match Range Filter</button>
-          </h2>
+      <!-- Match Filter -->
+      <div class="col-md-4 mb-3">
+        <div id="customMatch" class="accordion accordion-flush">
+          <div class="accordion-item" style="background-color: #F8F9FA">
+            <h2 class="accordion-header">
+              <button class="accordion-button text-light bg-secondary" type="button" data-bs-toggle="collapse"
+                data-bs-target="#filterEntry" aria-expanded="false" aria-controls="matchEntry">Match Range Filter</button>
+            </h2>
 
-          <div id="filterEntry" class="accordion-collapse collapse" data-bs-parent="#customMatch">
+            <div id="filterEntry" class="accordion-collapse collapse" data-bs-parent="#customMatch">
 
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <select id="startCompLevel" class="form-select mb-3" aria-label="Comp Level Select">
-                  <option value="p">P</option>
-                  <option value="qm" selected>QM</option>
-                  <option value="qf">QF</option>
-                  <option value="sf">SF</option>
-                  <option value="f">F</option>
-                </select>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <select id="startCompLevel" class="form-select mb-3" aria-label="Comp Level Select">
+                    <option value="p">P</option>
+                    <option value="qm" selected>QM</option>
+                    <option value="qf">QF</option>
+                    <option value="sf">SF</option>
+                    <option value="f">F</option>
+                  </select>
+                </div>
+                <input id="startMatchNum" class="form-control col-2 mb-3" type="text" placeholder="Start"
+                  aria-label="Start Match Filter">
               </div>
-              <input id="startMatchNum" class="form-control col-2 mb-3" type="text" placeholder="Start"
-                aria-label="Start Match Filter">
-            </div>
 
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <select id="endCompLevel" class="form-select mb-3" aria-label="Comp Level Select">
-                  <option value="p">P</option>
-                  <option value="qm" selected>QM</option>
-                  <option value="qf">QF</option>
-                  <option value="sf">SF</option>
-                  <option value="f">F</option>
-                </select>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <select id="endCompLevel" class="form-select mb-3" aria-label="Comp Level Select">
+                    <option value="p">P</option>
+                    <option value="qm" selected>QM</option>
+                    <option value="qf">QF</option>
+                    <option value="sf">SF</option>
+                    <option value="f">F</option>
+                  </select>
+                </div>
+                <input id="endMatchNum" class="form-control col-2 mb-3" type="text" placeholder="End" aria-label="End Match Filter">
               </div>
-              <input id="endMatchNum" class="form-control col-2 mb-3" type="text" placeholder="End" aria-label="End Match Filter">
-            </div>
 
-            <div>
-              <button id="filterData" class="btn btn-primary btn-sm mb-3" type="button">Filter Data</button>
+              <div>
+                <button id="filterData" class="btn btn-primary btn-sm mb-3" type="button">Filter Data</button>
+              </div>
             </div>
           </div>
         </div>
