@@ -187,15 +187,20 @@ function alertSuccessfulScan() {
 */
 function createCameraSelector(cameraId, reader) {
 
+  // Creates drop down menu to change between cameras
   reader.getVideoInputDevices().then((videoInputDevices) => {
-    // Creates drop down menu to change between cameras
     let initialId = null;
+    let select = document.getElementById(cameraId);
     if (videoInputDevices.length >= 1) {
       videoInputDevices.forEach((element) => {
         if (initialId === null) {
           initialId = element.deviceId;
         }
-        $(cameraId).append($("<option>", { value: element.deviceId, text: element.label }));
+
+        let opt = document.createElement('option');
+        opt.value = element.deviceId;
+        opt.innerHTML = element.label;
+        select.appendChild(opt);
       });
     }
 
