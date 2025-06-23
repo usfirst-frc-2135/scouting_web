@@ -107,13 +107,13 @@ require 'inc/header.php';
               <input id="enterEventCode" class="form-control" type="text" placeholder="2025CAFR" aria-describedby="tbaEventCode">
             </div>
 
-            <div class="row m-3 mx-auto">
+            <div class="row mb-3 mx-auto" style=" width: 200px;">
               <button id="writeConfig" class="btn btn-primary">Write Config File</button>
             </div>
-            <div class="row m-3 mx-auto">
+            <div class="row mb-3 mx-auto" style=" width: 200px;">
               <button id="createDB" class="btn btn-primary">Create DB</button>
             </div>
-            <div class="row m-3 mx-auto">
+            <div class="row mb-3 mx-auto" style=" width: 200px;">
               <button id="createTable" class="btn btn-primary">Create Table</button>
             </div>
           </div>
