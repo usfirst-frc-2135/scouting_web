@@ -749,10 +749,7 @@ require 'inc/header.php';
     document.getElementById("ourMatches").innerHTML = "";
     let row = '';
     for (let i in arrOurMatches) {
-      if (i != 0) {
-        row += " ";
-      }
-      row += '<a class="btn btn-secondary btn-sm m-1" href="./matchSheet.php?matchNum=' + arrOurMatches[i]["match_number"] + '&compLevel=' + arrOurMatches[i]["comp_level"] + '">' + arrOurMatches[i]["comp_level"] + arrOurMatches[i]["match_number"] + '</a>';
+      row += ' <a class="btn btn-secondary btn-sm col-2 m-1" href="./matchSheet.php?matchNum=' + arrOurMatches[i]["match_number"] + '&compLevel=' + arrOurMatches[i]["comp_level"] + '">' + arrOurMatches[i]["comp_level"] + arrOurMatches[i]["match_number"] + '</a>';
     }
 
     document.getElementById("ourMatches").innerHTML = row;
