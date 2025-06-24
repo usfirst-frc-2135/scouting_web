@@ -13,9 +13,18 @@ This repo is for the scouting web application. It is used to capture pit, match,
 
 Collected data can be viewed through a match data page and strategic data page. The team related data can also be viewed through a team lookup page to show scoring averages, maximums, trends. Match analyses are provided by a match sheet page that combines information from all 6 robots in a scheduled match with cumulative statistics on how the match might happen. Event related data can be also viewed through an event averages table and the COPR data from the Blue Alliance. 
 
-## How is it structured?
+## What web tools does it use?
 
 Web pages are written to use Bootstrap, PHP, and javascript to gather and display the results from the main database. The scouting database is MySQL on our team web site, Web pages access the scouting database over Internet connections and also pull information from the Blue Alliance.
+
+## How is it structured?
+
+An instance of the scouting database consists of four tables:  pit data, match data, strategic data, and cached TBA responses.
+- The pit data table is keyed on the event code and the team number, since it is not match dependent.
+- The match data table is keyed on the event code, match number, and team number and contains data for that team in that particular match.
+- The strategic data table is similarly keyed on those values.
+- The TBA table is keyed on the request string sent to the TBA server to retrieve info (i.e. "/frc/teams/").
+A single database can span multiple events, and the appropriate matches will be filtered in the responses. (As long as the database schema does not change.)
 
 ## Where is it stored?
 
