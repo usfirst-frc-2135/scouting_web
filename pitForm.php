@@ -111,7 +111,8 @@ require 'inc/header.php';
 
             <div class="card col-md-12 mx-auto" style=" background-color:#FBE7A5">
               <div class="card-header">
-                <h5>Observations<span class="text-danger"> (observe only, do not ask)</span></h5>
+                <h5>Observations</h5>
+                <h6><span class="text-danger">(observe only, do not ask)</span></h6>
               </div>
 
               <div class="card-body">
@@ -174,6 +175,21 @@ require 'inc/header.php';
 <!-- Javascript page handlers -->
 
 <script>
+
+  // Check if our URL directs to a specific team
+  function checkURLForTeamSpec() {
+    console.log("=> pitForm: checkURLForTeamSpec()");
+    let sp = new URLSearchParams(window.location.search);
+    if (sp.has('teamNum')) {
+      return sp.get('teamNum')
+    }
+    return null;
+  }
+
+  // Autofill the team number
+  function initializeTeamNumber(teamNumber) {
+    document.getElementById("teamNumber").value = teamNumber;
+  }
 
   // Verify pit form data
   function verifyPitForm() {
@@ -374,6 +390,12 @@ require 'inc/header.php';
       console.log("=> pitForm: getEventCode: " + eventCode);
       document.getElementById("navbarEventCode").innerHTML = eventCode;
     });
+
+    // Check URL for source team to load
+    let initTeamNumber = checkURLForTeamSpec();
+    if (initTeamNumber) {
+      initializeTeamNumber(initTeamNumber);
+    }
 
     // Submit the match data form
     document.getElementById("submitButton").addEventListener('click', function () {

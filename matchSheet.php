@@ -13,7 +13,7 @@ require 'inc/header.php';
       </div>
 
       <!-- Main card to hold the match selection -->
-      <div class="card col-md-4 mx-auto mb-3">
+      <div class="card col-md-6 mx-auto mb-3">
 
         <!-- Our team matches list -->
         <h5 class="pt-3">2135 Match Links</h5>
@@ -83,7 +83,7 @@ require 'inc/header.php';
       </div>
 
       <!-- Match overview card -->
-      <div class="card col-md-4 mx-auto mb-3 p-3">
+      <div class="card col-md-6 mx-auto mb-3 p-3">
         <h5 id="matchTitle">Match:</h5>
         <h5 id="matchTime">Time:</h5>
         <table class="table table-bordered table-sm border-dark text-center">

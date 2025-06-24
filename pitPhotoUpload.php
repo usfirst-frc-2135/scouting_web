@@ -34,15 +34,16 @@ require 'inc/header.php';
               </div>
             </div>
 
-            <div class="text-center mb-3">
-              <label for="replacePic" class="form-label">Replace Existing Photos</label>
-              <input id="replacePic" class="form-check-input" type="checkbox">
-            </div>
-
-            <div class="d-grid gap-2 col-6 mx-auto">
+            <div class="d-grid gap-2 col-6 mx-auto mb-3">
               <button id="upload" class="btn btn-primary" type="button">Upload</button>
             </div>
           </form>
+
+          <div class="text-center mt-3">
+            <label for="replacePic" class="form-label">Replace Existing Photos</label>
+            <input id="replacePic" class="form-check-input" type="checkbox">
+          </div>
+
         </div>
 
         <button id="loadingButton" class="btn btn-primary mb-3">
@@ -56,7 +57,6 @@ require 'inc/header.php';
       </div>
 
     </div>
-
   </div>
 </div>
 
@@ -68,6 +68,21 @@ require 'inc/header.php';
 
   const loadButton = document.getElementById("loadingButton");
   loadButton.style.visibility = 'hidden';
+
+  // Check if our URL directs to a specific team
+  function checkURLForTeamSpec() {
+    console.log("=> pitPhotoUpload: checkURLForTeamSpec()");
+    let sp = new URLSearchParams(window.location.search);
+    if (sp.has('teamNum')) {
+      return sp.get('teamNum')
+    }
+    return null;
+  }
+
+  // Autofill the team number
+  function initializeTeamNumber(teamNumber) {
+    document.getElementById("teamNumber").value = teamNumber;
+  }
 
   // Display success to user
   function showSuccessMessage(message) {
@@ -135,6 +150,12 @@ require 'inc/header.php';
       console.log("=> pitPhotoUpload: getEventCode: " + eventCode);
       document.getElementById("navbarEventCode").innerHTML = eventCode;
     });
+
+    // Check URL for source team to load
+    let initTeamNumber = checkURLForTeamSpec();
+    if (initTeamNumber) {
+      initializeTeamNumber(initTeamNumber);
+    }
 
     if (!window.FileReader) {
       alert("This browser does not support 'FileReader'");
