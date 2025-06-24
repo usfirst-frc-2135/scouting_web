@@ -699,9 +699,9 @@ class dbHandler
     //
     $out["server"] = $dbConfig["server"];
     $out["db"] = $dbConfig["db"];
-    $out["tbakey"] = substr($dbConfig["tbakey"], 0, 3) . "******";
+    $out["tbakey"] = substr($dbConfig["tbakey"], 0, 8) . "********";
     $out["eventcode"] = $dbConfig["eventcode"];
-    $out["username"] = substr($dbConfig["username"], 0, 1) . "*****";
+    $out["username"] = $dbConfig["username"];
     $out["dbExists"] = false;
     $out["serverExists"] = false;
     $out["matchTableExists"] = false;
