@@ -259,8 +259,8 @@ require 'inc/header.php';
   // Create and the HTML table for display
   function addAveragesToTable(teamList, avgData) {
     console.log("==> eventAverages: addAveragesToTable()");
-    let tableRef = document.getElementById("averageTable");
-    tableRef.querySelector('tbody').innerHTML = ""; // Clear Table
+    let tbodyRef = document.getElementById("averageTable").querySelector('tbody');
+    tbodyRef.innerHTML = ""; // Clear Table
     for (let teamNum of teamList) {
       let endgameClimbPercentage = getDataValue(avgData[teamNum], "endgameClimbPercent");
 
@@ -332,7 +332,7 @@ require 'inc/header.php';
 
         "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "totaldied") + "</td>";
 
-      tableRef.querySelector('tbody').insertRow().innerHTML = rowString;
+      tbodyRef.insertRow().innerHTML = rowString;
     }
   }
 

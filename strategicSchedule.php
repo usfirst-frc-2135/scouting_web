@@ -56,7 +56,7 @@ require 'inc/header.php';
     // the comparison.
 
     let tableRef = document.getElementById(tableId);
-    let rows = Array.prototype.slice.call(tableRef.querySelectorAll("tbody > tr")); // All <tr> in <tbody>
+    let rows = Array.prototype.slice.call(tableRef.querySelectorAll("tbody > tr")); // All "tr" in <tbody>
 
     // Sort the rows based on match number value
     rows.sort(function (rowA, rowB) {

@@ -116,7 +116,7 @@ require 'inc/header.php';
   function sortStrategicData(tableId, teamCol, matchCol) {
     console.log("==> strategicData: sortStrategicData()");
     let tableRef = document.getElementById(tableId);
-    let rows = Array.prototype.slice.call(tableRef.querySelectorAll("tbody > tr")); // All <tr> in <tbody>
+    let rows = Array.prototype.slice.call(tableRef.querySelectorAll("tbody > tr")); // All "tr" in <tbody>
 
     // Sort by match number
     rows.sort(function (rowA, rowB) {
@@ -146,8 +146,8 @@ require 'inc/header.php';
   // Load the strategic data into the table
   function loadStrategicData(dataObj) {
     console.log("==> strategicData: loadStrategicData()");
-    let tableRef = document.getElementById("strategicDataTable");
-    tableRef.querySelector('tbody').innerHTML = "";   // Clear Table
+    let tbodyRef = document.getElementById("strategicDataTable").querySelector('tbody');
+    tbodyRef.innerHTML = "";   // Clear Table
 
     for (let i = 0; i < dataObj.length; i++) {
       let driveVal = "";
@@ -188,7 +188,7 @@ require 'inc/header.php';
         "<td style=\"background-color:#cfe2ff\">" + dataObj[i]["problem_comment"] + "</td>" +
         "<td style=\"background-color:transparent\">" + dataObj[i]["general_comment"] + "</td>" +
         "<td style=\"background-color:#cfe2ff\">" + dataObj[i]["scoutname"] + "</td>";
-      tableRef.querySelector('tbody').insertRow().innerHTML = rowString;
+      tbodyRef.insertRow().innerHTML = rowString;
     }
   }
 

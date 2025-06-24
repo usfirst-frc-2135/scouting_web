@@ -47,7 +47,7 @@ require 'inc/header.php';
   function sortPitStatusTable(tableId) {
     console.log("==> pitStatus: sortTable: id: " + tableId);
     let tableRef = document.getElementById(tableId);
-    let rows = Array.prototype.slice.call(tableRef.querySelectorAll("tbody > tr")); // All <tr> in <tbody>
+    let rows = Array.prototype.slice.call(tableRef.querySelectorAll("tbody > tr")); // All "tr" in <tbody>
 
     rows.sort(function (rowA, rowB) {
       return compareTeamNumbers(rowA.cells[0].textContent, rowB.cells[0].textContent);
@@ -66,31 +66,29 @@ require 'inc/header.php';
       return null;
     }
 
-    document.getElementById("psTable").querySelector('tbody').innerHTML = "";
-    let row = "";
+    let tbodyRef = document.getElementById("psTable").querySelector('tbody');
+    tbodyRef.innerHTML = "";
     for (let teamNum of teams) {
       let teamName = names[teamNum];
-      row += "<tr>";
+      let row = "";
+      row += "<td class='text-start'>" + "<a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a>";
       if (teamName != "XX") {
-        row += " <td class='text-start'>" + "<a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a> - " + teamName + "</td>";
-      } else {
-        row += " <td class='text-start'>" + "<a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a>" + "</td>";
+        row += " - " + teamName;
       }
+      row += + "</td>";
 
       if (pitInfo[teamNum] != null) {
         row += " <td class='bg-success'>Yes</td>";
       } else {
-        row += " <td>No</td>";
+        row += "<td><a href='pitForm.php?teamNum=" + teamNum + "'>No</td>"
       }
 
       if ((images[teamNum] != null) && (images[teamNum].length > 0)) {
         row += " <td class='bg-success'>Yes</td>";
       } else {
-        row += " <td>No</td>";
+        row += "<td><a href='pitPhotoUpload.php?teamNum=" + teamNum + "'>No</td>"
       }
-
-      row += "</tr>";
-      document.getElementById("psTable").querySelector('tbody').innerHTML = row;
+      tbodyRef.insertRow().innerHTML = row;
     }
   }
 

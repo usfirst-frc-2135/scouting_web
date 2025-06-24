@@ -608,8 +608,8 @@ require 'inc/header.php';
 
     // Load team scouted information
     let rd = _allMatchData[teamNum];
-    let tableRef = document.getElementById(color + index + "DataTable");
-    tableRef.querySelector('tbody').innerHTML = "";
+    let tbodyRef = document.getElementById(color + index + "DataTable").querySelector('tbody');
+    tbodyRef.innerHTML = "";
     let row = "";
     if (rd != null) {
       row += "<td>" + rd["avgAutonCoralL1"] + "</td>";
@@ -632,7 +632,7 @@ require 'inc/header.php';
       row += "<td>" + rd["endgameClimbPercent"][3] + "</td>";
       row += "<td>" + rd["endgameClimbPercent"][4] + "</td>";
     }
-    tableRef.querySelector('tbody').insertRow().innerHTML = row;
+    tbodyRef.insertRow().innerHTML = row;
   }
 
   function updateSummary(redList, blueList) {
