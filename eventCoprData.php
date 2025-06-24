@@ -61,7 +61,7 @@ require 'inc/header.php';
     });
   }
 
-  // Add data keys (fields) to COPR table in html
+  // Add data keys (header fields) to COPR table in html
   function addKeysToCoprTable(tableId, keys) {
     let tableRef = document.getElementById(tableId);
     tableRef.querySelector('thead').innerHTML = ""; // Clear header

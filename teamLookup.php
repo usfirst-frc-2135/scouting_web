@@ -1118,17 +1118,14 @@ require 'inc/header.php';
     tbodyRef.innerHTML = "";     // clear table
     for (let i = 0; i < dataObj.length; i++) {
       let driverability = dataObj[i]["driverability"];
-      let driveVal = "";
-      if (driverability === "1")
-        driveVal = "Jerky";
-      else if (driverability === "2")
-        driveVal = "Slow";
-      else if (driverability === "3")
-        driveVal = "Average";
-      else if (driverability === "4")
-        driveVal = "Quick";
-      else if (driverability === "5")
-        driveVal = "-";
+      switch (driverability) {
+        case "1": driveVal = "Jerky"; break;
+        case "2": driveVal = "Slow"; break;
+        case "3": driveVal = "Average"; break;
+        case "4": driveVal = "Quick"; break;
+        case "5": driveVal = "-"; break;
+        default: driveVal = ""; break;
+      }
 
       let rowString = "<td>" + dataObj[i]["matchnumber"] + "</td>" +
         "<td>" + driveVal + "</td>" +

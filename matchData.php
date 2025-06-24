@@ -91,7 +91,7 @@ require 'inc/header.php';
   function sortMatchData(tableId, teamCol, matchCol) {
     console.log("==> matchData: sortMatchData()");
     let tableRef = document.getElementById(tableId);
-    let rows = Array.prototype.slice.call(tableRef.querySelectorAll("tbody > tr")); // All <tr> in <tbody>
+    let rows = Array.prototype.slice.call(tableRef.querySelectorAll("tbody > tr")); // All "tr" in <tbody>
 
     // Sort the rows based on column 1 match number
     rows.sort(function (rowA, rowB) {
@@ -117,7 +117,7 @@ require 'inc/header.php';
     tbodyRef.innerHTML = ""; // Clear Table
     for (let i = 0; i < dataObj.length; i++) {
       let teamNum = dataObj[i]["teamnumber"];
-      let rowString = "<td style=\"background-color:transparent\">" + dataObj[i]["matchnumber"] + "</td>" +
+      let rowString = "<th >" + dataObj[i]["matchnumber"] + "</th>" +
         "<td style=\"background-color:transparent\"><a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</td>" +
         "<td style=\"background-color:#cfe2ff\">" + dataObj[i]["autonLeave"] + "</td>" +
         "<td style=\"background-color:transparent\">" + dataObj[i]["autonCoralL1"] + "</td>" +

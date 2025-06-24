@@ -191,16 +191,17 @@ function createCameraSelector(cameraId, reader) {
   reader.getVideoInputDevices().then((videoInputDevices) => {
     let initialId = null;
     let select = document.getElementById(cameraId);
+    console.log("getVideoInputDevices: Camera count: " + videoInputDevices.length);
     if (videoInputDevices.length >= 1) {
       videoInputDevices.forEach((element) => {
         if (initialId === null) {
           initialId = element.deviceId;
         }
 
-        let opt = document.createElement('option');
-        opt.value = element.deviceId;
-        opt.innerHTML = element.label;
-        select.appendChild(opt);
+        let option = document.createElement('option');
+        option.value = element.deviceId;
+        option.innerHTML = element.label;
+        select.appendChild(option);
       });
     }
 

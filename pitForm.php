@@ -332,7 +332,7 @@ require 'inc/header.php';
     if (document.getElementById("computerVisionYes").checked) {
       dataToUse["computervision"] = 1;
     }
-    if (document.getElementById("computerVisionNo").checked) {
+    else if (document.getElementById("computerVisionNo").checked) {
       dataToUse["computervision"] = 0;
     }
 
@@ -340,10 +340,10 @@ require 'inc/header.php';
     if (document.getElementById("pitScore1").checked) {
       dataToUse["pitorg"] = 1;
     }
-    if (document.getElementById("pitScore2").checked) {
+    else if (document.getElementById("pitScore2").checked) {
       dataToUse["pitorg"] = 3;
     }
-    if (document.getElementById("pitScore3").checked) {
+    else if (document.getElementById("pitScore3").checked) {
       dataToUse["pitorg"] = 5;
     }
 

@@ -337,17 +337,12 @@ class matchDataProcessor {
 
       let endgameClimbPoints = 0;
       let climbLevel = (this.data[i]["cageClimb"]);
-      if (climbLevel === 1) {
-        endgameClimbPoints = 2;
-      }
-      else if (climbLevel === 2) {
-        endgameClimbPoints = 2;
-      }
-      else if (climbLevel === 3) {
-        endgameClimbPoints = 6;
-      }
-      else if (climbLevel === 4) {
-        endgameClimbPoints = 12;
+      switch (climbLevel) {
+        case 1: endgameClimbPoints = 2; break;
+        case 2: endgameClimbPoints = 2; break;
+        case 3: endgameClimbPoints = 6; break;
+        case 4: endgameClimbPoints = 12; break;
+        default: endgameClimbPoints = 0; break;
       }
       // HOLD      console.log(" --> endgame climb points = "+endgameClimbPoints);  //TEST
 
