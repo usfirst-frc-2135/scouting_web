@@ -30,7 +30,7 @@ require 'inc/header.php';
               <label for="teamNumber" class="form-label">Team Number</label>
               <input id="teamNumber" class="form-control" type="text" placeholder="FRC team number">
             </div>
-            <div class="row  col-9 col-md-6 mb-3">
+            <div class="row  col-9 col-md-7 mb-3">
               <span>Match Number</span>
               <div class="input-group">
                 <div class="input-group-prepend">
