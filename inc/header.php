@@ -46,7 +46,7 @@
 
     <div id="navbarCollapse" class="collapse navbar-collapse">
       <ul class="navbar-nav mr-auto">
-        <ul class="nav nav-pills">
+        <ul class="nav nav-pills flex-column flex-sm-row">
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle text-white-50" href="#" role="button" data-bs-toggle="dropdown"
               aria-expanded="false">Teams</a>
@@ -92,6 +92,7 @@
         </ul>
       </ul>
     </div>
+
   </nav>
 
   <script>
