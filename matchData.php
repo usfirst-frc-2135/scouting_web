@@ -18,25 +18,25 @@ require 'inc/header.php';
         <table id="matchDataTable" class="table table-striped table-bordered table-hover table-sm border-dark text-center sortable">
           <thead class="z-3">
             <tr>
-              <th scope="col" style="background-color:#cfe2ff" class="sorttable_numeric">Match</th>
+              <th scope="col" style="background-color:transparent" class="sorttable_numeric">Match</th>
               <th scope="col" style="background-color:transparent" class="sorttable_numeric">Team</th>
-              <th scope="col" style="background-color:#cfe2ff">Auton Leave</th>
-              <th scope="col" style="background-color:transparent">Auton Coral L1</th>
-              <th scope="col" style="background-color:#cfe2ff">Auton Coral L2</th>
-              <th scope="col" style="background-color:transparent">Auton Coral L3</th>
-              <th scope="col" style="background-color:#cfe2ff">Auton Coral L4</th>
-              <th scope="col" style="background-color:transparent">Auton Algae Net</th>
-              <th scope="col" style="background-color:#cfe2ff">Auton Algae Proc</th>
+              <th scope="col" style="background-color:#d5e6de">Auton Leave</th>
+              <th scope="col" style="background-color:#d5e6de">Auton Coral L1</th>
+              <th scope="col" style="background-color:#d5e6de">Auton Coral L2</th>
+              <th scope="col" style="background-color:#d5e6de">Auton Coral L3</th>
+              <th scope="col" style="background-color:#d5e6de">Auton Coral L4</th>
+              <th scope="col" style="background-color:#d5e6de">Auton Algae Net</th>
+              <th scope="col" style="background-color:#d5e6de">Auton Algae Proc</th>
               <th scope="col" style="background-color:transparent">Acq'd Coral</th>
-              <th scope="col" style="background-color:#cfe2ff">Acq'd Algae</th>
-              <th scope="col" style="background-color:transparent">Teleop Coral L1</th>
-              <th scope="col" style="background-color:#cfe2ff">Teleop Coral L2</th>
-              <th scope="col" style="background-color:transparent">Teleop Coral L3</th>
-              <th scope="col" style="background-color:#cfe2ff">Teleop Coral L4</th>
-              <th scope="col" style="background-color:transparent">Teleop Algae Net</th>
-              <th scope="col" style="background-color:#cfe2ff">Teleop Algae Proc</th>
-              <th scope="col" style="background-color:transparent">Cage Climb</th>
-              <th scope="col" style="background-color:#cfe2ff">Died</th>
+              <th scope="col" style="background-color:transparent">Acq'd Algae</th>
+              <th scope="col" style="background-color:#d6f3fB">Teleop Coral L1</th>
+              <th scope="col" style="background-color:#d6f3fB">Teleop Coral L2</th>
+              <th scope="col" style="background-color:#d6f3fB">Teleop Coral L3</th>
+              <th scope="col" style="background-color:#d6f3fB">Teleop Coral L4</th>
+              <th scope="col" style="background-color:#d6f3fB">Teleop Algae Net</th>
+              <th scope="col" style="background-color:#d6f3fB">Teleop Algae Proc</th>
+              <th scope="col" style="background-color:#fbe6d3">Cage Climb</th>
+              <th scope="col" style="background-color:transparent">Died</th>
               <th scope="col" style="background-color:transparent">Scout Name</th>
               <th scope="col" style="background-color:#cfe2ff">Comment</th>
             </tr>
