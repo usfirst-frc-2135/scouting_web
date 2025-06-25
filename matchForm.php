@@ -30,7 +30,7 @@ require 'inc/header.php';
               <label for="teamNumber" class="form-label">Team Number</label>
               <input id="teamNumber" class="form-control" type="number" placeholder="FRC team number">
             </div>
-            <div class="row col-9 col-md-6 mb-3">
+            <div class="row col-9 col-md-7 mb-3">
               <span>Match Number</span>
               <div class="input-group">
                 <div class="input-group-prepend">
@@ -68,7 +68,7 @@ require 'inc/header.php';
                   <div class="input-group-prepend col-1">
                     <button id="autoConesTopMinus" class="btn btn-danger" type="button">-</button>
                   </div>
-                  <span id="autoConesTop" class="input-group-text col-8 bg-warning">Auto Cones Top: 0</span>
+                  <span id="autoConesTop" class="input-group-text col-8 bg-warning">Cones Top: 0</span>
                   <div class="input-group-append col-1">
                     <button id="autoConesTopPlus" class="btn btn-success" type="button">+</button>
                   </div>
@@ -78,7 +78,7 @@ require 'inc/header.php';
                   <div class="input-group-prepend col-1">
                     <button id="autoConesMiddleMinus" class="btn btn-danger" type="button">-</button>
                   </div>
-                  <span id="autoConesMiddle" class="input-group-text col-8 bg-warning">Auto Cones Middle: 0</span>
+                  <span id="autoConesMiddle" class="input-group-text col-8 bg-warning">Cones Middle: 0</span>
                   <div class="input-group-append col-1">
                     <button id="autoConesMiddlePlus" class="btn btn-success" type="button">+</button>
                   </div>
@@ -88,7 +88,7 @@ require 'inc/header.php';
                   <div class="input-group-prepend col-1">
                     <button id="autoConesBottomMinus" class="btn btn-danger" type="button">-</button>
                   </div>
-                  <span id="autoConesBottom" class="input-group-text col-8 bg-warning">Auto Cones Bottom: 0</span>
+                  <span id="autoConesBottom" class="input-group-text col-8 bg-warning">Cones Bottom: 0</span>
                   <div class="input-group-append col-1">
                     <button id="autoConesBottomPlus" class="btn btn-success" type="button">+</button>
                   </div>
@@ -99,7 +99,7 @@ require 'inc/header.php';
                   <div class="input-group-prepend col-1">
                     <button id="autoCubesTopMinus" class="btn btn-danger" type="button">-</button>
                   </div>
-                  <span id="autoCubesTop" class="input-group-text col-8" style="background-color:#9B72EF">Auto Cubes Top: 0</span>
+                  <span id="autoCubesTop" class="input-group-text col-8" style="background-color:#9B72EF">Cubes Top: 0</span>
                   <div class="input-group-append col-1">
                     <button id="autoCubesTopPlus" class="btn btn-success" type="button">+</button>
                   </div>
@@ -109,7 +109,7 @@ require 'inc/header.php';
                   <div class="input-group-prepend col-1">
                     <button id="autoCubesMiddleMinus" class="btn btn-danger" type="button">-</button>
                   </div>
-                  <span id="autoCubesMiddle" class="input-group-text col-8" style="background-color:#9B72EF">Auto Cubes Middle:
+                  <span id="autoCubesMiddle" class="input-group-text col-8" style="background-color:#9B72EF">Cubes Middle:
                     0</span>
                   <div class="input-group-append col-1">
                     <button id="autoCubesMiddlePlus" class="btn btn-success" type="button">+</button>
@@ -120,7 +120,7 @@ require 'inc/header.php';
                   <div class="input-group-prepend col-1">
                     <button id="autoCubesBottomMinus" class="btn btn-danger" type="button">-</button>
                   </div>
-                  <span id="autoCubesBottom" class="input-group-text col-8" style="background-color:#9B72EF">Auto Cubes Bottom:
+                  <span id="autoCubesBottom" class="input-group-text col-8" style="background-color:#9B72EF">Cubes Bottom:
                     0</span>
                   <div class="input-group-append col-1">
                     <button id="autoCubesBottomPlus" class="btn btn-success" type="button">+</button>
@@ -151,7 +151,7 @@ require 'inc/header.php';
                   <div class="input-group-prepend col-1">
                     <button id="teleopConesTopMinus" class="btn btn-danger" type="button">-</button>
                   </div>
-                  <span id="teleopConesTop" class="input-group-text col-8 bg-warning">Teleop Cones Top: 0</span>
+                  <span id="teleopConesTop" class="input-group-text col-8 bg-warning">Cones Top: 0</span>
                   <div class="input-group-append col-1">
                     <button id="teleopConesTopPlus" class="btn btn-success" type="button">+</button>
                   </div>
@@ -161,7 +161,7 @@ require 'inc/header.php';
                   <div class="input-group-prepend col-1">
                     <button id="teleopConesMiddleMinus" class="btn btn-danger" type="button">-</button>
                   </div>
-                  <span id="teleopConesMiddle" class="input-group-text col-8 bg-warning">Teleop Cones Middle: 0</span>
+                  <span id="teleopConesMiddle" class="input-group-text col-8 bg-warning">Cones Middle: 0</span>
                   <div class="input-group-append col-1">
                     <button id="teleopConesMiddlePlus" class="btn btn-success" type="button">+</button>
                   </div>
@@ -171,7 +171,7 @@ require 'inc/header.php';
                   <div class="input-group-prepend col-1">
                     <button id="teleopConesBottomMinus" class="btn btn-danger" type="button">-</button>
                   </div>
-                  <span id="teleopConesBottom" class="input-group-text col-8 bg-warning">Teleop Cones Bottom: 0</span>
+                  <span id="teleopConesBottom" class="input-group-text col-8 bg-warning">Cones Bottom: 0</span>
                   <div class="input-group-append col-1">
                     <button id="teleopConesBottomPlus" class="btn btn-success" type="button">+</button>
                   </div>
@@ -182,7 +182,7 @@ require 'inc/header.php';
                   <div class="input-group-prepend col-1">
                     <button id="teleopCubesTopMinus" class="btn btn-danger" type="button">-</button>
                   </div>
-                  <span id="teleopCubesTop" class="input-group-text col-8" style="background-color:#9B72EF">Teleop Cubes
+                  <span id="teleopCubesTop" class="input-group-text col-8" style="background-color:#9B72EF">Cubes
                     Top:
                     0</span>
                   <div class="input-group-append col-1">
@@ -194,7 +194,7 @@ require 'inc/header.php';
                   <div class="input-group-prepend col-1">
                     <button id="teleopCubesMiddleMinus" class="btn btn-danger" type="button">-</button>
                   </div>
-                  <span id="teleopCubesMiddle" class="input-group-text col-8" style="background-color:#9B72EF">Teleop Cubes
+                  <span id="teleopCubesMiddle" class="input-group-text col-8" style="background-color:#9B72EF">Cubes
                     Middle:
                     0</span>
                   <div class="input-group-append col-1">
@@ -206,7 +206,7 @@ require 'inc/header.php';
                   <div class="input-group-prepend col-1">
                     <button id="teleopCubesBottomMinus" class="btn btn-danger" type="button">-</button>
                   </div>
-                  <span id="teleopCubesBottom" class="input-group-text col-8" style="background-color:#9B72EF">Teleop Cubes Bottom:
+                  <span id="teleopCubesBottom" class="input-group-text col-8" style="background-color:#9B72EF">Cubes Bottom:
                     0</span>
                   <div class="input-group-append col-1">
                     <button id="teleopCubesBottomPlus" class="btn btn-success" type="button">+</button>
@@ -294,125 +294,125 @@ require 'inc/header.php';
     // Auto cones
     document.getElementById("autoConesBottomPlus").addEventListener('click', function () {
       auto.cones.bottom += 1;
-      document.getElementById("autoConesBottom").innerHTML = "Auto Cones Bottom: " + auto.cones.bottom;
+      document.getElementById("autoConesBottom").innerHTML = "Cones Bottom: " + auto.cones.bottom;
     });
 
     document.getElementById("autoConesBottomMinus").addEventListener('click', function () {
       auto.cones.bottom = Math.max(auto.cones.bottom - 1, 0);
-      document.getElementById("autoConesBottom").innerHTML = "Auto Cones Bottom: " + auto.cones.bottom;
+      document.getElementById("autoConesBottom").innerHTML = "Cones Bottom: " + auto.cones.bottom;
     });
 
     document.getElementById("autoConesMiddlePlus").addEventListener('click', function () {
       auto.cones.middle += 1;
-      document.getElementById("autoConesMiddle").innerHTML = "Auto Cones Middle: " + auto.cones.middle;
+      document.getElementById("autoConesMiddle").innerHTML = "Cones Middle: " + auto.cones.middle;
     });
 
     document.getElementById("autoConesMiddleMinus").addEventListener('click', function () {
       auto.cones.middle = Math.max(auto.cones.middle - 1, 0);
-      document.getElementById("autoConesMiddle").innerHTML = "Auto Cones Middle: " + auto.cones.middle;
+      document.getElementById("autoConesMiddle").innerHTML = "Cones Middle: " + auto.cones.middle;
     });
 
     document.getElementById("autoConesTopPlus").addEventListener('click', function () {
       auto.cones.top += 1;
-      document.getElementById("autoConesTop").innerHTML = "Auto Cones Top: " + auto.cones.top;
+      document.getElementById("autoConesTop").innerHTML = "Cones Top: " + auto.cones.top;
     });
 
     document.getElementById("autoConesTopMinus").addEventListener('click', function () {
       auto.cones.top = Math.max(auto.cones.top - 1, 0);
-      document.getElementById("autoConesTop").innerHTML = "Auto Cones Top: " + auto.cones.top;
+      document.getElementById("autoConesTop").innerHTML = "Cones Top: " + auto.cones.top;
     });
 
     // Auto cubes
     document.getElementById("autoCubesBottomPlus").addEventListener('click', function () {
       auto.cubes.bottom += 1;
-      document.getElementById("autoCubesBottom").innerHTML = "Auto Cubes Bottom: " + auto.cubes.bottom;
+      document.getElementById("autoCubesBottom").innerHTML = "Cubes Bottom: " + auto.cubes.bottom;
     });
 
     document.getElementById("autoCubesBottomMinus").addEventListener('click', function () {
       auto.cubes.bottom = Math.max(auto.cubes.bottom - 1, 0);
-      document.getElementById("autoCubesBottom").innerHTML = "Auto Cubes Bottom: " + auto.cubes.bottom;
+      document.getElementById("autoCubesBottom").innerHTML = "Cubes Bottom: " + auto.cubes.bottom;
     });
 
     document.getElementById("autoCubesMiddlePlus").addEventListener('click', function () {
       auto.cubes.middle += 1;
-      document.getElementById("autoCubesMiddle").innerHTML = "Auto Cubes Middle: " + auto.cubes.middle;
+      document.getElementById("autoCubesMiddle").innerHTML = "Cubes Middle: " + auto.cubes.middle;
     });
 
     document.getElementById("autoCubesMiddleMinus").addEventListener('click', function () {
       auto.cubes.middle = Math.max(auto.cubes.middle - 1, 0);
-      document.getElementById("autoCubesMiddle").innerHTML = "Auto Cubes Middle: " + auto.cubes.middle;
+      document.getElementById("autoCubesMiddle").innerHTML = "Cubes Middle: " + auto.cubes.middle;
     });
 
     document.getElementById("autoCubesTopPlus").addEventListener('click', function () {
       auto.cubes.top += 1;
-      document.getElementById("autoCubesTop").innerHTML = "Auto Cubes Top: " + auto.cubes.top;
+      document.getElementById("autoCubesTop").innerHTML = "Cubes Top: " + auto.cubes.top;
     });
 
     document.getElementById("autoCubesTopMinus").addEventListener('click', function () {
       auto.cubes.top = Math.max(auto.cubes.top - 1, 0);
-      document.getElementById("autoCubesTop").innerHTML = "Auto Cubes Top: " + auto.cubes.top;
+      document.getElementById("autoCubesTop").innerHTML = "Cubes Top: " + auto.cubes.top;
     });
 
     // Teleop cones
     document.getElementById("teleopConesBottomPlus").addEventListener('click', function () {
       teleop.cones.bottom += 1;
-      document.getElementById("teleopConesBottom").innerHTML = "Teleop Cones Bottom: " + teleop.cones.bottom;
+      document.getElementById("teleopConesBottom").innerHTML = "Cones Bottom: " + teleop.cones.bottom;
     });
 
     document.getElementById("teleopConesBottomMinus").addEventListener('click', function () {
       teleop.cones.bottom = Math.max(teleop.cones.bottom - 1, 0);
-      document.getElementById("teleopConesBottom").innerHTML = "Teleop Cones Bottom: " + teleop.cones.bottom;
+      document.getElementById("teleopConesBottom").innerHTML = "Cones Bottom: " + teleop.cones.bottom;
     });
 
     document.getElementById("teleopConesMiddlePlus").addEventListener('click', function () {
       teleop.cones.middle += 1;
-      document.getElementById("teleopConesMiddle").innerHTML = "Teleop Cones Middle: " + teleop.cones.middle;
+      document.getElementById("teleopConesMiddle").innerHTML = "Cones Middle: " + teleop.cones.middle;
     });
 
     document.getElementById("teleopConesMiddleMinus").addEventListener('click', function () {
       teleop.cones.middle = Math.max(teleop.cones.middle - 1, 0);
-      document.getElementById("teleopConesMiddle").innerHTML = "Teleop Cones Middle: " + teleop.cones.middle;
+      document.getElementById("teleopConesMiddle").innerHTML = "Cones Middle: " + teleop.cones.middle;
     });
 
     document.getElementById("teleopConesTopPlus").addEventListener('click', function () {
       teleop.cones.top += 1;
-      document.getElementById("teleopConesTop").innerHTML = "Teleop Cones Top: " + teleop.cones.top;
+      document.getElementById("teleopConesTop").innerHTML = "Cones Top: " + teleop.cones.top;
     });
 
     document.getElementById("teleopConesTopMinus").addEventListener('click', function () {
       teleop.cones.top = Math.max(teleop.cones.top - 1, 0);
-      document.getElementById("teleopConesTop").innerHTML = "Teleop Cones Top: " + teleop.cones.top;
+      document.getElementById("teleopConesTop").innerHTML = "Cones Top: " + teleop.cones.top;
     });
 
     // Teleop cubes
     document.getElementById("teleopCubesBottomPlus").addEventListener('click', function () {
       teleop.cubes.bottom += 1;
-      document.getElementById("teleopCubesBottom").innerHTML = "Teleop Cubes Bottom: " + teleop.cubes.bottom;
+      document.getElementById("teleopCubesBottom").innerHTML = "Cubes Bottom: " + teleop.cubes.bottom;
     });
 
     document.getElementById("teleopCubesBottomMinus").addEventListener('click', function () {
       teleop.cubes.bottom = Math.max(teleop.cubes.bottom - 1, 0);
-      document.getElementById("teleopCubesBottom").innerHTML = "Teleop Cubes Bottom: " + teleop.cubes.bottom;
+      document.getElementById("teleopCubesBottom").innerHTML = "Cubes Bottom: " + teleop.cubes.bottom;
     });
 
     document.getElementById("teleopCubesMiddlePlus").addEventListener('click', function () {
       teleop.cubes.middle += 1;
-      document.getElementById("teleopCubesMiddle").innerHTML = "Teleop Cubes Middle: " + teleop.cubes.middle;
+      document.getElementById("teleopCubesMiddle").innerHTML = "Cubes Middle: " + teleop.cubes.middle;
     });
 
     document.getElementById("teleopCubesMiddleMinus").addEventListener('click', function () {
       teleop.cubes.middle = Math.max(teleop.cubes.middle - 1, 0);
-      document.getElementById("teleopCubesMiddle").innerHTML = "Teleop Cubes Middle: " + teleop.cubes.middle;
+      document.getElementById("teleopCubesMiddle").innerHTML = "Cubes Middle: " + teleop.cubes.middle;
     });
 
     document.getElementById("teleopCubesTopPlus").addEventListener('click', function () {
       teleop.cubes.top += 1;
-      document.getElementById("teleopCubesTop").innerHTML = "Teleop Cubes Top: " + teleop.cubes.top;
+      document.getElementById("teleopCubesTop").innerHTML = "Cubes Top: " + teleop.cubes.top;
     });
 
     document.getElementById("teleopCubesTopMinus").addEventListener('click', function () {
       teleop.cubes.top = Math.max(teleop.cubes.top - 1, 0);
-      document.getElementById("teleopCubesTop").innerHTML = "Teleop Cubes Top: " + teleop.cubes.top;
+      document.getElementById("teleopCubesTop").innerHTML = "Cubes Top: " + teleop.cubes.top;
     });
 
   }
@@ -478,18 +478,18 @@ require 'inc/header.php';
     teleop.cubes.bottom = 0;
     teleop.cubes.middle = 0;
     teleop.cubes.top = 0;
-    document.getElementById("autoConesBottom").innerHTML = "Auto Cones Bottom: " + auto.cones.bottom;
-    document.getElementById("autoConesMiddle").innerHTML = "Auto Cones Middle: " + auto.cones.middle;
-    document.getElementById("autoConesTop").innerHTML = "Auto Cones Top: " + auto.cones.top;
-    document.getElementById("autoCubesBottom").innerHTML = "Auto Cubes Bottom: " + auto.cubes.bottom;
-    document.getElementById("autoCubesMiddle").innerHTML = "Auto Cubes Middle: " + auto.cubes.middle;
-    document.getElementById("autoCubesTop").innerHTML = "Auto Cubes Top: " + auto.cubes.top;
-    document.getElementById("teleopConesBottom").innerHTML = "Teleop Cones Bottom: " + teleop.cones.bottom;
-    document.getElementById("teleopConesMiddle").innerHTML = "Teleop Cones Middle: " + teleop.cones.middle;
-    document.getElementById("teleopConesTop").innerHTML = "Teleop Cones Top: " + teleop.cones.top;
-    document.getElementById("teleopCubesBottom").innerHTML = "Teleop Cubes Bottom: " + teleop.cubes.bottom;
-    document.getElementById("teleopCubesMiddle").innerHTML = "Teleop Cubes Middle: " + teleop.cubes.middle;
-    document.getElementById("teleopCubesTop").innerHTML = "Teleop Cubes Top: " + teleop.cubes.top;
+    document.getElementById("autoConesBottom").innerHTML = "Cones Bottom: " + auto.cones.bottom;
+    document.getElementById("autoConesMiddle").innerHTML = "Cones Middle: " + auto.cones.middle;
+    document.getElementById("autoConesTop").innerHTML = "Cones Top: " + auto.cones.top;
+    document.getElementById("autoCubesBottom").innerHTML = "Cubes Bottom: " + auto.cubes.bottom;
+    document.getElementById("autoCubesMiddle").innerHTML = "Cubes Middle: " + auto.cubes.middle;
+    document.getElementById("autoCubesTop").innerHTML = "Cubes Top: " + auto.cubes.top;
+    document.getElementById("teleopConesBottom").innerHTML = "Cones Bottom: " + teleop.cones.bottom;
+    document.getElementById("teleopConesMiddle").innerHTML = "Cones Middle: " + teleop.cones.middle;
+    document.getElementById("teleopConesTop").innerHTML = "Cones Top: " + teleop.cones.top;
+    document.getElementById("teleopCubesBottom").innerHTML = "Cubes Bottom: " + teleop.cubes.bottom;
+    document.getElementById("teleopCubesMiddle").innerHTML = "Cubes Middle: " + teleop.cubes.middle;
+    document.getElementById("teleopCubesTop").innerHTML = "Cubes Top: " + teleop.cubes.top;
     document.getElementById("teamNumber").value = "";
     document.getElementById("generalComment").innerText = "";
   }
