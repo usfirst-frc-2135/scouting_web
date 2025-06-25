@@ -22,7 +22,7 @@ require 'inc/header.php';
             background: white;
           }
         </style>
-        <table id="matchTable" class="table table-striped table-bordered table-hover border-dark text-center sortable">
+        <table id="stratSchedTable" class="table table-striped table-bordered table-hover border-dark text-center sortable">
           <colgroup>
             <col span="1" style="background-color:transparent">
             <col span="1" style="background-color:#cfe2ff">
@@ -70,7 +70,7 @@ require 'inc/header.php';
   }
 
   // Load strategic schedule rows
-  function loadStrategicSchedule(dataObj, tableId) {
+  function loadStrategicSchedule(tableId, dataObj) {
     console.log("==> strategicSchedule: loadStrategicSchedule()");
     let tbodyRef = document.getElementById(tableId).querySelector('tbody');;
     tbodyRef.innerHTML = ""; // Clear Table
@@ -82,15 +82,15 @@ require 'inc/header.php';
   }
 
   // Figure out which teams/matches for strategic scouting table
-  function buildScheduleTable() {
+  function buildScheduleTable(tableId) {
     console.log("==> strategicSchedule: buildScheduleTable()");
     $.get("api/tbaAPI.php", {
       getStrategicMatches: 1
     }).done(function (strategicData) {
       console.log("=> getStrategicMatches");
       let dataObj = JSON.parse(strategicData);
-      loadStrategicSchedule(dataObj, "matchTable");
-      sortStrategicSchedule("matchTable");
+      loadStrategicSchedule(tableId, dataObj);
+      sortStrategicSchedule(tableId);
     });
   }
 
@@ -99,6 +99,8 @@ require 'inc/header.php';
   // Process the generated html
   //
   document.addEventListener("DOMContentLoaded", () => {
+
+    const tableId = "stratSchedTable";
 
     // Update the navbar with the event code
     $.get("api/tbaAPI.php", {
@@ -109,7 +111,7 @@ require 'inc/header.php';
       document.getElementById("navbarEventCode").innerHTML = eventCode;
     });
 
-    buildScheduleTable();
+    buildScheduleTable(tableId);
   });
 </script>
 

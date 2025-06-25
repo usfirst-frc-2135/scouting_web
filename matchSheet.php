@@ -599,11 +599,11 @@ require 'inc/header.php';
         console.log("==> matchSheet: buildTeamBox() for " + teamNum + ", teamname = " + teamname);
       }
       let elementRef = document.getElementById(color + index + "TeamNumber");
+      let boxInfo = "<a class='text-light' href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a>";
       if (teamname != "XX") {
-        elementRef.innerHTML = "<a class='text-light' href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a> - " + teamname;
-      } else {
-        elementRef.innerHTML = "<a class='text-light' href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a>";
+        boxInfo += " - " + teamname;
       }
+      elementRef.innerHTML = boxInfo;
     });
 
     // Load team scouted information

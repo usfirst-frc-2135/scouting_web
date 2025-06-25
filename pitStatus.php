@@ -59,14 +59,14 @@ require 'inc/header.php';
   }
 
   // Build the pit status table
-  function buildPitStatusPage(teams, names, images, pitInfo) {
+  function buildPitStatusPage(tableId, teams, names, images, pitInfo) {
     console.log("==> pitStatus: buildPitStatusPage()");
     if (teams === null || names === null || images === null || pitInfo === null) {
       console.warn("buildPitStatusPage: team, names, images, or pit data are missing!")
       return null;
     }
 
-    let tbodyRef = document.getElementById("psTable").querySelector('tbody');
+    let tbodyRef = document.getElementById(tableId).querySelector('tbody');
     tbodyRef.innerHTML = "";
     for (let teamNum of teams) {
       let teamName = names[teamNum];
@@ -75,7 +75,7 @@ require 'inc/header.php';
       if (teamName != "XX") {
         row += " - " + teamName;
       }
-      row += + "</td>";
+      row += "</td>";
 
       if (pitInfo[teamNum] != null) {
         row += " <td class='bg-success'>Yes</td>";
@@ -97,6 +97,8 @@ require 'inc/header.php';
   // Process the generated html
   //
   document.addEventListener("DOMContentLoaded", () => {
+
+    const tableId = "psTable";
 
     $.get("api/tbaAPI.php", {
       getEventCode: true
@@ -136,10 +138,10 @@ require 'inc/header.php';
           }).done(function (pitDataList) {
             console.log("=> getAllPitData");
             jsonPitList = JSON.parse(pitDataList);
-            buildPitStatusPage(teamList, namesList, jsonImageList, jsonPitList);
-            sortPitStatusTable("psTable");
+            buildPitStatusPage(tableId, teamList, namesList, jsonImageList, jsonPitList);
+            sortPitStatusTable(tableId);
             // script instructions say this is needed, but it breaks table header sorting
-            // sorttable.makeSortable(document.getElementById("psTable"));
+            // sorttable.makeSortable(document.getElementById(tableId));
           });
         });
       }

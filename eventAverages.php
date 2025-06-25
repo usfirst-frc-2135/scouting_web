@@ -64,165 +64,157 @@ require 'inc/header.php';
     <!-- Main row to hold the table -->
     <div class="row mb-3">
 
-      <!-- <div id="freeze-table" class="freeze-table overflow-auto"> -->
-      <style type="text/css" media="screen">
-        thead {
-          position: sticky;
-          top: 56px;
-          background: white;
-        }
-      </style>
+      <div id="freeze-table" class="freeze-table overflow-auto">
+        <table id="averagesTable" class="table table-striped table-bordered table-hover table-sm border-dark text-center sortable">
+          <colgroup>
+            <col span="1" style="background-color:transparent">
+            <col span="2" style="background-color:#cfe2ff">
+            <col span="2" style="background-color:transparent">
+            <col span="2" style="background-color:#cfe2ff">
+            <col span="2" style="background-color:transparent">
+            <col span="2" style="background-color:#cfe2ff">
+            <col span="2" style="background-color:transparent">
+            <col span="2" style="background-color:#cfe2ff">
+            <col span="2" style="background-color:transparent">
+            <col span="2" style="background-color:#cfe2ff">
+            <col span="2" style="background-color:transparent">
+            <col span="2" style="background-color:#cfe2ff">
+            <col span="2" style="background-color:transparent">
+            <col span="2" style="background-color:#cfe2ff">
+            <col span="2" style="background-color:transparent">
+            <col span="2" style="background-color:#cfe2ff">
+            <col span="2" style="background-color:transparent">
+            <col span="2" style="background-color:#cfe2ff">
+            <col span="2" style="background-color:transparent">
+            <col span="3" style="background-color:#cfe2ff">
+            <col span="2" style="background-color:transparent">
+            <col span="2" style="background-color:#cfe2ff">
+            <col span="2" style="background-color:transparent">
+            <col span="2" style="background-color:#cfe2ff">
+            <col span="3" style="background-color:transparent">
+            <col span="2" style="background-color:#cfe2ff">
+            <col span="2" style="background-color:transparent">
+            <col span="1" style="background-color:#cfe2ff">
+            <col span="1" style="background-color:transparent">
+            <col span="1" style="background-color:#cfe2ff">
+            <col span="1" style="background-color:transparent">
+            <col span="1" style="background-color:#cfe2ff">
+            <col span="1" style="background-color:transparent">
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="1" style="background-color:transparent"></th>
+              <th colspan="6" style="background-color:#83b4ff">Totals</th>
+              <th colspan="6" style="background-color:#d5e6de">Auton Pts</th>
+              <th colspan="6" style="background-color:#d6f3fB">Teleop Pts</th>
+              <th colspan="2" style="background-color:#fbe6d3">Endgame</th>
+              <th colspan="10" style="background-color:#d5e6de">Auton Coral</th>
+              <th colspan="6" style="background-color:#d5e6de">Auton Algae</th>
+              <th colspan="11" style="background-color:#d6f3fB">Teleop Coral</th>
+              <th colspan="7" style="background-color:#d6f3fB">Teleop Algae</th>
+              <th colspan="5" style="background-color:#fbe6d3">Endgame</th>
+              <th colspan="1" style="background-color:transparent"></th>
+            </tr>
+            <tr>
+              <th colspan="1" style="background-color:transparent"></th>
+              <th colspan="2" style="background-color:#83b4ff">Points</th>
+              <th colspan="2" style="background-color:transparent">Coral</th>
+              <th colspan="2" style="background-color:#83b4ff">Algae</th>
+              <th colspan="2" style="background-color:transparent">Points</th>
+              <th colspan="2" style="background-color:#83b4ff">Coral Pts</th>
+              <th colspan="2" style="background-color:transparent">Algae Pts</th>
+              <th colspan="2" style="background-color:#83b4ff">Points</th>
+              <th colspan="2" style="background-color:transparent">Coral Pts</th>
+              <th colspan="2" style="background-color:#83b4ff">Algae Pts</th>
+              <th colspan="2" style="background-color:transparent">Points</th>
+              <th colspan="2" style="background-color:#83b4ff">Total</th>
+              <th colspan="2" style="background-color:transparent">L1</th>
+              <th colspan="2" style="background-color:#83b4ff">L2</th>
+              <th colspan="2" style="background-color:transparent">L3</th>
+              <th colspan="2" style="background-color:#83b4ff">L4</th>
+              <th colspan="2" style="background-color:transparent">Total</th>
+              <th colspan="2" style="background-color:#83b4ff">Net</th>
+              <th colspan="2" style="background-color:transparent">Proc</th>
+              <th colspan="3" style="background-color:#83b4ff">Total</th>
+              <th colspan="2" style="background-color:transparent">L1</th>
+              <th colspan="2" style="background-color:#83b4ff">L2</th>
+              <th colspan="2" style="background-color:transparent">L3</th>
+              <th colspan="2" style="background-color:#83b4ff">L4</th>
+              <th colspan="3" style="background-color:transparent">Total</th>
+              <th colspan="2" style="background-color:#83b4ff">Net</th>
+              <th colspan="2" style="background-color:transparent">Proc</th>
+              <th colspan="5" style="background-color:#83b4ff">Climb%</th>
+              <th colspan="1" style="background-color:transparent">Died</th>
+            </tr>
+            <tr>
+              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Team</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Acc%</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Acc%</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
 
-      <table id="averageTable" class="table table-striped table-bordered table-hover table-sm border-dark text-center sortable">
-        <colgroup>
-          <col span="1" style="background-color:transparent">
-          <col span="2" style="background-color:#cfe2ff">
-          <col span="2" style="background-color:transparent">
-          <col span="2" style="background-color:#cfe2ff">
-          <col span="2" style="background-color:transparent">
-          <col span="2" style="background-color:#cfe2ff">
-          <col span="2" style="background-color:transparent">
-          <col span="2" style="background-color:#cfe2ff">
-          <col span="2" style="background-color:transparent">
-          <col span="2" style="background-color:#cfe2ff">
-          <col span="2" style="background-color:transparent">
-          <col span="2" style="background-color:#cfe2ff">
-          <col span="2" style="background-color:transparent">
-          <col span="2" style="background-color:#cfe2ff">
-          <col span="2" style="background-color:transparent">
-          <col span="2" style="background-color:#cfe2ff">
-          <col span="2" style="background-color:transparent">
-          <col span="2" style="background-color:#cfe2ff">
-          <col span="2" style="background-color:transparent">
-          <col span="3" style="background-color:#cfe2ff">
-          <col span="2" style="background-color:transparent">
-          <col span="2" style="background-color:#cfe2ff">
-          <col span="2" style="background-color:transparent">
-          <col span="2" style="background-color:#cfe2ff">
-          <col span="3" style="background-color:transparent">
-          <col span="2" style="background-color:#cfe2ff">
-          <col span="2" style="background-color:transparent">
-          <col span="1" style="background-color:#cfe2ff">
-          <col span="1" style="background-color:transparent">
-          <col span="1" style="background-color:#cfe2ff">
-          <col span="1" style="background-color:transparent">
-          <col span="1" style="background-color:#cfe2ff">
-          <col span="1" style="background-color:transparent">
-        </colgroup>
-        <thead>
-          <tr>
-            <th colspan="1" style="background-color:transparent"></th>
-            <th colspan="6" style="background-color:#83b4ff">Totals</th>
-            <th colspan="6" style="background-color:#d5e6de">Auton Pts</th>
-            <th colspan="6" style="background-color:#d6f3fB">Teleop Pts</th>
-            <th colspan="2" style="background-color:#fbe6d3">Endgame</th>
-            <th colspan="10" style="background-color:#d5e6de">Auton Coral</th>
-            <th colspan="6" style="background-color:#d5e6de">Auton Algae</th>
-            <th colspan="11" style="background-color:#d6f3fB">Teleop Coral</th>
-            <th colspan="7" style="background-color:#d6f3fB">Teleop Algae</th>
-            <th colspan="5" style="background-color:#fbe6d3">Endgame</th>
-            <th colspan="1" style="background-color:transparent"></th>
-          </tr>
-          <tr>
-            <th colspan="1" style="background-color:transparent"></th>
-            <th colspan="2" style="background-color:#83b4ff">Points</th>
-            <th colspan="2" style="background-color:transparent">Coral</th>
-            <th colspan="2" style="background-color:#83b4ff">Algae</th>
-            <th colspan="2" style="background-color:transparent">Points</th>
-            <th colspan="2" style="background-color:#83b4ff">Coral Pts</th>
-            <th colspan="2" style="background-color:transparent">Algae Pts</th>
-            <th colspan="2" style="background-color:#83b4ff">Points</th>
-            <th colspan="2" style="background-color:transparent">Coral Pts</th>
-            <th colspan="2" style="background-color:#83b4ff">Algae Pts</th>
-            <th colspan="2" style="background-color:transparent">Points</th>
-            <th colspan="2" style="background-color:#83b4ff">Total</th>
-            <th colspan="2" style="background-color:transparent">L1</th>
-            <th colspan="2" style="background-color:#83b4ff">L2</th>
-            <th colspan="2" style="background-color:transparent">L3</th>
-            <th colspan="2" style="background-color:#83b4ff">L4</th>
-            <th colspan="2" style="background-color:transparent">Total</th>
-            <th colspan="2" style="background-color:#83b4ff">Net</th>
-            <th colspan="2" style="background-color:transparent">Proc</th>
-            <th colspan="3" style="background-color:#83b4ff">Total</th>
-            <th colspan="2" style="background-color:transparent">L1</th>
-            <th colspan="2" style="background-color:#83b4ff">L2</th>
-            <th colspan="2" style="background-color:transparent">L3</th>
-            <th colspan="2" style="background-color:#83b4ff">L4</th>
-            <th colspan="3" style="background-color:transparent">Total</th>
-            <th colspan="2" style="background-color:#83b4ff">Net</th>
-            <th colspan="2" style="background-color:transparent">Proc</th>
-            <th colspan="5" style="background-color:#83b4ff">Climb%</th>
-            <th colspan="1" style="background-color:transparent">Died</th>
-          </tr>
-          <tr>
-            <th scope="col" class="sorttable_numeric" style="background-color:transparent">Team</th>
-            <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
-            <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
-            <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
-            <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
-            <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
-            <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
-            <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
-            <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
-            <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
-            <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
-            <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
-            <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
-            <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
-            <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
-            <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
-            <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
-            <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
-            <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
-            <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
-            <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
-            <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
-            <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
-            <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
-            <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
-            <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
-            <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
-            <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
-            <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
-            <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
-            <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
-            <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
-            <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
-            <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
-            <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
-            <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
-            <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
-            <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Acc%</th>
-            <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
-            <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
-            <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
-            <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
-            <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
-            <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
-            <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
-            <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
-            <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
-            <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
-            <th scope="col" class="sorttable_numeric" style="background-color:transparent">Acc%</th>
-            <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
-            <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
-            <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
-            <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
-            <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
-            <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">N</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:transparent">P</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">F</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:transparent">S</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">D</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:transparent">#</th>
+            </tr>
 
-            <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">N</th>
-            <th scope="col" class="sorttable_numeric" style="background-color:transparent">P</th>
-            <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">F</th>
-            <th scope="col" class="sorttable_numeric" style="background-color:transparent">S</th>
-            <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">D</th>
-            <th scope="col" class="sorttable_numeric" style="background-color:transparent">#</th>
-          </tr>
-
-        </thead>
-        <tbody class="table-group-divider"> </tbody>
-      </table>
-      <!-- </div> -->
+          </thead>
+          <tbody class="table-group-divider"> </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>
@@ -257,9 +249,9 @@ require 'inc/header.php';
   }
 
   // Create and the HTML table for display
-  function addAveragesToTable(teamList, avgData) {
+  function addAveragesToTable(tableId, teamList, avgData) {
     console.log("==> eventAverages: addAveragesToTable()");
-    let tbodyRef = document.getElementById("averageTable").querySelector('tbody');
+    let tbodyRef = document.getElementById(tableId).querySelector('tbody');
     tbodyRef.innerHTML = ""; // Clear Table
     for (let teamNum of teamList) {
       let endgameClimbPercentage = getDataValue(avgData[teamNum], "endgameClimbPercent");
@@ -357,10 +349,6 @@ require 'inc/header.php';
     let filteredData = mdp.getAverages();
     let teamList = addKeysToMatchTable(filteredData);
     addAveragesToTable(teamList, filteredData);
-    // setTimeout(function () {
-    //   // sorttable.makeSortable(document.getElementById("myTable"))      // Already sortable
-    //   // _frozenTable = $('#freeze-table').freezeTable({});              // Still investigating
-    // }, 1);
   }
 
   // CSV File functions
@@ -469,7 +457,7 @@ require 'inc/header.php';
   }
 
   // Get all match data, filter it, create final HTML table, and sort it
-  function buildAveragesTable() {
+  function buildAveragesTable(tableId) {
     console.log("==> eventAverages: buildAveragesTable()");
     $.get("api/dbReadAPI.php", {
       getEventMatches: 1
@@ -482,11 +470,7 @@ require 'inc/header.php';
           ...averageData
         };
         let teamList = addKeysToMatchTable(filteredData);
-        addAveragesToTable(teamList, filteredData);
-        // setTimeout(function () {
-        //   // sorttable.makeSortable(document.getElementById("myTable"))      // Already sortable
-        //   // _frozenTable = $('#freeze-table').freezeTable({});              // Still investigating
-        // }, 1);
+        addAveragesToTable(tableId, teamList, filteredData);
       });
       return
     });
@@ -518,6 +502,7 @@ require 'inc/header.php';
   //
   document.addEventListener("DOMContentLoaded", () => {
 
+    let tableId = "averagesTable";
     let tbaEventCode;
 
     // Update the navbar with the event code
@@ -530,17 +515,20 @@ require 'inc/header.php';
       tbaEventCode = eventCode;
     });
 
-    buildAveragesTable(); // Retrieve all data
+    buildAveragesTable(tableId); // Retrieve all data
 
     // Filter out unwanted matches
     document.getElementById("filterData").addEventListener('click', function () {
       filterEventMatchData();
     });
 
-    // Keep the frozen pane updated
-    // document.getElementById("averageTable").addEventListener('click', function () {
-    //   _frozenTable.update();
-    // });
+    // Create frozen table panes and keep the panes updated
+    let frozenTable = new FreezeTable('.freeze-table', { fixedNavbar: '.navbar' });
+    document.getElementById(tableId).addEventListener('click', function () {
+      if (frozenTable) {
+        frozenTable.update();
+      }
+    });
 
     // Write out picklist CSV file to client's download dir.
     document.getElementById("downloadCsvFile").addEventListener('click', function () {

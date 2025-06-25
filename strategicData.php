@@ -14,90 +14,55 @@ require 'inc/header.php';
     <!-- Main row to hold the strategic table -->
     <div class="row col-12 mb-3">
 
-      <!-- <div id="freeze-table" class="freeze-table overflow-auto"> -->
-      <style type="text/css" media="screen">
-        thead {
-          position: sticky;
-          top: 56px;
-          background: white;
-        }
-      </style>
-      <table id="strategicDataTable"
-        class="table table-striped table-bordered table-hover table-sm border-dark text-center sortable">
-        <colgroup>
-          <col span="2">
-          <col span="1">
-          <col span="1">
-          <col span="1">
-          <col span="1">
-          <col span="1">
-          <col span="1">
-          <col span="1">
-          <col span="1">
-          <col span="1">
-          <col span="1">
-          <col span="1">
-          <col span="1">
-          <col span="1">
-          <col span="1">
-          <col span="1">
-          <col span="1">
-          <col span="1">
-          <col span="1">
-          <col span="1">
-          <col span="1">
-          <col span="1">
-          <col span="1">
-          <col span="1">
-          <col span="1">
-        </colgroup>
-        <thead>
-          <tr>
-            <th colspan="1" style="background-color:transparent"> </th>
-            <th colspan="1" style="background-color:transparent"> </th>
-            <th colspan="1" style="background-color:#cfe2ff"> </th>
-            <th colspan="2" style="background-color:#cfe2ff">Against Defense</th>
-            <th colspan="3" style="background-color:transparent">Defense Tactics</th>
-            <th colspan="8" style="background-color:#cfe2ff">Fouls</th>
-            <th colspan="4" style="background-color:transparent">Auton</th>
-            <th colspan="4" style="background-color:#cfe2ff">Teleop</th>
-            <th colspan="2" style="background-color:transparent">Notes</th>
-            <th colspan="1"> </th>
-          </tr>
-          <tr>
-            <th scope="col" style="background-color:transparent" class="sorttable_numeric">Team</th>
-            <th scope="col" style="background-color:transparent">Match</th>
-            <th scope="col" style="background-color:#cfe2ff">Drive Skill</th>
-            <th scope="col" style="background-color:transparent">Block</th>
-            <th scope="col" style="background-color:#cfe2ff">Note</th>
-            <th scope="col" style="background-color:transparent">Block Path</th>
-            <th scope="col" style="background-color:#cfe2ff">Block Station</th>
-            <th scope="col" style="background-color:transparent">Note</th>
-            <th scope="col" style="background-color:#cfe2ff">Pin</th>
-            <th scope="col" style="background-color:transparent">Auton Barge Contact</th>
-            <th scope="col" style="background-color:#cfe2ff">Auton Cage Contact</th>
-            <th scope="col" style="background-color:transparent">Anchor Contact</th>
-            <th scope="col" style="background-color:#cfe2ff">Barge Contact</th>
-            <th scope="col" style="background-color:transparent">Reef Contact</th>
-            <th scope="col" style="background-color:#cfe2ff">Cage Contact</th>
-            <th scope="col" style="background-color:transparent">Contact Climbing Robot</th>
-            <th scope="col" style="background-color:#cfe2ff">Get Floor Coral</th>
-            <th scope="col" style="background-color:transparent">Get Stn Coral</th>
-            <th scope="col" style="background-color:#cfe2ff">Get Floor Algae</th>
-            <th scope="col" style="background-color:transparent">Get Reef Algae</th>
-            <th scope="col" style="background-color:#cfe2ff">Get Floor Coral</th>
-            <th scope="col" style="background-color:transparent">Get Floor Algae</th>
-            <th scope="col" style="background-color:#cfe2ff">Knock Algae</th>
-            <th scope="col" style="background-color:transparent">Acquire Reef Algae</th>
-            <th scope="col" style="background-color:#cfe2ff">Problem Note</th>
-            <th scope="col" style="background-color:transparent">General Note</th>
-            <th scope="col" style="background-color:#cfe2ff">Scout Name</th>
-          </tr>
-        </thead>
-        <tbody class="table-group-divider"> </tbody>
-      </table>
+      <div id="freeze-table" class="freeze-table overflow-auto">
+        <table id="strategicTable" class="table table-striped table-bordered table-hover table-sm border-dark text-center sortable">
+          <thead>
+            <tr>
+              <th colspan="1" style="background-color:transparent"> </th>
+              <th colspan="1" style="background-color:transparent"> </th>
+              <th colspan="1" style="background-color:#cfe2ff"> </th>
+              <th colspan="2" style="background-color:#cfe2ff">Against Defense</th>
+              <th colspan="3" style="background-color:transparent">Defense Tactics</th>
+              <th colspan="8" style="background-color:#cfe2ff">Fouls</th>
+              <th colspan="4" style="background-color:transparent">Auton</th>
+              <th colspan="4" style="background-color:#cfe2ff">Teleop</th>
+              <th colspan="2" style="background-color:transparent">Notes</th>
+              <th colspan="1"> </th>
+            </tr>
+            <tr>
+              <th scope="col" style="background-color:transparent" class="sorttable_numeric">Team</th>
+              <th scope="col" style="background-color:transparent">Match</th>
+              <th scope="col" style="background-color:#cfe2ff">Drive Skill</th>
+              <th scope="col" style="background-color:transparent">Block</th>
+              <th scope="col" style="background-color:#cfe2ff">Note</th>
+              <th scope="col" style="background-color:transparent">Block Path</th>
+              <th scope="col" style="background-color:#cfe2ff">Block Station</th>
+              <th scope="col" style="background-color:transparent">Note</th>
+              <th scope="col" style="background-color:#cfe2ff">Pin</th>
+              <th scope="col" style="background-color:transparent">Auton Barge Contact</th>
+              <th scope="col" style="background-color:#cfe2ff">Auton Cage Contact</th>
+              <th scope="col" style="background-color:transparent">Anchor Contact</th>
+              <th scope="col" style="background-color:#cfe2ff">Barge Contact</th>
+              <th scope="col" style="background-color:transparent">Reef Contact</th>
+              <th scope="col" style="background-color:#cfe2ff">Cage Contact</th>
+              <th scope="col" style="background-color:transparent">Contact Climbing Robot</th>
+              <th scope="col" style="background-color:#cfe2ff">Get Floor Coral</th>
+              <th scope="col" style="background-color:transparent">Get Stn Coral</th>
+              <th scope="col" style="background-color:#cfe2ff">Get Floor Algae</th>
+              <th scope="col" style="background-color:transparent">Get Reef Algae</th>
+              <th scope="col" style="background-color:#cfe2ff">Get Floor Coral</th>
+              <th scope="col" style="background-color:transparent">Get Floor Algae</th>
+              <th scope="col" style="background-color:#cfe2ff">Knock Algae</th>
+              <th scope="col" style="background-color:transparent">Acquire Reef Algae</th>
+              <th scope="col" style="background-color:#cfe2ff">Problem Note</th>
+              <th scope="col" style="background-color:transparent">General Note</th>
+              <th scope="col" style="background-color:#cfe2ff">Scout Name</th>
+            </tr>
+          </thead>
+          <tbody class="table-group-divider"> </tbody>
+        </table>
+      </div>
 
-      <!-- </div> -->
     </div>
   </div>
 </div>
@@ -144,9 +109,9 @@ require 'inc/header.php';
   }
 
   // Load the strategic data into the table
-  function loadStrategicData(dataObj) {
+  function loadStrategicData(tableId, dataObj) {
     console.log("==> strategicData: loadStrategicData()");
-    let tbodyRef = document.getElementById("strategicDataTable").querySelector('tbody');
+    let tbodyRef = document.getElementById(tableId).querySelector('tbody');
     tbodyRef.innerHTML = "";   // Clear Table
 
     for (let i = 0; i < dataObj.length; i++) {
@@ -193,19 +158,15 @@ require 'inc/header.php';
   }
 
   // Retrive strategic scouting data and load the table
-  function buildStrategicDataTable() {
+  function buildStrategicDataTable(tableId) {
     console.log("==> strategicData: buildStrategicDataTable()");
     $.get("api/dbReadAPI.php", {
       getAllStrategicData: 1
     }).done(function (strategicData) {
       console.log("=> getAllStrategicData");
       let dataObj = JSON.parse(strategicData);
-      loadStrategicData(dataObj);
-      sortStrategicData("strategicDataTable", teamColumn, matchColumn);
-      // setTimeout(function () {
-      //   // sorttable.makeSortable(document.getElementById("myTable"))      // Already sortable
-      //   // _frozenTable = $('#freeze-table').freezeTable({});              // Still investigating
-      // }, 1);
+      loadStrategicData(tableId, dataObj);
+      sortStrategicData(tableId, teamColumn, matchColumn);
     });
   }
 
@@ -214,6 +175,8 @@ require 'inc/header.php';
   // Process the generated html
   //
   document.addEventListener("DOMContentLoaded", () => {
+
+    let tableId = "strategicTable";
 
     // Update the navbar with the event code
     $.get("api/tbaAPI.php", {
@@ -224,17 +187,15 @@ require 'inc/header.php';
       document.getElementById("navbarEventCode").innerHTML = eventCode;
     });
 
-    buildStrategicDataTable();
+    buildStrategicDataTable(tableId);
 
-    // Submit the strategic form data
-    // document.getElementById("strategicDataTable").addEventListener('click', function () {
-    //     // if (frozenTable) {
-    //     frozenTable.update();
-    //   }
-
-    // $('.table-scrollable').freezeTable({
-    //   'scrollable': true,
-    // });
+    // Create frozen table panes and keep the panes updated
+    let frozenTable = new FreezeTable('.freeze-table', { fixedNavbar: '.navbar' });
+    document.getElementById(tableId).addEventListener('click', function () {
+      if (frozenTable) {
+        frozenTable.update();
+      }
+    });
   });
 </script>
 

@@ -21,7 +21,7 @@
     }
 
     .nav-pills {
-      /* navbar button text should be white */
+      /* navbar pill button text should be white */
       color: "white";
     }
 

@@ -14,23 +14,16 @@ require 'inc/header.php';
     <!-- Main row to hold the table -->
     <div class="row col-12 mb-3">
 
-      <!-- <div id="freeze-table" class="freeze-table"> -->
-      <style type="text/css" media="screen">
-        thead {
-          position: sticky;
-          top: 56px;
-          background: white;
-        }
-      </style>
-      <table id="coprTable" class="table table-striped table-bordered table-hover table-sm border-dark text-center sortable">
-        <thead>
-          <tr></tr>
-        </thead>
-        <tbody class="table-group-divider">
-          <td></td>
-        </tbody>
-      </table>
-      <!-- </div> -->
+      <div id="freeze-table" class="freeze-table overflow-auto">
+        <table id="coprTable" class="table table-striped table-bordered table-hover table-sm border-dark text-center sortable">
+          <thead>
+            <tr></tr>
+          </thead>
+          <tbody class="table-group-divider">
+            <td></td>
+          </tbody>
+        </table>
+      </div>
 
     </div>
   </div>
@@ -111,7 +104,7 @@ require 'inc/header.php';
     ];
 
   // Add data keys (fields) to COPR table in html
-  function loadCoprTable(coprData) {
+  function loadCoprTable(tableId, coprData) {
     console.log("==> eventCoprData.php: loadCoprTable()");
     let jsonCoprData = JSON.parse(coprData);
     let keys = jsonCoprData["keys"];
@@ -122,24 +115,20 @@ require 'inc/header.php';
     //   console.log("coprs: " + keys[i]);
     // }
 
-    addKeysToCoprTable("coprTable", coprKeys);
-    addDataToCoprTable("coprTable", data, coprKeys);
+    addKeysToCoprTable(tableId, coprKeys);
+    addDataToCoprTable(tableId, data, coprKeys);
   }
 
   // Retrive OPRs from TBA and build the COPR table to display
-  function buildTbaCoprTable(frozenTable) {
+  function buildTbaCoprTable(tableId) {
     //output: gets the COPR data from TBA
     $.get("api/tbaAPI.php", {
       getCOPRs: 1
     }).done(function (coprs) {
       console.log("=> getCOPRs");
-      loadCoprTable(coprs);
-      sortCoprTable("coprTable", teamColumn);
-      sorttable.makeSortable(document.getElementById("coprTable"));
-      // setTimeout(function () {
-      //   // sorttable.makeSortable(document.getElementById("myTable"))      // Already sortable
-      //   // _frozenTable = $('#freeze-table').freezeTable({});              // Still investigating
-      // }, 200);
+      loadCoprTable(tableId, coprs);
+      sortCoprTable(tableId, teamColumn);
+      sorttable.makeSortable(document.getElementById(tableId));
     });
   }
 
@@ -149,7 +138,7 @@ require 'inc/header.php';
   //
   document.addEventListener("DOMContentLoaded", () => {
 
-    let _frozenTable = null;
+    const tableId = "coprTable";
 
     // Update the navbar with the event code
     $.get("api/tbaAPI.php", {
@@ -160,12 +149,20 @@ require 'inc/header.php';
       document.getElementById("navbarEventCode").innerHTML = eventCode;
     });
 
-    buildTbaCoprTable(_frozenTable);
+    buildTbaCoprTable(tableId);
+
+    // Create frozen table panes and keep the panes updated
+    let frozenTable = new FreezeTable('.freeze-table', { fixedNavbar: '.navbar' });
+    document.getElementById(tableId).addEventListener('click', function () {
+      if (frozenTable) {
+        frozenTable.update();
+      }
+    });
 
     // Keep the frozen pane updated
-    document.getElementById("coprTable").addEventListener('click', function () {
-      if (_frozenTable) {
-        _frozenTable.update();
+    document.getElementById(tableId).addEventListener('click', function () {
+      if (frozenTable) {
+        frozenTable.update();
       }
     });
 

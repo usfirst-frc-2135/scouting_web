@@ -14,64 +14,36 @@ require 'inc/header.php';
     <!-- Main row to hold the table -->
     <div class="row col-12 mb-3">
 
-      <!-- <div id="freeze-table" class="freeze-table overflow-auto"> -->
-      <style type="text/css" media="screen">
-        thead {
-          position: sticky;
-          top: 56px;
-          background: white;
-        }
-      </style>
-      <table id="matchDataTable" class="table table-striped table-bordered table-hover table-sm border-dark text-center sortable">
-        <colgroup>
-          <col span="2">
-          <col span="1">
-          <col span="1">
-          <col span="1">
-          <col span="1">
-          <col span="1">
-          <col span="1">
-          <col span="1">
-          <col span="1">
-          <col span="1">
-          <col span="1">
-          <col span="1">
-          <col span="1">
-          <col span="1">
-          <col span="1">
-          <col span="1">
-          <col span="1">
-          <col span="1">
-          <col span="1">
-        </colgroup>
-        <thead>
-          <tr>
-            <th scope="col" style="background-color:transparent" class="sorttable_numeric">Match</th>
-            <th scope="col" style="background-color:transparent" class="sorttable_numeric">Team</th>
-            <th scope="col" style="background-color:#cfe2ff">Auton Leave</th>
-            <th scope="col" style="background-color:transparent">Auton Coral L1</th>
-            <th scope="col" style="background-color:#cfe2ff">Auton Coral L2</th>
-            <th scope="col" style="background-color:transparent">Auton Coral L3</th>
-            <th scope="col" style="background-color:#cfe2ff">Auton Coral L4</th>
-            <th scope="col" style="background-color:transparent">Auton Algae Net</th>
-            <th scope="col" style="background-color:#cfe2ff">Auton Algae Proc</th>
-            <th scope="col" style="background-color:transparent">Acq'd Coral</th>
-            <th scope="col" style="background-color:#cfe2ff">Acq'd Algae</th>
-            <th scope="col" style="background-color:transparent">Teleop Coral L1</th>
-            <th scope="col" style="background-color:#cfe2ff">Teleop Coral L2</th>
-            <th scope="col" style="background-color:transparent">Teleop Coral L3</th>
-            <th scope="col" style="background-color:#cfe2ff">Teleop Coral L4</th>
-            <th scope="col" style="background-color:transparent">Teleop Algae Net</th>
-            <th scope="col" style="background-color:#cfe2ff">Teleop Algae Proc</th>
-            <th scope="col" style="background-color:transparent">Cage Climb</th>
-            <th scope="col" style="background-color:#cfe2ff">Died</th>
-            <th scope="col" style="background-color:transparent">Scout Name</th>
-            <th scope="col" style="background-color:#cfe2ff">Comment</th>
-          </tr>
-        </thead>
-        <tbody class="table-group-divider"> </tbody>
-      </table>
-      <!-- </div> -->
+      <div id="freeze-table" class="freeze-table overflow-auto">
+        <table id="matchDataTable" class="table table-striped table-bordered table-hover table-sm border-dark text-center sortable">
+          <thead class="z-3">
+            <tr>
+              <th scope="col" style="background-color:#cfe2ff" class="sorttable_numeric">Match</th>
+              <th scope="col" style="background-color:transparent" class="sorttable_numeric">Team</th>
+              <th scope="col" style="background-color:#cfe2ff">Auton Leave</th>
+              <th scope="col" style="background-color:transparent">Auton Coral L1</th>
+              <th scope="col" style="background-color:#cfe2ff">Auton Coral L2</th>
+              <th scope="col" style="background-color:transparent">Auton Coral L3</th>
+              <th scope="col" style="background-color:#cfe2ff">Auton Coral L4</th>
+              <th scope="col" style="background-color:transparent">Auton Algae Net</th>
+              <th scope="col" style="background-color:#cfe2ff">Auton Algae Proc</th>
+              <th scope="col" style="background-color:transparent">Acq'd Coral</th>
+              <th scope="col" style="background-color:#cfe2ff">Acq'd Algae</th>
+              <th scope="col" style="background-color:transparent">Teleop Coral L1</th>
+              <th scope="col" style="background-color:#cfe2ff">Teleop Coral L2</th>
+              <th scope="col" style="background-color:transparent">Teleop Coral L3</th>
+              <th scope="col" style="background-color:#cfe2ff">Teleop Coral L4</th>
+              <th scope="col" style="background-color:transparent">Teleop Algae Net</th>
+              <th scope="col" style="background-color:#cfe2ff">Teleop Algae Proc</th>
+              <th scope="col" style="background-color:transparent">Cage Climb</th>
+              <th scope="col" style="background-color:#cfe2ff">Died</th>
+              <th scope="col" style="background-color:transparent">Scout Name</th>
+              <th scope="col" style="background-color:#cfe2ff">Comment</th>
+            </tr>
+          </thead>
+          <tbody class="table-group-divider"> </tbody>
+        </table>
+      </div>
 
     </div>
   </div>
@@ -111,13 +83,13 @@ require 'inc/header.php';
 
   // Load match data to page
   // NOTE: data object keywords MUST match the database definition in dbHandler.php
-  function loadMatchData(dataObj) {
+  function loadMatchData(tableId, dataObj) {
     console.log("==> matchData: loadMatchData()");
-    let tbodyRef = document.getElementById("matchDataTable").querySelector('tbody');;
+    let tbodyRef = document.getElementById(tableId).querySelector('tbody');;
     tbodyRef.innerHTML = ""; // Clear Table
     for (let i = 0; i < dataObj.length; i++) {
       let teamNum = dataObj[i]["teamnumber"];
-      let rowString = "<th >" + dataObj[i]["matchnumber"] + "</th>" +
+      let rowString = "<th>" + dataObj[i]["matchnumber"] + "</th>" +
         "<td style=\"background-color:transparent\"><a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</td>" +
         "<td style=\"background-color:#cfe2ff\">" + dataObj[i]["autonLeave"] + "</td>" +
         "<td style=\"background-color:transparent\">" + dataObj[i]["autonCoralL1"] + "</td>" +
@@ -143,18 +115,14 @@ require 'inc/header.php';
   }
 
   // Acquire match data and build the page
-  function buildMatchDataTable() {
+  function buildMatchDataTable(tableId, frozenId) {
     $.get("api/dbReadAPI.php", {
       getEventMatches: 1
     }).done(function (eventMatches) {
       console.log("=> getEventMatches");
       let dataObj = JSON.parse(eventMatches);
-      loadMatchData(dataObj);
-      sortMatchData("matchDataTable", teamColumn, matchColumn);
-      // setTimeout(function () {
-      //   // sorttable.makeSortable(document.getElementById("myTable"))      // Already sortable
-      //   // _frozenTable = $('#freeze-table').freezeTable({});              // Still investigating
-      // }, 1);
+      loadMatchData(tableId, dataObj);
+      sortMatchData(tableId, teamColumn, matchColumn);
     });
   }
 
@@ -163,6 +131,8 @@ require 'inc/header.php';
   // Process the generated html
   //
   document.addEventListener("DOMContentLoaded", () => {
+
+    const tableId = "matchDataTable";
 
     // Update the navbar with the event code
     $.get("api/tbaAPI.php", {
@@ -173,14 +143,15 @@ require 'inc/header.php';
       document.getElementById("navbarEventCode").innerHTML = eventCode;
     });
 
-    buildMatchDataTable();
+    buildMatchDataTable(tableId);
 
-    // Keep the frozen pane updated 
-    // document.getElementById("matchDataTable").addEventListener('click', function () {
-    // if (frozenTable) {
-    //   frozenTable.update();
-    // }
-    // });
+    // Create frozen table panes and keep the panes updated
+    let frozenTable = new FreezeTable('.freeze-table', { fixedNavbar: '.navbar' });
+    document.getElementById(tableId).addEventListener('click', function () {
+      if (frozenTable) {
+        frozenTable.update();
+      }
+    });
   });
 </script>
 
