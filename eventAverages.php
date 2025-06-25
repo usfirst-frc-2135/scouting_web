@@ -10,12 +10,12 @@ require 'inc/header.php';
     <div class="row pt-3 pb-3 mb-3">
       <h2 class="col-md-4"><?php echo $title; ?></h2>
 
-      <div class="col-md-4">
+      <div class="col-md-4 mb-3">
         <button id="downloadCsvFile" class="btn btn-primary" type="button">Download CSV</button>
       </div>
 
       <!-- Match Filter -->
-      <div class="col-md-4 mb-3">
+      <div class="col-md-3 mb-3">
         <div id="customMatch" class="accordion accordion-flush">
           <div class="accordion-item" style="background-color: #F8F9FA">
             <h2 class="accordion-header">

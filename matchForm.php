@@ -24,7 +24,7 @@ require 'inc/header.php';
         <div class="card-body mb-3">
           <form id="matchForm" method="post" enctype="multipart/form-data" name="matchForm">
             <div>
-              <h4>Match Info</h4>
+              <h4>Match Info (CHARGED UP)</h4>
             </div>
             <div class="col-7 col-md-5 mb-3">
               <label for="teamNumber" class="form-label">Team Number</label>

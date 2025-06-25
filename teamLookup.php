@@ -336,7 +336,7 @@ require 'inc/header.php';
                     <th colspan="2" class="text-center" style="background-color:#3686FF">Against Defense</th>
                     <th colspan="3" class="text-center">Defense Tactics</th>
                     <th colspan="8" class="text-center" style="background-color:#3686FF">Fouls</th>
-                    <th colspan="4" class="text-center">Auton/th>
+                    <th colspan="4" class="text-center">Auton</th>
                     <th colspan="4" class="text-center" style="background-color:#3686FF">Teleop</th>
                     <th colspan="2" class="text-center">Notes</th>
                     <th colspan="1"> </th>
