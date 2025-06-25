@@ -164,9 +164,9 @@ require 'inc/header.php';
             <table id="R0DataTable" class="table table-bordered table-danger table-sm text-center">
               <thead>
                 <tr>
-                  <th colspan="6" class="text-center fs-6">Auton</th>
-                  <th colspan="8" class="text-center fs-6">Teleop</th>
-                  <th colspan="5" class="text-center fs-6">Endgame</th>
+                  <th colspan="6" class="text-center fs-6" style="background-color:#D5E6DE">Auton</th>
+                  <th colspan="8" class="text-center fs-6" style="background-color:#D6F3FB">Teleop</th>
+                  <th colspan="5" class="text-center fs-6" style="background-color:#FBE6D3">Endgame</th>
                 </tr>
                 <tr>
                   <th scope="col">L1</th>
@@ -229,9 +229,9 @@ require 'inc/header.php';
             <table id="R1DataTable" class="table table-bordered table-danger table-sm text-center">
               <thead>
                 <tr>
-                  <th colspan="6" class="text-center fs-6">Auton</th>
-                  <th colspan="8" class="text-center fs-6">Teleop</th>
-                  <th colspan="5" class="text-center fs-6">Endgame</th>
+                  <th colspan="6" class="text-center fs-6" style="background-color:#D5E6DE">Auton</th>
+                  <th colspan="8" class="text-center fs-6" style="background-color:#D6F3FB">Teleop</th>
+                  <th colspan="5" class="text-center fs-6" style="background-color:#FBE6D3">Endgame</th>
                 </tr>
                 <tr>
                   <th scope="col">L1</th>
@@ -294,9 +294,9 @@ require 'inc/header.php';
             <table id="R2DataTable" class="table table-bordered table-danger table-sm text-center">
               <thead>
                 <tr>
-                  <th colspan="6" class="text-center fs-6">Auton</th>
-                  <th colspan="8" class="text-center fs-6">Teleop</th>
-                  <th colspan="5" class="text-center fs-6">Endgame</th>
+                  <th colspan="6" class="text-center fs-6" style="background-color:#D5E6DE">Auton</th>
+                  <th colspan="8" class="text-center fs-6" style="background-color:#D6F3FB">Teleop</th>
+                  <th colspan="5" class="text-center fs-6" style="background-color:#FBE6D3">Endgame</th>
                 </tr>
                 <tr>
                   <th scope="col">L1</th>
@@ -363,9 +363,9 @@ require 'inc/header.php';
             <table id="B0DataTable" class="table table-bordered table-primary table-sm text-center">
               <thead>
                 <tr>
-                  <th colspan="6" class="text-center fs-6">Auton</th>
-                  <th colspan="8" class="text-center fs-6">Teleop</th>
-                  <th colspan="5" class="text-center fs-6">Endgame</th>
+                  <th colspan="6" class="text-center fs-6" style="background-color:#D5E6DE">Auton</th>
+                  <th colspan="8" class="text-center fs-6" style="background-color:#D6F3FB">Teleop</th>
+                  <th colspan="5" class="text-center fs-6" style="background-color:#FBE6D3">Endgame</th>
                 </tr>
                 <tr>
                   <th scope="col">L1</th>
@@ -428,9 +428,9 @@ require 'inc/header.php';
             <table id="B1DataTable" class="table table-bordered table-primary table-sm text-center">
               <thead>
                 <tr>
-                  <th colspan="6" class="text-center fs-6">Auton</th>
-                  <th colspan="8" class="text-center fs-6">Teleop</th>
-                  <th colspan="5" class="text-center fs-6">Endgame</th>
+                  <th colspan="6" class="text-center fs-6" style="background-color:#D5E6DE">Auton</th>
+                  <th colspan="8" class="text-center fs-6" style="background-color:#D6F3FB">Teleop</th>
+                  <th colspan="5" class="text-center fs-6" style="background-color:#FBE6D3">Endgame</th>
                 </tr>
                 <tr>
                   <th scope="col">L1</th>
@@ -493,9 +493,9 @@ require 'inc/header.php';
             <table id="B2DataTable" class="table table-bordered table-primary table-sm text-center">
               <thead>
                 <tr>
-                  <th colspan="6" class="text-center fs-6">Auton</th>
-                  <th colspan="8" class="text-center fs-6">Teleop</th>
-                  <th colspan="5" class="text-center fs-6">Endgame</th>
+                  <th colspan="6" class="text-center fs-6" style="background-color:#D5E6DE">Auton</th>
+                  <th colspan="8" class="text-center fs-6" style="background-color:#D6F3FB">Teleop</th>
+                  <th colspan="5" class="text-center fs-6" style="background-color:#FBE6D3">Endgame</th>
                 </tr>
                 <tr>
                   <th scope="col">L1</th>
