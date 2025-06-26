@@ -1,5 +1,5 @@
 
-![2135-Logo](https://frc2135.org/scouting/2026/images/2135-Logo.png)
+![2135-Logo](https://frc2135.org/scouting/2026/images/favicon-32x32.png)
 
 # Scouting Web App (github: scouting_web)
 
