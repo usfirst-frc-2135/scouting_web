@@ -1,5 +1,5 @@
 
-![alt text](http://url/to/img.png)
+![alt text](http://images/2135-Logo.png)
 
 # Scouting Web App (github: scouting_web)
 
