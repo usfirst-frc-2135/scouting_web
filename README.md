@@ -1,5 +1,5 @@
 
-![alt text](http://images/2135-Logo.png)
+![2135-Logo](http://frc2135.org/scouting/2026/images/2135-Logo.png)
 
 # Scouting Web App (github: scouting_web)
 
