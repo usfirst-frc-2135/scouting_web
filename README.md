@@ -1,9 +1,5 @@
 
-<picture>
- <source media="(prefers-color-scheme: dark)" srcset="YOUR-DARKMODE-IMAGE">
- <source media="(prefers-color-scheme: light)" srcset="YOUR-LIGHTMODE-IMAGE">
- <img alt="2135-Logo" src="./images/2135-Logo.png">
-</picture>
+![alt text](http://url/to/img.png)
 
 # Scouting Web App (github: scouting_web)
 
