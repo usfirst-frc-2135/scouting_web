@@ -37,23 +37,6 @@ require 'inc/header.php';
 
   const teamColumn = 0;
 
-  // Sort the generated COPR table by team/match numbers
-  function sortCoprTable(tableId, teamCol) {
-    console.log("==> eventCoprData.php: sortCoprTable()");
-    let tableRef = document.getElementById(tableId);
-    let rows = Array.prototype.slice.call(tableRef.querySelectorAll("tbody > tr")); // All "tr" in <tbody>
-
-    // Sort the rows based on column 1 match number
-    rows.sort(function (rowA, rowB) {
-      return (compareTeamNumbers(rowA.cells[teamCol].textContent.trim(), rowB.cells[teamCol].textContent.trim()));
-    });
-
-    // Update the table body with the sorted rows.
-    rows.forEach(function (row) {
-      tableRef.querySelector("tbody").appendChild(row);
-    });
-  }
-
   // Add data keys (header fields) to COPR table in html
   function addKeysToCoprTable(tableId, keys) {
     let tableRef = document.getElementById(tableId);
@@ -127,8 +110,8 @@ require 'inc/header.php';
     }).done(function (coprs) {
       console.log("=> getCOPRs");
       loadCoprTable(tableId, coprs);
-      sortCoprTable(tableId, teamColumn);
-      sorttable.makeSortable(document.getElementById(tableId));
+      sortTableByTeam(tableId, teamColumn);
+      // sorttable.makeSortable(document.getElementById(tableId));
     });
   }
 
@@ -169,4 +152,6 @@ require 'inc/header.php';
   });
 </script>
 
+<script src="./scripts/compareMatchNumbers.js"></script>
 <script src="./scripts/compareTeamNumbers.js"></script>
+<script src="./scripts/sortFrcTables.js"></script>

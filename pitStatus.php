@@ -43,20 +43,7 @@ require 'inc/header.php';
 
 <script>
 
-  // Sort the pit status table by team number
-  function sortPitStatusTable(tableId) {
-    console.log("==> pitStatus: sortTable: id: " + tableId);
-    let tableRef = document.getElementById(tableId);
-    let rows = Array.prototype.slice.call(tableRef.querySelectorAll("tbody > tr")); // All "tr" in <tbody>
-
-    rows.sort(function (rowA, rowB) {
-      return compareTeamNumbers(rowA.cells[0].textContent, rowB.cells[0].textContent);
-    });
-
-    rows.forEach(function (row) {
-      tableRef.querySelector('tbody').appendChild(row);
-    });
-  }
+  const teamColumn = 0;
 
   // Build the pit status table
   function buildPitStatusPage(tableId, teams, names, images, pitInfo) {
@@ -139,7 +126,7 @@ require 'inc/header.php';
             console.log("=> getAllPitData");
             jsonPitList = JSON.parse(pitDataList);
             buildPitStatusPage(tableId, teamList, namesList, jsonImageList, jsonPitList);
-            sortPitStatusTable(tableId);
+            sortTableByTeam(tableId, teamColumn);
             // script instructions say this is needed, but it breaks table header sorting
             // sorttable.makeSortable(document.getElementById(tableId));
           });
@@ -150,4 +137,6 @@ require 'inc/header.php';
 
 </script>
 
+<script src="./scripts/compareMatchNumbers.js"></script>
 <script src="./scripts/compareTeamNumbers.js"></script>
+<script src="./scripts/sortFrcTables.js"></script>

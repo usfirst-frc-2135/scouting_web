@@ -6,6 +6,7 @@
   Function Definition
 */
 
+//
 //  Compare two alphnumAeric match numbers in the form of [comp_level][match_num]
 //    (e.g. p1, qm1, qm43, sf1, etc.)
 //  This function is passed into a sort() to compare two rows. It can convert objects

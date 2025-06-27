@@ -77,28 +77,6 @@ require 'inc/header.php';
   const teamColumn = 0;
   const matchColumn = 1;
 
-  // Sort strategic data table rows
-  function sortStrategicData(tableId, teamCol, matchCol) {
-    console.log("==> strategicData: sortStrategicData()");
-    let tableRef = document.getElementById(tableId);
-    let rows = Array.prototype.slice.call(tableRef.querySelectorAll("tbody > tr")); // All "tr" in <tbody>
-
-    // Sort by match number
-    rows.sort(function (rowA, rowB) {
-      return compareMatchNumbers(rowA.cells[matchCol].textContent, rowB.cells[matchCol].textContent);
-    });
-
-    // Sort by team number
-    rows.sort(function (rowA, rowB) {
-      return compareTeamNumbers(rowA.cells[teamCol].textContent, rowB.cells[teamCol].textContent);
-    });
-
-    // Update the table body with the sorted rows 
-    rows.forEach(function (row) {
-      tableRef.querySelector("tbody").appendChild(row);
-    });
-  }
-
   // Converts a given "1" to yes, "2" to no, anything else to a dash.
   function toYesNo(value) {
     switch (String(value)) {
@@ -166,7 +144,7 @@ require 'inc/header.php';
       console.log("=> getAllStrategicData");
       let dataObj = JSON.parse(strategicData);
       loadStrategicData(tableId, dataObj);
-      sortStrategicData(tableId, teamColumn, matchColumn);
+      sortTableByMatchAndTeam(tableId, teamColumn, matchColumn);
     });
   }
 
@@ -201,3 +179,4 @@ require 'inc/header.php';
 
 <script src="./scripts/compareMatchNumbers.js"></script>
 <script src="./scripts/compareTeamNumbers.js"></script>
+<script src="./scripts/sortFrcTables.js"></script>

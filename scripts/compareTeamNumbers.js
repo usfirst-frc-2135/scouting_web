@@ -11,6 +11,7 @@ let isAlpha = function (ch) {
   return /^[A-Z]$/i.test(ch);
 }
 
+//
 //  Compare two alphanumeric team numbers in the form of frc[team_num][letter]
 //    (e.g. 2135, 2135B, 2135C, etc.)
 //  This function is passed into a sort() to compare two rows

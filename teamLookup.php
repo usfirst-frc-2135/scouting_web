@@ -958,32 +958,6 @@ require 'inc/header.php';
     });
   }
 
-  // Gets the matches and puts them into the html rows
-  function sortMatchData(tableId, matchCol) {
-    let tableRef = document.getElementById(tableId);
-    let rows = Array.prototype.slice.call(tableRef.querySelectorAll("tbody > tr")); // All "tr" in <tbody>
-    rows.sort(function (rowA, rowB) {
-      return (compareMatchNumbers(rowA.cells[matchCol].textContent.trim(), rowB.cells[matchCol].textContent.trim()));
-    });
-    // Update the table body with the sorted rows.
-    rows.forEach(function (row) {
-      tableRef.querySelector("tbody").appendChild(row);
-    });
-  }
-
-  // Gets the strategic match info and puts them into the html rows
-  function sortStrategicData(tableId, matchCol) {
-    let tableRef = document.getElementById(tableId);
-    let rows = Array.prototype.slice.call(tableRef.querySelectorAll("tbody > tr")); // All "tr" in <tbody>
-    rows.sort(function (rowA, rowB) {
-      return (compareMatchNumbers(rowA.cells[matchCol].textContent.trim(), rowB.cells[matchCol].textContent.trim()));
-    });
-    // Update the table body with the sorted rows.
-    rows.forEach(function (row) {
-      tableRef.querySelector("tbody").appendChild(row);
-    });
-  }
-
   // Loads the match data table
   function teamMatchDataTable(dataObj) {
     console.log("==> teamLookup: teamMatchDataTable()");
@@ -1018,7 +992,7 @@ require 'inc/header.php';
         "<td>" + dataObj[i]["comment"] + "</td>";
       tbodyRef.insertRow().innerHTML = rowString;
     }
-    sortMatchData("matchDataTable", matchColumn);
+    sortTableByMatch("matchDataTable", matchColumn);
   }
 
   // Converts a given "1" to yes, "0" to no, anything else to empty string.
@@ -1154,7 +1128,7 @@ require 'inc/header.php';
         "<td>" + dataObj[i]["scoutname"] + "</td>";
       tbodyRef.innerHTML = rowString;
     }
-    sortStrategicData("strategicDataTable", matchColumn);
+    sortTableByMatch("strategicDataTable", matchColumn);
   }
 
   // This is the main function that runs when we want to load a team 
@@ -1286,4 +1260,6 @@ require 'inc/header.php';
 </script>
 
 <script src="./scripts/compareMatchNumbers.js"></script>
+<script src="./scripts/compareTeamNumbers.js"></script>
+<script src="./scripts/sortFrcTables.js"></script>
 <script src="./scripts/matchDataProcessor.js"></script>

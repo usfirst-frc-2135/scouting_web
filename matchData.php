@@ -56,30 +56,8 @@ require 'inc/header.php';
 <script>
 
   // let frozenTable = null;  // doesn't work with table-responsive
-  const teamColumn = 0;
-  const matchColumn = 1;
-
-  // Sort the html table data by team number
-  function sortMatchData(tableId, teamCol, matchCol) {
-    console.log("==> matchData: sortMatchData()");
-    let tableRef = document.getElementById(tableId);
-    let rows = Array.prototype.slice.call(tableRef.querySelectorAll("tbody > tr")); // All "tr" in <tbody>
-
-    // Sort the rows based on column 1 match number
-    rows.sort(function (rowA, rowB) {
-      return (compareTeamNumbers(rowA.cells[matchCol].textContent, rowB.cells[matchCol].textContent));
-    });
-
-    // Sort the rows based on column 1 match number
-    rows.sort(function (rowA, rowB) {
-      return (compareMatchNumbers(rowA.cells[teamCol].textContent, rowB.cells[teamCol].textContent));
-    });
-
-    // Update the table body with the sorted rows.
-    rows.forEach(function (row) {
-      tableRef.querySelector("tbody").appendChild(row);
-    });
-  }
+  const teamColumn = 1;
+  const matchColumn = 0;
 
   // Load match data to page
   // NOTE: data object keywords MUST match the database definition in dbHandler.php
@@ -122,7 +100,7 @@ require 'inc/header.php';
       console.log("=> getEventMatches");
       let dataObj = JSON.parse(eventMatches);
       loadMatchData(tableId, dataObj);
-      sortMatchData(tableId, teamColumn, matchColumn);
+      sortTableByMatchAndTeam(tableId, teamColumn, matchColumn);
     });
   }
 
@@ -157,3 +135,4 @@ require 'inc/header.php';
 
 <script src="./scripts/compareMatchNumbers.js"></script>
 <script src="./scripts/compareTeamNumbers.js"></script>
+<script src="./scripts/sortFrcTables.js"></script>

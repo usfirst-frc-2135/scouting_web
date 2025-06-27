@@ -48,27 +48,6 @@ require 'inc/header.php';
 
   const matchColumn = 0;
 
-  // Sort strategic schedule rows by match number
-  function sortStrategicSchedule(tableId) {
-    console.log("==> strategicSchedule: sortStrategicSchedule()");
-    // Assumes the entries are team numbers or match numbers. Note a team number could have end in 
-    // a "B", "C", "D", or "E", in which case we want to strip that off and just use the number for
-    // the comparison.
-
-    let tableRef = document.getElementById(tableId);
-    let rows = Array.prototype.slice.call(tableRef.querySelectorAll("tbody > tr")); // All "tr" in <tbody>
-
-    // Sort the rows based on match number value
-    rows.sort(function (rowA, rowB) {
-      return compareMatchNumbers(rowA.cells[matchColumn].textContent, rowB.cells[matchColumn].textContent);
-    });
-
-    // Update the table body with the sorted rows 
-    rows.forEach(function (row) {
-      tableRef.querySelector("tbody").appendChild(row);
-    });
-  }
-
   // Load strategic schedule rows
   function loadStrategicSchedule(tableId, dataObj) {
     console.log("==> strategicSchedule: loadStrategicSchedule()");
@@ -90,7 +69,7 @@ require 'inc/header.php';
       console.log("=> getStrategicMatches");
       let dataObj = JSON.parse(strategicData);
       loadStrategicSchedule(tableId, dataObj);
-      sortStrategicSchedule(tableId);
+      sortTableByMatch(tableId, matchColumn);
     });
   }
 
@@ -116,3 +95,5 @@ require 'inc/header.php';
 </script>
 
 <script src="./scripts/compareMatchNumbers.js"></script>
+<script src="./scripts/compareTeamNumbers.js"></script>
+<script src="./scripts/sortFrcTables.js"></script>
