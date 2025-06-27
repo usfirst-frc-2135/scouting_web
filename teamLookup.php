@@ -1124,8 +1124,8 @@ require 'inc/header.php';
     let mdp = new matchDataProcessor(allEventMatches);
     mdp.sortMatches(allEventMatches);
     mdp.getSiteFilteredAverages(function (averageData) {
-      processedData = averageData[team];
-      loadAverageTables(processedData);
+      let teamAverages = averageData[team];
+      loadAverageTables(teamAverages);
     });
     getFilteredData(team, function (fData) {
       filteredData = fData;

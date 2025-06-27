@@ -133,23 +133,23 @@ require 'inc/header.php';
                   <span class="fw-bold">Driver ability/speed:</span>
                 </div>
                 <div class="form-check form-check-inline">
-                  <input id="driveScore1" class="form-check-input" type="radio" name="driverAbilityGroup">
+                  <input id="driveScore1" class="form-check-input" type="radio" name="driverAbilityGroup" value=1>
                   <label for="driveScore1" class="form-check-label">1 - Jerky</label>
                 </div>
                 <div class="form-check form-check-inline">
-                  <input id="driveScore2" class="form-check-input" type="radio" name="driverAbilityGroup">
+                  <input id="driveScore2" class="form-check-input" type="radio" name="driverAbilityGroup" value=2>
                   <label for="driveScore2" class=" form-check-label">2 - Slow</label>
                 </div>
                 <div class="form-check form-check-inline">
-                  <input id="driveScore3" class="form-check-input" type="radio" name="driverAbilityGroup">
+                  <input id="driveScore3" class="form-check-input" type="radio" name="driverAbilityGroup" value=3>
                   <label for="driveScore3" class="form-check-label">3 - Average</label>
                 </div>
                 <div class="form-check form-check-inline">
-                  <input id="driveScore4" class="form-check-input" type="radio" name="driverAbilityGroup">
+                  <input id="driveScore4" class="form-check-input" type="radio" name="driverAbilityGroup" value=4>
                   <label for="driveScore4" class="form-check-label">4 - Quick/agile</label>
                 </div>
                 <div class="form-check form-check-inline">
-                  <input id="driveScore5" class="form-check-input" type="radio" name="driverAbilityGroup">
+                  <input id="driveScore5" class="form-check-input" type="radio" name="driverAbilityGroup" value=5>
                   <label for="driveScore5" class="form-check-label">5 - N/A</label>
                 </div>
 
@@ -299,11 +299,10 @@ require 'inc/header.php';
     document.getElementById("teamNumber").value = "";
     document.getElementById("compLevel").value = "";
     document.getElementById("matchNumber").value = "";
-    document.getElementById("driveScore1").checked = false;
-    document.getElementById("driveScore2").checked = false;
-    document.getElementById("driveScore3").checked = false;
-    document.getElementById("driveScore4").checked = false;
-    document.getElementById("driveScore5").checked = false;
+    const driverAbilityBtns = document.querySelectorAll("input[name = 'driverAbilityGroup']");
+    driverAbilityBtns.forEach(button => {
+      button.checked = false;
+    });
 
     document.getElementById("defenseTactic1").checked = false;
     document.getElementById("defenseTactic2").checked = false;
@@ -343,114 +342,49 @@ require 'inc/header.php';
 
     let compLevel = document.getElementById("compLevel").value;
     let matchNumber = document.getElementById("matchNumber").value;
+    let teamnum = validateTeamNumber(document.getElementById("teamNumber").value, null);
 
     // Clean up teamnumber before writing to table.
-    let teamnum = validateTeamNumber(document.getElementById("teamNumber").value, null);
-    // Cleaned up by validate function
-    // teamnum = teamnum.toUpperCase();  // if there's a letter, make it upper case
-    // teamnum = teamnum.replace(/[^0-9a-zA-Z]/g, '');  // remove any non-alphanumeric chars
-    dataToUse["scoutname"] = document.getElementById("scoutName").value;
-    dataToUse["teamnumber"] = teamnum;
     dataToUse["matchnumber"] = compLevel + matchNumber;
+    dataToUse["teamnumber"] = teamnum;
+    dataToUse["scoutname"] = document.getElementById("scoutName").value;
 
-    // Assume that some options were not checked at all.
+    // Process driver ability radio buttons
+    const driverAbilityBtns = document.querySelectorAll("input[name = 'driverAbilityGroup']");
     dataToUse["driverability"] = 0; // default
-    if (document.getElementById("driveScore1").checked) {
-      dataToUse["driverability"] = 1;
-    }
-    if (document.getElementById("driveScore2").checked) {
-      dataToUse["driverability"] = 2;
-    }
-    if (document.getElementById("driveScore3").checked) {
-      dataToUse["driverability"] = 3;
-    }
-    if (document.getElementById("driveScore4").checked) {
-      dataToUse["driverability"] = 4;
-    }
-    if (document.getElementById("driveScore5").checked) {
-      dataToUse["driverability"] = 5;
-    }
+    driverAbilityBtns.forEach(button => {
+      if (button.checked) {
+        console.log("driverability: " + button.value + " selected!");
+        dataToUse["driverability"] = button.value;
+      }
+    });
 
-    dataToUse["defense_tactic1"] = 0;     // default
-    dataToUse["defense_tactic2"] = 0;     // default
-    if (document.getElementById("defenseTactic1").checked) {
-      dataToUse["defense_tactic1"] = 1;
-    }
-    if (document.getElementById("defenseTactic2").checked) {
-      dataToUse["defense_tactic2"] = 1;
-    }
+    // Checkboxes and comment fields
+    dataToUse["defense_tactic1"] = (document.getElementById("defenseTactic1").checked) ? 1 : 0;
+    dataToUse["defense_tactic2"] = (document.getElementById("defenseTactic2").checked) ? 1 : 0;
+
     dataToUse["defense_comment"] = document.getElementById("defenseComment").value;
 
-    dataToUse["against_tactic1"] = 0;     // default
-    if (document.getElementById("againstTactic1").checked) {
-      dataToUse["against_tactic1"] = 1;
-    }
+    dataToUse["against_tactic1"] = (document.getElementById("againstTactic1").checked) ? 1 : 0;
+
     dataToUse["against_comment"] = document.getElementById("againstComment").value;
 
-    dataToUse["foul1"] = 0;     // default
-    dataToUse["autonFoul1"] = 0;     // default
-    dataToUse["autonFoul2"] = 0;     // default
-    dataToUse["autonGetCoralFromFloor"] = 0;     // default
-    dataToUse["autonGetCoralFromStation"] = 0;     // default
-    dataToUse["autonGetAlgaeFromFloor"] = 0;     // default
-    dataToUse["autonGetAlgaeFromReef"] = 0;     // default
-    dataToUse["teleopFoul1"] = 0;     // default
-    dataToUse["teleopFoul2"] = 0;     // default
-    dataToUse["teleopFoul3"] = 0;     // default
-    dataToUse["teleopFoul4"] = 0;     // default
-    dataToUse["teleopKnockOffAlgaeFromReef"] = 0;     // default
-    dataToUse["teleopAcquireAlgaeFromReef"] = 0;     // default
-    dataToUse["teleopFloorPickupCoral"] = 0;     // default
-    dataToUse["teleopFloorPickupAlgae"] = 0;     // default
-    dataToUse["endgameFoul1"] = 0;     // default
-    if (document.getElementById("foul1").checked) {
-      dataToUse["foul1"] = 1;
-    }
-    if (document.getElementById("autonFoul1").checked) {
-      dataToUse["autonFoul1"] = 1;
-    }
-    if (document.getElementById("autonFoul2").checked) {
-      dataToUse["autonFoul2"] = 1;
-    }
-    if (document.getElementById("autonGetCoralFromFloor").checked) {
-      dataToUse["autonGetCoralFromFloor"] = 1;
-    }
-    if (document.getElementById("autonGetCoralFromStation").checked) {
-      dataToUse["autonGetCoralFromStation"] = 1;
-    }
-    if (document.getElementById("autonGetAlgaeFromFloor").checked) {
-      dataToUse["autonGetAlgaeFromFloor"] = 1;
-    }
-    if (document.getElementById("autonGetAlgaeFromReef").checked) {
-      dataToUse["autonGetAlgaeFromReef"] = 1;
-    }
-    if (document.getElementById("teleopFoul1").checked) {
-      dataToUse["teleopFoul1"] = 1;
-    }
-    if (document.getElementById("teleopFoul2").checked) {
-      dataToUse["teleopFoul2"] = 1;
-    }
-    if (document.getElementById("teleopFoul3").checked) {
-      dataToUse["teleopFoul3"] = 1;
-    }
-    if (document.getElementById("teleopFoul4").checked) {
-      dataToUse["teleopFoul4"] = 1;
-    }
-    if (document.getElementById("teleopKnockOffAlgaeFromReef").checked) {
-      dataToUse["teleopKnockOffAlgaeFromReef"] = 1;
-    }
-    if (document.getElementById("teleopAcquireAlgaeFromReef").checked) {
-      dataToUse["teleopAcquireAlgaeFromReef"] = 1;
-    }
-    if (document.getElementById("teleopFloorPickupCoral").checked) {
-      dataToUse["teleopFloorPickupCoral"] = 1;
-    }
-    if (document.getElementById("teleopFloorPickupAlgae").checked) {
-      dataToUse["teleopFloorPickupAlgae"] = 1;
-    }
-    if (document.getElementById("endgameFoul1").checked) {
-      dataToUse["endgameFoul1"] = 1;
-    }
+    dataToUse["foul1"] = (document.getElementById("foul1").checked) ? 1 : 0;
+    dataToUse["autonFoul1"] = (document.getElementById("autonFoul1").checked) ? 1 : 0;
+    dataToUse["autonFoul2"] = (document.getElementById("autonFoul2").checked) ? 1 : 0;
+    dataToUse["autonGetCoralFromFloor"] = (document.getElementById("autonGetCoralFromFloor").checked) ? 1 : 0;
+    dataToUse["autonGetCoralFromStation"] = (document.getElementById("autonGetCoralFromStation").checked) ? 1 : 0;
+    dataToUse["autonGetAlgaeFromFloor"] = (document.getElementById("autonGetAlgaeFromFloor").checked) ? 1 : 0;
+    dataToUse["autonGetAlgaeFromReef"] = (document.getElementById("autonGetAlgaeFromReef").checked) ? 1 : 0;
+    dataToUse["teleopFoul1"] = (document.getElementById("teleopFoul1").checked) ? 1 : 0;
+    dataToUse["teleopFoul2"] = (document.getElementById("teleopFoul2").checked) ? 1 : 0;
+    dataToUse["teleopFoul3"] = (document.getElementById("teleopFoul3").checked) ? 1 : 0;
+    dataToUse["teleopFoul4"] = (document.getElementById("teleopFoul4").checked) ? 1 : 0;
+    dataToUse["teleopKnockOffAlgaeFromReef"] = (document.getElementById("teleopKnockOffAlgaeFromReef").checked) ? 1 : 0;
+    dataToUse["teleopAcquireAlgaeFromReef"] = (document.getElementById("teleopAcquireAlgaeFromReef").checked) ? 1 : 0;
+    dataToUse["teleopFloorPickupCoral"] = (document.getElementById("teleopFloorPickupCoral").checked) ? 1 : 0;
+    dataToUse["teleopFloorPickupAlgae"] = (document.getElementById("teleopFloorPickupAlgae").checked) ? 1 : 0;
+    dataToUse["endgameFoul1"] = (document.getElementById("endgameFoul1").checked) ? 1 : 0;
 
     dataToUse["problem_comment"] = document.getElementById("problemComment").value;
     dataToUse["general_comment"] = document.getElementById("generalComment").value;
