@@ -79,11 +79,6 @@ require 'inc/header.php';
     return null;
   }
 
-  // Autofill the team number
-  function initializeTeamNumber(teamNumber) {
-    document.getElementById("teamNumber").value = teamNumber;
-  }
-
   // Display success to user
   function showSuccessMessage(message) {
     console.log("==> pitPhotoUpload: showSuccessMessage()" + message);
@@ -154,7 +149,7 @@ require 'inc/header.php';
     // Check URL for source team to load
     let initTeamNumber = checkURLForTeamSpec();
     if (initTeamNumber) {
-      initializeTeamNumber(initTeamNumber);
+      document.getElementById("teamNumber").value = initTeamNumber;
     }
 
     if (!window.FileReader) {

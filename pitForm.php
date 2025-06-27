@@ -186,11 +186,6 @@ require 'inc/header.php';
     return null;
   }
 
-  // Autofill the team number
-  function initializeTeamNumber(teamNumber) {
-    document.getElementById("teamNumber").value = teamNumber;
-  }
-
   // Verify pit form data
   function verifyPitForm() {
     console.log("==> pitForm: verifyPitForm()");
@@ -394,7 +389,7 @@ require 'inc/header.php';
     // Check URL for source team to load
     let initTeamNumber = checkURLForTeamSpec();
     if (initTeamNumber) {
-      initializeTeamNumber(initTeamNumber);
+      document.getElementById("teamNumber").value = initTeamNumber;
     }
 
     // Submit the match data form
