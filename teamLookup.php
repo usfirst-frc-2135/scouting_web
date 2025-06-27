@@ -531,13 +531,13 @@ require 'inc/header.php';
     let autonCoralL3Tips = []; // holds custom tooltips for auton coral L3
     let autonCoralL4Tips = []; // holds custom tooltips for auton coral 4      
 
-    datasets.push({ label: "Leave", data: [], backgroundColor: '#F7CF58' });
-    datasets.push({ label: "Processor", data: [], backgroundColor: '#B4E7D6' });
-    datasets.push({ label: "Net", data: [], backgroundColor: '#4C9F7C' });
-    datasets.push({ label: "L1", data: [], backgroundColor: '#D98AB3' });
-    datasets.push({ label: "L2", data: [], backgroundColor: '#CE649B' });
-    datasets.push({ label: "L3", data: [], backgroundColor: '#C54282' });
-    datasets.push({ label: "L4", data: [], backgroundColor: '#9D3468' });
+    datasets.push({ label: "Leave", data: [], backgroundColor: '#F7CF58' });      // Yellow
+    datasets.push({ label: "Processor", data: [], backgroundColor: '#B4E7D6' });  // Teal (algae)
+    datasets.push({ label: "Net", data: [], backgroundColor: '#4C9F7C' });        // Darker Teal (algae)
+    datasets.push({ label: "L1", data: [], backgroundColor: '#D98AB3' });         // Light pink (coral branch)
+    datasets.push({ label: "L2", data: [], backgroundColor: '#CE649B' });         // Medium light pink (coral branch)
+    datasets.push({ label: "L3", data: [], backgroundColor: '#C54282' });         // Medium dark pink (coral branch)
+    datasets.push({ label: "L4", data: [], backgroundColor: '#9D3468' });         // Dark pink (coral branch)
 
     // Go thru each matchdata QR code string and build up a table of the data, so we can
     // later sort it so the matches are listed in the right order. 
@@ -656,12 +656,12 @@ require 'inc/header.php';
     let teleopCoralL3Tips = []; // holds custom tooltips for teleop coral L3
     let teleopCoralL4Tips = []; // holds custom tooltips for teleop coral 4      
 
-    datasets.push({ label: "Processor", data: [], backgroundColor: '#B4E7D6' });
-    datasets.push({ label: "Net", data: [], backgroundColor: '#4C9F7C' });
-    datasets.push({ label: "L1", data: [], backgroundColor: '#D98AB3' });
-    datasets.push({ label: "L2", data: [], backgroundColor: '#CE649B' });
-    datasets.push({ label: "L3", data: [], backgroundColor: '#C54282' });
-    datasets.push({ label: "L4", data: [], backgroundColor: '#9D3468' });
+    datasets.push({ label: "Processor", data: [], backgroundColor: '#B4E7D6' });  // Teal (algae)
+    datasets.push({ label: "Net", data: [], backgroundColor: '#4C9F7C' });        // Darker Teal (algae)
+    datasets.push({ label: "L1", data: [], backgroundColor: '#D98AB3' });         // Light pink (coral branch)
+    datasets.push({ label: "L2", data: [], backgroundColor: '#CE649B' });         // Medium light pink (coral branch)
+    datasets.push({ label: "L3", data: [], backgroundColor: '#C54282' });         // Medium dark pink (coral branch)
+    datasets.push({ label: "L4", data: [], backgroundColor: '#9D3468' });         // Dark pink (coral branch)
 
     // Go thru each matchdata QR code string and build up a table of the data, so we can
     // later sort it so the matches are listed in the right order. 
@@ -765,7 +765,7 @@ require 'inc/header.php';
     let datasets = [];
     let cageClimbTips = [];
 
-    datasets.push({ label: "Cage Climb", data: [], backgroundColor: '#ED8537' });
+    datasets.push({ label: "Cage Climb", data: [], backgroundColor: '#ED8537' });   // Orange (endgame)
 
     // Go thru each matchdata QR code string and build up a table of the data, so we can
     // later sort it so the matches are listed in the right order. 
@@ -1047,15 +1047,12 @@ require 'inc/header.php';
     console.log("==> teamLookup: loadTeamPhotos()");
     let first = true;
     for (let uri of teamPhotos) {
-      let tags = "";
+      let tags = "<div class='carousel-item";
       if (first) {
-        tags += "<div class='carousel-item active'>";
-      } else {
-        tags += "<div class='carousel-item'>";
+        tags += " active";
       }
       first = false;
-      tags += " <img src='./" + uri + "' class='d-block w-100'>";
-      tags += "</div>";
+      tags += "'> <img src='./" + uri + "' class='d-block w-100'> </div>";
       document.getElementById("robotPics").innerHTML += tags;
     }
   }

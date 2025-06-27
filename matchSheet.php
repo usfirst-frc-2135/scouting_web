@@ -691,15 +691,12 @@ require 'inc/header.php';
     let elementRef = document.getElementById(prefix + "RobotPics");
     elementRef.innerHTML = "";
     for (let uri of teamPics) {
-      let tags = "";
+      let tags = "<div class='carousel-item";
       if (first) {
-        tags += "<div class='carousel-item active'>";
-      } else {
-        tags += "<div class='carousel-item'>";
+        tags += " active";
       }
       first = false;
-      tags += " <img src='./" + uri + "' class='d-block w-100'>";
-      tags += "</div>";
+      tags += "'> <img src='./" + uri + "' class='d-block w-100'></div>";
       elementRef.innerHTML += tags;
     }
   }
