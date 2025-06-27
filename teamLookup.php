@@ -856,27 +856,27 @@ require 'inc/header.php';
     console.log("==> teamLookup: loadAverageData()");
 
     /////// Match Totals Table
-    avgs["totalCoralStr"] = "<b>Coral Scored</b>";
-    avgs["totalAlgaeStr"] = "<b>Algae Scored</b>";
-    avgs["totalCoralPointsStr"] = "<b>Coral Points</b>";
-    avgs["totalAlgaePointsStr"] = "<b>Algae Points</b>";
+    avgs["totalCoralStr"] = "Coral Scored";
+    avgs["totalAlgaeStr"] = "Algae Scored";
+    avgs["totalCoralPointsStr"] = "Coral Points";
+    avgs["totalAlgaePointsStr"] = "Algae Points";
 
     writeAverageTableRow("matchSheetTable", avgs, ["totalCoralStr", "avgTotalCoral", "maxTotalCoral"], 3);
     writeAverageTableRow("matchSheetTable", avgs, ["totalAlgaeStr", "avgTotalAlgae", "maxTotalAlgae"], 3);
     writeAverageTableRow("matchSheetTable", avgs, ["totalCoralPointsStr", "avgTotalCoralPoints", "maxTotalCoralPoints"], 3);
     writeAverageTableRow("matchSheetTable", avgs, ["totalAlgaePointsStr", "avgTotalAlgaePoints", "maxTotalAlgaePoints"], 3);
 
-    avgs["totalMatchPointsStr"] = "<b>Match Points</b>";
+    avgs["totalMatchPointsStr"] = "Match Points";
     avgs["avgTotalMatchPoints"] = rnd(avgs["avgTotalCoralPoints"] + avgs["avgTotalAlgaePoints"]);
     avgs["maxTotalMatchPoints"] = rnd(avgs["maxTotalCoralPoints"] + avgs["maxTotalAlgaePoints"]);
     writeAverageTableRow("matchSheetTable", avgs, ["totalMatchPointsStr", "avgTotalMatchPoints", "maxTotalMatchPoints"], 3);
 
     //Auton Table  
-    avgs["autonpointsStr"] = "<b>Total Points</b>";
-    avgs["autontotalcoralStr"] = "<b>Coral Scored</b>";
-    avgs["autontotalalgaeStr"] = "<b>Algae Scored</b>";
-    avgs["autoncoralpointsStr"] = "<b>Coral Points</b>";
-    avgs["autonalgaepointsStr"] = "<b>Algae Points</b>";
+    avgs["autonpointsStr"] = "Total Points";
+    avgs["autontotalcoralStr"] = "Coral Scored";
+    avgs["autontotalalgaeStr"] = "Algae Scored";
+    avgs["autoncoralpointsStr"] = "Coral Points";
+    avgs["autonalgaepointsStr"] = "Algae Points";
 
     writeAverageTableRow("autonTable", avgs, ["autonpointsStr", "avgTotalAutoPoints", "maxTotalAutoPoints"], 3);
     writeAverageTableRow("autonTable", avgs, ["autontotalcoralStr", "avgAutonCoral", "maxAutonCoral"], 3);
@@ -886,13 +886,13 @@ require 'inc/header.php';
 
     // Teleop Table
 
-    avgs["teleoppointsStr"] = "<b>Total Points</b>";
-    avgs["teleoptotalcoralStr"] = "<b>Coral Scored</b>";
-    avgs["teleoptotalalgaeStr"] = "<b>Algae Scored</b>";
-    avgs["teleopcoralpointsStr"] = "<b>Coral Points</b>";
-    avgs["teleopalgaepointsStr"] = "<b>Algae Points</b>";
-    avgs["teleopcoralaccuracyStr"] = "<b>Coral Acc%</b>";
-    avgs["teleopalgaeaccuracysStr"] = "<b>Algae Acc%</b>";
+    avgs["teleoppointsStr"] = "Total Points";
+    avgs["teleoptotalcoralStr"] = "Coral Scored";
+    avgs["teleoptotalalgaeStr"] = "Algae Scored";
+    avgs["teleopcoralpointsStr"] = "Coral Points";
+    avgs["teleopalgaepointsStr"] = "Algae Points";
+    avgs["teleopcoralaccuracyStr"] = "Coral Acc%";
+    avgs["teleopalgaeaccuracysStr"] = "Algae Acc%";
 
     writeAverageTableRow("teleopTable", avgs, ["teleoppointsStr", "avgTotalTeleopPoints", "maxTotalTeleopPoints"], 3);
     writeAverageTableRow("teleopTable", avgs, ["teleoptotalcoralStr", "avgTeleopCoralScored", "maxTeleopCoralScored"], 3);
@@ -903,8 +903,8 @@ require 'inc/header.php';
     writeAverageTableRow("teleopTable", avgs, ["teleopalgaeaccuracysStr", "teleopAlgaeScoringPercent"], 3);
 
     /////// Endgame Table
-    avgs["totalEndGamePointsStr"] = "<b>Endgame Points</b>";
-    avgs["endgameClimbPercent"]["endgameclimbStr"] = "<b>Cage Climb %</b>";
+    avgs["totalEndGamePointsStr"] = "Endgame Points";
+    avgs["endgameClimbPercent"]["endgameclimbStr"] = "Cage Climb %";
 
     writeAverageTableRow("endgameTotalPtsTable", avgs, ["totalEndGamePointsStr", "avgEndgamePoints", "maxEndgamePoints"], 3);
     writeAverageTableRow("endgameClimbTable", avgs["endgameClimbPercent"], ["endgameclimbStr", 0, 2, 1, 3, 4], 6);
@@ -1157,7 +1157,7 @@ require 'inc/header.php';
         alert("Can't load teamName from TBA; check if TBA Key was set in db_config");
       else {
         // console.log("==> teamLookup: getTeamInfo:\n" + teamInfo);
-        jsonTeamInfo = JSON.parse(teamInfo)["response"];
+        let jsonTeamInfo = JSON.parse(teamInfo)["response"];
         teamname = jsonTeamInfo["nickname"];
         console.log("==> teamLookup: for " + teamNum + ", teamname = " + teamname);
       }
@@ -1183,26 +1183,26 @@ require 'inc/header.php';
       getTeamMatches: teamNum
     }).done(function (teamMatches) {
       console.log("=> getTeamMatches");
-      jsonMatchData = JSON.parse(teamMatches);
+      let jsonMatchData = JSON.parse(teamMatches);
       loadMatchData(teamNum, jsonMatchData);
+    });
 
-      // Do the Pit Scouting Data
-      $.get("api/dbReadAPI.php", {
-        getTeamPitData: teamNum
-      }).done(function (teamPitData) {
-        console.log("=> getTeamPitData\n");
-        jsonPitData = JSON.parse(teamPitData);
-        loadPitData(jsonPitData);
+    // Do the Pit Scouting Data
+    $.get("api/dbReadAPI.php", {
+      getTeamPitData: teamNum
+    }).done(function (teamPitData) {
+      console.log("=> getTeamPitData\n");
+      let jsonPitData = JSON.parse(teamPitData);
+      loadPitData(jsonPitData);
+    });
 
-        // Do the Strategic Data Table.
-        $.get("api/dbReadAPI.php", {
-          getTeamStrategicData: teamNum
-        }).done(function (strategicData) {
-          console.log("=> getTeamStrategicData");
-          jsonStratData = JSON.parse(strategicData);
-          loadStrategicData(jsonStratData);
-        });
-      });
+    // Do the Strategic Data Table.
+    $.get("api/dbReadAPI.php", {
+      getTeamStrategicData: teamNum
+    }).done(function (strategicData) {
+      console.log("=> getTeamStrategicData");
+      let jsonStratData = JSON.parse(strategicData);
+      loadStrategicData(jsonStratData);
     });
   }
 
