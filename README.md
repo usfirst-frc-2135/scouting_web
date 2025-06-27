@@ -5,7 +5,7 @@
 
 ## What does it do?
 
-This repo is for the scouting web application. It is used to capture pit, match, and strategic data during an FRC competition. Input for pit and strategic data are collected on web forms, and the match data is collected by a QR scanner form. Robot photos are also uploaed via a web form.
+This repo is for the scouting web application. This web application is used to capture pit, match, and strategic data during an FRC competition. Input for pit and strategic data are collected on web forms, and the match data is collected by a QR scanner form. Robot photos are also uploaed via a web form.
 
 Collected data can be viewed through a match data page and strategic data page. The team related data can also be viewed through a team lookup page to show scoring averages, maximums, trends. Match analyses are provided by a match sheet page that combines information from all 6 robots in a scheduled match with cumulative statistics on how the match might happen. Event related data can be also viewed through an event averages table and the COPR data from the Blue Alliance. 
 
@@ -13,16 +13,17 @@ Collected data can be viewed through a match data page and strategic data page. 
 
 Web pages are written to use Bootstrap, PHP, and javascript to gather and display the results from the main database. The scouting database is MySQL on our team web site, Web pages access the scouting database over Internet connections and also pull information from the Blue Alliance.
 
-## How is it structured?
+## How is the database structured?
 
-An instance of the scouting database consists of four tables:  pit data, match data, strategic data, and cached TBA responses.
+A MySQL instance of the scouting database consists of four tables:  pit data, match data, strategic data, and cached TBA responses.
 - The pit data table is keyed on the event code and the team number, since it is not match dependent.
 - The match data table is keyed on the event code, match number, and team number and contains data for that team in that particular match.
-- The strategic data table is similarly keyed on those values.
+- The strategic data table is similarly keyed on the event code, match number and team number.
 - The TBA table is keyed on the request string sent to the TBA server to retrieve info (i.e. "/frc/teams/").
-A single database can span multiple events, and the appropriate matches will be filtered in the responses. (As long as the database schema does not change.)
 
-## Where is it stored?
+A single database can span multiple events, and matches not keyed to the selected event will be filtered out in the responses. (As long as the database schema does not change.)
+
+## Where is the source code stored?
 
 This  is stored in the "scouting_web" repo on the team's github at:
 
@@ -30,7 +31,7 @@ https://github.com/usfirst-frc-2135/scouting_web
 
 ## How to make changes to the web site?
 
-While the web scouting database is hosted on the team web site, it can be difficult to make changes, deploy, and test on a live web server. It is much easier to set up a web server on the development computer to add features and debug, and only deploy the scouting web pages once it's ready to release for production use. The team uses the application MAMP (Mac OS, Apache, MySQL, and Perl/Python/PHP) to host a development server right on the user's computer. With the right settings, the developer has a great deal of control and insight while running the pages that access the database.
+While the web scouting database is hosted on the team web site at frc2135.org, it can be difficult to make changes, deploy, and test on a live web server. It is much easier to set up a web server on the development computer to add features and debug, and then only deploy the scouting web pages once it's ready to release for production use. The team uses the application MAMP (Mac OS, Apache, MySQL, and Perl/Python/PHP) to host a development MySQL server right on the user's computer. With the right settings, the developer has a great deal of control and insight while running the pages that access the database.
 
 # Scouting App Settings
 
@@ -52,7 +53,7 @@ The normal dbStatus settings are as shown below. They shouldn’t need to be edi
 - tbakey:  `w3if5pkJk5JxG4OJw3wuxEShriilntI6lijMZFCAn12QkOR4ltxcJ6nPWK0Kifnu`
 
 
-(^1) (because the SQL code is executing on the server and can identify itself with 'localhost')| 
+(^1) (because the SQL code is executing on the web server and can identify itself with 'localhost')| 
 
 
 ### When creating a new database on the actual website:
