@@ -852,8 +852,8 @@ require 'inc/header.php';
   }
 
   // Generate all of the table data and fill them
-  function loadAverageData(avgs) {
-    console.log("==> teamLookup: loadAverageData()");
+  function loadAverageTables(avgs) {
+    console.log("==> teamLookup: loadAverageTables()");
 
     /////// Match Totals Table
     avgs["totalCoralStr"] = "Coral Scored";
@@ -913,19 +913,12 @@ require 'inc/header.php';
   // filters out the match type as specified in the db status page
   function getFilteredData(team, successFunction) {
     console.log("==> teamLookup: getFilteredData: " + team);
-    let tempThis = this;
 
     $.post("api/dbAPI.php", {
       getDBStatus: true
     }, function (dbStatus) {
       console.log("=> getDBStatus");
       dbdata = JSON.parse(dbStatus);
-      let localSiteFilter = {};
-      localSiteFilter["useP"] = dbdata["useP"];
-      localSiteFilter["useQm"] = dbdata["useQm"];
-      localSiteFilter["useQf"] = dbdata["useQf"];
-      localSiteFilter["useSf"] = dbdata["useSf"];
-      localSiteFilter["useF"] = dbdata["useF"];
 
       $.get("api/dbReadAPI.php", {
         getTeamMatches: team
@@ -936,20 +929,32 @@ require 'inc/header.php';
         let newData = [];
         for (let i = 0; i < getTeamMatches.length; i++) {
           let mn = getTeamMatches[i]["matchnumber"];
-          let mt = "-";
           let matchStr = mn.toLowerCase();
 
-          if (matchStr.search("p") != -1) { mt = "p"; }
-          else if (matchStr.search("qm") != -1) { mt = "qm"; }
-          else if (matchStr.search("qf") != -1) { mt = "qf"; }
-          else if (matchStr.search("sf") != -1) { mt = "sf"; }
-          else if (matchStr.search("f") != -1) { mt = "f"; }
-
-          if (mt === "p" && localSiteFilter["useP"]) { newData.push(getTeamMatches[i]); }
-          else if (mt === "qm" && localSiteFilter["useQm"]) { newData.push(getTeamMatches[i]); }
-          else if (mt === "qf" && localSiteFilter["useQf"]) { newData.push(getTeamMatches[i]); }
-          else if (mt === "sf" && localSiteFilter["useSf"]) { newData.push(getTeamMatches[i]); }
-          else if (mt === "f" && localSiteFilter["useF"]) { newData.push(getTeamMatches[i]); }
+          if (matchStr.search("p") != -1) {
+            if (dbdata["useP"]) {
+              newData.push(getTeamMatches[i]);
+            }
+          }
+          else if (matchStr.search("qm") != -1) {
+            if (dbdata["useQm"]) {
+              newData.push(getTeamMatches[i]);
+            }
+          }
+          else if (matchStr.search("qf") != -1) {
+            if (dbdata["useQf"]) {
+              newData.push(getTeamMatches[i]);
+            }
+          }
+          else if (matchStr.search("sf") != -1) {
+            if (dbdata["useSf"])
+              newData.push(getTeamMatches[i]);
+          }
+          else if (matchStr.search("f") != -1) {
+            if (dbdata["useF"]) {
+              newData.push(getTeamMatches[i]);
+            }
+          }
         }
         getTeamMatches = [...newData];
 
@@ -995,16 +1000,7 @@ require 'inc/header.php';
     sortTableByMatch("matchDataTable", matchColumn);
   }
 
-  // Converts a given "1" to yes, "0" to no, anything else to empty string.
-  function toYesNo(value) {
-    switch (String(value)) {
-      case "1": return "Yes";
-      case "2": return "No";
-      default: return "-";
-    }
-  }
-
-  // MAIN PROCESSORS HERE
+  // MAIN PAGE PROCESSORS HERE
 
   // Check if our URL directs to a specific team
   function checkURLForTeamSpec() {
@@ -1031,53 +1027,13 @@ require 'inc/header.php';
     }
   }
 
-  // Load the match data table
-  function loadMatchData(team, allEventMatches) {
-    console.log("==> teamLookup: loadMatchData()");
-    let mdp = new matchDataProcessor(allEventMatches);
-    mdp.sortMatches(allEventMatches);
-    mdp.getSiteFilteredAverages(function (averageData) {
-      processedData = averageData[team];
-      loadAverageData(processedData);
-    });
-    getFilteredData(team, function (fData) {
-      filteredData = fData;
-      loadAutonGraph(filteredData);
-      loadTeleopGraph(filteredData);
-      loadEndgameGraph(filteredData);
-      teamMatchDataTable(filteredData);
-    });
-  }
-
-  // Create a row in the pit data table
-  function writePitTableRow(tableID, dict, keys, length) {
-    let tbodyRef = document.getElementById(tableID).querySelector('tbody');
-    let row = "";
-    for (let i = 0; i < length; i++) {
-      row += (i < keys.length) ? "<td>" + dict[keys[i]] + "</td>" : "<td> </td>";
+  // Converts a given "1" to yes, "0" to no, anything else to empty string.
+  function toYesNo(value) {
+    switch (String(value)) {
+      case "1": return "Yes";
+      case "2": return "No";
+      default: return "-";
     }
-    tbodyRef.insertRow().innerHTML = row;
-  }
-
-  // Load the pit data table for this team
-  function loadPitData(pitData) {
-    console.log("==> teamLookup: loadPitData()");
-    if (!pitData || !pitData.length) {
-      // row one    
-      pitData["swervedrivestring"] = pitData["swerve"] ? "Yes" : "No";
-      pitData["drivemotors"];
-      pitData["sparepartsstring"] = pitData["spareparts"] ? "Yes" : "No";
-      pitData["proglanguage"];
-
-      // row two    
-      pitData["computervisionstring"] = pitData["computervision"] ? "Yes" : "No";
-      pitData["pitorg"];
-      pitData["preparedness"];
-      pitData["numbatteries"];
-    }
-
-    writePitTableRow("pitTable1", pitData, ["swervedrivestring", "drivemotors", "sparepartsstring", "proglanguage"], 4);
-    writePitTableRow("pitTable2", pitData, ["computervisionstring", "pitorg", "preparedness", "numbatteries"], 4);
   }
 
   // Load the strategic data table for this team
@@ -1129,6 +1085,55 @@ require 'inc/header.php';
       tbodyRef.innerHTML = rowString;
     }
     sortTableByMatch("strategicDataTable", matchColumn);
+  }
+
+  // Create a row in the pit data table
+  function writePitTableRow(tableID, dict, keys, length) {
+    let tbodyRef = document.getElementById(tableID).querySelector('tbody');
+    let row = "";
+    for (let i = 0; i < length; i++) {
+      row += (i < keys.length) ? "<td>" + dict[keys[i]] + "</td>" : "<td> </td>";
+    }
+    tbodyRef.insertRow().innerHTML = row;
+  }
+
+  // Load the pit data table for this team
+  function loadPitData(pitData) {
+    console.log("==> teamLookup: loadPitData()");
+    if (!pitData || !pitData.length) {
+      // row one    
+      pitData["swervedrivestring"] = pitData["swerve"] ? "Yes" : "No";
+      pitData["drivemotors"];
+      pitData["sparepartsstring"] = pitData["spareparts"] ? "Yes" : "No";
+      pitData["proglanguage"];
+
+      // row two    
+      pitData["computervisionstring"] = pitData["computervision"] ? "Yes" : "No";
+      pitData["pitorg"];
+      pitData["preparedness"];
+      pitData["numbatteries"];
+    }
+
+    writePitTableRow("pitTable1", pitData, ["swervedrivestring", "drivemotors", "sparepartsstring", "proglanguage"], 4);
+    writePitTableRow("pitTable2", pitData, ["computervisionstring", "pitorg", "preparedness", "numbatteries"], 4);
+  }
+
+  // Load the match data table
+  function loadMatchData(team, allEventMatches) {
+    console.log("==> teamLookup: loadMatchData()");
+    let mdp = new matchDataProcessor(allEventMatches);
+    mdp.sortMatches(allEventMatches);
+    mdp.getSiteFilteredAverages(function (averageData) {
+      processedData = averageData[team];
+      loadAverageTables(processedData);
+    });
+    getFilteredData(team, function (fData) {
+      filteredData = fData;
+      loadAutonGraph(filteredData);
+      loadTeleopGraph(filteredData);
+      loadEndgameGraph(filteredData);
+      teamMatchDataTable(filteredData);
+    });
   }
 
   // This is the main function that runs when we want to load a team 
