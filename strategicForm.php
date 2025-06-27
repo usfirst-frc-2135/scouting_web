@@ -133,23 +133,23 @@ require 'inc/header.php';
                   <span class="fw-bold">Driver ability/speed:</span>
                 </div>
                 <div class="form-check form-check-inline">
-                  <input id="driveScore1" class="form-check-input" type="radio" name="driverAbilityGroup" value=1>
+                  <input id="driveScore1" class="form-check-input" type="radio" name="driverAbilityGroup" value="1">
                   <label for="driveScore1" class="form-check-label">1 - Jerky</label>
                 </div>
                 <div class="form-check form-check-inline">
-                  <input id="driveScore2" class="form-check-input" type="radio" name="driverAbilityGroup" value=2>
+                  <input id="driveScore2" class="form-check-input" type="radio" name="driverAbilityGroup" value="2">
                   <label for="driveScore2" class=" form-check-label">2 - Slow</label>
                 </div>
                 <div class="form-check form-check-inline">
-                  <input id="driveScore3" class="form-check-input" type="radio" name="driverAbilityGroup" value=3>
+                  <input id="driveScore3" class="form-check-input" type="radio" name="driverAbilityGroup" value="3">
                   <label for="driveScore3" class="form-check-label">3 - Average</label>
                 </div>
                 <div class="form-check form-check-inline">
-                  <input id="driveScore4" class="form-check-input" type="radio" name="driverAbilityGroup" value=4>
+                  <input id="driveScore4" class="form-check-input" type="radio" name="driverAbilityGroup" value="4">
                   <label for="driveScore4" class="form-check-label">4 - Quick/agile</label>
                 </div>
                 <div class="form-check form-check-inline">
-                  <input id="driveScore5" class="form-check-input" type="radio" name="driverAbilityGroup" value=5>
+                  <input id="driveScore5" class="form-check-input" type="radio" name="driverAbilityGroup" value="5">
                   <label for="driveScore5" class="form-check-label">5 - N/A</label>
                 </div>
 
@@ -355,18 +355,16 @@ require 'inc/header.php';
     driverAbilityBtns.forEach(button => {
       if (button.checked) {
         console.log("driverability: " + button.value + " selected!");
-        dataToUse["driverability"] = button.value;
+        dataToUse["driverability"] = +button.value;
       }
     });
 
     // Checkboxes and comment fields
     dataToUse["defense_tactic1"] = (document.getElementById("defenseTactic1").checked) ? 1 : 0;
     dataToUse["defense_tactic2"] = (document.getElementById("defenseTactic2").checked) ? 1 : 0;
-
     dataToUse["defense_comment"] = document.getElementById("defenseComment").value;
 
     dataToUse["against_tactic1"] = (document.getElementById("againstTactic1").checked) ? 1 : 0;
-
     dataToUse["against_comment"] = document.getElementById("againstComment").value;
 
     dataToUse["foul1"] = (document.getElementById("foul1").checked) ? 1 : 0;

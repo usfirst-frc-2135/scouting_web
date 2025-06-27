@@ -1044,11 +1044,11 @@ require 'inc/header.php';
     for (let i = 0; i < dataObj.length; i++) {
       let driverability = dataObj[i]["driverability"];
       switch (driverability) {
-        case "1": driveVal = "Jerky"; break;
-        case "2": driveVal = "Slow"; break;
-        case "3": driveVal = "Average"; break;
-        case "4": driveVal = "Quick"; break;
-        case "5": driveVal = "-"; break;
+        case 1: driveVal = "Jerky"; break;
+        case 2: driveVal = "Slow"; break;
+        case 3: driveVal = "Average"; break;
+        case 4: driveVal = "Quick"; break;
+        case 5: driveVal = "-"; break;
         default: driveVal = ""; break;
       }
 
@@ -1082,7 +1082,7 @@ require 'inc/header.php';
         "<td>" + dataObj[i]["problem_comment"] + "</td>" +
         "<td>" + dataObj[i]["general_comment"] + "</td>" +
         "<td>" + dataObj[i]["scoutname"] + "</td>";
-      tbodyRef.innerHTML = rowString;
+      tbodyRef.insertRow().innerHTML = rowString;
     }
     sortTableByMatch("strategicDataTable", matchColumn);
   }
@@ -1125,7 +1125,12 @@ require 'inc/header.php';
     mdp.sortMatches(allEventMatches);
     mdp.getSiteFilteredAverages(function (averageData) {
       let teamAverages = averageData[team];
-      loadAverageTables(teamAverages);
+      if (teamAverages !== undefined) {
+        loadAverageTables(teamAverages);
+      }
+      else {
+        alert("No matches for this team at this event!")
+      }
     });
     getFilteredData(team, function (fData) {
       filteredData = fData;
