@@ -99,7 +99,7 @@ function addQrScanToTable(tableId, dataObj) {
     // Modify global variables
     scannedData[key] = dataObj;
     ++scannedCount;
-    document.getElementById("submitData").innerHTML = "Submit Data: " + scannedCount;
+    document.getElementById("submitData").innerText = "Submit Data: " + scannedCount;
     let tbodyRef = document.getElementById(tableId).querySelector('tbody');
     row = tbodyRef.insertRow();
     row.id = key + "_row";
@@ -123,7 +123,7 @@ function removeQrScanEntry(dataKey) {
     // Modify global variables
     delete scannedData[dataKey];
     --scannedCount;
-    document.getElementById("submitData").innerHTML = "Submit Data: " + scannedCount;
+    document.getElementById("submitData").innerText = "Submit Data: " + scannedCount;
     // Modify table
     document.getElementById(dataKey + "_row").remove();
   }
@@ -241,7 +241,7 @@ function submitScannedData() {
       if (response.indexOf('success') > -1) {
         alert("Data Successfully Submitted! Clearing Data.");
         clearScannedData();
-        document.getElementById("submitData").innerHTML = "Click to Submit Data: " + scannedCount;
+        document.getElementById("submitData").innerText = "Click to Submit Data: " + scannedCount;
       } else {
         alert("Data NOT Submitted. (is this a duplicate?)");
         console.warn("Data NOT Submitted. (is this a duplicate?)");

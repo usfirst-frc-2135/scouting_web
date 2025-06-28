@@ -294,125 +294,125 @@ require 'inc/header.php';
     // Auto cones
     document.getElementById("autoConesBottomPlus").addEventListener('click', function () {
       auto.cones.bottom += 1;
-      document.getElementById("autoConesBottom").innerHTML = "Cones Bottom: " + auto.cones.bottom;
+      document.getElementById("autoConesBottom").innerText = "Cones Bottom: " + auto.cones.bottom;
     });
 
     document.getElementById("autoConesBottomMinus").addEventListener('click', function () {
       auto.cones.bottom = Math.max(auto.cones.bottom - 1, 0);
-      document.getElementById("autoConesBottom").innerHTML = "Cones Bottom: " + auto.cones.bottom;
+      document.getElementById("autoConesBottom").innerText = "Cones Bottom: " + auto.cones.bottom;
     });
 
     document.getElementById("autoConesMiddlePlus").addEventListener('click', function () {
       auto.cones.middle += 1;
-      document.getElementById("autoConesMiddle").innerHTML = "Cones Middle: " + auto.cones.middle;
+      document.getElementById("autoConesMiddle").innerText = "Cones Middle: " + auto.cones.middle;
     });
 
     document.getElementById("autoConesMiddleMinus").addEventListener('click', function () {
       auto.cones.middle = Math.max(auto.cones.middle - 1, 0);
-      document.getElementById("autoConesMiddle").innerHTML = "Cones Middle: " + auto.cones.middle;
+      document.getElementById("autoConesMiddle").innerText = "Cones Middle: " + auto.cones.middle;
     });
 
     document.getElementById("autoConesTopPlus").addEventListener('click', function () {
       auto.cones.top += 1;
-      document.getElementById("autoConesTop").innerHTML = "Cones Top: " + auto.cones.top;
+      document.getElementById("autoConesTop").innerText = "Cones Top: " + auto.cones.top;
     });
 
     document.getElementById("autoConesTopMinus").addEventListener('click', function () {
       auto.cones.top = Math.max(auto.cones.top - 1, 0);
-      document.getElementById("autoConesTop").innerHTML = "Cones Top: " + auto.cones.top;
+      document.getElementById("autoConesTop").innerText = "Cones Top: " + auto.cones.top;
     });
 
     // Auto cubes
     document.getElementById("autoCubesBottomPlus").addEventListener('click', function () {
       auto.cubes.bottom += 1;
-      document.getElementById("autoCubesBottom").innerHTML = "Cubes Bottom: " + auto.cubes.bottom;
+      document.getElementById("autoCubesBottom").innerText = "Cubes Bottom: " + auto.cubes.bottom;
     });
 
     document.getElementById("autoCubesBottomMinus").addEventListener('click', function () {
       auto.cubes.bottom = Math.max(auto.cubes.bottom - 1, 0);
-      document.getElementById("autoCubesBottom").innerHTML = "Cubes Bottom: " + auto.cubes.bottom;
+      document.getElementById("autoCubesBottom").innerText = "Cubes Bottom: " + auto.cubes.bottom;
     });
 
     document.getElementById("autoCubesMiddlePlus").addEventListener('click', function () {
       auto.cubes.middle += 1;
-      document.getElementById("autoCubesMiddle").innerHTML = "Cubes Middle: " + auto.cubes.middle;
+      document.getElementById("autoCubesMiddle").innerText = "Cubes Middle: " + auto.cubes.middle;
     });
 
     document.getElementById("autoCubesMiddleMinus").addEventListener('click', function () {
       auto.cubes.middle = Math.max(auto.cubes.middle - 1, 0);
-      document.getElementById("autoCubesMiddle").innerHTML = "Cubes Middle: " + auto.cubes.middle;
+      document.getElementById("autoCubesMiddle").innerText = "Cubes Middle: " + auto.cubes.middle;
     });
 
     document.getElementById("autoCubesTopPlus").addEventListener('click', function () {
       auto.cubes.top += 1;
-      document.getElementById("autoCubesTop").innerHTML = "Cubes Top: " + auto.cubes.top;
+      document.getElementById("autoCubesTop").innerText = "Cubes Top: " + auto.cubes.top;
     });
 
     document.getElementById("autoCubesTopMinus").addEventListener('click', function () {
       auto.cubes.top = Math.max(auto.cubes.top - 1, 0);
-      document.getElementById("autoCubesTop").innerHTML = "Cubes Top: " + auto.cubes.top;
+      document.getElementById("autoCubesTop").innerText = "Cubes Top: " + auto.cubes.top;
     });
 
     // Teleop cones
     document.getElementById("teleopConesBottomPlus").addEventListener('click', function () {
       teleop.cones.bottom += 1;
-      document.getElementById("teleopConesBottom").innerHTML = "Cones Bottom: " + teleop.cones.bottom;
+      document.getElementById("teleopConesBottom").innerText = "Cones Bottom: " + teleop.cones.bottom;
     });
 
     document.getElementById("teleopConesBottomMinus").addEventListener('click', function () {
       teleop.cones.bottom = Math.max(teleop.cones.bottom - 1, 0);
-      document.getElementById("teleopConesBottom").innerHTML = "Cones Bottom: " + teleop.cones.bottom;
+      document.getElementById("teleopConesBottom").innerText = "Cones Bottom: " + teleop.cones.bottom;
     });
 
     document.getElementById("teleopConesMiddlePlus").addEventListener('click', function () {
       teleop.cones.middle += 1;
-      document.getElementById("teleopConesMiddle").innerHTML = "Cones Middle: " + teleop.cones.middle;
+      document.getElementById("teleopConesMiddle").innerText = "Cones Middle: " + teleop.cones.middle;
     });
 
     document.getElementById("teleopConesMiddleMinus").addEventListener('click', function () {
       teleop.cones.middle = Math.max(teleop.cones.middle - 1, 0);
-      document.getElementById("teleopConesMiddle").innerHTML = "Cones Middle: " + teleop.cones.middle;
+      document.getElementById("teleopConesMiddle").innerText = "Cones Middle: " + teleop.cones.middle;
     });
 
     document.getElementById("teleopConesTopPlus").addEventListener('click', function () {
       teleop.cones.top += 1;
-      document.getElementById("teleopConesTop").innerHTML = "Cones Top: " + teleop.cones.top;
+      document.getElementById("teleopConesTop").innerText = "Cones Top: " + teleop.cones.top;
     });
 
     document.getElementById("teleopConesTopMinus").addEventListener('click', function () {
       teleop.cones.top = Math.max(teleop.cones.top - 1, 0);
-      document.getElementById("teleopConesTop").innerHTML = "Cones Top: " + teleop.cones.top;
+      document.getElementById("teleopConesTop").innerText = "Cones Top: " + teleop.cones.top;
     });
 
     // Teleop cubes
     document.getElementById("teleopCubesBottomPlus").addEventListener('click', function () {
       teleop.cubes.bottom += 1;
-      document.getElementById("teleopCubesBottom").innerHTML = "Cubes Bottom: " + teleop.cubes.bottom;
+      document.getElementById("teleopCubesBottom").innerText = "Cubes Bottom: " + teleop.cubes.bottom;
     });
 
     document.getElementById("teleopCubesBottomMinus").addEventListener('click', function () {
       teleop.cubes.bottom = Math.max(teleop.cubes.bottom - 1, 0);
-      document.getElementById("teleopCubesBottom").innerHTML = "Cubes Bottom: " + teleop.cubes.bottom;
+      document.getElementById("teleopCubesBottom").innerText = "Cubes Bottom: " + teleop.cubes.bottom;
     });
 
     document.getElementById("teleopCubesMiddlePlus").addEventListener('click', function () {
       teleop.cubes.middle += 1;
-      document.getElementById("teleopCubesMiddle").innerHTML = "Cubes Middle: " + teleop.cubes.middle;
+      document.getElementById("teleopCubesMiddle").innerText = "Cubes Middle: " + teleop.cubes.middle;
     });
 
     document.getElementById("teleopCubesMiddleMinus").addEventListener('click', function () {
       teleop.cubes.middle = Math.max(teleop.cubes.middle - 1, 0);
-      document.getElementById("teleopCubesMiddle").innerHTML = "Cubes Middle: " + teleop.cubes.middle;
+      document.getElementById("teleopCubesMiddle").innerText = "Cubes Middle: " + teleop.cubes.middle;
     });
 
     document.getElementById("teleopCubesTopPlus").addEventListener('click', function () {
       teleop.cubes.top += 1;
-      document.getElementById("teleopCubesTop").innerHTML = "Cubes Top: " + teleop.cubes.top;
+      document.getElementById("teleopCubesTop").innerText = "Cubes Top: " + teleop.cubes.top;
     });
 
     document.getElementById("teleopCubesTopMinus").addEventListener('click', function () {
       teleop.cubes.top = Math.max(teleop.cubes.top - 1, 0);
-      document.getElementById("teleopCubesTop").innerHTML = "Cubes Top: " + teleop.cubes.top;
+      document.getElementById("teleopCubesTop").innerText = "Cubes Top: " + teleop.cubes.top;
     });
 
   }
@@ -478,18 +478,18 @@ require 'inc/header.php';
     teleop.cubes.bottom = 0;
     teleop.cubes.middle = 0;
     teleop.cubes.top = 0;
-    document.getElementById("autoConesBottom").innerHTML = "Cones Bottom: " + auto.cones.bottom;
-    document.getElementById("autoConesMiddle").innerHTML = "Cones Middle: " + auto.cones.middle;
-    document.getElementById("autoConesTop").innerHTML = "Cones Top: " + auto.cones.top;
-    document.getElementById("autoCubesBottom").innerHTML = "Cubes Bottom: " + auto.cubes.bottom;
-    document.getElementById("autoCubesMiddle").innerHTML = "Cubes Middle: " + auto.cubes.middle;
-    document.getElementById("autoCubesTop").innerHTML = "Cubes Top: " + auto.cubes.top;
-    document.getElementById("teleopConesBottom").innerHTML = "Cones Bottom: " + teleop.cones.bottom;
-    document.getElementById("teleopConesMiddle").innerHTML = "Cones Middle: " + teleop.cones.middle;
-    document.getElementById("teleopConesTop").innerHTML = "Cones Top: " + teleop.cones.top;
-    document.getElementById("teleopCubesBottom").innerHTML = "Cubes Bottom: " + teleop.cubes.bottom;
-    document.getElementById("teleopCubesMiddle").innerHTML = "Cubes Middle: " + teleop.cubes.middle;
-    document.getElementById("teleopCubesTop").innerHTML = "Cubes Top: " + teleop.cubes.top;
+    document.getElementById("autoConesBottom").innerText = "Cones Bottom: " + auto.cones.bottom;
+    document.getElementById("autoConesMiddle").innerText = "Cones Middle: " + auto.cones.middle;
+    document.getElementById("autoConesTop").innerText = "Cones Top: " + auto.cones.top;
+    document.getElementById("autoCubesBottom").innerText = "Cubes Bottom: " + auto.cubes.bottom;
+    document.getElementById("autoCubesMiddle").innerText = "Cubes Middle: " + auto.cubes.middle;
+    document.getElementById("autoCubesTop").innerText = "Cubes Top: " + auto.cubes.top;
+    document.getElementById("teleopConesBottom").innerText = "Cones Bottom: " + teleop.cones.bottom;
+    document.getElementById("teleopConesMiddle").innerText = "Cones Middle: " + teleop.cones.middle;
+    document.getElementById("teleopConesTop").innerText = "Cones Top: " + teleop.cones.top;
+    document.getElementById("teleopCubesBottom").innerText = "Cubes Bottom: " + teleop.cubes.bottom;
+    document.getElementById("teleopCubesMiddle").innerText = "Cubes Middle: " + teleop.cubes.middle;
+    document.getElementById("teleopCubesTop").innerText = "Cubes Top: " + teleop.cubes.top;
     document.getElementById("teamNumber").value = "";
     document.getElementById("generalComment").innerText = "";
   }

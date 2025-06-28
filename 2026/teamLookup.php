@@ -1145,8 +1145,8 @@ require 'inc/header.php';
   function buildTeamLookupPage(teamNum) {
     console.log("==> teamLookup: buildTeamLookupPage()");
     // Clear existing data
-    document.getElementById("teamTitle").innerHTML = "";
-    document.getElementById("robotPics").innerHTML = "";
+    document.getElementById("teamTitle").innerText = "";
+    document.getElementById("robotPics").innerText = "";
     document.getElementById("matchSheetTable").querySelector('tbody').innerHTML = "";
     document.getElementById("autonTable").querySelector('tbody').innerHTML = "";
     document.getElementById("teleopTable").querySelector('tbody').innerHTML = "";

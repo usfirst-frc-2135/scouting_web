@@ -578,7 +578,7 @@ require 'inc/header.php';
       suff = "PM"
     }
     let minutes = "0" + date.getMinutes();
-    document.getElementById("matchTime").innerHTML = "Time: " + hours + ":" + minutes.substring(minutes.length - 2) + " " + suff;
+    document.getElementById("matchTime").innerText = "Time: " + hours + ":" + minutes.substring(minutes.length - 2) + " " + suff;
   }
 
   // Load the info into the team box
@@ -668,19 +668,19 @@ require 'inc/header.php';
       }
     }
 
-    document.getElementById("redTotalCoral").innerHTML = roundInt(avgTotalCoral["red"]);
-    document.getElementById("redTotalAlgae").innerHTML = roundInt(avgTotalAlgae["red"]);
-    document.getElementById("redAvgAutoPoints").innerHTML = roundInt(avgAutoPoints["red"]);
-    document.getElementById("redAvgTeleopPoints").innerHTML = roundInt(avgTeleopPoints["red"]);
-    document.getElementById("redAvgEndgamePoints").innerHTML = roundInt(avgEndgamePoints["red"]);
-    document.getElementById("redTotalPredictedPoints").innerHTML = roundInt(totalPredictedPoints["red"]);
+    document.getElementById("redTotalCoral").innerText = roundInt(avgTotalCoral["red"]);
+    document.getElementById("redTotalAlgae").innerText = roundInt(avgTotalAlgae["red"]);
+    document.getElementById("redAvgAutoPoints").innerText = roundInt(avgAutoPoints["red"]);
+    document.getElementById("redAvgTeleopPoints").innerText = roundInt(avgTeleopPoints["red"]);
+    document.getElementById("redAvgEndgamePoints").innerText = roundInt(avgEndgamePoints["red"]);
+    document.getElementById("redTotalPredictedPoints").innerText = roundInt(totalPredictedPoints["red"]);
 
-    document.getElementById("blueTotalCoral").innerHTML = roundInt(avgTotalCoral["blue"]);
-    document.getElementById("blueTotalAlgae").innerHTML = roundInt(avgTotalAlgae["blue"]);
-    document.getElementById("blueAvgAutoPoints").innerHTML = roundInt(avgAutoPoints["blue"]);
-    document.getElementById("blueAvgTeleopPoints").innerHTML = roundInt(avgTeleopPoints["blue"]);
-    document.getElementById("blueAvgEndgamePoints").innerHTML = roundInt(avgEndgamePoints["blue"]);
-    document.getElementById("blueTotalPredictedPoints").innerHTML = roundInt(totalPredictedPoints["blue"]);
+    document.getElementById("blueTotalCoral").innerText = roundInt(avgTotalCoral["blue"]);
+    document.getElementById("blueTotalAlgae").innerText = roundInt(avgTotalAlgae["blue"]);
+    document.getElementById("blueAvgAutoPoints").innerText = roundInt(avgAutoPoints["blue"]);
+    document.getElementById("blueAvgTeleopPoints").innerText = roundInt(avgTeleopPoints["blue"]);
+    document.getElementById("blueAvgEndgamePoints").innerText = roundInt(avgEndgamePoints["blue"]);
+    document.getElementById("blueTotalPredictedPoints").innerText = roundInt(totalPredictedPoints["blue"]);
   }
 
 
@@ -818,33 +818,33 @@ require 'inc/header.php';
     document.getElementById("B1DataTable").querySelector('tbody').innerHTML = "";
     document.getElementById("B2DataTable").querySelector('tbody').innerHTML = "";
 
-    document.getElementById("redTotalCoral").innerHTML = "";
-    document.getElementById("redTotalAlgae").innerHTML = "";
-    document.getElementById("redAvgAutoPoints").innerHTML = "";
-    document.getElementById("redAvgTeleopPoints").innerHTML = "";
-    document.getElementById("redAvgEndgamePoints").innerHTML = "";
-    document.getElementById("redTotalPredictedPoints").innerHTML = "";
+    document.getElementById("redTotalCoral").innerText = "";
+    document.getElementById("redTotalAlgae").innerText = "";
+    document.getElementById("redAvgAutoPoints").innerText = "";
+    document.getElementById("redAvgTeleopPoints").innerText = "";
+    document.getElementById("redAvgEndgamePoints").innerText = "";
+    document.getElementById("redTotalPredictedPoints").innerText = "";
 
-    document.getElementById("blueTotalCoral").innerHTML = "";
-    document.getElementById("blueTotalAlgae").innerHTML = "";
-    document.getElementById("blueAvgAutoPoints").innerHTML = "";
-    document.getElementById("blueAvgTeleopPoints").innerHTML = "";
-    document.getElementById("blueAvgEndgamePoints").innerHTML = "";
-    document.getElementById("blueTotalPredictedPoints").innerHTML = "";
+    document.getElementById("blueTotalCoral").innerText = "";
+    document.getElementById("blueTotalAlgae").innerText = "";
+    document.getElementById("blueAvgAutoPoints").innerText = "";
+    document.getElementById("blueAvgTeleopPoints").innerText = "";
+    document.getElementById("blueAvgEndgamePoints").innerText = "";
+    document.getElementById("blueTotalPredictedPoints").innerText = "";
 
-    document.getElementById("R0RobotPics").innerHTML = "";
-    document.getElementById("R1RobotPics").innerHTML = "";
-    document.getElementById("R2RobotPics").innerHTML = "";
-    document.getElementById("B0RobotPics").innerHTML = "";
-    document.getElementById("B1RobotPics").innerHTML = "";
-    document.getElementById("B2RobotPics").innerHTML = "";
+    document.getElementById("R0RobotPics").innerText = "";
+    document.getElementById("R1RobotPics").innerText = "";
+    document.getElementById("R2RobotPics").innerText = "";
+    document.getElementById("B0RobotPics").innerText = "";
+    document.getElementById("B1RobotPics").innerText = "";
+    document.getElementById("B2RobotPics").innerText = "";
 
-    document.getElementById("enterRed1").innerHTML = "";
-    document.getElementById("enterRed2").innerHTML = "";
-    document.getElementById("enterRed3").innerHTML = "";
-    document.getElementById("enterBlue1").innerHTML = "";
-    document.getElementById("enterBlue2").innerHTML = "";
-    document.getElementById("enterBlue3").innerHTML = "";
+    document.getElementById("enterRed1").innerText = "";
+    document.getElementById("enterRed2").innerText = "";
+    document.getElementById("enterRed3").innerText = "";
+    document.getElementById("enterBlue1").innerText = "";
+    document.getElementById("enterBlue2").innerText = "";
+    document.getElementById("enterBlue3").innerText = "";
 
     _picDB = {};
   }
@@ -957,7 +957,7 @@ require 'inc/header.php';
     console.log("==> matchSheet: loadEventMatchSheet()");
     clearMatchSheet();
     // Write Match Number
-    document.getElementById("matchTitle").innerHTML = "Match " + compLevel + " " + matchNum;
+    document.getElementById("matchTitle").innerText = "Match " + compLevel + " " + matchNum;
     // Pull Data
     localMatchNum = matchNum;
     localCompLevel = compLevel;
@@ -970,7 +970,7 @@ require 'inc/header.php';
   function loadCustomMatch(redTeam1, redTeam2, redTeam3, blueTeam1, blueTeam2, blueTeam3) {
     clearMatchSheet();
     // Write Match Number
-    document.getElementById("matchTitle").innerHTML = "Match CUSTOM";
+    document.getElementById("matchTitle").innerText = "Match CUSTOM";
     // Pull Data
     customRedTeam1 = redTeam1;
     customRedTeam2 = redTeam2;
