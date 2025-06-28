@@ -92,7 +92,7 @@ require 'inc/header.php';
     }, function (eventCode) {
       eventCode = eventCode.trim();
       console.log("=> pitStatus: getEventCode: " + eventCode);
-      document.getElementById("navbarEventCode").innerHTML = eventCode;
+      document.getElementById("navbarEventCode").innerText = eventCode;
     });
 
     // Get the list of teams and add the team names 

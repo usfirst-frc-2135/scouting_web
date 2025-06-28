@@ -413,7 +413,7 @@ require 'inc/header.php';
     }, function (eventCode) {
       eventCode = eventCode.trim();
       console.log("=> strategicForm: getEventCode: " + eventCode);
-      document.getElementById("navbarEventCode").innerHTML = eventCode;
+      document.getElementById("navbarEventCode").innerText = eventCode;
     });
 
     // Submit the strategic form data

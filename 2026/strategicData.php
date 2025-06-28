@@ -162,7 +162,7 @@ require 'inc/header.php';
     }, function (eventCode) {
       eventCode = eventCode.trim();
       console.log("=> stategicData: getEventCode: " + eventCode);
-      document.getElementById("navbarEventCode").innerHTML = eventCode;
+      document.getElementById("navbarEventCode").innerText = eventCode;
     });
 
     buildStrategicDataTable(tableId);

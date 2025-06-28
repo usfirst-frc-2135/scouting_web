@@ -1228,7 +1228,7 @@ require 'inc/header.php';
     }, function (eventCode) {
       eventCode = eventCode.trim();
       console.log("=> teamLookup: getEventCode: " + eventCode);
-      document.getElementById("navbarEventCode").innerHTML = eventCode;
+      document.getElementById("navbarEventCode").innerText = eventCode;
     });
 
     // Check URL for source team to load
