@@ -214,8 +214,8 @@ require 'inc/header.php';
       idToWrittenMap[key] = false;
       let elementRef = document.getElementById(key);
       elementRef.addEventListener("change", function (evt) {
-        if (elementRef.innerText === "") {
-          document.getElementById(key).classList.remove("bg-info");
+        if (elementRef.value === "") {
+          elementRef.classList.add("text-bg-warning");
           idToWrittenMap[key] = false;
           if (key === "enterDBName") {
             idToWrittenMap["writeMatchTable"] = false;
@@ -224,7 +224,7 @@ require 'inc/header.php';
             idToWrittenMap["writeStrategicTable"] = false;
           }
         } else {
-          elementRef.classList.add("bg-info");
+          elementRef.classList.remove("text-bg-warning");
           idToWrittenMap[key] = true;
           if (key === "enterDBName") {
             // Mark tables in idToWrittenMap 
@@ -249,7 +249,7 @@ require 'inc/header.php';
 
       let configData = {};
       for (const key in idToKeyMap) {
-        if (idToWrittenMap[key]) {
+        if ((document.getElementById(key).value != "") && idToWrittenMap[key]) {
           configData[idToKeyMap[key]] = document.getElementById(key).value;
         }
       }
