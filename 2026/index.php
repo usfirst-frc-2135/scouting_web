@@ -45,23 +45,23 @@ require 'inc/header.php';
               <div class="row">
                 <div class="col">
                   <div class="form-check">
-                    <input id="dataP" class="form-check-input" type="checkbox" name="dataP">
+                    <input id="dataP" class="form-check-input" type="checkbox" name="dataP" checked>
                     <label for="dataP" class="form-check-label">Practice</label>
                   </div>
                   <div class="form-check">
-                    <input id="dataQm" class="form-check-input" type="checkbox" name="dataQm">
+                    <input id="dataQm" class="form-check-input" type="checkbox" name="dataQm" checked>
                     <label for="dataQm" class="form-check-label">Quals</label>
                   </div>
                   <div class="form-check">
-                    <input id="dataQf" class="form-check-input" type="checkbox" name="dataQf">
+                    <input id="dataQf" class="form-check-input" type="checkbox" name="dataQf" checked>
                     <label for="dataQf" class="form-check-label">Quarterfinals</label>
                   </div>
                   <div class="form-check">
-                    <input id="dataSf" class="form-check-input" type="checkbox" name="dataSf">
+                    <input id="dataSf" class="form-check-input" type="checkbox" name="dataSf" checked>
                     <label for="dataSf" class="form-check-label">Semifinals</label>
                   </div>
                   <div class="form-check">
-                    <input id="dataF" class="form-check-input" type="checkbox" name="dataF">
+                    <input id="dataF" class="form-check-input" type="checkbox" name="dataF" checked>
                     <label for="dataF" class="form-check-label">Finals</label>
                   </div>
                 </div>
@@ -188,20 +188,21 @@ require 'inc/header.php';
   document.addEventListener("DOMContentLoaded", () => {
 
     // Update the navbar with the event code
-    $.get("api/tbaAPI.php", {
-      getEventCode: true
-    }, function (eventCode) {
-      eventCode = eventCode.trim();
-      console.log("=> index: getEventCode: " + eventCode);
-      document.getElementById("navbarEventCode").innerHTML = eventCode;
-    });
-
     // Update the database statuses
     $.post("api/dbAPI.php", {
       getDBStatus: true
     }, function (dbStatus) {
       console.log("=> getDBStatus");
       updateStatusValues(JSON.parse(dbStatus));
+
+      $.get("api/tbaAPI.php", {
+        getEventCode: true
+      }, function (eventCode) {
+        eventCode = eventCode.trim();
+        console.log("=> index: getEventCode: " + eventCode);
+        document.getElementById("navbarEventCode").innerHTML = eventCode;
+      });
+
     });
 
     // Loop through handling all fields
