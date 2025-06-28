@@ -627,15 +627,23 @@ class dbHandler
   public function readDbConfig()
   {
     // If File doesn't exist, instantiate array as empty
-    try
+    if (!file_exists($this->dbIniFile))
     {
-      error_log("dbHandler: readDbConfig: reading db_config file");
-      $ini_arr = parse_ini_file($this->dbIniFile);
-    }
-    catch (Exception $e)
-    {
-        error_log("dbHandler: can't read existing db_config file, so  creating a new one");
+      error_log("dbHandler: readDbConfig: db_config file does NOT exist!");
       $ini_arr = array();
+    }
+    else
+    {
+      try
+      {
+        error_log("dbHandler: readDbConfig: reading db_config file");
+        $ini_arr = parse_ini_file(filename: $this->dbIniFile);
+      }
+      catch (Exception $e)
+      {
+        error_log("dbHandler: can't read existing db_config file, so  creating a new one");
+        $ini_arr = array();
+      }
     }
 
     // If required keys don't exist, instantiate them to default empty string
@@ -696,7 +704,7 @@ class dbHandler
   }
 
   // Check database status by connecting to server, database, and each table
-  public function getDBStatus()
+  public function getDBStatus(): array
   {
     $dbConfig = $this->readDbConfig();
     $out = array();
@@ -718,88 +726,94 @@ class dbHandler
     $out["useSf"] = $dbConfig["useSf"];
     $out["useF"] = $dbConfig["useF"];
 
-    // DB Connection
-    try
-    {
-      $dsn = "mysql:host=" . $dbConfig["server"] . ";dbname=" . $dbConfig["db"] . ";charset=" . $this->charset;
-      $conn = new PDO($dsn, $dbConfig["username"], $dbConfig["password"]);
-      $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-      $out["dbExists"] = true;
-    }
-    catch (PDOException $e)
-    {
-      $out["DBExists"] = false;
-    }
-
     // Server Connection
-    try
+    if ($dbConfig["server"] != "")
     {
-      $dsn = "mysql:host=" . $dbConfig["server"] . ";charset=" . $this->charset;
-      $conn = new PDO($dsn, $dbConfig["username"], $dbConfig["password"]);
-      $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-      $out["serverExists"] = true;
-    }
-    catch (PDOException $e)
-    {
-      $out["ServerExists"] = false;
-    }
+      try
+      {
+        $dsn = "mysql:host=" . $dbConfig["server"] . ";charset=" . $this->charset;
+        $conn = new PDO($dsn, $dbConfig["username"], $dbConfig["password"]);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $out["serverExists"] = true;
+      }
+      catch (PDOException $e)
+      {
+        error_log("dbHandler: getDBStatus: server connection failed!");
+      }
 
-    // Match data able Connection
-    try
-    {
-      $dsn = "mysql:host=" . $dbConfig["server"] . ";dbname=" . $dbConfig["db"] . ";charset=" . $this->charset;
-      $conn = new PDO($dsn, $dbConfig["username"], $dbConfig["password"]);
-      $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-      $val = $conn->query('SELECT * from ' . $dbConfig["datatable"]);
-      $out["matchTableExists"] = true;
-    }
-    catch (PDOException $e)
-    {
-      $out["matchTableExists"] = false;
-    }
+      // DB Connection
+      if ($out["serverExists"] = true)
+      {
+        try
+        {
+          $dsn = "mysql:host=" . $dbConfig["server"] . ";dbname=" . $dbConfig["db"] . ";charset=" . $this->charset;
+          $conn = new PDO($dsn, $dbConfig["username"], $dbConfig["password"]);
+          $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+          $out["dbExists"] = true;
+        }
+        catch (PDOException $e)
+        {
+          error_log("dbHandler: getDBStatus: database connection failed!");
+        }
 
-    // TBA table Connection
-    try
-    {
-      $dsn = "mysql:host=" . $dbConfig["server"] . ";dbname=" . $dbConfig["db"] . ";charset=" . $this->charset;
-      $conn = new PDO($dsn, $dbConfig["username"], $dbConfig["password"]);
-      $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-      $val = $conn->query('SELECT * from ' . $dbConfig["tbatable"]);
-      $out["tbaTableExists"] = true;
-    }
-    catch (PDOException $e)
-    {
-      $out["tbaTableExists"] = false;
-    }
+        // Match data able Connection
+        try
+        {
+          $dsn = "mysql:host=" . $dbConfig["server"] . ";dbname=" . $dbConfig["db"] . ";charset=" . $this->charset;
+          $conn = new PDO($dsn, $dbConfig["username"], $dbConfig["password"]);
+          $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+          $val = $conn->query('SELECT * from ' . $dbConfig["datatable"]);
+          $out["matchTableExists"] = true;
+        }
+        catch (PDOException $e)
+        {
+          error_log("dbHandler: getDBStatus: match data table missing!");
+        }
 
-    // Pit table Connection
-    try
-    {
-      $dsn = "mysql:host=" . $dbConfig["server"] . ";dbname=" . $dbConfig["db"] . ";charset=" . $this->charset;
-      $conn = new PDO($dsn, $dbConfig["username"], $dbConfig["password"]);
-      $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-      $val = $conn->query('SELECT * from ' . $dbConfig["pittable"]);
-      $out["pitTableExists"] = true;
-    }
-    catch (PDOException $e)
-    {
-      $out["pitTableExists"] = false;
-    }
+        // Pit table Connection
+        try
+        {
+          $dsn = "mysql:host=" . $dbConfig["server"] . ";dbname=" . $dbConfig["db"] . ";charset=" . $this->charset;
+          $conn = new PDO($dsn, $dbConfig["username"], $dbConfig["password"]);
+          $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+          $val = $conn->query('SELECT * from ' . $dbConfig["pittable"]);
+          $out["pitTableExists"] = true;
+        }
+        catch (PDOException $e)
+        {
+          error_log("dbHandler: getDBStatus: pit data table missing!");
+        }
 
-    // Strategic table Connection
-    try
-    {
-      $dsn = "mysql:host=" . $dbConfig["server"] . ";dbname=" . $dbConfig["db"] . ";charset=" . $this->charset;
-      $conn = new PDO($dsn, $dbConfig["username"], $dbConfig["password"]);
-      $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-      $val = $conn->query('SELECT * from ' . $dbConfig["strategictable"]);
-      $out["strategicTableExists"] = true;
-    }
-    catch (PDOException $e)
-    {
-      $out["strategicTableExists"] = false;
-    }
+        // Strategic table Connection
+        try
+        {
+          $dsn = "mysql:host=" . $dbConfig["server"] . ";dbname=" . $dbConfig["db"] . ";charset=" . $this->charset;
+          $conn = new PDO($dsn, $dbConfig["username"], $dbConfig["password"]);
+          $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+          $val = $conn->query('SELECT * from ' . $dbConfig["strategictable"]);
+          $out["strategicTableExists"] = true;
+        }
+        catch (PDOException $e)
+        {
+          error_log("dbHandler: getDBStatus: strategic data table missing!");
+        }
 
+        // TBA table Connection
+        try
+        {
+          $dsn = "mysql:host=" . $dbConfig["server"] . ";dbname=" . $dbConfig["db"] . ";charset=" . $this->charset;
+          $conn = new PDO($dsn, $dbConfig["username"], $dbConfig["password"]);
+          $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+          $val = $conn->query('SELECT * from ' . $dbConfig["tbatable"]);
+          $out["tbaTableExists"] = true;
+        }
+        catch (PDOException $e)
+        {
+          error_log("dbHandler: getDBStatus: tba table missing!");
+        }
+
+      }
+    }
     return $out;
   }
 }
