@@ -83,28 +83,33 @@ require 'inc/header.php';
           <div class="card-body">
             <div class="mb-3">
               <label for="enterServerURL" class="form-label"> MySQL Server URL</label>
-              <input id="enterServerURL" class="form-control" type="text" placeholder="(localhost)" aria-describedby="serverName">
+              <input id="enterServerURL" class="form-control text-bg-warning" type="text" placeholder="(localhost)"
+                aria-describedby="serverName">
             </div>
             <div class="mb-3">
               <label for="enterDBName" class="form-label">Database Name</label>
-              <input id="enterDBName" class="form-control" type="text" placeholder="scouting2025" aria-describedby="databaseName">
+              <input id="enterDBName" class="form-control text-bg-warning" type="text" placeholder="scouting2025"
+                aria-describedby="databaseName">
             </div>
             <div class="mb-3">
               <label for="enterUserName" class="form-label">User Name</label>
-              <input id="enterUserName" class="form-control" type="text" placeholder="DB username" aria-describedby="userName">
+              <input id="enterUserName" class="form-control text-bg-warning" type="text" placeholder="DB username"
+                aria-describedby="userName">
             </div>
             <div class="mb-3">
               <label for="enterPassword" class="form-label">Password</label>
-              <input id="enterPassword" class="form-control" type="password" placeholder="DB password" aria-describedby="password">
+              <input id="enterPassword" class="form-control text-bg-warning" type="password" placeholder="DB password"
+                aria-describedby="password">
             </div>
             <div class="mb-3">
               <label for="enterTBAKey" class="form-label">TBA Key</label>
-              <input id="enterTBAKey" class="form-control" type="text" placeholder="(from theBlueAlliance)"
+              <input id="enterTBAKey" class="form-control text-bg-warning" type="text" placeholder="(from theBlueAlliance)"
                 aria-describedby="tbaKey">
             </div>
             <div class="mb-3">
               <label for="enterEventCode" class="form-label">Event Code</label>
-              <input id="enterEventCode" class="form-control" type="text" placeholder="2025CAFR" aria-describedby="tbaEventCode">
+              <input id="enterEventCode" class="form-control text-bg-warning" type="text" placeholder="2025CAFR"
+                aria-describedby="tbaEventCode">
             </div>
 
             <div class="row mb-3 mx-auto" style=" width: 200px;">
@@ -133,15 +138,14 @@ require 'inc/header.php';
   // Set the status badges for an item
   function setStatusBadge(id, isSuccess) {
     console.log("==> index.php: setStatusBadge()");
+    document.getElementById(id).classList.remove("bg-warning");
     if (isSuccess) {
       document.getElementById(id).innerText = "Connected";
       document.getElementById(id).classList.add("bg-success");
-      document.getElementById(id).classList.remove("bg-warning");
       document.getElementById(id).classList.remove("bg-danger");
     } else {
       document.getElementById(id).innerText = "Not Connected";
       document.getElementById(id).classList.add("bg-danger");
-      document.getElementById(id).classList.remove("bg-warning");
       document.getElementById(id).classList.remove("bg-success");
     }
   }
