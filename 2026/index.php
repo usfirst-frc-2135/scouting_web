@@ -27,11 +27,11 @@ require 'inc/header.php';
             <h5>Pit Table Status: <span id="pitTableStatus" class="badge bg-warning float-end">Not Connected</span></h5>
             <h5>Strategic Table Status: <span id="strategicTableStatus" class="badge bg-warning float-end">Not Connected</span></h5>
             <hr />
-            <h5>MySQL Server: <span id="serverName" class="badge bg-primary float-end">????</span></h5>
-            <h5>Database: <span id="databaseName" class="badge bg-primary float-end">????</span></h5>
-            <h5>Username: <span id="userName" class="badge bg-primary float-end">????</span></h5>
-            <h5>TBA Key: <span id="tbaKey" class="badge bg-primary float-end">????</span></h5>
-            <h5>Event Code: <span id="eventCode" class="badge bg-primary float-end">????</span></h5>
+            <h5>MySQL Server: <span id="serverName" class="badge bg-secondary float-end">????</span></h5>
+            <h5>Database: <span id="databaseName" class="badge bg-secondary float-end">????</span></h5>
+            <h5>Username: <span id="userName" class="badge bg-secondary float-end">????</span></h5>
+            <h5>TBA Key: <span id="tbaKey" class="badge bg-secondary float-end">????</span></h5>
+            <h5>Event Code: <span id="eventCode" class="badge bg-secondary float-end">????</span></h5>
           </div>
         </div>
 
