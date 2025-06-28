@@ -28,7 +28,6 @@ require 'inc/header.php';
             <div class="input-group-prepend">
               <select id="enterMatchLevel" class="form-select" aria-label="Comp Level Select">
                 <option value="QM">QM</option>
-                <option value="QF">QF</option>
                 <option value="SF">SF</option>
                 <option value="F">F</option>
               </select>

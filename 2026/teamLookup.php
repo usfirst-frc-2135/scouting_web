@@ -941,11 +941,6 @@ require 'inc/header.php';
               newData.push(getTeamMatches[i]);
             }
           }
-          else if (matchStr.search("qf") != -1) {
-            if (dbdata["useQf"]) {
-              newData.push(getTeamMatches[i]);
-            }
-          }
           else if (matchStr.search("sf") != -1) {
             if (dbdata["useSf"])
               newData.push(getTeamMatches[i]);

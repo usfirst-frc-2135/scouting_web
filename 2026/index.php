@@ -53,10 +53,6 @@ require 'inc/header.php';
                     <label for="dataQm" class="form-check-label">Quals</label>
                   </div>
                   <div class="form-check">
-                    <input id="dataQf" class="form-check-input" type="checkbox" name="dataQf" checked>
-                    <label for="dataQf" class="form-check-label">Quarterfinals</label>
-                  </div>
-                  <div class="form-check">
                     <input id="dataSf" class="form-check-input" type="checkbox" name="dataSf" checked>
                     <label for="dataSf" class="form-check-label">Semifinals</label>
                   </div>
@@ -168,7 +164,6 @@ require 'inc/header.php';
 
     document.getElementById("dataP").checked = statusArray["useP"];
     document.getElementById("dataQm").checked = statusArray["useQm"];
-    document.getElementById("dataQf").checked = statusArray["useQf"];
     document.getElementById("dataSf").checked = statusArray["useSf"];
     document.getElementById("dataF").checked = statusArray["useF"];
   }
@@ -276,8 +271,7 @@ require 'inc/header.php';
       // Make data to send to API
       let filterData = {};
       filterData["useP"] = +document.getElementById("dataP").checked;
-      filterData["useQm"] = +document.getElementById("dataQf").checked;
-      filterData["useQf"] = +document.getElementById("dataQm").checked;
+      filterData["useQm"] = +document.getElementById("dataQm").checked;
       filterData["useSf"] = +document.getElementById("dataSf").checked;
       filterData["useF"] = +document.getElementById("dataF").checked;
 

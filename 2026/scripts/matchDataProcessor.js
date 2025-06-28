@@ -18,9 +18,6 @@ class matchDataProcessor {
     if (matchStr.search("qm") != -1) {
       return ["qm", parseInt(matchStr.substring(2))];
     }
-    if (matchStr.search("qf") != -1) {
-      return ["qf", parseInt(matchStr.substring(2))];
-    }
     if (matchStr.search("sf") != -1) {
       return ["sf", parseInt(matchStr.substring(2))];
     }
@@ -45,7 +42,7 @@ class matchDataProcessor {
       em = this.getMatchTuple(endMatch);
     }
 
-    let typeProg = { "p": 0, "qm": 1, "qf": 2, "sf": 3, "f": 4 };
+    let typeProg = { "p": 0, "qm": 1, "sf": 3, "f": 4 };
     if (sm === null || em === null) {
       return false;
     }
@@ -114,7 +111,6 @@ class matchDataProcessor {
         let localSiteFilter = {};
         localSiteFilter["useP"] = dbStatus["useP"];
         localSiteFilter["useQm"] = dbStatus["useQm"];
-        localSiteFilter["useQf"] = dbStatus["useQf"];
         localSiteFilter["useSf"] = dbStatus["useSf"];
         localSiteFilter["useF"] = dbStatus["useF"];
         this.siteFilter = { ...localSiteFilter };
@@ -137,7 +133,6 @@ class matchDataProcessor {
       }
       if (mt[0] === "p" && this.siteFilter["useP"]) { newData.push(this.data[i]); }
       else if (mt[0] === "qm" && this.siteFilter["useQm"]) { newData.push(this.data[i]); }
-      else if (mt[0] === "qf" && this.siteFilter["useQf"]) { newData.push(this.data[i]); }
       else if (mt[0] === "sf" && this.siteFilter["useSf"]) { newData.push(this.data[i]); }
       else if (mt[0] === "f" && this.siteFilter["useF"]) { newData.push(this.data[i]); }
     }
@@ -153,7 +148,6 @@ class matchDataProcessor {
       let localSiteFilter = {};
       localSiteFilter["useP"] = dbStatus["useP"];
       localSiteFilter["useQm"] = dbStatus["useQm"];
-      localSiteFilter["useQf"] = dbStatus["useQf"];
       localSiteFilter["useSf"] = dbStatus["useSf"];
       localSiteFilter["useF"] = dbStatus["useF"];
       tempThis.siteFilter = { ...localSiteFilter };

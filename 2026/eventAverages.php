@@ -30,7 +30,6 @@ require 'inc/header.php';
                   <select id="startCompLevel" class="form-select mb-3" aria-label="Comp Level Select">
                     <option value="p">P</option>
                     <option value="qm" selected>QM</option>
-                    <option value="qf">QF</option>
                     <option value="sf">SF</option>
                     <option value="f">F</option>
                   </select>
@@ -44,7 +43,6 @@ require 'inc/header.php';
                   <select id="endCompLevel" class="form-select mb-3" aria-label="Comp Level Select">
                     <option value="p">P</option>
                     <option value="qm" selected>QM</option>
-                    <option value="qf">QF</option>
                     <option value="sf">SF</option>
                     <option value="f">F</option>
                   </select>

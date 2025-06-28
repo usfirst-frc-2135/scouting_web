@@ -21,7 +21,6 @@ class dbHandler
     "strategictable",
     "useP",
     "useQm",
-    "useQf",
     "useSf",
     "useF"
   );
@@ -655,7 +654,7 @@ class dbHandler
       }
 
       # Specific checking for match filters
-      if ($key === "useP" || $key === "useQm" || $key === "useQf" || $key === "useSf" || $key === "useF")
+      if ($key === "useP" || $key === "useQm" || $key === "useSf" || $key === "useF")
       {
         $ini_arr[$key] = ($ini_arr[$key] === "" || $ini_arr[$key] === "1" || $ini_arr[$key] === "true");
       }
@@ -722,7 +721,6 @@ class dbHandler
     $out["strategicTableExists"] = false;
     $out["useP"] = $dbConfig["useP"];
     $out["useQm"] = $dbConfig["useQm"];
-    $out["useQf"] = $dbConfig["useQf"];
     $out["useSf"] = $dbConfig["useSf"];
     $out["useF"] = $dbConfig["useF"];
 

@@ -37,7 +37,6 @@ require 'inc/header.php';
                   <select id="compLevel" class="form-select" aria-label="Comp Level Select">
                     <option value="p">P</option>
                     <option value="qm" selected>QM</option>
-                    <option value="qf">QF</option>
                     <option value="sf">SF</option>
                     <option value="f">F</option>
                   </select>
