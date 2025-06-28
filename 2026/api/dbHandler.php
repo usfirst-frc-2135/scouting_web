@@ -481,6 +481,7 @@ class dbHandler
 
   public function createMatchTable()
   {
+    error_log("Creating Match Table");
     $conn = $this->connectToDB();
     $dbConfig = $this->readDbConfig();
     $query = "CREATE TABLE " . $dbConfig["db"] . "." . $dbConfig["datatable"] .
@@ -536,6 +537,7 @@ class dbHandler
 
   public function createTBATable()
   {
+    error_log("Creating TBA Table");
     $conn = $this->connectToDB();
     $dbConfig = $this->readDbConfig();
     $query = "CREATE TABLE " . $dbConfig["db"] . "." . $dbConfig["tbatable"] .
@@ -553,6 +555,7 @@ class dbHandler
 
   public function createPitTable()
   {
+    error_log("Creating Pit Table");
     $conn = $this->connectToDB();
     $dbConfig = $this->readDbConfig();
     $query = "CREATE TABLE " . $dbConfig["db"] . "." . $dbConfig["pittable"] .
@@ -578,6 +581,7 @@ class dbHandler
 
   public function createStrategicTable()
   {
+    error_log("Creating Strategic Table");
     $conn = $this->connectToDB();
     $dbConfig = $this->readDbConfig();
     $query = "CREATE TABLE " . $dbConfig["db"] . "." . $dbConfig["strategictable"] .
@@ -630,7 +634,7 @@ class dbHandler
     }
     catch (Exception $e)
     {
-      error_log("dbHandler: no existing db_config file, so  creating a new one");
+        error_log("dbHandler: can't read existing db_config file, so  creating a new one");
       $ini_arr = array();
     }
 
