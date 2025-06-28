@@ -198,15 +198,18 @@ require 'inc/header.php';
     }, function (dbStatus) {
       console.log("=> getDBStatus");
       updateStatusValues(JSON.parse(dbStatus));
-
-      $.get("api/tbaAPI.php", {
-        getEventCode: true
-      }, function (eventCode) {
-        eventCode = eventCode.trim();
-        console.log("=> index: getEventCode: " + eventCode);
-        document.getElementById("navbarEventCode").innerHTML = eventCode;
-      });
-
+      if (dbStatus["server"] !== "") {
+        $.get("api/tbaAPI.php", {
+          getEventCode: true
+        }, function (eventCode) {
+          eventCode = eventCode.trim();
+          console.log("=> index: getEventCode: " + eventCode + "\n");
+          document.getElementById("navbarEventCode").innerText = eventCode;
+        });
+      }
+      else {
+        console.warn("DB server undefined -- cannot retrieve event code!")
+      }
     });
 
     // Loop through handling all fields
