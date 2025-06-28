@@ -197,8 +197,9 @@ require 'inc/header.php';
       getDBStatus: true
     }, function (dbStatus) {
       console.log("=> getDBStatus");
-      updateStatusValues(JSON.parse(dbStatus));
+      dbStatus = JSON.parse(dbStatus);
       if (dbStatus["server"] !== "") {
+        updateStatusValues(dbStatus);
         $.get("api/tbaAPI.php", {
           getEventCode: true
         }, function (eventCode) {
