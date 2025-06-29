@@ -1124,7 +1124,7 @@ require 'inc/header.php';
         loadAverageTables(teamAverages);
       }
       else {
-        alert("No matches for this team at this event!")
+        alert("No match data for this team at this event!")
       }
     });
     getFilteredData(team, function (fData) {
