@@ -291,6 +291,7 @@ require 'inc/header.php';
       }, function (statusValues) {
         console.log("=> createDB");
         updateStatusValues(JSON.parse(statusValues));
+        alert("While this can create a new database, it cannot add permissions for this username! This must be done using phpMyAdmin.");
       });
     });
 

@@ -37,8 +37,15 @@ class dbHandler
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
         PDO::ATTR_EMULATE_PREPARES => false
       ];
+      try
+      {
       $this->conn = new PDO($dsn, $dbConfig["username"], $dbConfig["password"], $opt);
       $this->alreadyConnected = true;
+    }
+      catch (PDOException $e)
+      {
+        error_log($e);
+      }
     }
     return ($this->conn);
   }
@@ -469,9 +476,10 @@ class dbHandler
 
   public function createDB()
   {
+    error_log("createDB in dbHandler");
     $dbConfig = $this->readDbConfig();
-    $connection = $this->connectToServer();
-    $statement = $connection->prepare('CREATE DATABASE IF NOT EXISTS ' . $dbConfig["db"]);
+    $this->conn = $this->connectToServer();
+    $statement = $this->conn->prepare('CREATE DATABASE IF NOT EXISTS ' . $dbConfig["db"]);
     if (!$statement->execute())
     {
       throw new Exception("createDB Error: CREATE DATABASE query failed.");
@@ -736,25 +744,35 @@ class dbHandler
       }
       catch (PDOException $e)
       {
-        error_log("dbHandler: getDBStatus: server connection failed!");
+        error_log("dbHandler: getDBStatus: server connection failed! - " . $e->getMessage());
       }
 
       // DB Connection
-      if ($out["serverExists"] = true)
+      if ($out["serverExists"] == true)
       {
         try
         {
           $dsn = "mysql:host=" . $dbConfig["server"] . ";dbname=" . $dbConfig["db"] . ";charset=" . $this->charset;
           $conn = new PDO($dsn, $dbConfig["username"], $dbConfig["password"]);
           $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+          $val = $conn->query('SHOW DATABASES LIKE "' . $dbConfig["db"] . '"');
+          if ($val->rowCount() != 0)
+          {
           $out["dbExists"] = true;
+        }
+          else
+          {
+            error_log("dbHandler: getDBStatus: database does not exist");
+          }
         }
         catch (PDOException $e)
         {
-          error_log("dbHandler: getDBStatus: database connection failed!");
+          error_log("dbHandler: getDBStatus: database connection failed! - " . $e->getMessage());
         }
 
         // Match data able Connection
+        if ($out["dbExists"] == true)
+        {
         try
         {
           $dsn = "mysql:host=" . $dbConfig["server"] . ";dbname=" . $dbConfig["db"] . ";charset=" . $this->charset;
@@ -765,7 +783,7 @@ class dbHandler
         }
         catch (PDOException $e)
         {
-          error_log("dbHandler: getDBStatus: match data table missing!");
+            error_log("dbHandler: getDBStatus: match data table missing! " . $e->getMessage());
         }
 
         // Pit table Connection
@@ -779,7 +797,7 @@ class dbHandler
         }
         catch (PDOException $e)
         {
-          error_log("dbHandler: getDBStatus: pit data table missing!");
+            error_log("dbHandler: getDBStatus: pit data table missing! - " . $e->getMessage());
         }
 
         // Strategic table Connection
@@ -793,7 +811,7 @@ class dbHandler
         }
         catch (PDOException $e)
         {
-          error_log("dbHandler: getDBStatus: strategic data table missing!");
+            error_log("dbHandler: getDBStatus: strategic data table missing! - " . $e->getMessage());
         }
 
         // TBA table Connection
@@ -807,9 +825,9 @@ class dbHandler
         }
         catch (PDOException $e)
         {
-          error_log("dbHandler: getDBStatus: tba table missing!");
+            error_log("dbHandler: getDBStatus: tba table missing! - " . $e->getMessage());
+          }
         }
-
       }
     }
     return $out;
