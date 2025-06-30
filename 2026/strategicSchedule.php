@@ -49,13 +49,13 @@ require 'inc/header.php';
   const matchColumn = 0;
 
   // Load strategic schedule rows
-  function loadStrategicSchedule(tableId, dataObj) {
+  function loadStrategicSchedule(tableId, stratSched) {
     console.log("==> strategicSchedule: loadStrategicSchedule()");
     let tbodyRef = document.getElementById(tableId).querySelector('tbody');;
     tbodyRef.innerHTML = ""; // Clear Table
-    for (let i = 0; i < dataObj.length; i++) {
-      let matchNum = dataObj[i]["comp_level"] + dataObj[i]["match_number"];
-      let rowString = "<td>" + matchNum + "</td>" + "<td>" + dataObj[i]["teams"] + "</td>";
+    for (let i = 0; i < stratSched.length; i++) {
+      let matchNum = stratSched[i]["comp_level"] + stratSched[i]["match_number"];
+      let rowString = "<td>" + matchNum + "</td>" + "<td>" + stratSched[i]["teams"] + "</td>";
       tbodyRef.insertRow().innerHTML = rowString;
     }
   }
@@ -66,9 +66,10 @@ require 'inc/header.php';
     $.get("api/tbaAPI.php", {
       getStrategicMatches: 1
     }).done(function (strategicData) {
+      console.log(strategicData);
       console.log("=> getStrategicMatches");
-      let dataObj = JSON.parse(strategicData);
-      loadStrategicSchedule(tableId, dataObj);
+      let stratSched = JSON.parse(strategicData);
+      loadStrategicSchedule(tableId, stratSched);
       sortTableByMatch(tableId, matchColumn);
     });
   }
