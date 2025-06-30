@@ -1020,7 +1020,7 @@ require 'inc/header.php';
       console.log("==> Custom match sheet: " + redTeamNum1 + " " + blueTeamNum1);
       if (redTeamNum1.trim() === "" && blueTeamNum1.trim() === "") {
         console.warn("loadCustomMatch: No Red or Blue team 1 entered!");
-        alert("Please fill out Red Team Number 1 and Blue Team Number 1!");
+        alert("Please fill in Red Team Number 1 and Blue Team Number 1!");
         return false;
       }
       else if (redTeamNum1.trim() !== "" && blueTeamNum1.trim() !== "") {
@@ -1033,7 +1033,7 @@ require 'inc/header.php';
           document.getElementById("enterBlue3").value);
       }
       else {
-        alert("Please fill out red team number 1 and blue team number 1!");
+        alert("Please fill in red team number 1 and blue team number 1!");
       }
     });
 

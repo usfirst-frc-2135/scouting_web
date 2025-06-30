@@ -199,6 +199,11 @@ require 'inc/header.php';
       isError = true;
     }
 
+    if (document.getElementById("scoutName").value === "") {
+      errMsg += " Scout Name";
+      isError = true;
+    }
+
     if (!document.getElementById("swerveDriveYes").checked && !document.getElementById("swerveDriveNo").checked) {
       if (isError === true)
         errMsg += ",";
@@ -281,84 +286,83 @@ require 'inc/header.php';
   // Write pit data form fields to DB table
   function writeFormToPitTable() {
     console.log("==> pitForm: writeFormToPitTable()");
-    let dataToUse = {};
-    dataToUse["teamnumber"] = document.getElementById("teamNumber").value;
-
-    // TODO: dataToUse["scoutname"] = document.getElementById("scoutName").value; // enable once db is changed
+    let dataToSave = {};
+    dataToSave["teamnumber"] = document.getElementById("teamNumber").value;
+    dataToSave["scoutname"] = document.getElementById("scoutName").value; // enable once db is changed
 
     // Swerve
     if (document.getElementById("swerveDriveYes").checked) {
-      dataToUse["swerve"] = 1;
+      dataToSave["swerve"] = 1;
     }
     if (document.getElementById("swerveDriveNo").checked) {
-      dataToUse["swerve"] = 0;
+      dataToSave["swerve"] = 0;
     }
 
     // Drive motors
     let driveMotors = document.getElementById("driveMotors").value;
     switch (driveMotors) {
-      case "1": dataToUse["drivemotors"] = "Krakens"; break;
-      case "2": dataToUse["drivemotors"] = "NEOs"; break;
-      case "3": dataToUse["drivemotors"] = "Falcons"; break;
-      case "4": dataToUse["drivemotors"] = "CIMs"; break;
-      default: dataToUse["drivemotors"] = "Missing"; break;
+      case "1": dataToSave["drivemotors"] = "Krakens"; break;
+      case "2": dataToSave["drivemotors"] = "NEOs"; break;
+      case "3": dataToSave["drivemotors"] = "Falcons"; break;
+      case "4": dataToSave["drivemotors"] = "CIMs"; break;
+      default: dataToSave["drivemotors"] = "Missing"; break;
     }
 
     // Spare parts
     if (document.getElementById("sparePartsYes").checked) {
-      dataToUse["spareparts"] = 1;
+      dataToSave["spareparts"] = 1;
     }
     if (document.getElementById("sparePartsNo").checked) {
-      dataToUse["spareparts"] = 0;
+      dataToSave["spareparts"] = 0;
     }
 
     // Software language
     let progLang = document.getElementById("programmingLanguage").value;
     switch (progLang) {
-      case "1": dataToUse["proglanguage"] = "Java"; break;
-      case "2": dataToUse["proglanguage"] = "LabView"; break;
-      case "3": dataToUse["proglanguage"] = "C++"; break;
-      case "4": dataToUse["proglanguage"] = "Python"; break;
-      case "5": dataToUse["proglanguage"] = "Other"; break;
-      default: dataToUse["proglanguage"] = "Missing"; break;
+      case "1": dataToSave["proglanguage"] = "Java"; break;
+      case "2": dataToSave["proglanguage"] = "LabView"; break;
+      case "3": dataToSave["proglanguage"] = "C++"; break;
+      case "4": dataToSave["proglanguage"] = "Python"; break;
+      case "5": dataToSave["proglanguage"] = "Other"; break;
+      default: dataToSave["proglanguage"] = "Missing"; break;
     }
 
     // Computer vision
     if (document.getElementById("computerVisionYes").checked) {
-      dataToUse["computervision"] = 1;
+      dataToSave["computervision"] = 1;
     }
     else if (document.getElementById("computerVisionNo").checked) {
-      dataToUse["computervision"] = 0;
+      dataToSave["computervision"] = 0;
     }
 
     // Pit organization
     if (document.getElementById("pitScore1").checked) {
-      dataToUse["pitorg"] = 1;
+      dataToSave["pitorg"] = 1;
     }
     else if (document.getElementById("pitScore2").checked) {
-      dataToUse["pitorg"] = 3;
+      dataToSave["pitorg"] = 3;
     }
     else if (document.getElementById("pitScore3").checked) {
-      dataToUse["pitorg"] = 5;
+      dataToSave["pitorg"] = 5;
     }
 
     // Overall readiness
-    dataToUse["preparedness"] = 1;  // default
+    dataToSave["preparedness"] = 1;  // default
     if (document.getElementById("preparednessScore1").checked) {
-      dataToUse["preparedness"] = 1;
+      dataToSave["preparedness"] = 1;
     }
     else if (document.getElementById("preparednessScore2").checked) {
-      dataToUse["preparedness"] = 3;
+      dataToSave["preparedness"] = 3;
     }
     else if (document.getElementById("preparednessScore3").checked) {
-      dataToUse["preparedness"] = 5;
+      dataToSave["preparedness"] = 5;
     }
 
     // Battery count
-    dataToUse["numbatteries"] = document.getElementById("batteries").value;
+    dataToSave["numbatteries"] = document.getElementById("batteries").value;
 
     $.post("api/dbWriteAPI.php", {
-      writePitTable: JSON.stringify(dataToUse)
+      writePitTable: JSON.stringify(dataToSave)
     }).done(function (response) {
       console.log("=> writePitTable");
       // Because success word may have a newline at the end, don't do a direct compare

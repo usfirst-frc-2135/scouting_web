@@ -21,9 +21,9 @@ const qrValidLength = 41;   // This is determined by game requirements and adjus
 const qrPadLength = 1;      // TODO: no explanation why this is padded--did we delete something?
 
 // Validate the scanned QR string
-function validaateQrList(qrDataList) {
-  console.log("===> validaateQrList: qrDataList.length = " + qrDataList.length + " (valid " + qrValidLength + ")");
-  if (qrDataList.length != qrValidLength) {
+function validaateQrList(qrList) {
+  console.log("===> validaateQrList: qrList.length = " + qrList.length + " (valid " + qrValidLength + ")");
+  if (qrList.length != qrValidLength) {
     console.warn("   ===> validaateQrList: returning false! ");
     return false;
   }
@@ -32,58 +32,58 @@ function validaateQrList(qrDataList) {
 }
 
 // update this data list length whenever more data is added to the table
-function padList(dataList) {
-  if (dataList.length === qrValidLength - qrPadLength) {
-    dataList.push("");
+function padList(qrList) {
+  if (qrList.length === qrValidLength - qrPadLength) {
+    qrList.push("");
     console.warn("Padding QR scan! (Why?)")
   }
-  return dataList;
+  return qrList;
 }
 
 // IMPORTANT! also need to adjust data list size in "validaateQrList" and "padList"!!!
-function qrListToDict(dataList) {
-  let out = {};
-  out["teamnumber"] = dataList[0];
-  out["autonStartPos"] = dataList[1];
-  out["autonLeave"] = dataList[2];
-  out["reefzoneAB"] = dataList[3];
-  out["reefzoneCD"] = dataList[4];
-  out["reefzoneEF"] = dataList[5];
-  out["reefzoneGH"] = dataList[6];
-  out["reefzoneIJ"] = dataList[7];
-  out["reefzoneKL"] = dataList[8];
-  out["autonCoralL1"] = dataList[9];
-  out["autonCoralL2"] = dataList[10];
-  out["autonCoralL3"] = dataList[11];
-  out["autonCoralL4"] = dataList[12];
-  out["autonAlgaeNet"] = dataList[13];
-  out["autonAlgaeProcessor"] = dataList[14];
-  out["autonCoralFloor"] = dataList[15];
-  out["autonCoralStation"] = dataList[16];
-  out["autonAlgaeFloor"] = dataList[17];
-  out["autonAlgaeReef"] = dataList[18];
-  out["acquiredCoral"] = dataList[19];
-  out["acquiredAlgae"] = dataList[20];
-  out["teleopAlgaeFloorPickup"] = dataList[21];
-  out["teleopCoralFloorPickup"] = dataList[22];
-  out["teleopKnockOffAlgae"] = dataList[23];
-  out["teleopAlgaeFromReef"] = dataList[24];
-  out["teleopHoldBoth"] = dataList[25];
-  out["teleopCoralL1"] = dataList[26];
-  out["teleopCoralL2"] = dataList[27];
-  out["teleopCoralL3"] = dataList[28];
-  out["teleopCoralL4"] = dataList[29];
-  out["teleopAlgaeNet"] = dataList[30];
-  out["teleopAlgaeProcessor"] = dataList[31];
-  out["defenseLevel"] = dataList[32];
-  out["cageClimb"] = dataList[33];
-  out["startClimb"] = dataList[34];
-  out["died"] = dataList[35];
-  out["matchnumber"] = dataList[36];
-  out["eventcode"] = dataList[37];
-  out["scoutname"] = dataList[38];
-  out["comment"] = dataList[39];
-  return out;
+function qrListToMatchData(qrList) {
+  let matchData = {};
+  matchData["teamnumber"] = qrList[0];
+  matchData["autonStartPos"] = qrList[1];
+  matchData["autonLeave"] = qrList[2];
+  matchData["reefzoneAB"] = qrList[3];
+  matchData["reefzoneCD"] = qrList[4];
+  matchData["reefzoneEF"] = qrList[5];
+  matchData["reefzoneGH"] = qrList[6];
+  matchData["reefzoneIJ"] = qrList[7];
+  matchData["reefzoneKL"] = qrList[8];
+  matchData["autonCoralL1"] = qrList[9];
+  matchData["autonCoralL2"] = qrList[10];
+  matchData["autonCoralL3"] = qrList[11];
+  matchData["autonCoralL4"] = qrList[12];
+  matchData["autonAlgaeNet"] = qrList[13];
+  matchData["autonAlgaeProcessor"] = qrList[14];
+  matchData["autonCoralFloor"] = qrList[15];
+  matchData["autonCoralStation"] = qrList[16];
+  matchData["autonAlgaeFloor"] = qrList[17];
+  matchData["autonAlgaeReef"] = qrList[18];
+  matchData["acquiredCoral"] = qrList[19];
+  matchData["acquiredAlgae"] = qrList[20];
+  matchData["teleopAlgaeFloorPickup"] = qrList[21];
+  matchData["teleopCoralFloorPickup"] = qrList[22];
+  matchData["teleopKnockOffAlgae"] = qrList[23];
+  matchData["teleopAlgaeFromReef"] = qrList[24];
+  matchData["teleopHoldBoth"] = qrList[25];
+  matchData["teleopCoralL1"] = qrList[26];
+  matchData["teleopCoralL2"] = qrList[27];
+  matchData["teleopCoralL3"] = qrList[28];
+  matchData["teleopCoralL4"] = qrList[29];
+  matchData["teleopAlgaeNet"] = qrList[30];
+  matchData["teleopAlgaeProcessor"] = qrList[31];
+  matchData["defenseLevel"] = qrList[32];
+  matchData["cageClimb"] = qrList[33];
+  matchData["startClimb"] = qrList[34];
+  matchData["died"] = qrList[35];
+  matchData["matchnumber"] = qrList[36];
+  matchData["eventcode"] = qrList[37];
+  matchData["scoutname"] = qrList[38];
+  matchData["comment"] = qrList[39];
+  return matchData;
 }
 
 // Creates the key used to store the QR scan in the database
@@ -153,12 +153,12 @@ function getDefaultDeviceID(id) {
 function scanCamera(reader, id) {
   reader.decodeFromInputVideoDeviceContinuously(id, 'camera', (result, err) => {
     if (result) {
-      let dataList = qrStringToList(result.text);
-      dataList = padList(dataList);
-      console.log("scanCamera: dataList = " + dataList);
-      if (validaateQrList(dataList)) {
+      let qrList = qrStringToList(result.text);
+      qrList = padList(qrList);
+      console.log("scanCamera: qrList = " + qrList);
+      if (validaateQrList(qrList)) {
         alertSuccessfulScan();
-        addQrScanToTable("qrScanTable", qrListToDict(dataList));
+        addQrScanToTable("qrScanTable", qrListToMatchData(qrList));
       }
       else {
         alert("QR content failed validation!");

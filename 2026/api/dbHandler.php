@@ -79,7 +79,10 @@ class dbHandler
     $dbConfig = $this->readDbConfig();
     $sql = "INSERT INTO " . $dbConfig["datatable"] .
       "(entrykey,
+        eventcode,
+        matchnumber,
         teamnumber,
+        scoutname,
         autonStartPos,
         autonLeave,
         reefzoneAB,
@@ -115,12 +118,12 @@ class dbHandler
         cageClimb,
         startClimb,
         died,
-        matchnumber,
-        eventcode,
-        scoutname,
         comment)
       VALUES(:entrykey,
+        :eventcode,
+        :matchnumber,
         :teamnumber,
+        :scoutname,
         :autonStartPos,
         :autonLeave,
         :reefzoneAB,
@@ -156,9 +159,6 @@ class dbHandler
         :cageClimb,
         :startClimb,
         :died,
-        :matchnumber,
-        :eventcode,
-        :scoutname,
         :comment)";
     $prepared_statement = $this->conn->prepare($sql);
     $prepared_statement->execute($data);
@@ -193,7 +193,11 @@ class dbHandler
   public function readAllFromMatchTable($eventCode)
   {
     $dbConfig = $this->readDbConfig();
-    $sql = "SELECT teamnumber,
+    $sql = "SELECT 
+        eventcode,
+        matchnumber,
+        teamnumber,
+        scoutname,
         autonStartPos,
         autonLeave,
         reefzoneAB,
@@ -229,9 +233,6 @@ class dbHandler
         cageClimb,
         startClimb,
         died,
-        matchnumber,
-        eventcode,
-        scoutname,
         comment from " . $dbConfig["datatable"] . " where eventcode='" . $eventCode . "'";
     $prepared_statement = $this->conn->prepare($sql);
     $prepared_statement->execute();
@@ -243,7 +244,10 @@ class dbHandler
   {
     $dbConfig = $this->readDbConfig();
     $sql = "SELECT 
+        eventcode,
+        matchnumber,
         teamnumber,
+        scoutname,
         autonStartPos,
         autonLeave,
         reefzoneAB,
@@ -279,9 +283,6 @@ class dbHandler
         cageClimb,
         startClimb,
         died,
-        matchnumber,
-        eventcode,
-        scoutname,
         comment from " . $dbConfig["datatable"] . " where
         eventcode='" . $eventCode . "' AND
         teamnumber='" . $teamNumber . "'";
@@ -298,26 +299,28 @@ class dbHandler
       "(entrykey,
         eventcode,
         teamnumber,
-        numbatteries,
-        pitorg,
-        spareparts,
-        computervision,
+        scoutname,
         swerve,
-        proglanguage,
         drivemotors,
-        preparedness)
+        spareparts,
+        proglanguage,
+        computervision,
+        pitorg,
+        preparedness,
+        numbatteries)
       VALUES
         (:entrykey,
         :eventcode,
         :teamnumber,
-        :numbatteries,
-        :pitorg,
-        :spareparts,
-        :computervision,
+        :scoutname,
         :swerve,
-        :proglanguage,
         :drivemotors,
-        :preparedness)";
+        :spareparts,
+        :proglanguage,
+        :computervision,
+        :pitorg,
+        :preparedness,
+        :numbatteries)";
     $prepared_statement = $this->conn->prepare($sql);
     $prepared_statement->execute($data);
   }
@@ -325,15 +328,19 @@ class dbHandler
   public function readAllPitTable($eventCode)
   {
     $dbConfig = $this->readDbConfig();
-    $sql = "SELECT teamnumber,
+    $sql = "SELECT 
+        teamnumber,
+        scoutname,
+        swerve,
+        drivemotors,
+        spareparts,
+        proglanguage,
+        computervision,
         numbatteries,
         pitorg,
-        spareparts,
-        computervision,
-        swerve,
-        proglanguage,
-        drivemotors,
-        preparedness from " . $dbConfig["pittable"] . " where
+        preparedness,
+        numbatteries
+        from " . $dbConfig["pittable"] . " where
         eventcode='" . $eventCode . "'";
     $prepared_statement = $this->conn->prepare($sql);
     $prepared_statement->execute();
@@ -348,8 +355,8 @@ class dbHandler
     $sql = "INSERT INTO " . $dbConfig["strategictable"] .
       "(entrykey,
         eventcode,
-        teamnumber,
         matchnumber,
+        teamnumber,
         scoutname,
         driverability,
         defense_tactic1,
@@ -377,8 +384,8 @@ class dbHandler
         general_comment)
       VALUES(:entrykey,
         :eventcode,
-        :teamnumber,
         :matchnumber,
+        :teamnumber,
         :scoutname,
         :driverability,
         :defense_tactic1,
@@ -411,8 +418,9 @@ class dbHandler
   public function readAllFromStrategicTable($eventCode)
   {
     $dbConfig = $this->readDbConfig();
-    $sql = "SELECT teamnumber,
+    $sql = "SELECT 
         matchnumber,
+        teamnumber,
         scoutname,
         driverability,
         defense_tactic1,
@@ -437,7 +445,8 @@ class dbHandler
         teleopFoul4,
         endgameFoul1,
         problem_comment,
-        general_comment from " . $dbConfig["strategictable"] .
+        general_comment 
+        from " . $dbConfig["strategictable"] .
       " where eventcode='" . $eventCode . "'";
     $prepared_statement = $this->conn->prepare($sql);
     $prepared_statement->execute();
@@ -448,8 +457,9 @@ class dbHandler
   public function readTeamFromStrategicTable($teamNumber, $eventCode)
   {
     $dbConfig = $this->readDbConfig();
-    $sql = "SELECT teamnumber,
+    $sql = "SELECT 
         matchnumber,
+        teamnumber,
         scoutname,
         driverability,
         defense_tactic1,
@@ -474,7 +484,8 @@ class dbHandler
         teleopFoul4,
         endgameFoul1,
         problem_comment,
-        general_comment from " . $dbConfig["strategictable"] .
+        general_comment 
+        from " . $dbConfig["strategictable"] .
       " where eventcode='" . $eventCode .
       "' AND teamnumber='" . $teamNumber . "'";
     $prepared_statement = $this->conn->prepare($sql);
@@ -503,7 +514,10 @@ class dbHandler
     $query = "CREATE TABLE " . $dbConfig["db"] . "." . $dbConfig["datatable"] .
       " (
         entrykey VARCHAR(60) NOT NULL PRIMARY KEY,
+        eventcode VARCHAR(10) NOT NULL,
+        matchnumber VARCHAR(10) NOT NULL,
         teamnumber VARCHAR(6) NOT NULL,
+        scoutname VARCHAR(100) NOT NULL,
         autonStartPos TINYINT UNSIGNED NOT NULL,
         autonLeave TINYINT UNSIGNED NOT NULL,
         reefzoneAB TINYINT UNSIGNED NOT NULL,
@@ -539,9 +553,6 @@ class dbHandler
         cageClimb TINYINT UNSIGNED NOT NULL,
         startClimb TINYINT UNSIGNED NOT NULL,
         died TINYINT UNSIGNED NOT NULL,
-        matchnumber VARCHAR(10) NOT NULL,
-        eventcode VARCHAR(10) NOT NULL,
-        scoutname VARCHAR(100) NOT NULL,
         comment VARCHAR(500) NOT NULL
       )";
     $statement = $conn->prepare($query);
@@ -579,14 +590,15 @@ class dbHandler
         entrykey VARCHAR(60) NOT NULL PRIMARY KEY,
         eventcode VARCHAR(10) NOT NULL,
         teamnumber VARCHAR(6) NOT NULL,
-        numbatteries VARCHAR(8) NOT NULL,
-        pitorg TINYINT UNSIGNED NOT NULL,
-        spareparts TINYINT UNSIGNED NOT NULL,
-        computervision TINYINT UNSIGNED NOT NULL,
+        scoutname VARCHAR(15) NOT NULL,
         swerve TINYINT UNSIGNED NOT NULL,
-        proglanguage VARCHAR(20) NOT NULL,
         drivemotors VARCHAR(20) NOT NULL,
-        preparedness TINYINT UNSIGNED NOT NULL
+        spareparts TINYINT UNSIGNED NOT NULL,
+        proglanguage VARCHAR(20) NOT NULL,
+        computervision TINYINT UNSIGNED NOT NULL,
+        pitorg TINYINT UNSIGNED NOT NULL,
+        preparedness TINYINT UNSIGNED NOT NULL,
+        numbatteries VARCHAR(8) NOT NULL
       )";
     $statement = $conn->prepare($query);
     if (!$statement->execute())
@@ -604,8 +616,8 @@ class dbHandler
       " (
         entrykey VARCHAR(60) NOT NULL PRIMARY KEY,
         eventcode VARCHAR(10) NOT NULL,
-        teamnumber VARCHAR(6) NOT NULL,
         matchnumber VARCHAR(6) NOT NULL,
+        teamnumber VARCHAR(6) NOT NULL,
         scoutname VARCHAR(15) NOT NULL,
         driverability TINYINT UNSIGNED NOT NULL,
         defense_tactic1 TINYINT UNSIGNED NOT NULL,
@@ -725,21 +737,21 @@ class dbHandler
     $dbConfig = $this->readDbConfig();
     $out = array();
     //
-    $out["server"] = $dbConfig["server"];
-    $out["db"] = $dbConfig["db"];
-    $out["tbakey"] = substr($dbConfig["tbakey"], 0, 8) . "********";
-    $out["eventcode"] = $dbConfig["eventcode"];
-    $out["username"] = $dbConfig["username"];
-    $out["dbExists"] = false;
-    $out["serverExists"] = false;
-    $out["matchTableExists"] = false;
-    $out["tbaTableExists"] = false;
-    $out["pitTableExists"] = false;
-    $out["strategicTableExists"] = false;
-    $out["useP"] = $dbConfig["useP"];
-    $out["useQm"] = $dbConfig["useQm"];
-    $out["useSf"] = $dbConfig["useSf"];
-    $out["useF"] = $dbConfig["useF"];
+    $dbStatus["server"] = $dbConfig["server"];
+    $dbStatus["db"] = $dbConfig["db"];
+    $dbStatus["tbakey"] = substr($dbConfig["tbakey"], 0, 8) . "********";
+    $dbStatus["eventcode"] = $dbConfig["eventcode"];
+    $dbStatus["username"] = $dbConfig["username"];
+    $dbStatus["dbExists"] = false;
+    $dbStatus["serverExists"] = false;
+    $dbStatus["matchTableExists"] = false;
+    $dbStatus["tbaTableExists"] = false;
+    $dbStatus["pitTableExists"] = false;
+    $dbStatus["strategicTableExists"] = false;
+    $dbStatus["useP"] = $dbConfig["useP"];
+    $dbStatus["useQm"] = $dbConfig["useQm"];
+    $dbStatus["useSf"] = $dbConfig["useSf"];
+    $dbStatus["useF"] = $dbConfig["useF"];
 
     // Server Connection
     if ($dbConfig["server"] != "")
@@ -749,7 +761,7 @@ class dbHandler
         $dsn = "mysql:host=" . $dbConfig["server"] . ";charset=" . $this->charset;
         $conn = new PDO($dsn, $dbConfig["username"], $dbConfig["password"]);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $out["serverExists"] = true;
+        $dbStatus["serverExists"] = true;
       }
       catch (PDOException $e)
       {
@@ -757,7 +769,7 @@ class dbHandler
       }
 
       // DB Connection
-      if ($out["serverExists"] == true)
+      if ($dbStatus["serverExists"] == true)
       {
         try
         {
@@ -767,7 +779,7 @@ class dbHandler
           $val = $conn->query('SHOW DATABASES LIKE "' . $dbConfig["db"] . '"');
           if ($val->rowCount() != 0)
           {
-            $out["dbExists"] = true;
+            $dbStatus["dbExists"] = true;
           }
           else
           {
@@ -779,67 +791,67 @@ class dbHandler
           error_log("dbHandler: getDBStatus: database connection failed! - " . $e->getMessage());
         }
 
-          // Match data able Connection
-          if ($out["dbExists"] == true)
+        // Match data able Connection
+        if ($dbStatus["dbExists"] == true)
+        {
+          try
           {
-            try
-            {
-              $dsn = "mysql:host=" . $dbConfig["server"] . ";dbname=" . $dbConfig["db"] . ";charset=" . $this->charset;
-              $conn = new PDO($dsn, $dbConfig["username"], $dbConfig["password"]);
-              $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-              $val = $conn->query('SELECT * from ' . $dbConfig["datatable"]);
-              $out["matchTableExists"] = true;
-            }
-            catch (PDOException $e)
-            {
-              error_log("dbHandler: getDBStatus: match data table missing! " . $e->getMessage());
-            }
+            $dsn = "mysql:host=" . $dbConfig["server"] . ";dbname=" . $dbConfig["db"] . ";charset=" . $this->charset;
+            $conn = new PDO($dsn, $dbConfig["username"], $dbConfig["password"]);
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $val = $conn->query('SELECT * from ' . $dbConfig["datatable"]);
+            $dbStatus["matchTableExists"] = true;
+          }
+          catch (PDOException $e)
+          {
+            error_log("dbHandler: getDBStatus: match data table missing! " . $e->getMessage());
+          }
 
-            // Pit table Connection
-            try
-            {
-              $dsn = "mysql:host=" . $dbConfig["server"] . ";dbname=" . $dbConfig["db"] . ";charset=" . $this->charset;
-              $conn = new PDO($dsn, $dbConfig["username"], $dbConfig["password"]);
-              $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-              $val = $conn->query('SELECT * from ' . $dbConfig["pittable"]);
-              $out["pitTableExists"] = true;
-            }
-            catch (PDOException $e)
-            {
-              error_log("dbHandler: getDBStatus: pit data table missing! - " . $e->getMessage());
-            }
+          // Pit table Connection
+          try
+          {
+            $dsn = "mysql:host=" . $dbConfig["server"] . ";dbname=" . $dbConfig["db"] . ";charset=" . $this->charset;
+            $conn = new PDO($dsn, $dbConfig["username"], $dbConfig["password"]);
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $val = $conn->query('SELECT * from ' . $dbConfig["pittable"]);
+            $dbStatus["pitTableExists"] = true;
+          }
+          catch (PDOException $e)
+          {
+            error_log("dbHandler: getDBStatus: pit data table missing! - " . $e->getMessage());
+          }
 
-            // Strategic table Connection
-            try
-            {
-              $dsn = "mysql:host=" . $dbConfig["server"] . ";dbname=" . $dbConfig["db"] . ";charset=" . $this->charset;
-              $conn = new PDO($dsn, $dbConfig["username"], $dbConfig["password"]);
-              $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-              $val = $conn->query('SELECT * from ' . $dbConfig["strategictable"]);
-              $out["strategicTableExists"] = true;
-            }
-            catch (PDOException $e)
-            {
-              error_log("dbHandler: getDBStatus: strategic data table missing! - " . $e->getMessage());
-            }
+          // Strategic table Connection
+          try
+          {
+            $dsn = "mysql:host=" . $dbConfig["server"] . ";dbname=" . $dbConfig["db"] . ";charset=" . $this->charset;
+            $conn = new PDO($dsn, $dbConfig["username"], $dbConfig["password"]);
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $val = $conn->query('SELECT * from ' . $dbConfig["strategictable"]);
+            $dbStatus["strategicTableExists"] = true;
+          }
+          catch (PDOException $e)
+          {
+            error_log("dbHandler: getDBStatus: strategic data table missing! - " . $e->getMessage());
+          }
 
-            // TBA table Connection
-            try
-            {
-              $dsn = "mysql:host=" . $dbConfig["server"] . ";dbname=" . $dbConfig["db"] . ";charset=" . $this->charset;
-              $conn = new PDO($dsn, $dbConfig["username"], $dbConfig["password"]);
-              $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-              $val = $conn->query('SELECT * from ' . $dbConfig["tbatable"]);
-              $out["tbaTableExists"] = true;
-            }
-            catch (PDOException $e)
-            {
-              error_log("dbHandler: getDBStatus: tba table missing! - " . $e->getMessage());
-            }
+          // TBA table Connection
+          try
+          {
+            $dsn = "mysql:host=" . $dbConfig["server"] . ";dbname=" . $dbConfig["db"] . ";charset=" . $this->charset;
+            $conn = new PDO($dsn, $dbConfig["username"], $dbConfig["password"]);
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $val = $conn->query('SELECT * from ' . $dbConfig["tbatable"]);
+            $dbStatus["tbaTableExists"] = true;
+          }
+          catch (PDOException $e)
+          {
+            error_log("dbHandler: getDBStatus: tba table missing! - " . $e->getMessage());
           }
         }
       }
-    return $out;
+    }
+    return $dbStatus;
   }
 }
 

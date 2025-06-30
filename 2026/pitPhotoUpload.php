@@ -229,7 +229,7 @@ require 'inc/header.php';
         }
       }
       else {
-        alert("Please fill out all fields!");
+        alert("Please fill in all fields!");
         const loadButton = document.getElementById("loadingButton");
         loadButton.style.visibility = 'hidden';
       }

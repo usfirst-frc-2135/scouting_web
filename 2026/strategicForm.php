@@ -337,57 +337,57 @@ require 'inc/header.php';
   // Write strategic form data to DB table
   function writeStrategicFormToTable() {
     console.log("==> strategicForm.php: writeStrategicFormToTable()");
-    let dataToUse = {};
+    let dataToSave = {};
 
     let compLevel = document.getElementById("compLevel").value;
     let matchNumber = document.getElementById("matchNumber").value;
     let teamnum = validateTeamNumber(document.getElementById("teamNumber").value, null);
 
     // Clean up teamnumber before writing to table.
-    dataToUse["matchnumber"] = compLevel + matchNumber;
-    dataToUse["teamnumber"] = teamnum;
-    dataToUse["scoutname"] = document.getElementById("scoutName").value;
+    dataToSave["matchnumber"] = compLevel + matchNumber;
+    dataToSave["teamnumber"] = teamnum;
+    dataToSave["scoutname"] = document.getElementById("scoutName").value;
 
     // Process driver ability radio buttons
     const driverAbilityBtns = document.querySelectorAll("input[name = 'driverAbilityGroup']");
-    dataToUse["driverability"] = 0; // default
+    dataToSave["driverability"] = 0; // default
     driverAbilityBtns.forEach(button => {
       if (button.checked) {
         console.log("driverability: " + button.value + " selected!");
-        dataToUse["driverability"] = +button.value;
+        dataToSave["driverability"] = +button.value;
       }
     });
 
     // Checkboxes and comment fields
-    dataToUse["defense_tactic1"] = (document.getElementById("defenseTactic1").checked) ? 1 : 0;
-    dataToUse["defense_tactic2"] = (document.getElementById("defenseTactic2").checked) ? 1 : 0;
-    dataToUse["defense_comment"] = document.getElementById("defenseComment").value;
+    dataToSave["defense_tactic1"] = (document.getElementById("defenseTactic1").checked) ? 1 : 0;
+    dataToSave["defense_tactic2"] = (document.getElementById("defenseTactic2").checked) ? 1 : 0;
+    dataToSave["defense_comment"] = document.getElementById("defenseComment").value;
 
-    dataToUse["against_tactic1"] = (document.getElementById("againstTactic1").checked) ? 1 : 0;
-    dataToUse["against_comment"] = document.getElementById("againstComment").value;
+    dataToSave["against_tactic1"] = (document.getElementById("againstTactic1").checked) ? 1 : 0;
+    dataToSave["against_comment"] = document.getElementById("againstComment").value;
 
-    dataToUse["foul1"] = (document.getElementById("foul1").checked) ? 1 : 0;
-    dataToUse["autonFoul1"] = (document.getElementById("autonFoul1").checked) ? 1 : 0;
-    dataToUse["autonFoul2"] = (document.getElementById("autonFoul2").checked) ? 1 : 0;
-    dataToUse["autonGetCoralFromFloor"] = (document.getElementById("autonGetCoralFromFloor").checked) ? 1 : 0;
-    dataToUse["autonGetCoralFromStation"] = (document.getElementById("autonGetCoralFromStation").checked) ? 1 : 0;
-    dataToUse["autonGetAlgaeFromFloor"] = (document.getElementById("autonGetAlgaeFromFloor").checked) ? 1 : 0;
-    dataToUse["autonGetAlgaeFromReef"] = (document.getElementById("autonGetAlgaeFromReef").checked) ? 1 : 0;
-    dataToUse["teleopFoul1"] = (document.getElementById("teleopFoul1").checked) ? 1 : 0;
-    dataToUse["teleopFoul2"] = (document.getElementById("teleopFoul2").checked) ? 1 : 0;
-    dataToUse["teleopFoul3"] = (document.getElementById("teleopFoul3").checked) ? 1 : 0;
-    dataToUse["teleopFoul4"] = (document.getElementById("teleopFoul4").checked) ? 1 : 0;
-    dataToUse["teleopKnockOffAlgaeFromReef"] = (document.getElementById("teleopKnockOffAlgaeFromReef").checked) ? 1 : 0;
-    dataToUse["teleopAcquireAlgaeFromReef"] = (document.getElementById("teleopAcquireAlgaeFromReef").checked) ? 1 : 0;
-    dataToUse["teleopFloorPickupCoral"] = (document.getElementById("teleopFloorPickupCoral").checked) ? 1 : 0;
-    dataToUse["teleopFloorPickupAlgae"] = (document.getElementById("teleopFloorPickupAlgae").checked) ? 1 : 0;
-    dataToUse["endgameFoul1"] = (document.getElementById("endgameFoul1").checked) ? 1 : 0;
+    dataToSave["foul1"] = (document.getElementById("foul1").checked) ? 1 : 0;
+    dataToSave["autonFoul1"] = (document.getElementById("autonFoul1").checked) ? 1 : 0;
+    dataToSave["autonFoul2"] = (document.getElementById("autonFoul2").checked) ? 1 : 0;
+    dataToSave["autonGetCoralFromFloor"] = (document.getElementById("autonGetCoralFromFloor").checked) ? 1 : 0;
+    dataToSave["autonGetCoralFromStation"] = (document.getElementById("autonGetCoralFromStation").checked) ? 1 : 0;
+    dataToSave["autonGetAlgaeFromFloor"] = (document.getElementById("autonGetAlgaeFromFloor").checked) ? 1 : 0;
+    dataToSave["autonGetAlgaeFromReef"] = (document.getElementById("autonGetAlgaeFromReef").checked) ? 1 : 0;
+    dataToSave["teleopFoul1"] = (document.getElementById("teleopFoul1").checked) ? 1 : 0;
+    dataToSave["teleopFoul2"] = (document.getElementById("teleopFoul2").checked) ? 1 : 0;
+    dataToSave["teleopFoul3"] = (document.getElementById("teleopFoul3").checked) ? 1 : 0;
+    dataToSave["teleopFoul4"] = (document.getElementById("teleopFoul4").checked) ? 1 : 0;
+    dataToSave["teleopKnockOffAlgaeFromReef"] = (document.getElementById("teleopKnockOffAlgaeFromReef").checked) ? 1 : 0;
+    dataToSave["teleopAcquireAlgaeFromReef"] = (document.getElementById("teleopAcquireAlgaeFromReef").checked) ? 1 : 0;
+    dataToSave["teleopFloorPickupCoral"] = (document.getElementById("teleopFloorPickupCoral").checked) ? 1 : 0;
+    dataToSave["teleopFloorPickupAlgae"] = (document.getElementById("teleopFloorPickupAlgae").checked) ? 1 : 0;
+    dataToSave["endgameFoul1"] = (document.getElementById("endgameFoul1").checked) ? 1 : 0;
 
-    dataToUse["problem_comment"] = document.getElementById("problemComment").value;
-    dataToUse["general_comment"] = document.getElementById("generalComment").value;
+    dataToSave["problem_comment"] = document.getElementById("problemComment").value;
+    dataToSave["general_comment"] = document.getElementById("generalComment").value;
 
     $.post("api/dbWriteAPI.php", {
-      writeStrategicData: JSON.stringify(dataToUse)
+      writeStrategicData: JSON.stringify(dataToSave)
     }).done(function (response) {
       console.log("=> writeStrategicData");
       // Because success word may have a newline at the end, don't do a direct compare

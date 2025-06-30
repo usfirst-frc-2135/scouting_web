@@ -419,7 +419,7 @@ require 'inc/header.php';
   // Retrieve the form data and prepare for submission
   function getFormData(auto, teleop) {
     console.log("==> matchForm: getFormData()");
-    let out = {};
+    let dataToSave = {};
     let matchLevel = document.getElementById("compLevel").value;
     let matchNumber = document.getElementById("matchNumber").value;
     if (matchNumber != parseInt(matchNumber)) {
@@ -435,30 +435,30 @@ require 'inc/header.php';
       alert("TTeam number is an integer with optional letter.");
       throw Error("Team number is an integer with optional letter.");
     }
-    out["matchnumber"] = matchLevel + matchNumber;
-    out["teamnumber"] = teamNumber;
-    out["mobility"] = document.getElementById("exitCommunity").checked ? 1 : 0;
-    out["autonconesbottom"] = auto.cones.bottom;
-    out["autonconesmiddle"] = auto.cones.middle;
-    out["autonconestop"] = auto.cones.top;
-    out["autoncubesbottom"] = auto.cubes.bottom;
-    out["autoncubesmiddle"] = auto.cubes.middle;
-    out["autoncubestop"] = auto.cubes.bottom;
-    out["autochargestation"] = document.getElementById("autochargestation").value;
-    out["teleopconesbottom"] = teleop.cones.bottom;
-    out["teleopconesmiddle"] = teleop.cones.middle;
-    out["teleopconestop"] = teleop.cones.top;
-    out["teleopcubesbottom"] = teleop.cubes.bottom;
-    out["teleopcubesmiddle"] = teleop.cubes.middle;
-    out["teleopcubestop"] = teleop.cubes.top;
-    out["cubepickup"] = document.getElementById("pickedupCube").checked ? 1 : 0;
-    out["uprightconepickup"] = document.getElementById("pickedupUprightCone").checked ? 1 : 0;
-    out["tippedconepickup"] = document.getElementById("pickedupTippedCone").checked ? 1 : 0;
-    out["endgamechargestation"] = document.getElementById("endgamechargestation").value;
-    out["died"] = document.getElementById("dead").checked ? 1 : 0;
-    out["scoutname"] = document.getElementById("scoutName").value;
-    out["comment"] = document.getElementById("generalComment").innerText;
-    return out;
+    dataToSave["matchnumber"] = matchLevel + matchNumber;
+    dataToSave["teamnumber"] = teamNumber;
+    dataToSave["scoutname"] = document.getElementById("scoutName").value;
+    dataToSave["mobility"] = document.getElementById("exitCommunity").checked ? 1 : 0;
+    dataToSave["autonconesbottom"] = auto.cones.bottom;
+    dataToSave["autonconesmiddle"] = auto.cones.middle;
+    dataToSave["autonconestop"] = auto.cones.top;
+    dataToSave["autoncubesbottom"] = auto.cubes.bottom;
+    dataToSave["autoncubesmiddle"] = auto.cubes.middle;
+    dataToSave["autoncubestop"] = auto.cubes.bottom;
+    dataToSave["autochargestation"] = document.getElementById("autochargestation").value;
+    dataToSave["teleopconesbottom"] = teleop.cones.bottom;
+    dataToSave["teleopconesmiddle"] = teleop.cones.middle;
+    dataToSave["teleopconestop"] = teleop.cones.top;
+    dataToSave["teleopcubesbottom"] = teleop.cubes.bottom;
+    dataToSave["teleopcubesmiddle"] = teleop.cubes.middle;
+    dataToSave["teleopcubestop"] = teleop.cubes.top;
+    dataToSave["cubepickup"] = document.getElementById("pickedupCube").checked ? 1 : 0;
+    dataToSave["uprightconepickup"] = document.getElementById("pickedupUprightCone").checked ? 1 : 0;
+    dataToSave["tippedconepickup"] = document.getElementById("pickedupTippedCone").checked ? 1 : 0;
+    dataToSave["endgamechargestation"] = document.getElementById("endgamechargestation").value;
+    dataToSave["died"] = document.getElementById("dead").checked ? 1 : 0;
+    dataToSave["comment"] = document.getElementById("generalComment").innerText;
+    return dataToSave;
   }
 
   // Clear all form fields
