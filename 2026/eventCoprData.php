@@ -111,7 +111,8 @@ require 'inc/header.php';
       console.log("=> getCOPRs");
       loadCoprTable(tableId, coprs);
       sortTableByTeam(tableId, teamColumn);
-      // sorttable.makeSortable(document.getElementById(tableId));
+      sorttable.makeSortable(document.getElementById(tableId));
+      document.getElementById(tableId).click(); // This magic fixes the floating column bug
     });
   }
 

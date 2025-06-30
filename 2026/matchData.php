@@ -101,6 +101,9 @@ require 'inc/header.php';
       let dataObj = JSON.parse(eventMatches);
       loadMatchData(tableId, dataObj);
       sortTableByMatchAndTeam(tableId, teamColumn, matchColumn);
+      // script instructions say this is needed, but it breaks table header sorting
+      // sorttable.makeSortable(document.getElementById(tableId));
+      document.getElementById(tableId).click(); // This magic fixes the floating column bug
     });
   }
 

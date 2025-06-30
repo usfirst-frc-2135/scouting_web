@@ -469,8 +469,10 @@ require 'inc/header.php';
         };
         let teamList = addKeysToMatchTable(filteredData);
         addAveragesToTable(tableId, teamList, filteredData);
+        // script instructions say this is needed, but it breaks table header sorting
+        // sorttable.makeSortable(document.getElementById(tableId));
+        document.getElementById(tableId).click(); // This magic fixes the floating column bug
       });
-      return
     });
   }
 
