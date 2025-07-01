@@ -42,7 +42,7 @@ function validateTeamNumber(teamName, teamList) {
       if (teamList != null) {
         // teamNumber not in teamList)
         if (teamList.indexOf(teamNumber) < 0)
-          returnVal = 0;
+          teamNumber = 0;
       }
     }
   }

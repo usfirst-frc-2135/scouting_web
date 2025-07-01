@@ -46,6 +46,8 @@ function compareTeamNumbers(teamA, teamB) {
   // console.log("===> teamA = " + teamA + "; teamB = " + teamB);
 
   // Remove any letters at the last char in teamNum for the sort comparison.
+  let teamNumA;
+  let teamNumB;
   if (isAlpha(teamA.charAt(teamA.length - 1)))
     teamNumA = parseInt(teamA.substring(0, teamA.length - 1));
   else
@@ -55,7 +57,7 @@ function compareTeamNumbers(teamA, teamB) {
   else
     teamNumB = parseInt(teamB.substring(0, teamB.length));
 
-  returnVal = teamNumA - teamNumB;
+  let returnVal = teamNumA - teamNumB;
   if (returnVal === 0)
     returnVal = (parseInt(teamA) - parseInt(teamB));
 

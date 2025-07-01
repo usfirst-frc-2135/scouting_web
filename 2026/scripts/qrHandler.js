@@ -95,13 +95,13 @@ function qrListToKey(dataObj) {
 function addQrScanToTable(tableId, dataObj) {
   let key = qrListToKey(dataObj);
 
-  if (!scannedData.hasOwnProperty(key)) {
+  if (!Object.prototype.hasOwnProperty.call(scannedData, key)) {
     // Modify global variables
     scannedData[key] = dataObj;
     ++scannedCount;
     document.getElementById("submitData").innerText = "Submit Data: " + scannedCount;
     let tbodyRef = document.getElementById(tableId).querySelector('tbody');
-    row = tbodyRef.insertRow();
+    let row = tbodyRef.insertRow();
     row.id = key + "_row";
     row.innerHTML =
       "<td>" + dataObj["eventcode"] + "</td>" +
@@ -119,7 +119,7 @@ function addQrScanToTable(tableId, dataObj) {
 
 // Removes a QR scan row and cleans up
 function removeQrScanEntry(dataKey) {
-  if (scannedData.hasOwnProperty(dataKey)) {
+  if (Object.prototype.hasOwnProperty.call(scannedData, dataKey)) {
     // Modify global variables
     delete scannedData[dataKey];
     --scannedCount;
@@ -173,7 +173,7 @@ function alertSuccessfulScan() {
     window.navigator.vibrate(200); // Chrome throws an "intervention" if window is not clicked first!
   }
   catch (exception) {
-    alert("Vibrate notification request failed!")
+    alert("Vibrate notification request failed! - ")
   }
   document.getElementById("content").classList.add("bg-success");
   setTimeout(function () {
@@ -230,8 +230,9 @@ function submitScannedData() {
   for (const [key, value] of Object.entries(scannedData)) {
     indexedData.push(value);
   }
-  if (indexedData.length == 0)
+  if (indexedData.length == 0) {
     alert("Data NOT Submitted. (no entries found!)");
+  }
   else {
     $.post("api/dbWriteAPI.php", {
       writeTeamMatch: JSON.stringify(indexedData)
