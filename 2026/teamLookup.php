@@ -1217,15 +1217,6 @@ require 'inc/header.php';
   //
   document.addEventListener("DOMContentLoaded", () => {
 
-    // Update the navbar with the event code
-    $.get("api/dbAPI.php", {
-      getEventCode: true
-    }, function (eventCode) {
-      eventCode = eventCode.trim();
-      console.log("=> teamLookup: getEventCode: " + eventCode);
-      document.getElementById("navbarEventCode").innerText = eventCode;
-    });
-
     // Check URL for source team to load
     let initTeamNumber = checkURLForTeamSpec();
     if (initTeamNumber) {

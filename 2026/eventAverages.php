@@ -505,14 +505,12 @@ require 'inc/header.php';
     let tableId = "averagesTable";
     let tbaEventCode;
 
-    // Update the navbar with the event code
+    // Get the event code
     $.get("api/dbAPI.php", {
       getEventCode: true
     }, function (eventCode) {
-      eventCode = eventCode.trim();
-      console.log("=> eventAverages.php: getEventCode: " + eventCode);
-      document.getElementById("navbarEventCode").innerText = eventCode;
-      tbaEventCode = eventCode;
+      tbaEventCode = eventCode.trim();
+      console.log("=> index: getEventCode: " + tbaEventCode + "\n");
     });
 
     buildAveragesTable(tableId); // Retrieve all data

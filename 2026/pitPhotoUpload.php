@@ -137,21 +137,13 @@ require 'inc/header.php';
   //
   document.addEventListener("DOMContentLoaded", () => {
 
-    // Update the navbar with the event code
-    $.get("api/dbAPI.php", {
-      getEventCode: true
-    }, function (eventCode) {
-      eventCode = eventCode.trim();
-      console.log("=> pitPhotoUpload: getEventCode: " + eventCode);
-      document.getElementById("navbarEventCode").innerText = eventCode;
-    });
-
     // Check URL for source team to load
     let initTeamNumber = checkURLForTeamSpec();
     if (initTeamNumber) {
       document.getElementById("teamNumber").value = initTeamNumber;
     }
 
+    // Confirm the file selction selection is supported
     if (!window.FileReader) {
       alert("This browser does not support 'FileReader'");
       console.warn("This browser does not support 'FileReader'");

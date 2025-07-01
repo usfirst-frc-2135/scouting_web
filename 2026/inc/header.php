@@ -116,4 +116,28 @@
         items[i].classList.add("text-secondary");
       }
     }
+
+    // Update navbar with the event code if available
+    document.addEventListener("DOMContentLoaded", () => {
+      // Update the navbar with the event code
+      $.post("api/dbAPI.php", {
+        getDBStatus: true
+      }, function (dbStatus) {
+        console.log("=> getDBStatus");
+        dbStatus = JSON.parse(dbStatus);
+        if (dbStatus["server"] !== "") {
+          $.get("api/dbAPI.php", {
+            getEventCode: true
+          }, function (eventCode) {
+            eventCode = eventCode.trim();
+            console.log("=> index: getEventCode: " + eventCode + "\n");
+            document.getElementById("navbarEventCode").innerText = eventCode;
+          });
+        }
+        else {
+          console.warn("DB server undefined -- cannot retrieve event code!")
+        }
+      });
+    });
+
   </script>

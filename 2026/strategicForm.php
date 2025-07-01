@@ -406,15 +406,6 @@ require 'inc/header.php';
   //
   document.addEventListener("DOMContentLoaded", () => {
 
-    // Update the navbar with the event code
-    $.get("api/dbAPI.php", {
-      getEventCode: true
-    }, function (eventCode) {
-      eventCode = eventCode.trim();
-      console.log("=> strategicForm: getEventCode: " + eventCode);
-      document.getElementById("navbarEventCode").innerText = eventCode;
-    });
-
     // Submit the strategic form data
     document.getElementById("submitButton").addEventListener('click', function () {
       // Should be:

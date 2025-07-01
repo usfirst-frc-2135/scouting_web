@@ -50,16 +50,12 @@ require 'inc/header.php';
 
 <script>
 
-  // Update the navbar with the event code
+  /////////////////////////////////////////////////////////////////////////////
+  //
+  // Process the generated html
+  //
   document.addEventListener("DOMContentLoaded", () => {
-
-    $.get("api/dbAPI.php", {
-      getEventCode: true
-    }, function (eventCode) {
-      eventCode = eventCode.trim();
-      console.log("=> matchQrScanner: getEventCode: " + eventCode);
-      document.getElementById("navbarEventCode").innerText = eventCode;
-    });
+    // No work to be done?
   });
 
 </script>

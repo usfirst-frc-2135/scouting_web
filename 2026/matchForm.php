@@ -524,15 +524,6 @@ require 'inc/header.php';
       cubes: { bottom: 0, middle: 0, top: 0 }
     };
 
-    // Update the navbar with the event code
-    $.get("api/dbAPI.php", {
-      getEventCode: true
-    }, function (eventCode) {
-      eventCode = eventCode.trim();
-      console.log("=> matchForm: getEventCode: " + eventCode);
-      document.getElementById("navbarEventCode").innerText = eventCode;
-    });
-
     attachFormButtons(auto, teleop);
 
     // Submit the match data form 

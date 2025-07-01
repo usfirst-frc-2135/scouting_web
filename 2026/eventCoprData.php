@@ -124,15 +124,6 @@ require 'inc/header.php';
 
     const tableId = "coprTable";
 
-    // Update the navbar with the event code
-    $.get("api/dbAPI.php", {
-      getEventCode: true
-    }, function (eventCode) {
-      eventCode = eventCode.trim();
-      console.log("=> eventCoprData: getEventCode: " + eventCode);
-      document.getElementById("navbarEventCode").innerText = eventCode;
-    });
-
     buildTbaCoprTable(tableId);
 
     // Create frozen table panes and keep the panes updated

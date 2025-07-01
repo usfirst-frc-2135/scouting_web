@@ -186,8 +186,7 @@ require 'inc/header.php';
   //
   document.addEventListener("DOMContentLoaded", () => {
 
-    // Update the navbar with the event code
-    // Update the database statuses
+    // Update the database status badges
     $.post("api/dbAPI.php", {
       getDBStatus: true
     }, function (dbStatus) {
@@ -195,16 +194,6 @@ require 'inc/header.php';
       dbStatus = JSON.parse(dbStatus);
       if (dbStatus["server"] !== "") {
         updateStatusValues(dbStatus);
-        $.get("api/dbAPI.php", {
-          getEventCode: true
-        }, function (eventCode) {
-          eventCode = eventCode.trim();
-          console.log("=> index: getEventCode: " + eventCode + "\n");
-          document.getElementById("navbarEventCode").innerText = eventCode;
-        });
-      }
-      else {
-        console.warn("DB server undefined -- cannot retrieve event code!")
       }
     });
 
@@ -291,7 +280,7 @@ require 'inc/header.php';
       }, function (statusValues) {
         console.log("=> createDB");
         updateStatusValues(JSON.parse(statusValues));
-        alert("While this can create a new database, it cannot add permissions for this username! This must be done using phpMyAdmin.");
+        alert("While this might create a new database, it cannot add permissions for this username! This must be done using phpMyAdmin.");
       });
     });
 

@@ -87,14 +87,6 @@ require 'inc/header.php';
 
     const tableId = "psTable";
 
-    $.get("api/dbAPI.php", {
-      getEventCode: true
-    }, function (eventCode) {
-      eventCode = eventCode.trim();
-      console.log("=> pitStatus: getEventCode: " + eventCode);
-      document.getElementById("navbarEventCode").innerText = eventCode;
-    });
-
     // Get the list of teams and add the team names 
     $.get("api/tbaAPI.php", {
       getEventTeamNames: true

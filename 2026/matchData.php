@@ -115,15 +115,6 @@ require 'inc/header.php';
 
     const tableId = "matchDataTable";
 
-    // Update the navbar with the event code
-    $.get("api/dbAPI.php", {
-      getEventCode: true
-    }, function (eventCode) {
-      eventCode = eventCode.trim();
-      console.log("=> matchData: getEventCode: " + eventCode);
-      document.getElementById("navbarEventCode").innerText = eventCode;
-    });
-
     buildMatchDataTable(tableId);
 
     // Create frozen table panes and keep the panes updated

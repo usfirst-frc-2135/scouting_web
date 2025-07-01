@@ -82,15 +82,6 @@ require 'inc/header.php';
 
     const tableId = "stratSchedTable";
 
-    // Update the navbar with the event code
-    $.get("api/dbAPI.php", {
-      getEventCode: true
-    }, function (eventCode) {
-      eventCode = eventCode.trim();
-      console.log("=> strategicSchedule: getEventCode: " + eventCode);
-      document.getElementById("navbarEventCode").innerText = eventCode;
-    });
-
     buildScheduleTable(tableId);
   });
 </script>

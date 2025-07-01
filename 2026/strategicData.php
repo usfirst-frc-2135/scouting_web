@@ -159,15 +159,6 @@ require 'inc/header.php';
 
     let tableId = "strategicTable";
 
-    // Update the navbar with the event code
-    $.get("api/dbAPI.php", {
-      getEventCode: true
-    }, function (eventCode) {
-      eventCode = eventCode.trim();
-      console.log("=> stategicData: getEventCode: " + eventCode);
-      document.getElementById("navbarEventCode").innerText = eventCode;
-    });
-
     buildStrategicDataTable(tableId);
 
     // Create frozen table panes and keep the panes updated
