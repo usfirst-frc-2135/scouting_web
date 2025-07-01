@@ -877,8 +877,9 @@ require 'inc/header.php';
           getEventMatches: true
         }).done(function (eventMatches) {
           console.log("=> getEventMatches");
-          if (eventMatches === null)
+          if (eventMatches === null) {
             alert("Can't load matchlist from TBA; check if TBA Key was set in db_config");
+          }
           else {
             let ourMatches = {};
             jsonMatchData = JSON.parse(eventMatches)["response"];

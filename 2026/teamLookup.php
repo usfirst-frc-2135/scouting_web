@@ -507,9 +507,6 @@ require 'inc/header.php';
   let teleopChart;
   let endgameChart;
 
-  let frozenTableMatches = null;
-  let frozenTableStrategy = null;
-
   // Rounding helper function 
   function rnd(val) {
     return Math.round((val + Number.EPSILON) * 100) / 100;
