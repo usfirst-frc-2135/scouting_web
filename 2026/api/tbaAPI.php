@@ -7,20 +7,17 @@ include("tbaHandler.php");
 
 $db = new dbHandler();
 $dbConfig = $db->readDbConfig();
-$tba = new tbaHandler($dbConfig["tbakey"], $dbConfig["tbatable"], $db->connectToDB());
-
 $eventCode = $dbConfig["eventcode"];
+
 if (isset($_GET["eventCode"]))
 {
   // Used to over ride the written event code
   $eventCode = $_GET["eventCode"];
 }
 
-if (isset($_GET["getEventCode"]))
-{
-  echo ($dbConfig["eventcode"]);
-}
-else if (isset($_GET["getTeamInfo"]))
+$tba = new tbaHandler($dbConfig["tbakey"], $dbConfig["tbatable"], $db->connectToDB());
+
+if (isset($_GET["getTeamInfo"]))
 {
   echo (json_encode($tba->getTeamInfo($_GET["getTeamInfo"])));
 }

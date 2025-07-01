@@ -87,7 +87,7 @@ require 'inc/header.php';
 
     const tableId = "psTable";
 
-    $.get("api/tbaAPI.php", {
+    $.get("api/dbAPI.php", {
       getEventCode: true
     }, function (eventCode) {
       eventCode = eventCode.trim();
@@ -97,7 +97,7 @@ require 'inc/header.php';
 
     // Get the list of teams and add the team names 
     $.get("api/tbaAPI.php", {
-      getEventTeamNames: 1
+      getEventTeamNames: true
     }).done(function (eventTeamNames) {
       console.log("=> getEventTeamNames");
       let teamList = [];
@@ -121,7 +121,7 @@ require 'inc/header.php';
           jsonImageList = JSON.parse(teamImageList);
           // Get all the teams pit scouted
           $.get("api/dbReadAPI.php", {
-            getAllPitData: 1
+            getAllPitData: true
           }).done(function (pitDataList) {
             console.log("=> getAllPitData");
             jsonPitList = JSON.parse(pitDataList);

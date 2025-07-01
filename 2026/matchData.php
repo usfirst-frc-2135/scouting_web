@@ -95,7 +95,7 @@ require 'inc/header.php';
   // Acquire match data and build the page
   function buildMatchDataTable(tableId, frozenId) {
     $.get("api/dbReadAPI.php", {
-      getEventMatches: 1
+      getEventMatches: true
     }).done(function (eventMatches) {
       console.log("=> getEventMatches");
       let dataObj = JSON.parse(eventMatches);
@@ -116,7 +116,7 @@ require 'inc/header.php';
     const tableId = "matchDataTable";
 
     // Update the navbar with the event code
-    $.get("api/tbaAPI.php", {
+    $.get("api/dbAPI.php", {
       getEventCode: true
     }, function (eventCode) {
       eventCode = eventCode.trim();

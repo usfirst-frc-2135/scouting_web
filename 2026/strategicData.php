@@ -139,7 +139,7 @@ require 'inc/header.php';
   function buildStrategicDataTable(tableId) {
     console.log("==> strategicData: buildStrategicDataTable()");
     $.get("api/dbReadAPI.php", {
-      getAllStrategicData: 1
+      getAllStrategicData: true
     }).done(function (strategicData) {
       console.log("=> getAllStrategicData");
       let dataObj = JSON.parse(strategicData);
@@ -160,7 +160,7 @@ require 'inc/header.php';
     let tableId = "strategicTable";
 
     // Update the navbar with the event code
-    $.get("api/tbaAPI.php", {
+    $.get("api/dbAPI.php", {
       getEventCode: true
     }, function (eventCode) {
       eventCode = eventCode.trim();

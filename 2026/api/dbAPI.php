@@ -4,37 +4,45 @@
 */
 include "dbHandler.php";
 
-if (isset($_POST["getDBStatus"]))
+$db = new dbHandler();
+$dbConfig = $db->readDbConfig();
+$eventCode = $dbConfig["eventcode"];
+
+if (isset($_GET["eventCode"]))
 {
-  $db = new dbHandler();
+  // Used to over ride the written event code
+  $eventCode = $_GET["eventCode"];
+}
+
+if (isset($_GET["getEventCode"]))
+{
+  echo ($dbConfig["eventcode"]);
+}
+else if (isset($_POST["getDBStatus"]))
+{
   $stat = $db->getDBStatus();
   echo json_encode($stat);
 }
 else if (isset($_POST["writeConfig"]))
 {
-  $db = new dbHandler();
   $db->writeDbConfig(json_decode($_POST["writeConfig"]));
   $stat = $db->getDBStatus();
   echo json_encode($stat);
 }
 else if (isset($_POST["filterConfig"]))
 {
-  $db = new dbHandler();
   $db->writeDbConfig(json_decode($_POST["filterConfig"]));
   $stat = $db->getDBStatus();
   echo json_encode($stat);
 }
 else if (isset($_POST["createDB"]))
 {
-  $db = new dbHandler();
   $db->createDB();
   $stat = $db->getDBStatus();
   echo json_encode($stat);
 }
 else if (isset($_POST["createTable"]))
 {
-  $db = new dbHandler();
-
   try
   {
     $db->createMatchTable();

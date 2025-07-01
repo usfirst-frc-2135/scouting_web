@@ -106,7 +106,7 @@ require 'inc/header.php';
   function buildTbaCoprTable(tableId) {
     //output: gets the COPR data from TBA
     $.get("api/tbaAPI.php", {
-      getCOPRs: 1
+      getCOPRs: true
     }).done(function (coprs) {
       console.log("=> getCOPRs");
       loadCoprTable(tableId, coprs);
@@ -125,7 +125,7 @@ require 'inc/header.php';
     const tableId = "coprTable";
 
     // Update the navbar with the event code
-    $.get("api/tbaAPI.php", {
+    $.get("api/dbAPI.php", {
       getEventCode: true
     }, function (eventCode) {
       eventCode = eventCode.trim();

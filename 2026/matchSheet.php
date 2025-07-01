@@ -853,7 +853,7 @@ require 'inc/header.php';
     console.log("==> matchSheet: loadMatchData()");
     if (!_allMatchData) {
       $.get("api/dbReadAPI.php", {
-        getEventMatches: 1
+        getEventMatches: true
       }).done(function (eventMatches) {
         console.log("=> getEventMatches");
         eventMatches = JSON.parse(eventMatches);
@@ -874,7 +874,7 @@ require 'inc/header.php';
     if (!bUsingCustom) {
       if (!localMatchList) {
         $.get("api/tbaAPI.php", {
-          getEventMatches: 1
+          getEventMatches: true
         }).done(function (eventMatches) {
           console.log("=> getEventMatches");
           if (eventMatches === null)
@@ -989,7 +989,7 @@ require 'inc/header.php';
   document.addEventListener("DOMContentLoaded", () => {
 
     // Update the navbar with the event code
-    $.get("api/tbaAPI.php", {
+    $.get("api/dbAPI.php", {
       getEventCode: true
     }, function (eventCode) {
       eventCode = eventCode.trim();

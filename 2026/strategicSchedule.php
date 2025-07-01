@@ -64,7 +64,7 @@ require 'inc/header.php';
   function buildScheduleTable(tableId) {
     console.log("==> strategicSchedule: buildScheduleTable()");
     $.get("api/tbaAPI.php", {
-      getStrategicMatches: 1
+      getStrategicMatches: true
     }).done(function (strategicData) {
       console.log(strategicData);
       console.log("=> getStrategicMatches");
@@ -83,7 +83,7 @@ require 'inc/header.php';
     const tableId = "stratSchedTable";
 
     // Update the navbar with the event code
-    $.get("api/tbaAPI.php", {
+    $.get("api/dbAPI.php", {
       getEventCode: true
     }, function (eventCode) {
       eventCode = eventCode.trim();

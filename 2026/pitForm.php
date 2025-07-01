@@ -382,7 +382,7 @@ require 'inc/header.php';
   document.addEventListener("DOMContentLoaded", () => {
 
     // Update the navbar with the event code
-    $.get("api/tbaAPI.php", {
+    $.get("api/dbAPI.php", {
       getEventCode: true
     }, function (eventCode) {
       eventCode = eventCode.trim();

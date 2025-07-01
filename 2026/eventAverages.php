@@ -458,7 +458,7 @@ require 'inc/header.php';
   function buildAveragesTable(tableId) {
     console.log("==> eventAverages: buildAveragesTable()");
     $.get("api/dbReadAPI.php", {
-      getEventMatches: 1
+      getEventMatches: true
     }).done(function (eventMatches) {
       console.log("=> getEventMatches:");
       _jsonMatchData = JSON.parse(eventMatches);
@@ -480,14 +480,14 @@ require 'inc/header.php';
   function downloadCSVFile(eventCode) {
     console.log("==> eventAverages: downloadCSVFile()");
     $.get("api/dbReadAPI.php", {
-      getEventMatches: 1
+      getEventMatches: true
     }).done(function (eventMatches) {
       console.log("=> getEventMatches:");
       let jsonEventMatches = JSON.parse(eventMatches);
 
       // Get OPR data from TBA
       $.get("api/tbaAPI.php", {
-        getCOPRs: 1
+        getCOPRs: true
       }).done(function (getCoprs) {
         console.log("=> getCOPRs");
         let jsonCoprData = JSON.parse(getCoprs)["data"];
@@ -506,7 +506,7 @@ require 'inc/header.php';
     let tbaEventCode;
 
     // Update the navbar with the event code
-    $.get("api/tbaAPI.php", {
+    $.get("api/dbAPI.php", {
       getEventCode: true
     }, function (eventCode) {
       eventCode = eventCode.trim();
