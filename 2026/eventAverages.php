@@ -116,8 +116,8 @@ require 'inc/header.php';
             <tr>
               <th colspan="1" style="background-color:transparent"></th>
               <th colspan="2" style="background-color:#83b4ff">Points</th>
-              <th colspan="2" style="background-color:transparent">Coral</th>
-              <th colspan="2" style="background-color:#83b4ff">Algae</th>
+              <th colspan="2" style="background-color:transparent">Coral Pts</th>
+              <th colspan="2" style="background-color:#83b4ff">Algae Pts</th>
               <th colspan="2" style="background-color:transparent">Points</th>
               <th colspan="2" style="background-color:#83b4ff">Coral Pts</th>
               <th colspan="2" style="background-color:transparent">Algae Pts</th>
