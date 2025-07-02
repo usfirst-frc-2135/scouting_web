@@ -224,7 +224,6 @@ require 'inc/header.php';
 <script>
 
   let _jsonMatchData = null;
-  // let _frozenTable = null;
 
   // Round to 2 decimal places
   function rnd(val) {
