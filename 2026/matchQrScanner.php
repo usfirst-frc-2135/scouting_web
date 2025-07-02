@@ -55,7 +55,9 @@ require 'inc/header.php';
   // Process the generated html
   //
   document.addEventListener("DOMContentLoaded", () => {
-    // No work to be done?
+
+    // All work is done in the QR handler
+
   });
 
 </script>

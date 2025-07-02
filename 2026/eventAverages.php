@@ -433,7 +433,7 @@ require 'inc/header.php';
   }
 
   // Merge data into CSV file and write it
-  function createCSVFile(eventCode, eventMatches, coprs) {
+  function createCSVFile(csvName, eventMatches, coprs) {
     console.log("==> eventAverages: createCSVFile()");
     let mdp = new matchDataProcessor(eventMatches);
     let csvStr = "Team,Pit Location,OPR,Total Coral Avg,Total Coral Max,Total Algae Avg,Total Algae Max,Auto Pts Avg,Auto Pts Max,Tel Pts Avg,Tel Pts Max,End Pts Avg,End Pts Max,Total Pts Avg,Total Pts Max,Auto Coral Avg,Auto Coral Max,Auto L1 Avg,Auto L1 Max,Auto L2 Avg,Auto L2 Max,Auto L3 Avg,Auto L3 Max,Auto L4 Avg,Auto L4 Max,Auto Algae Avg,Auto Algae Max,Auto Net Avg,Auto Net Max,Auto Proc Avg,Auto Proc Max,Tel Coral Avg,Tel Coral Max,Tel L1 Avg,Tel L1 Max,Tel L2 Avg,Tel L2 Max,Tel L3 Avg,Tel L3 Max,Tel L4 Avg,Tel L4 Max,Tel Coral Acc,Tel Algae Avg,Tel Algae Max,Tel Net Avg,Tel Net Max,Tel Proc Avg,Tel Proc Max,Tel Algae Acc,End N/A,End Park,End Fall,End Shal,End Deep, Total Died, Note\n";
@@ -444,7 +444,7 @@ require 'inc/header.php';
       }
 
       let hiddenElement = document.createElement('a');
-      let filename = eventCode.trim() + ".csv";
+      let filename = csvName.trim() + ".csv";
       console.log("eventAverages: createCSVFile() CSV filename: " + filename);
       hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csvStr);
       hiddenElement.target = '_blank';
@@ -476,7 +476,7 @@ require 'inc/header.php';
   }
 
   // Retrieve match data and OPRs data and write out CSV file
-  function downloadCSVFile(eventCode) {
+  function downloadCSVFile(csvName) {
     console.log("==> eventAverages: downloadCSVFile()");
     $.get("api/dbReadAPI.php", {
       getEventMatches: true
@@ -490,7 +490,7 @@ require 'inc/header.php';
       }).done(function (getCoprs) {
         console.log("=> getCOPRs");
         let jsonCoprData = JSON.parse(getCoprs)["data"];
-        createCSVFile(eventCode, jsonEventMatches, jsonCoprData);
+        createCSVFile(csvName, jsonEventMatches, jsonCoprData);
       });
     });
   }
@@ -502,15 +502,7 @@ require 'inc/header.php';
   document.addEventListener("DOMContentLoaded", () => {
 
     let tableId = "averagesTable";
-    let tbaEventCode;
-
-    // Get the event code
-    $.get("api/dbAPI.php", {
-      getEventCode: true
-    }, function (eventCode) {
-      tbaEventCode = eventCode.trim();
-      console.log("=> index: getEventCode: " + tbaEventCode + "\n");
-    });
+    let csvFileName = "eventAverages";
 
     buildAveragesTable(tableId); // Retrieve all data
 
@@ -529,7 +521,7 @@ require 'inc/header.php';
 
     // Write out picklist CSV file to client's download dir.
     document.getElementById("downloadCsvFile").addEventListener('click', function () {
-      downloadCSVFile(tbaEventCode);
+      downloadCSVFile(csvFileName);
     });
   });
 

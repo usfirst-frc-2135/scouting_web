@@ -287,8 +287,8 @@ require 'inc/header.php';
 <script>
 
   // Create button event linkages
-  function attachFormButtons(auto, teleop) {
-    console.log("=> matchForm: attachFormButtons()");
+  function attachButtonListeners(auto, teleop) {
+    console.log("=> matchForm: attachButtonListeners()");
 
     // Auto cones
     document.getElementById("autoConesBottomPlus").addEventListener('click', function () {
@@ -524,7 +524,7 @@ require 'inc/header.php';
       cubes: { bottom: 0, middle: 0, top: 0 }
     };
 
-    attachFormButtons(auto, teleop);
+    attachButtonListeners(auto, teleop);
 
     // Submit the match data form 
     document.getElementById("submitForm").addEventListener('click', function () {
