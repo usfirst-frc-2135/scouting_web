@@ -286,7 +286,100 @@ require 'inc/header.php';
 
 <script>
 
-  // Create button event linkages
+  // Clear all form fields
+  function clearMatchForm() {
+    console.log("==> matchForm: clearMatchForm()");
+    document.getElementById("matchNumber").value = "";
+    auto.cones.bottom = 0;
+    auto.cones.middle = 0;
+    auto.cones.top = 0;
+    auto.cubes.bottom = 0;
+    auto.cubes.middle = 0;
+    auto.cubes.top = 0;
+    teleop.cones.bottom = 0;
+    teleop.cones.middle = 0;
+    teleop.cones.top = 0;
+    teleop.cubes.bottom = 0;
+    teleop.cubes.middle = 0;
+    teleop.cubes.top = 0;
+    document.getElementById("autoConesBottom").innerText = "Cones Bottom: " + auto.cones.bottom;
+    document.getElementById("autoConesMiddle").innerText = "Cones Middle: " + auto.cones.middle;
+    document.getElementById("autoConesTop").innerText = "Cones Top: " + auto.cones.top;
+    document.getElementById("autoCubesBottom").innerText = "Cubes Bottom: " + auto.cubes.bottom;
+    document.getElementById("autoCubesMiddle").innerText = "Cubes Middle: " + auto.cubes.middle;
+    document.getElementById("autoCubesTop").innerText = "Cubes Top: " + auto.cubes.top;
+    document.getElementById("teleopConesBottom").innerText = "Cones Bottom: " + teleop.cones.bottom;
+    document.getElementById("teleopConesMiddle").innerText = "Cones Middle: " + teleop.cones.middle;
+    document.getElementById("teleopConesTop").innerText = "Cones Top: " + teleop.cones.top;
+    document.getElementById("teleopCubesBottom").innerText = "Cubes Bottom: " + teleop.cubes.bottom;
+    document.getElementById("teleopCubesMiddle").innerText = "Cubes Middle: " + teleop.cubes.middle;
+    document.getElementById("teleopCubesTop").innerText = "Cubes Top: " + teleop.cubes.top;
+    document.getElementById("teamNumber").value = "";
+    document.getElementById("generalComment").innerText = "";
+  }
+
+  // Retrieve the form data and prepare for submission
+  function getMatchFormData(auto, teleop) {
+    console.log("==> matchForm: getMatchFormData()");
+    let dataToSave = {};
+    let matchLevel = document.getElementById("compLevel").value;
+    let matchNumber = document.getElementById("matchNumber").value;
+    if (matchNumber != parseInt(matchNumber)) {
+      alert("Match number must be integer.");
+      throw Error("Match number must be integer.");
+    }
+    let teamNumber = document.getElementById("teamNumber").value;
+    if (teamNumber === "") {
+      alert("Team number must not be empty.");
+      throw Error("Team number must not be empty.");
+    }
+    if (validateTeamNumber(teamNumber) <= 0) {
+      alert("TTeam number is an integer with optional letter.");
+      throw Error("Team number is an integer with optional letter.");
+    }
+    dataToSave["matchnumber"] = matchLevel + matchNumber;
+    dataToSave["teamnumber"] = teamNumber;
+    dataToSave["scoutname"] = document.getElementById("scoutName").value;
+    dataToSave["mobility"] = document.getElementById("exitCommunity").checked ? 1 : 0;
+    dataToSave["autonconesbottom"] = auto.cones.bottom;
+    dataToSave["autonconesmiddle"] = auto.cones.middle;
+    dataToSave["autonconestop"] = auto.cones.top;
+    dataToSave["autoncubesbottom"] = auto.cubes.bottom;
+    dataToSave["autoncubesmiddle"] = auto.cubes.middle;
+    dataToSave["autoncubestop"] = auto.cubes.bottom;
+    dataToSave["autochargestation"] = document.getElementById("autochargestation").value;
+    dataToSave["teleopconesbottom"] = teleop.cones.bottom;
+    dataToSave["teleopconesmiddle"] = teleop.cones.middle;
+    dataToSave["teleopconestop"] = teleop.cones.top;
+    dataToSave["teleopcubesbottom"] = teleop.cubes.bottom;
+    dataToSave["teleopcubesmiddle"] = teleop.cubes.middle;
+    dataToSave["teleopcubestop"] = teleop.cubes.top;
+    dataToSave["cubepickup"] = document.getElementById("pickedupCube").checked ? 1 : 0;
+    dataToSave["uprightconepickup"] = document.getElementById("pickedupUprightCone").checked ? 1 : 0;
+    dataToSave["tippedconepickup"] = document.getElementById("pickedupTippedCone").checked ? 1 : 0;
+    dataToSave["endgamechargestation"] = document.getElementById("endgamechargestation").value;
+    dataToSave["died"] = document.getElementById("dead").checked ? 1 : 0;
+    dataToSave["comment"] = document.getElementById("generalComment").innerText;
+    return dataToSave;
+  }
+
+  // Write the match data form to the DB table
+  function submitMatchFormData(formData) {
+    console.log("==> matchForm: submitMatchFormData()");
+    $.post("api/dbWriteAPI.php", {
+      writeSingleData: JSON.stringify(formData)
+    }, function (response) {
+      // Because success word may have a newline at the end, don't do a direct compare
+      if (response.indexOf('success') > -1) {
+        alert("Success in submitting Match data! Clearing Data.");
+        clearMatchForm();
+      } else {
+        alert("Failure in submitting Match Form! Please Check network connectivity.");
+      }
+    });
+  }
+
+  // Create button event listeners to process form input
   function attachButtonListeners(auto, teleop) {
     console.log("=> matchForm: attachButtonListeners()");
 
@@ -416,99 +509,6 @@ require 'inc/header.php';
 
   }
 
-  // Retrieve the form data and prepare for submission
-  function getFormData(auto, teleop) {
-    console.log("==> matchForm: getFormData()");
-    let dataToSave = {};
-    let matchLevel = document.getElementById("compLevel").value;
-    let matchNumber = document.getElementById("matchNumber").value;
-    if (matchNumber != parseInt(matchNumber)) {
-      alert("Match number must be integer.");
-      throw Error("Match number must be integer.");
-    }
-    let teamNumber = document.getElementById("teamNumber").value;
-    if (teamNumber === "") {
-      alert("Team number must not be empty.");
-      throw Error("Team number must not be empty.");
-    }
-    if (validateTeamNumber(teamNumber) <= 0) {
-      alert("TTeam number is an integer with optional letter.");
-      throw Error("Team number is an integer with optional letter.");
-    }
-    dataToSave["matchnumber"] = matchLevel + matchNumber;
-    dataToSave["teamnumber"] = teamNumber;
-    dataToSave["scoutname"] = document.getElementById("scoutName").value;
-    dataToSave["mobility"] = document.getElementById("exitCommunity").checked ? 1 : 0;
-    dataToSave["autonconesbottom"] = auto.cones.bottom;
-    dataToSave["autonconesmiddle"] = auto.cones.middle;
-    dataToSave["autonconestop"] = auto.cones.top;
-    dataToSave["autoncubesbottom"] = auto.cubes.bottom;
-    dataToSave["autoncubesmiddle"] = auto.cubes.middle;
-    dataToSave["autoncubestop"] = auto.cubes.bottom;
-    dataToSave["autochargestation"] = document.getElementById("autochargestation").value;
-    dataToSave["teleopconesbottom"] = teleop.cones.bottom;
-    dataToSave["teleopconesmiddle"] = teleop.cones.middle;
-    dataToSave["teleopconestop"] = teleop.cones.top;
-    dataToSave["teleopcubesbottom"] = teleop.cubes.bottom;
-    dataToSave["teleopcubesmiddle"] = teleop.cubes.middle;
-    dataToSave["teleopcubestop"] = teleop.cubes.top;
-    dataToSave["cubepickup"] = document.getElementById("pickedupCube").checked ? 1 : 0;
-    dataToSave["uprightconepickup"] = document.getElementById("pickedupUprightCone").checked ? 1 : 0;
-    dataToSave["tippedconepickup"] = document.getElementById("pickedupTippedCone").checked ? 1 : 0;
-    dataToSave["endgamechargestation"] = document.getElementById("endgamechargestation").value;
-    dataToSave["died"] = document.getElementById("dead").checked ? 1 : 0;
-    dataToSave["comment"] = document.getElementById("generalComment").innerText;
-    return dataToSave;
-  }
-
-  // Clear all form fields
-  function clearFormData() {
-    console.log("==> matchForm: clearFormData()");
-    document.getElementById("matchNumber").value = "";
-    auto.cones.bottom = 0;
-    auto.cones.middle = 0;
-    auto.cones.top = 0;
-    auto.cubes.bottom = 0;
-    auto.cubes.middle = 0;
-    auto.cubes.top = 0;
-    teleop.cones.bottom = 0;
-    teleop.cones.middle = 0;
-    teleop.cones.top = 0;
-    teleop.cubes.bottom = 0;
-    teleop.cubes.middle = 0;
-    teleop.cubes.top = 0;
-    document.getElementById("autoConesBottom").innerText = "Cones Bottom: " + auto.cones.bottom;
-    document.getElementById("autoConesMiddle").innerText = "Cones Middle: " + auto.cones.middle;
-    document.getElementById("autoConesTop").innerText = "Cones Top: " + auto.cones.top;
-    document.getElementById("autoCubesBottom").innerText = "Cubes Bottom: " + auto.cubes.bottom;
-    document.getElementById("autoCubesMiddle").innerText = "Cubes Middle: " + auto.cubes.middle;
-    document.getElementById("autoCubesTop").innerText = "Cubes Top: " + auto.cubes.top;
-    document.getElementById("teleopConesBottom").innerText = "Cones Bottom: " + teleop.cones.bottom;
-    document.getElementById("teleopConesMiddle").innerText = "Cones Middle: " + teleop.cones.middle;
-    document.getElementById("teleopConesTop").innerText = "Cones Top: " + teleop.cones.top;
-    document.getElementById("teleopCubesBottom").innerText = "Cubes Bottom: " + teleop.cubes.bottom;
-    document.getElementById("teleopCubesMiddle").innerText = "Cubes Middle: " + teleop.cubes.middle;
-    document.getElementById("teleopCubesTop").innerText = "Cubes Top: " + teleop.cubes.top;
-    document.getElementById("teamNumber").value = "";
-    document.getElementById("generalComment").innerText = "";
-  }
-
-  // Write the match data form to the DB table
-  function submitMatchData(formData) {
-    console.log("==> matchForm: submitMatchData()");
-    $.post("api/dbWriteAPI.php", {
-      writeSingleData: JSON.stringify(formData)
-    }, function (response) {
-      // Because success word may have a newline at the end, don't do a direct compare
-      if (response.indexOf('success') > -1) {
-        alert("Data Successfully Submitted! Clearing Data.");
-        clearFormData();
-      } else {
-        alert("Data NOT Submitted. Please Check Network Connectivity.");
-      }
-    });
-  }
-
   /////////////////////////////////////////////////////////////////////////////
   //
   // Process the generated html
@@ -528,13 +528,13 @@ require 'inc/header.php';
 
     // Submit the match data form 
     document.getElementById("submitForm").addEventListener('click', function () {
-      let formData = getFormData(auto, teleop);
+      let formData = getMatchFormData(auto, teleop);
       alert("This match form is NOT configured for 2025 game!");
 
       // Should be:
-      // formData getFormData()
-      // if (validateMatchData(formData))
-      //    submitMatchData(formData);
+      // if (validateMatchForm())
+      //    matchFormData = getMatchFormData();
+      //    submitMatchFormData(matchFormData);
     });
   });
 </script>

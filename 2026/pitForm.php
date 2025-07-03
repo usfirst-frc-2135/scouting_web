@@ -187,8 +187,8 @@ require 'inc/header.php';
   }
 
   // Verify pit form data
-  function verifyPitForm() {
-    console.log("==> pitForm: verifyPitForm()");
+  function validatePitForm() {
+    console.log("==> pitForm: validatePitForm()");
     let isError = false;
     let errMsg = "Please enter values for these fields:";
     let teamNum = document.getElementById("teamNumber").value;
@@ -368,16 +368,17 @@ require 'inc/header.php';
 
   // Send the pit form data to the server
   function submitPitFormData() {
+    console.log("==> pitForm: submitPitFormData()");
     $.post("api/dbWriteAPI.php", {
       writePitTable: JSON.stringify(pitFormData)
     }).done(function (response) {
       console.log("=> writePitTable");
       // Because success word may have a newline at the end, don't do a direct compare
       if (response.indexOf('success') > -1) {
-        alert("Success in submitting pit data!");
+        alert("Success in submitting Pit data! - Clearning form");
         clearPitForm();
       } else {
-        alert("Failure in submitting Pit Form! (is this a duplicate?)");
+        alert("Failure in submitting Pit Form! Is this a duplicate?");
       }
     });
   }
@@ -396,7 +397,7 @@ require 'inc/header.php';
 
     // Submit the match data form
     document.getElementById("submitButton").addEventListener('click', function () {
-      if (!verifyPitForm()) {
+      if (!validatePitForm()) {
         pitFormData = getPitFormData();
         submitPitFormData(pitFormData);
       }
