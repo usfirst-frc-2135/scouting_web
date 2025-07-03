@@ -73,7 +73,6 @@ require 'inc/header.php';
 
 <script>
 
-  // let frozenTable = null;
   const teamColumn = 0;
   const matchColumn = 1;
 
@@ -157,12 +156,12 @@ require 'inc/header.php';
   //
   document.addEventListener("DOMContentLoaded", () => {
 
-    let tableId = "strategicTable";
+    const tableId = "strategicTable";
+    const frozenTable = new FreezeTable('.freeze-table', { fixedNavbar: '.navbar' });
 
     buildStrategicDataTable(tableId);
 
     // Create frozen table panes and keep the panes updated
-    let frozenTable = new FreezeTable('.freeze-table', { fixedNavbar: '.navbar' });
     document.getElementById(tableId).addEventListener('click', function () {
       if (frozenTable) {
         frozenTable.update();

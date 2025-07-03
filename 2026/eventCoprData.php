@@ -123,24 +123,16 @@ require 'inc/header.php';
   document.addEventListener("DOMContentLoaded", () => {
 
     const tableId = "coprTable";
+    const frozenTable = new FreezeTable('.freeze-table', { fixedNavbar: '.navbar' });
 
     buildTbaCoprTable(tableId);
 
     // Create frozen table panes and keep the panes updated
-    let frozenTable = new FreezeTable('.freeze-table', { fixedNavbar: '.navbar' });
     document.getElementById(tableId).addEventListener('click', function () {
       if (frozenTable) {
         frozenTable.update();
       }
     });
-
-    // Keep the frozen pane updated
-    document.getElementById(tableId).addEventListener('click', function () {
-      if (frozenTable) {
-        frozenTable.update();
-      }
-    });
-
   });
 </script>
 

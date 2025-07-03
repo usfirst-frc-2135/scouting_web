@@ -501,8 +501,9 @@ require 'inc/header.php';
   //
   document.addEventListener("DOMContentLoaded", () => {
 
-    let tableId = "averagesTable";
-    let csvFileName = "eventAverages";
+    const tableId = "averagesTable";
+    const frozenTable = new FreezeTable('.freeze-table', { fixedNavbar: '.navbar' });
+    const csvFileName = "eventAverages";
 
     buildAveragesTable(tableId); // Retrieve all data
 
@@ -512,7 +513,6 @@ require 'inc/header.php';
     });
 
     // Create frozen table panes and keep the panes updated
-    let frozenTable = new FreezeTable('.freeze-table', { fixedNavbar: '.navbar' });
     document.getElementById(tableId).addEventListener('click', function () {
       if (frozenTable) {
         frozenTable.update();

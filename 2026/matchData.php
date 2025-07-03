@@ -55,7 +55,6 @@ require 'inc/header.php';
 
 <script>
 
-  // let frozenTable = null;  // doesn't work with table-responsive
   const teamColumn = 1;
   const matchColumn = 0;
 
@@ -93,7 +92,7 @@ require 'inc/header.php';
   }
 
   // Acquire match data and build the page
-  function buildMatchDataTable(tableId, frozenId) {
+  function buildMatchDataTable(tableId) {
     $.get("api/dbReadAPI.php", {
       getMatchData: true
     }).done(function (matchData) {
@@ -114,11 +113,11 @@ require 'inc/header.php';
   document.addEventListener("DOMContentLoaded", () => {
 
     const tableId = "matchDataTable";
+    const frozenTable = new FreezeTable('.freeze-table', { fixedNavbar: '.navbar' });
 
     buildMatchDataTable(tableId);
 
     // Create frozen table panes and keep the panes updated
-    let frozenTable = new FreezeTable('.freeze-table', { fixedNavbar: '.navbar' });
     document.getElementById(tableId).addEventListener('click', function () {
       if (frozenTable) {
         frozenTable.update();
