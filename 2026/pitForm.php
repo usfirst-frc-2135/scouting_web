@@ -200,6 +200,8 @@ require 'inc/header.php';
     }
 
     if (document.getElementById("scoutName").value === "") {
+      if (isError === true)
+        errMsg += ",";
       errMsg += " Scout Name";
       isError = true;
     }
@@ -284,7 +286,7 @@ require 'inc/header.php';
   }
 
   // Write pit data form fields to DB table
-  function writeFormToPitTable() {
+  function getPitFormData() {
     console.log("==> pitForm: writeFormToPitTable()");
     let dataToSave = {};
     dataToSave["teamnumber"] = document.getElementById("teamNumber").value;
@@ -361,8 +363,13 @@ require 'inc/header.php';
     // Battery count
     dataToSave["numbatteries"] = document.getElementById("batteries").value;
 
+    return dataToSave;
+  }
+
+  // Send the pit form data to the server
+  function submitPitFormData() {
     $.post("api/dbWriteAPI.php", {
-      writePitTable: JSON.stringify(dataToSave)
+      writePitTable: JSON.stringify(pitFormData)
     }).done(function (response) {
       console.log("=> writePitTable");
       // Because success word may have a newline at the end, don't do a direct compare
@@ -390,7 +397,8 @@ require 'inc/header.php';
     // Submit the match data form
     document.getElementById("submitButton").addEventListener('click', function () {
       if (!verifyPitForm()) {
-        writeFormToPitTable();
+        pitFormData = getPitFormData();
+        submitPitFormData(pitFormData);
       }
     });
 
