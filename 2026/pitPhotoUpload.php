@@ -115,10 +115,91 @@ require 'inc/header.php';
     }
   }
 
+  // Upload the selected image file to the server
+  function handlePhotoUpload() {
+    console.log("=> pitPhotoUpload: handlePhotoUpload");
+    if (document.getElementById("robotPic").value != "" && document.getElementById("teamNumber").value != "") {
+      let teamNum = document.getElementById("teamNumber").value;
+
+      if (validateTeamNumber(teamNum, null) > 0) {
+        const loadButton = document.getElementById("loadingButton");
+        loadButton.style.visibility = 'visible';
+
+        // Replace checkbox is ticked
+        if (document.getElementById("replacePic").checked === true) {
+          console.log("==> Going to remove existing photos for team #" + teamNum);
+
+          // First get list of robot-pic files for this team.
+          $.get("api/dbReadAPI.php", {
+            getImagesForTeam: teamNum
+          }).done(function (imagesData) {
+            console.log("=> getImagesForTeam");
+            let teamImages = JSON.parse(imagesData);
+
+            // If there are any existing images, delete them.
+            for (let picFile of teamImages) {
+              $.ajax({
+                url: 'api/deleteFile.php',
+                data: { 'file': "<?php echo dirname(__FILE__) . '/' ?>" + picFile },
+                success: function (response) {
+                  console.log("==> Deleted existing photo: " + picFile);
+                  document.getElementById("replacePic").checked = false;
+                },
+                error: function () {
+                  console.error("Could NOT delete existing photo: " + picFile);
+                }
+              });
+            }
+          });
+        }
+
+        // Load/reload the list of team images 
+        setTimeout(function () {
+          $.get("api/dbReadAPI.php", {
+            getImagesForTeam: teamNum
+          }).done(function (teamImages) {
+            console.log("=> getImagesForTeam\n" + teamImages);
+
+            // Now upload the selected image
+            let uploadPost = new FormData();
+            uploadPost.append("teamPic", document.getElementById("robotPic").files[0]);
+            uploadPost.append("teamNum", document.getElementById("teamNumber").value);
+            $.ajax({
+              type: "POST",
+              url: "api/dbWriteAPI.php",
+              data: uploadPost,
+              cache: false,
+              contentType: false,
+              processData: false,
+              error: showErrorMessage,
+              success: uploadSuccess
+            });
+          });
+        }, 500);
+      }
+      else {
+        alert("Team Number is invalid - must be integer with optional last alpha!");
+        const loadButton = document.getElementById("loadingButton");
+        loadButton.style.visibility = 'hidden';
+      }
+    }
+    else {
+      alert("Please fill in all fields!");
+      const loadButton = document.getElementById("loadingButton");
+      loadButton.style.visibility = 'hidden';
+    }
+
+    document.getElementById("closeMessage").addEventListener('click', function () {
+      document.getElementById("uploadMessage").style.display = "none";
+      document.getElementById("replacePic").checked = false;
+    });
+  }
+
+  // Handles FileReader events when an image file has been selected
   function handleFileSelect(evt) {
-    var files = evt.target.files;
-    var f = files[0];
-    var reader = new FileReader();
+    let files = evt.target.files;
+    let f = files[0];
+    let reader = new FileReader();
     reader.onload = (
       function (theFile) {
         return function (e) {
@@ -150,87 +231,11 @@ require 'inc/header.php';
       return;
     }
 
+    // Attach image upload processor
     document.getElementById('robotPic').addEventListener('change', handleFileSelect, false);
 
-    // Upload photo to the server
-    document.getElementById("upload").addEventListener('click', function () {
-      console.log("=> pitPhotoUpload: upload clicked!");
-      if (document.getElementById("robotPic").value != "" && document.getElementById("teamNumber").value != "") {
-        let teamNum = document.getElementById("teamNumber").value;
-
-        if (validateTeamNumber(teamNum, null) > 0) {
-          const loadButton = document.getElementById("loadingButton");
-          loadButton.style.visibility = 'visible';
-
-          // Replace checkbox is ticked
-          if (document.getElementById("replacePic").checked === true) {
-            console.log("==> Going to remove existing photos for team #" + teamNum);
-
-            // First get list of robot-pic files for this team.
-            $.get("api/dbReadAPI.php", {
-              getImagesForTeam: teamNum
-            }).done(function (imagesData) {
-              console.log("=> getImagesForTeam");
-              let teamImages = JSON.parse(imagesData);
-
-              // If there are any existing images, delete them.
-              for (let picFile of teamImages) {
-                $.ajax({
-                  url: 'api/deleteFile.php',
-                  data: { 'file': "<?php echo dirname(__FILE__) . '/' ?>" + picFile },
-                  success: function (response) {
-                    console.log("==> Deleted existing photo: " + picFile);
-                    document.getElementById("replacePic").checked = false;
-                  },
-                  error: function () {
-                    console.error("Could NOT delete existing photo: " + picFile);
-                  }
-                });
-              }
-            });
-          }
-
-          // Load/reload the list of team images 
-          setTimeout(function () {
-            $.get("api/dbReadAPI.php", {
-              getImagesForTeam: teamNum
-            }).done(function (teamImages) {
-              console.log("=> getImagesForTeam\n" + teamImages);
-
-              // Now upload the selected image
-              let uploadPost = new FormData();
-              uploadPost.append("teamPic", document.getElementById("robotPic").files[0]);
-              uploadPost.append("teamNum", document.getElementById("teamNumber").value);
-              $.ajax({
-                type: "POST",
-                url: "api/dbWriteAPI.php",
-                data: uploadPost,
-                cache: false,
-                contentType: false,
-                processData: false,
-                error: showErrorMessage,
-                success: uploadSuccess
-              });
-            });
-          }, 500);
-        }
-        else {
-          alert("Team Number is invalid - must be integer with optional last alpha!");
-          const loadButton = document.getElementById("loadingButton");
-          loadButton.style.visibility = 'hidden';
-        }
-      }
-      else {
-        alert("Please fill in all fields!");
-        const loadButton = document.getElementById("loadingButton");
-        loadButton.style.visibility = 'hidden';
-      }
-
-      document.getElementById("closeMessage").addEventListener('click', function () {
-        document.getElementById("uploadMessage").style.display = "none";
-        document.getElementById("replacePic").checked = false;
-      });
-    });
+    // Attach image file reader selection from disk
+    document.getElementById("upload").addEventListener('click', handlePhotoUpload);
   });
 </script>
 
