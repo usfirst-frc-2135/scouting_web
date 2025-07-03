@@ -21,7 +21,7 @@ require 'inc/header.php';
           <select id="cameraSelector" class="form-select mb-3" aria-label="Camera Select">
           </select>
           <div class="d-grid gap-2 col-6 mx-auto">
-            <button id="submitData" class="btn btn-success mb-3" type="button">Click to Submit Data: 0</button>
+            <button id="submitData" class="btn btn-success mb-3" type="button"></button>
           </div>
         </div>
       </div>
@@ -50,16 +50,268 @@ require 'inc/header.php';
 
 <script>
 
+  const qrValidLength = 41;   // This is determined by game requirements and adjusted each year
+  const qrPadLength = 1;      // TODO: no explanation why this is padded--did we delete something?
+
+  // update this data list length whenever more data is added to the table
+  function padList(qrList) {
+    if (qrList.length === qrValidLength - qrPadLength) {
+      qrList.push("");
+      console.warn("Padding QR scan! (Why is this needed?)")
+    }
+    return qrList;
+  }
+  // Validate the scanned QR string
+  function validateQrList(qrList) {
+    console.log("==> validateQrList: qrList.length = " + qrList.length + " (valid " + qrValidLength + ")");
+    if (qrList.length != qrValidLength) {
+      console.warn("===> validateQrList: returning false! ");
+      return false;
+    }
+    console.log("===> validateQrList: returning true! ");
+    return true;
+  }
+
+  // Convert the scanned QR string to a list
+  function qrStringToList(dataString) {
+    let out = dataString.trim().split("\t");
+    for (let i = 0; i < out.length; ++i) {
+      out[i] = out[i].trim();
+    }
+    return out;
+  }
+
+  // IMPORTANT! also need to adjust data list size in "validateQrList" and "padList"!!!
+  function qrListToMatchData(qrList) {
+    let matchData = {};
+    matchData["teamnumber"] = qrList[0];
+    matchData["autonStartPos"] = qrList[1];
+    matchData["autonLeave"] = qrList[2];
+    matchData["reefzoneAB"] = qrList[3];
+    matchData["reefzoneCD"] = qrList[4];
+    matchData["reefzoneEF"] = qrList[5];
+    matchData["reefzoneGH"] = qrList[6];
+    matchData["reefzoneIJ"] = qrList[7];
+    matchData["reefzoneKL"] = qrList[8];
+    matchData["autonCoralL1"] = qrList[9];
+    matchData["autonCoralL2"] = qrList[10];
+    matchData["autonCoralL3"] = qrList[11];
+    matchData["autonCoralL4"] = qrList[12];
+    matchData["autonAlgaeNet"] = qrList[13];
+    matchData["autonAlgaeProcessor"] = qrList[14];
+    matchData["autonCoralFloor"] = qrList[15];
+    matchData["autonCoralStation"] = qrList[16];
+    matchData["autonAlgaeFloor"] = qrList[17];
+    matchData["autonAlgaeReef"] = qrList[18];
+    matchData["acquiredCoral"] = qrList[19];
+    matchData["acquiredAlgae"] = qrList[20];
+    matchData["teleopAlgaeFloorPickup"] = qrList[21];
+    matchData["teleopCoralFloorPickup"] = qrList[22];
+    matchData["teleopKnockOffAlgae"] = qrList[23];
+    matchData["teleopAlgaeFromReef"] = qrList[24];
+    matchData["teleopHoldBoth"] = qrList[25];
+    matchData["teleopCoralL1"] = qrList[26];
+    matchData["teleopCoralL2"] = qrList[27];
+    matchData["teleopCoralL3"] = qrList[28];
+    matchData["teleopCoralL4"] = qrList[29];
+    matchData["teleopAlgaeNet"] = qrList[30];
+    matchData["teleopAlgaeProcessor"] = qrList[31];
+    matchData["defenseLevel"] = qrList[32];
+    matchData["cageClimb"] = qrList[33];
+    matchData["startClimb"] = qrList[34];
+    matchData["died"] = qrList[35];
+    matchData["matchnumber"] = qrList[36];
+    matchData["eventcode"] = qrList[37];
+    matchData["scoutname"] = qrList[38];
+    matchData["comment"] = qrList[39];
+    return matchData;
+  }
+
+  // Creates the key used to store the QR scan in the database
+  function getKeyForMatchData(matchData) {
+    return matchData["eventcode"] + "_" + matchData["matchnumber"] + "_" + matchData["teamnumber"];
+  }
+
+  // Adds a QR scan to the table of scans
+  function addMatchDataToTable(tableId, matchData, scannedMatches) {
+    let key = getKeyForMatchData(matchData);
+
+    console.log("addMatchDataToTable: Checking for key in scannedMatches: " + key + " " + scannedMatches);
+
+    if (!Object.prototype.hasOwnProperty.call(scannedMatches, key)) {
+      // Modify global variables
+      scannedMatches[key] = matchData;
+      updateScannedMatchCount(scannedMatches);
+      let tbodyRef = document.getElementById(tableId).querySelector('tbody');
+      let row = tbodyRef.insertRow();
+      row.id = key + "_row";
+      row.innerHTML =
+        "<td>" + matchData["eventcode"] + "</td>" +
+        "<td>" + matchData["matchnumber"] + "</td>" +
+        "<td>" + matchData["teamnumber"] + "</td>" +
+        "<td>" + matchData["scoutname"] + "</td>" +
+        "<td> <button id='" + key + "_delete' value='" + key + "' class='btn btn-danger' type='button'>Delete</button></td?";
+
+      // Add delete button
+      document.getElementById(key + "_delete").addEventListener('click', function () {
+        removeQrScanEntry(this.value, scannedMatches);
+      });
+    }
+    else {
+      console.log("addMatchDataToTable: scannedMatches already has that key!");
+    }
+  }
+
+  // Removes a QR scan row and cleans up
+  function removeQrScanEntry(dataKey, scannedMatches) {
+    if (Object.prototype.hasOwnProperty.call(scannedMatches, dataKey)) {
+      // Remove the match data, update the count, remove the row
+      delete scannedMatches[dataKey];
+      updateScannedMatchCount(scannedMatches);
+      document.getElementById(dataKey + "_row").remove();
+    }
+    else {
+      console.log("removeQrScanEntry: scannedMatches does not have that key!");
+    }
+  }
+
+  // Alerts user of a successful QR scan
+  function alertSuccessfulScan() {
+    try {
+      window.navigator.vibrate(200); // Chrome throws an "intervention" if window is not clicked first!
+    }
+    catch (exception) {
+      alert("Vibrate notification request failed!");
+      console.warn("alertSuccessfulScan: Vibrate notification request failed! - " + e);
+    }
+    document.getElementById("content").classList.add("bg-success");
+    setTimeout(function () {
+      document.getElementById("content").classList.remove("bg-success");
+    }, 500);
+  }
+
+  //  Saves default camera ID to localStorage for on reload camera config persistence
+  function setDefaultDeviceID(id) {
+    localStorage.setItem("cameraDefaultID", id);
+  }
+
+  //  Reads default camera ID from localStorage, or returns original ID
+  function getDefaultDeviceID(id) {
+    let defaultId = localStorage.getItem("cameraDefaultID");
+    return (defaultId !== null) ? defaultId : id;
+  }
+
+  // Responsible for handling actions that occur when camera is scanning
+  function addCameraScanner(camId, scanner, tableId, scannedMatches) {
+    scanner.decodeFromInputVideoDeviceContinuously(camId, 'camera', (result, err) => {
+      if (result) {
+        let qrList = qrStringToList(result.text);
+        qrList = padList(qrList);
+        console.log("addCameraScanner: qrList = " + qrList);
+        if (validateQrList(qrList)) {
+          alertSuccessfulScan();
+          addMatchDataToTable(tableId, qrListToMatchData(qrList), scannedMatches);
+        }
+        else {
+          alert("QR scan content failed validation!");
+          console.warn("addCameraScanner: QR scan content failed validation!");
+        }
+      }
+    });
+  }
+
+  // Build the camera selection dropdown and connect the scanner passed in
+  function createCameraSelector(camTagId, scanner, tableId, scannedMatches) {
+    // Look for cameras, enumerate them, and connect the scanner
+    scanner.getVideoInputDevices().then((videoInputDevices) => {
+      let camDeviceId = null;
+      let camSelector = document.getElementById(camTagId);
+      console.log("createCameraSelector: Camera count: " + videoInputDevices.length);
+      if (videoInputDevices.length >= 1) {
+        videoInputDevices.forEach((element) => {
+          if (camDeviceId === null) {
+            camDeviceId = element.deviceId;
+          }
+
+          let option = document.createElement('option');
+          option.value = element.deviceId;
+          option.innerHTML = element.label;
+          camSelector.appendChild(option);
+        });
+      }
+
+      // Creates scanner on default camera based on saved data
+      addCameraScanner(getDefaultDeviceID(camDeviceId), scanner, tableId, scannedMatches);
+
+      // Handle drop down changes to select another camera when necessary
+      document.getElementById(camTagId).addEventListener('change', function () {
+        let newCamId = document.getElementById(camTagId).value;
+        addCameraScanner(newCamId, scanner, tableId, scannedMatches);
+        setDefaultDeviceID(newCamId);
+      });
+    });
+  }
+
+  // Update the scanned match counter
+  function updateScannedMatchCount(scannedMatches) {
+    scanCount = Object.keys(scannedMatches).length;
+    document.getElementById("submitData").innerText = "Click to Submit Data: " + scanCount;
+  }
+
+  // Clear the scanned data to reset for more scans
+  function clearScannedMatches(tableId, scannedMatches) {
+    document.getElementById(tableId).innerHTML = "";
+    scannedMatches = {};
+    updateScannedMatchCount(scannedMatches);
+  }
+
+  // Send scanned match data to the database
+  function submitScannedMatches(tableId, scannedMatches) {
+    let indexedMatches = [];
+    for (const [key, value] of Object.entries(scannedMatches)) {
+      indexedMatches.push(value);
+    }
+    if (indexedMatches.length == 0) {
+      alert("No scanned match entries found! - Data NOT Submitted");
+      console.warn("submitScannedMatches: No scanned match entries found! - Data NOT Submitted");
+    }
+    else {
+      $.post("api/dbWriteAPI.php", {
+        writeTeamMatch: JSON.stringify(indexedMatches)
+      }, function (response) {
+        console.log("=> writeTeamMatch: " + JSON.stringify(response));
+        if (response.indexOf('success') > -1) { // A loose compare, because success word may have a newline
+          alert("Data Successfully Submitted! Clearing Data.");
+          clearScannedMatches(tableId, scannedMatches);
+        } else {
+          alert("Write to DB failed! - Data NOT Submitted (is this a duplicate?)");
+          console.warn("submitScannedMatches: Write to DB failed! - Data NOT Submitted (is this a duplicate?)");
+        }
+      });
+    }
+  }
+
   /////////////////////////////////////////////////////////////////////////////
   //
   // Process the generated html
   //
   document.addEventListener("DOMContentLoaded", () => {
 
-    // All work is done in the QR handler
+    // All successfully scanned matches
+    const tableId = "qrScanTable";
+    const scannedMatches = {};
 
+    // Initialze the page
+    updateScannedMatchCount(scannedMatches);
+
+    // Attach the ZXing QR scanner/decoder to the camera and load camera choices
+    const scanner = new ZXing.BrowserQRCodeReader();
+    createCameraSelector("cameraSelector", scanner, tableId, scannedMatches);
+
+    // Submit the scanned data
+    document.getElementById("submitData").addEventListener('click', function () {
+      submitScannedMatches(tableId, scannedMatches);
+    });
   });
 
 </script>
-
-<script src="./scripts/qrHandler.js"></script>
