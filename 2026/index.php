@@ -215,7 +215,6 @@ require 'inc/header.php';
           elementRef.classList.remove("text-bg-warning");
           idToWrittenMap[key] = true;
           if (key === "enterDBName") {
-            // Mark tables in idToWrittenMap 
             idToWrittenMap["writeMatchTable"] = true;
             idToWrittenMap["writeTBATable"] = true;
             idToWrittenMap["writePitTable"] = true;
@@ -241,13 +240,14 @@ require 'inc/header.php';
           configData[idToKeyMap[key]] = document.getElementById(key).value;
         }
       }
+
       // Create table names from database name.
       let databaseName = document.getElementById("enterDBName").value;
       console.log("index: " + databaseName);
-      configData["datatable"] = databaseName + "_dt";
+      configData["datatable"] = databaseName + "_match";
       configData["tbatable"] = databaseName + "_tba";
-      configData["pittable"] = databaseName + "_pt";
-      configData["strategictable"] = databaseName + "_st";
+      configData["pittable"] = databaseName + "_pit";
+      configData["strategictable"] = databaseName + "_strat";
       configData["writeConfig"] = JSON.stringify(configData);
 
       $.post("api/dbAPI.php", configData, function (statusValues) {
