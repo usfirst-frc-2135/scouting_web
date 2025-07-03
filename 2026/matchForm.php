@@ -369,8 +369,7 @@ require 'inc/header.php';
     $.post("api/dbWriteAPI.php", {
       writeSingleData: JSON.stringify(formData)
     }, function (response) {
-      // Because success word may have a newline at the end, don't do a direct compare
-      if (response.indexOf('success') > -1) {
+      if (response.indexOf('success') > -1) {    // A loose compare, because success word may have a newline
         alert("Success in submitting Match data! Clearing Data.");
         clearMatchForm();
       } else {

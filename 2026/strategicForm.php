@@ -267,7 +267,17 @@ require 'inc/header.php';
 
 <script>
 
-  function verifyStrategicForm() {
+  // Check if our URL directs to a specific team
+  function checkURLForTeamSpec() {
+    console.log("=> strategicForm: checkURLForTeamSpec()");
+    let sp = new URLSearchParams(window.location.search);
+    if (sp.has('teamNum')) {
+      return sp.get('teamNum')
+    }
+    return null;
+  }
+
+  function validateStrategicForm() {
     console.log("==> strategicForm.php: clearStrategicForm()");
     let isError = false;
     let errMsg = "Please enter values for these fields:";
@@ -335,8 +345,8 @@ require 'inc/header.php';
   }
 
   // Write strategic form data to DB table
-  function writeStrategicFormToTable() {
-    console.log("==> strategicForm.php: writeStrategicFormToTable()");
+  function getStrategicFormData() {
+    console.log("==> strategicForm.php: getStrategicFormData()");
     let dataToSave = {};
 
     let compLevel = document.getElementById("compLevel").value;
@@ -386,12 +396,17 @@ require 'inc/header.php';
     dataToSave["problem_comment"] = document.getElementById("problemComment").value;
     dataToSave["general_comment"] = document.getElementById("generalComment").value;
 
+    return dataToSave;
+  }
+
+  // Send the pit form data to the server
+  function submitStrategicFormData(strategicFormData) {
+    console.log("==> strategicForm: submitStrategicFormData()");
     $.post("api/dbWriteAPI.php", {
-      writeStrategicData: JSON.stringify(dataToSave)
+      writeStrategicData: JSON.stringify(strategicFormData)
     }).done(function (response) {
       console.log("=> writeStrategicData");
-      // Because success word may have a newline at the end, don't do a direct compare
-      if (response.indexOf('success') > -1) {
+      if (response.indexOf('success') > -1) {    // A loose compare, because success word may have a newline
         alert("Success in submitting Strategic Form data!");
         clearStrategicForm();
       } else {
@@ -406,15 +421,18 @@ require 'inc/header.php';
   //
   document.addEventListener("DOMContentLoaded", () => {
 
+    // Check URL for source team to load
+    let initTeamNumber = checkURLForTeamSpec();
+    if (initTeamNumber) {
+      document.getElementById("teamNumber").value = initTeamNumber;
+    }
+
     // Submit the strategic form data
     document.getElementById("submitButton").addEventListener('click', function () {
-      // Should be:
-      // formData getFormData()
-      // if (validateStrategicData(formData))
-      //    submitStrategicData(formData);
 
-      if (!verifyStrategicForm()) {
-        writeStrategicFormToTable();
+      if (!validateStrategicForm()) {
+        let strategicFormData = getStrategicFormData();
+        submitStrategicFormData(strategicFormData);
       }
     });
 

@@ -83,6 +83,7 @@ require 'inc/header.php';
     const tableId = "stratSchedTable";
 
     buildScheduleTable(tableId);
+
   });
 </script>
 

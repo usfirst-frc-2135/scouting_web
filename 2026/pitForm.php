@@ -367,14 +367,13 @@ require 'inc/header.php';
   }
 
   // Send the pit form data to the server
-  function submitPitFormData() {
+  function submitPitFormData(pitFormData) {
     console.log("==> pitForm: submitPitFormData()");
     $.post("api/dbWriteAPI.php", {
       writePitTable: JSON.stringify(pitFormData)
     }).done(function (response) {
       console.log("=> writePitTable");
-      // Because success word may have a newline at the end, don't do a direct compare
-      if (response.indexOf('success') > -1) {
+      if (response.indexOf('success') > -1) {    // A loose compare, because success word may have a newline
         alert("Success in submitting Pit data! - Clearning form");
         clearPitForm();
       } else {
