@@ -95,11 +95,11 @@ require 'inc/header.php';
   // Acquire match data and build the page
   function buildMatchDataTable(tableId, frozenId) {
     $.get("api/dbReadAPI.php", {
-      getEventMatches: true
-    }).done(function (eventMatches) {
-      console.log("=> getEventMatches");
-      let dataObj = JSON.parse(eventMatches);
-      loadMatchData(tableId, dataObj);
+      getMatchData: true
+    }).done(function (matchData) {
+      console.log("=> getMatchData");
+      let jsonMatchData = JSON.parse(matchData);
+      loadMatchData(tableId, jsonMatchData);
       sortTableByMatchAndTeam(tableId, teamColumn, matchColumn);
       // script instructions say this is needed, but it breaks table header sorting
       // sorttable.makeSortable(document.getElementById(tableId));

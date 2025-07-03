@@ -853,11 +853,11 @@ require 'inc/header.php';
     console.log("==> matchSheet: loadMatchData()");
     if (!_allMatchData) {
       $.get("api/dbReadAPI.php", {
-        getEventMatches: true
-      }).done(function (eventMatches) {
-        console.log("=> getEventMatches");
-        eventMatches = JSON.parse(eventMatches);
-        let mdp = new matchDataProcessor(eventMatches);
+        getMatchData: true
+      }).done(function (matchData) {
+        console.log("=> getMatchData");
+        jsonMatchData = JSON.parse(matchData);
+        let mdp = new matchDataProcessor(jsonMatchData);
         mdp.getSiteFilteredAverages(function (averageData) {
           _allMatchData = averageData;
           successFunction();
@@ -882,11 +882,11 @@ require 'inc/header.php';
           }
           else {
             let ourMatches = {};
-            jsonMatchData = JSON.parse(eventMatches)["response"];
+            jsonEventMatches = JSON.parse(eventMatches)["response"];
             localMatchList = {};
-            for (let mi in jsonMatchData) {
+            for (let mi in jsonEventMatches) {
               let newMatch = {};
-              let match = jsonMatchData[mi];
+              let match = jsonEventMatches[mi];
 
               newMatch["comp_level"] = match["comp_level"];
               newMatch["match_number"] = match["match_number"];

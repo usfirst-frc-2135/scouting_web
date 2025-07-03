@@ -40,7 +40,7 @@ if (isset($_GET["eventCode"]))
   $eventCode = $_GET["eventCode"];
 }
 
-if (isset($_GET["getEventMatches"]))
+if (isset($_GET["getMatchData"]))
 {
   // Get all data
   echo (json_encode($db->readAllFromMatchTable($eventCode)));

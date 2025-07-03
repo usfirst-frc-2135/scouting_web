@@ -433,9 +433,9 @@ require 'inc/header.php';
   }
 
   // Merge data into CSV file and write it
-  function createCSVFile(csvName, eventMatches, coprs) {
+  function createCSVFile(csvName, matchData, coprs) {
     console.log("==> eventAverages: createCSVFile()");
-    let mdp = new matchDataProcessor(eventMatches);
+    let mdp = new matchDataProcessor(matchData);
     let csvStr = "Team,Pit Location,OPR,Total Coral Avg,Total Coral Max,Total Algae Avg,Total Algae Max,Auto Pts Avg,Auto Pts Max,Tel Pts Avg,Tel Pts Max,End Pts Avg,End Pts Max,Total Pts Avg,Total Pts Max,Auto Coral Avg,Auto Coral Max,Auto L1 Avg,Auto L1 Max,Auto L2 Avg,Auto L2 Max,Auto L3 Avg,Auto L3 Max,Auto L4 Avg,Auto L4 Max,Auto Algae Avg,Auto Algae Max,Auto Net Avg,Auto Net Max,Auto Proc Avg,Auto Proc Max,Tel Coral Avg,Tel Coral Max,Tel L1 Avg,Tel L1 Max,Tel L2 Avg,Tel L2 Max,Tel L3 Avg,Tel L3 Max,Tel L4 Avg,Tel L4 Max,Tel Coral Acc,Tel Algae Avg,Tel Algae Max,Tel Net Avg,Tel Net Max,Tel Proc Avg,Tel Proc Max,Tel Algae Acc,End N/A,End Park,End Fall,End Shal,End Deep, Total Died, Note\n";
 
     mdp.getSiteFilteredAverages(function (averageData) {
@@ -457,10 +457,10 @@ require 'inc/header.php';
   function buildAveragesTable(tableId) {
     console.log("==> eventAverages: buildAveragesTable()");
     $.get("api/dbReadAPI.php", {
-      getEventMatches: true
-    }).done(function (eventMatches) {
-      console.log("=> getEventMatches:");
-      _jsonMatchData = JSON.parse(eventMatches);
+      getMatchData: true
+    }).done(function (matchData) {
+      console.log("=> getMatchData:");
+      _jsonMatchData = JSON.parse(matchData);
       let mdp = new matchDataProcessor(_jsonMatchData);
       mdp.getSiteFilteredAverages(function (averageData) {
         let filteredData = {
@@ -479,10 +479,10 @@ require 'inc/header.php';
   function downloadCSVFile(csvName) {
     console.log("==> eventAverages: downloadCSVFile()");
     $.get("api/dbReadAPI.php", {
-      getEventMatches: true
-    }).done(function (eventMatches) {
-      console.log("=> getEventMatches:");
-      let jsonEventMatches = JSON.parse(eventMatches);
+      getMatchData: true
+    }).done(function (matchData) {
+      console.log("=> getMatchData:");
+      let jsonMatchData = JSON.parse(matchData);
 
       // Get OPR data from TBA
       $.get("api/tbaAPI.php", {
@@ -490,7 +490,7 @@ require 'inc/header.php';
       }).done(function (getCoprs) {
         console.log("=> getCOPRs");
         let jsonCoprData = JSON.parse(getCoprs)["data"];
-        createCSVFile(csvName, jsonEventMatches, jsonCoprData);
+        createCSVFile(csvName, jsonMatchData, jsonCoprData);
       });
     });
   }

@@ -100,8 +100,9 @@ require 'inc/header.php';
       getEventTeamNames: true
     }).done(function (eventTeamNames) {
       console.log("=> getEventTeamNames");
-      if (eventTeamNames === null)
+      if (eventTeamNames === null) {
         alert("Can't load teamlist from TBA; check if TBA Key was set in db_config");
+      }
       else {
         let jsonTeamList = JSON.parse(eventTeamNames);
         for (let team in jsonTeamList) {
