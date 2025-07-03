@@ -19,8 +19,6 @@
 //
 function sortFrcTables(tableId, teamCol, matchCol) {
 
-  console.log("==> sortFrcTables:");
-
   let tableRef = document.getElementById(tableId);
   let rows = Array.prototype.slice.call(tableRef.querySelectorAll("tbody > tr")); // All "tr" in <tbody>
 
@@ -43,14 +41,17 @@ function sortFrcTables(tableId, teamCol, matchCol) {
 }
 
 function sortTableByTeam(tableId, teamCol) {
+  console.log("==> sortFrcTables: sortTableByTeam");
   sortFrcTables(tableId, teamCol, -1);
 }
 
 function sortTableByMatch(tableId, matchCol) {
+  console.log("==> sortFrcTables: sortTableByMatch");
   sortFrcTables(tableId, -1, matchCol);
 }
 
 function sortTableByMatchAndTeam(tableId, teamCol, matchCol) {
+  console.log("==> sortFrcTables: sortTableByMatchAndTeam");
   sortFrcTables(tableId, teamCol, matchCol);
 }
 

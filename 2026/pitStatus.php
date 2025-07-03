@@ -46,11 +46,11 @@ require 'inc/header.php';
   const teamColumn = 0;
 
   // Build the pit status table
-  function buildPitStatusPage(tableId, teams, names, images, pitInfo) {
-    console.log("==> pitStatus: buildPitStatusPage()");
-    if (teams === null || names === null || images === null || pitInfo === null) {
-      console.warn("buildPitStatusPage: team, names, images, or pit data are missing!")
-      return null;
+  function loadPitStatusTable(tableId, teams, names, images, pitInfo) {
+    console.log("==> pitStatus: loadPitStatusTable()");
+    if (teams === [] || (Object.keys(names).length === 0) || (Object.keys(images).length === 0) || (Object.keys(pitInfo).length === 0)) {
+      // console.warn("loadPitStatusTable: teams, names, images, or pit data are missing!")
+      return;
     }
 
     let tbodyRef = document.getElementById(tableId).querySelector('tbody');
@@ -77,6 +77,10 @@ require 'inc/header.php';
       }
       tbodyRef.insertRow().innerHTML = row;
     }
+
+    sortTableByTeam(tableId, teamColumn);
+    // script instructions say this is needed, but it breaks table header sorting
+    // sorttable.makeSortable(document.getElementById(tableId));
   }
 
   /////////////////////////////////////////////////////////////////////////////
@@ -86,44 +90,45 @@ require 'inc/header.php';
   document.addEventListener("DOMContentLoaded", () => {
 
     const tableId = "psTable";
+    let teamList = [];
+    let namesList = {};
+    let jsonImages = {};
+    let jsonPitData = {};
 
     // Get the list of teams and add the team names 
     $.get("api/tbaAPI.php", {
       getEventTeamNames: true
     }).done(function (eventTeamNames) {
       console.log("=> getEventTeamNames");
-      let teamList = [];
-      let namesList = {};
       if (eventTeamNames === null)
         alert("Can't load teamlist from TBA; check if TBA Key was set in db_config");
       else {
         let jsonTeamList = JSON.parse(eventTeamNames);
-        for (let i in jsonTeamList) {
-          let teamNum = jsonTeamList[i]["teamnum"];
-          let teamName = jsonTeamList[i]["teamname"];
+        for (let team in jsonTeamList) {
+          let teamNum = jsonTeamList[team]["teamnum"];
+          let teamName = jsonTeamList[team]["teamname"];
           teamList.push(teamNum);
           namesList[teamNum] = teamName;
         }
 
-        // Get all the team images
+        // Get all the team images for the list of teams
         $.get("api/dbReadAPI.php", {
           getAllTeamImages: JSON.stringify(teamList)
-        }).done(function (teamImageList) {
+        }).done(function (allTeamImages) {
           console.log("=> pitStatus: getAllTeamImages");
-          jsonImageList = JSON.parse(teamImageList);
-          // Get all the teams pit scouted
-          $.get("api/dbReadAPI.php", {
-            getAllPitData: true
-          }).done(function (pitDataList) {
-            console.log("=> getAllPitData");
-            jsonPitList = JSON.parse(pitDataList);
-            buildPitStatusPage(tableId, teamList, namesList, jsonImageList, jsonPitList);
-            sortTableByTeam(tableId, teamColumn);
-            // script instructions say this is needed, but it breaks table header sorting
-            // sorttable.makeSortable(document.getElementById(tableId));
-          });
+          jsonImages = JSON.parse(allTeamImages);
+          loadPitStatusTable(tableId, teamList, namesList, jsonImages, jsonPitData);
         });
       }
+    });
+
+    // Get all the teams pit scouted
+    $.get("api/dbReadAPI.php", {
+      getAllPitData: true
+    }).done(function (allPitData) {
+      console.log("=> getAllPitData");
+      jsonPitData = JSON.parse(allPitData);
+      loadPitStatusTable(tableId, teamList, namesList, jsonImages, jsonPitData);
     });
   });
 
