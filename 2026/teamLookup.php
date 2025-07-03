@@ -1160,14 +1160,13 @@ require 'inc/header.php';
       else {
         // console.log("==> teamLookup: getTeamInfo:\n" + teamInfo);
         let jsonTeamInfo = JSON.parse(teamInfo)["response"];
-        teamname = jsonTeamInfo["nickname"];
-        console.log("==> teamLookup: for " + teamNum + ", teamname = " + teamname);
+        nickname = jsonTeamInfo["nickname"];
+        console.log("==> teamLookup: for " + teamNum + ", teamname = " + nickname);
       }
-      if (teamname != "XX") {
-        document.getElementById("teamTitle").innerHTML = teamNum + " - " + teamname;
-      } else {
-        document.getElementById("teamTitle").innerHTML = teamNum;
+      if (nickname != "XX") {
+        teamNum += " - " + nickname;
       }
+      document.getElementById("teamTitle").innerHTML = teamNum;
     });
 
     // Add images for the team
