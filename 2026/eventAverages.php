@@ -223,8 +223,6 @@ require 'inc/header.php';
 
 <script>
 
-  let _jsonMatchData = null;
-
   // Round to 2 decimal places
   function rnd(val) {
     // Rounding helper function 
@@ -326,26 +324,13 @@ require 'inc/header.php';
   }
 
   // Add a team (key) to the final team list
-  function addKeysToMatchTable(dataObj) {
-    console.log("==> eventAverages: addKeysToMatchTable()");
+  function getTeamListFromData(dataObj) {
+    console.log("==> eventAverages: getTeamListFromData()");
     let keyList = [];
     for (let teamNum in dataObj) {
       keyList.push(teamNum);
     }
     return keyList;
-  }
-
-  // Update table when match filters are changed
-  function filterEventMatchData() {
-    console.log("==> eventAverages: filterEventMatchData()");
-    let startMatch = document.getElementById("startCompLevel").value + document.getElementById("startMatchNum").value;
-    let endMatch = document.getElementById("endCompLevel").value + document.getElementById("endMatchNum").value;
-    console.log("eventAverages: filterEventMatches: " + startMatch + " to " + endMatch);
-    let mdp = new matchDataProcessor(_jsonMatchData);
-    mdp.filterEventMatches(startMatch, endMatch);
-    let filteredData = mdp.getAverages();
-    let teamList = addKeysToMatchTable(filteredData);
-    addAveragesToTable(teamList, filteredData);
   }
 
   // CSV File functions
@@ -368,12 +353,11 @@ require 'inc/header.php';
   function createCSVLine(team, evtAvgs, coprs) {
     let pitLocation = 0;
     let oprTP = getDataValue(coprs[team], "totalPoints");
-    //let trapPercent = rnd(lookupAverage(evtAvgs,team, "trapPercentage"));
-    let teleopCoralScoringAcc = rnd(lookupAverage(evtAvgs, team, "teleopCoralScoringPercent"));
-    let teleopAlgaeScoringAcc = rnd(lookupAverage(evtAvgs, team, "teleopAlgaeScoringPercent"));
+    // let teleopCoralScoringAcc = rnd(lookupAverage(evtAvgs, team, "teleopCoralScoringPercent"));
+    // let teleopAlgaeScoringAcc = rnd(lookupAverage(evtAvgs, team, "teleopAlgaeScoringPercent"));
     let endgameClimbPercent = lookupAverage(evtAvgs, team, "endgameClimbPercent");
-    //let endgameharmonyPercentage = lookupAverage(evtAvgs,team, "endgameharmonypercent");
     let csvLine = team + ",";
+
     csvLine += pitLocation + ",";
     csvLine += oprTP + ",";
     csvLine += lookupAverage(evtAvgs, team, "avgTotalCoral") + ",";
@@ -435,9 +419,9 @@ require 'inc/header.php';
   // Merge data into CSV file and write it
   function createCSVFile(csvName, matchData, coprs) {
     console.log("==> eventAverages: createCSVFile()");
-    let mdp = new matchDataProcessor(matchData);
     let csvStr = "Team,Pit Location,OPR,Total Coral Avg,Total Coral Max,Total Algae Avg,Total Algae Max,Auto Pts Avg,Auto Pts Max,Tel Pts Avg,Tel Pts Max,End Pts Avg,End Pts Max,Total Pts Avg,Total Pts Max,Auto Coral Avg,Auto Coral Max,Auto L1 Avg,Auto L1 Max,Auto L2 Avg,Auto L2 Max,Auto L3 Avg,Auto L3 Max,Auto L4 Avg,Auto L4 Max,Auto Algae Avg,Auto Algae Max,Auto Net Avg,Auto Net Max,Auto Proc Avg,Auto Proc Max,Tel Coral Avg,Tel Coral Max,Tel L1 Avg,Tel L1 Max,Tel L2 Avg,Tel L2 Max,Tel L3 Avg,Tel L3 Max,Tel L4 Avg,Tel L4 Max,Tel Coral Acc,Tel Algae Avg,Tel Algae Max,Tel Net Avg,Tel Net Max,Tel Proc Avg,Tel Proc Max,Tel Algae Acc,End N/A,End Park,End Fall,End Shal,End Deep, Total Died, Note\n";
 
+    let mdp = new matchDataProcessor(matchData);
     mdp.getSiteFilteredAverages(function (averageData) {
       for (let key in averageData) {
         csvStr += createCSVLine(key, averageData, coprs);  // key is team number
@@ -450,28 +434,6 @@ require 'inc/header.php';
       hiddenElement.target = '_blank';
       hiddenElement.download = filename;
       hiddenElement.click();
-    });
-  }
-
-  // Get all match data, filter it, create final HTML table, and sort it
-  function buildAveragesTable(tableId) {
-    console.log("==> eventAverages: buildAveragesTable()");
-    $.get("api/dbReadAPI.php", {
-      getMatchData: true
-    }).done(function (matchData) {
-      console.log("=> getMatchData:");
-      _jsonMatchData = JSON.parse(matchData);
-      let mdp = new matchDataProcessor(_jsonMatchData);
-      mdp.getSiteFilteredAverages(function (averageData) {
-        let filteredData = {
-          ...averageData
-        };
-        let teamList = addKeysToMatchTable(filteredData);
-        addAveragesToTable(tableId, teamList, filteredData);
-        // script instructions say this is needed, but it breaks table header sorting
-        // sorttable.makeSortable(document.getElementById(tableId));
-        document.getElementById(tableId).click(); // This magic fixes the floating column bug
-      });
     });
   }
 
@@ -495,6 +457,33 @@ require 'inc/header.php';
     });
   }
 
+  // Get all match data, filter it, create final HTML table, and sort it
+  function buildAveragesTable(tableId, startMatch, endMatch) {
+    console.log("==> eventAverages: buildAveragesTable()");
+    $.get("api/dbReadAPI.php", {
+      getMatchData: true
+    }).done(function (matchData) {
+      console.log("=> getMatchData:");
+      let jsonMatchData = JSON.parse(matchData);
+
+      mdp = new matchDataProcessor(jsonMatchData);
+      if (startMatch !== null && endMatch !== null) {
+        mdp.filterMatchRange(startMatch, endMatch);
+      }
+      mdp.getSiteFilteredAverages(function (averageData) {
+        let filteredData = {
+          ...averageData
+        };
+
+        let teamList = getTeamListFromData(filteredData);
+        addAveragesToTable(tableId, teamList, filteredData);
+        // script instructions say this is needed, but it breaks table header sorting
+        // sorttable.makeSortable(document.getElementById(tableId));
+        document.getElementById(tableId).click(); // This magic fixes the floating column bug
+      });
+    });
+  }
+
   /////////////////////////////////////////////////////////////////////////////
   //
   // Process the generated html
@@ -504,12 +493,16 @@ require 'inc/header.php';
     const tableId = "averagesTable";
     const frozenTable = new FreezeTable('.freeze-table', { fixedNavbar: '.navbar' });
     const csvFileName = "eventAverages";
+    const jsonMatchData = {};
 
-    buildAveragesTable(tableId); // Retrieve all data
+    buildAveragesTable(tableId, null, null); // Retrieve all data
 
     // Filter out unwanted matches
     document.getElementById("filterData").addEventListener('click', function () {
-      filterEventMatchData();
+      let startMatch = document.getElementById("startCompLevel").value + document.getElementById("startMatchNum").value;
+      let endMatch = document.getElementById("endCompLevel").value + document.getElementById("endMatchNum").value;
+      console.log("==> eventAverages: filterMatchRange: " + startMatch + " to " + endMatch);
+      buildAveragesTable(tableId, startMatch, endMatch);
     });
 
     // Create frozen table panes and keep the panes updated
