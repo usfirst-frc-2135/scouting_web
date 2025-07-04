@@ -505,16 +505,16 @@ require 'inc/header.php';
       buildAveragesTable(tableId, startMatch, endMatch);
     });
 
+    // Write out picklist CSV file to client's download dir.
+    document.getElementById("downloadCsvFile").addEventListener('click', function () {
+      downloadCSVFile(csvFileName);
+    });
+
     // Create frozen table panes and keep the panes updated
     document.getElementById(tableId).addEventListener('click', function () {
       if (frozenTable) {
         frozenTable.update();
       }
-    });
-
-    // Write out picklist CSV file to client's download dir.
-    document.getElementById("downloadCsvFile").addEventListener('click', function () {
-      downloadCSVFile(csvFileName);
     });
   });
 
