@@ -27,9 +27,9 @@ require 'inc/header.php';
           <div class="input-group">
             <div class="input-group-prepend">
               <select id="enterMatchLevel" class="form-select" aria-label="Comp Level Select">
-                <option value="QM">QM</option>
-                <option value="SF">SF</option>
-                <option value="F">F</option>
+                <option value="qm">QM</option>
+                <option value="sf">SF</option>
+                <option value="f">F</option>
               </select>
             </div>
             <input id="enterMatchNumber" class="form-control" type="text" placeholder="Match Number" aria-label="Match Number">
