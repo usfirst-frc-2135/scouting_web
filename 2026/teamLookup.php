@@ -299,80 +299,81 @@ require 'inc/header.php';
           <div id="collapseStrategicData" class="card-body collapse">
 
             <!-- <div id="freeze-table-strat" class="freeze-table overflow-auto"> -->
-            <table id="strategicDataTable"
-              class="table table-striped table-bordered table-hover table-sm border-dark text-center sortable">
-              <colgroup>
-                <col span="2" style="background-color:transparent">
-                <col span="1" style="background-color:#cfe2ff">
-                <col span="1" style="background-color:transparent">
-                <col span="1" style="background-color:#cfe2ff">
-                <col span="1" style="background-color:transparent">
-                <col span="1" style="background-color:#cfe2ff">
-                <col span="1" style="background-color:#transparent">
-                <col span="1" style="background-color:#cfe2ff">
-                <col span="1" style="background-color:transparent">
-                <col span="1" style="background-color:#cfe2ff">
-                <col span="1" style="background-color:#transparent">
-                <col span="1" style="background-color:#cfe2ff">
-                <col span="1" style="background-color:#transparent">
-                <col span="1" style="background-color:#cfe2ff">
-                <col span="1" style="background-color:#transparent">
-                <col span="1" style="background-color:#cfe2ff">
-                <col span="1" style="background-color:#transparent">
-                <col span="1" style="background-color:#cfe2ff">
-                <col span="1" style="background-color:#transparent">
-                <col span="1" style="background-color:#cfe2ff">
-                <col span="1" style="background-color:#transparent">
-                <col span="1" style="background-color:#cfe2ff">
-                <col span="1" style="background-color:#transparent">
-                <col span="1" style="background-color:#cfe2ff">
-                <col span="1" style="background-color:#transparent">
-                <col span="1" style="background-color:#cfe2ff">
-              </colgroup>
-              <thead>
-                <tr>
-                  <th colspan="1"> </th>
-                  <th colspan="1"> </th>
-                  <th colspan="2" class="text-center" style="background-color:#3686FF">Against Defense</th>
-                  <th colspan="3" class="text-center">Defense Tactics</th>
-                  <th colspan="8" class="text-center" style="background-color:#3686FF">Fouls</th>
-                  <th colspan="4" class="text-center">Auton</th>
-                  <th colspan="4" class="text-center" style="background-color:#3686FF">Teleop</th>
-                  <th colspan="2" class="text-center">Notes</th>
-                  <th colspan="1"> </th>
-                </tr>
-                <tr>
-                  <th scope="col">Match</th>
-                  <th scope="col">Drive Skill</th>
-                  <th scope="col">Block</th>
-                  <th scope="col">Note</th>
-                  <th scope="col">Block Path</th>
-                  <th scope="col">Block Stn</th>
-                  <th scope="col">Note</th>
-                  <th scope="col">Pin</th>
-                  <th scope="col">Auton Barge Contact</th>
-                  <th scope="col">Auton Cage Contact</th>
-                  <th scope="col">Anchor Contact</th>
-                  <th scope="col">Barge Contact</th>
-                  <th scope="col">Reef Contact</th>
-                  <th scope="col">Cage Contact</th>
-                  <th scope="col">Contact Climbing Robot</th>
-                  <th scope="col">Get Floor Coral</th>
-                  <th scope="col">Get Stn Coral</th>
-                  <th scope="col">Get Floor Algae</th>
-                  <th scope="col">Get Reef Algae</th>
-                  <th scope="col">Get Floor Coral</th>
-                  <th scope="col">Get Floor Algae</th>
-                  <th scope="col">Knock Algae</th>
-                  <th scope="col">Aquire Reef Algae</th>
-                  <th scope="col">Problem Note</th>
-                  <th scope="col">General Note</th>
-                  <th scope="col">Scout Name</th>
-                </tr>
-              </thead>
-              <tbody class="table-group-divider"> </tbody>
-            </table>
-            <!-- </div> -->
+            <div class="overflow-auto">
+              <table id="strategicDataTable"
+                class="table table-striped table-bordered table-hover table-sm border-dark text-center sortable">
+                <colgroup>
+                  <col span="2" style="background-color:transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:#transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:#transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:#transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:#transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:#transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:#transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:#transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:#transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:#transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th colspan="1"> </th>
+                    <th colspan="1"> </th>
+                    <th colspan="2" class="text-center" style="background-color:#3686FF">Against Defense</th>
+                    <th colspan="3" class="text-center">Defense Tactics</th>
+                    <th colspan="8" class="text-center" style="background-color:#3686FF">Fouls</th>
+                    <th colspan="4" class="text-center">Auton</th>
+                    <th colspan="4" class="text-center" style="background-color:#3686FF">Teleop</th>
+                    <th colspan="2" class="text-center">Notes</th>
+                    <th colspan="1"> </th>
+                  </tr>
+                  <tr>
+                    <th scope="col">Match</th>
+                    <th scope="col">Drive Skill</th>
+                    <th scope="col">Block</th>
+                    <th scope="col">Note</th>
+                    <th scope="col">Block Path</th>
+                    <th scope="col">Block Stn</th>
+                    <th scope="col">Note</th>
+                    <th scope="col">Pin</th>
+                    <th scope="col">Auton Barge Contact</th>
+                    <th scope="col">Auton Cage Contact</th>
+                    <th scope="col">Anchor Contact</th>
+                    <th scope="col">Barge Contact</th>
+                    <th scope="col">Reef Contact</th>
+                    <th scope="col">Cage Contact</th>
+                    <th scope="col">Contact Climbing Robot</th>
+                    <th scope="col">Get Floor Coral</th>
+                    <th scope="col">Get Stn Coral</th>
+                    <th scope="col">Get Floor Algae</th>
+                    <th scope="col">Get Reef Algae</th>
+                    <th scope="col">Get Floor Coral</th>
+                    <th scope="col">Get Floor Algae</th>
+                    <th scope="col">Knock Algae</th>
+                    <th scope="col">Aquire Reef Algae</th>
+                    <th scope="col">Problem Note</th>
+                    <th scope="col">General Note</th>
+                    <th scope="col">Scout Name</th>
+                  </tr>
+                </thead>
+                <tbody class="table-group-divider"> </tbody>
+              </table>
+            </div>
           </div>
         </div>
 
@@ -435,56 +436,57 @@ require 'inc/header.php';
           <div id="collapseAllMatches" class="card-body collapse">
 
             <!-- <div id="freeze-table-match" class="freeze-table overflow-auto"> -->
-            <table id="matchDataTable"
-              class="table table-striped table-bordered table-hover table-sm border-dark text-center sortable">
-              <colgroup>
-                <col span="2" style="background-color:transparent">
-                <col span="1" style="background-color:#cfe2ff">
-                <col span="1" style="background-color:transparent">
-                <col span="1" style="background-color:#cfe2ff">
-                <col span="1" style="background-color:transparent">
-                <col span="1" style="background-color:#cfe2ff">
-                <col span="1" style="background-color:#transparent">
-                <col span="1" style="background-color:#cfe2ff">
-                <col span="1" style="background-color:transparent">
-                <col span="1" style="background-color:#cfe2ff">
-                <col span="1" style="background-color:#transparent">
-                <col span="1" style="background-color:#cfe2ff">
-                <col span="1" style="background-color:#transparent">
-                <col span="1" style="background-color:#cfe2ff">
-                <col span="1" style="background-color:#transparent">
-                <col span="1" style="background-color:#cfe2ff">
-                <col span="1" style="background-color:#transparent">
-                <col span="1" style="background-color:#cfe2ff">
-                <col span="1" style="background-color:#transparent">
-                <col span="1" style="background-color:#cfe2ff">
-              </colgroup>
-              <thead>
-                <tr>
-                  <th scope="col">Match</th>
-                  <th scope="col">Auton Leave</th>
-                  <th scope="col">Auton Coral L1</th>
-                  <th scope="col">Auton Coral L2</th>
-                  <th scope="col">Auton Coral L3</th>
-                  <th scope="col">Auton Coral L4</th>
-                  <th scope="col">Auton Algae Net</th>
-                  <th scope="col">Auton Algae Proc</th>
-                  <th scope="col">Acquired Coral</th>
-                  <th scope="col">Acquired Algae</th>
-                  <th scope="col">Teleop Coral L1</th>
-                  <th scope="col">Teleop Coral L2</th>
-                  <th scope="col">Teleop Coral L3</th>
-                  <th scope="col">Teleop Coral L4</th>
-                  <th scope="col">Teleop Algae Net</th>
-                  <th scope="col">Teleop Algae Proc</th>
-                  <th scope="col">Cage Climb</th>
-                  <th scope="col">Died</th>
-                  <th scope="col">Scout Name</th>
-                </tr>
-              </thead>
-              <tbody class="table-group-divider"> </tbody>
-            </table>
-            <!-- </div> -->
+            <div class="overflow-auto">
+              <table id="matchDataTable"
+                class="table table-striped table-bordered table-hover table-sm border-dark text-center sortable">
+                <colgroup>
+                  <col span="2" style="background-color:transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:#transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:#transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:#transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:#transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:#transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:#transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th scope="col">Match</th>
+                    <th scope="col">Auton Leave</th>
+                    <th scope="col">Auton Coral L1</th>
+                    <th scope="col">Auton Coral L2</th>
+                    <th scope="col">Auton Coral L3</th>
+                    <th scope="col">Auton Coral L4</th>
+                    <th scope="col">Auton Algae Net</th>
+                    <th scope="col">Auton Algae Proc</th>
+                    <th scope="col">Acquired Coral</th>
+                    <th scope="col">Acquired Algae</th>
+                    <th scope="col">Teleop Coral L1</th>
+                    <th scope="col">Teleop Coral L2</th>
+                    <th scope="col">Teleop Coral L3</th>
+                    <th scope="col">Teleop Coral L4</th>
+                    <th scope="col">Teleop Algae Net</th>
+                    <th scope="col">Teleop Algae Proc</th>
+                    <th scope="col">Cage Climb</th>
+                    <th scope="col">Died</th>
+                    <th scope="col">Scout Name</th>
+                  </tr>
+                </thead>
+                <tbody class="table-group-divider"> </tbody>
+              </table>
+            </div>
 
           </div>
         </div>
