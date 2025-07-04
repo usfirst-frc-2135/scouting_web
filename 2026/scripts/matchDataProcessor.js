@@ -2,7 +2,6 @@
   Match Data Processor
   Takes in match data from source and calculates averages and other derived data from it.
 */
-
 class matchDataProcessor {
 
   constructor(data) {
@@ -10,57 +9,58 @@ class matchDataProcessor {
     this.siteFilter = null;
   }
 
-  getMatchTuple(matchStr) {
-    matchStr = matchStr.toLowerCase();
-    if (matchStr.search("p") != -1) {
-      return ["p", parseInt(matchStr.substring(1))];
+  // Get the comp level and match number from the match ID string (ex. [qm, 25] from qm25)
+  getMatchTuple(matchId) {
+    matchId = matchId.toLowerCase();
+    if (matchId.search("p") != -1) {
+      return ["p", parseInt(matchId.substring(1))];
     }
-    if (matchStr.search("qm") != -1) {
-      return ["qm", parseInt(matchStr.substring(2))];
+    if (matchId.search("qm") != -1) {
+      return ["qm", parseInt(matchId.substring(2))];
     }
-    if (matchStr.search("sf") != -1) {
-      return ["sf", parseInt(matchStr.substring(2))];
+    if (matchId.search("sf") != -1) {
+      return ["sf", parseInt(matchId.substring(2))];
     }
-    if (matchStr.search("f") != -1) {
-      return ["f", parseInt(matchStr.substring(1))];
+    if (matchId.search("f") != -1) {
+      return ["f", parseInt(matchId.substring(1))];
     }
-    console.warn("getMatchTuple: Invalid prefix! " + matchStr)
+    console.warn("getMatchTuple: Invalid prefix! " + matchId)
     return null;
   }
 
+  // Fix match IDs that are missing the comp level
+  getFixedMatchTuple(matchId) {
+    let mt = this.getMatchTuple(matchId);
+    if (mt === null)
+      mt = this.getMatchTuple("qm" + matchId);
+    return mt;
+  }
+
+  // Compare if second match ID is larget than first match ID
   matchLessEqualThan(startMatch, endMatch) {
-    let sm = this.getMatchTuple(startMatch);
-    let em = this.getMatchTuple(endMatch);
-
-    if (sm === null) {
-      startMatch = "qm" + startMatch;
-      sm = this.getMatchTuple(startMatch);
-    }
-
-    if (em === null) {
-      endMatch = "qm" + endMatch;
-      em = this.getMatchTuple(endMatch);
-    }
+    let fmt = this.getFixedMatchTuple(startMatch);
+    let lmt = this.getFixedMatchTuple(endMatch);
 
     let typeProg = { "p": 0, "qm": 1, "sf": 3, "f": 4 };
-    if (sm === null || em === null) {
+    if (fmt === null || lmt === null) {
       return false;
     }
-    if (typeProg[sm[0]] < typeProg[em[0]]) {
+    if (typeProg[fmt[0]] < typeProg[lmt[0]]) {
       return true;
     }
-    if (typeProg[sm[0]] > typeProg[em[0]]) {
+    if (typeProg[fmt[0]] > typeProg[lmt[0]]) {
       return false;
     }
-    return sm[1] <= em[1];
+    return fmt[1] <= lmt[1];
   }
 
-  ifMatchInRange(startMatch, middleMatch, endMatch) {
-    return this.matchLessEqualThan(startMatch, middleMatch) && this.matchLessEqualThan(middleMatch, endMatch);
+  // Compare if match ID string is within two match ID endpoints
+  ifMatchInRange(startMatch, testMatch, endMatch) {
+    return this.matchLessEqualThan(startMatch, testMatch) && this.matchLessEqualThan(testMatch, endMatch);
   }
 
-  filterEventMatches(startMatch, endMatch) {
-    //  Modify this.data to only include matches between start match and end match
+  // Filters out all matches in this.data not within the specified range (destructively changes this.data)
+  filterMatchRange(startMatch, endMatch) {
     let newData = [];
     for (let i = 0; i < this.data.length; i++) {
       let midStr = this.data[i]["matchnumber"];
@@ -75,59 +75,20 @@ class matchDataProcessor {
     this.data = newData;
   }
 
-  // Rounding helper function 
-  rnd(val) {
-    return Math.round((val + Number.EPSILON) * 100) / 100;
-  }
-
-  removePracticeMatches() {
-    let newData = [];
-    for (let i = 0; i < this.data.length; i++) {
-      let midStr = this.data[i]["matchnumber"];
-      let mt = this.getMatchTuple(midStr);
-      if (mt === null || mt != "p") {
-        newData.push(this.data[i]);
-      }
-    }
-    this.data = newData;
-  }
-
+  // Sorts the data by match number (ignores comp_level)
   sortMatches(newData) {
     newData.sort((a, b) => {
       let compare = this.matchLessEqualThan(a["matchnumber"], b["matchnumber"]);
-      if (compare) {
-        return -1;
-      }
-      return 1;
+      return (compare) ? -1 : 1;
     });
   }
 
-  getSiteFilter(successFunction) {
-    if (!this.siteFilter) {
-      $.post("api/dbAPI.php", {
-        getDBStatus: true
-      }, function (dbStatus) {
-        dbStatus = JSON.parse(dbStatus);
-        let localSiteFilter = {};
-        localSiteFilter["useP"] = dbStatus["useP"];
-        localSiteFilter["useQm"] = dbStatus["useQm"];
-        localSiteFilter["useSf"] = dbStatus["useSf"];
-        localSiteFilter["useF"] = dbStatus["useF"];
-        this.siteFilter = { ...localSiteFilter };
-        successFunction();
-      });
-    }
-    else {
-      successFunction();
-    }
-  }
-
+  //  Modify match data to only include matches specified by the site filter
   applySiteFilter() {
-    //  Modify this.data to only include matches specified by the site filter
     let newData = [];
     for (let i = 0; i < this.data.length; i++) {
-      let mn = this.data[i]["matchnumber"];
-      let mt = this.getMatchTuple(mn);
+      let matchId = this.data[i]["matchnumber"];
+      let mt = this.getMatchTuple(matchId);
       if (mt === null) {
         mt = ["qm", null];
       }
@@ -139,26 +100,28 @@ class matchDataProcessor {
     this.data = [...newData];
   }
 
+  // Filters match data based on the retrieved site filter from DB config
   getSiteFilteredAverages(successFunction) {
     let tempThis = this;
     $.post("api/dbAPI.php", {
       getDBStatus: true
     }, function (dbStatus) {
       dbStatus = JSON.parse(dbStatus);
-      let localSiteFilter = {};
-      localSiteFilter["useP"] = dbStatus["useP"];
-      localSiteFilter["useQm"] = dbStatus["useQm"];
-      localSiteFilter["useSf"] = dbStatus["useSf"];
-      localSiteFilter["useF"] = dbStatus["useF"];
-      tempThis.siteFilter = { ...localSiteFilter };
+      let newSiteFilter = {};
+      newSiteFilter["useP"] = dbStatus["useP"];
+      newSiteFilter["useQm"] = dbStatus["useQm"];
+      newSiteFilter["useSf"] = dbStatus["useSf"];
+      newSiteFilter["useF"] = dbStatus["useF"];
+      tempThis.siteFilter = { ...newSiteFilter };
 
       tempThis.applySiteFilter();
 
-      successFunction(tempThis.getAverages());
+      successFunction(tempThis.getEventAverages());
     });
   }
 
-  getAverages() {
+  // Returns the match data with all calculations
+  getEventAverages() {
     let pdata = {}; // to hold returning data for all matches and all teams
 
     // For each team, go thru all its matches and do the calculations for the averages data.
