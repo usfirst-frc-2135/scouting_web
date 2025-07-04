@@ -41,9 +41,9 @@ While the web scouting database is hosted on the team web site at frc2135.org, i
 
 **Strategic Data** - scouting data collected by strategic scouts for select matches that evaluate a robot's performance for future play.
 
-**Match Number** - this can mean the full match ID (e.g. qm5) or just the numeric portion of the full match ID (e.g. 5).
+**Match Number** - this can mean the full match ID (e.g. "qm5") or just the numeric portion of the full match ID (e.g. 5).
 
-**Competition Level** - this is the prefix for a full match ID (e.g. qm for match ID qm5).
+**Competition Level** - this is the prefix "p", "qm", "sf", or "f" for a full match ID (e.g. "qm" for match ID "qm5").
 
 ## Scouting Web App Organization
 
@@ -54,6 +54,29 @@ While the web scouting database is hosted on the team web site at frc2135.org, i
 **Strategic Scouting Info** - activities related to capturing strategic scouting data during an event (strategic scouting schedule, strategic scouting form, strategic data table).
 
 **Event Scouting Info** - activities related to reviewing data for an event in order to make strategy decisions (match sheet, event averages, COPR data).
+
+# Scouting App Project Organization
+
+The scouting web app consists of a hosted web site containing PHP web pages and javascript helper utilities. The directory structure is detailed below:
+- scouting_web (this is the github repo root directory)
+  - 2026 (this subdirectory level is a mirror of what is placed on the live web site) 
+    - api - directory of PHP files for accessing the MySQL database and The Blue Alliance
+    - external - the javascript libraries used by the web site
+      - bootstrap - the framework used to build web pages and widgets
+      - charts - used to create charts withing the data lookup pages
+      - freeze-table - used to freeze the header and first column in larger data tables for easy viewing
+      - jquery - required by freeze-table (we no longer use jquery within our web pages--only javascript)
+      - sorttable - utility to automatically provde sorting functions to data tables
+      - zxing - used for QR code scanning and decoding
+    - images - graphic images used by the web site such as favicon.ico
+    - inc - header.php and footer.php include files
+    - qr-code - screenshots of QR codes used for web site testing
+    - robot-pics - location for uploaded photos of robots during pit scouting
+    - scripts - javascript utilities for commonly used functions
+    - *.php - the main webpages used by the scouting app web site -- the names should match the web menu interface
+  - phpinfo.php - a simple php file for running phpconfig on our web host
+  - LICENSE - the MIT license covering use of this repo
+  - README.md - THIS FILE
 
 # Scouting App Setup
 
