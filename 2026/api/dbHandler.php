@@ -516,7 +516,7 @@ class dbHandler
         entrykey VARCHAR(60) NOT NULL PRIMARY KEY,
         eventcode VARCHAR(10) NOT NULL,
         matchnumber VARCHAR(10) NOT NULL,
-        teamnumber VARCHAR(6) NOT NULL,
+        teamnumber VARCHAR(10) NOT NULL,
         scoutname VARCHAR(30) NOT NULL,
         autonStartPos TINYINT UNSIGNED NOT NULL,
         autonLeave TINYINT UNSIGNED NOT NULL,
@@ -589,7 +589,7 @@ class dbHandler
       " (
         entrykey VARCHAR(60) NOT NULL PRIMARY KEY,
         eventcode VARCHAR(10) NOT NULL,
-        teamnumber VARCHAR(6) NOT NULL,
+        teamnumber VARCHAR(10) NOT NULL,
         scoutname VARCHAR(30) NOT NULL,
         swerve TINYINT UNSIGNED NOT NULL,
         drivemotors VARCHAR(20) NOT NULL,
@@ -616,8 +616,8 @@ class dbHandler
       " (
         entrykey VARCHAR(60) NOT NULL PRIMARY KEY,
         eventcode VARCHAR(10) NOT NULL,
-        matchnumber VARCHAR(6) NOT NULL,
-        teamnumber VARCHAR(6) NOT NULL,
+        matchnumber VARCHAR(10) NOT NULL,
+        teamnumber VARCHAR(10) NOT NULL,
         scoutname VARCHAR(30) NOT NULL,
         driverability TINYINT UNSIGNED NOT NULL,
         defense_tactic1 TINYINT UNSIGNED NOT NULL,
