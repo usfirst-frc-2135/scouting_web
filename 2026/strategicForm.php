@@ -35,10 +35,10 @@ require 'inc/header.php';
               <div class="input-group">
                 <div class="input-group-prepend">
                   <select id="compLevel" class="form-select" aria-label="Comp Level Select">
-                    <option value="p">P</option>
-                    <option value="qm" selected>QM</option>
-                    <option value="sf">SF</option>
-                    <option value="f">F</option>
+                    <option id="compLevelP" value="p">P</option>
+                    <option id="compLevelQM" value="qm" selected>QM</option>
+                    <option id="compLevelSF" value="sf">SF</option>
+                    <option id="compLevelF" value="f">F</option>
                   </select>
                 </div>
                 <input id="matchNumber" class="form-control" type="text" placeholder="Match number">
@@ -304,10 +304,10 @@ require 'inc/header.php';
 
   function clearStrategicForm() {
     console.log("==> strategicForm.php: clearStrategicForm()");
-    document.getElementById("scoutName").value = "";
     document.getElementById("teamNumber").value = "";
-    document.getElementById("compLevel").value = "";
+    document.getElementById("compLevelQM").selected = true;
     document.getElementById("matchNumber").value = "";
+    document.getElementById("scoutName").value = "";
     const driverAbilityBtns = document.querySelectorAll("input[name = 'driverAbilityGroup']");
     driverAbilityBtns.forEach(button => {
       button.checked = false;

@@ -35,15 +35,16 @@ require 'inc/header.php';
               <div class="input-group">
                 <div class="input-group-prepend">
                   <select id="compLevel" class="form-select" aria-label="Comp Level Select">
-                    <option value="p">P</option>
-                    <option value="qm" selected>QM</option>
-                    <option value="sf">SF</option>
-                    <option value="f">F</option>
+                    <option id="compLevelP" value="p">P</option>
+                    <option id="compLevelQM" value="qm" selected>QM</option>
+                    <option id="compLevelSF" value="sf">SF</option>
+                    <option id="compLevelF" value="f">F</option>
                   </select>
                 </div>
                 <input id="matchNumber" class="form-control" type="text" placeholder="Match Number" aria-label="Match Number">
               </div>
             </div>
+
             <div class="col-7 col-md-6 mb-3">
               <label for="scoutName" class="form-label">Scout Name</label>
               <input id="scoutName" class="form-control" type="text" placeholder="First name, last initial">
@@ -289,6 +290,7 @@ require 'inc/header.php';
   // Clear all form fields
   function clearMatchForm() {
     console.log("==> matchForm: clearMatchForm()");
+    document.getElementById("compLevelQM").selected = true;
     document.getElementById("matchNumber").value = "";
     auto.cones.bottom = 0;
     auto.cones.middle = 0;
@@ -322,7 +324,7 @@ require 'inc/header.php';
   function getMatchFormData(auto, teleop) {
     console.log("==> matchForm: getMatchFormData()");
     let dataToSave = {};
-    let matchLevel = document.getElementById("compLevel").value;
+    let compLevel = document.getElementById("compLevel").value;
     let matchNumber = document.getElementById("matchNumber").value;
     if (matchNumber != parseInt(matchNumber)) {
       alert("Match number must be integer.");
@@ -337,7 +339,7 @@ require 'inc/header.php';
       alert("TTeam number is an integer with optional letter.");
       throw Error("Team number is an integer with optional letter.");
     }
-    dataToSave["matchnumber"] = matchLevel + matchNumber;
+    dataToSave["matchnumber"] = compLevel + matchNumber;
     dataToSave["teamnumber"] = teamNumber;
     dataToSave["scoutname"] = document.getElementById("scoutName").value;
     dataToSave["mobility"] = document.getElementById("exitCommunity").checked ? 1 : 0;
