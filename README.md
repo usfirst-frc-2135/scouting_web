@@ -33,7 +33,29 @@ https://github.com/usfirst-frc-2135/scouting_web
 
 While the web scouting database is hosted on the team web site at frc2135.org, it can be difficult to make changes, deploy, and test on a live web server. It is much easier to set up a web server on the development computer to add features and debug, and then only deploy the scouting web pages once it's ready to release for production use. The team uses the application MAMP (Mac OS, Apache, MySQL, and Perl/Python/PHP) to host a development MySQL server right on the user's computer. With the right settings, the developer has a great deal of control and insight while running the pages that access the database.
 
-# Scouting App Settings
+## Glossary
+
+**Match Data** - normal scouting data collected for every robot in every match at an event (or a collection of those matches).
+
+**Pit Data** - scouting data collected for a team robt usually before an event starts (or a collection of those robots).
+
+**Strategic Data** - scouting data collected by strategic scouts for select matches that evaluate a robot's performance for future play.
+
+**Match Number** - this can mean the full match ID (e.g. qm5) or just the numeric portion of the full match ID (e.g. 5).
+
+**Competition Level** - this is the prefix for a full match ID (e.g. qm for match ID qm5).
+
+## Scouting Web App Organization
+
+**Team Scouting Info** - activities related to capturing information about a robot (photo upload, pit scouting, team lookup).
+
+**Match Scouting Info** - activities related to capturing information about a match or matches during an event (QR form, match scouting form, match data table).
+
+**Strategic Scouting Info** - activities related to capturing strategic scouting data during an event (strategic scouting schedule, strategic scouting form, strategic data table).
+
+**Event Scouting Info** - activities related to reviewing data for an event in order to make strategy decisions (match sheet, event averages, COPR data).
+
+# Scouting App Setup
 
 ## Setting the event code for a new event:
 
