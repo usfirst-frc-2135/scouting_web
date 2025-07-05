@@ -27,21 +27,21 @@ require 'inc/header.php';
               <h4>Match Info</h4>
             </div>
             <div class="col-7 col-md-5 mb-3">
-              <label for="teamNumber" class="form-label">Team Number</label>
-              <input id="teamNumber" class="form-control" type="text" placeholder="FRC team number">
+              <label for="enterTeamNumber" class="form-label">Team Number</label>
+              <input id="enterTeamNumber" class="form-control" type="text" placeholder="FRC team number">
             </div>
             <div class="row  col-9 col-md-7 mb-3">
               <span>Match Number</span>
               <div class="input-group">
                 <div class="input-group-prepend">
-                  <select id="compLevel" class="form-select" aria-label="Comp Level Select">
+                  <select id="enterCompLevel" class="form-select" aria-label="Comp Level Select">
                     <option id="compLevelP" value="p">P</option>
                     <option id="compLevelQM" value="qm" selected>QM</option>
                     <option id="compLevelSF" value="sf">SF</option>
                     <option id="compLevelF" value="f">F</option>
                   </select>
                 </div>
-                <input id="matchNumber" class="form-control" type="text" placeholder="Match number">
+                <input id="enterMatchNumber" class="form-control" type="text" placeholder="Match number">
               </div>
             </div>
 
@@ -283,12 +283,12 @@ require 'inc/header.php';
     let errMsg = "Please enter values for these fields:";
 
     // Make sure there is a team number, scoutname and matchnum.
-    let teamNum = document.getElementById("teamNumber").value;
+    let teamNum = document.getElementById("enterTeamNumber").value;
     if (((teamNum === "") || (validateTeamNumber(teamNum, null) <= 0))) {
       errMsg += " Team Number";
       isError = true;
     }
-    if (document.getElementById("matchNumber").value === "") {
+    if (document.getElementById("enterMatchNumber").value === "") {
       errMsg += " Match Number";
       isError = true;
     }
@@ -304,9 +304,9 @@ require 'inc/header.php';
 
   function clearStrategicForm() {
     console.log("==> strategicForm.php: clearStrategicForm()");
-    document.getElementById("teamNumber").value = "";
+    document.getElementById("enterTeamNumber").value = "";
     document.getElementById("compLevelQM").selected = true;
-    document.getElementById("matchNumber").value = "";
+    document.getElementById("enterMatchNumber").value = "";
     document.getElementById("scoutName").value = "";
     const driverAbilityBtns = document.querySelectorAll("input[name = 'driverAbilityGroup']");
     driverAbilityBtns.forEach(button => {
@@ -349,9 +349,9 @@ require 'inc/header.php';
     console.log("==> strategicForm.php: getStrategicFormData()");
     let dataToSave = {};
 
-    let compLevel = document.getElementById("compLevel").value;
-    let matchNumber = document.getElementById("matchNumber").value;
-    let teamnum = validateTeamNumber(document.getElementById("teamNumber").value, null);
+    let compLevel = document.getElementById("enterCompLevel").value;
+    let matchNumber = document.getElementById("enterMatchNumber").value;
+    let teamnum = validateTeamNumber(document.getElementById("enterTeamNumber").value, null);
 
     // Clean up teamnumber before writing to table.
     dataToSave["matchnumber"] = compLevel + matchNumber;
@@ -424,7 +424,7 @@ require 'inc/header.php';
     // Check URL for source team to load
     let initTeamNumber = checkURLForTeamSpec();
     if (initTeamNumber) {
-      document.getElementById("teamNumber").value = initTeamNumber;
+      document.getElementById("enterTeamNumber").value = initTeamNumber;
     }
 
     // Submit the strategic form data

@@ -24,8 +24,8 @@ require 'inc/header.php';
           <form id="pitScoutingForm" method="post" enctype="multipart/form-data" name="pitScoutingForm">
 
             <div class="col-7 col-md-5 mb-3">
-              <label for="teamNumber" class="form-label">Team Number </label>
-              <input id="teamNumber" class="form-control" type="text" placeholder="FRC team number">
+              <label for="enterTeamNumber" class="form-label">Team Number </label>
+              <input id="enterTeamNumber" class="form-control" type="text" placeholder="FRC team number">
             </div>
             <div class="col-7 col-md-6 mb-3">
               <label for="scoutName" class="form-label">Scout Name</label>
@@ -191,10 +191,10 @@ require 'inc/header.php';
     console.log("==> pitForm: validatePitForm()");
     let isError = false;
     let errMsg = "Please enter values for these fields:";
-    let teamNum = document.getElementById("teamNumber").value;
+    let teamNum = document.getElementById("enterTeamNumber").value;
 
     // Make sure each piece of data has a value selected.
-    if (((document.getElementById("teamNumber").value === "") || (validateTeamNumber(teamNum, null) <= 0))) {
+    if (((document.getElementById("enterTeamNumber").value === "") || (validateTeamNumber(teamNum, null) <= 0))) {
       errMsg += " Team Number";
       isError = true;
     }
@@ -266,7 +266,7 @@ require 'inc/header.php';
   // Clear pit form fields
   function clearPitForm() {
     console.log("==> pitForm: clearPitForm()");
-    document.getElementById("teamNumber").value = "";
+    document.getElementById("enterTeamNumber").value = "";
     document.getElementById("scoutName").value = "";
     document.getElementById("swerveDriveYes").checked = false;
     document.getElementById("swerveDriveNo").checked = false;
@@ -289,7 +289,7 @@ require 'inc/header.php';
   function getPitFormData() {
     console.log("==> pitForm: writeFormToPitTable()");
     let dataToSave = {};
-    dataToSave["teamnumber"] = document.getElementById("teamNumber").value;
+    dataToSave["teamnumber"] = document.getElementById("enterTeamNumber").value;
     dataToSave["scoutname"] = document.getElementById("scoutName").value; // enable once db is changed
 
     // Swerve
@@ -391,7 +391,7 @@ require 'inc/header.php';
     // Check URL for source team to load
     let initTeamNumber = checkURLForTeamSpec();
     if (initTeamNumber) {
-      document.getElementById("teamNumber").value = initTeamNumber;
+      document.getElementById("enterTeamNumber").value = initTeamNumber;
     }
 
     // Submit the match data form

@@ -18,8 +18,8 @@ require 'inc/header.php';
         <div class="card-body">
           <form id="uploadForm" method="post" enctype="multipart/form-data">
             <div class="col-7 col-md-5 mb-3">
-              <label for="teamNumber" class="form-label">Team Number</label>
-              <input id="teamNumber" class="form-control" type="text" placeholder="FRC team number" name="teamNumber">
+              <label for="enterTeamNumber" class="form-label">Team Number</label>
+              <input id="enterTeamNumber" class="form-control" type="text" placeholder="FRC team number" name="enterTeamNumber">
             </div>
 
             <div class="mb-3">
@@ -82,7 +82,7 @@ require 'inc/header.php';
   function showSuccessMessage(message) {
     console.log("==> pitPhotoUpload: showSuccessMessage()" + message);
     document.getElementById("robotPic").value = "";
-    document.getElementById("teamNumber").value = "";
+    document.getElementById("enterTeamNumber").value = "";
 
     document.getElementById("uploadMessageText").innerHTML = message;
     document.getElementById("uploadMessage").classList.add("alert-success");
@@ -115,8 +115,8 @@ require 'inc/header.php';
   // Upload the selected image file to the server
   function handlePhotoUpload() {
     console.log("=> pitPhotoUpload: handlePhotoUpload");
-    if (document.getElementById("robotPic").value != "" && document.getElementById("teamNumber").value != "") {
-      let teamNum = document.getElementById("teamNumber").value;
+    if (document.getElementById("robotPic").value != "" && document.getElementById("enterTeamNumber").value != "") {
+      let teamNum = document.getElementById("enterTeamNumber").value;
 
       if (validateTeamNumber(teamNum, null) > 0) {
         loadingSpinner.style.visibility = 'visible';
@@ -159,7 +159,7 @@ require 'inc/header.php';
             // Now upload the selected image
             let uploadPost = new FormData();
             uploadPost.append("teamPic", document.getElementById("robotPic").files[0]);
-            uploadPost.append("teamNum", document.getElementById("teamNumber").value);
+            uploadPost.append("teamNum", document.getElementById("enterTeamNumber").value);
             $.ajax({
               type: "POST",
               url: "api/dbWriteAPI.php",
@@ -218,7 +218,7 @@ require 'inc/header.php';
     // Check URL for source team to load
     let initTeamNumber = checkURLForTeamSpec();
     if (initTeamNumber) {
-      document.getElementById("teamNumber").value = initTeamNumber;
+      document.getElementById("enterTeamNumber").value = initTeamNumber;
     }
 
     // Confirm the file selction selection is supported

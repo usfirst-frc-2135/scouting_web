@@ -1208,6 +1208,7 @@ require 'inc/header.php';
     // Check URL for source team to load
     let initTeamNumber = checkURLForTeamSpec();
     if (validateTeamNumber(initTeamNumber, null) > 0) {
+      document.getElementById("enterTeamNumber").value = initTeamNumber;
       buildTeamLookupPage(initTeamNumber);
     }
 

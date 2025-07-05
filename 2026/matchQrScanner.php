@@ -32,7 +32,7 @@ require 'inc/header.php';
       <thead>
         <tr>
           <th scope="col">Event Code</th>
-          <th scope="col">Match Code</th>
+          <th scope="col">Match Number</th>
           <th scope="col">Team Number</th>
           <th scope="col">Scout</th>
           <th scope="col">Delete</th>

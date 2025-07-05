@@ -27,21 +27,21 @@ require 'inc/header.php';
               <h4>Match Info (CHARGED UP)</h4>
             </div>
             <div class="col-7 col-md-5 mb-3">
-              <label for="teamNumber" class="form-label">Team Number</label>
-              <input id="teamNumber" class="form-control" type="number" placeholder="FRC team number">
+              <label for="enterTeamNumber" class="form-label">Team Number</label>
+              <input id="enterTeamNumber" class="form-control" type="number" placeholder="FRC team number">
             </div>
             <div class="row col-9 col-md-7 mb-3">
               <span>Match Number</span>
               <div class="input-group">
                 <div class="input-group-prepend">
-                  <select id="compLevel" class="form-select" aria-label="Comp Level Select">
+                  <select id="enterCompLevel" class="form-select" aria-label="Comp Level Select">
                     <option id="compLevelP" value="p">P</option>
                     <option id="compLevelQM" value="qm" selected>QM</option>
                     <option id="compLevelSF" value="sf">SF</option>
                     <option id="compLevelF" value="f">F</option>
                   </select>
                 </div>
-                <input id="matchNumber" class="form-control" type="text" placeholder="Match Number" aria-label="Match Number">
+                <input id="enterMatchNumber" class="form-control" type="text" placeholder="Match Number" aria-label="Match Number">
               </div>
             </div>
 
@@ -291,7 +291,8 @@ require 'inc/header.php';
   function clearMatchForm() {
     console.log("==> matchForm: clearMatchForm()");
     document.getElementById("compLevelQM").selected = true;
-    document.getElementById("matchNumber").value = "";
+    document.getElementById("enterMatchNumber").value = "";
+    document.getElementById("enterTeamNumber").value = "";
     auto.cones.bottom = 0;
     auto.cones.middle = 0;
     auto.cones.top = 0;
@@ -316,7 +317,6 @@ require 'inc/header.php';
     document.getElementById("teleopCubesBottom").innerText = "Cubes Bottom: " + teleop.cubes.bottom;
     document.getElementById("teleopCubesMiddle").innerText = "Cubes Middle: " + teleop.cubes.middle;
     document.getElementById("teleopCubesTop").innerText = "Cubes Top: " + teleop.cubes.top;
-    document.getElementById("teamNumber").value = "";
     document.getElementById("generalComment").innerText = "";
   }
 
@@ -324,13 +324,13 @@ require 'inc/header.php';
   function getMatchFormData(auto, teleop) {
     console.log("==> matchForm: getMatchFormData()");
     let dataToSave = {};
-    let compLevel = document.getElementById("compLevel").value;
-    let matchNumber = document.getElementById("matchNumber").value;
+    let compLevel = document.getElementById("enterCompLevel").value;
+    let matchNumber = document.getElementById("enterMatchNumber").value;
     if (matchNumber != parseInt(matchNumber)) {
       alert("Match number must be integer.");
       throw Error("Match number must be integer.");
     }
-    let teamNumber = document.getElementById("teamNumber").value;
+    let teamNumber = document.getElementById("enterTeamNumber").value;
     if (teamNumber === "") {
       alert("Team number must not be empty.");
       throw Error("Team number must not be empty.");
@@ -340,7 +340,7 @@ require 'inc/header.php';
       throw Error("Team number is an integer with optional letter.");
     }
     dataToSave["matchnumber"] = compLevel + matchNumber;
-    dataToSave["teamnumber"] = teamNumber;
+    dataToSave["enterTeamNumber"] = teamNumber;
     dataToSave["scoutname"] = document.getElementById("scoutName").value;
     dataToSave["mobility"] = document.getElementById("exitCommunity").checked ? 1 : 0;
     dataToSave["autonconesbottom"] = auto.cones.bottom;
