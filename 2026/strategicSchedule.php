@@ -46,8 +46,6 @@ require 'inc/header.php';
 
 <script>
 
-  const matchColumn = 0;
-
   // Load strategic schedule rows
   function loadStrategicSchedule(tableId, stratSched) {
     console.log("==> strategicSchedule: loadStrategicSchedule()");
@@ -70,6 +68,7 @@ require 'inc/header.php';
       console.log("=> getStrategicMatches");
       let stratSched = JSON.parse(strategicData);
       loadStrategicSchedule(tableId, stratSched);
+      const matchColumn = 0;
       sortTableByMatch(tableId, matchColumn);
     });
   }

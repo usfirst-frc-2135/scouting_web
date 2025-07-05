@@ -589,8 +589,9 @@ require 'inc/header.php';
     }).done(function (teamInfo) {
       console.log("=> getTeamInfo");
       let teamname = "XX";
-      if (teamInfo === null)
+      if (teamInfo === null) {
         alert("Can't load teamName from TBA; check if TBA Key was set in db_config");
+      }
       else {
         // console.log("matchSheet: getTeamInfo:\n" + teamInfo);
         jsonTeamInfo = JSON.parse(teamInfo)["response"];

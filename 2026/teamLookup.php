@@ -503,7 +503,6 @@ require 'inc/header.php';
 
 <script>
 
-  const matchColumn = 0;
 
   let autoChart;
   let teleopChart;
@@ -958,39 +957,40 @@ require 'inc/header.php';
   }
 
   // Loads the match data table
-  function teamMatchDataTable(dataObj) {
+  function teamMatchDataTable(matchData) {
     console.log("==> teamLookup: teamMatchDataTable()");
     let tbodyRef = document.getElementById("matchDataTable").querySelector('tbody');
     tbodyRef.innerHTML = "";     // clear table
-    for (let i = 0; i < dataObj.length; i++) {
-      let rowString = "<td>" + dataObj[i]["matchnumber"] + "</td>" +
-        "<td>" + dataObj[i]["autonLeave"] + "</td>" +
+    for (let i = 0; i < matchData.length; i++) {
+      let rowString = "<td>" + matchData[i]["matchnumber"] + "</td>" +
+        "<td>" + matchData[i]["autonLeave"] + "</td>" +
 
-        "<td>" + dataObj[i]["autonCoralL1"] + "</td>" +
-        "<td>" + dataObj[i]["autonCoralL2"] + "</td>" +
-        "<td>" + dataObj[i]["autonCoralL3"] + "</td>" +
-        "<td>" + dataObj[i]["autonCoralL4"] + "</td>" +
+        "<td>" + matchData[i]["autonCoralL1"] + "</td>" +
+        "<td>" + matchData[i]["autonCoralL2"] + "</td>" +
+        "<td>" + matchData[i]["autonCoralL3"] + "</td>" +
+        "<td>" + matchData[i]["autonCoralL4"] + "</td>" +
 
-        "<td>" + dataObj[i]["autonAlgaeNet"] + "</td>" +
-        "<td>" + dataObj[i]["autonAlgaeProcessor"] + "</td>" +
+        "<td>" + matchData[i]["autonAlgaeNet"] + "</td>" +
+        "<td>" + matchData[i]["autonAlgaeProcessor"] + "</td>" +
 
-        "<td>" + dataObj[i]["acquiredCoral"] + "</td>" +
-        "<td>" + dataObj[i]["acquiredAlgae"] + "</td>" +
+        "<td>" + matchData[i]["acquiredCoral"] + "</td>" +
+        "<td>" + matchData[i]["acquiredAlgae"] + "</td>" +
 
-        "<td>" + dataObj[i]["teleopCoralL1"] + "</td>" +
-        "<td>" + dataObj[i]["teleopCoralL2"] + "</td>" +
-        "<td>" + dataObj[i]["teleopCoralL3"] + "</td>" +
-        "<td>" + dataObj[i]["teleopCoralL4"] + "</td>" +
+        "<td>" + matchData[i]["teleopCoralL1"] + "</td>" +
+        "<td>" + matchData[i]["teleopCoralL2"] + "</td>" +
+        "<td>" + matchData[i]["teleopCoralL3"] + "</td>" +
+        "<td>" + matchData[i]["teleopCoralL4"] + "</td>" +
 
-        "<td>" + dataObj[i]["teleopAlgaeNet"] + "</td>" +
-        "<td>" + dataObj[i]["teleopAlgaeProcessor"] + "</td>" +
+        "<td>" + matchData[i]["teleopAlgaeNet"] + "</td>" +
+        "<td>" + matchData[i]["teleopAlgaeProcessor"] + "</td>" +
 
-        "<td>" + dataObj[i]["cageClimb"] + "</td>" +
-        "<td>" + dataObj[i]["died"] + "</td>" +
-        "<td>" + dataObj[i]["scoutname"] + "</td>" +
-        "<td>" + dataObj[i]["comment"] + "</td>";
+        "<td>" + matchData[i]["cageClimb"] + "</td>" +
+        "<td>" + matchData[i]["died"] + "</td>" +
+        "<td>" + matchData[i]["scoutname"] + "</td>" +
+        "<td>" + matchData[i]["comment"] + "</td>";
       tbodyRef.insertRow().innerHTML = rowString;
     }
+    const matchColumn = 0;
     sortTableByMatch("matchDataTable", matchColumn);
   }
 
@@ -1031,12 +1031,12 @@ require 'inc/header.php';
   }
 
   // Load the strategic data table for this team
-  function loadStrategicData(dataObj) {
+  function loadStrategicData(stratData) {
     console.log("==> teamLookup: loadStrategicData()");
     let tbodyRef = document.getElementById("strategicDataTable").querySelector('tbody');
     tbodyRef.innerHTML = "";     // clear table
-    for (let i = 0; i < dataObj.length; i++) {
-      let driverability = dataObj[i]["driverability"];
+    for (let i = 0; i < stratData.length; i++) {
+      let driverability = stratData[i]["driverability"];
       switch (driverability) {
         case 1: driveVal = "Jerky"; break;
         case 2: driveVal = "Slow"; break;
@@ -1046,38 +1046,39 @@ require 'inc/header.php';
         default: driveVal = ""; break;
       }
 
-      let rowString = "<td>" + dataObj[i]["matchnumber"] + "</td>" +
+      let rowString = "<td>" + stratData[i]["matchnumber"] + "</td>" +
         "<td>" + driveVal + "</td>" +
-        "<td>" + toYesNo(dataObj[i]["against_tactic1"]) + "</td>" +
-        "<td>" + dataObj[i]["against_comment"] + "</td>" +
+        "<td>" + toYesNo(stratData[i]["against_tactic1"]) + "</td>" +
+        "<td>" + stratData[i]["against_comment"] + "</td>" +
 
-        "<td>" + toYesNo(dataObj[i]["defense_tactic1"]) + "</td>" +
-        "<td>" + toYesNo(dataObj[i]["defense_tactic2"]) + "</td>" +
-        "<td>" + dataObj[i]["defense_comment"] + "</td>" +
+        "<td>" + toYesNo(stratData[i]["defense_tactic1"]) + "</td>" +
+        "<td>" + toYesNo(stratData[i]["defense_tactic2"]) + "</td>" +
+        "<td>" + stratData[i]["defense_comment"] + "</td>" +
 
-        "<td>" + toYesNo(dataObj[i]["foul1"]) + "</td>" +
-        "<td>" + toYesNo(dataObj[i]["autonFoul1"]) + "</td>" +
-        "<td>" + toYesNo(dataObj[i]["autonFoul2"]) + "</td>" +
-        "<td>" + toYesNo(dataObj[i]["teleopFoul1"]) + "</td>" +
-        "<td>" + toYesNo(dataObj[i]["teleopFoul2"]) + "</td>" +
-        "<td>" + toYesNo(dataObj[i]["teleopFoul3"]) + "</td>" +
-        "<td>" + toYesNo(dataObj[i]["teleopFoul4"]) + "</td>" +
-        "<td>" + toYesNo(dataObj[i]["endgameFoul1"]) + "</td>" +
+        "<td>" + toYesNo(stratData[i]["foul1"]) + "</td>" +
+        "<td>" + toYesNo(stratData[i]["autonFoul1"]) + "</td>" +
+        "<td>" + toYesNo(stratData[i]["autonFoul2"]) + "</td>" +
+        "<td>" + toYesNo(stratData[i]["teleopFoul1"]) + "</td>" +
+        "<td>" + toYesNo(stratData[i]["teleopFoul2"]) + "</td>" +
+        "<td>" + toYesNo(stratData[i]["teleopFoul3"]) + "</td>" +
+        "<td>" + toYesNo(stratData[i]["teleopFoul4"]) + "</td>" +
+        "<td>" + toYesNo(stratData[i]["endgameFoul1"]) + "</td>" +
 
-        "<td>" + toYesNo(dataObj[i]["autonGetCoralFromFloor"]) + "</td>" +
-        "<td>" + toYesNo(dataObj[i]["autonGetCoralFromStation"]) + "</td>" +
-        "<td>" + toYesNo(dataObj[i]["autonGetAlgaeFromFloor"]) + "</td>" +
-        "<td>" + toYesNo(dataObj[i]["autonGetAlgaeFromReef"]) + "</td>" +
-        "<td>" + toYesNo(dataObj[i]["teleopFloorPickupAlgae"]) + "</td>" +
-        "<td>" + toYesNo(dataObj[i]["teleopFloorPickupCoral"]) + "</td>" +
-        "<td>" + toYesNo(dataObj[i]["teleopKnockOffAlgaeFromReef"]) + "</td>" +
-        "<td>" + toYesNo(dataObj[i]["teleopAcquireAlgaeFromReef"]) + "</td>" +
+        "<td>" + toYesNo(stratData[i]["autonGetCoralFromFloor"]) + "</td>" +
+        "<td>" + toYesNo(stratData[i]["autonGetCoralFromStation"]) + "</td>" +
+        "<td>" + toYesNo(stratData[i]["autonGetAlgaeFromFloor"]) + "</td>" +
+        "<td>" + toYesNo(stratData[i]["autonGetAlgaeFromReef"]) + "</td>" +
+        "<td>" + toYesNo(stratData[i]["teleopFloorPickupAlgae"]) + "</td>" +
+        "<td>" + toYesNo(stratData[i]["teleopFloorPickupCoral"]) + "</td>" +
+        "<td>" + toYesNo(stratData[i]["teleopKnockOffAlgaeFromReef"]) + "</td>" +
+        "<td>" + toYesNo(stratData[i]["teleopAcquireAlgaeFromReef"]) + "</td>" +
 
-        "<td>" + dataObj[i]["problem_comment"] + "</td>" +
-        "<td>" + dataObj[i]["general_comment"] + "</td>" +
-        "<td>" + dataObj[i]["scoutname"] + "</td>";
+        "<td>" + stratData[i]["problem_comment"] + "</td>" +
+        "<td>" + stratData[i]["general_comment"] + "</td>" +
+        "<td>" + stratData[i]["scoutname"] + "</td>";
       tbodyRef.insertRow().innerHTML = rowString;
     }
+    const matchColumn = 0;
     sortTableByMatch("strategicDataTable", matchColumn);
   }
 

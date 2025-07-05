@@ -324,10 +324,10 @@ require 'inc/header.php';
   }
 
   // Add a team (key) to the final team list
-  function getTeamListFromData(dataObj) {
+  function getTeamListFromData(matchData) {
     console.log("==> eventAverages: getTeamListFromData()");
     let keyList = [];
-    for (let teamNum in dataObj) {
+    for (let teamNum in matchData) {
       keyList.push(teamNum);
     }
     return keyList;

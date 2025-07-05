@@ -35,8 +35,6 @@ require 'inc/header.php';
 
 <script>
 
-  const teamColumn = 0;
-
   // Add data keys (header fields) to COPR table in html
   function addKeysToCoprTable(tableId, keys) {
     let tableRef = document.getElementById(tableId);
@@ -110,6 +108,7 @@ require 'inc/header.php';
     }).done(function (coprs) {
       console.log("=> getCOPRs");
       loadCoprTable(tableId, coprs);
+      const teamColumn = 0;
       sortTableByTeam(tableId, teamColumn);
       sorttable.makeSortable(document.getElementById(tableId));
       document.getElementById(tableId).click(); // This magic fixes the floating column bug

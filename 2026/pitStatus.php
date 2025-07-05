@@ -43,8 +43,6 @@ require 'inc/header.php';
 
 <script>
 
-  const teamColumn = 0;
-
   // Build the pit status table
   function loadPitStatusTable(tableId, teams, names, images, pitInfo) {
     console.log("==> pitStatus: loadPitStatusTable()");
@@ -78,6 +76,7 @@ require 'inc/header.php';
       tbodyRef.insertRow().innerHTML = row;
     }
 
+    const teamColumn = 0;
     sortTableByTeam(tableId, teamColumn);
     // script instructions say this is needed, but it breaks table header sorting
     // sorttable.makeSortable(document.getElementById(tableId));

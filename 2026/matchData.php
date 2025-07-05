@@ -55,38 +55,35 @@ require 'inc/header.php';
 
 <script>
 
-  const teamColumn = 1;
-  const matchColumn = 0;
-
   // Load match data to page
   // NOTE: data object keywords MUST match the database definition in dbHandler.php
-  function loadMatchData(tableId, dataObj) {
+  function loadMatchData(tableId, matchData) {
     console.log("==> matchData: loadMatchData()");
     let tbodyRef = document.getElementById(tableId).querySelector('tbody');;
     tbodyRef.innerHTML = ""; // Clear Table
-    for (let i = 0; i < dataObj.length; i++) {
-      let teamNum = dataObj[i]["teamnumber"];
-      let rowString = "<th>" + dataObj[i]["matchnumber"] + "</th>" +
+    for (let i = 0; i < matchData.length; i++) {
+      let teamNum = matchData[i]["teamnumber"];
+      let rowString = "<th>" + matchData[i]["matchnumber"] + "</th>" +
         "<td style=\"background-color:transparent\"><a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</td>" +
-        "<td style=\"background-color:#cfe2ff\">" + dataObj[i]["autonLeave"] + "</td>" +
-        "<td style=\"background-color:transparent\">" + dataObj[i]["autonCoralL1"] + "</td>" +
-        "<td style=\"background-color:#cfe2ff\">" + dataObj[i]["autonCoralL2"] + "</td>" +
-        "<td style=\"background-color:transparent\">" + dataObj[i]["autonCoralL3"] + "</td>" +
-        "<td style=\"background-color:#cfe2ff\">" + dataObj[i]["autonCoralL4"] + "</td>" +
-        "<td style=\"background-color:transparent\">" + dataObj[i]["autonAlgaeNet"] + "</td>" +
-        "<td style=\"background-color:#cfe2ff\">" + dataObj[i]["autonAlgaeProcessor"] + "</td>" +
-        "<td style=\"background-color:transparent\">" + dataObj[i]["acquiredCoral"] + "</td>" +
-        "<td style=\"background-color:#cfe2ff\">" + dataObj[i]["acquiredAlgae"] + "</td>" +
-        "<td style=\"background-color:transparent\">" + dataObj[i]["teleopCoralL1"] + "</td>" +
-        "<td style=\"background-color:#cfe2ff\">" + dataObj[i]["teleopCoralL2"] + "</td>" +
-        "<td style=\"background-color:transparent\">" + dataObj[i]["teleopCoralL3"] + "</td>" +
-        "<td style=\"background-color:#cfe2ff\">" + dataObj[i]["teleopCoralL4"] + "</td>" +
-        "<td style=\"background-color:transparent\">" + dataObj[i]["teleopAlgaeNet"] + "</td>" +
-        "<td style=\"background-color:#cfe2ff\">" + dataObj[i]["teleopAlgaeProcessor"] + "</td>" +
-        "<td style=\"background-color:transparent\">" + dataObj[i]["cageClimb"] + "</td>" +
-        "<td style=\"background-color:#cfe2ff\">" + dataObj[i]["died"] + "</td>" +
-        "<td style=\"background-color:transparent\">" + dataObj[i]["scoutname"] + "</td>" +
-        "<td style=\"background-color:#cfe2ff\">" + dataObj[i]["comment"] + "</td>";
+        "<td style=\"background-color:#cfe2ff\">" + matchData[i]["autonLeave"] + "</td>" +
+        "<td style=\"background-color:transparent\">" + matchData[i]["autonCoralL1"] + "</td>" +
+        "<td style=\"background-color:#cfe2ff\">" + matchData[i]["autonCoralL2"] + "</td>" +
+        "<td style=\"background-color:transparent\">" + matchData[i]["autonCoralL3"] + "</td>" +
+        "<td style=\"background-color:#cfe2ff\">" + matchData[i]["autonCoralL4"] + "</td>" +
+        "<td style=\"background-color:transparent\">" + matchData[i]["autonAlgaeNet"] + "</td>" +
+        "<td style=\"background-color:#cfe2ff\">" + matchData[i]["autonAlgaeProcessor"] + "</td>" +
+        "<td style=\"background-color:transparent\">" + matchData[i]["acquiredCoral"] + "</td>" +
+        "<td style=\"background-color:#cfe2ff\">" + matchData[i]["acquiredAlgae"] + "</td>" +
+        "<td style=\"background-color:transparent\">" + matchData[i]["teleopCoralL1"] + "</td>" +
+        "<td style=\"background-color:#cfe2ff\">" + matchData[i]["teleopCoralL2"] + "</td>" +
+        "<td style=\"background-color:transparent\">" + matchData[i]["teleopCoralL3"] + "</td>" +
+        "<td style=\"background-color:#cfe2ff\">" + matchData[i]["teleopCoralL4"] + "</td>" +
+        "<td style=\"background-color:transparent\">" + matchData[i]["teleopAlgaeNet"] + "</td>" +
+        "<td style=\"background-color:#cfe2ff\">" + matchData[i]["teleopAlgaeProcessor"] + "</td>" +
+        "<td style=\"background-color:transparent\">" + matchData[i]["cageClimb"] + "</td>" +
+        "<td style=\"background-color:#cfe2ff\">" + matchData[i]["died"] + "</td>" +
+        "<td style=\"background-color:transparent\">" + matchData[i]["scoutname"] + "</td>" +
+        "<td style=\"background-color:#cfe2ff\">" + matchData[i]["comment"] + "</td>";
       tbodyRef.insertRow().innerHTML = rowString;
     }
   }
@@ -99,6 +96,8 @@ require 'inc/header.php';
       console.log("=> getMatchData");
       let jsonMatchData = JSON.parse(matchData);
       loadMatchData(tableId, jsonMatchData);
+      const teamColumn = 1;
+      const matchColumn = 0;
       sortTableByMatchAndTeam(tableId, teamColumn, matchColumn);
       // script instructions say this is needed, but it breaks table header sorting
       // sorttable.makeSortable(document.getElementById(tableId));
