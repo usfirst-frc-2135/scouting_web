@@ -407,8 +407,8 @@ require 'inc/header.php';
     }).done(function (response) {
       console.log("=> writeStrategicData");
       if (response.indexOf('success') > -1) {    // A loose compare, because success word may have a newline
-        alert("Success in submitting Strategic Form data!");
         clearStrategicForm();
+        alert("Success in submitting Strategic Form data!");
       } else {
         alert("Failure in submitting Strategic Form!");
       }

@@ -880,9 +880,6 @@ require 'inc/header.php';
           if (eventMatches === null) {
             return alert("Can't load eventMatches from TBA; check if TBA Key was set in db_config");
           }
-          if (eventMatches === null) {
-            alert("Can't load matchlist from TBA; check if TBA Key was set in db_config");
-          }
           else {
             let ourMatches = {};
             jEventMatches = JSON.parse(eventMatches)["response"];
@@ -1016,8 +1013,7 @@ require 'inc/header.php';
       console.log("==> Custom match sheet: " + redTeamNum1 + " " + blueTeamNum1);
       if (redTeamNum1.trim() === "" && blueTeamNum1.trim() === "") {
         console.warn("loadCustomMatch: No Red or Blue team 1 entered!");
-        alert("Please fill in Red Team Number 1 and Blue Team Number 1!");
-        return false;
+        return alert("Please fill in Red Team Number 1 and Blue Team Number 1!");
       }
       else if (redTeamNum1.trim() !== "" && blueTeamNum1.trim() !== "") {
         loadCustomMatch(

@@ -117,13 +117,11 @@
 
     for (let i = 0; i < items.length; i++) {
       if (items[i].href === currentLocation) {
-        // alert("add: " + items[i]);
         items[i].classList.add("active");
         items[i].classList.add("text-light");
         items[i].classList.remove("text-secondary");
       }
       else {
-        // alert("remove: " + items[i]);
         items[i].classList.remove("active");
         items[i].classList.remove("text-light");
         items[i].classList.add("text-secondary");

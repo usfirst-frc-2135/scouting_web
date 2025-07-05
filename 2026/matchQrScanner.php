@@ -181,8 +181,8 @@ require 'inc/header.php';
       window.navigator.vibrate(200); // Chrome throws an "intervention" if window is not clicked first!
     }
     catch (exception) {
-      alert("Vibrate notification request failed!");
       console.warn("alertSuccessfulScan: Vibrate notification request failed! - " + e);
+      alert("Vibrate notification request failed!");
     }
     document.getElementById("content").classList.add("bg-success");
     setTimeout(function () {
@@ -213,8 +213,8 @@ require 'inc/header.php';
           addMatchDataToTable(tableId, qrListToMatchData(qrList), scannedMatches);
         }
         else {
-          alert("QR scan content failed validation!");
           console.warn("addCameraScanner: QR scan content failed validation!");
+          alert("QR scan content failed validation!");
         }
       }
     });
@@ -272,8 +272,8 @@ require 'inc/header.php';
       indexedMatches.push(value);
     }
     if (indexedMatches.length == 0) {
-      alert("No scanned match entries found! - Data NOT Submitted");
       console.warn("submitScannedMatches: No scanned match entries found! - Data NOT Submitted");
+      alert("No scanned match entries found! - Data NOT Submitted");
     }
     else {
       $.post("api/dbWriteAPI.php", {
@@ -281,11 +281,11 @@ require 'inc/header.php';
       }, function (response) {
         console.log("=> writeTeamMatch: " + JSON.stringify(response));
         if (response.indexOf('success') > -1) { // A loose compare, because success word may have a newline
-          alert("Data Successfully Submitted! Clearing Data.");
           clearScannedMatches(tableId, scannedMatches);
+          alert("Data Successfully Submitted! Clearing Data.");
         } else {
-          alert("Write to DB failed! - Data NOT Submitted (is this a duplicate?)");
           console.warn("submitScannedMatches: Write to DB failed! - Data NOT Submitted (is this a duplicate?)");
+          alert("Write to DB failed! - Data NOT Submitted (is this a duplicate?)");
         }
       });
     }

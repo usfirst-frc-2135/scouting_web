@@ -223,9 +223,8 @@ require 'inc/header.php';
 
     // Confirm the file selction selection is supported
     if (!window.FileReader) {
-      alert("This browser does not support 'FileReader'");
       console.warn("This browser does not support 'FileReader'");
-      return;
+      return alert("This browser does not support 'FileReader'");
     }
 
     // Attach image upload processor

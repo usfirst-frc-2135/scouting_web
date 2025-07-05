@@ -237,8 +237,7 @@ require 'inc/header.php';
       for (const id in idToConfigKey) {
         if (document.getElementById(id).value == "") {
           console.warn("Enter all fields: server URL, database name, username, password, TBA key, and event code.");
-          alert("Enter all fields: server URL, database name, username, password, TBA key, and event code.");
-          return;
+          return alert("Enter all fields: server URL, database name, username, password, TBA key, and event code.");
         }
       }
 

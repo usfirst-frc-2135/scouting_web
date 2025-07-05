@@ -374,8 +374,8 @@ require 'inc/header.php';
     }).done(function (response) {
       console.log("=> writePitTable");
       if (response.indexOf('success') > -1) {    // A loose compare, because success word may have a newline
-        alert("Success in submitting Pit data! - Clearning form");
         clearPitForm();
+        alert("Success in submitting Pit data! - Clearning form");
       } else {
         alert("Failure in submitting Pit Form! Is this a duplicate?");
       }
