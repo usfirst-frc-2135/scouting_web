@@ -7,7 +7,7 @@
 */
 
 // Test for an alphabetic character
-function isAlpha(ch) {
+function isAlphaChar(ch) {
   return /^[A-Z]$/i.test(ch);
 }
 
@@ -33,7 +33,7 @@ function validateTeamNumber(teamName, teamList) {
   if (typeof teamName === 'string' || teamName instanceof String) {
     if (!/\s/.test(teamName)) {
       let lastChar = teamName.substring(teamName.length - 1);
-      if (isAlpha(lastChar)) {
+      if (isAlphaChar(lastChar)) {
         teamName = teamName.substring(0, teamName.length - 1);
       }
       if (isNumeric(teamName))

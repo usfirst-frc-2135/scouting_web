@@ -1110,7 +1110,7 @@ require 'inc/header.php';
     console.log("==> teamLookup: loadMatchData()");
     let mdp = new matchDataProcessor(allEventMatches);
     mdp.sortMatches(allEventMatches);
-    mdp.getSiteFilteredAverages(function (averageData) {
+    mdp.getSiteFilteredAverages(function (matchData, averageData) {
       let teamAverages = averageData[team];
       if (teamAverages !== undefined) {
         loadAverageTables(teamAverages);
@@ -1128,9 +1128,7 @@ require 'inc/header.php';
     });
   }
 
-  // This is the main function that runs when we want to load a team 
-  function buildTeamLookupPage(teamNum) {
-    console.log("==> teamLookup: buildTeamLookupPage()");
+  function clearTeamLookupPage() {
     // Clear existing data
     document.getElementById("teamTitle").innerText = "";
     document.getElementById("robotPics").innerText = "";
@@ -1143,6 +1141,12 @@ require 'inc/header.php';
     document.getElementById("pitTable2").querySelector('tbody').innerHTML = "";
     document.getElementById("strategicDataTable").querySelector('tbody').innerHTML = "";
     document.getElementById("matchDataTable").querySelector('tbody').innerHTML = "";
+  }
+
+  // This is the main function that runs when we want to load a team 
+  function buildTeamLookupPage(teamNum) {
+    console.log("==> teamLookup: buildTeamLookupPage()");
+    clearTeamLookupPage();
 
     // Get team name from TBA
     $.get("api/tbaAPI.php", {
@@ -1200,7 +1204,7 @@ require 'inc/header.php';
 
     // Check URL for source team to load
     let initTeamNumber = checkURLForTeamSpec();
-    if (initTeamNumber) {
+    if (validateTeamNumber(initTeamNumber, null) > 0) {
       buildTeamLookupPage(initTeamNumber);
     }
 
@@ -1215,7 +1219,10 @@ require 'inc/header.php';
 
     // Load team data for the number entered
     document.getElementById("loadTeamButton").addEventListener('click', function () {
-      buildTeamLookupPage(document.getElementById("enterTeamNumber").value);
+      let teamNum = document.getElementById("enterTeamNumber").value;
+      if (validateTeamNumber(teamNum, null) > 0) {
+        buildTeamLookupPage(document.getElementById("enterTeamNumber").value);
+      }
     });
   });
 </script>
@@ -1224,3 +1231,4 @@ require 'inc/header.php';
 <script src="./scripts/compareTeamNumbers.js"></script>
 <script src="./scripts/sortFrcTables.js"></script>
 <script src="./scripts/matchDataProcessor.js"></script>
+<script src="./scripts/validateTeamNumber.js"></script>

@@ -858,7 +858,7 @@ require 'inc/header.php';
       }).done(function (matchData) {
         console.log("=> getMatchData");
         let mdp = new matchDataProcessor(JSON.parse(matchData));
-        mdp.getSiteFilteredAverages(function (averageData) {
+        mdp.getSiteFilteredAverages(function (matchData, averageData) {
           _allMatchData = averageData;
           successFunction();
         });

@@ -1,6 +1,10 @@
 /*
   Match Data Processor
   Takes in match data from source and calculates averages and other derived data from it.
+  Data types:
+    matchData - the JSON parsed match data from our scouting database
+    matchId - the string used to identify a match competition level and match number (e.g. qm5)
+    matchTuple - a two entry tuple that identifies a match (e.g. ["qm", "5"])
 */
 class matchDataProcessor {
 
@@ -9,68 +13,71 @@ class matchDataProcessor {
     this.siteFilter = null;
   }
 
+  // Fix match IDs that are missing the comp level
+  getFixedMatchId(matchId) {
+    matchId = matchId.toLowerCase();
+    if ((matchId.search("p") != -1) || (matchId.search("qm") != -1) ||
+      (matchId.search("sf") != -1) || (matchId.search("f") != -1)) {
+      return matchId;
+    }
+    else {  // Attempt to repair bad match IDs but log them
+      console.warn("getMatchTuple: Invalid matchId! " + matchId);
+      return "qm" + matchId;
+    }
+  }
+
   // Get the comp level and match number from the match ID string (ex. [qm, 25] from qm25)
   getMatchTuple(matchId) {
-    matchId = matchId.toLowerCase();
+    matchId = this.getFixedMatchId(matchId);
     if (matchId.search("p") != -1) {
       return ["p", parseInt(matchId.substring(1))];
     }
-    if (matchId.search("qm") != -1) {
+    else if (matchId.search("qm") != -1) {
       return ["qm", parseInt(matchId.substring(2))];
     }
-    if (matchId.search("sf") != -1) {
+    else if (matchId.search("sf") != -1) {
       return ["sf", parseInt(matchId.substring(2))];
     }
-    if (matchId.search("f") != -1) {
+    else if (matchId.search("f") != -1) {
       return ["f", parseInt(matchId.substring(1))];
     }
-    console.warn("getMatchTuple: Invalid prefix! " + matchId)
+    else {  // Repair bad match IDs but report them
+      console.warn("getMatchTuple: Invalid match prefix! " + matchId);
+    }
     return null;
   }
 
-  // Fix match IDs that are missing the comp level
-  getFixedMatchTuple(matchId) {
-    let mt = this.getMatchTuple(matchId);
-    if (mt === null)
-      mt = this.getMatchTuple("qm" + matchId);
-    return mt;
-  }
-
   // Compare if second match ID is larget than first match ID
-  matchLessEqualThan(startMatch, endMatch) {
-    let fmt = this.getFixedMatchTuple(startMatch);
-    let lmt = this.getFixedMatchTuple(endMatch);
+  isMatchLessThanOrEqual(startMatchId, endMatchId) {
+    let smt = this.getMatchTuple(startMatchId);
+    let emt = this.getMatchTuple(endMatchId);
 
-    let typeProg = { "p": 0, "qm": 1, "sf": 3, "f": 4 };
-    if (fmt === null || lmt === null) {
+    let compLevel = { "p": 0, "qm": 1, "sf": 3, "f": 4 };
+    if (smt === null || emt === null) {
       return false;
     }
-    if (typeProg[fmt[0]] < typeProg[lmt[0]]) {
+    if (compLevel[smt[0]] < compLevel[emt[0]]) {
       return true;
     }
-    if (typeProg[fmt[0]] > typeProg[lmt[0]]) {
+    if (compLevel[smt[0]] > compLevel[emt[0]]) {
       return false;
     }
-    return fmt[1] <= lmt[1];
+    return smt[1] <= emt[1];
   }
 
   // Compare if match ID string is within two match ID endpoints
-  ifMatchInRange(startMatch, testMatch, endMatch) {
-    return this.matchLessEqualThan(startMatch, testMatch) && this.matchLessEqualThan(testMatch, endMatch);
+  ifMatchInRange(startMatchId, matchId, endMatchId) {
+    return this.isMatchLessThanOrEqual(startMatchId, matchId) && this.isMatchLessThanOrEqual(matchId, endMatchId);
   }
 
   // Filters out all matches in this.data not within the specified range (destructively changes this.data)
-  filterMatchRange(startMatch, endMatch) {
+  filterMatchRange(startMatchId, endMatchId) {
     let newData = [];
     for (let i = 0; i < this.data.length; i++) {
-      let midStr = this.data[i]["matchnumber"];
-      if (this.getMatchTuple(midStr) === null) {
-        midStr = "qm" + midStr;
-      }
-      if (this.ifMatchInRange(startMatch, midStr, endMatch)) {
+      let matchId = this.data[i]["matchnumber"];
+      if (this.ifMatchInRange(startMatchId, matchId, endMatchId)) {
         newData.push(this.data[i]);
       }
-
     }
     this.data = newData;
   }
@@ -78,7 +85,7 @@ class matchDataProcessor {
   // Sorts the data by match number (ignores comp_level)
   sortMatches(newData) {
     newData.sort((a, b) => {
-      let compare = this.matchLessEqualThan(a["matchnumber"], b["matchnumber"]);
+      let compare = this.isMatchLessThanOrEqual(a["matchnumber"], b["matchnumber"]);
       return (compare) ? -1 : 1;
     });
   }
@@ -116,7 +123,7 @@ class matchDataProcessor {
 
       tempThis.applySiteFilter();
 
-      successFunction(tempThis.getEventAverages());
+      successFunction(tempThis.data, tempThis.getEventAverages());
     });
   }
 
