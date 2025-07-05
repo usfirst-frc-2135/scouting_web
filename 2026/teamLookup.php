@@ -603,7 +603,7 @@ require 'inc/header.php';
       options: {
         scales: {
           x: { stacked: true },
-          y: { stacked: true, min: 0, ticks: { precision: 0 }, max: 5 }
+          y: { stacked: true, min: 0, ticks: { precision: 0 }, max: 5 } // Set Y axis maximum value - 4 coral + algae in  auto plus leave
         },
         plugins: {
           tooltip: {
@@ -720,7 +720,7 @@ require 'inc/header.php';
       options: {
         scales: {
           x: { stacked: true },
-          y: { stacked: true, min: 0, ticks: { precision: 0 }, max: 12 }
+          y: { stacked: true, min: 0, ticks: { precision: 0 }, max: 14 } // Set Y axis maximum value - 14 coral + algae in teleop
         },
         plugins: {
           tooltip: {
@@ -809,7 +809,7 @@ require 'inc/header.php';
       options: {
         scales: {
           x: { stacked: true },
-          y: { stacked: true, min: 0, ticks: { precision: 0 }, max: 4 }
+          y: { stacked: true, min: 0, ticks: { precision: 0 }, max: 4 } // Set Y axis maximum value - deep climb
         },
         plugins: {
           tooltip: {
