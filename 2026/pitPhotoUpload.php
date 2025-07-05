@@ -46,8 +46,9 @@ require 'inc/header.php';
 
         </div>
 
-        <button id="loadingButton" class="btn btn-primary mb-3">
-          <span class="spinner-border spinner-border-sm"></span>Loading ...
+        <button id="loadingSpinner" class="btn btn-primary mb-3" type="button" disabled>
+          <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+          <span role="status">Loading...</span>
         </button>
         <div id="uploadMessage" class="alert alert-dismissible fade show" style="display: none" role="alert">
           <div id="uploadMessageText"></div>
@@ -102,7 +103,7 @@ require 'inc/header.php';
   // Display success to user
   function uploadSuccess(msg) {
     console.log("==> pitPhotoUpload: uploadSuccess: " + msg);
-    loadingButton.style.visibility = 'hidden';
+    loadingSpinner.style.visibility = 'hidden';
     let jMsg = JSON.parse(msg);
     if (jMsg["success"]) {
       showSuccessMessage("Upload successful, clearing form!");
@@ -118,7 +119,7 @@ require 'inc/header.php';
       let teamNum = document.getElementById("teamNumber").value;
 
       if (validateTeamNumber(teamNum, null) > 0) {
-        loadingButton.style.visibility = 'visible';
+        loadingSpinner.style.visibility = 'visible';
 
         // Replace checkbox is ticked
         if (document.getElementById("replacePic").checked === true) {
@@ -173,12 +174,12 @@ require 'inc/header.php';
         }, 500);
       }
       else {
-        loadingButton.style.visibility = 'hidden';
+        loadingSpinner.style.visibility = 'hidden';
         alert("Team Number is invalid - must be integer with optional last alpha!");
       }
     }
     else {
-      loadingButton.style.visibility = 'hidden';
+      loadingSpinner.style.visibility = 'hidden';
       alert("Please fill in all fields!");
     }
 
@@ -211,8 +212,8 @@ require 'inc/header.php';
   //
   document.addEventListener("DOMContentLoaded", () => {
 
-    const loadingButton = document.getElementById("loadingButton");
-    loadingButton.style.visibility = 'hidden';
+    const loadingSpinner = document.getElementById("loadingSpinner");
+    loadingSpinner.style.visibility = 'hidden';
 
     // Check URL for source team to load
     let initTeamNumber = checkURLForTeamSpec();
