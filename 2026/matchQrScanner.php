@@ -176,12 +176,12 @@ require 'inc/header.php';
   }
 
   // Alerts user of a successful QR scan
-  function alertSuccessfulScan() {
+  function indicateScanSuccess() {
     try {
       window.navigator.vibrate(200); // Chrome throws an "intervention" if window is not clicked first!
     }
     catch (exception) {
-      console.warn("alertSuccessfulScan: Vibrate notification request failed! - " + e);
+      console.warn("indicateScanSuccess: Vibrate notification request failed! - " + e);
       alert("Vibrate notification request failed!");
     }
     document.getElementById("content").classList.add("bg-success");
@@ -209,7 +209,7 @@ require 'inc/header.php';
         qrList = padList(qrList);
         console.log("addCameraScanner: qrList = " + qrList);
         if (validateQrList(qrList)) {
-          alertSuccessfulScan();
+          indicateScanSuccess();
           addMatchDataToTable(tableId, qrListToMatchData(qrList), scannedMatches);
         }
         else {
