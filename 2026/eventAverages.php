@@ -437,22 +437,35 @@ require 'inc/header.php';
     });
   }
 
-  // Retrieve match data and OPRs data and write out CSV file
+  // Retrieve match data and OPRs data (in parallel) and write out CSV file
   function downloadCSVFile(csvName) {
     console.log("==> eventAverages: downloadCSVFile()");
+    let jMatchData = null;
+    let jCoprData = null;
+    function waitForData(mData, cData) {
+      if ((mData === null) || (cData === null)) {
+        return;
+      }
+      console.log("Creating the CSV");
+      createCSVFile(csvName, mData, cData);
+    }
+
+    // Get match data from DB
     $.get("api/dbReadAPI.php", {
       getMatchData: true
     }).done(function (matchData) {
       console.log("=> getMatchData:");
-      let jMatchData = JSON.parse(matchData);
+      jMatchData = JSON.parse(matchData);
+      waitForData(jMatchData, jCoprData);
+    });
 
-      // Get OPR data from TBA
-      $.get("api/tbaAPI.php", {
-        getCOPRs: true
-      }).done(function (coprs) {
-        console.log("=> getCOPRs");
-        createCSVFile(csvName, jMatchData, JSON.parse(coprs)["data"]);
-      });
+    // Get OPR data from TBA
+    $.get("api/tbaAPI.php", {
+      getCOPRs: true
+    }).done(function (coprs) {
+      console.log("=> getCOPRs");
+      jCoprData = JSON.parse(coprs)["data"];
+      waitForData(jMatchData, jCoprData);
     });
   }
 

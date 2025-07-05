@@ -1026,7 +1026,6 @@ require 'inc/header.php';
       }
     });
 
-
     // Load match links for our matches
     buildOurMatchLinks(function () { });
   });
