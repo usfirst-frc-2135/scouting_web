@@ -73,7 +73,7 @@ require 'inc/header.php';
     console.log("=> pitPhotoUpload: checkURLForTeamSpec()");
     let sp = new URLSearchParams(window.location.search);
     if (sp.has('teamNum')) {
-      return sp.get('teamNum')
+      return sp.get('teamNum');
     }
     return null;
   }
@@ -122,7 +122,7 @@ require 'inc/header.php';
         loadingSpinner.style.visibility = 'visible';
 
         // Replace checkbox is ticked
-        if (document.getElementById("replacePic").checked === true) {
+        if (document.getElementById("replacePic").checked) {
           console.log("==> Going to remove existing photos for team #" + teamNum);
 
           // First get list of robot-pic files for this team.

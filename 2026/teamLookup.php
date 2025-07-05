@@ -529,12 +529,12 @@ require 'inc/header.php';
     let autonCoralL4Tips = []; // holds custom tooltips for auton coral 4      
 
     datasets.push({ label: "Leave", data: [], backgroundColor: '#F7CF58' });      // Yellow
-    datasets.push({ label: "Processor", data: [], backgroundColor: '#B4E7D6' });  // Teal (algae)
-    datasets.push({ label: "Net", data: [], backgroundColor: '#4C9F7C' });        // Darker Teal (algae)
-    datasets.push({ label: "L1", data: [], backgroundColor: '#D98AB3' });         // Light pink (coral branch)
-    datasets.push({ label: "L2", data: [], backgroundColor: '#CE649B' });         // Medium light pink (coral branch)
-    datasets.push({ label: "L3", data: [], backgroundColor: '#C54282' });         // Medium dark pink (coral branch)
-    datasets.push({ label: "L4", data: [], backgroundColor: '#9D3468' });         // Dark pink (coral branch)
+    datasets.push({ label: "Processor", data: [], backgroundColor: '#B4E7D6' });  // Teal - algae
+    datasets.push({ label: "Net", data: [], backgroundColor: '#4C9F7C' });        // Darker Teal - algae
+    datasets.push({ label: "L1", data: [], backgroundColor: '#D98AB3' });         // Light pink - coral branch
+    datasets.push({ label: "L2", data: [], backgroundColor: '#CE649B' });         // Medium light pink - coral branch
+    datasets.push({ label: "L3", data: [], backgroundColor: '#C54282' });         // Medium dark pink - coral branch
+    datasets.push({ label: "L4", data: [], backgroundColor: '#9D3468' });         // Dark pink - coral branch
 
     // Go thru each matchdata QR code string and build up a table of the data, so we can
     // later sort it so the matches are listed in the right order. 
@@ -572,8 +572,9 @@ require 'inc/header.php';
 
       function storeAndGetTip(value, tipPrefix, dataset, yesNo) {
         dataset.push(value);
-        if (yesNo)
+        if (yesNo) {
           value = (value) ? "Yes" : "No";
+        }
         return tipPrefix + value;
       }
 
@@ -653,12 +654,12 @@ require 'inc/header.php';
     let teleopCoralL3Tips = []; // holds custom tooltips for teleop coral L3
     let teleopCoralL4Tips = []; // holds custom tooltips for teleop coral 4      
 
-    datasets.push({ label: "Processor", data: [], backgroundColor: '#B4E7D6' });  // Teal (algae)
-    datasets.push({ label: "Net", data: [], backgroundColor: '#4C9F7C' });        // Darker Teal (algae)
-    datasets.push({ label: "L1", data: [], backgroundColor: '#D98AB3' });         // Light pink (coral branch)
-    datasets.push({ label: "L2", data: [], backgroundColor: '#CE649B' });         // Medium light pink (coral branch)
-    datasets.push({ label: "L3", data: [], backgroundColor: '#C54282' });         // Medium dark pink (coral branch)
-    datasets.push({ label: "L4", data: [], backgroundColor: '#9D3468' });         // Dark pink (coral branch)
+    datasets.push({ label: "Processor", data: [], backgroundColor: '#B4E7D6' });  // Teal - algae
+    datasets.push({ label: "Net", data: [], backgroundColor: '#4C9F7C' });        // Darker Teal - algae
+    datasets.push({ label: "L1", data: [], backgroundColor: '#D98AB3' });         // Light pink - coral branch
+    datasets.push({ label: "L2", data: [], backgroundColor: '#CE649B' });         // Medium light pink - coral branch
+    datasets.push({ label: "L3", data: [], backgroundColor: '#C54282' });         // Medium dark pink - coral branch
+    datasets.push({ label: "L4", data: [], backgroundColor: '#9D3468' });         // Dark pink - coral branch
 
     // Go thru each matchdata QR code string and build up a table of the data, so we can
     // later sort it so the matches are listed in the right order. 
@@ -762,7 +763,7 @@ require 'inc/header.php';
     let datasets = [];
     let cageClimbTips = [];
 
-    datasets.push({ label: "Cage Climb", data: [], backgroundColor: '#ED8537' });   // Orange (endgame)
+    datasets.push({ label: "Cage Climb", data: [], backgroundColor: '#ED8537' });   // Orange - endgame
 
     // Go thru each matchdata QR code string and build up a table of the data, so we can
     // later sort it so the matches are listed in the right order. 
@@ -993,7 +994,7 @@ require 'inc/header.php';
     console.log("=> teamLookup: checkURLForTeamSpec()");
     let sp = new URLSearchParams(window.location.search);
     if (sp.has('teamNum')) {
-      return sp.get('teamNum')
+      return sp.get('teamNum');
     }
     return null;
   }
@@ -1110,21 +1111,23 @@ require 'inc/header.php';
     console.log("==> teamLookup: loadMatchData()");
     let mdp = new matchDataProcessor(allEventMatches);
     mdp.sortMatches(allEventMatches);
-    mdp.getSiteFilteredAverages(function (matchData, averageData) {
+    mdp.getSiteFilteredAverages(function (filteredMatches, averageData) {
+      if (filteredMatches != undefined) {
+        loadAutonGraph(filteredMatches);
+        loadTeleopGraph(filteredMatches);
+        loadEndgameGraph(filteredMatches);
+        teamMatchDataTable(filteredMatches);
+      }
+      else {
+        alert("No match data for this team at this event!");
+      }
       let teamAverages = averageData[team];
       if (teamAverages !== undefined) {
         loadAverageTables(teamAverages);
       }
       else {
-        alert("No match data for this team at this event!")
+        alert("No averages data for this team at this event!");
       }
-    });
-    getSiteFilteredData(team, function (fData) {
-      filteredData = fData;
-      loadAutonGraph(filteredData);
-      loadTeleopGraph(filteredData);
-      loadEndgameGraph(filteredData);
-      teamMatchDataTable(filteredData);
     });
   }
 

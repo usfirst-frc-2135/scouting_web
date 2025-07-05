@@ -272,7 +272,7 @@ require 'inc/header.php';
     console.log("=> strategicForm: checkURLForTeamSpec()");
     let sp = new URLSearchParams(window.location.search);
     if (sp.has('teamNum')) {
-      return sp.get('teamNum')
+      return sp.get('teamNum');
     }
     return null;
   }

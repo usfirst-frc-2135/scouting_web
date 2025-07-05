@@ -182,7 +182,7 @@ class tbaHandler
     }
 
     $ml = null;   // matchlist, only needed if multi-robot event
-    if ($bMultiRobots === true)
+    if ($bMultiRobots)
     {
       error_log("getEventTeamsEx: going to adjust teamlist for multi-robots");
       $ml = $this->getEventMatches($eventCode);
@@ -191,7 +191,7 @@ class tbaHandler
     foreach ($tl["response"] as $teamRow)
     {
       // If this is a multi-robot event, go thru  match list to get B/C/D/E robots and add them as separate teams.
-      if ($bMultiRobots === true)
+      if ($bMultiRobots)
       {
         $teamnum = $teamRow["team_number"];
         $numStr = "$teamnum"; // $teamnum needs to be converted to a string, for later

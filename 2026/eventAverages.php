@@ -229,7 +229,7 @@ require 'inc/header.php';
     return Math.round((val + Number.EPSILON) * 100) / 100;
   }
 
-  // Lookup value for a key in the passed dictionary (team in match data)
+  // Lookup value for a key in the passed dictionary - team in match data
   function getDataValue(dict, key) {
     if (!dict) {
       console.warn("getDataValue: Dictionary not found! " + dict);
@@ -339,11 +339,11 @@ require 'inc/header.php';
   function lookupAverage(teamAverages, team, item) {
     // console.log("==> eventAverages: lookupAverage()");
     if (!teamAverages) {
-      console.warn("lookupAverages: No team averages!")
+      console.warn("lookupAverages: No team averages!");
       return "NA";
     }
     if (!(team in teamAverages)) {
-      console.warn("lookupAverages: Team not in list!")
+      console.warn("lookupAverages: Team not in list!");
       return "NA";
     }
     return teamAverages[team][item];

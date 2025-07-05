@@ -757,7 +757,7 @@ require 'inc/header.php';
     if (!bUsingCustom) {
       matchVector = localMatchList[makeKey(localCompLevel, localMatchNum)];
       if (!matchVector) {
-        console.warn("processMatchList: Match does not exist: " + makeKey(localCompLevel, localMatchNum))
+        console.warn("processMatchList: Match does not exist: " + makeKey(localCompLevel, localMatchNum));
         alert("Match " + makeKey(localCompLevel, localMatchNum) + " does not exist!");
         return;
       }
@@ -893,8 +893,9 @@ require 'inc/header.php';
 
               newMatch["comp_level"] = match["comp_level"];
               newMatch["match_number"] = match["match_number"];
-              if (match["comp_level"] === "sf")
+              if (match["comp_level"] === "sf") {
                 newMatch["match_number"] = match["set_number"];
+              }
 
               newMatch["red_teams"] = match["alliances"]["red"]["team_keys"];
               newMatch["blue_teams"] = match["alliances"]["blue"]["team_keys"];
@@ -965,7 +966,7 @@ require 'inc/header.php';
     localMatchNum = matchNum;
     localCompLevel = compLevel;
     loadMatchData(function () {
-      buildOurMatchLinks(processMatchList)
+      buildOurMatchLinks(processMatchList);
     });
   }
 
@@ -982,7 +983,7 @@ require 'inc/header.php';
     customBlueTeam2 = blueTeam2;
     customBlueTeam3 = blueTeam3;
     loadMatchData(function () {
-      buildOurMatchLinks(processMatchList)
+      buildOurMatchLinks(processMatchList);
     });
   }
 

@@ -36,13 +36,15 @@ function validateTeamNumber(teamName, teamList) {
       if (isAlphaChar(lastChar)) {
         teamName = teamName.substring(0, teamName.length - 1);
       }
-      if (isNumeric(teamName))
+      if (isNumeric(teamName)) {
         teamNumber = parseInt(teamName);
+      }
 
       if (teamList != null) {
-        // teamNumber not in teamList)
-        if (teamList.indexOf(teamNumber) < 0)
+        // teamNumber not in teamList
+        if (teamList.indexOf(teamNumber) < 0) {
           teamNumber = 0;
+        }
       }
     }
   }

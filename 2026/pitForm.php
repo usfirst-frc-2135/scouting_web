@@ -181,7 +181,7 @@ require 'inc/header.php';
     console.log("=> pitForm: checkURLForTeamSpec()");
     let sp = new URLSearchParams(window.location.search);
     if (sp.has('teamNum')) {
-      return sp.get('teamNum')
+      return sp.get('teamNum');
     }
     return null;
   }
@@ -200,14 +200,14 @@ require 'inc/header.php';
     }
 
     if (document.getElementById("scoutName").value === "") {
-      if (isError === true)
+      if (isError)
         errMsg += ",";
       errMsg += " Scout Name";
       isError = true;
     }
 
     if (!document.getElementById("swerveDriveYes").checked && !document.getElementById("swerveDriveNo").checked) {
-      if (isError === true)
+      if (isError)
         errMsg += ",";
       errMsg += " Swerve Drive";
       isError = true;
@@ -215,14 +215,14 @@ require 'inc/header.php';
 
     let driveMotors = document.getElementById("driveMotors").value;
     if (driveMotors != 1 && driveMotors != 2 && driveMotors != 3 && driveMotors != 4) {
-      if (isError === true)
+      if (isError)
         errMsg += ",";
       errMsg += " Drive Motors";
       isError = true;
     }
 
     if (!document.getElementById("sparePartsYes").checked && !document.getElementById("sparePartsNo").checked) {
-      if (isError === true)
+      if (isError)
         errMsg += ",";
       errMsg += " Spare Parts";
       isError = true;
@@ -230,28 +230,28 @@ require 'inc/header.php';
 
     let progLanguage = document.getElementById("programmingLanguage").value;
     if (progLanguage != 1 && progLanguage != 2 && progLanguage != 3 && progLanguage != 4 && progLanguage != 5) {
-      if (isError === true)
+      if (isError)
         errMsg += ",";
       errMsg += " Programming Language";
       isError = true;
     }
 
     if (!document.getElementById("computerVisionYes").checked && !document.getElementById("computerVisionNo").checked) {
-      if (isError === true)
+      if (isError)
         errMsg += ",";
       errMsg += " Computer Vision";
       isError = true;
     }
 
     if (!document.getElementById("pitScore1").checked && !document.getElementById("pitScore2").checked && !document.getElementById("pitScore3").checked) {
-      if (isError === true)
+      if (isError)
         errMsg += ",";
       errMsg += " Pit Organization";
       isError = true;
     }
 
     if (!document.getElementById("preparednessScore1").checked && !document.getElementById("preparednessScore2").checked && !document.getElementById("preparednessScore3").checked) {
-      if (isError === true)
+      if (isError)
         errMsg += ",";
       errMsg += " Preparedness";
       isError = true;

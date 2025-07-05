@@ -47,7 +47,7 @@ require 'inc/header.php';
   function loadPitStatusTable(tableId, teams, names, images, pitInfo) {
     console.log("==> pitStatus: loadPitStatusTable()");
     if (teams === [] || (Object.keys(names).length === 0) || (Object.keys(images).length === 0) || (Object.keys(pitInfo).length === 0)) {
-      // console.warn("loadPitStatusTable: teams, names, images, or pit data are missing!")
+      // console.warn("loadPitStatusTable: teams, names, images, or pit data are missing!");
       return;
     }
 

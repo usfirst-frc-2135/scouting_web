@@ -148,7 +148,7 @@
           });
         }
         else {
-          console.warn("DB server undefined -- cannot retrieve event code!")
+          console.warn("DB server undefined -- cannot retrieve event code!");
         }
       });
     });

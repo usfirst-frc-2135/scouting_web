@@ -57,7 +57,7 @@ require 'inc/header.php';
   function padList(qrList) {
     if (qrList.length === qrValidLength - qrPadLength) {
       qrList.push("");
-      console.warn("Padding QR scan! (Why is this needed?)")
+      console.warn("Padding QR scan! (Why is this needed?)");
     }
     return qrList;
   }

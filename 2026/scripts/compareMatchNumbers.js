@@ -46,7 +46,7 @@ function compareMatchNumbers(matchA, matchB) {
     prefixA = "f";
   }
   if (prefixA === "") {
-    console.warn("compareMatchNumbers: matchA is missing comp_level! - " + matchA)
+    console.warn("compareMatchNumbers: matchA is missing comp_level! - " + matchA);
     prefixA = "qm";
     numA = matchA;
     matchA = prefixA + matchA;
@@ -69,7 +69,7 @@ function compareMatchNumbers(matchA, matchB) {
     prefixB = "f";
   }
   if (prefixB === "") {
-    console.warn("compareMatchNumbers: matchB is missing comp_level! - " + matchB)
+    console.warn("compareMatchNumbers: matchB is missing comp_level! - " + matchB);
     prefixB = "qm";
     numB = matchB;
     matchB = prefixB + matchB;

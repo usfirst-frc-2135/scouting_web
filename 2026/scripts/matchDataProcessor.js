@@ -247,8 +247,9 @@ class matchDataProcessor {
 
       let autonLeave = (this.data[i]["autonLeave"]);
       let autonLeavePoints = 0;
-      if (parseInt(autonLeave) === 1)
+      if (parseInt(autonLeave) === 1) {
         autonLeavePoints = 3;
+      }
       // HOLD      console.log(" --> auton Leave points = "+autonLeavePoints);  //TEST
 
       let currentAutonCoralL1 = (this.data[i]["autonCoralL1"]);
@@ -271,7 +272,7 @@ class matchDataProcessor {
       // HOLD      console.log(" --> total auton coral pts = "+totalAutoCoralPoints);  //TEST
 
       let totalAutoAlgae = parseInt(currentAutonAlgaeNet) + parseInt(currentAutonAlgaeProcessor);
-      let totalAutoAlgaePoints = (parseInt(currentAutonAlgaeNet) * 4) + (parseInt(currentAutonAlgaeProcessor) * 6)
+      let totalAutoAlgaePoints = (parseInt(currentAutonAlgaeNet) * 4) + (parseInt(currentAutonAlgaeProcessor) * 6);
       // HOLD      console.log(" --> total auton algae = "+totalAutoAlgae);  //TEST
       // HOLD      console.log(" --> total auton algae pts = "+totalAutoAlgaePoints);  //TEST
 

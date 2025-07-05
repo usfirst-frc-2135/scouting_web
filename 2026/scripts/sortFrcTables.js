@@ -23,16 +23,18 @@ function sortFrcTables(tableId, teamCol, matchCol) {
   let rows = Array.prototype.slice.call(tableRef.querySelectorAll("tbody > tr")); // All "tr" in <tbody>
 
   // Sort the rows based on column 1 match number
-  if (matchCol !== -1)
+  if (matchCol !== -1) {
     rows.sort(function (rowA, rowB) {
       return (compareMatchNumbers(rowA.cells[matchCol].textContent, rowB.cells[matchCol].textContent));
     });
+  }
 
   // Sort the rows based on column 1 match number
-  if (teamCol !== -1)
+  if (teamCol !== -1) {
     rows.sort(function (rowA, rowB) {
       return (compareTeamNumbers(rowA.cells[teamCol].textContent, rowB.cells[teamCol].textContent));
     });
+  }
 
   // Update the table body with the sorted rows.
   rows.forEach(function (row) {

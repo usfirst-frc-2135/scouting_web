@@ -533,9 +533,10 @@ require 'inc/header.php';
       alert("This match form is NOT configured for 2025 game!");
 
       // Should be:
-      // if (validateMatchForm())
+      // if (validateMatchForm()) {
       //    matchFormData = getMatchFormData();
       //    submitMatchFormData(matchFormData);
+      // }
     });
   });
 </script>
