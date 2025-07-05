@@ -908,47 +908,6 @@ require 'inc/header.php';
     writeAverageTableRow("endgameClimbTable", avgs["endgameClimbPercent"], ["endgameclimbStr", 0, 2, 1, 3, 4], 6);
   }
 
-  // filters out the match type as specified in the db status page
-  function getSiteFilteredData(team, successFunction) {
-    console.log("==> teamLookup: getSiteFilteredData: " + team);
-
-    $.post("api/dbAPI.php", {
-      getDBStatus: true
-    }, function (dbStatus) {
-      console.log("=> getDBStatus");
-      jDbStatus = JSON.parse(dbStatus);
-
-      $.get("api/dbReadAPI.php", {
-        getTeamMatches: team
-      }).done(function (teamMatches) {
-        console.log("=> getTeamMatches");
-        jTeamMatches = JSON.parse(teamMatches);
-
-        let newData = [];
-        for (let i = 0; i < jTeamMatches.length; i++) {
-          let mn = jTeamMatches[i]["matchnumber"];
-          let matchStr = mn.toLowerCase();
-
-          if ((matchStr.search("p") != -1) && jDbStatus["useP"]) {
-            newData.push(jTeamMatches[i]);
-          }
-          else if ((matchStr.search("qm") != -1) && jDbStatus["useQm"]) {
-            newData.push(jTeamMatches[i]);
-          }
-          else if ((matchStr.search("sf") != -1) && jDbStatus["useSf"]) {
-            newData.push(jTeamMatches[i]);
-          }
-          else if ((matchStr.search("f") != -1) && jDbStatus["useF"]) {
-            newData.push(jTeamMatches[i]);
-          }
-        }
-        jTeamMatches = [...newData];
-
-        successFunction(jTeamMatches);
-      });
-    });
-  }
-
   // Loads the match data table
   function teamMatchDataTable(matchData) {
     console.log("==> teamLookup: teamMatchDataTable()");
