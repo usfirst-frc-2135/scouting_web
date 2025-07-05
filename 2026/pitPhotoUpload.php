@@ -66,7 +66,6 @@ require 'inc/header.php';
 
 <script>
 
-  const loadingButton = document.getElementById("loadingButton");
 
   // Check if our URL directs to a specific team
   function checkURLForTeamSpec() {
@@ -212,6 +211,7 @@ require 'inc/header.php';
   //
   document.addEventListener("DOMContentLoaded", () => {
 
+    const loadingButton = document.getElementById("loadingButton");
     loadingButton.style.visibility = 'hidden';
 
     // Check URL for source team to load

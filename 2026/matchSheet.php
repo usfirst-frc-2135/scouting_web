@@ -587,23 +587,20 @@ require 'inc/header.php';
     $.get("api/tbaAPI.php", {
       getTeamInfo: teamNum
     }).done(function (teamInfo) {
-      console.log("=> getTeamInfo");
-      let teamname = "XX";
+      console.log("=> getTeamInfo:\n" + teamInfo);
+      let teamName = "";
       if (teamInfo === null) {
         alert("Can't load teamName from TBA; check if TBA Key was set in db_config");
       }
       else {
-        // console.log("matchSheet: getTeamInfo:\n" + teamInfo);
-        jTeamInfo = JSON.parse(teamInfo)["response"];
-        teamname = jTeamInfo["nickname"];
-        console.log("==> matchSheet: buildTeamBox() for " + teamNum + ", teamname = " + teamname);
+        let jTeamInfo = JSON.parse(teamInfo)["response"];
+        teamName += " " + jTeamInfo["nickname"];
       }
+      console.log("==> matchSheet: buildTeamBox() for " + teamNum + teamName);
+      let teamLink = "<a class='text-light' href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a>";
+      teamLink += " " + teamName;
       let elementRef = document.getElementById(color + index + "TeamNumber");
-      let boxInfo = "<a class='text-light' href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a>";
-      if (teamname != "XX") {
-        boxInfo += " - " + teamname;
-      }
-      elementRef.innerHTML = boxInfo;
+      elementRef.innerHTML = teamLink;
     });
 
     // Load team scouted information

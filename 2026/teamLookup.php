@@ -1148,20 +1148,16 @@ require 'inc/header.php';
     $.get("api/tbaAPI.php", {
       getTeamInfo: teamNum
     }).done(function (teamInfo) {
-      console.log("=> getTeamInfo");
-      let teamname = "XX";
+      console.log("=> getTeamInfo:\n" + teamInfo);
+      let teamName = "";
       if (teamInfo === null)
         alert("Can't load teamName from TBA; check if TBA Key was set in db_config");
       else {
-        // console.log("==> teamLookup: getTeamInfo:\n" + teamInfo);
         let jTeamInfo = JSON.parse(teamInfo)["response"];
-        nickname = jTeamInfo["nickname"];
-        console.log("==> teamLookup: for " + teamNum + ", teamname = " + nickname);
+        teamName += " " + jTeamInfo["nickname"];
       }
-      if (nickname != "XX") {
-        teamNum += " - " + nickname;
-      }
-      document.getElementById("teamTitle").innerHTML = teamNum;
+      console.log("==> teamLookup: for " + teamNum + teamName);
+      document.getElementById("teamTitle").innerHTML = teamNum + teamName;
     });
 
     // Add images for the team

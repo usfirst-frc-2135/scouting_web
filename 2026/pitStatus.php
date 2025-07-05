@@ -57,9 +57,7 @@ require 'inc/header.php';
       let teamName = names[teamNum];
       let row = "";
       row += "<td class='text-start'>" + "<a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a>";
-      if (teamName != "XX") {
-        row += " - " + teamName;
-      }
+      row += " " + teamName;
       row += "</td>";
 
       if (pitInfo[teamNum] != null) {
