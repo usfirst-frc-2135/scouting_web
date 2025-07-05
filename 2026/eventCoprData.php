@@ -87,9 +87,9 @@ require 'inc/header.php';
   // Add data keys (fields) to COPR table in html
   function loadCoprTable(tableId, coprData) {
     console.log("==> eventCoprData.php: loadCoprTable()");
-    let jsonCoprData = JSON.parse(coprData);
-    let keys = jsonCoprData["keys"];
-    let data = jsonCoprData["data"];
+    let jCoprData = JSON.parse(coprData);
+    let keys = jCoprData["keys"];
+    let data = jCoprData["data"];
 
     // Print the table then select the order in the array above
     // for (key in keys) {

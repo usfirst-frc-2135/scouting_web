@@ -444,15 +444,14 @@ require 'inc/header.php';
       getMatchData: true
     }).done(function (matchData) {
       console.log("=> getMatchData:");
-      let jsonMatchData = JSON.parse(matchData);
+      let jMatchData = JSON.parse(matchData);
 
       // Get OPR data from TBA
       $.get("api/tbaAPI.php", {
         getCOPRs: true
-      }).done(function (getCoprs) {
+      }).done(function (coprs) {
         console.log("=> getCOPRs");
-        let jsonCoprData = JSON.parse(getCoprs)["data"];
-        createCSVFile(csvName, jsonMatchData, jsonCoprData);
+        createCSVFile(csvName, jMatchData, JSON.parse(coprs)["data"]);
       });
     });
   }
@@ -464,9 +463,7 @@ require 'inc/header.php';
       getMatchData: true
     }).done(function (matchData) {
       console.log("=> getMatchData:");
-      let jsonMatchData = JSON.parse(matchData);
-
-      mdp = new matchDataProcessor(jsonMatchData);
+      mdp = new matchDataProcessor(JSON.parse(matchData));
       if (startMatch !== null && endMatch !== null) {
         mdp.filterMatchRange(startMatch, endMatch);
       }
@@ -493,7 +490,6 @@ require 'inc/header.php';
     const tableId = "averagesTable";
     const frozenTable = new FreezeTable('.freeze-table', { fixedNavbar: '.navbar' });
     const csvFileName = "eventAverages";
-    const jsonMatchData = {};
 
     buildAveragesTable(tableId, null, null); // Retrieve all data
 

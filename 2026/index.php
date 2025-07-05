@@ -147,38 +147,63 @@ require 'inc/header.php';
   }
 
   // Update all status badges for DB connection
-  function updateStatusValues(statusArray) {
-    console.log("==> index.php: updateStatusValues()");
-    document.getElementById("serverName").innerText = statusArray["server"];
-    document.getElementById("databaseName").innerText = statusArray["db"];
-    document.getElementById("userName").innerText = statusArray["username"];
-    document.getElementById("tbaKey").innerText = statusArray["tbakey"];
-    document.getElementById("eventCode").innerText = statusArray["eventcode"];
+  function updateStatusValues(dbStatus) {
+    if (dbStatus["server"] !== "") {
+      {
+        console.log("==> index.php: updateStatusValues()");
+        document.getElementById("serverName").innerText = dbStatus["server"];
+        document.getElementById("databaseName").innerText = dbStatus["db"];
+        document.getElementById("userName").innerText = dbStatus["username"];
+        document.getElementById("tbaKey").innerText = dbStatus["tbakey"];
+        document.getElementById("eventCode").innerText = dbStatus["eventcode"];
 
-    setStatusBadge("serverStatus", statusArray["serverExists"]);
-    setStatusBadge("databaseStatus", statusArray["dbExists"]);
-    setStatusBadge("matchTableStatus", statusArray["matchTableExists"]);
-    setStatusBadge("TBATableStatus", statusArray["tbaTableExists"]);
-    setStatusBadge("pitTableStatus", statusArray["pitTableExists"]);
-    setStatusBadge("strategicTableStatus", statusArray["strategicTableExists"]);
+        setStatusBadge("serverStatus", dbStatus["serverExists"]);
+        setStatusBadge("databaseStatus", dbStatus["dbExists"]);
+        setStatusBadge("matchTableStatus", dbStatus["matchTableExists"]);
+        setStatusBadge("TBATableStatus", dbStatus["tbaTableExists"]);
+        setStatusBadge("pitTableStatus", dbStatus["pitTableExists"]);
+        setStatusBadge("strategicTableStatus", dbStatus["strategicTableExists"]);
 
-    document.getElementById("dataP").checked = statusArray["useP"];
-    document.getElementById("dataQm").checked = statusArray["useQm"];
-    document.getElementById("dataSf").checked = statusArray["useSf"];
-    document.getElementById("dataF").checked = statusArray["useF"];
+        document.getElementById("dataP").checked = dbStatus["useP"];
+        document.getElementById("dataQm").checked = dbStatus["useQm"];
+        document.getElementById("dataSf").checked = dbStatus["useSf"];
+        document.getElementById("dataF").checked = dbStatus["useF"];
+      }
+    }
   }
 
-  // Map form form-control IDs to the db_config labels that store them
-  const idToKeyMap = {
-    "enterServerURL": "server",
-    "enterDBName": "db",
-    "enterUserName": "username",
-    "enterPassword": "password",
-    "enterTBAKey": "tbakey",
-    "enterEventCode": "eventcode",
-  };
+  // Loop through field IDs and add event listeners to each one
+  function addFieldListeners(idToConfigKey) {
+    let fieldWriteMap = [];
 
-  let idToWrittenMap = {}
+    // Loop through handling all fields
+    for (const id in idToConfigKey) {
+      fieldWriteMap[id] = false;
+      let elementRef = document.getElementById(id);
+      elementRef.addEventListener("change", function (evt) {
+        if (elementRef.value === "") {
+          elementRef.classList.add("text-bg-warning");
+          fieldWriteMap[id] = false;
+          if (id === "enterDBName") {
+            fieldWriteMap["writeMatchTable"] = false;
+            fieldWriteMap["writeTBATable"] = false;
+            fieldWriteMap["writePitTable"] = false;
+            fieldWriteMap["writeStrategicTable"] = false;
+          }
+        } else {
+          elementRef.classList.remove("text-bg-warning");
+          fieldWriteMap[id] = true;
+          if (id === "enterDBName") {
+            fieldWriteMap["writeMatchTable"] = true;
+            fieldWriteMap["writeTBATable"] = true;
+            fieldWriteMap["writePitTable"] = true;
+            fieldWriteMap["writeStrategicTable"] = true;
+          }
+        }
+      });
+    }
+    return fieldWriteMap;
+  }
 
   /////////////////////////////////////////////////////////////////////////////
   //
@@ -186,62 +211,46 @@ require 'inc/header.php';
   //
   document.addEventListener("DOMContentLoaded", () => {
 
+    // Map form form-control IDs to the db_config labels that store them
+    const idToConfigKey = {
+      "enterServerURL": "server",
+      "enterDBName": "db",
+      "enterUserName": "username",
+      "enterPassword": "password",
+      "enterTBAKey": "tbakey",
+      "enterEventCode": "eventcode",
+    };
+
+    // Attach listeners on the text fields
+    let fieldWriteMap = addFieldListeners(idToConfigKey);
+
     // Update the database status badges
     $.post("api/dbAPI.php", {
       getDBStatus: true
     }, function (dbStatus) {
       console.log("=> getDBStatus");
-      dbStatus = JSON.parse(dbStatus);
-      if (dbStatus["server"] !== "") {
-        updateStatusValues(dbStatus);
-      }
+      updateStatusValues(JSON.parse(dbStatus));
     });
 
-    // Loop through handling all fields
-    for (const key in idToKeyMap) {
-      idToWrittenMap[key] = false;
-      let elementRef = document.getElementById(key);
-      elementRef.addEventListener("change", function (evt) {
-        if (elementRef.value === "") {
-          elementRef.classList.add("text-bg-warning");
-          idToWrittenMap[key] = false;
-          if (key === "enterDBName") {
-            idToWrittenMap["writeMatchTable"] = false;
-            idToWrittenMap["writeTBATable"] = false;
-            idToWrittenMap["writePitTable"] = false;
-            idToWrittenMap["writeStrategicTable"] = false;
-          }
-        } else {
-          elementRef.classList.remove("text-bg-warning");
-          idToWrittenMap[key] = true;
-          if (key === "enterDBName") {
-            idToWrittenMap["writeMatchTable"] = true;
-            idToWrittenMap["writeTBATable"] = true;
-            idToWrittenMap["writePitTable"] = true;
-            idToWrittenMap["writeStrategicTable"] = true;
-          }
-        }
-      });
-    }
-
-    // Write the db_config file
+    // Create the write db_config file button
     document.getElementById("writeConfig").addEventListener('click', function () {
-      for (const key in idToKeyMap) {
-        if (document.getElementById(key).value == "") {
+      for (const id in idToConfigKey) {
+        if (document.getElementById(id).value == "") {
           console.warn("Enter all fields: server URL, database name, username, password, TBA key, and event code.");
           alert("Enter all fields: server URL, database name, username, password, TBA key, and event code.")
           return;
         }
       }
 
+      // Create the config file to write
       let configData = {};
-      for (const key in idToKeyMap) {
-        if ((document.getElementById(key).value != "") && idToWrittenMap[key]) {
-          configData[idToKeyMap[key]] = document.getElementById(key).value;
+      for (const id in idToConfigKey) {
+        if ((document.getElementById(id).value != "") && fieldWriteMap[id]) {
+          configData[idToConfigKey[id]] = document.getElementById(id).value;
         }
       }
 
-      // Create table names from database name.
+      // Create table names from database name
       let databaseName = document.getElementById("enterDBName").value;
       console.log("index: " + databaseName);
       configData["datatable"] = databaseName + "_match";
@@ -250,14 +259,15 @@ require 'inc/header.php';
       configData["strategictable"] = databaseName + "_strat";
       configData["writeConfig"] = JSON.stringify(configData);
 
-      $.post("api/dbAPI.php", configData, function (statusValues) {
-        updateStatusValues(JSON.parse(statusValues));
+      // Update the status badges after writing the config file
+      $.post("api/dbAPI.php", configData, function (dbStatus) {
+        console.log("=> writeConfig");
+        updateStatusValues(JSON.parse(dbStatus));
       });
     });
 
-    // Update the match type filters
+    // Create the filter checkbox listeners and create the config file values
     document.getElementById("filterData").addEventListener('click', function () {
-      // Make data to send to API
       let filterData = {};
       filterData["useP"] = +document.getElementById("dataP").checked;
       filterData["useQm"] = +document.getElementById("dataQm").checked;
@@ -268,30 +278,32 @@ require 'inc/header.php';
       configInfo["filterConfig"] = JSON.stringify(filterData);
 
       // Make request
-      $.post("api/dbAPI.php", configInfo, function (statusValues) {
-        updateStatusValues(JSON.parse(statusValues));
+      $.post("api/dbAPI.php", configInfo, function (dbStatus) {
+        console.log("=> filterConfig");
+        updateStatusValues(JSON.parse(dbStatus));
       });
     });
 
-    // Create a new database
+    // Create the button to create a new database
     document.getElementById("createDB").addEventListener('click', function () {
       $.post("api/dbAPI.php", {
         createDB: true
-      }, function (statusValues) {
+      }, function (dbStatus) {
         console.log("=> createDB");
-        updateStatusValues(JSON.parse(statusValues));
+        updateStatusValues(JSON.parse(dbStatus));
         alert("While this might create a new database, it cannot add permissions for this username! This must be done using phpMyAdmin.");
       });
     });
 
-    // Create new tables in database
+    // Create the button to create new tables in the atabase
     document.getElementById("createTable").addEventListener('click', function () {
       $.post("api/dbAPI.php", {
         createTable: true
       }, function (createTable) {
-        console.log("=> createDB");
+        console.log("=> createTable");
         updateStatusValues(JSON.parse(createTable));
       });
     });
   });
+
 </script>

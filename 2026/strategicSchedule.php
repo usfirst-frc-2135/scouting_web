@@ -63,11 +63,9 @@ require 'inc/header.php';
     console.log("==> strategicSchedule: buildScheduleTable()");
     $.get("api/tbaAPI.php", {
       getStrategicMatches: true
-    }).done(function (strategicData) {
-      console.log(strategicData);
-      console.log("=> getStrategicMatches");
-      let stratSched = JSON.parse(strategicData);
-      loadStrategicSchedule(tableId, stratSched);
+    }).done(function (strategicMatches) {
+      console.log("=> getStrategicMatches: " + strategicMatches);
+      loadStrategicSchedule(tableId, JSON.parse(strategicMatches));
       const matchColumn = 0;
       sortTableByMatch(tableId, matchColumn);
     });

@@ -106,12 +106,12 @@ class matchDataProcessor {
     $.post("api/dbAPI.php", {
       getDBStatus: true
     }, function (dbStatus) {
-      dbStatus = JSON.parse(dbStatus);
+      let jDbStatus = JSON.parse(dbStatus);
       let newSiteFilter = {};
-      newSiteFilter["useP"] = dbStatus["useP"];
-      newSiteFilter["useQm"] = dbStatus["useQm"];
-      newSiteFilter["useSf"] = dbStatus["useSf"];
-      newSiteFilter["useF"] = dbStatus["useF"];
+      newSiteFilter["useP"] = jDbStatus["useP"];
+      newSiteFilter["useQm"] = jDbStatus["useQm"];
+      newSiteFilter["useSf"] = jDbStatus["useSf"];
+      newSiteFilter["useF"] = jDbStatus["useF"];
       tempThis.siteFilter = { ...newSiteFilter };
 
       tempThis.applySiteFilter();

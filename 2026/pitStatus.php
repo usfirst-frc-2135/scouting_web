@@ -91,8 +91,8 @@ require 'inc/header.php';
     const tableId = "psTable";
     let teamList = [];
     let namesList = {};
-    let jsonImages = {};
-    let jsonPitData = {};
+    let jTeamImages = {};
+    let jPitData = {};
 
     // Get the list of teams and add the team names 
     $.get("api/tbaAPI.php", {
@@ -103,10 +103,10 @@ require 'inc/header.php';
         alert("Can't load teamlist from TBA; check if TBA Key was set in db_config");
       }
       else {
-        let jsonTeamList = JSON.parse(eventTeamNames);
-        for (let team in jsonTeamList) {
-          let teamNum = jsonTeamList[team]["teamnum"];
-          let teamName = jsonTeamList[team]["teamname"];
+        let jTeamNames = JSON.parse(eventTeamNames);
+        for (let team in jTeamNames) {
+          let teamNum = jTeamNames[team]["teamnum"];
+          let teamName = jTeamNames[team]["teamname"];
           teamList.push(teamNum);
           namesList[teamNum] = teamName;
         }
@@ -114,10 +114,10 @@ require 'inc/header.php';
         // Get all the team images for the list of teams
         $.get("api/dbReadAPI.php", {
           getAllTeamImages: JSON.stringify(teamList)
-        }).done(function (allTeamImages) {
+        }).done(function (teamImages) {
           console.log("=> pitStatus: getAllTeamImages");
-          jsonImages = JSON.parse(allTeamImages);
-          loadPitStatusTable(tableId, teamList, namesList, jsonImages, jsonPitData);
+          jTeamImages = JSON.parse(teamImages);
+          loadPitStatusTable(tableId, teamList, namesList, jTeamImages, jPitData);
         });
       }
     });
@@ -127,8 +127,8 @@ require 'inc/header.php';
       getAllPitData: true
     }).done(function (allPitData) {
       console.log("=> getAllPitData");
-      jsonPitData = JSON.parse(allPitData);
-      loadPitStatusTable(tableId, teamList, namesList, jsonImages, jsonPitData);
+      jPitData = JSON.parse(allPitData);
+      loadPitStatusTable(tableId, teamList, namesList, jTeamImages, jPitData);
     });
   });
 

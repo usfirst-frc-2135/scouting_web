@@ -908,42 +908,42 @@ require 'inc/header.php';
   }
 
   // filters out the match type as specified in the db status page
-  function getFilteredData(team, successFunction) {
-    console.log("==> teamLookup: getFilteredData: " + team);
+  function getSiteFilteredData(team, successFunction) {
+    console.log("==> teamLookup: getSiteFilteredData: " + team);
 
     $.post("api/dbAPI.php", {
       getDBStatus: true
     }, function (dbStatus) {
       console.log("=> getDBStatus");
-      dbdata = JSON.parse(dbStatus);
+      jDbStatus = JSON.parse(dbStatus);
 
       $.get("api/dbReadAPI.php", {
         getTeamMatches: team
-      }).done(function (getTeamMatches) {
+      }).done(function (teamMatches) {
         console.log("=> getTeamMatches");
-        getTeamMatches = JSON.parse(getTeamMatches);
+        jTeamMatches = JSON.parse(teamMatches);
 
         let newData = [];
-        for (let i = 0; i < getTeamMatches.length; i++) {
-          let mn = getTeamMatches[i]["matchnumber"];
+        for (let i = 0; i < jTeamMatches.length; i++) {
+          let mn = jTeamMatches[i]["matchnumber"];
           let matchStr = mn.toLowerCase();
 
-          if ((matchStr.search("p") != -1) && dbdata["useP"]) {
-            newData.push(getTeamMatches[i]);
+          if ((matchStr.search("p") != -1) && jDbStatus["useP"]) {
+            newData.push(jTeamMatches[i]);
           }
-          else if ((matchStr.search("qm") != -1) && dbdata["useQm"]) {
-            newData.push(getTeamMatches[i]);
+          else if ((matchStr.search("qm") != -1) && jDbStatus["useQm"]) {
+            newData.push(jTeamMatches[i]);
           }
-          else if ((matchStr.search("sf") != -1) && dbdata["useSf"]) {
-            newData.push(getTeamMatches[i]);
+          else if ((matchStr.search("sf") != -1) && jDbStatus["useSf"]) {
+            newData.push(jTeamMatches[i]);
           }
-          else if ((matchStr.search("f") != -1) && dbdata["useF"]) {
-            newData.push(getTeamMatches[i]);
+          else if ((matchStr.search("f") != -1) && jDbStatus["useF"]) {
+            newData.push(jTeamMatches[i]);
           }
         }
-        getTeamMatches = [...newData];
+        jTeamMatches = [...newData];
 
-        successFunction(getTeamMatches);
+        successFunction(jTeamMatches);
       });
     });
   }
@@ -1119,7 +1119,7 @@ require 'inc/header.php';
         alert("No match data for this team at this event!")
       }
     });
-    getFilteredData(team, function (fData) {
+    getSiteFilteredData(team, function (fData) {
       filteredData = fData;
       loadAutonGraph(filteredData);
       loadTeleopGraph(filteredData);
@@ -1154,8 +1154,8 @@ require 'inc/header.php';
         alert("Can't load teamName from TBA; check if TBA Key was set in db_config");
       else {
         // console.log("==> teamLookup: getTeamInfo:\n" + teamInfo);
-        let jsonTeamInfo = JSON.parse(teamInfo)["response"];
-        nickname = jsonTeamInfo["nickname"];
+        let jTeamInfo = JSON.parse(teamInfo)["response"];
+        nickname = jTeamInfo["nickname"];
         console.log("==> teamLookup: for " + teamNum + ", teamname = " + nickname);
       }
       if (nickname != "XX") {
@@ -1168,10 +1168,8 @@ require 'inc/header.php';
     $.get("api/dbReadAPI.php", {
       getImagesForTeam: teamNum
     }).done(function (teamImages) {
-      console.log("=> getImagesForTeam");
-      let jsonTeamImages = JSON.parse(teamImages);
-      console.log("==> PHOTOS: " + jsonTeamImages);
-      loadTeamPhotos(jsonTeamImages);
+      console.log("=> getImagesForTeam:\n" + teamImages);
+      loadTeamPhotos(JSON.parse(teamImages));
     });
 
     // Add Match Scouting Data
@@ -1179,8 +1177,7 @@ require 'inc/header.php';
       getTeamMatches: teamNum
     }).done(function (teamMatches) {
       console.log("=> getTeamMatches");
-      let jsonMatchData = JSON.parse(teamMatches);
-      loadMatchData(teamNum, jsonMatchData);
+      loadMatchData(teamNum, JSON.parse(teamMatches));
     });
 
     // Do the Pit Scouting Data
@@ -1188,8 +1185,7 @@ require 'inc/header.php';
       getTeamPitData: teamNum
     }).done(function (teamPitData) {
       console.log("=> getTeamPitData\n");
-      let jsonPitData = JSON.parse(teamPitData);
-      loadPitData(jsonPitData);
+      loadPitData(JSON.parse(teamPitData));
     });
 
     // Do the Strategic Data Table.
@@ -1197,8 +1193,7 @@ require 'inc/header.php';
       getTeamStrategicData: teamNum
     }).done(function (strategicData) {
       console.log("=> getTeamStrategicData");
-      let jsonStratData = JSON.parse(strategicData);
-      loadStrategicData(jsonStratData);
+      loadStrategicData(JSON.parse(strategicData));
     });
   }
 

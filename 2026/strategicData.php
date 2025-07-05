@@ -138,8 +138,7 @@ require 'inc/header.php';
       getAllStrategicData: true
     }).done(function (strategicData) {
       console.log("=> getAllStrategicData");
-      strategicData = JSON.parse(strategicData);
-      loadStrategicData(tableId, strategicData);
+      loadStrategicData(tableId, JSON.parse(strategicData));
       const teamColumn = 0;
       const matchColumn = 1;
       sortTableByMatchAndTeam(tableId, teamColumn, matchColumn);

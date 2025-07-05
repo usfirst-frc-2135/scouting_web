@@ -137,8 +137,8 @@
         getDBStatus: true
       }, function (dbStatus) {
         console.log("=> getDBStatus");
-        dbStatus = JSON.parse(dbStatus);
-        if (dbStatus["server"] !== "") {
+        let jDbStatus = JSON.parse(dbStatus);
+        if (jDbStatus["server"] !== "") {
           $.get("api/dbAPI.php", {
             getEventCode: true
           }, function (eventCode) {

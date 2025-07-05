@@ -104,14 +104,14 @@ require 'inc/header.php';
   // Display success to user
   function uploadSuccess(msg) {
     console.log("==> pitPhotoUpload: uploadSuccess: " + msg);
-    msg = JSON.parse(msg);
+    let jMsg = JSON.parse(msg);
     const loadButton = document.getElementById("loadingButton");
-    if (msg["success"]) {
+    if (jMsg["success"]) {
       loadButton.style.visibility = 'hidden';
       showSuccessMessage("Upload successful, clearing form!");
     } else {
       loadButton.style.visibility = 'hidden';
-      showErrorMessage(msg["message"]);
+      showErrorMessage(jMsg["message"]);
     }
   }
 
@@ -132,21 +132,21 @@ require 'inc/header.php';
           // First get list of robot-pic files for this team.
           $.get("api/dbReadAPI.php", {
             getImagesForTeam: teamNum
-          }).done(function (imagesData) {
-            console.log("=> getImagesForTeam");
-            let teamImages = JSON.parse(imagesData);
+          }).done(function (teamImages) {
+            console.log("=> getImagesForTeam\n" + teamImages);
+            let jTeamImages = JSON.parse(teamImages);
 
             // If there are any existing images, delete them.
-            for (let picFile of teamImages) {
+            for (let imageFile of jTeamImages) {
               $.ajax({
                 url: 'api/deleteFile.php',
-                data: { 'file': "<?php echo dirname(__FILE__) . '/' ?>" + picFile },
+                data: { 'file': "<?php echo dirname(__FILE__) . '/' ?>" + imageFile },
                 success: function (response) {
-                  console.log("==> Deleted existing photo: " + picFile);
+                  console.log("==> Deleted existing photo: " + imageFile);
                   document.getElementById("replacePic").checked = false;
                 },
                 error: function () {
-                  console.error("Could NOT delete existing photo: " + picFile);
+                  console.error("Could NOT delete existing photo: " + imageFile);
                 }
               });
             }

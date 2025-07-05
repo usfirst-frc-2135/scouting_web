@@ -548,7 +548,7 @@ require 'inc/header.php';
   let customBlueTeam1 = "-";
   let customBlueTeam2 = "-";
   let customBlueTeam3 = "-";
-  // let jsonMatchData = null;
+
   let _picDB = {};
   const _ourTeam = "frc2135";
 
@@ -594,8 +594,8 @@ require 'inc/header.php';
       }
       else {
         // console.log("matchSheet: getTeamInfo:\n" + teamInfo);
-        jsonTeamInfo = JSON.parse(teamInfo)["response"];
-        teamname = jsonTeamInfo["nickname"];
+        jTeamInfo = JSON.parse(teamInfo)["response"];
+        teamname = jTeamInfo["nickname"];
         console.log("==> matchSheet: buildTeamBox() for " + teamNum + ", teamname = " + teamname);
       }
       let elementRef = document.getElementById(color + index + "TeamNumber");
@@ -724,9 +724,9 @@ require 'inc/header.php';
       getAllTeamImages: JSON.stringify(requestList)
     }).done(function (imageData) {
       console.log("=> getAllTeamImages");
-      let teamImages = JSON.parse(imageData);
-      for (let team of Object.keys(teamImages)) {
-        buildRobotPhotoLinks(_picDB[team], teamImages[team]);
+      let jImageData = JSON.parse(imageData);
+      for (let team of Object.keys(jImageData)) {
+        buildRobotPhotoLinks(_picDB[team], jImageData[team]);
       }
     });
   }
@@ -857,8 +857,7 @@ require 'inc/header.php';
         getMatchData: true
       }).done(function (matchData) {
         console.log("=> getMatchData");
-        jsonMatchData = JSON.parse(matchData);
-        let mdp = new matchDataProcessor(jsonMatchData);
+        let mdp = new matchDataProcessor(JSON.parse(matchData));
         mdp.getSiteFilteredAverages(function (averageData) {
           _allMatchData = averageData;
           successFunction();
@@ -883,11 +882,11 @@ require 'inc/header.php';
           }
           else {
             let ourMatches = {};
-            jsonEventMatches = JSON.parse(eventMatches)["response"];
+            jEventMatches = JSON.parse(eventMatches)["response"];
             localMatchList = {};
-            for (let mi in jsonEventMatches) {
+            for (let mi in jEventMatches) {
               let newMatch = {};
-              let match = jsonEventMatches[mi];
+              let match = jEventMatches[mi];
 
               newMatch["comp_level"] = match["comp_level"];
               newMatch["match_number"] = match["match_number"];

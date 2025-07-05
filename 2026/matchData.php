@@ -94,8 +94,7 @@ require 'inc/header.php';
       getMatchData: true
     }).done(function (matchData) {
       console.log("=> getMatchData");
-      let jsonMatchData = JSON.parse(matchData);
-      loadMatchData(tableId, jsonMatchData);
+      loadMatchData(tableId, JSON.parse(matchData));
       const teamColumn = 1;
       const matchColumn = 0;
       sortTableByMatchAndTeam(tableId, teamColumn, matchColumn);
