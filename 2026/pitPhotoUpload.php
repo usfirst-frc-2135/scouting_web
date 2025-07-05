@@ -66,8 +66,7 @@ require 'inc/header.php';
 
 <script>
 
-  const loadButton = document.getElementById("loadingButton");
-  loadButton.style.visibility = 'hidden';
+  const loadingButton = document.getElementById("loadingButton");
 
   // Check if our URL directs to a specific team
   function checkURLForTeamSpec() {
@@ -104,13 +103,11 @@ require 'inc/header.php';
   // Display success to user
   function uploadSuccess(msg) {
     console.log("==> pitPhotoUpload: uploadSuccess: " + msg);
+    loadingButton.style.visibility = 'hidden';
     let jMsg = JSON.parse(msg);
-    const loadButton = document.getElementById("loadingButton");
     if (jMsg["success"]) {
-      loadButton.style.visibility = 'hidden';
       showSuccessMessage("Upload successful, clearing form!");
     } else {
-      loadButton.style.visibility = 'hidden';
       showErrorMessage(jMsg["message"]);
     }
   }
@@ -122,8 +119,7 @@ require 'inc/header.php';
       let teamNum = document.getElementById("teamNumber").value;
 
       if (validateTeamNumber(teamNum, null) > 0) {
-        const loadButton = document.getElementById("loadingButton");
-        loadButton.style.visibility = 'visible';
+        loadingButton.style.visibility = 'visible';
 
         // Replace checkbox is ticked
         if (document.getElementById("replacePic").checked === true) {
@@ -178,15 +174,13 @@ require 'inc/header.php';
         }, 500);
       }
       else {
+        loadingButton.style.visibility = 'hidden';
         alert("Team Number is invalid - must be integer with optional last alpha!");
-        const loadButton = document.getElementById("loadingButton");
-        loadButton.style.visibility = 'hidden';
       }
     }
     else {
+      loadingButton.style.visibility = 'hidden';
       alert("Please fill in all fields!");
-      const loadButton = document.getElementById("loadingButton");
-      loadButton.style.visibility = 'hidden';
     }
 
     document.getElementById("closeMessage").addEventListener('click', function () {
@@ -217,6 +211,8 @@ require 'inc/header.php';
   // Process the generated html
   //
   document.addEventListener("DOMContentLoaded", () => {
+
+    loadingButton.style.visibility = 'hidden';
 
     // Check URL for source team to load
     let initTeamNumber = checkURLForTeamSpec();
