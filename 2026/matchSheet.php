@@ -588,6 +588,9 @@ require 'inc/header.php';
       getTeamInfo: teamNum
     }).done(function (teamInfo) {
       console.log("=> getTeamInfo:\n" + teamInfo);
+      if (teamInfo === null) {
+        return alert("Can't load teamInfo from TBA; check if TBA Key was set in db_config");
+      }
       let teamName = "";
       if (teamInfo === null) {
         alert("Can't load teamName from TBA; check if TBA Key was set in db_config");
@@ -874,6 +877,9 @@ require 'inc/header.php';
           getEventMatches: true
         }).done(function (eventMatches) {
           console.log("=> getEventMatches");
+          if (eventMatches === null) {
+            return alert("Can't load eventMatches from TBA; check if TBA Key was set in db_config");
+          }
           if (eventMatches === null) {
             alert("Can't load matchlist from TBA; check if TBA Key was set in db_config");
           }

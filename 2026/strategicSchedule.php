@@ -65,6 +65,9 @@ require 'inc/header.php';
       getStrategicMatches: true
     }).done(function (strategicMatches) {
       console.log("=> getStrategicMatches: " + strategicMatches);
+      if (strategicMatches === null) {
+        return alert("Can't load strategicMatches from TBA; check if TBA Key was set in db_config");
+      }
       loadStrategicSchedule(tableId, JSON.parse(strategicMatches));
       const matchColumn = 0;
       sortTableByMatch(tableId, matchColumn);

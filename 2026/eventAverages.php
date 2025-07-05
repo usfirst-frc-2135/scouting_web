@@ -464,6 +464,9 @@ require 'inc/header.php';
       getCOPRs: true
     }).done(function (coprs) {
       console.log("=> getCOPRs");
+      if (coprs === null) {
+        return alert("Can't load COPRs from TBA; check if TBA Key was set in db_config");
+      }
       jCoprData = JSON.parse(coprs)["data"];
       waitForData(jMatchData, jCoprData);
     });

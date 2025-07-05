@@ -98,26 +98,24 @@ require 'inc/header.php';
     }).done(function (eventTeamNames) {
       console.log("=> getEventTeamNames");
       if (eventTeamNames === null) {
-        alert("Can't load teamlist from TBA; check if TBA Key was set in db_config");
+        return alert("Can't load eventTeamNames from TBA; check if TBA Key was set in db_config");
       }
-      else {
-        let jTeamNames = JSON.parse(eventTeamNames);
-        for (let team in jTeamNames) {
-          let teamNum = jTeamNames[team]["teamnum"];
-          let teamName = jTeamNames[team]["teamname"];
-          teamList.push(teamNum);
-          namesList[teamNum] = teamName;
-        }
+      let jTeamNames = JSON.parse(eventTeamNames);
+      for (let team in jTeamNames) {
+        let teamNum = jTeamNames[team]["teamnum"];
+        let teamName = jTeamNames[team]["teamname"];
+        teamList.push(teamNum);
+        namesList[teamNum] = teamName;
+      }
 
-        // Get all the team images for the list of teams
-        $.get("api/dbReadAPI.php", {
-          getAllTeamImages: JSON.stringify(teamList)
-        }).done(function (teamImages) {
-          console.log("=> pitStatus: getAllTeamImages");
-          jTeamImages = JSON.parse(teamImages);
-          loadPitStatusTable(tableId, teamList, namesList, jTeamImages, jPitData);
-        });
-      }
+      // Get all the team images for the list of teams
+      $.get("api/dbReadAPI.php", {
+        getAllTeamImages: JSON.stringify(teamList)
+      }).done(function (teamImages) {
+        console.log("=> pitStatus: getAllTeamImages");
+        jTeamImages = JSON.parse(teamImages);
+        loadPitStatusTable(tableId, teamList, namesList, jTeamImages, jPitData);
+      });
     });
 
     // Get all the teams pit scouted

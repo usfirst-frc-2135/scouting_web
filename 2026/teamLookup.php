@@ -1150,12 +1150,11 @@ require 'inc/header.php';
     }).done(function (teamInfo) {
       console.log("=> getTeamInfo:\n" + teamInfo);
       let teamName = "";
-      if (teamInfo === null)
-        alert("Can't load teamName from TBA; check if TBA Key was set in db_config");
-      else {
-        let jTeamInfo = JSON.parse(teamInfo)["response"];
-        teamName += " " + jTeamInfo["nickname"];
+      if (teamInfo === null) {
+        return alert("Can't load teamName from TBA; check if TBA Key was set in db_config");
       }
+      let jTeamInfo = JSON.parse(teamInfo)["response"];
+      teamName += " " + jTeamInfo["nickname"];
       console.log("==> teamLookup: for " + teamNum + teamName);
       document.getElementById("teamTitle").innerHTML = teamNum + teamName;
     });
