@@ -366,10 +366,10 @@ require 'inc/header.php';
   }
 
   // Write the match data form to the DB table
-  function submitMatchFormData(formData) {
+  function submitMatchFormData(matchFormData) {
     console.log("==> matchForm: submitMatchFormData()");
     $.post("api/dbWriteAPI.php", {
-      writeSingleData: JSON.stringify(formData)
+      writeSingleData: JSON.stringify(matchFormData)
     }, function (response) {
       if (response.indexOf('success') > -1) {    // A loose compare, because success word may have a newline
         alert("Success in submitting Match data! Clearing Data.");
@@ -529,7 +529,7 @@ require 'inc/header.php';
 
     // Submit the match data form 
     document.getElementById("submitForm").addEventListener('click', function () {
-      let formData = getMatchFormData(auto, teleop);
+      let matchFormData = getMatchFormData(auto, teleop);
       alert("This match form is NOT configured for 2025 game!");
 
       // Should be:
