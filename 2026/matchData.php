@@ -56,7 +56,7 @@ require 'inc/header.php';
 <script>
 
   // Load match data to page
-  // NOTE: data object keywords MUST match the database definition in dbHandler.php
+  // NOTE: match data keywords MUST match the database definition in dbHandler.php
   function loadMatchData(tableId, matchData) {
     console.log("==> matchData: loadMatchData()");
     let tbodyRef = document.getElementById(tableId).querySelector('tbody');;

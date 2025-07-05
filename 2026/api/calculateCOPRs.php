@@ -8,7 +8,7 @@ class CalculateCOPRs
   // {
   // }
 
-  private static function removeElimMatches($matchData)
+  private static function removeNonQualMatches($matchData)
   {
     $out = array();
     foreach ($matchData as $matchRow)
@@ -203,7 +203,7 @@ class CalculateCOPRs
 
   public static function calculateCOPRS($eventCode, $teamCount, $teamList, $teamLookup, $matchData)
   {
-    $matchData = self::removeElimMatches($matchData);
+    $matchData = self::removeNonQualMatches($matchData);
     $matchData = self::removeUnplayedMatches($matchData);
     $matchMatricies = self::createABMatricies($teamCount, $teamLookup, $matchData);
 

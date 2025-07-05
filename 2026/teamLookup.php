@@ -503,7 +503,6 @@ require 'inc/header.php';
 
 <script>
 
-
   let autoChart;
   let teleopChart;
   let endgameChart;
@@ -929,24 +928,17 @@ require 'inc/header.php';
           let mn = getTeamMatches[i]["matchnumber"];
           let matchStr = mn.toLowerCase();
 
-          if (matchStr.search("p") != -1) {
-            if (dbdata["useP"]) {
-              newData.push(getTeamMatches[i]);
-            }
+          if ((matchStr.search("p") != -1) && dbdata["useP"]) {
+            newData.push(getTeamMatches[i]);
           }
-          else if (matchStr.search("qm") != -1) {
-            if (dbdata["useQm"]) {
-              newData.push(getTeamMatches[i]);
-            }
+          else if ((matchStr.search("qm") != -1) && dbdata["useQm"]) {
+            newData.push(getTeamMatches[i]);
           }
-          else if (matchStr.search("sf") != -1) {
-            if (dbdata["useSf"])
-              newData.push(getTeamMatches[i]);
+          else if ((matchStr.search("sf") != -1) && dbdata["useSf"]) {
+            newData.push(getTeamMatches[i]);
           }
-          else if (matchStr.search("f") != -1) {
-            if (dbdata["useF"]) {
-              newData.push(getTeamMatches[i]);
-            }
+          else if ((matchStr.search("f") != -1) && dbdata["useF"]) {
+            newData.push(getTeamMatches[i]);
           }
         }
         getTeamMatches = [...newData];
