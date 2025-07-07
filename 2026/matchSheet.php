@@ -537,21 +537,6 @@ require 'inc/header.php';
 
 <script>
 
-  let _allMatchData = null;
-  let bUsingCustom = false;
-  let localMatchList = null;
-  let localMatchNum = null;
-  let localCompLevel = null;
-  let customRedTeam1 = "-";
-  let customRedTeam2 = "-";
-  let customRedTeam3 = "-";
-  let customBlueTeam1 = "-";
-  let customBlueTeam2 = "-";
-  let customBlueTeam3 = "-";
-
-  let _picDB = {};
-  const _ourTeam = "frc2135";
-
   // Utility to strip off leading "frc" from team number
   function strTeamToIntTeam(team) {
     return team.replace(/^(frc)/, '');
@@ -562,32 +547,176 @@ require 'inc/header.php';
     return Math.round((val + Number.EPSILON) * 100) / 100;
   }
 
+  // Fix match IDs that are missing the comp level
+  function getFixedMatchId(matchId) {
+    matchId = matchId.toLowerCase();
+    if ((matchId.search("p") != -1) || (matchId.search("qm") != -1) ||
+      (matchId.search("sf") != -1) || (matchId.search("f") != -1)) {
+      return matchId;
+    }
+    else {  // Attempt to repair bad match IDs but log them
+      console.warn("getMatchTuple: Invalid matchId! " + matchId);
+      return "qm" + matchId;
+    }
+  }
+
+  // Get the comp level and match number from the match ID string (ex. [qm, 25] from qm25)
+  function getMatchTuple(matchId) {
+    matchId = getFixedMatchId(matchId);
+    if (matchId.search("p") != -1) {
+      return ["p", parseInt(matchId.substring(1))];
+    }
+    else if (matchId.search("qm") != -1) {
+      return ["qm", parseInt(matchId.substring(2))];
+    }
+    else if (matchId.search("sf") != -1) {
+      return ["sf", parseInt(matchId.substring(2))];
+    }
+    else if (matchId.search("f") != -1) {
+      return ["f", parseInt(matchId.substring(1))];
+    }
+    else {  // Repair bad match IDs but report them
+      console.warn("getMatchTuple: Invalid match prefix! " + matchId);
+    }
+    return null;
+  }
+
+  // Create a match key in the form QM_1
+  function idToKey(matchId) {
+    mt = getMatchTuple(matchId);
+    return mt[0].toUpperCase() + "_" + String(mt[1]).toUpperCase();
+  }
+
   // Create a match key in the form QM_1
   function makeKey(compLevel, matchNumber) {
     return compLevel.toUpperCase() + "_" + String(matchNumber).toUpperCase();
   }
 
-  // Update time from system time in msec
+  // Clear all existing data from the match sheet table
+  function clearMatchSheet() {
+    console.log("==> matchSheet: clearMatchSheet()");
+
+    // Clear out custom match entries
+    document.getElementById("enterRed1").innerText = "";
+    document.getElementById("enterRed2").innerText = "";
+    document.getElementById("enterRed3").innerText = "";
+    document.getElementById("enterBlue1").innerText = "";
+    document.getElementById("enterBlue2").innerText = "";
+    document.getElementById("enterBlue3").innerText = "";
+
+    // Clear match summary
+    document.getElementById("matchTitle").innerText = "Match:";
+    document.getElementById("matchTime").innerText = "Time:";
+
+    document.getElementById("redTotalCoral").innerText = "";
+    document.getElementById("redTotalAlgae").innerText = "";
+    document.getElementById("redAvgAutoPoints").innerText = "";
+    document.getElementById("redAvgTeleopPoints").innerText = "";
+    document.getElementById("redAvgEndgamePoints").innerText = "";
+    document.getElementById("redTotalPredictedPoints").innerText = "";
+
+    document.getElementById("blueTotalCoral").innerText = "";
+    document.getElementById("blueTotalAlgae").innerText = "";
+    document.getElementById("blueAvgAutoPoints").innerText = "";
+    document.getElementById("blueAvgTeleopPoints").innerText = "";
+    document.getElementById("blueAvgEndgamePoints").innerText = "";
+    document.getElementById("blueTotalPredictedPoints").innerText = "";
+
+    // Clear team box photo and match data
+    document.getElementById("R0RobotPics").innerText = "";
+    document.getElementById("R1RobotPics").innerText = "";
+    document.getElementById("R2RobotPics").innerText = "";
+    document.getElementById("B0RobotPics").innerText = "";
+    document.getElementById("B1RobotPics").innerText = "";
+    document.getElementById("B2RobotPics").innerText = "";
+
+    document.getElementById("R0DataTable").querySelector('tbody').innerHTML = "";
+    document.getElementById("R1DataTable").querySelector('tbody').innerHTML = "";
+    document.getElementById("R2DataTable").querySelector('tbody').innerHTML = "";
+    document.getElementById("B0DataTable").querySelector('tbody').innerHTML = "";
+    document.getElementById("B1DataTable").querySelector('tbody').innerHTML = "";
+    document.getElementById("B2DataTable").querySelector('tbody').innerHTML = "";
+  }
+
+  // Build the list of HTML links to our matches at this event
+  function createOurTeamMatchLinks(ourMatches) {
+    console.log("==> matchSheet: createOurTeamMatchLinks()");
+    let ourMatchesArray = [];
+    for (let key in ourMatches) {
+      ourMatchesArray.push(ourMatches[key]);
+    }
+
+    ourMatchesArray.sort(function (matchA, matchB) {
+      return compareMatchNumbers(matchA["comp_level"] + matchA["match_number"], matchB["comp_level"] + matchB["match_number"]);
+    });
+
+    // document.getElementById("ourMatches").innerHTML = "";
+    // let row = '';
+    // for (let i in ourMatchesArray) {
+    //   let thisMatch = ourMatchesArray[i];
+    //   row += ' <a class="btn btn-secondary btn-sm col-2 m-1" href="./matchSheet.php?compLevel=' + thisMatch["comp_level"] + '&matchNum=' + thisMatch["match_number"] + '">' + thisMatch["comp_level"] + thisMatch["match_number"] + '</a>';
+    // }
+    // document.getElementById("ourMatches").innerHTML = row;
+
+    for (let i = 0; i < ourMatchesArray.length; i++) {
+      let thisMatch = ourMatchesArray[i];
+      let matchId = thisMatch["comp_level"] + thisMatch["match_number"]
+      const button = document.createElement("button");
+      button.id = matchId;
+      button.classList.add("btn");
+      button.classList.add("btn-secondary");
+      button.classList.add("btn-sm");
+      button.classList.add("col-2");
+      button.classList.add("m-1");
+      button.type = "button";
+      button.textContent = matchId;
+
+      button.onclick = function (el) {
+        let matchSpec = getEventMatchSpec(matchId, matchList);
+        loadMatchSheet(matchSpec, matchList, averageData);
+      }
+      document.getElementById("ourMatches").appendChild(button);
+    }
+  }
+
+  // Takes list of Team Pic paths and loads them
+  function buildRobotPhotoLinks(prefix, teamPics) {
+    console.log("==> buildRobotPhotoLinks: build the entries in the photo carousels");
+    let first = true;
+    let elementRef = document.getElementById(prefix + "RobotPics");
+    elementRef.innerHTML = "";
+    for (let uri of teamPics) {
+      let tags = "<div class='carousel-item";
+      if (first) {
+        tags += " active";
+      }
+      first = false;
+      tags += "'> <img src='./" + uri + "' class='d-block w-100'></div>";
+      elementRef.innerHTML += tags;
+    }
+  }
+
+  // Update match time from system time in msec
   function updateMatchTime(time) {
     let date = new Date(time * 1000);
     let hours = date.getHours();
-    let suff = "AM";
+    let suffix = "AM";
     if (hours > 12) {
       hours = hours - 12;
-      suff = "PM"
+      suffix = "PM"
     }
     let minutes = "0" + date.getMinutes();
-    document.getElementById("matchTime").innerText = "Time: " + hours + ":" + minutes.substring(minutes.length - 2) + " " + suff;
+    document.getElementById("matchTime").innerText = "Time: " + hours + ":" + minutes.substring(minutes.length - 2) + " " + suffix;
   }
 
   // Load the info into the team box
-  function buildTeamBox(color, index, teamNum) {
-    console.log("==> buildTeamBox: build the team box in the match sheet");
+  function buildTeamBox(color, index, teamNum, averageData) {
+    console.log("==> buildTeamBox: build the team box in the match sheet - " + teamNum);
     // Get team name from TBA
     $.get("api/tbaAPI.php", {
       getTeamInfo: teamNum
     }).done(function (teamInfo) {
-      console.log("=> getTeamInfo:\n" + teamInfo);
+      console.log("=> getTeamInfo:");
       if (teamInfo === null) {
         return alert("Can't load teamInfo from TBA; check if TBA Key was set in db_config");
       }
@@ -607,7 +736,7 @@ require 'inc/header.php';
     });
 
     // Load team scouted information
-    let rd = _allMatchData[teamNum];
+    let rd = averageData[teamNum];
     let tbodyRef = document.getElementById(color + index + "DataTable").querySelector('tbody');
     tbodyRef.innerHTML = "";
     let row = "";
@@ -635,7 +764,7 @@ require 'inc/header.php';
     tbodyRef.insertRow().innerHTML = row;
   }
 
-  function updateSummary(redList, blueList) {
+  function updateMatchSummary(matchSpec, averageData) {
     let avgTotalCoral = { "red": 0, "blue": 0 };
     let avgTotalAlgae = { "red": 0, "blue": 0 };
     let avgAutoPoints = { "red": 0, "blue": 0 };
@@ -643,9 +772,9 @@ require 'inc/header.php';
     let avgEndgamePoints = { "red": 0, "blue": 0 };
     let totalPredictedPoints = { "red": 0, "blue": 0 };
 
-    for (let i in redList) {
-      teamNum = strTeamToIntTeam(redList[i]);
-      let rd = _allMatchData[teamNum];
+    for (let i in matchSpec.red) {
+      teamNum = matchSpec.red[i];
+      let rd = averageData[teamNum];
       if (rd != null) {
         avgTotalCoral["red"] += rd["avgTotalCoral"];
         avgTotalAlgae["red"] += rd["avgTotalAlgae"];
@@ -655,9 +784,9 @@ require 'inc/header.php';
         totalPredictedPoints["red"] += rd["avgTotalPoints"];
       }
     }
-    for (let i in blueList) {
-      teamNum = strTeamToIntTeam(blueList[i]);
-      let rd = _allMatchData[teamNum];
+    for (let i in matchSpec.blue) {
+      teamNum = matchSpec.blue[i];
+      let rd = averageData[teamNum];
       if (rd != null) {
         avgTotalCoral["blue"] += rd["avgTotalCoral"];
         avgTotalAlgae["blue"] += rd["avgTotalAlgae"];
@@ -683,37 +812,22 @@ require 'inc/header.php';
     document.getElementById("blueTotalPredictedPoints").innerText = roundInt(totalPredictedPoints["blue"]);
   }
 
-
-  // Takes list of Team Pic paths and loads them
-  function buildRobotPhotoLinks(prefix, teamPics) {
-    console.log("==> buildRobotPhotoLinks: build the entries in the photo carousels");
-    let first = true;
-    let elementRef = document.getElementById(prefix + "RobotPics");
-    elementRef.innerHTML = "";
-    for (let uri of teamPics) {
-      let tags = "<div class='carousel-item";
-      if (first) {
-        tags += " active";
-      }
-      first = false;
-      tags += "'> <img src='./" + uri + "' class='d-block w-100'></div>";
-      elementRef.innerHTML += tags;
-    }
-  }
-
   // Build team photo image list
-  function sendPhotoRequest(redList, blueList) {
+  function sendPhotoRequest(matchSpec) {
     console.log("==> matchSheet: sendPhotoRequest()");
+    let _picDB = {};
     let requestList = [];
-    for (let i in redList) {
-      let tn = strTeamToIntTeam(redList[i]);
+
+    for (let i in matchSpec.red) {
+      let tn = matchSpec.red[i];
       if (tn !== "") {
         _picDB[tn] = "R" + i;
         requestList.push(tn);
       }
     }
-    for (let i in blueList) {
-      let tn = strTeamToIntTeam(blueList[i]);
+
+    for (let i in matchSpec.blue) {
+      let tn = matchSpec.blue[i];
       if (tn !== "") {
         _picDB[tn] = "B" + i;
         requestList.push(tn);
@@ -731,257 +845,131 @@ require 'inc/header.php';
     });
   }
 
-  // Build the list of HTML links to our matches at this event
-  function createMatchHtmlLinks(matches) {
-    console.log("==> matchSheet: createMatchHtmlLinks()");
-    let arrOurMatches = [];
-    for (let key in matches) {
-      arrOurMatches.push(matches[key]);
-    }
-
-    arrOurMatches.sort(function (matchA, matchB) {
-      return compareMatchNumbers(matchA["comp_level"] + matchA["match_number"], matchB["comp_level"] + matchB["match_number"]);
-    });
-
-    document.getElementById("ourMatches").innerHTML = "";
-    let row = '';
-    for (let i in arrOurMatches) {
-      row += ' <a class="btn btn-secondary btn-sm col-2 m-1" href="./matchSheet.php?matchNum=' + arrOurMatches[i]["match_number"] + '&compLevel=' + arrOurMatches[i]["comp_level"] + '">' + arrOurMatches[i]["comp_level"] + arrOurMatches[i]["match_number"] + '</a>';
-    }
-
-    document.getElementById("ourMatches").innerHTML = row;
+  // Clear a match spec object
+  function clearMatchSpec(spec) {
+    spec.title = "";
+    spec.time = "";
+    spec.red = ["", "", ""];
+    spec.blue = ["", "", ""];
   }
 
-  function processMatchList() {
-    // Get Match Vector
-    if (!bUsingCustom) {
-      matchVector = localMatchList[makeKey(localCompLevel, localMatchNum)];
-      if (!matchVector) {
-        console.warn("processMatchList: Match does not exist: " + makeKey(localCompLevel, localMatchNum));
-        alert("Match " + makeKey(localCompLevel, localMatchNum) + " does not exist!");
-        return;
-      }
-    }
-
-    if (bUsingCustom) {
-      customMatchVector = localMatchList["QM_1"];
-      if (!customMatchVector) {
-        console.warn("processMatchList: Match does not exist: QM_1");
-        alert("Match does not exist!");
-        return;
-      }
-    }
-
-    // Update Team Boxes
-    if (!bUsingCustom) {
-      for (let i in matchVector["red_teams"]) {
-        buildTeamBox("R", i, strTeamToIntTeam(matchVector["red_teams"][i]));
-      }
-      for (let i in matchVector["blue_teams"]) {
-        buildTeamBox("B", i, strTeamToIntTeam(matchVector["blue_teams"][i]));
-      }
-    }
-
-    if (bUsingCustom) {
-      for (let i in customMatchVector["red_teams"]) {
-        buildTeamBox("R", i, strTeamToIntTeam(customMatchVector["red_teams"][i]));
-      }
-      for (let i in customMatchVector["blue_teams"]) {
-        buildTeamBox("B", i, strTeamToIntTeam(customMatchVector["blue_teams"][i]));
-      }
-    }
-    // Update Summary Box
-    if (!bUsingCustom) {
-      updateSummary(matchVector["red_teams"], matchVector["blue_teams"]);
-
-      // Request Team Pics
-      sendPhotoRequest(matchVector["red_teams"], matchVector["blue_teams"]);
-
-      // Update Time
-      updateMatchTime(matchVector["time"]);
-    }
-    if (bUsingCustom) {
-      updateSummary(customMatchVector["red_teams"], customMatchVector["blue_teams"]);
-      // Request Team Pics
-      sendPhotoRequest(customMatchVector["red_teams"], customMatchVector["blue_teams"]);
-    }
-  }
-
-  // Clear all existing data from the match sheet table
-  function clearMatchSheet() {
-    console.log("==> matchSheet: clearMatchSheet()");
-    // Clear Data
-    document.getElementById("R0DataTable").querySelector('tbody').innerHTML = "";
-    document.getElementById("R1DataTable").querySelector('tbody').innerHTML = "";
-    document.getElementById("R2DataTable").querySelector('tbody').innerHTML = "";
-    document.getElementById("B0DataTable").querySelector('tbody').innerHTML = "";
-    document.getElementById("B1DataTable").querySelector('tbody').innerHTML = "";
-    document.getElementById("B2DataTable").querySelector('tbody').innerHTML = "";
-
-    document.getElementById("redTotalCoral").innerText = "";
-    document.getElementById("redTotalAlgae").innerText = "";
-    document.getElementById("redAvgAutoPoints").innerText = "";
-    document.getElementById("redAvgTeleopPoints").innerText = "";
-    document.getElementById("redAvgEndgamePoints").innerText = "";
-    document.getElementById("redTotalPredictedPoints").innerText = "";
-
-    document.getElementById("blueTotalCoral").innerText = "";
-    document.getElementById("blueTotalAlgae").innerText = "";
-    document.getElementById("blueAvgAutoPoints").innerText = "";
-    document.getElementById("blueAvgTeleopPoints").innerText = "";
-    document.getElementById("blueAvgEndgamePoints").innerText = "";
-    document.getElementById("blueTotalPredictedPoints").innerText = "";
-
-    document.getElementById("R0RobotPics").innerText = "";
-    document.getElementById("R1RobotPics").innerText = "";
-    document.getElementById("R2RobotPics").innerText = "";
-    document.getElementById("B0RobotPics").innerText = "";
-    document.getElementById("B1RobotPics").innerText = "";
-    document.getElementById("B2RobotPics").innerText = "";
-
-    document.getElementById("enterRed1").innerText = "";
-    document.getElementById("enterRed2").innerText = "";
-    document.getElementById("enterRed3").innerText = "";
-    document.getElementById("enterBlue1").innerText = "";
-    document.getElementById("enterBlue2").innerText = "";
-    document.getElementById("enterBlue3").innerText = "";
-
-    _picDB = {};
-  }
-
-  // Load match data for all matches
-  function loadMatchData(successFunction) {
-    console.log("==> matchSheet: loadMatchData()");
-    if (!_allMatchData) {
-      $.get("api/dbReadAPI.php", {
-        getMatchData: true
-      }).done(function (matchData) {
-        console.log("=> getMatchData");
-        let mdp = new matchDataProcessor(JSON.parse(matchData));
-        mdp.getSiteFilteredAverages(function (matchData, averageData) {
-          _allMatchData = averageData;
-          successFunction();
-        });
-      });
-    } else {
-      successFunction();
-    }
-  }
-
-  // Build match links for our matchs at this event 
-  function buildOurMatchLinks(successFunction) {
-    console.log("==> matchSheet: buildOurMatchLinks()");
-    if (!bUsingCustom) {
-      if (!localMatchList) {
-        $.get("api/tbaAPI.php", {
-          getEventMatches: true
-        }).done(function (eventMatches) {
-          console.log("=> getEventMatches");
-          if (eventMatches === null) {
-            return alert("Can't load eventMatches from TBA; check if TBA Key was set in db_config");
-          }
-          else {
-            let ourMatches = {};
-            jEventMatches = JSON.parse(eventMatches)["response"];
-            localMatchList = {};
-            for (let mi in jEventMatches) {
-              let newMatch = {};
-              let match = jEventMatches[mi];
-
-              newMatch["comp_level"] = match["comp_level"];
-              newMatch["match_number"] = match["match_number"];
-              if (match["comp_level"] === "sf") {
-                newMatch["match_number"] = match["set_number"];
-              }
-
-              newMatch["red_teams"] = match["alliances"]["red"]["team_keys"];
-              newMatch["blue_teams"] = match["alliances"]["blue"]["team_keys"];
-              newMatch["time"] = null;
-              if (match["actual_time"] != null) {
-                newMatch["time"] = match["actual_time"];
-              } else if (match["predicted_time"] != null) {
-                newMatch["time"] = match["predicted_time"];
-              }
-              // if (newMatch["time"] === null && match["time"] != null){ newMatch["time"] = match["time"]; }
-              localMatchList[makeKey(newMatch["comp_level"], newMatch["match_number"])] = newMatch;
-
-              // Create list of matches for our team
-              if (newMatch["red_teams"].includes(_ourTeam) || newMatch["blue_teams"].includes(_ourTeam)) {
-                let keyw = newMatch["comp_level"] + newMatch["match_number"];
-                ourMatches[keyw] = newMatch;
-              }
-            }
-            createMatchHtmlLinks(ourMatches);
-            successFunction();
-          }
-        });
-      } else {
-        successFunction();
-      }
-    }
-    else { // using custom
-      localMatchList = {};
+  // Create the event match list, extract our matches and build links for them
+  function buildMatchList(allEventMatches) {
+    console.log("==> matchSheet: buildMatchList()");
+    const OURTEAM = "frc2135";
+    let ourMatches = {};
+    let eventMatchList = [];
+    for (let mi in allEventMatches) {
+      let match = allEventMatches[mi];
       let newMatch = {};
-      newMatch["comp_level"] = "qm";
-      newMatch["match_number"] = 1;
-      newMatch["red_teams"] = [customRedTeam1, customRedTeam2, customRedTeam3];
-      newMatch["blue_teams"] = [customBlueTeam1, customBlueTeam2, customBlueTeam3]; //NEW
-      newMatch["time"] = "predicted_time"; //NEW
-      localMatchList["QM_1"] = newMatch;
 
-      //if (newMatch["red_teams"].includes(_ourTeam) || newMatch["blue_teams"].includes(_ourTeam)) {
-      //ourMatches[newMatch["match_number"]] = newMatch;
+      newMatch["comp_level"] = match["comp_level"];
+      newMatch["match_number"] = match["match_number"];
+      if (match["comp_level"] === "sf") {
+        newMatch["match_number"] = match["set_number"];
+      }
 
-      //createMatchHtmlLinks();
-      successFunction();
+      newMatch["red_teams"] = match["alliances"]["red"]["team_keys"];
+      newMatch["blue_teams"] = match["alliances"]["blue"]["team_keys"];
+      newMatch["time"] = null;
+      if (match["predicted_time"] != null) {
+        newMatch["time"] = match["predicted_time"];
+      } else if (match["actual_time"] != null) {
+        newMatch["time"] = match["actual_time"];
+      }
+
+      // if (newMatch["time"] === null && match["time"] != null){ newMatch["time"] = match["time"]; }
+      eventMatchList[idToKey(newMatch["comp_level"] + newMatch["match_number"])] = newMatch;
+
+      // Create list of matches for our team
+      if (newMatch["red_teams"].includes(OURTEAM) || newMatch["blue_teams"].includes(OURTEAM)) {
+        let keyw = newMatch["comp_level"] + newMatch["match_number"];
+        ourMatches[keyw] = newMatch;
+      }
     }
+    createOurTeamMatchLinks(ourMatches);
+    return eventMatchList;
   }
+
   // Check source URL for match specifier
   function checkURLForMatchSpec() {
     console.log("==> matchSheet: checkURLForMatchSpec()");
     let sp = new URLSearchParams(window.location.search);
-    if (!bUsingCustom) {
-      if (sp.has('compLevel') && sp.has('matchNum')) {
-        return [sp.get('compLevel'), sp.get('matchNum')];
-      }
-    }
-    if (bUsingCustom) {
-      if (sp.has('customRedTeam1') && sp.has('customRedTeam2') && sp.has('customRedTeam3') && sp.has('customBlueTeam1') && sp.has('customBlueTeam2') && sp.has('customBlueTeam3')) {
-        return [sp.get('customRedTeam1'), sp.get('customRedTeam2'), sp.get('customRedTeam3'), sp.get('customBlueTeam1'), sp.get('customBlueTeam2'), sp.get('customBlueTeam3')];
-      }
+    if (sp.has('compLevel') && sp.has('matchNum')) {
+      return sp.get('compLevel') + sp.get('matchNum');
     }
     return null;
   }
 
-  // Build the match sheet from this event
-  function loadEventMatchSheet(compLevel, matchNum) {
-    console.log("==> matchSheet: loadEventMatchSheet()");
-    clearMatchSheet();
-    // Write Match Number
-    document.getElementById("matchTitle").innerText = "Match " + compLevel + " " + matchNum;
-    // Pull Data
-    localMatchNum = matchNum;
-    localCompLevel = compLevel;
-    loadMatchData(function () {
-      buildOurMatchLinks(processMatchList);
-    });
+  // Check source URL for custom match
+  function checkURLForCustomMatch() {
+    console.log("==> matchSheet: checkURLForCustomMatch()");
+    let sp = new URLSearchParams(window.location.search);
+    if (sp.has('redTeam1') && sp.has('redTeam2') && sp.has('redTeam3') && sp.has('blueTeam1') && sp.has('blueTeam2') && sp.has('blueTeam3')) {
+      let matchSpec = {
+        title: "CUSTOM",
+        time: "",
+        red: [sp.get('redTeam1'), sp.get('redTeam2'), sp.get('redTeam3')],
+        blue: [sp.get('blueTeam1'), sp.get('blueTeam2'), sp.get('blueTeam3')]
+      };
+    }
+    return null;
+  }
+
+  // Get a match spec from a matchId
+  function getEventMatchSpec(matchId, matchList) {
+    if (matchList === null) {
+      console.error("matchSheet: getEventMatchSpec: matchList is null!");
+      return alert("matchSheet: getEventMatchSpec: matchList is null!");
+    }
+
+    let matchVector = matchList[idToKey(matchId)];
+    if (!matchVector) {
+      console.error("processMatchList: Match does not exist: " + idToKey(matchId));
+      return alert("Match " + idToKey(matchId) + " does not exist!");
+    }
+
+    matchSpec = {
+      title: matchId,
+      time: matchVector["time"],
+      red: [
+        strTeamToIntTeam(matchVector["red_teams"][0]),
+        strTeamToIntTeam(matchVector["red_teams"][1]),
+        strTeamToIntTeam(matchVector["red_teams"][2])
+      ],
+      blue: [
+        strTeamToIntTeam(matchVector["blue_teams"][0]),
+        strTeamToIntTeam(matchVector["blue_teams"][1]),
+        strTeamToIntTeam(matchVector["blue_teams"][2])
+      ]
+    };
+
+    return matchSpec;
   }
 
   // Build a custom red and blue alliance matchsheet
-  function loadCustomMatch(redTeam1, redTeam2, redTeam3, blueTeam1, blueTeam2, blueTeam3) {
+  function loadMatchSheet(matchSpec, matchList, averageData) {
+    console.log("==> matchSheet: loadMatchSheet()");
     clearMatchSheet();
-    // Write Match Number
-    document.getElementById("matchTitle").innerText = "Match CUSTOM";
-    // Pull Data
-    customRedTeam1 = redTeam1;
-    customRedTeam2 = redTeam2;
-    customRedTeam3 = redTeam3;
-    customBlueTeam1 = blueTeam1;
-    customBlueTeam2 = blueTeam2;
-    customBlueTeam3 = blueTeam3;
-    loadMatchData(function () {
-      buildOurMatchLinks(processMatchList);
-    });
+
+    if (matchSpec === null || matchList === null) {
+      console.error("matchSheet: loadMatchSheet: matchList or averageData is null!");
+      return alert("matchSheet: loadMatchSheet: matchList or averageData is null!");
+    }
+    sendPhotoRequest(matchSpec);
+
+    document.getElementById("matchTitle").innerText = matchSpec.title;
+    if (matchSpec.title !== "CUSTOM") {
+      updateMatchTime(matchSpec["time"]);
+    }
+    updateMatchSummary(matchSpec, averageData);
+
+    buildTeamBox("R", 0, matchSpec.red[0], averageData);
+    buildTeamBox("R", 1, matchSpec.red[1], averageData);
+    buildTeamBox("R", 2, matchSpec.red[2], averageData);
+    buildTeamBox("B", 0, matchSpec.blue[0], averageData);
+    buildTeamBox("B", 1, matchSpec.blue[1], averageData);
+    buildTeamBox("B", 2, matchSpec.blue[2], averageData);
   }
 
   /////////////////////////////////////////////////////////////////////////////
@@ -990,47 +978,76 @@ require 'inc/header.php';
   //
   document.addEventListener("DOMContentLoaded", () => {
 
-    // Check URL for source match to load
-    let matchSpec = checkURLForMatchSpec();
-    if (matchSpec) {
-      console.log("==> matchsheet: building from URL spec!");
-      loadEventMatchSheet(matchSpec[0], matchSpec[1]);
-    }
+    let matchList = null;
+    let averageData = null;
 
-    // Load the match sheet data from form entry 
-    document.getElementById("loadMatch").addEventListener('click', function () {
-      console.log("=> matchsheet: load event match!");
-      bUsingCustom = false;
-      loadEventMatchSheet(document.getElementById("enterMatchLevel").value, document.getElementById("enterMatchNumber").value);
+    // Load event matches from TBA and build our links and a full match list
+    $.get("api/tbaAPI.php", {
+      getEventMatches: true
+    }).done(function (eventMatches) {
+      console.log("=> getEventMatches");
+      if (eventMatches === null) {
+        return alert("Can't load eventMatches from TBA; check if TBA Key was set in db_config");
+      }
+      else {
+        let jEventMatches = JSON.parse(eventMatches)["response"];
+        matchList = buildMatchList(jEventMatches);
+      }
     });
 
-    // Open and set the custom match selected
+    // Load all match scouting data to be processed later
+    $.get("api/dbReadAPI.php", {
+      getMatchData: true
+    }).done(function (allMatchData) {
+      console.log("=> getMatchData");
+      let mdp = new matchDataProcessor(JSON.parse(allMatchData));
+      mdp.getSiteFilteredAverages(function (allMatchData, allAverageData) {
+        averageData = allAverageData;
+      });
+    });
+
+    // Check URL for match ID to load
+    let matchId = checkURLForMatchSpec();
+    if (matchId !== null && matchId !== "") {
+      console.log("==> matchsheet: building from URL match spec! " + matchId);
+      let matchSpec = getEventMatchSpec(matchId, matchList);
+      loadMatchSheet(matchSpec, matchList, averageData);
+    }
+
+    // Check URL for a custom match spec to load
+    let customSpec = checkURLForCustomMatch();
+    if (customSpec !== null && customSpec.red[0] !== "" && customSpec.blue[0] !== "") {
+      console.log("==> matchsheet: building custom match from URL spec! " + customSpec.red[0] + " " + customSpec.blue[0]);
+      loadMatchSheet(customSpec, matchList, averageData);
+    }
+
+    // Load the match sheet from the match number entries
+    document.getElementById("loadMatch").addEventListener('click', function () {
+      console.log("=> matchsheet: load event match!");
+      let matchId = document.getElementById("enterMatchLevel").value + document.getElementById("enterMatchNumber").value;
+      let matchSpec = getEventMatchSpec(matchId, matchList);
+      loadMatchSheet(matchSpec, matchList, averageData);
+    });
+
+    // Load the custom match using the custom team numbers entries
     document.getElementById("loadCustomMatch").addEventListener('click', function () {
       console.log("=> matchsheet: load custom match!");
-      bUsingCustom = true;
-      let redTeamNum1 = document.getElementById("enterRed1").value;
-      let blueTeamNum1 = document.getElementById("enterBlue1").value;
-      console.log("==> Custom match sheet: " + redTeamNum1 + " " + blueTeamNum1);
-      if (redTeamNum1.trim() === "" && blueTeamNum1.trim() === "") {
+      let matchSpec = {
+        title: "CUSTOM",
+        time: "",
+        red: [document.getElementById("enterRed1").value.trim(), document.getElementById("enterRed2").value.trim(), document.getElementById("enterRed3").value.trim()],
+        blue: [document.getElementById("enterBlue1").value.trim(), document.getElementById("enterBlue2").value.trim(), document.getElementById("enterBlue3").value.trim()]
+      };
+      console.log("==> Custom match sheet: " + matchSpec.red[0] + " " + matchSpec.blue[0]);
+      if (matchSpec.red[0] === "" && matchSpec.blue[0] === "") {
         console.warn("loadCustomMatch: No Red or Blue team 1 entered!");
         return alert("Please fill in Red Team Number 1 and Blue Team Number 1!");
       }
-      else if (redTeamNum1.trim() !== "" && blueTeamNum1.trim() !== "") {
-        loadCustomMatch(
-          document.getElementById("enterRed1").value,
-          document.getElementById("enterRed2").value,
-          document.getElementById("enterRed3").value,
-          document.getElementById("enterBlue1").value,
-          document.getElementById("enterBlue2").value,
-          document.getElementById("enterBlue3").value);
-      }
       else {
-        alert("Please fill in red team number 1 and blue team number 1!");
+        loadMatchSheet(matchSpec, matchList, averageData);
       }
     });
 
-    // Load match links for our matches
-    buildOurMatchLinks(function () { });
   });
 
 </script>
