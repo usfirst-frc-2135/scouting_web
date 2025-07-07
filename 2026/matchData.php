@@ -62,28 +62,31 @@ require 'inc/header.php';
     let tbodyRef = document.getElementById(tableId).querySelector('tbody');;
     tbodyRef.innerHTML = ""; // Clear Table
     for (let i = 0; i < matchData.length; i++) {
-      let teamNum = matchData[i]["teamnumber"];
-      let rowString = "<th>" + matchData[i]["matchnumber"] + "</th>" +
-        "<td style=\"background-color:transparent\"><a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</td>" +
-        "<td style=\"background-color:#cfe2ff\">" + matchData[i]["autonLeave"] + "</td>" +
-        "<td style=\"background-color:transparent\">" + matchData[i]["autonCoralL1"] + "</td>" +
-        "<td style=\"background-color:#cfe2ff\">" + matchData[i]["autonCoralL2"] + "</td>" +
-        "<td style=\"background-color:transparent\">" + matchData[i]["autonCoralL3"] + "</td>" +
-        "<td style=\"background-color:#cfe2ff\">" + matchData[i]["autonCoralL4"] + "</td>" +
-        "<td style=\"background-color:transparent\">" + matchData[i]["autonAlgaeNet"] + "</td>" +
-        "<td style=\"background-color:#cfe2ff\">" + matchData[i]["autonAlgaeProcessor"] + "</td>" +
-        "<td style=\"background-color:transparent\">" + matchData[i]["acquiredCoral"] + "</td>" +
-        "<td style=\"background-color:#cfe2ff\">" + matchData[i]["acquiredAlgae"] + "</td>" +
-        "<td style=\"background-color:transparent\">" + matchData[i]["teleopCoralL1"] + "</td>" +
-        "<td style=\"background-color:#cfe2ff\">" + matchData[i]["teleopCoralL2"] + "</td>" +
-        "<td style=\"background-color:transparent\">" + matchData[i]["teleopCoralL3"] + "</td>" +
-        "<td style=\"background-color:#cfe2ff\">" + matchData[i]["teleopCoralL4"] + "</td>" +
-        "<td style=\"background-color:transparent\">" + matchData[i]["teleopAlgaeNet"] + "</td>" +
-        "<td style=\"background-color:#cfe2ff\">" + matchData[i]["teleopAlgaeProcessor"] + "</td>" +
-        "<td style=\"background-color:transparent\">" + matchData[i]["cageClimb"] + "</td>" +
-        "<td style=\"background-color:#cfe2ff\">" + matchData[i]["died"] + "</td>" +
-        "<td style=\"background-color:transparent\">" + matchData[i]["scoutname"] + "</td>" +
-        "<td style=\"background-color:#cfe2ff\">" + matchData[i]["comment"] + "</td>";
+      let matchItem = matchData[i];
+      let teamNum = matchItem["teamnumber"];
+      const tdPrefix0 = "<td style=\"background-color:transparent\">";
+      const tdPrefix1 = "<td style=\"background-color:#cfe2ff\">";
+      let rowString = "<th>" + matchItem["matchnumber"] + "</th>";
+      rowString += tdPrefix0 + "<a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</td>";
+      rowString += tdPrefix1 + matchItem["autonLeave"] + "</td>";
+      rowString += tdPrefix0 + matchItem["autonCoralL1"] + "</td>";
+      rowString += tdPrefix1 + matchItem["autonCoralL2"] + "</td>";
+      rowString += tdPrefix0 + matchItem["autonCoralL3"] + "</td>";
+      rowString += tdPrefix1 + matchItem["autonCoralL4"] + "</td>";
+      rowString += tdPrefix0 + matchItem["autonAlgaeNet"] + "</td>";
+      rowString += tdPrefix1 + matchItem["autonAlgaeProcessor"] + "</td>";
+      rowString += tdPrefix0 + matchItem["acquiredCoral"] + "</td>";
+      rowString += tdPrefix1 + matchItem["acquiredAlgae"] + "</td>";
+      rowString += tdPrefix0 + matchItem["teleopCoralL1"] + "</td>";
+      rowString += tdPrefix1 + matchItem["teleopCoralL2"] + "</td>";
+      rowString += tdPrefix0 + matchItem["teleopCoralL3"] + "</td>";
+      rowString += tdPrefix1 + matchItem["teleopCoralL4"] + "</td>";
+      rowString += tdPrefix0 + matchItem["teleopAlgaeNet"] + "</td>";
+      rowString += tdPrefix1 + matchItem["teleopAlgaeProcessor"] + "</td>";
+      rowString += tdPrefix0 + matchItem["cageClimb"] + "</td>";
+      rowString += tdPrefix1 + matchItem["died"] + "</td>";
+      rowString += tdPrefix0 + matchItem["scoutname"] + "</td>";
+      rowString += tdPrefix1 + matchItem["comment"] + "</td>";
       tbodyRef.insertRow().innerHTML = rowString;
     }
   }

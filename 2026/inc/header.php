@@ -116,15 +116,16 @@
     const length = items.length;
 
     for (let i = 0; i < items.length; i++) {
-      if (items[i].href === currentLocation) {
-        items[i].classList.add("active");
-        items[i].classList.add("text-light");
-        items[i].classList.remove("text-secondary");
+      let menuLink = items[i];
+      if (menuLink.href === currentLocation) {
+        menuLink.classList.add("active");
+        menuLink.classList.add("text-light");
+        menuLink.classList.remove("text-secondary");
       }
       else {
-        items[i].classList.remove("active");
-        items[i].classList.remove("text-light");
-        items[i].classList.add("text-secondary");
+        menuLink.classList.remove("active");
+        menuLink.classList.remove("text-light");
+        menuLink.classList.add("text-secondary");
       }
     }
 

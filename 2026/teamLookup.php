@@ -514,7 +514,7 @@ require 'inc/header.php';
 
   ///// AUTON GRAPH STARTS HERE /////
 
-  function loadAutonGraph(matchdata) {
+  function loadAutonGraph(matchData) {
     console.log("==> teamLookup: loadAutonGraph()");
 
     // Declare variables
@@ -536,18 +536,19 @@ require 'inc/header.php';
     datasets.push({ label: "L3", data: [], backgroundColor: '#C54282' });         // Medium dark pink - coral branch
     datasets.push({ label: "L4", data: [], backgroundColor: '#9D3468' });         // Dark pink - coral branch
 
-    // Go thru each matchdata QR code string and build up a table of the data, so we can
+    // Go thru each matchData QR code string and build up a table of the data, so we can
     // later sort it so the matches are listed in the right order. 
     let mydata = [];
-    for (let i = 0; i < matchdata.length; i++) {
-      let matchnum = matchdata[i]["matchnumber"];
-      let autonLeave = matchdata[i]["autonLeave"];
-      let autonAlgaeProcessor = matchdata[i]["autonAlgaeProcessor"];
-      let autonAlgaeNet = matchdata[i]["autonAlgaeNet"];
-      let autonCoralOne = matchdata[i]["autonCoralL1"];
-      let autonCoralTwo = matchdata[i]["autonCoralL2"];
-      let autonCoralThree = matchdata[i]["autonCoralL3"];
-      let autonCoralFour = matchdata[i]["autonCoralL4"];
+    for (let i = 0; i < matchData.length; i++) {
+      let matchItem = matchData[i];
+      let matchnum = matchItem["matchnumber"];
+      let autonLeave = matchItem["autonLeave"];
+      let autonAlgaeProcessor = matchItem["autonAlgaeProcessor"];
+      let autonAlgaeNet = matchItem["autonAlgaeNet"];
+      let autonCoralOne = matchItem["autonCoralL1"];
+      let autonCoralTwo = matchItem["autonCoralL2"];
+      let autonCoralThree = matchItem["autonCoralL3"];
+      let autonCoralFour = matchItem["autonCoralL4"];
       mydata.push({
         matchnum: matchnum,
         leave: autonLeave,
@@ -641,7 +642,7 @@ require 'inc/header.php';
 
   ///// TELEOP GRAPH STARTS HERE /////
 
-  function loadTeleopGraph(matchdata) {
+  function loadTeleopGraph(matchData) {
     console.log("==> teamLookup: loadTeleopGraph()");
 
     // Declare variables
@@ -661,17 +662,18 @@ require 'inc/header.php';
     datasets.push({ label: "L3", data: [], backgroundColor: '#C54282' });         // Medium dark pink - coral branch
     datasets.push({ label: "L4", data: [], backgroundColor: '#9D3468' });         // Dark pink - coral branch
 
-    // Go thru each matchdata QR code string and build up a table of the data, so we can
+    // Go thru each matchData QR code string and build up a table of the data, so we can
     // later sort it so the matches are listed in the right order. 
     let mydata = [];
-    for (let i = 0; i < matchdata.length; i++) {
-      let matchnum = matchdata[i]["matchnumber"];
-      let teleopAlgaeProcessor = matchdata[i]["teleopAlgaeProcessor"];
-      let teleopAlgaeNet = matchdata[i]["teleopAlgaeNet"];
-      let teleopCoralOne = matchdata[i]["teleopCoralL1"];
-      let teleopCoralTwo = matchdata[i]["teleopCoralL2"];
-      let teleopCoralThree = matchdata[i]["teleopCoralL3"];
-      let teleopCoralFour = matchdata[i]["teleopCoralL4"];
+    for (let i = 0; i < matchData.length; i++) {
+      let matchItem = matchData[i];
+      let matchnum = matchItem["matchnumber"];
+      let teleopAlgaeProcessor = matchItem["teleopAlgaeProcessor"];
+      let teleopAlgaeNet = matchItem["teleopAlgaeNet"];
+      let teleopCoralOne = matchItem["teleopCoralL1"];
+      let teleopCoralTwo = matchItem["teleopCoralL2"];
+      let teleopCoralThree = matchItem["teleopCoralL3"];
+      let teleopCoralFour = matchItem["teleopCoralL4"];
       mydata.push({
         matchnum: matchnum,
         teleopprocessor: teleopAlgaeProcessor,
@@ -757,7 +759,7 @@ require 'inc/header.php';
 
   ///// ENDGAME GRAPH STARTS HERE /////
 
-  function loadEndgameGraph(matchdata) {
+  function loadEndgameGraph(matchData) {
     console.log("==> teamLookup: loadEndgameGraph()");
     let matchList = [];
     let datasets = [];
@@ -765,12 +767,12 @@ require 'inc/header.php';
 
     datasets.push({ label: "Cage Climb", data: [], backgroundColor: '#ED8537' });   // Orange - endgame
 
-    // Go thru each matchdata QR code string and build up a table of the data, so we can
+    // Go thru each matchData QR code string and build up a table of the data, so we can
     // later sort it so the matches are listed in the right order. 
     let mydata = [];
-    for (let i = 0; i < matchdata.length; i++) {
-      let matchnum = matchdata[i]["matchnumber"];
-      let cageClimb = matchdata[i]["cageClimb"];
+    for (let i = 0; i < matchData.length; i++) {
+      let matchnum = matchData[i]["matchnumber"];
+      let cageClimb = matchData[i]["cageClimb"];
       mydata.push({
         matchnum: matchnum,
         cage: cageClimb,
@@ -914,32 +916,34 @@ require 'inc/header.php';
     let tbodyRef = document.getElementById("matchDataTable").querySelector('tbody');
     tbodyRef.innerHTML = "";     // clear table
     for (let i = 0; i < matchData.length; i++) {
-      let rowString = "<td>" + matchData[i]["matchnumber"] + "</td>" +
-        "<td>" + matchData[i]["autonLeave"] + "</td>" +
+      let matchItem = matchData[i];
+      let rowString = "";
+      rowString += "<td>" + matchItem["matchnumber"] + "</td>";
+      rowString += "<td>" + matchItem["autonLeave"] + "</td>";
 
-        "<td>" + matchData[i]["autonCoralL1"] + "</td>" +
-        "<td>" + matchData[i]["autonCoralL2"] + "</td>" +
-        "<td>" + matchData[i]["autonCoralL3"] + "</td>" +
-        "<td>" + matchData[i]["autonCoralL4"] + "</td>" +
+      rowString += "<td>" + matchItem["autonCoralL1"] + "</td>";
+      rowString += "<td>" + matchItem["autonCoralL2"] + "</td>";
+      rowString += "<td>" + matchItem["autonCoralL3"] + "</td>";
+      rowString += "<td>" + matchItem["autonCoralL4"] + "</td>";
 
-        "<td>" + matchData[i]["autonAlgaeNet"] + "</td>" +
-        "<td>" + matchData[i]["autonAlgaeProcessor"] + "</td>" +
+      rowString += "<td>" + matchItem["autonAlgaeNet"] + "</td>";
+      rowString += "<td>" + matchItem["autonAlgaeProcessor"] + "</td>";
 
-        "<td>" + matchData[i]["acquiredCoral"] + "</td>" +
-        "<td>" + matchData[i]["acquiredAlgae"] + "</td>" +
+      rowString += "<td>" + matchItem["acquiredCoral"] + "</td>";
+      rowString += "<td>" + matchItem["acquiredAlgae"] + "</td>";
 
-        "<td>" + matchData[i]["teleopCoralL1"] + "</td>" +
-        "<td>" + matchData[i]["teleopCoralL2"] + "</td>" +
-        "<td>" + matchData[i]["teleopCoralL3"] + "</td>" +
-        "<td>" + matchData[i]["teleopCoralL4"] + "</td>" +
+      rowString += "<td>" + matchItem["teleopCoralL1"] + "</td>";
+      rowString += "<td>" + matchItem["teleopCoralL2"] + "</td>";
+      rowString += "<td>" + matchItem["teleopCoralL3"] + "</td>";
+      rowString += "<td>" + matchItem["teleopCoralL4"] + "</td>";
 
-        "<td>" + matchData[i]["teleopAlgaeNet"] + "</td>" +
-        "<td>" + matchData[i]["teleopAlgaeProcessor"] + "</td>" +
+      rowString += "<td>" + matchItem["teleopAlgaeNet"] + "</td>";
+      rowString += "<td>" + matchItem["teleopAlgaeProcessor"] + "</td>";
 
-        "<td>" + matchData[i]["cageClimb"] + "</td>" +
-        "<td>" + matchData[i]["died"] + "</td>" +
-        "<td>" + matchData[i]["scoutname"] + "</td>" +
-        "<td>" + matchData[i]["comment"] + "</td>";
+      rowString += "<td>" + matchItem["cageClimb"] + "</td>";
+      rowString += "<td>" + matchItem["died"] + "</td>";
+      rowString += "<td>" + matchItem["scoutname"] + "</td>";
+      rowString += "<td>" + matchItem["comment"] + "</td>";
       tbodyRef.insertRow().innerHTML = rowString;
     }
     const matchColumn = 0;
@@ -988,7 +992,9 @@ require 'inc/header.php';
     let tbodyRef = document.getElementById("strategicDataTable").querySelector('tbody');
     tbodyRef.innerHTML = "";     // clear table
     for (let i = 0; i < stratData.length; i++) {
-      let driverability = stratData[i]["driverability"];
+      let stratItem = stratData[i];
+
+      let driverability = stratItem["driverability"];
       switch (driverability) {
         case 1: driveVal = "Jerky"; break;
         case 2: driveVal = "Slow"; break;
@@ -998,36 +1004,37 @@ require 'inc/header.php';
         default: driveVal = ""; break;
       }
 
-      let rowString = "<td>" + stratData[i]["matchnumber"] + "</td>" +
-        "<td>" + driveVal + "</td>" +
-        "<td>" + toYesNo(stratData[i]["against_tactic1"]) + "</td>" +
-        "<td>" + stratData[i]["against_comment"] + "</td>" +
+      let rowString = "";
+      rowString += "<td>" + stratItem["matchnumber"] + "</td>";
+      rowString += "<td>" + driveVal + "</td>";
+      rowString += "<td>" + toYesNo(stratItem["against_tactic1"]) + "</td>";
+      rowString += "<td>" + stratItem["against_comment"] + "</td>";
 
-        "<td>" + toYesNo(stratData[i]["defense_tactic1"]) + "</td>" +
-        "<td>" + toYesNo(stratData[i]["defense_tactic2"]) + "</td>" +
-        "<td>" + stratData[i]["defense_comment"] + "</td>" +
+      rowString += "<td>" + toYesNo(stratItem["defense_tactic1"]) + "</td>";
+      rowString += "<td>" + toYesNo(stratItem["defense_tactic2"]) + "</td>";
+      rowString += "<td>" + stratItem["defense_comment"] + "</td>";
 
-        "<td>" + toYesNo(stratData[i]["foul1"]) + "</td>" +
-        "<td>" + toYesNo(stratData[i]["autonFoul1"]) + "</td>" +
-        "<td>" + toYesNo(stratData[i]["autonFoul2"]) + "</td>" +
-        "<td>" + toYesNo(stratData[i]["teleopFoul1"]) + "</td>" +
-        "<td>" + toYesNo(stratData[i]["teleopFoul2"]) + "</td>" +
-        "<td>" + toYesNo(stratData[i]["teleopFoul3"]) + "</td>" +
-        "<td>" + toYesNo(stratData[i]["teleopFoul4"]) + "</td>" +
-        "<td>" + toYesNo(stratData[i]["endgameFoul1"]) + "</td>" +
+      rowString += "<td>" + toYesNo(stratItem["foul1"]) + "</td>";
+      rowString += "<td>" + toYesNo(stratItem["autonFoul1"]) + "</td>";
+      rowString += "<td>" + toYesNo(stratItem["autonFoul2"]) + "</td>";
+      rowString += "<td>" + toYesNo(stratItem["teleopFoul1"]) + "</td>";
+      rowString += "<td>" + toYesNo(stratItem["teleopFoul2"]) + "</td>";
+      rowString += "<td>" + toYesNo(stratItem["teleopFoul3"]) + "</td>";
+      rowString += "<td>" + toYesNo(stratItem["teleopFoul4"]) + "</td>";
+      rowString += "<td>" + toYesNo(stratItem["endgameFoul1"]) + "</td>";
 
-        "<td>" + toYesNo(stratData[i]["autonGetCoralFromFloor"]) + "</td>" +
-        "<td>" + toYesNo(stratData[i]["autonGetCoralFromStation"]) + "</td>" +
-        "<td>" + toYesNo(stratData[i]["autonGetAlgaeFromFloor"]) + "</td>" +
-        "<td>" + toYesNo(stratData[i]["autonGetAlgaeFromReef"]) + "</td>" +
-        "<td>" + toYesNo(stratData[i]["teleopFloorPickupAlgae"]) + "</td>" +
-        "<td>" + toYesNo(stratData[i]["teleopFloorPickupCoral"]) + "</td>" +
-        "<td>" + toYesNo(stratData[i]["teleopKnockOffAlgaeFromReef"]) + "</td>" +
-        "<td>" + toYesNo(stratData[i]["teleopAcquireAlgaeFromReef"]) + "</td>" +
+      rowString += "<td>" + toYesNo(stratItem["autonGetCoralFromFloor"]) + "</td>";
+      rowString += "<td>" + toYesNo(stratItem["autonGetCoralFromStation"]) + "</td>";
+      rowString += "<td>" + toYesNo(stratItem["autonGetAlgaeFromFloor"]) + "</td>";
+      rowString += "<td>" + toYesNo(stratItem["autonGetAlgaeFromReef"]) + "</td>";
+      rowString += "<td>" + toYesNo(stratItem["teleopFloorPickupAlgae"]) + "</td>";
+      rowString += "<td>" + toYesNo(stratItem["teleopFloorPickupCoral"]) + "</td>";
+      rowString += "<td>" + toYesNo(stratItem["teleopKnockOffAlgaeFromReef"]) + "</td>";
+      rowString += "<td>" + toYesNo(stratItem["teleopAcquireAlgaeFromReef"]) + "</td>";
 
-        "<td>" + stratData[i]["problem_comment"] + "</td>" +
-        "<td>" + stratData[i]["general_comment"] + "</td>" +
-        "<td>" + stratData[i]["scoutname"] + "</td>";
+      rowString += "<td>" + stratItem["problem_comment"] + "</td>";
+      rowString += "<td>" + stratItem["general_comment"] + "</td>";
+      rowString += "<td>" + stratItem["scoutname"] + "</td>";
       tbodyRef.insertRow().innerHTML = rowString;
     }
     const matchColumn = 0;

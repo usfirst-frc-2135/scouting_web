@@ -89,8 +89,9 @@ require 'inc/header.php';
     tbodyRef.innerHTML = "";   // Clear Table
 
     for (let i = 0; i < stratData.length; i++) {
+      let stratItem = stratData[i];
       let driveVal = "";
-      switch (stratData[i]["driverability"]) {
+      switch (stratItem["driverability"]) {
         case 1: driveVal = "Jerky"; break;
         case 2: driveVal = "Slow"; break;
         case 3: driveVal = "Average"; break;
@@ -99,34 +100,37 @@ require 'inc/header.php';
         case 5: driveVal = "-"; break;
       }
 
-      let teamNum = stratData[i]["teamnumber"];
-      let rowString = "<td style=\"background-color:transparent\"><a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</td>" +
-        "<td style=\"background-color:transparent\">" + stratData[i]["matchnumber"] + "</td>" +
-        "<td style=\"background-color:#cfe2ff\">" + driveVal + "</td>" +
-        "<td style=\"background-color:transparent\">" + toYesNo(stratData[i]["against_tactic1"]) + "</td>" +
-        "<td style=\"background-color:#cfe2ff\">" + stratData[i]["against_comment"] + "</td>" +
-        "<td style=\"background-color:transparent\">" + toYesNo(stratData[i]["defense_tactic1"]) + "</td>" +
-        "<td style=\"background-color:#cfe2ff\">" + toYesNo(stratData[i]["defense_tactic2"]) + "</td>" +
-        "<td style=\"background-color:transparent\">" + stratData[i]["defense_comment"] + "</td>" +
-        "<td style=\"background-color:#cfe2ff\">" + toYesNo(stratData[i]["foul1"]) + "</td>" +
-        "<td style=\"background-color:transparent\">" + toYesNo(stratData[i]["autonFoul1"]) + "</td>" +
-        "<td style=\"background-color:#cfe2ff\">" + toYesNo(stratData[i]["autonFoul2"]) + "</td>" +
-        "<td style=\"background-color:transparent\">" + toYesNo(stratData[i]["teleopFoul1"]) + "</td>" +
-        "<td style=\"background-color:#cfe2ff\">" + toYesNo(stratData[i]["teleopFoul2"]) + "</td>" +
-        "<td style=\"background-color:transparent\">" + toYesNo(stratData[i]["teleopFoul3"]) + "</td>" +
-        "<td style=\"background-color:#cfe2ff\">" + toYesNo(stratData[i]["teleopFoul4"]) + "</td>" +
-        "<td style=\"background-color:transparent\">" + toYesNo(stratData[i]["endgameFoul1"]) + "</td>" +
-        "<td style=\"background-color:#cfe2ff\">" + toYesNo(stratData[i]["autonGetCoralFromFloor"]) + "</td>" +
-        "<td style=\"background-color:transparent\">" + toYesNo(stratData[i]["autonGetCoralFromStation"]) + "</td>" +
-        "<td style=\"background-color:#cfe2ff\">" + toYesNo(stratData[i]["autonGetAlgaeFromFloor"]) + "</td>" +
-        "<td style=\"background-color:transparent\">" + toYesNo(stratData[i]["autonGetAlgaeFromReef"]) + "</td>" +
-        "<td style=\"background-color:#cfe2ff\">" + toYesNo(stratData[i]["teleopFloorPickupAlgae"]) + "</td>" +
-        "<td style=\"background-color:transparent\">" + toYesNo(stratData[i]["teleopFloorPickupCoral"]) + "</td>" +
-        "<td style=\"background-color:#cfe2ff\">" + toYesNo(stratData[i]["teleopKnockOffAlgaeFromReef"]) + "</td>" +
-        "<td style=\"background-color:transparent\">" + toYesNo(stratData[i]["teleopAcquireAlgaeFromReef"]) + "</td>" +
-        "<td style=\"background-color:#cfe2ff\">" + stratData[i]["problem_comment"] + "</td>" +
-        "<td style=\"background-color:transparent\">" + stratData[i]["general_comment"] + "</td>" +
-        "<td style=\"background-color:#cfe2ff\">" + stratData[i]["scoutname"] + "</td>";
+      let teamNum = stratItem["teamnumber"];
+      const tdPrefix0 = "<td style=\"background-color:transparent\">";
+      const tdPrefix1 = "<td style=\"background-color:#cfe2ff\">";
+      let rowString = "";
+      rowString += tdPrefix0 + "<a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</td>";
+      rowString += tdPrefix0 + stratItem["matchnumber"] + "</td>";
+      rowString += tdPrefix1 + driveVal + "</td>";
+      rowString += tdPrefix0 + toYesNo(stratItem["against_tactic1"]) + "</td>";
+      rowString += tdPrefix1 + stratItem["against_comment"] + "</td>";
+      rowString += tdPrefix0 + toYesNo(stratItem["defense_tactic1"]) + "</td>";
+      rowString += tdPrefix1 + toYesNo(stratItem["defense_tactic2"]) + "</td>";
+      rowString += tdPrefix0 + stratItem["defense_comment"] + "</td>";
+      rowString += tdPrefix1 + toYesNo(stratItem["foul1"]) + "</td>";
+      rowString += tdPrefix0 + toYesNo(stratItem["autonFoul1"]) + "</td>";
+      rowString += tdPrefix1 + toYesNo(stratItem["autonFoul2"]) + "</td>";
+      rowString += tdPrefix0 + toYesNo(stratItem["teleopFoul1"]) + "</td>";
+      rowString += tdPrefix1 + toYesNo(stratItem["teleopFoul2"]) + "</td>";
+      rowString += tdPrefix0 + toYesNo(stratItem["teleopFoul3"]) + "</td>";
+      rowString += tdPrefix1 + toYesNo(stratItem["teleopFoul4"]) + "</td>";
+      rowString += tdPrefix0 + toYesNo(stratItem["endgameFoul1"]) + "</td>";
+      rowString += tdPrefix1 + toYesNo(stratItem["autonGetCoralFromFloor"]) + "</td>";
+      rowString += tdPrefix0 + toYesNo(stratItem["autonGetCoralFromStation"]) + "</td>";
+      rowString += tdPrefix1 + toYesNo(stratItem["autonGetAlgaeFromFloor"]) + "</td>";
+      rowString += tdPrefix0 + toYesNo(stratItem["autonGetAlgaeFromReef"]) + "</td>";
+      rowString += tdPrefix1 + toYesNo(stratItem["teleopFloorPickupAlgae"]) + "</td>";
+      rowString += tdPrefix0 + toYesNo(stratItem["teleopFloorPickupCoral"]) + "</td>";
+      rowString += tdPrefix1 + toYesNo(stratItem["teleopKnockOffAlgaeFromReef"]) + "</td>";
+      rowString += tdPrefix0 + toYesNo(stratItem["teleopAcquireAlgaeFromReef"]) + "</td>";
+      rowString += tdPrefix1 + stratItem["problem_comment"] + "</td>";
+      rowString += tdPrefix0 + stratItem["general_comment"] + "</td>";
+      rowString += tdPrefix1 + stratItem["scoutname"] + "</td>";
       tbodyRef.insertRow().innerHTML = rowString;
     }
   }

@@ -145,12 +145,12 @@ require 'inc/header.php';
       let tbodyRef = document.getElementById(tableId).querySelector('tbody');
       let row = tbodyRef.insertRow();
       row.id = key + "_row";
-      row.innerHTML =
-        "<td>" + matchData["eventcode"] + "</td>" +
-        "<td>" + matchData["matchnumber"] + "</td>" +
-        "<td>" + matchData["teamnumber"] + "</td>" +
-        "<td>" + matchData["scoutname"] + "</td>" +
-        "<td> <button id='" + key + "_delete' value='" + key + "' class='btn btn-danger' type='button'>Delete</button></td?";
+      row.innerHTML = "";
+      row.innerHTML += "<td>" + matchData["eventcode"] + "</td>";
+      row.innerHTML += "<td>" + matchData["matchnumber"] + "</td>";
+      row.innerHTML += "<td>" + matchData["teamnumber"] + "</td>";
+      row.innerHTML += "<td>" + matchData["scoutname"] + "</td>";
+      row.innerHTML += "<td> <button id='" + key + "_delete' value='" + key + "' class='btn btn-danger' type='button'>Delete</button></td?";
 
       // Add delete button
       document.getElementById(key + "_delete").addEventListener('click', function () {

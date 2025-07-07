@@ -176,7 +176,15 @@ class dbHandler
     {
       foreach ($row as $key => $value)
       {
-        if ($key === "autonStartPos" || $key === "autonLeave" || $key === "reefzoneAB" || $key === "reefzoneCD" || $key === "reefzoneEF" || $key === "reefzoneGH" || $key === "reefzoneIJ" || $key === "reefzoneKL" || $key === "autonCoralL1" || $key === "autonCoralL2" || $key === "autonCoralL3" || $key === "autonCoralL4" || $key === "autonAlgaeNet" || $key === "autonAlgaeProcessor" || $key === "autonCoralFloor" || $key === "autonCoralStation" || $key === "autonAlgaeFloor" || $key === "autonAlgaeReef" || $key === "acquiredCoral" || $key === "acquiredAlgae" || $key === "teleopAlgaeFloorPickup" || $key === "teleopCoralFloorPickup" || $key === "teleopKnockOffAlgae" || $key === "teleopAlgaeFromReef" || $key === "teleopHoldBoth" || $key === "teleopCoralL1" || $key === "teleopCoralL2" || $key === "teleopCoralL3" || $key === "teleopCoralL4" || $key === "teleopAlgaeNet" || $key === "teleopAlgaeProcessor" || $key === "defenseLevel" || $key === "cageClimb" || $key === "startClimb" || $key === "died")
+        if (
+          $key === "autonStartPos" || $key === "autonLeave" || $key === "reefzoneAB" || $key === "reefzoneCD" || $key === "reefzoneEF" || $key === "reefzoneGH" ||
+          $key === "reefzoneIJ" || $key === "reefzoneKL" || $key === "autonCoralL1" || $key === "autonCoralL2" || $key === "autonCoralL3" || $key === "autonCoralL4" ||
+          $key === "autonAlgaeNet" || $key === "autonAlgaeProcessor" || $key === "autonCoralFloor" || $key === "autonCoralStation" || $key === "autonAlgaeFloor" || $key === "autonAlgaeReef" ||
+          $key === "acquiredCoral" || $key === "acquiredAlgae" || $key === "teleopAlgaeFloorPickup" || $key === "teleopCoralFloorPickup" ||
+          $key === "teleopKnockOffAlgae" || $key === "teleopAlgaeFromReef" || $key === "teleopHoldBoth" || $key === "teleopCoralL1" || $key === "teleopCoralL2" ||
+          $key === "teleopCoralL3" || $key === "teleopCoralL4" || $key === "teleopAlgaeNet" || $key === "teleopAlgaeProcessor" || $key === "defenseLevel" ||
+          $key === "cageClimb" || $key === "startClimb" || $key === "died"
+        )
         {
           $row[$key] = $this->enforceInt($value);
         }
@@ -446,8 +454,7 @@ class dbHandler
         endgameFoul1,
         problem_comment,
         general_comment 
-        from " . $dbConfig["strategictable"] .
-      " where eventcode='" . $eventCode . "'";
+        from " . $dbConfig["strategictable"] . " where eventcode='" . $eventCode . "'";
     $prepared_statement = $this->conn->prepare($sql);
     $prepared_statement->execute();
     $result = $prepared_statement->fetchAll();
@@ -485,9 +492,7 @@ class dbHandler
         endgameFoul1,
         problem_comment,
         general_comment 
-        from " . $dbConfig["strategictable"] .
-      " where eventcode='" . $eventCode .
-      "' AND teamnumber='" . $teamNumber . "'";
+        from " . $dbConfig["strategictable"] . " where eventcode='" . $eventCode . "' AND teamnumber='" . $teamNumber . "'";
     $prepared_statement = $this->conn->prepare($sql);
     $prepared_statement->execute();
     $result = $prepared_statement->fetchAll();

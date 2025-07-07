@@ -251,73 +251,74 @@ require 'inc/header.php';
     for (let teamNum of teamList) {
       let endgameClimbPercentage = getDataValue(avgData[teamNum], "endgameClimbPercent");
 
-      let rowString =
-        "<td style=\"background-color:transparent\"><a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a></td>" +
-        //"<td>" + getDataValue(tbaData[teamNum], "totalPoints") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "avgTotalPoints") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "maxTotalPoints") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "avgTotalCoral") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "maxTotalCoral") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "avgTotalAlgae") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "maxTotalAlgae") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "avgTotalAutoPoints") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "maxTotalAutoPoints") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "avgTotalAutoCoralPoints") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "maxTotalAutoCoralPoints") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "avgTotalAutoAlgaePoints") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "maxTotalAutoAlgaePoints") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "avgTotalTeleopPoints") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "maxTotalTeleopPoints") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "avgTotalTeleopCoralPoints") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "maxTotalTeleopCoralPoints") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "avgTotalTeleopAlgaePoints") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "maxTotalTeleopAlgaePoints") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "avgEndgamePoints") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "maxEndgamePoints") + "</td>" +
+      const tdPrefix = "<td style=\"background-color:transparent\">";
+      let rowString = "";
+      rowString += tdPrefix + "<a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a></td>";
+      //rowString += tdPrefix + getDataValue(tbaData[teamNum], "totalPoints") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "avgTotalPoints") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "maxTotalPoints") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "avgTotalCoral") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "maxTotalCoral") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "avgTotalAlgae") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "maxTotalAlgae") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "avgTotalAutoPoints") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "maxTotalAutoPoints") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "avgTotalAutoCoralPoints") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "maxTotalAutoCoralPoints") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "avgTotalAutoAlgaePoints") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "maxTotalAutoAlgaePoints") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "avgTotalTeleopPoints") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "maxTotalTeleopPoints") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "avgTotalTeleopCoralPoints") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "maxTotalTeleopCoralPoints") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "avgTotalTeleopAlgaePoints") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "maxTotalTeleopAlgaePoints") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "avgEndgamePoints") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "maxEndgamePoints") + "</td>";
 
-        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "avgAutonCoral") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "maxAutonCoral") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "avgAutonCoralL1") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "maxAutonCoralL1") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "avgAutonCoralL2") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "maxAutonCoralL2") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "avgAutonCoralL3") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "maxAutonCoralL3") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "avgAutonCoralL4") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "maxAutonCoralL4") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "avgAutonAlgae") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "maxAutonAlgae") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "avgAutonAlgaeNet") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "maxAutonAlgaeNet") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "avgAutonAlgaeProc") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "maxAutonAlgaeProc") + "</td>" +
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "avgAutonCoral") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "maxAutonCoral") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "avgAutonCoralL1") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "maxAutonCoralL1") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "avgAutonCoralL2") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "maxAutonCoralL2") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "avgAutonCoralL3") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "maxAutonCoralL3") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "avgAutonCoralL4") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "maxAutonCoralL4") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "avgAutonAlgae") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "maxAutonAlgae") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "avgAutonAlgaeNet") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "maxAutonAlgaeNet") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "avgAutonAlgaeProc") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "maxAutonAlgaeProc") + "</td>";
 
-        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "teleopCoralScoringPercent") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "avgTeleopCoralScored") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "maxTeleopCoralScored") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "avgTeleopCoralL1") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "maxTeleopCoralL1") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "avgTeleopCoralL2") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "maxTeleopCoralL2") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "avgTeleopCoralL3") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "maxTeleopCoralL3") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "avgTeleopCoralL4") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "maxTeleopCoralL4") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "teleopAlgaeScoringPercent") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "avgTeleopAlgaeScored") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "maxTeleopAlgaeScored") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "avgTeleopAlgaeNet") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "maxTeleopAlgaeNet") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "avgTeleopAlgaeProc") + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "maxTeleopAlgaeProc") + "</td>" +
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopCoralScoringPercent") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "avgTeleopCoralScored") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "maxTeleopCoralScored") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "avgTeleopCoralL1") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "maxTeleopCoralL1") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "avgTeleopCoralL2") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "maxTeleopCoralL2") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "avgTeleopCoralL3") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "maxTeleopCoralL3") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "avgTeleopCoralL4") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "maxTeleopCoralL4") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopAlgaeScoringPercent") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "avgTeleopAlgaeScored") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "maxTeleopAlgaeScored") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "avgTeleopAlgaeNet") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "maxTeleopAlgaeNet") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "avgTeleopAlgaeProc") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "maxTeleopAlgaeProc") + "</td>";
 
-        "<td style=\"background-color:transparent\">" + getDataValue(endgameClimbPercentage, 0) + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(endgameClimbPercentage, 1) + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(endgameClimbPercentage, 2) + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(endgameClimbPercentage, 3) + "</td>" +
-        "<td style=\"background-color:transparent\">" + getDataValue(endgameClimbPercentage, 4) + "</td>" +
+      rowString += tdPrefix + getDataValue(endgameClimbPercentage, 0) + "</td>";
+      rowString += tdPrefix + getDataValue(endgameClimbPercentage, 1) + "</td>";
+      rowString += tdPrefix + getDataValue(endgameClimbPercentage, 2) + "</td>";
+      rowString += tdPrefix + getDataValue(endgameClimbPercentage, 3) + "</td>";
+      rowString += tdPrefix + getDataValue(endgameClimbPercentage, 4) + "</td>";
 
-        "<td style=\"background-color:transparent\">" + getDataValue(avgData[teamNum], "totaldied") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "totaldied") + "</td>";
 
       tbodyRef.insertRow().innerHTML = rowString;
     }
