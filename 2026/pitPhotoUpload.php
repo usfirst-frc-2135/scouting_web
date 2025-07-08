@@ -209,6 +209,12 @@ require 'inc/header.php';
   /////////////////////////////////////////////////////////////////////////////
   //
   // Process the generated html
+  //    When upload button is pressed
+  //      If replace all images button is checked 
+  //      Load a list of previous images for that team
+  //      Delete all previous images
+  //    Post the new image to the database
+  //    Delay 500 msec while flashing a success to the user
   //
   document.addEventListener("DOMContentLoaded", () => {
 

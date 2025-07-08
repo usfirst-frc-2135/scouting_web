@@ -83,6 +83,10 @@ require 'inc/header.php';
   /////////////////////////////////////////////////////////////////////////////
   //
   // Process the generated html
+  //    Get team list for this eventcode from TBA
+  //      - Get photos for that team list from our photos
+  //    Get all pit data from our database
+  //    When all completed, generate the web page
   //
   document.addEventListener("DOMContentLoaded", () => {
 

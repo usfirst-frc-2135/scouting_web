@@ -1168,6 +1168,13 @@ require 'inc/header.php';
   /////////////////////////////////////////////////////////////////////////////
   //
   // Process the generated html
+  //    When the team lookup page load button is pressed
+  //      In parallel, start retrieving each of these for the selected team:
+  //        - Team info (name) from TBA
+  //        - Images of the robot from database
+  //        - Match scouting data from database
+  //        - Pit scouting data from database
+  //        - Strategic scouting data from database
   //
   document.addEventListener("DOMContentLoaded", () => {
 

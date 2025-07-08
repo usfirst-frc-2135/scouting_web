@@ -110,6 +110,8 @@ require 'inc/header.php';
   /////////////////////////////////////////////////////////////////////////////
   //
   // Process the generated html
+  //    Get all match data from our database
+  //    When completed, display the web page
   //
   document.addEventListener("DOMContentLoaded", () => {
 

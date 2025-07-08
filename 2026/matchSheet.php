@@ -975,6 +975,13 @@ require 'inc/header.php';
   /////////////////////////////////////////////////////////////////////////////
   //
   // Process the generated html
+  //  Get the event match list from TBA and identify our matches from TBA schedule to build quick links
+  //  Get all match data and averages from our database to prepare for creating the match sheet
+  //  When load button (or quick link) is pressed
+  //    Identify the teams in the selected match
+  //    Request photos for each team
+  //    Update the match summary using the match averages
+  //    Build a team box for each team with the team info, photo, and match average data
   //
   document.addEventListener("DOMContentLoaded", () => {
 

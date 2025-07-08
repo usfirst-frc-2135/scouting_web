@@ -501,6 +501,13 @@ require 'inc/header.php';
   /////////////////////////////////////////////////////////////////////////////
   //
   // Process the generated html
+  //    Get all match data and averages from our database (can be filtered by match)
+  //    When completed, display the web page
+  //
+  //    If download button is clicked
+  //    Get (again) all pit data from our database
+  //    Get event COPRs from TBA
+  //    Write combined data into a CSV file
   //
   document.addEventListener("DOMContentLoaded", () => {
 

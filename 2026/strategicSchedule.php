@@ -77,6 +77,8 @@ require 'inc/header.php';
   /////////////////////////////////////////////////////////////////////////////
   //
   // Process the generated html
+  //    Get a (calcuated) strategic schedule from our database for our matches
+  //    When completed, display the web page
   //
   document.addEventListener("DOMContentLoaded", () => {
 

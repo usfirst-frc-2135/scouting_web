@@ -121,6 +121,8 @@ require 'inc/header.php';
   /////////////////////////////////////////////////////////////////////////////
   //
   // Process the generated html
+  //    Get all COPR data from TBA
+  //    When completed, display the web page
   //
   document.addEventListener("DOMContentLoaded", () => {
 
