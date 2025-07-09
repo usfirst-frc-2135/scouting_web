@@ -34,7 +34,7 @@ require 'inc/header.php';
             </div>
             <input id="enterMatchNumber" class="form-control" type="text" placeholder="Match Number" aria-label="Match Number">
             <div class="input-group-append">
-              <button id="loadMatch" class="btn btn-primary" type="button">Load Match</button>
+              <button id="loadMatchButton" class="btn btn-primary" type="button">Load Match</button>
             </div>
           </div>
         </div>
@@ -666,7 +666,7 @@ require 'inc/header.php';
       button.onclick = function (el) {
         document.getElementById("enterMatchLevel").value = thisMatch["comp_level"];
         document.getElementById("enterMatchNumber").value = thisMatch["match_number"];
-        document.getElementById("loadMatch").click();
+        document.getElementById("loadMatchButton").click();
       }
       document.getElementById("ourMatches").appendChild(button);
     }
@@ -885,8 +885,8 @@ require 'inc/header.php';
   }
 
   // Check source URL for match specifier
-  function checkURLForMatchSpec() {
-    console.log("==> matchSheet: checkURLForMatchSpec()");
+  function checkURLForMatchId() {
+    console.log("==> matchSheet: checkURLForMatchId()");
     let sp = new URLSearchParams(window.location.search);
     if (sp.has('compLevel') && sp.has('matchNum')) {
       return sp.get('compLevel') + sp.get('matchNum');
@@ -895,8 +895,8 @@ require 'inc/header.php';
   }
 
   // Check source URL for custom match
-  function checkURLForCustomMatch() {
-    console.log("==> matchSheet: checkURLForCustomMatch()");
+  function checkURLForMatchSpec() {
+    console.log("==> matchSheet: checkURLForMatchSpec()");
     let sp = new URLSearchParams(window.location.search);
     if (sp.has('redTeam1') && sp.has('redTeam2') && sp.has('redTeam3') && sp.has('blueTeam1') && sp.has('blueTeam2') && sp.has('blueTeam3')) {
       let matchSpec = {
@@ -1012,16 +1012,16 @@ require 'inc/header.php';
     });
 
     // Check URL for match ID to load
-    let matchId = checkURLForMatchSpec();
+    let matchId = checkURLForMatchId();
     if (matchId !== null && matchId !== "") {
-      console.log("==> matchsheet: building from URL match spec! " + matchId);
+      console.log("==> matchsheet: building from URL match ID! " + matchId);
       let matchSpec = getEventMatchSpec(matchId, matchList);
       if ((matchSpec !== null) && (matchList !== null) && (averageData !== null))
         loadMatchSheet(matchSpec, matchList, averageData);
     }
 
     // Check URL for a custom match spec to load
-    let customSpec = checkURLForCustomMatch();
+    let customSpec = checkURLForMatchSpec();
     if (customSpec !== null && customSpec.red[0] !== "" && customSpec.blue[0] !== "") {
       console.log("==> matchsheet: building custom match from URL spec! " + customSpec.red[0] + " " + customSpec.blue[0]);
       matchSpec = customSpec;
@@ -1030,7 +1030,7 @@ require 'inc/header.php';
     }
 
     // Load the match sheet from the match number entries
-    document.getElementById("loadMatch").addEventListener('click', function () {
+    document.getElementById("loadMatchButton").addEventListener('click', function () {
       console.log("=> matchsheet: load event match!");
       let matchId = document.getElementById("enterMatchLevel").value + document.getElementById("enterMatchNumber").value;
       matchSpec = getEventMatchSpec(matchId, matchList);
