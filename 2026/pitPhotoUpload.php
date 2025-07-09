@@ -216,7 +216,7 @@ require 'inc/header.php';
   //    Post the new image to the database
   //    Delay 500 msec while flashing a success to the user
   //
-  document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("DOMContentLoaded", function () {
 
     const loadingSpinner = document.getElementById("loadingSpinner");
     loadingSpinner.style.visibility = 'hidden';

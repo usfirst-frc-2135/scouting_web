@@ -209,7 +209,7 @@ require 'inc/header.php';
   //
   // Process the generated html
   //
-  document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("DOMContentLoaded", function () {
 
     // Map form form-control IDs to the db_config labels that store them
     const idToConfigKey = {

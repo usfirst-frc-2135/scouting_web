@@ -124,7 +124,7 @@ require 'inc/header.php';
   //    Get all COPR data from TBA
   //    When completed, display the web page
   //
-  document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("DOMContentLoaded", function () {
 
     const tableId = "coprTable";
     const frozenTable = new FreezeTable('.freeze-table', { fixedNavbar: '.navbar' });

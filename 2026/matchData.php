@@ -113,7 +113,7 @@ require 'inc/header.php';
   //    Get all match data from our database
   //    When completed, display the web page
   //
-  document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("DOMContentLoaded", function () {
 
     const tableId = "matchDataTable";
     const frozenTable = new FreezeTable('.freeze-table', { fixedNavbar: '.navbar' });

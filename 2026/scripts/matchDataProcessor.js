@@ -84,7 +84,7 @@ class matchDataProcessor {
 
   // Sorts the data by match number (ignores comp_level)
   sortMatches(newData) {
-    newData.sort((a, b) => {
+    newData.sort(function (a, b) {
       let compare = this.isMatchLessThanOrEqual(a["matchnumber"], b["matchnumber"]);
       return (compare) ? -1 : 1;
     });

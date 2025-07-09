@@ -976,7 +976,7 @@ require 'inc/header.php';
   //    Update the match summary using the match averages
   //    Build a team box for each team with the team info, photo, and match average data
   //
-  document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("DOMContentLoaded", function () {
 
     let matchList = null;
     let averageData = null;

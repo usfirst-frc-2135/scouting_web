@@ -158,7 +158,7 @@ require 'inc/header.php';
   //    Get all strategic data from our database
   //    When completed, display the web page
   //
-  document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("DOMContentLoaded", function () {
 
     const tableId = "strategicTable";
     const frozenTable = new FreezeTable('.freeze-table', { fixedNavbar: '.navbar' });

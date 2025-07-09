@@ -386,7 +386,7 @@ require 'inc/header.php';
   //
   // Process the generated html
   //
-  document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("DOMContentLoaded", function () {
 
     // Check URL for source team to load
     let initTeamNumber = checkURLForTeamSpec();

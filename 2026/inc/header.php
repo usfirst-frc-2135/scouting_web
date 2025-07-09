@@ -130,7 +130,7 @@
     }
 
     // Update navbar with the event code if available
-    document.addEventListener("DOMContentLoaded", () => {
+    document.addEventListener("DOMContentLoaded", function () {
       // Update the navbar with the event code
       $.post("api/dbAPI.php", {
         getDBStatus: true

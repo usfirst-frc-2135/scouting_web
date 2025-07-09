@@ -509,7 +509,7 @@ require 'inc/header.php';
   //    Get event COPRs from TBA
   //    Write combined data into a CSV file
   //
-  document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("DOMContentLoaded", function () {
 
     const tableId = "averagesTable";
     const frozenTable = new FreezeTable('.freeze-table', { fixedNavbar: '.navbar' });

@@ -88,7 +88,7 @@ require 'inc/header.php';
   //    Get all pit data from our database
   //    When all completed, generate the web page
   //
-  document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("DOMContentLoaded", function () {
 
     const tableId = "psTable";
     let teamList = [];

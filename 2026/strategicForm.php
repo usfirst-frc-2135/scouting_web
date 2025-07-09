@@ -309,7 +309,7 @@ require 'inc/header.php';
     document.getElementById("enterMatchNumber").value = "";
     document.getElementById("scoutName").value = "";
     const driverAbilityBtns = document.querySelectorAll("input[name = 'driverAbilityGroup']");
-    driverAbilityBtns.forEach(button => {
+    driverAbilityBtns.forEach(function (button) {
       button.checked = false;
     });
 
@@ -361,7 +361,7 @@ require 'inc/header.php';
     // Process driver ability radio buttons
     const driverAbilityBtns = document.querySelectorAll("input[name = 'driverAbilityGroup']");
     dataToSave["driverability"] = 0; // default
-    driverAbilityBtns.forEach(button => {
+    driverAbilityBtns.forEach(function (button) {
       if (button.checked) {
         console.log("driverability: " + button.value + " selected!");
         dataToSave["driverability"] = +button.value;
@@ -419,7 +419,7 @@ require 'inc/header.php';
   //
   // Process the generated html
   //
-  document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("DOMContentLoaded", function () {
 
     // Check URL for source team to load
     let initTeamNumber = checkURLForTeamSpec();

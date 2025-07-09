@@ -203,7 +203,7 @@ require 'inc/header.php';
 
   // Responsible for handling actions that occur when camera is scanning
   function addCameraScanner(camId, scanner, tableId, scannedMatches) {
-    scanner.decodeFromInputVideoDeviceContinuously(camId, 'camera', (result, err) => {
+    scanner.decodeFromInputVideoDeviceContinuously(camId, 'camera', function (result, err) {
       if (result) {
         let qrList = qrStringToList(result.text);
         qrList = padList(qrList);
@@ -223,12 +223,12 @@ require 'inc/header.php';
   // Build the camera selection dropdown and connect the scanner passed in
   function createCameraSelector(camTagId, scanner, tableId, scannedMatches) {
     // Look for cameras, enumerate them, and connect the scanner
-    scanner.getVideoInputDevices().then((videoInputDevices) => {
+    scanner.getVideoInputDevices().then(function (videoInputDevices) {
       let camDeviceId = null;
       let camSelector = document.getElementById(camTagId);
       console.log("createCameraSelector: Camera count: " + videoInputDevices.length);
       if (videoInputDevices.length >= 1) {
-        videoInputDevices.forEach((element) => {
+        videoInputDevices.forEach(function (element) {
           if (camDeviceId === null) {
             camDeviceId = element.deviceId;
           }
@@ -295,7 +295,7 @@ require 'inc/header.php';
   //
   // Process the generated html
   //
-  document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("DOMContentLoaded", function () {
 
     // All successfully scanned matches
     const tableId = "qrScanTable";

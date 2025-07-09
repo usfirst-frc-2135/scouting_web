@@ -80,7 +80,7 @@ require 'inc/header.php';
   //    Get a (calcuated) strategic schedule from our database for our matches
   //    When completed, display the web page
   //
-  document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("DOMContentLoaded", function () {
 
     const tableId = "stratSchedTable";
 

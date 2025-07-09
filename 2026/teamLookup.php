@@ -1076,7 +1076,7 @@ require 'inc/header.php';
   function loadMatchData(team, allEventMatches) {
     console.log("==> teamLookup: loadMatchData()");
     let mdp = new matchDataProcessor(allEventMatches);
-    mdp.sortMatches(allEventMatches);
+    // mdp.sortMatches(allEventMatches);
     mdp.getSiteFilteredAverages(function (filteredMatches, averageData) {
       if (filteredMatches != undefined) {
         loadAutonGraph(filteredMatches);
@@ -1176,7 +1176,7 @@ require 'inc/header.php';
   //        - Pit scouting data from database
   //        - Strategic scouting data from database
   //
-  document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("DOMContentLoaded", function () {
 
     // Check URL for source team to load
     let initTeamNumber = checkURLForTeamSpec();
