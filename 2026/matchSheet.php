@@ -639,8 +639,8 @@ require 'inc/header.php';
   }
 
   // Build the list of HTML links to our matches at this event
-  function createOurTeamMatchLinks(ourMatches) {
-    console.log("==> matchSheet: createOurTeamMatchLinks()");
+  function buildOurTeamMatchLinks(ourMatches) {
+    console.log("==> matchSheet: buildOurTeamMatchLinks()");
     let ourMatchesArray = [];
     for (let key in ourMatches) {
       ourMatchesArray.push(ourMatches[key]);
@@ -649,14 +649,6 @@ require 'inc/header.php';
     ourMatchesArray.sort(function (matchA, matchB) {
       return compareMatchNumbers(matchA["comp_level"] + matchA["match_number"], matchB["comp_level"] + matchB["match_number"]);
     });
-
-    // document.getElementById("ourMatches").innerHTML = "";
-    // let row = '';
-    // for (let i in ourMatchesArray) {
-    //   let thisMatch = ourMatchesArray[i];
-    //   row += ' <a class="btn btn-secondary btn-sm col-2 m-1" href="./matchSheet.php?compLevel=' + thisMatch["comp_level"] + '&matchNum=' + thisMatch["match_number"] + '">' + thisMatch["comp_level"] + thisMatch["match_number"] + '</a>';
-    // }
-    // document.getElementById("ourMatches").innerHTML = row;
 
     for (let i = 0; i < ourMatchesArray.length; i++) {
       let thisMatch = ourMatchesArray[i];
@@ -672,8 +664,9 @@ require 'inc/header.php';
       button.textContent = matchId;
 
       button.onclick = function (el) {
-        let matchSpec = getEventMatchSpec(matchId, matchList);
-        loadMatchSheet(matchSpec, matchList, averageData);
+        document.getElementById("enterMatchLevel").value = thisMatch["comp_level"];
+        document.getElementById("enterMatchNumber").value = thisMatch["match_number"];
+        document.getElementById("loadMatch").click();
       }
       document.getElementById("ourMatches").appendChild(button);
     }
@@ -887,7 +880,7 @@ require 'inc/header.php';
         ourMatches[keyw] = newMatch;
       }
     }
-    createOurTeamMatchLinks(ourMatches);
+    buildOurTeamMatchLinks(ourMatches);
     return eventMatchList;
   }
 
@@ -925,7 +918,7 @@ require 'inc/header.php';
 
     let matchVector = matchList[idToKey(matchId)];
     if (!matchVector) {
-      console.error("processMatchList: Match does not exist: " + idToKey(matchId));
+      console.error("matchSheet: getEventMatchSpec: Match does not exist: " + idToKey(matchId));
       return alert("Match " + idToKey(matchId) + " does not exist!");
     }
 
@@ -987,6 +980,7 @@ require 'inc/header.php';
 
     let matchList = null;
     let averageData = null;
+    let matchSpec = null;
 
     // Load event matches from TBA and build our links and a full match list
     $.get("api/tbaAPI.php", {
@@ -999,6 +993,8 @@ require 'inc/header.php';
       else {
         let jEventMatches = JSON.parse(eventMatches)["response"];
         matchList = buildMatchList(jEventMatches);
+        if ((matchSpec !== null) && (matchList !== null) && (averageData !== null))
+          loadMatchSheet(matchSpec, matchList, averageData);
       }
     });
 
@@ -1010,6 +1006,8 @@ require 'inc/header.php';
       let mdp = new matchDataProcessor(JSON.parse(allMatchData));
       mdp.getSiteFilteredAverages(function (allMatchData, allAverageData) {
         averageData = allAverageData;
+        if ((matchSpec !== null) && (matchList !== null) && (averageData !== null))
+          loadMatchSheet(matchSpec, matchList, averageData);
       });
     });
 
@@ -1018,22 +1016,26 @@ require 'inc/header.php';
     if (matchId !== null && matchId !== "") {
       console.log("==> matchsheet: building from URL match spec! " + matchId);
       let matchSpec = getEventMatchSpec(matchId, matchList);
-      loadMatchSheet(matchSpec, matchList, averageData);
+      if ((matchSpec !== null) && (matchList !== null) && (averageData !== null))
+        loadMatchSheet(matchSpec, matchList, averageData);
     }
 
     // Check URL for a custom match spec to load
     let customSpec = checkURLForCustomMatch();
     if (customSpec !== null && customSpec.red[0] !== "" && customSpec.blue[0] !== "") {
       console.log("==> matchsheet: building custom match from URL spec! " + customSpec.red[0] + " " + customSpec.blue[0]);
-      loadMatchSheet(customSpec, matchList, averageData);
+      matchSpec = customSpec;
+      if ((matchSpec !== null) && (matchList !== null) && (averageData !== null))
+        loadMatchSheet(matchSpec, matchList, averageData);
     }
 
     // Load the match sheet from the match number entries
     document.getElementById("loadMatch").addEventListener('click', function () {
       console.log("=> matchsheet: load event match!");
       let matchId = document.getElementById("enterMatchLevel").value + document.getElementById("enterMatchNumber").value;
-      let matchSpec = getEventMatchSpec(matchId, matchList);
-      loadMatchSheet(matchSpec, matchList, averageData);
+      matchSpec = getEventMatchSpec(matchId, matchList);
+      if ((matchSpec !== null) && (matchList !== null) && (averageData !== null))
+        loadMatchSheet(matchSpec, matchList, averageData);
     });
 
     // Load the custom match using the custom team numbers entries
@@ -1051,7 +1053,8 @@ require 'inc/header.php';
         return alert("Please fill in Red Team Number 1 and Blue Team Number 1!");
       }
       else {
-        loadMatchSheet(matchSpec, matchList, averageData);
+        if ((matchSpec !== null) && (matchList !== null) && (averageData !== null))
+          loadMatchSheet(matchSpec, matchList, averageData);
       }
     });
 
