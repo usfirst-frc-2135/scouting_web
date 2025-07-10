@@ -986,9 +986,9 @@ require 'inc/header.php';
 
     // Load all match scouting data to be processed later
     $.get("api/dbReadAPI.php", {
-      getMatchData: true
+      getAllMatchData: true
     }).done(function (allMatchData) {
-      console.log("=> getMatchData");
+      console.log("=> getAllMatchData");
       let mdp = new matchDataProcessor(JSON.parse(allMatchData));
       mdp.getSiteFilteredAverages(function (filteredMatchData, filteredAvgData) {
         averageData = filteredAvgData;

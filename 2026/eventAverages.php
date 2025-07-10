@@ -453,9 +453,9 @@ require 'inc/header.php';
 
     // Get match data from DB
     $.get("api/dbReadAPI.php", {
-      getMatchData: true
+      getAllMatchData: true
     }).done(function (matchData) {
-      console.log("=> getMatchData:");
+      console.log("=> getAllMatchData:");
       jMatchData = JSON.parse(matchData);
       waitForData(jMatchData, jCoprData);
     });
@@ -477,9 +477,9 @@ require 'inc/header.php';
   function buildAveragesTable(tableId, startMatch, endMatch) {
     console.log("==> eventAverages: buildAveragesTable()");
     $.get("api/dbReadAPI.php", {
-      getMatchData: true
+      getAllMatchData: true
     }).done(function (matchData) {
-      console.log("=> getMatchData:");
+      console.log("=> getAllMatchData:");
       mdp = new matchDataProcessor(JSON.parse(matchData));
       if (startMatch !== null && endMatch !== null) {
         mdp.filterMatchRange(startMatch, endMatch);

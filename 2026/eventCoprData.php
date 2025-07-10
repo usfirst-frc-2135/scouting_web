@@ -85,11 +85,11 @@ require 'inc/header.php';
     ];
 
   // Add data keys (fields) to COPR table in html
-  function loadCoprTable(tableId, coprData) {
+  function loadCoprTable(tableId, coprResponse) {
     console.log("==> eventCoprData.php: loadCoprTable()");
-    let jCoprData = JSON.parse(coprData);
+    let jCoprData = JSON.parse(coprResponse);
     let keys = jCoprData["keys"];
-    let data = jCoprData["data"];
+    let coprData = jCoprData["data"];
 
     // Print the table then select the order in the array above
     // for (key in keys) {
@@ -97,7 +97,7 @@ require 'inc/header.php';
     // }
 
     addKeysToCoprTable(tableId, coprKeys);
-    addDataToCoprTable(tableId, data, coprKeys);
+    addDataToCoprTable(tableId, coprData, coprKeys);
   }
 
   // Retrive OPRs from TBA and build the COPR table to display

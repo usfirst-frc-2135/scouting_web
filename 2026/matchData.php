@@ -94,9 +94,9 @@ require 'inc/header.php';
   // Acquire match data and build the page
   function buildMatchDataTable(tableId) {
     $.get("api/dbReadAPI.php", {
-      getMatchData: true
+      getAllMatchData: true
     }).done(function (matchData) {
-      console.log("=> getMatchData");
+      console.log("=> getAllMatchData");
       let mdp = new matchDataProcessor(JSON.parse(matchData));
       // mdp.sortMatches(allEventMatches);
       mdp.getSiteFilteredAverages(function (filteredMatchData, filteredAvgData) {

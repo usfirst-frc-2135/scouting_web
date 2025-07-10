@@ -74,7 +74,7 @@ class dbHandler
     return $this->conn;
   }
 
-  public function writeRowToMatchTable($data)
+  public function writeRowToMatchTable($mData)
   {
     $dbConfig = $this->readDbConfig();
     $sql = "INSERT INTO " . $dbConfig["datatable"] .
@@ -161,7 +161,7 @@ class dbHandler
         :died,
         :comment)";
     $prepared_statement = $this->conn->prepare($sql);
-    $prepared_statement->execute($data);
+    $prepared_statement->execute($mData);
   }
 
   private function enforceInt($val)
@@ -169,10 +169,10 @@ class dbHandler
     return intval($val);
   }
 
-  private function enforceDataTyping($data)
+  private function enforceDataTyping($mData)
   {
     $out = array();
-    foreach ($data as $row)
+    foreach ($mData as $row)
     {
       foreach ($row as $key => $value)
       {
@@ -300,7 +300,7 @@ class dbHandler
     return $this->enforceDataTyping($result);
   }
 
-  public function writeRowToPitTable($data)
+  public function writeRowToPitTable($pData)
   {
     $dbConfig = $this->readDbConfig();
     $sql = "INSERT INTO " . $dbConfig["pittable"] .
@@ -330,7 +330,7 @@ class dbHandler
         :preparedness,
         :numbatteries)";
     $prepared_statement = $this->conn->prepare($sql);
-    $prepared_statement->execute($data);
+    $prepared_statement->execute($pData);
   }
 
   public function readAllPitTable($eventCode)
@@ -356,7 +356,7 @@ class dbHandler
     return $result;
   }
 
-  public function writeRowToStrategicTable($data)
+  public function writeRowToStrategicTable($sData)
   {
     $dbConfig = $this->readDbConfig();
 
@@ -420,7 +420,7 @@ class dbHandler
         :problem_comment,
         :general_comment)";
     $prepared_statement = $this->conn->prepare($sql);
-    $prepared_statement->execute($data);
+    $prepared_statement->execute($sData);
   }
 
   public function readAllFromStrategicTable($eventCode)
@@ -708,10 +708,10 @@ class dbHandler
     }
 
     // Build ini file string
-    $data = "";
+    $cfgData = "";
     foreach ($currDBConfig as $key => $value)
     {
-      $data = $data . $key . "=" . $value . "\r\n";
+      $cfgData = $cfgData . $key . "=" . $value . "\r\n";
     }
 
     // Write ini file string to actual file
@@ -729,7 +729,7 @@ class dbHandler
 
       if ($writeLock)
       {
-        fwrite($fp, $data);
+        fwrite($fp, $cfgData);
         flock($fp, LOCK_UN);
       }
     }

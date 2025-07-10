@@ -223,17 +223,17 @@ class CalculateCOPRs
     }
 
     // Repackage Values into Team Value Dicts
-    $data = array();
+    $cData = array();
     foreach ($teamList as $team)
     {
-      $data[$team] = array();
+      $cData[$team] = array();
       foreach ($Xs as $component => $x)
       {
-        $data[$team][$component] = round($x[$teamLookup[$team]], 2);
+        $cData[$team][$component] = round($x[$teamLookup[$team]], 2);
       }
     }
 
-    return array("eventCode" => $eventCode, "data" => $data, "keys" => self::getNumericalBreakdownKeys($matchData));
+    return array("eventCode" => $eventCode, "data" => $cData, "keys" => self::getNumericalBreakdownKeys($matchData));
   }
 
 }

@@ -2,16 +2,16 @@
   Match Data Processor
   Takes in match data from source and calculates averages and other derived data from it.
   Data types:
-    matchData - the JSON parsed match data from our scouting database
+    jMatchData - the JSON parsed match data from our scouting database
     matchId - the string used to identify a match competition level and match number (e.g. qm5)
     matchTuple - a two entry tuple that identifies a match (e.g. ["qm", "5"])
 */
 class matchDataProcessor {
 
-  constructor(data) {
-    this.data = data;
+  constructor(jMatchData) {
+    this.mData = jMatchData;
     this.siteFilter = null;
-    console.log("this.data length: " + this.data.length);
+    console.log("this.mData length: " + this.mData.length);
   }
 
   // Fix match IDs that are missing the comp level
@@ -71,17 +71,17 @@ class matchDataProcessor {
     return this.isMatchLessThanOrEqual(startMatchId, matchId) && this.isMatchLessThanOrEqual(matchId, endMatchId);
   }
 
-  // Filters out all matches in this.data not within the specified range (destructively changes this.data)
+  // Filters out all matches in this.mData not within the specified range (destructively changes this.mData)
   filterMatchRange(startMatchId, endMatchId) {
     console.log("==> matchDataProcessor: filterMatchRange:");
     let newData = [];
-    for (let i = 0; i < this.data.length; i++) {
-      let matchId = this.data[i]["matchnumber"];
+    for (let i = 0; i < this.mData.length; i++) {
+      let matchId = this.mData[i]["matchnumber"];
       if (this.ifMatchInRange(startMatchId, matchId, endMatchId)) {
-        newData.push(this.data[i]);
+        newData.push(this.mData[i]);
       }
     }
-    this.data = newData;
+    this.mData = newData;
   }
 
   // Sorts the data by match number (ignores comp_level)
@@ -97,19 +97,19 @@ class matchDataProcessor {
   applySiteFilter() {
     console.log("==> matchDataProcessor: applySiteFilter:");
     let newData = [];
-    for (let i = 0; i < this.data.length; i++) {
-      let matchId = this.data[i]["matchnumber"];
+    for (let i = 0; i < this.mData.length; i++) {
+      let matchId = this.mData[i]["matchnumber"];
       let mt = this.getMatchTuple(matchId);
       if (mt === null) {
         mt = ["qm", null];
       }
-      if (mt[0] === "p" && this.siteFilter["useP"]) { newData.push(this.data[i]); }
-      else if (mt[0] === "qm" && this.siteFilter["useQm"]) { newData.push(this.data[i]); }
-      else if (mt[0] === "sf" && this.siteFilter["useSf"]) { newData.push(this.data[i]); }
-      else if (mt[0] === "f" && this.siteFilter["useF"]) { newData.push(this.data[i]); }
+      if (mt[0] === "p" && this.siteFilter["useP"]) { newData.push(this.mData[i]); }
+      else if (mt[0] === "qm" && this.siteFilter["useQm"]) { newData.push(this.mData[i]); }
+      else if (mt[0] === "sf" && this.siteFilter["useSf"]) { newData.push(this.mData[i]); }
+      else if (mt[0] === "f" && this.siteFilter["useF"]) { newData.push(this.mData[i]); }
     }
-    this.data = [...newData];
-    console.log("this.data length: " + this.data.length + " (after filter)");
+    this.mData = [...newData];
+    console.log("this.mData length: " + this.mData.length + " (after filter)");
   }
 
   // Filters match data based on the retrieved site filter from DB config
@@ -130,7 +130,7 @@ class matchDataProcessor {
 
       tempThis.applySiteFilter();
 
-      successFunction(tempThis.data, tempThis.getEventAverages());
+      successFunction(tempThis.mData, tempThis.getEventAverages());
     });
   }
 
@@ -140,8 +140,8 @@ class matchDataProcessor {
     let pdata = {}; // to hold returning data for all matches and all teams
 
     // For each team, go thru all its matches and do the calculations for the averages data.
-    for (let i = 0; i < this.data.length; i++) {
-      let tn = this.data[i]["teamnumber"];
+    for (let i = 0; i < this.mData.length; i++) {
+      let tn = this.mData[i]["teamnumber"];
       // console.log("===> doing MDP calculations for team (" + i + "): " + tn);  // TEST
 
       if (!(tn in pdata)) {
@@ -244,33 +244,33 @@ class matchDataProcessor {
         pdata[tn]["commentlist"] = [];
       }
 
-      // HOLD      console.log("  -> for match = "+ this.data[i]["matchnumber"]); //TEST
+      // HOLD      console.log("  -> for match = "+ this.mData[i]["matchnumber"]); //TEST
 
-      pdata[tn]["reefzoneABpercent"] += this.data[i]["reefzoneAB"];
-      pdata[tn]["reefzoneCDpercent"] += this.data[i]["reefzoneCD"];
-      pdata[tn]["reefzoneEFpercent"] += this.data[i]["reefzoneEF"];
-      pdata[tn]["reefzoneGHpercent"] += this.data[i]["reefzoneGH"];
-      pdata[tn]["reefzoneIJpercent"] += this.data[i]["reefzoneIJ"];
-      pdata[tn]["reefzoneKLpercent"] += this.data[i]["reefzoneKL"];
+      pdata[tn]["reefzoneABpercent"] += this.mData[i]["reefzoneAB"];
+      pdata[tn]["reefzoneCDpercent"] += this.mData[i]["reefzoneCD"];
+      pdata[tn]["reefzoneEFpercent"] += this.mData[i]["reefzoneEF"];
+      pdata[tn]["reefzoneGHpercent"] += this.mData[i]["reefzoneGH"];
+      pdata[tn]["reefzoneIJpercent"] += this.mData[i]["reefzoneIJ"];
+      pdata[tn]["reefzoneKLpercent"] += this.mData[i]["reefzoneKL"];
 
-      let autonLeave = (this.data[i]["autonLeave"]);
+      let autonLeave = (this.mData[i]["autonLeave"]);
       let autonLeavePoints = 0;
       if (parseInt(autonLeave) === 1) {
         autonLeavePoints = 3;
       }
       // HOLD      console.log(" --> auton Leave points = "+autonLeavePoints);  //TEST
 
-      let currentAutonCoralL1 = (this.data[i]["autonCoralL1"]);
+      let currentAutonCoralL1 = (this.mData[i]["autonCoralL1"]);
       // HOLD      console.log(" --> auton coral L1 = "+currentAutonCoralL1);  //TEST
-      let currentAutonCoralL2 = (this.data[i]["autonCoralL2"]);
+      let currentAutonCoralL2 = (this.mData[i]["autonCoralL2"]);
       // HOLD      console.log(" --> auton coral L2 = "+currentAutonCoralL2);  //TEST
-      let currentAutonCoralL3 = (this.data[i]["autonCoralL3"]);
+      let currentAutonCoralL3 = (this.mData[i]["autonCoralL3"]);
       // HOLD      console.log(" --> auton coral L3 = "+currentAutonCoralL3);  //TEST
-      let currentAutonCoralL4 = (this.data[i]["autonCoralL4"]);
+      let currentAutonCoralL4 = (this.mData[i]["autonCoralL4"]);
       // HOLD      console.log(" --> auton coral L4 = "+currentAutonCoralL4);  //TEST
-      let currentAutonAlgaeNet = (this.data[i]["autonAlgaeNet"]);
+      let currentAutonAlgaeNet = (this.mData[i]["autonAlgaeNet"]);
       // HOLD      console.log(" --> auton algae net = "+currentAutonAlgaeNet);  //TEST
-      let currentAutonAlgaeProcessor = (this.data[i]["autonAlgaeProcessor"]);
+      let currentAutonAlgaeProcessor = (this.mData[i]["autonAlgaeProcessor"]);
       // HOLD      console.log(" --> auton algae proc = "+currentAutonAlgaeProcessor);  //TEST
 
       let totalAutoCoral = parseInt(currentAutonCoralL1) + parseInt(currentAutonCoralL2) + parseInt(currentAutonCoralL3) + parseInt(currentAutonCoralL4);
@@ -284,12 +284,12 @@ class matchDataProcessor {
       // HOLD      console.log(" --> total auton algae = "+totalAutoAlgae);  //TEST
       // HOLD      console.log(" --> total auton algae pts = "+totalAutoAlgaePoints);  //TEST
 
-      let currentTeleopCoralL1 = (this.data[i]["teleopCoralL1"]);
-      let currentTeleopCoralL2 = (this.data[i]["teleopCoralL2"]);
-      let currentTeleopCoralL3 = (this.data[i]["teleopCoralL3"]);
-      let currentTeleopCoralL4 = (this.data[i]["teleopCoralL4"]);
-      let currentTeleopAlgaeNet = (this.data[i]["teleopAlgaeNet"]);
-      let currentTeleopAlgaeProcessor = (this.data[i]["teleopAlgaeProcessor"]);
+      let currentTeleopCoralL1 = (this.mData[i]["teleopCoralL1"]);
+      let currentTeleopCoralL2 = (this.mData[i]["teleopCoralL2"]);
+      let currentTeleopCoralL3 = (this.mData[i]["teleopCoralL3"]);
+      let currentTeleopCoralL4 = (this.mData[i]["teleopCoralL4"]);
+      let currentTeleopAlgaeNet = (this.mData[i]["teleopAlgaeNet"]);
+      let currentTeleopAlgaeProcessor = (this.mData[i]["teleopAlgaeProcessor"]);
 
       let totalTeleopCoral = (parseInt(currentTeleopCoralL1)) + (parseInt(currentTeleopCoralL2)) + (parseInt(currentTeleopCoralL3)) + (parseInt(currentTeleopCoralL4));
       let totalTeleopCoralPoints = (parseInt(currentTeleopCoralL1) * 2) + (parseInt(currentTeleopCoralL2) * 3) + (parseInt(currentTeleopCoralL3) * 4) + (parseInt(currentTeleopCoralL4) * 5);
@@ -301,15 +301,15 @@ class matchDataProcessor {
       // HOLD      console.log(" --> total teleop algae = "+totalTeleopAlgae);  //TEST
       // HOLD      console.log(" --> total teleop algae pts = "+totalTeleopAlgaePoints);  //TEST
 
-      let currentTeleopCoralAcquired = (this.data[i]["acquiredCoral"]);
-      let currentTeleopAlgaeAcquired = (this.data[i]["acquiredAlgae"]);
+      let currentTeleopCoralAcquired = (this.mData[i]["acquiredCoral"]);
+      let currentTeleopAlgaeAcquired = (this.mData[i]["acquiredAlgae"]);
       pdata[tn]["totalTeleopCoral"] += parseInt(totalTeleopCoral);
       pdata[tn]["teleopAcquireCoral"] += parseInt(currentTeleopCoralAcquired);
       pdata[tn]["totalTeleopAlgae"] += parseInt(totalTeleopAlgae);
       pdata[tn]["teleopAcquireAlgae"] += parseInt(currentTeleopAlgaeAcquired);
 
       let endgameClimbPoints = 0;
-      let climbLevel = (this.data[i]["cageClimb"]);
+      let climbLevel = (this.mData[i]["cageClimb"]);
       switch (climbLevel) {
         case 1: endgameClimbPoints = 2; break;
         case 2: endgameClimbPoints = 2; break;
@@ -415,13 +415,13 @@ class matchDataProcessor {
       pdata[tn]["maxTeleopAlgaeNet"] = Math.max(pdata[tn]["maxTeleopAlgaeNet"], currentTeleopAlgaeNet);
       pdata[tn]["maxTeleopAlgaeProc"] = Math.max(pdata[tn]["maxTeleopAlgaeProc"], currentTeleopAlgaeProcessor);
       // For boolean data, we are just incrementing that data instead of adding the value here.
-      pdata[tn]["endgameClimbPercent"][this.data[i]["cageClimb"]] += 1;
-      // HOLD pdata[tn]["endgameStartClimbPercent"][this.data[i]["endgameStartClimbing"]] += 1;
+      pdata[tn]["endgameClimbPercent"][this.mData[i]["cageClimb"]] += 1;
+      // HOLD pdata[tn]["endgameStartClimbPercent"][this.mData[i]["endgameStartClimbing"]] += 1;
 
-      pdata[tn]["totaldied"] += this.data[i]["died"];
+      pdata[tn]["totaldied"] += this.mData[i]["died"];
       pdata[tn]["totalmatches"] += 1;
-      pdata[tn]["scoutnames"].push(this.data[i]["scoutname"]);
-      pdata[tn]["commentlist"].push(this.data[i]["comment"]);
+      pdata[tn]["scoutnames"].push(this.mData[i]["scoutname"]);
+      pdata[tn]["commentlist"].push(this.mData[i]["comment"]);
     }
 
     // Go thru each team in pdata and do the avg, max and percent calculations.

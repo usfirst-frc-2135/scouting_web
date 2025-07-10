@@ -1142,9 +1142,9 @@ require 'inc/header.php';
 
     // Add Match Scouting Data
     $.get("api/dbReadAPI.php", {
-      getTeamMatches: teamNum
+      getTeamMatchData: teamNum
     }).done(function (teamMatches) {
-      console.log("=> getTeamMatches");
+      console.log("=> getTeamMatchData");
       loadMatchData(teamNum, JSON.parse(teamMatches));
     });
 

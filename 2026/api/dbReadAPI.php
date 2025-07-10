@@ -40,15 +40,15 @@ if (isset($_GET["eventCode"]))
   $eventCode = $_GET["eventCode"];
 }
 
-if (isset($_GET["getMatchData"]))
+if (isset($_GET["getAllMatchData"]))
 {
-  // Get all data
+  // Get all match data
   echo (json_encode($db->readAllFromMatchTable($eventCode)));
 }
-else if (isset($_GET["getTeamMatches"]))
+else if (isset($_GET["getTeamMatchData"]))
 {
-  // Get all data for a team
-  echo (json_encode($db->readTeamFromMatchTable($_GET["getTeamMatches"], $eventCode)));
+  // Get match data for a team
+  echo (json_encode($db->readTeamFromMatchTable($_GET["getTeamMatchData"], $eventCode)));
 }
 else if (isset($_GET["getAllPitData"]))
 {
@@ -78,12 +78,12 @@ else if (isset($_GET["getTeamPitData"]))
 }
 else if (isset($_GET["getAllStrategicData"]))
 {
-  // Get all data
+  // Get all strategic data
   echo (json_encode($db->readAllFromStrategicTable($eventCode)));
 }
 else if (isset($_GET["getTeamStrategicData"]))
 {
-  // Get all data for a team
+  // Get all strategic data for a team
   echo (json_encode($db->readTeamFromStrategicTable($_GET["getTeamStrategicData"], $eventCode)));
 }
 else if (isset($_GET["getImagesForTeam"]))
