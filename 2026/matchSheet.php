@@ -26,7 +26,7 @@ require 'inc/header.php';
         <div class="card mb-3">
           <div class="input-group">
             <div class="input-group-prepend">
-              <select id="enterMatchLevel" class="form-select" aria-label="Comp Level Select">
+              <select id="enterCompLevel" class="form-select" aria-label="Comp Level Select">
                 <option value="qm">QM</option>
                 <option value="sf">SF</option>
                 <option value="f">F</option>
@@ -664,7 +664,7 @@ require 'inc/header.php';
       button.textContent = matchId;
 
       button.onclick = function (el) {
-        document.getElementById("enterMatchLevel").value = thisMatch["comp_level"];
+        document.getElementById("enterCompLevel").value = thisMatch["comp_level"];
         document.getElementById("enterMatchNumber").value = thisMatch["match_number"];
         document.getElementById("loadMatchButton").click();
       }
@@ -894,26 +894,10 @@ require 'inc/header.php';
     return null;
   }
 
-  // Check source URL for custom match
-  function checkURLForMatchSpec() {
-    console.log("==> matchSheet: checkURLForMatchSpec()");
-    let sp = new URLSearchParams(window.location.search);
-    if (sp.has('redTeam1') && sp.has('redTeam2') && sp.has('redTeam3') && sp.has('blueTeam1') && sp.has('blueTeam2') && sp.has('blueTeam3')) {
-      let matchSpec = {
-        title: "CUSTOM",
-        time: "",
-        red: [sp.get('redTeam1'), sp.get('redTeam2'), sp.get('redTeam3')],
-        blue: [sp.get('blueTeam1'), sp.get('blueTeam2'), sp.get('blueTeam3')]
-      };
-    }
-    return null;
-  }
-
   // Get a match spec from a matchId
   function getEventMatchSpec(matchId, matchList) {
     if (matchList === null) {
-      console.error("matchSheet: getEventMatchSpec: matchList is null!");
-      return alert("matchSheet: getEventMatchSpec: matchList is null!");
+      return null;
     }
 
     let matchVector = matchList[idToKey(matchId)];
@@ -941,13 +925,13 @@ require 'inc/header.php';
   }
 
   // Build a custom red and blue alliance matchsheet
-  function loadMatchSheet(matchSpec, matchList, averageData) {
+  function loadMatchSheet(matchSpec, averageData) {
     console.log("==> matchSheet: loadMatchSheet()");
     clearMatchSheet();
 
-    if (matchSpec === null || matchList === null) {
-      console.error("matchSheet: loadMatchSheet: matchList or averageData is null!");
-      return alert("matchSheet: loadMatchSheet: matchList or averageData is null!");
+    if (matchSpec === null) {
+      console.error("matchSheet: loadMatchSheet: averageData is null!");
+      return alert("matchSheet: loadMatchSheet: averageData is null!");
     }
     sendPhotoRequest(matchSpec);
 
@@ -977,7 +961,7 @@ require 'inc/header.php';
   //    Build a team box for each team with the team info, photo, and match average data
   //
   document.addEventListener("DOMContentLoaded", function () {
-
+    let matchId = null;
     let matchList = null;
     let averageData = null;
     let matchSpec = null;
@@ -993,8 +977,10 @@ require 'inc/header.php';
       else {
         let jEventMatches = JSON.parse(eventMatches)["response"];
         matchList = buildMatchList(jEventMatches);
-        if ((matchSpec !== null) && (matchList !== null) && (averageData !== null))
-          loadMatchSheet(matchSpec, matchList, averageData);
+        if (matchId !== null)
+          matchSpec = getEventMatchSpec(matchId, matchList);
+        if ((matchSpec !== null) && (averageData !== null))
+          loadMatchSheet(matchSpec, averageData);
       }
     });
 
@@ -1004,56 +990,49 @@ require 'inc/header.php';
     }).done(function (allMatchData) {
       console.log("=> getMatchData");
       let mdp = new matchDataProcessor(JSON.parse(allMatchData));
-      mdp.getSiteFilteredAverages(function (allMatchData, averageData) {
-        if ((matchSpec !== null) && (matchList !== null) && (averageData !== null))
-          loadMatchSheet(matchSpec, matchList, averageData);
+      mdp.getSiteFilteredAverages(function (filteredMatchData, filteredAvgData) {
+        averageData = filteredAvgData;
+        if ((matchSpec !== null) && (averageData !== null))
+          loadMatchSheet(matchSpec, averageData);
       });
     });
 
     // Check URL for match ID to load
-    let matchId = checkURLForMatchId();
-    if (matchId !== null && matchId !== "") {
+    matchId = checkURLForMatchId();
+    if (matchId !== null) {
       console.log("==> matchsheet: building from URL match ID! " + matchId);
-      let matchSpec = getEventMatchSpec(matchId, matchList);
-      if ((matchSpec !== null) && (matchList !== null) && (averageData !== null))
-        loadMatchSheet(matchSpec, matchList, averageData);
-    }
-
-    // Check URL for a custom match spec to load
-    let customSpec = checkURLForMatchSpec();
-    if (customSpec !== null && customSpec.red[0] !== "" && customSpec.blue[0] !== "") {
-      console.log("==> matchsheet: building custom match from URL spec! " + customSpec.red[0] + " " + customSpec.blue[0]);
-      matchSpec = customSpec;
-      if ((matchSpec !== null) && (matchList !== null) && (averageData !== null))
-        loadMatchSheet(matchSpec, matchList, averageData);
+      matchSpec = getEventMatchSpec(matchId, matchList);
+      if ((matchSpec !== null) && (averageData !== null))
+        loadMatchSheet(matchSpec, averageData);
     }
 
     // Load the match sheet from the match number entries
     document.getElementById("loadMatchButton").addEventListener('click', function () {
       console.log("=> matchsheet: load event match!");
-      let matchId = document.getElementById("enterMatchLevel").value + document.getElementById("enterMatchNumber").value;
+      matchId = document.getElementById("enterCompLevel").value + document.getElementById("enterMatchNumber").value;
       matchSpec = getEventMatchSpec(matchId, matchList);
-      if ((matchSpec !== null) && (matchList !== null) && (averageData !== null))
-        loadMatchSheet(matchSpec, matchList, averageData);
+      if ((matchSpec !== null) && (averageData !== null))
+        loadMatchSheet(matchSpec, averageData);
     });
 
     // Load the custom match using the custom team numbers entries
     document.getElementById("loadCustomMatch").addEventListener('click', function () {
       console.log("=> matchsheet: load custom match!");
-      let matchSpec = {
+      let newSpec = {
         title: "CUSTOM",
         time: "",
         red: [document.getElementById("enterRed1").value.trim(), document.getElementById("enterRed2").value.trim(), document.getElementById("enterRed3").value.trim()],
         blue: [document.getElementById("enterBlue1").value.trim(), document.getElementById("enterBlue2").value.trim(), document.getElementById("enterBlue3").value.trim()]
       };
-      console.log("==> Custom match sheet: " + matchSpec.red[0] + " " + matchSpec.blue[0]);
-      if (matchSpec.red[0] === "" && matchSpec.blue[0] === "") {
+      console.log("==> Custom match sheet: " + newSpec.red[0] + " " + newSpec.blue[0]);
+      if (newSpec.red[0] === "" && newSpec.blue[0] === "") {
         console.warn("loadCustomMatch: No Red or Blue team 1 entered!");
         return alert("Please fill in Red Team Number 1 and Blue Team Number 1!");
       }
       else {
-        if ((matchSpec !== null) && (matchList !== null) && (averageData !== null))
-          loadMatchSheet(matchSpec, matchList, averageData);
+        matchSpec = newSpec;
+        if ((matchSpec !== null) && (averageData !== null))
+          loadMatchSheet(matchSpec, averageData);
       }
     });
 
