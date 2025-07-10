@@ -11,6 +11,7 @@ class matchDataProcessor {
   constructor(data) {
     this.data = data;
     this.siteFilter = null;
+    console.log("this.data length: " + this.data.length);
   }
 
   // Fix match IDs that are missing the comp level
@@ -72,6 +73,7 @@ class matchDataProcessor {
 
   // Filters out all matches in this.data not within the specified range (destructively changes this.data)
   filterMatchRange(startMatchId, endMatchId) {
+    console.log("==> matchDataProcessor: filterMatchRange:");
     let newData = [];
     for (let i = 0; i < this.data.length; i++) {
       let matchId = this.data[i]["matchnumber"];
@@ -84,6 +86,7 @@ class matchDataProcessor {
 
   // Sorts the data by match number (ignores comp_level)
   sortMatches(newData) {
+    console.log("==> matchDataProcessor: sortMatches:");
     newData.sort(function (a, b) {
       let compare = this.isMatchLessThanOrEqual(a["matchnumber"], b["matchnumber"]);
       return (compare) ? -1 : 1;
@@ -92,6 +95,7 @@ class matchDataProcessor {
 
   //  Modify match data to only include matches specified by the site filter
   applySiteFilter() {
+    console.log("==> matchDataProcessor: applySiteFilter:");
     let newData = [];
     for (let i = 0; i < this.data.length; i++) {
       let matchId = this.data[i]["matchnumber"];
@@ -105,14 +109,17 @@ class matchDataProcessor {
       else if (mt[0] === "f" && this.siteFilter["useF"]) { newData.push(this.data[i]); }
     }
     this.data = [...newData];
+    console.log("this.data length: " + this.data.length + " (after filter)");
   }
 
   // Filters match data based on the retrieved site filter from DB config
   getSiteFilteredAverages(successFunction) {
+    console.log("==> matchDataProcessor: getSiteFilteredAverages:");
     let tempThis = this;
     $.post("api/dbAPI.php", {
       getDBStatus: true
     }, function (dbStatus) {
+      console.log("==> getDBStatus");
       let jDbStatus = JSON.parse(dbStatus);
       let newSiteFilter = {};
       newSiteFilter["useP"] = jDbStatus["useP"];
@@ -129,6 +136,7 @@ class matchDataProcessor {
 
   // Returns the match data with all calculations
   getEventAverages() {
+    console.log("==> matchDataProcessor: getEventAverages:");
     let pdata = {}; // to hold returning data for all matches and all teams
 
     // For each team, go thru all its matches and do the calculations for the averages data.

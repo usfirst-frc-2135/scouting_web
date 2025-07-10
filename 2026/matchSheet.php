@@ -1004,8 +1004,7 @@ require 'inc/header.php';
     }).done(function (allMatchData) {
       console.log("=> getMatchData");
       let mdp = new matchDataProcessor(JSON.parse(allMatchData));
-      mdp.getSiteFilteredAverages(function (allMatchData, allAverageData) {
-        averageData = allAverageData;
+      mdp.getSiteFilteredAverages(function (allMatchData, averageData) {
         if ((matchSpec !== null) && (matchList !== null) && (averageData !== null))
           loadMatchSheet(matchSpec, matchList, averageData);
       });

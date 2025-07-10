@@ -14,8 +14,8 @@ function isAlphaChar(ch) {
 // Test for an numeric string
 function isNumeric(str) {
   if (typeof str != "string") return false // we only process strings!  
-  return !isNaN(str) && // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)...
-    !isNaN(parseFloat(str)) // ...and ensure strings of whitespace fail
+  return !isNaN(str) &&     // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)
+    !isNaN(parseFloat(str)) // and ensure strings of whitespace fail
 }
 
 //  Check if a provided team number is valid

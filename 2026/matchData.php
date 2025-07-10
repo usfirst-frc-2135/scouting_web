@@ -97,13 +97,22 @@ require 'inc/header.php';
       getMatchData: true
     }).done(function (matchData) {
       console.log("=> getMatchData");
-      loadMatchData(tableId, JSON.parse(matchData));
-      const teamColumn = 1;
-      const matchColumn = 0;
-      sortTableByMatchAndTeam(tableId, teamColumn, matchColumn);
-      // script instructions say this is needed, but it breaks table header sorting
-      // sorttable.makeSortable(document.getElementById(tableId));
-      document.getElementById(tableId).click(); // This magic fixes the floating column bug
+      let mdp = new matchDataProcessor(JSON.parse(matchData));
+      // mdp.sortMatches(allEventMatches);
+      mdp.getSiteFilteredAverages(function (filteredMatchData, filteredAvgData) {
+        if (filteredMatchData !== undefined) {
+          loadMatchData(tableId, filteredMatchData);
+          const teamColumn = 1;
+          const matchColumn = 0;
+          sortTableByMatchAndTeam(tableId, teamColumn, matchColumn);
+          // script instructions say this is needed, but it breaks table header sorting
+          // sorttable.makeSortable(document.getElementById(tableId));
+          document.getElementById(tableId).click(); // This magic fixes the floating column bug
+        }
+        else {
+          alert("No match data found!");
+        }
+      });
     });
   }
 
@@ -131,4 +140,5 @@ require 'inc/header.php';
 
 <script src="./scripts/compareMatchNumbers.js"></script>
 <script src="./scripts/compareTeamNumbers.js"></script>
+<script src="./scripts/matchDataProcessor.js"></script>
 <script src="./scripts/sortFrcTables.js"></script>

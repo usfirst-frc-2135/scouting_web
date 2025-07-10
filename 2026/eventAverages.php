@@ -423,9 +423,9 @@ require 'inc/header.php';
     let csvStr = "Team,Pit Location,OPR,Total Coral Avg,Total Coral Max,Total Algae Avg,Total Algae Max,Auto Pts Avg,Auto Pts Max,Tel Pts Avg,Tel Pts Max,End Pts Avg,End Pts Max,Total Pts Avg,Total Pts Max,Auto Coral Avg,Auto Coral Max,Auto L1 Avg,Auto L1 Max,Auto L2 Avg,Auto L2 Max,Auto L3 Avg,Auto L3 Max,Auto L4 Avg,Auto L4 Max,Auto Algae Avg,Auto Algae Max,Auto Net Avg,Auto Net Max,Auto Proc Avg,Auto Proc Max,Tel Coral Avg,Tel Coral Max,Tel L1 Avg,Tel L1 Max,Tel L2 Avg,Tel L2 Max,Tel L3 Avg,Tel L3 Max,Tel L4 Avg,Tel L4 Max,Tel Coral Acc,Tel Algae Avg,Tel Algae Max,Tel Net Avg,Tel Net Max,Tel Proc Avg,Tel Proc Max,Tel Algae Acc,End N/A,End Park,End Fall,End Shal,End Deep, Total Died, Note\n";
 
     let mdp = new matchDataProcessor(matchData);
-    mdp.getSiteFilteredAverages(function (matchData, averageData) {
-      for (let key in averageData) {
-        csvStr += createCSVLine(key, averageData, coprs);  // key is team number
+    mdp.getSiteFilteredAverages(function (filteredMatchData, filteredAvgData) {
+      for (let key in filteredAvgData) {
+        csvStr += createCSVLine(key, filteredAvgData, coprs);  // key is team number
       }
 
       let hiddenElement = document.createElement('a');
@@ -484,13 +484,9 @@ require 'inc/header.php';
       if (startMatch !== null && endMatch !== null) {
         mdp.filterMatchRange(startMatch, endMatch);
       }
-      mdp.getSiteFilteredAverages(function (matchData, averageData) {
-        let filteredData = {
-          ...averageData
-        };
-
-        let teamList = getTeamListFromData(filteredData);
-        addAveragesToTable(tableId, teamList, filteredData);
+      mdp.getSiteFilteredAverages(function (filteredMatchData, filteredAvgData) {
+        let teamList = getTeamListFromData(filteredAvgData);
+        addAveragesToTable(tableId, teamList, filteredAvgData);
         // script instructions say this is needed, but it breaks table header sorting
         // sorttable.makeSortable(document.getElementById(tableId));
         document.getElementById(tableId).click(); // This magic fixes the floating column bug

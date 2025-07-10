@@ -1077,7 +1077,7 @@ require 'inc/header.php';
     console.log("==> teamLookup: loadMatchData()");
     let mdp = new matchDataProcessor(allEventMatches);
     // mdp.sortMatches(allEventMatches);
-    mdp.getSiteFilteredAverages(function (filteredMatches, averageData) {
+    mdp.getSiteFilteredAverages(function (filteredMatches, filteredAvgData) {
       if (filteredMatches != undefined) {
         loadAutonGraph(filteredMatches);
         loadTeleopGraph(filteredMatches);
@@ -1087,7 +1087,7 @@ require 'inc/header.php';
       else {
         alert("No match data for this team at this event!");
       }
-      let teamAverages = averageData[team];
+      let teamAverages = filteredAvgData[team];
       if (teamAverages !== undefined) {
         loadAverageTables(teamAverages);
       }
