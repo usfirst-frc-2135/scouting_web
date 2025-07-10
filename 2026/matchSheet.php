@@ -952,12 +952,20 @@ require 'inc/header.php';
   /////////////////////////////////////////////////////////////////////////////
   //
   // Process the generated html
-  //  Get the event match list from TBA and identify our matches from TBA schedule to build quick links
-  //  Get all match data and averages from our database to prepare for creating the match sheet
-  //  When load button (or quick link) is pressed
-  //    Identify the teams in the selected match
+  //  Get the event match list (1) from TBA and identify our matches from TBA schedule to build quick links
+  //  Get all match data and averages (2) from our database to prepare for creating the match sheet
+  //  When load button (3) our quick link (4) is clicked 
+  //    Use the match ID to identify all teams with a matchSpec
+  //  When the custom match button (5) is clicked
+  //    Create a matchSpec from the teams entered
+  //
+  //  Note that all 5 of these events can happen or complete at different times. All five sequences test 
+  //    to see if the minimum data is needed for the match sheet (matchSpec and averageData) and call the 
+  //    final function to load the match sheet.
+  //
+  //  LoadMatchSheet function:
   //    Request photos for each team
-  //    Update the match summary using the match averages
+  //    Update the match summary table using the match averages
   //    Build a team box for each team with the team info, photo, and match average data
   //
   document.addEventListener("DOMContentLoaded", function () {
