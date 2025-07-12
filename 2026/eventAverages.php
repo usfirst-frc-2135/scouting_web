@@ -223,12 +223,6 @@ require 'inc/header.php';
 
 <script>
 
-  // Round to 2 decimal places
-  function rnd(val) {
-    // Rounding helper function 
-    return Math.round((val + Number.EPSILON) * 100) / 100;
-  }
-
   // Lookup value for a key in the passed dictionary - team in match data
   function getDataValue(dict, key) {
     if (!dict) {
@@ -354,8 +348,6 @@ require 'inc/header.php';
   function createCSVLine(team, evtAvgs, coprs) {
     let pitLocation = 0;
     let oprTP = getDataValue(coprs[team], "totalPoints");
-    // let teleopCoralScoringAcc = rnd(lookupAverage(evtAvgs, team, "teleopCoralScoringPercent"));
-    // let teleopAlgaeScoringAcc = rnd(lookupAverage(evtAvgs, team, "teleopAlgaeScoringPercent"));
     let endgameClimbPercent = lookupAverage(evtAvgs, team, "endgameClimbPercent");
     let csvLine = team + ",";
 

@@ -542,8 +542,8 @@ require 'inc/header.php';
     return team.replace(/^(frc)/, '');
   }
 
-  // Round data to two decimal digits
-  function roundInt(val) {
+  // Round data to no more than two decimal digits
+  function roundTwoPlaces(val) {
     return Math.round((val + Number.EPSILON) * 100) / 100;
   }
 
@@ -790,19 +790,19 @@ require 'inc/header.php';
       }
     }
 
-    document.getElementById("redTotalCoral").innerText = roundInt(avgTotalCoral["red"]);
-    document.getElementById("redTotalAlgae").innerText = roundInt(avgTotalAlgae["red"]);
-    document.getElementById("redAvgAutoPoints").innerText = roundInt(avgAutoPoints["red"]);
-    document.getElementById("redAvgTeleopPoints").innerText = roundInt(avgTeleopPoints["red"]);
-    document.getElementById("redAvgEndgamePoints").innerText = roundInt(avgEndgamePoints["red"]);
-    document.getElementById("redTotalPredictedPoints").innerText = roundInt(totalPredictedPoints["red"]);
+    document.getElementById("redTotalCoral").innerText = roundTwoPlaces(avgTotalCoral["red"]);
+    document.getElementById("redTotalAlgae").innerText = roundTwoPlaces(avgTotalAlgae["red"]);
+    document.getElementById("redAvgAutoPoints").innerText = roundTwoPlaces(avgAutoPoints["red"]);
+    document.getElementById("redAvgTeleopPoints").innerText = roundTwoPlaces(avgTeleopPoints["red"]);
+    document.getElementById("redAvgEndgamePoints").innerText = roundTwoPlaces(avgEndgamePoints["red"]);
+    document.getElementById("redTotalPredictedPoints").innerText = roundTwoPlaces(totalPredictedPoints["red"]);
 
-    document.getElementById("blueTotalCoral").innerText = roundInt(avgTotalCoral["blue"]);
-    document.getElementById("blueTotalAlgae").innerText = roundInt(avgTotalAlgae["blue"]);
-    document.getElementById("blueAvgAutoPoints").innerText = roundInt(avgAutoPoints["blue"]);
-    document.getElementById("blueAvgTeleopPoints").innerText = roundInt(avgTeleopPoints["blue"]);
-    document.getElementById("blueAvgEndgamePoints").innerText = roundInt(avgEndgamePoints["blue"]);
-    document.getElementById("blueTotalPredictedPoints").innerText = roundInt(totalPredictedPoints["blue"]);
+    document.getElementById("blueTotalCoral").innerText = roundTwoPlaces(avgTotalCoral["blue"]);
+    document.getElementById("blueTotalAlgae").innerText = roundTwoPlaces(avgTotalAlgae["blue"]);
+    document.getElementById("blueAvgAutoPoints").innerText = roundTwoPlaces(avgAutoPoints["blue"]);
+    document.getElementById("blueAvgTeleopPoints").innerText = roundTwoPlaces(avgTeleopPoints["blue"]);
+    document.getElementById("blueAvgEndgamePoints").innerText = roundTwoPlaces(avgEndgamePoints["blue"]);
+    document.getElementById("blueTotalPredictedPoints").innerText = roundTwoPlaces(totalPredictedPoints["blue"]);
   }
 
   // Build team photo image list

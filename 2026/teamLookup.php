@@ -507,8 +507,8 @@ require 'inc/header.php';
   let teleopChart;
   let endgameChart;
 
-  // Rounding helper function 
-  function rnd(val) {
+  // Round data to no more than two decimal digits
+  function roundTwoPlaces(val) {
     return Math.round((val + Number.EPSILON) * 100) / 100;
   }
 
@@ -867,8 +867,8 @@ require 'inc/header.php';
     writeAverageTableRow("matchSheetTable", avgs, ["totalAlgaePointsStr", "avgTotalAlgaePoints", "maxTotalAlgaePoints"], 3);
 
     avgs["totalMatchPointsStr"] = "Match Points";
-    avgs["avgTotalMatchPoints"] = rnd(avgs["avgTotalCoralPoints"] + avgs["avgTotalAlgaePoints"]);
-    avgs["maxTotalMatchPoints"] = rnd(avgs["maxTotalCoralPoints"] + avgs["maxTotalAlgaePoints"]);
+    avgs["avgTotalMatchPoints"] = roundTwoPlaces(avgs["avgTotalCoralPoints"] + avgs["avgTotalAlgaePoints"]);
+    avgs["maxTotalMatchPoints"] = roundTwoPlaces(avgs["maxTotalCoralPoints"] + avgs["maxTotalAlgaePoints"]);
     writeAverageTableRow("matchSheetTable", avgs, ["totalMatchPointsStr", "avgTotalMatchPoints", "maxTotalMatchPoints"], 3);
 
     //Auton Table  
