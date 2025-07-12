@@ -1196,9 +1196,9 @@ require 'inc/header.php';
 
     // Load team data for the number entered
     document.getElementById("loadTeamButton").addEventListener('click', function () {
-      let teamNum = document.getElementById("enterTeamNumber").value;
+      let teamNum = document.getElementById("enterTeamNumber").value.trim();
       if (validateTeamNumber(teamNum, null) > 0) {
-        buildTeamLookupPage(document.getElementById("enterTeamNumber").value);
+        buildTeamLookupPage(teamNum);
       }
     });
   });

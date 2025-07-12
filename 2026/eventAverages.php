@@ -507,8 +507,8 @@ require 'inc/header.php';
 
     // Filter out unwanted matches
     document.getElementById("filterData").addEventListener('click', function () {
-      let startMatch = document.getElementById("startCompLevel").value + document.getElementById("startMatchNum").value;
-      let endMatch = document.getElementById("endCompLevel").value + document.getElementById("endMatchNum").value;
+      let startMatch = document.getElementById("startCompLevel").value + document.getElementById("startMatchNum").value.trim();
+      let endMatch = document.getElementById("endCompLevel").value + document.getElementById("endMatchNum").value.trim();
       console.log("==> eventAverages: filterMatchRange: " + startMatch + " to " + endMatch);
       buildAveragesTable(tableId, startMatch, endMatch);
     });

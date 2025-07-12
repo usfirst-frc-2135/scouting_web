@@ -235,7 +235,7 @@ require 'inc/header.php';
     // Create the write db_config file button
     document.getElementById("writeConfig").addEventListener('click', function () {
       for (const id in idToConfigKey) {
-        if (document.getElementById(id).value == "") {
+        if (document.getElementById(id).value.trim() == "") {
           console.warn("Enter all fields: server URL, database name, username, password, TBA key, and event code.");
           return alert("Enter all fields: server URL, database name, username, password, TBA key, and event code.");
         }

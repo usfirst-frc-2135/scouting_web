@@ -283,16 +283,16 @@ require 'inc/header.php';
     let errMsg = "Please enter values for these fields:";
 
     // Make sure there is a team number, scoutname and matchnum.
-    let teamNum = document.getElementById("enterTeamNumber").value;
+    let teamNum = document.getElementById("enterTeamNumber").value.trim();
     if (((teamNum === "") || (validateTeamNumber(teamNum, null) <= 0))) {
       errMsg += " Team Number";
       isError = true;
     }
-    if (document.getElementById("enterMatchNumber").value === "") {
+    if (document.getElementById("enterMatchNumber").value.trim() === "") {
       errMsg += " Match Number";
       isError = true;
     }
-    if (document.getElementById("scoutName").value === "") {
+    if (document.getElementById("scoutName").value.trim() === "") {
       errMsg += " Scout Name";
       isError = true;
     }

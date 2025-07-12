@@ -115,9 +115,8 @@ require 'inc/header.php';
   // Upload the selected image file to the server
   function handlePhotoUpload() {
     console.log("=> pitPhotoUpload: handlePhotoUpload");
-    if (document.getElementById("robotPic").value != "" && document.getElementById("enterTeamNumber").value != "") {
-      let teamNum = document.getElementById("enterTeamNumber").value;
-
+    let teamNum = document.getElementById("enterTeamNumber").value.trim();
+    if (document.getElementById("robotPic").value != "" && teamNum != "") {
       if (validateTeamNumber(teamNum, null) > 0) {
         loadingSpinner.style.visibility = 'visible';
 
@@ -159,7 +158,7 @@ require 'inc/header.php';
             // Now upload the selected image
             let uploadPost = new FormData();
             uploadPost.append("teamPic", document.getElementById("robotPic").files[0]);
-            uploadPost.append("teamNum", document.getElementById("enterTeamNumber").value);
+            uploadPost.append("teamNum", document.getElementById("enterTeamNumber").value.trim());
             $.ajax({
               type: "POST",
               url: "api/dbWriteAPI.php",

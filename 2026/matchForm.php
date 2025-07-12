@@ -325,12 +325,12 @@ require 'inc/header.php';
     console.log("==> matchForm: getMatchFormData()");
     let dataToSave = {};
     let compLevel = document.getElementById("enterCompLevel").value;
-    let matchNumber = document.getElementById("enterMatchNumber").value;
+    let matchNumber = document.getElementById("enterMatchNumber").value.trim();
     if (matchNumber != parseInt(matchNumber)) {
       alert("Match number must be integer.");
       throw Error("Match number must be integer.");
     }
-    let teamNumber = document.getElementById("enterTeamNumber").value;
+    let teamNumber = document.getElementById("enterTeamNumber").value.trim();
     if (teamNumber === "") {
       alert("Team number must not be empty.");
       throw Error("Team number must not be empty.");
@@ -341,7 +341,7 @@ require 'inc/header.php';
     }
     dataToSave["matchnumber"] = compLevel + matchNumber;
     dataToSave["enterTeamNumber"] = teamNumber;
-    dataToSave["scoutname"] = document.getElementById("scoutName").value;
+    dataToSave["scoutname"] = document.getElementById("scoutName").value.trim();
     dataToSave["mobility"] = document.getElementById("exitCommunity").checked ? 1 : 0;
     dataToSave["autonconesbottom"] = auto.cones.bottom;
     dataToSave["autonconesmiddle"] = auto.cones.middle;
