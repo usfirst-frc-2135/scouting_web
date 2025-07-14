@@ -26,10 +26,6 @@ require 'inc/header.php';
             <div>
               <h4>Match Info</h4>
             </div>
-            <div class="col-7 col-md-5 mb-3">
-              <label for="enterTeamNumber" class="form-label">Team Number</label>
-              <input id="enterTeamNumber" class="form-control" type="text" placeholder="FRC team number">
-            </div>
             <div class="row  col-9 col-md-7 mb-3">
               <span>Match Number</span>
               <div class="input-group">
@@ -43,6 +39,11 @@ require 'inc/header.php';
                 </div>
                 <input id="enterMatchNumber" class="form-control" type="text" placeholder="Match number">
               </div>
+            </div>
+
+            <div class="col-7 col-md-5 mb-3">
+              <label for="enterTeamNumber" class="form-label">Team Number</label>
+              <input id="enterTeamNumber" class="form-control" type="text" placeholder="FRC team number">
             </div>
 
             <div class="col-7 col-md-6 mb-3">

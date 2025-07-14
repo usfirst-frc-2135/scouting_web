@@ -291,8 +291,7 @@ require 'inc/header.php';
     console.log("==> pitForm: writeFormToPitTable()");
     let dataToSave = {};
     dataToSave["teamnumber"] = document.getElementById("enterTeamNumber").value.trim();
-    dataToSave["scoutname"] = document.getElementById("enterScoutName").value.trim(); // enable once db is changed
-
+    dataToSave["scoutname"] = document.getElementById("enterScoutName").value.trim();
     // Swerve
     if (document.getElementById("swerveDriveYes").checked) {
       dataToSave["swerve"] = 1;
