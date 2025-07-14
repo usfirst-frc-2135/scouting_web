@@ -338,7 +338,7 @@ require 'inc/header.php';
       isError = true;
     }
 
-    if (((teamNum === "") || (validateTeamNumber(teamNum, null) <= 0))) {
+    if (validateTeamNumber(teamNum, null) <= 0) {
       if (isError)
         errMsg += ",";
       errMsg += " Team Number";

@@ -195,7 +195,7 @@ require 'inc/header.php';
     let scoutName = document.getElementById("enterScoutName").value.trim();
 
     // Make sure each piece of data has a value selected.
-    if (((teamNum === "") || (validateTeamNumber(teamNum, null) <= 0))) {
+    if (validateTeamNumber(teamNum, null) <= 0) {
       errMsg += " Team Number";
       isError = true;
     }

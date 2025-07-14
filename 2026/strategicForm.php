@@ -293,7 +293,7 @@ require 'inc/header.php';
       errMsg += " Match Number";
       isError = true;
     }
-    if (((teamNum === "") || (validateTeamNumber(teamNum, null) <= 0))) {
+    if (validateTeamNumber(teamNum, null) <= 0) {
       if (isError)
         errMsg += ",";
       errMsg += " Team Number";
@@ -360,7 +360,7 @@ require 'inc/header.php';
 
     let compLevel = document.getElementById("enterCompLevel").value;
     let matchNumber = document.getElementById("enterMatchNumber").value.trim();
-    let teamNum = validateTeamNumber(document.getElementById("enterTeamNumber").value.trim(), null);
+    let teamNum = document.getElementById("enterTeamNumber").value.trim();
     let scoutName = document.getElementById("enterScoutName").value.trim();
 
     // Clean up team number before writing to table.

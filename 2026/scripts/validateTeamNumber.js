@@ -31,19 +31,21 @@ function validateTeamNumber(teamName, teamList) {
   let teamNumber = -1;  // 
 
   if (typeof teamName === 'string' || teamName instanceof String) {
-    if (!/\s/.test(teamName)) {
-      let lastChar = teamName.substring(teamName.length - 1);
-      if (isAlphaChar(lastChar)) {
-        teamName = teamName.substring(0, teamName.length - 1);
-      }
-      if (isNumeric(teamName)) {
-        teamNumber = parseInt(teamName);
-      }
+    if (teamName !== "") {
+      if (!/\s/.test(teamName)) {
+        let lastChar = teamName.substring(teamName.length - 1);
+        if (isAlphaChar(lastChar)) {
+          teamName = teamName.substring(0, teamName.length - 1);
+        }
+        if (isNumeric(teamName)) {
+          teamNumber = parseInt(teamName);
+        }
 
-      if (teamList != null) {
-        // teamNumber not in teamList
-        if (teamList.indexOf(teamNumber) < 0) {
-          teamNumber = 0;
+        if (teamList != null) {
+          // teamNumber not in teamList
+          if (teamList.indexOf(teamNumber) < 0) {
+            teamNumber = 0;
+          }
         }
       }
     }
