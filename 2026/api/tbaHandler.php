@@ -157,6 +157,7 @@ class tbaHandler
   }
 
   ///// Get a list of Teams at an Event AND Handle 2nd (or more) Robots /////
+  //
   // NOTE: for events that have multiple robots, the teamlist only lists the basic team numbers.
   // So we must adjust the list to contain the multiple robot <teamNum><Letter>.
   public function getEventTeamsEx($eventCode)
@@ -199,7 +200,6 @@ class tbaHandler
         array_push($multiBots, $teamnum);  // always add the plain team number
 
         // Check the matches if this team number has multiple robots.
-        $ml = array();
         foreach ($ml["response"] as $match)
         {
           // Put all this match's teams in $teams, then check for the current teamnumber.
