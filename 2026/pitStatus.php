@@ -46,8 +46,8 @@ require 'inc/header.php';
   // Build the pit status table
   function loadPitStatusTable(tableId, teams, names, images, pitInfo) {
     console.log("==> pitStatus: loadPitStatusTable()");
-    if (teams === [] || (Object.keys(names).length === 0) || (Object.keys(images).length === 0) || (Object.keys(pitInfo).length === 0)) {
-      // console.warn("loadPitStatusTable: teams, names, images, or pit data are missing!");
+    if (teams === [] || names === [] || images === null || pitInfo === null) {
+      // console.warn("loadPitStatusTable: teams, names, images, or pit data are missing -- still waiting for gets!");
       return;
     }
 
@@ -92,9 +92,9 @@ require 'inc/header.php';
 
     const tableId = "psTable";
     let teamList = [];
-    let namesList = {};
-    let jTeamImages = {};
-    let jPitData = {};
+    let namesList = [];
+    let jTeamImages = null;
+    let jPitData = null;
 
     // Get the list of teams and add the team names 
     $.get("api/tbaAPI.php", {
