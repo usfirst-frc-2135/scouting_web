@@ -282,18 +282,26 @@ require 'inc/header.php';
     console.log("==> strategicForm.php: clearStrategicForm()");
     let isError = false;
     let errMsg = "Please enter values for these fields:";
+    let matchNumber = document.getElementById("enterMatchNumber").value.trim();
+    let teamNum = document.getElementById("enterTeamNumber").value.trim();
+    let scoutName = document.getElementById("enterScoutName").value.trim();
 
     // Make sure there is a team number, scoutname and matchnum.
-    let teamNum = document.getElementById("enterTeamNumber").value.trim();
-    if (document.getElementById("enterMatchNumber").value.trim() === "") {
+    if ((matchNumber === "") || isNaN(parseInt(matchNumber))) {
+      if (isError)
+        errMsg += ",";
       errMsg += " Match Number";
       isError = true;
     }
     if (((teamNum === "") || (validateTeamNumber(teamNum, null) <= 0))) {
+      if (isError)
+        errMsg += ",";
       errMsg += " Team Number";
       isError = true;
     }
-    if (document.getElementById("enterScoutName").value.trim() === "") {
+    if (scoutName === "") {
+      if (isError)
+        errMsg += ",";
       errMsg += " Scout Name";
       isError = true;
     }
@@ -353,11 +361,12 @@ require 'inc/header.php';
     let compLevel = document.getElementById("enterCompLevel").value;
     let matchNumber = document.getElementById("enterMatchNumber").value.trim();
     let teamNum = validateTeamNumber(document.getElementById("enterTeamNumber").value.trim(), null);
+    let scoutName = document.getElementById("enterScoutName").value.trim();
 
     // Clean up team number before writing to table.
     dataToSave["matchnumber"] = compLevel + matchNumber;
     dataToSave["teamnumber"] = teamNum;
-    dataToSave["scoutname"] = document.getElementById("enterScoutName").value.trim();
+    dataToSave["scoutname"] = scoutName;
 
     // Process driver ability radio buttons
     const driverAbilityBtns = document.querySelectorAll("input[name = 'driverAbilityGroup']");

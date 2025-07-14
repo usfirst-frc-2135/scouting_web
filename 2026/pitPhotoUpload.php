@@ -116,8 +116,8 @@ require 'inc/header.php';
   function handlePhotoUpload() {
     console.log("=> pitPhotoUpload: handlePhotoUpload");
     let teamNum = document.getElementById("enterTeamNumber").value.trim();
-    if (document.getElementById("robotPic").value != "" && teamNum != "") {
-      if (validateTeamNumber(teamNum, null) > 0) {
+    if (document.getElementById("robotPic").value != "") {
+      if ((teamNum != "") && (validateTeamNumber(teamNum, null) > 0)) {
         loadingSpinner.style.visibility = 'visible';
 
         // Replace checkbox is ticked
@@ -179,7 +179,7 @@ require 'inc/header.php';
     }
     else {
       loadingSpinner.style.visibility = 'hidden';
-      alert("Please fill in all fields!");
+      alert("Please fill in robot photo!");
     }
 
     document.getElementById("closeMessage").addEventListener('click', function () {

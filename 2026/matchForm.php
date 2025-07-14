@@ -43,7 +43,7 @@ require 'inc/header.php';
 
             <div class="col-7 col-md-5 mb-3">
               <label for="enterTeamNumber" class="form-label">Team Number</label>
-              <input id="enterTeamNumber" class="form-control" type="number" placeholder="FRC team number">
+              <input id="enterTeamNumber" class="form-control" type="text" placeholder="FRC team number">
             </div>
 
             <div class="col-7 col-md-6 mb-3">
@@ -289,30 +289,30 @@ require 'inc/header.php';
 <script>
 
   // Clear all form fields
-  function clearMatchForm() {
+  function clearMatchForm(auton, teleop) {
     console.log("==> matchForm: clearMatchForm()");
     document.getElementById("compLevelQM").selected = true;
     document.getElementById("enterMatchNumber").value = "";
     document.getElementById("enterTeamNumber").value = "";
     document.getElementById("enterScoutName").value = "";
-    auto.cones.bottom = 0;
-    auto.cones.middle = 0;
-    auto.cones.top = 0;
-    auto.cubes.bottom = 0;
-    auto.cubes.middle = 0;
-    auto.cubes.top = 0;
+    auton.cones.bottom = 0;
+    auton.cones.middle = 0;
+    auton.cones.top = 0;
+    auton.cubes.bottom = 0;
+    auton.cubes.middle = 0;
+    auton.cubes.top = 0;
     teleop.cones.bottom = 0;
     teleop.cones.middle = 0;
     teleop.cones.top = 0;
     teleop.cubes.bottom = 0;
     teleop.cubes.middle = 0;
     teleop.cubes.top = 0;
-    document.getElementById("autoConesBottom").innerText = "Cones Bottom: " + auto.cones.bottom;
-    document.getElementById("autoConesMiddle").innerText = "Cones Middle: " + auto.cones.middle;
-    document.getElementById("autoConesTop").innerText = "Cones Top: " + auto.cones.top;
-    document.getElementById("autoCubesBottom").innerText = "Cubes Bottom: " + auto.cubes.bottom;
-    document.getElementById("autoCubesMiddle").innerText = "Cubes Middle: " + auto.cubes.middle;
-    document.getElementById("autoCubesTop").innerText = "Cubes Top: " + auto.cubes.top;
+    document.getElementById("autoConesBottom").innerText = "Cones Bottom: " + auton.cones.bottom;
+    document.getElementById("autoConesMiddle").innerText = "Cones Middle: " + auton.cones.middle;
+    document.getElementById("autoConesTop").innerText = "Cones Top: " + auton.cones.top;
+    document.getElementById("autoCubesBottom").innerText = "Cubes Bottom: " + auton.cubes.bottom;
+    document.getElementById("autoCubesMiddle").innerText = "Cubes Middle: " + auton.cubes.middle;
+    document.getElementById("autoCubesTop").innerText = "Cubes Top: " + auton.cubes.top;
     document.getElementById("teleopConesBottom").innerText = "Cones Bottom: " + teleop.cones.bottom;
     document.getElementById("teleopConesMiddle").innerText = "Cones Middle: " + teleop.cones.middle;
     document.getElementById("teleopConesTop").innerText = "Cones Top: " + teleop.cones.top;
@@ -322,40 +322,61 @@ require 'inc/header.php';
     document.getElementById("generalComment").innerText = "";
   }
 
+  function validateMatchForm(auton, teleop) {
+    console.log("==> matchForm: validateMatchForm()");
+    let isError = false;
+    let errMsg = "Please enter values for these fields:";
+    let matchNumber = document.getElementById("enterMatchNumber").value.trim();
+    let teamNum = document.getElementById("enterTeamNumber").value.trim();
+    let scoutName = document.getElementById("enterScoutName").value.trim();
+
+    // Make sure each piece of data has a value selected.
+    if ((matchNumber === "") || isNaN(parseInt(matchNumber))) {
+      if (isError)
+        errMsg += ",";
+      errMsg += " Match Number";
+      isError = true;
+    }
+
+    if (((teamNum === "") || (validateTeamNumber(teamNum, null) <= 0))) {
+      if (isError)
+        errMsg += ",";
+      errMsg += " Team Number";
+      isError = true;
+    }
+
+    if (scoutName === "") {
+      if (isError)
+        errMsg += ",";
+      errMsg += " Scout Name";
+      isError = true;
+    }
+
+    if (isError) {
+      alert(errMsg);
+    }
+    return isError;
+  }
+
   // Retrieve the form data and prepare for submission
-  function getMatchFormData(auto, teleop) {
+  function getMatchFormData(auton, teleop) {
     console.log("==> matchForm: getMatchFormData()");
     let dataToSave = {};
     let compLevel = document.getElementById("enterCompLevel").value;
     let matchNumber = document.getElementById("enterMatchNumber").value.trim();
     let teamNumber = document.getElementById("enterTeamNumber").value.trim();
     let scoutName = document.getElementById("enterScoutName").value.trim();
-    if (matchNumber != parseInt(matchNumber)) {
-      alert("Match number must be integer.");
-      throw Error("Match number must be integer.");
-    }
-    if (teamNumber === "") {
-      alert("Team number must not be empty.");
-      throw Error("Team number must not be empty.");
-    }
-    if (validateTeamNumber(teamNumber) <= 0) {
-      alert("Team number is an integer with optional letter.");
-      throw Error("Team number is an integer with optional letter.");
-    }
-    if (scoutName === "") {
-      alert("Scout name must not be empty.");
-      throw Error("Scout name must not be empty.");
-    }
+
     dataToSave["matchnumber"] = compLevel + matchNumber;
     dataToSave["teamnumber"] = teamNumber;
     dataToSave["scoutname"] = scoutName;
     dataToSave["mobility"] = document.getElementById("exitCommunity").checked ? 1 : 0;
-    dataToSave["autonconesbottom"] = auto.cones.bottom;
-    dataToSave["autonconesmiddle"] = auto.cones.middle;
-    dataToSave["autonconestop"] = auto.cones.top;
-    dataToSave["autoncubesbottom"] = auto.cubes.bottom;
-    dataToSave["autoncubesmiddle"] = auto.cubes.middle;
-    dataToSave["autoncubestop"] = auto.cubes.bottom;
+    dataToSave["autonconesbottom"] = auton.cones.bottom;
+    dataToSave["autonconesmiddle"] = auton.cones.middle;
+    dataToSave["autonconestop"] = auton.cones.top;
+    dataToSave["autoncubesbottom"] = auton.cubes.bottom;
+    dataToSave["autoncubesmiddle"] = auton.cubes.middle;
+    dataToSave["autoncubestop"] = auton.cubes.bottom;
     dataToSave["autochargestation"] = document.getElementById("autochargestation").value;
     dataToSave["teleopconesbottom"] = teleop.cones.bottom;
     dataToSave["teleopconesmiddle"] = teleop.cones.middle;
@@ -388,69 +409,69 @@ require 'inc/header.php';
   }
 
   // Create button event listeners to process form input
-  function attachButtonListeners(auto, teleop) {
+  function attachButtonListeners(auton, teleop) {
     console.log("=> matchForm: attachButtonListeners()");
 
     // Auto cones
     document.getElementById("autoConesBottomPlus").addEventListener('click', function () {
-      auto.cones.bottom += 1;
-      document.getElementById("autoConesBottom").innerText = "Cones Bottom: " + auto.cones.bottom;
+      auton.cones.bottom += 1;
+      document.getElementById("autoConesBottom").innerText = "Cones Bottom: " + auton.cones.bottom;
     });
 
     document.getElementById("autoConesBottomMinus").addEventListener('click', function () {
-      auto.cones.bottom = Math.max(auto.cones.bottom - 1, 0);
-      document.getElementById("autoConesBottom").innerText = "Cones Bottom: " + auto.cones.bottom;
+      auton.cones.bottom = Math.max(auton.cones.bottom - 1, 0);
+      document.getElementById("autoConesBottom").innerText = "Cones Bottom: " + auton.cones.bottom;
     });
 
     document.getElementById("autoConesMiddlePlus").addEventListener('click', function () {
-      auto.cones.middle += 1;
-      document.getElementById("autoConesMiddle").innerText = "Cones Middle: " + auto.cones.middle;
+      auton.cones.middle += 1;
+      document.getElementById("autoConesMiddle").innerText = "Cones Middle: " + auton.cones.middle;
     });
 
     document.getElementById("autoConesMiddleMinus").addEventListener('click', function () {
-      auto.cones.middle = Math.max(auto.cones.middle - 1, 0);
-      document.getElementById("autoConesMiddle").innerText = "Cones Middle: " + auto.cones.middle;
+      auton.cones.middle = Math.max(auton.cones.middle - 1, 0);
+      document.getElementById("autoConesMiddle").innerText = "Cones Middle: " + auton.cones.middle;
     });
 
     document.getElementById("autoConesTopPlus").addEventListener('click', function () {
-      auto.cones.top += 1;
-      document.getElementById("autoConesTop").innerText = "Cones Top: " + auto.cones.top;
+      auton.cones.top += 1;
+      document.getElementById("autoConesTop").innerText = "Cones Top: " + auton.cones.top;
     });
 
     document.getElementById("autoConesTopMinus").addEventListener('click', function () {
-      auto.cones.top = Math.max(auto.cones.top - 1, 0);
-      document.getElementById("autoConesTop").innerText = "Cones Top: " + auto.cones.top;
+      auton.cones.top = Math.max(auton.cones.top - 1, 0);
+      document.getElementById("autoConesTop").innerText = "Cones Top: " + auton.cones.top;
     });
 
     // Auto cubes
     document.getElementById("autoCubesBottomPlus").addEventListener('click', function () {
-      auto.cubes.bottom += 1;
-      document.getElementById("autoCubesBottom").innerText = "Cubes Bottom: " + auto.cubes.bottom;
+      auton.cubes.bottom += 1;
+      document.getElementById("autoCubesBottom").innerText = "Cubes Bottom: " + auton.cubes.bottom;
     });
 
     document.getElementById("autoCubesBottomMinus").addEventListener('click', function () {
-      auto.cubes.bottom = Math.max(auto.cubes.bottom - 1, 0);
-      document.getElementById("autoCubesBottom").innerText = "Cubes Bottom: " + auto.cubes.bottom;
+      auton.cubes.bottom = Math.max(auton.cubes.bottom - 1, 0);
+      document.getElementById("autoCubesBottom").innerText = "Cubes Bottom: " + auton.cubes.bottom;
     });
 
     document.getElementById("autoCubesMiddlePlus").addEventListener('click', function () {
-      auto.cubes.middle += 1;
-      document.getElementById("autoCubesMiddle").innerText = "Cubes Middle: " + auto.cubes.middle;
+      auton.cubes.middle += 1;
+      document.getElementById("autoCubesMiddle").innerText = "Cubes Middle: " + auton.cubes.middle;
     });
 
     document.getElementById("autoCubesMiddleMinus").addEventListener('click', function () {
-      auto.cubes.middle = Math.max(auto.cubes.middle - 1, 0);
-      document.getElementById("autoCubesMiddle").innerText = "Cubes Middle: " + auto.cubes.middle;
+      auton.cubes.middle = Math.max(auton.cubes.middle - 1, 0);
+      document.getElementById("autoCubesMiddle").innerText = "Cubes Middle: " + auton.cubes.middle;
     });
 
     document.getElementById("autoCubesTopPlus").addEventListener('click', function () {
-      auto.cubes.top += 1;
-      document.getElementById("autoCubesTop").innerText = "Cubes Top: " + auto.cubes.top;
+      auton.cubes.top += 1;
+      document.getElementById("autoCubesTop").innerText = "Cubes Top: " + auton.cubes.top;
     });
 
     document.getElementById("autoCubesTopMinus").addEventListener('click', function () {
-      auto.cubes.top = Math.max(auto.cubes.top - 1, 0);
-      document.getElementById("autoCubesTop").innerText = "Cubes Top: " + auto.cubes.top;
+      auton.cubes.top = Math.max(auton.cubes.top - 1, 0);
+      document.getElementById("autoCubesTop").innerText = "Cubes Top: " + auton.cubes.top;
     });
 
     // Teleop cones
@@ -523,7 +544,7 @@ require 'inc/header.php';
   //
   document.addEventListener("DOMContentLoaded", function () {
 
-    const auto = {
+    const auton = {
       cones: { bottom: 0, middle: 0, top: 0 },
       cubes: { bottom: 0, middle: 0, top: 0 }
     };
@@ -532,18 +553,15 @@ require 'inc/header.php';
       cubes: { bottom: 0, middle: 0, top: 0 }
     };
 
-    attachButtonListeners(auto, teleop);
+    attachButtonListeners(auton, teleop);
 
     // Submit the match data form 
     document.getElementById("submitForm").addEventListener('click', function () {
-      let matchFormData = getMatchFormData(auto, teleop);
-      alert("This match form is NOT configured for 2025 game!");
-
-      // Should be:
-      // if (validateMatchForm()) {
-      //    matchFormData = getMatchFormData();
-      //    submitMatchFormData(matchFormData);
-      // }
+      if (!validateMatchForm(auton, teleop)) {
+        matchFormData = getMatchFormData(auton, teleop);
+        alert("This match form is NOT configured for 2025 game!");
+        //    submitMatchFormData(matchFormData);
+      }
     });
   });
 </script>
