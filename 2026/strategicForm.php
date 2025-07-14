@@ -46,8 +46,8 @@ require 'inc/header.php';
             </div>
 
             <div class="col-7 col-md-6 mb-3">
-              <label for="scoutName" class="form-label">Scout Name</label>
-              <input id="scoutName" class="form-control" type="text" placeholder="First name, last initial">
+              <label for="enterScoutName" class="form-label">Scout Name</label>
+              <input id="enterScoutName" class="form-control" type="text" placeholder="First name, last initial">
             </div>
 
             <!-- Autonomous Mode -->
@@ -284,15 +284,15 @@ require 'inc/header.php';
 
     // Make sure there is a team number, scoutname and matchnum.
     let teamNum = document.getElementById("enterTeamNumber").value.trim();
-    if (((teamNum === "") || (validateTeamNumber(teamNum, null) <= 0))) {
-      errMsg += " Team Number";
-      isError = true;
-    }
     if (document.getElementById("enterMatchNumber").value.trim() === "") {
       errMsg += " Match Number";
       isError = true;
     }
-    if (document.getElementById("scoutName").value.trim() === "") {
+    if (((teamNum === "") || (validateTeamNumber(teamNum, null) <= 0))) {
+      errMsg += " Team Number";
+      isError = true;
+    }
+    if (document.getElementById("enterScoutName").value.trim() === "") {
       errMsg += " Scout Name";
       isError = true;
     }
@@ -304,10 +304,10 @@ require 'inc/header.php';
 
   function clearStrategicForm() {
     console.log("==> strategicForm.php: clearStrategicForm()");
-    document.getElementById("enterTeamNumber").value = "";
     document.getElementById("compLevelQM").selected = true;
     document.getElementById("enterMatchNumber").value = "";
-    document.getElementById("scoutName").value = "";
+    document.getElementById("enterTeamNumber").value = "";
+    document.getElementById("enterScoutName").value = "";
     const driverAbilityBtns = document.querySelectorAll("input[name = 'driverAbilityGroup']");
     driverAbilityBtns.forEach(function (button) {
       button.checked = false;
@@ -350,13 +350,13 @@ require 'inc/header.php';
     let dataToSave = {};
 
     let compLevel = document.getElementById("enterCompLevel").value;
-    let matchNumber = document.getElementById("enterMatchNumber").value;
-    let teamnum = validateTeamNumber(document.getElementById("enterTeamNumber").value, null);
+    let matchNumber = document.getElementById("enterMatchNumber").value.trim();
+    let teamNum = validateTeamNumber(document.getElementById("enterTeamNumber").value.trim(), null);
 
-    // Clean up teamnumber before writing to table.
+    // Clean up team number before writing to table.
     dataToSave["matchnumber"] = compLevel + matchNumber;
-    dataToSave["teamnumber"] = teamnum;
-    dataToSave["scoutname"] = document.getElementById("scoutName").value;
+    dataToSave["teamnumber"] = teamNum;
+    dataToSave["scoutname"] = document.getElementById("enterScoutName").value.trim();
 
     // Process driver ability radio buttons
     const driverAbilityBtns = document.querySelectorAll("input[name = 'driverAbilityGroup']");

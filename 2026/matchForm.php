@@ -46,8 +46,8 @@ require 'inc/header.php';
             </div>
 
             <div class="col-7 col-md-6 mb-3">
-              <label for="scoutName" class="form-label">Scout Name</label>
-              <input id="scoutName" class="form-control" type="text" placeholder="First name, last initial">
+              <label for="enterScoutName" class="form-label">Scout Name</label>
+              <input id="enterScoutName" class="form-control" type="text" placeholder="First name, last initial">
             </div>
 
             <!-- Autonomous Mode -->
@@ -293,6 +293,7 @@ require 'inc/header.php';
     document.getElementById("compLevelQM").selected = true;
     document.getElementById("enterMatchNumber").value = "";
     document.getElementById("enterTeamNumber").value = "";
+    document.getElementById("enterScoutName").value = "";
     auto.cones.bottom = 0;
     auto.cones.middle = 0;
     auto.cones.top = 0;
@@ -326,22 +327,27 @@ require 'inc/header.php';
     let dataToSave = {};
     let compLevel = document.getElementById("enterCompLevel").value;
     let matchNumber = document.getElementById("enterMatchNumber").value.trim();
+    let teamNumber = document.getElementById("enterTeamNumber").value.trim();
+    let scoutName = document.getElementById("enterScoutName").value.trim();
     if (matchNumber != parseInt(matchNumber)) {
       alert("Match number must be integer.");
       throw Error("Match number must be integer.");
     }
-    let teamNumber = document.getElementById("enterTeamNumber").value.trim();
     if (teamNumber === "") {
       alert("Team number must not be empty.");
       throw Error("Team number must not be empty.");
     }
     if (validateTeamNumber(teamNumber) <= 0) {
-      alert("TTeam number is an integer with optional letter.");
+      alert("Team number is an integer with optional letter.");
       throw Error("Team number is an integer with optional letter.");
     }
+    if (scoutName === "") {
+      alert("Scout name must not be empty.");
+      throw Error("Scout name must not be empty.");
+    }
     dataToSave["matchnumber"] = compLevel + matchNumber;
-    dataToSave["enterTeamNumber"] = teamNumber;
-    dataToSave["scoutname"] = document.getElementById("scoutName").value.trim();
+    dataToSave["teamnumber"] = teamNumber;
+    dataToSave["scoutname"] = scoutName;
     dataToSave["mobility"] = document.getElementById("exitCommunity").checked ? 1 : 0;
     dataToSave["autonconesbottom"] = auto.cones.bottom;
     dataToSave["autonconesmiddle"] = auto.cones.middle;

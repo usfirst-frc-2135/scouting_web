@@ -1017,7 +1017,7 @@ require 'inc/header.php';
     // Load the match sheet from the match number entries
     document.getElementById("loadMatchButton").addEventListener('click', function () {
       console.log("=> matchsheet: load event match!");
-      matchId = document.getElementById("enterCompLevel").value + document.getElementById("enterMatchNumber").value;
+      matchId = document.getElementById("enterCompLevel").value + document.getElementById("enterMatchNumber").value.trim();
       matchSpec = getEventMatchSpec(matchId, matchList);
       if ((matchSpec !== null) && (averageData !== null))
         loadMatchSheet(matchSpec, averageData);

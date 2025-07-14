@@ -28,8 +28,8 @@ require 'inc/header.php';
               <input id="enterTeamNumber" class="form-control" type="text" placeholder="FRC team number">
             </div>
             <div class="col-7 col-md-6 mb-3">
-              <label for="scoutName" class="form-label">Scout Name</label>
-              <input id="scoutName" class="form-control" type="text" placeholder="First name, last initial">
+              <label for="enterScoutName" class="form-label">Scout Name</label>
+              <input id="enterScoutName" class="form-control" type="text" placeholder="First name, last initial">
             </div>
 
             <div class="card col-md-12 mx-auto" style=" background-color:#AFE8F7">
@@ -191,15 +191,16 @@ require 'inc/header.php';
     console.log("==> pitForm: validatePitForm()");
     let isError = false;
     let errMsg = "Please enter values for these fields:";
-    let teamNum = document.getElementById("enterTeamNumber").value;
+    let teamNum = document.getElementById("enterTeamNumber").value.trim();
+    let scoutName = document.getElementById("enterScoutName").value.trim();
 
     // Make sure each piece of data has a value selected.
-    if (((document.getElementById("enterTeamNumber").value === "") || (validateTeamNumber(teamNum, null) <= 0))) {
+    if (((teamNum === "") || (validateTeamNumber(teamNum, null) <= 0))) {
       errMsg += " Team Number";
       isError = true;
     }
 
-    if (document.getElementById("scoutName").value === "") {
+    if (scoutName === "") {
       if (isError)
         errMsg += ",";
       errMsg += " Scout Name";
@@ -267,7 +268,7 @@ require 'inc/header.php';
   function clearPitForm() {
     console.log("==> pitForm: clearPitForm()");
     document.getElementById("enterTeamNumber").value = "";
-    document.getElementById("scoutName").value = "";
+    document.getElementById("enterScoutName").value = "";
     document.getElementById("swerveDriveYes").checked = false;
     document.getElementById("swerveDriveNo").checked = false;
     document.getElementById("driveMotors").value = "0";
@@ -289,8 +290,8 @@ require 'inc/header.php';
   function getPitFormData() {
     console.log("==> pitForm: writeFormToPitTable()");
     let dataToSave = {};
-    dataToSave["teamnumber"] = document.getElementById("enterTeamNumber").value;
-    dataToSave["scoutname"] = document.getElementById("scoutName").value; // enable once db is changed
+    dataToSave["teamnumber"] = document.getElementById("enterTeamNumber").value.trim();
+    dataToSave["scoutname"] = document.getElementById("enterScoutName").value.trim(); // enable once db is changed
 
     // Swerve
     if (document.getElementById("swerveDriveYes").checked) {
