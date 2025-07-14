@@ -120,44 +120,42 @@ require 'inc/header.php';
 
               <div class="card-body">
                 <div class="mb-3">
-                  <div>
-                    <span>Pit Organization</span>
-                    <div class="col-5">
-                      <div class="input-group mb-3">
-                        <select id="progLanguage" class="form-select">
-                          <option selected value="-1">Choose ...</option>
-                          <option value="1">1 - Messy</option>
-                          <option value="2">2 - Below average</option>
-                          <option value="3">3 - Organized!</option>
-                          <option value="4">4 - Above average</option>
-                          <option value="5">5 - Pristine</option>
-                        </select>
-                      </div>
+                  <span>Pit Organization</span>
+                  <div class="col-5">
+                    <div class="input-group mb-3">
+                      <select id="progLanguage" class="form-select">
+                        <option selected value="-1">Choose ...</option>
+                        <option value="1">1 - Messy</option>
+                        <option value="2">2 - Below average</option>
+                        <option value="3">3 - Organized!</option>
+                        <option value="4">4 - Above average</option>
+                        <option value="5">5 - Pristine</option>
+                      </select>
                     </div>
                   </div>
                 </div>
 
                 <div class="mb-3">
-                  <div>
-                    <span>Preparedness/Professionalism</span>
-                    <div class="col-5">
-                      <div class="input-group mb-3">
-                        <select id="progLanguage" class="form-select">
-                          <option selected value="-1">Choose ...</option>
-                          <option value="1">1 - Utter chaos</option>
-                          <option value="2">2 - Below average</option>
-                          <option value="3">3 - Prepared!</option>
-                          <option value="4">4 - Above average</option>
-                          <option value="5">5 - Proactive</option>
-                        </select>
-                      </div>
+                  <span>Preparedness/Professionalism</span>
+                  <div class="col-5">
+                    <div class="input-group mb-3">
+                      <select id="progLanguage" class="form-select">
+                        <option selected value="-1">Choose ...</option>
+                        <option value="1">1 - Utter chaos</option>
+                        <option value="2">2 - Below average</option>
+                        <option value="3">3 - Prepared!</option>
+                        <option value="4">4 - Above average</option>
+                        <option value="5">5 - Proactive</option>
+                      </select>
                     </div>
                   </div>
                 </div>
 
                 <div class="mb-3">
                   <label for="numBatteries" class="form-label">Count the number of batteries they have</label>
-                  <input id="numBatteries" class="form-control" type="text" placeholder="Battery count">
+                  <div class="col-4">
+                    <input id="numBatteries" class="form-control" type="number" placeholder="Battery count">
+                  </div>
                 </div>
               </div>
             </div>
