@@ -39,71 +39,74 @@ require 'inc/header.php';
 
               <div class="card-body">
                 <div class="mb-3">
-                  <div>
-                    <span>Does your robot have swerve drive?</span>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input id="swerveDriveYes" class="form-check-input" type="radio" name="swerveDriveGroup">
-                    <label for="swerveDriveYes" class="form-check-label">Yes</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input id="swerveDriveNo" class="form-check-input" type="radio" name="swerveDriveGroup">
-                    <label for="swerveDriveNo" class="form-check-label">No</label>
+                  <span>Does your robot have swerve drive?</span>
+                  <div class="col-4">
+                    <div class="input-group mb-3">
+                      <select id="swerveDrive" class="form-select">
+                        <option selected value="-1">Choose ...</option>
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                      </select>
+                    </div>
                   </div>
                 </div>
 
                 <div class="mb-3">
                   <span>What type of motors do you use on your drive train?</span>
-                  <div class="input-group mb-3">
-                    <select id="driveMotors" class="form-select">
-                      <option selected value="0">Choose ...</option>
-                      <option value="1">Krakens</option>
-                      <option value="2">Neos</option>
-                      <option value="3">Falcons</option>
-                      <option value="4">CIMs</option>
-                    </select>
+                  <div class="col-4">
+                    <div class="input-group mb-3">
+                      <select id="driveMotors" class="form-select">
+                        <option selected value="-1">Choose ...</option>
+                        <option value="Krakens">Krakens</option>
+                        <option value="NEOs">NEOs</option>
+                        <option value="Falcons">Falcons</option>
+                        <option value="CIMs">CIMs</option>
+                      </select>
+                    </div>
                   </div>
                 </div>
 
                 <div class="mb-3">
-                  <div>
-                    <span>Does your team have spare parts for the robot?</span>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input id="sparePartsYes" class="form-check-input" type="radio" name="sparePartsGroup">
-                    <label for="sparePartsYes" class="form-check-label">Yes</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input id="sparePartsNo" class="form-check-input" type="radio" name="sparePartsGroup">
-                    <label for="sparePartsNo" class="form-check-label">No</label>
+                  <span>Does your team have spare parts for the robot?</span>
+                  <div class="col-4">
+                    <div class="input-group mb-3">
+                      <select id="spareParts" class="form-select">
+                        <option selected value="-1">Choose ...</option>
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                      </select>
+                    </div>
                   </div>
                 </div>
 
                 <div class="mb-3">
                   <span>What programming language do you use?</span>
-                  <div class="input-group mb-3">
-                    <select id="programmingLanguage" class="form-select">
-                      <option selected value="0">Choose ...</option>
-                      <option id="java" value="1">Java</option>
-                      <option id="labView" value="2">LabView</option>
-                      <option id="C++" value="3">C++</option>
-                      <option id="python" value="4">Python</option>
-                      <option id="other" value="5">Other</option>
-                    </select>
+                  <div class="col-4">
+                    <div class="input-group mb-3">
+                      <select id="progLanguage" class="form-select">
+                        <option selected value="-1">Choose ...</option>
+                        <option value="Java">Java</option>
+                        <option value="LabView">LabView</option>
+                        <option value="C++">C++</option>
+                        <option value="Python">Python</option>
+                        <option value="Other">Other</option>
+                      </select>
+                    </div>
                   </div>
                 </div>
 
                 <div class="mb-3">
                   <div>
                     <span>Does your robot have computer vision?</span>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input id="computerVisionYes" class="form-check-input" type="radio" name="computerVisionGroup">
-                    <label for="computerVisionYes" class="form-check-label">Yes</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input id="computerVisionNo" class="form-check-input" type="radio" name="computerVisionGroup">
-                    <label for="computerVisionNo" class="form-check-label">No</label>
+                    <div class="col-4">
+                      <div class="input-group mb-3">
+                        <select id="computerVision" class="form-select">
+                          <option selected value="-1">Choose ...</option>
+                          <option value="1">Yes</option>
+                          <option value="0">No</option>
+                        </select>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -119,42 +122,42 @@ require 'inc/header.php';
                 <div class="mb-3">
                   <div>
                     <span>Pit Organization</span>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input id="pitScore1" class="form-check-input" type="radio" name="pitOrgGroup">
-                    <label for="pitScore1" class="form-check-label">1 (Messy)</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input id="pitScore2" class="form-check-input" type="radio" name="pitOrgGroup">
-                    <label for="pitScore2" class="form-check-label">3 (Average)</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input id="pitScore3" class="form-check-input" type="radio" name="pitOrgGroup">
-                    <label for="pitScore3" class="form-check-label">5 (Pristine)</label>
+                    <div class="col-5">
+                      <div class="input-group mb-3">
+                        <select id="progLanguage" class="form-select">
+                          <option selected value="-1">Choose ...</option>
+                          <option value="1">1 - Messy</option>
+                          <option value="2">2 - Below average</option>
+                          <option value="3">3 - Organized!</option>
+                          <option value="4">4 - Above average</option>
+                          <option value="5">5 - Pristine</option>
+                        </select>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
                 <div class="mb-3">
                   <div>
                     <span>Preparedness/Professionalism</span>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input id="preparednessScore1" class="form-check-input" type="radio" name="preparednessGroup">
-                    <label for="preparednessScore1" class="form-check-label">1 (Minimal)</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input id="preparednessScore2" class="form-check-input" type="radio" name="preparednessGroup">
-                    <label for="preparednessScore2" class="form-check-label">3 (Average)</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input id="preparednessScore3" class="form-check-input" type="radio" name="preparednessGroup">
-                    <label for="preparednessScore3" class="form-check-label">5 (Excellent)</label>
+                    <div class="col-5">
+                      <div class="input-group mb-3">
+                        <select id="progLanguage" class="form-select">
+                          <option selected value="-1">Choose ...</option>
+                          <option value="1">1 - Utter chaos</option>
+                          <option value="2">2 - Below average</option>
+                          <option value="3">3 - Prepared!</option>
+                          <option value="4">4 - Above average</option>
+                          <option value="5">5 - Proactive</option>
+                        </select>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
                 <div class="mb-3">
-                  <label for="batteries" class="form-label">Count the number of batteries they have</label>
-                  <input id="batteries" class="form-control" type="text" placeholder="Battery count">
+                  <label for="numBatteries" class="form-label">Count the number of batteries they have</label>
+                  <input id="numBatteries" class="form-control" type="text" placeholder="Battery count">
                 </div>
               </div>
             </div>
@@ -207,51 +210,49 @@ require 'inc/header.php';
       isError = true;
     }
 
-    if (!document.getElementById("swerveDriveYes").checked && !document.getElementById("swerveDriveNo").checked) {
+    if (document.getElementById("swerveDrive").value === "-1") {
       if (isError)
         errMsg += ",";
       errMsg += " Swerve Drive";
       isError = true;
     }
 
-    let driveMotors = document.getElementById("driveMotors").value;
-    if (driveMotors != 1 && driveMotors != 2 && driveMotors != 3 && driveMotors != 4) {
+    if (document.getElementById("driveMotors").value === "-1") {
       if (isError)
         errMsg += ",";
       errMsg += " Drive Motors";
       isError = true;
     }
 
-    if (!document.getElementById("sparePartsYes").checked && !document.getElementById("sparePartsNo").checked) {
+    if (document.getElementById("spareParts").value === "-1") {
       if (isError)
         errMsg += ",";
       errMsg += " Spare Parts";
       isError = true;
     }
 
-    let progLanguage = document.getElementById("programmingLanguage").value;
-    if (progLanguage != 1 && progLanguage != 2 && progLanguage != 3 && progLanguage != 4 && progLanguage != 5) {
+    if (document.getElementById("progLanguage").value === "-1") {
       if (isError)
         errMsg += ",";
       errMsg += " Programming Language";
       isError = true;
     }
 
-    if (!document.getElementById("computerVisionYes").checked && !document.getElementById("computerVisionNo").checked) {
+    if (document.getElementById("computerVision").value === "-1") {
       if (isError)
         errMsg += ",";
       errMsg += " Computer Vision";
       isError = true;
     }
 
-    if (!document.getElementById("pitScore1").checked && !document.getElementById("pitScore2").checked && !document.getElementById("pitScore3").checked) {
+    if (!document.getElementById("pitScore").value === "-1") {
       if (isError)
         errMsg += ",";
       errMsg += " Pit Organization";
       isError = true;
     }
 
-    if (!document.getElementById("preparednessScore1").checked && !document.getElementById("preparednessScore2").checked && !document.getElementById("preparednessScore3").checked) {
+    if (!document.getElementById("preparednessScore").value === "-1") {
       if (isError)
         errMsg += ",";
       errMsg += " Preparedness";
@@ -269,21 +270,14 @@ require 'inc/header.php';
     console.log("==> pitForm: clearPitForm()");
     document.getElementById("enterTeamNumber").value = "";
     document.getElementById("enterScoutName").value = "";
-    document.getElementById("swerveDriveYes").checked = false;
-    document.getElementById("swerveDriveNo").checked = false;
-    document.getElementById("driveMotors").value = "0";
-    document.getElementById("sparePartsYes").checked = false;
-    document.getElementById("sparePartsNo").checked = false;
-    document.getElementById("programmingLanguage").value = "0";
-    document.getElementById("computerVisionYes").checked = false;
-    document.getElementById("computerVisionNo").checked = false;
-    document.getElementById("pitScore1").checked = false;
-    document.getElementById("pitScore2").checked = false;
-    document.getElementById("pitScore3").checked = false;
-    document.getElementById("preparednessScore1").checked = false;
-    document.getElementById("preparednessScore2").checked = false;
-    document.getElementById("preparednessScore3").checked = false;
-    document.getElementById("batteries").value = "";
+    document.getElementById("swerveDrive").value = "-1";
+    document.getElementById("driveMotors").value = "-1";
+    document.getElementById("spareParts").value = "-1";
+    document.getElementById("progLanguage").value = "-1";
+    document.getElementById("computerVision").value = "-1";
+    document.getElementById("pitScore").value = "-1";
+    document.getElementById("preparednessScore").value = "-1";
+    document.getElementById("numBatteries").value = "";
   }
 
   // Write pit data form fields to DB table
@@ -292,76 +286,16 @@ require 'inc/header.php';
     let dataToSave = {};
     dataToSave["teamnumber"] = document.getElementById("enterTeamNumber").value.trim();
     dataToSave["scoutname"] = document.getElementById("enterScoutName").value.trim();
-    // Swerve
-    if (document.getElementById("swerveDriveYes").checked) {
-      dataToSave["swerve"] = 1;
-    }
-    if (document.getElementById("swerveDriveNo").checked) {
-      dataToSave["swerve"] = 0;
-    }
 
-    // Drive motors
-    let driveMotors = document.getElementById("driveMotors").value;
-    switch (driveMotors) {
-      case "1": dataToSave["drivemotors"] = "Krakens"; break;
-      case "2": dataToSave["drivemotors"] = "NEOs"; break;
-      case "3": dataToSave["drivemotors"] = "Falcons"; break;
-      case "4": dataToSave["drivemotors"] = "CIMs"; break;
-      default: dataToSave["drivemotors"] = "Missing"; break;
-    }
-
-    // Spare parts
-    if (document.getElementById("sparePartsYes").checked) {
-      dataToSave["spareparts"] = 1;
-    }
-    if (document.getElementById("sparePartsNo").checked) {
-      dataToSave["spareparts"] = 0;
-    }
-
-    // Software language
-    let progLang = document.getElementById("programmingLanguage").value;
-    switch (progLang) {
-      case "1": dataToSave["proglanguage"] = "Java"; break;
-      case "2": dataToSave["proglanguage"] = "LabView"; break;
-      case "3": dataToSave["proglanguage"] = "C++"; break;
-      case "4": dataToSave["proglanguage"] = "Python"; break;
-      case "5": dataToSave["proglanguage"] = "Other"; break;
-      default: dataToSave["proglanguage"] = "Missing"; break;
-    }
-
-    // Computer vision
-    if (document.getElementById("computerVisionYes").checked) {
-      dataToSave["computervision"] = 1;
-    }
-    else if (document.getElementById("computerVisionNo").checked) {
-      dataToSave["computervision"] = 0;
-    }
-
-    // Pit organization
-    if (document.getElementById("pitScore1").checked) {
-      dataToSave["pitorg"] = 1;
-    }
-    else if (document.getElementById("pitScore2").checked) {
-      dataToSave["pitorg"] = 3;
-    }
-    else if (document.getElementById("pitScore3").checked) {
-      dataToSave["pitorg"] = 5;
-    }
-
-    // Overall readiness
-    dataToSave["preparedness"] = 1;  // default
-    if (document.getElementById("preparednessScore1").checked) {
-      dataToSave["preparedness"] = 1;
-    }
-    else if (document.getElementById("preparednessScore2").checked) {
-      dataToSave["preparedness"] = 3;
-    }
-    else if (document.getElementById("preparednessScore3").checked) {
-      dataToSave["preparedness"] = 5;
-    }
-
-    // Battery count
-    dataToSave["numbatteries"] = document.getElementById("batteries").value;
+    // All fields use the "value" of the html element above to eliminate any translation
+    dataToSave["swerve"] = document.getElementById("swerveDrive").value;
+    dataToSave["drivemotors"] = document.getElementById("driveMotors").value;
+    dataToSave["spareparts"] = document.getElementById("spareParts").value;
+    dataToSave["proglanguage"] = document.getElementById("progLanguage").value;
+    dataToSave["computervision"] = document.getElementById("computerVision").value;
+    dataToSave["pitorg"] = document.getElementById("pitScore1").value;
+    dataToSave["preparedness"] = document.getElementById("preparednessScore").value;
+    dataToSave["numbatteries"] = document.getElementById("numBatteries").value;
 
     return dataToSave;
   }
