@@ -114,6 +114,7 @@
     const currentLocation = location.href;
     const items = document.querySelectorAll("a");
     const length = items.length;
+    let frcEventCode = null;
 
     for (let i = 0; i < items.length; i++) {
       let menuLink = items[i];
@@ -141,9 +142,9 @@
           $.get("api/dbAPI.php", {
             getEventCode: true
           }, function (eventCode) {
-            eventCode = eventCode.trim();
-            console.log("=> index: getEventCode: " + eventCode + "\n");
-            document.getElementById("navbarEventCode").innerText = eventCode;
+            frcEventCode = eventCode.trim();
+            console.log("=> index: getEventCode: " + frcEventCode + "\n");
+            document.getElementById("navbarEventCode").innerText = frcEventCode;
           });
         }
         else {

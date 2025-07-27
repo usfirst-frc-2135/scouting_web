@@ -82,10 +82,19 @@ require 'inc/header.php';
   }
 
   // IMPORTANT! also need to adjust data list size in "validateQrList" and "padList"!!!
+  //  TODO: For 2026, please change the field order to put year-specific items LAST (order is suggested below in comments)
+  //  TODO: For 2026, remove any undocumented "padding" on the structure. Just declare an "other" field.
+  //  TODO: Also for 2026, add about 3-5 "other" fields to the QR list so it can be slightly appended without breaking
   function qrListToMatchData(qrList) {
     let matchData = {};
-    matchData["teamnumber"] = qrList[0];
-    matchData["autonStartPos"] = qrList[1];
+    // Perennial fields that always occur
+    matchData["eventcode"] = qrList[37];      // Should be [0] in 2026
+    matchData["matchnumber"] = qrList[36];    // Should be [1] in 2026
+    matchData["teamnumber"] = qrList[0];      // Should be [2] in 2026
+    matchData["scoutname"] = qrList[38];      // Should be [3] in 2026
+    // Game or year-specific fields below here!
+    // Autonomous
+    matchData["autonStartPos"] = qrList[1];   // These all get bumped down
     matchData["autonLeave"] = qrList[2];
     matchData["reefzoneAB"] = qrList[3];
     matchData["reefzoneCD"] = qrList[4];
@@ -103,6 +112,7 @@ require 'inc/header.php';
     matchData["autonCoralStation"] = qrList[16];
     matchData["autonAlgaeFloor"] = qrList[17];
     matchData["autonAlgaeReef"] = qrList[18];
+    // Teleop
     matchData["acquiredCoral"] = qrList[19];
     matchData["acquiredAlgae"] = qrList[20];
     matchData["teleopAlgaeFloorPickup"] = qrList[21];
@@ -116,13 +126,16 @@ require 'inc/header.php';
     matchData["teleopCoralL4"] = qrList[29];
     matchData["teleopAlgaeNet"] = qrList[30];
     matchData["teleopAlgaeProcessor"] = qrList[31];
+    // Defense notes
     matchData["defenseLevel"] = qrList[32];
+    // Endgame
     matchData["cageClimb"] = qrList[33];
     matchData["startClimb"] = qrList[34];
+    // Overall
     matchData["died"] = qrList[35];
-    matchData["matchnumber"] = qrList[36];
-    matchData["eventcode"] = qrList[37];
-    matchData["scoutname"] = qrList[38];
+    // qrList[36] see above
+    // qrList[37] see above
+    // qrList[38] see above
     matchData["comment"] = qrList[39];
     return matchData;
   }
@@ -140,6 +153,10 @@ require 'inc/header.php';
 
     if (!Object.prototype.hasOwnProperty.call(scannedMatches, key)) {
       // Modify global variables
+      if (matchData["eventcode"] === frcEventCode) {
+        console.warn("Event code does not match the one in db_config!");
+        alert("QR event code does not match the one in db_config!"); // this is a passive notification - return if we want to prevent this
+      }
       scannedMatches[key] = matchData;
       updateScannedMatchCount(scannedMatches);
       let tbodyRef = document.getElementById(tableId).querySelector('tbody');

@@ -113,7 +113,7 @@ class matchDataProcessor {
   }
 
   // Filters match data based on the retrieved site filter from DB config
-  getSiteFilteredAverages(successFunction) {
+  getSiteFilteredAverages(processorFunction) {
     console.log("==> matchDataProcessor: getSiteFilteredAverages:");
     let tempThis = this;
     $.post("api/dbAPI.php", {
@@ -130,7 +130,7 @@ class matchDataProcessor {
 
       tempThis.applySiteFilter();
 
-      successFunction(tempThis.mData, tempThis.getEventAverages());
+      processorFunction(tempThis.mData, tempThis.getEventAverages());
     });
   }
 
