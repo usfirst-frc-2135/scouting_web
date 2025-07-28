@@ -4,7 +4,7 @@
 */
 class CalculateCOPRs
 {
-  // public function __construct($tbaApiKey, $tbaTableName, $dbConnection)
+  // public function __construct()
   // {
   // }
 
