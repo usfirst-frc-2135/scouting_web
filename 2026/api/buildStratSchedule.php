@@ -87,27 +87,25 @@ class BuildStratSchedule
                 // If team number is a match here
                 if ($bnum === $tnum)
                 {
-                  $bFoundInOut = 0;
+                  $bFoundInOut = false;
                   for ($z = 0; $z < sizeof($out); $z++)
                   {
                     $dout = $out[$z];
                     if ($dout["match_number"] === $bmatchnum)
                     {
-                      $bFoundInOut = 1;
+                      $bFoundInOut = true;
                       $prev = $dout["teams"];
-
                       // If tnum is not in prev, then add it.
                       if (strpos($prev, $tnum) === false)
                       {
-                        $prev .= ", " . $tnum;   // append with tnum
-                        $dout["teams"] = $prev;
+                        $dout["teams"] = $prev . ", " . $tnum;
                         $out[$z] = $dout;
                       }
                       break;
                     }
                   }
 
-                  if ($bFoundInOut === 0)
+                  if ($bFoundInOut === false)
                   {
                     $dout = array();
                     $dout["comp_level"] = $bmatch["comp_level"];
