@@ -12,7 +12,7 @@ require 'inc/header.php';
     </div>
 
     <!-- Main column to hold the strategic match schedule -->
-    <div class="col-md-8">
+    <div class="col-md-10">
 
       <div>
         <style type="text/css" media="screen">
@@ -31,7 +31,8 @@ require 'inc/header.php';
             <tr>
               <th class="sorttable_numeric" scope="col">Match</th>
               <th class="sorttable_nosort" scope="col">Teams</th>
-              <th class="sorttable_nosort" scope="col">Time</th>
+              <th class="sorttable_nosort" scope="col">Scheduled</th>
+              <th class="sorttable_nosort" scope="col">Predicted</th>
             </tr>
           </thead>
           <tbody class="table-group-divider"> </tbody>
@@ -56,14 +57,18 @@ require 'inc/header.php';
       let matchNum = stratSched[i]["comp_level"] + stratSched[i]["match_number"];
       let matchTeams = stratSched[i]["teams"];
       let matchTime = new Date(stratSched[i]["time"] * 1000);
-      if (stratSched[i]["predicted_time"] != null)
-        matchTime = new Date(stratSched[i]["predicted_time"] * 1000);
+      let predictedTime = new Date(stratSched[i]["predicted_time"] * 1000);
       let timeNow = new Date();
-      let timeStr = matchTime.toLocaleDateString("en-us", { weekday: 'short', month: 'short', day: 'numeric', hour: "numeric", minute: "numeric" });
+      let options = { weekday: 'short', month: 'short', day: 'numeric', hour: "numeric", minute: "numeric" };
+      let timeStr = matchTime.toLocaleDateString("en-us", options);
       if (timeNow > matchTime) {
         timeStr = "<del>" + timeStr + "</del>";
       }
-      let rowString = "<td>" + matchNum + "</td>" + "<td>" + matchTeams + "</td>" + "<td>" + timeStr + "</td>";
+      let predStr = predictedTime.toLocaleDateString("en-us", options);
+      if (timeNow > predictedTime) {
+        predStr = "<del>" + predStr + "</del>";
+      }
+      let rowString = "<td>" + matchNum + "</td>" + "<td>" + matchTeams + "</td>" + "<td>" + timeStr + "</td>" + "<td>" + predStr + "</td>";
       tbodyRef.insertRow().innerHTML = rowString;
     }
   }
