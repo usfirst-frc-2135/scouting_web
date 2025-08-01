@@ -12,7 +12,7 @@ require 'inc/header.php';
     </div>
 
     <!-- Main column to hold the strategic match schedule -->
-    <div class="col-md-6">
+    <div class="col-md-8">
 
       <div>
         <style type="text/css" media="screen">
@@ -31,6 +31,7 @@ require 'inc/header.php';
             <tr>
               <th class="sorttable_numeric" scope="col">Match</th>
               <th class="sorttable_nosort" scope="col">Teams</th>
+              <th class="sorttable_nosort" scope="col">Time</th>
             </tr>
           </thead>
           <tbody class="table-group-divider"> </tbody>
@@ -53,7 +54,9 @@ require 'inc/header.php';
     tbodyRef.innerHTML = ""; // Clear Table
     for (let i = 0; i < stratSched.length; i++) {
       let matchNum = stratSched[i]["comp_level"] + stratSched[i]["match_number"];
-      let rowString = "<td>" + matchNum + "</td>" + "<td>" + stratSched[i]["teams"] + "</td>";
+      let matchTime = new Date(stratSched[i]["time"] * 1000);
+      let timeStr = matchTime.toLocaleDateString("en-us", { weekday: 'short', month: 'short', day: 'numeric', hour: "numeric", minute: "numeric" });
+      let rowString = "<td>" + matchNum + "</td>" + "<td>" + stratSched[i]["teams"] + "</td>" + "<td>" + timeStr + "</td>";
       tbodyRef.insertRow().innerHTML = rowString;
     }
   }

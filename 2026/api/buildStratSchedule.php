@@ -8,124 +8,112 @@ class BuildStratSchedule
   // {
   // }
 
-  public static function getMatches($ml)
+  public static function getMatches($evtMatches)
   {
-    $out = array();
-
     // Go thru all the matches and figure out which ones are our matches.
     $ourMatches = array();  // Our matches at the event
-    $allMatches = array();   // All matches at the event
-
-    // error_log("---> going thru matches ");
-    foreach ($ml["response"] as $match)
+    foreach ($evtMatches["response"] as $evtMatch)
     {
-      $matchInfo = array();
-      $matchInfo["comp_level"] = $match["comp_level"];
-      $matchInfo["match_number"] = $match["match_number"];
-      $matchInfo["time"] = $match["time"];
-      $matchInfo["predicted_time"] = $match["predicted_time"];
-      $matchInfo["actual_time"] = $match["actual_time"];
-
       // Put all this match's teams in $teams, then check for our teamnumber.
-      $teams = array();
-      for ($j = 0; $j < 3; $j++)
-        array_push($teams, substr($match["alliances"]["red"]["team_keys"][$j], 3));
-      for ($k = 0; $k < 3; $k++)
-        array_push($teams, substr($match["alliances"]["blue"]["team_keys"][$k], 3));
+      $teamNums = array();
+      foreach ($evtMatch["alliances"]["red"]["team_keys"] as $redTeam)
+        array_push($teamNums, substr($redTeam, 3));
+      foreach ($evtMatch["alliances"]["blue"]["team_keys"] as $blueTeam)
+        array_push($teamNums, substr($blueTeam, 3));
 
       // If a team number is ours, then this match is one of ours. 
-      foreach ($teams as $tn)
+      foreach ($teamNums as $teamNum)
       {
-        if ($tn === OURTEAM)
+        if ($teamNum === OURTEAM)
         {
           // error_log("  ---> found one of our matches: $matchnum");
-          $myMatch = array();  // store this match's num and teams in myMatch
-          $myMatch["comp_level"] = $match["comp_level"];
-          $myMatch["match_number"] = $match["match_number"];
-          $myMatch["teams"] = $teams;
+          $myMatch = array();  // store this match's num and teamNums in myMatch
+          $myMatch["comp_level"] = $evtMatch["comp_level"];
+          $myMatch["match_number"] = $evtMatch["match_number"];
+          $myMatch["teams"] = $teamNums;
           array_push($ourMatches, $myMatch);
           break;
         }
       }
-
-      $matchInfo["teams"] = $teams; // TODO: Do we need to keep all teams here? Or just get them from ourMatches
-      array_push($allMatches, $matchInfo);
     }
 
     // Now we have the list of our matches (with the teams).
-    // For each of our matches, go thru the teams in the match. Get the full match list for each team 
+    // For each of the event matches, go thru the teams in the match. Get the full match list for each team 
     // in the match and hang on to their list of matches that are earlier (lower number) than that match.
     // Those are matches we want to strategic scout. So store as match# and teams.
-    foreach ($ourMatches as $tmatch)
+    $stratMatches = array();
+    foreach ($evtMatches["response"] as $evtMatch)
     {
       // Get this match's teams; for each: get their match numbers. Any match# that is less than this 
       // match#, save it with that team number.
-      foreach ($tmatch["teams"] as $tnum)
+      if ($evtMatch["comp_level"] === "qm")   // Only care about Qual matches
       {
-        if ($tnum === OURTEAM)
-          continue;
+        // Get the basic event match info
+        $matchInfo = array();
+        $matchInfo["comp_level"] = $evtMatch["comp_level"];
+        $matchInfo["match_number"] = $evtMatch["match_number"];
+        $matchInfo["time"] = $evtMatch["time"];
+        $matchInfo["predicted_time"] = $evtMatch["predicted_time"];
+        $matchInfo["actual_time"] = $evtMatch["actual_time"];
+        $matchInfo["teams"] = "";
+        $stratTeams = array();
 
-        // Get their match numbers.
-        foreach ($ml["response"] as $bmatch)
+        // Build a team list for this match
+        $evtTeams = array();
+        foreach ($evtMatch["alliances"]["red"]["team_keys"] as $redTeam)
+          array_push($evtTeams, substr($redTeam, 3));
+        foreach ($evtMatch["alliances"]["blue"]["team_keys"] as $blueTeam)
+          array_push($evtTeams, substr($blueTeam, 3));
+
+        // For each event team, search through our matches to see if we play them later
+        foreach ($evtTeams as $evtTeam)
         {
-          if ($bmatch["comp_level"] === "qm")   // Only care about Qual matches
+          foreach ($ourMatches as $ourMatch)
           {
-            // If this match is earlier than ourMatchNum, check if it has this $tnum.
-            $bmatchnum = $bmatch["match_number"];
-            // error_log("    ===> looking at match $bmatchnum");
-            if ((int) $bmatchnum < (int) $tmatch["match_number"])
+            // If this match is earlier than ourMatchNum, check if it has this $ourTeam.
+            if ((int) $evtMatch["match_number"] < (int) $ourMatch["match_number"])
             {
-              // This match is earlier than ourMatchNum, so check if it has this team.
-              $bteams = array();
-              for ($j = 0; $j < 3; $j++)
-                array_push($bteams, substr($bmatch["alliances"]["red"]["team_keys"][$j], 3));
-              for ($k = 0; $k < 3; $k++)
-                array_push($bteams, substr($bmatch["alliances"]["blue"]["team_keys"][$k], 3));
-
-              foreach ($bteams as $bnum)
+              foreach ($ourMatch["teams"] as $ourTeam)
               {
-                // If team number is a match here
-                if ($bnum === $tnum)
+                if ($ourTeam === OURTEAM)
+                  continue;
+
+                // This event match is earlier than ourMatchNum, so check if it has this team.
+                if ($evtTeam === $ourTeam)
                 {
-                  $bFoundInOut = false;
-                  for ($z = 0; $z < sizeof($out); $z++)
+                  $alreadyListed = false;
+                  foreach ($stratTeams as $stratTeam)
                   {
-                    $dout = $out[$z];
-                    if ($dout["match_number"] === $bmatchnum)
+                    if ($evtTeam === $stratTeam)
                     {
-                      $bFoundInOut = true;
-                      $prev = $dout["teams"];
-                      // If tnum is not in prev, then add it.
-                      if (strpos($prev, $tnum) === false)
-                      {
-                        $dout["teams"] = $prev . ", " . $tnum;
-                        $out[$z] = $dout;
-                      }
+                      $alreadyListed = true;
                       break;
                     }
                   }
 
-                  if ($bFoundInOut === false)
+                  if (empty($stratTeams) || !$alreadyListed)
                   {
-                    $dout = array();
-                    $dout["comp_level"] = $bmatch["comp_level"];
-                    $dout["match_number"] = $bmatchnum;
-                    $dout["teams"] = $tnum;
-                    array_push($out, $dout);
+                    array_push($stratTeams, $evtTeam);
                   }
                 }
               }
             }
           }
         }
+
+        foreach ($stratTeams as $stratTeam)
+        {
+          if ($matchInfo["teams"] !== "")
+            $matchInfo["teams"] .= ", ";
+          $matchInfo["teams"] .= $stratTeam;
+        }
+        // error_log($matchInfo["teams"]);
+        array_push($stratMatches, $matchInfo); // TODO: Form list here
       }
     }
 
-    // TODO: Merge $out with our matches into the $allMatches array and send it out
-
-    return $out;
+    return $stratMatches;
   }
-
 }
 
 ?>
