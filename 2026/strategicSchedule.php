@@ -54,9 +54,16 @@ require 'inc/header.php';
     tbodyRef.innerHTML = ""; // Clear Table
     for (let i = 0; i < stratSched.length; i++) {
       let matchNum = stratSched[i]["comp_level"] + stratSched[i]["match_number"];
+      let matchTeams = stratSched[i]["teams"];
       let matchTime = new Date(stratSched[i]["time"] * 1000);
+      if (stratSched[i]["predicted_time"] != null)
+        matchTime = new Date(stratSched[i]["predicted_time"] * 1000);
+      let timeNow = new Date();
       let timeStr = matchTime.toLocaleDateString("en-us", { weekday: 'short', month: 'short', day: 'numeric', hour: "numeric", minute: "numeric" });
-      let rowString = "<td>" + matchNum + "</td>" + "<td>" + stratSched[i]["teams"] + "</td>" + "<td>" + timeStr + "</td>";
+      if (timeNow > matchTime) {
+        timeStr = "<del>" + timeStr + "</del>";
+      }
+      let rowString = "<td>" + matchNum + "</td>" + "<td>" + matchTeams + "</td>" + "<td>" + timeStr + "</td>";
       tbodyRef.insertRow().innerHTML = rowString;
     }
   }
@@ -67,7 +74,7 @@ require 'inc/header.php';
     $.get("api/tbaAPI.php", {
       getStrategicMatches: true
     }).done(function (strategicMatches) {
-      // console.log("=> getStrategicMatches: " + strategicMatches);
+      console.log("=> getStrategicMatches: " + strategicMatches);
       if (strategicMatches === null) {
         return alert("Can't load strategicMatches from TBA; check if TBA Key was set in db_config");
       }
