@@ -353,18 +353,20 @@ require 'inc/header.php';
 
     csvLine += pitLocation + ",";
     csvLine += oprTP + ",";
-    csvLine += lookupAverage(evtAvgs, team, "avgTotalCoral") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "maxTotalCoral") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "avgTotalAlgae") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "maxTotalAlgae") + ",";
+    csvLine += lookupAverage(evtAvgs, team, "avgTotalPoints") + ",";
+    csvLine += lookupAverage(evtAvgs, team, "maxTotalPoints") + ",";
     csvLine += lookupAverage(evtAvgs, team, "avgTotalAutoPoints") + ",";
     csvLine += lookupAverage(evtAvgs, team, "maxTotalAutoPoints") + ",";
     csvLine += lookupAverage(evtAvgs, team, "avgTotalTeleopPoints") + ",";
     csvLine += lookupAverage(evtAvgs, team, "maxTotalTeleopPoints") + ",";
     csvLine += lookupAverage(evtAvgs, team, "avgEndgamePoints") + ",";
     csvLine += lookupAverage(evtAvgs, team, "maxEndgamePoints") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "avgTotalPoints") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "maxTotalPoints") + ",";
+
+    csvLine += lookupAverage(evtAvgs, team, "avgTotalCoral") + ",";
+    csvLine += lookupAverage(evtAvgs, team, "maxTotalCoral") + ",";
+    csvLine += lookupAverage(evtAvgs, team, "avgTotalAlgae") + ",";
+    csvLine += lookupAverage(evtAvgs, team, "maxTotalAlgae") + ",";
+
     csvLine += lookupAverage(evtAvgs, team, "avgAutonCoral") + ",";
     csvLine += lookupAverage(evtAvgs, team, "maxAutonCoral") + ",";
     csvLine += lookupAverage(evtAvgs, team, "avgAutonCoralL1") + ",";
