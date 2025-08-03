@@ -19,6 +19,8 @@ class dbHandler
     "tbatable",
     "pittable",
     "strategictable",
+    "scouttable",
+    "aliastable",
     "useP",
     "useQm",
     "useSf",
@@ -499,6 +501,61 @@ class dbHandler
     return $result;
   }
 
+  public function writeScoutToMatchTable($mData)
+  {
+    $dbConfig = $this->readDbConfig();
+    $sql = "INSERT INTO " . $dbConfig["scouttable"] .
+      "(scoutname)
+      VALUES(:scoutname)";
+    $prepared_statement = $this->conn->prepare($sql);
+    $prepared_statement->execute($mData);
+  }
+
+  public function readAllScoutTable($eventCode)
+  {
+    $dbConfig = $this->readDbConfig();
+    $sql = "SELECT 
+        scoutname
+        from " . $dbConfig["scouttable"] . " where
+        eventcode='" . $eventCode . "'";
+    $prepared_statement = $this->conn->prepare($sql);
+    $prepared_statement->execute();
+    $result = $prepared_statement->fetchAll();
+    return $result;
+  }
+
+  public function writeAliasToMatchTable($mData)
+  {
+    $dbConfig = $this->readDbConfig();
+    $sql = "INSERT INTO " . $dbConfig["aliastable"] .
+      "(entrykey,
+      eventcode,
+      teamnumber,
+      aliasnumber)
+      VALUES(:entrykey,
+      :eventcode,
+      :teamnumber,
+      :aliasnumber)";
+    $prepared_statement = $this->conn->prepare($sql);
+    $prepared_statement->execute($mData);
+  }
+
+  public function readAllAliasTable($eventCode)
+  {
+    $dbConfig = $this->readDbConfig();
+    $sql = "SELECT 
+        entrykey,
+        eventcode,
+        teamnumber,
+        aliasnumber
+        from " . $dbConfig["aliastable"] . " where
+        eventcode='" . $eventCode . "'";
+    $prepared_statement = $this->conn->prepare($sql);
+    $prepared_statement->execute();
+    $result = $prepared_statement->fetchAll();
+    return $result;
+  }
+
   public function createDB()
   {
     error_log("createDB in dbHandler");
@@ -656,6 +713,41 @@ class dbHandler
     }
   }
 
+  public function createScoutTable()
+  {
+    error_log("Creating Scout Table");
+    $conn = $this->connectToDB();
+    $dbConfig = $this->readDbConfig();
+    $query = "CREATE TABLE " . $dbConfig["db"] . "." . $dbConfig["scouttable"] .
+      " (
+        scoutname VARCHAR(30) NOT NULL PRIMARY KEY
+      )";
+    $statement = $conn->prepare($query);
+    if (!$statement->execute())
+    {
+      throw new Exception("createScoutTable Error: CREATE TABLE " . $dbConfig["scouttable"] . " query failed.");
+    }
+  }
+
+  public function createAliasTable()
+  {
+    error_log("Creating Alias Table");
+    $conn = $this->connectToDB();
+    $dbConfig = $this->readDbConfig();
+    $query = "CREATE TABLE " . $dbConfig["db"] . "." . $dbConfig["aliastable"] .
+      " (
+        entrykey VARCHAR(60) NOT NULL PRIMARY KEY,
+        eventcode VARCHAR(10) NOT NULL,
+        teamnumber VARCHAR(10) NOT NULL,
+        aliasnumber VARCHAR(10) NOT NULL
+      )";
+    $statement = $conn->prepare($query);
+    if (!$statement->execute())
+    {
+      throw new Exception("createAliasTable Error: CREATE TABLE " . $dbConfig["aliastable"] . " query failed.");
+    }
+  }
+
   // Read and return the database configutration file
   public function readDbConfig()
   {
@@ -753,6 +845,8 @@ class dbHandler
     $dbStatus["tbaTableExists"] = false;
     $dbStatus["pitTableExists"] = false;
     $dbStatus["strategicTableExists"] = false;
+    $dbStatus["scoutTableExists"] = false;
+    $dbStatus["aliasTableExists"] = false;
     $dbStatus["useP"] = $dbConfig["useP"];
     $dbStatus["useQm"] = $dbConfig["useQm"];
     $dbStatus["useSf"] = $dbConfig["useSf"];
@@ -852,6 +946,34 @@ class dbHandler
           catch (PDOException $e)
           {
             error_log("dbHandler: getDBStatus: tba table missing! - " . $e->getMessage());
+          }
+
+          // Scout table Connection
+          try
+          {
+            $dsn = "mysql:host=" . $dbConfig["server"] . ";dbname=" . $dbConfig["db"] . ";charset=" . $this->charset;
+            $conn = new PDO($dsn, $dbConfig["username"], $dbConfig["password"]);
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $val = $conn->query('SELECT * from ' . $dbConfig["scouttable"]);
+            $dbStatus["scoutTableExists"] = true;
+          }
+          catch (PDOException $e)
+          {
+            error_log("dbHandler: getDBStatus: scout table missing! - " . $e->getMessage());
+          }
+
+          // Alias table Connection
+          try
+          {
+            $dsn = "mysql:host=" . $dbConfig["server"] . ";dbname=" . $dbConfig["db"] . ";charset=" . $this->charset;
+            $conn = new PDO($dsn, $dbConfig["username"], $dbConfig["password"]);
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $val = $conn->query('SELECT * from ' . $dbConfig["aliastable"]);
+            $dbStatus["aliasTableExists"] = true;
+          }
+          catch (PDOException $e)
+          {
+            error_log("dbHandler: getDBStatus: alias table missing! - " . $e->getMessage());
           }
         }
       }

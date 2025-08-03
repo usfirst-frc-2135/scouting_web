@@ -26,6 +26,8 @@ require 'inc/header.php';
             <h5>TBA Table Status: <span id="TBATableStatus" class="badge bg-warning float-end">Not Connected</span></h5>
             <h5>Pit Table Status: <span id="pitTableStatus" class="badge bg-warning float-end">Not Connected</span></h5>
             <h5>Strategic Table Status: <span id="strategicTableStatus" class="badge bg-warning float-end">Not Connected</span></h5>
+            <h5>Scout Table Status: <span id="scoutTableStatus" class="badge bg-warning float-end">Not Connected</span></h5>
+            <h5>Alias Table Status: <span id="aliasTableStatus" class="badge bg-warning float-end">Not Connected</span></h5>
             <hr />
             <h5>MySQL Server: <span id="serverName" class="badge bg-secondary float-end">????</span></h5>
             <h5>Database: <span id="databaseName" class="badge bg-secondary float-end">????</span></h5>
@@ -163,6 +165,8 @@ require 'inc/header.php';
         setStatusBadge("TBATableStatus", dbStatus["tbaTableExists"]);
         setStatusBadge("pitTableStatus", dbStatus["pitTableExists"]);
         setStatusBadge("strategicTableStatus", dbStatus["strategicTableExists"]);
+        setStatusBadge("scoutTableStatus", dbStatus["scoutTableExists"]);
+        setStatusBadge("aliasTableStatus", dbStatus["aliasTableExists"]);
 
         document.getElementById("dataP").checked = dbStatus["useP"];
         document.getElementById("dataQm").checked = dbStatus["useQm"];
@@ -256,6 +260,8 @@ require 'inc/header.php';
       configData["tbatable"] = databaseName + "_tba";
       configData["pittable"] = databaseName + "_pit";
       configData["strategictable"] = databaseName + "_strat";
+      configData["scouttable"] = databaseName + "_scout";
+      configData["aliastable"] = databaseName + "_alias";
       configData["writeConfig"] = JSON.stringify(configData);
 
       // Update the status badges after writing the config file

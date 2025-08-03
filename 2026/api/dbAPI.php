@@ -79,6 +79,24 @@ else if (isset($_POST["createTable"]))
     error_log($e);
   }
 
+  try
+  {
+    $db->createScoutTable();
+  }
+  catch (Exception $e)
+  {
+    error_log($e);
+  }
+
+  try
+  {
+    $db->createAliasTable();
+  }
+  catch (Exception $e)
+  {
+    error_log($e);
+  }
+
   $stat = $db->getDBStatus();
   echo json_encode($stat);
 }
