@@ -102,9 +102,9 @@ require 'inc/header.php';
           <thead>
             <tr>
               <th colspan="1" style="background-color:transparent"></th>
-              <th colspan="8" style="background-color:#83b4ff">Points</th>
-              <th colspan="4" style="background-color:#d5e6de">Auton</th>
-              <th colspan="4" style="background-color:#d6f3fB">Teleop</th>
+              <th colspan="8" style="background-color:#83b4ff">Match Points</th>
+              <th colspan="4" style="background-color:#d5e6de">Auton Pts</th>
+              <th colspan="4" style="background-color:#d6f3fB">Teleop Pts</th>
               <th colspan="4" style="background-color:#83b4ff">Game pieces</th>
               <th colspan="10" style="background-color:#d5e6de">Auton Coral</th>
               <th colspan="6" style="background-color:#d5e6de">Auton Algae</th>
@@ -119,45 +119,45 @@ require 'inc/header.php';
 
               <!-- points by game phase -->
               <th colspan="2" style="background-color:#83b4ff">Total Pts</th>
-              <th colspan="2" style="background-color:transparent">Auton Pts</th>
-              <th colspan="2" style="background-color:#83b4ff">Teleop Pts</th>
-              <th colspan="2" style="background-color:transparent">Endgame Pts</th>
+              <th colspan="2" style="background-color:#d5e6de">Auton Pts</th>
+              <th colspan="2" style="background-color:#d6f3fB">Teleop Pts</th>
+              <th colspan="2" style="background-color:#fbe6d3">Endgame Pts</th>
 
               <!-- points by game piece -->
-              <th colspan="2" style="background-color:#83b4ff">Coral Pts</th>
+              <th colspan="2" style="background-color:#d5e6de">Coral Pts</th>
               <th colspan="2" style="background-color:transparent">Algae Pts</th>
-              <th colspan="2" style="background-color:#83b4ff">Coral Pts</th>
+              <th colspan="2" style="background-color:#d6f3fB">Coral Pts</th>
               <th colspan="2" style="background-color:transparent">Algae Pts</th>
 
               <th colspan="2" style="background-color:#83b4ff">Total Coral</th>
               <th colspan="2" style="background-color:transparent">Total Algae</th>
 
               <!-- auton coral -->
-              <th colspan="2" style="background-color:#83b4ff">Total</th>
+              <th colspan="2" style="background-color:#d5e6de">Auton Coral</th>
               <th colspan="2" style="background-color:transparent">L4</th>
-              <th colspan="2" style="background-color:#83b4ff">L3</th>
+              <th colspan="2" style="background-color:#d5e6de">L3</th>
               <th colspan="2" style="background-color:transparent">L2</th>
-              <th colspan="2" style="background-color:#83b4ff">L1</th>
+              <th colspan="2" style="background-color:#d5e6de">L1</th>
 
               <!-- auton algae -->
-              <th colspan="2" style="background-color:transparent">Total</th>
-              <th colspan="2" style="background-color:#83b4ff">Proc</th>
+              <th colspan="2" style="background-color:transparent">Total Algae</th>
+              <th colspan="2" style="background-color:#d5e6de">Proc</th>
               <th colspan="2" style="background-color:transparent">Net</th>
 
               <!-- teleop coral -->
-              <th colspan="3" style="background-color:#83b4ff">Total</th>
+              <th colspan="3" style="background-color:#d6f3fB">Teleop Coral</th>
               <th colspan="2" style="background-color:transparent">L4</th>
-              <th colspan="2" style="background-color:#83b4ff">L3</th>
+              <th colspan="2" style="background-color:#d6f3fB">L3</th>
               <th colspan="2" style="background-color:transparent">L2</th>
-              <th colspan="2" style="background-color:#83b4ff">L1</th>
+              <th colspan="2" style="background-color:#d6f3fB">L1</th>
 
               <!-- teleop algae -->
-              <th colspan="3" style="background-color:transparent">Total</th>
-              <th colspan="2" style="background-color:#83b4ff">Proc</th>
+              <th colspan="3" style="background-color:transparent">Teleop Algae</th>
+              <th colspan="2" style="background-color:#d6f3fB">Proc</th>
               <th colspan="2" style="background-color:transparent">Net</th>
 
               <!-- endgame -->
-              <th colspan="5" style="background-color:#83b4ff">Climb%</th>
+              <th colspan="5" style="background-color:#fbe6d3">Climb%</th>
 
               <!-- died -->
               <th colspan="1" style="background-color:transparent">Died</th>
