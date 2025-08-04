@@ -168,27 +168,27 @@ require 'inc/header.php';
                   <th colspan="5" class="text-center fs-6" style="background-color:#FBE6D3">Endgame</th>
                 </tr>
                 <tr>
-                  <th scope="col">L1</th>
-                  <th scope="col">L2</th>
-                  <th scope="col">L3</th>
                   <th scope="col">L4</th>
+                  <th scope="col">L3</th>
+                  <th scope="col">L2</th>
+                  <th scope="col">L1</th>
                   <th scope="col">Net</th>
                   <th scope="col">Proc</th>
 
                   <th scope="col">C%</th>
-                  <th scope="col">L1</th>
-                  <th scope="col">L2</th>
-                  <th scope="col">L3</th>
                   <th scope="col">L4</th>
+                  <th scope="col">L3</th>
+                  <th scope="col">L2</th>
+                  <th scope="col">L1</th>
                   <th scope="col">A%</th>
                   <th scope="col">Net</th>
                   <th scope="col">Proc</th>
 
-                  <th scope="col">N</th>
-                  <th scope="col">P</th>
-                  <th scope="col">F</th>
-                  <th scope="col">S</th>
                   <th scope="col">D</th>
+                  <th scope="col">S</th>
+                  <th scope="col">F</th>
+                  <th scope="col">P</th>
+                  <th scope="col">N</th>
                 </tr>
               </thead>
               <tbody class="table-group-divider"> </tbody>
@@ -233,27 +233,27 @@ require 'inc/header.php';
                   <th colspan="5" class="text-center fs-6" style="background-color:#FBE6D3">Endgame</th>
                 </tr>
                 <tr>
-                  <th scope="col">L1</th>
-                  <th scope="col">L2</th>
-                  <th scope="col">L3</th>
                   <th scope="col">L4</th>
+                  <th scope="col">L3</th>
+                  <th scope="col">L2</th>
+                  <th scope="col">L1</th>
                   <th scope="col">Net</th>
                   <th scope="col">Proc</th>
 
                   <th scope="col">C%</th>
-                  <th scope="col">L1</th>
-                  <th scope="col">L2</th>
-                  <th scope="col">L3</th>
                   <th scope="col">L4</th>
+                  <th scope="col">L3</th>
+                  <th scope="col">L2</th>
+                  <th scope="col">L1</th>
                   <th scope="col">A%</th>
                   <th scope="col">Net</th>
                   <th scope="col">Proc</th>
 
-                  <th scope="col">N</th>
-                  <th scope="col">P</th>
-                  <th scope="col">F</th>
-                  <th scope="col">S</th>
                   <th scope="col">D</th>
+                  <th scope="col">S</th>
+                  <th scope="col">F</th>
+                  <th scope="col">P</th>
+                  <th scope="col">N</th>
                 </tr>
               </thead>
               <tbody class="table-group-divider"> </tbody>
@@ -298,27 +298,27 @@ require 'inc/header.php';
                   <th colspan="5" class="text-center fs-6" style="background-color:#FBE6D3">Endgame</th>
                 </tr>
                 <tr>
-                  <th scope="col">L1</th>
-                  <th scope="col">L2</th>
-                  <th scope="col">L3</th>
                   <th scope="col">L4</th>
+                  <th scope="col">L3</th>
+                  <th scope="col">L2</th>
+                  <th scope="col">L1</th>
                   <th scope="col">Net</th>
                   <th scope="col">Proc</th>
 
                   <th scope="col">C%</th>
-                  <th scope="col">L1</th>
-                  <th scope="col">L2</th>
-                  <th scope="col">L3</th>
                   <th scope="col">L4</th>
+                  <th scope="col">L3</th>
+                  <th scope="col">L2</th>
+                  <th scope="col">L1</th>
                   <th scope="col">A%</th>
                   <th scope="col">Net</th>
                   <th scope="col">Proc</th>
 
-                  <th scope="col">N</th>
-                  <th scope="col">P</th>
-                  <th scope="col">F</th>
-                  <th scope="col">S</th>
                   <th scope="col">D</th>
+                  <th scope="col">S</th>
+                  <th scope="col">F</th>
+                  <th scope="col">P</th>
+                  <th scope="col">N</th>
                 </tr>
               </thead>
               <tbody class="table-group-divider"> </tbody>
@@ -367,27 +367,27 @@ require 'inc/header.php';
                   <th colspan="5" class="text-center fs-6" style="background-color:#FBE6D3">Endgame</th>
                 </tr>
                 <tr>
-                  <th scope="col">L1</th>
-                  <th scope="col">L2</th>
-                  <th scope="col">L3</th>
                   <th scope="col">L4</th>
+                  <th scope="col">L3</th>
+                  <th scope="col">L2</th>
+                  <th scope="col">L1</th>
                   <th scope="col">Net</th>
                   <th scope="col">Proc</th>
 
                   <th scope="col">C%</th>
-                  <th scope="col">L1</th>
-                  <th scope="col">L2</th>
-                  <th scope="col">L3</th>
                   <th scope="col">L4</th>
+                  <th scope="col">L3</th>
+                  <th scope="col">L2</th>
+                  <th scope="col">L1</th>
                   <th scope="col">A%</th>
                   <th scope="col">Net</th>
                   <th scope="col">Proc</th>
 
-                  <th scope="col">N</th>
-                  <th scope="col">P</th>
-                  <th scope="col">F</th>
-                  <th scope="col">S</th>
                   <th scope="col">D</th>
+                  <th scope="col">S</th>
+                  <th scope="col">F</th>
+                  <th scope="col">P</th>
+                  <th scope="col">N</th>
                 </tr>
               </thead>
               <tbody class="table-group-divider"> </tbody>
@@ -432,27 +432,27 @@ require 'inc/header.php';
                   <th colspan="5" class="text-center fs-6" style="background-color:#FBE6D3">Endgame</th>
                 </tr>
                 <tr>
-                  <th scope="col">L1</th>
-                  <th scope="col">L2</th>
-                  <th scope="col">L3</th>
                   <th scope="col">L4</th>
+                  <th scope="col">L3</th>
+                  <th scope="col">L2</th>
+                  <th scope="col">L1</th>
                   <th scope="col">Net</th>
                   <th scope="col">Proc</th>
 
                   <th scope="col">C%</th>
-                  <th scope="col">L1</th>
-                  <th scope="col">L2</th>
-                  <th scope="col">L3</th>
                   <th scope="col">L4</th>
+                  <th scope="col">L3</th>
+                  <th scope="col">L2</th>
+                  <th scope="col">L1</th>
                   <th scope="col">A%</th>
                   <th scope="col">Net</th>
                   <th scope="col">Proc</th>
 
-                  <th scope="col">N</th>
-                  <th scope="col">P</th>
-                  <th scope="col">F</th>
-                  <th scope="col">S</th>
                   <th scope="col">D</th>
+                  <th scope="col">S</th>
+                  <th scope="col">F</th>
+                  <th scope="col">P</th>
+                  <th scope="col">N</th>
                 </tr>
               </thead>
               <tbody class="table-group-divider"> </tbody>
@@ -497,27 +497,27 @@ require 'inc/header.php';
                   <th colspan="5" class="text-center fs-6" style="background-color:#FBE6D3">Endgame</th>
                 </tr>
                 <tr>
-                  <th scope="col">L1</th>
-                  <th scope="col">L2</th>
-                  <th scope="col">L3</th>
                   <th scope="col">L4</th>
+                  <th scope="col">L3</th>
+                  <th scope="col">L2</th>
+                  <th scope="col">L1</th>
                   <th scope="col">Net</th>
                   <th scope="col">Proc</th>
 
                   <th scope="col">C%</th>
-                  <th scope="col">L1</th>
-                  <th scope="col">L2</th>
-                  <th scope="col">L3</th>
                   <th scope="col">L4</th>
+                  <th scope="col">L3</th>
+                  <th scope="col">L2</th>
+                  <th scope="col">L1</th>
                   <th scope="col">A%</th>
                   <th scope="col">Net</th>
                   <th scope="col">Proc</th>
 
-                  <th scope="col">N</th>
-                  <th scope="col">P</th>
-                  <th scope="col">F</th>
-                  <th scope="col">S</th>
                   <th scope="col">D</th>
+                  <th scope="col">S</th>
+                  <th scope="col">F</th>
+                  <th scope="col">P</th>
+                  <th scope="col">N</th>
                 </tr>
               </thead>
               <tbody class="table-group-divider"> </tbody>
@@ -734,74 +734,74 @@ require 'inc/header.php';
     tbodyRef.innerHTML = "";
     let row = "";
     if (rd != null) {
-      row += "<td>" + rd["avgAutonCoralL1"] + "</td>";
-      row += "<td>" + rd["avgAutonCoralL2"] + "</td>";
-      row += "<td>" + rd["avgAutonCoralL3"] + "</td>";
-      row += "<td>" + rd["avgAutonCoralL4"] + "</td>";
-      row += "<td>" + rd["avgAutonAlgaeNet"] + "</td>";
-      row += "<td>" + rd["avgAutonAlgaeProc"] + "</td>";
-      row += "<td>" + rd["teleopCoralScoringPercent"] + "</td>";
-      row += "<td>" + rd["avgTeleopCoralL1"] + "</td>";
-      row += "<td>" + rd["avgTeleopCoralL2"] + "</td>";
-      row += "<td>" + rd["avgTeleopCoralL3"] + "</td>";
-      row += "<td>" + rd["avgTeleopCoralL4"] + "</td>";
-      row += "<td>" + rd["teleopAlgaeScoringPercent"] + "</td>";
-      row += "<td>" + rd["avgTeleopAlgaeNet"] + "</td>";
-      row += "<td>" + rd["avgTeleopAlgaeProc"] + "</td>";
-      row += "<td>" + rd["endgameClimbPercent"][0] + "</td>";
-      row += "<td>" + rd["endgameClimbPercent"][1] + "</td>";
-      row += "<td>" + rd["endgameClimbPercent"][2] + "</td>";
-      row += "<td>" + rd["endgameClimbPercent"][3] + "</td>";
+      row += "<td>" + rd["autonCoralL4Avg"] + "</td>";
+      row += "<td>" + rd["autonCoralL3Avg"] + "</td>";
+      row += "<td>" + rd["autonCoralL2Avg"] + "</td>";
+      row += "<td>" + rd["autonCoralL1Avg"] + "</td>";
+      row += "<td>" + rd["autonAlgaeNetAvg"] + "</td>";
+      row += "<td>" + rd["autonAlgaeProcAvg"] + "</td>";
+      row += "<td>" + rd["teleopCoralPercent"] + "</td>";
+      row += "<td>" + rd["teleopCoralL1Avg"] + "</td>";
+      row += "<td>" + rd["teleopCoralL2Avg"] + "</td>";
+      row += "<td>" + rd["teleopCoralL3Avg"] + "</td>";
+      row += "<td>" + rd["teleopCoralL4Avg"] + "</td>";
+      row += "<td>" + rd["teleopAlgaePercent"] + "</td>";
+      row += "<td>" + rd["teleopAlgaeNetAvg"] + "</td>";
+      row += "<td>" + rd["teleopAlgaeProcAvg"] + "</td>";
       row += "<td>" + rd["endgameClimbPercent"][4] + "</td>";
+      row += "<td>" + rd["endgameClimbPercent"][3] + "</td>";
+      row += "<td>" + rd["endgameClimbPercent"][2] + "</td>";
+      row += "<td>" + rd["endgameClimbPercent"][1] + "</td>";
+      row += "<td>" + rd["endgameClimbPercent"][0] + "</td>";
     }
     tbodyRef.insertRow().innerHTML = row;
   }
 
   function updateMatchSummary(matchSpec, averageData) {
-    let avgTotalCoral = { "red": 0, "blue": 0 };
-    let avgTotalAlgae = { "red": 0, "blue": 0 };
+    let totalCoralAvg = { "red": 0, "blue": 0 };
+    let totalAlgaeAvg = { "red": 0, "blue": 0 };
     let avgAutoPoints = { "red": 0, "blue": 0 };
     let avgTeleopPoints = { "red": 0, "blue": 0 };
-    let avgEndgamePoints = { "red": 0, "blue": 0 };
+    let endgamePointsAvg = { "red": 0, "blue": 0 };
     let totalPredictedPoints = { "red": 0, "blue": 0 };
 
     for (let i in matchSpec.red) {
       teamNum = matchSpec.red[i];
       let rd = averageData[teamNum];
       if (rd != null) {
-        avgTotalCoral["red"] += rd["avgTotalCoral"];
-        avgTotalAlgae["red"] += rd["avgTotalAlgae"];
-        avgAutoPoints["red"] += rd["avgTotalAutoPoints"];
-        avgTeleopPoints["red"] += rd["avgTotalTeleopPoints"];
-        avgEndgamePoints["red"] += rd["avgEndgamePoints"];
-        totalPredictedPoints["red"] += rd["avgTotalPoints"];
+        totalCoralAvg["red"] += rd["totalCoralAvg"];
+        totalAlgaeAvg["red"] += rd["totalAlgaeAvg"];
+        avgAutoPoints["red"] += rd["autonPointsAvg"];
+        avgTeleopPoints["red"] += rd["teleopPointsAvg"];
+        endgamePointsAvg["red"] += rd["endgamePointsAvg"];
+        totalPredictedPoints["red"] += rd["totalPointsAvg"];
       }
     }
     for (let i in matchSpec.blue) {
       teamNum = matchSpec.blue[i];
       let rd = averageData[teamNum];
       if (rd != null) {
-        avgTotalCoral["blue"] += rd["avgTotalCoral"];
-        avgTotalAlgae["blue"] += rd["avgTotalAlgae"];
-        avgAutoPoints["blue"] += rd["avgTotalAutoPoints"];
-        avgTeleopPoints["blue"] += rd["avgTotalTeleopPoints"];
-        avgEndgamePoints["blue"] += rd["avgEndgamePoints"];
-        totalPredictedPoints["blue"] += rd["avgTotalPoints"];
+        totalCoralAvg["blue"] += rd["totalCoralAvg"];
+        totalAlgaeAvg["blue"] += rd["totalAlgaeAvg"];
+        avgAutoPoints["blue"] += rd["autonPointsAvg"];
+        avgTeleopPoints["blue"] += rd["teleopPointsAvg"];
+        endgamePointsAvg["blue"] += rd["endgamePointsAvg"];
+        totalPredictedPoints["blue"] += rd["totalPointsAvg"];
       }
     }
 
-    document.getElementById("redTotalCoral").innerText = roundTwoPlaces(avgTotalCoral["red"]);
-    document.getElementById("redTotalAlgae").innerText = roundTwoPlaces(avgTotalAlgae["red"]);
+    document.getElementById("redTotalCoral").innerText = roundTwoPlaces(totalCoralAvg["red"]);
+    document.getElementById("redTotalAlgae").innerText = roundTwoPlaces(totalAlgaeAvg["red"]);
     document.getElementById("redAvgAutoPoints").innerText = roundTwoPlaces(avgAutoPoints["red"]);
     document.getElementById("redAvgTeleopPoints").innerText = roundTwoPlaces(avgTeleopPoints["red"]);
-    document.getElementById("redAvgEndgamePoints").innerText = roundTwoPlaces(avgEndgamePoints["red"]);
+    document.getElementById("redAvgEndgamePoints").innerText = roundTwoPlaces(endgamePointsAvg["red"]);
     document.getElementById("redTotalPredictedPoints").innerText = roundTwoPlaces(totalPredictedPoints["red"]);
 
-    document.getElementById("blueTotalCoral").innerText = roundTwoPlaces(avgTotalCoral["blue"]);
-    document.getElementById("blueTotalAlgae").innerText = roundTwoPlaces(avgTotalAlgae["blue"]);
+    document.getElementById("blueTotalCoral").innerText = roundTwoPlaces(totalCoralAvg["blue"]);
+    document.getElementById("blueTotalAlgae").innerText = roundTwoPlaces(totalAlgaeAvg["blue"]);
     document.getElementById("blueAvgAutoPoints").innerText = roundTwoPlaces(avgAutoPoints["blue"]);
     document.getElementById("blueAvgTeleopPoints").innerText = roundTwoPlaces(avgTeleopPoints["blue"]);
-    document.getElementById("blueAvgEndgamePoints").innerText = roundTwoPlaces(avgEndgamePoints["blue"]);
+    document.getElementById("blueAvgEndgamePoints").innerText = roundTwoPlaces(endgamePointsAvg["blue"]);
     document.getElementById("blueTotalPredictedPoints").innerText = roundTwoPlaces(totalPredictedPoints["blue"]);
   }
 

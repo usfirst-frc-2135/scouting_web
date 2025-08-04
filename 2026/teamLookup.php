@@ -861,14 +861,14 @@ require 'inc/header.php';
     avgs["totalCoralPointsStr"] = "Coral Points";
     avgs["totalAlgaePointsStr"] = "Algae Points";
 
-    writeAverageTableRow("matchSheetTable", avgs, ["totalCoralStr", "avgTotalCoral", "maxTotalCoral"], 3);
-    writeAverageTableRow("matchSheetTable", avgs, ["totalAlgaeStr", "avgTotalAlgae", "maxTotalAlgae"], 3);
-    writeAverageTableRow("matchSheetTable", avgs, ["totalCoralPointsStr", "avgTotalCoralPoints", "maxTotalCoralPoints"], 3);
-    writeAverageTableRow("matchSheetTable", avgs, ["totalAlgaePointsStr", "avgTotalAlgaePoints", "maxTotalAlgaePoints"], 3);
+    writeAverageTableRow("matchSheetTable", avgs, ["totalCoralStr", "totalCoralAvg", "totalCoralMax"], 3);
+    writeAverageTableRow("matchSheetTable", avgs, ["totalAlgaeStr", "totalAlgaeAvg", "totalAlgaeMax"], 3);
+    writeAverageTableRow("matchSheetTable", avgs, ["totalCoralPointsStr", "totalCoralPointsAvg", "totalCoralPointsMax"], 3);
+    writeAverageTableRow("matchSheetTable", avgs, ["totalAlgaePointsStr", "totalAlgaePointsAvg", "totalAlgaePointsMax"], 3);
 
     avgs["totalMatchPointsStr"] = "Match Points";
-    avgs["avgTotalMatchPoints"] = roundTwoPlaces(avgs["avgTotalCoralPoints"] + avgs["avgTotalAlgaePoints"]);
-    avgs["maxTotalMatchPoints"] = roundTwoPlaces(avgs["maxTotalCoralPoints"] + avgs["maxTotalAlgaePoints"]);
+    avgs["avgTotalMatchPoints"] = roundTwoPlaces(avgs["totalCoralPointsAvg"] + avgs["totalAlgaePointsAvg"]);
+    avgs["maxTotalMatchPoints"] = roundTwoPlaces(avgs["totalCoralPointsMax"] + avgs["totalAlgaePointsMax"]);
     writeAverageTableRow("matchSheetTable", avgs, ["totalMatchPointsStr", "avgTotalMatchPoints", "maxTotalMatchPoints"], 3);
 
     //Auton Table  
@@ -878,11 +878,11 @@ require 'inc/header.php';
     avgs["autoncoralpointsStr"] = "Coral Points";
     avgs["autonalgaepointsStr"] = "Algae Points";
 
-    writeAverageTableRow("autonTable", avgs, ["autonpointsStr", "avgTotalAutoPoints", "maxTotalAutoPoints"], 3);
-    writeAverageTableRow("autonTable", avgs, ["autontotalcoralStr", "avgAutonCoral", "maxAutonCoral"], 3);
-    writeAverageTableRow("autonTable", avgs, ["autontotalalgaeStr", "avgAutonAlgae", "maxAutonAlgae"], 3);
-    writeAverageTableRow("autonTable", avgs, ["autoncoralpointsStr", "avgTotalAutoCoralPoints", "maxTotalAutoCoralPoints"], 3);
-    writeAverageTableRow("autonTable", avgs, ["autonalgaepointsStr", "avgTotalAutoAlgaePoints", "maxTotalAutoAlgaePoints"], 3);
+    writeAverageTableRow("autonTable", avgs, ["autonpointsStr", "autonPointsAvg", "autonPointsMax"], 3);
+    writeAverageTableRow("autonTable", avgs, ["autontotalcoralStr", "autonCoralAvg", "autonCoralMax"], 3);
+    writeAverageTableRow("autonTable", avgs, ["autontotalalgaeStr", "autonAlgaeAvg", "autonAlgaeMax"], 3);
+    writeAverageTableRow("autonTable", avgs, ["autoncoralpointsStr", "autonCoralPointsAvg", "autonCoralPointsMax"], 3);
+    writeAverageTableRow("autonTable", avgs, ["autonalgaepointsStr", "autonAlgaePointsAvg", "autonAlgaePointsMax"], 3);
 
     // Teleop Table
 
@@ -894,19 +894,19 @@ require 'inc/header.php';
     avgs["teleopcoralaccuracyStr"] = "Coral Acc%";
     avgs["teleopalgaeaccuracysStr"] = "Algae Acc%";
 
-    writeAverageTableRow("teleopTable", avgs, ["teleoppointsStr", "avgTotalTeleopPoints", "maxTotalTeleopPoints"], 3);
-    writeAverageTableRow("teleopTable", avgs, ["teleoptotalcoralStr", "avgTeleopCoralScored", "maxTeleopCoralScored"], 3);
-    writeAverageTableRow("teleopTable", avgs, ["teleoptotalalgaeStr", "avgTeleopAlgaeScored", "maxTeleopAlgaeScored"], 3);
-    writeAverageTableRow("teleopTable", avgs, ["teleopcoralpointsStr", "avgTotalTeleopCoralPoints", "maxTotalTeleopCoralPoints"], 3);
-    writeAverageTableRow("teleopTable", avgs, ["teleopalgaepointsStr", "avgTotalTeleopAlgaePoints", "maxTotalTeleopAlgaePoints"], 3);
-    writeAverageTableRow("teleopTable", avgs, ["teleopcoralaccuracyStr", "teleopCoralScoringPercent"], 3);
-    writeAverageTableRow("teleopTable", avgs, ["teleopalgaeaccuracysStr", "teleopAlgaeScoringPercent"], 3);
+    writeAverageTableRow("teleopTable", avgs, ["teleoppointsStr", "teleopPointsAvg", "teleopPointsMax"], 3);
+    writeAverageTableRow("teleopTable", avgs, ["teleoptotalcoralStr", "teleopCoralAvg", "teleopCoralMax"], 3);
+    writeAverageTableRow("teleopTable", avgs, ["teleoptotalalgaeStr", "teleopAlgaeAvg", "teleopAlgaeMax"], 3);
+    writeAverageTableRow("teleopTable", avgs, ["teleopcoralpointsStr", "teleopCoralPointsAvg", "teleopCoralPointsMax"], 3);
+    writeAverageTableRow("teleopTable", avgs, ["teleopalgaepointsStr", "teleopAlgaePointsAvg", "teleopAlgaePointsMax"], 3);
+    writeAverageTableRow("teleopTable", avgs, ["teleopcoralaccuracyStr", "teleopCoralPercent"], 3);
+    writeAverageTableRow("teleopTable", avgs, ["teleopalgaeaccuracysStr", "teleopAlgaePercent"], 3);
 
     /////// Endgame Table
     avgs["totalEndGamePointsStr"] = "Endgame Points";
     avgs["endgameClimbPercent"]["endgameclimbStr"] = "Cage Climb %";
 
-    writeAverageTableRow("endgameTotalPtsTable", avgs, ["totalEndGamePointsStr", "avgEndgamePoints", "maxEndgamePoints"], 3);
+    writeAverageTableRow("endgameTotalPtsTable", avgs, ["totalEndGamePointsStr", "endgamePointsAvg", "endgamePointsMax"], 3);
     writeAverageTableRow("endgameClimbTable", avgs["endgameClimbPercent"], ["endgameclimbStr", 0, 2, 1, 3, 4], 6);
   }
 

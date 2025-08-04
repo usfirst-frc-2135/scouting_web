@@ -102,10 +102,10 @@ require 'inc/header.php';
           <thead>
             <tr>
               <th colspan="1" style="background-color:transparent"></th>
-              <th colspan="6" style="background-color:#83b4ff">Totals</th>
-              <th colspan="6" style="background-color:#d5e6de">Auton Pts</th>
-              <th colspan="6" style="background-color:#d6f3fB">Teleop Pts</th>
-              <th colspan="2" style="background-color:#fbe6d3">Endgame</th>
+              <th colspan="8" style="background-color:#83b4ff">Points</th>
+              <th colspan="4" style="background-color:#d5e6de">Auton</th>
+              <th colspan="4" style="background-color:#d6f3fB">Teleop</th>
+              <th colspan="4" style="background-color:#83b4ff">Game pieces</th>
               <th colspan="10" style="background-color:#d5e6de">Auton Coral</th>
               <th colspan="6" style="background-color:#d5e6de">Auton Algae</th>
               <th colspan="11" style="background-color:#d6f3fB">Teleop Coral</th>
@@ -114,38 +114,85 @@ require 'inc/header.php';
               <th colspan="1" style="background-color:transparent"></th>
             </tr>
             <tr>
+              <!-- team number -->
               <th colspan="1" style="background-color:transparent"></th>
-              <th colspan="2" style="background-color:#83b4ff">Points</th>
-              <th colspan="2" style="background-color:transparent">Coral Pts</th>
-              <th colspan="2" style="background-color:#83b4ff">Algae Pts</th>
-              <th colspan="2" style="background-color:transparent">Points</th>
+
+              <!-- points by game phase -->
+              <th colspan="2" style="background-color:#83b4ff">Total Pts</th>
+              <th colspan="2" style="background-color:transparent">Auton Pts</th>
+              <th colspan="2" style="background-color:#83b4ff">Teleop Pts</th>
+              <th colspan="2" style="background-color:transparent">Endgame Pts</th>
+
+              <!-- points by game piece -->
               <th colspan="2" style="background-color:#83b4ff">Coral Pts</th>
               <th colspan="2" style="background-color:transparent">Algae Pts</th>
-              <th colspan="2" style="background-color:#83b4ff">Points</th>
-              <th colspan="2" style="background-color:transparent">Coral Pts</th>
-              <th colspan="2" style="background-color:#83b4ff">Algae Pts</th>
-              <th colspan="2" style="background-color:transparent">Points</th>
+              <th colspan="2" style="background-color:#83b4ff">Coral Pts</th>
+              <th colspan="2" style="background-color:transparent">Algae Pts</th>
+
+              <th colspan="2" style="background-color:#83b4ff">Total Coral</th>
+              <th colspan="2" style="background-color:transparent">Total Algae</th>
+
+              <!-- auton coral -->
               <th colspan="2" style="background-color:#83b4ff">Total</th>
-              <th colspan="2" style="background-color:transparent">L1</th>
-              <th colspan="2" style="background-color:#83b4ff">L2</th>
-              <th colspan="2" style="background-color:transparent">L3</th>
-              <th colspan="2" style="background-color:#83b4ff">L4</th>
+              <th colspan="2" style="background-color:transparent">L4</th>
+              <th colspan="2" style="background-color:#83b4ff">L3</th>
+              <th colspan="2" style="background-color:transparent">L2</th>
+              <th colspan="2" style="background-color:#83b4ff">L1</th>
+
+              <!-- auton algae -->
               <th colspan="2" style="background-color:transparent">Total</th>
-              <th colspan="2" style="background-color:#83b4ff">Net</th>
-              <th colspan="2" style="background-color:transparent">Proc</th>
+              <th colspan="2" style="background-color:#83b4ff">Proc</th>
+              <th colspan="2" style="background-color:transparent">Net</th>
+
+              <!-- teleop coral -->
               <th colspan="3" style="background-color:#83b4ff">Total</th>
-              <th colspan="2" style="background-color:transparent">L1</th>
-              <th colspan="2" style="background-color:#83b4ff">L2</th>
-              <th colspan="2" style="background-color:transparent">L3</th>
-              <th colspan="2" style="background-color:#83b4ff">L4</th>
+              <th colspan="2" style="background-color:transparent">L4</th>
+              <th colspan="2" style="background-color:#83b4ff">L3</th>
+              <th colspan="2" style="background-color:transparent">L2</th>
+              <th colspan="2" style="background-color:#83b4ff">L1</th>
+
+              <!-- teleop algae -->
               <th colspan="3" style="background-color:transparent">Total</th>
-              <th colspan="2" style="background-color:#83b4ff">Net</th>
-              <th colspan="2" style="background-color:transparent">Proc</th>
+              <th colspan="2" style="background-color:#83b4ff">Proc</th>
+              <th colspan="2" style="background-color:transparent">Net</th>
+
+              <!-- endgame -->
               <th colspan="5" style="background-color:#83b4ff">Climb%</th>
+
+              <!-- died -->
               <th colspan="1" style="background-color:transparent">Died</th>
             </tr>
             <tr>
+              <!-- team number -->
               <th scope="col" class="sorttable_numeric" style="background-color:transparent">Team</th>
+
+              <!-- points by game phase -->
+              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
+
+              <!-- points by game piece -->
+              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
+
+              <!-- total game pieces -->
+              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
+
+              <!-- auton coral -->
               <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
               <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
               <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
@@ -156,32 +203,16 @@ require 'inc/header.php';
               <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
               <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
               <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
+
+              <!-- auton algae -->
               <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
               <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
               <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
               <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
               <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
               <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
+
+              <!-- teleop coral -->
               <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Acc%</th>
               <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
               <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
@@ -193,6 +224,8 @@ require 'inc/header.php';
               <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
               <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
               <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
+
+              <!-- telop algae -->
               <th scope="col" class="sorttable_numeric" style="background-color:transparent">Acc%</th>
               <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
               <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
@@ -201,11 +234,14 @@ require 'inc/header.php';
               <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
               <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
 
+              <!-- endgame -->
               <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">N</th>
               <th scope="col" class="sorttable_numeric" style="background-color:transparent">P</th>
               <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">F</th>
               <th scope="col" class="sorttable_numeric" style="background-color:transparent">S</th>
               <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">D</th>
+
+              <!-- died -->
               <th scope="col" class="sorttable_numeric" style="background-color:transparent">#</th>
             </tr>
 
@@ -248,64 +284,76 @@ require 'inc/header.php';
       const tdPrefix = "<td style=\"background-color:transparent\">";
       let rowString = "";
       rowString += tdPrefix + "<a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a></td>";
-      //rowString += tdPrefix + getDataValue(tbaData[teamNum], "totalPoints") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "avgTotalPoints") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "maxTotalPoints") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "avgTotalCoral") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "maxTotalCoral") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "avgTotalAlgae") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "maxTotalAlgae") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "avgTotalAutoPoints") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "maxTotalAutoPoints") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "avgTotalAutoCoralPoints") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "maxTotalAutoCoralPoints") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "avgTotalAutoAlgaePoints") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "maxTotalAutoAlgaePoints") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "avgTotalTeleopPoints") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "maxTotalTeleopPoints") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "avgTotalTeleopCoralPoints") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "maxTotalTeleopCoralPoints") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "avgTotalTeleopAlgaePoints") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "maxTotalTeleopAlgaePoints") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "avgEndgamePoints") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "maxEndgamePoints") + "</td>";
 
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "avgAutonCoral") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "maxAutonCoral") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "avgAutonCoralL1") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "maxAutonCoralL1") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "avgAutonCoralL2") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "maxAutonCoralL2") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "avgAutonCoralL3") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "maxAutonCoralL3") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "avgAutonCoralL4") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "maxAutonCoralL4") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "avgAutonAlgae") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "maxAutonAlgae") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "avgAutonAlgaeNet") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "maxAutonAlgaeNet") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "avgAutonAlgaeProc") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "maxAutonAlgaeProc") + "</td>";
+      // points by game phase
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "totalPointsAvg") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "totalPointsMax") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "autonPointsAvg") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "autonPointsMax") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopPointsAvg") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopPointsMax") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "endgamePointsAvg") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "endgamePointsMax") + "</td>";
 
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopCoralScoringPercent") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "avgTeleopCoralScored") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "maxTeleopCoralScored") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "avgTeleopCoralL1") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "maxTeleopCoralL1") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "avgTeleopCoralL2") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "maxTeleopCoralL2") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "avgTeleopCoralL3") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "maxTeleopCoralL3") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "avgTeleopCoralL4") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "maxTeleopCoralL4") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopAlgaeScoringPercent") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "avgTeleopAlgaeScored") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "maxTeleopAlgaeScored") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "avgTeleopAlgaeNet") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "maxTeleopAlgaeNet") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "avgTeleopAlgaeProc") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "maxTeleopAlgaeProc") + "</td>";
+      // points by game piece
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "autonCoralPointsAvg") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "autonCoralPointsMax") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "autonAlgaePointsAvg") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "autonAlgaePointsMax") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopCoralPointsAvg") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopCoralPointsMax") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopAlgaePointsAvg") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopAlgaePointsMax") + "</td>";
 
+      // total game pieces
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "totalCoralAvg") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "totalCoralMax") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "totalAlgaeAvg") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "totalAlgaeMax") + "</td>";
+
+      // auton coral
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "autonCoralAvg") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "autonCoralMax") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "autonCoralL4Avg") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "autonCoralL4Max") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "autonCoralL3Avg") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "autonCoralL3Max") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "autonCoralL2Avg") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "autonCoralL2Max") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "autonCoralL1Avg") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "autonCoralL1Max") + "</td>";
+
+      // auton algae
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "autonAlgaeAvg") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "autonAlgaeMax") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "autonAlgaeProcAvg") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "autonAlgaeProcMax") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "autonAlgaeNetAvg") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "autonAlgaeNetMax") + "</td>";
+
+      // teleop coral
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopCoralPercent") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopCoralAvg") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopCoralMax") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopCoralL4Avg") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopCoralL4Max") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopCoralL3Avg") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopCoralL3Max") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopCoralL2Avg") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopCoralL2Max") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopCoralL1Avg") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopCoralL1Max") + "</td>";
+
+      // teleop algae
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopAlgaePercent") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopAlgaeAvg") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopAlgaeMax") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopAlgaeProcAvg") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopAlgaeProcMax") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopAlgaeNetAvg") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopAlgaeNetMax") + "</td>";
+
+      // endgame
       rowString += tdPrefix + getDataValue(endgameClimbPercentage, 0) + "</td>";
       rowString += tdPrefix + getDataValue(endgameClimbPercentage, 1) + "</td>";
       rowString += tdPrefix + getDataValue(endgameClimbPercentage, 2) + "</td>";
@@ -353,59 +401,72 @@ require 'inc/header.php';
 
     csvLine += pitLocation + ",";
     csvLine += oprTP + ",";
-    csvLine += lookupAverage(evtAvgs, team, "avgTotalPoints") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "maxTotalPoints") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "avgTotalAutoPoints") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "maxTotalAutoPoints") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "avgTotalTeleopPoints") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "maxTotalTeleopPoints") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "avgEndgamePoints") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "maxEndgamePoints") + ",";
 
-    csvLine += lookupAverage(evtAvgs, team, "avgTotalCoral") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "maxTotalCoral") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "avgTotalAlgae") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "maxTotalAlgae") + ",";
+    // points
+    csvLine += lookupAverage(evtAvgs, team, "totalPointsAvg") + ",";
+    csvLine += lookupAverage(evtAvgs, team, "totalPointsMax") + ",";
+    csvLine += lookupAverage(evtAvgs, team, "autonPointsAvg") + ",";
+    csvLine += lookupAverage(evtAvgs, team, "autonPointsMax") + ",";
+    csvLine += lookupAverage(evtAvgs, team, "teleopPointsAvg") + ",";
+    csvLine += lookupAverage(evtAvgs, team, "teleopPointsMax") + ",";
+    csvLine += lookupAverage(evtAvgs, team, "endgamePointsAvg") + ",";
+    csvLine += lookupAverage(evtAvgs, team, "endgamePointsMax") + ",";
 
-    csvLine += lookupAverage(evtAvgs, team, "avgAutonCoral") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "maxAutonCoral") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "avgAutonCoralL1") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "maxAutonCoralL1") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "avgAutonCoralL2") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "maxAutonCoralL2") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "avgAutonCoralL3") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "maxAutonCoralL3") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "avgAutonCoralL4") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "maxAutonCoralL4") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "avgAutonAlgae") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "maxAutonAlgae") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "avgAutonAlgaeNet") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "maxAutonAlgaeNet") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "avgAutonAlgaeProc") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "maxAutonAlgaeProc") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "avgTeleopCoralScored") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "maxTeleopCoralScored") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "avgTeleopCoralL1") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "maxTeleopCoralL1") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "avgTeleopCoralL2") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "maxTeleopCoralL2") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "avgTeleopCoralL3") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "maxTeleopCoralL3") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "avgTeleopCoralL4") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "maxTeleopCoralL4") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "teleopCoralScoringPercent") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "avgTeleopAlgaeScored") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "maxTeleopAlgaeScored") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "avgTeleopAlgaeNet") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "maxTeleopAlgaeNet") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "avgTeleopAlgaeProc") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "maxTeleopAlgaeProc") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "teleopAlgaeScoringPercent") + ",";
+    // auton coral
+    csvLine += lookupAverage(evtAvgs, team, "autonCoralAvg") + ",";
+    csvLine += lookupAverage(evtAvgs, team, "autonCoralMax") + ",";
+    csvLine += lookupAverage(evtAvgs, team, "autonCoralL4Avg") + ",";
+    csvLine += lookupAverage(evtAvgs, team, "autonCoralL4Max") + ",";
+    csvLine += lookupAverage(evtAvgs, team, "autonCoralL3Avg") + ",";
+    csvLine += lookupAverage(evtAvgs, team, "autonCoralL3Max") + ",";
+    csvLine += lookupAverage(evtAvgs, team, "autonCoralL2Avg") + ",";
+    csvLine += lookupAverage(evtAvgs, team, "autonCoralL2Max") + ",";
+    csvLine += lookupAverage(evtAvgs, team, "autonCoralL1Avg") + ",";
+    csvLine += lookupAverage(evtAvgs, team, "autonCoralL1Max") + ",";
+
+    // total game pieces
+    csvLine += lookupAverage(evtAvgs, team, "totalCoralAvg") + ",";
+    csvLine += lookupAverage(evtAvgs, team, "totalCoralMax") + ",";
+    csvLine += lookupAverage(evtAvgs, team, "totalAlgaeAvg") + ",";
+    csvLine += lookupAverage(evtAvgs, team, "totalAlgaeMax") + ",";
+
+    // auton algae
+    csvLine += lookupAverage(evtAvgs, team, "autonAlgaeAvg") + ",";
+    csvLine += lookupAverage(evtAvgs, team, "autonAlgaeMax") + ",";
+    csvLine += lookupAverage(evtAvgs, team, "autonAlgaeProcAvg") + ",";
+    csvLine += lookupAverage(evtAvgs, team, "autonAlgaeProcMax") + ",";
+    csvLine += lookupAverage(evtAvgs, team, "autonAlgaeNetAvg") + ",";
+    csvLine += lookupAverage(evtAvgs, team, "autonAlgaeNetMax") + ",";
+
+    // teleop coral
+    csvLine += lookupAverage(evtAvgs, team, "teleopCoralPercent") + ",";
+    csvLine += lookupAverage(evtAvgs, team, "teleopCoralAvg") + ",";
+    csvLine += lookupAverage(evtAvgs, team, "teleopCoralMax") + ",";
+    csvLine += lookupAverage(evtAvgs, team, "teleopCoralL4Avg") + ",";
+    csvLine += lookupAverage(evtAvgs, team, "teleopCoralL4Max") + ",";
+    csvLine += lookupAverage(evtAvgs, team, "teleopCoralL3Avg") + ",";
+    csvLine += lookupAverage(evtAvgs, team, "teleopCoralL3Max") + ",";
+    csvLine += lookupAverage(evtAvgs, team, "teleopCoralL2Avg") + ",";
+    csvLine += lookupAverage(evtAvgs, team, "teleopCoralL2Max") + ",";
+    csvLine += lookupAverage(evtAvgs, team, "teleopCoralL1Avg") + ",";
+    csvLine += lookupAverage(evtAvgs, team, "teleopCoralL1Max") + ",";
+
+    // auton algae
+    csvLine += lookupAverage(evtAvgs, team, "teleopAlgaePercent") + ",";
+    csvLine += lookupAverage(evtAvgs, team, "teleopAlgaeAvg") + ",";
+    csvLine += lookupAverage(evtAvgs, team, "teleopAlgaeMax") + ",";
+    csvLine += lookupAverage(evtAvgs, team, "teleopAlgaeProcAvg") + ",";
+    csvLine += lookupAverage(evtAvgs, team, "teleopAlgaeProcMax") + ",";
+    csvLine += lookupAverage(evtAvgs, team, "teleopAlgaeNetAvg") + ",";
+    csvLine += lookupAverage(evtAvgs, team, "teleopAlgaeNetMax") + ",";
+
+    // endgame
     csvLine += getDataValue(endgameClimbPercent, 0) + ",";
     csvLine += getDataValue(endgameClimbPercent, 1) + ",";
     csvLine += getDataValue(endgameClimbPercent, 2) + ",";
     csvLine += getDataValue(endgameClimbPercent, 3) + ",";
     csvLine += getDataValue(endgameClimbPercent, 4) + ",";
+
     csvLine += lookupAverage(evtAvgs, team, "totaldied") + ",";
     csvLine += "-\n";    // NOTE
     return csvLine;
@@ -419,6 +480,7 @@ require 'inc/header.php';
     let mdp = new matchDataProcessor(matchData);
     mdp.getSiteFilteredAverages(function (filteredMatchData, filteredAvgData) {
       for (let key in filteredAvgData) {
+        // console.log(key);
         csvStr += createCSVLine(key, filteredAvgData, coprs);  // key is team number
       }
 
