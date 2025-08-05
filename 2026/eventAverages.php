@@ -412,6 +412,22 @@ require 'inc/header.php';
     csvLine += lookupAverage(evtAvgs, team, "endgamePointsAvg") + ",";
     csvLine += lookupAverage(evtAvgs, team, "endgamePointsMax") + ",";
 
+    // points by game piece
+    csvLine += lookupAverage(evtAvgs, team, "autonCoralPointsAvg") + ",";
+    csvLine += lookupAverage(evtAvgs, team, "autonCoralPointsMax") + ",";
+    csvLine += lookupAverage(evtAvgs, team, "autonAlgaePointsAvg") + ",";
+    csvLine += lookupAverage(evtAvgs, team, "autonAlgaePointsMax") + ",";
+    csvLine += lookupAverage(evtAvgs, team, "teleopCoralPointsAvg") + ",";
+    csvLine += lookupAverage(evtAvgs, team, "teleopCoralPointsMax") + ",";
+    csvLine += lookupAverage(evtAvgs, team, "teleopAlgaePointsAvg") + ",";
+    csvLine += lookupAverage(evtAvgs, team, "teleopAlgaePointsMax") + ",";
+
+    // total game pieces
+    csvLine += lookupAverage(evtAvgs, team, "totalCoralAvg") + ",";
+    csvLine += lookupAverage(evtAvgs, team, "totalCoralMax") + ",";
+    csvLine += lookupAverage(evtAvgs, team, "totalAlgaeAvg") + ",";
+    csvLine += lookupAverage(evtAvgs, team, "totalAlgaeMax") + ",";
+
     // auton coral
     csvLine += lookupAverage(evtAvgs, team, "autonCoralAvg") + ",";
     csvLine += lookupAverage(evtAvgs, team, "autonCoralMax") + ",";
@@ -423,12 +439,6 @@ require 'inc/header.php';
     csvLine += lookupAverage(evtAvgs, team, "autonCoralL2Max") + ",";
     csvLine += lookupAverage(evtAvgs, team, "autonCoralL1Avg") + ",";
     csvLine += lookupAverage(evtAvgs, team, "autonCoralL1Max") + ",";
-
-    // total game pieces
-    csvLine += lookupAverage(evtAvgs, team, "totalCoralAvg") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "totalCoralMax") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "totalAlgaeAvg") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "totalAlgaeMax") + ",";
 
     // auton algae
     csvLine += lookupAverage(evtAvgs, team, "autonAlgaeAvg") + ",";
@@ -475,7 +485,16 @@ require 'inc/header.php';
   // Merge data into CSV file and write it
   function createCSVFile(csvName, matchData, coprs) {
     console.log("==> eventAverages: createCSVFile()");
-    let csvStr = "Team,Pit Location,OPR,Total Coral Avg,Total Coral Max,Total Algae Avg,Total Algae Max,Auto Pts Avg,Auto Pts Max,Tel Pts Avg,Tel Pts Max,End Pts Avg,End Pts Max,Total Pts Avg,Total Pts Max,Auto Coral Avg,Auto Coral Max,Auto L1 Avg,Auto L1 Max,Auto L2 Avg,Auto L2 Max,Auto L3 Avg,Auto L3 Max,Auto L4 Avg,Auto L4 Max,Auto Algae Avg,Auto Algae Max,Auto Net Avg,Auto Net Max,Auto Proc Avg,Auto Proc Max,Tel Coral Avg,Tel Coral Max,Tel L1 Avg,Tel L1 Max,Tel L2 Avg,Tel L2 Max,Tel L3 Avg,Tel L3 Max,Tel L4 Avg,Tel L4 Max,Tel Coral Acc,Tel Algae Avg,Tel Algae Max,Tel Net Avg,Tel Net Max,Tel Proc Avg,Tel Proc Max,Tel Algae Acc,End N/A,End Park,End Fall,End Shal,End Deep, Total Died, Note\n";
+    let csvStr = "Team,Pit Location,OPR," +
+      "Total Pts Avg,Total Pts Max,Auto Pts Avg,Auto Pts Max,Tel Pts Avg,Tel Pts Max,End Pts Avg,End Pts Max," +
+      "Auton Coral Pts Avg,Total Coral Pts Max,Auto Algae Pts Avg,Auto Algae Pts Max,Tel Coral Pts Avg,Tel Coral Pts Max,Tel Algae Pts Avg,Tel Algae Pts Max," +
+      "Total Coral Avg,Total Coral Max,Total Algae Avg,Total Algae Max," +
+      "Auto Coral Avg,Auto Coral Max,Auto L4 Avg,Auto L4 Max,Auto L3 Avg,Auto L3 Max,Auto L2 Avg,Auto L2 Max,Auto L1 Avg,Auto L1 Max," +
+      "Auto Algae Avg,Auto Algae Max,Auto Proc Avg,Auto Proc Max,Auto Net Avg,Auto Net Max," +
+      "Tel Coral Acc,Tel Coral Avg,Tel Coral Max,Tel L4 Avg,Tel L4 Max,Tel L3 Avg,Tel L3 Max,Tel L2 Avg,Tel L2 Max,Tel L1 Avg,Tel L1 Max," +
+      "Tel Algae Acc,Tel Algae Avg,Tel Algae Max,Tel Proc Avg,Tel Proc Max,Tel Net Avg,Tel Net Max," +
+      "End N/A,End Park,End Fall,End Shal,End Deep," +
+      "Total Died, Note\n";
 
     let mdp = new matchDataProcessor(matchData);
     mdp.getSiteFilteredAverages(function (filteredMatchData, filteredAvgData) {
