@@ -165,6 +165,110 @@ class matchDataProcessor {
         pdata[tn] = {};
         // No need to initialize individual data fields here -- just the match index
         pdata[tn]["totalmatches"] = 0;
+
+        pdata[tn]["totalPointsAvg"] = 0;
+        pdata[tn]["totalPointsMax"] = 0;
+        pdata[tn]["autonPointsAvg"] = 0;
+        pdata[tn]["autonPointsMax"] = 0;
+        pdata[tn]["teleopPointsAvg"] = 0;
+        pdata[tn]["teleopPointsMax"] = 0;
+        pdata[tn]["endgamePointsAvg"] = 0;
+        pdata[tn]["endgamePointsMax"] = 0;
+
+        // points by game piece
+        pdata[tn]["totalCoralPointsAvg"] = 0;
+        pdata[tn]["totalCoralPointsMax"] = 0;
+        pdata[tn]["totalAlgaePointsAvg"] = 0;
+        pdata[tn]["totalAlgaePointsMax"] = 0;
+
+        pdata[tn]["autonCoralPointsAvg"] = 0;
+        pdata[tn]["autonCoralPointsMax"] = 0;
+        pdata[tn]["autonAlgaePointsAvg"] = 0;
+        pdata[tn]["autonAlgaePointsMax"] = 0;
+        pdata[tn]["teleopCoralPointsAvg"] = 0;
+        pdata[tn]["teleopCoralPointsMax"] = 0;
+        pdata[tn]["teleopAlgaePointsAvg"] = 0;
+        pdata[tn]["teleopAlgaePointsMax"] = 0;
+
+        // total game pieces
+        pdata[tn]["totalCoralAvg"] = 0;
+        pdata[tn]["totalCoralMax"] = 0;
+        pdata[tn]["totalAlgaeAvg"] = 0;
+        pdata[tn]["totalAlgaeMax"] = 0;
+
+        // reef face
+        pdata[tn]["reefzoneABpercent"] = 0;
+        pdata[tn]["reefzoneCDpercent"] = 0;
+        pdata[tn]["reefzoneEFpercent"] = 0;
+        pdata[tn]["reefzoneGHpercent"] = 0;
+        pdata[tn]["reefzoneIJpercent"] = 0;
+        pdata[tn]["reefzoneKLpercent"] = 0;
+
+        // auton coral
+        pdata[tn]["autonCoralAvg"] = 0;
+        pdata[tn]["autonCoralMax"] = 0;
+        pdata[tn]["autonCoralL4Avg"] = 0;
+        pdata[tn]["autonCoralL4Max"] = 0;
+        pdata[tn]["autonCoralL3Avg"] = 0;
+        pdata[tn]["autonCoralL3Max"] = 0;
+        pdata[tn]["autonCoralL2Avg"] = 0;
+        pdata[tn]["autonCoralL2Max"] = 0;
+        pdata[tn]["autonCoralL1Avg"] = 0;
+        pdata[tn]["autonCoralL1Max"] = 0;
+
+        pdata[tn]["autonCoralPickupFloor"] = 0;
+        pdata[tn]["autonCoralPickupStation"] = 0;
+        pdata[tn]["autonStartPositionPercent"] = { 0: 0, 1: 0, 2: 0 };
+
+        // auton algae
+        pdata[tn]["autonAlgaeAvg"] = 0;
+        pdata[tn]["autonAlgaeMax"] = 0;
+        pdata[tn]["autonAlgaeProcAvg"] = 0;
+        pdata[tn]["autonAlgaeProcMax"] = 0;
+        pdata[tn]["autonAlgaeNetAvg"] = 0;
+        pdata[tn]["autonAlgaeNetMax"] = 0;
+
+        pdata[tn]["autonAlgaePickupFloor"] = 0;
+        pdata[tn]["autonAlgaePickupReef"] = 0;
+
+        // teleop coral
+        pdata[tn]["teleopCoralPercent"] = 0;
+        pdata[tn]["teleopCoralAvg"] = 0;
+        pdata[tn]["teleopCoralMax"] = 0;
+        pdata[tn]["teleopCoralL4Avg"] = 0;
+        pdata[tn]["teleopCoralL4Max"] = 0;
+        pdata[tn]["teleopCoralL3Avg"] = 0;
+        pdata[tn]["teleopCoralL3Max"] = 0;
+        pdata[tn]["teleopCoralL2Avg"] = 0;
+        pdata[tn]["teleopCoralL2Max"] = 0;
+        pdata[tn]["teleopCoralL1Avg"] = 0;
+        pdata[tn]["teleopCoralL1Max"] = 0;
+
+        pdata[tn]["teleopAcquireCoral"] = 0;    // for calculating shooting percentage
+        pdata[tn]["teleopCoralFloorPickup"] = 0;
+
+        // teleop algae
+        pdata[tn]["teleopAlgaePercent"] = 0;
+        pdata[tn]["teleopAlgaeAvg"] = 0;
+        pdata[tn]["teleopAlgaeMax"] = 0;
+        pdata[tn]["teleopAlgaeProcAvg"] = 0;
+        pdata[tn]["teleopAlgaeProcMax"] = 0;
+        pdata[tn]["teleopAlgaeNetAvg"] = 0;
+        pdata[tn]["teleopAlgaeNetMax"] = 0;
+
+        pdata[tn]["teleopAcquireAlgae"] = 0;   // for calculating shooting percentage
+        pdata[tn]["teleopAlgaeFloorPickup"] = 0;
+        pdata[tn]["teleopKnockOffAlgae"] = 0;
+        pdata[tn]["teleopAcquireAlgaeFromReef"] = 0;
+        pdata[tn]["teleopHoldTwoGamePieces"] = 0;
+
+        // endgame
+        pdata[tn]["endgameClimbPercent"] = { 0: 0, 1: 0, 2: 0, 3: 0, 4: 0 };
+        pdata[tn]["endgameStartClimbingPercent"] = { 0: 0, 1: 0, 2: 0, 3: 0 };
+
+        pdata[tn]["totaldied"] = 0;
+        pdata[tn]["scoutnames"] = [];
+        pdata[tn]["commentlist"] = [];
       }
       // HOLD      console.log("  -> for match = "+ this.mData[i]["matchnumber"]); // TEST
 
