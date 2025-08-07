@@ -316,7 +316,7 @@ class tbaHandler
     $teamList = $this->getEventTeamsEx($eventCode);
 
     $teamLookup = $this->teamListToLookup($teamList);
-    $TLCount = sizeof($teamLookup);  //TEST
+    $TLCount = sizeof($teamLookup);  // TEST
     // error_log(" ===> teamLookup size = $TLCount");
 
     $teamCount = sizeof($teamList);

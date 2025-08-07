@@ -485,6 +485,7 @@ require 'inc/header.php';
   // Merge data into CSV file and write it
   function createCSVFile(csvName, matchData, coprs) {
     console.log("==> eventAverages: createCSVFile()");
+    // This CSV header must match the order in createCSVLine!
     let csvStr = "Team,Pit Location,OPR," +
       "Total Pts Avg,Total Pts Max,Auto Pts Avg,Auto Pts Max,Tel Pts Avg,Tel Pts Max,End Pts Avg,End Pts Max," +
       "Auton Coral Pts Avg,Total Coral Pts Max,Auto Algae Pts Avg,Auto Algae Pts Max,Tel Coral Pts Avg,Tel Coral Pts Max,Tel Algae Pts Avg,Tel Algae Pts Max," +
