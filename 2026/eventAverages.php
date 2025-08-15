@@ -306,14 +306,14 @@ require 'inc/header.php';
       rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopAlgaePointsMax") + "</td>";
 
       // total game pieces
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "totalCoralAvg") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "totalCoralMax") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "totalAlgaeAvg") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "totalAlgaeMax") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "totalCoralScoredAvg") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "totalCoralScoredMax") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "totalAlgaeScoredAvg") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "totalAlgaeScoredMax") + "</td>";
 
       // auton coral
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "autonCoralAvg") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "autonCoralMax") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "autonCoralScoredAvg") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "autonCoralScoredMax") + "</td>";
       rowString += tdPrefix + getDataValue(avgData[teamNum], "autonCoralL4Avg") + "</td>";
       rowString += tdPrefix + getDataValue(avgData[teamNum], "autonCoralL4Max") + "</td>";
       rowString += tdPrefix + getDataValue(avgData[teamNum], "autonCoralL3Avg") + "</td>";
@@ -324,8 +324,8 @@ require 'inc/header.php';
       rowString += tdPrefix + getDataValue(avgData[teamNum], "autonCoralL1Max") + "</td>";
 
       // auton algae
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "autonAlgaeAvg") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "autonAlgaeMax") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "autonAlgaeScoredAvg") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "autonAlgaeScoredMax") + "</td>";
       rowString += tdPrefix + getDataValue(avgData[teamNum], "autonAlgaeProcAvg") + "</td>";
       rowString += tdPrefix + getDataValue(avgData[teamNum], "autonAlgaeProcMax") + "</td>";
       rowString += tdPrefix + getDataValue(avgData[teamNum], "autonAlgaeNetAvg") + "</td>";
@@ -333,8 +333,8 @@ require 'inc/header.php';
 
       // teleop coral
       rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopCoralPercent") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopCoralAvg") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopCoralMax") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopCoralScoredAvg") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopCoralScoredMax") + "</td>";
       rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopCoralL4Avg") + "</td>";
       rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopCoralL4Max") + "</td>";
       rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopCoralL3Avg") + "</td>";
@@ -346,8 +346,8 @@ require 'inc/header.php';
 
       // teleop algae
       rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopAlgaePercent") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopAlgaeAvg") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopAlgaeMax") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopAlgaeScoredAvg") + "</td>";
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopAlgaeScoredMax") + "</td>";
       rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopAlgaeProcAvg") + "</td>";
       rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopAlgaeProcMax") + "</td>";
       rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopAlgaeNetAvg") + "</td>";
@@ -423,14 +423,14 @@ require 'inc/header.php';
     csvLine += lookupAverage(evtAvgs, team, "teleopAlgaePointsMax") + ",";
 
     // total game pieces
-    csvLine += lookupAverage(evtAvgs, team, "totalCoralAvg") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "totalCoralMax") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "totalAlgaeAvg") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "totalAlgaeMax") + ",";
+    csvLine += lookupAverage(evtAvgs, team, "totalCoralScoredAvg") + ",";
+    csvLine += lookupAverage(evtAvgs, team, "totalCoralScoredMax") + ",";
+    csvLine += lookupAverage(evtAvgs, team, "totalAlgaeScoredAvg") + ",";
+    csvLine += lookupAverage(evtAvgs, team, "totalAlgaeScoredMax") + ",";
 
     // auton coral
-    csvLine += lookupAverage(evtAvgs, team, "autonCoralAvg") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "autonCoralMax") + ",";
+    csvLine += lookupAverage(evtAvgs, team, "autonCoralScoredAvg") + ",";
+    csvLine += lookupAverage(evtAvgs, team, "autonCoralScoredMax") + ",";
     csvLine += lookupAverage(evtAvgs, team, "autonCoralL4Avg") + ",";
     csvLine += lookupAverage(evtAvgs, team, "autonCoralL4Max") + ",";
     csvLine += lookupAverage(evtAvgs, team, "autonCoralL3Avg") + ",";
@@ -441,8 +441,8 @@ require 'inc/header.php';
     csvLine += lookupAverage(evtAvgs, team, "autonCoralL1Max") + ",";
 
     // auton algae
-    csvLine += lookupAverage(evtAvgs, team, "autonAlgaeAvg") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "autonAlgaeMax") + ",";
+    csvLine += lookupAverage(evtAvgs, team, "autonAlgaeScoredAvg") + ",";
+    csvLine += lookupAverage(evtAvgs, team, "autonAlgaeScoredMax") + ",";
     csvLine += lookupAverage(evtAvgs, team, "autonAlgaeProcAvg") + ",";
     csvLine += lookupAverage(evtAvgs, team, "autonAlgaeProcMax") + ",";
     csvLine += lookupAverage(evtAvgs, team, "autonAlgaeNetAvg") + ",";
@@ -450,8 +450,8 @@ require 'inc/header.php';
 
     // teleop coral
     csvLine += lookupAverage(evtAvgs, team, "teleopCoralPercent") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "teleopCoralAvg") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "teleopCoralMax") + ",";
+    csvLine += lookupAverage(evtAvgs, team, "teleopCoralScoredAvg") + ",";
+    csvLine += lookupAverage(evtAvgs, team, "teleopCoralScoredMax") + ",";
     csvLine += lookupAverage(evtAvgs, team, "teleopCoralL4Avg") + ",";
     csvLine += lookupAverage(evtAvgs, team, "teleopCoralL4Max") + ",";
     csvLine += lookupAverage(evtAvgs, team, "teleopCoralL3Avg") + ",";
@@ -463,8 +463,8 @@ require 'inc/header.php';
 
     // auton algae
     csvLine += lookupAverage(evtAvgs, team, "teleopAlgaePercent") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "teleopAlgaeAvg") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "teleopAlgaeMax") + ",";
+    csvLine += lookupAverage(evtAvgs, team, "teleopAlgaeScoredAvg") + ",";
+    csvLine += lookupAverage(evtAvgs, team, "teleopAlgaeScoredMax") + ",";
     csvLine += lookupAverage(evtAvgs, team, "teleopAlgaeProcAvg") + ",";
     csvLine += lookupAverage(evtAvgs, team, "teleopAlgaeProcMax") + ",";
     csvLine += lookupAverage(evtAvgs, team, "teleopAlgaeNetAvg") + ",";
