@@ -16,7 +16,7 @@ if (isset($_GET["eventCode"]))
 
 if (isset($_GET["getEventCode"]))
 {
-  echo ($dbConfig["eventcode"]);
+  echo $dbConfig["eventcode"];
 }
 else if (isset($_POST["getDBStatus"]))
 {

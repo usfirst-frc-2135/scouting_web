@@ -32,7 +32,7 @@ if (isset($_POST["writeTeamMatch"]))
       $msg = "fail";
     }
   }
-  echo ($msg);
+  echo $msg;
 }
 
 if (isset($_POST["writeSingleData"]))
@@ -44,7 +44,7 @@ if (isset($_POST["writeSingleData"]))
   $dat["eventcode"] = $eventCode;
   $dat["entrykey"] = $dat["eventcode"] . "_" . $dat["matchnumber"] . "_" . $dat["teamnumber"];
   $db->writeRowToMatchTable($dat);
-  echo ("success");
+  echo "success";
 }
 
 if (isset($_POST["writePitTable"]))
@@ -55,7 +55,7 @@ if (isset($_POST["writePitTable"]))
   $args["entrykey"] = $eventCode . "_" . $args["teamnumber"];
   $args["eventcode"] = $eventCode;
   $db->writeRowToPitTable($args);
-  echo ("success");
+  echo "success";
 }
 
 if (isset($_POST["writeStrategicData"]))
@@ -75,7 +75,7 @@ if (isset($_POST["writeStrategicData"]))
     error_log("! writeStrategicData() threw exception = $e");
     $msg = "fail";
   }
-  echo ($msg);
+  echo $msg;
 }
 
 if (isset($_POST["writePicklist"]))
@@ -161,7 +161,7 @@ if (isset($_POST["teamNum"]) and isset($_FILES["teamPic"]))
   $response = array();
   $response["success"] = $uploadSuccess;
   $response["message"] = $errorMessage;
-  echo (json_encode($response));
+  echo json_encode($response);
 }
 
 ?>

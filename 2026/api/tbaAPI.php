@@ -19,27 +19,27 @@ $tba = new tbaHandler($dbConfig["tbakey"], $dbConfig["tbatable"], $db->connectTo
 
 if (isset($_GET["getTeamInfo"]))
 {
-  echo (json_encode($tba->getTeamInfo($_GET["getTeamInfo"])));
+  echo json_encode($tba->getTeamInfo($_GET["getTeamInfo"]));
 }
 else if (isset($_GET["getEventTeamNames"]))
 {
-  echo (json_encode($tba->getEventTeamNames($eventCode)));
+  echo json_encode($tba->getEventTeamNames($eventCode));
 }
 else if (isset($_GET["getEventMatches"]))
 {
-  echo (json_encode($tba->getEventMatches($eventCode)));
+  echo json_encode($tba->getEventMatches($eventCode));
 }
 else if (isset($_GET["getEventTeamsEx"]))
 {
-  echo (json_encode($tba->getEventTeamsEx($eventCode)));
+  echo json_encode($tba->getEventTeamsEx($eventCode));
 }
 else if (isset($_GET["getStrategicMatches"]))
 {
-  echo (json_encode($tba->getStrategicMatches($eventCode)));
+  echo json_encode($tba->getStrategicMatches($eventCode));
 }
 else if (isset($_GET["getCOPRs"]))
 {
-  echo (json_encode($tba->getComponentOPRS($eventCode)));
+  echo json_encode($tba->getComponentOPRS($eventCode));
 }
 
 ?>

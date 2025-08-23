@@ -43,12 +43,12 @@ if (isset($_GET["eventCode"]))
 if (isset($_GET["getAllMatchData"]))
 {
   // Get all match data
-  echo (json_encode($db->readAllFromMatchTable($eventCode)));
+  echo json_encode($db->readAllFromMatchTable($eventCode));
 }
 else if (isset($_GET["getTeamMatchData"]))
 {
   // Get match data for a team
-  echo (json_encode($db->readTeamFromMatchTable($_GET["getTeamMatchData"], $eventCode)));
+  echo json_encode($db->readTeamFromMatchTable($_GET["getTeamMatchData"], $eventCode));
 }
 else if (isset($_GET["getAllPitData"]))
 {
@@ -59,7 +59,7 @@ else if (isset($_GET["getAllPitData"]))
   {
     $out[$row["teamnumber"]] = $row;
   }
-  echo (json_encode($out));
+  echo json_encode($out);
 }
 else if (isset($_GET["getTeamPitData"]))
 {
@@ -74,22 +74,22 @@ else if (isset($_GET["getTeamPitData"]))
       break;
     }
   }
-  echo (json_encode($out));
+  echo json_encode($out);
 }
 else if (isset($_GET["getAllStrategicData"]))
 {
   // Get all strategic data
-  echo (json_encode($db->readAllFromStrategicTable($eventCode)));
+  echo json_encode($db->readAllFromStrategicTable($eventCode));
 }
 else if (isset($_GET["getTeamStrategicData"]))
 {
   // Get all strategic data for a team
-  echo (json_encode($db->readTeamFromStrategicTable($_GET["getTeamStrategicData"], $eventCode)));
+  echo json_encode($db->readTeamFromStrategicTable($_GET["getTeamStrategicData"], $eventCode));
 }
 else if (isset($_GET["getImagesForTeam"]))
 {
   // Get all images for a team
-  echo (json_encode(getRobotPhotos($_GET["getImagesForTeam"])));
+  echo json_encode(getRobotPhotos($_GET["getImagesForTeam"]));
 }
 else if (isset($_GET["getAllTeamImages"]))
 {
@@ -100,7 +100,7 @@ else if (isset($_GET["getAllTeamImages"]))
   {
     $imageObj[$team] = getRobotPhotos($team);
   }
-  echo (json_encode($imageObj));
+  echo json_encode($imageObj);
 }
 else if (isset($_GET["config"]))
 {
@@ -115,7 +115,7 @@ else if (isset($_GET["config"]))
       $output["tbakey"] = $dbConfig["tbakey"];
     }
   }
-  echo (json_encode($output));
+  echo json_encode($output);
 }
 
 ?>
