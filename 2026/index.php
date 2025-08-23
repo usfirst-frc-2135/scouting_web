@@ -123,6 +123,23 @@ require 'inc/header.php';
         </div>
 
       </div>
+
+      <!-- DB Config text entry card -->
+      <div class="col-lg-6 col-sm-6 col-xs-6 gx-3">
+        <div class="card">
+          <div class="card-header">
+            Table Config
+          </div>
+          <div class="card-body">
+            <div class="row mb-3 mx-auto" style=" width: 200px;">
+              <a class="btn btn-primary" href="./scoutData.php" role="button">Configure Scout Names</a>
+            </div>
+            <div class="row mb-3 mx-auto" style=" width: 200px;">
+              <a class="btn btn-primary" href="./aliasData.php" role="button">Configure Team Aliases</a>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

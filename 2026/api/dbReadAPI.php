@@ -102,6 +102,16 @@ else if (isset($_GET["getAllTeamImages"]))
   }
   echo json_encode($imageObj);
 }
+else if (isset($_GET["getEventAliasNames"]))
+{
+  // Get team alias list for an event
+  echo json_encode($db->readEventAliasTable($eventCode));
+}
+else if (isset($_GET["getEventScoutNames"]))
+{
+  // Get scout list for an event
+  echo json_encode($db->readEventScoutTable($eventCode));
+}
 else if (isset($_GET["config"]))
 {
   $output = array();

@@ -35,12 +35,11 @@ if (isset($_POST["writeTeamMatch"]))
   echo $msg;
 }
 
-if (isset($_POST["writeSingleData"]))
+if (isset($_POST["writeSingleMatch"]))
 {
   // Write Data API
   $db->connectToDB();
-  $dat = json_decode($_POST["writeSingleData"], true);
-  // echo($_POST["writeTeamMatch"]);
+  $dat = json_decode($_POST["writeSingleMatch"], true);
   $dat["eventcode"] = $eventCode;
   $dat["entrykey"] = $dat["eventcode"] . "_" . $dat["matchnumber"] . "_" . $dat["teamnumber"];
   $db->writeRowToMatchTable($dat);
@@ -76,6 +75,29 @@ if (isset($_POST["writeStrategicData"]))
     $msg = "fail";
   }
   echo $msg;
+}
+
+if (isset($_POST["writeSingleScoutName"]))
+{
+  // Write Data API
+  $db->connectToDB();
+  $dat = json_decode($_POST["writeSingleScoutName"], true);
+  $dat["eventcode"] = $eventCode;
+  $scoutname = str_replace(' ', '_', $dat["scoutname"]);
+  $dat["entrykey"] = $dat["eventcode"] . "_" . $scoutname;
+  $db->writeScoutNameToTable($dat);
+  echo "success";
+}
+
+if (isset($_POST["writeSingleTeamAlias"]))
+{
+  // Write Data API
+  $db->connectToDB();
+  $dat = json_decode($_POST["writeSingleTeamAlias"], true);
+  $dat["eventcode"] = $eventCode;
+  $dat["entrykey"] = $dat["eventcode"] . "_" . $dat["teamnumber"];
+  $db->writeAliasNumberToTable($dat);
+  echo "success";
 }
 
 if (isset($_POST["writePicklist"]))

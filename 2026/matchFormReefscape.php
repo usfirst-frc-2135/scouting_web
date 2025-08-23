@@ -377,7 +377,7 @@ require 'inc/header.php';
   function submitMatchFormData(matchFormData) {
     console.log("==> matchForm: submitMatchFormData()");
     $.post("api/dbWriteAPI.php", {
-      writeSingleData: JSON.stringify(matchFormData)
+      writeSingleMatch: JSON.stringify(matchFormData)
     }, function (response) {
       if (response.indexOf('success') > -1) {    // A loose compare, because success word may have a newline
         alert("Success in submitting Match data! Clearing Data.");

@@ -80,7 +80,8 @@ class dbHandler
   {
     $dbConfig = $this->readDbConfig();
     $sql = "INSERT INTO " . $dbConfig["datatable"] .
-      "(entrykey,
+      "(
+        entrykey,
         eventcode,
         matchnumber,
         teamnumber,
@@ -120,8 +121,11 @@ class dbHandler
         cageClimb,
         startClimb,
         died,
-        comment)
-      VALUES(:entrykey,
+        comment
+      )
+      VALUES
+      (
+        :entrykey,
         :eventcode,
         :matchnumber,
         :teamnumber,
@@ -161,7 +165,8 @@ class dbHandler
         :cageClimb,
         :startClimb,
         :died,
-        :comment)";
+        :comment
+      )";
     $prepared_statement = $this->conn->prepare($sql);
     $prepared_statement->execute($mData);
   }
@@ -306,7 +311,8 @@ class dbHandler
   {
     $dbConfig = $this->readDbConfig();
     $sql = "INSERT INTO " . $dbConfig["pittable"] .
-      "(entrykey,
+      "(
+        entrykey,
         eventcode,
         teamnumber,
         scoutname,
@@ -317,9 +323,11 @@ class dbHandler
         computervision,
         pitorg,
         preparedness,
-        numbatteries)
+        numbatteries
+      )
       VALUES
-        (:entrykey,
+      (
+        :entrykey,
         :eventcode,
         :teamnumber,
         :scoutname,
@@ -330,7 +338,8 @@ class dbHandler
         :computervision,
         :pitorg,
         :preparedness,
-        :numbatteries)";
+        :numbatteries
+      )";
     $prepared_statement = $this->conn->prepare($sql);
     $prepared_statement->execute($pData);
   }
@@ -363,7 +372,8 @@ class dbHandler
     $dbConfig = $this->readDbConfig();
 
     $sql = "INSERT INTO " . $dbConfig["strategictable"] .
-      "(entrykey,
+      "(
+        entrykey,
         eventcode,
         matchnumber,
         teamnumber,
@@ -391,8 +401,11 @@ class dbHandler
         teleopFoul4,
         endgameFoul1,
         problem_comment,
-        general_comment)
-      VALUES(:entrykey,
+        general_comment
+      )
+      VALUES
+      (
+        :entrykey,
         :eventcode,
         :matchnumber,
         :teamnumber,
@@ -420,7 +433,8 @@ class dbHandler
         :teleopFoul4,
         :endgameFoul1,
         :problem_comment,
-        :general_comment)";
+        :general_comment
+      )";
     $prepared_statement = $this->conn->prepare($sql);
     $prepared_statement->execute($sData);
   }
@@ -501,20 +515,31 @@ class dbHandler
     return $result;
   }
 
-  public function writeScoutToMatchTable($mData)
+  public function writeScoutNameToTable($mData)
   {
     $dbConfig = $this->readDbConfig();
     $sql = "INSERT INTO " . $dbConfig["scouttable"] .
-      "(scoutname)
-      VALUES(:scoutname)";
+      "(
+        entrykey,
+        eventcode,
+        scoutname
+      )
+      VALUES
+      (
+        :entrykey,
+        :eventcode,
+        :scoutname
+      )";
     $prepared_statement = $this->conn->prepare($sql);
     $prepared_statement->execute($mData);
   }
 
-  public function readAllScoutTable($eventCode)
+  public function readEventScoutTable($eventCode)
   {
     $dbConfig = $this->readDbConfig();
     $sql = "SELECT 
+        entrykey,
+        eventcode,
         scoutname
         from " . $dbConfig["scouttable"] . " where
         eventcode='" . $eventCode . "'";
@@ -524,23 +549,29 @@ class dbHandler
     return $result;
   }
 
-  public function writeAliasToMatchTable($mData)
+  // Write team alias record into table and replace if an entry already exists
+  public function writeAliasNumberToTable($mData)
   {
     $dbConfig = $this->readDbConfig();
-    $sql = "INSERT INTO " . $dbConfig["aliastable"] .
-      "(entrykey,
-      eventcode,
-      teamnumber,
-      aliasnumber)
-      VALUES(:entrykey,
-      :eventcode,
-      :teamnumber,
-      :aliasnumber)";
+    $sql = "REPLACE INTO " . $dbConfig["aliastable"] .
+      "(
+        entrykey,
+        eventcode,
+        teamnumber,
+        aliasnumber
+      )
+      VALUES
+      (
+        :entrykey,
+        :eventcode,
+        :teamnumber,
+        :aliasnumber
+      )";
     $prepared_statement = $this->conn->prepare($sql);
     $prepared_statement->execute($mData);
   }
 
-  public function readAllAliasTable($eventCode)
+  public function readEventAliasTable($eventCode)
   {
     $dbConfig = $this->readDbConfig();
     $sql = "SELECT 
@@ -720,6 +751,8 @@ class dbHandler
     $dbConfig = $this->readDbConfig();
     $query = "CREATE TABLE " . $dbConfig["db"] . "." . $dbConfig["scouttable"] .
       " (
+        entrykey VARCHAR(60) NOT NULL PRIMARY KEY,
+        eventcode VARCHAR(10) NOT NULL,
         scoutname VARCHAR(30) NOT NULL PRIMARY KEY
       )";
     $statement = $conn->prepare($query);
