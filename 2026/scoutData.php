@@ -15,7 +15,7 @@ require 'inc/header.php';
     <div class="row col-md-6 mb-3">
       <h5>Add New Scout Name</h5>
       <div class="input-group mb-3">
-        <input id="enterScoutName" class="form-control" type="text" placeholder="Scout name" aria-label="Scout Name">
+        <input id="enterScoutName" class="form-control" type="text" placeholder="First name, last init." aria-label="Scout Name">
         <div class="input-group-append">
           <button id="saveScoutName" class="btn btn-primary" type="button">Save Scout Name</button>
         </div>
