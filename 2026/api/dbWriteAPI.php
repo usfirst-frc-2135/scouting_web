@@ -77,17 +77,42 @@ if (isset($_POST["writeStrategicData"]))
   echo $msg;
 }
 
+function makeKeyScoutName($ec, $sn)
+{
+  $sn = str_replace(' ', '_', $sn);
+  $key = $ec . "_" . $sn;
+  return $key;
+}
+;
+
 if (isset($_POST["writeSingleScoutName"]))
 {
   // Write Data API
   $db->connectToDB();
   $dat = json_decode($_POST["writeSingleScoutName"], true);
   $dat["eventcode"] = $eventCode;
-  $scoutname = str_replace(' ', '_', $dat["scoutname"]);
-  $dat["entrykey"] = $dat["eventcode"] . "_" . $scoutname;
+  $dat["entrykey"] = makeKeyScoutName($dat["eventcode"], $dat["scoutname"]);
   $db->writeScoutNameToTable($dat);
   echo "success";
 }
+
+if (isset($_POST["deleteSingleScoutName"]))
+{
+  // Write Data API
+  $db->connectToDB();
+  $dat = json_decode($_POST["deleteSingleScoutName"], true);
+  $dat["eventcode"] = $eventCode;
+  $dat["entrykey"] = makeKeyScoutName($dat["eventcode"], $dat["scoutname"]);
+  $db->deleteScoutNameFromTable($dat);
+  echo "success";
+}
+
+function makeKeyTeamAlias($ec, $tn)
+{
+  $key = $ec . "_" . $tn;
+  return $key;
+}
+;
 
 if (isset($_POST["writeSingleTeamAlias"]))
 {
@@ -95,8 +120,19 @@ if (isset($_POST["writeSingleTeamAlias"]))
   $db->connectToDB();
   $dat = json_decode($_POST["writeSingleTeamAlias"], true);
   $dat["eventcode"] = $eventCode;
-  $dat["entrykey"] = $dat["eventcode"] . "_" . $dat["teamnumber"];
+  $dat["entrykey"] = makeKeyTeamAlias($dat["eventcode"], $dat["teamnumber"]);
   $db->writeAliasNumberToTable($dat);
+  echo "success";
+}
+
+if (isset($_POST["deleteSingleTeamAlias"]))
+{
+  // Write Data API
+  $db->connectToDB();
+  $dat = json_decode($_POST["deleteSingleTeamAlias"], true);
+  $dat["eventcode"] = $eventCode;
+  $dat["entrykey"] = makeKeyTeamAlias($dat["eventcode"], $dat["teamalias"]);
+  $db->deleteTeamAliasFromTable($dat);
   echo "success";
 }
 

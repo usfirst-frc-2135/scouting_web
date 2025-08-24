@@ -15,9 +15,13 @@ require 'inc/header.php';
     <div class="row col-md-6 mb-3">
       <h5>Add New Scout Name</h5>
       <div class="input-group mb-3">
-        <input id="enterScoutName" class="form-control" type="text" placeholder="First name, last init." aria-label="Scout Name">
+        <input id="enterScoutName" class="form-control me-2" type="text" placeholder="First name, last init."
+          aria-label="Scout Name">
         <div class="input-group-append">
-          <button id="saveScoutName" class="btn btn-primary" type="button">Save Scout Name</button>
+          <button id="addScoutName" class="btn btn-primary me-2" type="button">Add</button>
+        </div>
+        <div class="input-group-append">
+          <button id="deleteScoutName" class="btn btn-primary" type="button">Delete</button>
         </div>
       </div>
     </div>
@@ -73,18 +77,34 @@ require 'inc/header.php';
     sorttable.makeSortable(document.getElementById(tableId));
   }
 
-  // Attempt to save the scout name to the scout table
-  function saveScoutName(tableId, scoutName) {
-    console.log("==> scoutData: saveScoutName()" + " " + scoutName);
+  // Attempt to add the scout name to the scout table
+  function addScoutName(tableId, scoutName) {
+    console.log("==> scoutData: addScoutName()" + " " + scoutName);
     $.post("api/dbWriteAPI.php", {
       writeSingleScoutName: JSON.stringify({ "scoutname": scoutName })
     }, function (response) {
       if (response.indexOf('success') > -1) {    // A loose compare, because success word may have a newline
-        alert("Success in submitting Scout Name data! Clearing Data.");
+        // alert("Success in submitting Scout Name data! Clearing Data.");
         document.getElementById("enterScoutName").value = "";
         buildScoutTable(tableId);
       } else {
-        alert("Failure in submitting Scout Name data! Please Check network connectivity.");
+        alert("Failure in adding Scout Name data! Please Check network connectivity.");
+      }
+    });
+  }
+
+  // Attempt to remove the scout name from the scout table
+  function deleteScoutName(tableId, scoutName) {
+    console.log("==> scoutData: deleteScoutName()" + " " + scoutName);
+    $.post("api/dbWriteAPI.php", {
+      deleteSingleScoutName: JSON.stringify({ "scoutname": scoutName })
+    }, function (response) {
+      if (response.indexOf('success') > -1) {    // A loose compare, because success word may have a newline
+        // alert("Success in submitting Scout Name data! Clearing Data.");
+        document.getElementById("enterScoutName").value = "";
+        buildScoutTable(tableId);
+      } else {
+        alert("Failure in removing Scout Name data! Please Check network connectivity.");
       }
     });
   }
@@ -119,15 +139,23 @@ require 'inc/header.php';
     input.addEventListener("keypress", function (event) {
       if (event.key === "Enter") {
         event.preventDefault();
-        document.getElementById("saveScoutName").click();
+        document.getElementById("addScoutName").click();
       }
     });
 
-    // Save the scout name
-    document.getElementById("saveScoutName").addEventListener('click', function () {
+    // Add the scout name
+    document.getElementById("addScoutName").addEventListener('click', function () {
       let scoutName = document.getElementById("enterScoutName").value.trim();
       if (scoutName != "") {
-        saveScoutName(tableId, scoutName);
+        addScoutName(tableId, scoutName);
+      }
+    });
+
+    // Remove the scout name
+    document.getElementById("deleteScoutName").addEventListener('click', function () {
+      let scoutName = document.getElementById("enterScoutName").value.trim();
+      if (scoutName != "") {
+        deleteScoutName(tableId, scoutName);
       }
     });
   });

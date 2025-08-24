@@ -248,7 +248,9 @@ class dbHandler
         cageClimb,
         startClimb,
         died,
-        comment from " . $dbConfig["datatable"] . " where eventcode='" . $eventCode . "'";
+        comment 
+        FROM " . $dbConfig["datatable"] .
+      " WHERE eventcode='" . $eventCode . "'";
     $prepared_statement = $this->conn->prepare($sql);
     $prepared_statement->execute();
     $result = $prepared_statement->fetchAll();
@@ -298,9 +300,9 @@ class dbHandler
         cageClimb,
         startClimb,
         died,
-        comment from " . $dbConfig["datatable"] . " where
-        eventcode='" . $eventCode . "' AND
-        teamnumber='" . $teamNumber . "'";
+        comment 
+        FROM " . $dbConfig["datatable"] .
+      " WHERE eventcode='" . $eventCode . "' AND teamnumber='" . $teamNumber . "'";
     $prepared_statement = $this->conn->prepare($sql);
     $prepared_statement->execute();
     $result = $prepared_statement->fetchAll();
@@ -359,8 +361,8 @@ class dbHandler
         pitorg,
         preparedness,
         numbatteries
-        from " . $dbConfig["pittable"] . " where
-        eventcode='" . $eventCode . "'";
+        FROM " . $dbConfig["pittable"] .
+      " WHERE eventcode='" . $eventCode . "'";
     $prepared_statement = $this->conn->prepare($sql);
     $prepared_statement->execute();
     $result = $prepared_statement->fetchAll();
@@ -470,7 +472,8 @@ class dbHandler
         endgameFoul1,
         problem_comment,
         general_comment 
-        from " . $dbConfig["strategictable"] . " where eventcode='" . $eventCode . "'";
+        FROM " . $dbConfig["strategictable"] .
+      " WHERE eventcode='" . $eventCode . "'";
     $prepared_statement = $this->conn->prepare($sql);
     $prepared_statement->execute();
     $result = $prepared_statement->fetchAll();
@@ -508,7 +511,8 @@ class dbHandler
         endgameFoul1,
         problem_comment,
         general_comment 
-        from " . $dbConfig["strategictable"] . " where eventcode='" . $eventCode . "' AND teamnumber='" . $teamNumber . "'";
+        FROM " . $dbConfig["strategictable"] .
+      " WHERE eventcode='" . $eventCode . "' AND teamnumber='" . $teamNumber . "'";
     $prepared_statement = $this->conn->prepare($sql);
     $prepared_statement->execute();
     $result = $prepared_statement->fetchAll();
@@ -534,6 +538,14 @@ class dbHandler
     $prepared_statement->execute($mData);
   }
 
+  public function deleteScoutNameFromTable($mData)
+  {
+    $dbConfig = $this->readDbConfig();
+    $sql = "DELETE FROM " . $dbConfig["scouttable"] . " WHERE entrykey='" . $mData["entrykey"] . "'";
+    $prepared_statement = $this->conn->prepare($sql);
+    $prepared_statement->execute();
+  }
+
   public function readEventScoutTable($eventCode)
   {
     $dbConfig = $this->readDbConfig();
@@ -541,8 +553,8 @@ class dbHandler
         entrykey,
         eventcode,
         scoutname
-        from " . $dbConfig["scouttable"] . " where
-        eventcode='" . $eventCode . "'";
+        FROM " . $dbConfig["scouttable"] .
+      " WHERE eventcode='" . $eventCode . "'";
     $prepared_statement = $this->conn->prepare($sql);
     $prepared_statement->execute();
     $result = $prepared_statement->fetchAll();
@@ -571,6 +583,14 @@ class dbHandler
     $prepared_statement->execute($mData);
   }
 
+  public function deleteTeamAliasFromTable($mData)
+  {
+    $dbConfig = $this->readDbConfig();
+    $sql = "DELETE FROM " . $dbConfig["aliastable"] . " WHERE entrykey='" . $mData["entrykey"] . "'";
+    $prepared_statement = $this->conn->prepare($sql);
+    $prepared_statement->execute();
+  }
+
   public function readEventAliasTable($eventCode)
   {
     $dbConfig = $this->readDbConfig();
@@ -579,8 +599,8 @@ class dbHandler
         eventcode,
         teamnumber,
         aliasnumber
-        from " . $dbConfig["aliastable"] . " where
-        eventcode='" . $eventCode . "'";
+        FROM " . $dbConfig["aliastable"] .
+      " WHERE eventcode='" . $eventCode . "'";
     $prepared_statement = $this->conn->prepare($sql);
     $prepared_statement->execute();
     $result = $prepared_statement->fetchAll();
@@ -753,7 +773,7 @@ class dbHandler
       " (
         entrykey VARCHAR(60) NOT NULL PRIMARY KEY,
         eventcode VARCHAR(10) NOT NULL,
-        scoutname VARCHAR(30) NOT NULL PRIMARY KEY
+        scoutname VARCHAR(30) NOT NULL
       )";
     $statement = $conn->prepare($query);
     if (!$statement->execute())
@@ -931,7 +951,7 @@ class dbHandler
             $dsn = "mysql:host=" . $dbConfig["server"] . ";dbname=" . $dbConfig["db"] . ";charset=" . $this->charset;
             $conn = new PDO($dsn, $dbConfig["username"], $dbConfig["password"]);
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $val = $conn->query('SELECT * from ' . $dbConfig["datatable"]);
+            $val = $conn->query('SELECT * FROM ' . $dbConfig["datatable"]);
             $dbStatus["matchTableExists"] = true;
           }
           catch (PDOException $e)
@@ -945,7 +965,7 @@ class dbHandler
             $dsn = "mysql:host=" . $dbConfig["server"] . ";dbname=" . $dbConfig["db"] . ";charset=" . $this->charset;
             $conn = new PDO($dsn, $dbConfig["username"], $dbConfig["password"]);
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $val = $conn->query('SELECT * from ' . $dbConfig["pittable"]);
+            $val = $conn->query('SELECT * FROM ' . $dbConfig["pittable"]);
             $dbStatus["pitTableExists"] = true;
           }
           catch (PDOException $e)
@@ -959,7 +979,7 @@ class dbHandler
             $dsn = "mysql:host=" . $dbConfig["server"] . ";dbname=" . $dbConfig["db"] . ";charset=" . $this->charset;
             $conn = new PDO($dsn, $dbConfig["username"], $dbConfig["password"]);
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $val = $conn->query('SELECT * from ' . $dbConfig["strategictable"]);
+            $val = $conn->query('SELECT * FROM ' . $dbConfig["strategictable"]);
             $dbStatus["strategicTableExists"] = true;
           }
           catch (PDOException $e)
@@ -973,7 +993,7 @@ class dbHandler
             $dsn = "mysql:host=" . $dbConfig["server"] . ";dbname=" . $dbConfig["db"] . ";charset=" . $this->charset;
             $conn = new PDO($dsn, $dbConfig["username"], $dbConfig["password"]);
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $val = $conn->query('SELECT * from ' . $dbConfig["tbatable"]);
+            $val = $conn->query('SELECT * FROM ' . $dbConfig["tbatable"]);
             $dbStatus["tbaTableExists"] = true;
           }
           catch (PDOException $e)
@@ -987,7 +1007,7 @@ class dbHandler
             $dsn = "mysql:host=" . $dbConfig["server"] . ";dbname=" . $dbConfig["db"] . ";charset=" . $this->charset;
             $conn = new PDO($dsn, $dbConfig["username"], $dbConfig["password"]);
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $val = $conn->query('SELECT * from ' . $dbConfig["scouttable"]);
+            $val = $conn->query('SELECT * FROM ' . $dbConfig["scouttable"]);
             $dbStatus["scoutTableExists"] = true;
           }
           catch (PDOException $e)
@@ -1001,7 +1021,7 @@ class dbHandler
             $dsn = "mysql:host=" . $dbConfig["server"] . ";dbname=" . $dbConfig["db"] . ";charset=" . $this->charset;
             $conn = new PDO($dsn, $dbConfig["username"], $dbConfig["password"]);
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $val = $conn->query('SELECT * from ' . $dbConfig["aliastable"]);
+            $val = $conn->query('SELECT * FROM ' . $dbConfig["aliastable"]);
             $dbStatus["aliasTableExists"] = true;
           }
           catch (PDOException $e)

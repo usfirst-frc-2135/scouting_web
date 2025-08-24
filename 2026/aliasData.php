@@ -15,10 +15,13 @@ require 'inc/header.php';
     <div class="row col-md-6 mb-3">
       <h5>Add New Alias</h5>
       <div class="input-group mb-3">
-        <input id="enterTeamNumber" class="form-control" type="text" placeholder="Team number" aria-label="Team Number">
-        <input id="enterAliasNumber" class="form-control" type="text" placeholder="Alias number" aria-label="Alias Number">
+        <input id="enterTeamNumber" class="form-control me-2" type="text" placeholder="Team number" aria-label="Team Number">
+        <input id="enterAliasNumber" class="form-control me-2" type="text" placeholder="Alias number" aria-label="Alias Number">
         <div class="input-group-append">
-          <button id="saveTeamAlias" class="btn btn-primary" type="button">Save Team Alias</button>
+          <button id="addTeamAlias" class="btn btn-primary me-2" type="button">Add</button>
+        </div>
+        <div class="input-group-append">
+          <button id="deleteTeamAlias" class="btn btn-primary" type="button">Delete</button>
         </div>
       </div>
     </div>
@@ -80,18 +83,35 @@ require 'inc/header.php';
   }
 
   // Attempt to save the team alias to the alias table
-  function saveTeamAlias(tableId, teamNum, alias) {
-    console.log("==> aliasData: saveTeamAlias()" + " " + teamNum + " " + alias);
+  function addTeamAlias(tableId, teamNum, alias) {
+    console.log("==> aliasData: addTeamAlias()" + " " + teamNum + " " + alias);
     $.post("api/dbWriteAPI.php", {
       writeSingleTeamAlias: JSON.stringify({ "teamnumber": teamNum, "aliasnumber": alias })
     }, function (response) {
       if (response.indexOf('success') > -1) {    // A loose compare, because success word may have a newline
-        alert("Success in submitting Team Alias data! Clearing Data.");
+        // alert("Success in submitting Team Alias data! Clearing Data.");
         document.getElementById("enterTeamNumber").value = "";
         document.getElementById("enterAliasNumber").value = "";
         buildAliasTable(tableId);
       } else {
         alert("Failure in submitting Team Alias data! Please Check network connectivity.");
+      }
+    });
+  }
+
+  // Attempt to remove the team alias from the alias table
+  function deleteTeamAlias(tableId, teamAlias) {
+    console.log("==> aliasData: deleteTeamAlias()" + " " + teamAlias);
+    $.post("api/dbWriteAPI.php", {
+      deleteSingleTeamAlias: JSON.stringify({ "teamalias": teamAlias })
+    }, function (response) {
+      if (response.indexOf('success') > -1) {    // A loose compare, because success word may have a newline
+        // alert("Success in submitting Team Alias data! Clearing Data.");
+        document.getElementById("enterTeamNumber").value = "";
+        document.getElementById("enterAliasNumber").value = "";
+        buildAliasTable(tableId);
+      } else {
+        alert("Failure in removing Team Alias data! Please Check network connectivity.");
       }
     });
   }
@@ -126,7 +146,7 @@ require 'inc/header.php';
     teamInput.addEventListener("keypress", function (event) {
       if (event.key === "Enter") {
         event.preventDefault();
-        document.getElementById("saveTeamAlias").click();
+        document.getElementById("addTeamAlias").click();
       }
     });
 
@@ -135,16 +155,24 @@ require 'inc/header.php';
     aliasInput.addEventListener("keypress", function (event) {
       if (event.key === "Enter") {
         event.preventDefault();
-        document.getElementById("saveTeamAlias").click();
+        document.getElementById("addTeamAlias").click();
       }
     });
 
     // Save the team alias for the number entered
-    document.getElementById("saveTeamAlias").addEventListener('click', function () {
+    document.getElementById("addTeamAlias").addEventListener('click', function () {
       let teamNum = document.getElementById("enterTeamNumber").value.trim();
       let aliasNum = document.getElementById("enterAliasNumber").value.trim();
       if (validateTeamNumber(teamNum, null) > 0 && validateTeamNumber(aliasNum, null) > 0) {
-        saveTeamAlias(tableId, teamNum, aliasNum);
+        addTeamAlias(tableId, teamNum, aliasNum);
+      }
+    });
+
+    // Remove the team alias
+    document.getElementById("deleteTeamAlias").addEventListener('click', function () {
+      let teamAlias = document.getElementById("enterTeamNumber").value.trim();
+      if (teamAlias != "") {
+        deleteTeamAlias(tableId, teamAlias);
       }
     });
   });
