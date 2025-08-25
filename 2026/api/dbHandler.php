@@ -27,6 +27,12 @@ class dbHandler
     "useF"
   );
 
+  private $opt = [
+    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    PDO::ATTR_EMULATE_PREPARES => false
+  ];
+
   // Connect to the database
   public function connectToDB()
   {
@@ -34,14 +40,9 @@ class dbHandler
     {
       $dbConfig = $this->readDbConfig();
       $dsn = "mysql:host=" . $dbConfig["server"] . ";dbname=" . $dbConfig["db"] . ";charset=" . $this->charset;
-      $opt = [
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-        PDO::ATTR_EMULATE_PREPARES => false
-      ];
       try
       {
-        $this->conn = new PDO($dsn, $dbConfig["username"], $dbConfig["password"], $opt);
+        $this->conn = new PDO($dsn, $dbConfig["username"], $dbConfig["password"], $this->opt);
         $this->alreadyConnected = true;
       }
       catch (PDOException $e)
@@ -57,15 +58,10 @@ class dbHandler
   {
     $dbConfig = $this->readDbConfig();
     $dsn = "mysql:host=" . $dbConfig["server"] . ";charset=" . $this->charset;
-    $opt = [
-      PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-      PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-      PDO::ATTR_EMULATE_PREPARES => false
-    ];
 
     try
     {
-      $this->conn = new PDO($dsn, $dbConfig["username"], $dbConfig["password"], $opt);
+      $this->conn = new PDO($dsn, $dbConfig["username"], $dbConfig["password"], $this->opt);
       $this->alreadyConnected = true;
     }
     catch (PDOException $e)

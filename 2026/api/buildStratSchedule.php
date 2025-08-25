@@ -108,7 +108,7 @@ class BuildStratSchedule
           $matchInfo["teams"] .= $stratTeam;
         }
         // error_log($matchInfo["teams"]);
-        array_push($stratMatches, $matchInfo); // TODO: Form list here
+        array_push($stratMatches, $matchInfo);
       }
     }
 

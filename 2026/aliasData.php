@@ -57,6 +57,21 @@ require 'inc/header.php';
 
 <script>
 
+  // Scan HTML table and covert to JSON
+  function tableToJSON(tableId) {
+    const table = document.getElementById(tableId);
+    const headers = Array.from(table.querySelectorAll('th')).map(th => th.textContent.trim());
+    const rows = Array.from(table.querySelectorAll('tr')).slice(1); // Skip header row
+
+    return rows.map(row => {
+      const cells = Array.from(row.querySelectorAll('td'));
+      return headers.reduce((obj, header, index) => {
+        obj[header] = cells[index]?.textContent.trim() || "";
+        return obj;
+      }, {});
+    });
+  }
+
   // Build the team alias table
   function loadAliasDataTable(tableId, teamAliasList) {
     console.log("==> aliasData: loadAliasDataTable()");
@@ -120,10 +135,13 @@ require 'inc/header.php';
   function buildAliasTable(tableId) {
     $.get("api/dbReadAPI.php", {
       getEventAliasNames: true
-    }).done(function (eventScoutNames) {
-      console.log("=> eventScoutNames");
-      let jScoutNames = JSON.parse(eventScoutNames);
-      loadAliasDataTable(tableId, jScoutNames);
+    }).done(function (eventAliasNames) {
+      console.log("=> eventAliasNames");
+      let jAliasNames = JSON.parse(eventAliasNames);
+      loadAliasDataTable(tableId, jAliasNames);
+      jsonTable = tableToJSON(tableId);
+      // TODO: use php to write json to file
+      console.log(jsonTable);
     });
   }
 
