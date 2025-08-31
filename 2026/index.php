@@ -81,12 +81,12 @@ require 'inc/header.php';
           <div class="card-body">
             <div class="mb-3">
               <label for="enterServerURL" class="form-label"> MySQL Server URL</label>
-              <input id="enterServerURL" class="form-control text-bg-warning" type="text" placeholder="(localhost)"
+              <input id="enterServerURL" class="form-control text-bg-warning" type="text" placeholder="ex. localhost"
                 aria-describedby="serverName">
             </div>
             <div class="mb-3">
               <label for="enterDBName" class="form-label">Database Name</label>
-              <input id="enterDBName" class="form-control text-bg-warning" type="text" placeholder="scouting2025"
+              <input id="enterDBName" class="form-control text-bg-warning" type="text" placeholder="ex. scouting2025"
                 aria-describedby="databaseName">
             </div>
             <div class="mb-3">
@@ -101,13 +101,13 @@ require 'inc/header.php';
             </div>
             <div class="mb-3">
               <label for="enterTBAKey" class="form-label">TBA Key</label>
-              <input id="enterTBAKey" class="form-control text-bg-warning" type="text" placeholder="(from theBlueAlliance)"
+              <input id="enterTBAKey" class="form-control text-bg-warning" type="text" placeholder="From theBlueAlliance"
                 aria-describedby="tbaKey">
             </div>
             <div class="mb-3">
               <label for="enterEventCode" class="form-label">Event Code</label>
-              <input id="enterEventCode" class="form-control text-bg-warning" type="text" placeholder="2025CAFR"
-                aria-describedby="tbaEventCode">
+              <input id="enterEventCode" class="form-control text-bg-warning" type="text"
+                placeholder="FRC event code (ex. 2024camb)" aria-describedby="tbaEventCode">
             </div>
 
             <div class="row mb-3 mx-auto" style=" width: 200px;">
