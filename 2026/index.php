@@ -117,7 +117,7 @@ require 'inc/header.php';
               <button id="createDB" class="btn btn-primary">Create DB</button>
             </div>
             <div class="row mb-3 mx-auto" style=" width: 200px;">
-              <button id="createTable" class="btn btn-primary">Create Table</button>
+              <button id="createTables" class="btn btn-primary">Create Tables</button>
             </div>
           </div>
         </div>
@@ -318,12 +318,12 @@ require 'inc/header.php';
     });
 
     // Create the button to create new tables in the atabase
-    document.getElementById("createTable").addEventListener('click', function () {
+    document.getElementById("createTables").addEventListener('click', function () {
       $.post("api/dbAPI.php", {
-        createTable: true
-      }, function (createTable) {
-        console.log("=> createTable");
-        updateStatusValues(JSON.parse(createTable));
+        createTables: true
+      }, function (createTables) {
+        console.log("=> createTables");
+        updateStatusValues(JSON.parse(createTables));
       });
     });
   });

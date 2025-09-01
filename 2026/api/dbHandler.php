@@ -667,7 +667,7 @@ class dbHandler
     $statement = $conn->prepare($query);
     if (!$statement->execute())
     {
-      throw new Exception("createTable Error: CREATE TABLE " . $dbConfig["datatable"] . " query failed.");
+      throw new Exception("createTables Error: CREATE TABLE " . $dbConfig["datatable"] . " query failed.");
     }
   }
 

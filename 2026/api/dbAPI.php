@@ -41,7 +41,7 @@ else if (isset($_POST["createDB"]))
   $stat = $db->getDBStatus();
   echo json_encode($stat);
 }
-else if (isset($_POST["createTable"]))
+else if (isset($_POST["createTables"]))
 {
   try
   {
