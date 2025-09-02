@@ -18,10 +18,7 @@ require 'inc/header.php';
         <input id="enterTeamNumber" class="form-control me-2" type="text" placeholder="Team number" aria-label="Team Number">
         <input id="enterAliasNumber" class="form-control me-2" type="text" placeholder="Alias number" aria-label="Alias Number">
         <div class="input-group-append">
-          <button id="addTeamAlias" class="btn btn-primary me-2" type="button">Add</button>
-        </div>
-        <div class="input-group-append">
-          <button id="deleteTeamAlias" class="btn btn-primary me-2" type="button">Delete</button>
+          <button id="addTeamAlias" class="btn btn-primary me-2" type="button">Add Alias</button>
         </div>
         <div class="input-group-append">
           <button id="writeTeamAliasJSON" class="btn btn-primary" type="button">Write File</button>
@@ -43,8 +40,9 @@ require 'inc/header.php';
       <table id="aliasTable" class="table table-striped table-bordered table-hover text-center sortable">
         <thead>
           <tr>
-            <th class="text-start sorttable_numeric">Team Number</th>
-            <th>Team Alias</th>
+            <th scope="col" class="text-start sorttable_numeric">Team Number</th>
+            <th scope="col" class="sorttable_numeric">Team Alias</th>
+            <th scope="col">Delete</th>
           </tr>
         </thead>
         <tbody class=" table-group-divider">
@@ -71,12 +69,19 @@ require 'inc/header.php';
     let tbodyRef = document.getElementById(tableId).querySelector('tbody');
     tbodyRef.innerHTML = "";
     for (let entry of teamAliasList) {
-      let row = "";
-      row += "<td class='text-start'>" + "<a href='teamLookup.php?teamNum=" + entry["teamnumber"] + "'>" + entry["teamnumber"] + "</a>";
-      row += "</td>";
-      row += "<td>" + entry["aliasnumber"] + "</td>";
+      let key = entry["teamnumber"].trim();
+      let row = tbodyRef.insertRow();
+      row.id = key + "_row";
+      row.innerHTML = "";
+      row.innerHTML += "<td class='text-start'>" + "<a href='teamLookup.php?teamNum=" + entry["teamnumber"] + "'>" + entry["teamnumber"] + "</a>" + "</td>";
+      row.innerHTML += "<td>" + entry["aliasnumber"] + "</td>";
+      row.innerHTML += "<td> <button id='" + key + "_delete' value='" + key + "' class='btn btn-danger' type='button'>Delete</button></td>";
 
-      tbodyRef.insertRow().innerHTML = row;
+      // Add delete button
+      document.getElementById(key + "_delete").addEventListener('click', function () {
+        console.log("Deleted " + this.value);
+        deleteTeamAlias(tableId, this.value);
+      });
     }
 
     const teamColumn = 0;
@@ -182,14 +187,6 @@ require 'inc/header.php';
       let aliasNum = document.getElementById("enterAliasNumber").value.trim();
       if (validateTeamNumber(teamNum, null) > 0 && validateTeamNumber(aliasNum, null) > 0) {
         addTeamAlias(tableId, teamNum, aliasNum);
-      }
-    });
-
-    // Remove the team alias
-    document.getElementById("deleteTeamAlias").addEventListener('click', function () {
-      let teamAlias = document.getElementById("enterTeamNumber").value.trim();
-      if (teamAlias != "") {
-        deleteTeamAlias(tableId, teamAlias);
       }
     });
 

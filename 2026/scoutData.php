@@ -18,10 +18,7 @@ require 'inc/header.php';
         <input id="enterScoutName" class="form-control me-2" type="text" placeholder="First name, last init."
           aria-label="Scout Name">
         <div class="input-group-append">
-          <button id="addScoutName" class="btn btn-primary me-2" type="button">Add</button>
-        </div>
-        <div class="input-group-append">
-          <button id="deleteScoutName" class="btn btn-primary me-2" type="button">Delete</button>
+          <button id="addScoutName" class="btn btn-primary me-2" type="button">Add Scout</button>
         </div>
         <div class="input-group-append">
           <button id="writeScoutNameJSON" class="btn btn-primary" type="button">Write File</button>
@@ -43,7 +40,8 @@ require 'inc/header.php';
       <table id="scoutTable" class="table table-striped table-bordered table-hover text-center sortable">
         <thead>
           <tr>
-            <th class="text-start sorttable_numeric">Scout Name</th>
+            <th scope="col" class="text-start sorttable_numeric">Scout Name</th>
+            <th scope="col">Delete</th>
           </tr>
         </thead>
         <tbody class=" table-group-divider">
@@ -70,10 +68,18 @@ require 'inc/header.php';
     let tbodyRef = document.getElementById(tableId).querySelector('tbody');
     tbodyRef.innerHTML = "";
     for (let entry of scoutNameList) {
-      let row = "";
-      row += "<td class='text-start'>" + entry["scoutname"] + "</td>";
+      let key = entry["scoutname"].replace(' ', '_');
+      let row = tbodyRef.insertRow();
+      row.id = key + "_row";
+      row.innerHTML = "";
+      row.innerHTML += "<td class='text-start'>" + entry["scoutname"] + "</td>";
+      row.innerHTML += "<td> <button id='" + key + "_delete' value='" + key + "' class='btn btn-danger' type='button'>Delete</button></td>";
 
-      tbodyRef.insertRow().innerHTML = row;
+      // Add delete button
+      document.getElementById(key + "_delete").addEventListener('click', function () {
+        console.log("Deleted " + this.value);
+        deleteScoutName(tableId, this.value);
+      });
     }
 
     // script instructions say this is needed, but it breaks table header sorting
@@ -165,14 +171,6 @@ require 'inc/header.php';
       let scoutName = document.getElementById("enterScoutName").value.trim();
       if (scoutName != "") {
         addScoutName(tableId, scoutName);
-      }
-    });
-
-    // Remove the scout name
-    document.getElementById("deleteScoutName").addEventListener('click', function () {
-      let scoutName = document.getElementById("enterScoutName").value.trim();
-      if (scoutName != "") {
-        deleteScoutName(tableId, scoutName);
       }
     });
 
