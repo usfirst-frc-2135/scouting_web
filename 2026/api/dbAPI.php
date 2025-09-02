@@ -23,6 +23,18 @@ else if (isset($_POST["getDBStatus"]))
   $stat = $db->getDBStatus();
   echo json_encode($stat);
 }
+else if (isset($_POST["writeScoutNameJSON"]))
+{
+  $db->writeJSONToFile($_POST["writeScoutNameJSON"], $_POST["filename"]);
+  $stat = $db->getDBStatus();
+  echo json_encode($stat);
+}
+else if (isset($_POST["writeTeamAliasJSON"]))
+{
+  $db->writeJSONToFile($_POST["writeTeamAliasJSON"], $_POST["filename"]);
+  $stat = $db->getDBStatus();
+  echo json_encode($stat);
+}
 else if (isset($_POST["writeConfig"]))
 {
   $db->writeDbConfig(json_decode($_POST["writeConfig"]));

@@ -778,6 +778,30 @@ class dbHandler
     }
   }
 
+  public function writeJSONToFile($dat, $name)
+  {
+    // Write ini file string to actual file
+    if ($fp = fopen($name, 'w'))
+    {
+      $startTime = microtime(True);
+      do
+      {
+        $writeLock = flock($fp, LOCK_EX);
+        if (!$writeLock)
+        {
+          usleep(round(21350));
+        }
+      } while ((!$writeLock) and ((microtime(True) - $startTime) < 5));
+
+      if ($writeLock)
+      {
+        fwrite($fp, $dat);
+        flock($fp, LOCK_UN);
+      }
+    }
+    fclose($fp);
+  }
+
   public function createAliasTable()
   {
     error_log("Creating Alias Table");

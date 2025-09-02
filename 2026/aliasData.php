@@ -21,7 +21,10 @@ require 'inc/header.php';
           <button id="addTeamAlias" class="btn btn-primary me-2" type="button">Add</button>
         </div>
         <div class="input-group-append">
-          <button id="deleteTeamAlias" class="btn btn-primary" type="button">Delete</button>
+          <button id="deleteTeamAlias" class="btn btn-primary me-2" type="button">Delete</button>
+        </div>
+        <div class="input-group-append">
+          <button id="writeTeamAliasJSON" class="btn btn-primary" type="button">Write File</button>
         </div>
       </div>
     </div>
@@ -56,21 +59,6 @@ require 'inc/header.php';
 <!-- Javascript page handlers -->
 
 <script>
-
-  // Scan HTML table and covert to JSON
-  function tableToJSON(tableId) {
-    const table = document.getElementById(tableId);
-    const headers = Array.from(table.querySelectorAll('th')).map(th => th.textContent.trim());
-    const rows = Array.from(table.querySelectorAll('tr')).slice(1); // Skip header row
-
-    return rows.map(row => {
-      const cells = Array.from(row.querySelectorAll('td'));
-      return headers.reduce((obj, header, index) => {
-        obj[header] = cells[index]?.textContent.trim() || "";
-        return obj;
-      }, {});
-    });
-  }
 
   // Build the team alias table
   function loadAliasDataTable(tableId, teamAliasList) {
@@ -131,6 +119,20 @@ require 'inc/header.php';
     });
   }
 
+  // Retrieve team aliases and write out file
+  function writeTeamAliasFile(tableId, fileName) {
+    console.log("==> aliasData: writeTeamAliasFile()");
+    jsonTable = tableToJSON(tableId);
+    console.log(jsonTable);
+
+    $.post("api/dbAPI.php", {
+      writeTeamAliasJSON: JSON.stringify(jsonTable),
+      filename: fileName
+    }, function (dbStatus) {
+      console.log("=> writeTeamAliasFile");
+    });
+  }
+
   // Retrieve data and build team and alias table
   function buildAliasTable(tableId) {
     $.get("api/dbReadAPI.php", {
@@ -139,9 +141,6 @@ require 'inc/header.php';
       console.log("=> eventAliasNames");
       let jAliasNames = JSON.parse(eventAliasNames);
       loadAliasDataTable(tableId, jAliasNames);
-      jsonTable = tableToJSON(tableId);
-      // TODO: use php to write json to file
-      console.log(jsonTable);
     });
   }
 
@@ -155,6 +154,7 @@ require 'inc/header.php';
 
     const tableId = "aliasTable";
     let teamAliasList = [];
+    const teamAliasFileName = "../json/teamAliases.json";
 
     // Get the list of teams and add the team names 
     buildAliasTable(tableId);
@@ -193,6 +193,11 @@ require 'inc/header.php';
         deleteTeamAlias(tableId, teamAlias);
       }
     });
+
+    // Write out team alias JSON file to server folder
+    document.getElementById("writeTeamAliasJSON").addEventListener('click', function () {
+      writeTeamAliasFile(tableId, teamAliasFileName);
+    });
   });
 
 </script>
@@ -200,4 +205,5 @@ require 'inc/header.php';
 <script src="./scripts/compareMatchNumbers.js"></script>
 <script src="./scripts/compareTeamNumbers.js"></script>
 <script src="./scripts/sortFrcTables.js"></script>
+<script src="./scripts/tableToJSON.js"></script>
 <script src="./scripts/validateTeamNumber.js"></script>

@@ -21,7 +21,10 @@ require 'inc/header.php';
           <button id="addScoutName" class="btn btn-primary me-2" type="button">Add</button>
         </div>
         <div class="input-group-append">
-          <button id="deleteScoutName" class="btn btn-primary" type="button">Delete</button>
+          <button id="deleteScoutName" class="btn btn-primary me-2" type="button">Delete</button>
+        </div>
+        <div class="input-group-append">
+          <button id="writeScoutNameJSON" class="btn btn-primary" type="button">Write File</button>
         </div>
       </div>
     </div>
@@ -109,6 +112,20 @@ require 'inc/header.php';
     });
   }
 
+  // Retrieve scout names and write out file
+  function writeScoutNameFile(tableId, fileName) {
+    console.log("==> scoutData: writeScoutNameFile()");
+    jsonTable = tableToJSON(tableId);
+    console.log(jsonTable);
+
+    $.post("api/dbAPI.php", {
+      writeScoutNameJSON: JSON.stringify(jsonTable),
+      filename: fileName
+    }, function (dbStatus) {
+      console.log("=> writeScoutNameFile");
+    });
+  }
+
   // Retrieve data and build scout name table
   function buildScoutTable(tableId) {
     $.get("api/dbReadAPI.php", {
@@ -130,6 +147,7 @@ require 'inc/header.php';
 
     const tableId = "scoutTable";
     let scoutNameList = [];
+    const scoutFileName = "../json/scoutNames.json";
 
     // Get the list of teams and add the team names 
     buildScoutTable(tableId);
@@ -158,6 +176,13 @@ require 'inc/header.php';
         deleteScoutName(tableId, scoutName);
       }
     });
+
+    // Write out scout name JSON file to server folder
+    document.getElementById("writeScoutNameJSON").addEventListener('click', function () {
+      writeScoutNameFile(tableId, scoutFileName);
+    });
   });
 
 </script>
+
+<script src="./scripts/tableToJSON.js"></script>
