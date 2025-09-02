@@ -173,7 +173,7 @@ require 'inc/header.php';
       row.innerHTML += "<td>" + matchData["matchnumber"] + "</td>";
       row.innerHTML += "<td>" + matchData["teamnumber"] + "</td>";
       row.innerHTML += "<td>" + matchData["scoutname"] + "</td>";
-      row.innerHTML += "<td> <button id='" + key + "_delete' value='" + key + "' class='btn btn-danger' type='button'>Delete</button></td?";
+      row.innerHTML += "<td> <button id='" + key + "_delete' value='" + key + "' class='btn btn-danger' type='button'>Delete</button></td>";
 
       // Add delete button
       document.getElementById(key + "_delete").addEventListener('click', function () {
