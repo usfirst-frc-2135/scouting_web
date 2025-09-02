@@ -164,8 +164,8 @@ if (isset($_POST["teamNum"]) and isset($_FILES["teamPic"]))
     // Check that the size of the file is less than the number below
     if ($_FILES["teamPic"]["size"] < 100000000)
     {
-      // Check that the file type is a JPG or PNG
-      if ($imageFileType === "jpg" || $imageFileType === "JPG" || $imageFileType === "PNG" || $imageFileType === "png" || $imageFileType === "jpeg" || $imageFileType === "JPEG" || $imageFileType === "gif" || $imageFileType === "GIF")
+      // Check that the file type is a JPG, JPEG, GIF or PNG
+      if ($imageFileType === "jpg" || $imageFileType === "jpeg" || $imageFileType === "png" || $imageFileType === "gif")
       {
         $i = 0;
         $fileValid = false;
