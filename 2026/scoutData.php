@@ -40,7 +40,7 @@ require 'inc/header.php';
       <table id="scoutTable" class="table table-striped table-bordered table-hover text-center sortable">
         <thead>
           <tr>
-            <th scope="col" class="text-start sorttable_numeric">Scout Name</th>
+            <th scope="col" class="text-start">Scout Name</th>
             <th scope="col">Delete</th>
           </tr>
         </thead>
@@ -83,7 +83,7 @@ require 'inc/header.php';
     }
 
     // script instructions say this is needed, but it breaks table header sorting
-    sorttable.makeSortable(document.getElementById(tableId));
+    // sorttable.makeSortable(document.getElementById(tableId));
   }
 
   // Attempt to add the scout name to the scout table
