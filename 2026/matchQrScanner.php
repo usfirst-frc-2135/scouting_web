@@ -159,9 +159,9 @@ require 'inc/header.php';
 
     if (!Object.prototype.hasOwnProperty.call(scannedMatches, key)) {
       // Modify global variables
-      if (matchData["eventcode"] === frcEventCode) {
-        console.warn("Event code does not match the one in db_config!");
-        alert("QR event code does not match the one in db_config!"); // this is a passive notification - return if we want to prevent this
+      if (matchData["eventcode"] !== frcEventCode) {
+        console.warn("Event code does not match the one in db_config! - " + frcEventCode + "/" + matchData["eventcode"]);
+        alert("QR event code does not match the one in db_config! - " + frcEventCode + "/" + matchData["eventcode"]); // this is a passive notification - return if we want to prevent this
       }
       scannedMatches[key] = matchData;
       updateScannedMatchCount(scannedMatches);
