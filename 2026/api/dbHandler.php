@@ -835,7 +835,7 @@ class dbHandler
       try
       {
         error_log("dbHandler: readDbConfig: reading db_config file");
-        $ini_arr = parse_ini_file(filename: $this->dbIniFile);
+        $ini_arr = parse_ini_file($this->dbIniFile);
       }
       catch (Exception $e)
       {

@@ -114,7 +114,7 @@ require 'inc/header.php';
 
   // Retrieve scout names and write out file
   function writeScoutNameFile(tableId, fileName) {
-    console.log("==> scoutData: writeScoutNameFile()");
+    console.log("==> scoutData: writeScoutNameFile() - " + fileName);
     jsonTable = tableToJSON(tableId);
     console.log(jsonTable);
 
@@ -122,7 +122,7 @@ require 'inc/header.php';
       writeScoutNameJSON: JSON.stringify(jsonTable),
       filename: fileName
     }, function (dbStatus) {
-      console.log("=> writeScoutNameFile");
+      console.log("=> writeScoutNameFile - DONE");
     });
   }
 
@@ -147,7 +147,6 @@ require 'inc/header.php';
 
     const tableId = "scoutTable";
     let scoutNameList = [];
-    const scoutFileName = "../json/scoutNames.json";
 
     // Get the list of teams and add the team names 
     buildScoutTable(tableId);
@@ -179,7 +178,8 @@ require 'inc/header.php';
 
     // Write out scout name JSON file to server folder
     document.getElementById("writeScoutNameJSON").addEventListener('click', function () {
-      writeScoutNameFile(tableId, scoutFileName);
+      const filename = "../json/" + frcEventCode + "_" + "scoutNames.json";
+      writeScoutNameFile(tableId, filename);
     });
   });
 

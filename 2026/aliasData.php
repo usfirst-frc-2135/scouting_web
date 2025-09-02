@@ -121,7 +121,7 @@ require 'inc/header.php';
 
   // Retrieve team aliases and write out file
   function writeTeamAliasFile(tableId, fileName) {
-    console.log("==> aliasData: writeTeamAliasFile()");
+    console.log("==> aliasData: writeTeamAliasFile() - " + fileName);
     jsonTable = tableToJSON(tableId);
     console.log(jsonTable);
 
@@ -129,7 +129,7 @@ require 'inc/header.php';
       writeTeamAliasJSON: JSON.stringify(jsonTable),
       filename: fileName
     }, function (dbStatus) {
-      console.log("=> writeTeamAliasFile");
+      console.log("=> writeTeamAliasFile - DONE");
     });
   }
 
@@ -154,7 +154,6 @@ require 'inc/header.php';
 
     const tableId = "aliasTable";
     let teamAliasList = [];
-    const teamAliasFileName = "../json/teamAliases.json";
 
     // Get the list of teams and add the team names 
     buildAliasTable(tableId);
@@ -196,7 +195,8 @@ require 'inc/header.php';
 
     // Write out team alias JSON file to server folder
     document.getElementById("writeTeamAliasJSON").addEventListener('click', function () {
-      writeTeamAliasFile(tableId, teamAliasFileName);
+      const filename = "../json/" + frcEventCode + "_" + "teamAliases.json";
+      writeTeamAliasFile(tableId, filename);
     });
   });
 

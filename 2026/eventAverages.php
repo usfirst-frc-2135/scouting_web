@@ -505,7 +505,7 @@ require 'inc/header.php';
       }
 
       let hiddenElement = document.createElement('a');
-      let filename = csvName.trim() + ".csv";
+      let filename = frcEventCode + "_" + csvName.trim() + ".csv";
       console.log("eventAverages: createCSVFile() CSV filename: " + filename);
       hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csvStr);
       hiddenElement.target = '_blank';
