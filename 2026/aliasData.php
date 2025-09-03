@@ -135,6 +135,7 @@ require 'inc/header.php';
       filename: fileName
     }, function (dbStatus) {
       console.log("=> writeTeamAliasFile - DONE");
+      alert("Team Alias JSON file written to: \n\n     " + fileName);
     });
   }
 

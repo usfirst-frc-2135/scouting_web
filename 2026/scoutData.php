@@ -129,6 +129,7 @@ require 'inc/header.php';
       filename: fileName
     }, function (dbStatus) {
       console.log("=> writeScoutNameFile - DONE");
+      alert("Scout Names JSON file written to: \n\n     " + fileName);
     });
   }
 
