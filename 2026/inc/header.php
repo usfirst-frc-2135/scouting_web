@@ -100,6 +100,7 @@
                   Averages</a></li>
               <li><a class="dropdown-item text-white-50 text-end text-sm-start" data-toggle="pill" href="./eventCoprData.php">Event
                   COPRs</a></li>
+              <li><a class="dropdown-item text-white-50 text-end text-sm-start" data-toggle="pill" href="./teamCompare.php">Team Compare </a></li>
             </ul>
           </li>
 
