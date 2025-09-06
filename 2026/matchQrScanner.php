@@ -96,33 +96,33 @@ require 'inc/header.php';
     // Game or year-specific fields below here!
 
     // Autonomous
-    // matchData["autonStartPos"] = qrList[1];   // UNUSED
+    matchData["autonStartPos"] = qrList[1];   // UNUSED
     matchData["autonLeave"] = qrList[2];
-    // matchData["reefzoneAB"] = qrList[3];      // UNUSED
-    // matchData["reefzoneCD"] = qrList[4];      // UNUSED
-    // matchData["reefzoneEF"] = qrList[5];      // UNUSED
-    // matchData["reefzoneGH"] = qrList[6];      // UNUSED
-    // matchData["reefzoneIJ"] = qrList[7];      // UNUSED
-    // matchData["reefzoneKL"] = qrList[8];      // UNUSED
+    matchData["reefzoneAB"] = qrList[3];      // UNUSED
+    matchData["reefzoneCD"] = qrList[4];      // UNUSED
+    matchData["reefzoneEF"] = qrList[5];      // UNUSED
+    matchData["reefzoneGH"] = qrList[6];      // UNUSED
+    matchData["reefzoneIJ"] = qrList[7];      // UNUSED
+    matchData["reefzoneKL"] = qrList[8];      // UNUSED
     matchData["autonCoralL1"] = qrList[9];
     matchData["autonCoralL2"] = qrList[10];
     matchData["autonCoralL3"] = qrList[11];
     matchData["autonCoralL4"] = qrList[12];
     matchData["autonAlgaeNet"] = qrList[13];
     matchData["autonAlgaeProcessor"] = qrList[14];
-    // matchData["autonCoralFloor"] = qrList[15];    // UNUSED
-    // matchData["autonCoralStation"] = qrList[16];  // UNUSED
-    // matchData["autonAlgaeFloor"] = qrList[17];    // UNUSED
-    // matchData["autonAlgaeReef"] = qrList[18];     // UNUSED
+    matchData["autonCoralFloor"] = qrList[15];    // UNUSED
+    matchData["autonCoralStation"] = qrList[16];  // UNUSED
+    matchData["autonAlgaeFloor"] = qrList[17];    // UNUSED
+    matchData["autonAlgaeReef"] = qrList[18];     // UNUSED
 
     // Teleop
     matchData["acquiredCoral"] = qrList[19];
     matchData["acquiredAlgae"] = qrList[20];
-    // matchData["teleopAlgaeFloorPickup"] = qrList[21]; // UNUSED
-    // matchData["teleopCoralFloorPickup"] = qrList[22]; // UNUSED
-    // matchData["teleopKnockOffAlgae"] = qrList[23];    // UNUSED
-    // matchData["teleopAlgaeFromReef"] = qrList[24];    // UNUSED
-    // matchData["teleopHoldBoth"] = qrList[25];         // UNUSED
+    matchData["teleopAlgaeFloorPickup"] = qrList[21]; // UNUSED
+    matchData["teleopCoralFloorPickup"] = qrList[22]; // UNUSED
+    matchData["teleopKnockOffAlgae"] = qrList[23];    // UNUSED
+    matchData["teleopAlgaeFromReef"] = qrList[24];    // UNUSED
+    matchData["teleopHoldBoth"] = qrList[25];         // UNUSED
     matchData["teleopCoralL1"] = qrList[26];
     matchData["teleopCoralL2"] = qrList[27];
     matchData["teleopCoralL3"] = qrList[28];
@@ -131,17 +131,17 @@ require 'inc/header.php';
     matchData["teleopAlgaeProcessor"] = qrList[31];
 
     // Defense notes
-    // matchData["defenseLevel"] = qrList[32];           // UNUSED
+    matchData["defenseLevel"] = qrList[32];           // UNUSED
 
     // Endgame
     matchData["cageClimb"] = qrList[33];
-    // matchData["startClimb"] = qrList[34];             // UNUSED
+    matchData["startClimb"] = qrList[34];             // UNUSED
 
     // Overall
     matchData["died"] = qrList[35];
-    // qrList[36] see above
-    // qrList[37] see above
-    // qrList[38] see above
+    qrList[36] 
+    qrList[37] 
+    qrList[38] 
     matchData["comment"] = qrList[39];
     return matchData;
   }
