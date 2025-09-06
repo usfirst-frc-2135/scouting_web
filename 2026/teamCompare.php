@@ -40,235 +40,235 @@ require 'inc/header.php';
                 <canvas id="autoChart" width="400" height="360"></canvas>
               </div>
             </div>
+          </div>
+
+        </div>
       </div>
-
     </div>
-  </div>
-</div>
 
-<?php include 'inc/footer.php'; ?>
+    <?php include 'inc/footer.php'; ?>
 
-<!-- Javascript page handlers -->
+    <!-- Javascript page handlers -->
 
 
-<script>
+    <script>
 
-  let autoChart;
-  let teleopChart;
-  let endgameChart;
+      let autoChart;
+      let teleopChart;
+      let endgameChart;
 
-  // Round data to no more than two decimal digits
-  function roundTwoPlaces(val) {
-    return Math.round((val + Number.EPSILON) * 100) / 100;
-  }
-
-  ///// AUTON GRAPH STARTS HERE /////
-
-  function loadAutonGraph(matchData) {
-    console.log("==> teamCompare: loadAutonGraph()");
-
-    // Declare variables
-    let matchList = []; // List of matches to use as x labels
-    let datasets = []; // Each entry is a dict with a label and data attribute
-    let autonLeaveTips = []; // holds custom tooltips for auton leave start line data      
-    let autonAlgaeProcTips = []; // holds custom tooltips for auton algae processor
-    let autonAlgaeNetTips = []; // holds custom tooltips for auton algae net
-    let autonCoralL1Tips = []; // holds custom tooltips for auton coral L1
-    let autonCoralL2Tips = []; // holds custom tooltips for auton coral L2
-    let autonCoralL3Tips = []; // holds custom tooltips for auton coral L3
-    let autonCoralL4Tips = []; // holds custom tooltips for auton coral 4      
-
-    datasets.push({ label: "Leave", data: [], backgroundColor: '#F7CF58' });      // Yellow
-    datasets.push({ label: "Processor", data: [], backgroundColor: '#B4E7D6' });  // Teal - algae
-    datasets.push({ label: "Net", data: [], backgroundColor: '#4C9F7C' });        // Darker Teal - algae
-    datasets.push({ label: "L1", data: [], backgroundColor: '#D98AB3' });         // Light pink - coral branch
-    datasets.push({ label: "L2", data: [], backgroundColor: '#CE649B' });         // Medium light pink - coral branch
-    datasets.push({ label: "L3", data: [], backgroundColor: '#C54282' });         // Medium dark pink - coral branch
-    datasets.push({ label: "L4", data: [], backgroundColor: '#9D3468' });         // Dark pink - coral branch
-
-    // Go thru each matchData QR code string and build up a table of the data, so we can
-    // later sort it so the matches are listed in the right order. 
-    let mydata = [];
-    for (let i = 0; i < matchData.length; i++) {
-      let matchItem = matchData[i];
-      let matchnum = matchItem["matchnumber"];
-      let autonLeave = matchItem["autonLeave"];
-      let autonAlgaeProcessor = matchItem["autonAlgaeProcessor"];
-      let autonAlgaeNet = matchItem["autonAlgaeNet"];
-      let autonCoralOne = matchItem["autonCoralL1"];
-      let autonCoralTwo = matchItem["autonCoralL2"];
-      let autonCoralThree = matchItem["autonCoralL3"];
-      let autonCoralFour = matchItem["autonCoralL4"];
-      mydata.push({
-        matchnum: matchnum,
-        leave: autonLeave,
-        processor: autonAlgaeProcessor,
-        net: autonAlgaeNet,
-        one: autonCoralOne,
-        two: autonCoralTwo,
-        three: autonCoralThree,
-        four: autonCoralFour
-      });
-    }
-
-    mydata.sort(function (rowA, rowB) {
-      return (compareMatchNumbers(rowA["matchnum"], rowB["matchnum"]));
-    });
-
-    // Build data sets; go thru each mydata row and populate the graph datasets.
-    for (let i = 0; i < mydata.length; i++) {
-      let matchnum = mydata[i]["matchnum"];
-      matchList.push(matchnum);
-      let tipStr = "";
-
-      function storeAndGetTip(value, tipPrefix, dataset, yesNo) {
-        dataset.push(value);
-        if (yesNo) {
-          value = (value) ? "Yes" : "No";
-        }
-        return tipPrefix + value;
+      // Round data to no more than two decimal digits
+      function roundTwoPlaces(val) {
+        return Math.round((val + Number.EPSILON) * 100) / 100;
       }
 
-      autonLeaveTips.push({ xlabel: matchnum, tip: storeAndGetTip(mydata[i]["leave"], "Leave=", datasets[0]["data"], true) });
-      autonAlgaeProcTips.push({ xlabel: matchnum, tip: storeAndGetTip(mydata[i]["processor"], "Processor=", datasets[1]["data"], false) });
-      autonAlgaeNetTips.push({ xlabel: matchnum, tip: storeAndGetTip(mydata[i]["net"], "Net=", datasets[2]["data"], false) });
-      autonCoralL1Tips.push({ xlabel: matchnum, tip: storeAndGetTip(mydata[i]["one"], "L1=", datasets[3]["data"], false) });
-      autonCoralL2Tips.push({ xlabel: matchnum, tip: storeAndGetTip(mydata[i]["two"], "L2=", datasets[4]["data"], false) });
-      autonCoralL3Tips.push({ xlabel: matchnum, tip: storeAndGetTip(mydata[i]["three"], "L3=", datasets[5]["data"], false) });
-      autonCoralL4Tips.push({ xlabel: matchnum, tip: storeAndGetTip(mydata[i]["four"], "L4=", datasets[6]["data"], false) });
-    }
+      ///// AUTON GRAPH STARTS HERE /////
 
-    // Define the graph as a line chart:
-    if (autoChart !== undefined) {
-      autoChart.destroy();
-    }
+      function loadAutonGraph(matchData) {
+        console.log("==> teamCompare: loadAutonGraph()");
 
-    // Create the Auton graph
-    const ctx = document.getElementById('autoChart').getContext('2d');
-    autoChart = new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: matchList,
-        datasets: datasets
-      },
-      options: {
-        scales: {
-          x: { stacked: true },
-          y: { stacked: true, min: 0, ticks: { precision: 0 }, max: 5 } // Set Y axis maximum value - 4 coral + algae in  auto plus leave
-        },
-        plugins: {
-          tooltip: {
-            callbacks: {  // Special tooltip handling
-              label: function (tooltipItem, ddata) {
+        // Declare variables
+        let matchList = []; // List of matches to use as x labels
+        let datasets = []; // Each entry is a dict with a label and data attribute
+        let autonLeaveTips = []; // holds custom tooltips for auton leave start line data      
+        let autonAlgaeProcTips = []; // holds custom tooltips for auton algae processor
+        let autonAlgaeNetTips = []; // holds custom tooltips for auton algae net
+        let autonCoralL1Tips = []; // holds custom tooltips for auton coral L1
+        let autonCoralL2Tips = []; // holds custom tooltips for auton coral L2
+        let autonCoralL3Tips = []; // holds custom tooltips for auton coral L3
+        let autonCoralL4Tips = []; // holds custom tooltips for auton coral 4      
 
-                function getTip(matchno, tipList) {
-                  for (let i = 0; i < tipList.length; i++)
-                    if (tipList[i].xlabel === matchno)
-                      return tipList[i].tip;
+        datasets.push({ label: "Leave", data: [], backgroundColor: '#F7CF58' });      // Yellow
+        datasets.push({ label: "Processor", data: [], backgroundColor: '#B4E7D6' });  // Teal - algae
+        datasets.push({ label: "Net", data: [], backgroundColor: '#4C9F7C' });        // Darker Teal - algae
+        datasets.push({ label: "L1", data: [], backgroundColor: '#D98AB3' });         // Light pink - coral branch
+        datasets.push({ label: "L2", data: [], backgroundColor: '#CE649B' });         // Medium light pink - coral branch
+        datasets.push({ label: "L3", data: [], backgroundColor: '#C54282' });         // Medium dark pink - coral branch
+        datasets.push({ label: "L4", data: [], backgroundColor: '#9D3468' });         // Dark pink - coral branch
+
+        // Go thru each matchData QR code string and build up a table of the data, so we can
+        // later sort it so the matches are listed in the right order. 
+        let mydata = [];
+        for (let i = 0; i < matchData.length; i++) {
+          let matchItem = matchData[i];
+          let matchnum = matchItem["matchnumber"];
+          let autonLeave = matchItem["autonLeave"];
+          let autonAlgaeProcessor = matchItem["autonAlgaeProcessor"];
+          let autonAlgaeNet = matchItem["autonAlgaeNet"];
+          let autonCoralOne = matchItem["autonCoralL1"];
+          let autonCoralTwo = matchItem["autonCoralL2"];
+          let autonCoralThree = matchItem["autonCoralL3"];
+          let autonCoralFour = matchItem["autonCoralL4"];
+          mydata.push({
+            matchnum: matchnum,
+            leave: autonLeave,
+            processor: autonAlgaeProcessor,
+            net: autonAlgaeNet,
+            one: autonCoralOne,
+            two: autonCoralTwo,
+            three: autonCoralThree,
+            four: autonCoralFour
+          });
+        }
+
+        mydata.sort(function (rowA, rowB) {
+          return (compareMatchNumbers(rowA["matchnum"], rowB["matchnum"]));
+        });
+
+        // Build data sets; go thru each mydata row and populate the graph datasets.
+        for (let i = 0; i < mydata.length; i++) {
+          let matchnum = mydata[i]["matchnum"];
+          matchList.push(matchnum);
+          let tipStr = "";
+
+          function storeAndGetTip(value, tipPrefix, dataset, yesNo) {
+            dataset.push(value);
+            if (yesNo) {
+              value = (value) ? "Yes" : "No";
+            }
+            return tipPrefix + value;
+          }
+
+          autonLeaveTips.push({ xlabel: matchnum, tip: storeAndGetTip(mydata[i]["leave"], "Leave=", datasets[0]["data"], true) });
+          autonAlgaeProcTips.push({ xlabel: matchnum, tip: storeAndGetTip(mydata[i]["processor"], "Processor=", datasets[1]["data"], false) });
+          autonAlgaeNetTips.push({ xlabel: matchnum, tip: storeAndGetTip(mydata[i]["net"], "Net=", datasets[2]["data"], false) });
+          autonCoralL1Tips.push({ xlabel: matchnum, tip: storeAndGetTip(mydata[i]["one"], "L1=", datasets[3]["data"], false) });
+          autonCoralL2Tips.push({ xlabel: matchnum, tip: storeAndGetTip(mydata[i]["two"], "L2=", datasets[4]["data"], false) });
+          autonCoralL3Tips.push({ xlabel: matchnum, tip: storeAndGetTip(mydata[i]["three"], "L3=", datasets[5]["data"], false) });
+          autonCoralL4Tips.push({ xlabel: matchnum, tip: storeAndGetTip(mydata[i]["four"], "L4=", datasets[6]["data"], false) });
+        }
+
+        // Define the graph as a line chart:
+        if (autoChart !== undefined) {
+          autoChart.destroy();
+        }
+
+        // Create the Auton graph
+        const ctx = document.getElementById('autoChart').getContext('2d');
+        autoChart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: matchList,
+            datasets: datasets
+          },
+          options: {
+            scales: {
+              x: { stacked: true },
+              y: { stacked: true, min: 0, ticks: { precision: 0 }, max: 5 } // Set Y axis maximum value - 4 coral + algae in  auto plus leave
+            },
+            plugins: {
+              tooltip: {
+                callbacks: {  // Special tooltip handling
+                  label: function (tooltipItem, ddata) {
+
+                    function getTip(matchno, tipList) {
+                      for (let i = 0; i < tipList.length; i++)
+                        if (tipList[i].xlabel === matchno)
+                          return tipList[i].tip;
+                    }
+
+                    let matchnum = tooltipItem.label;
+                    let tipStr = datasets[tooltipItem.datasetIndex].label;
+                    switch (tooltipItem.datasetIndex) {
+                      case 0: return getTip(matchnum, autonLeaveTips);
+                      case 1: return getTip(matchnum, autonAlgaeProcTips);
+                      case 2: return getTip(matchnum, autonAlgaeNetTips);
+                      case 3: return getTip(matchnum, autonCoralL1Tips);
+                      case 4: return getTip(matchnum, autonCoralL2Tips);
+                      case 5: return getTip(matchnum, autonCoralL3Tips);
+                      case 6: return getTip(matchnum, autonCoralL4Tips);
+                      default: return "missing tip string!"
+                    }
+                    return tipStr;
+                  }
                 }
-
-                let matchnum = tooltipItem.label;
-                let tipStr = datasets[tooltipItem.datasetIndex].label;
-                switch (tooltipItem.datasetIndex) {
-                  case 0: return getTip(matchnum, autonLeaveTips);
-                  case 1: return getTip(matchnum, autonAlgaeProcTips);
-                  case 2: return getTip(matchnum, autonAlgaeNetTips);
-                  case 3: return getTip(matchnum, autonCoralL1Tips);
-                  case 4: return getTip(matchnum, autonCoralL2Tips);
-                  case 5: return getTip(matchnum, autonCoralL3Tips);
-                  case 6: return getTip(matchnum, autonCoralL4Tips);
-                  default: return "missing tip string!"
-                }
-                return tipStr;
               }
             }
           }
+        });
+      }
+
+      ///// AUTON GRAPH ENDS HERE /////
+
+
+      // MAIN PAGE PROCESSORS HERE
+
+
+
+      // Check if our URL directs to a specific team
+      function checkURLForTeamSpec() {
+        console.log("=> teamCompare: checkURLForTeamSpec()");
+        let sp = new URLSearchParams(window.location.search);
+        if (sp.has('teamNum')) {
+          return sp.get('teamNum');
         }
+        return null;
       }
-    });
-  }
 
-  ///// AUTON GRAPH ENDS HERE /////
-
-
-  // MAIN PAGE PROCESSORS HERE
-
-
-
-  // Check if our URL directs to a specific team
-  function checkURLForTeamSpec() {
-    console.log("=> teamCompare: checkURLForTeamSpec()");
-    let sp = new URLSearchParams(window.location.search);
-    if (sp.has('teamNum')) {
-      return sp.get('teamNum');
-    }
-    return null;
-  }
-
-  function clearTeamComparePage() {
-    // Clear existing data
-    document.getElementById("teamTitle").innerText = "";
-    document.getElementById("autonTable").querySelector('tbody').innerHTML = "";
-  }
-
-  // This is the main function that runs when we want to load a team 
-  function buildTeamComparePage(teamNum) {
-    console.log("==> teamCompare: buildTeamComparePage()");
-    clearTeamComparePage();
-
-    // Get team name from TBA
-    $.get("api/tbaAPI.php", {
-      getTeamInfo: teamNum
-    }).done(function (teamInfo) {
-      console.log("=> getTeamInfo:\n" + teamInfo);
-      let teamName = "";
-      if (teamInfo === null) {
-        return alert("Can't load teamName from TBA; check if TBA Key was set in db_config");
+      function clearTeamComparePage() {
+        // Clear existing data
+        document.getElementById("teamTitle").innerText = "";
+        document.getElementById("autonTable").querySelector('tbody').innerHTML = "";
       }
-      let jTeamInfo = JSON.parse(teamInfo)["response"];
-      teamName += " " + jTeamInfo["nickname"];
-      console.log("==> teamCompare: for " + teamNum + teamName);
-      document.getElementById("teamTitle").innerHTML = teamNum + teamName;
-    });
-  }
 
-  /////////////////////////////////////////////////////////////////////////////
-  //
-  // Process the generated html
-  //    When the team lookup page load button is pressed
-  //      In parallel, start retrieving each of these for the selected team:
-  //        - Team info (name) from TBA
-  //
-  document.addEventListener("DOMContentLoaded", function () {
+      // This is the main function that runs when we want to load a team 
+      function buildTeamComparePage(teamNum) {
+        console.log("==> teamCompare: buildTeamComparePage()");
+        clearTeamComparePage();
 
-    // Check URL for source team to load
-    let initTeamNumber = checkURLForTeamSpec();
-    if (validateTeamNumber(initTeamNumber, null) > 0) {
-      document.getElementById("enterTeamNumber1").value = initTeamNumber;
-      buildTeamCmparePage(initTeamNumber);
-    }
-
-    // Pressing enter in team number field loads the page
-    let input = document.getElementById("enterTeamNumber1");
-    input.addEventListener("keypress", function (event) {
-      if (event.key === "Enter") {
-        event.preventDefault();
-        document.getElementById("loadTeamButton").click();
+        // Get team name from TBA
+        $.get("api/tbaAPI.php", {
+          getTeamInfo: teamNum
+        }).done(function (teamInfo) {
+          console.log("=> getTeamInfo:\n" + teamInfo);
+          let teamName = "";
+          if (teamInfo === null) {
+            return alert("Can't load teamName from TBA; check if TBA Key was set in db_config");
+          }
+          let jTeamInfo = JSON.parse(teamInfo)["response"];
+          teamName += " " + jTeamInfo["nickname"];
+          console.log("==> teamCompare: for " + teamNum + teamName);
+          document.getElementById("teamTitle").innerHTML = teamNum + teamName;
+        });
       }
-    });
 
-    // Load team data for the number entered
-    document.getElementById("loadTeamButton").addEventListener('click', function () {
-      let teamNum = document.getElementById("enterTeamNumber1").value.trim();
-      if (validateTeamNumber(teamNum, null) > 0) {
-        buildTeamComparePage(teamNum);
-      }
-    });
-  });
-</script>
+      /////////////////////////////////////////////////////////////////////////////
+      //
+      // Process the generated html
+      //    When the team lookup page load button is pressed
+      //      In parallel, start retrieving each of these for the selected team:
+      //        - Team info (name) from TBA
+      //
+      document.addEventListener("DOMContentLoaded", function () {
 
-<script src="./scripts/compareMatchNumbers.js"></script>
-<script src="./scripts/compareTeamNumbers.js"></script>
-<script src="./scripts/sortFrcTables.js"></script>
-<script src="./scripts/matchDataProcessor.js"></script>
-<script src="./scripts/validateTeamNumber.js"></script>
+        // Check URL for source team to load
+        let initTeamNumber = checkURLForTeamSpec();
+        if (validateTeamNumber(initTeamNumber, null) > 0) {
+          document.getElementById("enterTeamNumber1").value = initTeamNumber;
+          buildTeamCmparePage(initTeamNumber);
+        }
+
+        // Pressing enter in team number field loads the page
+        let input = document.getElementById("enterTeamNumber1");
+        input.addEventListener("keypress", function (event) {
+          if (event.key === "Enter") {
+            event.preventDefault();
+            document.getElementById("loadTeamButton").click();
+          }
+        });
+
+        // Load team data for the number entered
+        document.getElementById("loadTeamButton").addEventListener('click', function () {
+          let teamNum = document.getElementById("enterTeamNumber1").value.trim();
+          if (validateTeamNumber(teamNum, null) > 0) {
+            buildTeamComparePage(teamNum);
+          }
+        });
+      });
+    </script>
+
+    <script src="./scripts/compareMatchNumbers.js"></script>
+    <script src="./scripts/compareTeamNumbers.js"></script>
+    <script src="./scripts/sortFrcTables.js"></script>
+    <script src="./scripts/matchDataProcessor.js"></script>
+    <script src="./scripts/validateTeamNumber.js"></script>
