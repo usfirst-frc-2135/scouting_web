@@ -177,7 +177,7 @@ require 'inc/header.php';
 
     // Write out scout name JSON file to server folder
     document.getElementById("writeScoutNameJSON").addEventListener('click', function () {
-      const filename = "../json/" + frcEventCode + "_" + "scoutNames.json";
+      const filename = "../../../json/" + frcEventCode + "_" + "scoutNames.json";
       writeScoutNameFile(tableId, filename);
     });
   });
