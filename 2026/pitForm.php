@@ -123,7 +123,7 @@ require 'inc/header.php';
                   <span>Pit Organization</span>
                   <div class="col-5">
                     <div class="input-group mb-3">
-                      <select id="progLanguage" class="form-select">
+                      <select id="pitOrganization" class="form-select">
                         <option selected value="-1">Choose ...</option>
                         <option value="1">1 - Messy</option>
                         <option value="2">2 - Below average</option>
@@ -139,7 +139,7 @@ require 'inc/header.php';
                   <span>Preparedness/Professionalism</span>
                   <div class="col-5">
                     <div class="input-group mb-3">
-                      <select id="progLanguage" class="form-select">
+                      <select id="preparednessScore" class="form-select">
                         <option selected value="-1">Choose ...</option>
                         <option value="1">1 - Utter chaos</option>
                         <option value="2">2 - Below average</option>
@@ -243,7 +243,7 @@ require 'inc/header.php';
       isError = true;
     }
 
-    if (!document.getElementById("pitScore").value === "-1") {
+    if (!document.getElementById("pitOrganization").value === "-1") {
       if (isError)
         errMsg += ",";
       errMsg += " Pit Organization";
@@ -273,7 +273,7 @@ require 'inc/header.php';
     document.getElementById("spareParts").value = "-1";
     document.getElementById("progLanguage").value = "-1";
     document.getElementById("computerVision").value = "-1";
-    document.getElementById("pitScore").value = "-1";
+    document.getElementById("pitOrganization").value = "-1";
     document.getElementById("preparednessScore").value = "-1";
     document.getElementById("numBatteries").value = "";
   }
@@ -291,7 +291,7 @@ require 'inc/header.php';
     dataToSave["spareparts"] = document.getElementById("spareParts").value;
     dataToSave["proglanguage"] = document.getElementById("progLanguage").value;
     dataToSave["computervision"] = document.getElementById("computerVision").value;
-    dataToSave["pitorg"] = document.getElementById("pitScore1").value;
+    dataToSave["pitorg"] = document.getElementById("pitOrganization").value;
     dataToSave["preparedness"] = document.getElementById("preparednessScore").value;
     dataToSave["numbatteries"] = document.getElementById("numBatteries").value;
 
