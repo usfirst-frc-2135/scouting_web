@@ -139,9 +139,9 @@ require 'inc/header.php';
 
     // Overall
     matchData["died"] = qrList[35];
-    qrList[36] 
-    qrList[37] 
-    qrList[38] 
+    // qrList[36] see above
+    // qrList[37] see above
+    // qrList[38] see above
     matchData["comment"] = qrList[39];
     return matchData;
   }
