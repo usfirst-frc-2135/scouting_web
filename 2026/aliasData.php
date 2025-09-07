@@ -200,7 +200,7 @@ require 'inc/header.php';
 
     // Write out team alias JSON file to server folder
     document.getElementById("writeTeamAliasJSON").addEventListener('click', function () {
-      const filename = "../json/" + frcEventCode + "_" + "teamAliases.json";
+      const filename = "../../../json/" + frcEventCode + "_" + "teamAliases.json";
       writeTeamAliasFile(tableId, filename);
     });
   });
