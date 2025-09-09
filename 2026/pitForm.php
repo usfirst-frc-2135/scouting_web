@@ -28,11 +28,17 @@ require 'inc/header.php';
               <input id="enterTeamNumber" class="form-control" type="text" placeholder="FRC team number">
             </div>
             <div class="col-7 col-md-6 mb-3">
-              <label for="enterScoutName" class="form-label">Scout Name</label>
-              <input id="enterScoutName" class="form-control" type="text" placeholder="First name, last initial">
+              <label for="selectScoutName" class="form-label">Scout Name</label>
+              <select id="selectScoutName" class="form-select mb-3" onchange="showScoutInputBox(this.value)"
+                aria-label="selectScoutName">
+                <option selected>Choose ...</option>
+              </select>
+              <div id="otherDiv" class="mb-3" style="display:none;">
+                <input id="otherScoutName" class="form-control" type="text" placeholder="First name, last initial">
+              </div>
             </div>
 
-            <div class="card col-md-12 mx-auto" style=" background-color:#AFE8F7">
+            <div class="card col-md-12 mx-auto" style="background-color:#AFE8F7">
               <div class="card-header">
                 <h5>Questions</h5>
               </div>
@@ -187,13 +193,31 @@ require 'inc/header.php';
     return null;
   }
 
+  // Show scout name text entry box
+  function showScoutInputBox(value) {
+    document.getElementById('otherDiv').style.display = value === 'Other' ? 'block' : 'none';
+  }
+
+  // Get scout name - return empty string if not a valid selection or empty text box
+  function getScoutName() {
+    let scoutName = document.getElementById("selectScoutName").value.trim();
+
+    if (scoutName === "Choose ...")
+      scoutName = "";
+    else if (scoutName === "Other") {
+      scoutName = document.getElementById("otherScoutName").value.trim();
+      scoutName.replace(' ', '_');
+    }
+    return scoutName;
+  }
+
   // Verify pit form data
   function validatePitForm() {
     console.log("==> pitForm: validatePitForm()");
     let isError = false;
     let errMsg = "Please enter values for these fields:";
     let teamNum = document.getElementById("enterTeamNumber").value.trim();
-    let scoutName = document.getElementById("enterScoutName").value.trim();
+    let scoutName = getScoutName();
 
     // Make sure each piece of data has a value selected.
     if (validateTeamNumber(teamNum, null) <= 0) {
@@ -257,6 +281,14 @@ require 'inc/header.php';
       isError = true;
     }
 
+    let numBatteries = parseInt(document.getElementById("numBatteries").value);
+    if ((numBatteries < 1) || (numBatteries > 20)) {
+      if (isError)
+        errMsg += ",";
+      errMsg += " Batteries [1..20]";
+      isError = true;
+    }
+
     if (isError) {
       alert(errMsg);
     }
@@ -267,7 +299,8 @@ require 'inc/header.php';
   function clearPitForm() {
     console.log("==> pitForm: clearPitForm()");
     document.getElementById("enterTeamNumber").value = "";
-    document.getElementById("enterScoutName").value = "";
+    document.getElementById("selectScoutName").value = "Choose ...";
+    document.getElementById("otherScoutName").value = "";
     document.getElementById("swerveDrive").value = "-1";
     document.getElementById("driveMotors").value = "-1";
     document.getElementById("spareParts").value = "-1";
@@ -275,7 +308,7 @@ require 'inc/header.php';
     document.getElementById("computerVision").value = "-1";
     document.getElementById("pitOrganization").value = "-1";
     document.getElementById("preparednessScore").value = "-1";
-    document.getElementById("numBatteries").value = "";
+    document.getElementById("numBatteries").value = "-1";
   }
 
   // Write pit data form fields to DB table
@@ -283,7 +316,7 @@ require 'inc/header.php';
     console.log("==> pitForm: writeFormToPitTable()");
     let dataToSave = {};
     dataToSave["teamnumber"] = document.getElementById("enterTeamNumber").value.trim();
-    dataToSave["scoutname"] = document.getElementById("enterScoutName").value.trim();
+    dataToSave["scoutname"] = getScoutName();
 
     // All fields use the "value" of the html element above to eliminate any translation
     dataToSave["swerve"] = document.getElementById("swerveDrive").value;
@@ -325,6 +358,25 @@ require 'inc/header.php';
     if (initTeamNumber) {
       document.getElementById("enterTeamNumber").value = initTeamNumber;
     }
+
+    // Read scout names from database for this event
+    $.get("api/dbReadAPI.php", {
+      getEventScoutNames: true
+    }).done(function (eventScoutNames) {
+      console.log("=> getEventScoutNames");
+      let scoutSelect = document.getElementById("selectScoutName");
+      let jsonNames = JSON.parse(eventScoutNames);
+      for (let name of jsonNames) {
+        let option = document.createElement('option');
+        option.value = name["scoutname"];
+        option.innerHTML = name["scoutname"];
+        scoutSelect.appendChild(option);
+      };
+      let other = document.createElement('option');
+      other.value = "Other";
+      other.innerHTML = "Other";
+      scoutSelect.appendChild(other);
+    });
 
     // Submit the match data form
     document.getElementById("submitButton").addEventListener('click', function () {
