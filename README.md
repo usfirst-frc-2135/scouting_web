@@ -76,7 +76,6 @@ The scouting web app consists of a hosted web site containing PHP web pages and 
       - zxing - used for QR code scanning and decoding
     - images - graphic images used by the web site such as favicon.ico
     - inc - header.php and footer.php include files
-    - json - directory where team alias and scout name JSON files are written
     - qr-code - screenshots of QR codes used for web site testing
     - robot-pics - location for uploaded photos of robots during pit scouting
     - scripts - javascript utilities for commonly used functions
