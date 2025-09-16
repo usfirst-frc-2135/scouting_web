@@ -95,6 +95,20 @@ require 'inc/header.php';
     let namesList = [];
     let jTeamImages = null;
     let jPitData = null;
+    let jAliasNames = [];
+    let bAliasUsed = false;
+console.log("---> pit status add event lisner starting");
+    //get alias table data
+    $.get("api/dbReadAPI.php", {
+      getEventAliasNames: true
+    }).done(function (eventAliasNames) {
+      console.log("=> eventAliasNames");
+      jAliasNames = JSON.parse(eventAliasNames);
+      if (jAliasNames.length > 0) { 
+        console.log("---> aliases used");
+        bAliasUsed = true;
+      }
+    });
 
     // Get the list of teams and add the team names 
     $.get("api/tbaAPI.php", {
@@ -105,10 +119,20 @@ require 'inc/header.php';
         return alert("Can't load eventTeamNames from TBA; check if TBA Key was set in db_config");
       }
       let jTeamNames = JSON.parse(eventTeamNames);
+      console.log( "----> jTeamNames length = " + jTeamNames.length);
       for (let team in jTeamNames) {
         let teamNum = jTeamNames[team]["teamnum"];
         let teamName = jTeamNames[team]["teamname"];
         teamList.push(teamNum);
+        //checking if alias is being used and adjust team name accordingly
+        //right now the teamNum is the 99-number
+        if(bAliasUsed) {
+          let BCDnum = getTeamNumFromAlias(teamNum, jAliasNames);
+          console.log("---> BCDnum = " + BCDnum);
+          if (BCDnum !== "") {
+            teamName = BCDnum;
+          }
+        }
         namesList[teamNum] = teamName;
       }
 
@@ -136,4 +160,5 @@ require 'inc/header.php';
 
 <script src="./scripts/compareMatchNumbers.js"></script>
 <script src="./scripts/compareTeamNumbers.js"></script>
+<script src="./scripts/aliasFunctions.js"></script>
 <script src="./scripts/sortFrcTables.js"></script>
