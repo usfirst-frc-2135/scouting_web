@@ -283,8 +283,10 @@ require 'inc/header.php';
 
   // Clear the scanned data to reset for more scans
   function clearScannedMatches(tableId, scannedMatches) {
-    document.getElementById(tableId).innerHTML = "";
-    scannedMatches = {};
+    for (let entry in scannedMatches) {
+      delete scannedMatches[entry];
+    }
+    document.getElementById(tableId).querySelector('tbody').innerHTML = "";
     updateScannedMatchCount(scannedMatches);
   }
 
