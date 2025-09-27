@@ -909,7 +909,7 @@ class dbHandler
     //
     $dbStatus["server"] = $dbConfig["server"];
     $dbStatus["db"] = $dbConfig["db"];
-    $dbStatus["tbakey"] = substr($dbConfig["tbakey"], 0, 8) . "********";
+    $dbStatus["tbakey"] = $dbConfig["tbakey"];
     $dbStatus["eventcode"] = $dbConfig["eventcode"];
     $dbStatus["username"] = $dbConfig["username"];
     $dbStatus["dbExists"] = false;

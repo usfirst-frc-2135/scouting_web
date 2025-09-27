@@ -171,10 +171,20 @@ require 'inc/header.php';
       {
         console.log("==> index.php: updateStatusValues()");
         document.getElementById("serverName").innerText = dbStatus["server"];
+        document.getElementById("enterServerURL").value = dbStatus["server"];
+        document.getElementById("enterServerURL").classList.remove("text-bg-warning");
         document.getElementById("databaseName").innerText = dbStatus["db"];
+        document.getElementById("enterDBName").value = dbStatus["db"];
+        document.getElementById("enterDBName").classList.remove("text-bg-warning");
         document.getElementById("userName").innerText = dbStatus["username"];
-        document.getElementById("tbaKey").innerText = dbStatus["tbakey"];
+        document.getElementById("enterUserName").value = dbStatus["username"];
+        document.getElementById("enterUserName").classList.remove("text-bg-warning");
+        document.getElementById("tbaKey").innerText = dbStatus["tbakey"].substring(0, 8) + "********"; // Only show partial TBAKey
+        document.getElementById("enterTBAKey").value = dbStatus["tbakey"];
+        document.getElementById("enterTBAKey").classList.remove("text-bg-warning");
         document.getElementById("eventCode").innerText = dbStatus["eventcode"];
+        document.getElementById("enterEventCode").value = dbStatus["eventcode"];
+        document.getElementById("enterEventCode").classList.remove("text-bg-warning");
 
         setStatusBadge("serverStatus", dbStatus["serverExists"]);
         setStatusBadge("databaseStatus", dbStatus["dbExists"]);
