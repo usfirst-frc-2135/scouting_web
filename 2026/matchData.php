@@ -72,6 +72,7 @@ require 'inc/header.php';
       if (jAliasNames.length > 0) {
         console.log("---> aliases used");
         bAliasUsed = true;
+        myAnames = jAliasNames;
       }
        
     let tbodyRef = document.getElementById(tableId).querySelector('tbody');;
