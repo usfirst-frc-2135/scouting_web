@@ -8,7 +8,11 @@ require 'inc/header.php';
 
     <!-- Page Title -->
     <div class="row pt-3 pb-3 mb-3">
-      <h2 class="col-md-6"><?php echo $title; ?></h2>
+      <h2 class="col-md-4"><?php echo $title; ?></h2>
+      <div class="col-md-4 mb-d form-check">
+        <input id="showCompleted" class="form-check-input" type="checkbox" name="showCompleted" checked>
+        <label for="showCompleted" class="form-check-label">Show Completed Matches</label>
+      </div>
     </div>
 
     <!-- Main column to hold the strategic match schedule -->
@@ -218,6 +222,12 @@ require 'inc/header.php';
     const watchId = "watchTable";
 
     buildWatchTable(tableId, watchId);
+
+    // Create the completed match filter checkbox listener
+    document.getElementById("showCompleted").addEventListener('click', function () {
+      document.getElementById("showCompleted").checked;
+      buildWatchTable(tableId, watchId);
+    });
 
     // Save the team status to watch
     document.getElementById("addTeamWatch").addEventListener('click', function () {
