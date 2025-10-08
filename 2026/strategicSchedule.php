@@ -74,10 +74,11 @@ require 'inc/header.php';
   }
 
   // Figure out which teams/matches for strategic scouting table
-  function buildScheduleTable(tableId) {
+  function buildScheduleTable(tableId, filter) {
     console.log("==> strategicSchedule: buildScheduleTable()");
     $.get("api/tbaAPI.php", {
-      getStrategicMatches: true
+      getStrategicMatches: true,
+      scheduleFilter: JSON.stringify(filter)
     }).done(function (strategicMatches) {
       // console.log("=> getStrategicMatches: " + strategicMatches);
       if (strategicMatches === null) {
@@ -98,8 +99,13 @@ require 'inc/header.php';
   document.addEventListener("DOMContentLoaded", function () {
 
     const tableId = "stratSchedTable";
+    // Test cases for debugging
+    let scheduleFilter = { "watch": [], "ignore": [] };
+    // let scheduleFilter = { "watch": [], "ignore": [{ "teamNum": "1351" }] };
+    // let scheduleFilter = { "watch": [{ "teamNum": "1967" }], "ignore": [] };
+    // let scheduleFilter = { "watch": [{ "teamNum": "1967" }], "ignore": [{ "teamNum": "1351" }] };
 
-    buildScheduleTable(tableId);
+    buildScheduleTable(tableId, scheduleFilter);
 
   });
 </script>
