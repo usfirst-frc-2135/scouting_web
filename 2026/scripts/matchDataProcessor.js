@@ -165,6 +165,7 @@ class matchDataProcessor {
         pdata[tn] = {};
         // No need to initialize individual data fields here -- just the match index
         pdata[tn]["totalmatches"] = 0;
+        pdata[tn]["totaldefensematches"] = 0;  // incremented each match this team played defense
 
         // points by game phase
         pdata[tn]["totalPointsAvg"] = 0;
@@ -243,6 +244,8 @@ class matchDataProcessor {
 
         pdata[tn]["teleopAlgaeAcquired"] = 0;   // for calculating shooting percentage
 
+        pdata[tn]["defenseAvg"] = 0;
+
         // endgame
         pdata[tn]["endgameClimbPercent"] = { 0: 0, 1: 0, 2: 0, 3: 0, 4: 0 };
 
@@ -289,6 +292,11 @@ class matchDataProcessor {
 
       let currentTeleopCoralAcquired = parseInt(this.mData[i]["acquiredCoral"]);
       let currentTeleopAlgaeAcquired = parseInt(this.mData[i]["acquiredAlgae"]);
+
+      let currentDefense = parseInt(this.mData[i]["defenseLevel"]);
+      if (currentDefense != 0) {
+        pdata[tn]["totaldefensematches"] += 1;  // increment if this team played defense
+      }
 
       //////////////////// ENDGAME ////////////////////
 
@@ -432,6 +440,8 @@ class matchDataProcessor {
       pdata[tn]["teleopAlgaeProcAvg"] += currentTeleopAlgaeProcessor;
       pdata[tn]["teleopAlgaeProcMax"] = Math.max(pdata[tn]["teleopAlgaeProcMax"], currentTeleopAlgaeProcessor);
 
+      pdata[tn]["defenseAvg"] += currentDefense;
+
       // For boolean data, we are just incrementing that data instead of adding the value here.
       pdata[tn]["endgameClimbPercent"][this.mData[i]["cageClimb"]] += 1;
 
@@ -510,6 +520,10 @@ class matchDataProcessor {
       // teleop algae
       pdata[key]["teleopAlgaeProcAvg"] = this.roundOnePlace(pdata[key]["teleopAlgaeProcAvg"] / pdata[key]["totalmatches"]);
       pdata[key]["teleopAlgaeNetAvg"] = this.roundOnePlace(pdata[key]["teleopAlgaeNetAvg"] / pdata[key]["totalmatches"]);
+
+      // Defense avg - only calculate this if this team played defense in a match
+      if(pdata[key]["totaldefensematches"] != 0)
+        pdata[key]["defenseAvg"] = this.roundOnePlace(pdata[key]["defenseAvg"] / pdata[key]["totaldefensematches"]);
 
       // endgame
       pdata[key]["endgameClimbPercent"][0] = this.toPercent(pdata[key]["endgameClimbPercent"][0] / pdata[key]["totalmatches"]);

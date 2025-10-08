@@ -20,6 +20,8 @@ require 'inc/header.php';
             <tr>
               <th scope="col" style="background-color:transparent" class="sorttable_numeric">Match</th>
               <th scope="col" style="background-color:transparent" class="sorttable_numeric">Team</th>
+              <th scope="col" style="background-color:transparent">Alias</th>
+
               <th scope="col" style="background-color:#d5e6de">Auton Leave</th>
               <th scope="col" style="background-color:#d5e6de">Auton Coral L1</th>
               <th scope="col" style="background-color:#d5e6de">Auton Coral L2</th>
@@ -35,6 +37,7 @@ require 'inc/header.php';
               <th scope="col" style="background-color:#d6f3fB">Teleop Coral L4</th>
               <th scope="col" style="background-color:#d6f3fB">Teleop Algae Net</th>
               <th scope="col" style="background-color:#d6f3fB">Teleop Algae Proc</th>
+              <th scope="col" style="background-color:#d6f3fB">Defense</th>
               <th scope="col" style="background-color:#fbe6d3">Cage Climb</th>
               <th scope="col" style="background-color:transparent">Died</th>
               <th scope="col" style="background-color:transparent">Scout Name</th>
@@ -59,15 +62,40 @@ require 'inc/header.php';
   // NOTE: match data keywords MUST match the database definition in dbHandler.php
   function loadMatchData(tableId, matchData) {
     console.log("==> matchData: loadMatchData()");
+    // first get alias table data
+    let bAliasUsed = false;
+    
+    $.get("api/dbReadAPI.php", {
+      getEventAliasNames: true
+    }).done(function (eventAliasNames) {
+      console.log("=> eventAliasNames");
+      jAliasNames = JSON.parse(eventAliasNames);
+      if (jAliasNames.length > 0) {
+        console.log("---> aliases used");
+        bAliasUsed = true;
+        myAnames = jAliasNames;
+      }
+       
     let tbodyRef = document.getElementById(tableId).querySelector('tbody');;
     tbodyRef.innerHTML = ""; // Clear Table
     for (let i = 0; i < matchData.length; i++) {
       let matchItem = matchData[i];
       let teamNum = matchItem["teamnumber"];
+      let alias = "";
+
+      if(bAliasUsed) {
+          let BCDnum = getTeamNumFromAlias(teamNum, myAnames);
+//HOLD          console.log("---> BCDnum = " + BCDnum);
+          if (BCDnum !== "") {
+            alias = BCDnum;
+          }
+        }
+
       const tdPrefix0 = "<td style=\"background-color:transparent\">";
       const tdPrefix1 = "<td style=\"background-color:#cfe2ff\">";
       let rowString = "<th>" + matchItem["matchnumber"] + "</th>";
       rowString += tdPrefix0 + "<a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</td>";
+      rowString += tdPrefix0 + alias + "</td>";
       rowString += tdPrefix1 + matchItem["autonLeave"] + "</td>";
       rowString += tdPrefix0 + matchItem["autonCoralL1"] + "</td>";
       rowString += tdPrefix1 + matchItem["autonCoralL2"] + "</td>";
@@ -83,12 +111,14 @@ require 'inc/header.php';
       rowString += tdPrefix1 + matchItem["teleopCoralL4"] + "</td>";
       rowString += tdPrefix0 + matchItem["teleopAlgaeNet"] + "</td>";
       rowString += tdPrefix1 + matchItem["teleopAlgaeProcessor"] + "</td>";
+      rowString += tdPrefix1 + matchItem["defenseLevel"] + "</td>";
       rowString += tdPrefix0 + matchItem["cageClimb"] + "</td>";
       rowString += tdPrefix1 + matchItem["died"] + "</td>";
       rowString += tdPrefix0 + matchItem["scoutname"] + "</td>";
       rowString += tdPrefix1 + matchItem["comment"] + "</td>";
       tbodyRef.insertRow().innerHTML = rowString;
     }
+  });
   }
 
   // Acquire match data and build the page
@@ -140,5 +170,6 @@ require 'inc/header.php';
 
 <script src="./scripts/compareMatchNumbers.js"></script>
 <script src="./scripts/compareTeamNumbers.js"></script>
+<script src="./scripts/aliasFunctions.js"></script>
 <script src="./scripts/matchDataProcessor.js"></script>
 <script src="./scripts/sortFrcTables.js"></script>

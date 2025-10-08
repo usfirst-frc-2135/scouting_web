@@ -21,6 +21,7 @@ class dbHandler
     "strategictable",
     "scouttable",
     "aliastable",
+    "watchtable",
     "useP",
     "useQm",
     "useSf",
@@ -71,6 +72,8 @@ class dbHandler
 
     return $this->conn;
   }
+  ////////////////////////////////////////////////////////
+  ////////////////////// Match Data //////////////////////
 
   public function writeRowToMatchTable($mData)
   {
@@ -305,6 +308,9 @@ class dbHandler
     return $this->enforceDataTyping($result);
   }
 
+  ////////////////////////////////////////////////////////
+  ////////////////////// Pit Data ////////////////////////
+
   public function writeRowToPitTable($pData)
   {
     $dbConfig = $this->readDbConfig();
@@ -364,6 +370,9 @@ class dbHandler
     $result = $prepared_statement->fetchAll();
     return $result;
   }
+
+  ////////////////////////////////////////////////////////
+  ////////////////////// Strategic Data //////////////////
 
   public function writeRowToStrategicTable($sData)
   {
@@ -515,7 +524,10 @@ class dbHandler
     return $result;
   }
 
-  public function writeScoutNameToTable($mData)
+  ////////////////////////////////////////////////////////
+  ////////////////////// Scout Name //////////////////////
+
+  public function writeScoutNameToTable($sName)
   {
     $dbConfig = $this->readDbConfig();
     $sql = "INSERT INTO " . $dbConfig["scouttable"] .
@@ -531,13 +543,13 @@ class dbHandler
         :scoutname
       )";
     $prepared_statement = $this->conn->prepare($sql);
-    $prepared_statement->execute($mData);
+    $prepared_statement->execute($sName);
   }
 
-  public function deleteScoutNameFromTable($mData)
+  public function deleteScoutNameFromTable($sName)
   {
     $dbConfig = $this->readDbConfig();
-    $sql = "DELETE FROM " . $dbConfig["scouttable"] . " WHERE entrykey='" . $mData["entrykey"] . "'";
+    $sql = "DELETE FROM " . $dbConfig["scouttable"] . " WHERE entrykey='" . $sName["entrykey"] . "'";
     $prepared_statement = $this->conn->prepare($sql);
     $prepared_statement->execute();
   }
@@ -557,8 +569,11 @@ class dbHandler
     return $result;
   }
 
+  ////////////////////////////////////////////////////////
+  ////////////////////// Team Alias //////////////////////
+
   // Write team alias record into table and replace if an entry already exists
-  public function writeAliasNumberToTable($mData)
+  public function writeAliasNumberToTable($aNum)
   {
     $dbConfig = $this->readDbConfig();
     $sql = "REPLACE INTO " . $dbConfig["aliastable"] .
@@ -576,13 +591,13 @@ class dbHandler
         :aliasnumber
       )";
     $prepared_statement = $this->conn->prepare($sql);
-    $prepared_statement->execute($mData);
+    $prepared_statement->execute($aNum);
   }
 
-  public function deleteTeamAliasFromTable($mData)
+  public function deleteTeamAliasFromTable($aNum)
   {
     $dbConfig = $this->readDbConfig();
-    $sql = "DELETE FROM " . $dbConfig["aliastable"] . " WHERE entrykey='" . $mData["entrykey"] . "'";
+    $sql = "DELETE FROM " . $dbConfig["aliastable"] . " WHERE entrykey='" . $aNum["entrykey"] . "'";
     $prepared_statement = $this->conn->prepare($sql);
     $prepared_statement->execute();
   }
@@ -603,6 +618,58 @@ class dbHandler
     return $result;
   }
 
+  ////////////////////////////////////////////////////////
+  ////////////////////// Watch List //////////////////////
+
+  // Write team watch status record into table and replace if an entry already exists
+  public function writeWatchStatusToTable($wStat)
+  {
+    $dbConfig = $this->readDbConfig();
+    $sql = "REPLACE INTO " . $dbConfig["watchtable"] .
+      "(
+        entrykey,
+        eventcode,
+        teamnumber,
+        status
+      )
+      VALUES
+      (
+        :entrykey,
+        :eventcode,
+        :teamnumber,
+        :status
+      )";
+    $prepared_statement = $this->conn->prepare($sql);
+    $prepared_statement->execute($wStat);
+  }
+
+  public function deleteWatchStatusFromTable($wStat)
+  {
+    $dbConfig = $this->readDbConfig();
+    $sql = "DELETE FROM " . $dbConfig["watchtable"] . " WHERE entrykey='" . $wStat["entrykey"] . "'";
+    $prepared_statement = $this->conn->prepare($sql);
+    $prepared_statement->execute();
+  }
+
+  public function readEventWatchList($eventCode)
+  {
+    $dbConfig = $this->readDbConfig();
+    $sql = "SELECT 
+        entrykey,
+        eventcode,
+        teamnumber,
+        status
+        FROM " . $dbConfig["watchtable"] .
+      " WHERE eventcode='" . $eventCode . "'";
+    $prepared_statement = $this->conn->prepare($sql);
+    $prepared_statement->execute();
+    $result = $prepared_statement->fetchAll();
+    return $result;
+  }
+
+  ////////////////////////////////////////////////////////
+  ////////////////////// Database Creation ///////////////
+
   public function createDB()
   {
     error_log("createDB in dbHandler");
@@ -614,6 +681,9 @@ class dbHandler
       throw new Exception("createDB Error: CREATE DATABASE query failed.");
     }
   }
+
+  ////////////////////////////////////////////////////////
+  ////////////////////// Table Creation //////////////////
 
   public function createMatchTable()
   {
@@ -821,6 +891,28 @@ class dbHandler
     }
   }
 
+  public function createWatchTable()
+  {
+    error_log("Creating Watch Table");
+    $conn = $this->connectToDB();
+    $dbConfig = $this->readDbConfig();
+    $query = "CREATE TABLE " . $dbConfig["db"] . "." . $dbConfig["watchtable"] .
+      " (
+        entrykey VARCHAR(60) NOT NULL PRIMARY KEY,
+        eventcode VARCHAR(10) NOT NULL,
+        teamnumber VARCHAR(10) NOT NULL,
+        status VARCHAR(10) NOT NULL
+      )";
+    $statement = $conn->prepare($query);
+    if (!$statement->execute())
+    {
+      throw new Exception("createWatchTable Error: CREATE TABLE " . $dbConfig["watchtable"] . " query failed.");
+    }
+  }
+
+  ////////////////////////////////////////////////////////
+  ////////////////////// Database Config /////////////////
+
   // Read and return the database configutration file
   public function readDbConfig()
   {
@@ -909,7 +1001,7 @@ class dbHandler
     //
     $dbStatus["server"] = $dbConfig["server"];
     $dbStatus["db"] = $dbConfig["db"];
-    $dbStatus["tbakey"] = substr($dbConfig["tbakey"], 0, 8) . "********";
+    $dbStatus["tbakey"] = $dbConfig["tbakey"];
     $dbStatus["eventcode"] = $dbConfig["eventcode"];
     $dbStatus["username"] = $dbConfig["username"];
     $dbStatus["dbExists"] = false;
@@ -920,6 +1012,7 @@ class dbHandler
     $dbStatus["strategicTableExists"] = false;
     $dbStatus["scoutTableExists"] = false;
     $dbStatus["aliasTableExists"] = false;
+    $dbStatus["watchTableExists"] = false;
     $dbStatus["useP"] = $dbConfig["useP"];
     $dbStatus["useQm"] = $dbConfig["useQm"];
     $dbStatus["useSf"] = $dbConfig["useSf"];
@@ -1047,6 +1140,20 @@ class dbHandler
           catch (PDOException $e)
           {
             error_log("dbHandler: getDBStatus: alias table missing! - " . $e->getMessage());
+          }
+
+          // Watch table Connection
+          try
+          {
+            $dsn = "mysql:host=" . $dbConfig["server"] . ";dbname=" . $dbConfig["db"] . ";charset=" . $this->charset;
+            $conn = new PDO($dsn, $dbConfig["username"], $dbConfig["password"]);
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $val = $conn->query('SELECT * FROM ' . $dbConfig["watchtable"]);
+            $dbStatus["watchTableExists"] = true;
+          }
+          catch (PDOException $e)
+          {
+            error_log("dbHandler: getDBStatus: watch table missing! - " . $e->getMessage());
           }
         }
       }

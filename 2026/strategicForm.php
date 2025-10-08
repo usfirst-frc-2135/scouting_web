@@ -133,6 +133,10 @@ require 'inc/header.php';
                   <span class="fw-bold">Driver ability/speed:</span>
                 </div>
                 <div class="form-check form-check-inline">
+                  <input id="driveScore0" class="form-check-input" type="radio" name="driverAbilityGroup" value="0">
+                  <label for="driveScore0" class="form-check-label">0 - N/A</label>
+                </div>
+                <div class="form-check form-check-inline">
                   <input id="driveScore1" class="form-check-input" type="radio" name="driverAbilityGroup" value="1">
                   <label for="driveScore1" class="form-check-label">1 - Jerky</label>
                 </div>
@@ -147,10 +151,6 @@ require 'inc/header.php';
                 <div class="form-check form-check-inline">
                   <input id="driveScore4" class="form-check-input" type="radio" name="driverAbilityGroup" value="4">
                   <label for="driveScore4" class="form-check-label">4 - Quick/agile</label>
-                </div>
-                <div class="form-check form-check-inline">
-                  <input id="driveScore5" class="form-check-input" type="radio" name="driverAbilityGroup" value="5">
-                  <label for="driveScore5" class="form-check-label">5 - N/A</label>
                 </div>
 
                 <!-- Against defensive robot section -->

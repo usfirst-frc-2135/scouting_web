@@ -328,9 +328,9 @@ class tbaHandler
   }
 
   ///// Create a Table of Strategic Matches to Scout /////
-  public function getStrategicMatches($eventCode)
+  public function getStrategicMatches($eventCode, $watchList)
   {
-    error_log("starting getStrategicMatches for eventCode: $eventCode");
+    error_log("starting getStrategicMatches for eventCode: $eventCode, watchList: $watchList");
     $out = array();
 
     // If eventCode is "COMPX", just exit.
@@ -343,7 +343,7 @@ class tbaHandler
     // error_log("---> calling getEventMatches()");
     $ml = $this->getEventMatches($eventCode);   // get all the matches at this event
 
-    return BuildStratSchedule::getMatches($ml);
+    return BuildStratSchedule::getMatches($ml, $watchList);
   }
 
 }

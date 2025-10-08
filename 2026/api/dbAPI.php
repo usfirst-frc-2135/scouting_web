@@ -109,6 +109,15 @@ else if (isset($_POST["createTables"]))
     error_log($e);
   }
 
+  try
+  {
+    $db->createWatchTable();
+  }
+  catch (Exception $e)
+  {
+    error_log($e);
+  }
+
   $stat = $db->getDBStatus();
   echo json_encode($stat);
 }
