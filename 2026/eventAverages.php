@@ -98,6 +98,7 @@ require 'inc/header.php';
             <col span="1" style="background-color:transparent">
             <col span="1" style="background-color:#cfe2ff">
             <col span="1" style="background-color:transparent">
+            <col span="1" style="background-color:#cfe2ff">
           </colgroup>
           <thead>
             <tr>
@@ -110,6 +111,7 @@ require 'inc/header.php';
               <th colspan="6" style="background-color:#d5e6de">Auton Algae</th>
               <th colspan="11" style="background-color:#d6f3fB">Teleop Coral</th>
               <th colspan="7" style="background-color:#d6f3fB">Teleop Algae</th>
+              <th colspan="1" style="background-color:#AFE8F7">Def</th>
               <th colspan="5" style="background-color:#fbe6d3">Endgame</th>
               <th colspan="1" style="background-color:transparent"></th>
             </tr>
@@ -155,6 +157,9 @@ require 'inc/header.php';
               <th colspan="3" style="background-color:transparent">Teleop Algae</th>
               <th colspan="2" style="background-color:#d6f3fB">Proc</th>
               <th colspan="2" style="background-color:transparent">Net</th>
+
+              <!-- defense -->
+              <th colspan="1" style="background-color:#AFE8F7"></th>
 
               <!-- endgame -->
               <th colspan="5" style="background-color:#fbe6d3">Climb%</th>
@@ -233,6 +238,9 @@ require 'inc/header.php';
               <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
               <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
               <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
+
+              <!-- defense -->
+              <th scope="col" class="sorttable_numeric" style="background-color:#AFE8F7">Avg</th>
 
               <!-- endgame -->
               <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">N</th>
@@ -352,6 +360,9 @@ require 'inc/header.php';
       rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopAlgaeProcMax") + "</td>";
       rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopAlgaeNetAvg") + "</td>";
       rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopAlgaeNetMax") + "</td>";
+
+      // defense
+      rowString += tdPrefix + getDataValue(avgData[teamNum], "defenseAvg") + "</td>";
 
       // endgame
       rowString += tdPrefix + getDataValue(endgameClimbPercentage, 0) + "</td>";
