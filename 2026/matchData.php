@@ -37,6 +37,7 @@ require 'inc/header.php';
               <th scope="col" style="background-color:#d6f3fB">Teleop Coral L4</th>
               <th scope="col" style="background-color:#d6f3fB">Teleop Algae Net</th>
               <th scope="col" style="background-color:#d6f3fB">Teleop Algae Proc</th>
+              <th scope="col" style="background-color:#d6f3fB">Defense</th>
               <th scope="col" style="background-color:#fbe6d3">Cage Climb</th>
               <th scope="col" style="background-color:transparent">Died</th>
               <th scope="col" style="background-color:transparent">Scout Name</th>
@@ -72,6 +73,7 @@ require 'inc/header.php';
       if (jAliasNames.length > 0) {
         console.log("---> aliases used");
         bAliasUsed = true;
+        myAnames = jAliasNames;
       }
        
     let tbodyRef = document.getElementById(tableId).querySelector('tbody');;
@@ -83,7 +85,7 @@ require 'inc/header.php';
 
       if(bAliasUsed) {
           let BCDnum = getTeamNumFromAlias(teamNum, myAnames);
-          console.log("---> BCDnum = " + BCDnum);
+//HOLD          console.log("---> BCDnum = " + BCDnum);
           if (BCDnum !== "") {
             alias = BCDnum;
           }
@@ -109,6 +111,7 @@ require 'inc/header.php';
       rowString += tdPrefix1 + matchItem["teleopCoralL4"] + "</td>";
       rowString += tdPrefix0 + matchItem["teleopAlgaeNet"] + "</td>";
       rowString += tdPrefix1 + matchItem["teleopAlgaeProcessor"] + "</td>";
+      rowString += tdPrefix1 + matchItem["defenseLevel"] + "</td>";
       rowString += tdPrefix0 + matchItem["cageClimb"] + "</td>";
       rowString += tdPrefix1 + matchItem["died"] + "</td>";
       rowString += tdPrefix0 + matchItem["scoutname"] + "</td>";
