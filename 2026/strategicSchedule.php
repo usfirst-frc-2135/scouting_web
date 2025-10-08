@@ -43,7 +43,7 @@ require 'inc/header.php';
     <!-- Main row to hold the watch list card -->
     <div class="card col-md-6 mb-3">
       <div class="card-header">
-        Manage Watch List <span class="text-danger fw-bold"> (affects all scouting web users!)</span>
+        Manage Watch List <span class="text-danger fw-bold">- This affects ALL web users!</span>
       </div>
       <div class="card-body">
         <div class="input-group mb-3">
