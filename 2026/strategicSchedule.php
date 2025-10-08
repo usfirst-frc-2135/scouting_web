@@ -154,22 +154,10 @@ require 'inc/header.php';
     $.get("api/dbReadAPI.php", {
       getEventWatchList: true
     }).done(function (eventWatchList) {
-      console.log("=> eventWatchList");
+      console.log("=> eventWatchList" + eventWatchList);
       let jWatchList = JSON.parse(eventWatchList);
       loadTeamWatchTable(tableId, watchId, jWatchList);
-
-      let scheduleFilter = { "watch": [], "ignore": [] };
-      for (let i = 0; i < jWatchList.length; i++) {
-        if (jWatchList[i]["status"] === "watch") {
-          scheduleFilter["watch"].push({ "teamnumber": jWatchList[i]["teamnumber"] });
-        }
-        else if (jWatchList[i]["status"] === "ignore") {
-          scheduleFilter["ignore"].push({ "teamnumber": jWatchList[i]["teamnumber"] });
-        }
-      }
-      console.log(JSON.stringify(scheduleFilter));
-
-      buildScheduleTable(tableId, scheduleFilter);
+      buildScheduleTable(tableId, eventWatchList);
     });
   }
 
@@ -199,11 +187,11 @@ require 'inc/header.php';
   }
 
   // Figure out which teams/matches for strategic scouting table
-  function buildScheduleTable(tableId, filter) {
+  function buildScheduleTable(tableId, watchList) {
     console.log("==> strategicSchedule: buildScheduleTable()");
     $.get("api/tbaAPI.php", {
       getStrategicMatches: true,
-      scheduleFilter: JSON.stringify(filter)
+      watchList: watchList
     }).done(function (strategicMatches) {
       // console.log("=> getStrategicMatches: " + strategicMatches);
       if (strategicMatches === null) {

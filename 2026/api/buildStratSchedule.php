@@ -18,7 +18,7 @@ class BuildStratSchedule
     return $teams;
   }
 
-  public static function getMatches($evtMatches, $scheduleFilter)
+  public static function getMatches($evtMatches, $watchList)
   {
     // Go thru all the matches and figure out which ones are our matches.
     $ourMatches = array();  // Our matches at the event
@@ -38,13 +38,6 @@ class BuildStratSchedule
         array_push($ourMatches, $myMatch);
       }
     }
-
-    // Build watch and ignore filters from combined list filter
-    $watchList = array();
-    $ignoreList = array();
-    $filter = json_decode($scheduleFilter, true);
-    $watchList = $filter["watch"];
-    $ignoreList = $filter["ignore"];
 
     // Now we have the list of our matches (with the teams).
     // For each of the event matches, go thru the teams in the match. Get the full match list for each team 
@@ -69,34 +62,34 @@ class BuildStratSchedule
 
         // Build a team list for this match
         $evtTeams = self::getTeamsInMatch($evtMatch);
+        $watchTeams = json_decode($watchList, true);
 
         // For each event team, search through our matches to see if we play them later
         foreach ($evtTeams as $evtTeam)
         {
           // Scan schedule for all teams as a default
-          $skipScan = false;
+          $inWatchList = false;
 
           // If in watch list, push to stratTeams here and skip the schedule scan
-          foreach ($watchList as $watchTeam)
+          foreach ($watchTeams as $watchTeam)
           {
             if ($evtTeam === $watchTeam["teamnumber"])
             {
-              array_push($stratTeams, $evtTeam);
-              $skipScan = true;
-            }
-          }
-
-          // If in ignore list, skip the schedule scan
-          foreach ($ignoreList as $ignoreTeam)
-          {
-            if ($evtTeam === $ignoreTeam["teamnumber"])
-            {
-              $skipScan = true;
+              $inWatchList = true;
+              if ($watchTeam["status"] === "watch")
+              {
+                // Add to strategic team list to scout
+                array_push($stratTeams, $evtTeam);
+              }
+              else if ($watchTeam["status"] === "ignore")
+              {
+                // Do nothing, but don't run the match scanner
+              }
             }
           }
 
           // Scan the schedule to make a list of teams we haven't played yet
-          if (!$skipScan)
+          if (!$inWatchList)
           {
             foreach ($ourMatches as $ourMatch)
             {
