@@ -179,6 +179,8 @@ require 'inc/header.php';
       let matchTime = new Date(stratSched[i]["time"] * 1000);
       let predictedTime = new Date(stratSched[i]["predicted_time"] * 1000);
       let timeNow = new Date();
+      // Use this for testing a partial schedule, uncomment following lineand change the date/time to mid schedule
+      // timeNow = new Date("2025-05-17T17:52:00");
       let options = { weekday: 'short', month: 'short', day: 'numeric', hour: "numeric", minute: "numeric" };
       let timeStr = matchTime.toLocaleDateString("en-us", options);
       let predStr = predictedTime.toLocaleDateString("en-us", options);
@@ -188,8 +190,6 @@ require 'inc/header.php';
       if (predictedTime < timeNow) {
         predStr = "<del>" + predStr + "</del>";
       }
-      // Use this for testing a partial schedule, uncomment following lineand change the date/time to mid schedule
-      // timeNow = new Date("2025-05-17T17:52:00");
       if (predictedTime > timeNow || document.getElementById("showCompleted").checked) {
         let rowString = "<td>" + matchNum + "</td>" + "<td>" + matchTeams + "</td>" + "<td>" + timeStr + "</td>" + "<td>" + predStr + "</td>";
         tbodyRef.insertRow().innerHTML = rowString;
