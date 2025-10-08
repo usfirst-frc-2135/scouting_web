@@ -79,7 +79,7 @@ class BuildStratSchedule
           // If in watch list, push to stratTeams here and skip the schedule scan
           foreach ($watchList as $watchTeam)
           {
-            if ($evtTeam === $watchTeam["teamNum"])
+            if ($evtTeam === $watchTeam["teamnumber"])
             {
               array_push($stratTeams, $evtTeam);
               $skipScan = true;
@@ -89,7 +89,7 @@ class BuildStratSchedule
           // If in ignore list, skip the schedule scan
           foreach ($ignoreList as $ignoreTeam)
           {
-            if ($evtTeam === $ignoreTeam["teamNum"])
+            if ($evtTeam === $ignoreTeam["teamnumber"])
             {
               $skipScan = true;
             }

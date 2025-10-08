@@ -150,13 +150,26 @@ require 'inc/header.php';
   }
 
   // Retrieve data and build team watch status table
-  function buildWatchTable(watchId) {
+  function buildWatchTable(tableId, watchId) {
     $.get("api/dbReadAPI.php", {
       getEventWatchList: true
     }).done(function (eventWatchList) {
       console.log("=> eventWatchList");
       let jWatchList = JSON.parse(eventWatchList);
       loadTeamWatchTable(watchId, jWatchList);
+
+      let scheduleFilter = { "watch": [], "ignore": [] };
+      for (let i = 0; i < jWatchList.length; i++) {
+        if (jWatchList[i]["status"] === "watch") {
+          scheduleFilter["watch"].push({ "teamnumber": jWatchList[i]["teamnumber"] });
+        }
+        else if (jWatchList[i]["status"] === "ignore") {
+          scheduleFilter["ignore"].push({ "teamnumber": jWatchList[i]["teamnumber"] });
+        }
+      }
+      console.log(JSON.stringify(scheduleFilter));
+
+      buildScheduleTable(tableId, scheduleFilter);
     });
   }
 
@@ -212,15 +225,8 @@ require 'inc/header.php';
 
     const tableId = "stratSchedTable";
     const watchId = "watchTable";
-    // Test cases for debugging
-    let scheduleFilter = { "watch": [], "ignore": [] };
-    // let scheduleFilter = { "watch": [], "ignore": [{ "teamNum": "1351" }] };
-    // let scheduleFilter = { "watch": [{ "teamNum": "1967" }], "ignore": [] };
-    // let scheduleFilter = { "watch": [{ "teamNum": "1967" }], "ignore": [{ "teamNum": "1351" }] };
 
-    buildScheduleTable(tableId, scheduleFilter);
-
-    buildWatchTable(watchId);
+    buildWatchTable(tableId, watchId);
 
     // Save the team status to watch
     document.getElementById("addTeamWatch").addEventListener('click', function () {
