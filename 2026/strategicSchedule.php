@@ -86,7 +86,7 @@ require 'inc/header.php';
 <script>
 
   // Build the team watch list table
-  function loadTeamWatchTable(watchId, teamWatchList) {
+  function loadTeamWatchTable(tableId, watchId, teamWatchList) {
     console.log("==> strategicSchedule: loadTeamWatchTable()");
     if (teamWatchList === []) {
       // console.warn("loadTeamWatchTable: teamWatchList is missing!");
@@ -107,7 +107,7 @@ require 'inc/header.php';
       // Add delete button
       document.getElementById(key + "_delete").addEventListener('click', function () {
         console.log("Deleted " + this.value);
-        deleteTeamWatch(watchId, this.value);
+        deleteTeamWatch(tableId, watchId, this.value);
       });
     }
 
@@ -118,7 +118,7 @@ require 'inc/header.php';
   }
 
   // Attempt to save the team watch status to the watch table
-  function updateTeamWatch(watchId, teamNum, status) {
+  function updateTeamWatch(tableId, watchId, teamNum, status) {
     console.log("==> strategicSchedule: updateTeamWatch()" + " " + teamNum + " " + status);
     $.post("api/dbWriteAPI.php", {
       writeSingleTeamWatch: JSON.stringify({ "teamnumber": teamNum, "status": status })
@@ -126,7 +126,7 @@ require 'inc/header.php';
       if (response.indexOf('success') > -1) {    // A loose compare, because success word may have a newline
         // alert("Success in submitting Team Watch status! Clearing Data.");
         document.getElementById("enterTeamNumber").value = "";
-        buildWatchTable(watchId);
+        buildWatchTable(tableId, watchId);
       } else {
         alert("Failure in submitting Team Watch status! Please Check network connectivity.");
       }
@@ -134,7 +134,7 @@ require 'inc/header.php';
   }
 
   // Attempt to remove the team watch status from the watch table
-  function deleteTeamWatch(watchId, teamWatch) {
+  function deleteTeamWatch(tableId, watchId, teamWatch) {
     console.log("==> strategicSchedule: deleteTeamWatch()" + " " + teamWatch);
     $.post("api/dbWriteAPI.php", {
       deleteSingleTeamWatch: JSON.stringify({ "teamwatch": teamWatch })
@@ -142,7 +142,7 @@ require 'inc/header.php';
       if (response.indexOf('success') > -1) {    // A loose compare, because success word may have a newline
         // alert("Success in submitting Team Watch status! Clearing Data.");
         document.getElementById("enterTeamNumber").value = "";
-        buildWatchTable(watchId);
+        buildWatchTable(tableId, watchId);
       } else {
         alert("Failure in removing Team Watch status! Please Check network connectivity.");
       }
@@ -156,7 +156,7 @@ require 'inc/header.php';
     }).done(function (eventWatchList) {
       console.log("=> eventWatchList");
       let jWatchList = JSON.parse(eventWatchList);
-      loadTeamWatchTable(watchId, jWatchList);
+      loadTeamWatchTable(tableId, watchId, jWatchList);
 
       let scheduleFilter = { "watch": [], "ignore": [] };
       for (let i = 0; i < jWatchList.length; i++) {
@@ -232,7 +232,7 @@ require 'inc/header.php';
     document.getElementById("addTeamWatch").addEventListener('click', function () {
       let teamNum = document.getElementById("enterTeamNumber").value.trim().toUpperCase();
       if (validateTeamNumber(teamNum, null) > 0) {
-        updateTeamWatch(watchId, teamNum, "watch");
+        updateTeamWatch(tableId, watchId, teamNum, "watch");
       }
     });
 
@@ -240,7 +240,7 @@ require 'inc/header.php';
     document.getElementById("addTeamIgnore").addEventListener('click', function () {
       let teamNum = document.getElementById("enterTeamNumber").value.trim().toUpperCase();
       if (validateTeamNumber(teamNum, null) > 0) {
-        updateTeamWatch(watchId, teamNum, "ignore");
+        updateTeamWatch(tableId, watchId, teamNum, "ignore");
       }
     });
   });
