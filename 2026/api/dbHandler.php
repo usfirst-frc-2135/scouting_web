@@ -651,7 +651,7 @@ class dbHandler
     $prepared_statement->execute();
   }
 
-  public function readEventWatchStatus($eventCode)
+  public function readEventWatchList($eventCode)
   {
     $dbConfig = $this->readDbConfig();
     $sql = "SELECT 

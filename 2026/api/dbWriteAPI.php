@@ -112,7 +112,6 @@ function makeKeyTeamAlias($ec, $tn)
   $key = $ec . "_" . $tn;
   return $key;
 }
-;
 
 if (isset($_POST["writeSingleTeamAlias"]))
 {
@@ -133,6 +132,34 @@ if (isset($_POST["deleteSingleTeamAlias"]))
   $dat["eventcode"] = $eventCode;
   $dat["entrykey"] = makeKeyTeamAlias($dat["eventcode"], $dat["teamalias"]);
   $db->deleteTeamAliasFromTable($dat);
+  echo "success";
+}
+
+function makeKeyTeamWatch($ec, $tn)
+{
+  $key = $ec . "_" . $tn;
+  return $key;
+}
+
+if (isset($_POST["writeSingleTeamWatch"]))
+{
+  // Write Data API
+  $db->connectToDB();
+  $dat = json_decode($_POST["writeSingleTeamWatch"], true);
+  $dat["eventcode"] = $eventCode;
+  $dat["entrykey"] = makeKeyTeamWatch($dat["eventcode"], $dat["teamnumber"]);
+  $db->writeWatchStatusToTable($dat);
+  echo "success";
+}
+
+if (isset($_POST["deleteSingleTeamWatch"]))
+{
+  // Write Data API
+  $db->connectToDB();
+  $dat = json_decode($_POST["deleteSingleTeamWatch"], true);
+  $dat["eventcode"] = $eventCode;
+  $dat["entrykey"] = makeKeyTeamWatch($dat["eventcode"], $dat["teamwatch"]);
+  $db->deleteWatchStatusFromTable($dat);
   echo "success";
 }
 

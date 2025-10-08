@@ -38,6 +38,43 @@ require 'inc/header.php';
           <tbody class="table-group-divider"> </tbody>
         </table>
       </div>
+
+      <!-- Main row to hold the entry card -->
+      <div class="row col-md-6 mb-3">
+        <div class="card mb-3">
+          <h5>Update Watch List</h5>
+          <div class="input-group mb-3">
+            <input id="enterTeamNumber" class="form-control me-2" type="text" placeholder="Team number" aria-label="Team Number">
+            <div class="input-group-append">
+              <button id="addTeamWatch" class="btn btn-success me-2" type="button">Watch</button>
+            </div>
+            <div class="input-group-append">
+              <button id="addTeamIgnore" class="btn btn-secondary" type="button">Ignore</button>
+            </div>
+          </div>
+
+          <!-- Main row to hold the table -->
+          <style type="text/css" media="screen">
+            thead {
+              position: sticky;
+              top: 56px;
+              background: white;
+            }
+          </style>
+
+          <table id="watchTable" class="table table-striped table-bordered table-hover text-center sortable">
+            <thead>
+              <tr>
+                <th scope="col" class="text-start sorttable_numeric">Team Number</th>
+                <th scope="col" class="sorttable_numeric">Status</th>
+                <th scope="col">Delete</th>
+              </tr>
+            </thead>
+            <tbody class=" table-group-divider">
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -47,6 +84,81 @@ require 'inc/header.php';
 <!-- Javascript page handlers -->
 
 <script>
+
+  // Build the team watch list table
+  function loadTeamWatchTable(watchId, teamWatchList) {
+    console.log("==> strategicSchedule: loadTeamWatchTable()");
+    if (teamWatchList === []) {
+      // console.warn("loadTeamWatchTable: teamWatchList is missing!");
+      return;
+    }
+
+    let tbodyRef = document.getElementById(watchId).querySelector('tbody');
+    tbodyRef.innerHTML = "";
+    for (let entry of teamWatchList) {
+      let key = entry["teamnumber"].trim();
+      let row = tbodyRef.insertRow();
+      row.id = key + "_row";
+      row.innerHTML = "";
+      row.innerHTML += "<td class='text-start'>" + "<a href='teamLookup.php?teamNum=" + entry["teamnumber"] + "'>" + entry["teamnumber"] + "</a>" + "</td>";
+      row.innerHTML += "<td>" + entry["status"] + "</td>";
+      row.innerHTML += "<td> <button id='" + key + "_delete' value='" + key + "' class='btn btn-danger' type='button'>Delete</button></td>";
+
+      // Add delete button
+      document.getElementById(key + "_delete").addEventListener('click', function () {
+        console.log("Deleted " + this.value);
+        deleteTeamWatch(watchId, this.value);
+      });
+    }
+
+    const teamColumn = 0;
+    sortTableByTeam(watchId, teamColumn);
+    // script instructions say this is needed, but it breaks table header sorting
+    // sorttable.makeSortable(document.getElementById(watchId));
+  }
+
+  // Attempt to save the team watch status to the watch table
+  function updateTeamWatch(watchId, teamNum, status) {
+    console.log("==> strategicSchedule: updateTeamWatch()" + " " + teamNum + " " + status);
+    $.post("api/dbWriteAPI.php", {
+      writeSingleTeamWatch: JSON.stringify({ "teamnumber": teamNum, "status": status })
+    }, function (response) {
+      if (response.indexOf('success') > -1) {    // A loose compare, because success word may have a newline
+        // alert("Success in submitting Team Watch status! Clearing Data.");
+        document.getElementById("enterTeamNumber").value = "";
+        buildWatchTable(watchId);
+      } else {
+        alert("Failure in submitting Team Watch status! Please Check network connectivity.");
+      }
+    });
+  }
+
+  // Attempt to remove the team watch status from the watch table
+  function deleteTeamWatch(watchId, teamWatch) {
+    console.log("==> strategicSchedule: deleteTeamWatch()" + " " + teamWatch);
+    $.post("api/dbWriteAPI.php", {
+      deleteSingleTeamWatch: JSON.stringify({ "teamwatch": teamWatch })
+    }, function (response) {
+      if (response.indexOf('success') > -1) {    // A loose compare, because success word may have a newline
+        // alert("Success in submitting Team Watch status! Clearing Data.");
+        document.getElementById("enterTeamNumber").value = "";
+        buildWatchTable(watchId);
+      } else {
+        alert("Failure in removing Team Watch status! Please Check network connectivity.");
+      }
+    });
+  }
+
+  // Retrieve data and build team watch status table
+  function buildWatchTable(watchId) {
+    $.get("api/dbReadAPI.php", {
+      getEventWatchList: true
+    }).done(function (eventWatchList) {
+      console.log("=> eventWatchList");
+      let jWatchList = JSON.parse(eventWatchList);
+      loadTeamWatchTable(watchId, jWatchList);
+    });
+  }
 
   // Load strategic schedule rows
   function loadStrategicSchedule(tableId, stratSched) {
@@ -99,6 +211,7 @@ require 'inc/header.php';
   document.addEventListener("DOMContentLoaded", function () {
 
     const tableId = "stratSchedTable";
+    const watchId = "watchTable";
     // Test cases for debugging
     let scheduleFilter = { "watch": [], "ignore": [] };
     // let scheduleFilter = { "watch": [], "ignore": [{ "teamNum": "1351" }] };
@@ -107,9 +220,27 @@ require 'inc/header.php';
 
     buildScheduleTable(tableId, scheduleFilter);
 
+    buildWatchTable(watchId);
+
+    // Save the team status to watch
+    document.getElementById("addTeamWatch").addEventListener('click', function () {
+      let teamNum = document.getElementById("enterTeamNumber").value.trim().toUpperCase();
+      if (validateTeamNumber(teamNum, null) > 0) {
+        updateTeamWatch(watchId, teamNum, "watch");
+      }
+    });
+
+    // Save the team status to ignore
+    document.getElementById("addTeamIgnore").addEventListener('click', function () {
+      let teamNum = document.getElementById("enterTeamNumber").value.trim().toUpperCase();
+      if (validateTeamNumber(teamNum, null) > 0) {
+        updateTeamWatch(watchId, teamNum, "ignore");
+      }
+    });
   });
 </script>
 
 <script src="./scripts/compareMatchNumbers.js"></script>
 <script src="./scripts/compareTeamNumbers.js"></script>
 <script src="./scripts/sortFrcTables.js"></script>
+<script src="./scripts/validateTeamNumber.js"></script>

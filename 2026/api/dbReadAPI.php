@@ -112,6 +112,11 @@ else if (isset($_GET["getEventScoutNames"]))
   // Get scout list for an event
   echo json_encode($db->readEventScoutTable($eventCode));
 }
+else if (isset($_GET["getEventWatchList"]))
+{
+  // Get scout list for an event
+  echo json_encode($db->readEventWatchList($eventCode));
+}
 else if (isset($_GET["config"]))
 {
   $output = array();
