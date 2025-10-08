@@ -181,15 +181,19 @@ require 'inc/header.php';
       let timeNow = new Date();
       let options = { weekday: 'short', month: 'short', day: 'numeric', hour: "numeric", minute: "numeric" };
       let timeStr = matchTime.toLocaleDateString("en-us", options);
-      if (timeNow > matchTime) {
+      let predStr = predictedTime.toLocaleDateString("en-us", options);
+      if (matchTime < timeNow) {
         timeStr = "<del>" + timeStr + "</del>";
       }
-      let predStr = predictedTime.toLocaleDateString("en-us", options);
-      if (timeNow > predictedTime) {
+      if (predictedTime < timeNow) {
         predStr = "<del>" + predStr + "</del>";
       }
-      let rowString = "<td>" + matchNum + "</td>" + "<td>" + matchTeams + "</td>" + "<td>" + timeStr + "</td>" + "<td>" + predStr + "</td>";
-      tbodyRef.insertRow().innerHTML = rowString;
+      // Use this for testing a partial schedule, uncomment following lineand change the date/time to mid schedule
+      // timeNow = new Date("2025-05-17T17:52:00");
+      if (predictedTime > timeNow || document.getElementById("showCompleted").checked) {
+        let rowString = "<td>" + matchNum + "</td>" + "<td>" + matchTeams + "</td>" + "<td>" + timeStr + "</td>" + "<td>" + predStr + "</td>";
+        tbodyRef.insertRow().innerHTML = rowString;
+      }
     }
   }
 
@@ -225,7 +229,6 @@ require 'inc/header.php';
 
     // Create the completed match filter checkbox listener
     document.getElementById("showCompleted").addEventListener('click', function () {
-      document.getElementById("showCompleted").checked;
       buildWatchTable(tableId, watchId);
     });
 
