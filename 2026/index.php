@@ -22,10 +22,11 @@ require 'inc/header.php';
           <div class="card-body">
             <h5>MySQL Server Status: <span id="serverStatus" class="badge bg-warning float-end">Not Connected</span></h5>
             <h5>Database Status: <span id="databaseStatus" class="badge bg-warning float-end">Not Connected</span></h5>
-            <h5>Match Table Status: <span id="matchTableStatus" class="badge bg-warning float-end">Not Connected</span></h5>
-            <h5>TBA Table Status: <span id="TBATableStatus" class="badge bg-warning float-end">Not Connected</span></h5>
             <h5>Pit Table Status: <span id="pitTableStatus" class="badge bg-warning float-end">Not Connected</span></h5>
+            <h5>Match Table Status: <span id="matchTableStatus" class="badge bg-warning float-end">Not Connected</span></h5>
             <h5>Strategic Table Status: <span id="strategicTableStatus" class="badge bg-warning float-end">Not Connected</span></h5>
+            <h5>TBA Table Status: <span id="TBATableStatus" class="badge bg-warning float-end">Not Connected</span></h5>
+            <h5>Watch Table Status: <span id="watchTableStatus" class="badge bg-warning float-end">Not Connected</span></h5>
             <h5>Scout Table Status: <span id="scoutTableStatus" class="badge bg-warning float-end">Not Connected</span></h5>
             <h5>Alias Table Status: <span id="aliasTableStatus" class="badge bg-warning float-end">Not Connected</span></h5>
             <hr />
@@ -194,6 +195,7 @@ require 'inc/header.php';
         setStatusBadge("strategicTableStatus", dbStatus["strategicTableExists"]);
         setStatusBadge("scoutTableStatus", dbStatus["scoutTableExists"]);
         setStatusBadge("aliasTableStatus", dbStatus["aliasTableExists"]);
+        setStatusBadge("watchTableStatus", dbStatus["watchTableExists"]);
 
         document.getElementById("dataP").checked = dbStatus["useP"];
         document.getElementById("dataQm").checked = dbStatus["useQm"];
@@ -289,6 +291,7 @@ require 'inc/header.php';
       configData["strategictable"] = databaseName + "_strat";
       configData["scouttable"] = databaseName + "_scout";
       configData["aliastable"] = databaseName + "_alias";
+      configData["watchtable"] = databaseName + "_watch";
       configData["writeConfig"] = JSON.stringify(configData);
 
       // Update the status badges after writing the config file
