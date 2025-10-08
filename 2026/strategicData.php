@@ -97,7 +97,7 @@ require 'inc/header.php';
         case 3: driveVal = "Average"; break;
         case 4: driveVal = "Quick"; break;
         default:
-        case 5: driveVal = "-"; break;
+        case 0: driveVal = "-"; break;
       }
 
       let teamNum = stratItem["teamnumber"];
