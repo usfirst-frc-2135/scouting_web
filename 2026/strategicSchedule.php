@@ -38,44 +38,47 @@ require 'inc/header.php';
           <tbody class="table-group-divider"> </tbody>
         </table>
       </div>
+    </div>
 
-      <!-- Main row to hold the entry card -->
-      <div class="row col-md-6 mb-3">
-        <div class="card mb-3">
-          <h5>Update Watch List</h5>
-          <div class="input-group mb-3">
-            <input id="enterTeamNumber" class="form-control me-2" type="text" placeholder="Team number" aria-label="Team Number">
-            <div class="input-group-append">
-              <button id="addTeamWatch" class="btn btn-success me-2" type="button">Watch</button>
-            </div>
-            <div class="input-group-append">
-              <button id="addTeamIgnore" class="btn btn-secondary" type="button">Ignore</button>
-            </div>
+    <!-- Main row to hold the watch list card -->
+    <div class="card col-md-6 mb-3">
+      <div class="card-header">
+        Manage Watch List
+      </div>
+      <div class="card-body">
+        <div class="input-group mb-3">
+          <input id="enterTeamNumber" class="form-control me-2" type="text" placeholder="Team number" aria-label="Team Number">
+          <div class="input-group-append">
+            <button id="addTeamWatch" class="btn btn-success me-2" type="button">Watch</button>
           </div>
-
-          <!-- Main row to hold the table -->
-          <style type="text/css" media="screen">
-            thead {
-              position: sticky;
-              top: 56px;
-              background: white;
-            }
-          </style>
-
-          <table id="watchTable" class="table table-striped table-bordered table-hover text-center sortable">
-            <thead>
-              <tr>
-                <th scope="col" class="text-start sorttable_numeric">Team Number</th>
-                <th scope="col" class="sorttable_numeric">Status</th>
-                <th scope="col">Delete</th>
-              </tr>
-            </thead>
-            <tbody class=" table-group-divider">
-            </tbody>
-          </table>
+          <div class="input-group-append">
+            <button id="addTeamIgnore" class="btn btn-secondary" type="button">Ignore</button>
+          </div>
         </div>
+
+        <!-- Main row to hold the table -->
+        <style type="text/css" media="screen">
+          thead {
+            position: sticky;
+            top: 56px;
+            background: white;
+          }
+        </style>
+
+        <table id="watchTable" class="table table-striped table-bordered table-hover text-center sortable">
+          <thead>
+            <tr>
+              <th scope="col" class="text-start sorttable_numeric">Team Number</th>
+              <th scope="col" class="sorttable_numeric">Status</th>
+              <th scope="col">Delete</th>
+            </tr>
+          </thead>
+          <tbody class=" table-group-divider">
+          </tbody>
+        </table>
       </div>
     </div>
+
   </div>
 </div>
 
