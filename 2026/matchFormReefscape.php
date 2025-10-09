@@ -47,8 +47,15 @@ require 'inc/header.php';
             </div>
 
             <div class="col-7 col-md-6 mb-3">
-              <label for="enterScoutName" class="form-label">Scout Name</label>
-              <input id="enterScoutName" class="form-control" type="text" placeholder="First name, last initial">
+              <label for="selectScoutName" class="form-label">Scout Name</label>
+              <select id="selectScoutName" class="form-select mb-3" onchange="showScoutInputBox(this.value)"
+                aria-label="selectScoutName">
+                <option selected>Choose ...</option>
+              </select>
+              <div id="otherDiv" class="mb-3" style="display:none;">
+                <input id="otherScoutName" class="form-control" type="text" placeholder="First name, last initial">
+              </div>
+
             </div>
 
             <!-- Autonomous Mode -->
@@ -269,7 +276,8 @@ require 'inc/header.php';
     document.getElementById("compLevelQM").selected = true;
     document.getElementById("enterMatchNumber").value = "";
     document.getElementById("enterTeamNumber").value = "";
-    document.getElementById("enterScoutName").value = "";
+    document.getElementById("selectScoutName").value = "Choose ...";
+    document.getElementById("otherScoutName").value = "";
 
     auton.coral.l4 = 0;
     auton.coral.l3 = 0;
@@ -304,13 +312,31 @@ require 'inc/header.php';
     document.getElementById("generalComment").innerText = "";
   }
 
+  // Show scout name text entry box
+  function showScoutInputBox(value) {
+    document.getElementById('otherDiv').style.display = value === 'Other' ? 'block' : 'none';
+  }
+
+  // Get scout name - return empty string if not a valid selection or empty text box
+  function getScoutName() {
+    let scoutName = document.getElementById("selectScoutName").value.trim();
+
+    if (scoutName === "Choose ...")
+      scoutName = "";
+    else if (scoutName === "Other") {
+      scoutName = document.getElementById("otherScoutName").value.trim();
+      scoutName.replace(' ', '_');
+    }
+    return scoutName;
+  }
+
   function validateMatchForm(auton, teleop) {
     console.log("==> matchForm: validateMatchForm()");
     let isError = false;
     let errMsg = "Please enter values for these fields:";
     let matchNumber = document.getElementById("enterMatchNumber").value.trim();
     let teamNum = document.getElementById("enterTeamNumber").value.trim();
-    let scoutName = document.getElementById("enterScoutName").value.trim();
+    let scoutName = getScoutName();
 
     // Make sure each piece of data has a value selected.
     if ((matchNumber === "") || isNaN(parseInt(matchNumber))) {
@@ -351,7 +377,7 @@ require 'inc/header.php';
 
     dataToSave["matchnumber"] = compLevel + matchNumber;
     dataToSave["teamnumber"] = teamNumber;
-    dataToSave["scoutname"] = scoutName;
+    dataToSave["scoutname"] = getScoutName();
     dataToSave["autonLeave"] = document.getElementById("leaveStartLine").checked ? 1 : 0;
     dataToSave["autonCoralL4"] = auton.coral.l4;
     dataToSave["autonCoralL3"] = auton.coral.l3;
@@ -534,6 +560,26 @@ require 'inc/header.php';
     };
 
     attachButtonListeners(auton, teleop);
+
+    // Read scout names from database for this event
+    $.get("api/dbReadAPI.php", {
+      getEventScoutNames: true
+    }).done(function (eventScoutNames) {
+      console.log("=> getEventScoutNames");
+      let scoutSelect = document.getElementById("selectScoutName");
+      let jsonNames = JSON.parse(eventScoutNames);
+      for (let name of jsonNames) {
+        let option = document.createElement('option');
+        option.value = name["scoutname"];
+        option.innerHTML = name["scoutname"];
+        scoutSelect.appendChild(option);
+      };
+      let other = document.createElement('option');
+      other.value = "Other";
+      other.innerHTML = "Other";
+      scoutSelect.appendChild(other);
+    });
+
 
     // Submit the match data form 
     document.getElementById("submitForm").addEventListener('click', function () {
