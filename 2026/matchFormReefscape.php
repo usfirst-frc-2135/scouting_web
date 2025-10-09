@@ -373,7 +373,7 @@ require 'inc/header.php';
     let compLevel = document.getElementById("enterCompLevel").value;
     let matchNumber = document.getElementById("enterMatchNumber").value.trim();
     let teamNumber = document.getElementById("enterTeamNumber").value.trim();
-    let scoutName = document.getElementById("enterScoutName").value.trim();
+    let scoutName = getScoutName();
 
     dataToSave["matchnumber"] = compLevel + matchNumber;
     dataToSave["teamnumber"] = teamNumber;
