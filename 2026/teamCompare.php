@@ -670,6 +670,9 @@ require 'inc/header.php';
         let t2DataD = avgData2[team2]["teleopCoralL3Avg"];
         let t2DataE = avgData2[team2]["autonAlgaeScoredAvg"];
           
+            console.log(t2DataA);
+            console.log("past setting up 3 data");
+            
         datasets.push({ label: team1, data: [t1DataA,t1DataB,t1DataC,t1DataD,t1DataE], backgroundColor: '#F7CF58' });      // Yellow
         datasets.push({ label: team2, data: [t2DataA,t2DataB,t2DataC,t2DataD,t2DataE], backgroundColor: '#B4E7D6' });      // Teal
 
@@ -678,8 +681,8 @@ require 'inc/header.php';
           thirdPickChart.destroy();
         }
 
-        // Create the second pick graph
-        const ctx = document.getElementById('thirddPickChart').getContext('2d');
+        // Create the third pick graph
+        const ctx = document.getElementById('ThirdPickChart').getContext('2d');
         thirdPickChart = new Chart(ctx, {
           type: 'bar',
           data: {
@@ -722,6 +725,7 @@ require 'inc/header.php';
             else alert("No averages data for this team at this event!");
             });
         }
+        
     function loadMatchData2(teamNum1, teamNum2, mdp1Second, mdp2Second) {
     console.log("==> teamLookup: loadMatchData()");
         if (mdp1Second == null || mdp2Second == null) {
@@ -745,19 +749,20 @@ require 'inc/header.php';
             else alert("No averages data for this team at this event!");
             });
         }
+        
     function loadMatchData3(teamNum1, teamNum2, mdp1Third, mdp2Third) {
     console.log("==> teamLookup: loadMatchData()");
         if (mdp1Third == null || mdp2Third == null) {
             return;
         }
         //mdp.sortMatches(allEventMatches);
-        console.log("have all data");
+        console.log("3 have all data");
         mdp1Third.getSiteFilteredAverages(function (filteredMatches, filteredAvgData) {
             if (filteredAvgData != undefined) {
-                console.log("mdp1second good");
+                console.log("3 mdp1third good");
                 mdp2Third.getSiteFilteredAverages(function (filteredMatches2, filteredAvgData2) {
                     if (filteredAvgData2 != undefined) {
-                        console.log("mdp2second good");
+                        console.log("3 mdp2third good");
                         loadThirdPickGraph(teamNum1, teamNum2, filteredAvgData, filteredAvgData2);
                         addAveragesToTable(teamNum1, teamNum2, filteredAvgData, filteredAvgData2);
                         addAllAveragesToTable(teamNum1, teamNum2, filteredAvgData, filteredAvgData2);
@@ -1183,57 +1188,57 @@ require 'inc/header.php';
       };
         
         function buildTeamComparePage3(teamNum1Third, teamNum2Third) {
-          let mdp1Second = null;
-          let mdp2Second = null;
-          let teamInfo1Second = null;
-          let teamInfo2Second = null;
+          let mdp1Third = null;
+          let mdp2Third = null;
+          let teamInfo1Third = null;
+          let teamInfo2Third = null;
         console.log("==> teamCompare: buildTeamComparePage()");
         //clearTeamComparePage();
         //let teamNum1 = document.getElementById("enterTeamNumber1");
         //let teamNum2 = document.getElementById("enterTeamNumber2")
         // Get team name from TBA
         $.get("api/tbaAPI.php", {
-          getTeamInfo: teamNum1Second
-        }).done(function (teamInfo1Second) {
-          console.log("=> getTeamInfo:\n" + teamInfo1Second);
-          let teamName1Second = "";
-          if (teamInfo1Second === null) {
+          getTeamInfo: teamNum1Third
+        }).done(function (teamInfo1Third) {
+          console.log("=> getTeamInfo:\n" + teamInfo1Third);
+          let teamName1Third = "";
+          if (teamInfo1Third === null) {
             return alert("Can't load teamName from TBA; check if TBA Key was set in db_config");
           }
-          let jTeamInfo = JSON.parse(teamInfo1Second)["response"];
-          teamName1Second += " " + jTeamInfo["nickname"];
-          console.log("==> teamCompare: for " + teamNum1Second + teamName1Second);
-          document.getElementById("team1Title2").innerHTML = teamNum1Second + "-" + teamName1Second;
+          let jTeamInfo = JSON.parse(teamInfo1Third)["response"];
+          teamName1Third += " " + jTeamInfo["nickname"];
+          console.log("==> teamCompare: for " + teamNum1Third + teamName1Third);
+          document.getElementById("2team1Title3").innerHTML = teamNum1Third + "-" + teamName1Third;
           
         $.get("api/tbaAPI.php", {
-          getTeamInfo: teamNum2Second
-        }).done(function (teamInfo2Second) {
-          console.log("=> getTeamInfo:\n" + teamInfo2Second);
-          let teamName2Second = "";
-          if (teamInfo2Second === null) {
+          getTeamInfo: teamNum2Third
+        }).done(function (teamInfo2Third) {
+          console.log("=> getTeamInfo:\n" + teamInfo2Third);
+          let teamName2Third = "";
+          if (teamInfo2Third === null) {
             return alert("Can't load teamName from TBA; check if TBA Key was set in db_config");
           }
-          let kTeamInfo = JSON.parse(teamInfo2Second)["response"];
-          teamName2Second += " " + kTeamInfo["nickname"];
-          console.log("==> teamCompare: for " + teamNum1Second + teamName1Second + teamNum2Second + teamName2Second);
-          document.getElementById("team2Title2").innerHTML = teamNum2Second + "-" + teamName2Second;
+          let kTeamInfo = JSON.parse(teamInfo2Third)["response"];
+          teamName2Third += " " + kTeamInfo["nickname"];
+          console.log("==> teamCompare: for " + teamNum1Third + teamName1Third + teamNum2Third + teamName2Third);
+          document.getElementById("2team2Title3").innerHTML = teamNum2Third + "-" + teamName2Third;
           });
           
         $.get("api/dbReadAPI.php", {
-            getTeamMatchData: teamNum1Second
-            }).done(function (teamMatchesSecond) {
+            getTeamMatchData: teamNum1Third
+            }).done(function (teamMatchesThird) {
             console.log("=> getTeamMatchData");
-            mdp1Second = new matchDataProcessor(JSON.parse(teamMatchesSecond));
-            console.log("done with mdp 1");
-            loadMatchData2(teamNum1Second, teamNum2Second, mdp1Second, mdp2Second);
+            mdp1Third = new matchDataProcessor(JSON.parse(teamMatchesThird));
+            console.log("3 done with mdp 1");
+            loadMatchData3(teamNum1Third, teamNum2Third, mdp1Third, mdp2Third);
          });
           $.get("api/dbReadAPI.php", {
-            getTeamMatchData: teamNum2Second
-            }).done(function (teamMatches2Second) {
+            getTeamMatchData: teamNum2Third
+            }).done(function (teamMatches2Third) {
             console.log("=> getTeamMatchData");
-            mdp2Second = new matchDataProcessor(JSON.parse(teamMatches2Second));
-            console.log("done with mdp2");
-            loadMatchData2(teamNum1Second, teamNum2Second, mdp1Second, mdp2Second);
+            mdp2Third = new matchDataProcessor(JSON.parse(teamMatches2Third));
+            console.log("3 done with mdp2");
+            loadMatchData3(teamNum1Third, teamNum2Third, mdp1Third, mdp2Third);
          });
         /*$.get("api/dbReadAPI.php", {
             getTeamMatchData: teamNum2
@@ -1256,8 +1261,10 @@ require 'inc/header.php';
         // Pressing enter in team number field loads the page
         let input = document.getElementById("enterTeamNumber1");
         let inputSecond = document.getElementById("2enterTeamNumber1");
+        let inputThird = document.getElementById("3enterTeamNumber1");
         let input2 = document.getElementById("enterTeamNumber2");
         let input2Second = document.getElementById("2enterTeamNumber2");
+        let input2Third = document.getElementById("3enterTeamNumber2");
         input.addEventListener("keypress", function (event) {
           if (event.key === "Enter") {
             event.preventDefault();
@@ -1268,6 +1275,12 @@ require 'inc/header.php';
           if (event2.key === "Enter") {
             event2.preventDefault();
             document.getElementById("loadTeamButton2").click();
+          }
+        });
+        inputThird.addEventListener("keypress", function (event3) {
+          if (event3.key === "Enter") {
+            event3.preventDefault();
+            document.getElementById("loadTeamButton3").click();
           }
         });
 
@@ -1284,6 +1297,13 @@ require 'inc/header.php';
           let teamNum2Second = document.getElementById("2enterTeamNumber2").value.trim();
           if (validateTeamNumber(teamNum1Second, null) > 0  && validateTeamNumber(teamNum2Second, null) > 0) {
             buildTeamComparePage2(teamNum1Second, teamNum2Second);
+          }
+        });
+        document.getElementById("loadTeamButton3").addEventListener('click', function () {
+          let teamNum1Third = document.getElementById("3enterTeamNumber1").value.trim();
+          let teamNum2Third = document.getElementById("3enterTeamNumber2").value.trim();
+          if (validateTeamNumber(teamNum1Third, null) > 0  && validateTeamNumber(teamNum2Third, null) > 0) {
+            buildTeamComparePage3(teamNum1Third, teamNum2Third);
           }
         });
       });
