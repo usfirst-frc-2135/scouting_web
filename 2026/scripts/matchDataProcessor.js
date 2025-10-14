@@ -11,7 +11,7 @@ class matchDataProcessor {
   constructor(jMatchData) {
     this.mData = jMatchData;
     this.siteFilter = null;
-    console.log("this.mData length: " + this.mData.length);
+    console.log("matchDataProcessor: MatchData: num of matches = " + this.mData.length);
   }
 
   // Convert to integer percent (one decimal digit)
@@ -31,12 +31,18 @@ class matchDataProcessor {
 
   // Fix match IDs that are missing the comp level
   getFixedMatchId(matchId) {
-    matchId = matchId.toLowerCase();
-    if ((matchId.search("p") != -1) || (matchId.search("qm") != -1) ||
-      (matchId.search("sf") != -1) || (matchId.search("f") != -1)) {
-      return matchId;
+    if(matchId != 0) {
+      matchId = matchId.toLowerCase();
+      if ((matchId.search("p") != -1) || (matchId.search("qm") != -1) ||
+        (matchId.search("sf") != -1) || (matchId.search("f") != -1)) {
+        return matchId;
+      }
+      else {  // Attempt to repair bad match IDs but log them
+        console.warn("getMatchTuple: Invalid matchId! " + matchId);
+        return "qm" + matchId;
+      }
     }
-    else {  // Attempt to repair bad match IDs but log them
+    else {  
       console.warn("getMatchTuple: Invalid matchId! " + matchId);
       return "qm" + matchId;
     }
@@ -88,7 +94,6 @@ class matchDataProcessor {
 
   // Filters out all matches in this.mData not within the specified range (destructively changes this.mData)
   filterMatchRange(startMatchId, endMatchId) {
-    console.log("==> matchDataProcessor: filterMatchRange:");
     let newData = [];
     for (let i = 0; i < this.mData.length; i++) {
       let matchId = this.mData[i]["matchnumber"];
@@ -101,7 +106,7 @@ class matchDataProcessor {
 
   // Sorts the data by match number (ignores comp_level)
   sortMatches(newData) {
-    console.log("==> matchDataProcessor: sortMatches:");
+    console.log("matchDataProcessor: sortMatches:");
     newData.sort(function (a, b) {
       let compare = this.isMatchLessThanOrEqual(a["matchnumber"], b["matchnumber"]);
       return (compare) ? -1 : 1;
@@ -110,7 +115,6 @@ class matchDataProcessor {
 
   //  Modify match data to only include matches specified by the site filter
   applySiteFilter() {
-    console.log("==> matchDataProcessor: applySiteFilter:");
     let newData = [];
     for (let i = 0; i < this.mData.length; i++) {
       let matchId = this.mData[i]["matchnumber"];
@@ -124,17 +128,14 @@ class matchDataProcessor {
       else if (mt[0] === "f" && this.siteFilter["useF"]) { newData.push(this.mData[i]); }
     }
     this.mData = [...newData];
-    console.log("this.mData length: " + this.mData.length + " (after filter)");
   }
 
   // Filters match data based on the retrieved site filter from DB config
   getSiteFilteredAverages(processorFunction) {
-    console.log("==> matchDataProcessor: getSiteFilteredAverages:");
     let tempThis = this;
     $.post("api/dbAPI.php", {
       getDBStatus: true
     }, function (dbStatus) {
-      console.log("==> getDBStatus");
       let jDbStatus = JSON.parse(dbStatus);
       let newSiteFilter = {};
       newSiteFilter["useP"] = jDbStatus["useP"];
@@ -151,7 +152,7 @@ class matchDataProcessor {
 
   // Returns the match data with all calculations
   getEventAverages() {
-    console.log("==> matchDataProcessor: getEventAverages:");
+    console.log("matchDataProcessor: getEventAverages:");
     let pdata = {}; // to hold returning data for all matches and all teams
 
     // Process the each match

@@ -61,38 +61,22 @@ require 'inc/header.php';
   // Load match data to page
   // NOTE: match data keywords MUST match the database definition in dbHandler.php
   function loadMatchData(tableId, matchData) {
-    console.log("==> matchData: loadMatchData()");
-    // first get alias table data
-    let bAliasUsed = false;
-    
-    $.get("api/dbReadAPI.php", {
-      getEventAliasNames: true
-    }).done(function (eventAliasNames) {
-      console.log("=> eventAliasNames");
-      jAliasNames = JSON.parse(eventAliasNames);
-      if (jAliasNames.length > 0) {
-        console.log("---> aliases used");
-        bAliasUsed = true;
-        myAnames = jAliasNames;
-      }
-       
+    console.log("matchData: loadMatchData()");
+
     let tbodyRef = document.getElementById(tableId).querySelector('tbody');;
     tbodyRef.innerHTML = ""; // Clear Table
+
+    // Go thru each match and build the HTML string for that row.
     for (let i = 0; i < matchData.length; i++) {
       let matchItem = matchData[i];
       let teamNum = matchItem["teamnumber"];
-      let alias = "";
-
-      if(bAliasUsed) {
-          let BCDnum = getTeamNumFromAlias(teamNum, myAnames);
-//HOLD          console.log("---> BCDnum = " + BCDnum);
-          if (BCDnum !== "") {
-            alias = BCDnum;
-          }
-        }
+      let alias = matchItem["teamalias"];
+      if(alias == 0)
+        alias = "";
 
       const tdPrefix0 = "<td style=\"background-color:transparent\">";
       const tdPrefix1 = "<td style=\"background-color:#cfe2ff\">";
+      let data1 = matchItem["matchnumber"];
       let rowString = "<th>" + matchItem["matchnumber"] + "</th>";
       rowString += tdPrefix0 + "<a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</td>";
       rowString += tdPrefix0 + alias + "</td>";
@@ -118,7 +102,6 @@ require 'inc/header.php';
       rowString += tdPrefix1 + matchItem["comment"] + "</td>";
       tbodyRef.insertRow().innerHTML = rowString;
     }
-  });
   }
 
   // Acquire match data and build the page
@@ -170,6 +153,5 @@ require 'inc/header.php';
 
 <script src="./scripts/compareMatchNumbers.js"></script>
 <script src="./scripts/compareTeamNumbers.js"></script>
-<script src="./scripts/aliasFunctions.js"></script>
 <script src="./scripts/matchDataProcessor.js"></script>
 <script src="./scripts/sortFrcTables.js"></script>
