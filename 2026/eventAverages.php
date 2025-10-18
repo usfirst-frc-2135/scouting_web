@@ -65,7 +65,7 @@ require 'inc/header.php';
       <div id="freeze-table" class="freeze-table overflow-auto">
         <table id="averagesTable" class="table table-striped table-bordered table-hover table-sm border-dark text-center sortable">
           <colgroup>
-            <col span="1" style="background-color:transparent">
+            <col span="2" style="background-color:transparent">
             <col span="2" style="background-color:#cfe2ff">
             <col span="2" style="background-color:transparent">
             <col span="2" style="background-color:#cfe2ff">
@@ -102,7 +102,7 @@ require 'inc/header.php';
           </colgroup>
           <thead>
             <tr>
-              <th colspan="1" style="background-color:transparent"></th>
+              <th colspan="2" style="background-color:transparent"></th>
               <th colspan="8" style="background-color:#83b4ff">Match Points</th>
               <th colspan="4" style="background-color:#d5e6de">Auton Pts</th>
               <th colspan="4" style="background-color:#d6f3fB">Teleop Pts</th>
@@ -117,7 +117,7 @@ require 'inc/header.php';
             </tr>
             <tr>
               <!-- team number -->
-              <th colspan="1" style="background-color:transparent"></th>
+              <th colspan="2" style="background-color:transparent"></th>
 
               <!-- points by game phase -->
               <th colspan="2" style="background-color:#83b4ff">Total Pts</th>
@@ -170,6 +170,8 @@ require 'inc/header.php';
             <tr>
               <!-- team number -->
               <th scope="col" class="sorttable_numeric" style="background-color:transparent">Team</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Alias</th>
+
 
               <!-- points by game phase -->
               <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
@@ -280,9 +282,12 @@ require 'inc/header.php';
     }
     return "";
   }
+  
+
+
 
   // Create and the HTML table for display
-  function addAveragesToTable(tableId, teamList, avgData) {
+  function addAveragesToTable(tableId, teamList, avgData, aliaslist) {
     console.log("==> eventAverages: addAveragesToTable()");
     let tbodyRef = document.getElementById(tableId).querySelector('tbody');
     tbodyRef.innerHTML = ""; // Clear Table
@@ -292,7 +297,10 @@ require 'inc/header.php';
       const tdPrefix = "<td style=\"background-color:transparent\">";
       let rowString = "";
       rowString += tdPrefix + "<a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a></td>";
-
+      let bAliasUsed = false;
+      let alias = getAliasFromTeamNum(teamNum, aliaslist);
+      rowString += tdPrefix + alias + "</td>";
+    
       // points by game phase
       rowString += tdPrefix + getDataValue(avgData[teamNum], "totalPointsAvg") + "</td>";
       rowString += tdPrefix + getDataValue(avgData[teamNum], "totalPointsMax") + "</td>";
@@ -404,6 +412,7 @@ require 'inc/header.php';
   }
 
   // Returns a string with the comma-separated line of data for the given team.
+  //LOOK
   function createCSVLine(team, evtAvgs, coprs) {
     let pitLocation = 0;
     let oprTP = getDataValue(coprs[team], "totalPoints");
@@ -566,6 +575,19 @@ require 'inc/header.php';
     $.get("api/dbReadAPI.php", {
       getAllMatchData: true
     }).done(function (matchData) {
+
+      $.get("api/dbReadAPI.php", {
+      getEventAliasNames: true
+    }).done(function (eventAliasNames) {
+      console.log("=> eventAliasNames");
+      jAliasNames = JSON.parse(eventAliasNames);
+      if (jAliasNames.length > 0) {
+        console.log("---> aliases used");
+        bAliasUsed = true;
+        myAnames = jAliasNames;
+      }
+    });
+
       console.log("=> getAllMatchData:");
       mdp = new matchDataProcessor(JSON.parse(matchData));
       if (startMatch !== null && endMatch !== null) {
@@ -573,7 +595,7 @@ require 'inc/header.php';
       }
       mdp.getSiteFilteredAverages(function (filteredMatchData, filteredAvgData) {
         let teamList = getTeamListFromData(filteredAvgData);
-        addAveragesToTable(tableId, teamList, filteredAvgData);
+        addAveragesToTable(tableId, teamList, filteredAvgData, jAliasNames);
         // script instructions say this is needed, but it breaks table header sorting
         // sorttable.makeSortable(document.getElementById(tableId));
         document.getElementById(tableId).click(); // This magic fixes the floating column bug
@@ -623,4 +645,6 @@ require 'inc/header.php';
 
 </script>
 
+<script src="./scripts/compareMatchNumbers.js"></script>
 <script src="./scripts/matchDataProcessor.js"></script>
+<script src="./scripts/aliasFunctions.js"></script>
