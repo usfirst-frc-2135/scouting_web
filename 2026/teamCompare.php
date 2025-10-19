@@ -31,7 +31,7 @@ require 'inc/header.php';
             <h5 id="team2Title" class="card-title">Team 2 # </h5>
 
             <!-- First Pick collapsible graph -->
-            <div class="card mb-3" style="background-color:#D5E6DE">
+            <div class="card mb-3" style="background-color:#F0FFFF">
               <div class="card-header">
                 <h5 class="text-center">
                   <a href="#collapseFirstPickGraph" data-bs-toggle="collapse" aria-expanded="false">First Pick</a>
@@ -93,20 +93,184 @@ require 'inc/header.php';
             </div>
             </div>
           </div>
+              
+        <div class="card mb-3">
+          <div class="card-header">
+            <h5 class="text-center">
+              <a href="#collapseStrategicData" data-bs-toggle="collapse" aria-expanded="false">Strategic Scouting Team 1</a>
+            </h5>
+          </div>
+          <div id="collapseStrategicData" class="card-body collapse">
+
+            <!-- <div id="freeze-table-strat" class="freeze-table overflow-auto"> -->
+            <div class="overflow-auto">
+              <table id="strategicDataTable"
+                class="table table-striped table-bordered table-hover table-sm border-dark text-center sortable">
+                <colgroup>
+                  <col span="2" style="background-color:transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th colspan="1"> </th>
+                    <th colspan="1"> </th>
+                    <th colspan="2" class="text-center" style="background-color:#3686FF">Against Defense</th>
+                    <th colspan="3" class="text-center">Defense Tactics</th>
+                    <th colspan="8" class="text-center" style="background-color:#3686FF">Fouls</th>
+                    <th colspan="4" class="text-center">Auton</th>
+                    <th colspan="4" class="text-center" style="background-color:#3686FF">Teleop</th>
+                    <th colspan="2" class="text-center">Notes</th>
+                    <th colspan="1"> </th>
+                  </tr>
+                  <tr>
+                    <th scope="col">Match</th>
+                    <th scope="col">Drive Skill</th>
+                    <th scope="col">Block</th>
+                    <th scope="col">Note</th>
+                    <th scope="col">Block Path</th>
+                    <th scope="col">Block Stn</th>
+                    <th scope="col">Note</th>
+                    <th scope="col">Pin</th>
+                    <th scope="col">Auton Barge Contact</th>
+                    <th scope="col">Auton Cage Contact</th>
+                    <th scope="col">Anchor Contact</th>
+                    <th scope="col">Barge Contact</th>
+                    <th scope="col">Reef Contact</th>
+                    <th scope="col">Cage Contact</th>
+                    <th scope="col">Contact Climbing Robot</th>
+                    <th scope="col">Get Floor Coral</th>
+                    <th scope="col">Get Stn Coral</th>
+                    <th scope="col">Get Floor Algae</th>
+                    <th scope="col">Get Reef Algae</th>
+                    <th scope="col">Get Floor Coral</th>
+                    <th scope="col">Get Floor Algae</th>
+                    <th scope="col">Knock Algae</th>
+                    <th scope="col">Aquire Reef Algae</th>
+                    <th scope="col">Problem Note</th>
+                    <th scope="col">General Note</th>
+                    <th scope="col">Scout Name</th>
+                  </tr>
+                </thead>
+                <tbody class="table-group-divider"> </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="card mb-3">
+          <div class="card-header">
+            <h5 class="text-center">
+              <a href="#collapseStrategicData" data-bs-toggle="collapse" aria-expanded="false">Strategic Scouting Team 2</a>
+            </h5>
+          </div>
+          <div id="collapseStrategicData" class="card-body collapse">
+
+            <!-- <div id="freeze-table-strat" class="freeze-table overflow-auto"> -->
+            <div class="overflow-auto">
+              <table id="strategicDataTable2"
+                class="table table-striped table-bordered table-hover table-sm border-dark text-center sortable">
+                <colgroup>
+                  <col span="2" style="background-color:transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:transparent">
+                  <col span="1" style="background-color:#cfe2ff">
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th colspan="1"> </th>
+                    <th colspan="1"> </th>
+                    <th colspan="2" class="text-center" style="background-color:#3686FF">Against Defense</th>
+                    <th colspan="3" class="text-center">Defense Tactics</th>
+                    <th colspan="8" class="text-center" style="background-color:#3686FF">Fouls</th>
+                    <th colspan="4" class="text-center">Auton</th>
+                    <th colspan="4" class="text-center" style="background-color:#3686FF">Teleop</th>
+                    <th colspan="2" class="text-center">Notes</th>
+                    <th colspan="1"> </th>
+                  </tr>
+                  <tr>
+                    <th scope="col">Match</th>
+                    <th scope="col">Drive Skill</th>
+                    <th scope="col">Block</th>
+                    <th scope="col">Note</th>
+                    <th scope="col">Block Path</th>
+                    <th scope="col">Block Stn</th>
+                    <th scope="col">Note</th>
+                    <th scope="col">Pin</th>
+                    <th scope="col">Auton Barge Contact</th>
+                    <th scope="col">Auton Cage Contact</th>
+                    <th scope="col">Anchor Contact</th>
+                    <th scope="col">Barge Contact</th>
+                    <th scope="col">Reef Contact</th>
+                    <th scope="col">Cage Contact</th>
+                    <th scope="col">Contact Climbing Robot</th>
+                    <th scope="col">Get Floor Coral</th>
+                    <th scope="col">Get Stn Coral</th>
+                    <th scope="col">Get Floor Algae</th>
+                    <th scope="col">Get Reef Algae</th>
+                    <th scope="col">Get Floor Coral</th>
+                    <th scope="col">Get Floor Algae</th>
+                    <th scope="col">Knock Algae</th>
+                    <th scope="col">Aquire Reef Algae</th>
+                    <th scope="col">Problem Note</th>
+                    <th scope="col">General Note</th>
+                    <th scope="col">Scout Name</th>
+                  </tr>
+                </thead>
+                <tbody class="table-group-divider"> </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     </div>
     
       <!-- Second Pick collapsible graph -->
-<div class="row col-md-6 mb-3">
-      <div class="input-group mb-3">
-        <input id="2enterTeamNumber1" class="form-control" type="text" placeholder="FRC team number1" aria-label="Team Number">
-        <input id="2enterTeamNumber2" class="form-control" type="text" placeholder="FRC team number2" aria-label="Team Number">
-        <div class="input-group-append">
-          <button id="loadTeamButton2" class="btn btn-primary" type="button">Load Teams</button>
-        </div>
-      </div>
-    </div>
 
     <!-- First column of data starts here -->
     <div class="row">
@@ -117,7 +281,7 @@ require 'inc/header.php';
             <h5 id="team2Title2" class="card-title">Team 2 # </h5>
 
             <!-- First Pick collapsible graph -->
-            <div class="card mb-3" style="background-color:#D5E6DE">
+            <div class="card mb-3" style="background-color:#F0FFFF">
               <div class="card-header">
                 <h5 class="text-center">
                   <a href="#collapseSecondPickGraph" data-bs-toggle="collapse" aria-expanded="false">Second Pick</a>
@@ -135,15 +299,6 @@ require 'inc/header.php';
       </div>
     
     <!-- Third Pick collapsible graph -->
-<div class="row col-md-6 mb-3">
-      <div class="input-group mb-3">
-        <input id="3enterTeamNumber1" class="form-control" type="text" placeholder="FRC team number1" aria-label="Team Number">
-        <input id="3enterTeamNumber2" class="form-control" type="text" placeholder="FRC team number2" aria-label="Team Number">
-        <div class="input-group-append">
-          <button id="loadTeamButton3" class="btn btn-primary" type="button">Load Teams</button>
-        </div>
-      </div>
-    </div>
 
     <!-- First column of data starts here -->
     <div class="row">
@@ -154,7 +309,7 @@ require 'inc/header.php';
             <h5 id="2team2Title3" class="card-title">Team 2 # </h5>
 
             <!-- First Pick collapsible graph -->
-            <div class="card mb-3" style="background-color:#D5E6DE">
+            <div class="card mb-3" style="background-color:#F0FFFF">
               <div class="card-header">
                 <h5 class="text-center">
                   <a href="#collapseThirdPickGraph" data-bs-toggle="collapse" aria-expanded="false">Third Pick</a>
@@ -578,8 +733,8 @@ require 'inc/header.php';
         let t2DataC = avgData2[team2]["endgamePointsAvg"];
         let t2DataD = avgData2[team2]["teleopCoralL3Avg"];
           
-        datasets.push({ label: team1, data: [t1DataA,t1DataB,t1DataC,t1DataD], backgroundColor: '#F7CF58' });      // Yellow
-        datasets.push({ label: team2, data: [t2DataA,t2DataB,t2DataC,t2DataD], backgroundColor: '#B4E7D6' });      // Teal
+        datasets.push({ label: team1, data: [t1DataA,t1DataB,t1DataC,t1DataD], backgroundColor: '#FFC5D3' });      // Light pink
+        datasets.push({ label: team2, data: [t2DataA,t2DataB,t2DataC,t2DataD], backgroundColor: '#C3B1E1' });      // Lavendar
 
         // Define the graph as a bar chart:
         if (firstPickChart !== undefined) {
@@ -625,8 +780,8 @@ require 'inc/header.php';
         let t2DataD = avgData2[team2]["teleopCoralL3Avg"];
         let t2DataE = avgData2[team2]["autonAlgaeScoredAvg"];
           
-        datasets.push({ label: team1, data: [t1DataA,t1DataB,t1DataC,t1DataD,t1DataE], backgroundColor: '#F7CF58' });      // Yellow
-        datasets.push({ label: team2, data: [t2DataA,t2DataB,t2DataC,t2DataD,t2DataE], backgroundColor: '#B4E7D6' });      // Teal
+        datasets.push({ label: team1, data: [t1DataA,t1DataB,t1DataC,t1DataD,t1DataE], backgroundColor: '#FFC5D3' });      // Yellow
+        datasets.push({ label: team2, data: [t2DataA,t2DataB,t2DataC,t2DataD,t2DataE], backgroundColor: '#C3B1E1' });      // Teal
 
         // Define the graph as a bar chart:
         if (secondPickChart !== undefined) {
@@ -673,8 +828,8 @@ require 'inc/header.php';
             console.log(t2DataA);
             console.log("past setting up 3 data");
             
-        datasets.push({ label: team1, data: [t1DataA,t1DataB,t1DataC,t1DataD,t1DataE], backgroundColor: '#F7CF58' });      // Yellow
-        datasets.push({ label: team2, data: [t2DataA,t2DataB,t2DataC,t2DataD,t2DataE], backgroundColor: '#B4E7D6' });      // Teal
+        datasets.push({ label: team1, data: [t1DataA,t1DataB,t1DataC,t1DataD,t1DataE], backgroundColor: '#FFC5D3' });      // Yellow
+        datasets.push({ label: team2, data: [t2DataA,t2DataB,t2DataC,t2DataD,t2DataE], backgroundColor: '#C3B1E1' });      // Teal
 
         // Define the graph as a bar chart:
         if (thirdPickChart !== undefined) {
@@ -718,6 +873,7 @@ require 'inc/header.php';
                         loadFirstPickGraph(teamNum1, teamNum2, filteredAvgData, filteredAvgData2);
                         addAveragesToTable(teamNum1, teamNum2, filteredAvgData, filteredAvgData2);
                         addAllAveragesToTable(teamNum1, teamNum2, filteredAvgData, filteredAvgData2);
+                        //buildStrategicDataTable(teamNum1, teamNum2);
                     } 
                     else alert("No averages data for this team 2 at this event!");
                 });
@@ -740,8 +896,8 @@ require 'inc/header.php';
                     if (filteredAvgData2 != undefined) {
                         console.log("mdp2second good");
                         loadSecondPickGraph(teamNum1, teamNum2, filteredAvgData, filteredAvgData2);
-                        addAveragesToTable(teamNum1, teamNum2, filteredAvgData, filteredAvgData2);
-                        addAllAveragesToTable(teamNum1, teamNum2, filteredAvgData, filteredAvgData2);
+                        //addAveragesToTable(teamNum1, teamNum2, filteredAvgData, filteredAvgData2);
+                        //addAllAveragesToTable(teamNum1, teamNum2, filteredAvgData, filteredAvgData2);
                     } 
                     else alert("No averages data for this team 2 at this event!");
                 });
@@ -764,8 +920,8 @@ require 'inc/header.php';
                     if (filteredAvgData2 != undefined) {
                         console.log("3 mdp2third good");
                         loadThirdPickGraph(teamNum1, teamNum2, filteredAvgData, filteredAvgData2);
-                        addAveragesToTable(teamNum1, teamNum2, filteredAvgData, filteredAvgData2);
-                        addAllAveragesToTable(teamNum1, teamNum2, filteredAvgData, filteredAvgData2);
+                        //addAveragesToTable(teamNum1, teamNum2, filteredAvgData, filteredAvgData2);
+                        //addAllAveragesToTable(teamNum1, teamNum2, filteredAvgData, filteredAvgData2);
                     } 
                     else alert("No averages data for this team 2 at this event!");
                 });
@@ -844,6 +1000,8 @@ require 'inc/header.php';
         document.getElementById("firstPickChart").querySelector('tbody').innerHTML = "";
         document.getElementById("secondPickChart").querySelector('tbody').innerHTML = "";
         document.getElementById("thirdPickChart").querySelector('tbody').innerHTML = "";
+        document.getElementById("strategicDataTable").querySelector('tbody').innerHTML = "";
+        document.getElementById("strategicDataTable2").querySelector('tbody').innerHTML = "";
       }
         
     function getDataValue(dict, key) {
@@ -1059,6 +1217,139 @@ require 'inc/header.php';
             
           tbodyRef.insertRow().innerHTML = rowString2;
   }
+        
+    function toYesNo(value) {
+    switch (String(value)) {
+      case "1": return "Yes";
+      case "2": return "No";
+      default: return "-";
+    }
+  }    
+        
+   // Load the strategic data table for this team
+  function loadStrategicData(stratData) {
+    console.log("==> teamLookup: loadStrategicData()");
+    let tbodyRef = document.getElementById("strategicDataTable").querySelector('tbody');
+    tbodyRef.innerHTML = "";     // clear table
+    for (let i = 0; i < stratData.length; i++) {
+      let stratItem = stratData[i];
+
+      let driverability = stratItem["driverability"];
+      switch (driverability) {
+        case 1: driveVal = "Jerky"; break;
+        case 2: driveVal = "Slow"; break;
+        case 3: driveVal = "Average"; break;
+        case 4: driveVal = "Quick"; break;
+        case 5: driveVal = "-"; break;
+        default: driveVal = ""; break;
+      }
+
+      let rowString = "";
+      rowString += "<td>" + stratItem["matchnumber"] + "</td>";
+      rowString += "<td>" + driveVal + "</td>";
+      rowString += "<td>" + toYesNo(stratItem["against_tactic1"]) + "</td>";
+      rowString += "<td>" + stratItem["against_comment"] + "</td>";
+
+      rowString += "<td>" + toYesNo(stratItem["defense_tactic1"]) + "</td>";
+      rowString += "<td>" + toYesNo(stratItem["defense_tactic2"]) + "</td>";
+      rowString += "<td>" + stratItem["defense_comment"] + "</td>";
+
+      rowString += "<td>" + toYesNo(stratItem["foul1"]) + "</td>";
+      rowString += "<td>" + toYesNo(stratItem["autonFoul1"]) + "</td>";
+      rowString += "<td>" + toYesNo(stratItem["autonFoul2"]) + "</td>";
+      rowString += "<td>" + toYesNo(stratItem["teleopFoul1"]) + "</td>";
+      rowString += "<td>" + toYesNo(stratItem["teleopFoul2"]) + "</td>";
+      rowString += "<td>" + toYesNo(stratItem["teleopFoul3"]) + "</td>";
+      rowString += "<td>" + toYesNo(stratItem["teleopFoul4"]) + "</td>";
+      rowString += "<td>" + toYesNo(stratItem["endgameFoul1"]) + "</td>";
+
+      rowString += "<td>" + toYesNo(stratItem["autonGetCoralFromFloor"]) + "</td>";
+      rowString += "<td>" + toYesNo(stratItem["autonGetCoralFromStation"]) + "</td>";
+      rowString += "<td>" + toYesNo(stratItem["autonGetAlgaeFromFloor"]) + "</td>";
+      rowString += "<td>" + toYesNo(stratItem["autonGetAlgaeFromReef"]) + "</td>";
+      rowString += "<td>" + toYesNo(stratItem["teleopFloorPickupAlgae"]) + "</td>";
+      rowString += "<td>" + toYesNo(stratItem["teleopFloorPickupCoral"]) + "</td>";
+      rowString += "<td>" + toYesNo(stratItem["teleopKnockOffAlgaeFromReef"]) + "</td>";
+      rowString += "<td>" + toYesNo(stratItem["teleopAcquireAlgaeFromReef"]) + "</td>";
+
+      rowString += "<td>" + stratItem["problem_comment"] + "</td>";
+      rowString += "<td>" + stratItem["general_comment"] + "</td>";
+      rowString += "<td>" + stratItem["scoutname"] + "</td>";
+      tbodyRef.insertRow().innerHTML = rowString;
+    }
+    const matchColumn = 0;
+    sortTableByMatch("strategicDataTable", matchColumn);
+  }
+        
+    function loadStrategicData2(stratData) {
+    console.log("==> teamLookup: loadStrategicData()");
+    let tbodyRef = document.getElementById("strategicDataTable2").querySelector('tbody');
+    tbodyRef.innerHTML = "";     // clear table
+    for (let i = 0; i < stratData.length; i++) {
+      let stratItem = stratData[i];
+
+      let driverability = stratItem["driverability"];
+      switch (driverability) {
+        case 1: driveVal = "Jerky"; break;
+        case 2: driveVal = "Slow"; break;
+        case 3: driveVal = "Average"; break;
+        case 4: driveVal = "Quick"; break;
+        case 5: driveVal = "-"; break;
+        default: driveVal = ""; break;
+      }
+
+      let rowString = "";
+      rowString += "<td>" + stratItem["matchnumber"] + "</td>";
+      rowString += "<td>" + driveVal + "</td>";
+      rowString += "<td>" + toYesNo(stratItem["against_tactic1"]) + "</td>";
+      rowString += "<td>" + stratItem["against_comment"] + "</td>";
+
+      rowString += "<td>" + toYesNo(stratItem["defense_tactic1"]) + "</td>";
+      rowString += "<td>" + toYesNo(stratItem["defense_tactic2"]) + "</td>";
+      rowString += "<td>" + stratItem["defense_comment"] + "</td>";
+
+      rowString += "<td>" + toYesNo(stratItem["foul1"]) + "</td>";
+      rowString += "<td>" + toYesNo(stratItem["autonFoul1"]) + "</td>";
+      rowString += "<td>" + toYesNo(stratItem["autonFoul2"]) + "</td>";
+      rowString += "<td>" + toYesNo(stratItem["teleopFoul1"]) + "</td>";
+      rowString += "<td>" + toYesNo(stratItem["teleopFoul2"]) + "</td>";
+      rowString += "<td>" + toYesNo(stratItem["teleopFoul3"]) + "</td>";
+      rowString += "<td>" + toYesNo(stratItem["teleopFoul4"]) + "</td>";
+      rowString += "<td>" + toYesNo(stratItem["endgameFoul1"]) + "</td>";
+
+      rowString += "<td>" + toYesNo(stratItem["autonGetCoralFromFloor"]) + "</td>";
+      rowString += "<td>" + toYesNo(stratItem["autonGetCoralFromStation"]) + "</td>";
+      rowString += "<td>" + toYesNo(stratItem["autonGetAlgaeFromFloor"]) + "</td>";
+      rowString += "<td>" + toYesNo(stratItem["autonGetAlgaeFromReef"]) + "</td>";
+      rowString += "<td>" + toYesNo(stratItem["teleopFloorPickupAlgae"]) + "</td>";
+      rowString += "<td>" + toYesNo(stratItem["teleopFloorPickupCoral"]) + "</td>";
+      rowString += "<td>" + toYesNo(stratItem["teleopKnockOffAlgaeFromReef"]) + "</td>";
+      rowString += "<td>" + toYesNo(stratItem["teleopAcquireAlgaeFromReef"]) + "</td>";
+
+      rowString += "<td>" + stratItem["problem_comment"] + "</td>";
+      rowString += "<td>" + stratItem["general_comment"] + "</td>";
+      rowString += "<td>" + stratItem["scoutname"] + "</td>";
+      tbodyRef.insertRow().innerHTML = rowString;
+    }
+    const matchColumn = 0;
+    sortTableByMatch("strategicDataTable2", matchColumn);
+  }
+        
+  /*  // Retrive strategic scouting data and load the table
+      function buildStrategicDataTable(teamNum, teamNum2) {
+        console.log("==> strategicData: buildStrategicDataTable()");
+        $.get("api/dbReadAPI.php", {
+          getAllStrategicData: true
+        }).done(function (strategicData) {
+          console.log("=> getAllStrategicData");
+          loadStrategicData(JSON.parse(strategicData), teamNum, teamNum2);
+          const teamColumn = 0;
+          const matchColumn = 1;
+          // script instructions say this is needed, but it breaks table header sorting
+          // sorttable.makeSortable(document.getElementById(tableId));
+          //document.getElementById(tableId).click(); // This magic fixes the floating column bug
+        });
+      }*/
 
 
       // This is the main function that runs when we want to load a team 
@@ -1116,6 +1407,21 @@ require 'inc/header.php';
             console.log("done with mdp2");
             loadMatchData(teamNum1, teamNum2, mdp1, mdp2);
          });
+            
+        // Do the Strategic Data Table.
+            $.get("api/dbReadAPI.php", {
+              getTeamStrategicData: teamNum1
+            }).done(function (strategicData) {
+              console.log("=> getTeamStrategicData");
+              loadStrategicData(JSON.parse(strategicData));
+            });
+            
+            $.get("api/dbReadAPI.php", {
+              getTeamStrategicData: teamNum2
+            }).done(function (strategicData2) {
+              console.log("=> getTeamStrategicData2");
+              loadStrategicData2(JSON.parse(strategicData2));
+            });
         /*$.get("api/dbReadAPI.php", {
             getTeamMatchData: teamNum2
             }).done(function (teamMatches) {
@@ -1260,11 +1566,11 @@ require 'inc/header.php';
 
         // Pressing enter in team number field loads the page
         let input = document.getElementById("enterTeamNumber1");
-        let inputSecond = document.getElementById("2enterTeamNumber1");
-        let inputThird = document.getElementById("3enterTeamNumber1");
+        let inputSecond = document.getElementById("enterTeamNumber1");
+        let inputThird = document.getElementById("enterTeamNumber1");
         let input2 = document.getElementById("enterTeamNumber2");
-        let input2Second = document.getElementById("2enterTeamNumber2");
-        let input2Third = document.getElementById("3enterTeamNumber2");
+        let input2Second = document.getElementById("enterTeamNumber2");
+        let input2Third = document.getElementById("enterTeamNumber2");
         input.addEventListener("keypress", function (event) {
           if (event.key === "Enter") {
             event.preventDefault();
@@ -1274,13 +1580,13 @@ require 'inc/header.php';
         inputSecond.addEventListener("keypress", function (event2) {
           if (event2.key === "Enter") {
             event2.preventDefault();
-            document.getElementById("loadTeamButton2").click();
+            document.getElementById("loadTeamButton").click();
           }
         });
         inputThird.addEventListener("keypress", function (event3) {
           if (event3.key === "Enter") {
             event3.preventDefault();
-            document.getElementById("loadTeamButton3").click();
+            document.getElementById("loadTeamButton").click();
           }
         });
 
@@ -1292,16 +1598,16 @@ require 'inc/header.php';
             buildTeamComparePage(teamNum1, teamNum2);
           }
         });
-        document.getElementById("loadTeamButton2").addEventListener('click', function () {
-          let teamNum1Second = document.getElementById("2enterTeamNumber1").value.trim();
-          let teamNum2Second = document.getElementById("2enterTeamNumber2").value.trim();
+        document.getElementById("loadTeamButton").addEventListener('click', function () {
+          let teamNum1Second = document.getElementById("enterTeamNumber1").value.trim();
+          let teamNum2Second = document.getElementById("enterTeamNumber2").value.trim();
           if (validateTeamNumber(teamNum1Second, null) > 0  && validateTeamNumber(teamNum2Second, null) > 0) {
             buildTeamComparePage2(teamNum1Second, teamNum2Second);
           }
         });
-        document.getElementById("loadTeamButton3").addEventListener('click', function () {
-          let teamNum1Third = document.getElementById("3enterTeamNumber1").value.trim();
-          let teamNum2Third = document.getElementById("3enterTeamNumber2").value.trim();
+        document.getElementById("loadTeamButton").addEventListener('click', function () {
+          let teamNum1Third = document.getElementById("enterTeamNumber1").value.trim();
+          let teamNum2Third = document.getElementById("enterTeamNumber2").value.trim();
           if (validateTeamNumber(teamNum1Third, null) > 0  && validateTeamNumber(teamNum2Third, null) > 0) {
             buildTeamComparePage3(teamNum1Third, teamNum2Third);
           }
