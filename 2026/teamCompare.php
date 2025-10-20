@@ -694,21 +694,25 @@ require 'inc/header.php';
       function loadFirstPickGraph(team1, team2, avgData1, avgData2) {
         console.log("==> teamCompare: loadFirstPickGraph()");
 
-        let xLabels = ["Auton Avg Pts", "Teleop Avg Pts", "Endgame Avg Pts", "Teleop Net Avg"]
+        let xLabels = ["Auton Avg Pts", "Teleop Avg Pts", "Endgame Avg Pts", "Teleop Net Avg", "Teleop L4 Avg", "Teleop L3 Avg"]
         let datasets = [];
                     
         let t1DataA = avgData1[team1]["autonPointsAvg"];
         let t1DataB = avgData1[team1]["teleopPointsAvg"];
         let t1DataC = avgData1[team1]["endgamePointsAvg"];
         let t1DataD = avgData1[team1]["teleopAlgaeNetAvg"];
+        let t1DataE = avgData1[team1]["teleopCoralL4Avg"];
+        let t1DataF = avgData1[team1]["teleopCoralL3Avg"];
           
         let t2DataA = avgData2[team2]["autonPointsAvg"];
         let t2DataB = avgData2[team2]["teleopPointsAvg"];
         let t2DataC = avgData2[team2]["endgamePointsAvg"];
         let t2DataD = avgData2[team2]["teleopAlgaeNetAvg"];
+        let t2DataE = avgData2[team2]["teleopCoralL4Avg"];
+        let t2DataF = avgData2[team2]["teleopCoralL3Avg"];
           
-        datasets.push({ label: team1, data: [t1DataA,t1DataB,t1DataC,t1DataD], backgroundColor: '#FF4316' });
-        datasets.push({ label: team2, data: [t2DataA,t2DataB,t2DataC,t2DataD], backgroundColor: '#0033FF' });
+        datasets.push({ label: team1, data: [t1DataA,t1DataB,t1DataC,t1DataD,t1DataE,t1DataF], backgroundColor: '#FF4316' });
+        datasets.push({ label: team2, data: [t2DataA,t2DataB,t2DataC,t2DataD,t2DataE,t2DataF], backgroundColor: '#0033FF' });
 
         // Define the graph as a bar chart:
         if (firstPickChart !== undefined) {
@@ -739,23 +743,25 @@ require 'inc/header.php';
       function loadSecondPickGraph(team1, team2, avgData1, avgData2) {
         console.log("==> teamCompare: loadSecondPickGraph()");
 
-        let xLabels = ["Auton Avg Pts", "Teleop Avg Pts", "Endgame Avg Pts", "Teleop L3 Avg", "Teleop Net Avg"]
+        let xLabels = ["Auton Avg Pts", "Teleop Avg Pts", "Endgame Avg Pts", "Teleop L3 Avg", "Teleop L2 Avg", "Teleop Net Avg"]
         let datasets = [];
                     
         let t1DataA = avgData1[team1]["autonPointsAvg"];
         let t1DataB = avgData1[team1]["teleopPointsAvg"];
         let t1DataC = avgData1[team1]["endgamePointsAvg"];
         let t1DataD = avgData1[team1]["teleopCoralL3Avg"];
-        let t1DataE = avgData1[team1]["teleopAlgaeNetAvg"];
+        let t1DataE = avgData1[team1]["teleopCoralL2Avg"];
+        let t1DataF = avgData1[team1]["teleopAlgaeNetAvg"];
           
         let t2DataA = avgData2[team2]["autonPointsAvg"];
         let t2DataB = avgData2[team2]["teleopPointsAvg"];
         let t2DataC = avgData2[team2]["endgamePointsAvg"];
         let t2DataD = avgData2[team2]["teleopCoralL3Avg"];
-        let t2DataE = avgData2[team2]["teleopAlgaeNetAvg"];
+        let t2DataE = avgData2[team2]["teleopCoralL2Avg"];
+        let t2DataF = avgData2[team2]["teleopAlgaeNetAvg"];
           
-        datasets.push({ label: team1, data: [t1DataA,t1DataB,t1DataC,t1DataD,t1DataE], backgroundColor: '#FF4316' });      
-        datasets.push({ label: team2, data: [t2DataA,t2DataB,t2DataC,t2DataD,t2DataE], backgroundColor: '#0033FF' });
+        datasets.push({ label: team1, data: [t1DataA,t1DataB,t1DataC,t1DataD,t1DataE,t1DataF], backgroundColor: '#FF4316' });      
+        datasets.push({ label: team2, data: [t2DataA,t2DataB,t2DataC,t2DataD,t2DataE,t2DataF], backgroundColor: '#0033FF' });
 
         // Define the graph as a bar chart:
         if (secondPickChart !== undefined) {
