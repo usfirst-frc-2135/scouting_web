@@ -1099,7 +1099,7 @@ require 'inc/header.php';
 
   function clearTeamLookupPage() {
     // Clear existing data
-    console.log("----> teamLookup: starting clearTeamLookupPage()");
+    console.log("teamLookup: starting clearTeamLookupPage()");
     document.getElementById("teamTitle").innerText = "";
     document.getElementById("robotPics").innerText = "";
     document.getElementById("matchSheetTable").querySelector('tbody').innerHTML = "";
@@ -1124,7 +1124,7 @@ require 'inc/header.php';
       if (teamNum.charAt(0) == '9' && teamNum.charAt(1) == '9' && (aliasList != undefined)) {
         // 'teamNum' is a 99# (an alias in the aliasList), so get the BCDnum from aliasList and use it for teamName
         let bcdname = getTeamNumFromAlias(teamNum, aliasList);
-        console.log("---> for alias: " + teamNum + ", bcdname = " + bcdname);
+        console.log("for alias: " + teamNum + ", bcdname = " + bcdname);
         if (bcdname !== "") {
           mname = bcdname;
           document.getElementById("teamTitle").innerHTML = teamNum + " - "+mname;   
@@ -1133,7 +1133,7 @@ require 'inc/header.php';
                  teamNum.charAt(teamNum.length-1) === 'D' || teamNum.charAt(teamNum.length-1) === 'E' ) {
         // 'teamNum' is a BCDnum so get the alias from aliasList and use it for teamName
         let alias = getAliasFromTeamNum(teamNum, aliasList);
-        console.log("---> for BCDnum: " + teamNum + ", alias = " + alias);
+        console.log("for BCDnum: " + teamNum + ", alias = " + alias);
         if (alias !== "") {
           teamName = alias;
           document.getElementById("teamTitle").innerHTML = teamNum + " - "+teamName;   
@@ -1225,7 +1225,7 @@ require 'inc/header.php';
         aliasTable = jAliasNames;
       }
 
-      // Check URL for team# to use (we may have gotten here by clicking on a team number link from another page.
+      // Check URL for team# to use (we may have gotten here by clicking on a team number link from another page)
       // Note: for aliases: this could only be the BCDnum, never the 99#.
       let urlTeamNum = checkURLForTeamSpec();
       if (validateTeamNumber(urlTeamNum, null) > 0) {
@@ -1237,50 +1237,48 @@ require 'inc/header.php';
           if((urlTeamNum.charAt(urlTeamNum.length-1) === 'B') || (urlTeamNum.charAt(urlTeamNum.length-1) === 'C') ||
              (urlTeamNum.charAt(urlTeamNum.length-1) === 'D') || (urlTeamNum.charAt(urlTeamNum.length-1) === 'E')) {
             let alias = getAliasFromTeamNum(urlTeamNum, aliasTable);
-            console.log("---> for URL team: " + urlTeamNum + ", alias = " + alias);
+            console.log("for URL team: " + urlTeamNum + ", alias = " + alias);
             if (alias != "") {
               teamName = alias;
             }
           }
           buildTeamLookupPage(urlTeamNum,teamName, aliasTable);
         }
-      } else {
+      } 
 
-        // Pressing enter in team number field loads the page
-        let input = document.getElementById("enterTeamNumber");
-        input.addEventListener("keypress", function (event) {
-          if (event.key === "Enter") {
-            event.preventDefault();
-            document.getElementById("loadTeamButton").click();
-          }
-        });
+      // Pressing enter in team number field loads the page
+      let input = document.getElementById("enterTeamNumber");
+      input.addEventListener("keypress", function (event) {
+        if (event.key === "Enter") {
+          event.preventDefault();
+          document.getElementById("loadTeamButton").click();
+        }
+      });
 
-        // Load team data for the number entered
-        document.getElementById("loadTeamButton").addEventListener('click', function () {
-          let enteredNum = document.getElementById("enterTeamNumber").value.trim();
-          console.log("!!! clicked on load team button for "+enteredNum);
-          let teamNum = enteredNum;
-          clearTeamLookupPage();
+      // Load team data for the number entered
+      document.getElementById("loadTeamButton").addEventListener('click', function () {
+        let enteredNum = document.getElementById("enterTeamNumber").value.trim();
+        let teamNum = enteredNum;
+        clearTeamLookupPage();
 
-          // Figure out if the entered number is a 99#.
-          if (bAliasUsed) {
-            if( (enteredNum.charAt(0) == '9') && (enteredNum.charAt(1) == '9') ) {
+        // Figure out if the entered number is a 99#.
+        if (bAliasUsed) {
+          if( (enteredNum.charAt(0) == '9') && (enteredNum.charAt(1) == '9') ) {
 
-              // This team number is an alias, so get the BCDnumber.
-              let bcdNum = getTeamNumFromAlias(enteredNum, aliasTable);
-              console.log("---> for alias: " + enteredNum + ", bcdNum = " + bcdNum);
-              if (bcdNum !== "") {
-                teamName = enteredNum;
-                teamNum = bcdNum;
-              }
+            // This team number is an alias, so get the BCDnumber.
+            let bcdNum = getTeamNumFromAlias(enteredNum, aliasTable);
+            console.log("Entered number is an alias: " + enteredNum + ", bcdNum = " + bcdNum);
+            if (bcdNum !== "") {
+              teamName = enteredNum;
+              teamNum = bcdNum;
             }
           }
+        }
 
-          if (validateTeamNumber(teamNum, null) > 0) {
-            buildTeamLookupPage(teamNum,teamName,aliasTable);
-          }
-        });
-      }
+        if (validateTeamNumber(teamNum, null) > 0) {
+          buildTeamLookupPage(teamNum,teamName,aliasTable);
+        }
+      });
     });
   });
 </script>
