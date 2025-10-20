@@ -27,8 +27,8 @@ require 'inc/header.php';
       <div class="col-lg-6 col-sm-6 col-xs-6 gx-3">
         <div class="card mb-3">
           <div class="card-body">
-            <h5 id="team1Title" class="card-title">Team 1 # </h5>
-            <h5 id="team2Title" class="card-title">Team 2 # </h5>
+            <h5 id="team1Title" class="card-title">Team1</h5>
+            <h5 id="team2Title" class="card-title">Team2</h5>
 
             <!-- First Pick collapsible graph -->
             <div class="card mb-3" style="background-color:#F0FFFF">
@@ -41,19 +41,40 @@ require 'inc/header.php';
                 <canvas id="firstPickChart" width="400" height="360"></canvas>
               </div>
             </div>
+            <!-- end of First Pick collapsible graph -->
               
+            <!-- Second Pick collapsible graph -->
+            <div class="card mb-3" style="background-color:#F0FFFF">
+              <div class="card-header">
+                <h5 class="text-center">
+                  <a href="#collapseSecondPickGraph" data-bs-toggle="collapse" aria-expanded="false">Second Pick</a>
+                </h5>
+              </div>
+              <div id="collapseSecondPickGraph" class="card-body collapse">
+                <canvas id="secondPickChart" width="400" height="360"></canvas>
+              </div>
+            </div>
+              
+            <!-- Third Pick collapsible graph -->
+            <div class="card mb-3" style="background-color:#F0FFFF">
+              <div class="card-header">
+                <h5 class="text-center">
+                  <a href="#collapseThirdPickGraph" data-bs-toggle="collapse" aria-expanded="false">Third Pick</a>
+                </h5>
+              </div>
+              <div id="collapseThirdPickGraph" class="card-body collapse">
+                <canvas id="ThirdPickChart" width="400" height="360"></canvas>
+              </div>
+            </div>
           </div>
-
         </div>
       </div>
         
-          <div class="col-lg-6 col-sm-6 col-xs-6 gx-3">
-        <div class="card mb-3">
-          <div class="card-body">
-
+      <!-- Second column of data starts here -->
+      <div class="col-lg-6 col-sm-6 col-xs-6 gx-3">
             <div class="card mb-3" style="background-color:#FBE6D3">
               <div class="card-header">
-                <h5 class="text-center"> <a href="#collapseEndgame" data-bs-toggle="collapse" aria-expanded="false">Endgame
+                <h5 class="text-center"> <a href="#collapseEndgame" data-bs-toggle="collapse" aria-expanded="false">Endgame Climb Percentages
                   </a>
                 </h5>
               </div>
@@ -63,11 +84,11 @@ require 'inc/header.php';
                   <thead>
                     <tr>
                       <th> </th>
-                      <th style="width:12%" scope="col">N</th>
-                      <th style="width:12%" scope="col">F</th>
-                      <th style="width:12%" scope="col">P</th>
-                      <th style="width:12%" scope="col">S</th>
-                      <th style="width:12%" scope="col">D</th>
+                      <th style="width:12%" scope="col">N%</th>
+                      <th style="width:12%" scope="col">F%</th>
+                      <th style="width:12%" scope="col">P%</th>
+                      <th style="width:12%" scope="col">S%</th>
+                      <th style="width:12%" scope="col">D%</th>
                     </tr>
                   </thead>
                   <tbody class="table-group-divider">
@@ -95,16 +116,14 @@ require 'inc/header.php';
           </div>
               
         <div class="card mb-3">
-          <div class="card-header">
+          <div id="strategicLink1" class="card-header">
             <h5 class="text-center">
-              <a href="#collapseStrategicData" data-bs-toggle="collapse" aria-expanded="false">Strategic Scouting Team 1</a>
+              <a href="#collapseStrategicData1" data-bs-toggle="collapse" aria-expanded="false">Team 1 - Strategic Data</a>
             </h5>
           </div>
-          <div id="collapseStrategicData" class="card-body collapse">
-
-            <!-- <div id="freeze-table-strat" class="freeze-table overflow-auto"> -->
+          <div id="collapseStrategicData1" class="card-body collapse">
             <div class="overflow-auto">
-              <table id="strategicDataTable"
+              <table id="strategicDataTable1"
                 class="table table-striped table-bordered table-hover table-sm border-dark text-center sortable">
                 <colgroup>
                   <col span="2" style="background-color:transparent">
@@ -181,14 +200,12 @@ require 'inc/header.php';
           </div>
         </div>
         <div class="card mb-3">
-          <div class="card-header">
+          <div id="strategicLink2" class="card-header">
             <h5 class="text-center">
-              <a href="#collapseStrategicData" data-bs-toggle="collapse" aria-expanded="false">Strategic Scouting Team 2</a>
+              <a href="#collapseStrategicData2" data-bs-toggle="collapse" aria-expanded="false">Team 2 - Strategic Data</a>
             </h5>
           </div>
-          <div id="collapseStrategicData" class="card-body collapse">
-
-            <!-- <div id="freeze-table-strat" class="freeze-table overflow-auto"> -->
+          <div id="collapseStrategicData2" class="card-body collapse">
             <div class="overflow-auto">
               <table id="strategicDataTable2"
                 class="table table-striped table-bordered table-hover table-sm border-dark text-center sortable">
@@ -269,62 +286,6 @@ require 'inc/header.php';
       </div>
     </div>
     </div>
-    
-      <!-- Second Pick collapsible graph -->
-
-    <!-- First column of data starts here -->
-    <div class="row">
-      <div class="col-lg-6 col-sm-6 col-xs-6 gx-3">
-        <div class="card mb-3">
-          <div class="card-body">
-            <h5 id="team1Title2" class="card-title">Team 1 # </h5>
-            <h5 id="team2Title2" class="card-title">Team 2 # </h5>
-
-            <!-- First Pick collapsible graph -->
-            <div class="card mb-3" style="background-color:#F0FFFF">
-              <div class="card-header">
-                <h5 class="text-center">
-                  <a href="#collapseSecondPickGraph" data-bs-toggle="collapse" aria-expanded="false">Second Pick</a>
-                </h5>
-              </div>
-              <div id="collapseSecondPickGraph" class="card-body collapse">
-                <canvas id="secondPickChart" width="400" height="360"></canvas>
-              </div>
-            </div>
-              
-          </div>
-
-        </div>
-      </div>
-      </div>
-    
-    <!-- Third Pick collapsible graph -->
-
-    <!-- First column of data starts here -->
-    <div class="row">
-      <div class="col-lg-6 col-sm-6 col-xs-6 gx-3">
-        <div class="card mb-3">
-          <div class="card-body">
-            <h5 id="2team1Title3" class="card-title">Team 1 # </h5>
-            <h5 id="2team2Title3" class="card-title">Team 2 # </h5>
-
-            <!-- First Pick collapsible graph -->
-            <div class="card mb-3" style="background-color:#F0FFFF">
-              <div class="card-header">
-                <h5 class="text-center">
-                  <a href="#collapseThirdPickGraph" data-bs-toggle="collapse" aria-expanded="false">Third Pick</a>
-                </h5>
-              </div>
-              <div id="collapseThirdPickGraph" class="card-body collapse">
-                <canvas id="ThirdPickChart" width="400" height="360"></canvas>
-              </div>
-            </div>
-              
-          </div>
-
-        </div>
-      </div>
-      </div>
     
 
 <div class="container row-offcanvas row-offcanvas-left">
@@ -728,26 +689,26 @@ require 'inc/header.php';
         return Math.round((val + Number.EPSILON) * 100) / 100;
       }
 
-      ///// AUTON GRAPH STARTS HERE /////
+      ///// FIRST PICK GRAPH STARTS HERE /////
 
       function loadFirstPickGraph(team1, team2, avgData1, avgData2) {
         console.log("==> teamCompare: loadFirstPickGraph()");
 
-        let xLabels = ["Avg Auto Pts", "Avg Teleop Pts", "Endgame Avg Pts", "Avg L3 Teleop"]
+        let xLabels = ["Auton Avg Pts", "Teleop Avg Pts", "Endgame Avg Pts", "Teleop Net Avg"]
         let datasets = [];
                     
         let t1DataA = avgData1[team1]["autonPointsAvg"];
         let t1DataB = avgData1[team1]["teleopPointsAvg"];
         let t1DataC = avgData1[team1]["endgamePointsAvg"];
-        let t1DataD = avgData1[team1]["teleopCoralL3Avg"];
+        let t1DataD = avgData1[team1]["teleopAlgaeNetAvg"];
           
         let t2DataA = avgData2[team2]["autonPointsAvg"];
         let t2DataB = avgData2[team2]["teleopPointsAvg"];
         let t2DataC = avgData2[team2]["endgamePointsAvg"];
-        let t2DataD = avgData2[team2]["teleopCoralL3Avg"];
+        let t2DataD = avgData2[team2]["teleopAlgaeNetAvg"];
           
-        datasets.push({ label: team1, data: [t1DataA,t1DataB,t1DataC,t1DataD], backgroundColor: '#FFC5D3' });      // Light pink
-        datasets.push({ label: team2, data: [t2DataA,t2DataB,t2DataC,t2DataD], backgroundColor: '#C3B1E1' });      // Lavendar
+        datasets.push({ label: team1, data: [t1DataA,t1DataB,t1DataC,t1DataD], backgroundColor: '#FF4316' });
+        datasets.push({ label: team2, data: [t2DataA,t2DataB,t2DataC,t2DataD], backgroundColor: '#0033FF' });
 
         // Define the graph as a bar chart:
         if (firstPickChart !== undefined) {
@@ -772,29 +733,29 @@ require 'inc/header.php';
           }
         });
       }
+      // End of FIRST PICK GRAPH 
 
-      ///// AUTON GRAPH ENDS HERE /////
-
+      ///// SECOND PICK GRAPH STARTS HERE /////
       function loadSecondPickGraph(team1, team2, avgData1, avgData2) {
         console.log("==> teamCompare: loadSecondPickGraph()");
 
-        let xLabels = ["Avg Auto Pts", "Avg Teleop Pts", "Endgame Avg Pts", "Avg L3 Teleop", "Barge Scoring"]
+        let xLabels = ["Auton Avg Pts", "Teleop Avg Pts", "Endgame Avg Pts", "Teleop L3 Avg", "Teleop Net Avg"]
         let datasets = [];
                     
         let t1DataA = avgData1[team1]["autonPointsAvg"];
         let t1DataB = avgData1[team1]["teleopPointsAvg"];
         let t1DataC = avgData1[team1]["endgamePointsAvg"];
         let t1DataD = avgData1[team1]["teleopCoralL3Avg"];
-        let t1DataE = avgData1[team1]["autonAlgaeScoredAvg"];
+        let t1DataE = avgData1[team1]["teleopAlgaeNetAvg"];
           
         let t2DataA = avgData2[team2]["autonPointsAvg"];
         let t2DataB = avgData2[team2]["teleopPointsAvg"];
         let t2DataC = avgData2[team2]["endgamePointsAvg"];
         let t2DataD = avgData2[team2]["teleopCoralL3Avg"];
-        let t2DataE = avgData2[team2]["autonAlgaeScoredAvg"];
+        let t2DataE = avgData2[team2]["teleopAlgaeNetAvg"];
           
-        datasets.push({ label: team1, data: [t1DataA,t1DataB,t1DataC,t1DataD,t1DataE], backgroundColor: '#FFC5D3' });      // Yellow
-        datasets.push({ label: team2, data: [t2DataA,t2DataB,t2DataC,t2DataD,t2DataE], backgroundColor: '#C3B1E1' });      // Teal
+        datasets.push({ label: team1, data: [t1DataA,t1DataB,t1DataC,t1DataD,t1DataE], backgroundColor: '#FF4316' });      
+        datasets.push({ label: team2, data: [t2DataA,t2DataB,t2DataC,t2DataD,t2DataE], backgroundColor: '#0033FF' });
 
         // Define the graph as a bar chart:
         if (secondPickChart !== undefined) {
@@ -819,30 +780,32 @@ require 'inc/header.php';
           }
         });
       }
-        
+      // End of SECOND PICK GRAPH 
+
+      ///// THIRD PICK GRAPH STARTS HERE /////
       function loadThirdPickGraph(team1, team2, avgData1, avgData2) {
         console.log("==> teamCompare: loadThirdPickGraph()");
 
-        let xLabels = ["Avg Auto Pts", "Avg Teleop Pts", "Endgame Avg Pts", "Avg L3 Teleop", "Barge Scoring"]
+        let xLabels = ["Auton Avg Pts", "Teleop Avg Pts", "Endgame Avg Pts", "Teleop L3 Avg", "Teleop Net Avg"]
         let datasets = [];
                     
         let t1DataA = avgData1[team1]["autonPointsAvg"];
         let t1DataB = avgData1[team1]["teleopPointsAvg"];
         let t1DataC = avgData1[team1]["endgamePointsAvg"];
         let t1DataD = avgData1[team1]["teleopCoralL3Avg"];
-        let t1DataE = avgData1[team1]["autonAlgaeScoredAvg"];
+        let t1DataE = avgData1[team1]["teleopAlgaeNetAvg"];
           
         let t2DataA = avgData2[team2]["autonPointsAvg"];
         let t2DataB = avgData2[team2]["teleopPointsAvg"];
         let t2DataC = avgData2[team2]["endgamePointsAvg"];
         let t2DataD = avgData2[team2]["teleopCoralL3Avg"];
-        let t2DataE = avgData2[team2]["autonAlgaeScoredAvg"];
+        let t2DataE = avgData2[team2]["teleopAlgaeNetAvg"];
           
         console.log(t2DataA);
         console.log("past setting up 3 data");
             
-        datasets.push({ label: team1, data: [t1DataA,t1DataB,t1DataC,t1DataD,t1DataE], backgroundColor: '#FFC5D3' });      // Yellow
-        datasets.push({ label: team2, data: [t2DataA,t2DataB,t2DataC,t2DataD,t2DataE], backgroundColor: '#C3B1E1' });      // Teal
+        datasets.push({ label: team1, data: [t1DataA,t1DataB,t1DataC,t1DataD,t1DataE], backgroundColor: '#FF4316' });      
+        datasets.push({ label: team2, data: [t2DataA,t2DataB,t2DataC,t2DataD,t2DataE], backgroundColor: '#0033FF' });     
 
         // Define the graph as a bar chart:
         if (thirdPickChart !== undefined) {
@@ -867,26 +830,30 @@ require 'inc/header.php';
           }
         });
       }
-
-      ///// THIRD PICK GRAPH ENDS HERE /////
+      // End of SECOND PICK GRAPH 
 
       function loadMatchData(teamNum1, teamNum2, mdp1, mdp2) {
-        console.log("==> teamCompare: loadMatchData()");
         if (mdp1 == null || mdp2 == null) {
             return;
         }
-        //mdp.sortMatches(allEventMatches);
-        console.log("have all data");
+        console.log("loadMatchData: we have all the data, so do it");
+
+        // Get the team1 averages data from matchDataProcessor (mdp)
         mdp1.getSiteFilteredAverages(function (filteredMatches, filteredAvgData) {
           if (filteredAvgData != undefined) {
-            console.log("mdp1 good");
+            console.log("loadMatchData: got mdp1");
+
+            // Get the team2 averages data from matchDataProcessor (mdp)
             mdp2.getSiteFilteredAverages(function (filteredMatches2, filteredAvgData2) {
               if (filteredAvgData2 != undefined) {
-                console.log("mdp2 good");
+                console.log("loadMatchData: got mdp2");
+
+                // Load the graphs
                 loadFirstPickGraph(teamNum1, teamNum2, filteredAvgData, filteredAvgData2);
+                loadSecondPickGraph(teamNum1, teamNum2, filteredAvgData, filteredAvgData2);
+                loadThirdPickGraph(teamNum1, teamNum2, filteredAvgData, filteredAvgData2);
                 loadEndgameTable(teamNum1, teamNum2, filteredAvgData, filteredAvgData2);
                 loadAvgTable(teamNum1, teamNum2, filteredAvgData, filteredAvgData2);
-                //buildStrategicDataTable(teamNum1, teamNum2);
               } 
               else alert("No averages data for this team 2 at this event!");
             });
@@ -895,47 +862,6 @@ require 'inc/header.php';
         });
       }
         
-      function loadMatchData2(teamNum1, teamNum2, mdp1Second, mdp2Second) {
-        console.log("==> teamCompare: loadMatchData()");
-        if (mdp1Second == null || mdp2Second == null) {
-          return;
-        }
-        console.log("have all data");
-        mdp1Second.getSiteFilteredAverages(function (filteredMatches, filteredAvgData) {
-          if (filteredAvgData != undefined) {
-            console.log("mdp1second good");
-            mdp2Second.getSiteFilteredAverages(function (filteredMatches2, filteredAvgData2) {
-              if (filteredAvgData2 != undefined) {
-                console.log("mdp2second good");
-                loadSecondPickGraph(teamNum1, teamNum2, filteredAvgData, filteredAvgData2);
-              } 
-              else alert("No averages data for this team 2 at this event!");
-            });
-          }
-          else alert("No averages data for this team at this event!");
-        });
-      }
-        
-      function loadMatchData3(teamNum1, teamNum2, mdp1Third, mdp2Third) {
-        console.log("==> teamCompare: loadMatchData()");
-        if (mdp1Third == null || mdp2Third == null) {
-          return;
-        }
-        console.log("3 have all data");
-        mdp1Third.getSiteFilteredAverages(function (filteredMatches, filteredAvgData) {
-          if (filteredAvgData != undefined) {
-            console.log("3 mdp1third good");
-            mdp2Third.getSiteFilteredAverages(function (filteredMatches2, filteredAvgData2) {
-              if (filteredAvgData2 != undefined) {
-                console.log("3 mdp2third good");
-                loadThirdPickGraph(teamNum1, teamNum2, filteredAvgData, filteredAvgData2);
-              } 
-              else alert("No averages data for this team 2 at this event!");
-            });
-          }
-          else alert("No averages data for this team at this event!");
-        });
-      }
                                        
       // MAIN PAGE PROCESSORS HERE
       // Check if our URL directs to a specific team
@@ -993,13 +919,7 @@ require 'inc/header.php';
       function clearTeamComparePage() {
         // Clear existing data
         document.getElementById("team1Title").innerText = "";
-        document.getElementById("team1Title2").innerText = "";
         document.getElementById("team2Title").innerText = "";
-        document.getElementById("team2Title2").innerText = "";
-        document.getElementById("team1Title3").innerText = "";
-        document.getElementById("team2Title3").innerText = "";
-        document.getElementById("2team1Title3").innerText = "";
-        document.getElementById("2team2Title3").innerText = "";
         document.getElementById("firstPickChart").querySelector('tbody').innerHTML = "";
         document.getElementById("secondPickChart").querySelector('tbody').innerHTML = "";
         document.getElementById("thirdPickChart").querySelector('tbody').innerHTML = "";
@@ -1027,7 +947,7 @@ require 'inc/header.php';
 
         let endgameClimbPercentage = getDataValue(avgData[teamNum], "endgameClimbPercent");
         let endgameClimbPercentage2 = getDataValue(avgData2[teamNum2], "endgameClimbPercent");
-        const tdPrefix = "<td style=\"background-color:transparent\">";
+        const tdPrefix = "<td>";
         let rowString = "";
         let rowString2 = "";
         rowString += tdPrefix + "<a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a></td>";    
@@ -1230,7 +1150,7 @@ require 'inc/header.php';
         rowString2 += tdPrefix + getDataValue(endgameClimbPercentage2, 3) + "</td>";
         rowString2 += tdPrefix + getDataValue(endgameClimbPercentage2, 4) + "</td>";
             
-        rowString2 += tdPrefix + getDataValue(avgData2[teamNum], "totaldied") + "</td>";
+        rowString2 += tdPrefix + getDataValue(avgData2[teamNum2], "totaldied") + "</td>";
         
         tbodyRef.insertRow().innerHTML = rowString2;
       }
@@ -1244,9 +1164,13 @@ require 'inc/header.php';
       }    
         
       // Load the strategic data table for this team
-      function loadStrategicData(stratData) {
-        console.log("==> teamCompare: loadStrategicData()");
-        let tbodyRef = document.getElementById("strategicDataTable").querySelector('tbody');
+      function loadStrategicData1(teamNum,stratData) {
+        console.log("==> teamCompare: loadStrategicData1()");
+        let stratTitle = teamNum+" - Strategic Data";
+        let sLink = document.getElementById("strategicLink1").querySelector('a');
+        sLink.text = stratTitle;
+
+        let tbodyRef = document.getElementById("strategicDataTable1").querySelector('tbody');
         tbodyRef.innerHTML = "";     // clear table
         for (let i = 0; i < stratData.length; i++) {
           let stratItem = stratData[i];
@@ -1294,11 +1218,15 @@ require 'inc/header.php';
         tbodyRef.insertRow().innerHTML = rowString;
       }
       const matchColumn = 0;
-      sortTableByMatch("strategicDataTable", matchColumn);
+      sortTableByMatch("strategicDataTable1", matchColumn);
     }
         
-    function loadStrategicData2(stratData) {
+    function loadStrategicData2(teamNum,stratData) {
       console.log("==> teamCompare: loadStrategicData()");
+      let stratTitle = teamNum + " - Strategic Data";
+      let sLink = document.getElementById("strategicLink2").querySelector('a');
+      sLink.text = stratTitle;
+
       let tbodyRef = document.getElementById("strategicDataTable2").querySelector('tbody');
       tbodyRef.innerHTML = "";     // clear table
       for (let i = 0; i < stratData.length; i++) {
@@ -1351,25 +1279,7 @@ require 'inc/header.php';
       sortTableByMatch("strategicDataTable2", matchColumn);
     }
         
-    /*  // Retrive strategic scouting data and load the table
-      function buildStrategicDataTable(teamNum, teamNum2) {
-        console.log("==> strategicData: buildStrategicDataTable()");
-        $.get("api/dbReadAPI.php", {
-          getAllStrategicData: true
-        }).done(function (strategicData) {
-          console.log("=> getAllStrategicData");
-          loadStrategicData(JSON.parse(strategicData), teamNum, teamNum2);
-          const teamColumn = 0;
-          const matchColumn = 1;
-          // script instructions say this is needed, but it breaks table header sorting
-          // sorttable.makeSortable(document.getElementById(tableId));
-          //document.getElementById(tableId).click(); // This magic fixes the floating column bug
-        });
-      }*/
-
-
-      // This is the main function that runs when we want to load a team 
-        
+      // This is the main function that runs when we want to load teams.
       function buildTeamComparePage(teamNum1, teamNum2) {
         let mdp1 = null;
         let mdp2 = null;
@@ -1377,34 +1287,36 @@ require 'inc/header.php';
         let teamInfo2 = null;
         console.log("==> teamCompare: buildTeamComparePage()");
 
-        // Get team name from TBA
+        // Get team1 name from TBA
         $.get("api/tbaAPI.php", {
           getTeamInfo: teamNum1
         }).done(function (teamInfo1) {
-          console.log("=> getTeamInfo:\n" + teamInfo1);
-          let teamName1 = "";
+//          console.log("=> getTeamInfo: " + teamInfo1);
+          let teamStr1 = teamNum1;
           if (teamInfo1 === null) {
             return alert("Can't load teamName from TBA; check if TBA Key was set in db_config");
           }
           let jTeamInfo = JSON.parse(teamInfo1)["response"];
-          teamName1 += " " + jTeamInfo["nickname"];
-          console.log("==> teamCompare: for " + teamNum1 + teamName1);
-          document.getElementById("team1Title").innerHTML = teamNum1 + "-" + teamName1;
+          teamStr1 += " - " + jTeamInfo["nickname"] + "       ";;
+          console.log("==> teamCompare: team1: " + teamStr1);
+          document.getElementById("team1Title").innerHTML = teamStr1;
           
+          // Get team2 name from TBA
           $.get("api/tbaAPI.php", {
             getTeamInfo: teamNum2
           }).done(function (teamInfo2) {
-            console.log("=> getTeamInfo:\n" + teamInfo2);
-            let teamName2 = "";
+//            console.log("=> getTeamInfo: " + teamInfo2);
+            let teamStr2 = teamNum2;
             if (teamInfo2 === null) {
               return alert("Can't load teamName from TBA; check if TBA Key was set in db_config");
             }
             let kTeamInfo = JSON.parse(teamInfo2)["response"];
-            teamName2 += " " + kTeamInfo["nickname"];
-            console.log("==> teamCompare: for " + teamNum1 + teamName1 + teamNum2 + teamName2);
-            document.getElementById("team2Title").innerHTML = teamNum2 + "-" + teamName2;
+            teamStr2 += " - " + kTeamInfo["nickname"];
+            console.log("==> teamCompare: team2: " + teamStr2);
+            document.getElementById("team2Title").innerHTML = teamStr2;
           });
           
+          // Get team1 match data
           $.get("api/dbReadAPI.php", {
             getTeamMatchData: teamNum1
           }).done(function (teamMatches) {
@@ -1413,6 +1325,7 @@ require 'inc/header.php';
             console.log("done with mdp 1");
             loadMatchData(teamNum1, teamNum2, mdp1, mdp2);
           });
+          // Get team2 match data
           $.get("api/dbReadAPI.php", {
             getTeamMatchData: teamNum2
           }).done(function (teamMatches2) {
@@ -1422,139 +1335,24 @@ require 'inc/header.php';
             loadMatchData(teamNum1, teamNum2, mdp1, mdp2);
           });
             
-          // Do the Strategic Data Table.
+          // Do team1 Strategic Data Table.
           $.get("api/dbReadAPI.php", {
             getTeamStrategicData: teamNum1
           }).done(function (strategicData) {
             console.log("=> getTeamStrategicData");
-            loadStrategicData(JSON.parse(strategicData));
+            loadStrategicData1(teamNum1,JSON.parse(strategicData));
           });
             
+          // Do team2 Strategic Data Table.
           $.get("api/dbReadAPI.php", {
             getTeamStrategicData: teamNum2
           }).done(function (strategicData2) {
             console.log("=> getTeamStrategicData2");
-            loadStrategicData2(JSON.parse(strategicData2));
+            loadStrategicData2(teamNum2,JSON.parse(strategicData2));
           });
         });
       }
       
-      function buildTeamComparePage2(teamNum1Second, teamNum2Second) {
-        let mdp1Second = null;
-        let mdp2Second = null;
-        let teamInfo1Second = null;
-        let teamInfo2Second = null;
-        console.log("==> teamCompare: buildTeamComparePage2()");
-
-        // Get team name from TBA
-        $.get("api/tbaAPI.php", {
-          getTeamInfo: teamNum1Second
-        }).done(function (teamInfo1Second) {
-          console.log("=> getTeamInfo:\n" + teamInfo1Second);
-          let teamName1Second = "";
-          if (teamInfo1Second === null) {
-            return alert("Can't load teamName from TBA; check if TBA Key was set in db_config");
-          }
-          let jTeamInfo = JSON.parse(teamInfo1Second)["response"];
-          teamName1Second += " " + jTeamInfo["nickname"];
-          console.log("==> teamCompare: for " + teamNum1Second + teamName1Second);
-          document.getElementById("team1Title2").innerHTML = teamNum1Second + "-" + teamName1Second;
-          
-        $.get("api/tbaAPI.php", {
-          getTeamInfo: teamNum2Second
-        }).done(function (teamInfo2Second) {
-          console.log("=> getTeamInfo:\n" + teamInfo2Second);
-          let teamName2Second = "";
-          if (teamInfo2Second === null) {
-            return alert("Can't load teamName from TBA; check if TBA Key was set in db_config");
-          }
-          let kTeamInfo = JSON.parse(teamInfo2Second)["response"];
-          teamName2Second += " " + kTeamInfo["nickname"];
-          console.log("==> teamCompare: for " + teamNum1Second + teamName1Second + teamNum2Second + teamName2Second);
-          document.getElementById("team2Title2").innerHTML = teamNum2Second + "-" + teamName2Second;
-          });
-          
-        $.get("api/dbReadAPI.php", {
-            getTeamMatchData: teamNum1Second
-            }).done(function (teamMatchesSecond) {
-            console.log("=> getTeamMatchData");
-            mdp1Second = new matchDataProcessor(JSON.parse(teamMatchesSecond));
-            console.log("done with mdp 1");
-            loadMatchData2(teamNum1Second, teamNum2Second, mdp1Second, mdp2Second);
-         });
-          $.get("api/dbReadAPI.php", {
-            getTeamMatchData: teamNum2Second
-            }).done(function (teamMatches2Second) {
-            console.log("=> getTeamMatchData");
-            mdp2Second = new matchDataProcessor(JSON.parse(teamMatches2Second));
-            console.log("done with mdp2");
-            loadMatchData2(teamNum1Second, teamNum2Second, mdp1Second, mdp2Second);
-         });
-        /*$.get("api/dbReadAPI.php", {
-            getTeamMatchData: teamNum2
-            }).done(function (teamMatches) {
-            console.log("=> getTeamMatchData2");
-            loadMatchData(teamNum1, teamNum2, JSON.parse(teamMatches));
-         });*/
-        });
-      };
-        
-        function buildTeamComparePage3(teamNum1Third, teamNum2Third) {
-          let mdp1Third = null;
-          let mdp2Third = null;
-          let teamInfo1Third = null;
-          let teamInfo2Third = null;
-        console.log("==> teamCompare: buildTeamComparePage()");
-        //clearTeamComparePage();
-        //let teamNum1 = document.getElementById("enterTeamNumber1");
-        //let teamNum2 = document.getElementById("enterTeamNumber2")
-        // Get team name from TBA
-        $.get("api/tbaAPI.php", {
-          getTeamInfo: teamNum1Third
-        }).done(function (teamInfo1Third) {
-          console.log("=> getTeamInfo:\n" + teamInfo1Third);
-          let teamName1Third = "";
-          if (teamInfo1Third === null) {
-            return alert("Can't load teamName from TBA; check if TBA Key was set in db_config");
-          }
-          let jTeamInfo = JSON.parse(teamInfo1Third)["response"];
-          teamName1Third += " " + jTeamInfo["nickname"];
-          console.log("==> teamCompare: for " + teamNum1Third + teamName1Third);
-          document.getElementById("2team1Title3").innerHTML = teamNum1Third + "-" + teamName1Third;
-          
-        $.get("api/tbaAPI.php", {
-          getTeamInfo: teamNum2Third
-        }).done(function (teamInfo2Third) {
-          console.log("=> getTeamInfo:\n" + teamInfo2Third);
-          let teamName2Third = "";
-          if (teamInfo2Third === null) {
-            return alert("Can't load teamName from TBA; check if TBA Key was set in db_config");
-          }
-          let kTeamInfo = JSON.parse(teamInfo2Third)["response"];
-          teamName2Third += " " + kTeamInfo["nickname"];
-          console.log("==> teamCompare: for " + teamNum1Third + teamName1Third + teamNum2Third + teamName2Third);
-          document.getElementById("2team2Title3").innerHTML = teamNum2Third + "-" + teamName2Third;
-          });
-          
-        $.get("api/dbReadAPI.php", {
-            getTeamMatchData: teamNum1Third
-            }).done(function (teamMatchesThird) {
-            console.log("=> getTeamMatchData");
-            mdp1Third = new matchDataProcessor(JSON.parse(teamMatchesThird));
-            console.log("3 done with mdp 1");
-            loadMatchData3(teamNum1Third, teamNum2Third, mdp1Third, mdp2Third);
-         });
-          $.get("api/dbReadAPI.php", {
-            getTeamMatchData: teamNum2Third
-            }).done(function (teamMatches2Third) {
-            console.log("=> getTeamMatchData");
-            mdp2Third = new matchDataProcessor(JSON.parse(teamMatches2Third));
-            console.log("3 done with mdp2");
-            loadMatchData3(teamNum1Third, teamNum2Third, mdp1Third, mdp2Third);
-         });
-        });
-      };
-
       /////////////////////////////////////////////////////////////////////////////
       //
       // Process the generated html
@@ -1598,27 +1396,13 @@ require 'inc/header.php';
             buildTeamComparePage(teamNum1, teamNum2);
           }
         });
-        document.getElementById("loadTeamButton").addEventListener('click', function () {
-          let teamNum1Second = document.getElementById("enterTeamNumber1").value.trim();
-          let teamNum2Second = document.getElementById("enterTeamNumber2").value.trim();
-          if (validateTeamNumber(teamNum1Second, null) > 0  && validateTeamNumber(teamNum2Second, null) > 0) {
-            buildTeamComparePage2(teamNum1Second, teamNum2Second);
-          }
-        });
-        document.getElementById("loadTeamButton").addEventListener('click', function () {
-          let teamNum1Third = document.getElementById("enterTeamNumber1").value.trim();
-          let teamNum2Third = document.getElementById("enterTeamNumber2").value.trim();
-          if (validateTeamNumber(teamNum1Third, null) > 0  && validateTeamNumber(teamNum2Third, null) > 0) {
-            buildTeamComparePage3(teamNum1Third, teamNum2Third);
-          }
-        });
       });
         
         
     </script>
 
-    <script src="./scripts/compareMatchNumbers.js"></script>
-    <script src="./scripts/compareTeamNumbers.js"></script>
-    <script src="./scripts/sortFrcTables.js"></script>
-    <script src="./scripts/matchDataProcessor.js"></script>
-    <script src="./scripts/validateTeamNumber.js"></script>
+<script src="./scripts/compareMatchNumbers.js"></script>
+<script src="./scripts/compareTeamNumbers.js"></script>
+<script src="./scripts/sortFrcTables.js"></script>
+<script src="./scripts/matchDataProcessor.js"></script>
+<script src="./scripts/validateTeamNumber.js"></script>
