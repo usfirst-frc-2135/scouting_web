@@ -297,7 +297,6 @@ require 'inc/header.php';
       const tdPrefix = "<td style=\"background-color:transparent\">";
       let rowString = "";
       rowString += tdPrefix + "<a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a></td>";
-      let bAliasUsed = false;
       let alias = getAliasFromTeamNum(teamNum, aliaslist);
       rowString += tdPrefix + alias + "</td>";
     
@@ -413,11 +412,14 @@ require 'inc/header.php';
 
   // Returns a string with the comma-separated line of data for the given team.
   //LOOK
-  function createCSVLine(team, evtAvgs, coprs) {
+  function createCSVLine(team, evtAvgs, coprs, aliasData) {
     let pitLocation = 0;
     let oprTP = getDataValue(coprs[team], "totalPoints");
     let endgameClimbPercent = lookupAverage(evtAvgs, team, "endgameClimbPercent");
+
     let csvLine = team + ",";
+    let alias = getAliasFromTeamNum(team, aliasData);
+    csvLine += alias + ",";
 
     csvLine += pitLocation + ",";
     csvLine += oprTP + ",";
@@ -503,10 +505,11 @@ require 'inc/header.php';
   }
 
   // Merge data into CSV file and write it
-  function createCSVFile(csvName, matchData, coprs) {
-    console.log("==> eventAverages: createCSVFile()");
+  function createCSVFile(csvName, matchData, coprs, aliasData) {
+    console.log("eventAverages: createCSVFile()");
+
     // This CSV header must match the order in createCSVLine!
-    let csvStr = "Team,Pit Location,OPR," +
+    let csvStr = "Team,Alias,Pit Location,OPR," +
       "Total Pts Avg,Total Pts Max,Auto Pts Avg,Auto Pts Max,Tel Pts Avg,Tel Pts Max,End Pts Avg,End Pts Max," +
       "Auton Coral Pts Avg,Total Coral Pts Max,Auto Algae Pts Avg,Auto Algae Pts Max,Tel Coral Pts Avg,Tel Coral Pts Max,Tel Algae Pts Avg,Tel Algae Pts Max," +
       "Total Coral Avg,Total Coral Max,Total Algae Avg,Total Algae Max," +
@@ -520,8 +523,7 @@ require 'inc/header.php';
     let mdp = new matchDataProcessor(matchData);
     mdp.getSiteFilteredAverages(function (filteredMatchData, filteredAvgData) {
       for (let key in filteredAvgData) {
-        // console.log(key);
-        csvStr += createCSVLine(key, filteredAvgData, coprs);  // key is team number
+        csvStr += createCSVLine(key, filteredAvgData, coprs, aliasData);  // key is team number
       }
 
       let hiddenElement = document.createElement('a');
@@ -539,33 +541,43 @@ require 'inc/header.php';
     console.log("==> eventAverages: downloadCSVFile()");
     let jMatchData = null;
     let jCoprData = null;
-    function waitForData(mData, cData) {
-      if ((mData === null) || (cData === null)) {
+    let jAliasData = null;
+    function waitForData(mData, cData, aData) {
+      if ((mData === null) || (cData === null) || (aData === null)) {
         return;
       }
       console.log("Creating the CSV");
-      createCSVFile(csvName, mData, cData);
+      createCSVFile(csvName, mData, cData, aData);
     }
+
+    // Get alias data from DB
+    $.get("api/dbReadAPI.php", {
+      getEventAliasNames: true
+    }).done(function (eventAliasNames) {
+      console.log("Got event Alias Names");
+      jAliasData = JSON.parse(eventAliasNames);
+      waitForData(jMatchData, jCoprData, jAliasData);
+    });
 
     // Get match data from DB
     $.get("api/dbReadAPI.php", {
       getAllMatchData: true
     }).done(function (matchData) {
-      console.log("=> getAllMatchData:");
+      console.log("Got all match data");
       jMatchData = JSON.parse(matchData);
-      waitForData(jMatchData, jCoprData);
+      waitForData(jMatchData, jCoprData, jAliasData);
     });
 
     // Get OPR data from TBA
     $.get("api/tbaAPI.php", {
       getCOPRs: true
     }).done(function (coprs) {
-      console.log("=> getCOPRs");
+      console.log("Got COPRs data");
       if (coprs === null) {
         return alert("Can't load COPRs from TBA; check if TBA Key was set in db_config");
       }
       jCoprData = JSON.parse(coprs)["data"];
-      waitForData(jMatchData, jCoprData);
+      waitForData(jMatchData, jCoprData, jAliasData);
     });
   }
 
@@ -581,11 +593,6 @@ require 'inc/header.php';
     }).done(function (eventAliasNames) {
       console.log("=> eventAliasNames");
       jAliasNames = JSON.parse(eventAliasNames);
-      if (jAliasNames.length > 0) {
-        console.log("---> aliases used");
-        bAliasUsed = true;
-        myAnames = jAliasNames;
-      }
     });
 
       console.log("=> getAllMatchData:");
