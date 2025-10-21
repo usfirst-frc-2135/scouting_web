@@ -690,29 +690,46 @@ require 'inc/header.php';
       }
 
       ///// FIRST PICK GRAPH STARTS HERE /////
-
       function loadFirstPickGraph(team1, team2, avgData1, avgData2) {
         console.log("==> teamCompare: loadFirstPickGraph()");
 
-        let xLabels = ["Auton Avg Pts", "Teleop Avg Pts", "Endgame Avg Pts", "Teleop Net Avg", "Teleop L4 Avg", "Teleop L3 Avg"]
+        let xLabels = ["Auton Avg Pts", "Teleop Avg Pts", "Endgame Avg Pts", "Teleop Net Pts", "Teleop L4 Pts", "Teleop L3 Pts"]
         let datasets = [];
                     
         let t1DataA = avgData1[team1]["autonPointsAvg"];
         let t1DataB = avgData1[team1]["teleopPointsAvg"];
         let t1DataC = avgData1[team1]["endgamePointsAvg"];
+
+        // Multiply teleopAlgaeNetAvg by 4 to get points.
         let t1DataD = avgData1[team1]["teleopAlgaeNetAvg"];
+        let netPts1 = t1DataD * 4;
+
+        // Multiply teleopCoralL4Avg by 5 to get points.
         let t1DataE = avgData1[team1]["teleopCoralL4Avg"];
+        let L4Pts1 = t1DataE * 5;
+
+        // Multiply teleopCoralL3Avg by 4 to get points.
         let t1DataF = avgData1[team1]["teleopCoralL3Avg"];
+        let L3Pts1 = t1DataF * 4;
           
         let t2DataA = avgData2[team2]["autonPointsAvg"];
         let t2DataB = avgData2[team2]["teleopPointsAvg"];
         let t2DataC = avgData2[team2]["endgamePointsAvg"];
+
+        // Multiply teleopAlgaeNetAvg by 4 to get points.
         let t2DataD = avgData2[team2]["teleopAlgaeNetAvg"];
+        let netPts2 = t2DataD * 4;
+
+        // Multiply teleopCoralL4Avg by 5 to get points.
         let t2DataE = avgData2[team2]["teleopCoralL4Avg"];
+        let L4Pts2 = t2DataE * 5;
+
+        // Multiply teleopCoralL3Avg by 4 to get points.
         let t2DataF = avgData2[team2]["teleopCoralL3Avg"];
+        let L3Pts2 = t2DataF * 4;
           
-        datasets.push({ label: team1, data: [t1DataA,t1DataB,t1DataC,t1DataD,t1DataE,t1DataF], backgroundColor: '#FF4316' });
-        datasets.push({ label: team2, data: [t2DataA,t2DataB,t2DataC,t2DataD,t2DataE,t2DataF], backgroundColor: '#0033FF' });
+        datasets.push({ label: team1, data: [t1DataA,t1DataB,t1DataC,netPts1,L4Pts1,L3Pts1], backgroundColor: '#FF4316' });
+        datasets.push({ label: team2, data: [t2DataA,t2DataB,t2DataC,netPts2,L4Pts2,L3Pts2], backgroundColor: '#0033FF' });
 
         // Define the graph as a bar chart:
         if (firstPickChart !== undefined) {
@@ -743,25 +760,43 @@ require 'inc/header.php';
       function loadSecondPickGraph(team1, team2, avgData1, avgData2) {
         console.log("==> teamCompare: loadSecondPickGraph()");
 
-        let xLabels = ["Auton Avg Pts", "Teleop Avg Pts", "Endgame Avg Pts", "Teleop L3 Avg", "Teleop L2 Avg", "Teleop Net Avg"]
+        let xLabels = ["Auton Avg Pts", "Teleop Avg Pts", "Endgame Avg Pts", "Teleop Net Pts", "Teleop L3 Pts", "Teleop L2 Pts"]
         let datasets = [];
                     
         let t1DataA = avgData1[team1]["autonPointsAvg"];
         let t1DataB = avgData1[team1]["teleopPointsAvg"];
         let t1DataC = avgData1[team1]["endgamePointsAvg"];
-        let t1DataD = avgData1[team1]["teleopCoralL3Avg"];
-        let t1DataE = avgData1[team1]["teleopCoralL2Avg"];
-        let t1DataF = avgData1[team1]["teleopAlgaeNetAvg"];
+
+        // Multiply teleopAlgaeNetAvg by 4 to get points.
+        let t1DataD = avgData1[team1]["teleopAlgaeNetAvg"];
+        let netPts1 = t1DataD * 4;
+
+        // Multiply teleopCoralL3Avg by 4 to get points.
+        let t1DataE = avgData1[team1]["teleopCoralL3Avg"];
+        let L3Pts1 = t1DataE * 4;
+
+        // Multiply teleopCoralL2Avg by 3 to get points.
+        let t1DataF = avgData1[team1]["teleopCoralL2Avg"];
+        let L2Pts1 = t1DataF * 3;
           
         let t2DataA = avgData2[team2]["autonPointsAvg"];
         let t2DataB = avgData2[team2]["teleopPointsAvg"];
         let t2DataC = avgData2[team2]["endgamePointsAvg"];
-        let t2DataD = avgData2[team2]["teleopCoralL3Avg"];
-        let t2DataE = avgData2[team2]["teleopCoralL2Avg"];
-        let t2DataF = avgData2[team2]["teleopAlgaeNetAvg"];
+
+        // Multiply teleopAlgaeNetAvg by 4 to get points.
+        let t2DataD = avgData2[team2]["teleopAlgaeNetAvg"];
+        let netPts2 = t2DataD * 4;
+
+        // Multiply teleopCoralL3Avg by 4 to get points.
+        let t2DataE = avgData2[team2]["teleopCoralL3Avg"];
+        let L3Pts2 = t2DataE * 4;
+
+        // Multiply teleopCoralL2Avg by 3 to get points.
+        let t2DataF = avgData2[team2]["teleopCoralL2Avg"];
+        let L2Pts2 = t2DataF * 3;
           
-        datasets.push({ label: team1, data: [t1DataA,t1DataB,t1DataC,t1DataD,t1DataE,t1DataF], backgroundColor: '#FF4316' });      
-        datasets.push({ label: team2, data: [t2DataA,t2DataB,t2DataC,t2DataD,t2DataE,t2DataF], backgroundColor: '#0033FF' });
+        datasets.push({ label: team1, data: [t1DataA,t1DataB,t1DataC,netPts1,L3Pts1,L2Pts1], backgroundColor: '#FF4316' });      
+        datasets.push({ label: team2, data: [t2DataA,t2DataB,t2DataC,netPts2,L3Pts2,L2Pts2], backgroundColor: '#0033FF' });
 
         // Define the graph as a bar chart:
         if (secondPickChart !== undefined) {
@@ -792,26 +827,35 @@ require 'inc/header.php';
       function loadThirdPickGraph(team1, team2, avgData1, avgData2) {
         console.log("==> teamCompare: loadThirdPickGraph()");
 
-        let xLabels = ["Auton Avg Pts", "Teleop Avg Pts", "Endgame Avg Pts", "Teleop L3 Avg", "Teleop Net Avg"]
+        let xLabels = ["Auton Avg Pts", "Teleop Avg Pts", "Endgame Avg Pts", "Teleop Net Pts", "Teleop L3 Pts"]
         let datasets = [];
                     
         let t1DataA = avgData1[team1]["autonPointsAvg"];
         let t1DataB = avgData1[team1]["teleopPointsAvg"];
         let t1DataC = avgData1[team1]["endgamePointsAvg"];
-        let t1DataD = avgData1[team1]["teleopCoralL3Avg"];
-        let t1DataE = avgData1[team1]["teleopAlgaeNetAvg"];
-          
+
+        // Multiply teleopAlgaeNetAvg by 4 to get points.
+        let t1DataD = avgData1[team1]["teleopAlgaeNetAvg"];
+        let netPts1 = t1DataD * 4;
+
+        // Multiply teleopCoralL3Avg by 4 to get points.
+        let t1DataE = avgData1[team1]["teleopCoralL3Avg"];
+        let L3Pts1 = t1DataE * 4;
+
         let t2DataA = avgData2[team2]["autonPointsAvg"];
         let t2DataB = avgData2[team2]["teleopPointsAvg"];
         let t2DataC = avgData2[team2]["endgamePointsAvg"];
-        let t2DataD = avgData2[team2]["teleopCoralL3Avg"];
-        let t2DataE = avgData2[team2]["teleopAlgaeNetAvg"];
+
+        // Multiply teleopAlgaeNetAvg by 4 to get points.
+        let t2DataD = avgData2[team2]["teleopAlgaeNetAvg"];
+        let netPts2 = t2DataD * 4;
+
+        // Multiply teleopCoralL3Avg by 4 to get points.
+        let t2DataE = avgData2[team2]["teleopCoralL3Avg"];
+        let L3Pts2 = t2DataE * 4;
           
-        console.log(t2DataA);
-        console.log("past setting up 3 data");
-            
-        datasets.push({ label: team1, data: [t1DataA,t1DataB,t1DataC,t1DataD,t1DataE], backgroundColor: '#FF4316' });      
-        datasets.push({ label: team2, data: [t2DataA,t2DataB,t2DataC,t2DataD,t2DataE], backgroundColor: '#0033FF' });     
+        datasets.push({ label: team1, data: [t1DataA,t1DataB,t1DataC,netPts1,L3Pts1], backgroundColor: '#FF4316' });      
+        datasets.push({ label: team2, data: [t2DataA,t2DataB,t2DataC,netPts2,L3Pts2], backgroundColor: '#0033FF' });     
 
         // Define the graph as a bar chart:
         if (thirdPickChart !== undefined) {
@@ -836,7 +880,7 @@ require 'inc/header.php';
           }
         });
       }
-      // End of SECOND PICK GRAPH 
+      // End of THIRD PICK GRAPH 
 
       function loadMatchData(teamNum1, teamNum2, mdp1, mdp2) {
         if (mdp1 == null || mdp2 == null) {
@@ -959,8 +1003,8 @@ require 'inc/header.php';
         rowString += tdPrefix + "<a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a></td>";    
         
         rowString += tdPrefix + getDataValue(endgameClimbPercentage, 0) + "</td>";
-        rowString += tdPrefix + getDataValue(endgameClimbPercentage, 1) + "</td>";
         rowString += tdPrefix + getDataValue(endgameClimbPercentage, 2) + "</td>";
+        rowString += tdPrefix + getDataValue(endgameClimbPercentage, 1) + "</td>";
         rowString += tdPrefix + getDataValue(endgameClimbPercentage, 3) + "</td>";
         rowString += tdPrefix + getDataValue(endgameClimbPercentage, 4) + "</td>";
         
@@ -969,8 +1013,8 @@ require 'inc/header.php';
         rowString2 += tdPrefix + "<a href='teamLookup.php?teamNum=" + teamNum2 + "'>" + teamNum2 + "</a></td>"; 
         
         rowString2 += tdPrefix + getDataValue(endgameClimbPercentage2, 0) + "</td>";
-        rowString2 += tdPrefix + getDataValue(endgameClimbPercentage2, 1) + "</td>";
         rowString2 += tdPrefix + getDataValue(endgameClimbPercentage2, 2) + "</td>";
+        rowString2 += tdPrefix + getDataValue(endgameClimbPercentage2, 1) + "</td>";
         rowString2 += tdPrefix + getDataValue(endgameClimbPercentage2, 3) + "</td>";
         rowString2 += tdPrefix + getDataValue(endgameClimbPercentage2, 4) + "</td>";
             
