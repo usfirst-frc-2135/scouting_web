@@ -1211,19 +1211,13 @@ require 'inc/header.php';
 
     console.log("!!> addEventListener");
     // first get alias table data
-    let bAliasUsed = false;
     let teamName = "";
 
     $.get("api/dbReadAPI.php", {
       getEventAliasNames: true
     }).done(function (eventAliasNames) {
       console.log("=> eventAliasNames");
-      jAliasNames = JSON.parse(eventAliasNames);
-      if (jAliasNames.length > 0) {
-        console.log("matchData: aliases used");
-        bAliasUsed = true;
-        aliasTable = jAliasNames;
-      }
+      let jAliasNames = JSON.parse(eventAliasNames);
 
       // Check URL for team# to use (we may have gotten here by clicking on a team number link from another page)
       // Note: for aliases: this could only be the BCDnum, never the 99#.
@@ -1232,18 +1226,13 @@ require 'inc/header.php';
         console.log("urlTeamNum = " + urlTeamNum);
         document.getElementById("enterTeamNumber").value = urlTeamNum;
  
-        if (bAliasUsed) {
-          // This team number might be a BCDnum, so look up its alias.
-          if((urlTeamNum.charAt(urlTeamNum.length-1) === 'B') || (urlTeamNum.charAt(urlTeamNum.length-1) === 'C') ||
-             (urlTeamNum.charAt(urlTeamNum.length-1) === 'D') || (urlTeamNum.charAt(urlTeamNum.length-1) === 'E')) {
-            let alias = getAliasFromTeamNum(urlTeamNum, aliasTable);
-            console.log("for URL team: " + urlTeamNum + ", alias = " + alias);
-            if (alias != "") {
-              teamName = alias;
-            }
-          }
-          buildTeamLookupPage(urlTeamNum,teamName, aliasTable);
+        // This team number might be a BCDnum, so look up its alias and use it for the teamName.
+        let alias = getAliasFromTeamNum(urlTeamNum, jAliasNames);
+        if (alias != "") {
+          console.log("for URL team: " + urlTeamNum + ", alias = " + alias);
+          teamName = alias;
         }
+        buildTeamLookupPage(urlTeamNum,teamName, jAliasNames);
       } 
 
       // Pressing enter in team number field loads the page
@@ -1262,11 +1251,11 @@ require 'inc/header.php';
         clearTeamLookupPage();
 
         // Figure out if the entered number is a 99#.
-        if (bAliasUsed) {
+        if (jAliasNames.length > 0) {
           if( (enteredNum.charAt(0) == '9') && (enteredNum.charAt(1) == '9') ) {
 
             // This team number is an alias, so get the BCDnumber.
-            let bcdNum = getTeamNumFromAlias(enteredNum, aliasTable);
+            let bcdNum = getTeamNumFromAlias(enteredNum, jAliasNames);
             console.log("Entered number is an alias: " + enteredNum + ", bcdNum = " + bcdNum);
             if (bcdNum !== "") {
               teamName = enteredNum;
@@ -1276,7 +1265,7 @@ require 'inc/header.php';
         }
 
         if (validateTeamNumber(teamNum, null) > 0) {
-          buildTeamLookupPage(teamNum,teamName,aliasTable);
+          buildTeamLookupPage(teamNum,teamName,jAliasNames);
         }
       });
     });
