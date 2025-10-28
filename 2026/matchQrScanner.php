@@ -341,3 +341,5 @@ require 'inc/header.php';
   });
 
 </script>
+
+<script src="./external/zxing/zxing.min.js"></script>
