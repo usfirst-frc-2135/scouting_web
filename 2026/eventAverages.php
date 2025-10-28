@@ -282,7 +282,7 @@ require 'inc/header.php';
     }
     return "";
   }
-  
+
 
 
 
@@ -299,7 +299,7 @@ require 'inc/header.php';
       rowString += tdPrefix + "<a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a></td>";
       let alias = getAliasFromTeamNum(teamNum, aliaslist);
       rowString += tdPrefix + alias + "</td>";
-    
+
       // points by game phase
       rowString += tdPrefix + getDataValue(avgData[teamNum], "totalPointsAvg") + "</td>";
       rowString += tdPrefix + getDataValue(avgData[teamNum], "totalPointsMax") + "</td>";
@@ -511,7 +511,7 @@ require 'inc/header.php';
     // This CSV header must match the order in createCSVLine!
     let csvStr = "Team,Alias,Pit Location,OPR," +
       "Total Pts Avg,Total Pts Max,Auto Pts Avg,Auto Pts Max,Tel Pts Avg,Tel Pts Max,End Pts Avg,End Pts Max," +
-      "Auton Coral Pts Avg,Total Coral Pts Max,Auto Algae Pts Avg,Auto Algae Pts Max,Tel Coral Pts Avg,Tel Coral Pts Max,Tel Algae Pts Avg,Tel Algae Pts Max," +
+      "Auton Coral Pts Avg,Auton Coral Pts Max,Auto Algae Pts Avg,Auto Algae Pts Max,Tel Coral Pts Avg,Tel Coral Pts Max,Tel Algae Pts Avg,Tel Algae Pts Max," +
       "Total Coral Avg,Total Coral Max,Total Algae Avg,Total Algae Max," +
       "Auto Coral Avg,Auto Coral Max,Auto L4 Avg,Auto L4 Max,Auto L3 Avg,Auto L3 Max,Auto L2 Avg,Auto L2 Max,Auto L1 Avg,Auto L1 Max," +
       "Auto Algae Avg,Auto Algae Max,Auto Proc Avg,Auto Proc Max,Auto Net Avg,Auto Net Max," +
@@ -589,11 +589,11 @@ require 'inc/header.php';
     }).done(function (matchData) {
 
       $.get("api/dbReadAPI.php", {
-      getEventAliasNames: true
-    }).done(function (eventAliasNames) {
-      console.log("=> eventAliasNames");
-      jAliasNames = JSON.parse(eventAliasNames);
-    });
+        getEventAliasNames: true
+      }).done(function (eventAliasNames) {
+        console.log("=> eventAliasNames");
+        jAliasNames = JSON.parse(eventAliasNames);
+      });
 
       console.log("=> getAllMatchData:");
       mdp = new matchDataProcessor(JSON.parse(matchData));
