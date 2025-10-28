@@ -201,13 +201,17 @@ require 'inc/header.php';
 
   // Alerts user of a successful QR scan
   function indicateScanSuccess() {
-    try {
-      window.navigator.vibrate(200); // Chrome throws an "intervention" if window is not clicked first!
+    const canVibrate = window.navigator.vibrate;
+    if (canVibrate) {                   // iOS does not support vibrate and crashes, so test if it's available
+      try {
+        window.navigator.vibrate(200); // MacOS Chrome throws an "intervention" if window is not clicked first!
+      }
+      catch (exception) {
+        console.warn("indicateScanSuccess: Vibrate notification request failed! - " + e);
+        alert("Vibrate notification request failed!");
+      }
     }
-    catch (exception) {
-      console.warn("indicateScanSuccess: Vibrate notification request failed! - " + e);
-      alert("Vibrate notification request failed!");
-    }
+
     document.getElementById("content").classList.add("bg-success");
     setTimeout(function () {
       document.getElementById("content").classList.remove("bg-success");
