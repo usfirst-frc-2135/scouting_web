@@ -699,7 +699,7 @@ require 'inc/header.php';
       }
 
       teleopAlgaeProcessorTips.push({ xlabel: matchnum, tip: storeAndGetTip(mydata[i]["teleopprocessor"], "Processor=", datasets[0]["data"]) });
-      teleopAlgaeNetTips.push({ xlabel: matchnum, tip: storeAndGetTip(mydata[i]["teleopnet"], "Processor=", datasets[1]["data"]) });
+      teleopAlgaeNetTips.push({ xlabel: matchnum, tip: storeAndGetTip(mydata[i]["teleopnet"], "Net=", datasets[1]["data"]) });
       teleopCoralL1Tips.push({ xlabel: matchnum, tip: storeAndGetTip(mydata[i]["levelone"], "L1=", datasets[2]["data"]) });
       teleopCoralL2Tips.push({ xlabel: matchnum, tip: storeAndGetTip(mydata[i]["leveltwo"], "L2=", datasets[3]["data"]) });
       teleopCoralL3Tips.push({ xlabel: matchnum, tip: storeAndGetTip(mydata[i]["levelthree"], "L3=", datasets[4]["data"]) });
