@@ -250,6 +250,9 @@ class matchDataProcessor {
         // endgame
         pdata[tn]["endgameClimbPercent"] = { 0: 0, 1: 0, 2: 0, 3: 0, 4: 0 };
 
+        pdata[tn]["endgameClimbStartPercent"] = { 0: 0, 1: 0, 2: 0, 3: 0 };
+
+
         pdata[tn]["totaldied"] = 0;
         pdata[tn]["scoutnames"] = [];
         pdata[tn]["commentlist"] = [];
@@ -444,6 +447,7 @@ class matchDataProcessor {
       pdata[tn]["defenseAvg"] += currentDefense;
 
       // For boolean data, we are just incrementing that data instead of adding the value here.
+      pdata[tn]["endgameClimbStartPercent"][this.mData[i]["startClimb"]] += 1;
       pdata[tn]["endgameClimbPercent"][this.mData[i]["cageClimb"]] += 1;
 
       // Text data for matches
@@ -527,6 +531,12 @@ class matchDataProcessor {
         pdata[key]["defenseAvg"] = this.roundOnePlace(pdata[key]["defenseAvg"] / pdata[key]["totaldefensematches"]);
 
       // endgame
+      
+      pdata[key]["endgameClimbStartPercent"][0] = this.toPercent(pdata[key]["endgameClimbStartPercent"][0] / pdata[key]["totalmatches"]);
+      pdata[key]["endgameClimbStartPercent"][1] = this.toPercent(pdata[key]["endgameClimbStartPercent"][1] / pdata[key]["totalmatches"]);
+      pdata[key]["endgameClimbStartPercent"][2] = this.toPercent(pdata[key]["endgameClimbStartPercent"][2] / pdata[key]["totalmatches"]);
+      pdata[key]["endgameClimbStartPercent"][3] = this.toPercent(pdata[key]["endgameClimbStartPercent"][3] / pdata[key]["totalmatches"]);
+
       pdata[key]["endgameClimbPercent"][0] = this.toPercent(pdata[key]["endgameClimbPercent"][0] / pdata[key]["totalmatches"]);
       pdata[key]["endgameClimbPercent"][1] = this.toPercent(pdata[key]["endgameClimbPercent"][1] / pdata[key]["totalmatches"]);
       pdata[key]["endgameClimbPercent"][2] = this.toPercent(pdata[key]["endgameClimbPercent"][2] / pdata[key]["totalmatches"]);
