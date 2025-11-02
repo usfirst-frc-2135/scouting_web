@@ -112,7 +112,7 @@ require 'inc/header.php';
               <th colspan="11" style="background-color:#d6f3fB">Teleop Coral</th>
               <th colspan="7" style="background-color:#d6f3fB">Teleop Algae</th>
               <th colspan="1" style="background-color:#AFE8F7">Def</th>
-              <th colspan="5" style="background-color:#fbe6d3">Endgame</th>
+              <th colspan="9" style="background-color:#fbe6d3">Endgame</th>
               <th colspan="1" style="background-color:transparent"></th>
             </tr>
             <tr>
@@ -162,6 +162,7 @@ require 'inc/header.php';
               <th colspan="1" style="background-color:#AFE8F7"></th>
 
               <!-- endgame -->
+              <th colspan="4" style="background-color:#fbe6d3">startClimb%</th>
               <th colspan="5" style="background-color:#fbe6d3">Climb%</th>
 
               <!-- died -->
@@ -244,12 +245,19 @@ require 'inc/header.php';
               <!-- defense -->
               <th scope="col" class="sorttable_numeric" style="background-color:#AFE8F7">Avg</th>
 
-              <!-- endgame -->
+              <!-- endgame (start climb)-->
+              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">N</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:transparent">B</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">A</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:transparent">L</th>
+
+              <!-- endgame (climb)-->
               <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">N</th>
               <th scope="col" class="sorttable_numeric" style="background-color:transparent">P</th>
               <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">F</th>
               <th scope="col" class="sorttable_numeric" style="background-color:transparent">S</th>
               <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">D</th>
+
 
               <!-- died -->
               <th scope="col" class="sorttable_numeric" style="background-color:transparent">#</th>
@@ -292,7 +300,11 @@ require 'inc/header.php';
     let tbodyRef = document.getElementById(tableId).querySelector('tbody');
     tbodyRef.innerHTML = ""; // Clear Table
     for (let teamNum of teamList) {
+      let endgameClimbStartPercentage = getDataValue(avgData[teamNum], "endgameClimbStartPercent");//LOOK
+
+    for (let teamNum of teamList) {
       let endgameClimbPercentage = getDataValue(avgData[teamNum], "endgameClimbPercent");
+
 
       const tdPrefix = "<td style=\"background-color:transparent\">";
       let rowString = "";
@@ -372,6 +384,11 @@ require 'inc/header.php';
       rowString += tdPrefix + getDataValue(avgData[teamNum], "defenseAvg") + "</td>";
 
       // endgame
+      rowString += tdPrefix + getDataValue(endgameClimbStartPercentage, 0) + "</td>";
+      rowString += tdPrefix + getDataValue(endgameClimbStartPercentage, 1) + "</td>";
+      rowString += tdPrefix + getDataValue(endgameClimbStartPercentage, 2) + "</td>";
+      rowString += tdPrefix + getDataValue(endgameClimbStartPercentage, 3) + "</td>";
+
       rowString += tdPrefix + getDataValue(endgameClimbPercentage, 0) + "</td>";
       rowString += tdPrefix + getDataValue(endgameClimbPercentage, 1) + "</td>";
       rowString += tdPrefix + getDataValue(endgameClimbPercentage, 2) + "</td>";
@@ -383,6 +400,7 @@ require 'inc/header.php';
       tbodyRef.insertRow().innerHTML = rowString;
     }
   }
+}
 
   // Add a team (key) to the final team list
   function getTeamListFromData(matchData) {
@@ -415,6 +433,7 @@ require 'inc/header.php';
   function createCSVLine(team, evtAvgs, coprs, aliasData) {
     let pitLocation = 0;
     let oprTP = getDataValue(coprs[team], "totalPoints");
+    let endgameClimbStartPercent = lookupAverage(evtAvgs, team, "endgameClimbStartPercent");
     let endgameClimbPercent = lookupAverage(evtAvgs, team, "endgameClimbPercent");
 
     let csvLine = team + ",";
@@ -493,6 +512,12 @@ require 'inc/header.php';
     csvLine += lookupAverage(evtAvgs, team, "teleopAlgaeNetMax") + ",";
 
     // endgame
+
+    csvLine += getDataValue(endgameClimbStartPercent, 0) + ",";
+    csvLine += getDataValue(endgameClimbStartPercent, 1) + ",";
+    csvLine += getDataValue(endgameClimbStartPercent, 2) + ",";
+    csvLine += getDataValue(endgameClimbStartPercent, 3) + ",";
+
     csvLine += getDataValue(endgameClimbPercent, 0) + ",";
     csvLine += getDataValue(endgameClimbPercent, 1) + ",";
     csvLine += getDataValue(endgameClimbPercent, 2) + ",";
@@ -516,8 +541,8 @@ require 'inc/header.php';
       "Auto Coral Avg,Auto Coral Max,Auto L4 Avg,Auto L4 Max,Auto L3 Avg,Auto L3 Max,Auto L2 Avg,Auto L2 Max,Auto L1 Avg,Auto L1 Max," +
       "Auto Algae Avg,Auto Algae Max,Auto Proc Avg,Auto Proc Max,Auto Net Avg,Auto Net Max," +
       "Tel Coral Acc,Tel Coral Avg,Tel Coral Max,Tel L4 Avg,Tel L4 Max,Tel L3 Avg,Tel L3 Max,Tel L2 Avg,Tel L2 Max,Tel L1 Avg,Tel L1 Max," +
-      "Tel Algae Acc,Tel Algae Avg,Tel Algae Max,Tel Proc Avg,Tel Proc Max,Tel Net Avg,Tel Net Max," +
-      "End N/A,End Park,End Fall,End Shal,End Deep," +
+      "Tel Algae Acc,Tel Algae Avg,Tel Algae Max,Tel Proc Avg,Tel Proc Max,Tel Net Avg,Tel Net Max," + "Climb N/A,Climb Before,Climb At,Climb Later" + 
+      "End N/A,End Park,End Fall,End Shal,End Deep," + 
       "Total Died, Note\n";
 
     let mdp = new matchDataProcessor(matchData);

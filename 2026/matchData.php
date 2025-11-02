@@ -39,6 +39,7 @@ require 'inc/header.php';
               <th scope="col" style="background-color:#d6f3fB">Teleop Algae Proc</th>
               <th scope="col" style="background-color:#d6f3fB">Defense</th>
               <th scope="col" style="background-color:#fbe6d3">Cage Climb</th>
+              <th scope="col" style="background-color:#fbe6d3">Start Climb</th>
               <th scope="col" style="background-color:transparent">Died</th>
               <th scope="col" style="background-color:transparent">Scout Name</th>
               <th scope="col" style="background-color:#cfe2ff">Comment</th>
@@ -97,6 +98,7 @@ require 'inc/header.php';
       rowString += tdPrefix1 + matchItem["teleopAlgaeProcessor"] + "</td>";
       rowString += tdPrefix1 + matchItem["defenseLevel"] + "</td>";
       rowString += tdPrefix0 + matchItem["cageClimb"] + "</td>";
+      rowString += tdPrefix0 + matchItem["startClimb"] + "</td>";//LOOK
       rowString += tdPrefix1 + matchItem["died"] + "</td>";
       rowString += tdPrefix0 + matchItem["scoutname"] + "</td>";
       rowString += tdPrefix1 + matchItem["comment"] + "</td>";
