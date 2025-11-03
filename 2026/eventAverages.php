@@ -93,12 +93,9 @@ require 'inc/header.php';
             <col span="2" style="background-color:#cfe2ff">
             <col span="2" style="background-color:transparent">
             <col span="1" style="background-color:#cfe2ff">
+            <col span="4" style="background-color:transparent">
+            <col span="5" style="background-color:#cfe2ff">
             <col span="1" style="background-color:transparent">
-            <col span="1" style="background-color:#cfe2ff">
-            <col span="1" style="background-color:transparent">
-            <col span="1" style="background-color:#cfe2ff">
-            <col span="1" style="background-color:transparent">
-            <col span="1" style="background-color:#cfe2ff">
           </colgroup>
           <thead>
             <tr>
@@ -162,7 +159,7 @@ require 'inc/header.php';
               <th colspan="1" style="background-color:#AFE8F7"></th>
 
               <!-- endgame -->
-              <th colspan="4" style="background-color:#fbe6d3">startClimb%</th>
+              <th colspan="4" style="background-color:transparent">Start Climb%</th>
               <th colspan="5" style="background-color:#fbe6d3">Climb%</th>
 
               <!-- died -->
@@ -246,17 +243,17 @@ require 'inc/header.php';
               <th scope="col" class="sorttable_numeric" style="background-color:#AFE8F7">Avg</th>
 
               <!-- endgame (start climb)-->
-              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">N</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:transparent">N</th>
               <th scope="col" class="sorttable_numeric" style="background-color:transparent">B</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">A</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:transparent">A</th>
               <th scope="col" class="sorttable_numeric" style="background-color:transparent">L</th>
 
               <!-- endgame (climb)-->
-              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">N</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:transparent">N</th>
               <th scope="col" class="sorttable_numeric" style="background-color:transparent">P</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">F</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:transparent">F</th>
               <th scope="col" class="sorttable_numeric" style="background-color:transparent">S</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">D</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:transparent">D</th>
 
 
               <!-- died -->
@@ -299,12 +296,10 @@ require 'inc/header.php';
     console.log("==> eventAverages: addAveragesToTable()");
     let tbodyRef = document.getElementById(tableId).querySelector('tbody');
     tbodyRef.innerHTML = ""; // Clear Table
-    for (let teamNum of teamList) {
-      let endgameClimbStartPercentage = getDataValue(avgData[teamNum], "endgameClimbStartPercent");//LOOK
 
     for (let teamNum of teamList) {
       let endgameClimbPercentage = getDataValue(avgData[teamNum], "endgameClimbPercent");
-
+      let endgameClimbStartPercentage = getDataValue(avgData[teamNum], "endgameClimbStartPercent");
 
       const tdPrefix = "<td style=\"background-color:transparent\">";
       let rowString = "";
@@ -400,7 +395,7 @@ require 'inc/header.php';
       tbodyRef.insertRow().innerHTML = rowString;
     }
   }
-}
+
 
   // Add a team (key) to the final team list
   function getTeamListFromData(matchData) {
@@ -429,7 +424,6 @@ require 'inc/header.php';
   }
 
   // Returns a string with the comma-separated line of data for the given team.
-  //LOOK
   function createCSVLine(team, evtAvgs, coprs, aliasData) {
     let pitLocation = 0;
     let oprTP = getDataValue(coprs[team], "totalPoints");
@@ -512,7 +506,6 @@ require 'inc/header.php';
     csvLine += lookupAverage(evtAvgs, team, "teleopAlgaeNetMax") + ",";
 
     // endgame
-
     csvLine += getDataValue(endgameClimbStartPercent, 0) + ",";
     csvLine += getDataValue(endgameClimbStartPercent, 1) + ",";
     csvLine += getDataValue(endgameClimbStartPercent, 2) + ",";
@@ -525,7 +518,7 @@ require 'inc/header.php';
     csvLine += getDataValue(endgameClimbPercent, 4) + ",";
 
     csvLine += lookupAverage(evtAvgs, team, "totaldied") + ",";
-    csvLine += "-\n";    // NOTE
+    csvLine += "-\n";    // Comment
     return csvLine;
   }
 
@@ -541,7 +534,7 @@ require 'inc/header.php';
       "Auto Coral Avg,Auto Coral Max,Auto L4 Avg,Auto L4 Max,Auto L3 Avg,Auto L3 Max,Auto L2 Avg,Auto L2 Max,Auto L1 Avg,Auto L1 Max," +
       "Auto Algae Avg,Auto Algae Max,Auto Proc Avg,Auto Proc Max,Auto Net Avg,Auto Net Max," +
       "Tel Coral Acc,Tel Coral Avg,Tel Coral Max,Tel L4 Avg,Tel L4 Max,Tel L3 Avg,Tel L3 Max,Tel L2 Avg,Tel L2 Max,Tel L1 Avg,Tel L1 Max," +
-      "Tel Algae Acc,Tel Algae Avg,Tel Algae Max,Tel Proc Avg,Tel Proc Max,Tel Net Avg,Tel Net Max," + "Climb N/A,Climb Before,Climb At,Climb Later" + 
+      "Tel Algae Acc,Tel Algae Avg,Tel Algae Max,Tel Proc Avg,Tel Proc Max,Tel Net Avg,Tel Net Max," + "Start N/A,Start Before,Start At,Start Less10," + 
       "End N/A,End Park,End Fall,End Shal,End Deep," + 
       "Total Died, Note\n";
 
@@ -579,8 +572,8 @@ require 'inc/header.php';
     $.get("api/dbReadAPI.php", {
       getEventAliasNames: true
     }).done(function (eventAliasNames) {
-      console.log("Got event Alias Names");
       jAliasData = JSON.parse(eventAliasNames);
+      console.log("Got event Alias Names");
       waitForData(jMatchData, jCoprData, jAliasData);
     });
 
@@ -588,8 +581,8 @@ require 'inc/header.php';
     $.get("api/dbReadAPI.php", {
       getAllMatchData: true
     }).done(function (matchData) {
-      console.log("Got all match data");
       jMatchData = JSON.parse(matchData);
+      console.log("Got all match data");
       waitForData(jMatchData, jCoprData, jAliasData);
     });
 
@@ -597,11 +590,11 @@ require 'inc/header.php';
     $.get("api/tbaAPI.php", {
       getCOPRs: true
     }).done(function (coprs) {
-      console.log("Got COPRs data");
       if (coprs === null) {
         return alert("Can't load COPRs from TBA; check if TBA Key was set in db_config");
       }
       jCoprData = JSON.parse(coprs)["data"];
+      console.log("Got COPRs data");
       waitForData(jMatchData, jCoprData, jAliasData);
     });
   }

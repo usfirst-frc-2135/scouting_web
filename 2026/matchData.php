@@ -96,9 +96,9 @@ require 'inc/header.php';
       rowString += tdPrefix1 + matchItem["teleopCoralL4"] + "</td>";
       rowString += tdPrefix0 + matchItem["teleopAlgaeNet"] + "</td>";
       rowString += tdPrefix1 + matchItem["teleopAlgaeProcessor"] + "</td>";
-      rowString += tdPrefix1 + matchItem["defenseLevel"] + "</td>";
-      rowString += tdPrefix0 + matchItem["cageClimb"] + "</td>";
-      rowString += tdPrefix0 + matchItem["startClimb"] + "</td>";//LOOK
+      rowString += tdPrefix0 + matchItem["defenseLevel"] + "</td>";
+      rowString += tdPrefix1 + matchItem["cageClimb"] + "</td>";
+      rowString += tdPrefix0 + matchItem["startClimb"] + "</td>";
       rowString += tdPrefix1 + matchItem["died"] + "</td>";
       rowString += tdPrefix0 + matchItem["scoutname"] + "</td>";
       rowString += tdPrefix1 + matchItem["comment"] + "</td>";

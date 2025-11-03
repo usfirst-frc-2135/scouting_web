@@ -460,6 +460,8 @@ require 'inc/header.php';
                   <col span="1" style="background-color:#cfe2ff">
                   <col span="1" style="background-color:transparent">
                   <col span="1" style="background-color:#cfe2ff">
+                  <col span="1" style="background-color:transparent">
+                  <col span="1" style="background-color:#cfe2ff">
                 </colgroup>
                 <thead>
                   <tr>
@@ -479,7 +481,9 @@ require 'inc/header.php';
                     <th scope="col">Teleop Coral L4</th>
                     <th scope="col">Teleop Algae Net</th>
                     <th scope="col">Teleop Algae Proc</th>
+                    <th scope="col">Def</th>
                     <th scope="col">Cage Climb</th>
+                    <th scope="col">Start Climb</th>
                     <th scope="col">Died</th>
                     <th scope="col">Scout Name</th>
                   </tr>
@@ -940,7 +944,9 @@ require 'inc/header.php';
       rowString += "<td>" + matchItem["teleopAlgaeNet"] + "</td>";
       rowString += "<td>" + matchItem["teleopAlgaeProcessor"] + "</td>";
 
+      rowString += "<td>" + matchItem["defenseLevel"] + "</td>";
       rowString += "<td>" + matchItem["cageClimb"] + "</td>";
+      rowString += "<td>" + matchItem["startClimb"] + "</td>";
       rowString += "<td>" + matchItem["died"] + "</td>";
       rowString += "<td>" + matchItem["scoutname"] + "</td>";
       rowString += "<td>" + matchItem["comment"] + "</td>";

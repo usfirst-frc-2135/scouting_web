@@ -372,12 +372,9 @@ require 'inc/header.php';
             <col span="2" style="background-color:#cfe2ff">
             <col span="2" style="background-color:transparent">
             <col span="1" style="background-color:#cfe2ff">
+            <col span="4" style="background-color:transparent">
+            <col span="5" style="background-color:#cfe2ff">
             <col span="1" style="background-color:transparent">
-            <col span="1" style="background-color:#cfe2ff">
-            <col span="1" style="background-color:transparent">
-            <col span="1" style="background-color:#cfe2ff">
-            <col span="1" style="background-color:transparent">
-            <col span="1" style="background-color:#cfe2ff">
           </colgroup>
           <thead>
             <tr>
@@ -391,7 +388,7 @@ require 'inc/header.php';
               <th colspan="11" style="background-color:#d6f3fB">Teleop Coral</th>
               <th colspan="7" style="background-color:#d6f3fB">Teleop Algae</th>
               <th colspan="1" style="background-color:#AFE8F7">Def</th>
-              <th colspan="5" style="background-color:#fbe6d3">Endgame</th>
+              <th colspan="9" style="background-color:#fbe6d3">Endgame</th>
               <th colspan="1" style="background-color:transparent"></th>
             </tr>
             <tr>
@@ -441,6 +438,7 @@ require 'inc/header.php';
               <th colspan="1" style="background-color:#AFE8F7"></th>
 
               <!-- endgame -->
+              <th colspan="4" style="background-color:transparent">Start Climb%</th>
               <th colspan="5" style="background-color:#fbe6d3">Climb%</th>
 
               <!-- died -->
@@ -522,12 +520,18 @@ require 'inc/header.php';
               <!-- defense -->
               <th scope="col" class="sorttable_numeric" style="background-color:#AFE8F7">Avg</th>
 
-              <!-- endgame -->
-              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">N</th>
+              <!-- endgame (start climb)-->
+              <th scope="col" class="sorttable_numeric" style="background-color:transparent">N</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:transparent">B</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:transparent">A</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:transparent">L</th>
+
+              <!-- endgame (climb)-->
+              <th scope="col" class="sorttable_numeric" style="background-color:transparent">N</th>
               <th scope="col" class="sorttable_numeric" style="background-color:transparent">P</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">F</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:transparent">F</th>
               <th scope="col" class="sorttable_numeric" style="background-color:transparent">S</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">D</th>
+              <th scope="col" class="sorttable_numeric" style="background-color:transparent">D</th>
 
               <!-- died -->
               <th scope="col" class="sorttable_numeric" style="background-color:transparent">#</th>
@@ -997,6 +1001,7 @@ require 'inc/header.php';
 
       let endgameClimbPercentage = getDataValue(avgData[teamNum], "endgameClimbPercent");
       let endgameClimbPercentage2 = getDataValue(avgData2[teamNum2], "endgameClimbPercent");
+
       const tdPrefix = "<td>";
       let rowString = "";
       let rowString2 = "";
@@ -1028,6 +1033,8 @@ require 'inc/header.php';
 
       let endgameClimbPercentage = getDataValue(avgData[teamNum], "endgameClimbPercent");
       let endgameClimbPercentage2 = getDataValue(avgData2[teamNum2], "endgameClimbPercent");
+      let endgameClimbStartPercentage = getDataValue(avgData[teamNum], "endgameClimbStartPercent");
+      let endgameClimbStartPercentage2 = getDataValue(avgData2[teamNum2], "endgameClimbStartPercent");
       const tdPrefix = "<td style=\"background-color:transparent\">";
       let rowString = "";
       let rowString2 = "";
@@ -1107,6 +1114,10 @@ require 'inc/header.php';
       rowString += tdPrefix + getDataValue(avgData[teamNum], "defenseAvg") + "</td>";
 
       // endgame
+      rowString += tdPrefix + getDataValue(endgameClimbStartPercentage, 0) + "</td>";
+      rowString += tdPrefix + getDataValue(endgameClimbStartPercentage, 1) + "</td>";
+      rowString += tdPrefix + getDataValue(endgameClimbStartPercentage, 2) + "</td>";
+      rowString += tdPrefix + getDataValue(endgameClimbStartPercentage, 3) + "</td>";
       rowString += tdPrefix + getDataValue(endgameClimbPercentage, 0) + "</td>";
       rowString += tdPrefix + getDataValue(endgameClimbPercentage, 1) + "</td>";
       rowString += tdPrefix + getDataValue(endgameClimbPercentage, 2) + "</td>";
@@ -1194,6 +1205,10 @@ require 'inc/header.php';
       rowString2 += tdPrefix + getDataValue(avgData2[teamNum2], "defenseAvg") + "</td>";
 
       // endgame
+      rowString2 += tdPrefix + getDataValue(endgameClimbStartPercentage2, 0) + "</td>";
+      rowString2 += tdPrefix + getDataValue(endgameClimbStartPercentage2, 1) + "</td>";
+      rowString2 += tdPrefix + getDataValue(endgameClimbStartPercentage2, 2) + "</td>";
+      rowString2 += tdPrefix + getDataValue(endgameClimbStartPercentage2, 3) + "</td>";
       rowString2 += tdPrefix + getDataValue(endgameClimbPercentage2, 0) + "</td>";
       rowString2 += tdPrefix + getDataValue(endgameClimbPercentage2, 1) + "</td>";
       rowString2 += tdPrefix + getDataValue(endgameClimbPercentage2, 2) + "</td>";
