@@ -284,6 +284,28 @@ require 'inc/header.php';
                     </tr>
                   </tbody>
                 </table>
+                <table id="endgameStartClimbTable"
+                  class="table table-striped table-bordered table-hover table-sm border-dark text-center ">
+                  <thead>
+                    <tr>
+                      <th scope="col" style="text-align:left"></th>
+                      <th style="width:12%" scope="col">N</th>
+                      <th style="width:12%" scope="col">B</th>
+                      <th style="width:12%" scope="col">A</th>
+                      <th style="width:12%" scope="col">L</th>
+                    </tr>
+                  </thead>
+                  <tbody class="table-group-divider">
+                    <tr>
+                      <th scope="row" style="text-align:left">Start Climb %</th>
+                      <td> </td>
+                      <td> </td>
+                      <td> </td>
+                      <td> </td>
+                      <td> </td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
@@ -909,9 +931,12 @@ require 'inc/header.php';
     /////// Endgame Table
     avgs["totalEndGamePointsStr"] = "Endgame Points";
     avgs["endgameClimbPercent"]["endgameclimbStr"] = "Cage Climb %";
+    avgs["endgameClimbStartPercent"]["endgamestartclimbStr"] = "Start Climb %";
 
     writeAverageTableRow("endgameTotalPtsTable", avgs, ["totalEndGamePointsStr", "endgamePointsAvg", "endgamePointsMax"], 3);
     writeAverageTableRow("endgameClimbTable", avgs["endgameClimbPercent"], ["endgameclimbStr", 0, 2, 1, 3, 4], 6);
+    writeAverageTableRow("endgameStartClimbTable", avgs["endgameClimbStartPercent"], ["endgamestartclimbStr", 0, 1, 2, 3], 5);//LOOK
+
   }
 
   // Loads the match data table
@@ -1113,6 +1138,7 @@ require 'inc/header.php';
     document.getElementById("teleopTable").querySelector('tbody').innerHTML = "";
     document.getElementById("endgameTotalPtsTable").querySelector('tbody').innerHTML = "";
     document.getElementById("endgameClimbTable").querySelector('tbody').innerHTML = "";
+    document.getElementById("endgameStartClimbTable").querySelector('tbody').innerHTML = "";
     document.getElementById("pitTable1").querySelector('tbody').innerHTML = "";
     document.getElementById("pitTable2").querySelector('tbody').innerHTML = "";
     document.getElementById("strategicDataTable").querySelector('tbody').innerHTML = "";
