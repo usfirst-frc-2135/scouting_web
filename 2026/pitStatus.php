@@ -104,7 +104,7 @@ require 'inc/header.php';
     }).done(function (eventAliasNames) {
       console.log("=> eventAliasNames");
       jAliasNames = JSON.parse(eventAliasNames);
-      if (jAliasNames.length > 0) { 
+      if (jAliasNames.length > 0) {
         console.log("pitStatus: aliases used");
         bAliasUsed = true;
       }
@@ -119,14 +119,14 @@ require 'inc/header.php';
         return alert("Can't load eventTeamNames from TBA; check if TBA Key was set in db_config");
       }
       let jTeamNames = JSON.parse(eventTeamNames);
-      console.log( "pitStatus: jTeamNames length = " + jTeamNames.length);
+      console.log("pitStatus: jTeamNames length = " + jTeamNames.length);
       for (let team in jTeamNames) {
         let teamNum = jTeamNames[team]["teamnum"];
         let teamName = jTeamNames[team]["teamname"];
 
         // Checking if alias is being used and adjust team name accordingly.
         // At this point, the teamNum could be the 99-number.
-        if(bAliasUsed) {
+        if (bAliasUsed) {
           let BCDnum = getTeamNumFromAlias(teamNum, jAliasNames);
           if (BCDnum !== "") {
             // This entry is an alias, so create a new entry with the BCDnum with the alias as teamName.

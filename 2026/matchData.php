@@ -72,7 +72,7 @@ require 'inc/header.php';
       let matchItem = matchData[i];
       let teamNum = matchItem["teamnumber"];
       let alias = matchItem["teamalias"];
-      if(alias == 0)
+      if (alias == 0)
         alias = "";
 
       const tdPrefix0 = "<td style=\"background-color:transparent\">";

@@ -94,4 +94,3 @@ function compareMatchNumbers(matchA, matchB) {
 
   return returnVal;
 };
-

@@ -57,7 +57,8 @@
                   Lookup</a></li>
               <li><a class="dropdown-item text-white-50 text-end text-sm-start" data-toggle="pill" href="./pitPhotoUpload.php">Photo
                   Upload</a></li>
-              <li><a class="dropdown-item text-white-50 text-end text-sm-start" data-toggle="pill" href="./pitForm.php">Pit Scouting</a>
+              <li><a class="dropdown-item text-white-50 text-end text-sm-start" data-toggle="pill" href="./pitForm.php">Pit
+                  Scouting</a>
               </li>
             </ul>
           </li>
@@ -66,8 +67,9 @@
             <a class="nav-link dropdown-toggle text-white-50 text-end text-sm-start" href="#" role="button"
               data-bs-toggle="dropdown" aria-expanded="false">Matches</a>
             <ul class="dropdown-menu bg-dark">
-              <li><a class="dropdown-item text-white-50 text-end text-sm-start" data-toggle="pill" href="./matchQrScanner.php">QR Scanner</a></li>
-             <!-- <li><a class="dropdown-item text-white-50 text-end text-sm-start" data-toggle="pill"
+              <li><a class="dropdown-item text-white-50 text-end text-sm-start" data-toggle="pill" href="./matchQrScanner.php">QR
+                  Scanner</a></li>
+              <!-- <li><a class="dropdown-item text-white-50 text-end text-sm-start" data-toggle="pill"
                   href="./matchFormReefscape.php">Match
                   Form</a></li>-->
               <li><a class="dropdown-item text-white-50 text-end text-sm-start" data-toggle="pill" href="./matchData.php">Match

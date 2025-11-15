@@ -13,10 +13,10 @@ function getAliasFromTeamNum(teamnum, teamAliasList) {
   let rtnAlias = "";
   for (let entry of teamAliasList) {
     let tnum = entry["teamnumber"].trim();
-//HOLD    console.log( "---> comparing teamnum " + teamnum + " with tnum " + tnum);
+    //HOLD    console.log( "---> comparing teamnum " + teamnum + " with tnum " + tnum);
     if (tnum === teamnum) {
       rtnAlias = entry["aliasnumber"]
-//HOLD      console.log("   ---> FOUND teamnum, got alias = " + rtnAlias);
+      //HOLD      console.log("   ---> FOUND teamnum, got alias = " + rtnAlias);
       break;
     }
   }
@@ -29,17 +29,12 @@ function getTeamNumFromAlias(alias, teamAliasList) {
   let rtnTeamNum = "";
   for (let entry of teamAliasList) {
     let anum = entry["aliasnumber"].trim();
-//HOLD    console.log( "---> comparing alias " + alias + " with " + anum);
-     if (anum == alias) {
-       rtnTeamNum = entry["teamnumber"]
-//HOLD       console.log("   ---> FOUND alias, got teamnum = " + rtnTeamNum);
-       break;
-     }
-   }
+    //HOLD    console.log( "---> comparing alias " + alias + " with " + anum);
+    if (anum == alias) {
+      rtnTeamNum = entry["teamnumber"]
+      //HOLD       console.log("   ---> FOUND alias, got teamnum = " + rtnTeamNum);
+      break;
+    }
+  }
   return rtnTeamNum;
 }
-  
-  
-
-
-    

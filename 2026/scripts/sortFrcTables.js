@@ -53,4 +53,3 @@ function sortTableByMatch(tableId, matchCol) {
 function sortTableByMatchAndTeam(tableId, teamCol, matchCol) {
   sortFrcTables(tableId, teamCol, matchCol);
 }
-

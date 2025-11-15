@@ -31,7 +31,7 @@ class matchDataProcessor {
 
   // Fix match IDs that are missing the comp level
   getFixedMatchId(matchId) {
-    if(matchId != 0) {
+    if (matchId != 0) {
       matchId = matchId.toLowerCase();
       if ((matchId.search("p") != -1) || (matchId.search("qm") != -1) ||
         (matchId.search("sf") != -1) || (matchId.search("f") != -1)) {
@@ -42,7 +42,7 @@ class matchDataProcessor {
         return "qm" + matchId;
       }
     }
-    else {  
+    else {
       console.warn("getMatchTuple: Invalid matchId! " + matchId);
       return "qm" + matchId;
     }
@@ -527,11 +527,11 @@ class matchDataProcessor {
       pdata[key]["teleopAlgaeNetAvg"] = this.roundOnePlace(pdata[key]["teleopAlgaeNetAvg"] / pdata[key]["totalmatches"]);
 
       // Defense avg - only calculate this if this team played defense in a match
-      if(pdata[key]["totaldefensematches"] != 0)
+      if (pdata[key]["totaldefensematches"] != 0)
         pdata[key]["defenseAvg"] = this.roundOnePlace(pdata[key]["defenseAvg"] / pdata[key]["totaldefensematches"]);
 
       // endgame
-      
+
       pdata[key]["endgameClimbStartPercent"][0] = this.toPercent(pdata[key]["endgameClimbStartPercent"][0] / pdata[key]["totalmatches"]);
       pdata[key]["endgameClimbStartPercent"][1] = this.toPercent(pdata[key]["endgameClimbStartPercent"][1] / pdata[key]["totalmatches"]);
       pdata[key]["endgameClimbStartPercent"][2] = this.toPercent(pdata[key]["endgameClimbStartPercent"][2] / pdata[key]["totalmatches"]);

@@ -74,4 +74,3 @@ function compareTeamNumbers(teamA, teamB) {
 
   return returnVal;
 }
-

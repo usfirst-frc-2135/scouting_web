@@ -534,8 +534,8 @@ require 'inc/header.php';
       "Auto Coral Avg,Auto Coral Max,Auto L4 Avg,Auto L4 Max,Auto L3 Avg,Auto L3 Max,Auto L2 Avg,Auto L2 Max,Auto L1 Avg,Auto L1 Max," +
       "Auto Algae Avg,Auto Algae Max,Auto Proc Avg,Auto Proc Max,Auto Net Avg,Auto Net Max," +
       "Tel Coral Acc,Tel Coral Avg,Tel Coral Max,Tel L4 Avg,Tel L4 Max,Tel L3 Avg,Tel L3 Max,Tel L2 Avg,Tel L2 Max,Tel L1 Avg,Tel L1 Max," +
-      "Tel Algae Acc,Tel Algae Avg,Tel Algae Max,Tel Proc Avg,Tel Proc Max,Tel Net Avg,Tel Net Max," + "Start N/A,Start Before,Start At,Start Less10," + 
-      "End N/A,End Park,End Fall,End Shal,End Deep," + 
+      "Tel Algae Acc,Tel Algae Avg,Tel Algae Max,Tel Proc Avg,Tel Proc Max,Tel Net Avg,Tel Net Max," + "Start N/A,Start Before,Start At,Start Less10," +
+      "End N/A,End Park,End Fall,End Shal,End Deep," +
       "Total Died, Note\n";
 
     let mdp = new matchDataProcessor(matchData);

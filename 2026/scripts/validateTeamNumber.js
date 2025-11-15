@@ -53,4 +53,3 @@ function validateTeamNumber(teamName, teamList) {
 
   return teamNumber;
 }
-
