@@ -55,12 +55,12 @@ require 'inc/header.php';
             <!-- End game card -->
             <div class="card mb-3" style="background-color:#FBE6D3">
               <div class="card-header">
-                <h5 class="text-center"> <a href="#collapseEndgame" data-bs-toggle="collapse" aria-expanded="false">Endgame Climb
+                <h5 class="text-center"> <a href="#collapseEndgame" data-bs-toggle="collapse" aria-expanded="true">Endgame Climb
                     Percentages
                   </a>
                 </h5>
               </div>
-              <div id="collapseEndgame" class="card-body collapse">
+              <div id="collapseEndgame" class="card-body collapse show">
                 <table id="endgameClimbTable"
                   class="table table-striped table-bordered table-hover table-sm border-dark text-center ">
                   <thead>
@@ -1031,66 +1031,64 @@ require 'inc/header.php';
     $.get("api/tbaAPI.php", {
       getTeamInfo: teamNum1
     }).done(function (teamInfo1) {
-      //          console.log("=> getTeamInfo: " + teamInfo1);
-      let teamStr1 = teamNum1;
+      // console.log("=> getTeamInfo: " + teamInfo1);
       if (teamInfo1 === null) {
         return alert("Can't load teamName from TBA; check if TBA Key was set in db_config");
       }
       let jTeamInfo = JSON.parse(teamInfo1)["response"];
-      teamStr1 += " - " + jTeamInfo["nickname"] + "       ";
+      let teamStr1 = teamNum1 " - " + jTeamInfo["nickname"];
       console.log("==> teamCompare: team1: " + teamStr1);
       document.getElementById("teamMainTitle1").innerHTML = teamStr1;
+    });
 
-      // Get team2 name from TBA
-      $.get("api/tbaAPI.php", {
-        getTeamInfo: teamNum2
-      }).done(function (teamInfo2) {
-        //            console.log("=> getTeamInfo: " + teamInfo2);
-        let teamStr2 = teamNum2;
-        if (teamInfo2 === null) {
-          return alert("Can't load teamName from TBA; check if TBA Key was set in db_config");
-        }
-        let kTeamInfo = JSON.parse(teamInfo2)["response"];
-        teamStr2 += " - " + kTeamInfo["nickname"];
-        console.log("==> teamCompare: team2: " + teamStr2);
-        document.getElementById("teamMainTitle2").innerHTML = teamStr2;
-      });
+    // Get match data
+    $.get("api/dbReadAPI.php", {
+      getTeamMatchData: teamNum1
+    }).done(function (teamMatches) {
+      console.log("=> getTeamMatchData");
+      mdp1 = new matchDataProcessor(JSON.parse(teamMatches));
+      console.log("done with mdp 1");
+      loadMatchData(teamNum1, teamNum2, mdp1, mdp2);
+    });
 
-      // Get match data
-      $.get("api/dbReadAPI.php", {
-        getTeamMatchData: teamNum1
-      }).done(function (teamMatches) {
-        console.log("=> getTeamMatchData");
-        mdp1 = new matchDataProcessor(JSON.parse(teamMatches));
-        console.log("done with mdp 1");
-        loadMatchData(teamNum1, teamNum2, mdp1, mdp2);
-      });
+    // Do team1 Strategic Data Table.
+    $.get("api/dbReadAPI.php", {
+      getTeamStrategicData: teamNum1
+    }).done(function (strategicData) {
+      console.log("=> getTeamStrategicData");
+      loadStrategicData("strategicLink1", "strategicDataTable1", teamNum1, JSON.parse(strategicData));
+    });
 
-      // Get team2 match data
-      $.get("api/dbReadAPI.php", {
-        getTeamMatchData: teamNum2
-      }).done(function (teamMatches2) {
-        console.log("=> getTeamMatchData");
-        mdp2 = new matchDataProcessor(JSON.parse(teamMatches2));
-        console.log("done with mdp2");
-        loadMatchData(teamNum1, teamNum2, mdp1, mdp2);
-      });
+    // Get team2 name from TBA
+    $.get("api/tbaAPI.php", {
+      getTeamInfo: teamNum2
+    }).done(function (teamInfo2) {
+      // console.log("=> getTeamInfo: " + teamInfo2);
+      if (teamInfo2 === null) {
+        return alert("Can't load teamName from TBA; check if TBA Key was set in db_config");
+      }
+      let jTeamInfo = JSON.parse(teamInfo2)["response"];
+      let teamStr2 = teamNum2 + " - " + jTeamInfo["nickname"];
+      console.log("==> teamCompare: team2: " + teamStr2);
+      document.getElementById("teamMainTitle2").innerHTML = teamStr2;
+    });
 
-      // Do team1 Strategic Data Table.
-      $.get("api/dbReadAPI.php", {
-        getTeamStrategicData: teamNum1
-      }).done(function (strategicData) {
-        console.log("=> getTeamStrategicData");
-        loadStrategicData("strategicLink1", "strategicDataTable1", teamNum1, JSON.parse(strategicData));
-      });
+    // Get team2 match data
+    $.get("api/dbReadAPI.php", {
+      getTeamMatchData: teamNum2
+    }).done(function (teamMatches2) {
+      console.log("=> getTeamMatchData");
+      mdp2 = new matchDataProcessor(JSON.parse(teamMatches2));
+      console.log("done with mdp2");
+      loadMatchData(teamNum1, teamNum2, mdp1, mdp2);
+    });
 
-      // Do team2 Strategic Data Table.
-      $.get("api/dbReadAPI.php", {
-        getTeamStrategicData: teamNum2
-      }).done(function (strategicData2) {
-        console.log("=> getTeamStrategicData2");
-        loadStrategicData("strategicLink2", "strategicDataTable2", teamNum2, JSON.parse(strategicData2));
-      });
+    // Do team2 Strategic Data Table.
+    $.get("api/dbReadAPI.php", {
+      getTeamStrategicData: teamNum2
+    }).done(function (strategicData2) {
+      console.log("=> getTeamStrategicData2");
+      loadStrategicData("strategicLink2", "strategicDataTable2", teamNum2, JSON.parse(strategicData2));
     });
   }
 

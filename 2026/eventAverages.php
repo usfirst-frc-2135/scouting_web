@@ -288,9 +288,6 @@ require 'inc/header.php';
     return "";
   }
 
-
-
-
   // Create and the HTML table for display
   function addAveragesToTable(tableId, teamList, avgData, aliaslist) {
     console.log("==> eventAverages: addAveragesToTable()");
@@ -614,7 +611,7 @@ require 'inc/header.php';
       });
 
       console.log("=> getAllMatchData:");
-      mdp = new matchDataProcessor(JSON.parse(matchData));
+      let mdp = new matchDataProcessor(JSON.parse(matchData));
       if (startMatch !== null && endMatch !== null) {
         mdp.filterMatchRange(startMatch, endMatch);
       }
