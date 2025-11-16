@@ -1153,13 +1153,12 @@ require 'inc/header.php';
     clearTeamLookupPage();
     if (teamName == "") {
       // teamName is empty, so get it from TBA or from aliasList. First check for alias.
-      if (teamNum.charAt(0) == '9' && teamNum.charAt(1) == '9' && (aliasList != undefined)) {
+      if (isAliasNumber(teamNum) && (aliasList != undefined)) {
         // 'teamNum' is a 99# (an alias in the aliasList), so get the BCDnum from aliasList and use it for teamName
         let bcdname = getTeamNumFromAlias(teamNum, aliasList);
         console.log("for alias: " + teamNum + ", bcdname = " + bcdname);
         if (bcdname !== "") {
-          mname = bcdname;
-          document.getElementById("teamTitle").innerHTML = teamNum + " - " + mname;
+          document.getElementById("teamTitle").innerHTML = teamNum + " - " + bcdname;
         }
       } else if (teamNum.charAt(teamNum.length - 1) === 'B' || teamNum.charAt(teamNum.length - 1) === 'C' ||
         teamNum.charAt(teamNum.length - 1) === 'D' || teamNum.charAt(teamNum.length - 1) === 'E') {
@@ -1172,6 +1171,7 @@ require 'inc/header.php';
         }
       }
     }
+
     // If teamName is still empty, look it up from TBA teamInfo.
     if (teamName == "") {
       // Get teamInfo from TBA
@@ -1284,8 +1284,7 @@ require 'inc/header.php';
 
         // Figure out if the entered number is a 99#.
         if (jAliasNames.length > 0) {
-          if ((enteredNum.charAt(0) == '9') && (enteredNum.charAt(1) == '9')) {
-
+          if (isAliasNumber(enteredNum)) {
             // This team number is an alias, so get the BCDnumber.
             let bcdNum = getTeamNumFromAlias(enteredNum, jAliasNames);
             console.log("Entered number is an alias: " + enteredNum + ", bcdNum = " + bcdNum);

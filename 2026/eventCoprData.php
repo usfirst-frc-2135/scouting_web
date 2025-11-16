@@ -53,6 +53,9 @@ require 'inc/header.php';
     let tbodyRef = document.getElementById(tableId).querySelector('tbody');
     tbodyRef.innerHTML = ""; // Clear Table
     for (let teamNum in coprData) {
+      if (isAliasNumber(teamNum)) { // TBA returns both alias (9970 to 9999) and letter suffix names
+        continue;
+      }
       let row = '<td style="background-color:#cfe2ff">' + "<a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + '</td>';
       for (let j = 0; j < keys.length; j++) {
         let color = (j % 2 == 1) ? "#cfe2ff" : "transparent";
@@ -140,6 +143,7 @@ require 'inc/header.php';
   });
 </script>
 
+<script src="./scripts/aliasFunctions.js"></script>
 <script src="./scripts/compareMatchNumbers.js"></script>
 <script src="./scripts/compareTeamNumbers.js"></script>
 <script src="./scripts/sortFrcTables.js"></script>
