@@ -234,7 +234,7 @@ require 'inc/header.php';
 
     // Save the team status to watch
     document.getElementById("addTeamWatch").addEventListener('click', function () {
-      let teamNum = document.getElementById("enterTeamNumber").value.trim().toUpperCase();
+      let teamNum = document.getElementById("enterTeamNumber").value.toUpperCase().trim();
       if (validateTeamNumber(teamNum, null) > 0) {
         updateTeamWatch(tableId, watchId, teamNum, "watch");
       }
@@ -242,7 +242,7 @@ require 'inc/header.php';
 
     // Save the team status to ignore
     document.getElementById("addTeamIgnore").addEventListener('click', function () {
-      let teamNum = document.getElementById("enterTeamNumber").value.trim().toUpperCase();
+      let teamNum = document.getElementById("enterTeamNumber").value.toUpperCase().trim();
       if (validateTeamNumber(teamNum, null) > 0) {
         updateTeamWatch(tableId, watchId, teamNum, "ignore");
       }

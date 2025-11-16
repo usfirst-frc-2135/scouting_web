@@ -75,7 +75,7 @@ require 'inc/header.php';
     if (sp.has('teamNum')) {
       return sp.get('teamNum');
     }
-    return null;
+    return "";
   }
 
   // Display success to user
@@ -115,7 +115,7 @@ require 'inc/header.php';
   // Upload the selected image file to the server
   function handlePhotoUpload() {
     console.log("=> pitPhotoUpload: handlePhotoUpload");
-    let teamNum = document.getElementById("enterTeamNumber").value.trim();
+    let teamNum = document.getElementById("enterTeamNumber").value.toUpperCase().trim();
     if (document.getElementById("robotPic").value != "") {
       if (validateTeamNumber(teamNum, null) > 0) {
         loadingSpinner.style.visibility = 'visible';
@@ -158,7 +158,7 @@ require 'inc/header.php';
             // Now upload the selected image
             let uploadPost = new FormData();
             uploadPost.append("teamPic", document.getElementById("robotPic").files[0]);
-            uploadPost.append("teamNum", document.getElementById("enterTeamNumber").value.trim());
+            uploadPost.append("teamNum", document.getElementById("enterTeamNumber").value.toUpperCase().trim());
             $.ajax({
               type: "POST",
               url: "api/dbWriteAPI.php",
@@ -221,8 +221,8 @@ require 'inc/header.php';
     loadingSpinner.style.visibility = 'hidden';
 
     // Check URL for source team to load
-    let initTeamNumber = checkURLForTeamSpec();
-    if (initTeamNumber) {
+    let initTeamNumber = checkURLForTeamSpec().toUpperCase();
+    if (initTeamNumber !== "") {
       document.getElementById("enterTeamNumber").value = initTeamNumber;
     }
 

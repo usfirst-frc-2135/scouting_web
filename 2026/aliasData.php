@@ -191,7 +191,7 @@ require 'inc/header.php';
 
     // Save the team alias for the number entered
     document.getElementById("addTeamAlias").addEventListener('click', function () {
-      let teamNum = document.getElementById("enterTeamNumber").value.trim().toUpperCase();
+      let teamNum = document.getElementById("enterTeamNumber").value.toUpperCase().trim();
       let aliasNum = document.getElementById("enterAliasNumber").value.trim();
       if (validateTeamNumber(teamNum, null) > 0 && validateTeamNumber(aliasNum, null) > 0) {
         addTeamAlias(tableId, teamNum, aliasNum);

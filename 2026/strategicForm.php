@@ -275,7 +275,7 @@ require 'inc/header.php';
     if (sp.has('teamNum')) {
       return sp.get('teamNum');
     }
-    return null;
+    return "";
   }
 
   function validateStrategicForm() {
@@ -283,7 +283,7 @@ require 'inc/header.php';
     let isError = false;
     let errMsg = "Please enter values for these fields:";
     let matchNumber = document.getElementById("enterMatchNumber").value.trim();
-    let teamNum = document.getElementById("enterTeamNumber").value.trim();
+    let teamNum = document.getElementById("enterTeamNumber").value.toUpperCase().trim();
     let scoutName = document.getElementById("enterScoutName").value.trim();
 
     // Make sure there is a team number, scoutname and matchnum.
@@ -360,7 +360,7 @@ require 'inc/header.php';
 
     let compLevel = document.getElementById("enterCompLevel").value;
     let matchNumber = document.getElementById("enterMatchNumber").value.trim();
-    let teamNum = document.getElementById("enterTeamNumber").value.trim();
+    let teamNum = document.getElementById("enterTeamNumber").value.toUpperCase().trim();
     let scoutName = document.getElementById("enterScoutName").value.trim();
 
     // Clean up team number before writing to table.
@@ -432,8 +432,8 @@ require 'inc/header.php';
   document.addEventListener("DOMContentLoaded", function () {
 
     // Check URL for source team to load
-    let initTeamNumber = checkURLForTeamSpec();
-    if (initTeamNumber) {
+    let initTeamNumber = checkURLForTeamSpec().toUpperCase();
+    if (initTeamNumber !== "") {
       document.getElementById("enterTeamNumber").value = initTeamNumber;
     }
 

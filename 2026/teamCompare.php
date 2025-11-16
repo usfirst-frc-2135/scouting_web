@@ -925,22 +925,13 @@ require 'inc/header.php';
 
   // MAIN PAGE PROCESSORS HERE
   // Check if our URL directs to a specific team compare
-  function checkURLForTeamSpec1() {
-    console.log("=> teamCompare: checkURLForTeamSpec1()");
+  function checkURLForTeamSpec(teamId) {
+    console.log("=> teamCompare: checkURLForTeamSpec()");
     let sp = new URLSearchParams(window.location.search);
-    if (sp.has('teamNum2')) {
-      return sp.get('teamNum2');
+    if (sp.has('teamId')) {
+      return sp.get('teamId');
     }
-    return null;
-  }
-
-  function checkURLForTeamSpec2() {
-    console.log("=> teamCompare: checkURLForTeamSpec2()");
-    let sp2 = new URLSearchParams(window.location.search);
-    if (sp2.has('teamNum1Second')) {
-      return sp.get('teamNum1Second');
-    }
-    return null;
+    return "";
   }
 
   function clearTeamComparePage() {
@@ -1422,8 +1413,8 @@ require 'inc/header.php';
 
     // Load team data for the number entered
     document.getElementById("loadTeamButton").addEventListener('click', function () {
-      let teamNum1 = document.getElementById("enterTeamNumber1").value.trim();
-      let teamNum2 = document.getElementById("enterTeamNumber2").value.trim();
+      let teamNum1 = document.getElementById("enterTeamNumber1").value.toUpperCase().trim();
+      let teamNum2 = document.getElementById("enterTeamNumber2").value.toUpperCase().trim();
       if (validateTeamNumber(teamNum1, null) > 0 && validateTeamNumber(teamNum2, null) > 0) {
         buildTeamComparePage(teamNum1, teamNum2);
       }

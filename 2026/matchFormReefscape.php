@@ -309,7 +309,7 @@ require 'inc/header.php';
     let isError = false;
     let errMsg = "Please enter values for these fields:";
     let matchNumber = document.getElementById("enterMatchNumber").value.trim();
-    let teamNum = document.getElementById("enterTeamNumber").value.trim();
+    let teamNum = document.getElementById("enterTeamNumber").value.toUpperCase().trim();
     let scoutName = document.getElementById("enterScoutName").value.trim();
 
     // Make sure each piece of data has a value selected.
@@ -346,7 +346,7 @@ require 'inc/header.php';
     let dataToSave = {};
     let compLevel = document.getElementById("enterCompLevel").value;
     let matchNumber = document.getElementById("enterMatchNumber").value.trim();
-    let teamNumber = document.getElementById("enterTeamNumber").value.trim();
+    let teamNumber = document.getElementById("enterTeamNumber").value.toUpperCase().trim();
     let scoutName = document.getElementById("enterScoutName").value.trim();
 
     dataToSave["matchnumber"] = compLevel + matchNumber;

@@ -184,7 +184,7 @@ require 'inc/header.php';
     if (sp.has('teamNum')) {
       return sp.get('teamNum');
     }
-    return null;
+    return "";
   }
 
   // Verify pit form data
@@ -192,7 +192,7 @@ require 'inc/header.php';
     console.log("==> pitForm: validatePitForm()");
     let isError = false;
     let errMsg = "Please enter values for these fields:";
-    let teamNum = document.getElementById("enterTeamNumber").value.trim();
+    let teamNum = document.getElementById("enterTeamNumber").value.toUpperCase().trim();
     let scoutName = document.getElementById("enterScoutName").value.trim();
 
     // Make sure each piece of data has a value selected.
@@ -282,7 +282,7 @@ require 'inc/header.php';
   function getPitFormData() {
     console.log("==> pitForm: writeFormToPitTable()");
     let dataToSave = {};
-    dataToSave["teamnumber"] = document.getElementById("enterTeamNumber").value.trim();
+    dataToSave["teamnumber"] = document.getElementById("enterTeamNumber").value.toUpperCase().trim();
     dataToSave["scoutname"] = document.getElementById("enterScoutName").value.trim();
 
     // All fields use the "value" of the html element above to eliminate any translation
@@ -321,8 +321,8 @@ require 'inc/header.php';
   document.addEventListener("DOMContentLoaded", function () {
 
     // Check URL for source team to load
-    let initTeamNumber = checkURLForTeamSpec();
-    if (initTeamNumber) {
+    let initTeamNumber = checkURLForTeamSpec().toUpperCase();
+    if (initTeamNumber !== "") {
       document.getElementById("enterTeamNumber").value = initTeamNumber;
     }
 

@@ -990,7 +990,7 @@ require 'inc/header.php';
     if (sp.has('teamNum')) {
       return sp.get('teamNum');
     }
-    return null;
+    return "";
   }
 
   // Takes list of Team photo paths and loads them.
@@ -1253,7 +1253,7 @@ require 'inc/header.php';
 
       // Check URL for team# to use (we may have gotten here by clicking on a team number link from another page)
       // Note: for aliases: this could only be the BCDnum, never the 99#.
-      let urlTeamNum = checkURLForTeamSpec();
+      let urlTeamNum = checkURLForTeamSpec().toUpperCase();
       if (validateTeamNumber(urlTeamNum, null) > 0) {
         console.log("urlTeamNum = " + urlTeamNum);
         document.getElementById("enterTeamNumber").value = urlTeamNum;
@@ -1278,7 +1278,7 @@ require 'inc/header.php';
 
       // Load team data for the number entered
       document.getElementById("loadTeamButton").addEventListener('click', function () {
-        let enteredNum = document.getElementById("enterTeamNumber").value.trim();
+        let enteredNum = document.getElementById("enterTeamNumber").value.toUpperCase().trim();
         let teamNum = enteredNum;
         clearTeamLookupPage();
 
