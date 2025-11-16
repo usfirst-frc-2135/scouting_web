@@ -43,6 +43,42 @@ require 'inc/header.php';
             </div>
             <!-- end of First Pick collapsible graph -->
 
+          </div>
+        </div>
+      </div>
+
+      <!-- Second column of data starts here -->
+      <div class="col-lg-6 col-sm-6 col-xs-6 gx-3">
+        <div class="card mb-3">
+          <div class="card-body">
+
+            <!-- End game card -->
+            <div class="card mb-3" style="background-color:#FBE6D3">
+              <div class="card-header">
+                <h5 class="text-center"> <a href="#collapseEndgame" data-bs-toggle="collapse" aria-expanded="false">Endgame Climb
+                    Percentages
+                  </a>
+                </h5>
+              </div>
+              <div id="collapseEndgame" class="card-body collapse">
+                <table id="endgameClimbTable"
+                  class="table table-striped table-bordered table-hover table-sm border-dark text-center ">
+                  <thead>
+                    <tr>
+                      <th>Team</th>
+                      <th style="width:12%" scope="col">N%</th>
+                      <th style="width:12%" scope="col">F%</th>
+                      <th style="width:12%" scope="col">P%</th>
+                      <th style="width:12%" scope="col">S%</th>
+                      <th style="width:12%" scope="col">D%</th>
+                    </tr>
+                  </thead>
+                  <tbody class="table-group-divider">
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
             <!-- Second Pick collapsible graph -->
             <div class="card mb-3" style="background-color:#F0FFFF">
               <div class="card-header">
@@ -66,34 +102,7 @@ require 'inc/header.php';
                 <canvas id="ThirdPickChart" width="400" height="360"></canvas>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
 
-      <!-- Second column of data starts here -->
-      <div class="col-lg-6 col-sm-6 col-xs-6 gx-3">
-        <div class="card mb-3" style="background-color:#FBE6D3">
-          <div class="card-header">
-            <h5 class="text-center"> <a href="#collapseEndgame" data-bs-toggle="collapse" aria-expanded="false">Endgame Climb
-                Percentages
-              </a>
-            </h5>
-          </div>
-          <div id="collapseEndgame" class="card-body collapse">
-            <table id="endgameClimbTable" class="table table-striped table-bordered table-hover table-sm border-dark text-center ">
-              <thead>
-                <tr>
-                  <th>Team</th>
-                  <th style="width:12%" scope="col">N%</th>
-                  <th style="width:12%" scope="col">F%</th>
-                  <th style="width:12%" scope="col">P%</th>
-                  <th style="width:12%" scope="col">S%</th>
-                  <th style="width:12%" scope="col">D%</th>
-                </tr>
-              </thead>
-              <tbody class="table-group-divider">
-              </tbody>
-            </table>
           </div>
         </div>
       </div>
@@ -812,50 +821,37 @@ require 'inc/header.php';
     return "";
   }
 
+  function createEndgameEntry(teamNum, avgData) {
+    let endgameClimbPercentage = getDataValue(avgData[teamNum], "endgameClimbPercent");
+    let rowString = "";
+    const tdPrefix = "<td>";
+
+    rowString += tdPrefix + "<a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a></td>";
+    rowString += tdPrefix + getDataValue(endgameClimbPercentage, 0) + "</td>";
+    rowString += tdPrefix + getDataValue(endgameClimbPercentage, 2) + "</td>";
+    rowString += tdPrefix + getDataValue(endgameClimbPercentage, 1) + "</td>";
+    rowString += tdPrefix + getDataValue(endgameClimbPercentage, 3) + "</td>";
+    rowString += tdPrefix + getDataValue(endgameClimbPercentage, 4) + "</td>";
+
+    return rowString;
+  }
+
   function loadEndgameTable(teamNum, teamNum2, avgData, avgData2) {
     console.log("==> teamCompare: loadEndgameTable()");
     let tbodyRef = document.getElementById("endgameClimbTable").querySelector('tbody');
     tbodyRef.innerHTML = ""; // Clear Table
 
-    let endgameClimbPercentage1 = getDataValue(avgData[teamNum], "endgameClimbPercent");
-    let endgameClimbPercentage2 = getDataValue(avgData2[teamNum2], "endgameClimbPercent");
-
-    const tdPrefix = "<td>";
-    let rowString = "";
-    let rowString2 = "";
-    rowString += tdPrefix + "<a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a></td>";
-
-    rowString += tdPrefix + getDataValue(endgameClimbPercentage1, 0) + "</td>";
-    rowString += tdPrefix + getDataValue(endgameClimbPercentage1, 2) + "</td>";
-    rowString += tdPrefix + getDataValue(endgameClimbPercentage1, 1) + "</td>";
-    rowString += tdPrefix + getDataValue(endgameClimbPercentage1, 3) + "</td>";
-    rowString += tdPrefix + getDataValue(endgameClimbPercentage1, 4) + "</td>";
-
-    tbodyRef.insertRow().innerHTML = rowString;
-
-    rowString2 += tdPrefix + "<a href='teamLookup.php?teamNum=" + teamNum2 + "'>" + teamNum2 + "</a></td>";
-
-    rowString2 += tdPrefix + getDataValue(endgameClimbPercentage2, 0) + "</td>";
-    rowString2 += tdPrefix + getDataValue(endgameClimbPercentage2, 2) + "</td>";
-    rowString2 += tdPrefix + getDataValue(endgameClimbPercentage2, 1) + "</td>";
-    rowString2 += tdPrefix + getDataValue(endgameClimbPercentage2, 3) + "</td>";
-    rowString2 += tdPrefix + getDataValue(endgameClimbPercentage2, 4) + "</td>";
-
-    tbodyRef.insertRow().innerHTML = rowString2;
+    tbodyRef.insertRow().innerHTML = createEndgameEntry(teamNum, avgData);
+    tbodyRef.insertRow().innerHTML = createEndgameEntry(teamNum2, avgData2);
   }
 
-  function loadAvgTable(teamNum, teamNum2, avgData, avgData2) {
-    console.log("==> teamCompare: loadAvgTable()");
-    let tbodyRef = document.getElementById("averagesTable").querySelector('tbody');
-    tbodyRef.innerHTML = ""; // Clear Table
-
-    let endgameClimbPercentage1 = getDataValue(avgData[teamNum], "endgameClimbPercent");
-    let endgameClimbPercentage2 = getDataValue(avgData2[teamNum2], "endgameClimbPercent");
+  // Create an event average entry for a team
+  function createEventAverageEntry(teamNum, avgData) {
+    let endgameClimbPercentage = getDataValue(avgData[teamNum], "endgameClimbPercent");
     let endgameClimbStartPercentage = getDataValue(avgData[teamNum], "endgameClimbStartPercent");
-    let endgameClimbStartPercentage2 = getDataValue(avgData2[teamNum2], "endgameClimbStartPercent");
     const tdPrefix = "<td style=\"background-color:transparent\">";
     let rowString = "";
-    let rowString2 = "";
+
     rowString += tdPrefix + "<a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a></td>";
     // Alias col
     rowString += tdPrefix + "" + "</td>";   // for now just empty string
@@ -936,106 +932,25 @@ require 'inc/header.php';
     rowString += tdPrefix + getDataValue(endgameClimbStartPercentage, 1) + "</td>";
     rowString += tdPrefix + getDataValue(endgameClimbStartPercentage, 2) + "</td>";
     rowString += tdPrefix + getDataValue(endgameClimbStartPercentage, 3) + "</td>";
-    rowString += tdPrefix + getDataValue(endgameClimbPercentage1, 0) + "</td>";
-    rowString += tdPrefix + getDataValue(endgameClimbPercentage1, 1) + "</td>";
-    rowString += tdPrefix + getDataValue(endgameClimbPercentage1, 2) + "</td>";
-    rowString += tdPrefix + getDataValue(endgameClimbPercentage1, 3) + "</td>";
-    rowString += tdPrefix + getDataValue(endgameClimbPercentage1, 4) + "</td>";
+    rowString += tdPrefix + getDataValue(endgameClimbPercentage, 0) + "</td>";
+    rowString += tdPrefix + getDataValue(endgameClimbPercentage, 1) + "</td>";
+    rowString += tdPrefix + getDataValue(endgameClimbPercentage, 2) + "</td>";
+    rowString += tdPrefix + getDataValue(endgameClimbPercentage, 3) + "</td>";
+    rowString += tdPrefix + getDataValue(endgameClimbPercentage, 4) + "</td>";
 
     rowString += tdPrefix + getDataValue(avgData[teamNum], "totaldied") + "</td>";
 
-    tbodyRef.insertRow().innerHTML = rowString;
+    return rowString;
+  }
 
-    // Do 2nd team averages
-    rowString2 += tdPrefix + "<a href='teamLookup.php?teamNum=" + teamNum2 + "'>" + teamNum2 + "</a></td>";
-    rowString2 += tdPrefix + "" + "</td>";   // alias - for now just empty string
+  // Load the event averages table
+  function loadAvgTable(teamNum, teamNum2, avgData, avgData2) {
+    console.log("==> teamCompare: loadAvgTable()");
+    let tbodyRef = document.getElementById("averagesTable").querySelector('tbody');
+    tbodyRef.innerHTML = ""; // Clear Table
 
-
-    // points by game phase
-    rowString2 += tdPrefix + getDataValue(avgData2[teamNum2], "totalPointsAvg") + "</td>";
-    rowString2 += tdPrefix + getDataValue(avgData2[teamNum2], "totalPointsMax") + "</td>";
-    rowString2 += tdPrefix + getDataValue(avgData2[teamNum2], "autonPointsAvg") + "</td>";
-    rowString2 += tdPrefix + getDataValue(avgData2[teamNum2], "autonPointsMax") + "</td>";
-    rowString2 += tdPrefix + getDataValue(avgData2[teamNum2], "teleopPointsAvg") + "</td>";
-    rowString2 += tdPrefix + getDataValue(avgData2[teamNum2], "teleopPointsMax") + "</td>";
-    rowString2 += tdPrefix + getDataValue(avgData2[teamNum2], "endgamePointsAvg") + "</td>";
-    rowString2 += tdPrefix + getDataValue(avgData2[teamNum2], "endgamePointsMax") + "</td>";
-
-    // points by game piece
-    rowString2 += tdPrefix + getDataValue(avgData2[teamNum2], "autonCoralPointsAvg") + "</td>";
-    rowString2 += tdPrefix + getDataValue(avgData2[teamNum2], "autonCoralPointsMax") + "</td>";
-    rowString2 += tdPrefix + getDataValue(avgData2[teamNum2], "autonAlgaePointsAvg") + "</td>";
-    rowString2 += tdPrefix + getDataValue(avgData2[teamNum2], "autonAlgaePointsMax") + "</td>";
-    rowString2 += tdPrefix + getDataValue(avgData2[teamNum2], "teleopCoralPointsAvg") + "</td>";
-    rowString2 += tdPrefix + getDataValue(avgData2[teamNum2], "teleopCoralPointsMax") + "</td>";
-    rowString2 += tdPrefix + getDataValue(avgData2[teamNum2], "teleopAlgaePointsAvg") + "</td>";
-    rowString2 += tdPrefix + getDataValue(avgData2[teamNum2], "teleopAlgaePointsMax") + "</td>";
-
-    // total game pieces
-    rowString2 += tdPrefix + getDataValue(avgData2[teamNum2], "totalCoralScoredAvg") + "</td>";
-    rowString2 += tdPrefix + getDataValue(avgData2[teamNum2], "totalCoralScoredMax") + "</td>";
-    rowString2 += tdPrefix + getDataValue(avgData2[teamNum2], "totalAlgaeScoredAvg") + "</td>";
-    rowString2 += tdPrefix + getDataValue(avgData2[teamNum2], "totalAlgaeScoredMax") + "</td>";
-
-    // auton coral
-    rowString2 += tdPrefix + getDataValue(avgData2[teamNum2], "autonCoralScoredAvg") + "</td>";
-    rowString2 += tdPrefix + getDataValue(avgData2[teamNum2], "autonCoralScoredMax") + "</td>";
-    rowString2 += tdPrefix + getDataValue(avgData2[teamNum2], "autonCoralL4Avg") + "</td>";
-    rowString2 += tdPrefix + getDataValue(avgData2[teamNum2], "autonCoralL4Max") + "</td>";
-    rowString2 += tdPrefix + getDataValue(avgData2[teamNum2], "autonCoralL3Avg") + "</td>";
-    rowString2 += tdPrefix + getDataValue(avgData2[teamNum2], "autonCoralL3Max") + "</td>";
-    rowString2 += tdPrefix + getDataValue(avgData2[teamNum2], "autonCoralL2Avg") + "</td>";
-    rowString2 += tdPrefix + getDataValue(avgData2[teamNum2], "autonCoralL2Max") + "</td>";
-    rowString2 += tdPrefix + getDataValue(avgData2[teamNum2], "autonCoralL1Avg") + "</td>";
-    rowString2 += tdPrefix + getDataValue(avgData2[teamNum2], "autonCoralL1Max") + "</td>";
-
-    // auton algae
-    rowString2 += tdPrefix + getDataValue(avgData2[teamNum2], "autonAlgaeScoredAvg") + "</td>";
-    rowString2 += tdPrefix + getDataValue(avgData2[teamNum2], "autonAlgaeScoredMax") + "</td>";
-    rowString2 += tdPrefix + getDataValue(avgData2[teamNum2], "autonAlgaeProcAvg") + "</td>";
-    rowString2 += tdPrefix + getDataValue(avgData2[teamNum2], "autonAlgaeProcMax") + "</td>";
-    rowString2 += tdPrefix + getDataValue(avgData2[teamNum2], "autonAlgaeNetAvg") + "</td>";
-    rowString2 += tdPrefix + getDataValue(avgData2[teamNum2], "autonAlgaeNetMax") + "</td>";
-
-    // teleop coral
-    rowString2 += tdPrefix + getDataValue(avgData2[teamNum2], "teleopCoralPercent") + "</td>";
-    rowString2 += tdPrefix + getDataValue(avgData2[teamNum2], "teleopCoralScoredAvg") + "</td>";
-    rowString2 += tdPrefix + getDataValue(avgData2[teamNum2], "teleopCoralScoredMax") + "</td>";
-    rowString2 += tdPrefix + getDataValue(avgData2[teamNum2], "teleopCoralL4Avg") + "</td>";
-    rowString2 += tdPrefix + getDataValue(avgData2[teamNum2], "teleopCoralL4Max") + "</td>";
-    rowString2 += tdPrefix + getDataValue(avgData2[teamNum2], "teleopCoralL3Avg") + "</td>";
-    rowString2 += tdPrefix + getDataValue(avgData2[teamNum2], "teleopCoralL3Max") + "</td>";
-    rowString2 += tdPrefix + getDataValue(avgData2[teamNum2], "teleopCoralL2Avg") + "</td>";
-    rowString2 += tdPrefix + getDataValue(avgData2[teamNum2], "teleopCoralL2Max") + "</td>";
-    rowString2 += tdPrefix + getDataValue(avgData2[teamNum2], "teleopCoralL1Avg") + "</td>";
-    rowString2 += tdPrefix + getDataValue(avgData2[teamNum2], "teleopCoralL1Max") + "</td>";
-
-    // teleop algae
-    rowString2 += tdPrefix + getDataValue(avgData2[teamNum2], "teleopAlgaePercent") + "</td>";
-    rowString2 += tdPrefix + getDataValue(avgData2[teamNum2], "teleopAlgaeScoredAvg") + "</td>";
-    rowString2 += tdPrefix + getDataValue(avgData2[teamNum2], "teleopAlgaeScoredMax") + "</td>";
-    rowString2 += tdPrefix + getDataValue(avgData2[teamNum2], "teleopAlgaeProcAvg") + "</td>";
-    rowString2 += tdPrefix + getDataValue(avgData2[teamNum2], "teleopAlgaeProcMax") + "</td>";
-    rowString2 += tdPrefix + getDataValue(avgData2[teamNum2], "teleopAlgaeNetAvg") + "</td>";
-    rowString2 += tdPrefix + getDataValue(avgData2[teamNum2], "teleopAlgaeNetMax") + "</td>";
-
-    // defense
-    rowString2 += tdPrefix + getDataValue(avgData2[teamNum2], "defenseAvg") + "</td>";
-
-    // endgame
-    rowString2 += tdPrefix + getDataValue(endgameClimbStartPercentage2, 0) + "</td>";
-    rowString2 += tdPrefix + getDataValue(endgameClimbStartPercentage2, 1) + "</td>";
-    rowString2 += tdPrefix + getDataValue(endgameClimbStartPercentage2, 2) + "</td>";
-    rowString2 += tdPrefix + getDataValue(endgameClimbStartPercentage2, 3) + "</td>";
-    rowString2 += tdPrefix + getDataValue(endgameClimbPercentage2, 0) + "</td>";
-    rowString2 += tdPrefix + getDataValue(endgameClimbPercentage2, 1) + "</td>";
-    rowString2 += tdPrefix + getDataValue(endgameClimbPercentage2, 2) + "</td>";
-    rowString2 += tdPrefix + getDataValue(endgameClimbPercentage2, 3) + "</td>";
-    rowString2 += tdPrefix + getDataValue(endgameClimbPercentage2, 4) + "</td>";
-
-    rowString2 += tdPrefix + getDataValue(avgData2[teamNum2], "totaldied") + "</td>";
-
-    tbodyRef.insertRow().innerHTML = rowString2;
+    tbodyRef.insertRow().innerHTML = createEventAverageEntry(teamNum, avgData);
+    tbodyRef.insertRow().innerHTML = createEventAverageEntry(teamNum2, avgData2);
   }
 
   function toYesNo(value) {
@@ -1047,74 +962,15 @@ require 'inc/header.php';
   }
 
   // Load the strategic data table for this team
-  function loadStrategicData1(teamNum, stratData) {
-    console.log("==> teamCompare: loadStrategicData1()");
-    let stratTitle = teamNum + " - Strategic Data";
-    let sLink = document.getElementById("strategicLink1").querySelector('a');
-    sLink.text = stratTitle;
-
-    let tbodyRef = document.getElementById("strategicDataTable1").querySelector('tbody');
-    tbodyRef.innerHTML = "";     // clear table
-    for (let i = 0; i < stratData.length; i++) {
-      let stratItem = stratData[i];
-      let driverability = stratItem["driverability"];
-      switch (driverability) {
-        case 1: driveVal = "Jerky"; break;
-        case 2: driveVal = "Slow"; break;
-        case 3: driveVal = "Average"; break;
-        case 4: driveVal = "Quick"; break;
-        case 5: driveVal = "-"; break;
-        default: driveVal = ""; break;
-      }
-
-      let rowString = "";
-      rowString += "<td>" + stratItem["matchnumber"] + "</td>";
-      rowString += "<td>" + driveVal + "</td>";
-      rowString += "<td>" + toYesNo(stratItem["against_tactic1"]) + "</td>";
-      rowString += "<td>" + stratItem["against_comment"] + "</td>";
-
-      rowString += "<td>" + toYesNo(stratItem["defense_tactic1"]) + "</td>";
-      rowString += "<td>" + toYesNo(stratItem["defense_tactic2"]) + "</td>";
-      rowString += "<td>" + stratItem["defense_comment"] + "</td>";
-
-      rowString += "<td>" + toYesNo(stratItem["foul1"]) + "</td>";
-      rowString += "<td>" + toYesNo(stratItem["autonFoul1"]) + "</td>";
-      rowString += "<td>" + toYesNo(stratItem["autonFoul2"]) + "</td>";
-      rowString += "<td>" + toYesNo(stratItem["teleopFoul1"]) + "</td>";
-      rowString += "<td>" + toYesNo(stratItem["teleopFoul2"]) + "</td>";
-      rowString += "<td>" + toYesNo(stratItem["teleopFoul3"]) + "</td>";
-      rowString += "<td>" + toYesNo(stratItem["teleopFoul4"]) + "</td>";
-      rowString += "<td>" + toYesNo(stratItem["endgameFoul1"]) + "</td>";
-
-      rowString += "<td>" + toYesNo(stratItem["autonGetCoralFromFloor"]) + "</td>";
-      rowString += "<td>" + toYesNo(stratItem["autonGetCoralFromStation"]) + "</td>";
-      rowString += "<td>" + toYesNo(stratItem["autonGetAlgaeFromFloor"]) + "</td>";
-      rowString += "<td>" + toYesNo(stratItem["autonGetAlgaeFromReef"]) + "</td>";
-      rowString += "<td>" + toYesNo(stratItem["teleopFloorPickupAlgae"]) + "</td>";
-      rowString += "<td>" + toYesNo(stratItem["teleopFloorPickupCoral"]) + "</td>";
-      rowString += "<td>" + toYesNo(stratItem["teleopKnockOffAlgaeFromReef"]) + "</td>";
-      rowString += "<td>" + toYesNo(stratItem["teleopAcquireAlgaeFromReef"]) + "</td>";
-
-      rowString += "<td>" + stratItem["problem_comment"] + "</td>";
-      rowString += "<td>" + stratItem["general_comment"] + "</td>";
-      rowString += "<td>" + stratItem["scoutname"] + "</td>";
-      tbodyRef.insertRow().innerHTML = rowString;
-    }
-    const matchColumn = 0;
-    sortTableByMatch("strategicDataTable1", matchColumn);
-  }
-
-  function loadStrategicData2(teamNum, stratData) {
+  function loadStrategicData(stratLinkStr, stratTableId, teamNum, stratData) {
     console.log("==> teamCompare: loadStrategicData()");
-    let stratTitle = teamNum + " - Strategic Data";
-    let sLink = document.getElementById("strategicLink2").querySelector('a');
-    sLink.text = stratTitle;
+    let sLink = document.getElementById(stratLinkStr).querySelector('a');
+    sLink.text = teamNum + " - Strategic Data";
 
-    let tbodyRef = document.getElementById("strategicDataTable2").querySelector('tbody');
+    let tbodyRef = document.getElementById(stratTableId).querySelector('tbody');
     tbodyRef.innerHTML = "";     // clear table
     for (let i = 0; i < stratData.length; i++) {
       let stratItem = stratData[i];
-
       let driverability = stratItem["driverability"];
       switch (driverability) {
         case 1: driveVal = "Jerky"; break;
@@ -1159,7 +1015,7 @@ require 'inc/header.php';
       tbodyRef.insertRow().innerHTML = rowString;
     }
     const matchColumn = 0;
-    sortTableByMatch("strategicDataTable2", matchColumn);
+    sortTableByMatch(stratTableId, matchColumn);
   }
 
   // This is the main function that runs when we want to load teams.
@@ -1200,7 +1056,7 @@ require 'inc/header.php';
         document.getElementById("teamMainTitle2").innerHTML = teamStr2;
       });
 
-      // Get team1 match data
+      // Get match data
       $.get("api/dbReadAPI.php", {
         getTeamMatchData: teamNum1
       }).done(function (teamMatches) {
@@ -1225,7 +1081,7 @@ require 'inc/header.php';
         getTeamStrategicData: teamNum1
       }).done(function (strategicData) {
         console.log("=> getTeamStrategicData");
-        loadStrategicData1(teamNum1, JSON.parse(strategicData));
+        loadStrategicData("strategicLink1", "strategicDataTable1", teamNum1, JSON.parse(strategicData));
       });
 
       // Do team2 Strategic Data Table.
@@ -1233,7 +1089,7 @@ require 'inc/header.php';
         getTeamStrategicData: teamNum2
       }).done(function (strategicData2) {
         console.log("=> getTeamStrategicData2");
-        loadStrategicData2(teamNum2, JSON.parse(strategicData2));
+        loadStrategicData("strategicLink2", "strategicDataTable2", teamNum2, JSON.parse(strategicData2));
       });
     });
   }
