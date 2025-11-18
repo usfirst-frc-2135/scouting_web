@@ -1036,7 +1036,7 @@ require 'inc/header.php';
         return alert("Can't load teamName from TBA; check if TBA Key was set in db_config");
       }
       let jTeamInfo = JSON.parse(teamInfo1)["response"];
-      let teamStr1 = teamNum1 " - " + jTeamInfo["nickname"];
+      let teamStr1 = teamNum1 + " - " + jTeamInfo["nickname"];
       console.log("==> teamCompare: team1: " + teamStr1);
       document.getElementById("teamMainTitle1").innerHTML = teamStr1;
     });

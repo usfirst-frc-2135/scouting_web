@@ -459,57 +459,8 @@ require 'inc/header.php';
 
             <!-- <div id="freeze-table-match" class="freeze-table overflow-auto"> -->
             <div class="overflow-auto">
-              <table id="matchDataTable"
-                class="table table-striped table-bordered table-hover table-sm border-dark text-center sortable">
-                <colgroup>
-                  <col span="2" style="background-color:transparent">
-                  <col span="1" style="background-color:#cfe2ff">
-                  <col span="1" style="background-color:transparent">
-                  <col span="1" style="background-color:#cfe2ff">
-                  <col span="1" style="background-color:transparent">
-                  <col span="1" style="background-color:#cfe2ff">
-                  <col span="1" style="background-color:transparent">
-                  <col span="1" style="background-color:#cfe2ff">
-                  <col span="1" style="background-color:transparent">
-                  <col span="1" style="background-color:#cfe2ff">
-                  <col span="1" style="background-color:transparent">
-                  <col span="1" style="background-color:#cfe2ff">
-                  <col span="1" style="background-color:transparent">
-                  <col span="1" style="background-color:#cfe2ff">
-                  <col span="1" style="background-color:transparent">
-                  <col span="1" style="background-color:#cfe2ff">
-                  <col span="1" style="background-color:transparent">
-                  <col span="1" style="background-color:#cfe2ff">
-                  <col span="1" style="background-color:transparent">
-                  <col span="1" style="background-color:#cfe2ff">
-                  <col span="1" style="background-color:transparent">
-                  <col span="1" style="background-color:#cfe2ff">
-                </colgroup>
-                <thead>
-                  <tr>
-                    <th scope="col">Match</th>
-                    <th scope="col">Auton Leave</th>
-                    <th scope="col">Auton Coral L1</th>
-                    <th scope="col">Auton Coral L2</th>
-                    <th scope="col">Auton Coral L3</th>
-                    <th scope="col">Auton Coral L4</th>
-                    <th scope="col">Auton Algae Net</th>
-                    <th scope="col">Auton Algae Proc</th>
-                    <th scope="col">Acquired Coral</th>
-                    <th scope="col">Acquired Algae</th>
-                    <th scope="col">Teleop Coral L1</th>
-                    <th scope="col">Teleop Coral L2</th>
-                    <th scope="col">Teleop Coral L3</th>
-                    <th scope="col">Teleop Coral L4</th>
-                    <th scope="col">Teleop Algae Net</th>
-                    <th scope="col">Teleop Algae Proc</th>
-                    <th scope="col">Def</th>
-                    <th scope="col">Cage Climb</th>
-                    <th scope="col">Start Climb</th>
-                    <th scope="col">Died</th>
-                    <th scope="col">Scout Name</th>
-                  </tr>
-                </thead>
+              <table id="matchDataTable" class="table table-striped table-bordered table-hover table-sm border-dark text-center">
+                <thead class="z-3"> </thead>
                 <tbody class="table-group-divider"> </tbody>
               </table>
             </div>
@@ -939,48 +890,6 @@ require 'inc/header.php';
 
   }
 
-  // Loads the match data table
-  function teamMatchDataTable(matchData) {
-    console.log("==> teamLookup: teamMatchDataTable()");
-    let tbodyRef = document.getElementById("matchDataTable").querySelector('tbody');
-    tbodyRef.innerHTML = "";     // clear table
-    for (let i = 0; i < matchData.length; i++) {
-      let matchItem = matchData[i];
-      let rowString = "";
-      rowString += "<td>" + matchItem["matchnumber"] + "</td>";
-      rowString += "<td>" + matchItem["autonLeave"] + "</td>";
-
-      rowString += "<td>" + matchItem["autonCoralL1"] + "</td>";
-      rowString += "<td>" + matchItem["autonCoralL2"] + "</td>";
-      rowString += "<td>" + matchItem["autonCoralL3"] + "</td>";
-      rowString += "<td>" + matchItem["autonCoralL4"] + "</td>";
-
-      rowString += "<td>" + matchItem["autonAlgaeNet"] + "</td>";
-      rowString += "<td>" + matchItem["autonAlgaeProcessor"] + "</td>";
-
-      rowString += "<td>" + matchItem["acquiredCoral"] + "</td>";
-      rowString += "<td>" + matchItem["acquiredAlgae"] + "</td>";
-
-      rowString += "<td>" + matchItem["teleopCoralL1"] + "</td>";
-      rowString += "<td>" + matchItem["teleopCoralL2"] + "</td>";
-      rowString += "<td>" + matchItem["teleopCoralL3"] + "</td>";
-      rowString += "<td>" + matchItem["teleopCoralL4"] + "</td>";
-
-      rowString += "<td>" + matchItem["teleopAlgaeNet"] + "</td>";
-      rowString += "<td>" + matchItem["teleopAlgaeProcessor"] + "</td>";
-
-      rowString += "<td>" + matchItem["defenseLevel"] + "</td>";
-      rowString += "<td>" + matchItem["cageClimb"] + "</td>";
-      rowString += "<td>" + matchItem["startClimb"] + "</td>";
-      rowString += "<td>" + matchItem["died"] + "</td>";
-      rowString += "<td>" + matchItem["scoutname"] + "</td>";
-      rowString += "<td>" + matchItem["comment"] + "</td>";
-      tbodyRef.insertRow().innerHTML = rowString;
-    }
-    const matchColumn = 0;
-    sortTableByMatch("matchDataTable", matchColumn);
-  }
-
   // MAIN PAGE PROCESSORS HERE
 
   // Check if our URL directs to a specific team
@@ -1104,7 +1013,7 @@ require 'inc/header.php';
   }
 
   // Load the match data table
-  function loadMatchData(team, allEventMatches) {
+  function loadMatchData(team, allEventMatches, jAliasNames) {
     console.log("==> teamLookup: loadMatchData()");
     let mdp = new matchDataProcessor(allEventMatches);
     // mdp.sortMatches(allEventMatches);
@@ -1113,7 +1022,7 @@ require 'inc/header.php';
         loadAutonGraph(filteredMatches);
         loadTeleopGraph(filteredMatches);
         loadEndgameGraph(filteredMatches);
-        teamMatchDataTable(filteredMatches);
+        insertMatchDataBody("matchDataTable", filteredMatches, jAliasNames, [team]);
       }
       else {
         alert("No match data for this team at this event!");
@@ -1128,9 +1037,9 @@ require 'inc/header.php';
     });
   }
 
+  // Clear existing data
   function clearTeamLookupPage() {
-    // Clear existing data
-    console.log("teamLookup: starting clearTeamLookupPage()");
+    console.log("==> teamLookup: clearTeamLookupPage()");
     document.getElementById("teamTitle").innerText = "";
     document.getElementById("robotPics").innerText = "";
     document.getElementById("matchSheetTable").querySelector('tbody').innerHTML = "";
@@ -1148,38 +1057,38 @@ require 'inc/header.php';
   ///////////////////////////////////////////////////////////////////
   // This is the main function that runs when we want to load a team.
   // teamName will be set to the alias for BCD teamnums; else it's empty here and will be looked up later.
-  function buildTeamLookupPage(teamNum, teamName, aliasList) {
-    console.log("!!> teamLookup: buildTeamLookupPage(), teamnum = " + teamNum + ", teamName = " + teamName);
+  function buildTeamLookupPage(teamNum, teamName, jAliasNames) {
+    console.log("==> teamLookup: buildTeamLookupPage() teamNum " + teamNum + ", teamName " + teamName);
     clearTeamLookupPage();
-    if (teamName == "") {
-      // teamName is empty, so get it from TBA or from aliasList. First check for alias.
-      if (isAliasNumber(teamNum) && (aliasList != undefined)) {
-        // 'teamNum' is a 99# (an alias in the aliasList), so get the BCDnum from aliasList and use it for teamName
-        let bcdname = getTeamNumFromAlias(teamNum, aliasList);
-        console.log("for alias: " + teamNum + ", bcdname = " + bcdname);
-        if (bcdname !== "") {
-          document.getElementById("teamTitle").innerHTML = teamNum + " - " + bcdname;
-        }
-      } else if (teamNum.charAt(teamNum.length - 1) === 'B' || teamNum.charAt(teamNum.length - 1) === 'C' ||
-        teamNum.charAt(teamNum.length - 1) === 'D' || teamNum.charAt(teamNum.length - 1) === 'E') {
-        // 'teamNum' is a BCDnum so get the alias from aliasList and use it for teamName
-        let alias = getAliasFromTeamNum(teamNum, aliasList);
-        console.log("for BCDnum: " + teamNum + ", alias = " + alias);
-        if (alias !== "") {
-          teamName = alias;
-          document.getElementById("teamTitle").innerHTML = teamNum + " - " + teamName;
-        }
-      }
-    }
 
-    // If teamName is still empty, look it up from TBA teamInfo.
-    if (teamName == "") {
-      // Get teamInfo from TBA
-      console.log("going to get teaminfo from TBA")
+    // Figure out if the entered number is in range 9970-9999
+    if (isAliasNumber(teamNum) && jAliasNames.length > 0) {
+      // This team number is an alias, so get the BCDnumber.
+      let bcdNum = getTeamNumFromAlias(teamNum, jAliasNames);
+      console.log("===> teamLookup: Entered number is an alias: " + teamNum + ", bcdNum = " + bcdNum);
+      if (bcdNum !== "") {
+        teamName = teamNum;
+        teamNum = bcdNum;
+      }
+      document.getElementById("teamTitle").innerHTML = teamNum + " - " + teamName;
+    }
+    // Test for alphanumeric character suffix (e.g. 1678B)
+    else if (/^[a-zA-Z]+$/.test(teamNum.charAt(teamNum.length - 1))) {
+      // 'teamNum' is a bcdNum so get the alias from jAliasNames and use it for teamName
+      let aliasNum = getAliasFromTeamNum(teamNum, jAliasNames);
+      console.log("===> teamLookup: for bcdNum: " + teamNum + ", alias = " + aliasNum);
+      if (aliasNum !== "") {
+        teamName = aliasNum;
+      }
+      document.getElementById("teamTitle").innerHTML = teamNum + " - " + teamName;
+    }
+    // Normal team number - get teamInfo from TBA
+    else {
+      console.log("==> teamLookup: going to get teaminfo from TBA");
       $.get("api/tbaAPI.php", {
         getTeamInfo: teamNum
       }).done(function (teamInfo) {
-        //HOLD        console.log("=> getTeamInfo:\n" + teamInfo);
+        console.log("=> getTeamInfo:\n" + teamInfo);
         if (teamInfo === null) {
           return alert("Can't load teamName from TBA; check if TBA Key was set in db_config");
         }
@@ -1190,7 +1099,6 @@ require 'inc/header.php';
         document.getElementById("teamTitle").innerHTML = teamNum + " - " + teamName;
       });
     }
-    document.getElementById("teamTitle").innerHTML = teamNum + " - " + teamName;
 
     // Add images for the team
     $.get("api/dbReadAPI.php", {
@@ -1205,7 +1113,7 @@ require 'inc/header.php';
       getTeamMatchData: teamNum
     }).done(function (teamMatches) {
       console.log("=> getTeamMatchData");
-      loadMatchData(teamNum, JSON.parse(teamMatches));
+      loadMatchData(teamNum, JSON.parse(teamMatches), jAliasNames);
     });
 
     // Do the Pit Scouting Data
@@ -1225,7 +1133,6 @@ require 'inc/header.php';
     });
     console.log("going to set title again for team " + teamNum + " with teamName: " + teamName);
     document.getElementById("teamTitle").innerHTML = teamNum + " - " + teamName;
-
   }
 
   /////////////////////////////////////////////////////////////////////////////
@@ -1250,6 +1157,7 @@ require 'inc/header.php';
     }).done(function (eventAliasNames) {
       console.log("=> eventAliasNames");
       let jAliasNames = JSON.parse(eventAliasNames);
+      insertMatchDataHeader("matchDataTable", jAliasNames);
 
       // Check URL for team# to use (we may have gotten here by clicking on a team number link from another page)
       // Note: for aliases: this could only be the BCDnum, never the 99#.
@@ -1258,12 +1166,6 @@ require 'inc/header.php';
         console.log("urlTeamNum = " + urlTeamNum);
         document.getElementById("enterTeamNumber").value = urlTeamNum;
 
-        // This team number might be a BCDnum, so look up its alias and use it for the teamName.
-        let alias = getAliasFromTeamNum(urlTeamNum, jAliasNames);
-        if (alias != "") {
-          console.log("for URL team: " + urlTeamNum + ", alias = " + alias);
-          teamName = alias;
-        }
         buildTeamLookupPage(urlTeamNum, teamName, jAliasNames);
       }
 
@@ -1278,22 +1180,7 @@ require 'inc/header.php';
 
       // Load team data for the number entered
       document.getElementById("loadTeamButton").addEventListener('click', function () {
-        let enteredNum = document.getElementById("enterTeamNumber").value.toUpperCase().trim();
-        let teamNum = enteredNum;
-        clearTeamLookupPage();
-
-        // Figure out if the entered number is a 99#.
-        if (jAliasNames.length > 0) {
-          if (isAliasNumber(enteredNum)) {
-            // This team number is an alias, so get the BCDnumber.
-            let bcdNum = getTeamNumFromAlias(enteredNum, jAliasNames);
-            console.log("Entered number is an alias: " + enteredNum + ", bcdNum = " + bcdNum);
-            if (bcdNum !== "") {
-              teamName = enteredNum;
-              teamNum = bcdNum;
-            }
-          }
-        }
+        let teamNum = document.getElementById("enterTeamNumber").value.toUpperCase().trim();
 
         if (validateTeamNumber(teamNum, null) > 0) {
           buildTeamLookupPage(teamNum, teamName, jAliasNames);
@@ -1301,13 +1188,15 @@ require 'inc/header.php';
       });
     });
   });
+
 </script>
 
+<script src="./scripts/aliasFunctions.js"></script>
 <script src="./scripts/compareMatchNumbers.js"></script>
 <script src="./scripts/compareTeamNumbers.js"></script>
 <script src="./scripts/sortFrcTables.js"></script>
 <script src="./scripts/matchDataProcessor.js"></script>
-<script src="./scripts/aliasFunctions.js"></script>
+<script src="./scripts/matchDataTable.js"></script>
 <script src="./scripts/validateTeamNumber.js"></script>
 
 <script src="./external/charts/chart.umd.js"></script>
