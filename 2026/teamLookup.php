@@ -324,75 +324,7 @@ require 'inc/header.php';
             <div class="overflow-auto">
               <table id="strategicDataTable"
                 class="table table-striped table-bordered table-hover table-sm border-dark text-center sortable">
-                <colgroup>
-                  <col span="2" style="background-color:transparent">
-                  <col span="1" style="background-color:#cfe2ff">
-                  <col span="1" style="background-color:transparent">
-                  <col span="1" style="background-color:#cfe2ff">
-                  <col span="1" style="background-color:transparent">
-                  <col span="1" style="background-color:#cfe2ff">
-                  <col span="1" style="background-color:transparent">
-                  <col span="1" style="background-color:#cfe2ff">
-                  <col span="1" style="background-color:transparent">
-                  <col span="1" style="background-color:#cfe2ff">
-                  <col span="1" style="background-color:transparent">
-                  <col span="1" style="background-color:#cfe2ff">
-                  <col span="1" style="background-color:transparent">
-                  <col span="1" style="background-color:#cfe2ff">
-                  <col span="1" style="background-color:transparent">
-                  <col span="1" style="background-color:#cfe2ff">
-                  <col span="1" style="background-color:transparent">
-                  <col span="1" style="background-color:#cfe2ff">
-                  <col span="1" style="background-color:transparent">
-                  <col span="1" style="background-color:#cfe2ff">
-                  <col span="1" style="background-color:transparent">
-                  <col span="1" style="background-color:#cfe2ff">
-                  <col span="1" style="background-color:transparent">
-                  <col span="1" style="background-color:#cfe2ff">
-                  <col span="1" style="background-color:transparent">
-                  <col span="1" style="background-color:#cfe2ff">
-                </colgroup>
-                <thead>
-                  <tr>
-                    <th colspan="1"> </th>
-                    <th colspan="1"> </th>
-                    <th colspan="2" class="text-center" style="background-color:#3686FF">Against Defense</th>
-                    <th colspan="3" class="text-center">Defense Tactics</th>
-                    <th colspan="8" class="text-center" style="background-color:#3686FF">Fouls</th>
-                    <th colspan="4" class="text-center">Auton</th>
-                    <th colspan="4" class="text-center" style="background-color:#3686FF">Teleop</th>
-                    <th colspan="2" class="text-center">Notes</th>
-                    <th colspan="1"> </th>
-                  </tr>
-                  <tr>
-                    <th scope="col">Match</th>
-                    <th scope="col">Drive Skill</th>
-                    <th scope="col">Block</th>
-                    <th scope="col">Note</th>
-                    <th scope="col">Block Path</th>
-                    <th scope="col">Block Stn</th>
-                    <th scope="col">Note</th>
-                    <th scope="col">Pin</th>
-                    <th scope="col">Auton Barge Contact</th>
-                    <th scope="col">Auton Cage Contact</th>
-                    <th scope="col">Anchor Contact</th>
-                    <th scope="col">Barge Contact</th>
-                    <th scope="col">Reef Contact</th>
-                    <th scope="col">Cage Contact</th>
-                    <th scope="col">Contact Climbing Robot</th>
-                    <th scope="col">Get Floor Coral</th>
-                    <th scope="col">Get Stn Coral</th>
-                    <th scope="col">Get Floor Algae</th>
-                    <th scope="col">Get Reef Algae</th>
-                    <th scope="col">Get Floor Coral</th>
-                    <th scope="col">Get Floor Algae</th>
-                    <th scope="col">Knock Algae</th>
-                    <th scope="col">Aquire Reef Algae</th>
-                    <th scope="col">Problem Note</th>
-                    <th scope="col">General Note</th>
-                    <th scope="col">Scout Name</th>
-                  </tr>
-                </thead>
+                <thead> </thead>
                 <tbody class="table-group-divider"> </tbody>
               </table>
             </div>
@@ -494,16 +426,8 @@ require 'inc/header.php';
   function loadAutonGraph(matchData) {
     console.log("==> teamLookup: loadAutonGraph()");
 
-    // Declare variables
-    let matchList = []; // List of matches to use as x labels
+    // Retrieve the data for each match
     let datasets = []; // Each entry is a dict with a label and data attribute
-    let autonLeaveTips = []; // holds custom tooltips for auton leave start line data      
-    let autonAlgaeProcTips = []; // holds custom tooltips for auton algae processor
-    let autonAlgaeNetTips = []; // holds custom tooltips for auton algae net
-    let autonCoralL1Tips = []; // holds custom tooltips for auton coral L1
-    let autonCoralL2Tips = []; // holds custom tooltips for auton coral L2
-    let autonCoralL3Tips = []; // holds custom tooltips for auton coral L3
-    let autonCoralL4Tips = []; // holds custom tooltips for auton coral 4      
 
     datasets.push({ label: "Leave", data: [], backgroundColor: '#F7CF58' });      // Yellow
     datasets.push({ label: "Processor", data: [], backgroundColor: '#B4E7D6' });  // Teal - algae
@@ -518,23 +442,15 @@ require 'inc/header.php';
     let mydata = [];
     for (let i = 0; i < matchData.length; i++) {
       let matchItem = matchData[i];
-      let matchnum = matchItem["matchnumber"];
-      let autonLeave = matchItem["autonLeave"];
-      let autonAlgaeProcessor = matchItem["autonAlgaeProcessor"];
-      let autonAlgaeNet = matchItem["autonAlgaeNet"];
-      let autonCoralOne = matchItem["autonCoralL1"];
-      let autonCoralTwo = matchItem["autonCoralL2"];
-      let autonCoralThree = matchItem["autonCoralL3"];
-      let autonCoralFour = matchItem["autonCoralL4"];
       mydata.push({
-        matchnum: matchnum,
-        leave: autonLeave,
-        processor: autonAlgaeProcessor,
-        net: autonAlgaeNet,
-        one: autonCoralOne,
-        two: autonCoralTwo,
-        three: autonCoralThree,
-        four: autonCoralFour
+        matchnum: matchItem["matchnumber"],
+        leave: matchItem["autonLeave"],
+        processor: matchItem["autonAlgaeProcessor"],
+        net: matchItem["autonAlgaeNet"],
+        one: matchItem["autonCoralL1"],
+        two: matchItem["autonCoralL2"],
+        three: matchItem["autonCoralL3"],
+        four: matchItem["autonCoralL4"]
       });
     }
 
@@ -543,10 +459,18 @@ require 'inc/header.php';
     });
 
     // Build data sets; go thru each mydata row and populate the graph datasets.
+    let matchList = []; // List of matches to use as x labels
+    let autonLeaveTips = []; // holds custom tooltips for auton leave start line data      
+    let autonAlgaeProcTips = []; // holds custom tooltips for auton algae processor
+    let autonAlgaeNetTips = []; // holds custom tooltips for auton algae net
+    let autonCoralL1Tips = []; // holds custom tooltips for auton coral L1
+    let autonCoralL2Tips = []; // holds custom tooltips for auton coral L2
+    let autonCoralL3Tips = []; // holds custom tooltips for auton coral L3
+    let autonCoralL4Tips = []; // holds custom tooltips for auton coral 4  
+
     for (let i = 0; i < mydata.length; i++) {
       let matchnum = mydata[i]["matchnum"];
       matchList.push(matchnum);
-      let tipStr = "";
 
       function storeAndGetTip(value, tipPrefix, dataset, yesNo) {
         dataset.push(value);
@@ -623,14 +547,7 @@ require 'inc/header.php';
     console.log("==> teamLookup: loadTeleopGraph()");
 
     // Declare variables
-    let matchList = []; // List of matches to use as x lables
     let datasets = []; // Each entry is a dict with a label and data attribute
-    let teleopAlgaeProcessorTips = []; // holds custom tooltips for teleop speaker notes
-    let teleopAlgaeNetTips = [];//holds custom tooltips for if amplification used
-    let teleopCoralL1Tips = []; // holds custom tooltips for teleop coral L1
-    let teleopCoralL2Tips = []; // holds custom tooltips for teleop coral L2
-    let teleopCoralL3Tips = []; // holds custom tooltips for teleop coral L3
-    let teleopCoralL4Tips = []; // holds custom tooltips for teleop coral 4      
 
     datasets.push({ label: "Processor", data: [], backgroundColor: '#B4E7D6' });  // Teal - algae
     datasets.push({ label: "Net", data: [], backgroundColor: '#4C9F7C' });        // Darker Teal - algae
@@ -644,31 +561,33 @@ require 'inc/header.php';
     let mydata = [];
     for (let i = 0; i < matchData.length; i++) {
       let matchItem = matchData[i];
-      let matchnum = matchItem["matchnumber"];
-      let teleopAlgaeProcessor = matchItem["teleopAlgaeProcessor"];
-      let teleopAlgaeNet = matchItem["teleopAlgaeNet"];
-      let teleopCoralOne = matchItem["teleopCoralL1"];
-      let teleopCoralTwo = matchItem["teleopCoralL2"];
-      let teleopCoralThree = matchItem["teleopCoralL3"];
-      let teleopCoralFour = matchItem["teleopCoralL4"];
       mydata.push({
-        matchnum: matchnum,
-        teleopprocessor: teleopAlgaeProcessor,
-        teleopnet: teleopAlgaeNet,
-        levelone: teleopCoralOne,
-        leveltwo: teleopCoralTwo,
-        levelthree: teleopCoralThree,
-        levelfour: teleopCoralFour
+        matchnum: matchItem["matchnumber"],
+        teleopprocessor: matchItem["teleopAlgaeProcessor"],
+        teleopnet: matchItem["teleopAlgaeNet"],
+        levelone: matchItem["teleopCoralL1"],
+        leveltwo: matchItem["teleopCoralL2"],
+        levelthree: matchItem["teleopCoralL3"],
+        levelfour: matchItem["teleopCoralL4"]
       });
     }
+
     mydata.sort(function (rowA, rowB) {
       return (compareMatchNumbers(rowA["matchnum"], rowB["matchnum"]));
     });
+
     // Build data sets; go thru each mydata row and populate the graph datasets.
+    let matchList = []; // List of matches to use as x lables
+    let teleopAlgaeProcessorTips = []; // holds custom tooltips for teleop speaker notes
+    let teleopAlgaeNetTips = [];//holds custom tooltips for if amplification used
+    let teleopCoralL1Tips = []; // holds custom tooltips for teleop coral L1
+    let teleopCoralL2Tips = []; // holds custom tooltips for teleop coral L2
+    let teleopCoralL3Tips = []; // holds custom tooltips for teleop coral L3
+    let teleopCoralL4Tips = []; // holds custom tooltips for teleop coral 4      
+
     for (let i = 0; i < mydata.length; i++) {
       let matchnum = mydata[i]["matchnum"];
       matchList.push(matchnum);
-      let tipStr = "";
 
       function storeAndGetTip(value, tipPrefix, dataset) {
         dataset.push(value);
@@ -738,9 +657,9 @@ require 'inc/header.php';
 
   function loadEndgameGraph(matchData) {
     console.log("==> teamLookup: loadEndgameGraph()");
-    let matchList = [];
+
+    // Retrieve the data for each match
     let datasets = [];
-    let cageClimbTips = [];
 
     datasets.push({ label: "Cage Climb", data: [], backgroundColor: '#ED8537' });   // Orange - endgame
 
@@ -748,19 +667,22 @@ require 'inc/header.php';
     // later sort it so the matches are listed in the right order. 
     let mydata = [];
     for (let i = 0; i < matchData.length; i++) {
-      let matchnum = matchData[i]["matchnumber"];
-      let cageClimb = matchData[i]["cageClimb"];
+      let matchItem = matchData[i];
       mydata.push({
-        matchnum: matchnum,
-        cage: cageClimb,
+        matchnum: matchItem["matchnumber"],
+        cage: matchItem["cageClimb"],
       });
     }
+
     mydata.sort(function (rowA, rowB) {
       return (compareMatchNumbers(rowA["matchnum"], rowB["matchnum"]));
     });
 
 
     // Build data sets; go thru each mydata row and populate the graph datasets.
+    let matchList = [];
+    let cageClimbTips = [];
+
     for (let i = 0; i < mydata.length; i++) {
       let matchnum = mydata[i]["matchnum"];
       matchList.push(matchnum);
@@ -926,61 +848,6 @@ require 'inc/header.php';
     }
   }
 
-  // Load the strategic data table for this team
-  function loadStrategicData(stratData) {
-    console.log("==> teamLookup: loadStrategicData()");
-    let tbodyRef = document.getElementById("strategicDataTable").querySelector('tbody');
-    tbodyRef.innerHTML = "";     // clear table
-    for (let i = 0; i < stratData.length; i++) {
-      let stratItem = stratData[i];
-
-      let driverability = stratItem["driverability"];
-      switch (driverability) {
-        case 1: driveVal = "Jerky"; break;
-        case 2: driveVal = "Slow"; break;
-        case 3: driveVal = "Average"; break;
-        case 4: driveVal = "Quick"; break;
-        case 5: driveVal = "-"; break;
-        default: driveVal = ""; break;
-      }
-
-      let rowString = "";
-      rowString += "<td>" + stratItem["matchnumber"] + "</td>";
-      rowString += "<td>" + driveVal + "</td>";
-      rowString += "<td>" + toYesNo(stratItem["against_tactic1"]) + "</td>";
-      rowString += "<td>" + stratItem["against_comment"] + "</td>";
-
-      rowString += "<td>" + toYesNo(stratItem["defense_tactic1"]) + "</td>";
-      rowString += "<td>" + toYesNo(stratItem["defense_tactic2"]) + "</td>";
-      rowString += "<td>" + stratItem["defense_comment"] + "</td>";
-
-      rowString += "<td>" + toYesNo(stratItem["foul1"]) + "</td>";
-      rowString += "<td>" + toYesNo(stratItem["autonFoul1"]) + "</td>";
-      rowString += "<td>" + toYesNo(stratItem["autonFoul2"]) + "</td>";
-      rowString += "<td>" + toYesNo(stratItem["teleopFoul1"]) + "</td>";
-      rowString += "<td>" + toYesNo(stratItem["teleopFoul2"]) + "</td>";
-      rowString += "<td>" + toYesNo(stratItem["teleopFoul3"]) + "</td>";
-      rowString += "<td>" + toYesNo(stratItem["teleopFoul4"]) + "</td>";
-      rowString += "<td>" + toYesNo(stratItem["endgameFoul1"]) + "</td>";
-
-      rowString += "<td>" + toYesNo(stratItem["autonGetCoralFromFloor"]) + "</td>";
-      rowString += "<td>" + toYesNo(stratItem["autonGetCoralFromStation"]) + "</td>";
-      rowString += "<td>" + toYesNo(stratItem["autonGetAlgaeFromFloor"]) + "</td>";
-      rowString += "<td>" + toYesNo(stratItem["autonGetAlgaeFromReef"]) + "</td>";
-      rowString += "<td>" + toYesNo(stratItem["teleopFloorPickupAlgae"]) + "</td>";
-      rowString += "<td>" + toYesNo(stratItem["teleopFloorPickupCoral"]) + "</td>";
-      rowString += "<td>" + toYesNo(stratItem["teleopKnockOffAlgaeFromReef"]) + "</td>";
-      rowString += "<td>" + toYesNo(stratItem["teleopAcquireAlgaeFromReef"]) + "</td>";
-
-      rowString += "<td>" + stratItem["problem_comment"] + "</td>";
-      rowString += "<td>" + stratItem["general_comment"] + "</td>";
-      rowString += "<td>" + stratItem["scoutname"] + "</td>";
-      tbodyRef.insertRow().innerHTML = rowString;
-    }
-    const matchColumn = 0;
-    sortTableByMatch("strategicDataTable", matchColumn);
-  }
-
   // Create a row in the pit data table
   function writePitTableRow(tableID, dict, keys, length) {
     let tbodyRef = document.getElementById(tableID).querySelector('tbody');
@@ -1129,7 +996,7 @@ require 'inc/header.php';
       getTeamStrategicData: teamNum
     }).done(function (strategicData) {
       console.log("=> getTeamStrategicData");
-      loadStrategicData(JSON.parse(strategicData));
+      insertStrategicDataBody("strategicDataTable", JSON.parse(strategicData), jAliasNames, teamNum);
     });
     console.log("going to set title again for team " + teamNum + " with teamName: " + teamName);
     document.getElementById("teamTitle").innerHTML = teamNum + " - " + teamName;
@@ -1157,6 +1024,7 @@ require 'inc/header.php';
     }).done(function (eventAliasNames) {
       console.log("=> eventAliasNames");
       let jAliasNames = JSON.parse(eventAliasNames);
+      insertStrategicDataHeader("strategicDataTable", jAliasNames);
       insertMatchDataHeader("matchDataTable", jAliasNames);
 
       // Check URL for team# to use (we may have gotten here by clicking on a team number link from another page)
@@ -1197,6 +1065,7 @@ require 'inc/header.php';
 <script src="./scripts/sortFrcTables.js"></script>
 <script src="./scripts/matchDataProcessor.js"></script>
 <script src="./scripts/matchDataTable.js"></script>
+<script src="./scripts/strategicDataTable.js"></script>
 <script src="./scripts/validateTeamNumber.js"></script>
 
 <script src="./external/charts/chart.umd.js"></script>

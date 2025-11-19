@@ -117,77 +117,8 @@ require 'inc/header.php';
 
       <div id="collapseStrategicData1" class="card-body collapse">
         <div class="overflow-auto">
-          <table id="strategicDataTable1"
-            class="table table-striped table-bordered table-hover table-sm border-dark text-center sortable">
-            <colgroup>
-              <col span="2" style="background-color:transparent">
-              <col span="1" style="background-color:#cfe2ff">
-              <col span="1" style="background-color:transparent">
-              <col span="1" style="background-color:#cfe2ff">
-              <col span="1" style="background-color:transparent">
-              <col span="1" style="background-color:#cfe2ff">
-              <col span="1" style="background-color:transparent">
-              <col span="1" style="background-color:#cfe2ff">
-              <col span="1" style="background-color:transparent">
-              <col span="1" style="background-color:#cfe2ff">
-              <col span="1" style="background-color:transparent">
-              <col span="1" style="background-color:#cfe2ff">
-              <col span="1" style="background-color:transparent">
-              <col span="1" style="background-color:#cfe2ff">
-              <col span="1" style="background-color:transparent">
-              <col span="1" style="background-color:#cfe2ff">
-              <col span="1" style="background-color:transparent">
-              <col span="1" style="background-color:#cfe2ff">
-              <col span="1" style="background-color:transparent">
-              <col span="1" style="background-color:#cfe2ff">
-              <col span="1" style="background-color:transparent">
-              <col span="1" style="background-color:#cfe2ff">
-              <col span="1" style="background-color:transparent">
-              <col span="1" style="background-color:#cfe2ff">
-              <col span="1" style="background-color:transparent">
-              <col span="1" style="background-color:#cfe2ff">
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="1"> </th>
-                <th colspan="1"> </th>
-                <th colspan="2" class="text-center" style="background-color:#3686FF">Against Defense</th>
-                <th colspan="3" class="text-center">Defense Tactics</th>
-                <th colspan="8" class="text-center" style="background-color:#3686FF">Fouls</th>
-                <th colspan="4" class="text-center">Auton</th>
-                <th colspan="4" class="text-center" style="background-color:#3686FF">Teleop</th>
-                <th colspan="2" class="text-center">Notes</th>
-                <th colspan="1"> </th>
-              </tr>
-              <tr>
-                <th scope="col">Match</th>
-                <th scope="col">Drive Skill</th>
-                <th scope="col">Block</th>
-                <th scope="col">Note</th>
-                <th scope="col">Block Path</th>
-                <th scope="col">Block Stn</th>
-                <th scope="col">Note</th>
-                <th scope="col">Pin</th>
-                <th scope="col">Auton Barge Contact</th>
-                <th scope="col">Auton Cage Contact</th>
-                <th scope="col">Anchor Contact</th>
-                <th scope="col">Barge Contact</th>
-                <th scope="col">Reef Contact</th>
-                <th scope="col">Cage Contact</th>
-                <th scope="col">Contact Climbing Robot</th>
-                <th scope="col">Get Floor Coral</th>
-                <th scope="col">Get Stn Coral</th>
-                <th scope="col">Get Floor Algae</th>
-                <th scope="col">Get Reef Algae</th>
-                <th scope="col">Get Floor Coral</th>
-                <th scope="col">Get Floor Algae</th>
-                <th scope="col">Knock Algae</th>
-                <th scope="col">Aquire Reef Algae</th>
-                <th scope="col">Problem Note</th>
-                <th scope="col">General Note</th>
-                <th scope="col">Scout Name</th>
-              </tr>
-            </thead>
+          <table id="strategicDataTable1" class="table table-striped table-bordered table-hover table-sm border-dark text-center">
+            <thead> </thead>
             <tbody class="table-group-divider"> </tbody>
           </table>
         </div>
@@ -203,77 +134,8 @@ require 'inc/header.php';
 
       <div id="collapseStrategicData2" class="card-body collapse">
         <div class="overflow-auto">
-          <table id="strategicDataTable2"
-            class="table table-striped table-bordered table-hover table-sm border-dark text-center sortable">
-            <colgroup>
-              <col span="2" style="background-color:transparent">
-              <col span="1" style="background-color:#cfe2ff">
-              <col span="1" style="background-color:transparent">
-              <col span="1" style="background-color:#cfe2ff">
-              <col span="1" style="background-color:transparent">
-              <col span="1" style="background-color:#cfe2ff">
-              <col span="1" style="background-color:transparent">
-              <col span="1" style="background-color:#cfe2ff">
-              <col span="1" style="background-color:transparent">
-              <col span="1" style="background-color:#cfe2ff">
-              <col span="1" style="background-color:transparent">
-              <col span="1" style="background-color:#cfe2ff">
-              <col span="1" style="background-color:transparent">
-              <col span="1" style="background-color:#cfe2ff">
-              <col span="1" style="background-color:transparent">
-              <col span="1" style="background-color:#cfe2ff">
-              <col span="1" style="background-color:transparent">
-              <col span="1" style="background-color:#cfe2ff">
-              <col span="1" style="background-color:transparent">
-              <col span="1" style="background-color:#cfe2ff">
-              <col span="1" style="background-color:transparent">
-              <col span="1" style="background-color:#cfe2ff">
-              <col span="1" style="background-color:transparent">
-              <col span="1" style="background-color:#cfe2ff">
-              <col span="1" style="background-color:transparent">
-              <col span="1" style="background-color:#cfe2ff">
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="1"> </th>
-                <th colspan="1"> </th>
-                <th colspan="2" class="text-center" style="background-color:#3686FF">Against Defense</th>
-                <th colspan="3" class="text-center">Defense Tactics</th>
-                <th colspan="8" class="text-center" style="background-color:#3686FF">Fouls</th>
-                <th colspan="4" class="text-center">Auton</th>
-                <th colspan="4" class="text-center" style="background-color:#3686FF">Teleop</th>
-                <th colspan="2" class="text-center">Notes</th>
-                <th colspan="1"> </th>
-              </tr>
-              <tr>
-                <th scope="col">Match</th>
-                <th scope="col">Drive Skill</th>
-                <th scope="col">Block</th>
-                <th scope="col">Note</th>
-                <th scope="col">Block Path</th>
-                <th scope="col">Block Stn</th>
-                <th scope="col">Note</th>
-                <th scope="col">Pin</th>
-                <th scope="col">Auton Barge Contact</th>
-                <th scope="col">Auton Cage Contact</th>
-                <th scope="col">Anchor Contact</th>
-                <th scope="col">Barge Contact</th>
-                <th scope="col">Reef Contact</th>
-                <th scope="col">Cage Contact</th>
-                <th scope="col">Contact Climbing Robot</th>
-                <th scope="col">Get Floor Coral</th>
-                <th scope="col">Get Stn Coral</th>
-                <th scope="col">Get Floor Algae</th>
-                <th scope="col">Get Reef Algae</th>
-                <th scope="col">Get Floor Coral</th>
-                <th scope="col">Get Floor Algae</th>
-                <th scope="col">Knock Algae</th>
-                <th scope="col">Aquire Reef Algae</th>
-                <th scope="col">Problem Note</th>
-                <th scope="col">General Note</th>
-                <th scope="col">Scout Name</th>
-              </tr>
-            </thead>
+          <table id="strategicDataTable2" class="table table-striped table-bordered table-hover table-sm border-dark text-center">
+            <thead> </thead>
             <tbody class="table-group-divider"> </tbody>
           </table>
         </div>
@@ -561,46 +423,30 @@ require 'inc/header.php';
   }
 
   ///// FIRST PICK GRAPH STARTS HERE /////
-  function loadFirstPickGraph(team1, team2, avgData1, avgData2) {
+  function loadFirstPickGraph(team1, team2, avgData) {
     console.log("==> teamCompare: loadFirstPickGraph()");
-
-    let xLabels = ["Auton Avg Pts", "Teleop Avg Pts", "Endgame Avg Pts", "Teleop Net Pts", "Teleop L4 Pts", "Teleop L3 Pts"]
     let datasets = [];
 
-    let t1DataA = avgData1[team1]["autonPointsAvg"];
-    let t1DataB = avgData1[team1]["teleopPointsAvg"];
-    let t1DataC = avgData1[team1]["endgamePointsAvg"];
-
-    // Multiply teleopAlgaeNetAvg by 4 to get points.
-    let t1DataD = avgData1[team1]["teleopAlgaeNetAvg"];
-    let netPts1 = t1DataD * 4;
-
-    // Multiply teleopCoralL4Avg by 5 to get points.
-    let t1DataE = avgData1[team1]["teleopCoralL4Avg"];
-    let L4Pts1 = t1DataE * 5;
-
-    // Multiply teleopCoralL3Avg by 4 to get points.
-    let t1DataF = avgData1[team1]["teleopCoralL3Avg"];
-    let L3Pts1 = t1DataF * 4;
-
-    let t2DataA = avgData2[team2]["autonPointsAvg"];
-    let t2DataB = avgData2[team2]["teleopPointsAvg"];
-    let t2DataC = avgData2[team2]["endgamePointsAvg"];
-
-    // Multiply teleopAlgaeNetAvg by 4 to get points.
-    let t2DataD = avgData2[team2]["teleopAlgaeNetAvg"];
-    let netPts2 = t2DataD * 4;
-
-    // Multiply teleopCoralL4Avg by 5 to get points.
-    let t2DataE = avgData2[team2]["teleopCoralL4Avg"];
-    let L4Pts2 = t2DataE * 5;
-
-    // Multiply teleopCoralL3Avg by 4 to get points.
-    let t2DataF = avgData2[team2]["teleopCoralL3Avg"];
-    let L3Pts2 = t2DataF * 4;
-
-    datasets.push({ label: team1, data: [t1DataA, t1DataB, t1DataC, netPts1, L4Pts1, L3Pts1], backgroundColor: '#FF4316' });
-    datasets.push({ label: team2, data: [t2DataA, t2DataB, t2DataC, netPts2, L4Pts2, L3Pts2], backgroundColor: '#0033FF' });
+    datasets.push({
+      label: team1, data: [
+        avgData[team1]["autonPointsAvg"],
+        avgData[team1]["teleopPointsAvg"],
+        avgData[team1]["endgamePointsAvg"],
+        avgData[team1]["teleopAlgaeNetAvg"] * 4,    // Multiply teleopAlgaeNetAvg by 4 to get points.
+        avgData[team1]["teleopCoralL4Avg"] * 5,     // Multiply teleopCoralL4Avg by 5 to get points.
+        avgData[team1]["teleopCoralL3Avg"] * 4      // Multiply teleopCoralL3Avg by 4 to get points.
+      ], backgroundColor: '#FF4316'
+    });
+    datasets.push({
+      label: team2, data: [
+        avgData[team2]["autonPointsAvg"],
+        avgData[team2]["teleopPointsAvg"],
+        avgData[team2]["endgamePointsAvg"],
+        avgData[team2]["teleopAlgaeNetAvg"] * 4,    // Multiply teleopAlgaeNetAvg by 4 to get points.
+        avgData[team2]["teleopCoralL4Avg"] * 5,     // Multiply teleopCoralL4Avg by 5 to get points.
+        avgData[team2]["teleopCoralL3Avg"] * 4      // Multiply teleopCoralL3Avg by 4 to get points.
+      ], backgroundColor: '#0033FF'
+    });
 
     // Define the graph as a bar chart:
     if (firstPickChart !== undefined) {
@@ -612,7 +458,7 @@ require 'inc/header.php';
     firstPickChart = new Chart(ctx, {
       type: 'bar',
       data: {
-        labels: xLabels,
+        labels: ["Auton Avg Pts", "Teleop Avg Pts", "Endgame Avg Pts", "Teleop Net Pts", "Teleop L4 Pts", "Teleop L3 Pts"],
         datasets: datasets
       },
       options: {
@@ -625,49 +471,33 @@ require 'inc/header.php';
       }
     });
   }
-  // End of FIRST PICK GRAPH 
+  ///// End of FIRST PICK GRAPH /////
 
   ///// SECOND PICK GRAPH STARTS HERE /////
-  function loadSecondPickGraph(team1, team2, avgData1, avgData2) {
+  function loadSecondPickGraph(team1, team2, avgData) {
     console.log("==> teamCompare: loadSecondPickGraph()");
-
-    let xLabels = ["Auton Avg Pts", "Teleop Avg Pts", "Endgame Avg Pts", "Teleop Net Pts", "Teleop L3 Pts", "Teleop L2 Pts"]
     let datasets = [];
 
-    let t1DataA = avgData1[team1]["autonPointsAvg"];
-    let t1DataB = avgData1[team1]["teleopPointsAvg"];
-    let t1DataC = avgData1[team1]["endgamePointsAvg"];
-
-    // Multiply teleopAlgaeNetAvg by 4 to get points.
-    let t1DataD = avgData1[team1]["teleopAlgaeNetAvg"];
-    let netPts1 = t1DataD * 4;
-
-    // Multiply teleopCoralL3Avg by 4 to get points.
-    let t1DataE = avgData1[team1]["teleopCoralL3Avg"];
-    let L3Pts1 = t1DataE * 4;
-
-    // Multiply teleopCoralL2Avg by 3 to get points.
-    let t1DataF = avgData1[team1]["teleopCoralL2Avg"];
-    let L2Pts1 = t1DataF * 3;
-
-    let t2DataA = avgData2[team2]["autonPointsAvg"];
-    let t2DataB = avgData2[team2]["teleopPointsAvg"];
-    let t2DataC = avgData2[team2]["endgamePointsAvg"];
-
-    // Multiply teleopAlgaeNetAvg by 4 to get points.
-    let t2DataD = avgData2[team2]["teleopAlgaeNetAvg"];
-    let netPts2 = t2DataD * 4;
-
-    // Multiply teleopCoralL3Avg by 4 to get points.
-    let t2DataE = avgData2[team2]["teleopCoralL3Avg"];
-    let L3Pts2 = t2DataE * 4;
-
-    // Multiply teleopCoralL2Avg by 3 to get points.
-    let t2DataF = avgData2[team2]["teleopCoralL2Avg"];
-    let L2Pts2 = t2DataF * 3;
-
-    datasets.push({ label: team1, data: [t1DataA, t1DataB, t1DataC, netPts1, L3Pts1, L2Pts1], backgroundColor: '#FF4316' });
-    datasets.push({ label: team2, data: [t2DataA, t2DataB, t2DataC, netPts2, L3Pts2, L2Pts2], backgroundColor: '#0033FF' });
+    datasets.push({
+      label: team1, data: [
+        avgData[team1]["autonPointsAvg"],
+        avgData[team1]["teleopPointsAvg"],
+        avgData[team1]["endgamePointsAvg"],
+        avgData[team1]["teleopAlgaeNetAvg"] * 4,    // Multiply teleopAlgaeNetAvg by 4 to get points.
+        avgData[team1]["teleopCoralL3Avg"] * 4,     // Multiply teleopCoralL3Avg by 4 to get points.
+        avgData[team1]["teleopCoralL2Avg"] * 3      // Multiply teleopCoralL2Avg by 3 to get points.
+      ], backgroundColor: '#FF4316'
+    });
+    datasets.push({
+      label: team2, data: [
+        avgData[team2]["autonPointsAvg"],
+        avgData[team2]["teleopPointsAvg"],
+        avgData[team2]["endgamePointsAvg"],
+        avgData[team2]["teleopAlgaeNetAvg"] * 4,    // Multiply teleopAlgaeNetAvg by 4 to get points.   
+        avgData[team2]["teleopCoralL3Avg"] * 4,     // Multiply teleopCoralL3Avg by 4 to get points.
+        avgData[team2]["teleopCoralL2Avg"] * 3      // Multiply teleopCoralL2Avg by 3 to get points.
+      ], backgroundColor: '#0033FF'
+    });
 
     // Define the graph as a bar chart:
     if (secondPickChart !== undefined) {
@@ -679,7 +509,7 @@ require 'inc/header.php';
     secondPickChart = new Chart(ctx, {
       type: 'bar',
       data: {
-        labels: xLabels,
+        labels: ["Auton Avg Pts", "Teleop Avg Pts", "Endgame Avg Pts", "Teleop Net Pts", "Teleop L3 Pts", "Teleop L2 Pts"],
         datasets: datasets
       },
       options: {
@@ -692,41 +522,31 @@ require 'inc/header.php';
       }
     });
   }
-  // End of SECOND PICK GRAPH 
+  ///// End of SECOND PICK GRAPH /////
 
   ///// THIRD PICK GRAPH STARTS HERE /////
-  function loadThirdPickGraph(team1, team2, avgData1, avgData2) {
+  function loadThirdPickGraph(team1, team2, avgData) {
     console.log("==> teamCompare: loadThirdPickGraph()");
-
-    let xLabels = ["Auton Avg Pts", "Teleop Avg Pts", "Endgame Avg Pts", "Teleop Net Pts", "Teleop L3 Pts"]
     let datasets = [];
 
-    let t1DataA = avgData1[team1]["autonPointsAvg"];
-    let t1DataB = avgData1[team1]["teleopPointsAvg"];
-    let t1DataC = avgData1[team1]["endgamePointsAvg"];
-
-    // Multiply teleopAlgaeNetAvg by 4 to get points.
-    let t1DataD = avgData1[team1]["teleopAlgaeNetAvg"];
-    let netPts1 = t1DataD * 4;
-
-    // Multiply teleopCoralL3Avg by 4 to get points.
-    let t1DataE = avgData1[team1]["teleopCoralL3Avg"];
-    let L3Pts1 = t1DataE * 4;
-
-    let t2DataA = avgData2[team2]["autonPointsAvg"];
-    let t2DataB = avgData2[team2]["teleopPointsAvg"];
-    let t2DataC = avgData2[team2]["endgamePointsAvg"];
-
-    // Multiply teleopAlgaeNetAvg by 4 to get points.
-    let t2DataD = avgData2[team2]["teleopAlgaeNetAvg"];
-    let netPts2 = t2DataD * 4;
-
-    // Multiply teleopCoralL3Avg by 4 to get points.
-    let t2DataE = avgData2[team2]["teleopCoralL3Avg"];
-    let L3Pts2 = t2DataE * 4;
-
-    datasets.push({ label: team1, data: [t1DataA, t1DataB, t1DataC, netPts1, L3Pts1], backgroundColor: '#FF4316' });
-    datasets.push({ label: team2, data: [t2DataA, t2DataB, t2DataC, netPts2, L3Pts2], backgroundColor: '#0033FF' });
+    datasets.push({
+      label: team1, data: [
+        avgData[team1]["autonPointsAvg"],
+        avgData[team1]["teleopPointsAvg"],
+        avgData[team1]["endgamePointsAvg"],
+        avgData[team1]["teleopAlgaeNetAvg"] * 4,    // Multiply teleopAlgaeNetAvg by 4 to get points.
+        avgData[team1]["teleopCoralL3Avg"] * 4      // Multiply teleopCoralL3Avg by 4 to get points.
+      ], backgroundColor: '#FF4316'
+    });
+    datasets.push({
+      label: team2, data: [
+        avgData[team2]["autonPointsAvg"],
+        avgData[team2]["teleopPointsAvg"],
+        avgData[team2]["endgamePointsAvg"],
+        avgData[team2]["teleopAlgaeNetAvg"] * 4,    // Multiply teleopAlgaeNetAvg by 4 to get points.
+        avgData[team2]["teleopCoralL3Avg"] * 4      // Multiply teleopCoralL3Avg by 4 to get points.
+      ], backgroundColor: '#0033FF'
+    });
 
     // Define the graph as a bar chart:
     if (thirdPickChart !== undefined) {
@@ -738,7 +558,7 @@ require 'inc/header.php';
     thirdPickChart = new Chart(ctx, {
       type: 'bar',
       data: {
-        labels: xLabels,
+        labels: ["Auton Avg Pts", "Teleop Avg Pts", "Endgame Avg Pts", "Teleop Net Pts", "Teleop L3 Pts"],
         datasets: datasets
       },
       options: {
@@ -751,42 +571,10 @@ require 'inc/header.php';
       }
     });
   }
-  // End of THIRD PICK GRAPH 
-
-  function loadMatchData(teamNum1, teamNum2, mdp1, mdp2) {
-    if (mdp1 == null || mdp2 == null) {
-      return;
-    }
-    console.log("loadMatchData: we have all the data, so do it");
-
-    // Get the team1 averages data from matchDataProcessor (mdp)
-    mdp1.getSiteFilteredAverages(function (filteredMatches, filteredAvgData) {
-      if (filteredAvgData != undefined) {
-        console.log("loadMatchData: got mdp1");
-
-        // Get the team2 averages data from matchDataProcessor (mdp)
-        mdp2.getSiteFilteredAverages(function (filteredMatches2, filteredAvgData2) {
-          if (filteredAvgData2 != undefined) {
-            console.log("loadMatchData: got mdp2");
-
-            // Load the graphs
-            loadFirstPickGraph(teamNum1, teamNum2, filteredAvgData, filteredAvgData2);
-            loadSecondPickGraph(teamNum1, teamNum2, filteredAvgData, filteredAvgData2);
-            loadThirdPickGraph(teamNum1, teamNum2, filteredAvgData, filteredAvgData2);
-            loadEndgameTable(teamNum1, teamNum2, filteredAvgData, filteredAvgData2);
-            loadAvgTable(teamNum1, teamNum2, filteredAvgData, filteredAvgData2);
-          }
-          else
-            alert("No averages data for this team 2 at this event!");
-        });
-      }
-      else
-        alert("No averages data for this team at this event!");
-    });
-  }
+  ///// End of THIRD PICK GRAPH /////
 
 
-  // MAIN PAGE PROCESSORS HERE
+  ///// MAIN PAGE PROCESSORS HERE /////
   // Check if our URL directs to a specific team compare
   function checkURLForTeamSpec(teamId) {
     console.log("=> teamCompare: checkURLForTeamSpec()");
@@ -804,8 +592,9 @@ require 'inc/header.php';
     document.getElementById("firstPickChart").querySelector('tbody').innerHTML = "";
     document.getElementById("secondPickChart").querySelector('tbody').innerHTML = "";
     document.getElementById("thirdPickChart").querySelector('tbody').innerHTML = "";
-    document.getElementById("strategicDataTable").querySelector('tbody').innerHTML = "";
+    document.getElementById("strategicDataTable1").querySelector('tbody').innerHTML = "";
     document.getElementById("strategicDataTable2").querySelector('tbody').innerHTML = "";
+    document.getElementById("averagesTable").querySelector('body').innerHTML = "";
   }
 
   function getDataValue(dict, key) {
@@ -823,9 +612,9 @@ require 'inc/header.php';
 
   function createEndgameEntry(teamNum, avgData) {
     let endgameClimbPercentage = getDataValue(avgData[teamNum], "endgameClimbPercent");
-    let rowString = "";
     const tdPrefix = "<td>";
 
+    let rowString = "";
     rowString += tdPrefix + "<a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a></td>";
     rowString += tdPrefix + getDataValue(endgameClimbPercentage, 0) + "</td>";
     rowString += tdPrefix + getDataValue(endgameClimbPercentage, 2) + "</td>";
@@ -836,13 +625,13 @@ require 'inc/header.php';
     return rowString;
   }
 
-  function loadEndgameTable(teamNum, teamNum2, avgData, avgData2) {
+  function loadEndgameTable(teamNum, teamNum2, avgData) {
     console.log("==> teamCompare: loadEndgameTable()");
     let tbodyRef = document.getElementById("endgameClimbTable").querySelector('tbody');
     tbodyRef.innerHTML = ""; // Clear Table
 
     tbodyRef.insertRow().innerHTML = createEndgameEntry(teamNum, avgData);
-    tbodyRef.insertRow().innerHTML = createEndgameEntry(teamNum2, avgData2);
+    tbodyRef.insertRow().innerHTML = createEndgameEntry(teamNum2, avgData);
   }
 
   // Create an event average entry for a team
@@ -944,151 +733,79 @@ require 'inc/header.php';
   }
 
   // Load the event averages table
-  function loadAvgTable(teamNum, teamNum2, avgData, avgData2) {
-    console.log("==> teamCompare: loadAvgTable()");
+  function loadEventAveragesTable(teamNum, teamNum2, avgData) {
+    console.log("==> teamCompare: loadEventAveragesTable()");
     let tbodyRef = document.getElementById("averagesTable").querySelector('tbody');
     tbodyRef.innerHTML = ""; // Clear Table
 
     tbodyRef.insertRow().innerHTML = createEventAverageEntry(teamNum, avgData);
-    tbodyRef.insertRow().innerHTML = createEventAverageEntry(teamNum2, avgData2);
-  }
-
-  function toYesNo(value) {
-    switch (String(value)) {
-      case "1": return "Yes";
-      case "2": return "No";
-      default: return "-";
-    }
-  }
-
-  // Load the strategic data table for this team
-  function loadStrategicData(stratLinkStr, stratTableId, teamNum, stratData) {
-    console.log("==> teamCompare: loadStrategicData()");
-    let sLink = document.getElementById(stratLinkStr).querySelector('a');
-    sLink.text = teamNum + " - Strategic Data";
-
-    let tbodyRef = document.getElementById(stratTableId).querySelector('tbody');
-    tbodyRef.innerHTML = "";     // clear table
-    for (let i = 0; i < stratData.length; i++) {
-      let stratItem = stratData[i];
-      let driverability = stratItem["driverability"];
-      switch (driverability) {
-        case 1: driveVal = "Jerky"; break;
-        case 2: driveVal = "Slow"; break;
-        case 3: driveVal = "Average"; break;
-        case 4: driveVal = "Quick"; break;
-        case 5: driveVal = "-"; break;
-        default: driveVal = ""; break;
-      }
-
-      let rowString = "";
-      rowString += "<td>" + stratItem["matchnumber"] + "</td>";
-      rowString += "<td>" + driveVal + "</td>";
-      rowString += "<td>" + toYesNo(stratItem["against_tactic1"]) + "</td>";
-      rowString += "<td>" + stratItem["against_comment"] + "</td>";
-
-      rowString += "<td>" + toYesNo(stratItem["defense_tactic1"]) + "</td>";
-      rowString += "<td>" + toYesNo(stratItem["defense_tactic2"]) + "</td>";
-      rowString += "<td>" + stratItem["defense_comment"] + "</td>";
-
-      rowString += "<td>" + toYesNo(stratItem["foul1"]) + "</td>";
-      rowString += "<td>" + toYesNo(stratItem["autonFoul1"]) + "</td>";
-      rowString += "<td>" + toYesNo(stratItem["autonFoul2"]) + "</td>";
-      rowString += "<td>" + toYesNo(stratItem["teleopFoul1"]) + "</td>";
-      rowString += "<td>" + toYesNo(stratItem["teleopFoul2"]) + "</td>";
-      rowString += "<td>" + toYesNo(stratItem["teleopFoul3"]) + "</td>";
-      rowString += "<td>" + toYesNo(stratItem["teleopFoul4"]) + "</td>";
-      rowString += "<td>" + toYesNo(stratItem["endgameFoul1"]) + "</td>";
-
-      rowString += "<td>" + toYesNo(stratItem["autonGetCoralFromFloor"]) + "</td>";
-      rowString += "<td>" + toYesNo(stratItem["autonGetCoralFromStation"]) + "</td>";
-      rowString += "<td>" + toYesNo(stratItem["autonGetAlgaeFromFloor"]) + "</td>";
-      rowString += "<td>" + toYesNo(stratItem["autonGetAlgaeFromReef"]) + "</td>";
-      rowString += "<td>" + toYesNo(stratItem["teleopFloorPickupAlgae"]) + "</td>";
-      rowString += "<td>" + toYesNo(stratItem["teleopFloorPickupCoral"]) + "</td>";
-      rowString += "<td>" + toYesNo(stratItem["teleopKnockOffAlgaeFromReef"]) + "</td>";
-      rowString += "<td>" + toYesNo(stratItem["teleopAcquireAlgaeFromReef"]) + "</td>";
-
-      rowString += "<td>" + stratItem["problem_comment"] + "</td>";
-      rowString += "<td>" + stratItem["general_comment"] + "</td>";
-      rowString += "<td>" + stratItem["scoutname"] + "</td>";
-      tbodyRef.insertRow().innerHTML = rowString;
-    }
-    const matchColumn = 0;
-    sortTableByMatch(stratTableId, matchColumn);
+    tbodyRef.insertRow().innerHTML = createEventAverageEntry(teamNum2, avgData);
   }
 
   // This is the main function that runs when we want to load teams.
   function buildTeamComparePage(teamNum1, teamNum2) {
-    let mdp1 = null;
-    let mdp2 = null;
-    let teamInfo1 = null;
-    let teamInfo2 = null;
-
     console.log("==> teamCompare: buildTeamComparePage()");
 
     // Get team1 name from TBA
     $.get("api/tbaAPI.php", {
-      getTeamInfo: teamNum1
-    }).done(function (teamInfo1) {
-      // console.log("=> getTeamInfo: " + teamInfo1);
-      if (teamInfo1 === null) {
-        return alert("Can't load teamName from TBA; check if TBA Key was set in db_config");
+      getEventTeamNames: true
+    }).done(function (eventTeamNames) {
+      console.log("=> getEventTeamNames: ");
+      if (eventTeamNames === null) {
+        return alert("Can't load teams from TBA; check if TBA Key was set in db_config");
       }
-      let jTeamInfo = JSON.parse(teamInfo1)["response"];
-      let teamStr1 = teamNum1 + " - " + jTeamInfo["nickname"];
-      console.log("==> teamCompare: team1: " + teamStr1);
+      let jTeamNames = JSON.parse(eventTeamNames);
+      let teamStr1 = "";
+      let teamStr2 = "";
+      for (let entry in jTeamNames) {
+        if (parseInt(teamNum1) === jTeamNames[entry]["teamnum"]) {
+          teamStr1 = jTeamNames[entry]["teamnum"] + " - " + jTeamNames[entry]["teamname"];
+        }
+        if (parseInt(teamNum2) === jTeamNames[entry]["teamnum"]) {
+          teamStr2 = jTeamNames[entry]["teamnum"] + " - " + jTeamNames[entry]["teamname"];
+        }
+      }
+      console.log("==> teamCompare: team1: \n" + teamStr1 + "\n" + teamStr2);
       document.getElementById("teamMainTitle1").innerHTML = teamStr1;
-    });
-
-    // Get match data
-    $.get("api/dbReadAPI.php", {
-      getTeamMatchData: teamNum1
-    }).done(function (teamMatches) {
-      console.log("=> getTeamMatchData");
-      mdp1 = new matchDataProcessor(JSON.parse(teamMatches));
-      console.log("done with mdp 1");
-      loadMatchData(teamNum1, teamNum2, mdp1, mdp2);
-    });
-
-    // Do team1 Strategic Data Table.
-    $.get("api/dbReadAPI.php", {
-      getTeamStrategicData: teamNum1
-    }).done(function (strategicData) {
-      console.log("=> getTeamStrategicData");
-      loadStrategicData("strategicLink1", "strategicDataTable1", teamNum1, JSON.parse(strategicData));
-    });
-
-    // Get team2 name from TBA
-    $.get("api/tbaAPI.php", {
-      getTeamInfo: teamNum2
-    }).done(function (teamInfo2) {
-      // console.log("=> getTeamInfo: " + teamInfo2);
-      if (teamInfo2 === null) {
-        return alert("Can't load teamName from TBA; check if TBA Key was set in db_config");
-      }
-      let jTeamInfo = JSON.parse(teamInfo2)["response"];
-      let teamStr2 = teamNum2 + " - " + jTeamInfo["nickname"];
-      console.log("==> teamCompare: team2: " + teamStr2);
       document.getElementById("teamMainTitle2").innerHTML = teamStr2;
+    });
+
+    // Get strategic data and filter for both teams
+    $.get("api/dbReadAPI.php", {
+      getAllStrategicData: true
+    }).done(function (allStrategicData) {
+      let jStratData = JSON.parse(allStrategicData);
+      console.log("=> getAllStrategicData");
+      document.getElementById("strategicLink1").querySelector('a').text = teamNum1 + " - Strategic Data";
+      insertStrategicDataBody("strategicDataTable1", jStratData, [], [teamNum1]);
+      document.getElementById("strategicLink2").querySelector('a').text = teamNum2 + " - Strategic Data";
+      insertStrategicDataBody("strategicDataTable2", jStratData, [], [teamNum2]);
     });
 
     // Get team2 match data
     $.get("api/dbReadAPI.php", {
-      getTeamMatchData: teamNum2
-    }).done(function (teamMatches2) {
-      console.log("=> getTeamMatchData");
-      mdp2 = new matchDataProcessor(JSON.parse(teamMatches2));
-      console.log("done with mdp2");
-      loadMatchData(teamNum1, teamNum2, mdp1, mdp2);
-    });
+      getAllMatchData: true
+    }).done(function (allMatchData) {
+      console.log("=> getAllMatchData");
+      let mdp = new matchDataProcessor(JSON.parse(allMatchData));
+      if (mdp === null) {
+        alert("No match data for this team at this event!");
+      }
 
-    // Do team2 Strategic Data Table.
-    $.get("api/dbReadAPI.php", {
-      getTeamStrategicData: teamNum2
-    }).done(function (strategicData2) {
-      console.log("=> getTeamStrategicData2");
-      loadStrategicData("strategicLink2", "strategicDataTable2", teamNum2, JSON.parse(strategicData2));
+      // Get the team1 averages data from matchDataProcessor (mdp)
+      mdp.getSiteFilteredAverages(function (filteredMatches, filteredAvgData) {
+        if (filteredAvgData !== undefined) {
+
+          // Load the graphs
+          loadFirstPickGraph(teamNum1, teamNum2, filteredAvgData);
+          loadSecondPickGraph(teamNum1, teamNum2, filteredAvgData);
+          loadThirdPickGraph(teamNum1, teamNum2, filteredAvgData);
+          loadEndgameTable(teamNum1, teamNum2, filteredAvgData);
+          loadEventAveragesTable(teamNum1, teamNum2, filteredAvgData);
+        }
+        else
+          alert("No averages data for matches at this event!");
+      });
     });
   }
 
@@ -1104,6 +821,9 @@ require 'inc/header.php';
     // Pressing enter in team number field loads the page
     let inputTeam1 = document.getElementById("enterTeamNumber1");
     let inputTeam2 = document.getElementById("enterTeamNumber2");
+
+    insertStrategicDataHeader("strategicDataTable1", []);
+    insertStrategicDataHeader("strategicDataTable2", []);
 
     inputTeam1.addEventListener("keypress", function (event1) {
       if (event1.key === "Enter") {
@@ -1135,6 +855,7 @@ require 'inc/header.php';
 <script src="./scripts/compareTeamNumbers.js"></script>
 <script src="./scripts/sortFrcTables.js"></script>
 <script src="./scripts/matchDataProcessor.js"></script>
+<script src="./scripts/strategicDataTable.js"></script>
 <script src="./scripts/validateTeamNumber.js"></script>
 
 <script src="./external/charts/chart.umd.js"></script>

@@ -19,14 +19,13 @@
 //      aliasList   - list of aliases at the event
 //
 function insertMatchDataHeader(tableId, aliasList) {
-  console.log("==> insertMatchDataHeader: tableId" + tableId + " aliases " + aliasList.length);
+  console.log("==> insertMatchDataHeader: tableId " + tableId + " aliases " + aliasList.length);
 
   let theadRef = document.getElementById(tableId).querySelector('thead');;
   theadRef.innerHTML = ""; // Clear Table
 
   let rowString = '';
 
-  rowString += '<tr>';
   rowString += '<th scope="col" style="background-color:transparent" class="sorttable_numeric">Match</th>';
   rowString += '<th scope="col" style="background-color:transparent" class="sorttable_numeric">Team</th>';
   // Insert column if the aliasList is not empty
@@ -54,13 +53,21 @@ function insertMatchDataHeader(tableId, aliasList) {
   rowString += '<th scope="col" style="background-color:transparent">Died</th>';
   rowString += '<th scope="col" style="background-color:transparent">Scout Name</th>';
   rowString += '<th scope="col" style="background-color:#cfe2ff">Comment</th>';
-  rowString += '</tr>';
 
   theadRef.insertRow().innerHTML = rowString;
 };
 
+// Converts a given "1" to yes, "2" to no, anything else to a dash.
+function toYesNo(value) {
+  switch (String(value)) {
+    case "1": return "Yes";
+    case "2": return "No";
+    default: return "-";
+  }
+}
+
 //
-//  Insert a match data table header (all rows)
+//  Insert a match data table body (all rows)
 //    Params
 //      tableId     - the HTML ID where the table header is inserted
 //      matchData   - the list of available matches to include in this table
@@ -68,7 +75,7 @@ function insertMatchDataHeader(tableId, aliasList) {
 //      teamFilter  - list of teams to include in table (length 0 if all)
 //
 function insertMatchDataBody(tableId, matchData, aliasList, teamFilter) {
-  console.log("==> insertMatchDataTable: tableId" + tableId + " matches " + matchData.length + " teams " + teamFilter.length + " aliases " + aliasList.length);
+  console.log("==> insertMatchDataTable: tableId " + tableId + " matches " + matchData.length + " aliases " + aliasList.length + " teams " + teamFilter.length);
 
   let tbodyRef = document.getElementById(tableId).querySelector('tbody');;
   tbodyRef.innerHTML = ""; // Clear Table
@@ -118,6 +125,7 @@ function insertMatchDataBody(tableId, matchData, aliasList, teamFilter) {
     tbodyRef.insertRow().innerHTML = rowString;
 
     sorttable.makeSortable(document.getElementById(tableId));
+
     const matchColumn = 0;
     sortTableByMatch(tableId, matchColumn);
   }
