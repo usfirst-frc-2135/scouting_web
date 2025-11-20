@@ -25,34 +25,37 @@ function insertMatchDataHeader(tableId, aliasList) {
   theadRef.innerHTML = ""; // Clear Table
 
   let rowString = '';
-
+  const thPrefix0 = '<th scope="col" style="background-color:transparent">';  // No color
+  const thPrefix1 = '<th scope="col" style="background-color:#d5e6de">';      // Auton color
+  const thPrefix2 = '<th scope="col" style="background-color:#d6f3fB">';      // Teleop color
+  const thPrefix3 = '<th scope="col" style="background-color:#fbe6d3">';      // Endgame color
   rowString += '<th scope="col" style="background-color:transparent" class="sorttable_numeric">Match</th>';
   rowString += '<th scope="col" style="background-color:transparent" class="sorttable_numeric">Team</th>';
   // Insert column if the aliasList is not empty
   if (aliasList.length > 0) {
-    rowString += '<th scope="col" style="background-color:transparent">Alias</th>';
+    rowString += thPrefix0 + 'Alias</th>';
   }
-  rowString += '<th scope="col" style="background-color:#d5e6de">Auton Leave</th>';
-  rowString += '<th scope="col" style="background-color:#d5e6de">Auton Coral L1</th>';
-  rowString += '<th scope="col" style="background-color:#d5e6de">Auton Coral L2</th>';
-  rowString += '<th scope="col" style="background-color:#d5e6de">Auton Coral L3</th>';
-  rowString += '<th scope="col" style="background-color:#d5e6de">Auton Coral L4</th>';
-  rowString += '<th scope="col" style="background-color:#d5e6de">Auton Algae Net</th>';
-  rowString += '<th scope="col" style="background-color:#d5e6de">Auton Algae Proc</th>';
-  rowString += '<th scope="col" style="background-color:transparent">Acqd Coral</th>';
-  rowString += '<th scope="col" style="background-color:transparent">Acqd Algae</th>';
-  rowString += '<th scope="col" style="background-color:#d6f3fB">Teleop Coral L1</th>';
-  rowString += '<th scope="col" style="background-color:#d6f3fB">Teleop Coral L2</th>';
-  rowString += '<th scope="col" style="background-color:#d6f3fB">Teleop Coral L3</th>';
-  rowString += '<th scope="col" style="background-color:#d6f3fB">Teleop Coral L4</th>';
-  rowString += '<th scope="col" style="background-color:#d6f3fB">Teleop Algae Net</th>';
-  rowString += '<th scope="col" style="background-color:#d6f3fB">Teleop Algae Proc</th>';
-  rowString += '<th scope="col" style="background-color:#d6f3fB">Defense</th>';
-  rowString += '<th scope="col" style="background-color:#fbe6d3">Cage Climb</th>';
-  rowString += '<th scope="col" style="background-color:#fbe6d3">Start Climb</th>';
-  rowString += '<th scope="col" style="background-color:transparent">Died</th>';
-  rowString += '<th scope="col" style="background-color:transparent">Scout Name</th>';
-  rowString += '<th scope="col" style="background-color:#cfe2ff">Comment</th>';
+  rowString += thPrefix1 + 'Auton Leave</th>';
+  rowString += thPrefix1 + 'Auton Coral L1</th>';
+  rowString += thPrefix1 + 'Auton Coral L2</th>';
+  rowString += thPrefix1 + 'Auton Coral L3</th>';
+  rowString += thPrefix1 + 'Auton Coral L4</th>';
+  rowString += thPrefix1 + 'Auton Algae Net</th>';
+  rowString += thPrefix1 + 'Auton Algae Proc</th>';
+  rowString += thPrefix0 + 'Acqd Coral</th>';
+  rowString += thPrefix0 + 'Acqd Algae</th>';
+  rowString += thPrefix2 + 'Teleop Coral L1</th>';
+  rowString += thPrefix2 + 'Teleop Coral L2</th>';
+  rowString += thPrefix2 + 'Teleop Coral L3</th>';
+  rowString += thPrefix2 + 'Teleop Coral L4</th>';
+  rowString += thPrefix2 + 'Teleop Algae Net</th>';
+  rowString += thPrefix2 + 'Teleop Algae Proc</th>';
+  rowString += thPrefix2 + 'Defense</th>';
+  rowString += thPrefix3 + 'Cage Climb</th>';
+  rowString += thPrefix3 + 'Start Climb</th>';
+  rowString += thPrefix0 + 'Died</th>';
+  rowString += thPrefix0 + 'Scout Name</th>';
+  rowString += thPrefix0 + 'Comment</th>';
 
   theadRef.insertRow().innerHTML = rowString;
 };
@@ -123,10 +126,10 @@ function insertMatchDataBody(tableId, matchData, aliasList, teamFilter) {
     rowString += tdPrefix1 + matchItem["comment"] + "</td>";
 
     tbodyRef.insertRow().innerHTML = rowString;
-
-    sorttable.makeSortable(document.getElementById(tableId));
-
-    const matchColumn = 0;
-    sortTableByMatch(tableId, matchColumn);
   }
+
+  sorttable.makeSortable(document.getElementById(tableId));
+
+  const matchColumn = 0;
+  sortTableByMatch(tableId, matchColumn);
 };

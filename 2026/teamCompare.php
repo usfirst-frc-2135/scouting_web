@@ -198,206 +198,10 @@ require 'inc/header.php';
         <div class="row mb-3">
 
           <div id="freeze-table" class="freeze-table overflow-auto">
-            <table id="averagesTable"
-              class="table table-striped table-bordered table-hover table-sm border-dark text-center sortable">
-              <colgroup>
-                <col span="2" style="background-color:transparent">
-                <col span="2" style="background-color:#cfe2ff">
-                <col span="2" style="background-color:transparent">
-                <col span="2" style="background-color:#cfe2ff">
-                <col span="2" style="background-color:transparent">
-                <col span="2" style="background-color:#cfe2ff">
-                <col span="2" style="background-color:transparent">
-                <col span="2" style="background-color:#cfe2ff">
-                <col span="2" style="background-color:transparent">
-                <col span="2" style="background-color:#cfe2ff">
-                <col span="2" style="background-color:transparent">
-                <col span="2" style="background-color:#cfe2ff">
-                <col span="2" style="background-color:transparent">
-                <col span="2" style="background-color:#cfe2ff">
-                <col span="2" style="background-color:transparent">
-                <col span="2" style="background-color:#cfe2ff">
-                <col span="2" style="background-color:transparent">
-                <col span="2" style="background-color:#cfe2ff">
-                <col span="2" style="background-color:transparent">
-                <col span="3" style="background-color:#cfe2ff">
-                <col span="2" style="background-color:transparent">
-                <col span="2" style="background-color:#cfe2ff">
-                <col span="2" style="background-color:transparent">
-                <col span="2" style="background-color:#cfe2ff">
-                <col span="3" style="background-color:transparent">
-                <col span="2" style="background-color:#cfe2ff">
-                <col span="2" style="background-color:transparent">
-                <col span="1" style="background-color:#cfe2ff">
-                <col span="4" style="background-color:transparent">
-                <col span="5" style="background-color:#cfe2ff">
-                <col span="1" style="background-color:transparent">
-              </colgroup>
-              <thead>
-                <tr>
-                  <th colspan="2" style="background-color:transparent"></th>
-                  <th colspan="8" style="background-color:#83b4ff">Match Points</th>
-                  <th colspan="4" style="background-color:#d5e6de">Auton Pts</th>
-                  <th colspan="4" style="background-color:#d6f3fB">Teleop Pts</th>
-                  <th colspan="4" style="background-color:#83b4ff">Game pieces</th>
-                  <th colspan="10" style="background-color:#d5e6de">Auton Coral</th>
-                  <th colspan="6" style="background-color:#d5e6de">Auton Algae</th>
-                  <th colspan="11" style="background-color:#d6f3fB">Teleop Coral</th>
-                  <th colspan="7" style="background-color:#d6f3fB">Teleop Algae</th>
-                  <th colspan="1" style="background-color:#AFE8F7">Def</th>
-                  <th colspan="9" style="background-color:#fbe6d3">Endgame</th>
-                  <th colspan="1" style="background-color:transparent"></th>
-                </tr>
-                <tr>
-                  <!-- team number -->
-                  <th colspan="2" style="background-color:transparent"></th>
-
-                  <!-- points by game phase -->
-                  <th colspan="2" style="background-color:#83b4ff">Total Pts</th>
-                  <th colspan="2" style="background-color:#d5e6de">Auton Pts</th>
-                  <th colspan="2" style="background-color:#d6f3fB">Teleop Pts</th>
-                  <th colspan="2" style="background-color:#fbe6d3">Endgame Pts</th>
-
-                  <!-- points by game piece -->
-                  <th colspan="2" style="background-color:#d5e6de">Coral Pts</th>
-                  <th colspan="2" style="background-color:transparent">Algae Pts</th>
-                  <th colspan="2" style="background-color:#d6f3fB">Coral Pts</th>
-                  <th colspan="2" style="background-color:transparent">Algae Pts</th>
-
-                  <th colspan="2" style="background-color:#83b4ff">Total Coral</th>
-                  <th colspan="2" style="background-color:transparent">Total Algae</th>
-
-                  <!-- auton coral -->
-                  <th colspan="2" style="background-color:#d5e6de">Auton Coral</th>
-                  <th colspan="2" style="background-color:transparent">L4</th>
-                  <th colspan="2" style="background-color:#d5e6de">L3</th>
-                  <th colspan="2" style="background-color:transparent">L2</th>
-                  <th colspan="2" style="background-color:#d5e6de">L1</th>
-
-                  <!-- auton algae -->
-                  <th colspan="2" style="background-color:transparent">Total Algae</th>
-                  <th colspan="2" style="background-color:#d5e6de">Proc</th>
-                  <th colspan="2" style="background-color:transparent">Net</th>
-
-                  <!-- teleop coral -->
-                  <th colspan="3" style="background-color:#d6f3fB">Teleop Coral</th>
-                  <th colspan="2" style="background-color:transparent">L4</th>
-                  <th colspan="2" style="background-color:#d6f3fB">L3</th>
-                  <th colspan="2" style="background-color:transparent">L2</th>
-                  <th colspan="2" style="background-color:#d6f3fB">L1</th>
-
-                  <!-- teleop algae -->
-                  <th colspan="3" style="background-color:transparent">Teleop Algae</th>
-                  <th colspan="2" style="background-color:#d6f3fB">Proc</th>
-                  <th colspan="2" style="background-color:transparent">Net</th>
-
-                  <!-- defense -->
-                  <th colspan="1" style="background-color:#AFE8F7"></th>
-
-                  <!-- endgame -->
-                  <th colspan="4" style="background-color:transparent">Start Climb%</th>
-                  <th colspan="5" style="background-color:#fbe6d3">Climb%</th>
-
-                  <!-- died -->
-                  <th colspan="1" style="background-color:transparent">Died</th>
-                </tr>
-                <tr>
-                  <!-- team number -->
-                  <th scope="col" class="sorttable_numeric" style="background-color:transparent">Team</th>
-                  <th scope="col" class="sorttable_numeric" style="background-color:transparent">Alias</th>
-
-                  <!-- points by game phase -->
-                  <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
-                  <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
-                  <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
-                  <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
-                  <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
-                  <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
-                  <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
-                  <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
-
-                  <!-- points by game piece -->
-                  <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
-                  <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
-                  <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
-                  <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
-                  <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
-                  <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
-                  <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
-                  <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
-
-                  <!-- total game pieces -->
-                  <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
-                  <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
-                  <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
-                  <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
-
-                  <!-- auton coral -->
-                  <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
-                  <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
-                  <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
-                  <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
-                  <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
-                  <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
-                  <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
-                  <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
-                  <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
-                  <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
-
-                  <!-- auton algae -->
-                  <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
-                  <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
-                  <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
-                  <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
-                  <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
-                  <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
-
-                  <!-- teleop coral -->
-                  <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Acc%</th>
-                  <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
-                  <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
-                  <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
-                  <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
-                  <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
-                  <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
-                  <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
-                  <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
-                  <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
-                  <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
-
-                  <!-- telop algae -->
-                  <th scope="col" class="sorttable_numeric" style="background-color:transparent">Acc%</th>
-                  <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
-                  <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
-                  <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
-                  <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
-                  <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
-                  <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
-
-                  <!-- defense -->
-                  <th scope="col" class="sorttable_numeric" style="background-color:#AFE8F7">Avg</th>
-
-                  <!-- endgame (start climb)-->
-                  <th scope="col" class="sorttable_numeric" style="background-color:transparent">N</th>
-                  <th scope="col" class="sorttable_numeric" style="background-color:transparent">B</th>
-                  <th scope="col" class="sorttable_numeric" style="background-color:transparent">A</th>
-                  <th scope="col" class="sorttable_numeric" style="background-color:transparent">L</th>
-
-                  <!-- endgame (climb)-->
-                  <th scope="col" class="sorttable_numeric" style="background-color:transparent">N</th>
-                  <th scope="col" class="sorttable_numeric" style="background-color:transparent">P</th>
-                  <th scope="col" class="sorttable_numeric" style="background-color:transparent">F</th>
-                  <th scope="col" class="sorttable_numeric" style="background-color:transparent">S</th>
-                  <th scope="col" class="sorttable_numeric" style="background-color:transparent">D</th>
-
-                  <!-- died -->
-                  <th scope="col" class="sorttable_numeric" style="background-color:transparent">#</th>
-                </tr>
-              </thead>
-
+            <table id="averagesTable" class="table table-striped table-bordered table-hover table-sm border-dark text-center">
+              <thead> </thead>
               <tbody class="table-group-divider">
               </tbody>
-
             </table>
           </div>
         </div>
@@ -634,114 +438,6 @@ require 'inc/header.php';
     tbodyRef.insertRow().innerHTML = createEndgameEntry(teamNum2, avgData);
   }
 
-  // Create an event average entry for a team
-  function createEventAverageEntry(teamNum, avgData) {
-    let endgameClimbPercentage = getDataValue(avgData[teamNum], "endgameClimbPercent");
-    let endgameClimbStartPercentage = getDataValue(avgData[teamNum], "endgameClimbStartPercent");
-    const tdPrefix = "<td style=\"background-color:transparent\">";
-    let rowString = "";
-
-    rowString += tdPrefix + "<a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a></td>";
-    // Alias col
-    rowString += tdPrefix + "" + "</td>";   // for now just empty string
-
-    // points by game phase
-    rowString += tdPrefix + getDataValue(avgData[teamNum], "totalPointsAvg") + "</td>";
-    rowString += tdPrefix + getDataValue(avgData[teamNum], "totalPointsMax") + "</td>";
-    rowString += tdPrefix + getDataValue(avgData[teamNum], "autonPointsAvg") + "</td>";
-    rowString += tdPrefix + getDataValue(avgData[teamNum], "autonPointsMax") + "</td>";
-    rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopPointsAvg") + "</td>";
-    rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopPointsMax") + "</td>";
-    rowString += tdPrefix + getDataValue(avgData[teamNum], "endgamePointsAvg") + "</td>";
-    rowString += tdPrefix + getDataValue(avgData[teamNum], "endgamePointsMax") + "</td>";
-
-    // points by game piece
-    rowString += tdPrefix + getDataValue(avgData[teamNum], "autonCoralPointsAvg") + "</td>";
-    rowString += tdPrefix + getDataValue(avgData[teamNum], "autonCoralPointsMax") + "</td>";
-    rowString += tdPrefix + getDataValue(avgData[teamNum], "autonAlgaePointsAvg") + "</td>";
-    rowString += tdPrefix + getDataValue(avgData[teamNum], "autonAlgaePointsMax") + "</td>";
-    rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopCoralPointsAvg") + "</td>";
-    rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopCoralPointsMax") + "</td>";
-    rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopAlgaePointsAvg") + "</td>";
-    rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopAlgaePointsMax") + "</td>";
-
-    // total game pieces
-    rowString += tdPrefix + getDataValue(avgData[teamNum], "totalCoralScoredAvg") + "</td>";
-    rowString += tdPrefix + getDataValue(avgData[teamNum], "totalCoralScoredMax") + "</td>";
-    rowString += tdPrefix + getDataValue(avgData[teamNum], "totalAlgaeScoredAvg") + "</td>";
-    rowString += tdPrefix + getDataValue(avgData[teamNum], "totalAlgaeScoredMax") + "</td>";
-
-    // auton coral
-    rowString += tdPrefix + getDataValue(avgData[teamNum], "autonCoralScoredAvg") + "</td>";
-    rowString += tdPrefix + getDataValue(avgData[teamNum], "autonCoralScoredMax") + "</td>";
-    rowString += tdPrefix + getDataValue(avgData[teamNum], "autonCoralL4Avg") + "</td>";
-    rowString += tdPrefix + getDataValue(avgData[teamNum], "autonCoralL4Max") + "</td>";
-    rowString += tdPrefix + getDataValue(avgData[teamNum], "autonCoralL3Avg") + "</td>";
-    rowString += tdPrefix + getDataValue(avgData[teamNum], "autonCoralL3Max") + "</td>";
-    rowString += tdPrefix + getDataValue(avgData[teamNum], "autonCoralL2Avg") + "</td>";
-    rowString += tdPrefix + getDataValue(avgData[teamNum], "autonCoralL2Max") + "</td>";
-    rowString += tdPrefix + getDataValue(avgData[teamNum], "autonCoralL1Avg") + "</td>";
-    rowString += tdPrefix + getDataValue(avgData[teamNum], "autonCoralL1Max") + "</td>";
-
-    // auton algae
-    rowString += tdPrefix + getDataValue(avgData[teamNum], "autonAlgaeScoredAvg") + "</td>";
-    rowString += tdPrefix + getDataValue(avgData[teamNum], "autonAlgaeScoredMax") + "</td>";
-    rowString += tdPrefix + getDataValue(avgData[teamNum], "autonAlgaeProcAvg") + "</td>";
-    rowString += tdPrefix + getDataValue(avgData[teamNum], "autonAlgaeProcMax") + "</td>";
-    rowString += tdPrefix + getDataValue(avgData[teamNum], "autonAlgaeNetAvg") + "</td>";
-    rowString += tdPrefix + getDataValue(avgData[teamNum], "autonAlgaeNetMax") + "</td>";
-
-    // teleop coral
-    rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopCoralPercent") + "</td>";
-    rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopCoralScoredAvg") + "</td>";
-    rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopCoralScoredMax") + "</td>";
-    rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopCoralL4Avg") + "</td>";
-    rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopCoralL4Max") + "</td>";
-    rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopCoralL3Avg") + "</td>";
-    rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopCoralL3Max") + "</td>";
-    rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopCoralL2Avg") + "</td>";
-    rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopCoralL2Max") + "</td>";
-    rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopCoralL1Avg") + "</td>";
-    rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopCoralL1Max") + "</td>";
-
-    // teleop algae
-    rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopAlgaePercent") + "</td>";
-    rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopAlgaeScoredAvg") + "</td>";
-    rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopAlgaeScoredMax") + "</td>";
-    rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopAlgaeProcAvg") + "</td>";
-    rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopAlgaeProcMax") + "</td>";
-    rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopAlgaeNetAvg") + "</td>";
-    rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopAlgaeNetMax") + "</td>";
-
-    // defense 
-    rowString += tdPrefix + getDataValue(avgData[teamNum], "defenseAvg") + "</td>";
-
-    // endgame
-    rowString += tdPrefix + getDataValue(endgameClimbStartPercentage, 0) + "</td>";
-    rowString += tdPrefix + getDataValue(endgameClimbStartPercentage, 1) + "</td>";
-    rowString += tdPrefix + getDataValue(endgameClimbStartPercentage, 2) + "</td>";
-    rowString += tdPrefix + getDataValue(endgameClimbStartPercentage, 3) + "</td>";
-    rowString += tdPrefix + getDataValue(endgameClimbPercentage, 0) + "</td>";
-    rowString += tdPrefix + getDataValue(endgameClimbPercentage, 1) + "</td>";
-    rowString += tdPrefix + getDataValue(endgameClimbPercentage, 2) + "</td>";
-    rowString += tdPrefix + getDataValue(endgameClimbPercentage, 3) + "</td>";
-    rowString += tdPrefix + getDataValue(endgameClimbPercentage, 4) + "</td>";
-
-    rowString += tdPrefix + getDataValue(avgData[teamNum], "totaldied") + "</td>";
-
-    return rowString;
-  }
-
-  // Load the event averages table
-  function loadEventAveragesTable(teamNum, teamNum2, avgData) {
-    console.log("==> teamCompare: loadEventAveragesTable()");
-    let tbodyRef = document.getElementById("averagesTable").querySelector('tbody');
-    tbodyRef.innerHTML = ""; // Clear Table
-
-    tbodyRef.insertRow().innerHTML = createEventAverageEntry(teamNum, avgData);
-    tbodyRef.insertRow().innerHTML = createEventAverageEntry(teamNum2, avgData);
-  }
-
   // This is the main function that runs when we want to load teams.
   function buildTeamComparePage(teamNum1, teamNum2) {
     console.log("==> teamCompare: buildTeamComparePage()");
@@ -787,7 +483,9 @@ require 'inc/header.php';
       getAllMatchData: true
     }).done(function (allMatchData) {
       console.log("=> getAllMatchData");
-      let mdp = new matchDataProcessor(JSON.parse(allMatchData));
+      let jMatches = JSON.parse(allMatchData);
+      let compareMatches = jMatches.filter(function (el) { return el["teamnumber"] == teamNum1 || el["teamnumber"] == teamNum2; });
+      let mdp = new matchDataProcessor(compareMatches);
       if (mdp === null) {
         alert("No match data for this team at this event!");
       }
@@ -801,7 +499,7 @@ require 'inc/header.php';
           loadSecondPickGraph(teamNum1, teamNum2, filteredAvgData);
           loadThirdPickGraph(teamNum1, teamNum2, filteredAvgData);
           loadEndgameTable(teamNum1, teamNum2, filteredAvgData);
-          loadEventAveragesTable(teamNum1, teamNum2, filteredAvgData);
+          insertEventAveragesBody("averagesTable", filteredAvgData, [], [teamNum1, teamNum2]);
         }
         else
           alert("No averages data for matches at this event!");
@@ -824,6 +522,7 @@ require 'inc/header.php';
 
     insertStrategicDataHeader("strategicDataTable1", []);
     insertStrategicDataHeader("strategicDataTable2", []);
+    insertEventAveragesHeader("averagesTable", []);
 
     inputTeam1.addEventListener("keypress", function (event1) {
       if (event1.key === "Enter") {
@@ -853,6 +552,7 @@ require 'inc/header.php';
 
 <script src="./scripts/compareMatchNumbers.js"></script>
 <script src="./scripts/compareTeamNumbers.js"></script>
+<script src="./scripts/eventAveragesTable.js"></script>
 <script src="./scripts/sortFrcTables.js"></script>
 <script src="./scripts/matchDataProcessor.js"></script>
 <script src="./scripts/strategicDataTable.js"></script>

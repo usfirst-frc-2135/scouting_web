@@ -25,8 +25,11 @@ function insertStrategicDataHeader(tableId, aliasList) {
   theadRef.innerHTML = ""; // Clear Table
 
   let rowString1 = '';
-  rowString1 += '<tr>';
   rowString1 += '<th colspan="1" style="background-color:transparent"> </th>';
+  // Insert column if the aliasList is not empty
+  if (aliasList.length > 0) {
+    rowString1 += '<th colspan="1" style="background-color:transparent"> </th>';
+  }
   rowString1 += '<th colspan="1" style="background-color:transparent"> </th>';
   rowString1 += '<th colspan="1" style="background-color:#cfe2ff"> </th>';
   rowString1 += '<th colspan="2" style="background-color:#cfe2ff">Against Defense</th>';
@@ -36,40 +39,43 @@ function insertStrategicDataHeader(tableId, aliasList) {
   rowString1 += '<th colspan="4" style="background-color:#cfe2ff">Teleop</th>';
   rowString1 += '<th colspan="2" style="background-color:transparent">Notes</th>';
   rowString1 += '<th colspan="1"> </th>';
-  rowString1 += '</tr>';
 
   theadRef.insertRow().innerHTML = rowString1;
 
   let rowString2 = '';
-  rowString2 += '<tr>';
+  const thPrefix0 = '<th scope="col" style="background-color:transparent">';
+  const thPrefix1 = '<th scope="col" style="background-color:#cfe2ff">';
   rowString2 += '<th scope="col" style="background-color:transparent" class="sorttable_numeric">Team</th>';
-  rowString2 += '<th scope="col" style="background-color:transparent">Match</th>';
-  rowString2 += '<th scope="col" style="background-color:#cfe2ff">Drive Skill</th>';
-  rowString2 += '<th scope="col" style="background-color:transparent">Block</th>';
-  rowString2 += '<th scope="col" style="background-color:#cfe2ff">Note</th>';
-  rowString2 += '<th scope="col" style="background-color:transparent">Block Path</th>';
-  rowString2 += '<th scope="col" style="background-color:#cfe2ff">Block Station</th>';
-  rowString2 += '<th scope="col" style="background-color:transparent">Note</th>';
-  rowString2 += '<th scope="col" style="background-color:#cfe2ff">Pin</th>';
-  rowString2 += '<th scope="col" style="background-color:transparent">Auton Barge Contact</th>';
-  rowString2 += '<th scope="col" style="background-color:#cfe2ff">Auton Cage Contact</th>';
-  rowString2 += '<th scope="col" style="background-color:transparent">Anchor Contact</th>';
-  rowString2 += '<th scope="col" style="background-color:#cfe2ff">Barge Contact</th>';
-  rowString2 += '<th scope="col" style="background-color:transparent">Reef Contact</th>';
-  rowString2 += '<th scope="col" style="background-color:#cfe2ff">Cage Contact</th>';
-  rowString2 += '<th scope="col" style="background-color:transparent">Contact Climbing Robot</th>';
-  rowString2 += '<th scope="col" style="background-color:#cfe2ff">Get Floor Coral</th>';
-  rowString2 += '<th scope="col" style="background-color:transparent">Get Stn Coral</th>';
-  rowString2 += '<th scope="col" style="background-color:#cfe2ff">Get Floor Algae</th>';
-  rowString2 += '<th scope="col" style="background-color:transparent">Get Reef Algae</th>';
-  rowString2 += '<th scope="col" style="background-color:#cfe2ff">Get Floor Coral</th>';
-  rowString2 += '<th scope="col" style="background-color:transparent">Get Floor Algae</th>';
-  rowString2 += '<th scope="col" style="background-color:#cfe2ff">Knock Algae</th>';
-  rowString2 += '<th scope="col" style="background-color:transparent">Acquire Reef Algae</th>';
-  rowString2 += '<th scope="col" style="background-color:#cfe2ff">Problem Note</th>';
-  rowString2 += '<th scope="col" style="background-color:transparent">General Note</th>';
-  rowString2 += '<th scope="col" style="background-color:#cfe2ff">Scout Name</th>';
-  rowString2 += '</tr>';
+  // Insert column if the aliasList is not empty
+  if (aliasList.length > 0) {
+    rowString2 += thPrefix0 + 'Alias</th>';
+  }
+  rowString2 += thPrefix0 + 'Match</th>';
+  rowString2 += thPrefix1 + 'Drive Skill</th>';
+  rowString2 += thPrefix0 + 'Block</th>';
+  rowString2 += thPrefix1 + 'Note</th>';
+  rowString2 += thPrefix0 + 'Block Path</th>';
+  rowString2 += thPrefix1 + 'Block Station</th>';
+  rowString2 += thPrefix0 + 'Note</th>';
+  rowString2 += thPrefix1 + 'Pin</th>';
+  rowString2 += thPrefix0 + 'Auton Barge Contact</th>';
+  rowString2 += thPrefix1 + 'Auton Cage Contact</th>';
+  rowString2 += thPrefix0 + 'Anchor Contact</th>';
+  rowString2 += thPrefix1 + 'Barge Contact</th>';
+  rowString2 += thPrefix0 + 'Reef Contact</th>';
+  rowString2 += thPrefix1 + 'Cage Contact</th>';
+  rowString2 += thPrefix0 + 'Contact Climbing Robot</th>';
+  rowString2 += thPrefix1 + 'Get Floor Coral</th>';
+  rowString2 += thPrefix0 + 'Get Stn Coral</th>';
+  rowString2 += thPrefix1 + 'Get Floor Algae</th>';
+  rowString2 += thPrefix0 + 'Get Reef Algae</th>';
+  rowString2 += thPrefix1 + 'Get Floor Coral</th>';
+  rowString2 += thPrefix0 + 'Get Floor Algae</th>';
+  rowString2 += thPrefix1 + 'Knock Algae</th>';
+  rowString2 += thPrefix0 + 'Acquire Reef Algae</th>';
+  rowString2 += thPrefix1 + 'Problem Note</th>';
+  rowString2 += thPrefix0 + 'General Note</th>';
+  rowString2 += thPrefix1 + 'Scout Name</th>';
 
   theadRef.insertRow().innerHTML = rowString2;
 };
@@ -119,6 +125,13 @@ function insertStrategicDataBody(tableId, stratData, aliasList, teamFilter) {
 
     let rowString = "";
     rowString += tdPrefix0 + "<a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</td>";
+    // Insert column if the aliasList is not empty
+    if (aliasList.length > 0) {
+      let aliasNum = stratItem["teamalias"];
+      if (aliasNum === 0)
+        aliasNum = "";
+      rowString += tdPrefix0 + aliasNum + "</td>";
+    }
     rowString += tdPrefix0 + stratItem["matchnumber"] + "</td>";
     rowString += tdPrefix1 + driveVal + "</td>";
     rowString += tdPrefix0 + toYesNo(stratItem["against_tactic1"]) + "</td>";
@@ -147,11 +160,11 @@ function insertStrategicDataBody(tableId, stratData, aliasList, teamFilter) {
     rowString += tdPrefix1 + stratItem["scoutname"] + "</td>";
 
     tbodyRef.insertRow().innerHTML = rowString;
-
-    sorttable.makeSortable(document.getElementById(tableId));
-
-    const teamColumn = 0;
-    const matchColumn = 1;
-    sortTableByMatchAndTeam(tableId, teamColumn, matchColumn);
   }
+
+  sorttable.makeSortable(document.getElementById(tableId));
+
+  const teamColumn = 0;
+  const matchColumn = 1;
+  sortTableByMatchAndTeam(tableId, teamColumn, matchColumn);
 };

@@ -998,6 +998,7 @@ require 'inc/header.php';
       console.log("=> getTeamStrategicData");
       insertStrategicDataBody("strategicDataTable", JSON.parse(strategicData), jAliasNames, teamNum);
     });
+
     console.log("going to set title again for team " + teamNum + " with teamName: " + teamName);
     document.getElementById("teamTitle").innerHTML = teamNum + " - " + teamName;
   }
@@ -1033,13 +1034,11 @@ require 'inc/header.php';
       if (validateTeamNumber(urlTeamNum, null) > 0) {
         console.log("urlTeamNum = " + urlTeamNum);
         document.getElementById("enterTeamNumber").value = urlTeamNum;
-
         buildTeamLookupPage(urlTeamNum, teamName, jAliasNames);
       }
 
       // Pressing enter in team number field loads the page
-      let input = document.getElementById("enterTeamNumber");
-      input.addEventListener("keypress", function (event) {
+      document.getElementById("enterTeamNumber").addEventListener("keypress", function (event) {
         if (event.key === "Enter") {
           event.preventDefault();
           document.getElementById("loadTeamButton").click();
@@ -1049,7 +1048,6 @@ require 'inc/header.php';
       // Load team data for the number entered
       document.getElementById("loadTeamButton").addEventListener('click', function () {
         let teamNum = document.getElementById("enterTeamNumber").value.toUpperCase().trim();
-
         if (validateTeamNumber(teamNum, null) > 0) {
           buildTeamLookupPage(teamNum, teamName, jAliasNames);
         }
