@@ -21,6 +21,7 @@ require 'inc/header.php';
               <label for="enterTeamNumber" class="form-label">Team Number</label>
               <input id="enterTeamNumber" class="form-control" type="text" placeholder="FRC team number" name="enterTeamNumber">
             </div>
+            <div id="aliasNumber" class="ms-3 mb-3 text-success"></div>
 
             <div class="mb-3">
               <div class="input-group">
@@ -67,7 +68,6 @@ require 'inc/header.php';
 
 <script>
 
-
   // Check if our URL directs to a specific team
   function checkURLForTeamSpec() {
     console.log("=> pitPhotoUpload: checkURLForTeamSpec()");
@@ -83,6 +83,7 @@ require 'inc/header.php';
     console.log("==> pitPhotoUpload: showSuccessMessage()" + message);
     document.getElementById("robotPic").value = "";
     document.getElementById("enterTeamNumber").value = "";
+    document.getElementById("aliasNumber").innerText = "";
 
     document.getElementById("uploadMessageText").innerHTML = message;
     document.getElementById("uploadMessage").classList.add("alert-success");
@@ -219,6 +220,15 @@ require 'inc/header.php';
 
     const loadingSpinner = document.getElementById("loadingSpinner");
     loadingSpinner.style.visibility = 'hidden';
+    let jAliasNames = null;
+
+    // Read the alias table
+    $.get("api/dbReadAPI.php", {
+      getEventAliasNames: true
+    }).done(function (eventAliasNames) {
+      console.log("=> eventAliasNames");
+      jAliasNames = JSON.parse(eventAliasNames);
+    });
 
     // Check URL for source team to load
     let initTeamNumber = checkURLForTeamSpec().toUpperCase();
@@ -232,6 +242,17 @@ require 'inc/header.php';
       return alert("This browser does not support 'FileReader'");
     }
 
+    // Attach enterTeamNumber listener when losing focus to check for alias numbers
+    document.getElementById('enterTeamNumber').addEventListener('focusout', function () {
+      console.log("focus out");
+      let enteredNum = event.target.value.toUpperCase().trim();
+      if (isAliasNumber(enteredNum)) {
+        let teamNum = getTeamNumFromAlias(enteredNum, jAliasNames);
+        document.getElementById("aliasNumber").innerText = "Alias number " + enteredNum + " is Team " + teamNum;
+        document.getElementById("enterTeamNumber").value = teamNum;
+      }
+    });
+
     // Attach image upload processor
     document.getElementById('robotPic').addEventListener('change', handleFileSelect, false);
 
@@ -240,4 +261,5 @@ require 'inc/header.php';
   });
 </script>
 
+<script src="./scripts/aliasFunctions.js"></script>
 <script src="./scripts/validateTeamNumber.js"></script>

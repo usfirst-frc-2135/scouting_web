@@ -20,6 +20,8 @@ require 'inc/header.php';
           <button id="loadTeamButton" class="btn btn-primary" type="button">Load Teams</button>
         </div>
       </div>
+      <div id="aliasNumber1" class="ms-3 mb-3 text-success"></div>
+      <div id="aliasNumber2" class="ms-3 mb-3 text-success"></div>
     </div>
 
     <!-- First column of data starts here -->
@@ -391,6 +393,8 @@ require 'inc/header.php';
 
   function clearTeamComparePage() {
     // Clear existing data
+    document.getElementById("aliasNumber1").innerText = "";
+    document.getElementById("aliasNumber2").innerText = "";
     document.getElementById("teamMainTitle1").innerText = "";
     document.getElementById("teamMainTitle2").innerText = "";
     document.getElementById("firstPickChart").querySelector('tbody').innerHTML = "";
@@ -519,6 +523,15 @@ require 'inc/header.php';
     // Pressing enter in team number field loads the page
     let inputTeam1 = document.getElementById("enterTeamNumber1");
     let inputTeam2 = document.getElementById("enterTeamNumber2");
+    let jAliasNames = null;
+
+    // Read the alias table
+    $.get("api/dbReadAPI.php", {
+      getEventAliasNames: true
+    }).done(function (eventAliasNames) {
+      console.log("=> eventAliasNames");
+      jAliasNames = JSON.parse(eventAliasNames);
+    });
 
     insertStrategicDataHeader("strategicDataTable1", []);
     insertStrategicDataHeader("strategicDataTable2", []);
@@ -546,10 +559,32 @@ require 'inc/header.php';
         buildTeamComparePage(teamNum1, teamNum2);
       }
     });
+
+    // Attach enterTeamNumber listener when losing focus to check for alias numbers
+    document.getElementById('enterTeamNumber1').addEventListener('focusout', function () {
+      console.log("focus out");
+      let enteredNum = event.target.value.toUpperCase().trim();
+      if (isAliasNumber(enteredNum)) {
+        let teamNum = getTeamNumFromAlias(enteredNum, jAliasNames);
+        document.getElementById("aliasNumber1").innerText = "Alias number " + enteredNum + " is Team " + teamNum + "\n";
+        document.getElementById("enterTeamNumber1").value = teamNum;
+      }
+    });
+
+    document.getElementById('enterTeamNumber2').addEventListener('focusout', function () {
+      console.log("focus out");
+      let enteredNum = event.target.value.toUpperCase().trim();
+      if (isAliasNumber(enteredNum)) {
+        let teamNum = getTeamNumFromAlias(enteredNum, jAliasNames);
+        document.getElementById("aliasNumber2").innerText = "Alias number " + enteredNum + " is Team " + teamNum + "\n";
+        document.getElementById("enterTeamNumber2").value = teamNum;
+      }
+    });
   });
 
 </script>
 
+<script src="./scripts/aliasFunctions.js"></script>
 <script src="./scripts/compareMatchNumbers.js"></script>
 <script src="./scripts/compareTeamNumbers.js"></script>
 <script src="./scripts/eventAveragesTable.js"></script>

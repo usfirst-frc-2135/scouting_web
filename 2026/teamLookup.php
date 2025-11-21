@@ -20,6 +20,7 @@ require 'inc/header.php';
         </div>
       </div>
     </div>
+    <div id="aliasNumber" class="ms-3 mb-3 text-success"></div>
 
     <!-- First column of data starts here -->
     <div class="row">
@@ -907,6 +908,7 @@ require 'inc/header.php';
   // Clear existing data
   function clearTeamLookupPage() {
     console.log("==> teamLookup: clearTeamLookupPage()");
+    document.getElementById("aliasNumber").innerText = "";
     document.getElementById("teamTitle").innerText = "";
     document.getElementById("robotPics").innerText = "";
     document.getElementById("matchSheetTable").querySelector('tbody').innerHTML = "";
@@ -1019,12 +1021,14 @@ require 'inc/header.php';
     console.log("!!> addEventListener");
     // first get alias table data
     let teamName = "";
+    let jAliasNames = null;
 
+    // Read the alias table
     $.get("api/dbReadAPI.php", {
       getEventAliasNames: true
     }).done(function (eventAliasNames) {
       console.log("=> eventAliasNames");
-      let jAliasNames = JSON.parse(eventAliasNames);
+      jAliasNames = JSON.parse(eventAliasNames);
       insertStrategicDataHeader("strategicDataTable", jAliasNames);
       insertMatchDataHeader("matchDataTable", jAliasNames);
 
@@ -1042,6 +1046,17 @@ require 'inc/header.php';
         if (event.key === "Enter") {
           event.preventDefault();
           document.getElementById("loadTeamButton").click();
+        }
+      });
+
+      // Attach enterTeamNumber listener when losing focus to check for alias numbers
+      document.getElementById('enterTeamNumber').addEventListener('focusout', function () {
+        console.log("focus out");
+        let enteredNum = event.target.value.toUpperCase().trim();
+        if (isAliasNumber(enteredNum)) {
+          let teamNum = getTeamNumFromAlias(enteredNum, jAliasNames);
+          document.getElementById("aliasNumber").innerText = "Alias number " + enteredNum + " is Team " + teamNum;
+          document.getElementById("enterTeamNumber").value = teamNum;
         }
       });
 
