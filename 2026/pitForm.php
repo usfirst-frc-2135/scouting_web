@@ -409,9 +409,10 @@ require 'inc/header.php';
           document.getElementById("aliasNumber").innerText = "Alias number " + enteredNum + " is NOT valid!";
         else
           document.getElementById("aliasNumber").innerText = "Alias number " + enteredNum + " is Team " + teamNum;
-        else
         document.getElementById("enterTeamNumber").value = teamNum;
       }
+      else
+        document.getElementById("aliasNumber").innerText = "";
     });
   });
 </script>

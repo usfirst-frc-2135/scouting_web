@@ -570,6 +570,8 @@ require 'inc/header.php';
           document.getElementById("aliasNumber1").innerText = "Alias number " + enteredNum + " is Team " + teamNum + "\n";
         document.getElementById("enterTeamNumber1").value = teamNum;
       }
+      else
+        document.getElementById("aliasNumber1").innerText = "";
     });
 
     document.getElementById('enterTeamNumber2').addEventListener('focusout', function () {
@@ -583,6 +585,8 @@ require 'inc/header.php';
           document.getElementById("aliasNumber2").innerText = "Alias number " + enteredNum + " is Team " + teamNum + "\n";
         document.getElementById("enterTeamNumber2").value = teamNum;
       }
+      else
+        document.getElementById("aliasNumber2").innerText = "";
     });
   });
 

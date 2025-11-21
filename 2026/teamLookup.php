@@ -1061,6 +1061,8 @@ require 'inc/header.php';
             document.getElementById("aliasNumber").innerText = "Alias number " + enteredNum + " is Team " + teamNum;
           document.getElementById("enterTeamNumber").value = teamNum;
         }
+        else
+          document.getElementById("aliasNumber").innerText = "";
       });
 
       // Load team data for the number entered
