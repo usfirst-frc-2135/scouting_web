@@ -96,7 +96,6 @@ require 'inc/header.php';
     let jTeamImages = null;
     let jPitData = null;
     let jAliasNames = [];
-    let bAliasUsed = false;
 
     // Get alias table data
     $.get("api/dbReadAPI.php", {
@@ -106,7 +105,6 @@ require 'inc/header.php';
       jAliasNames = JSON.parse(eventAliasNames);
       if (jAliasNames.length > 0) {
         console.log("pitStatus: aliases used");
-        bAliasUsed = true;
       }
     });
 
@@ -126,7 +124,7 @@ require 'inc/header.php';
 
         // Checking if alias is being used and adjust team name accordingly.
         // At this point, the teamNum could be the 99-number.
-        if (bAliasUsed) {
+        if (jAliasNames.length > 0) {
           let BCDnum = getTeamNumFromAlias(teamNum, jAliasNames);
           if (BCDnum !== "") {
             // This entry is an alias, so create a new entry with the BCDnum with the alias as teamName.

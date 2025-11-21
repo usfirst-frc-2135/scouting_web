@@ -520,9 +520,6 @@ require 'inc/header.php';
   //
   document.addEventListener("DOMContentLoaded", function () {
 
-    // Pressing enter in team number field loads the page
-    let inputTeam1 = document.getElementById("enterTeamNumber1");
-    let inputTeam2 = document.getElementById("enterTeamNumber2");
     let jAliasNames = null;
 
     // Read the alias table
@@ -537,14 +534,15 @@ require 'inc/header.php';
     insertStrategicDataHeader("strategicDataTable2", []);
     insertEventAveragesHeader("averagesTable", []);
 
-    inputTeam1.addEventListener("keypress", function (event1) {
+    // Pressing enter in team number field loads the page
+    document.getElementById("enterTeamNumber1").addEventListener("keypress", function (event1) {
       if (event1.key === "Enter") {
         event1.preventDefault();
         document.getElementById("loadTeamButton").click();
       }
     });
 
-    inputTeam2.addEventListener("keypress", function (event2) {
+    document.getElementById("enterTeamNumber2").addEventListener("keypress", function (event2) {
       if (event2.key === "Enter") {
         event2.preventDefault();
         document.getElementById("loadTeamButton").click();
