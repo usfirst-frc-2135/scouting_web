@@ -84,6 +84,7 @@ class dbHandler
         eventcode,
         matchnumber,
         teamnumber,
+        teamalias,
         scoutname,
         autonStartPos,
         autonLeave,
@@ -128,6 +129,7 @@ class dbHandler
         :eventcode,
         :matchnumber,
         :teamnumber,
+        :teamalias,
         :scoutname,
         :autonStartPos,
         :autonLeave,
@@ -189,7 +191,7 @@ class dbHandler
           $key === "acquiredCoral" || $key === "acquiredAlgae" || $key === "teleopAlgaeFloorPickup" || $key === "teleopCoralFloorPickup" ||
           $key === "teleopKnockOffAlgae" || $key === "teleopAlgaeFromReef" || $key === "teleopHoldBoth" || $key === "teleopCoralL1" || $key === "teleopCoralL2" ||
           $key === "teleopCoralL3" || $key === "teleopCoralL4" || $key === "teleopAlgaeNet" || $key === "teleopAlgaeProcessor" || $key === "defenseLevel" ||
-          $key === "cageClimb" || $key === "startClimb" || $key === "died"
+          $key === "cageClimb" || $key === "startClimb" || $key === "died" || $key === "teamalias"
         )
         {
           $row[$key] = $this->enforceInt($value);
@@ -211,6 +213,7 @@ class dbHandler
         eventcode,
         matchnumber,
         teamnumber,
+        teamalias,
         scoutname,
         autonStartPos,
         autonLeave,
@@ -263,6 +266,7 @@ class dbHandler
         eventcode,
         matchnumber,
         teamnumber,
+        teamalias,
         scoutname,
         autonStartPos,
         autonLeave,
@@ -696,6 +700,7 @@ class dbHandler
         eventcode VARCHAR(10) NOT NULL,
         matchnumber VARCHAR(10) NOT NULL,
         teamnumber VARCHAR(10) NOT NULL,
+        teamalias VARCHAR(10) NOT NULL,
         scoutname VARCHAR(30) NOT NULL,
         autonStartPos TINYINT UNSIGNED NOT NULL,
         autonLeave TINYINT UNSIGNED NOT NULL,

@@ -294,10 +294,11 @@ require 'inc/header.php';
       configData["watchtable"] = databaseName + "_watch";
       configData["writeConfig"] = JSON.stringify(configData);
 
-      // Update the status badges after writing the config file
+      // Update the status badges after writing the config file and reload the page
       $.post("api/dbAPI.php", configData, function (dbStatus) {
         console.log("=> writeConfig");
         updateStatusValues(JSON.parse(dbStatus));
+        location.reload(); // This updates the event code in the header
       });
     });
 

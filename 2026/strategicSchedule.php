@@ -9,9 +9,9 @@ require 'inc/header.php';
     <!-- Page Title -->
     <div class="row pt-3 pb-3 mb-3">
       <h2 class="col-md-4"><?php echo $title; ?></h2>
-      <div class="col-md-4 mb-d form-check">
-        <input id="showCompleted" class="form-check-input" type="checkbox" name="showCompleted" checked>
-        <label for="showCompleted" class="form-check-label">Show Completed Matches</label>
+      <div class="col-md-4 mb-d form-check form-check-inline">
+        <input id="showCompleted" class="form-check-input ms-1" type="checkbox" name="showCompleted" checked>
+        <label for="showCompleted" class="form-check-label ms-1">Show Completed Matches</label>
       </div>
     </div>
 
@@ -234,7 +234,7 @@ require 'inc/header.php';
 
     // Save the team status to watch
     document.getElementById("addTeamWatch").addEventListener('click', function () {
-      let teamNum = document.getElementById("enterTeamNumber").value.trim().toUpperCase();
+      let teamNum = document.getElementById("enterTeamNumber").value.toUpperCase().trim();
       if (validateTeamNumber(teamNum, null) > 0) {
         updateTeamWatch(tableId, watchId, teamNum, "watch");
       }
@@ -242,7 +242,7 @@ require 'inc/header.php';
 
     // Save the team status to ignore
     document.getElementById("addTeamIgnore").addEventListener('click', function () {
-      let teamNum = document.getElementById("enterTeamNumber").value.trim().toUpperCase();
+      let teamNum = document.getElementById("enterTeamNumber").value.toUpperCase().trim();
       if (validateTeamNumber(teamNum, null) > 0) {
         updateTeamWatch(tableId, watchId, teamNum, "ignore");
       }

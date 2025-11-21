@@ -161,36 +161,7 @@ require 'inc/header.php';
 
           <div class="overflow-auto">
             <table id="R0DataTable" class="table table-bordered table-danger table-sm text-center">
-              <thead>
-                <tr>
-                  <th colspan="6" class="text-center fs-6" style="background-color:#D5E6DE">Auton</th>
-                  <th colspan="8" class="text-center fs-6" style="background-color:#D6F3FB">Teleop</th>
-                  <th colspan="5" class="text-center fs-6" style="background-color:#FBE6D3">Endgame</th>
-                </tr>
-                <tr>
-                  <th scope="col">L4</th>
-                  <th scope="col">L3</th>
-                  <th scope="col">L2</th>
-                  <th scope="col">L1</th>
-                  <th scope="col">Net</th>
-                  <th scope="col">Proc</th>
-
-                  <th scope="col">C%</th>
-                  <th scope="col">L4</th>
-                  <th scope="col">L3</th>
-                  <th scope="col">L2</th>
-                  <th scope="col">L1</th>
-                  <th scope="col">A%</th>
-                  <th scope="col">Net</th>
-                  <th scope="col">Proc</th>
-
-                  <th scope="col">D</th>
-                  <th scope="col">S</th>
-                  <th scope="col">F</th>
-                  <th scope="col">P</th>
-                  <th scope="col">N</th>
-                </tr>
-              </thead>
+              <thead> </thead>
               <tbody class="table-group-divider"> </tbody>
             </table>
           </div>
@@ -226,36 +197,7 @@ require 'inc/header.php';
 
           <div class="overflow-auto">
             <table id="R1DataTable" class="table table-bordered table-danger table-sm text-center">
-              <thead>
-                <tr>
-                  <th colspan="6" class="text-center fs-6" style="background-color:#D5E6DE">Auton</th>
-                  <th colspan="8" class="text-center fs-6" style="background-color:#D6F3FB">Teleop</th>
-                  <th colspan="5" class="text-center fs-6" style="background-color:#FBE6D3">Endgame</th>
-                </tr>
-                <tr>
-                  <th scope="col">L4</th>
-                  <th scope="col">L3</th>
-                  <th scope="col">L2</th>
-                  <th scope="col">L1</th>
-                  <th scope="col">Net</th>
-                  <th scope="col">Proc</th>
-
-                  <th scope="col">C%</th>
-                  <th scope="col">L4</th>
-                  <th scope="col">L3</th>
-                  <th scope="col">L2</th>
-                  <th scope="col">L1</th>
-                  <th scope="col">A%</th>
-                  <th scope="col">Net</th>
-                  <th scope="col">Proc</th>
-
-                  <th scope="col">D</th>
-                  <th scope="col">S</th>
-                  <th scope="col">F</th>
-                  <th scope="col">P</th>
-                  <th scope="col">N</th>
-                </tr>
-              </thead>
+              <thead> </thead>
               <tbody class="table-group-divider"> </tbody>
             </table>
           </div>
@@ -291,36 +233,7 @@ require 'inc/header.php';
 
           <div class="overflow-auto">
             <table id="R2DataTable" class="table table-bordered table-danger table-sm text-center">
-              <thead>
-                <tr>
-                  <th colspan="6" class="text-center fs-6" style="background-color:#D5E6DE">Auton</th>
-                  <th colspan="8" class="text-center fs-6" style="background-color:#D6F3FB">Teleop</th>
-                  <th colspan="5" class="text-center fs-6" style="background-color:#FBE6D3">Endgame</th>
-                </tr>
-                <tr>
-                  <th scope="col">L4</th>
-                  <th scope="col">L3</th>
-                  <th scope="col">L2</th>
-                  <th scope="col">L1</th>
-                  <th scope="col">Net</th>
-                  <th scope="col">Proc</th>
-
-                  <th scope="col">C%</th>
-                  <th scope="col">L4</th>
-                  <th scope="col">L3</th>
-                  <th scope="col">L2</th>
-                  <th scope="col">L1</th>
-                  <th scope="col">A%</th>
-                  <th scope="col">Net</th>
-                  <th scope="col">Proc</th>
-
-                  <th scope="col">D</th>
-                  <th scope="col">S</th>
-                  <th scope="col">F</th>
-                  <th scope="col">P</th>
-                  <th scope="col">N</th>
-                </tr>
-              </thead>
+              <thead> </thead>
               <tbody class="table-group-divider"> </tbody>
             </table>
           </div>
@@ -360,36 +273,7 @@ require 'inc/header.php';
 
           <div class="overflow-auto">
             <table id="B0DataTable" class="table table-bordered table-primary table-sm text-center">
-              <thead>
-                <tr>
-                  <th colspan="6" class="text-center fs-6" style="background-color:#D5E6DE">Auton</th>
-                  <th colspan="8" class="text-center fs-6" style="background-color:#D6F3FB">Teleop</th>
-                  <th colspan="5" class="text-center fs-6" style="background-color:#FBE6D3">Endgame</th>
-                </tr>
-                <tr>
-                  <th scope="col">L4</th>
-                  <th scope="col">L3</th>
-                  <th scope="col">L2</th>
-                  <th scope="col">L1</th>
-                  <th scope="col">Net</th>
-                  <th scope="col">Proc</th>
-
-                  <th scope="col">C%</th>
-                  <th scope="col">L4</th>
-                  <th scope="col">L3</th>
-                  <th scope="col">L2</th>
-                  <th scope="col">L1</th>
-                  <th scope="col">A%</th>
-                  <th scope="col">Net</th>
-                  <th scope="col">Proc</th>
-
-                  <th scope="col">D</th>
-                  <th scope="col">S</th>
-                  <th scope="col">F</th>
-                  <th scope="col">P</th>
-                  <th scope="col">N</th>
-                </tr>
-              </thead>
+              <thead> </thead>
               <tbody class="table-group-divider"> </tbody>
             </table>
           </div>
@@ -425,36 +309,7 @@ require 'inc/header.php';
 
           <div class="overflow-auto">
             <table id="B1DataTable" class="table table-bordered table-primary table-sm text-center">
-              <thead>
-                <tr>
-                  <th colspan="6" class="text-center fs-6" style="background-color:#D5E6DE">Auton</th>
-                  <th colspan="8" class="text-center fs-6" style="background-color:#D6F3FB">Teleop</th>
-                  <th colspan="5" class="text-center fs-6" style="background-color:#FBE6D3">Endgame</th>
-                </tr>
-                <tr>
-                  <th scope="col">L4</th>
-                  <th scope="col">L3</th>
-                  <th scope="col">L2</th>
-                  <th scope="col">L1</th>
-                  <th scope="col">Net</th>
-                  <th scope="col">Proc</th>
-
-                  <th scope="col">C%</th>
-                  <th scope="col">L4</th>
-                  <th scope="col">L3</th>
-                  <th scope="col">L2</th>
-                  <th scope="col">L1</th>
-                  <th scope="col">A%</th>
-                  <th scope="col">Net</th>
-                  <th scope="col">Proc</th>
-
-                  <th scope="col">D</th>
-                  <th scope="col">S</th>
-                  <th scope="col">F</th>
-                  <th scope="col">P</th>
-                  <th scope="col">N</th>
-                </tr>
-              </thead>
+              <thead> </thead>
               <tbody class="table-group-divider"> </tbody>
             </table>
           </div>
@@ -490,36 +345,7 @@ require 'inc/header.php';
 
           <div class="overflow-auto">
             <table id="B2DataTable" class="table table-bordered table-primary table-sm text-center">
-              <thead>
-                <tr>
-                  <th colspan="6" class="text-center fs-6" style="background-color:#D5E6DE">Auton</th>
-                  <th colspan="8" class="text-center fs-6" style="background-color:#D6F3FB">Teleop</th>
-                  <th colspan="5" class="text-center fs-6" style="background-color:#FBE6D3">Endgame</th>
-                </tr>
-                <tr>
-                  <th scope="col">L4</th>
-                  <th scope="col">L3</th>
-                  <th scope="col">L2</th>
-                  <th scope="col">L1</th>
-                  <th scope="col">Net</th>
-                  <th scope="col">Proc</th>
-
-                  <th scope="col">C%</th>
-                  <th scope="col">L4</th>
-                  <th scope="col">L3</th>
-                  <th scope="col">L2</th>
-                  <th scope="col">L1</th>
-                  <th scope="col">A%</th>
-                  <th scope="col">Net</th>
-                  <th scope="col">Proc</th>
-
-                  <th scope="col">D</th>
-                  <th scope="col">S</th>
-                  <th scope="col">F</th>
-                  <th scope="col">P</th>
-                  <th scope="col">N</th>
-                </tr>
-              </thead>
+              <thead> </thead>
               <tbody class="table-group-divider"> </tbody>
             </table>
           </div>
@@ -702,9 +528,43 @@ require 'inc/header.php';
     document.getElementById("matchTime").innerText = "Time: " + hours + ":" + minutes.substring(minutes.length - 2) + " " + suffix;
   }
 
+  // Build the header in each team box data table
+  function buildTeamBoxTableHeader(tableId) {
+    let rowString1 = "";
+    rowString1 += '<th colspan="6" class="text-center fs-6" style="background-color:#D5E6DE">Auton</th>';
+    rowString1 += '<th colspan="8" class="text-center fs-6" style="background-color:#D6F3FB">Teleop</th>';
+    rowString1 += '<th colspan="5" class="text-center fs-6" style="background-color:#FBE6D3">Endgame</th>';
+
+    let rowString2 = "";
+    rowString2 += '<th scope="col">L4</th>';
+    rowString2 += '<th scope="col">L3</th>';
+    rowString2 += '<th scope="col">L2</th>';
+    rowString2 += '<th scope="col">L1</th>';
+    rowString2 += '<th scope="col">Net</th>';
+    rowString2 += '<th scope="col">Proc</th>';
+
+    rowString2 += '<th scope="col">C%</th>';
+    rowString2 += '<th scope="col">L4</th>';
+    rowString2 += '<th scope="col">L3</th>';
+    rowString2 += '<th scope="col">L2</th>';
+    rowString2 += '<th scope="col">L1</th>';
+    rowString2 += '<th scope="col">A%</th>';
+    rowString2 += '<th scope="col">Net</th>';
+    rowString2 += '<th scope="col">Proc</th>';
+
+    rowString2 += '<th scope="col">D</th>';
+    rowString2 += '<th scope="col">S</th>';
+    rowString2 += '<th scope="col">F</th>';
+    rowString2 += '<th scope="col">P</th>';
+    rowString2 += '<th scope="col">N</th>';
+
+    document.getElementById(tableId).querySelector('thead').insertRow().innerHTML = rowString1;
+    document.getElementById(tableId).querySelector('thead').insertRow().innerHTML = rowString2;
+  }
+
   // Load the info into the team box
-  function buildTeamBox(color, index, teamNum, averageData) {
-    console.log("==> buildTeamBox: build the team box in the match sheet - " + teamNum);
+  function buildTeamBoxTableBody(color, index, teamNum, averageData) {
+    console.log("==> buildTeamBoxTableBody: build the team box in the match sheet - " + teamNum);
     // Get team name from TBA
     $.get("api/tbaAPI.php", {
       getTeamInfo: teamNum
@@ -721,7 +581,7 @@ require 'inc/header.php';
         let jTeamInfo = JSON.parse(teamInfo)["response"];
         teamName += " " + jTeamInfo["nickname"];
       }
-      console.log("==> matchSheet: buildTeamBox() for " + teamNum + teamName);
+      console.log("==> matchSheet: buildTeamBoxTableBody() for " + teamNum + teamName);
       let teamLink = "<a class='text-light' href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a>";
       teamLink += " " + teamName;
       let elementRef = document.getElementById(color + index + "TeamNumber");
@@ -741,10 +601,10 @@ require 'inc/header.php';
       row += "<td>" + rd["autonAlgaeNetAvg"] + "</td>";
       row += "<td>" + rd["autonAlgaeProcAvg"] + "</td>";
       row += "<td>" + rd["teleopCoralPercent"] + "</td>";
-      row += "<td>" + rd["teleopCoralL1Avg"] + "</td>";
-      row += "<td>" + rd["teleopCoralL2Avg"] + "</td>";
-      row += "<td>" + rd["teleopCoralL3Avg"] + "</td>";
       row += "<td>" + rd["teleopCoralL4Avg"] + "</td>";
+      row += "<td>" + rd["teleopCoralL3Avg"] + "</td>";
+      row += "<td>" + rd["teleopCoralL2Avg"] + "</td>";
+      row += "<td>" + rd["teleopCoralL1Avg"] + "</td>";
       row += "<td>" + rd["teleopAlgaePercent"] + "</td>";
       row += "<td>" + rd["teleopAlgaeNetAvg"] + "</td>";
       row += "<td>" + rd["teleopAlgaeProcAvg"] + "</td>";
@@ -757,6 +617,7 @@ require 'inc/header.php';
     tbodyRef.insertRow().innerHTML = row;
   }
 
+  // Update the match summary table comparing both alliances
   function updateMatchSummary(matchSpec, averageData) {
     let totalCoralScoredAvg = { "red": 0, "blue": 0 };
     let totalAlgaeScoredAvg = { "red": 0, "blue": 0 };
@@ -941,12 +802,12 @@ require 'inc/header.php';
     }
     updateMatchSummary(matchSpec, averageData);
 
-    buildTeamBox("R", 0, matchSpec.red[0], averageData);
-    buildTeamBox("R", 1, matchSpec.red[1], averageData);
-    buildTeamBox("R", 2, matchSpec.red[2], averageData);
-    buildTeamBox("B", 0, matchSpec.blue[0], averageData);
-    buildTeamBox("B", 1, matchSpec.blue[1], averageData);
-    buildTeamBox("B", 2, matchSpec.blue[2], averageData);
+    buildTeamBoxTableBody("R", 0, matchSpec.red[0], averageData);
+    buildTeamBoxTableBody("R", 1, matchSpec.red[1], averageData);
+    buildTeamBoxTableBody("R", 2, matchSpec.red[2], averageData);
+    buildTeamBoxTableBody("B", 0, matchSpec.blue[0], averageData);
+    buildTeamBoxTableBody("B", 1, matchSpec.blue[1], averageData);
+    buildTeamBoxTableBody("B", 2, matchSpec.blue[2], averageData);
   }
 
   /////////////////////////////////////////////////////////////////////////////
@@ -973,6 +834,13 @@ require 'inc/header.php';
     let matchList = null;
     let averageData = null;
     let matchSpec = null;
+
+    buildTeamBoxTableHeader("R0DataTable");
+    buildTeamBoxTableHeader("R1DataTable");
+    buildTeamBoxTableHeader("R2DataTable");
+    buildTeamBoxTableHeader("B0DataTable");
+    buildTeamBoxTableHeader("B1DataTable");
+    buildTeamBoxTableHeader("B2DataTable");
 
     // Load event matches from TBA and build our links and a full match list
     $.get("api/tbaAPI.php", {

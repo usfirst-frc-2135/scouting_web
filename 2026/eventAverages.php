@@ -63,197 +63,8 @@ require 'inc/header.php';
     <div class="row mb-3">
 
       <div id="freeze-table" class="freeze-table overflow-auto">
-        <table id="averagesTable" class="table table-striped table-bordered table-hover table-sm border-dark text-center sortable">
-          <colgroup>
-            <col span="1" style="background-color:transparent">
-            <col span="2" style="background-color:#cfe2ff">
-            <col span="2" style="background-color:transparent">
-            <col span="2" style="background-color:#cfe2ff">
-            <col span="2" style="background-color:transparent">
-            <col span="2" style="background-color:#cfe2ff">
-            <col span="2" style="background-color:transparent">
-            <col span="2" style="background-color:#cfe2ff">
-            <col span="2" style="background-color:transparent">
-            <col span="2" style="background-color:#cfe2ff">
-            <col span="2" style="background-color:transparent">
-            <col span="2" style="background-color:#cfe2ff">
-            <col span="2" style="background-color:transparent">
-            <col span="2" style="background-color:#cfe2ff">
-            <col span="2" style="background-color:transparent">
-            <col span="2" style="background-color:#cfe2ff">
-            <col span="2" style="background-color:transparent">
-            <col span="2" style="background-color:#cfe2ff">
-            <col span="2" style="background-color:transparent">
-            <col span="3" style="background-color:#cfe2ff">
-            <col span="2" style="background-color:transparent">
-            <col span="2" style="background-color:#cfe2ff">
-            <col span="2" style="background-color:transparent">
-            <col span="2" style="background-color:#cfe2ff">
-            <col span="3" style="background-color:transparent">
-            <col span="2" style="background-color:#cfe2ff">
-            <col span="2" style="background-color:transparent">
-            <col span="1" style="background-color:#cfe2ff">
-            <col span="1" style="background-color:transparent">
-            <col span="1" style="background-color:#cfe2ff">
-            <col span="1" style="background-color:transparent">
-            <col span="1" style="background-color:#cfe2ff">
-            <col span="1" style="background-color:transparent">
-            <col span="1" style="background-color:#cfe2ff">
-          </colgroup>
-          <thead>
-            <tr>
-              <th colspan="1" style="background-color:transparent"></th>
-              <th colspan="8" style="background-color:#83b4ff">Match Points</th>
-              <th colspan="4" style="background-color:#d5e6de">Auton Pts</th>
-              <th colspan="4" style="background-color:#d6f3fB">Teleop Pts</th>
-              <th colspan="4" style="background-color:#83b4ff">Game pieces</th>
-              <th colspan="10" style="background-color:#d5e6de">Auton Coral</th>
-              <th colspan="6" style="background-color:#d5e6de">Auton Algae</th>
-              <th colspan="11" style="background-color:#d6f3fB">Teleop Coral</th>
-              <th colspan="7" style="background-color:#d6f3fB">Teleop Algae</th>
-              <th colspan="1" style="background-color:#AFE8F7">Def</th>
-              <th colspan="5" style="background-color:#fbe6d3">Endgame</th>
-              <th colspan="1" style="background-color:transparent"></th>
-            </tr>
-            <tr>
-              <!-- team number -->
-              <th colspan="1" style="background-color:transparent"></th>
-
-              <!-- points by game phase -->
-              <th colspan="2" style="background-color:#83b4ff">Total Pts</th>
-              <th colspan="2" style="background-color:#d5e6de">Auton Pts</th>
-              <th colspan="2" style="background-color:#d6f3fB">Teleop Pts</th>
-              <th colspan="2" style="background-color:#fbe6d3">Endgame Pts</th>
-
-              <!-- points by game piece -->
-              <th colspan="2" style="background-color:#d5e6de">Coral Pts</th>
-              <th colspan="2" style="background-color:transparent">Algae Pts</th>
-              <th colspan="2" style="background-color:#d6f3fB">Coral Pts</th>
-              <th colspan="2" style="background-color:transparent">Algae Pts</th>
-
-              <th colspan="2" style="background-color:#83b4ff">Total Coral</th>
-              <th colspan="2" style="background-color:transparent">Total Algae</th>
-
-              <!-- auton coral -->
-              <th colspan="2" style="background-color:#d5e6de">Auton Coral</th>
-              <th colspan="2" style="background-color:transparent">L4</th>
-              <th colspan="2" style="background-color:#d5e6de">L3</th>
-              <th colspan="2" style="background-color:transparent">L2</th>
-              <th colspan="2" style="background-color:#d5e6de">L1</th>
-
-              <!-- auton algae -->
-              <th colspan="2" style="background-color:transparent">Total Algae</th>
-              <th colspan="2" style="background-color:#d5e6de">Proc</th>
-              <th colspan="2" style="background-color:transparent">Net</th>
-
-              <!-- teleop coral -->
-              <th colspan="3" style="background-color:#d6f3fB">Teleop Coral</th>
-              <th colspan="2" style="background-color:transparent">L4</th>
-              <th colspan="2" style="background-color:#d6f3fB">L3</th>
-              <th colspan="2" style="background-color:transparent">L2</th>
-              <th colspan="2" style="background-color:#d6f3fB">L1</th>
-
-              <!-- teleop algae -->
-              <th colspan="3" style="background-color:transparent">Teleop Algae</th>
-              <th colspan="2" style="background-color:#d6f3fB">Proc</th>
-              <th colspan="2" style="background-color:transparent">Net</th>
-
-              <!-- defense -->
-              <th colspan="1" style="background-color:#AFE8F7"></th>
-
-              <!-- endgame -->
-              <th colspan="5" style="background-color:#fbe6d3">Climb%</th>
-
-              <!-- died -->
-              <th colspan="1" style="background-color:transparent">Died</th>
-            </tr>
-            <tr>
-              <!-- team number -->
-              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Team</th>
-
-              <!-- points by game phase -->
-              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
-
-              <!-- points by game piece -->
-              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
-
-              <!-- total game pieces -->
-              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
-
-              <!-- auton coral -->
-              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
-
-              <!-- auton algae -->
-              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
-
-              <!-- teleop coral -->
-              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Acc%</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
-
-              <!-- telop algae -->
-              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Acc%</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Avg</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Max</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Avg</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:transparent">Max</th>
-
-              <!-- defense -->
-              <th scope="col" class="sorttable_numeric" style="background-color:#AFE8F7">Avg</th>
-
-              <!-- endgame -->
-              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">N</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:transparent">P</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">F</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:transparent">S</th>
-              <th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">D</th>
-
-              <!-- died -->
-              <th scope="col" class="sorttable_numeric" style="background-color:transparent">#</th>
-            </tr>
-
-          </thead>
+        <table id="averagesTable" class="table table-striped table-bordered table-hover table-sm border-dark text-center">
+          <thead> </thead>
           <tbody class="table-group-divider"> </tbody>
         </table>
       </div>
@@ -266,126 +77,6 @@ require 'inc/header.php';
 <!-- Javascript page handlers -->
 
 <script>
-
-  // Lookup value for a key in the passed dictionary - team in match data
-  function getDataValue(dict, key) {
-    if (!dict) {
-      console.warn("getDataValue: Dictionary not found! " + dict);
-    }
-    else if (key in dict) {
-      return dict[key];
-    }
-    else {
-      console.warn("getDataValue: Key not found in dictionary! " + key + " " + dict);
-    }
-    return "";
-  }
-
-  // Create and the HTML table for display
-  function addAveragesToTable(tableId, teamList, avgData) {
-    console.log("==> eventAverages: addAveragesToTable()");
-    let tbodyRef = document.getElementById(tableId).querySelector('tbody');
-    tbodyRef.innerHTML = ""; // Clear Table
-    for (let teamNum of teamList) {
-      let endgameClimbPercentage = getDataValue(avgData[teamNum], "endgameClimbPercent");
-
-      const tdPrefix = "<td style=\"background-color:transparent\">";
-      let rowString = "";
-      rowString += tdPrefix + "<a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a></td>";
-
-      // points by game phase
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "totalPointsAvg") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "totalPointsMax") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "autonPointsAvg") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "autonPointsMax") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopPointsAvg") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopPointsMax") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "endgamePointsAvg") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "endgamePointsMax") + "</td>";
-
-      // points by game piece
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "autonCoralPointsAvg") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "autonCoralPointsMax") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "autonAlgaePointsAvg") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "autonAlgaePointsMax") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopCoralPointsAvg") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopCoralPointsMax") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopAlgaePointsAvg") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopAlgaePointsMax") + "</td>";
-
-      // total game pieces
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "totalCoralScoredAvg") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "totalCoralScoredMax") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "totalAlgaeScoredAvg") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "totalAlgaeScoredMax") + "</td>";
-
-      // auton coral
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "autonCoralScoredAvg") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "autonCoralScoredMax") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "autonCoralL4Avg") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "autonCoralL4Max") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "autonCoralL3Avg") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "autonCoralL3Max") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "autonCoralL2Avg") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "autonCoralL2Max") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "autonCoralL1Avg") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "autonCoralL1Max") + "</td>";
-
-      // auton algae
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "autonAlgaeScoredAvg") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "autonAlgaeScoredMax") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "autonAlgaeProcAvg") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "autonAlgaeProcMax") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "autonAlgaeNetAvg") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "autonAlgaeNetMax") + "</td>";
-
-      // teleop coral
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopCoralPercent") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopCoralScoredAvg") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopCoralScoredMax") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopCoralL4Avg") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopCoralL4Max") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopCoralL3Avg") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopCoralL3Max") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopCoralL2Avg") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopCoralL2Max") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopCoralL1Avg") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopCoralL1Max") + "</td>";
-
-      // teleop algae
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopAlgaePercent") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopAlgaeScoredAvg") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopAlgaeScoredMax") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopAlgaeProcAvg") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopAlgaeProcMax") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopAlgaeNetAvg") + "</td>";
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "teleopAlgaeNetMax") + "</td>";
-
-      // defense
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "defenseAvg") + "</td>";
-
-      // endgame
-      rowString += tdPrefix + getDataValue(endgameClimbPercentage, 0) + "</td>";
-      rowString += tdPrefix + getDataValue(endgameClimbPercentage, 1) + "</td>";
-      rowString += tdPrefix + getDataValue(endgameClimbPercentage, 2) + "</td>";
-      rowString += tdPrefix + getDataValue(endgameClimbPercentage, 3) + "</td>";
-      rowString += tdPrefix + getDataValue(endgameClimbPercentage, 4) + "</td>";
-
-      rowString += tdPrefix + getDataValue(avgData[teamNum], "totaldied") + "</td>";
-
-      tbodyRef.insertRow().innerHTML = rowString;
-    }
-  }
-
-  // Add a team (key) to the final team list
-  function getTeamListFromData(matchData) {
-    console.log("==> eventAverages: getTeamListFromData()");
-    let keyList = [];
-    for (let teamNum in matchData) {
-      keyList.push(teamNum);
-    }
-    return keyList;
-  }
 
   // CSV File functions
 
@@ -404,11 +95,15 @@ require 'inc/header.php';
   }
 
   // Returns a string with the comma-separated line of data for the given team.
-  function createCSVLine(team, evtAvgs, coprs) {
+  function createCSVLine(team, evtAvgs, coprs, aliasData) {
     let pitLocation = 0;
     let oprTP = getDataValue(coprs[team], "totalPoints");
+    let endgameClimbStartPercent = lookupAverage(evtAvgs, team, "endgameClimbStartPercent");
     let endgameClimbPercent = lookupAverage(evtAvgs, team, "endgameClimbPercent");
+
     let csvLine = team + ",";
+    let alias = getAliasFromTeamNum(team, aliasData);
+    csvLine += alias + ",";
 
     csvLine += pitLocation + ",";
     csvLine += oprTP + ",";
@@ -472,7 +167,7 @@ require 'inc/header.php';
     csvLine += lookupAverage(evtAvgs, team, "teleopCoralL1Avg") + ",";
     csvLine += lookupAverage(evtAvgs, team, "teleopCoralL1Max") + ",";
 
-    // auton algae
+    // teleop algae
     csvLine += lookupAverage(evtAvgs, team, "teleopAlgaePercent") + ",";
     csvLine += lookupAverage(evtAvgs, team, "teleopAlgaeScoredAvg") + ",";
     csvLine += lookupAverage(evtAvgs, team, "teleopAlgaeScoredMax") + ",";
@@ -482,6 +177,11 @@ require 'inc/header.php';
     csvLine += lookupAverage(evtAvgs, team, "teleopAlgaeNetMax") + ",";
 
     // endgame
+    csvLine += getDataValue(endgameClimbStartPercent, 0) + ",";
+    csvLine += getDataValue(endgameClimbStartPercent, 1) + ",";
+    csvLine += getDataValue(endgameClimbStartPercent, 2) + ",";
+    csvLine += getDataValue(endgameClimbStartPercent, 3) + ",";
+
     csvLine += getDataValue(endgameClimbPercent, 0) + ",";
     csvLine += getDataValue(endgameClimbPercent, 1) + ",";
     csvLine += getDataValue(endgameClimbPercent, 2) + ",";
@@ -489,30 +189,30 @@ require 'inc/header.php';
     csvLine += getDataValue(endgameClimbPercent, 4) + ",";
 
     csvLine += lookupAverage(evtAvgs, team, "totaldied") + ",";
-    csvLine += "-\n";    // NOTE
+    csvLine += "-\n";    // Comment
     return csvLine;
   }
 
   // Merge data into CSV file and write it
-  function createCSVFile(csvName, matchData, coprs) {
-    console.log("==> eventAverages: createCSVFile()");
+  function createCSVFile(csvName, matchData, coprs, aliasData) {
+    console.log("eventAverages: createCSVFile()");
+
     // This CSV header must match the order in createCSVLine!
-    let csvStr = "Team,Pit Location,OPR," +
+    let csvStr = "Team,Alias,Pit Location,OPR," +
       "Total Pts Avg,Total Pts Max,Auto Pts Avg,Auto Pts Max,Tel Pts Avg,Tel Pts Max,End Pts Avg,End Pts Max," +
-      "Auton Coral Pts Avg,Total Coral Pts Max,Auto Algae Pts Avg,Auto Algae Pts Max,Tel Coral Pts Avg,Tel Coral Pts Max,Tel Algae Pts Avg,Tel Algae Pts Max," +
+      "Auton Coral Pts Avg,Auton Coral Pts Max,Auto Algae Pts Avg,Auto Algae Pts Max,Tel Coral Pts Avg,Tel Coral Pts Max,Tel Algae Pts Avg,Tel Algae Pts Max," +
       "Total Coral Avg,Total Coral Max,Total Algae Avg,Total Algae Max," +
       "Auto Coral Avg,Auto Coral Max,Auto L4 Avg,Auto L4 Max,Auto L3 Avg,Auto L3 Max,Auto L2 Avg,Auto L2 Max,Auto L1 Avg,Auto L1 Max," +
       "Auto Algae Avg,Auto Algae Max,Auto Proc Avg,Auto Proc Max,Auto Net Avg,Auto Net Max," +
       "Tel Coral Acc,Tel Coral Avg,Tel Coral Max,Tel L4 Avg,Tel L4 Max,Tel L3 Avg,Tel L3 Max,Tel L2 Avg,Tel L2 Max,Tel L1 Avg,Tel L1 Max," +
-      "Tel Algae Acc,Tel Algae Avg,Tel Algae Max,Tel Proc Avg,Tel Proc Max,Tel Net Avg,Tel Net Max," +
+      "Tel Algae Acc,Tel Algae Avg,Tel Algae Max,Tel Proc Avg,Tel Proc Max,Tel Net Avg,Tel Net Max," + "Start N/A,Start Before,Start At,Start Less10," +
       "End N/A,End Park,End Fall,End Shal,End Deep," +
       "Total Died, Note\n";
 
     let mdp = new matchDataProcessor(matchData);
     mdp.getSiteFilteredAverages(function (filteredMatchData, filteredAvgData) {
       for (let key in filteredAvgData) {
-        // console.log(key);
-        csvStr += createCSVLine(key, filteredAvgData, coprs);  // key is team number
+        csvStr += createCSVLine(key, filteredAvgData, coprs, aliasData);  // key is team number
       }
 
       let hiddenElement = document.createElement('a');
@@ -530,33 +230,43 @@ require 'inc/header.php';
     console.log("==> eventAverages: downloadCSVFile()");
     let jMatchData = null;
     let jCoprData = null;
-    function waitForData(mData, cData) {
-      if ((mData === null) || (cData === null)) {
+    let jAliasData = null;
+    function waitForData(mData, cData, aData) {
+      if ((mData === null) || (cData === null) || (aData === null)) {
         return;
       }
       console.log("Creating the CSV");
-      createCSVFile(csvName, mData, cData);
+      createCSVFile(csvName, mData, cData, aData);
     }
+
+    // Get alias data from DB
+    $.get("api/dbReadAPI.php", {
+      getEventAliasNames: true
+    }).done(function (eventAliasNames) {
+      jAliasData = JSON.parse(eventAliasNames);
+      console.log("Got event Alias Names");
+      waitForData(jMatchData, jCoprData, jAliasData);
+    });
 
     // Get match data from DB
     $.get("api/dbReadAPI.php", {
       getAllMatchData: true
     }).done(function (matchData) {
-      console.log("=> getAllMatchData:");
       jMatchData = JSON.parse(matchData);
-      waitForData(jMatchData, jCoprData);
+      console.log("Got all match data");
+      waitForData(jMatchData, jCoprData, jAliasData);
     });
 
     // Get OPR data from TBA
     $.get("api/tbaAPI.php", {
       getCOPRs: true
     }).done(function (coprs) {
-      console.log("=> getCOPRs");
       if (coprs === null) {
         return alert("Can't load COPRs from TBA; check if TBA Key was set in db_config");
       }
       jCoprData = JSON.parse(coprs)["data"];
-      waitForData(jMatchData, jCoprData);
+      console.log("Got COPRs data");
+      waitForData(jMatchData, jCoprData, jAliasData);
     });
   }
 
@@ -566,14 +276,21 @@ require 'inc/header.php';
     $.get("api/dbReadAPI.php", {
       getAllMatchData: true
     }).done(function (matchData) {
+
+      $.get("api/dbReadAPI.php", {
+        getEventAliasNames: true
+      }).done(function (eventAliasNames) {
+        console.log("=> eventAliasNames");
+        jAliasNames = JSON.parse(eventAliasNames);
+      });
+
       console.log("=> getAllMatchData:");
-      mdp = new matchDataProcessor(JSON.parse(matchData));
+      let mdp = new matchDataProcessor(JSON.parse(matchData));
       if (startMatch !== null && endMatch !== null) {
         mdp.filterMatchRange(startMatch, endMatch);
       }
       mdp.getSiteFilteredAverages(function (filteredMatchData, filteredAvgData) {
-        let teamList = getTeamListFromData(filteredAvgData);
-        addAveragesToTable(tableId, teamList, filteredAvgData);
+        insertEventAveragesBody(tableId, filteredAvgData, [], []);
         // script instructions say this is needed, but it breaks table header sorting
         // sorttable.makeSortable(document.getElementById(tableId));
         document.getElementById(tableId).click(); // This magic fixes the floating column bug
@@ -598,6 +315,7 @@ require 'inc/header.php';
     const frozenTable = new FreezeTable('.freeze-table', { fixedNavbar: '.navbar' });
     const csvFileName = "eventAverages";
 
+    insertEventAveragesHeader(tableId, []);
     buildAveragesTable(tableId, null, null); // Retrieve all data
 
     // Filter out unwanted matches
@@ -623,4 +341,8 @@ require 'inc/header.php';
 
 </script>
 
+<script src="./scripts/aliasFunctions.js"></script>
+<script src="./scripts/compareTeamNumbers.js"></script>
+<script src="./scripts/eventAveragesTable.js"></script>
 <script src="./scripts/matchDataProcessor.js"></script>
+<script src="./scripts/sortFrcTables.js"></script>

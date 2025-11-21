@@ -57,7 +57,7 @@ require 'inc/header.php';
       let teamName = names[teamNum];
       let row = "";
       row += "<td class='text-start'>" + "<a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a>";
-      row += " " + teamName;
+      row += " - " + teamName;
       row += "</td>";
 
       if (pitInfo[teamNum] != null) {
@@ -97,15 +97,15 @@ require 'inc/header.php';
     let jPitData = null;
     let jAliasNames = [];
     let bAliasUsed = false;
-console.log("---> pit status add event lisner starting");
-    //get alias table data
+
+    // Get alias table data
     $.get("api/dbReadAPI.php", {
       getEventAliasNames: true
     }).done(function (eventAliasNames) {
       console.log("=> eventAliasNames");
       jAliasNames = JSON.parse(eventAliasNames);
-      if (jAliasNames.length > 0) { 
-        console.log("---> aliases used");
+      if (jAliasNames.length > 0) {
+        console.log("pitStatus: aliases used");
         bAliasUsed = true;
       }
     });
@@ -119,20 +119,22 @@ console.log("---> pit status add event lisner starting");
         return alert("Can't load eventTeamNames from TBA; check if TBA Key was set in db_config");
       }
       let jTeamNames = JSON.parse(eventTeamNames);
-      console.log( "----> jTeamNames length = " + jTeamNames.length);
+      console.log("pitStatus: jTeamNames length = " + jTeamNames.length);
       for (let team in jTeamNames) {
         let teamNum = jTeamNames[team]["teamnum"];
         let teamName = jTeamNames[team]["teamname"];
-        teamList.push(teamNum);
-        //checking if alias is being used and adjust team name accordingly
-        //right now the teamNum is the 99-number
-        if(bAliasUsed) {
+
+        // Checking if alias is being used and adjust team name accordingly.
+        // At this point, the teamNum could be the 99-number.
+        if (bAliasUsed) {
           let BCDnum = getTeamNumFromAlias(teamNum, jAliasNames);
-          console.log("---> BCDnum = " + BCDnum);
           if (BCDnum !== "") {
-            teamName = BCDnum;
+            // This entry is an alias, so create a new entry with the BCDnum with the alias as teamName.
+            teamName = teamNum;
+            teamNum = BCDnum;
           }
         }
+        teamList.push(teamNum);
         namesList[teamNum] = teamName;
       }
 

@@ -50,7 +50,7 @@ require 'inc/header.php';
 
 <script>
 
-  const qrValidLength = 41;   // This is determined by game requirements and adjusted each year
+  const qrValidLength = 42;   // This is determined by game requirements and adjusted each year
   const qrPadLength = 1;      // TODO: no explanation why this is padded--did we delete something?
 
   // update this data list length whenever more data is added to the table
@@ -143,6 +143,7 @@ require 'inc/header.php';
     // qrList[37] see above
     // qrList[38] see above
     matchData["comment"] = qrList[39];
+    matchData["teamalias"] = qrList[40];
     return matchData;
   }
 
@@ -200,13 +201,17 @@ require 'inc/header.php';
 
   // Alerts user of a successful QR scan
   function indicateScanSuccess() {
-    try {
-      window.navigator.vibrate(200); // Chrome throws an "intervention" if window is not clicked first!
+    const canVibrate = window.navigator.vibrate;
+    if (canVibrate) {                   // iOS does not support vibrate and crashes, so test if it's available
+      try {
+        window.navigator.vibrate(200); // MacOS Chrome throws an "intervention" if window is not clicked first!
+      }
+      catch (exception) {
+        console.warn("indicateScanSuccess: Vibrate notification request failed! - " + e);
+        alert("Vibrate notification request failed!");
+      }
     }
-    catch (exception) {
-      console.warn("indicateScanSuccess: Vibrate notification request failed! - " + e);
-      alert("Vibrate notification request failed!");
-    }
+
     document.getElementById("content").classList.add("bg-success");
     setTimeout(function () {
       document.getElementById("content").classList.remove("bg-success");
@@ -340,3 +345,5 @@ require 'inc/header.php';
   });
 
 </script>
+
+<script src="./external/zxing/zxing.min.js"></script>

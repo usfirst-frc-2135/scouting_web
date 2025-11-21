@@ -159,8 +159,7 @@ require 'inc/header.php';
     buildScoutTable(tableId);
 
     // Pressing enter in team number field attempts to save the scout name
-    let input = document.getElementById("enterScoutName");
-    input.addEventListener("keypress", function (event) {
+    document.getElementById("enterScoutName").addEventListener("keypress", function (event) {
       if (event.key === "Enter") {
         event.preventDefault();
         document.getElementById("addScoutName").click();
