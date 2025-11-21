@@ -405,7 +405,11 @@ require 'inc/header.php';
       let enteredNum = event.target.value.toUpperCase().trim();
       if (isAliasNumber(enteredNum)) {
         let teamNum = getTeamNumFromAlias(enteredNum, jAliasNames);
-        document.getElementById("aliasNumber").innerText = "Alias number " + enteredNum + " is Team " + teamNum;
+        if (teamNum === "")
+          document.getElementById("aliasNumber").innerText = "Alias number " + enteredNum + " is NOT valid!";
+        else
+          document.getElementById("aliasNumber").innerText = "Alias number " + enteredNum + " is Team " + teamNum;
+        else
         document.getElementById("enterTeamNumber").value = teamNum;
       }
     });
