@@ -139,7 +139,7 @@ require 'inc/header.php';
               <a class="btn btn-primary" href="./aliasData.php" role="button">Configure Team Aliases</a>
             </div>
             <div class="row mb-3 mx-auto" style=" width: 200px;">
-              <a class="btn btn-primary" href="./matchStatus.php" role="button">Check Match Status</a>
+              <a class="btn btn-primary" href="./matchStatus.php" role="button">Match Scouting Status</a>
             </div>
           </div>
         </div>
