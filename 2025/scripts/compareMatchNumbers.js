@@ -79,16 +79,22 @@ function compareMatchNumbers(matchA, matchB) {
 
   let returnVal;
 
-  if (prefixA === prefixB)   // Comp level is same, use numbers
+  if (prefixA === prefixB)    // Comp level is same, use numbers
     returnVal = (parseInt(numA) - parseInt(numB));
-  else if (prefixA === "p")  // A != B, practice matches always first
+  else if (prefixA === "p")   // A != B, A practice matches always first
     returnVal = -1;
-  else if (prefixB === "p")  // A !practice, so B is first
+  else if (prefixB === "p")   // A != B, A !practice, B practice, B practice is first
     returnVal = 1;
-  else if (prefixA === "qm") // A & B !practice, so A must be first
+  else if (prefixA === "qm")  // A != B, A & B !practice, A qm, A qual is first
     returnVal = -1;
-  else
-    returnVal = 1;          // B must be first
+  else if (prefixB === "qm")  // A != B, A & B !practice, A !qm, B qm, B qual is first
+    returnVal = 1;
+  else if (prefixA === "sf")  // A != B, A & B !practice, A & B !qm, A is sf, A is first
+    returnVal = -1;
+  else if (prefixB === "sf")  // A != B, A & B !practice, A & B !qm, A !sf, B is first
+    returnVal = 1;
+  else                        // This shouldn't happen, because A & B would both need to be "f"
+    returnVal = -1;
 
   // console.log("==> compareMatchNumbers: " + matchA + " " + matchB + " " + returnVal);
 
