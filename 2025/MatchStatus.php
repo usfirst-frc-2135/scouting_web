@@ -1,5 +1,5 @@
 <?php
-$title = 'Match Data';
+$title = 'Match Scouting Status';
 require 'inc/header.php';
 ?>
 
@@ -15,7 +15,7 @@ require 'inc/header.php';
     <div class="row col-12 mb-3">
 
       <div id="freeze-table" class="freeze-table overflow-auto">
-        <table id="matchDataTable" class="table table-striped table-bordered table-hover table-sm border-dark text-center">
+        <table id="matchStatusTable" class="table table-striped table-bordered table-hover table-sm border-dark text-center">
           <thead class="z-3"> </thead>
           <tbody class="table-group-divider"> </tbody>
         </table>
@@ -32,33 +32,59 @@ require 'inc/header.php';
 <script>
 
   // Acquire match data and build the page
-  function buildMatchDataTable(tableId) {
-    $.get("api/dbReadAPI.php", {
-      getEventAliasNames: true
-    }).done(function (eventAliasNames) {
-      console.log("=> eventAliasNames");
-      let jAliasNames = JSON.parse(eventAliasNames);
-      insertMatchDataHeader(tableId, jAliasNames);
-      $.get("api/dbReadAPI.php", {
-        getAllMatchData: true
-      }).done(function (matchData) {
-        console.log("=> getAllMatchData");
-        let mdp = new matchDataProcessor(JSON.parse(matchData));
-        // mdp.sortMatches(allEventMatches);
-        mdp.getSiteFilteredAverages(function (filteredMatchData, filteredAvgData) {
-          if (filteredMatchData !== undefined) {
-            insertMatchDataBody(tableId, filteredMatchData, jAliasNames, []);
-            // script instructions say this is needed, but it breaks table header sorting
-            // sorttable.makeSortable(document.getElementById(tableId));
-            document.getElementById(tableId).click(); // This magic fixes the floating column bug
-          }
-          else {
-            alert("No match data found!");
-          }
-        });
-      });
+  function buildMatchStatusTable(tableId, eventMatches, allMatchData) {
+    console.log("==> matchStatus: buildMatchStatusTable()");
 
-    });
+    if ((eventMatches === null) || (allMatchData === null))
+      return;
+
+    console.log("=> buildMatchStatusTable");
+    let hdrString = "<th scope='col' class='sorttable_numerci'>Match</th> <th class='text-bg-danger'>Red 1</th> <th class='text-bg-danger'>Red 2</th> <th class='text-bg-danger'>Red 3</th> <th class='text-bg-primary'>Blue 1</th> <th class='text-bg-primary'>Blue 2</th> <th class='text-bg-primary'>Blue 3</th>";
+    document.getElementById(tableId).querySelector('thead').insertRow().innerHTML = hdrString;
+
+    let tbodyRef = document.getElementById(tableId).querySelector('tbody');
+    for (let emi in eventMatches) {
+      let match = eventMatches[emi];
+      let matchNum = match["match_number"];
+      if (match["comp_level"] === "sf") {
+        matchNum = match["set_number"];
+      }
+      let matchId = match["comp_level"] + matchNum;
+      let alliances = match["alliances"];
+
+      // Build a match row with scout names if the match has been scouted
+      let rowString = "";
+      rowString += "<td>" + matchId + "</td>";
+
+      // Red teams in this match
+      for (team in alliances["red"]["team_keys"]) {
+        let cellString = "<td class='table-danger'>" + alliances["red"]["team_keys"][team].substring(3) + "</td>";
+        for (let ami in allMatchData) {
+          if ((allMatchData[ami]["matchnumber"] === matchId) && allMatchData[ami]["teamnumber"] === alliances["red"]["team_keys"][team].substring(3)) {
+            cellString = "<td class='table-success'>" + allMatchData[ami]["scoutname"] + "</td>";
+            break;
+          }
+        }
+        rowString += cellString;
+      }
+
+      // Blue teams in this match
+      for (team in alliances["blue"]["team_keys"]) {
+        let cellString = "<td class='table-primary'>" + alliances["blue"]["team_keys"][team].substring(3) + "</td>";
+        for (let ami in allMatchData) {
+          if ((allMatchData[ami]["matchnumber"] === matchId) && allMatchData[ami]["teamnumber"] === alliances["blue"]["team_keys"][team].substring(3)) {
+            cellString = "<td class='table-success'>" + allMatchData[ami]["scoutname"] + "</td>";
+            break;
+          }
+        }
+        rowString += cellString;
+      }
+
+      tbodyRef.insertRow().innerHTML = rowString;
+    }
+
+    let matchCol = 0;
+    sortTableByMatch(tableId, matchCol);
   }
 
   /////////////////////////////////////////////////////////////////////////////
@@ -69,10 +95,26 @@ require 'inc/header.php';
   //
   document.addEventListener("DOMContentLoaded", function () {
 
-    const tableId = "matchDataTable";
+    const tableId = "matchStatusTable";
+    let jEventMatches = null;
+    let jAllMatchData = null;
     const frozenTable = new FreezeTable('.freeze-table', { fixedNavbar: '.navbar' });
 
-    buildMatchDataTable(tableId);
+    $.get("api/tbaAPI.php", {
+      getEventMatches: true
+    }).done(function (eventMatches) {
+      console.log("=> getEventMatches");
+      jEventMatches = JSON.parse(eventMatches)["response"];
+      buildMatchStatusTable(tableId, jEventMatches, jAllMatchData);
+    });
+
+    $.get("api/dbReadAPI.php", {
+      getAllMatchData: true
+    }).done(function (matchData) {
+      console.log("=> getAllMatchData");
+      jAllMatchData = JSON.parse(matchData);
+      buildMatchStatusTable(tableId, jEventMatches, jAllMatchData);
+    });
 
     // Create frozen table panes and keep the panes updated
     document.getElementById(tableId).addEventListener('click', function () {
