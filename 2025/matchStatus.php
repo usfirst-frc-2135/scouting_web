@@ -31,14 +31,14 @@ require 'inc/header.php';
 
 <script>
 
-  // Acquire match data and build the page
-  function buildMatchStatusTable(tableId, eventMatches, allMatchData) {
-    console.log("==> matchStatus: buildMatchStatusTable()");
+  // Load the table with the match status values
+  function loadMatchStatusTable(tableId, eventMatches, allMatchData) {
+    console.log("==> matchStatus: loadMatchStatusTable()");
 
     if ((eventMatches === null) || (allMatchData === null))
       return;
 
-    console.log("=> buildMatchStatusTable");
+    console.log("=> loadMatchStatusTable");
     let hdrString = "<th scope='col' class='sorttable_numerci'>Match</th> <th class='text-bg-danger'>Red 1</th> <th class='text-bg-danger'>Red 2</th> <th class='text-bg-danger'>Red 3</th> <th class='text-bg-primary'>Blue 1</th> <th class='text-bg-primary'>Blue 2</th> <th class='text-bg-primary'>Blue 3</th>";
     document.getElementById(tableId).querySelector('thead').insertRow().innerHTML = hdrString;
 
@@ -87,6 +87,30 @@ require 'inc/header.php';
     sortTableByMatch(tableId, matchCol);
   }
 
+  // Load match data and event matches
+  function buildMatchStatusTable(tableId) {
+    console.log("==> matchStatus: buildMatchStatusTable()");
+    let jEventMatches = null;
+    let jAllMatchData = null;
+
+    $.get("api/tbaAPI.php", {
+      getEventMatches: true
+    }).done(function (eventMatches) {
+      console.log("=> getEventMatches");
+      jEventMatches = JSON.parse(eventMatches)["response"];
+      loadMatchStatusTable(tableId, jEventMatches, jAllMatchData);
+    });
+
+    $.get("api/dbReadAPI.php", {
+      getAllMatchData: true
+    }).done(function (matchData) {
+      console.log("=> getAllMatchData");
+      jAllMatchData = JSON.parse(matchData);
+      loadMatchStatusTable(tableId, jEventMatches, jAllMatchData);
+    });
+
+  }
+
   /////////////////////////////////////////////////////////////////////////////
   //
   // Process the generated html
@@ -97,25 +121,9 @@ require 'inc/header.php';
   document.addEventListener("DOMContentLoaded", function () {
 
     const tableId = "matchStatusTable";
-    let jEventMatches = null;
-    let jAllMatchData = null;
     const frozenTable = new FreezeTable('.freeze-table', { fixedNavbar: '.navbar' });
 
-    $.get("api/tbaAPI.php", {
-      getEventMatches: true
-    }).done(function (eventMatches) {
-      console.log("=> getEventMatches");
-      jEventMatches = JSON.parse(eventMatches)["response"];
-      buildMatchStatusTable(tableId, jEventMatches, jAllMatchData);
-    });
-
-    $.get("api/dbReadAPI.php", {
-      getAllMatchData: true
-    }).done(function (matchData) {
-      console.log("=> getAllMatchData");
-      jAllMatchData = JSON.parse(matchData);
-      buildMatchStatusTable(tableId, jEventMatches, jAllMatchData);
-    });
+    buildMatchStatusTable(tableId);
 
     // Create frozen table panes and keep the panes updated
     document.getElementById(tableId).addEventListener('click', function () {

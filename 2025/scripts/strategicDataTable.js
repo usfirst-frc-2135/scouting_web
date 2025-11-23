@@ -165,6 +165,7 @@ function insertStrategicDataBody(tableId, stratData, aliasList, teamFilter) {
   sorttable.makeSortable(document.getElementById(tableId));
 
   const teamColumn = 0;
-  const matchColumn = 1;
+  let matchColumn = (aliasList.length > 0) ? 2 : 1;
+
   sortTableByMatchAndTeam(tableId, teamColumn, matchColumn);
 };

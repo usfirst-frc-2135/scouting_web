@@ -324,7 +324,7 @@ require 'inc/header.php';
             <!-- <div id="freeze-table-strat" class="freeze-table overflow-auto"> -->
             <div class="overflow-auto">
               <table id="strategicDataTable"
-                class="table table-striped table-bordered table-hover table-sm border-dark text-center sortable">
+                class="table table-striped table-bordered table-hover table-sm border-dark text-center">
                 <thead> </thead>
                 <tbody class="table-group-divider"> </tbody>
               </table>
@@ -926,14 +926,15 @@ require 'inc/header.php';
   ///////////////////////////////////////////////////////////////////
   // This is the main function that runs when we want to load a team.
   // teamName will be set to the alias for BCD teamnums; else it's empty here and will be looked up later.
-  function buildTeamLookupPage(teamNum, teamName, jAliasNames) {
-    console.log("==> teamLookup: buildTeamLookupPage() teamNum " + teamNum + ", teamName " + teamName);
+  function buildTeamLookupPage(teamNum, aliasList) {
+    console.log("==> teamLookup: buildTeamLookupPage() teamNum " + teamNum);
+    let teamName = "";
     clearTeamLookupPage();
 
     // Figure out if the entered number is in range 9970-9999
-    if (isAliasNumber(teamNum) && jAliasNames.length > 0) {
+    if (isAliasNumber(teamNum) && aliasList.length > 0) {
       // This team number is an alias, so get the BCDnumber.
-      let bcdNum = getTeamNumFromAlias(teamNum, jAliasNames);
+      let bcdNum = getTeamNumFromAlias(teamNum, aliasList);
       console.log("===> teamLookup: Entered number is an alias: " + teamNum + ", bcdNum = " + bcdNum);
       if (bcdNum !== "") {
         teamName = teamNum;
@@ -943,8 +944,8 @@ require 'inc/header.php';
     }
     // Test for alphanumeric character suffix (e.g. 1678B)
     else if (/^[a-zA-Z]+$/.test(teamNum.charAt(teamNum.length - 1))) {
-      // 'teamNum' is a bcdNum so get the alias from jAliasNames and use it for teamName
-      let aliasNum = getAliasFromTeamNum(teamNum, jAliasNames);
+      // 'teamNum' is a bcdNum so get the alias from aliasList and use it for teamName
+      let aliasNum = getAliasFromTeamNum(teamNum, aliasList);
       console.log("===> teamLookup: for bcdNum: " + teamNum + ", alias = " + aliasNum);
       if (aliasNum !== "") {
         teamName = aliasNum;
@@ -982,7 +983,7 @@ require 'inc/header.php';
       getTeamMatchData: teamNum
     }).done(function (teamMatches) {
       console.log("=> getTeamMatchData");
-      loadMatchData(teamNum, JSON.parse(teamMatches), jAliasNames);
+      loadMatchData(teamNum, JSON.parse(teamMatches), aliasList);
     });
 
     // Do the Pit Scouting Data
@@ -998,7 +999,7 @@ require 'inc/header.php';
       getTeamStrategicData: teamNum
     }).done(function (strategicData) {
       console.log("=> getTeamStrategicData");
-      insertStrategicDataBody("strategicDataTable", JSON.parse(strategicData), jAliasNames, teamNum);
+      insertStrategicDataBody("strategicDataTable", JSON.parse(strategicData), aliasList, teamNum);
     });
 
     console.log("going to set title again for team " + teamNum + " with teamName: " + teamName);
@@ -1019,8 +1020,6 @@ require 'inc/header.php';
   document.addEventListener("DOMContentLoaded", function () {
 
     console.log("!!> addEventListener");
-    // first get alias table data
-    let teamName = "";
     let jAliasNames = null;
 
     // Read the alias table
@@ -1038,7 +1037,7 @@ require 'inc/header.php';
       if (validateTeamNumber(urlTeamNum, null) > 0) {
         console.log("urlTeamNum = " + urlTeamNum);
         document.getElementById("enterTeamNumber").value = urlTeamNum;
-        buildTeamLookupPage(urlTeamNum, teamName, jAliasNames);
+        buildTeamLookupPage(urlTeamNum, jAliasNames);
       }
 
       // Pressing enter in team number field loads the page
@@ -1048,30 +1047,30 @@ require 'inc/header.php';
           document.getElementById("loadTeamButton").click();
         }
       });
+    });
 
-      // Attach enterTeamNumber listener when losing focus to check for alias numbers
-      document.getElementById('enterTeamNumber').addEventListener('focusout', function () {
-        console.log("focus out");
-        let enteredNum = event.target.value.toUpperCase().trim();
-        if (isAliasNumber(enteredNum)) {
-          let teamNum = getTeamNumFromAlias(enteredNum, jAliasNames);
-          if (teamNum === "")
-            document.getElementById("aliasNumber").innerText = "Alias number " + enteredNum + " is NOT valid!";
-          else
-            document.getElementById("aliasNumber").innerText = "Alias number " + enteredNum + " is Team " + teamNum;
-          document.getElementById("enterTeamNumber").value = teamNum;
-        }
+    // Attach enterTeamNumber listener when losing focus to check for alias numbers
+    document.getElementById('enterTeamNumber').addEventListener('focusout', function () {
+      console.log("focus out");
+      let enteredNum = event.target.value.toUpperCase().trim();
+      if (isAliasNumber(enteredNum)) {
+        let teamNum = getTeamNumFromAlias(enteredNum, jAliasNames);
+        if (teamNum === "")
+          document.getElementById("aliasNumber").innerText = "Alias number " + enteredNum + " is NOT valid!";
         else
-          document.getElementById("aliasNumber").innerText = "";
-      });
+          document.getElementById("aliasNumber").innerText = "Alias number " + enteredNum + " is Team " + teamNum;
+        document.getElementById("enterTeamNumber").value = teamNum;
+      }
+      else
+        document.getElementById("aliasNumber").innerText = "";
+    });
 
-      // Load team data for the number entered
-      document.getElementById("loadTeamButton").addEventListener('click', function () {
-        let teamNum = document.getElementById("enterTeamNumber").value.toUpperCase().trim();
-        if (validateTeamNumber(teamNum, null) > 0) {
-          buildTeamLookupPage(teamNum, teamName, jAliasNames);
-        }
-      });
+    // Load team data for the number entered
+    document.getElementById("loadTeamButton").addEventListener('click', function () {
+      let teamNum = document.getElementById("enterTeamNumber").value.toUpperCase().trim();
+      if (validateTeamNumber(teamNum, null) > 0) {
+        buildTeamLookupPage(teamNum, jAliasNames);
+      }
     });
   });
 

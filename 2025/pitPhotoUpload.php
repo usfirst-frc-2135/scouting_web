@@ -236,12 +236,6 @@ require 'inc/header.php';
       document.getElementById("enterTeamNumber").value = initTeamNumber;
     }
 
-    // Confirm the file selction selection is supported
-    if (!window.FileReader) {
-      console.warn("This browser does not support 'FileReader'");
-      return alert("This browser does not support 'FileReader'");
-    }
-
     // Attach enterTeamNumber listener when losing focus to check for alias numbers
     document.getElementById('enterTeamNumber').addEventListener('focusout', function () {
       console.log("focus out");
@@ -257,6 +251,12 @@ require 'inc/header.php';
       else
         document.getElementById("aliasNumber").innerText = "";
     });
+
+    // Confirm the file selction selection is supported
+    if (!window.FileReader) {
+      console.warn("This browser does not support 'FileReader'");
+      return alert("This browser does not support 'FileReader'");
+    }
 
     // Attach image upload processor
     document.getElementById('robotPic').addEventListener('change', handleFileSelect, false);

@@ -80,17 +80,9 @@ require 'inc/header.php';
     // sorttable.makeSortable(document.getElementById(tableId));
   }
 
-  /////////////////////////////////////////////////////////////////////////////
-  //
-  // Process the generated html
-  //    Get team list for this eventcode from TBA
-  //      - Get photos for that team list from our photos
-  //    Get all pit data from our database
-  //    When all completed, generate the web page
-  //
-  document.addEventListener("DOMContentLoaded", function () {
-
-    const tableId = "psTable";
+  // Load all pit status Info
+  function buildPitStatusTable(tableId) {
+    console.log("==> pitStatus: buildPitStatusTable()");
     let teamList = [];
     let namesList = [];
     let jTeamImages = null;
@@ -116,24 +108,24 @@ require 'inc/header.php';
       if (eventTeamNames === null) {
         return alert("Can't load eventTeamNames from TBA; check if TBA Key was set in db_config");
       }
-      let jTeamNames = JSON.parse(eventTeamNames);
-      console.log("pitStatus: jTeamNames length = " + jTeamNames.length);
-      for (let team in jTeamNames) {
-        let teamNum = jTeamNames[team]["teamnum"];
-        let teamName = jTeamNames[team]["teamname"];
+      let jEventTeams = JSON.parse(eventTeamNames);
+      console.log("pitStatus: jEventTeams length = " + jEventTeams.length);
+      for (let evtTeam in jEventTeams) {
+        let evtTeamNum = jEventTeams[evtTeam]["teamnum"];
+        let evtTeamName = jEventTeams[evtTeam]["teamname"];
 
         // Checking if alias is being used and adjust team name accordingly.
         // At this point, the teamNum could be the 99-number.
         if (jAliasNames.length > 0) {
-          let BCDnum = getTeamNumFromAlias(teamNum, jAliasNames);
-          if (BCDnum !== "") {
-            // This entry is an alias, so create a new entry with the BCDnum with the alias as teamName.
-            teamName = teamNum;
-            teamNum = BCDnum;
+          let bcdNum = getTeamNumFromAlias(evtTeamNum, jAliasNames);
+          if (bcdNum !== "") {
+            // This entry is an alias, so create a new entry with the bcdNum with the alias as evtTeamName.
+            evtTeamName = evtTeamNum;
+            evtTeamNum = bcdNum;
           }
         }
-        teamList.push(teamNum);
-        namesList[teamNum] = teamName;
+        teamList.push(evtTeamNum);
+        namesList[evtTeamNum] = evtTeamName;
       }
 
       // Get all the team images for the list of teams
@@ -154,6 +146,22 @@ require 'inc/header.php';
       jPitData = JSON.parse(allPitData);
       loadPitStatusTable(tableId, teamList, namesList, jTeamImages, jPitData);
     });
+  }
+
+  /////////////////////////////////////////////////////////////////////////////
+  //
+  // Process the generated html
+  //    Get team list for this eventcode from TBA
+  //      - Get photos for that team list from our photos
+  //    Get all pit data from our database
+  //    When all completed, generate the web page
+  //
+  document.addEventListener("DOMContentLoaded", function () {
+
+    const tableId = "psTable";
+
+    buildPitStatusTable(tableId);
+
   });
 
 </script>

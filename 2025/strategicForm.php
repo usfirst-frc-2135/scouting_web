@@ -496,7 +496,6 @@ require 'inc/header.php';
 
     // Submit the strategic form data
     document.getElementById("submitButton").addEventListener('click', function () {
-
       if (!validateStrategicForm()) {
         let strategicFormData = getStrategicFormData();
         submitStrategicFormData(strategicFormData);

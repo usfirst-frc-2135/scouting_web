@@ -580,7 +580,6 @@ require 'inc/header.php';
       scoutSelect.appendChild(other);
     });
 
-
     // Submit the match data form 
     document.getElementById("submitForm").addEventListener('click', function () {
       if (!validateMatchForm(auton, teleop)) {

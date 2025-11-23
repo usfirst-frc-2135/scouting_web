@@ -151,26 +151,13 @@ require 'inc/header.php';
     });
   }
 
-  /////////////////////////////////////////////////////////////////////////////
-  //
-  // Process the generated html
-  //    Get all match data and averages from our database (can be filtered by match)
-  //    When completed, display the web page
-  //
-  //    If download button is clicked
-  //    Get (again) all pit data from our database
-  //    Get event COPRs from TBA
-  //    Write combined data into a CSV file
-  //
-  document.addEventListener("DOMContentLoaded", function () {
-
-    const tableId = "averagesTable";
-    const frozenTable = new FreezeTable('.freeze-table', { fixedNavbar: '.navbar' });
-    const csvFileName = "eventAverages";
+  // Build event averages table
+  function buildEventAveragesTable(tableId, startMatch, endMatch) {
     let jAliasNames = null;
     let jMatchData = null;
     let jCoprData = null;
 
+    // Get Alias lookup table
     $.get("api/dbReadAPI.php", {
       getEventAliasNames: true
     }).done(function (eventAliasNames) {
@@ -208,6 +195,26 @@ require 'inc/header.php';
       console.log("==> eventAverages: filterMatchRange: " + startMatch + " to " + endMatch);
       buildAveragesBody(tableId, jAliasNames, jCoprData, jMatchData, startMatch, endMatch);
     });
+  }
+
+  /////////////////////////////////////////////////////////////////////////////
+  //
+  // Process the generated html
+  //    Get all match data and averages from our database (can be filtered by match)
+  //    When completed, display the web page
+  //
+  //    If download button is clicked
+  //    Get (again) all pit data from our database
+  //    Get event COPRs from TBA
+  //    Write combined data into a CSV file
+  //
+  document.addEventListener("DOMContentLoaded", function () {
+
+    const tableId = "averagesTable";
+    const frozenTable = new FreezeTable('.freeze-table', { fixedNavbar: '.navbar' });
+    const csvFileName = "eventAverages";
+
+    buildEventAveragesTable(tableId, null, null);
 
     // Write out picklist CSV file to client's download dir.
     document.getElementById("downloadCsvFile").addEventListener('click', function () {

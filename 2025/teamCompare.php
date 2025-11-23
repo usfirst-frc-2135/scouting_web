@@ -443,7 +443,7 @@ require 'inc/header.php';
   }
 
   // This is the main function that runs when we want to load teams.
-  function buildTeamComparePage(teamNum1, teamNum2) {
+  function buildTeamComparePage(teamNum1, teamNum2, aliasList) {
     console.log("==> teamCompare: buildTeamComparePage()");
 
     // Get team1 name from TBA
@@ -477,9 +477,9 @@ require 'inc/header.php';
       let jStratData = JSON.parse(allStrategicData);
       console.log("=> getAllStrategicData");
       document.getElementById("strategicLink1").querySelector('a').text = teamNum1 + " - Strategic Data";
-      insertStrategicDataBody("strategicDataTable1", jStratData, [], [teamNum1]);
+      insertStrategicDataBody("strategicDataTable1", jStratData, aliasList, [teamNum1]);
       document.getElementById("strategicLink2").querySelector('a').text = teamNum2 + " - Strategic Data";
-      insertStrategicDataBody("strategicDataTable2", jStratData, [], [teamNum2]);
+      insertStrategicDataBody("strategicDataTable2", jStratData, aliasList, [teamNum2]);
     });
 
     // Get team2 match data
@@ -503,7 +503,7 @@ require 'inc/header.php';
           loadSecondPickGraph(teamNum1, teamNum2, filteredAvgData);
           loadThirdPickGraph(teamNum1, teamNum2, filteredAvgData);
           loadEndgameTable(teamNum1, teamNum2, filteredAvgData);
-          insertEventAveragesBody("averagesTable", filteredAvgData, [], [], [teamNum1, teamNum2]);
+          insertEventAveragesBody("averagesTable", filteredAvgData, [], aliasList, [teamNum1, teamNum2]);
         }
         else
           alert("No averages data for matches at this event!");
@@ -528,11 +528,11 @@ require 'inc/header.php';
     }).done(function (eventAliasNames) {
       console.log("=> eventAliasNames");
       jAliasNames = JSON.parse(eventAliasNames);
+      insertStrategicDataHeader("strategicDataTable1", jAliasNames);
+      insertStrategicDataHeader("strategicDataTable2", jAliasNames);
+      insertEventAveragesHeader("averagesTable", jAliasNames);
     });
 
-    insertStrategicDataHeader("strategicDataTable1", []);
-    insertStrategicDataHeader("strategicDataTable2", []);
-    insertEventAveragesHeader("averagesTable", []);
 
     // Pressing enter in team number field loads the page
     document.getElementById("enterTeamNumber1").addEventListener("keypress", function (event1) {
@@ -554,7 +554,7 @@ require 'inc/header.php';
       let teamNum1 = document.getElementById("enterTeamNumber1").value.toUpperCase().trim();
       let teamNum2 = document.getElementById("enterTeamNumber2").value.toUpperCase().trim();
       if (validateTeamNumber(teamNum1, null) > 0 && validateTeamNumber(teamNum2, null) > 0) {
-        buildTeamComparePage(teamNum1, teamNum2);
+        buildTeamComparePage(teamNum1, teamNum2, jAliasNames);
       }
     });
 

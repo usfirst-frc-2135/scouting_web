@@ -32,34 +32,38 @@ require 'inc/header.php';
 
 <script>
 
-  // Acquire match data and build the page
-  function buildMatchDataTable(tableId) {
+  // Build the match data table
+  function buildMatchDataTable(tableId) {    // Load the alias table
+    let jAliasNames = null;
+
+    // Load alias lookup table
     $.get("api/dbReadAPI.php", {
       getEventAliasNames: true
     }).done(function (eventAliasNames) {
       console.log("=> eventAliasNames");
-      let jAliasNames = JSON.parse(eventAliasNames);
+      jAliasNames = JSON.parse(eventAliasNames);
       insertMatchDataHeader(tableId, jAliasNames);
-      $.get("api/dbReadAPI.php", {
-        getAllMatchData: true
-      }).done(function (matchData) {
-        console.log("=> getAllMatchData");
-        let mdp = new matchDataProcessor(JSON.parse(matchData));
-        // mdp.sortMatches(allEventMatches);
-        mdp.getSiteFilteredAverages(function (filteredMatchData, filteredAvgData) {
-          if (filteredMatchData !== undefined) {
-            insertMatchDataBody(tableId, filteredMatchData, jAliasNames, []);
-            document.getElementById('spinner').style.display = 'none';
-            // script instructions say this is needed, but it breaks table header sorting
-            // sorttable.makeSortable(document.getElementById(tableId));
-            document.getElementById(tableId).click(); // This magic fixes the floating column bug
-          }
-          else {
-            alert("No match data found!");
-          }
-        });
-      });
+    });
 
+    // Load the match data
+    $.get("api/dbReadAPI.php", {
+      getAllMatchData: true
+    }).done(function (matchData) {
+      console.log("=> getAllMatchData");
+      let mdp = new matchDataProcessor(JSON.parse(matchData));
+      // mdp.sortMatches(allEventMatches);
+      mdp.getSiteFilteredAverages(function (filteredMatchData, filteredAvgData) {
+        if (filteredMatchData !== undefined) {
+          insertMatchDataBody(tableId, filteredMatchData, jAliasNames, []);
+          document.getElementById('spinner').style.display = 'none';
+          // script instructions say this is needed, but it breaks table header sorting
+          // sorttable.makeSortable(document.getElementById(tableId));
+          document.getElementById(tableId).click(); // This magic fixes the floating column bug
+        }
+        else {
+          alert("No match data found!");
+        }
+      });
     });
   }
 
