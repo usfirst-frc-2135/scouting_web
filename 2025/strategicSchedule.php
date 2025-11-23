@@ -9,6 +9,7 @@ require 'inc/header.php';
     <!-- Page Title -->
     <div class="row pt-3 pb-3 mb-3">
       <h2 class="col-md-4"><?php echo $title; ?></h2>
+      <div id="spinner" class="spinner-border"></div>
       <div class="col-md-4 mb-d form-check form-check-inline">
         <input id="showCompleted" class="form-check-input ms-1" type="checkbox" name="showCompleted" checked>
         <label for="showCompleted" class="form-check-label ms-1">Show Completed Matches</label>
@@ -211,6 +212,7 @@ require 'inc/header.php';
       loadStrategicSchedule(tableId, JSON.parse(strategicMatches));
       const matchColumn = 0;
       sortTableByMatch(tableId, matchColumn);
+      document.getElementById('spinner').style.display = 'none';
     });
   }
 

@@ -9,6 +9,7 @@ require 'inc/header.php';
     <!-- Page Title -->
     <div class="row pt-3 pb-3 mb-3">
       <h2 class="col-md-6"><?php echo $title; ?></h2>
+      <div id="spinner" class="spinner-border"></div>
     </div>
 
     <!-- Main row to hold the table -->
@@ -117,6 +118,7 @@ require 'inc/header.php';
       const teamColumn = 0;
       sortTableByTeam(tableId, teamColumn);
       sorttable.makeSortable(document.getElementById(tableId));
+      document.getElementById('spinner').style.display = 'none';
       document.getElementById(tableId).click(); // This magic fixes the floating column bug
     });
   }

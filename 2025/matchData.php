@@ -9,6 +9,7 @@ require 'inc/header.php';
     <!-- Page Title -->
     <div class="row pt-3 pb-3 mb-3">
       <h2 class="col-md-6"><?php echo $title; ?></h2>
+      <div id="spinner" class="spinner-border"></div>
     </div>
 
     <!-- Main row to hold the table -->
@@ -48,6 +49,7 @@ require 'inc/header.php';
         mdp.getSiteFilteredAverages(function (filteredMatchData, filteredAvgData) {
           if (filteredMatchData !== undefined) {
             insertMatchDataBody(tableId, filteredMatchData, jAliasNames, []);
+            document.getElementById('spinner').style.display = 'none';
             // script instructions say this is needed, but it breaks table header sorting
             // sorttable.makeSortable(document.getElementById(tableId));
             document.getElementById(tableId).click(); // This magic fixes the floating column bug
