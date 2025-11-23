@@ -503,7 +503,7 @@ require 'inc/header.php';
           loadSecondPickGraph(teamNum1, teamNum2, filteredAvgData);
           loadThirdPickGraph(teamNum1, teamNum2, filteredAvgData);
           loadEndgameTable(teamNum1, teamNum2, filteredAvgData);
-          insertEventAveragesBody("averagesTable", filteredAvgData, [], [teamNum1, teamNum2]);
+          insertEventAveragesBody("averagesTable", filteredAvgData, [], [], [teamNum1, teamNum2]);
         }
         else
           alert("No averages data for matches at this event!");
