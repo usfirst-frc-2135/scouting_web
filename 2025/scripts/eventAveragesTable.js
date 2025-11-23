@@ -25,11 +25,14 @@ function insertEventAveragesHeader(tableId, aliasList) {
   theadRef.innerHTML = ""; // Clear Table
 
   let rowString1 = '';
-  rowString1 += '<th colspan="1" style="background-color:transparent"> </th>';
+  rowString1 += '<th scope="col" style="background-color:transparent"> </th>';
   // Insert column if the aliasList is not empty
   if (aliasList.length > 0) {
     rowString1 += '<th scope="col" style="background-color:transparent"> </th>';
   }
+  rowString1 += '<th scope="col" style="background-color:transparent"> </th>';
+
+  // points by game phase
   rowString1 += '<th colspan="8" style="background-color:#83b4ff">Match Points</th>';
   rowString1 += '<th colspan="4" style="background-color:#d5e6de">Auton Pts</th>';
   rowString1 += '<th colspan="4" style="background-color:#d6f3fB">Teleop Pts</th>';
@@ -46,11 +49,12 @@ function insertEventAveragesHeader(tableId, aliasList) {
 
   let rowString2 = '';
   // team number
-  rowString2 += '<th scope="col" style="background-color:transparent" class="sorttable_numeric">Team</th>';
+  rowString2 += '<th scope="col" style="background-color:transparent" class="sorttable_numeric"> </th>';
   // Insert column if the aliasList is not empty
   if (aliasList.length > 0) {
-    rowString2 += '<th scope="col" style="background-color:transparent">Alias</th>';
+    rowString2 += '<th scope="col" style="background-color:transparent"> </th>';
   }
+  rowString2 += '<th scope="col" style="background-color:transparent"> </th>';
 
   // points by game phase
   rowString2 += '<th colspan="2" style="background-color:#83b4ff">Total Pts</th>';
@@ -111,6 +115,7 @@ function insertEventAveragesHeader(tableId, aliasList) {
   if (aliasList.length > 0) {
     rowString3 += tdPrefix0 + 'Alias</th>';
   }
+  rowString3 += tdPrefix0 + 'COPRs</th>';
 
   // points by game phase
   rowString3 += tdPrefix1 + 'Avg</th>';
@@ -234,7 +239,7 @@ function getDataValue(dict, key) {
 //      aliasList     - list of aliases at the event (length 0 if none)
 //      teamFilter    - list of teams to include in table (length 0 if all)
 //
-function insertEventAveragesBody(tableId, eventAverages, aliasList, teamFilter) {
+function insertEventAveragesBody(tableId, eventAverages, coprData, aliasList, teamFilter) {
   console.log("==> insertEventAveragesBody: tableId " + tableId + " eventAverages " + Object.keys(eventAverages).length + " aliases " + aliasList.length + " teams " + teamFilter.length);
 
   let tbodyRef = document.getElementById(tableId).querySelector('tbody');;
@@ -248,20 +253,18 @@ function insertEventAveragesBody(tableId, eventAverages, aliasList, teamFilter) 
     if (teamFilter.length !== 0 && !teamFilter.includes(teamNum))
       continue;
 
-    let endgameClimbPercentage = getDataValue(avgItem, "endgameClimbPercent");
-    let endgameClimbStartPercentage = getDataValue(avgItem, "endgameClimbStartPercent");
-
-    const tdPrefix0 = '<td style=\"background-color:transparent">';
+    const tdPrefix0 = '<td style="background-color:transparent">';
     const tdPrefix1 = '<td style="background-color:#cfe2ff">';
     let rowString = "";
     rowString += tdPrefix0 + "<a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</td>";
     // Insert column if the aliasList is not empty
     if (aliasList.length > 0) {
-      let aliasNum = avgItem["teamalias"];
+      let aliasNum = getAliasFromTeamNum(teamNum, aliasList);;
       if (aliasNum === 0)
         aliasNum = "";
       rowString += tdPrefix0 + aliasNum + "</td>";
     }
+    rowString += tdPrefix0 + getDataValue(coprData[teamNum], "totalPoints") + "</td>";
 
     // points by game phase
     rowString += tdPrefix1 + getDataValue(avgItem, "totalPointsAvg") + "</td>";
@@ -335,11 +338,13 @@ function insertEventAveragesBody(tableId, eventAverages, aliasList, teamFilter) 
     rowString += tdPrefix1 + getDataValue(avgItem, "defenseAvg") + "</td>";
 
     // endgame
+    let endgameClimbStartPercentage = getDataValue(avgItem, "endgameClimbStartPercent");
     rowString += tdPrefix0 + getDataValue(endgameClimbStartPercentage, 0) + "</td>";
     rowString += tdPrefix0 + getDataValue(endgameClimbStartPercentage, 1) + "</td>";
     rowString += tdPrefix0 + getDataValue(endgameClimbStartPercentage, 2) + "</td>";
     rowString += tdPrefix0 + getDataValue(endgameClimbStartPercentage, 3) + "</td>";
 
+    let endgameClimbPercentage = getDataValue(avgItem, "endgameClimbPercent");
     rowString += tdPrefix1 + getDataValue(endgameClimbPercentage, 0) + "</td>";
     rowString += tdPrefix1 + getDataValue(endgameClimbPercentage, 1) + "</td>";
     rowString += tdPrefix1 + getDataValue(endgameClimbPercentage, 2) + "</td>";

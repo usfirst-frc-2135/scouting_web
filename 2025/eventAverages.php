@@ -78,223 +78,74 @@ require 'inc/header.php';
 
 <script>
 
-  // CSV File functions
+  // Scrape table and write CSV file
+  function downloadTableAsCSV(tableId, csvName) {
+    csvName = csvName + ".csv";
+    console.log("==> eventAverages: downloadTableAsCSV(): " + csvName);
+    const table = document.getElementById(tableId).querySelector('tbody');
+    let csv = [];
 
-  // Retrieve an average value from data for a team
-  function lookupAverage(teamAverages, team, item) {
-    // console.log("==> eventAverages: lookupAverage()");
-    if (!teamAverages) {
-      console.warn("lookupAverages: No team averages!");
-      return "NA";
-    }
-    if (!(team in teamAverages)) {
-      console.warn("lookupAverages: Team not in list!");
-      return "NA";
-    }
-    return teamAverages[team][item];
-  }
-
-  // Returns a string with the comma-separated line of data for the given team.
-  function createCSVLine(team, evtAvgs, coprs, aliasData) {
-    let pitLocation = 0;
-    let oprTP = getDataValue(coprs[team], "totalPoints");
-    let endgameClimbStartPercent = lookupAverage(evtAvgs, team, "endgameClimbStartPercent");
-    let endgameClimbPercent = lookupAverage(evtAvgs, team, "endgameClimbPercent");
-
-    let csvLine = team + ",";
-    let alias = getAliasFromTeamNum(team, aliasData);
-    csvLine += alias + ",";
-
-    csvLine += pitLocation + ",";
-    csvLine += oprTP + ",";
-
-    // points
-    csvLine += lookupAverage(evtAvgs, team, "totalPointsAvg") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "totalPointsMax") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "autonPointsAvg") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "autonPointsMax") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "teleopPointsAvg") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "teleopPointsMax") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "endgamePointsAvg") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "endgamePointsMax") + ",";
-
-    // points by game piece
-    csvLine += lookupAverage(evtAvgs, team, "autonCoralPointsAvg") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "autonCoralPointsMax") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "autonAlgaePointsAvg") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "autonAlgaePointsMax") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "teleopCoralPointsAvg") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "teleopCoralPointsMax") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "teleopAlgaePointsAvg") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "teleopAlgaePointsMax") + ",";
-
-    // total game pieces
-    csvLine += lookupAverage(evtAvgs, team, "totalCoralScoredAvg") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "totalCoralScoredMax") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "totalAlgaeScoredAvg") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "totalAlgaeScoredMax") + ",";
-
-    // auton coral
-    csvLine += lookupAverage(evtAvgs, team, "autonCoralScoredAvg") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "autonCoralScoredMax") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "autonCoralL4Avg") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "autonCoralL4Max") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "autonCoralL3Avg") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "autonCoralL3Max") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "autonCoralL2Avg") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "autonCoralL2Max") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "autonCoralL1Avg") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "autonCoralL1Max") + ",";
-
-    // auton algae
-    csvLine += lookupAverage(evtAvgs, team, "autonAlgaeScoredAvg") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "autonAlgaeScoredMax") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "autonAlgaeProcAvg") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "autonAlgaeProcMax") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "autonAlgaeNetAvg") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "autonAlgaeNetMax") + ",";
-
-    // teleop coral
-    csvLine += lookupAverage(evtAvgs, team, "teleopCoralPercent") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "teleopCoralScoredAvg") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "teleopCoralScoredMax") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "teleopCoralL4Avg") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "teleopCoralL4Max") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "teleopCoralL3Avg") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "teleopCoralL3Max") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "teleopCoralL2Avg") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "teleopCoralL2Max") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "teleopCoralL1Avg") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "teleopCoralL1Max") + ",";
-
-    // teleop algae
-    csvLine += lookupAverage(evtAvgs, team, "teleopAlgaePercent") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "teleopAlgaeScoredAvg") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "teleopAlgaeScoredMax") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "teleopAlgaeProcAvg") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "teleopAlgaeProcMax") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "teleopAlgaeNetAvg") + ",";
-    csvLine += lookupAverage(evtAvgs, team, "teleopAlgaeNetMax") + ",";
-
-    // endgame
-    csvLine += getDataValue(endgameClimbStartPercent, 0) + ",";
-    csvLine += getDataValue(endgameClimbStartPercent, 1) + ",";
-    csvLine += getDataValue(endgameClimbStartPercent, 2) + ",";
-    csvLine += getDataValue(endgameClimbStartPercent, 3) + ",";
-
-    csvLine += getDataValue(endgameClimbPercent, 0) + ",";
-    csvLine += getDataValue(endgameClimbPercent, 1) + ",";
-    csvLine += getDataValue(endgameClimbPercent, 2) + ",";
-    csvLine += getDataValue(endgameClimbPercent, 3) + ",";
-    csvLine += getDataValue(endgameClimbPercent, 4) + ",";
-
-    csvLine += lookupAverage(evtAvgs, team, "totaldied") + ",";
-    csvLine += "-\n";    // Comment
-    return csvLine;
-  }
-
-  // Merge data into CSV file and write it
-  function createCSVFile(csvName, matchData, coprs, aliasData) {
-    console.log("eventAverages: createCSVFile()");
-
-    // This CSV header must match the order in createCSVLine!
-    let csvStr = "Team,Alias,Pit Location,OPR," +
-      "Total Pts Avg,Total Pts Max,Auto Pts Avg,Auto Pts Max,Tel Pts Avg,Tel Pts Max,End Pts Avg,End Pts Max," +
-      "Auton Coral Pts Avg,Auton Coral Pts Max,Auto Algae Pts Avg,Auto Algae Pts Max,Tel Coral Pts Avg,Tel Coral Pts Max,Tel Algae Pts Avg,Tel Algae Pts Max," +
+    // This CSV header must match the order in eventAveragesTable.js insertEventAveragesBody()
+    let hdrStr = "Team,Alias,COPRs," +
+      "Total Pts Avg,Total Pts Max," +
+      "Auto Pts Avg,Auto Pts Max,Tel Pts Avg,Tel Pts Max,End Pts Avg,End Pts Max," +
+      "Auton Coral Pts Avg,Auton Coral Pts Max,Auto Algae Pts Avg,Auto Algae Pts Max," +
+      "Tel Coral Pts Avg, Tel Coral Pts Max, Tel Algae Pts Avg, Tel Algae Pts Max," +
       "Total Coral Avg,Total Coral Max,Total Algae Avg,Total Algae Max," +
-      "Auto Coral Avg,Auto Coral Max,Auto L4 Avg,Auto L4 Max,Auto L3 Avg,Auto L3 Max,Auto L2 Avg,Auto L2 Max,Auto L1 Avg,Auto L1 Max," +
+      "Auto Coral Avg,Auto Coral Max," +
+      "Auto L4 Avg,Auto L4 Max,Auto L3 Avg,Auto L3 Max,Auto L2 Avg,Auto L2 Max,Auto L1 Avg,Auto L1 Max," +
       "Auto Algae Avg,Auto Algae Max,Auto Proc Avg,Auto Proc Max,Auto Net Avg,Auto Net Max," +
-      "Tel Coral Acc,Tel Coral Avg,Tel Coral Max,Tel L4 Avg,Tel L4 Max,Tel L3 Avg,Tel L3 Max,Tel L2 Avg,Tel L2 Max,Tel L1 Avg,Tel L1 Max," +
-      "Tel Algae Acc,Tel Algae Avg,Tel Algae Max,Tel Proc Avg,Tel Proc Max,Tel Net Avg,Tel Net Max," + "Start N/A,Start Before,Start At,Start Less10," +
+      "Tel Coral Acc,Tel Coral Avg,Tel Coral Max," +
+      "Tel L4 Avg,Tel L4 Max,Tel L3 Avg,Tel L3 Max,Tel L2 Avg,Tel L2 Max,Tel L1 Avg,Tel L1 Max," +
+      "Tel Algae Acc,Tel Algae Avg,Tel Algae Max,Tel Proc Avg,Tel Proc Max,Tel Net Avg,Tel Net Max," +
+      "Start N/A,Start Before,Start At,Start Less10," +
       "End N/A,End Park,End Fall,End Shal,End Deep," +
-      "Total Died, Note\n";
+      "Total Died, Note";
+    csv.push(hdrStr);
 
-    let mdp = new matchDataProcessor(matchData);
-    mdp.getSiteFilteredAverages(function (filteredMatchData, filteredAvgData) {
-      for (let key in filteredAvgData) {
-        csvStr += createCSVLine(key, filteredAvgData, coprs, aliasData);  // key is team number
-      }
+    const rows = table.querySelectorAll("tr");
 
-      let hiddenElement = document.createElement('a');
-      let filename = frcEventCode + "_" + csvName.trim() + ".csv";
-      console.log("eventAverages: createCSVFile() CSV filename: " + filename);
-      hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csvStr);
-      hiddenElement.target = '_blank';
-      hiddenElement.download = filename;
-      hiddenElement.click();
+    rows.forEach(row => {
+      const cols = row.querySelectorAll("td");
+      const rowData = Array.from(cols).map(col => col.innerText);
+      csv.push(rowData.join(","));
     });
+
+    const csvFile = new Blob([csv.join("\n")], { type: "text/csv" });
+    const downloadLink = document.createElement("a");
+    downloadLink.download = csvName;
+    downloadLink.href = window.URL.createObjectURL(csvFile);
+    downloadLink.style.display = "none";
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
   }
 
-  // Retrieve match data and OPRs data (in parallel) and write out CSV file
-  function downloadCSVFile(csvName) {
-    console.log("==> eventAverages: downloadCSVFile()");
-    let jMatchData = null;
-    let jCoprData = null;
-    let jAliasData = null;
-    function waitForData(mData, cData, aData) {
-      if ((mData === null) || (cData === null) || (aData === null)) {
-        return;
-      }
-      console.log("Creating the CSV");
-      createCSVFile(csvName, mData, cData, aData);
+  // Get alias names and COPRs, create table header
+  function buildAveragesHeader(tableId, aliasNames) {
+    if (aliasNames === null) {
+      return;
     }
 
-    // Get alias data from DB
-    $.get("api/dbReadAPI.php", {
-      getEventAliasNames: true
-    }).done(function (eventAliasNames) {
-      jAliasData = JSON.parse(eventAliasNames);
-      console.log("Got event Alias Names");
-      waitForData(jMatchData, jCoprData, jAliasData);
-    });
-
-    // Get match data from DB
-    $.get("api/dbReadAPI.php", {
-      getAllMatchData: true
-    }).done(function (matchData) {
-      jMatchData = JSON.parse(matchData);
-      console.log("Got all match data");
-      waitForData(jMatchData, jCoprData, jAliasData);
-    });
-
-    // Get OPR data from TBA
-    $.get("api/tbaAPI.php", {
-      getCOPRs: true
-    }).done(function (coprs) {
-      if (coprs === null) {
-        return alert("Can't load COPRs from TBA; check if TBA Key was set in db_config");
-      }
-      jCoprData = JSON.parse(coprs)["data"];
-      console.log("Got COPRs data");
-      waitForData(jMatchData, jCoprData, jAliasData);
-    });
+    insertEventAveragesHeader(tableId, aliasNames);
   }
 
   // Get all match data, filter it, create final HTML table, and sort it
-  function buildAveragesTable(tableId, startMatch, endMatch) {
-    console.log("==> eventAverages: buildAveragesTable()");
-    $.get("api/dbReadAPI.php", {
-      getAllMatchData: true
-    }).done(function (matchData) {
+  function buildAveragesBody(tableId, aliasNames, coprs, matchData, startMatch, endMatch) {
+    if (aliasNames === null || coprs === null || matchData === null) {
+      return;
+    }
 
-      $.get("api/dbReadAPI.php", {
-        getEventAliasNames: true
-      }).done(function (eventAliasNames) {
-        console.log("=> eventAliasNames");
-        jAliasNames = JSON.parse(eventAliasNames);
-      });
-
-      console.log("=> getAllMatchData:");
-      let mdp = new matchDataProcessor(JSON.parse(matchData));
-      if (startMatch !== null && endMatch !== null) {
-        mdp.filterMatchRange(startMatch, endMatch);
-      }
-      mdp.getSiteFilteredAverages(function (filteredMatchData, filteredAvgData) {
-        insertEventAveragesBody(tableId, filteredAvgData, [], []);
-        // script instructions say this is needed, but it breaks table header sorting
-        // sorttable.makeSortable(document.getElementById(tableId));
-        document.getElementById(tableId).click(); // This magic fixes the floating column bug
-      });
+    console.log("==> eventAverages: buildAveragesBody()");
+    let mdp = new matchDataProcessor(matchData);
+    if (startMatch !== null && endMatch !== null) {
+      mdp.filterMatchRange(startMatch, endMatch);
+    }
+    mdp.getSiteFilteredAverages(function (filteredMatchData, filteredAvgData) {
+      insertEventAveragesBody(tableId, filteredAvgData, coprs, aliasNames, []);
+      // script instructions say this is needed, but it breaks table header sorting
+      // sorttable.makeSortable(document.getElementById(tableId));
+      document.getElementById(tableId).click(); // This magic fixes the floating column bug
     });
   }
 
@@ -314,21 +165,51 @@ require 'inc/header.php';
     const tableId = "averagesTable";
     const frozenTable = new FreezeTable('.freeze-table', { fixedNavbar: '.navbar' });
     const csvFileName = "eventAverages";
+    let jAliasNames = null;
+    let jMatchData = null;
+    let jCoprData = null;
 
-    insertEventAveragesHeader(tableId, []);
-    buildAveragesTable(tableId, null, null); // Retrieve all data
+    $.get("api/dbReadAPI.php", {
+      getEventAliasNames: true
+    }).done(function (eventAliasNames) {
+      console.log("=> eventAliasNames");
+      jAliasNames = JSON.parse(eventAliasNames);
+      buildAveragesHeader(tableId, jAliasNames);
+      buildAveragesBody(tableId, jAliasNames, jCoprData, jMatchData, null, null); // Retrieve all data
+    });
+
+    // Get OPR data from TBA
+    $.get("api/tbaAPI.php", {
+      getCOPRs: true
+    }).done(function (coprs) {
+      if (coprs === null) {
+        return alert("Can't load COPRs from TBA; check if TBA Key was set in db_config");
+      }
+      console.log("=> getCOPRs");
+      jCoprData = JSON.parse(coprs)["data"];
+      buildAveragesBody(tableId, jAliasNames, jCoprData, jMatchData, null, null); // Retrieve all data
+    });
+
+    // Get match data from DB
+    $.get("api/dbReadAPI.php", {
+      getAllMatchData: true
+    }).done(function (matchData) {
+      console.log("=> getAllMatchData");
+      jMatchData = JSON.parse(matchData);
+      buildAveragesBody(tableId, jAliasNames, jCoprData, jMatchData, null, null); // Retrieve all data
+    });
 
     // Filter out unwanted matches
     document.getElementById("filterData").addEventListener('click', function () {
       let startMatch = document.getElementById("startCompLevel").value + document.getElementById("startMatchNum").value.trim();
       let endMatch = document.getElementById("endCompLevel").value + document.getElementById("endMatchNum").value.trim();
       console.log("==> eventAverages: filterMatchRange: " + startMatch + " to " + endMatch);
-      buildAveragesTable(tableId, startMatch, endMatch);
+      buildAveragesBody(tableId, jAliasNames, jCoprData, jMatchData, startMatch, endMatch);
     });
 
     // Write out picklist CSV file to client's download dir.
     document.getElementById("downloadCsvFile").addEventListener('click', function () {
-      downloadCSVFile(csvFileName);
+      downloadTableAsCSV(tableId, csvFileName);
     });
 
     // Create frozen table panes and keep the panes updated
