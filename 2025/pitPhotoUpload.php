@@ -238,7 +238,7 @@ require 'inc/header.php';
 
     // Attach enterTeamNumber listener when losing focus to check for alias numbers
     document.getElementById('enterTeamNumber').addEventListener('focusout', function () {
-      console.log("focus out");
+      console.log("enterTeamNumber: focus out");
       let enteredNum = event.target.value.toUpperCase().trim();
       if (isAliasNumber(enteredNum)) {
         let teamNum = getTeamNumFromAlias(enteredNum, jAliasNames);

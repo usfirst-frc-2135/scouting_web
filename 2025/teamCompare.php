@@ -511,6 +511,22 @@ require 'inc/header.php';
     });
   }
 
+  // Converts alias number in team number entry field
+  function validateEnteredTeamNumber(enterId, aliasId, event, aliasList) {
+    console.log("enterTeamNumber: focus out");
+    let enteredNum = event.target.value.toUpperCase().trim();
+    if (isAliasNumber(enteredNum)) {
+      let teamNum = getTeamNumFromAlias(enteredNum, aliasList);
+      if (teamNum === "")
+        document.getElementById(aliasId).innerText = "Alias number " + enteredNum + " is NOT valid!";
+      else
+        document.getElementById(aliasId).innerText = "Alias number " + enteredNum + " is Team " + teamNum;
+      document.getElementById(enterId).value = teamNum;
+    }
+    else
+      document.getElementById(aliasId).innerText = "";
+  }
+
   /////////////////////////////////////////////////////////////////////////////
   //
   // Process the generated html
@@ -537,6 +553,7 @@ require 'inc/header.php';
     // Pressing enter in team number field loads the page
     document.getElementById("enterTeamNumber1").addEventListener("keypress", function (event1) {
       if (event1.key === "Enter") {
+        validateEnteredTeamNumber("enterTeamNumber1", "aliasNumber1", event, jAliasNames);
         event1.preventDefault();
         document.getElementById("loadTeamButton").click();
       }
@@ -544,9 +561,21 @@ require 'inc/header.php';
 
     document.getElementById("enterTeamNumber2").addEventListener("keypress", function (event2) {
       if (event2.key === "Enter") {
+        validateEnteredTeamNumber("enterTeamNumber2", "aliasNumber2", event, jAliasNames);
         event2.preventDefault();
         document.getElementById("loadTeamButton").click();
       }
+    });
+
+    // Attach enterTeamNumber listener when losing focus to check for alias numbers
+    document.getElementById('enterTeamNumber1').addEventListener('focusout', function () {
+      console.log("enterTeamNumber: focus out");
+      validateEnteredTeamNumber("enterTeamNumber1", "aliasNumber1", event, jAliasNames);
+    });
+
+    document.getElementById('enterTeamNumber2').addEventListener('focusout', function () {
+      console.log("enterTeamNumber: focus out");
+      validateEnteredTeamNumber("enterTeamNumber2", "aliasNumber2", event, jAliasNames);
     });
 
     // Load team data for the number entered
@@ -556,37 +585,6 @@ require 'inc/header.php';
       if (validateTeamNumber(teamNum1, null) > 0 && validateTeamNumber(teamNum2, null) > 0) {
         buildTeamComparePage(teamNum1, teamNum2, jAliasNames);
       }
-    });
-
-    // Attach enterTeamNumber listener when losing focus to check for alias numbers
-    document.getElementById('enterTeamNumber1').addEventListener('focusout', function () {
-      console.log("focus out");
-      let enteredNum = event.target.value.toUpperCase().trim();
-      if (isAliasNumber(enteredNum)) {
-        let teamNum = getTeamNumFromAlias(enteredNum, jAliasNames);
-        if (teamNum === "")
-          document.getElementById("aliasNumber1").innerText = "Alias number " + enteredNum + " is NOT valid!";
-        else
-          document.getElementById("aliasNumber1").innerText = "Alias number " + enteredNum + " is Team " + teamNum + "\n";
-        document.getElementById("enterTeamNumber1").value = teamNum;
-      }
-      else
-        document.getElementById("aliasNumber1").innerText = "";
-    });
-
-    document.getElementById('enterTeamNumber2').addEventListener('focusout', function () {
-      console.log("focus out");
-      let enteredNum = event.target.value.toUpperCase().trim();
-      if (isAliasNumber(enteredNum)) {
-        let teamNum = getTeamNumFromAlias(enteredNum, jAliasNames);
-        if (teamNum === "")
-          document.getElementById("aliasNumber2").innerText = "Alias number " + enteredNum + " is NOT valid!";
-        else
-          document.getElementById("aliasNumber2").innerText = "Alias number " + enteredNum + " is Team " + teamNum + "\n";
-        document.getElementById("enterTeamNumber2").value = teamNum;
-      }
-      else
-        document.getElementById("aliasNumber2").innerText = "";
     });
   });
 

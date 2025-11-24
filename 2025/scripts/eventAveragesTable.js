@@ -259,10 +259,7 @@ function insertEventAveragesBody(tableId, eventAverages, coprData, aliasList, te
     rowString += tdPrefix0 + "<a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</td>";
     // Insert column if the aliasList is not empty
     if (aliasList.length > 0) {
-      let aliasNum = getAliasFromTeamNum(teamNum, aliasList);;
-      if (aliasNum === 0)
-        aliasNum = "";
-      rowString += tdPrefix0 + aliasNum + "</td>";
+      rowString += tdPrefix0 + getAliasFromTeamNum(teamNum, aliasList) + "</td>";
     }
     rowString += tdPrefix0 + getDataValue(coprData[teamNum], "totalPoints") + "</td>";
 

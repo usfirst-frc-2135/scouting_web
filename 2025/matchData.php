@@ -89,6 +89,7 @@ require 'inc/header.php';
   });
 </script>
 
+<script src="./scripts/aliasFunctions.js"></script>
 <script src="./scripts/compareMatchNumbers.js"></script>
 <script src="./scripts/compareTeamNumbers.js"></script>
 <script src="./scripts/matchDataTable.js"></script>

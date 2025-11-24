@@ -1006,6 +1006,22 @@ require 'inc/header.php';
     document.getElementById("teamTitle").innerHTML = teamNum + " - " + teamName;
   }
 
+  // Converts alias number in team number entry field
+  function validateEnteredTeamNumber(event, aliasList) {
+    console.log("enterTeamNumber: focus out");
+    let enteredNum = event.target.value.toUpperCase().trim();
+    if (isAliasNumber(enteredNum)) {
+      let teamNum = getTeamNumFromAlias(enteredNum, aliasList);
+      if (teamNum === "")
+        document.getElementById("aliasNumber").innerText = "Alias number " + enteredNum + " is NOT valid!";
+      else
+        document.getElementById("aliasNumber").innerText = "Alias number " + enteredNum + " is Team " + teamNum;
+      document.getElementById("enterTeamNumber").value = teamNum;
+    }
+    else
+      document.getElementById("aliasNumber").innerText = "";
+  }
+
   /////////////////////////////////////////////////////////////////////////////
   //
   // Process the generated html
@@ -1039,36 +1055,27 @@ require 'inc/header.php';
         document.getElementById("enterTeamNumber").value = urlTeamNum;
         buildTeamLookupPage(urlTeamNum, jAliasNames);
       }
+    });
 
-      // Pressing enter in team number field loads the page
+    // Attach enterTeamNumber listener so that pressing enter in team number field loads the page
       document.getElementById("enterTeamNumber").addEventListener("keypress", function (event) {
         if (event.key === "Enter") {
+        validateEnteredTeamNumber(event, jAliasNames);
           event.preventDefault();
           document.getElementById("loadTeamButton").click();
         }
       });
-    });
 
     // Attach enterTeamNumber listener when losing focus to check for alias numbers
     document.getElementById('enterTeamNumber').addEventListener('focusout', function () {
-      console.log("focus out");
-      let enteredNum = event.target.value.toUpperCase().trim();
-      if (isAliasNumber(enteredNum)) {
-        let teamNum = getTeamNumFromAlias(enteredNum, jAliasNames);
-        if (teamNum === "")
-          document.getElementById("aliasNumber").innerText = "Alias number " + enteredNum + " is NOT valid!";
-        else
-          document.getElementById("aliasNumber").innerText = "Alias number " + enteredNum + " is Team " + teamNum;
-        document.getElementById("enterTeamNumber").value = teamNum;
-      }
-      else
-        document.getElementById("aliasNumber").innerText = "";
+      console.log("enterTeamNumber: focus out");
+      validateEnteredTeamNumber(event, jAliasNames);
     });
 
     // Load team data for the number entered
     document.getElementById("loadTeamButton").addEventListener('click', function () {
       let teamNum = document.getElementById("enterTeamNumber").value.toUpperCase().trim();
-      if (validateTeamNumber(teamNum, null) > 0) {
+      if (validateTeamNumber(teamNum, null) > 0 && jAliasNames !== null) {
         buildTeamLookupPage(teamNum, jAliasNames);
       }
     });
