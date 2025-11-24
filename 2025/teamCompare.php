@@ -391,7 +391,7 @@ require 'inc/header.php';
     return "";
   }
 
-  // Clear existing data
+  // Clear all existing data fields and tables
   function clearTeamComparePage() {
     document.getElementById("aliasNumber1").innerText = "";
     document.getElementById("aliasNumber2").innerText = "";

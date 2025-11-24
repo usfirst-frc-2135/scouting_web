@@ -619,7 +619,7 @@ require 'inc/header.php';
       options: {
         scales: {
           x: { stacked: true },
-          y: { stacked: true, min: 0, ticks: { precision: 0 }, max: 14 } // Set Y axis maximum value - 14 coral + algae in teleop
+          y: { stacked: true, min: 0, ticks: { precision: 0 }, max: 16 } // Set Y axis maximum value - 16 coral + algae in teleop
         },
         plugins: {
           tooltip: {
@@ -937,7 +937,6 @@ require 'inc/header.php';
       if (aliasNum !== "")
         evtTeam = getAliasFromTeamNum(teamNum, aliasList);
     }
-    console.log("=> evtTeam = " + evtTeam);
 
     // Retrieve team info to get team names
     $.get("api/tbaAPI.php", {
@@ -947,13 +946,11 @@ require 'inc/header.php';
       if (teamInfo === null) {
         return alert("Can't load teamName from TBA; check if TBA Key was set in db_config");
       }
-
       // Form the team string with number and name
       let teamStr = teamNum + " - " + JSON.parse(teamInfo)["response"]["nickname"];
       if (isAliasNumber(evtTeam)) {
         teamStr = teamNum + " - " + evtTeam;
       }
-
       document.getElementById("teamTitle").innerText = teamStr;
     });
 

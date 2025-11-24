@@ -212,12 +212,12 @@ require 'inc/header.php';
 
     const tableId = "averagesTable";
     const frozenTable = new FreezeTable('.freeze-table', { fixedNavbar: '.navbar' });
-    const csvFileName = "eventAverages";
 
     buildEventAveragesTable(tableId, null, null);
 
     // Write out picklist CSV file to client's download dir.
     document.getElementById("downloadCsvFile").addEventListener('click', function () {
+      const csvFileName = frcEventCode + "_eventAverages";
       downloadTableAsCSV(tableId, csvFileName);
     });
 
