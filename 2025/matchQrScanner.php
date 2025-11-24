@@ -51,7 +51,7 @@ require 'inc/header.php';
 <script>
 
   const qrValidLength = 42;   // This is determined by game requirements and adjusted each year
-  const qrPadLength = 1;      // TODO: no explanation why this is padded--did we delete something?
+  const qrPadLength = 1;      // TODO: no explanation why this is padded--did we delete something? Remove for 2026
 
   // update this data list length whenever more data is added to the table
   function padList(qrList) {
@@ -82,18 +82,19 @@ require 'inc/header.php';
   }
 
   // IMPORTANT! also need to adjust data list size in "validateQrList" and "padList"!!!
-  //  TODO: For 2026, please change the field order to put year-specific items LAST (order is suggested below in comments)
-  //  TODO: For 2026, remove any undocumented "padding" on the structure. Just declare an "other" field.
-  //  TODO: Also for 2026, add about 3-5 "other" fields to the QR list so it can be slightly appended without breaking
+  //  TODO: For 2026, please change the field order to put match or year-specific items LAST (order is suggested below in comments)
+  //        For 2026, remove any undocumented "padding" on the structure. Just declare an "other" field.
+  //        Also for 2026, add about 10 "other" fields to the QR list so it can be slightly expanded without breaking the android app
   function qrListToMatchData(qrList) {
     let matchData = {};
     // Perennial fields that always occur
     matchData["eventcode"] = qrList[37];      // Make this [0] in 2026
     matchData["matchnumber"] = qrList[36];    // Make this [1] in 2026
     matchData["teamnumber"] = qrList[0];      // Make this [2] in 2026
-    matchData["scoutname"] = qrList[38];      // Make this [3] in 2026
+    matchData["teamalias"] = qrList[40];      // Make this [3] in 2026
+    matchData["scoutname"] = qrList[38];      // Make this [4] in 2026
 
-    // Game or year-specific fields below here!
+    // Match or year-specific fields below here!
 
     // Autonomous
     matchData["autonStartPos"] = qrList[1];   // UNUSED
@@ -143,7 +144,6 @@ require 'inc/header.php';
     // qrList[37] see above
     // qrList[38] see above
     matchData["comment"] = qrList[39];
-    matchData["teamalias"] = qrList[40];
     return matchData;
   }
 

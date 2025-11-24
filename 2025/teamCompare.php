@@ -391,8 +391,8 @@ require 'inc/header.php';
     return "";
   }
 
+  // Clear existing data
   function clearTeamComparePage() {
-    // Clear existing data
     document.getElementById("aliasNumber1").innerText = "";
     document.getElementById("aliasNumber2").innerText = "";
     document.getElementById("teamMainTitle1").innerText = "";
@@ -442,6 +442,32 @@ require 'inc/header.php';
     tbodyRef.insertRow().innerHTML = createEndgameEntry(teamNum2, avgData);
   }
 
+  // Retrieve team info from TBA and alias list
+  function getTeamDescription(teamNum, aliasList, evtInfo) {
+    // Get alias numbers if they exist for this team number
+    let aliasNum = "";
+    if (aliasList !== null) {
+      aliasNum = getAliasFromTeamNum(teamNum, aliasList);
+    }
+
+    // Get the team name from TBA event info
+    let teamStr = "";
+    for (let entry in evtInfo) {
+      let teamEntry = evtInfo[entry];
+      if (teamNum === teamEntry["teamnum"].toString()) {
+        teamStr = teamNum + " - " + teamEntry["teamname"];
+        break;
+      }
+    }
+
+    // Form the final team string
+    if (aliasNum !== "") {
+      teamStr = teamNum + " - " + aliasNum;
+    }
+    console.log("==> teamCompare: team: " + teamStr);
+    return teamStr
+  }
+
   // This is the main function that runs when we want to load teams.
   function buildTeamComparePage(teamNum1, teamNum2, aliasList) {
     console.log("==> teamCompare: buildTeamComparePage()");
@@ -455,19 +481,8 @@ require 'inc/header.php';
         return alert("Can't load teams from TBA; check if TBA Key was set in db_config");
       }
       let jTeamNames = JSON.parse(eventTeamNames);
-      let teamStr1 = "";
-      let teamStr2 = "";
-      for (let entry in jTeamNames) {
-        if (parseInt(teamNum1) === jTeamNames[entry]["teamnum"]) {
-          teamStr1 = jTeamNames[entry]["teamnum"] + " - " + jTeamNames[entry]["teamname"];
-        }
-        if (parseInt(teamNum2) === jTeamNames[entry]["teamnum"]) {
-          teamStr2 = jTeamNames[entry]["teamnum"] + " - " + jTeamNames[entry]["teamname"];
-        }
-      }
-      console.log("==> teamCompare: team1: \n" + teamStr1 + "\n" + teamStr2);
-      document.getElementById("teamMainTitle1").innerHTML = teamStr1;
-      document.getElementById("teamMainTitle2").innerHTML = teamStr2;
+      document.getElementById("teamMainTitle1").innerText = getTeamDescription(teamNum1, aliasList, jTeamNames);;
+      document.getElementById("teamMainTitle2").innerText = getTeamDescription(teamNum2, aliasList, jTeamNames);
     });
 
     // Get strategic data and filter for both teams
@@ -511,11 +526,11 @@ require 'inc/header.php';
     });
   }
 
-  // Converts alias number in team number entry field
+  // Autocorrects alias number in team number entry field
   function validateEnteredTeamNumber(enterId, aliasId, event, aliasList) {
     console.log("enterTeamNumber: focus out");
     let enteredNum = event.target.value.toUpperCase().trim();
-    if (isAliasNumber(enteredNum)) {
+    if (isAliasNumber(enteredNum) && aliasList !== null) {
       let teamNum = getTeamNumFromAlias(enteredNum, aliasList);
       if (teamNum === "")
         document.getElementById(aliasId).innerText = "Alias number " + enteredNum + " is NOT valid!";

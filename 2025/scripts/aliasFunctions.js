@@ -45,3 +45,10 @@ function isAliasNumber(teamStr) {
 
   return (teamInt >= 9970 && teamInt <= 9999);
 }
+
+//
+// Test if a team number string has an alaphabetic character at the end (indicating BCD number)
+//
+function isBCDNumber(teamStr) {
+  return /^[a-zA-Z]+$/.test(teamStr.charAt(teamStr.length - 1));
+}

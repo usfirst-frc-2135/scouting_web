@@ -261,7 +261,8 @@ function insertEventAveragesBody(tableId, eventAverages, coprData, aliasList, te
     if (aliasList.length > 0) {
       rowString += tdPrefix0 + getAliasFromTeamNum(teamNum, aliasList) + "</td>";
     }
-    rowString += tdPrefix0 + getDataValue(coprData[teamNum], "totalPoints") + "</td>";
+    let coprEntry = (coprData.length !== 0) ? getDataValue(coprData[teamNum], "totalPoints") : "";  // TODO: Load COPR data from TBA and pass in here
+    rowString += tdPrefix0 + coprEntry + "</td>";
 
     // points by game phase
     rowString += tdPrefix1 + getDataValue(avgItem, "totalPointsAvg") + "</td>";

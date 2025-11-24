@@ -928,47 +928,34 @@ require 'inc/header.php';
   // teamName will be set to the alias for BCD teamnums; else it's empty here and will be looked up later.
   function buildTeamLookupPage(teamNum, aliasList) {
     console.log("==> teamLookup: buildTeamLookupPage() teamNum " + teamNum);
-    let teamName = "";
     clearTeamLookupPage();
 
-    // Figure out if the entered number is in range 9970-9999
-    if (isAliasNumber(teamNum) && aliasList.length > 0) {
-      // This team number is an alias, so get the BCDnumber.
-      let bcdNum = getTeamNumFromAlias(teamNum, aliasList);
-      console.log("===> teamLookup: Entered number is an alias: " + teamNum + ", bcdNum = " + bcdNum);
-      if (bcdNum !== "") {
-        teamName = teamNum;
-        teamNum = bcdNum;
-      }
-      document.getElementById("teamTitle").innerHTML = teamNum + " - " + teamName;
-    }
-    // Test for alphanumeric character suffix (e.g. 1678B)
-    else if (/^[a-zA-Z]+$/.test(teamNum.charAt(teamNum.length - 1))) {
-      // 'teamNum' is a bcdNum so get the alias from aliasList and use it for teamName
+    // Get alias numbers if they exist for this team number
+    let evtTeam = teamNum;
+    if (aliasList !== null) {
       let aliasNum = getAliasFromTeamNum(teamNum, aliasList);
-      console.log("===> teamLookup: for bcdNum: " + teamNum + ", alias = " + aliasNum);
-      if (aliasNum !== "") {
-        teamName = aliasNum;
-      }
-      document.getElementById("teamTitle").innerHTML = teamNum + " - " + teamName;
+      if (aliasNum !== "")
+        evtTeam = getAliasFromTeamNum(teamNum, aliasList);
     }
-    // Normal team number - get teamInfo from TBA
-    else {
-      console.log("==> teamLookup: going to get teaminfo from TBA");
-      $.get("api/tbaAPI.php", {
-        getTeamInfo: teamNum
-      }).done(function (teamInfo) {
-        console.log("=> getTeamInfo:\n" + teamInfo);
-        if (teamInfo === null) {
-          return alert("Can't load teamName from TBA; check if TBA Key was set in db_config");
-        }
+    console.log("=> evtTeam = " + evtTeam);
 
-        let jTeamInfo = JSON.parse(teamInfo)["response"];
-        teamName = jTeamInfo["nickname"];
-        console.log("teamName from TBA = " + teamName);
-        document.getElementById("teamTitle").innerHTML = teamNum + " - " + teamName;
-      });
-    }
+    // Retrieve team info to get team names
+    $.get("api/tbaAPI.php", {
+      getTeamInfo: evtTeam
+    }).done(function (teamInfo) {
+      console.log("=> getTeamInfo:\n" + teamInfo);
+      if (teamInfo === null) {
+        return alert("Can't load teamName from TBA; check if TBA Key was set in db_config");
+      }
+
+      // Form the team string with number and name
+      let teamStr = teamNum + " - " + JSON.parse(teamInfo)["response"]["nickname"];
+      if (isAliasNumber(evtTeam)) {
+        teamStr = teamNum + " - " + evtTeam;
+      }
+
+      document.getElementById("teamTitle").innerText = teamStr;
+    });
 
     // Add images for the team
     $.get("api/dbReadAPI.php", {
@@ -997,20 +984,17 @@ require 'inc/header.php';
     // Do the Strategic Data Table.
     $.get("api/dbReadAPI.php", {
       getTeamStrategicData: teamNum
-    }).done(function (strategicData) {
+    }).done(function (teamStratData) {
       console.log("=> getTeamStrategicData");
-      insertStrategicDataBody("strategicDataTable", JSON.parse(strategicData), aliasList, teamNum);
+      insertStrategicDataBody("strategicDataTable", JSON.parse(teamStratData), aliasList, [teamNum]);
     });
-
-    console.log("going to set title again for team " + teamNum + " with teamName: " + teamName);
-    document.getElementById("teamTitle").innerHTML = teamNum + " - " + teamName;
   }
 
-  // Converts alias number in team number entry field
+  // Autocorrects alias number in team number entry field
   function validateEnteredTeamNumber(event, aliasList) {
     console.log("enterTeamNumber: focus out");
     let enteredNum = event.target.value.toUpperCase().trim();
-    if (isAliasNumber(enteredNum)) {
+    if (isAliasNumber(enteredNum) && aliasList !== null) {
       let teamNum = getTeamNumFromAlias(enteredNum, aliasList);
       if (teamNum === "")
         document.getElementById("aliasNumber").innerText = "Alias number " + enteredNum + " is NOT valid!";
@@ -1058,13 +1042,13 @@ require 'inc/header.php';
     });
 
     // Attach enterTeamNumber listener so that pressing enter in team number field loads the page
-      document.getElementById("enterTeamNumber").addEventListener("keypress", function (event) {
-        if (event.key === "Enter") {
+    document.getElementById("enterTeamNumber").addEventListener("keypress", function (event) {
+      if (event.key === "Enter") {
         validateEnteredTeamNumber(event, jAliasNames);
-          event.preventDefault();
-          document.getElementById("loadTeamButton").click();
-        }
-      });
+        event.preventDefault();
+        document.getElementById("loadTeamButton").click();
+      }
+    });
 
     // Attach enterTeamNumber listener when losing focus to check for alias numbers
     document.getElementById('enterTeamNumber').addEventListener('focusout', function () {
