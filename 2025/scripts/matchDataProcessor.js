@@ -14,22 +14,30 @@ class matchDataProcessor {
     console.log("matchDataProcessor: MatchData: num of matches = " + this.mData.length);
   }
 
+  //
   // Convert to integer percent (one decimal digit)
+  //
   toPercent(val) {
     return this.roundOnePlace(((val + Number.EPSILON) * 1000) / 10);
   }
 
+  //
   // Round data to no more than one decimal digit
+  //
   roundOnePlace(val) {
     return Math.round((val + Number.EPSILON) * 10) / 10;
   }
 
+  //
   // Round data to no more than two decimal digits
+  //
   roundTwoPlaces(val) {
     return Math.round((val + Number.EPSILON) * 100) / 100;
   }
 
+  //
   // Fix match IDs that are missing the comp level
+  //
   getFixedMatchId(matchId) {
     if (matchId != 0) {
       matchId = matchId.toLowerCase();
@@ -48,7 +56,9 @@ class matchDataProcessor {
     }
   }
 
+  //
   // Get the comp level and match number from the match ID string (ex. [qm, 25] from qm25)
+  //
   getMatchTuple(matchId) {
     matchId = this.getFixedMatchId(matchId);
     if (matchId.search("p") != -1) {
@@ -69,7 +79,9 @@ class matchDataProcessor {
     return null;
   }
 
+  //
   // Compare if second match ID is larget than first match ID
+  //
   isMatchLessThanOrEqual(startMatchId, endMatchId) {
     let smt = this.getMatchTuple(startMatchId);
     let emt = this.getMatchTuple(endMatchId);
@@ -87,12 +99,16 @@ class matchDataProcessor {
     return smt[1] <= emt[1];
   }
 
+  //
   // Compare if match ID string is within two match ID endpoints
+  //
   ifMatchInRange(startMatchId, matchId, endMatchId) {
     return this.isMatchLessThanOrEqual(startMatchId, matchId) && this.isMatchLessThanOrEqual(matchId, endMatchId);
   }
 
+  //
   // Filters out all matches in this.mData not within the specified range (destructively changes this.mData)
+  //
   filterMatchRange(startMatchId, endMatchId) {
     let newData = [];
     for (let i = 0; i < this.mData.length; i++) {
@@ -104,7 +120,9 @@ class matchDataProcessor {
     this.mData = newData;
   }
 
+  //
   // Sorts the data by match number (ignores comp_level)
+  //
   sortMatches(newData) {
     console.log("matchDataProcessor: sortMatches:");
     newData.sort(function (a, b) {
@@ -113,7 +131,9 @@ class matchDataProcessor {
     });
   }
 
+  //
   //  Modify match data to only include matches specified by the site filter
+  //
   applySiteFilter() {
     let newData = [];
     for (let i = 0; i < this.mData.length; i++) {
@@ -130,7 +150,9 @@ class matchDataProcessor {
     this.mData = [...newData];
   }
 
+  //
   // Filters match data based on the retrieved site filter from DB config
+  //
   getSiteFilteredAverages(processorFunction) {
     let tempThis = this;
     $.post("api/dbAPI.php", {
@@ -150,7 +172,9 @@ class matchDataProcessor {
     });
   }
 
+  //
   // Returns the match data with all calculations
+  //
   getEventAverages() {
     console.log("matchDataProcessor: getEventAverages:");
     let pdata = {}; // to hold returning data for all matches and all teams

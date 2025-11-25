@@ -31,7 +31,9 @@ require 'inc/header.php';
 
 <script>
 
+  //
   // Load the table with the match status values
+  //
   function loadMatchStatusTable(tableId, eventMatches, allMatchData) {
     console.log("==> matchStatus: loadMatchStatusTable()");
 
@@ -87,7 +89,9 @@ require 'inc/header.php';
     sortTableByMatch(tableId, matchCol);
   }
 
+  //
   // Load match data and event matches
+  //
   function buildMatchStatusTable(tableId) {
     console.log("==> matchStatus: buildMatchStatusTable()");
     let jEventMatches = null;

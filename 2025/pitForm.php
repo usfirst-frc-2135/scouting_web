@@ -185,7 +185,9 @@ require 'inc/header.php';
 
 <script>
 
+  //
   // Check if our URL directs to a specific team
+  //
   function checkURLForTeamSpec() {
     console.log("=> pitForm: checkURLForTeamSpec()");
     let sp = new URLSearchParams(window.location.search);
@@ -195,7 +197,9 @@ require 'inc/header.php';
     return "";
   }
 
+  //
   // Show scout name text entry box
+  //
   function showScoutInputBox(value) {
     document.getElementById('otherDiv').style.display = value === 'Other' ? 'block' : 'none';
   }
@@ -213,7 +217,9 @@ require 'inc/header.php';
     return scoutName;
   }
 
+  //
   // Verify pit form data
+  //
   function validatePitForm() {
     console.log("==> pitForm: validatePitForm()");
     let isError = false;
@@ -297,7 +303,9 @@ require 'inc/header.php';
     return isError;
   }
 
+  //
   // Clear pit form fields
+  //
   function clearPitForm() {
     console.log("==> pitForm: clearPitForm()");
     document.getElementById("enterTeamNumber").value = "";
@@ -314,7 +322,9 @@ require 'inc/header.php';
     document.getElementById("numBatteries").value = "-1";
   }
 
+  //
   // Write pit data form fields to DB table
+  //
   function getPitFormData() {
     console.log("==> pitForm: writeFormToPitTable()");
     let dataToSave = {};
@@ -334,7 +344,9 @@ require 'inc/header.php';
     return dataToSave;
   }
 
+  //
   // Send the pit form data to the server
+  //
   function submitPitFormData(pitFormData) {
     console.log("==> pitForm: submitPitFormData()");
     $.post("api/dbWriteAPI.php", {

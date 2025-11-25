@@ -57,7 +57,9 @@ require 'inc/header.php';
 
 <script>
 
+  //
   // Build the scout name table
+  //
   function loadScoutDataTable(tableId, scoutNameList) {
     console.log("==> scoutData: loadScoutDataTable()");
     if (scoutNameList === []) {
@@ -86,7 +88,9 @@ require 'inc/header.php';
     // sorttable.makeSortable(document.getElementById(tableId));
   }
 
+  //
   // Attempt to add the scout name to the scout table
+  //
   function addScoutName(tableId, scoutName) {
     console.log("==> scoutData: addScoutName()" + " " + scoutName);
     $.post("api/dbWriteAPI.php", {
@@ -102,7 +106,9 @@ require 'inc/header.php';
     });
   }
 
+  //
   // Attempt to remove the scout name from the scout table
+  //
   function deleteScoutName(tableId, scoutName) {
     console.log("==> scoutData: deleteScoutName()" + " " + scoutName);
     $.post("api/dbWriteAPI.php", {
@@ -118,7 +124,9 @@ require 'inc/header.php';
     });
   }
 
+  //
   // Retrieve scout names and write out file
+  //
   function writeScoutNameFile(tableId, fileName) {
     console.log("==> scoutData: writeScoutNameFile() - " + fileName);
     jsonTable = tableToJSON(tableId);
@@ -133,7 +141,9 @@ require 'inc/header.php';
     });
   }
 
+  //
   // Retrieve data and build scout name table
+  //
   function buildScoutTable(tableId) {
     $.get("api/dbReadAPI.php", {
       getEventScoutNames: true

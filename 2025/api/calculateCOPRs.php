@@ -8,6 +8,7 @@ class CalculateCOPRs
   // {
   // }
 
+  // Remove non-qual matches from match data
   private static function removeNonQualMatches($matchData)
   {
     $out = array();
@@ -21,6 +22,7 @@ class CalculateCOPRs
     return $out;
   }
 
+  // Remove unplayed matches from match data
   private static function removeUnplayedMatches($matchData)
   {
     $out = array();
@@ -34,6 +36,7 @@ class CalculateCOPRs
     return $out;
   }
 
+  // Get numerical breakdown keys from match data
   private static function getNumericalBreakdownKeys($matchData)
   {
     $sampleBreakdown = $matchData[0]["score_breakdown"]["red"];
@@ -48,10 +51,11 @@ class CalculateCOPRs
     return $out;
   }
 
+  //
   // COPR Calculation 
   // NOTE: this will NOT work for events with multiple teams unless that event code is in 
   // the hard-coded list (see getEventTeamsEx()). The result is that there is no OPR data shown.
-
+  //
   private static function choleskyDecomposition($A)
   {
     //  Args:
@@ -99,6 +103,7 @@ class CalculateCOPRs
     return array("L" => $L, "Lp" => $Lp);
   }
 
+  // Solve Ly = B then L'p = y
   private static function forwardSubstitution($A, $B)
   {
     /*
@@ -131,6 +136,7 @@ class CalculateCOPRs
     return $X;
   }
 
+  // Solve Ly = B then L'p = y
   private static function backwardSubstitution($A, $B)
   {
     /*
@@ -164,6 +170,7 @@ class CalculateCOPRs
     return $X;
   }
 
+  // Create A Matrix and B Vectors from match data
   private static function createABMatricies($teamCount, $teamLookup, $matchData)
   {
     $aMatrix = array_fill(0, $teamCount, array_fill(0, $teamCount, 0)); // Just for who plays in what matchData
@@ -201,6 +208,7 @@ class CalculateCOPRs
     return array("A" => $aMatrix, "B" => $bVectors);
   }
 
+  // Main COPR Calculation Function
   public static function calculateCOPRS($eventCode, $teamCount, $teamList, $teamLookup, $matchData)
   {
     $matchData = self::removeNonQualMatches($matchData);

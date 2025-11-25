@@ -7,12 +7,14 @@ include "dbHandler.php";
 $db = new dbHandler();
 $dbConfig = $db->readDbConfig();
 
+// Set event code
 $eventCode = $dbConfig["eventcode"];
 if (isset($_GET["eventCode"]))
 {
   $eventCode = $_GET["eventCode"];
 }
 
+// Process the DB write request options
 if (isset($_POST["writeTeamMatch"]))
 {
   // Write Data API

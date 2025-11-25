@@ -72,9 +72,12 @@ class dbHandler
 
     return $this->conn;
   }
+
   ////////////////////////////////////////////////////////
   ////////////////////// Match Data //////////////////////
+  ////////////////////////////////////////////////////////
 
+  // Write match data row into table
   public function writeRowToMatchTable($mData)
   {
     $dbConfig = $this->readDbConfig();
@@ -172,11 +175,13 @@ class dbHandler
     $prepared_statement->execute($mData);
   }
 
+  // Enforce integer data type
   private function enforceInt($val)
   {
     return intval($val);
   }
 
+  // Enforce data typing for match data
   private function enforceDataTyping($mData)
   {
     $out = array();
@@ -206,6 +211,7 @@ class dbHandler
     return $out;
   }
 
+  // Read all match data for event
   public function readAllFromMatchTable($eventCode)
   {
     $dbConfig = $this->readDbConfig();
@@ -259,6 +265,7 @@ class dbHandler
     return $this->enforceDataTyping($result);
   }
 
+  // Read match data for specific team in event
   public function readTeamFromMatchTable($teamNumber, $eventCode)
   {
     $dbConfig = $this->readDbConfig();
@@ -314,7 +321,9 @@ class dbHandler
 
   ////////////////////////////////////////////////////////
   ////////////////////// Pit Data ////////////////////////
+  ////////////////////////////////////////////////////////
 
+  // Write pit data row into table
   public function writeRowToPitTable($pData)
   {
     $dbConfig = $this->readDbConfig();
@@ -352,6 +361,7 @@ class dbHandler
     $prepared_statement->execute($pData);
   }
 
+  // Read all pit data for event
   public function readAllPitTable($eventCode)
   {
     $dbConfig = $this->readDbConfig();
@@ -377,7 +387,9 @@ class dbHandler
 
   ////////////////////////////////////////////////////////
   ////////////////////// Strategic Data //////////////////
+  ////////////////////////////////////////////////////////
 
+  // Write strategic data row into table
   public function writeRowToStrategicTable($sData)
   {
     $dbConfig = $this->readDbConfig();
@@ -450,6 +462,7 @@ class dbHandler
     $prepared_statement->execute($sData);
   }
 
+  // Read all strategic data for event
   public function readAllFromStrategicTable($eventCode)
   {
     $dbConfig = $this->readDbConfig();
@@ -489,6 +502,7 @@ class dbHandler
     return $result;
   }
 
+  // Read strategic data for specific team in event
   public function readTeamFromStrategicTable($teamNumber, $eventCode)
   {
     $dbConfig = $this->readDbConfig();
@@ -530,7 +544,9 @@ class dbHandler
 
   ////////////////////////////////////////////////////////
   ////////////////////// Scout Name //////////////////////
+  ////////////////////////////////////////////////////////
 
+  // Write scout name record into table and replace if an entry already exists
   public function writeScoutNameToTable($sName)
   {
     $dbConfig = $this->readDbConfig();
@@ -550,6 +566,7 @@ class dbHandler
     $prepared_statement->execute($sName);
   }
 
+  //
   public function deleteScoutNameFromTable($sName)
   {
     $dbConfig = $this->readDbConfig();
@@ -558,6 +575,7 @@ class dbHandler
     $prepared_statement->execute();
   }
 
+  //
   public function readEventScoutTable($eventCode)
   {
     $dbConfig = $this->readDbConfig();
@@ -575,6 +593,7 @@ class dbHandler
 
   ////////////////////////////////////////////////////////
   ////////////////////// Team Alias //////////////////////
+  ////////////////////////////////////////////////////////
 
   // Write team alias record into table and replace if an entry already exists
   public function writeAliasNumberToTable($aNum)
@@ -598,6 +617,7 @@ class dbHandler
     $prepared_statement->execute($aNum);
   }
 
+  // Delete team alias record from table
   public function deleteTeamAliasFromTable($aNum)
   {
     $dbConfig = $this->readDbConfig();
@@ -606,6 +626,7 @@ class dbHandler
     $prepared_statement->execute();
   }
 
+  // Read all team alias records for event
   public function readEventAliasTable($eventCode)
   {
     $dbConfig = $this->readDbConfig();
@@ -624,6 +645,7 @@ class dbHandler
 
   ////////////////////////////////////////////////////////
   ////////////////////// Watch List //////////////////////
+  ////////////////////////////////////////////////////////
 
   // Write team watch status record into table and replace if an entry already exists
   public function writeWatchStatusToTable($wStat)
@@ -647,6 +669,7 @@ class dbHandler
     $prepared_statement->execute($wStat);
   }
 
+  // Delete team watch status record from table
   public function deleteWatchStatusFromTable($wStat)
   {
     $dbConfig = $this->readDbConfig();
@@ -655,6 +678,7 @@ class dbHandler
     $prepared_statement->execute();
   }
 
+  // Read all team watch status records for event
   public function readEventWatchList($eventCode)
   {
     $dbConfig = $this->readDbConfig();
@@ -673,7 +697,9 @@ class dbHandler
 
   ////////////////////////////////////////////////////////
   ////////////////////// Database Creation ///////////////
+  ////////////////////////////////////////////////////////
 
+  // Create the database
   public function createDB()
   {
     error_log("createDB in dbHandler");
@@ -688,7 +714,9 @@ class dbHandler
 
   ////////////////////////////////////////////////////////
   ////////////////////// Table Creation //////////////////
+  ////////////////////////////////////////////////////////
 
+  // Create Match Data Table 
   public function createMatchTable()
   {
     error_log("Creating Match Table");
@@ -746,6 +774,7 @@ class dbHandler
     }
   }
 
+  // Create TBA Response CacheTable
   public function createTBATable()
   {
     error_log("Creating TBA Table");
@@ -764,6 +793,7 @@ class dbHandler
     }
   }
 
+  // Create Pit Data Table
   public function createPitTable()
   {
     error_log("Creating Pit Table");
@@ -791,6 +821,7 @@ class dbHandler
     }
   }
 
+  // Create Strategic Data Table
   public function createStrategicTable()
   {
     error_log("Creating Strategic Table");
@@ -835,6 +866,7 @@ class dbHandler
     }
   }
 
+  // Create Scout Name Table
   public function createScoutTable()
   {
     error_log("Creating Scout Table");
@@ -853,6 +885,7 @@ class dbHandler
     }
   }
 
+  // Write JSON data to file
   public function writeJSONToFile($dat, $name)
   {
     // Write ini file string to actual file
@@ -877,6 +910,7 @@ class dbHandler
     fclose($fp);
   }
 
+  // Create Team Alias Data Table
   public function createAliasTable()
   {
     error_log("Creating Alias Table");
@@ -896,6 +930,7 @@ class dbHandler
     }
   }
 
+  // Create Team Alias Data Table
   public function createWatchTable()
   {
     error_log("Creating Watch Table");
@@ -917,6 +952,7 @@ class dbHandler
 
   ////////////////////////////////////////////////////////
   ////////////////////// Database Config /////////////////
+  ////////////////////////////////////////////////////////
 
   // Read and return the database configutration file
   public function readDbConfig()
@@ -958,6 +994,7 @@ class dbHandler
     return $ini_arr;
   }
 
+  // Write database configuration file
   public function writeDbConfig($dat)
   {
     // Get values to write

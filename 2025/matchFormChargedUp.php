@@ -288,7 +288,9 @@ require 'inc/header.php';
 
 <script>
 
+  //
   // Clear all form fields
+  //
   function clearMatchForm(auton, teleop) {
     console.log("==> matchForm: clearMatchForm()");
     document.getElementById("compLevelQM").selected = true;
@@ -322,6 +324,9 @@ require 'inc/header.php';
     document.getElementById("generalComment").innerText = "";
   }
 
+  //
+  // Validate that all required fields have been entered
+  //
   function validateMatchForm(auton, teleop) {
     console.log("==> matchForm: validateMatchForm()");
     let isError = false;
@@ -358,7 +363,9 @@ require 'inc/header.php';
     return isError;
   }
 
+  //
   // Retrieve the form data and prepare for submission
+  //
   function getMatchFormData(auton, teleop) {
     console.log("==> matchForm: getMatchFormData()");
     let dataToSave = {};
@@ -393,7 +400,9 @@ require 'inc/header.php';
     return dataToSave;
   }
 
+  //
   // Write the match data form to the DB table
+  //
   function submitMatchFormData(matchFormData) {
     console.log("==> matchForm: submitMatchFormData()");
     $.post("api/dbWriteAPI.php", {
@@ -408,7 +417,9 @@ require 'inc/header.php';
     });
   }
 
+  //
   // Create button event listeners to process form input
+  //
   function attachButtonListeners(auton, teleop) {
     console.log("=> matchForm: attachButtonListeners()");
 
@@ -564,6 +575,7 @@ require 'inc/header.php';
       }
     });
   });
+
 </script>
 
 <script src="./scripts/validateTeamNumber.js"></script>

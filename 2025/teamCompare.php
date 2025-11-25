@@ -223,12 +223,16 @@ require 'inc/header.php';
   let secondPickChart;
   let thirdPickChart;
 
+  //
   // Round data to no more than two decimal digits
+  //
   function roundTwoPlaces(val) {
     return Math.round((val + Number.EPSILON) * 100) / 100;
   }
 
+  //
   ///// FIRST PICK GRAPH STARTS HERE /////
+  //
   function loadFirstPickGraph(team1, team2, avgData) {
     console.log("==> teamCompare: loadFirstPickGraph()");
     let datasets = [];
@@ -279,7 +283,9 @@ require 'inc/header.php';
   }
   ///// End of FIRST PICK GRAPH /////
 
+  //
   ///// SECOND PICK GRAPH STARTS HERE /////
+  //
   function loadSecondPickGraph(team1, team2, avgData) {
     console.log("==> teamCompare: loadSecondPickGraph()");
     let datasets = [];
@@ -330,7 +336,9 @@ require 'inc/header.php';
   }
   ///// End of SECOND PICK GRAPH /////
 
+  //
   ///// THIRD PICK GRAPH STARTS HERE /////
+  //
   function loadThirdPickGraph(team1, team2, avgData) {
     console.log("==> teamCompare: loadThirdPickGraph()");
     let datasets = [];
@@ -380,8 +388,9 @@ require 'inc/header.php';
   ///// End of THIRD PICK GRAPH /////
 
 
+  //
   ///// MAIN PAGE PROCESSORS HERE /////
-  // Check if our URL directs to a specific team compare
+  //    Check if our URL directs to a specific team compare
   function checkURLForTeamSpec(teamId) {
     console.log("=> teamCompare: checkURLForTeamSpec()");
     let sp = new URLSearchParams(window.location.search);
@@ -391,7 +400,9 @@ require 'inc/header.php';
     return "";
   }
 
+  //
   // Clear all existing data fields and tables
+  //
   function clearTeamComparePage() {
     document.getElementById("aliasNumber1").innerText = "";
     document.getElementById("aliasNumber2").innerText = "";
@@ -405,6 +416,9 @@ require 'inc/header.php';
     document.getElementById("averagesTable").querySelector('body').innerHTML = "";
   }
 
+  //
+  // Safely get a value from a dictionary, warn if not found
+  //
   function getDataValue(dict, key) {
     if (!dict) {
       console.warn("getDataValue: Dictionary not found! " + dict);
@@ -418,6 +432,9 @@ require 'inc/header.php';
     return "";
   }
 
+  //
+  // Create a single endgame climb entry row
+  //
   function createEndgameEntry(teamNum, avgData) {
     let endgameClimbPercentage = getDataValue(avgData[teamNum], "endgameClimbPercent");
     const tdPrefix = "<td>";
@@ -442,7 +459,9 @@ require 'inc/header.php';
     tbodyRef.insertRow().innerHTML = createEndgameEntry(teamNum2, avgData);
   }
 
+  //
   // Retrieve team info from TBA and alias list
+  //
   function getTeamDescription(teamNum, aliasList, evtInfo) {
     // Get alias numbers if they exist for this team number
     let aliasNum = "";
@@ -468,7 +487,9 @@ require 'inc/header.php';
     return teamStr
   }
 
+  //
   // This is the main function that runs when we want to load teams.
+  //
   function buildTeamComparePage(teamNum1, teamNum2, aliasList) {
     console.log("==> teamCompare: buildTeamComparePage()");
 
@@ -526,7 +547,9 @@ require 'inc/header.php';
     });
   }
 
+  //
   // Autocorrects alias number in team number entry field
+  //
   function validateEnteredTeamNumber(enterId, aliasId, event, aliasList) {
     console.log("enterTeamNumber: focus out");
     let enteredNum = event.target.value.toUpperCase().trim();

@@ -42,14 +42,39 @@ function sortFrcTables(tableId, teamCol, matchCol) {
   });
 }
 
+//
+//  Sort table by team number
+//  Params:
+//    tableId - the html ID of the <table> tag element
+//    teamCol - the column number of the team numbers in the table
+//  Return:
+//    tableId is sorted in place by team number
+//
 function sortTableByTeam(tableId, teamCol) {
   sortFrcTables(tableId, teamCol, -1);
 }
 
+//
+//  Sort table by match number
+//  Params:
+//    tableId - the html ID of the <table> tag element
+//    matchCol - the column number of the match numbers in the table
+//  Return:
+//    tableId is sorted in place by match number
+//
 function sortTableByMatch(tableId, matchCol) {
   sortFrcTables(tableId, -1, matchCol);
 }
 
+//
+//  Sort table by match number and team number
+//  Params:
+//    tableId - the html ID of the <table> tag element
+//    teamCol - the column number of the team numbers in the table
+//    matchCol - the column number of the match numbers in the table
+//  Return:
+//    tableId is sorted in place by match number and team number
+//
 function sortTableByMatchAndTeam(tableId, teamCol, matchCol) {
   sortFrcTables(tableId, teamCol, matchCol);
 }

@@ -417,13 +417,16 @@ require 'inc/header.php';
   let teleopChart;
   let endgameChart;
 
+  //
   // Round data to no more than two decimal digits
+  //
   function roundTwoPlaces(val) {
     return Math.round((val + Number.EPSILON) * 100) / 100;
   }
 
+  //
   ///// AUTON GRAPH STARTS HERE /////
-
+  //
   function loadAutonGraph(matchData) {
     console.log("==> teamLookup: loadAutonGraph()");
 
@@ -542,8 +545,9 @@ require 'inc/header.php';
 
   ///// AUTON GRAPH ENDS HERE /////
 
+  //
   ///// TELEOP GRAPH STARTS HERE /////
-
+  //
   function loadTeleopGraph(matchData) {
     console.log("==> teamLookup: loadTeleopGraph()");
 
@@ -654,8 +658,9 @@ require 'inc/header.php';
 
   ///// TELEOP GRAPH ENDS HERE /////
 
+  //
   ///// ENDGAME GRAPH STARTS HERE /////
-
+  //
   function loadEndgameGraph(matchData) {
     console.log("==> teamLookup: loadEndgameGraph()");
 
@@ -741,7 +746,9 @@ require 'inc/header.php';
 
   ///// ENDGAME GRAPH END HERE /////
 
+  //
   // Create an html table row with tr and td cells
+  //
   function writeAverageTableRow(tableID, dict, keys, length) {
     let tbodyRef = document.getElementById(tableID).querySelector('tbody');
     let row = "<th  style='text-align:left'>" + dict[keys[0]] + "</th>";
@@ -751,7 +758,9 @@ require 'inc/header.php';
     tbodyRef.insertRow().innerHTML = row;
   }
 
+  //
   // Generate all of the table data and fill them
+  //
   function loadAverageTables(avgs) {
     console.log("==> teamLookup: loadAverageTables()");
 
@@ -815,7 +824,9 @@ require 'inc/header.php';
 
   // MAIN PAGE PROCESSORS HERE
 
+  //
   // Check if our URL directs to a specific team
+  //
   function checkURLForTeamSpec() {
     console.log("=> teamLookup: checkURLForTeamSpec()");
     let sp = new URLSearchParams(window.location.search);
@@ -825,7 +836,9 @@ require 'inc/header.php';
     return "";
   }
 
+  //
   // Takes list of Team photo paths and loads them.
+  //
   function loadTeamPhotos(teamPhotos) {
     console.log("==> teamLookup: loadTeamPhotos()");
     let first = true;
@@ -840,7 +853,9 @@ require 'inc/header.php';
     }
   }
 
+  //
   // Converts a given "1" to yes, "0" to no, anything else to empty string.
+  //
   function toYesNo(value) {
     switch (String(value)) {
       case "1": return "Yes";
@@ -849,7 +864,9 @@ require 'inc/header.php';
     }
   }
 
+  //
   // Create a row in the pit data table
+  //
   function writePitTableRow(tableID, dict, keys, length) {
     let tbodyRef = document.getElementById(tableID).querySelector('tbody');
     let row = "";
@@ -859,7 +876,9 @@ require 'inc/header.php';
     tbodyRef.insertRow().innerHTML = row;
   }
 
+  //
   // Load the pit data table for this team
+  //
   function loadPitData(pitData) {
     console.log("==> teamLookup: loadPitData()");
     if (!pitData || !pitData.length) {
@@ -880,7 +899,9 @@ require 'inc/header.php';
     writePitTableRow("pitTable2", pitData, ["computervisionstring", "pitorg", "preparedness", "numbatteries"], 4);
   }
 
+  //
   // Load the match data table
+  //
   function loadMatchData(team, allEventMatches, jAliasNames) {
     console.log("==> teamLookup: loadMatchData()");
     let mdp = new matchDataProcessor(allEventMatches);
@@ -905,7 +926,9 @@ require 'inc/header.php';
     });
   }
 
+  //
   // Clear existing data
+  //
   function clearTeamLookupPage() {
     console.log("==> teamLookup: clearTeamLookupPage()");
     document.getElementById("aliasNumber").innerText = "";
@@ -924,8 +947,8 @@ require 'inc/header.php';
   }
 
   ///////////////////////////////////////////////////////////////////
-  // This is the main function that runs when we want to load a team.
-  // teamName will be set to the alias for BCD teamnums; else it's empty here and will be looked up later.
+  // Main function that runs when we want to load a team.
+  //    teamName will be set to the alias for BCD teamnums
   function buildTeamLookupPage(teamNum, aliasList) {
     console.log("==> teamLookup: buildTeamLookupPage() teamNum " + teamNum);
     clearTeamLookupPage();
@@ -987,7 +1010,9 @@ require 'inc/header.php';
     });
   }
 
+  //
   // Autocorrects alias number in team number entry field
+  //
   function validateEnteredTeamNumber(event, aliasList) {
     console.log("enterTeamNumber: focus out");
     let enteredNum = event.target.value.toUpperCase().trim();

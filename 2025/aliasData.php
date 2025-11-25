@@ -58,7 +58,9 @@ require 'inc/header.php';
 
 <script>
 
+  //
   // Build the team alias table
+  //
   function loadAliasDataTable(tableId, teamAliasList) {
     console.log("==> aliasData: loadAliasDataTable()");
     if (teamAliasList === []) {
@@ -90,7 +92,9 @@ require 'inc/header.php';
     // sorttable.makeSortable(document.getElementById(tableId));
   }
 
+  //
   // Attempt to save the team alias to the alias table
+  //
   function addTeamAlias(tableId, teamNum, alias) {
     console.log("==> aliasData: addTeamAlias()" + " " + teamNum + " " + alias);
     $.post("api/dbWriteAPI.php", {
@@ -107,7 +111,9 @@ require 'inc/header.php';
     });
   }
 
+  //
   // Attempt to remove the team alias from the alias table
+  //
   function deleteTeamAlias(tableId, teamAlias) {
     console.log("==> aliasData: deleteTeamAlias()" + " " + teamAlias);
     $.post("api/dbWriteAPI.php", {
@@ -124,7 +130,9 @@ require 'inc/header.php';
     });
   }
 
+  //
   // Retrieve team aliases and write out file
+  //
   function writeTeamAliasFile(tableId, fileName) {
     console.log("==> aliasData: writeTeamAliasFile() - " + fileName);
     let jsonTable = tableToJSON(tableId);   // Convert the HTML table into a JSON object
@@ -146,7 +154,9 @@ require 'inc/header.php';
     });
   }
 
+  //
   // Retrieve data and build team and alias table
+  //
   function buildAliasTable(tableId) {
     $.get("api/dbReadAPI.php", {
       getEventAliasNames: true

@@ -1,5 +1,5 @@
 <?php
-$title = 'Strategic Form';
+$title = 'Strategic Scouting Form';
 require 'inc/header.php';
 ?>
 
@@ -275,7 +275,9 @@ require 'inc/header.php';
 
 <script>
 
+  //
   // Check if our URL directs to a specific team
+  //
   function checkURLForTeamSpec() {
     console.log("=> strategicForm: checkURLForTeamSpec()");
     let sp = new URLSearchParams(window.location.search);
@@ -285,7 +287,9 @@ require 'inc/header.php';
     return "";
   }
 
+  //
   // Show scout name text entry box
+  //
   function showScoutInputBox(value) {
     document.getElementById('otherDiv').style.display = value === 'Other' ? 'block' : 'none';
   }
@@ -303,6 +307,9 @@ require 'inc/header.php';
     return scoutName;
   }
 
+  //
+  // Validate strategic form entries
+  //
   function validateStrategicForm() {
     console.log("==> strategicForm.php: clearStrategicForm()");
     let isError = false;
@@ -336,6 +343,9 @@ require 'inc/header.php';
     return isError;
   }
 
+  //
+  // Clear strategic form entries
+  //
   function clearStrategicForm() {
     console.log("==> strategicForm.php: clearStrategicForm()");
     document.getElementById("compLevelQM").selected = true;
@@ -381,7 +391,9 @@ require 'inc/header.php';
     document.getElementById("generalComment").value = "";
   }
 
+  //
   // Write strategic form data to DB table
+  //
   function getStrategicFormData() {
     console.log("==> strategicForm.php: getStrategicFormData()");
     let dataToSave = {};
@@ -437,7 +449,9 @@ require 'inc/header.php';
     return dataToSave;
   }
 
+  //
   // Send the pit form data to the server
+  //
   function submitStrategicFormData(strategicFormData) {
     console.log("==> strategicForm: submitStrategicFormData()");
     $.post("api/dbWriteAPI.php", {

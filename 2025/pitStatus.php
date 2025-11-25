@@ -43,7 +43,9 @@ require 'inc/header.php';
 
 <script>
 
+  //
   // Build the pit status table
+  //
   function loadPitStatusTable(tableId, teams, names, images, pitInfo) {
     console.log("==> pitStatus: loadPitStatusTable()");
     if (teams === [] || names === [] || images === null || pitInfo === null) {
@@ -80,14 +82,16 @@ require 'inc/header.php';
     // sorttable.makeSortable(document.getElementById(tableId));
   }
 
+  //
   // Load all pit status Info
+  //
   function buildPitStatusTable(tableId) {
     console.log("==> pitStatus: buildPitStatusTable()");
+    let jAliasNames = [];
     let teamList = [];
     let namesList = [];
     let jTeamImages = null;
     let jPitData = null;
-    let jAliasNames = [];
 
     // Get alias table data
     $.get("api/dbReadAPI.php", {

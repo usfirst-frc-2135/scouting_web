@@ -93,7 +93,9 @@ require 'inc/header.php';
 
 <script>
 
+  //
   // Build the team watch list table
+  //
   function loadTeamWatchTable(tableId, watchId, teamWatchList) {
     console.log("==> strategicSchedule: loadTeamWatchTable()");
     if (teamWatchList === []) {
@@ -125,7 +127,9 @@ require 'inc/header.php';
     // sorttable.makeSortable(document.getElementById(watchId));
   }
 
+  //
   // Attempt to save the team watch status to the watch table
+  //
   function updateTeamWatch(tableId, watchId, teamNum, status) {
     console.log("==> strategicSchedule: updateTeamWatch()" + " " + teamNum + " " + status);
     $.post("api/dbWriteAPI.php", {
@@ -141,7 +145,9 @@ require 'inc/header.php';
     });
   }
 
+  //
   // Attempt to remove the team watch status from the watch table
+  //
   function deleteTeamWatch(tableId, watchId, teamWatch) {
     console.log("==> strategicSchedule: deleteTeamWatch()" + " " + teamWatch);
     $.post("api/dbWriteAPI.php", {
@@ -157,7 +163,9 @@ require 'inc/header.php';
     });
   }
 
+  //
   // Retrieve data and build team watch status table
+  //
   function buildWatchTable(tableId, watchId) {
     $.get("api/dbReadAPI.php", {
       getEventWatchList: true
@@ -169,7 +177,9 @@ require 'inc/header.php';
     });
   }
 
+  //
   // Load strategic schedule rows
+  //
   function loadStrategicSchedule(tableId, stratSched) {
     console.log("==> strategicSchedule: loadStrategicSchedule()");
     let tbodyRef = document.getElementById(tableId).querySelector('tbody');;
@@ -198,7 +208,9 @@ require 'inc/header.php';
     }
   }
 
+  //
   // Figure out which teams/matches for strategic scouting table
+  //
   function buildScheduleTable(tableId, watchList) {
     console.log("==> strategicSchedule: buildScheduleTable()");
     $.get("api/tbaAPI.php", {

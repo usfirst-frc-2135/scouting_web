@@ -363,17 +363,23 @@ require 'inc/header.php';
 
 <script>
 
+  //
   // Utility to strip off leading "frc" from team number
+  //
   function strTeamToIntTeam(team) {
     return team.replace(/^(frc)/, '');
   }
 
+  //
   // Round data to no more than two decimal digits
+  //
   function roundTwoPlaces(val) {
     return Math.round((val + Number.EPSILON) * 100) / 100;
   }
 
+  //
   // Fix match IDs that are missing the comp level
+  //
   function getFixedMatchId(matchId) {
     matchId = matchId.toLowerCase();
     if ((matchId.search("p") != -1) || (matchId.search("qm") != -1) ||
@@ -386,7 +392,9 @@ require 'inc/header.php';
     }
   }
 
+  //
   // Get the comp level and match number from the match ID string (ex. [qm, 25] from qm25)
+  //
   function getMatchTuple(matchId) {
     matchId = getFixedMatchId(matchId);
     if (matchId.search("p") != -1) {
@@ -407,18 +415,24 @@ require 'inc/header.php';
     return null;
   }
 
+  //
   // Create a match key in the form QM_1
+  //
   function idToKey(matchId) {
     mt = getMatchTuple(matchId);
     return mt[0].toUpperCase() + "_" + String(mt[1]).toUpperCase();
   }
 
+  //
   // Create a match key in the form QM_1
+  //
   function makeKey(compLevel, matchNumber) {
     return compLevel.toUpperCase() + "_" + String(matchNumber).toUpperCase();
   }
 
+  //
   // Clear all existing data from the match sheet table
+  //
   function clearMatchSheet() {
     console.log("==> matchSheet: clearMatchSheet()");
 
@@ -464,7 +478,9 @@ require 'inc/header.php';
     document.getElementById("B2DataTable").querySelector('tbody').innerHTML = "";
   }
 
+  //
   // Build the list of HTML links to our matches at this event
+  //
   function buildOurTeamMatchLinks(ourMatches) {
     console.log("==> matchSheet: buildOurTeamMatchLinks()");
     let ourMatchesArray = [];
@@ -498,7 +514,9 @@ require 'inc/header.php';
     }
   }
 
+  //
   // Takes list of Team Pic paths and loads them
+  //
   function buildRobotPhotoLinks(prefix, teamPics) {
     console.log("==> buildRobotPhotoLinks: build the entries in the photo carousels");
     let first = true;
@@ -515,7 +533,9 @@ require 'inc/header.php';
     }
   }
 
+  //
   // Update match time from system time in msec
+  //
   function updateMatchTime(time) {
     let date = new Date(time * 1000);
     let hours = date.getHours();
@@ -528,7 +548,9 @@ require 'inc/header.php';
     document.getElementById("matchTime").innerText = "Time: " + hours + ":" + minutes.substring(minutes.length - 2) + " " + suffix;
   }
 
+  //
   // Build the header in each team box data table
+  //
   function buildTeamBoxTableHeader(tableId) {
     let rowString1 = "";
     rowString1 += '<th colspan="6" class="text-center fs-6" style="background-color:#D5E6DE">Auton</th>';
@@ -562,7 +584,9 @@ require 'inc/header.php';
     document.getElementById(tableId).querySelector('thead').insertRow().innerHTML = rowString2;
   }
 
+  //
   // Load the info into the team box
+  //
   function buildTeamBoxTableBody(color, index, teamNum, averageData) {
     console.log("==> buildTeamBoxTableBody: build the team box in the match sheet - " + teamNum);
     // Get team name from TBA
@@ -617,7 +641,9 @@ require 'inc/header.php';
     tbodyRef.insertRow().innerHTML = row;
   }
 
+  //
   // Update the match summary table comparing both alliances
+  //
   function updateMatchSummary(matchSpec, averageData) {
     let totalCoralScoredAvg = { "red": 0, "blue": 0 };
     let totalAlgaeScoredAvg = { "red": 0, "blue": 0 };
@@ -666,7 +692,9 @@ require 'inc/header.php';
     document.getElementById("blueTotalPredictedPoints").innerText = roundTwoPlaces(totalPredictedPoints["blue"]);
   }
 
+  //
   // Build team photo image list
+  //
   function sendPhotoRequest(matchSpec) {
     console.log("==> matchSheet: sendPhotoRequest()");
     let _picDB = {};
@@ -699,7 +727,9 @@ require 'inc/header.php';
     });
   }
 
+  //
   // Clear a match spec object
+  //
   function clearMatchSpec(spec) {
     spec.title = "";
     spec.time = "";
@@ -707,7 +737,9 @@ require 'inc/header.php';
     spec.blue = ["", "", ""];
   }
 
+  //
   // Create the event match list, extract our matches and build links for them
+  //
   function buildMatchList(allEventMatches) {
     console.log("==> matchSheet: buildMatchList()");
     const OURTEAM = "frc2135";
@@ -745,7 +777,9 @@ require 'inc/header.php';
     return eventMatchList;
   }
 
+  //
   // Check source URL for match specifier
+  //
   function checkURLForMatchId() {
     console.log("==> matchSheet: checkURLForMatchId()");
     let sp = new URLSearchParams(window.location.search);
@@ -755,7 +789,9 @@ require 'inc/header.php';
     return null;
   }
 
+  //
   // Get a match spec from a matchId
+  //
   function getEventMatchSpec(matchId, matchList) {
     if (matchList === null) {
       return null;
@@ -785,7 +821,9 @@ require 'inc/header.php';
     return matchSpec;
   }
 
+  //
   // Build a custom red and blue alliance matchsheet
+  //
   function loadMatchSheet(matchSpec, averageData) {
     console.log("==> matchSheet: loadMatchSheet()");
     clearMatchSheet();

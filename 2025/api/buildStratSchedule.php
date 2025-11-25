@@ -8,6 +8,7 @@ class BuildStratSchedule
   // {
   // }
 
+  // Get all the teams in a match
   private static function getTeamsInMatch($match)
   {
     $teams = array();
@@ -18,6 +19,7 @@ class BuildStratSchedule
     return $teams;
   }
 
+  // Get our strategic scouting matches from the event matches and our watch list
   public static function getMatches($evtMatches, $watchList)
   {
     // Go thru all the matches and figure out which ones are our matches.

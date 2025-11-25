@@ -32,7 +32,9 @@ require 'inc/header.php';
 
 <script>
 
+  //
   // Retrive strategic scouting data and load the table
+  //
   function buildStrategicDataTable(tableId) {
     console.log("==> strategicData: buildStrategicDataTable()");
     let jAliasNames = null;

@@ -217,7 +217,9 @@ function getTeamListFromData(matchData) {
   return keyList;
 }
 
+//
 // Lookup value for a key in the passed dictionary - team in match data
+//
 function getDataValue(dict, key) {
   if (!dict) {
     console.warn("getDataValue: Dictionary not found! " + dict);

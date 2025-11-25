@@ -154,7 +154,9 @@ require 'inc/header.php';
 
 <script>
 
+  //
   // Set the status badges for an item
+  //
   function setStatusBadge(id, isSuccess) {
     console.log("==> index.php: setStatusBadge()");
     document.getElementById(id).classList.remove("bg-warning");
@@ -169,7 +171,9 @@ require 'inc/header.php';
     }
   }
 
+  //
   // Update all status badges for DB connection
+  //
   function updateStatusValues(dbStatus) {
     if (dbStatus["server"] !== "") {
       {
@@ -208,7 +212,9 @@ require 'inc/header.php';
     }
   }
 
+  //
   // Loop through field IDs and add event listeners to each one
+  //
   function addFieldListeners(idToConfigKey) {
     let fieldWriteMap = [];
 

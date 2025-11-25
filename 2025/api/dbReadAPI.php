@@ -8,6 +8,7 @@ $db = new dbHandler();
 $dbConfig = $db->readDbConfig();
 $db->connectToDB();
 
+// Retrieve robot photos for a team
 function getRobotPhotos($team)
 {
   $imageList = array();
@@ -34,12 +35,14 @@ function getRobotPhotos($team)
   return $imageList;
 }
 
+// Set event code
 $eventCode = $dbConfig["eventcode"];
 if (isset($_GET["eventCode"]))
 {
   $eventCode = $_GET["eventCode"];
 }
 
+// Process the read request options
 if (isset($_GET["getAllMatchData"]))
 {
   // Get all match data

@@ -34,6 +34,7 @@ class tbaHandler
     $this->tbaTableName = $tbaTableName;
   }
 
+  // Read URI from TBA API
   private function readURIFromTBA($uri)
   {
     $out = array();
@@ -95,6 +96,7 @@ class tbaHandler
     return $out;
   }
 
+  // Read URI from DB cache
   private function readURIFromDB($uri)
   {
     // If uri not in db, then return empty
@@ -112,6 +114,7 @@ class tbaHandler
     return $out;
   }
 
+  // Write URI response to DB cache
   private function writeResponseToDB($uri, $response)
   {
     $replaceValues = array();
@@ -124,6 +127,7 @@ class tbaHandler
     $prepared_statement->execute($replaceValues);
   }
 
+  // Make a DB cached call to TBA API
   private function makeDBCachedCall($uri)
   {
     $currTime = time();

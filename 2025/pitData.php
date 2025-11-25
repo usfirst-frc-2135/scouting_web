@@ -31,7 +31,9 @@ require 'inc/header.php';
 
 <script>
 
+  //
   // Insert the pit data table header
+  //
   function insertPitTableHeader(tableId, pitData) {
     console.log("==> pitData: insertPitDataHeader()");
     let tbodyRef = document.getElementById(tableId).querySelector('thead');
@@ -61,7 +63,9 @@ require 'inc/header.php';
     }
   }
 
+  //
   // Converts a given "1" to yes, "2" to no, anything else to a dash.
+  //
   function toYesNo(value) {
     switch (value) {
       case 0: return "No";
@@ -70,7 +74,9 @@ require 'inc/header.php';
     }
   }
 
+  //
   // Converts a given pit organization to a string
+  //
   function toOrganization(value) {
     switch (value) {
       case 1: return "1-Messy";
@@ -82,7 +88,9 @@ require 'inc/header.php';
     }
   }
 
+  //
   // Converts a given readiness to a string
+  //
   function toPreparedness(value) {
     switch (value) {
       case 1: return "1-Chaos";
@@ -95,7 +103,9 @@ require 'inc/header.php';
   }
 
 
+  //
   // Insert the pit data table body
+  //
   function insertPitTableBody(tableId, pitData) {
     console.log("==> pitData: insertPitDataBody()");
     let tbodyRef = document.getElementById(tableId).querySelector('tbody');
@@ -119,7 +129,9 @@ require 'inc/header.php';
     }
   }
 
+  //
   // Acquire match data and build the page
+  //
   function buildPitDataTable(tableId) {
     $.get("api/dbReadAPI.php", {
       getAllPitData: true

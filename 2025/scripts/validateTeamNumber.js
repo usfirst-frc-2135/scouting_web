@@ -6,12 +6,16 @@
   Function Definition
 */
 
+//
 // Test for an alphabetic character
+//
 function isAlphaChar(ch) {
   return /^[A-Z]$/i.test(ch);
 }
 
+//
 // Test for an numeric string
+//
 function isNumeric(str) {
   if (typeof str != "string") return false // we only process strings!  
   return !isNaN(str) &&     // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)

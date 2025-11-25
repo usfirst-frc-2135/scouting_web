@@ -80,7 +80,9 @@ function insertStrategicDataHeader(tableId, aliasList) {
   theadRef.insertRow().innerHTML = rowString2;
 };
 
+//
 // Converts a given "1" to yes, "2" to no, anything else to a dash.
+//
 function toYesNo(value) {
   switch (String(value)) {
     case "1": return "Yes";

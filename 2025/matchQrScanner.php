@@ -53,7 +53,9 @@ require 'inc/header.php';
   const qrValidLength = 42;   // This is determined by game requirements and adjusted each year
   const qrPadLength = 1;      // TODO: no explanation why this is padded--did we delete something? Remove for 2026
 
+  //
   // update this data list length whenever more data is added to the table
+  //
   function padList(qrList) {
     if (qrList.length === qrValidLength - qrPadLength) {
       qrList.push("");
@@ -72,7 +74,9 @@ require 'inc/header.php';
     return true;
   }
 
+  //
   // Convert the scanned QR string to a list
+  //
   function qrStringToList(dataString) {
     let out = dataString.trim().split("\t");
     for (let i = 0; i < out.length; ++i) {
@@ -81,6 +85,7 @@ require 'inc/header.php';
     return out;
   }
 
+  //
   // IMPORTANT! also need to adjust data list size in "validateQrList" and "padList"!!!
   //  TODO: For 2026, please change the field order to put match or year-specific items LAST (order is suggested below in comments)
   //        For 2026, remove any undocumented "padding" on the structure. Just declare an "other" field.
@@ -147,12 +152,16 @@ require 'inc/header.php';
     return matchData;
   }
 
+  //
   // Creates the key used to store the QR scan in the database
+  //
   function getKeyForMatchData(matchData) {
     return matchData["eventcode"] + "_" + matchData["matchnumber"] + "_" + matchData["teamnumber"];
   }
 
+  //
   // Adds a QR scan to the table of scans
+  //
   function addMatchDataToTable(tableId, matchData, scannedMatches) {
     let key = getKeyForMatchData(matchData);
 
@@ -186,7 +195,9 @@ require 'inc/header.php';
     }
   }
 
+  //
   // Removes a QR scan row and cleans up
+  //
   function removeQrScanEntry(dataKey, scannedMatches) {
     if (Object.prototype.hasOwnProperty.call(scannedMatches, dataKey)) {
       // Remove the match data, update the count, remove the row
@@ -199,7 +210,9 @@ require 'inc/header.php';
     }
   }
 
+  //
   // Alerts user of a successful QR scan
+  //
   function indicateScanSuccess() {
     const canVibrate = window.navigator.vibrate;
     if (canVibrate) {                   // iOS does not support vibrate and crashes, so test if it's available
@@ -218,18 +231,24 @@ require 'inc/header.php';
     }, 500);
   }
 
+  //
   //  Saves default camera ID to localStorage for on reload camera config persistence
+  //
   function setDefaultDeviceID(id) {
     localStorage.setItem("cameraDefaultID", id);
   }
 
+  //
   //  Reads default camera ID from localStorage, or returns original ID
+  //
   function getDefaultDeviceID(id) {
     let defaultId = localStorage.getItem("cameraDefaultID");
     return (defaultId !== null) ? defaultId : id;
   }
 
+  //
   // Responsible for handling actions that occur when camera is scanning
+  //
   function addCameraScanner(camId, scanner, tableId, scannedMatches) {
     scanner.decodeFromInputVideoDeviceContinuously(camId, 'camera', function (result, err) {
       if (result) {
@@ -248,7 +267,9 @@ require 'inc/header.php';
     });
   }
 
+  //
   // Build the camera selection dropdown and connect the scanner passed in
+  //
   function createCameraSelector(camTagId, scanner, tableId, scannedMatches) {
     // Look for cameras, enumerate them, and connect the scanner
     scanner.getVideoInputDevices().then(function (videoInputDevices) {
@@ -280,13 +301,17 @@ require 'inc/header.php';
     });
   }
 
+  //
   // Update the scanned match counter
+  //
   function updateScannedMatchCount(scannedMatches) {
     scanCount = Object.keys(scannedMatches).length;
     document.getElementById("submitData").innerText = "Click to Submit Data: " + scanCount;
   }
 
+  //
   // Clear the scanned data to reset for more scans
+  //
   function clearScannedMatches(tableId, scannedMatches) {
     for (let entry in scannedMatches) {
       delete scannedMatches[entry];

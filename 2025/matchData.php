@@ -32,7 +32,9 @@ require 'inc/header.php';
 
 <script>
 
+  //
   // Build the match data table
+  //
   function buildMatchDataTable(tableId) {    // Load the alias table
     console.log("==> matchData: buildMatchDataTable()");
     let jAliasNames = null;

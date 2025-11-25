@@ -79,7 +79,9 @@ require 'inc/header.php';
 
 <script>
 
+  //
   // Scrape table and write CSV file
+  //
   function downloadTableAsCSV(tableId, csvName) {
     csvName = csvName + ".csv";
     console.log("==> eventAverages: downloadTableAsCSV(): " + csvName);
@@ -123,7 +125,9 @@ require 'inc/header.php';
     document.body.removeChild(downloadLink);
   }
 
+  //
   // Get alias names and COPRs, create table header
+  //
   function buildAveragesHeader(tableId, aliasNames) {
     if (aliasNames === null) {
       return;
@@ -132,7 +136,9 @@ require 'inc/header.php';
     insertEventAveragesHeader(tableId, aliasNames);
   }
 
+  //
   // Get all match data, filter it, create final HTML table, and sort it
+  //
   function buildAveragesBody(tableId, aliasNames, coprs, matchData, startMatch, endMatch) {
     if (aliasNames === null || coprs === null || matchData === null) {
       return;
@@ -152,7 +158,9 @@ require 'inc/header.php';
     });
   }
 
+  //
   // Build event averages table
+  //
   function buildEventAveragesTable(tableId, startMatch, endMatch) {
     let jAliasNames = null;
     let jMatchData = null;

@@ -9,6 +9,7 @@ $db = new dbHandler();
 $dbConfig = $db->readDbConfig();
 $eventCode = $dbConfig["eventcode"];
 
+//
 if (isset($_GET["eventCode"]))
 {
   // Used to over ride the written event code
@@ -17,6 +18,7 @@ if (isset($_GET["eventCode"]))
 
 $tba = new tbaHandler($dbConfig["tbakey"], $dbConfig["tbatable"], $db->connectToDB());
 
+// Process the TBA API request options
 if (isset($_GET["getTeamInfo"]))
 {
   echo json_encode($tba->getTeamInfo($_GET["getTeamInfo"]));

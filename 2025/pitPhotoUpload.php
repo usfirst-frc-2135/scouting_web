@@ -68,7 +68,9 @@ require 'inc/header.php';
 
 <script>
 
+  //
   // Check if our URL directs to a specific team
+  //
   function checkURLForTeamSpec() {
     console.log("=> pitPhotoUpload: checkURLForTeamSpec()");
     let sp = new URLSearchParams(window.location.search);
@@ -78,7 +80,9 @@ require 'inc/header.php';
     return "";
   }
 
+  //
   // Display success to user
+  //
   function showSuccessMessage(message) {
     console.log("==> pitPhotoUpload: showSuccessMessage()" + message);
     document.getElementById("robotPic").value = "";
@@ -91,7 +95,9 @@ require 'inc/header.php';
     document.getElementById("uploadMessage").style.display = "block";
   }
 
+  //
   // Display error to user
+  //
   function showErrorMessage(message) {
     console.log("==> pitPhotoUpload: showErrorMessage: " + message);
 
@@ -101,7 +107,9 @@ require 'inc/header.php';
     document.getElementById("uploadMessage").style.display = "block";
   }
 
+  //
   // Display success to user
+  //
   function uploadSuccess(msg) {
     console.log("==> pitPhotoUpload: uploadSuccess: " + msg);
     loadingSpinner.style.visibility = 'hidden';
@@ -113,7 +121,9 @@ require 'inc/header.php';
     }
   }
 
+  //
   // Upload the selected image file to the server
+  //
   function handlePhotoUpload() {
     console.log("=> pitPhotoUpload: handlePhotoUpload");
     let teamNum = document.getElementById("enterTeamNumber").value.toUpperCase().trim();
@@ -189,7 +199,9 @@ require 'inc/header.php';
     });
   }
 
+  //
   // Handles FileReader events when an image file has been selected
+  //
   function handleFileSelect(evt) {
     let files = evt.target.files;
     let f = files[0];

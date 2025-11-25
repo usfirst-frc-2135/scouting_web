@@ -36,7 +36,9 @@ require 'inc/header.php';
 
 <script>
 
+  //
   // Add data keys (header fields) to COPR table in html
+  //
   function addKeysToCoprTable(tableId, keys) {
     let tableRef = document.getElementById(tableId);
     tableRef.querySelector('thead').innerHTML = ""; // Clear header
@@ -49,7 +51,9 @@ require 'inc/header.php';
     tableRef.querySelector('thead').insertRow().innerHTML = header;
   }
 
+  //
   // Add team data to COPR table in html
+  //
   function addDataToCoprTable(tableId, coprData, keys) {
     let tbodyRef = document.getElementById(tableId).querySelector('tbody');
     tbodyRef.innerHTML = ""; // Clear Table
@@ -67,8 +71,9 @@ require 'inc/header.php';
     }
   }
 
+  //
   // This table controls the order and header names for the COPR table
-  // First column matches TBA keys for a match breakdown, column two is a preferred header name
+  //    First column matches TBA keys for a match breakdown, column two is a preferred header name
   const coprKeys =
     [["rp", "RP"],
     ["totalPoints", "Total Pts"],
@@ -88,7 +93,9 @@ require 'inc/header.php';
     ["techFoulCount", "Tech Foul Ct"]
     ];
 
+  //
   // Add data keys (fields) to COPR table in html
+  //
   function loadCoprTable(tableId, coprResponse) {
     console.log("==> eventCoprData.php: loadCoprTable()");
     let jCoprData = JSON.parse(coprResponse);
@@ -104,7 +111,9 @@ require 'inc/header.php';
     addDataToCoprTable(tableId, coprData, coprKeys);
   }
 
+  //
   // Retrive OPRs from TBA and build the COPR table to display
+  //
   function buildTbaCoprTable(tableId) {
     //output: gets the COPR data from TBA
     $.get("api/tbaAPI.php", {
@@ -143,6 +152,7 @@ require 'inc/header.php';
       }
     });
   });
+
 </script>
 
 <script src="./scripts/aliasFunctions.js"></script>
