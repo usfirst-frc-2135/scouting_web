@@ -34,6 +34,7 @@ require 'inc/header.php';
 
   // Build the match data table
   function buildMatchDataTable(tableId) {    // Load the alias table
+    console.log("==> matchData: buildMatchDataTable()");
     let jAliasNames = null;
 
     // Load alias lookup table

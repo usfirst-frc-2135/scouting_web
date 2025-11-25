@@ -35,12 +35,23 @@ require 'inc/header.php';
   // Retrive strategic scouting data and load the table
   function buildStrategicDataTable(tableId) {
     console.log("==> strategicData: buildStrategicDataTable()");
-    insertStrategicDataHeader(tableId, []);
+    let jAliasNames = null;
+
+    // Load alias lookup table
+    $.get("api/dbReadAPI.php", {
+      getEventAliasNames: true
+    }).done(function (eventAliasNames) {
+      console.log("=> eventAliasNames");
+      jAliasNames = JSON.parse(eventAliasNames);
+      insertStrategicDataHeader(tableId, jAliasNames);
+    });
+
+    // Load the strategic data
     $.get("api/dbReadAPI.php", {
       getAllStrategicData: true
     }).done(function (strategicData) {
       console.log("=> getAllStrategicData");
-      insertStrategicDataBody(tableId, JSON.parse(strategicData), [], []);
+      insertStrategicDataBody(tableId, JSON.parse(strategicData), jAliasNames, []);
       document.getElementById('spinner').style.display = 'none';
       // script instructions say this is needed, but it breaks table header sorting
       // sorttable.makeSortable(document.getElementById(tableId));
@@ -70,6 +81,7 @@ require 'inc/header.php';
   });
 </script>
 
+<script src="./scripts/aliasFunctions.js"></script>
 <script src="./scripts/compareMatchNumbers.js"></script>
 <script src="./scripts/compareTeamNumbers.js"></script>
 <script src="./scripts/sortFrcTables.js"></script>
