@@ -53,6 +53,7 @@ require 'inc/header.php';
       }
       let matchId = match["comp_level"] + matchNum;
       let alliances = match["alliances"];
+      let scouts = [];
 
       // Build a match row with scout names if the match has been scouted
       let rowString = "";
@@ -63,7 +64,8 @@ require 'inc/header.php';
         let cellString = "<td class='table-danger'>" + alliances["red"]["team_keys"][team].substring(3) + "</td>";
         for (let ami in allMatchData) {
           if ((allMatchData[ami]["matchnumber"] === matchId) && allMatchData[ami]["teamnumber"] === alliances["red"]["team_keys"][team].substring(3)) {
-            cellString = "<td class='table-success'>" + allMatchData[ami]["scoutname"] + "</td>";
+            cellString = ((!scouts.includes(allMatchData[ami]["scoutname"])) ? "<td class='table-success'>" : "<td class='table-warning'>") + allMatchData[ami]["scoutname"] + "</td>";
+            scouts.push(allMatchData[ami]["scoutname"]);
             break;
           }
         }
@@ -75,7 +77,8 @@ require 'inc/header.php';
         let cellString = "<td class='table-primary'>" + alliances["blue"]["team_keys"][team].substring(3) + "</td>";
         for (let ami in allMatchData) {
           if ((allMatchData[ami]["matchnumber"] === matchId) && allMatchData[ami]["teamnumber"] === alliances["blue"]["team_keys"][team].substring(3)) {
-            cellString = "<td class='table-success'>" + allMatchData[ami]["scoutname"] + "</td>";
+            cellString = ((!scouts.includes(allMatchData[ami]["scoutname"])) ? "<td class='table-success'>" : "<td class='table-warning'>") + allMatchData[ami]["scoutname"] + "</td>";
+            scouts.push(allMatchData[ami]["scoutname"]);
             break;
           }
         }
