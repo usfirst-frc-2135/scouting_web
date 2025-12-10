@@ -31,7 +31,7 @@ require 'inc/header.php';
                 </div>
               </div>
               <div class="row text-center">
-                <output id="photoList"></output>
+                <output id="photoPreview"></output>
               </div>
             </div>
 
@@ -56,9 +56,19 @@ require 'inc/header.php';
           <button id="closeMessage" class="btn-close" type="button" aria-label="Photo Upload Close"></button>
         </div>
 
-      </div>
+        <!-- Existing photos card -->
+        <div class="card">
+          <div class="card-header">
+            <h3>Existing Photos</h3>
+          </div>
+          <div class="card-body">
+            <output id="photoPrevious"></output>
+          </div>
+        </div>
 
+      </div>
     </div>
+
   </div>
 </div>
 
@@ -209,13 +219,35 @@ require 'inc/header.php';
     reader.onload = (
       function (theFile) {
         return function (e) {
-          document.getElementById('photoList').innerHTML = [
-            '<img src="', e.target.result, '" title="', theFile.name, '" width="300" />'
+          document.getElementById('photoPreview').innerHTML = [
+            '<img src="', e.target.result, '" title="', theFile.name, '" width="300">'
           ].join('');
         };
       }
     )(f);
     reader.readAsDataURL(f);
+  }
+
+  //
+  // Load existing photos for this team
+  //
+  function loadPreviousTeamPhotos(teamNum) {
+    console.log("==> Load existing photos for team #" + teamNum);
+    document.getElementById('photoPrevious').innerHTML = "";
+
+    // First get list of robot-pic files for this team.
+    $.get("api/dbReadAPI.php", {
+      getImagesForTeam: teamNum
+    }).done(function (teamImages) {
+      console.log("=> getImagesForTeam\n" + teamImages);
+      let jTeamImages = JSON.parse(teamImages);
+
+      for (let imageFile of jTeamImages) {
+        document.getElementById('photoPrevious').innerHTML +=
+          '<div>File:  ' + imageFile + '</div>' +
+          '<img class="mb-3" src="' + imageFile + '" title="' + teamNum + '" width="150" >';
+      }
+    });
   }
 
   /////////////////////////////////////////////////////////////////////////////
@@ -262,6 +294,7 @@ require 'inc/header.php';
       }
       else
         document.getElementById("aliasNumber").innerText = "";
+      loadPreviousTeamPhotos(document.getElementById("enterTeamNumber").value);
     });
 
     // Confirm the file selction selection is supported
