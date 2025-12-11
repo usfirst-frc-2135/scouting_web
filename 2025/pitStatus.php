@@ -63,13 +63,13 @@ require 'inc/header.php';
       row += "</td>";
 
       if (pitInfo[teamNum] != null) {
-        row += " <td class='bg-success'>Yes</td>";
+        row += " <td class='table-success'>Yes</td>";
       } else {
         row += "<td><a href='pitForm.php?teamNum=" + teamNum + "'>No</td>"
       }
 
       if ((images[teamNum] != null) && (images[teamNum].length > 0)) {
-        row += " <td class='bg-success'>Yes</td>";
+        row += " <td class='table-success'>Yes</td>";
       } else {
         row += "<td><a href='pitPhotoUpload.php?teamNum=" + teamNum + "'>No</td>"
       }
