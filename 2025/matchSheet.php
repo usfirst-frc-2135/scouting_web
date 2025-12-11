@@ -136,16 +136,17 @@ require 'inc/header.php';
 
     <!-- Red0 - Red Team 1 -->
     <div class="col-lg-4 col-sm-4 col-xs-4 gx-3">
-      <div id="R0Flush" class="accordion accordion-flush text-light bg-danger mb-3">
+      <div id="R0TeamBox" class="accordion accordion-flush text-light bg-danger mb-3">
         <div class="accordion-item bg-danger">
-          <h6 id="R0flush-headingOne" class="accordion-header bg-danger">
-            <button class="accordion-button collapsed bg-danger btn-sm" type="button" data-bs-toggle="collapse"
-              data-bs-target="#flush-R0Collapse" aria-expanded="false" aria-controls="flush-R0Collapse">
-              <h6 id="R0TeamNumber" class="text-center text-light">Team #</h6>
-            </button>
-          </h6>
 
-          <div id="flush-R0Collapse" class="accordion-collapse collapse show" data-bs-parent="#R0Flush">
+          <div id="R0TeamHeader" class="accordion-header d-flex align-items-center bg-danger">
+            <a class="text-nowrap text-center text-light ms-3">Team #</a>
+            <button class="accordion-button bg-transparent shadow-none collapsed" type="button" data-bs-toggle="collapse"
+              data-bs-target="#R0TeamCollapse" aria-expanded="false" aria-controls="R0TeamCollapse">
+            </button>
+          </div>
+
+          <div id="R0TeamCollapse" class="accordion-collapse collapse" data-bs-parent="#R0TeamBox">
             <div id="R0PicsCarousel" class="carousel slide" data-interval="false">
               <div id="R0RobotPics" class="carousel-inner"> </div>
               <button class="carousel-control-prev" type="button" data-bs-target="#R0PicsCarousel" data-bs-slide="prev">
@@ -172,16 +173,17 @@ require 'inc/header.php';
 
     <!-- Red1 - Red Team 2 -->
     <div class="col-lg-4 col-sm-4 col-xs-4 gx-3">
-      <div id="R1Flush" class="accordion accordion-flush text-light bg-danger mb-3">
+      <div id="R1TeamBox" class="accordion accordion-flush text-light bg-danger mb-3">
         <div class="accordion-item bg-danger">
-          <h6 id="R1flush-headingOne" class="accordion-header bg-danger">
-            <button class="accordion-button collapsed bg-danger btn-sm" type="button" data-bs-toggle="collapse"
-              data-bs-target="#flush-R1Collapse" aria-expanded="false" aria-controls="flush-R1Collapse">
-              <h6 id="R1TeamNumber" class="text-center text-light">Team #</h6>
-            </button>
-          </h6>
 
-          <div id="flush-R1Collapse" class="accordion-collapse collapse show" data-bs-parent="#R1Flush">
+          <div id="R1TeamHeader" class="accordion-header d-flex align-items-center bg-danger">
+            <a class="text-nowrap text-center text-light ms-3">Team #</a>
+            <button class="accordion-button bg-transparent shadow-none collapsed" type="button" data-bs-toggle="collapse"
+              data-bs-target="#R1TeamCollapse" aria-expanded="false" aria-controls="R1TeamCollapse">
+            </button>
+          </div>
+
+          <div id="R1TeamCollapse" class="accordion-collapse collapse" data-bs-parent="#R1TeamBox">
             <div id="R1PicsCarousel" class="carousel slide" data-interval="false">
               <div id="R1RobotPics" class="carousel-inner"> </div>
               <button class="carousel-control-prev" type="button" data-bs-target="#R1PicsCarousel" data-bs-slide="prev">
@@ -208,16 +210,17 @@ require 'inc/header.php';
 
     <!-- Red2 - Red Team 3 -->
     <div class="col-lg-4 col-sm-4 col-xs-4 gx-3">
-      <div id="R2Flush" class="accordion accordion-flush text-light bg-danger mb-3">
+      <div id="R2TeamBox" class="accordion accordion-flush text-light bg-danger mb-3">
         <div class="accordion-item bg-danger">
-          <h6 id="R2flush-headingOne" class="accordion-header bg-danger">
-            <button class="accordion-button collapsed bg-danger btn-sm" type="button" data-bs-toggle="collapse"
-              data-bs-target="#flush-R2Collapse" aria-expanded="false" aria-controls="flush-R2Collapse">
-              <h6 id="R2TeamNumber" class="text-center text-light">Team #</h6>
-            </button>
-          </h6>
 
-          <div id="flush-R2Collapse" class="accordion-collapse collapse show" data-bs-parent="#R2Flush">
+          <div id="R2TeamHeader" class="accordion-header d-flex align-items-center bg-danger">
+            <a class="text-nowrap text-center text-light ms-3">Team #</a>
+            <button class="accordion-button bg-transparent shadow-none collapsed" type="button" data-bs-toggle="collapse"
+              data-bs-target="#R2TeamCollapse" aria-expanded="false" aria-controls="R2TeamCollapse">
+            </button>
+          </div>
+
+          <div id="R2TeamCollapse" class="accordion-collapse collapse" data-bs-parent="#R2TeamBox">
             <div id="R2PicsCarousel" class="carousel slide" data-interval="false">
               <div id="R2RobotPics" class="carousel-inner"> </div>
               <button class="carousel-control-prev" type="button" data-bs-target="#R2PicsCarousel" data-bs-slide="prev">
@@ -248,16 +251,17 @@ require 'inc/header.php';
 
     <!-- Blue0 - Blue Team 1 -->
     <div class="col-lg-4 col-sm-4 col-xs-4 gx-3">
-      <div id="B0Flush" class="accordion accordion-flush text-light bg-primary mb-3">
+      <div id="B0TeamBox" class="accordion accordion-flush text-light bg-primary mb-3">
         <div class="accordion-item bg-primary">
-          <h6 id="B0flush-headingOne" class="accordion-header bg-primary">
-            <button class="accordion-button collapsed bg-primary btn-sm" type="button" data-bs-toggle="collapse"
-              data-bs-target="#flush-B0Collapse" aria-expanded="false" aria-controls="flush-B0Collapse">
-              <h6 id="B0TeamNumber" class="text-center text-light">Team #</h6>
-            </button>
-          </h6>
 
-          <div id="flush-B0Collapse" class="accordion-collapse collapse show" data-bs-parent="#B0Flush">
+          <div id="B0TeamHeader" class="accordion-header d-flex align-items-center bg-primary">
+            <a class="text-nowrap text-center text-light ms-3">Team #</a>
+            <button class="accordion-button bg-transparent shadow-none collapsed" type="button" data-bs-toggle="collapse"
+              data-bs-target="#B0TeamCollapse" aria-expanded="false" aria-controls="B0TeamCollapse">
+            </button>
+          </div>
+
+          <div id="B0TeamCollapse" class="accordion-collapse collapse" data-bs-parent="#B0TeamBox">
             <div id="B0PicsCarousel" class="carousel slide" data-interval="false">
               <div id="B0RobotPics" class="carousel-inner"> </div>
               <button class="carousel-control-prev" type="button" data-bs-target="#B0PicsCarousel" data-bs-slide="prev">
@@ -284,16 +288,17 @@ require 'inc/header.php';
 
     <!-- Blue1 - Blue Team 2 -->
     <div class="col-lg-4 col-sm-4 col-xs-4 gx-3">
-      <div id="B1Flush" class="accordion accordion-flush text-light bg-primary mb-3">
+      <div id="B1TeamBox" class="accordion accordion-flush text-light bg-primary mb-3">
         <div class="accordion-item bg-primary">
-          <h6 id="B1flush-headingOne" class="accordion-header bg-primary">
-            <button class="accordion-button collapsed bg-primary btn-sm" type="button" data-bs-toggle="collapse"
-              data-bs-target="#flush-B1Collapse" aria-expanded="false" aria-controls="flush-B1Collapse">
-              <h6 id="B1TeamNumber" class="text-center text-light">Team #</h6>
-            </button>
-          </h6>
 
-          <div id="flush-B1Collapse" class="accordion-collapse collapse show" data-bs-parent="#B1Flush">
+          <div id="B1TeamHeader" class="accordion-header d-flex align-items-center bg-primary">
+            <a class="text-nowrap text-center text-light ms-3">Team #</a>
+            <button class="accordion-button bg-transparent shadow-none collapsed" type="button" data-bs-toggle="collapse"
+              data-bs-target="#B1TeamCollapse" aria-expanded="false" aria-controls="B1TeamCollapse">
+            </button>
+          </div>
+
+          <div id="B1TeamCollapse" class="accordion-collapse collapse" data-bs-parent="#B1TeamBox">
             <div id="B1PicsCarousel" class="carousel slide" data-interval="false">
               <div id="B1RobotPics" class="carousel-inner"> </div>
               <button class="carousel-control-prev" type="button" data-bs-target="#B1PicsCarousel" data-bs-slide="prev">
@@ -320,16 +325,17 @@ require 'inc/header.php';
 
     <!-- Blue2 - Blue Team 3 -->
     <div class="col-lg-4 col-sm-4 col-xs-4 gx-3">
-      <div id="B2Flush" class="accordion accordion-flush text-light bg-primary mb-3">
+      <div id="B2TeamBox" class="accordion accordion-flush text-light bg-primary mb-3">
         <div class="accordion-item bg-primary">
-          <h6 id="B2flush-headingOne" class="accordion-header bg-primary">
-            <button class="accordion-button collapsed bg-primary btn-sm" type="button" data-bs-toggle="collapse"
-              data-bs-target="#flush-B2Collapse" aria-expanded="false" aria-controls="flush-B2Collapse">
-              <h6 id="B2TeamNumber" class="text-center text-light">Team #</h6>
-            </button>
-          </h6>
 
-          <div id="flush-B2Collapse" class="accordion-collapse collapse show" data-bs-parent="#B2Flush">
+          <div id="B2TeamHeader" class="accordion-header d-flex align-items-center bg-primary">
+            <a class="text-nowrap text-center text-light ms-3">Team #</a>
+            <button class="accordion-button bg-transparent shadow-none collapsed" type="button" data-bs-toggle="collapse"
+              data-bs-target="#B2TeamCollapse" aria-expanded="false" aria-controls="B2TeamCollapse">
+            </button>
+          </div>
+
+          <div id="B2TeamCollapse" class="accordion-collapse collapse" data-bs-parent="#B2TeamBox">
             <div id="B2PicsCarousel" class="carousel slide" data-interval="false">
               <div id="B2RobotPics" class="carousel-inner"> </div>
               <button class="carousel-control-prev" type="button" data-bs-target="#B2PicsCarousel" data-bs-slide="prev">
@@ -519,17 +525,20 @@ require 'inc/header.php';
   //
   function buildRobotPhotoLinks(prefix, teamPics) {
     console.log("==> buildRobotPhotoLinks: build the entries in the photo carousels");
-    let first = true;
-    let elementRef = document.getElementById(prefix + "RobotPics");
-    elementRef.innerHTML = "";
+    let count = 0;
+    let slideRef = document.getElementById(prefix + "RobotPics");
+    slideRef.innerHTML = "";
     for (let uri of teamPics) {
-      let tags = "<div class='carousel-item";
-      if (first) {
-        tags += " active";
+      let slide = "<div class='carousel-item";
+      if (count === 0) {
+        slide += " active";
       }
-      first = false;
-      tags += "'> <img src='./" + uri + "' class='d-block w-100'></div>";
-      elementRef.innerHTML += tags;
+      count++;
+      slide += "'> <img src='./" + uri + "' class='d-block w-100'></div>";
+      slideRef.innerHTML += slide;
+    }
+    if (count > 0) {
+      document.getElementById(prefix + "TeamCollapse").classList.add("show");
     }
   }
 
@@ -606,10 +615,9 @@ require 'inc/header.php';
         teamName += " " + jTeamInfo["nickname"];
       }
       console.log("==> matchSheet: buildTeamBoxTableBody() for " + teamNum + teamName);
-      let teamLink = "<a class='text-light' href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a>";
-      teamLink += " " + teamName;
-      let elementRef = document.getElementById(color + index + "TeamNumber");
-      elementRef.innerHTML = teamLink;
+      let teamLink = "<a class='text-light' href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + " " + teamName + "</a>";
+      let elementRef = document.getElementById(color + index + "TeamHeader");
+      elementRef.querySelector('a').innerHTML = teamLink;
     });
 
     // Load team scouted information
