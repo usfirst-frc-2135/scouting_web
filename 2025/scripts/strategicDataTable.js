@@ -11,6 +11,9 @@
 //    1) insert a header row for a strategic data table
 //    2) insert a body row for strategic data table
 //
+const thAuto = '<th scope="col" class="bg-success-subtle">';        // Auton color
+const thTeleop = '<th scope="col" class="bg-primary-subtle">';      // Teleop color
+const thEndgame = '<th scope="col" class="bg-warning-subtle">';     // Endgame color
 
 //
 //  Insert a strategic data table header (all rows)
@@ -25,27 +28,27 @@ function insertStrategicDataHeader(tableId, aliasList) {
   theadRef.innerHTML = ""; // Clear Table
 
   let rowString1 = '';
-  rowString1 += '<th colspan="1" style="background-color:transparent"> </th>';
+  rowString1 += '<th colspan="1" class="bg-body"> </th>';
   // Insert column if the aliasList is not empty
   if (aliasList.length > 0) {
-    rowString1 += '<th colspan="1" style="background-color:transparent"> </th>';
+    rowString1 += '<th colspan="1" class="bg-body"> </th>';
   }
-  rowString1 += '<th colspan="1" style="background-color:transparent"> </th>';
-  rowString1 += '<th colspan="1" style="background-color:#cfe2ff"> </th>';
-  rowString1 += '<th colspan="2" style="background-color:#cfe2ff">Against Defense</th>';
-  rowString1 += '<th colspan="3" style="background-color:transparent">Defense Tactics</th>';
-  rowString1 += '<th colspan="8" style="background-color:#cfe2ff">Fouls</th>';
-  rowString1 += '<th colspan="4" style="background-color:transparent">Auton</th>';
-  rowString1 += '<th colspan="4" style="background-color:#cfe2ff">Teleop</th>';
-  rowString1 += '<th colspan="2" style="background-color:transparent">Notes</th>';
+  rowString1 += '<th colspan="1" class="bg-body"> </th>';
+  rowString1 += '<th colspan="1" class="bg-primary-subtle"> </th>';
+  rowString1 += '<th colspan="2" class="bg-primary-subtle">Against Defense</th>';
+  rowString1 += '<th colspan="3" class="bg-body">Defense Tactics</th>';
+  rowString1 += '<th colspan="8" class="bg-primary-subtle">Fouls</th>';
+  rowString1 += '<th colspan="4" class="bg-success-subtle">Auton</th>';
+  rowString1 += '<th colspan="4" class="bg-primary-subtle">Teleop</th>';
+  rowString1 += '<th colspan="2" class="bg-body">Notes</th>';
   rowString1 += '<th colspan="1"> </th>';
 
   theadRef.insertRow().innerHTML = rowString1;
 
   let rowString2 = '';
-  const thPrefix0 = '<th scope="col" style="background-color:transparent">';
-  const thPrefix1 = '<th scope="col" style="background-color:#cfe2ff">';
-  rowString2 += '<th scope="col" style="background-color:transparent" class="sorttable_numeric">Team</th>';
+  const thPrefix0 = '<th scope="col" class="bg-body">';
+  const thPrefix1 = '<th scope="col" class="bg-primary-subtle">';
+  rowString2 += '<th scope="col" class="bg-body sorttable_numeric">Team</th>';
   // Insert column if the aliasList is not empty
   if (aliasList.length > 0) {
     rowString2 += thPrefix0 + 'Alias</th>';
@@ -65,14 +68,14 @@ function insertStrategicDataHeader(tableId, aliasList) {
   rowString2 += thPrefix0 + 'Reef Contact</th>';
   rowString2 += thPrefix1 + 'Cage Contact</th>';
   rowString2 += thPrefix0 + 'Contact Climbing Robot</th>';
-  rowString2 += thPrefix1 + 'Get Floor Coral</th>';
-  rowString2 += thPrefix0 + 'Get Stn Coral</th>';
-  rowString2 += thPrefix1 + 'Get Floor Algae</th>';
-  rowString2 += thPrefix0 + 'Get Reef Algae</th>';
-  rowString2 += thPrefix1 + 'Get Floor Coral</th>';
-  rowString2 += thPrefix0 + 'Get Floor Algae</th>';
-  rowString2 += thPrefix1 + 'Knock Algae</th>';
-  rowString2 += thPrefix0 + 'Acquire Reef Algae</th>';
+  rowString2 += thAuto + 'Get Floor Coral</th>';
+  rowString2 += thAuto + 'Get Stn Coral</th>';
+  rowString2 += thAuto + 'Get Floor Algae</th>';
+  rowString2 += thAuto + 'Get Reef Algae</th>';
+  rowString2 += thTeleop + 'Get Floor Coral</th>';
+  rowString2 += thTeleop + 'Get Floor Algae</th>';
+  rowString2 += thTeleop + 'Knock Algae</th>';
+  rowString2 += thTeleop + 'Acquire Reef Algae</th>';
   rowString2 += thPrefix1 + 'Problem Note</th>';
   rowString2 += thPrefix0 + 'General Note</th>';
   rowString2 += thPrefix1 + 'Scout Name</th>';
@@ -112,8 +115,9 @@ function insertStrategicDataBody(tableId, stratData, aliasList, teamFilter) {
     if (teamFilter.length !== 0 && !teamFilter.includes(teamNum))
       continue;
 
-    const tdPrefix0 = "<td style=\"background-color:transparent\">";
-    const tdPrefix1 = "<td style=\"background-color:#cfe2ff\">";
+    const tdPrefix0 = "<td class='bg-body'>";
+    const tdPrefix0Bold = "<td class='bg-body fw-bold'>";
+    const tdPrefix1 = "<td class='bg-primary-subtle'>";
 
     let driveVal = "";
     switch (stratItem["driverability"]) {
@@ -131,7 +135,7 @@ function insertStrategicDataBody(tableId, stratData, aliasList, teamFilter) {
     if (aliasList.length > 0) {
       rowString += tdPrefix0 + getAliasFromTeamNum(teamNum, aliasList) + "</td>";
     }
-    rowString += tdPrefix0 + stratItem["matchnumber"] + "</td>";
+    rowString += tdPrefix0Bold + stratItem["matchnumber"] + "</td>";
     rowString += tdPrefix1 + driveVal + "</td>";
     rowString += tdPrefix0 + toYesNo(stratItem["against_tactic1"]) + "</td>";
     rowString += tdPrefix1 + stratItem["against_comment"] + "</td>";

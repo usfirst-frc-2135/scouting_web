@@ -40,7 +40,7 @@ require 'inc/header.php';
               </div>
             </div>
 
-            <div class="card col-md-12 mx-auto" style="background-color:#AFE8F7">
+            <div class="card col-md-12 mx-auto bg-success-subtle">
               <div class="card-header">
                 <h5>Questions</h5>
               </div>
@@ -120,7 +120,7 @@ require 'inc/header.php';
               </div>
             </div>
 
-            <div class="card col-md-12 mx-auto" style=" background-color:#FBE7A5">
+            <div class="card col-md-12 mx-auto bg-warning-subtle">
               <div class="card-header">
                 <h5>Observations</h5>
                 <h6><span class="text-danger">(observe only, do not ask)</span></h6>

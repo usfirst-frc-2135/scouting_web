@@ -1,7 +1,7 @@
 <?php header('Access-Control-Allow-Origin: *'); ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="light">
 
 <head>
   <title><?php echo $title; ?></title>
@@ -32,9 +32,9 @@
   </style>
 </head>
 
-<body class="bg-light">
+<body>
   <!-- Create collapsible navbar and navigation buttons -->
-  <nav class="navbar navbar-expand-sm bg-dark sticky-top" data-bs-theme="dark">
+  <nav class="navbar navbar-expand-sm bg-dark sticky-top">
     <a class="navbar-brand text-white" href="./index.php">
       <img src="./images/favicon-32x32.png" alt="Logo" width="24" height="24" class="d-inline-block align-text-top">
       <span id="navbarEventCode"> ????</span>

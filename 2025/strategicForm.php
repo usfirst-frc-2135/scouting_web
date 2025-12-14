@@ -59,7 +59,7 @@ require 'inc/header.php';
             </div>
 
             <!-- Autonomous Mode -->
-            <div class="card mb-3" style="background-color:#D5E6DE">
+            <div class="card mb-3 bg-success-subtle">
               <div class="card-header fw-bold">
                 Autonomous Mode
               </div>
@@ -104,7 +104,7 @@ require 'inc/header.php';
             <!-- end Autonomous Mode -->
 
             <!-- Teleop Mode -->
-            <div class="card mb-3" style="background-color:#D6F3FB">
+            <div class="card mb-3 bg-primary-subtle">
               <div class="card-header fw-bold">
                 Teleop Mode
               </div>
@@ -184,7 +184,7 @@ require 'inc/header.php';
             <!-- end Teleop Mode -->
 
             <!-- Playing Defense Section -->
-            <div class="card mb-3" style="background-color:#fbe6d3">
+            <div class="card mb-3 bg-warning-subtle">
               <div class="card-header fw-bold">
                 Playing Defense
               </div>
@@ -239,7 +239,7 @@ require 'inc/header.php';
             </div>
 
             <!-- Comments section -->
-            <div class="card mb-3" style="background-color:#F8F9FA">
+            <div class="card bg-light-subtle mb-3">
               <div class="card-header fw-bold">
                 Comments
               </div>

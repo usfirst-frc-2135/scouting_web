@@ -43,7 +43,7 @@ require 'inc/header.php';
         <div class="card mb-3">
 
           <div id="customMatch" class="accordion accordion-flush">
-            <div class="accordion-item" style="background-color: #F8F9FA">
+            <div class="accordion-item bg-secondary-subtle">
               <h2 class="accordion-header">
                 <button class="accordion-button text-light bg-secondary" type="button" data-bs-toggle="collapse"
                   data-bs-target="#matchEntry" aria-expanded="false" aria-controls="matchEntry">Enter Custom Match
@@ -54,22 +54,22 @@ require 'inc/header.php';
                   <div class="input-group mb-3">
                     <h5 id="red">Red Alliance:</h5>
                     <div class="input-group mb-3">
-                      <input id="enterRed1" class="form-control border border-black" style="background-color:#F3D8DA" type="text"
+                      <input id="enterRed1" class="form-control border border-black bg-danger-subtle" type="text"
                         placeholder="Red Team 1" aria-label="Red Team 1">
-                      <input id="enterRed2" class="form-control border border-black" style="background-color:#F3D8DA" type="text"
+                      <input id="enterRed2" class="form-control border border-black bg-danger-subtle" type="text"
                         placeholder="Red Team 2" aria-label="Red Team 2">
-                      <input id="enterRed3" class="form-control border border-black" style="background-color:#F3D8DA" type="text"
+                      <input id="enterRed3" class="form-control border border-black bg-danger-subtle" type="text"
                         placeholder="Red Team 3" aria-label="Red Team 3">
                     </div>
                   </div>
                   <div class="input-group mb-3">
                     <h5 id="blue">Blue Alliance:</h5>
                     <div class="input-group mb-3">
-                      <input id="enterBlue1" class="form-control border border-black" style="background-color:#D3E1FC" type="text"
+                      <input id="enterBlue1" class="form-control border border-black bg-primary-subtle" type="text"
                         placeholder="Blue Team 1" aria-label="Blue Team 1">
-                      <input id="enterBlue2" class="form-control border border-black" style="background-color:#D3E1FC" type="text"
+                      <input id="enterBlue2" class="form-control border border-black bg-primary-subtle" type="text"
                         placeholder="Blue Team 2" aria-label="Blue Team 2">
-                      <input id="enterBlue3" class="form-control border border-black" style="background-color:#D3E1FC" type="text"
+                      <input id="enterBlue3" class="form-control border border-black bg-primary-subtle" type="text"
                         placeholder="Blue Team 3" aria-label="Blue Team 3">
                     </div>
                   </div>
@@ -562,9 +562,9 @@ require 'inc/header.php';
   //
   function buildTeamBoxTableHeader(tableId) {
     let rowString1 = "";
-    rowString1 += '<th colspan="6" class="text-center fs-6" style="background-color:#D5E6DE">Auton</th>';
-    rowString1 += '<th colspan="8" class="text-center fs-6" style="background-color:#D6F3FB">Teleop</th>';
-    rowString1 += '<th colspan="5" class="text-center fs-6" style="background-color:#FBE6D3">Endgame</th>';
+    rowString1 += '<th colspan="6" class="text-center fs-6 bg-success-subtle">Auton</th>';
+    rowString1 += '<th colspan="8" class="text-center fs-6 bg-primary-subtle">Teleop</th>';
+    rowString1 += '<th colspan="5" class="text-center fs-6 bg-warning-subtle">Endgame</th>';
 
     let rowString2 = "";
     rowString2 += '<th scope="col">L4</th>';

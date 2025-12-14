@@ -9,6 +9,7 @@ require 'inc/header.php';
     <!-- Page Title -->
     <div class="row pt-3 pb-3 mb-3">
       <h2 class="col-md-6"><?php echo $title; ?></h2>
+      <a href="javascript:history.back()">Back to DB Status</a>
     </div>
 
     <!-- Main row to hold the table -->
@@ -41,7 +42,13 @@ require 'inc/header.php';
       return;
 
     console.log("=> loadMatchStatusTable");
-    let hdrString = "<th scope='col' class='sorttable_numerci'>Match</th> <th class='text-bg-danger'>Red 1</th> <th class='text-bg-danger'>Red 2</th> <th class='text-bg-danger'>Red 3</th> <th class='text-bg-primary'>Blue 1</th> <th class='text-bg-primary'>Blue 2</th> <th class='text-bg-primary'>Blue 3</th>";
+    let hdrString = "<th scope='col' class='sorttable_numerci'>Match</th>" +
+      "<th class='text-bg-danger'>Red 1</th>" +
+      "<th class='text-bg-danger'>Red 2</th>" +
+      "<th class='text-bg-danger'>Red 3</th>" +
+      "<th class='text-bg-primary'>Blue 1</th>" +
+      "<th class='text-bg-primary'>Blue 2</th>" +
+      "<th class='text-bg-primary'>Blue 3</th>";
     document.getElementById(tableId).querySelector('thead').insertRow().innerHTML = hdrString;
 
     let tbodyRef = document.getElementById(tableId).querySelector('tbody');
@@ -57,14 +64,14 @@ require 'inc/header.php';
 
       // Build a match row with scout names if the match has been scouted
       let rowString = "";
-      rowString += "<td>" + matchId + "</td>";
+      rowString += "<td class='fw-bold'>" + matchId + "</td>";
 
       // Red teams in this match
       for (team in alliances["red"]["team_keys"]) {
         let cellString = "<td class='table-danger'>" + alliances["red"]["team_keys"][team].substring(3) + "</td>";
         for (let ami in allMatchData) {
           if ((allMatchData[ami]["matchnumber"] === matchId) && allMatchData[ami]["teamnumber"] === alliances["red"]["team_keys"][team].substring(3)) {
-            cellString = ((!scouts.includes(allMatchData[ami]["scoutname"])) ? "<td class='table-success'>" : "<td class='table-warning'>") + allMatchData[ami]["scoutname"] + "</td>";
+            cellString = "<td class='table-" + ((!scouts.includes(allMatchData[ami]["scoutname"])) ? "success'>" : "warning'>") + allMatchData[ami]["scoutname"] + "</td>";
             scouts.push(allMatchData[ami]["scoutname"]);
             break;
           }
@@ -77,7 +84,7 @@ require 'inc/header.php';
         let cellString = "<td class='table-primary'>" + alliances["blue"]["team_keys"][team].substring(3) + "</td>";
         for (let ami in allMatchData) {
           if ((allMatchData[ami]["matchnumber"] === matchId) && allMatchData[ami]["teamnumber"] === alliances["blue"]["team_keys"][team].substring(3)) {
-            cellString = ((!scouts.includes(allMatchData[ami]["scoutname"])) ? "<td class='table-success'>" : "<td class='table-warning'>") + allMatchData[ami]["scoutname"] + "</td>";
+            cellString = "<td class='table-" + ((!scouts.includes(allMatchData[ami]["scoutname"])) ? "success'>" : "warning'>") + allMatchData[ami]["scoutname"] + "</td>";
             scouts.push(allMatchData[ami]["scoutname"]);
             break;
           }

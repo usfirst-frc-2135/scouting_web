@@ -45,7 +45,7 @@ require 'inc/header.php';
             </div>
 
             <!-- Auton collapsible graph -->
-            <div class="card mb-3" style="background-color:#D5E6DE">
+            <div class="card mb-3 bg-success-subtle">
               <div class="card-header">
                 <h5 class="text-center">
                   <a href="#collapseAutonCoralGraph" data-bs-toggle="collapse" aria-expanded="false">Auton Scoring</a>
@@ -57,7 +57,7 @@ require 'inc/header.php';
             </div>
 
             <!-- Teleop collapsible graph -->
-            <div class="card mb-3" style="background-color:#D6F3FB">
+            <div class="card mb-3 bg-primary-subtle">
               <div class="card-header">
                 <h5 class="text-center">
                   <a href="#collapseTeleopCoralGraph" data-bs-toggle="collapse" aria-expanded="false">Teleop Scoring</a>
@@ -69,7 +69,7 @@ require 'inc/header.php';
             </div>
 
             <!-- Endgame collapsible graph -->
-            <div class="card mb-3" style="background-color:#FBE6D3">
+            <div class="card mb-3 bg-warning-subtle">
               <div class="card-header">
                 <h5 class="text-center">
                   <a href="#collapseEndgameGraph" data-bs-toggle="collapse" aria-expanded="false">Endgame Scoring</a>
@@ -137,7 +137,7 @@ require 'inc/header.php';
             </div>
 
             <!-- Auton Points section -->
-            <div class="card mb-3" style="background-color:#D5E6DE">
+            <div class="card mb-3 bg-success-subtle">
               <div class="card-header">
                 <h5 class="text-center"><a href="#collapseAuton" data-bs-toggle="collapse" aria-expanded="false">Auton</a></h5>
               </div>
@@ -182,7 +182,7 @@ require 'inc/header.php';
             </div>
 
             <!-- Teleop Points section -->
-            <div class="card mb-3" style="background-color:#D6F3FB">
+            <div class="card mb-3 bg-primary-subtle">
               <div class="card-header">
                 <h5 class="text-center"> <a href="#collapseTeleop" data-bs-toggle="collapse" aria-expanded="false">Teleop </a>
                 </h5>
@@ -238,7 +238,7 @@ require 'inc/header.php';
             </div>
 
             <!-- Endgame Points section -->
-            <div class="card mb-3" style="background-color:#FBE6D3">
+            <div class="card mb-3 bg-warning-subtle">
               <div class="card-header">
                 <h5 class="text-center"> <a href="#collapseEndgame" data-bs-toggle="collapse" aria-expanded="false">Endgame
                   </a>
@@ -343,10 +343,10 @@ require 'inc/header.php';
           <div id="collapsePitData" class="card-body collapse">
             <table id="pitTable1" class="table table-striped table-sm table-bordered table-hover border-dark text-center">
               <colgroup>
-                <col span="1" style="background-color:transparent">
-                <col span="1" style="background-color:#cfe2ff">
-                <col span="1" style="background-color:transparent">
-                <col span="1" style="background-color:#cfe2ff">
+                <col span="1" class="bg-body">
+                <col span="1" class="bg-primary-subtle">
+                <col span="1" class="bg-body">
+                <col span="1" class="bg-primary-subtle">
               </colgroup>
               <thead>
                 <tr>
@@ -362,10 +362,10 @@ require 'inc/header.php';
             <!-- Pit Scouting 2nd row -->
             <table id="pitTable2" class="table table-striped table-sm table-bordered table-hover border-dark text-center">
               <colgroup>
-                <col span="1" style="background-color:transparent">
-                <col span="1" style="background-color:#cfe2ff">
-                <col span="1" style="background-color:transparent">
-                <col span="1" style="background-color:#cfe2ff">
+                <col span="1" class="bg-body">
+                <col span="1" class="bg-primary-subtle">
+                <col span="1" class="bg-body">
+                <col span="1" class="bg-primary-subtle">
               </colgroup>
               <thead>
                 <tr>

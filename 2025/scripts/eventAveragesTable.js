@@ -11,6 +11,13 @@
 //    1) insert a header row for a event averages table
 //    2) insert a body row for event averages table
 //
+const thBody = 'class="bg-body"';
+const thBodySortable = 'class="bg-body sorttable_numeric"';
+const thInfoSortable = 'class="bg-primary-subtle sorttable_numeric"';
+const thAuto = 'class="bg-success-subtle"';
+const thTeleop = 'class="bg-primary-subtle"';
+const thEndgame = 'class="bg-warning-subtle"';
+const thMatch = 'class="bg-danger-subtle"';
 
 //
 //  Insert a strategic data table header (all rows)
@@ -25,91 +32,91 @@ function insertEventAveragesHeader(tableId, aliasList) {
   theadRef.innerHTML = ""; // Clear Table
 
   let rowString1 = '';
-  rowString1 += '<th scope="col" style="background-color:transparent"> </th>';
+  rowString1 += '<th scope="col" ' + thBody + '> </th>';
   // Insert column if the aliasList is not empty
   if (aliasList.length > 0) {
-    rowString1 += '<th scope="col" style="background-color:transparent"> </th>';
+    rowString1 += '<th scope="col" ' + thBody + '> </th>';
   }
-  rowString1 += '<th scope="col" style="background-color:transparent"> </th>';
+  rowString1 += '<th scope="col" ' + thBody + '> </th>';
 
   // points by game phase
-  rowString1 += '<th colspan="8" style="background-color:#83b4ff">Match Points</th>';
-  rowString1 += '<th colspan="4" style="background-color:#d5e6de">Auton Pts</th>';
-  rowString1 += '<th colspan="4" style="background-color:#d6f3fB">Teleop Pts</th>';
-  rowString1 += '<th colspan="4" style="background-color:#83b4ff">Game pieces</th>';
-  rowString1 += '<th colspan="10" style="background-color:#d5e6de">Auton Coral</th>';
-  rowString1 += '<th colspan="6" style="background-color:#d5e6de">Auton Algae</th>';
-  rowString1 += '<th colspan="11" style="background-color:#d6f3fB">Teleop Coral</th>';
-  rowString1 += '<th colspan="7" style="background-color:#d6f3fB">Teleop Algae</th>';
-  rowString1 += '<th colspan="1" style="background-color:#d6f3fB">Def</th>';
-  rowString1 += '<th colspan="9" style="background-color:#fbe6d3">Endgame</th>';
-  rowString1 += '<th colspan="1" style="background-color:transparent"></th>';
+  rowString1 += '<th colspan="8" ' + thMatch + '>Match Points</th>';
+  rowString1 += '<th colspan="4" ' + thAuto + '>Auton Pts</th>';
+  rowString1 += '<th colspan="4" ' + thTeleop + '>Teleop Pts</th>';
+  rowString1 += '<th colspan="4" ' + thMatch + '>Game pieces</th>';
+  rowString1 += '<th colspan="10" ' + thAuto + '>Auton Coral</th>';
+  rowString1 += '<th colspan="6" ' + thAuto + '>Auton Algae</th>';
+  rowString1 += '<th colspan="11" ' + thTeleop + '>Teleop Coral</th>';
+  rowString1 += '<th colspan="7" ' + thTeleop + '>Teleop Algae</th>';
+  rowString1 += '<th colspan="1" ' + thTeleop + '>Def</th>';
+  rowString1 += '<th colspan="9" ' + thEndgame + '>Endgame</th>';
+  rowString1 += '<th colspan="1" ' + thMatch + '></th>';
 
   theadRef.insertRow().innerHTML = rowString1;
 
   let rowString2 = '';
   // team number
-  rowString2 += '<th scope="col" style="background-color:transparent" class="sorttable_numeric"> </th>';
+  rowString2 += '<th scope="col" ' + thBodySortable + '> </th>';
   // Insert column if the aliasList is not empty
   if (aliasList.length > 0) {
-    rowString2 += '<th scope="col" style="background-color:transparent"> </th>';
+    rowString2 += '<th scope="col" ' + thBody + '> </th>';
   }
-  rowString2 += '<th scope="col" style="background-color:transparent"> </th>';
+  rowString2 += '<th scope="col" ' + thBody + '> </th>';
 
   // points by game phase
-  rowString2 += '<th colspan="2" style="background-color:#83b4ff">Total Pts</th>';
-  rowString2 += '<th colspan="2" style="background-color:#d5e6de">Auton Pts</th>';
-  rowString2 += '<th colspan="2" style="background-color:#d6f3fB">Teleop Pts</th>';
-  rowString2 += '<th colspan="2" style="background-color:#fbe6d3">Endgame Pts</th>';
+  rowString2 += '<th colspan="2" ' + thMatch + '>Total Pts</th>';
+  rowString2 += '<th colspan="2" ' + thAuto + '>Auton Pts</th>';
+  rowString2 += '<th colspan="2" ' + thTeleop + '>Teleop Pts</th>';
+  rowString2 += '<th colspan="2" ' + thEndgame + '>Endgame Pts</th>';
 
   // points by game piece
-  rowString2 += '<th colspan="2" style="background-color:#d5e6de">Coral Pts</th>';
-  rowString2 += '<th colspan="2" style="background-color:transparent">Algae Pts</th>';
-  rowString2 += '<th colspan="2" style="background-color:#d6f3fB">Coral Pts</th>';
-  rowString2 += '<th colspan="2" style="background-color:transparent">Algae Pts</th>';
+  rowString2 += '<th colspan="2" ' + thAuto + '>Coral Pts</th>';
+  rowString2 += '<th colspan="2" ' + thAuto + '>Algae Pts</th>';
+  rowString2 += '<th colspan="2" ' + thTeleop + '>Coral Pts</th>';
+  rowString2 += '<th colspan="2" ' + thTeleop + '>Algae Pts</th>';
 
-  rowString2 += '<th colspan="2" style="background-color:#83b4ff">Total Coral</th>';
-  rowString2 += '<th colspan="2" style="background-color:transparent">Total Algae</th>';
+  rowString2 += '<th colspan="2" ' + thMatch + '>Total Coral</th>';
+  rowString2 += '<th colspan="2" ' + thMatch + '>Total Algae</th>';
 
   // auton coral
-  rowString2 += '<th colspan="2" style="background-color:#d5e6de">Auton Coral</th>';
-  rowString2 += '<th colspan="2" style="background-color:transparent">L4</th>';
-  rowString2 += '<th colspan="2" style="background-color:#d5e6de">L3</th>';
-  rowString2 += '<th colspan="2" style="background-color:transparent">L2</th>';
-  rowString2 += '<th colspan="2" style="background-color:#d5e6de">L1</th>';
+  rowString2 += '<th colspan="2" ' + thAuto + '>Auton Coral</th>';
+  rowString2 += '<th colspan="2" ' + thAuto + '>L4</th>';
+  rowString2 += '<th colspan="2" ' + thAuto + '>L3</th>';
+  rowString2 += '<th colspan="2" ' + thAuto + '>L2</th>';
+  rowString2 += '<th colspan="2" ' + thAuto + '>L1</th>';
 
   // auton algae
-  rowString2 += '<th colspan="2" style="background-color:transparent">Total Algae</th>';
-  rowString2 += '<th colspan="2" style="background-color:#d5e6de">Proc</th>';
-  rowString2 += '<th colspan="2" style="background-color:transparent">Net</th>';
+  rowString2 += '<th colspan="2" ' + thAuto + '>Total Algae</th>';
+  rowString2 += '<th colspan="2" ' + thAuto + '>Proc</th>';
+  rowString2 += '<th colspan="2" ' + thAuto + '>Net</th>';
 
   // teleop coral
-  rowString2 += '<th colspan="3" style="background-color:#d6f3fB">Teleop Coral</th>';
-  rowString2 += '<th colspan="2" style="background-color:transparent">L4</th>';
-  rowString2 += '<th colspan="2" style="background-color:#d6f3fB">L3</th>';
-  rowString2 += '<th colspan="2" style="background-color:transparent">L2</th>';
-  rowString2 += '<th colspan="2" style="background-color:#d6f3fB">L1</th>';
+  rowString2 += '<th colspan="3" ' + thTeleop + '>Teleop Coral</th>';
+  rowString2 += '<th colspan="2" ' + thTeleop + '>L4</th>';
+  rowString2 += '<th colspan="2" ' + thTeleop + '>L3</th>';
+  rowString2 += '<th colspan="2" ' + thTeleop + '>L2</th>';
+  rowString2 += '<th colspan="2" ' + thTeleop + '>L1</th>';
 
   // teleop algae
-  rowString2 += '<th colspan="3" style="background-color:transparent">Teleop Algae</th>';
-  rowString2 += '<th colspan="2" style="background-color:#d6f3fB">Proc</th>';
-  rowString2 += '<th colspan="2" style="background-color:transparent">Net</th>';
+  rowString2 += '<th colspan="3" ' + thTeleop + '>Teleop Algae</th>';
+  rowString2 += '<th colspan="2" ' + thTeleop + '>Proc</th>';
+  rowString2 += '<th colspan="2" ' + thTeleop + '>Net</th>';
 
   // defense 
-  rowString2 += '<th colspan="1" style="background-color:#d6f3fB"></th>';
+  rowString2 += '<th colspan="1" ' + thTeleop + '></th>';
 
   // endgame 
-  rowString2 += '<th colspan="4" style="background-color:transparent">Start Climb%</th>';
-  rowString2 += '<th colspan="5" style="background-color:#fbe6d3">Climb%</th>';
+  rowString2 += '<th colspan="4" ' + thEndgame + '>Start Climb%</th>';
+  rowString2 += '<th colspan="5" ' + thEndgame + '>Climb%</th>';
 
   // died 
-  rowString2 += '<th colspan="1" style="background-color:transparent">Died</th>';
+  rowString2 += '<th colspan="1" ' + thMatch + '>Died</th>';
 
   theadRef.insertRow().innerHTML = rowString2;
 
   let rowString3 = '';
-  const tdPrefix0 = '<th scope="col" class="sorttable_numeric" style="background-color:transparent">';
-  const tdPrefix1 = '<th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">';
+  const tdPrefix0 = '<th scope="col" ' + thBodySortable + '>';
+  const tdPrefix1 = '<th scope="col" class="bg-primary-subtle sorttable_numeric">';
   // team number
   rowString3 += tdPrefix0 + 'Team</th>';
   if (aliasList.length > 0) {
@@ -195,11 +202,11 @@ function insertEventAveragesHeader(tableId, aliasList) {
   rowString3 += tdPrefix0 + 'L</th>';
 
   // endgame(climb)
-  rowString3 += tdPrefix0 + 'N</th>';
-  rowString3 += tdPrefix0 + 'P</th>';
-  rowString3 += tdPrefix0 + 'F</th>';
-  rowString3 += tdPrefix0 + 'S</th>';
-  rowString3 += tdPrefix0 + 'D</th>';
+  rowString3 += tdPrefix1 + 'N</th>';
+  rowString3 += tdPrefix1 + 'P</th>';
+  rowString3 += tdPrefix1 + 'F</th>';
+  rowString3 += tdPrefix1 + 'S</th>';
+  rowString3 += tdPrefix1 + 'D</th>';
 
   // died 
   rowString3 += tdPrefix0 + '#</th>';
@@ -255,8 +262,8 @@ function insertEventAveragesBody(tableId, eventAverages, coprData, aliasList, te
     if (teamFilter.length !== 0 && !teamFilter.includes(teamNum))
       continue;
 
-    const tdPrefix0 = '<td style="background-color:transparent">';
-    const tdPrefix1 = '<td style="background-color:#cfe2ff">';
+    const tdPrefix0 = '<td ' + thBody + '>';
+    const tdPrefix1 = '<td ' + thInfoSortable + '>';
     let rowString = "";
     rowString += tdPrefix0 + "<a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</td>";
     // Insert column if the aliasList is not empty

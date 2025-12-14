@@ -9,6 +9,7 @@ require 'inc/header.php';
     <!-- Page Title -->
     <div class="row pt-3 pb-3 mb-3">
       <h2 class="col-md-6"><?php echo $title; ?></h2>
+      <a href="javascript:history.back()">Back to DB Status</a>
     </div>
 
     <!-- Main row to hold the entry card -->

@@ -42,10 +42,10 @@ require 'inc/header.php';
   function addKeysToCoprTable(tableId, keys) {
     let tableRef = document.getElementById(tableId);
     tableRef.querySelector('thead').innerHTML = ""; // Clear header
-    let header = '<th scope="col" class="sorttable_numeric" style="background-color:#cfe2ff">Team</th>';
+    let header = '<th scope="col" class="bg-body sorttable_numeric">Team</th>';
     for (let i = 0; i < keys.length; i++) {
-      let color = (i % 2 == 1) ? "#cfe2ff" : "transparent";
-      header += '<th scope="col" class="sorttable_numeric" style="background-color:' + color + '">' + keys[i][1] + '</th>';
+      let color = (i % 2 == 0) ? "primary-subtle" : "transparent";
+      header += '<th scope="col" class="bg-' + color + ' sorttable_numeric">' + keys[i][1] + '</th>';
     }
     // console.log("header: " + header);
     tableRef.querySelector('thead').insertRow().innerHTML = header;
@@ -61,10 +61,10 @@ require 'inc/header.php';
       if (isAliasNumber(teamNum)) { // TBA returns both alias (9970 to 9999) and letter suffix names
         continue;
       }
-      let row = '<td style="background-color:#cfe2ff">' + "<a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + '</td>';
+      let row = '<td class="bg-body">' + "<a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + '</td>';
       for (let j = 0; j < keys.length; j++) {
-        let color = (j % 2 == 1) ? "#cfe2ff" : "transparent";
-        row += '<td style="background-color:' + color + '">' + coprData[teamNum][keys[j][0]] + '</td>';
+        let color = (j % 2 == 0) ? "primary-subtle" : "body";
+        row += '<td class="bg-' + color + '">' + coprData[teamNum][keys[j][0]] + '</td>';
       }
       // console.log("row: " + row);
       tbodyRef.insertRow().innerHTML = row;

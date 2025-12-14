@@ -25,34 +25,35 @@ function insertMatchDataHeader(tableId, aliasList) {
   theadRef.innerHTML = ""; // Clear Table
 
   let rowString = '';
-  const thPrefix0 = '<th scope="col" style="background-color:transparent">';  // No color
-  const thPrefix1 = '<th scope="col" style="background-color:#d5e6de">';      // Auton color
-  const thPrefix2 = '<th scope="col" style="background-color:#d6f3fB">';      // Teleop color
-  const thPrefix3 = '<th scope="col" style="background-color:#fbe6d3">';      // Endgame color
-  rowString += '<th scope="col" style="background-color:transparent" class="sorttable_numeric">Match</th>';
-  rowString += '<th scope="col" style="background-color:transparent" class="sorttable_numeric">Team</th>';
+  const thPrefix0 = '<th scope="col" class="bg-body">';               // No color
+  const thAuto = '<th scope="col" class="bg-success-subtle">';        // Auton color
+  const thTeleop = '<th scope="col" class="bg-primary-subtle">';      // Teleop color
+  const thEndgame = '<th scope="col" class="bg-warning-subtle">';     // Endgame color
+
+  rowString += '<th scope="col" class="bg-body sorttable_numeric">Match</th>';
+  rowString += '<th scope="col" class="bg-body sorttable_numeric">Team</th>';
   // Insert column if the aliasList is not empty
   if (aliasList.length > 0) {
     rowString += thPrefix0 + 'Alias</th>';
   }
-  rowString += thPrefix1 + 'Auton Leave</th>';
-  rowString += thPrefix1 + 'Auton Coral L1</th>';
-  rowString += thPrefix1 + 'Auton Coral L2</th>';
-  rowString += thPrefix1 + 'Auton Coral L3</th>';
-  rowString += thPrefix1 + 'Auton Coral L4</th>';
-  rowString += thPrefix1 + 'Auton Algae Net</th>';
-  rowString += thPrefix1 + 'Auton Algae Proc</th>';
+  rowString += thAuto + 'Auton Leave</th>';
+  rowString += thAuto + 'Auton Coral L1</th>';
+  rowString += thAuto + 'Auton Coral L2</th>';
+  rowString += thAuto + 'Auton Coral L3</th>';
+  rowString += thAuto + 'Auton Coral L4</th>';
+  rowString += thAuto + 'Auton Algae Net</th>';
+  rowString += thAuto + 'Auton Algae Proc</th>';
   rowString += thPrefix0 + 'Acqd Coral</th>';
   rowString += thPrefix0 + 'Acqd Algae</th>';
-  rowString += thPrefix2 + 'Teleop Coral L1</th>';
-  rowString += thPrefix2 + 'Teleop Coral L2</th>';
-  rowString += thPrefix2 + 'Teleop Coral L3</th>';
-  rowString += thPrefix2 + 'Teleop Coral L4</th>';
-  rowString += thPrefix2 + 'Teleop Algae Net</th>';
-  rowString += thPrefix2 + 'Teleop Algae Proc</th>';
-  rowString += thPrefix2 + 'Defense</th>';
-  rowString += thPrefix3 + 'Cage Climb</th>';
-  rowString += thPrefix3 + 'Start Climb</th>';
+  rowString += thTeleop + 'Teleop Coral L1</th>';
+  rowString += thTeleop + 'Teleop Coral L2</th>';
+  rowString += thTeleop + 'Teleop Coral L3</th>';
+  rowString += thTeleop + 'Teleop Coral L4</th>';
+  rowString += thTeleop + 'Teleop Algae Net</th>';
+  rowString += thTeleop + 'Teleop Algae Proc</th>';
+  rowString += thTeleop + 'Defense</th>';
+  rowString += thEndgame + 'Cage Climb</th>';
+  rowString += thEndgame + 'Start Climb</th>';
   rowString += thPrefix0 + 'Died</th>';
   rowString += thPrefix0 + 'Scout Name</th>';
   rowString += thPrefix0 + 'Comment</th>';
@@ -92,10 +93,10 @@ function insertMatchDataBody(tableId, matchData, aliasList, teamFilter) {
     if (teamFilter.length !== 0 && !teamFilter.includes(teamNum))
       continue;
 
-    const tdPrefix0 = "<td style=\"background-color:transparent\">";
-    const tdPrefix1 = "<td style=\"background-color:#cfe2ff\">";
+    const tdPrefix0 = "<td class='bg-body'>";
+    const tdPrefix1 = "<td class='bg-primary-subtle'>";
 
-    let rowString = "<th>" + matchItem["matchnumber"] + "</th>";
+    let rowString = "<th class='fw-bold'>" + matchItem["matchnumber"] + "</th>";
 
     rowString += tdPrefix0 + "<a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</td>";
     // Insert column if the aliasList is not empty

@@ -17,7 +17,7 @@ require 'inc/header.php';
     </div>
 
     <!-- Main column to hold the strategic match schedule -->
-    <div class="col-md-10">
+    <div class="col-md-10 mb-3">
 
       <div>
         <style type="text/css" media="screen">
@@ -29,8 +29,8 @@ require 'inc/header.php';
         </style>
         <table id="stratSchedTable" class="table table-striped table-bordered table-hover border-dark text-center sortable">
           <colgroup>
-            <col span="1" style="background-color:transparent">
-            <col span="1" style="background-color:#cfe2ff">
+            <col span="1" class="bg-body">
+            <col span="1" class="bg-primary-subtle">
           </colgroup>
           <thead>
             <tr>
@@ -202,7 +202,10 @@ require 'inc/header.php';
         predStr = "<del>" + predStr + "</del>";
       }
       if (predictedTime > timeNow || document.getElementById("showCompleted").checked) {
-        let rowString = "<td>" + matchNum + "</td>" + "<td>" + matchTeams + "</td>" + "<td>" + timeStr + "</td>" + "<td>" + predStr + "</td>";
+        let rowString = "<td class='fw-bold'>" + matchNum + "</td>" +
+          "<td>" + matchTeams + "</td>" +
+          "<td>" + timeStr + "</td>" +
+          "<td>" + predStr + "</td>";
         tbodyRef.insertRow().innerHTML = rowString;
       }
     }

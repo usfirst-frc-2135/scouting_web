@@ -33,7 +33,7 @@ require 'inc/header.php';
             <h5 id="teamMainTitle2" class="card-title">Team 2</h5>
 
             <!-- First Pick collapsible graph -->
-            <div class="card mb-3" style="background-color:#F0FFFF">
+            <div class="card mb-3 bg-success-subtle">
               <div class="card-header">
                 <h5 class="text-center">
                   <a href="#collapseFirstPickGraph" data-bs-toggle="collapse" aria-expanded="true">First Pick</a>
@@ -55,7 +55,7 @@ require 'inc/header.php';
           <div class="card-body">
 
             <!-- End game card -->
-            <div class="card mb-3" style="background-color:#FBE6D3">
+            <div class="card mb-3 bg-warning-subtle">
               <div class="card-header">
                 <h5 class="text-center"> <a href="#collapseEndgame" data-bs-toggle="collapse" aria-expanded="true">Endgame Climb
                     Percentages
@@ -82,7 +82,7 @@ require 'inc/header.php';
             </div>
 
             <!-- Second Pick collapsible graph -->
-            <div class="card mb-3" style="background-color:#F0FFFF">
+            <div class="card mb-3 bg-success-subtle">
               <div class="card-header">
                 <h5 class="text-center">
                   <a href="#collapseSecondPickGraph" data-bs-toggle="collapse" aria-expanded="false">Second Pick</a>
@@ -94,7 +94,7 @@ require 'inc/header.php';
             </div>
 
             <!-- Third Pick collapsible graph -->
-            <div class="card mb-3" style="background-color:#F0FFFF">
+            <div class="card mb-3 bg-success-subtle">
               <div class="card-header">
                 <h5 class="text-center">
                   <a href="#collapseThirdPickGraph" data-bs-toggle="collapse" aria-expanded="false">Third Pick</a>
@@ -154,9 +154,9 @@ require 'inc/header.php';
           <!-- Match Filter -->
           <div class="col-md-3 mb-3">
             <div id="customMatch" class="accordion accordion-flush">
-              <div class="accordion-item" style="background-color: #F8F9FA">
+              <div class="accordion-item bg-secondary-subtle">
                 <h2 class="accordion-header">
-                  <button class="accordion-button text-light bg-secondary" type="button" data-bs-toggle="collapse"
+                  <button class="accordion-button text-light bg-secondary mb-3" type="button" data-bs-toggle="collapse"
                     data-bs-target="#filterEntry" aria-expanded="false" aria-controls="matchEntry">Match Range Filter</button>
                 </h2>
 
@@ -164,28 +164,32 @@ require 'inc/header.php';
 
                   <div class="input-group">
                     <div class="input-group-prepend">
-                      <select id="startCompLevel" class="form-select mb-3" aria-label="Comp Level Select">
+                      <select id="startCompLevel" class="form-select ms-2 mb-3" aria-label="Comp Level Select">
                         <option value="p">P</option>
                         <option value="qm" selected>QM</option>
                         <option value="sf">SF</option>
                         <option value="f">F</option>
                       </select>
                     </div>
-                    <input id="startMatchNum" class="form-control col-2 mb-3" type="text" placeholder="Start"
+                    <input id="startMatchNum" class="form-control col-2 me-2 mb-3" type="text" placeholder="Start"
                       aria-label="Start Match Filter">
                   </div>
 
                   <div class="input-group">
                     <div class="input-group-prepend">
-                      <select id="endCompLevel" class="form-select mb-3" aria-label="Comp Level Select">
+                      <select id="endCompLevel" class="form-select ms-2 mb-3" aria-label="Comp Level Select">
                         <option value="p">P</option>
                         <option value="qm" selected>QM</option>
                         <option value="sf">SF</option>
                         <option value="f">F</option>
                       </select>
                     </div>
-                    <input id="endMatchNum" class="form-control col-2 mb-3" type="text" placeholder="End"
+                    <input id="endMatchNum" class="form-control col-2 me-2 mb-3" type="text" placeholder="End"
                       aria-label="End Match Filter">
+                  </div>
+
+                  <div>
+                    <button id="filterData" class="btn btn-primary btn-sm ms-2 mb-3" type="button">Filter Data</button>
                   </div>
 
                 </div>
