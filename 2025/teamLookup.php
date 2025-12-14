@@ -100,34 +100,34 @@ require 'inc/header.php';
                   class="table table-striped table-bordered table-hover table-sm border-dark text-center ">
                   <thead>
                     <tr>
-                      <th scope="col" style="text-align:left">Totals</th>
+                      <th scope="col" class="text-start">Totals</th>
                       <th scope="col">AVG</th>
                       <th scope="col">MAX</th>
                     </tr>
                   </thead>
                   <tbody class="table-group-divider">
                     <tr>
-                      <th scope="row" style="text-align:left">Coral Scored</th>
+                      <th scope="row" class="text-start">Coral Scored</th>
                       <td> </td>
                       <td> </td>
                     </tr>
                     <tr>
-                      <th scope="row" style="text-align:left">Algae Scored</th>
+                      <th scope="row" class="text-start">Algae Scored</th>
                       <td> </td>
                       <td> </td>
                     </tr>
                     <tr>
-                      <th scope="row" style="text-align:left">Coral Points</th>
+                      <th scope="row" class="text-start">Coral Points</th>
                       <td> </td>
                       <td> </td>
                     </tr>
                     <tr>
-                      <th scope="row" style="text-align:left">Algae Points</th>
+                      <th scope="row" class="text-start">Algae Points</th>
                       <td> </td>
                       <td> </td>
                     </tr>
                     <tr>
-                      <th scope="row" style="text-align:left">Match Points</th>
+                      <th scope="row" class="text-start">Match Points</th>
                       <td> </td>
                       <td> </td>
                     </tr>
@@ -145,34 +145,34 @@ require 'inc/header.php';
                 <table id="autonTable" class="table table-striped table-bordered table-hover table-sm border-dark text-center ">
                   <thead>
                     <tr>
-                      <th scope="col" style="text-align:left"></th>
+                      <th scope="col" class="text-start"></th>
                       <th scope="col">AVG</th>
                       <th scope="col">MAX</th>
                     </tr>
                   </thead>
                   <tbody class="table-group-divider">
                     <tr>
-                      <th scope="row" style="text-align:left">Auton Points</th>
+                      <th scope="row" class="text-start">Auton Points</th>
                       <td> </td>
                       <td> </td>
                     </tr>
                     <tr>
-                      <th scope="row" style="text-align:left">Coral Scored</th>
+                      <th scope="row" class="text-start">Coral Scored</th>
                       <td> </td>
                       <td> </td>
                     </tr>
                     <tr>
-                      <th scope="row" style="text-align:left">Algae Scored</th>
+                      <th scope="row" class="text-start">Algae Scored</th>
                       <td> </td>
                       <td> </td>
                     </tr>
                     <tr>
-                      <th scope="row" style="text-align:left">Coral Points</th>
+                      <th scope="row" class="text-start">Coral Points</th>
                       <td> </td>
                       <td> </td>
                     </tr>
                     <tr>
-                      <th scope="row" style="text-align:left">Algae Points</th>
+                      <th scope="row" class="text-start">Algae Points</th>
                       <td> </td>
                       <td> </td>
                     </tr>
@@ -191,44 +191,44 @@ require 'inc/header.php';
                 <table id="teleopTable" class="table table-striped table-bordered table-hover table-sm border-dark text-center ">
                   <thead>
                     <tr>
-                      <th scope="col" style="text-align:left"></th>
+                      <th scope="col" class="text-start"></th>
                       <th scope="col">AVG</th>
                       <th scope="col">MAX</th>
                     </tr>
                   </thead>
                   <tbody class="table-group-divider">
                     <tr>
-                      <th scope="row" style="text-align:left">Teleop Points</th>
+                      <th scope="row" class="text-start">Teleop Points</th>
                       <td> </td>
                       <td> </td>
                     </tr>
                     <tr>
-                      <th scope="row" style="text-align:left">Coral Scored</th>
+                      <th scope="row" class="text-start">Coral Scored</th>
                       <td> </td>
                       <td> </td>
                     </tr>
                     <tr>
-                      <th scope="row" style="text-align:left">Algae Scored</th>
+                      <th scope="row" class="text-start">Algae Scored</th>
                       <td> </td>
                       <td> </td>
                     </tr>
                     <tr>
-                      <th scope="row" style="text-align:left">Coral Points</th>
+                      <th scope="row" class="text-start">Coral Points</th>
                       <td> </td>
                       <td> </td>
                     </tr>
                     <tr>
-                      <th scope="row" style="text-align:left">Algae Points</th>
+                      <th scope="row" class="text-start">Algae Points</th>
                       <td> </td>
                       <td> </td>
                     </tr>
                     <tr>
-                      <th scope="row" style="text-align:left">Coral Acc%</th>
+                      <th scope="row" class="text-start">Coral Acc%</th>
                       <td> </td>
                       <td> </td>
                     </tr>
                     <tr>
-                      <th scope="row" style="text-align:left">Algae Acc%</th>
+                      <th scope="row" class="text-start">Algae Acc%</th>
                       <td> </td>
                       <td> </td>
                     </tr>
@@ -249,14 +249,14 @@ require 'inc/header.php';
                   class="table table-striped table-bordered table-hover table-sm border-dark text-center ">
                   <thead>
                     <tr>
-                      <th scope="col" style="text-align:left"></th>
+                      <th scope="col" class="text-start"></th>
                       <th scope="col">AVG</th>
                       <th scope="col">MAX</th>
                     </tr>
                   </thead>
                   <tbody class="table-group-divider">
                     <tr>
-                      <th scope="row" style="text-align:left">Endgame Points</th>
+                      <th scope="row" class="text-start">Endgame Points</th>
                       <td> </td>
                       <td> </td>
                     </tr>
@@ -266,7 +266,7 @@ require 'inc/header.php';
                   class="table table-striped table-bordered table-hover table-sm border-dark text-center ">
                   <thead>
                     <tr>
-                      <th scope="col" style="text-align:left"></th>
+                      <th scope="col" class="text-start"></th>
                       <th style="width:12%" scope="col">N</th>
                       <th style="width:12%" scope="col">F</th>
                       <th style="width:12%" scope="col">P</th>
@@ -276,7 +276,7 @@ require 'inc/header.php';
                   </thead>
                   <tbody class="table-group-divider">
                     <tr>
-                      <th scope="row" style="text-align:left">Cage Climb %</th>
+                      <th scope="row" class="text-start">Cage Climb %</th>
                       <td> </td>
                       <td> </td>
                       <td> </td>
@@ -289,7 +289,7 @@ require 'inc/header.php';
                   class="table table-striped table-bordered table-hover table-sm border-dark text-center ">
                   <thead>
                     <tr>
-                      <th scope="col" style="text-align:left"></th>
+                      <th scope="col" class="text-start"></th>
                       <th style="width:12%" scope="col">N</th>
                       <th style="width:12%" scope="col">B</th>
                       <th style="width:12%" scope="col">A</th>
@@ -298,7 +298,7 @@ require 'inc/header.php';
                   </thead>
                   <tbody class="table-group-divider">
                     <tr>
-                      <th scope="row" style="text-align:left">Start Climb %</th>
+                      <th scope="row" class="text-start">Start Climb %</th>
                       <td> </td>
                       <td> </td>
                       <td> </td>
@@ -342,18 +342,12 @@ require 'inc/header.php';
           <!-- Pit Scouting 1st row -->
           <div id="collapsePitData" class="card-body collapse">
             <table id="pitTable1" class="table table-striped table-sm table-bordered table-hover border-dark text-center">
-              <colgroup>
-                <col span="1" class="bg-body">
-                <col span="1" class="bg-primary-subtle">
-                <col span="1" class="bg-body">
-                <col span="1" class="bg-primary-subtle">
-              </colgroup>
               <thead>
                 <tr>
-                  <th scope="col" style="width:25%">Swerve</th>
-                  <th scope="col" style="width:25%">Motors</th>
-                  <th scope="col" style="width:25%">Spares</th>
-                  <th scope="col" style="width:25%">Language</th>
+                  <th scope="col" class="bg-primary-subtle" style="width:25%">Swerve</th>
+                  <th scope="col" class="bg-primary-subtle" style="width:25%">Motors</th>
+                  <th scope="col" class="bg-primary-subtle" style="width:25%">Spares</th>
+                  <th scope="col" class="bg-primary-subtle" style="width:25%">Language</th>
                 </tr>
               </thead>
               <tbody class="table-group-divider"> </tbody>
@@ -361,18 +355,12 @@ require 'inc/header.php';
 
             <!-- Pit Scouting 2nd row -->
             <table id="pitTable2" class="table table-striped table-sm table-bordered table-hover border-dark text-center">
-              <colgroup>
-                <col span="1" class="bg-body">
-                <col span="1" class="bg-primary-subtle">
-                <col span="1" class="bg-body">
-                <col span="1" class="bg-primary-subtle">
-              </colgroup>
               <thead>
                 <tr>
-                  <th scope="col" style="width:25%">Vision</th>
-                  <th scope="col" style="width:25%">Pit</th>
-                  <th scope="col" style="width:25%">Prep</th>
-                  <th scope="col" style="width:25%">Batteries</th>
+                  <th scope="col" class="bg-primary-subtle" style="width:25%">Vision</th>
+                  <th scope="col" class="bg-primary-subtle" style="width:25%">Pit</th>
+                  <th scope="col" class="bg-primary-subtle" style="width:25%">Prep</th>
+                  <th scope="col" class="bg-primary-subtle" style="width:25%">Batteries</th>
                 </tr>
               </thead>
               <tbody class="table-group-divider"> </tbody>
@@ -751,7 +739,7 @@ require 'inc/header.php';
   //
   function writeAverageTableRow(tableID, dict, keys, length) {
     let tbodyRef = document.getElementById(tableID).querySelector('tbody');
-    let row = "<th  style='text-align:left'>" + dict[keys[0]] + "</th>";
+    let row = "<th  class='text-start'>" + dict[keys[0]] + "</th>";
     for (let i = 1; i < length; i++) {
       row += (i < keys.length) ? "<td>" + dict[keys[i]] + "</td>" : "<td> </td>";
     }

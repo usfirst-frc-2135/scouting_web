@@ -196,10 +196,10 @@ require 'inc/header.php';
       let timeStr = matchTime.toLocaleDateString("en-us", options);
       let predStr = predictedTime.toLocaleDateString("en-us", options);
       if (matchTime < timeNow) {
-        timeStr = "<del>" + timeStr + "</del>";
+        timeStr = "<span class='bg-danger-subtle'><del>" + timeStr + "</del></span>";
       }
       if (predictedTime < timeNow) {
-        predStr = "<del>" + predStr + "</del>";
+        predStr = "<span class='bg-danger-subtle'><del>" + predStr + "</del></span>";
       }
       if (predictedTime > timeNow || document.getElementById("showCompleted").checked) {
         let rowString = "<td class='fw-bold'>" + matchNum + "</td>" +
