@@ -15,7 +15,7 @@ require 'inc/header.php';
     <div class="row col-12 mb-3">
 
       <div id="freeze-table" class="freeze-table overflow-auto">
-        <table id="pitDataTable" class="table table-striped table-bordered table-hover table-sm border-dark text-center">
+        <table id="pitDataTable" class="table table-striped table-bordered table-hover table-sm border-secondary text-center">
           <thead class="z-3"> </thead>
           <tbody class="table-group-divider"> </tbody>
         </table>

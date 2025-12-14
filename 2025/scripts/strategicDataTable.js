@@ -11,9 +11,6 @@
 //    1) insert a header row for a strategic data table
 //    2) insert a body row for strategic data table
 //
-const thAuto = '<th scope="col" class="bg-success-subtle">';        // Auton color
-const thTeleop = '<th scope="col" class="bg-primary-subtle">';      // Teleop color
-const thEndgame = '<th scope="col" class="bg-warning-subtle">';     // Endgame color
 
 //
 //  Insert a strategic data table header (all rows)
@@ -26,6 +23,10 @@ function insertStrategicDataHeader(tableId, aliasList) {
 
   let theadRef = document.getElementById(tableId).querySelector('thead');;
   theadRef.innerHTML = ""; // Clear Table
+
+  const thAuto = '<th scope="col" class="bg-success-subtle">';        // Auton color
+  const thTeleop = '<th scope="col" class="bg-primary-subtle">';      // Teleop color
+  const thEndgame = '<th scope="col" class="bg-warning-subtle">';     // Endgame color
 
   let rowString1 = '';
   rowString1 += '<th colspan="1" class="bg-body"> </th>';

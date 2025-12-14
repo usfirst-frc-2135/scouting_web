@@ -97,7 +97,7 @@ require 'inc/header.php';
               </div>
               <div class="card-body">
                 <table id="matchSheetTable"
-                  class="table table-striped table-bordered table-hover table-sm border-dark text-center ">
+                  class="table table-striped table-bordered table-hover table-sm border-secondary text-center ">
                   <thead>
                     <tr>
                       <th scope="col" class="text-start">Totals</th>
@@ -142,7 +142,8 @@ require 'inc/header.php';
                 <h5 class="text-center"><a href="#collapseAuton" data-bs-toggle="collapse" aria-expanded="false">Auton</a></h5>
               </div>
               <div id="collapseAuton" class="card-body collapse">
-                <table id="autonTable" class="table table-striped table-bordered table-hover table-sm border-dark text-center ">
+                <table id="autonTable"
+                  class="table table-striped table-bordered table-hover table-sm border-secondary text-center ">
                   <thead>
                     <tr>
                       <th scope="col" class="text-start"></th>
@@ -188,7 +189,8 @@ require 'inc/header.php';
                 </h5>
               </div>
               <div id="collapseTeleop" class="card-body collapse">
-                <table id="teleopTable" class="table table-striped table-bordered table-hover table-sm border-dark text-center ">
+                <table id="teleopTable"
+                  class="table table-striped table-bordered table-hover table-sm border-secondary text-center ">
                   <thead>
                     <tr>
                       <th scope="col" class="text-start"></th>
@@ -246,7 +248,7 @@ require 'inc/header.php';
               </div>
               <div id="collapseEndgame" class="card-body collapse">
                 <table id="endgameTotalPtsTable"
-                  class="table table-striped table-bordered table-hover table-sm border-dark text-center ">
+                  class="table table-striped table-bordered table-hover table-sm border-secondary text-center ">
                   <thead>
                     <tr>
                       <th scope="col" class="text-start"></th>
@@ -263,7 +265,7 @@ require 'inc/header.php';
                   </tbody>
                 </table>
                 <table id="endgameClimbTable"
-                  class="table table-striped table-bordered table-hover table-sm border-dark text-center ">
+                  class="table table-striped table-bordered table-hover table-sm border-secondary text-center ">
                   <thead>
                     <tr>
                       <th scope="col" class="text-start"></th>
@@ -284,9 +286,9 @@ require 'inc/header.php';
                       <td> </td>
                     </tr>
                   </tbody>
-                </table>
+                </table>border-secondary
                 <table id="endgameStartClimbTable"
-                  class="table table-striped table-bordered table-hover table-sm border-dark text-center ">
+                  class="table table-striped table-bordered table-hover table-sm border-secondary text-center ">
                   <thead>
                     <tr>
                       <th scope="col" class="text-start"></th>
@@ -324,7 +326,7 @@ require 'inc/header.php';
             <!-- <div id="freeze-table-strat" class="freeze-table overflow-auto"> -->
             <div class="overflow-auto">
               <table id="strategicDataTable"
-                class="table table-striped table-bordered table-hover table-sm border-dark text-center">
+                class="table table-striped table-bordered table-hover table-sm border-secondary text-center">
                 <thead> </thead>
                 <tbody class="table-group-divider"> </tbody>
               </table>
@@ -341,7 +343,7 @@ require 'inc/header.php';
           </div>
           <!-- Pit Scouting 1st row -->
           <div id="collapsePitData" class="card-body collapse">
-            <table id="pitTable1" class="table table-striped table-sm table-bordered table-hover border-dark text-center">
+            <table id="pitTable1" class="table table-striped table-sm table-bordered table-hover border-secondary text-center">
               <thead>
                 <tr>
                   <th scope="col" class="bg-primary-subtle" style="width:25%">Swerve</th>
@@ -354,7 +356,7 @@ require 'inc/header.php';
             </table>
 
             <!-- Pit Scouting 2nd row -->
-            <table id="pitTable2" class="table table-striped table-sm table-bordered table-hover border-dark text-center">
+            <table id="pitTable2" class="table table-striped table-sm table-bordered table-hover border-secondary text-center">
               <thead>
                 <tr>
                   <th scope="col" class="bg-primary-subtle" style="width:25%">Vision</th>
@@ -380,7 +382,7 @@ require 'inc/header.php';
 
             <!-- <div id="freeze-table-match" class="freeze-table overflow-auto"> -->
             <div class="overflow-auto">
-              <table id="matchDataTable" class="table table-striped table-bordered table-hover table-sm border-dark text-center">
+              <table id="matchDataTable" class="table table-striped table-bordered table-hover table-sm border-secondary text-center">
                 <thead class="z-3"> </thead>
                 <tbody class="table-group-divider"> </tbody>
               </table>

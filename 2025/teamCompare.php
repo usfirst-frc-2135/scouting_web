@@ -64,7 +64,7 @@ require 'inc/header.php';
               </div>
               <div id="collapseEndgame" class="card-body collapse show">
                 <table id="endgameClimbTable"
-                  class="table table-striped table-bordered table-hover table-sm border-dark text-center ">
+                  class="table table-striped table-bordered table-hover table-sm border-secondary text-center ">
                   <thead>
                     <tr>
                       <th>Team</th>
@@ -119,7 +119,7 @@ require 'inc/header.php';
 
       <div id="collapseStrategicData1" class="card-body collapse">
         <div class="overflow-auto">
-          <table id="strategicDataTable1" class="table table-striped table-bordered table-hover table-sm border-dark text-center">
+          <table id="strategicDataTable1" class="table table-striped table-bordered table-hover table-sm border-secondary text-center">
             <thead> </thead>
             <tbody class="table-group-divider"> </tbody>
           </table>
@@ -136,7 +136,7 @@ require 'inc/header.php';
 
       <div id="collapseStrategicData2" class="card-body collapse">
         <div class="overflow-auto">
-          <table id="strategicDataTable2" class="table table-striped table-bordered table-hover table-sm border-dark text-center">
+          <table id="strategicDataTable2" class="table table-striped table-bordered table-hover table-sm border-secondary text-center">
             <thead> </thead>
             <tbody class="table-group-divider"> </tbody>
           </table>
@@ -204,7 +204,7 @@ require 'inc/header.php';
         <div class="row mb-3">
 
           <div id="freeze-table" class="freeze-table overflow-auto">
-            <table id="averagesTable" class="table table-striped table-bordered table-hover table-sm border-dark text-center">
+            <table id="averagesTable" class="table table-striped table-bordered table-hover table-sm border-secondary text-center">
               <thead> </thead>
               <tbody class="table-group-divider">
               </tbody>

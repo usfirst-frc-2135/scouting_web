@@ -16,7 +16,7 @@ require 'inc/header.php';
     <div class="row col-12 mb-3">
 
       <div id="freeze-table" class="freeze-table overflow-auto">
-        <table id="coprTable" class="table table-striped table-bordered table-hover table-sm border-dark text-center sortable">
+        <table id="coprTable" class="table table-striped table-bordered table-hover table-sm border-secondary text-center sortable">
           <thead>
             <tr></tr>
           </thead>
@@ -44,7 +44,7 @@ require 'inc/header.php';
     tableRef.querySelector('thead').innerHTML = ""; // Clear header
     let header = '<th scope="col" class="bg-body sorttable_numeric">Team</th>';
     for (let i = 0; i < keys.length; i++) {
-      let color = (i % 2 == 0) ? "primary-subtle" : "transparent";
+      let color = (i % 2 == 0) ? "primary-subtle" : "body";
       header += '<th scope="col" class="bg-' + color + ' sorttable_numeric">' + keys[i][1] + '</th>';
     }
     // console.log("header: " + header);

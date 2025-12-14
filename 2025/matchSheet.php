@@ -85,7 +85,7 @@ require 'inc/header.php';
       <div class="card col-md-6 mx-auto mb-3 p-3">
         <h5 id="matchTitle">Match:</h5>
         <h5 id="matchTime">Time:</h5>
-        <table class="table table-bordered table-sm border-dark text-center">
+        <table class="table table-bordered table-sm border-secondary text-center">
           <thead>
             <tr>
               <th></th>

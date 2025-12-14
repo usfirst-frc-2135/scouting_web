@@ -27,7 +27,7 @@ require 'inc/header.php';
             background: white;
           }
         </style>
-        <table id="stratSchedTable" class="table table-striped table-bordered table-hover border-dark text-center sortable">
+        <table id="stratSchedTable" class="table table-striped table-bordered table-hover border-secondary text-center sortable">
           <colgroup>
             <col span="1" class="bg-body">
             <col span="1" class="bg-primary-subtle">

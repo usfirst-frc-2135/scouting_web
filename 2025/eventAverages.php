@@ -65,7 +65,7 @@ require 'inc/header.php';
     <div class="row mb-3">
 
       <div id="freeze-table" class="freeze-table overflow-auto">
-        <table id="averagesTable" class="table table-striped table-bordered table-hover table-sm border-dark text-center">
+        <table id="averagesTable" class="table table-striped table-bordered table-hover table-sm border-secondary text-center">
           <thead> </thead>
           <tbody class="table-group-divider"> </tbody>
         </table>
