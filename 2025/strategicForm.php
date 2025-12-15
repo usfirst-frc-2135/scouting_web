@@ -239,7 +239,7 @@ require 'inc/header.php';
             </div>
 
             <!-- Comments section -->
-            <div class="card bg-light-subtle mb-3">
+            <div class="card bg-body-subtle mb-3">
               <div class="card-header fw-bold">
                 Comments
               </div>
