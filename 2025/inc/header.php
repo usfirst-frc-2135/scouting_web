@@ -141,6 +141,9 @@
     // Update navbar with the event code if available
     //
     document.addEventListener("DOMContentLoaded", function () {
+      // Load dark
+      localStorage.getItem('dark-light') == 'dark' ? document.documentElement.setAttribute('data-bs-theme', 'dark') : document.documentElement.setAttribute('data-bs-theme', 'light');
+
       // Update the navbar with the event code
       $.post("api/dbAPI.php", {
         getDBStatus: true
@@ -165,9 +168,11 @@
     document.getElementById('modeSwitch').addEventListener('click', () => {
       if (document.documentElement.getAttribute('data-bs-theme') == 'dark') {
         document.documentElement.setAttribute('data-bs-theme', 'light')
+        localStorage.setItem('dark-light', 'light');
       }
       else {
         document.documentElement.setAttribute('data-bs-theme', 'dark')
+        localStorage.setItem('dark-light', 'dark');
       }
     })
   </script>
