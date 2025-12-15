@@ -39,6 +39,9 @@
       <img src="./images/favicon-32x32.png" alt="Logo" width="24" height="24" class="d-inline-block align-text-top">
       <span id="navbarEventCode"> ????</span>
     </a>
+    <div class="align-left me-auto">
+      <button id="modeSwitch" class="btn btn-secondary btn-sm">M</button>
+    </div>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
       aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -159,4 +162,12 @@
       });
     });
 
+    document.getElementById('modeSwitch').addEventListener('click', () => {
+      if (document.documentElement.getAttribute('data-bs-theme') == 'dark') {
+        document.documentElement.setAttribute('data-bs-theme', 'light')
+      }
+      else {
+        document.documentElement.setAttribute('data-bs-theme', 'dark')
+      }
+    })
   </script>
