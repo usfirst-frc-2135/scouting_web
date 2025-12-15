@@ -136,11 +136,11 @@ require 'inc/header.php';
 
     <!-- Red0 - Red Team 1 -->
     <div class="col-lg-4 col-sm-4 col-xs-4 gx-3">
-      <div id="R0TeamBox" class="accordion accordion-flush text-light bg-danger mb-3">
+      <div id="R0TeamBox" class="accordion accordion-flush mb-3">
         <div class="accordion-item bg-danger">
 
           <div id="R0TeamHeader" class="accordion-header d-flex align-items-center bg-danger">
-            <a class="text-nowrap text-center text-light ms-3">Team #</a>
+            <a class="text-start text-nowrap link-light fw-bold ms-3">Team #</a>
             <button class="accordion-button bg-transparent shadow-none collapsed" type="button" data-bs-toggle="collapse"
               data-bs-target="#R0TeamCollapse" aria-expanded="false" aria-controls="R0TeamCollapse">
             </button>
@@ -173,11 +173,11 @@ require 'inc/header.php';
 
     <!-- Red1 - Red Team 2 -->
     <div class="col-lg-4 col-sm-4 col-xs-4 gx-3">
-      <div id="R1TeamBox" class="accordion accordion-flush text-light bg-danger mb-3">
+      <div id="R1TeamBox" class="accordion accordion-flush mb-3">
         <div class="accordion-item bg-danger">
 
           <div id="R1TeamHeader" class="accordion-header d-flex align-items-center bg-danger">
-            <a class="text-nowrap text-center text-light ms-3">Team #</a>
+            <a class="text-start text-nowrap link-light fw-bold ms-3">Team #</a>
             <button class="accordion-button bg-transparent shadow-none collapsed" type="button" data-bs-toggle="collapse"
               data-bs-target="#R1TeamCollapse" aria-expanded="false" aria-controls="R1TeamCollapse">
             </button>
@@ -210,11 +210,11 @@ require 'inc/header.php';
 
     <!-- Red2 - Red Team 3 -->
     <div class="col-lg-4 col-sm-4 col-xs-4 gx-3">
-      <div id="R2TeamBox" class="accordion accordion-flush text-light bg-danger mb-3">
+      <div id="R2TeamBox" class="accordion accordion-flush mb-3">
         <div class="accordion-item bg-danger">
 
           <div id="R2TeamHeader" class="accordion-header d-flex align-items-center bg-danger">
-            <a class="text-nowrap text-center text-light ms-3">Team #</a>
+            <a class="text-start text-nowrap link-light fw-bold ms-3">Team #</a>
             <button class="accordion-button bg-transparent shadow-none collapsed" type="button" data-bs-toggle="collapse"
               data-bs-target="#R2TeamCollapse" aria-expanded="false" aria-controls="R2TeamCollapse">
             </button>
@@ -251,11 +251,11 @@ require 'inc/header.php';
 
     <!-- Blue0 - Blue Team 1 -->
     <div class="col-lg-4 col-sm-4 col-xs-4 gx-3">
-      <div id="B0TeamBox" class="accordion accordion-flush text-light bg-primary mb-3">
+      <div id="B0TeamBox" class="accordion accordion-flush mb-3">
         <div class="accordion-item bg-primary">
 
           <div id="B0TeamHeader" class="accordion-header d-flex align-items-center bg-primary">
-            <a class="text-nowrap text-center text-light ms-3">Team #</a>
+            <a class="text-start text-nowrap link-light fw-bold ms-3">Team #</a>
             <button class="accordion-button bg-transparent shadow-none collapsed" type="button" data-bs-toggle="collapse"
               data-bs-target="#B0TeamCollapse" aria-expanded="false" aria-controls="B0TeamCollapse">
             </button>
@@ -288,11 +288,11 @@ require 'inc/header.php';
 
     <!-- Blue1 - Blue Team 2 -->
     <div class="col-lg-4 col-sm-4 col-xs-4 gx-3">
-      <div id="B1TeamBox" class="accordion accordion-flush text-light bg-primary mb-3">
+      <div id="B1TeamBox" class="accordion accordion-flush mb-3">
         <div class="accordion-item bg-primary">
 
           <div id="B1TeamHeader" class="accordion-header d-flex align-items-center bg-primary">
-            <a class="text-nowrap text-center text-light ms-3">Team #</a>
+            <a class="text-start text-nowrap link-light fw-bold ms-3">Team #</a>
             <button class="accordion-button bg-transparent shadow-none collapsed" type="button" data-bs-toggle="collapse"
               data-bs-target="#B1TeamCollapse" aria-expanded="false" aria-controls="B1TeamCollapse">
             </button>
@@ -325,11 +325,11 @@ require 'inc/header.php';
 
     <!-- Blue2 - Blue Team 3 -->
     <div class="col-lg-4 col-sm-4 col-xs-4 gx-3">
-      <div id="B2TeamBox" class="accordion accordion-flush text-light bg-primary mb-3">
+      <div id="B2TeamBox" class="accordion accordion-flush mb-3">
         <div class="accordion-item bg-primary">
 
           <div id="B2TeamHeader" class="accordion-header d-flex align-items-center bg-primary">
-            <a class="text-nowrap text-center text-light ms-3">Team #</a>
+            <a class="text-start text-nowrap link-light fw-bold ms-3">Team #</a>
             <button class="accordion-button bg-transparent shadow-none collapsed" type="button" data-bs-toggle="collapse"
               data-bs-target="#B2TeamCollapse" aria-expanded="false" aria-controls="B2TeamCollapse">
             </button>
@@ -562,9 +562,9 @@ require 'inc/header.php';
   //
   function buildTeamBoxTableHeader(tableId) {
     let rowString1 = "";
-    rowString1 += '<th colspan="6" class="text-center fs-6 bg-success-subtle">Auton</th>';
-    rowString1 += '<th colspan="8" class="text-center fs-6 bg-primary-subtle">Teleop</th>';
-    rowString1 += '<th colspan="5" class="text-center fs-6 bg-warning-subtle">Endgame</th>';
+    rowString1 += '<th colspan="6" class="text-center fs-6 text-body bg-success-subtle">Auton</th>';
+    rowString1 += '<th colspan="8" class="text-center fs-6 text-body bg-primary-subtle">Teleop</th>';
+    rowString1 += '<th colspan="5" class="text-center fs-6 text-body bg-warning-subtle">Endgame</th>';
 
     let rowString2 = "";
     rowString2 += '<th scope="col">L4</th>';
@@ -615,9 +615,10 @@ require 'inc/header.php';
         teamName += " " + jTeamInfo["nickname"];
       }
       console.log("==> matchSheet: buildTeamBoxTableBody() for " + teamNum + teamName);
-      let teamLink = "<a class='text-light' href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + " " + teamName + "</a>";
       let elementRef = document.getElementById(color + index + "TeamHeader");
-      elementRef.querySelector('a').innerHTML = teamLink;
+      let aRef = elementRef.querySelector('a');
+      aRef.href = 'teamLookup.php?teamNum=' + teamNum;
+      aRef.text = teamNum + " " + teamName;
     });
 
     // Load team scouted information
