@@ -89,8 +89,8 @@ require 'inc/header.php';
           <thead>
             <tr>
               <th></th>
-              <th>Red</th>
-              <th>Blue</th>
+              <th class="text-bg-danger">Red</th>
+              <th class="text-bg-primary">Blue</th>
             </tr>
           </thead>
           <tbody class="table-group-divider">
