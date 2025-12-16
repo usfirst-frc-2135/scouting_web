@@ -10,7 +10,7 @@
   <meta name="author" content="FRC 2135">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="icon" href="./images/favicon.ico">
-  <link rel="icon" type="image/png" href="./images/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" href="./images/favicon-32x32.png" type="image/png" sizes="32x32">
   <link href="./external/bootstrap-5.3.6-dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 
   <style type="text/css" media="screen">
@@ -34,21 +34,21 @@
 
 <body>
   <!-- Create collapsible navbar and navigation buttons -->
-  <nav class="navbar navbar-expand-sm bg-dark sticky-top">
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark sticky-top">
     <a class="navbar-brand text-white" href="./index.php">
       <img src="./images/favicon-32x32.png" alt="Logo" width="24" height="24" class="d-inline-block align-text-top">
       <span id="navbarEventCode"> ????</span>
     </a>
-    <div class="align-left me-auto">
-      <button id="modeSwitch" class="btn btn-secondary btn-sm">M</button>
+    <div class="nav-item nav-item-dark align-left me-auto">
+      <img id="modeSwitch" src="./images/moon.svg" alt="Mode Switch" width="24" height="24">
     </div>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+    <button class="navbar-toggler navbar-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
       aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div id="navbarCollapse" class="collapse navbar-collapse">
-      <ul class="navbar-nav mr-auto">
+      <ul class="navbar-nav navbar-dark mr-auto">
         <ul class="nav nav-pills flex-column flex-sm-row">
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle text-white-50 text-end text-sm-start" href="#" role="button"
@@ -137,12 +137,24 @@
       }
     }
 
+    function selectDarkLightMode() {
+      let mode = localStorage.getItem('dark-light');
+      if (mode == 'dark') {
+        document.documentElement.setAttribute('data-bs-theme', 'dark');
+        document.getElementById('modeSwitch').src = './images/icons8-sun-50.png';
+      }
+      else {
+        document.documentElement.setAttribute('data-bs-theme', 'light');
+        document.getElementById('modeSwitch').src = './images/icons8-moon-50.png';
+      }
+    }
+
     //
     // Update navbar with the event code if available
     //
     document.addEventListener("DOMContentLoaded", function () {
       // Load dark
-      localStorage.getItem('dark-light') == 'dark' ? document.documentElement.setAttribute('data-bs-theme', 'dark') : document.documentElement.setAttribute('data-bs-theme', 'light');
+      selectDarkLightMode();
 
       // Update the navbar with the event code
       $.post("api/dbAPI.php", {
@@ -166,13 +178,8 @@
     });
 
     document.getElementById('modeSwitch').addEventListener('click', () => {
-      if (document.documentElement.getAttribute('data-bs-theme') == 'dark') {
-        document.documentElement.setAttribute('data-bs-theme', 'light')
-        localStorage.setItem('dark-light', 'light');
-      }
-      else {
-        document.documentElement.setAttribute('data-bs-theme', 'dark')
-        localStorage.setItem('dark-light', 'dark');
-      }
+      localStorage.setItem('dark-light', document.documentElement.getAttribute('data-bs-theme') == 'dark' ? 'light' : 'dark');
+      selectDarkLightMode();
     })
+
   </script>
