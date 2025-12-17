@@ -129,7 +129,7 @@ require 'inc/header.php';
       <div class="col-lg-6 col-sm-6 col-xs-6 gx-3">
         <div class="card">
           <div class="card-header">
-            Table Config
+            Table Config/Status
           </div>
           <div class="card-body">
             <div class="row mb-3 mx-auto" style=" width: 200px;">
@@ -139,7 +139,7 @@ require 'inc/header.php';
               <a class="btn btn-primary" href="./aliasData.php" role="button">Configure Team Aliases</a>
             </div>
             <div class="row mb-3 mx-auto" style=" width: 200px;">
-              <a class="btn btn-primary" href="./matchStatus.php" role="button">Match Scouting Status</a>
+              <a class="btn btn-primary" href="./matchStatus.php" role="button">Match Data Status</a>
             </div>
           </div>
         </div>

@@ -21,9 +21,6 @@ require 'inc/header.php';
         <div class="input-group-append">
           <button id="addTeamAlias" class="btn btn-primary me-2" type="button">Add Alias</button>
         </div>
-        <div class="input-group-append">
-          <button id="writeTeamAliasJSON" class="btn btn-primary" type="button">Write File</button>
-        </div>
       </div>
     </div>
 
@@ -49,6 +46,11 @@ require 'inc/header.php';
         <tbody class=" table-group-divider">
         </tbody>
       </table>
+    </div>
+
+    <!-- Write Aliases to a JSON file -->
+    <div class="row mb-3 mx-auto" style=" width: 200px;">
+      <button id="writeTeamAliasJSON" class="btn btn-primary" type="button">Write JSON File</button>
     </div>
   </div>
 </div>

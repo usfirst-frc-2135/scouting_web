@@ -25,9 +25,9 @@ require 'inc/header.php';
       <table id="psTable" class="table table-striped table-bordered table-hover text-center sortable">
         <thead>
           <tr>
-            <th class="text-start sorttable_numeric">Team</th>
-            <th>Pit Scouted?</th>
-            <th>Photo Uploaded?</th>
+            <th scope='col' class="text-start sorttable_numeric">Team</th>
+            <th scope='col'>Pit Scouted?</th>
+            <th scope='col'>Photo Uploaded?</th>
           </tr>
         </thead>
         <tbody class=" table-group-divider">

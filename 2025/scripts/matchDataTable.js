@@ -25,7 +25,7 @@ function insertMatchDataHeader(tableId, aliasList) {
   theadRef.innerHTML = ""; // Clear Table
 
   let rowString = '';
-  const thPrefix0 = '<th scope="col" class="bg-body">';               // No color
+  const thMatch = '<th scope="col" class="bg-body">';               // No color
   const thAuto = '<th scope="col" class="bg-success-subtle">';        // Auton color
   const thTeleop = '<th scope="col" class="bg-primary-subtle">';      // Teleop color
   const thEndgame = '<th scope="col" class="bg-warning-subtle">';     // Endgame color
@@ -34,8 +34,9 @@ function insertMatchDataHeader(tableId, aliasList) {
   rowString += '<th scope="col" class="bg-body sorttable_numeric">Team</th>';
   // Insert column if the aliasList is not empty
   if (aliasList.length > 0) {
-    rowString += thPrefix0 + 'Alias</th>';
+    rowString += thMatch + 'Alias</th>';
   }
+  rowString += thMatch + 'Died</th>';
   rowString += thAuto + 'Auton Leave</th>';
   rowString += thAuto + 'Auton Coral L1</th>';
   rowString += thAuto + 'Auton Coral L2</th>';
@@ -43,20 +44,19 @@ function insertMatchDataHeader(tableId, aliasList) {
   rowString += thAuto + 'Auton Coral L4</th>';
   rowString += thAuto + 'Auton Algae Net</th>';
   rowString += thAuto + 'Auton Algae Proc</th>';
-  rowString += thPrefix0 + 'Acqd Coral</th>';
-  rowString += thPrefix0 + 'Acqd Algae</th>';
   rowString += thTeleop + 'Teleop Coral L1</th>';
   rowString += thTeleop + 'Teleop Coral L2</th>';
   rowString += thTeleop + 'Teleop Coral L3</th>';
   rowString += thTeleop + 'Teleop Coral L4</th>';
   rowString += thTeleop + 'Teleop Algae Net</th>';
   rowString += thTeleop + 'Teleop Algae Proc</th>';
-  rowString += thTeleop + 'Defense</th>';
   rowString += thEndgame + 'Cage Climb</th>';
   rowString += thEndgame + 'Start Climb</th>';
-  rowString += thPrefix0 + 'Died</th>';
-  rowString += thPrefix0 + 'Scout Name</th>';
-  rowString += thPrefix0 + 'Comment</th>';
+  rowString += thTeleop + 'Defense</th>';
+  rowString += thMatch + 'Acqd Coral</th>';
+  rowString += thMatch + 'Acqd Algae</th>';
+  rowString += thMatch + 'Scout Name</th>';
+  rowString += thMatch + 'Comment</th>';
 
   theadRef.insertRow().innerHTML = rowString;
 };
@@ -93,37 +93,37 @@ function insertMatchDataBody(tableId, matchData, aliasList, teamFilter) {
     if (teamFilter.length !== 0 && !teamFilter.includes(teamNum))
       continue;
 
-    const tdPrefix0 = "<td class='bg-body'>";
-    const tdPrefix1 = "<td class='bg-primary-subtle'>";
+    const tdBody = "<td class='bg-body'>";
+    const tdBlue = "<td class='bg-primary-subtle'>";
 
     let rowString = "<th class='fw-bold'>" + matchItem["matchnumber"] + "</th>";
 
-    rowString += tdPrefix0 + "<a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</td>";
+    rowString += tdBody + "<a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</td>";
     // Insert column if the aliasList is not empty
     if (aliasList.length > 0) {
-      rowString += tdPrefix0 + getAliasFromTeamNum(teamNum, aliasList) + "</td>";
+      rowString += tdBody + getAliasFromTeamNum(teamNum, aliasList) + "</td>";
     }
-    rowString += tdPrefix1 + matchItem["autonLeave"] + "</td>";
-    rowString += tdPrefix0 + matchItem["autonCoralL1"] + "</td>";
-    rowString += tdPrefix1 + matchItem["autonCoralL2"] + "</td>";
-    rowString += tdPrefix0 + matchItem["autonCoralL3"] + "</td>";
-    rowString += tdPrefix1 + matchItem["autonCoralL4"] + "</td>";
-    rowString += tdPrefix0 + matchItem["autonAlgaeNet"] + "</td>";
-    rowString += tdPrefix1 + matchItem["autonAlgaeProcessor"] + "</td>";
-    rowString += tdPrefix0 + matchItem["acquiredCoral"] + "</td>";
-    rowString += tdPrefix1 + matchItem["acquiredAlgae"] + "</td>";
-    rowString += tdPrefix0 + matchItem["teleopCoralL1"] + "</td>";
-    rowString += tdPrefix1 + matchItem["teleopCoralL2"] + "</td>";
-    rowString += tdPrefix0 + matchItem["teleopCoralL3"] + "</td>";
-    rowString += tdPrefix1 + matchItem["teleopCoralL4"] + "</td>";
-    rowString += tdPrefix0 + matchItem["teleopAlgaeNet"] + "</td>";
-    rowString += tdPrefix1 + matchItem["teleopAlgaeProcessor"] + "</td>";
-    rowString += tdPrefix0 + matchItem["defenseLevel"] + "</td>";
-    rowString += tdPrefix1 + matchItem["cageClimb"] + "</td>";
-    rowString += tdPrefix0 + matchItem["startClimb"] + "</td>";
-    rowString += tdPrefix1 + matchItem["died"] + "</td>";
-    rowString += tdPrefix0 + matchItem["scoutname"] + "</td>";
-    rowString += tdPrefix1 + matchItem["comment"] + "</td>";
+    rowString += tdBlue + matchItem["died"] + "</td>";
+    rowString += tdBody + matchItem["autonLeave"] + "</td>";
+    rowString += tdBlue + matchItem["autonCoralL1"] + "</td>";
+    rowString += tdBody + matchItem["autonCoralL2"] + "</td>";
+    rowString += tdBlue + matchItem["autonCoralL3"] + "</td>";
+    rowString += tdBody + matchItem["autonCoralL4"] + "</td>";
+    rowString += tdBlue + matchItem["autonAlgaeNet"] + "</td>";
+    rowString += tdBody + matchItem["autonAlgaeProcessor"] + "</td>";
+    rowString += tdBlue + matchItem["teleopCoralL1"] + "</td>";
+    rowString += tdBody + matchItem["teleopCoralL2"] + "</td>";
+    rowString += tdBlue + matchItem["teleopCoralL3"] + "</td>";
+    rowString += tdBody + matchItem["teleopCoralL4"] + "</td>";
+    rowString += tdBlue + matchItem["teleopAlgaeNet"] + "</td>";
+    rowString += tdBody + matchItem["teleopAlgaeProcessor"] + "</td>";
+    rowString += tdBlue + matchItem["cageClimb"] + "</td>";
+    rowString += tdBody + matchItem["startClimb"] + "</td>";
+    rowString += tdBlue + matchItem["defenseLevel"] + "</td>";
+    rowString += tdBody + matchItem["acquiredCoral"] + "</td>";
+    rowString += tdBlue + matchItem["acquiredAlgae"] + "</td>";
+    rowString += tdBody + matchItem["scoutname"] + "</td>";
+    rowString += tdBlue + matchItem["comment"] + "</td>";
 
     tbodyRef.insertRow().innerHTML = rowString;
   }

@@ -12,8 +12,8 @@
 //    2) insert a body row for event averages table
 //
 const thBody = 'class="bg-body"';
-const thBodySortable = 'class="bg-body sorttable_numeric"';
-const thInfoSortable = 'class="bg-primary-subtle sorttable_numeric"';
+const thBodySort = 'class="bg-body sorttable_numeric"';
+const thBlueSort = 'class="bg-primary-subtle sorttable_numeric"';
 const thAuto = 'class="bg-success-subtle"';
 const thTeleop = 'class="bg-primary-subtle"';
 const thEndgame = 'class="bg-warning-subtle"';
@@ -32,184 +32,184 @@ function insertEventAveragesHeader(tableId, aliasList) {
   theadRef.innerHTML = ""; // Clear Table
 
   let rowString1 = '';
-  rowString1 += '<th scope="col" ' + thBody + '> </th>';
+  rowString1 += '<th colspan="1 ' + thBody + '> </th>';
   // Insert column if the aliasList is not empty
   if (aliasList.length > 0) {
-    rowString1 += '<th scope="col" ' + thBody + '> </th>';
+    rowString1 += '<th colspan="1" ' + thBody + '> </th>';
   }
-  rowString1 += '<th scope="col" ' + thBody + '> </th>';
+  rowString1 += '<th colspan="1" ' + thBody + '> </th>';
 
   // points by game phase
-  rowString1 += '<th colspan="8" ' + thMatch + '>Match Points</th>';
-  rowString1 += '<th colspan="4" ' + thAuto + '>Auton Pts</th>';
-  rowString1 += '<th colspan="4" ' + thTeleop + '>Teleop Pts</th>';
-  rowString1 += '<th colspan="4" ' + thMatch + '>Game pieces</th>';
-  rowString1 += '<th colspan="10" ' + thAuto + '>Auton Coral</th>';
-  rowString1 += '<th colspan="6" ' + thAuto + '>Auton Algae</th>';
-  rowString1 += '<th colspan="11" ' + thTeleop + '>Teleop Coral</th>';
-  rowString1 += '<th colspan="7" ' + thTeleop + '>Teleop Algae</th>';
-  rowString1 += '<th colspan="1" ' + thTeleop + '>Def</th>';
-  rowString1 += '<th colspan="9" ' + thEndgame + '>Endgame</th>';
-  rowString1 += '<th colspan="1" ' + thMatch + '></th>';
+  rowString1 += '<th colspan="8" ' + thMatch + '>Match Points' + '</th>';
+  rowString1 += '<th colspan="4" ' + thAuto + '>Auton Pts' + '</th>';
+  rowString1 += '<th colspan="4" ' + thTeleop + '>Teleop Pts' + '</th>';
+  rowString1 += '<th colspan="4" ' + thMatch + '>Game pieces' + '</th>';
+  rowString1 += '<th colspan="10" ' + thAuto + '>Auton Coral' + '</th>';
+  rowString1 += '<th colspan="6" ' + thAuto + '>Auton Algae' + '</th>';
+  rowString1 += '<th colspan="11" ' + thTeleop + '>Teleop Coral' + '</th>';
+  rowString1 += '<th colspan="7" ' + thTeleop + '>Teleop Algae' + '</th>';
+  rowString1 += '<th colspan="1" ' + thTeleop + '>Def' + '</th>';
+  rowString1 += '<th colspan="9" ' + thEndgame + '>Endgame' + '</th>';
+  rowString1 += '<th colspan="1" ' + thMatch + '>' + '</th>';
 
   theadRef.insertRow().innerHTML = rowString1;
 
   let rowString2 = '';
   // team number
-  rowString2 += '<th scope="col" ' + thBodySortable + '> </th>';
+  rowString2 += '<th colspan="1" ' + thBodySort + '> </th>';
   // Insert column if the aliasList is not empty
   if (aliasList.length > 0) {
-    rowString2 += '<th scope="col" ' + thBody + '> </th>';
+    rowString2 += '<th colspan="1" ' + thBody + '> </th>';
   }
-  rowString2 += '<th scope="col" ' + thBody + '> </th>';
+  rowString2 += '<th colspan="1" ' + thBody + '> </th>';
 
   // points by game phase
-  rowString2 += '<th colspan="2" ' + thMatch + '>Total Pts</th>';
-  rowString2 += '<th colspan="2" ' + thAuto + '>Auton Pts</th>';
-  rowString2 += '<th colspan="2" ' + thTeleop + '>Teleop Pts</th>';
-  rowString2 += '<th colspan="2" ' + thEndgame + '>Endgame Pts</th>';
+  rowString2 += '<th colspan="2" ' + thMatch + '>Total Pts' + '</th>';
+  rowString2 += '<th colspan="2" ' + thAuto + '>Auton Pts' + '</th>';
+  rowString2 += '<th colspan="2" ' + thTeleop + '>Teleop Pts' + '</th>';
+  rowString2 += '<th colspan="2" ' + thEndgame + '>Endgame Pts' + '</th>';
 
   // points by game piece
-  rowString2 += '<th colspan="2" ' + thAuto + '>Coral Pts</th>';
-  rowString2 += '<th colspan="2" ' + thAuto + '>Algae Pts</th>';
-  rowString2 += '<th colspan="2" ' + thTeleop + '>Coral Pts</th>';
-  rowString2 += '<th colspan="2" ' + thTeleop + '>Algae Pts</th>';
+  rowString2 += '<th colspan="2" ' + thAuto + '>Coral Pts' + '</th>';
+  rowString2 += '<th colspan="2" ' + thAuto + '>Algae Pts' + '</th>';
+  rowString2 += '<th colspan="2" ' + thTeleop + '>Coral Pts' + '</th>';
+  rowString2 += '<th colspan="2" ' + thTeleop + '>Algae Pts' + '</th>';
 
-  rowString2 += '<th colspan="2" ' + thMatch + '>Total Coral</th>';
-  rowString2 += '<th colspan="2" ' + thMatch + '>Total Algae</th>';
+  rowString2 += '<th colspan="2" ' + thMatch + '>Total Coral' + '</th>';
+  rowString2 += '<th colspan="2" ' + thMatch + '>Total Algae' + '</th>';
 
   // auton coral
-  rowString2 += '<th colspan="2" ' + thAuto + '>Auton Coral</th>';
-  rowString2 += '<th colspan="2" ' + thAuto + '>L4</th>';
-  rowString2 += '<th colspan="2" ' + thAuto + '>L3</th>';
-  rowString2 += '<th colspan="2" ' + thAuto + '>L2</th>';
-  rowString2 += '<th colspan="2" ' + thAuto + '>L1</th>';
+  rowString2 += '<th colspan="2" ' + thAuto + '>Auton Coral' + '</th>';
+  rowString2 += '<th colspan="2" ' + thAuto + '>L4' + '</th>';
+  rowString2 += '<th colspan="2" ' + thAuto + '>L3' + '</th>';
+  rowString2 += '<th colspan="2" ' + thAuto + '>L2' + '</th>';
+  rowString2 += '<th colspan="2" ' + thAuto + '>L1' + '</th>';
 
   // auton algae
-  rowString2 += '<th colspan="2" ' + thAuto + '>Total Algae</th>';
-  rowString2 += '<th colspan="2" ' + thAuto + '>Proc</th>';
-  rowString2 += '<th colspan="2" ' + thAuto + '>Net</th>';
+  rowString2 += '<th colspan="2" ' + thAuto + '>Total Algae' + '</th>';
+  rowString2 += '<th colspan="2" ' + thAuto + '>Proc' + '</th>';
+  rowString2 += '<th colspan="2" ' + thAuto + '>Net' + '</th>';
 
   // teleop coral
-  rowString2 += '<th colspan="3" ' + thTeleop + '>Teleop Coral</th>';
-  rowString2 += '<th colspan="2" ' + thTeleop + '>L4</th>';
-  rowString2 += '<th colspan="2" ' + thTeleop + '>L3</th>';
-  rowString2 += '<th colspan="2" ' + thTeleop + '>L2</th>';
-  rowString2 += '<th colspan="2" ' + thTeleop + '>L1</th>';
+  rowString2 += '<th colspan="3" ' + thTeleop + '>Teleop Coral' + '</th>';
+  rowString2 += '<th colspan="2" ' + thTeleop + '>L4' + '</th>';
+  rowString2 += '<th colspan="2" ' + thTeleop + '>L3' + '</th>';
+  rowString2 += '<th colspan="2" ' + thTeleop + '>L2' + '</th>';
+  rowString2 += '<th colspan="2" ' + thTeleop + '>L1' + '</th>';
 
   // teleop algae
-  rowString2 += '<th colspan="3" ' + thTeleop + '>Teleop Algae</th>';
-  rowString2 += '<th colspan="2" ' + thTeleop + '>Proc</th>';
-  rowString2 += '<th colspan="2" ' + thTeleop + '>Net</th>';
+  rowString2 += '<th colspan="3" ' + thTeleop + '>Teleop Algae' + '</th>';
+  rowString2 += '<th colspan="2" ' + thTeleop + '>Proc' + '</th>';
+  rowString2 += '<th colspan="2" ' + thTeleop + '>Net' + '</th>';
 
   // defense 
   rowString2 += '<th colspan="1" ' + thTeleop + '></th>';
 
   // endgame 
-  rowString2 += '<th colspan="4" ' + thEndgame + '>Start Climb%</th>';
-  rowString2 += '<th colspan="5" ' + thEndgame + '>Climb%</th>';
+  rowString2 += '<th colspan="4" ' + thEndgame + '>Start Climb%' + '</th>';
+  rowString2 += '<th colspan="5" ' + thEndgame + '>Climb%' + '</th>';
 
   // died 
-  rowString2 += '<th colspan="1" ' + thMatch + '>Died</th>';
+  rowString2 += '<th colspan="1" ' + thMatch + '>Died' + '</th>';
 
   theadRef.insertRow().innerHTML = rowString2;
 
   let rowString3 = '';
-  const tdPrefix0 = '<th scope="col" ' + thBodySortable + '>';
-  const tdPrefix1 = '<th scope="col" class="bg-primary-subtle sorttable_numeric">';
+  const tdPrefix0 = '<th scope="col" ' + thBodySort + '>';
+  const tdPrefix1 = '<th scope="col" ' + thBlueSort + '>';
   // team number
-  rowString3 += tdPrefix0 + 'Team</th>';
+  rowString3 += tdPrefix0 + 'Team' + '</th>';
   if (aliasList.length > 0) {
-    rowString3 += tdPrefix0 + 'Alias</th>';
+    rowString3 += tdPrefix0 + 'Alias' + '</th>';
   }
-  rowString3 += tdPrefix0 + 'COPRs</th>';
+  rowString3 += tdPrefix0 + 'COPRs' + '</th>';
 
   // points by game phase
-  rowString3 += tdPrefix1 + 'Avg</th>';
-  rowString3 += tdPrefix1 + 'Max</th>';
-  rowString3 += tdPrefix0 + 'Avg</th>';
-  rowString3 += tdPrefix0 + 'Max</th>';
-  rowString3 += tdPrefix1 + 'Avg</th>';
-  rowString3 += tdPrefix1 + 'Max</th>';
-  rowString3 += tdPrefix0 + 'Avg</th>';
-  rowString3 += tdPrefix0 + 'Max</th>';
+  rowString3 += tdPrefix1 + 'Avg' + '</th>';
+  rowString3 += tdPrefix1 + 'Max' + '</th>';
+  rowString3 += tdPrefix0 + 'Avg' + '</th>';
+  rowString3 += tdPrefix0 + 'Max' + '</th>';
+  rowString3 += tdPrefix1 + 'Avg' + '</th>';
+  rowString3 += tdPrefix1 + 'Max' + '</th>';
+  rowString3 += tdPrefix0 + 'Avg' + '</th>';
+  rowString3 += tdPrefix0 + 'Max' + '</th>';
 
   // points by game piece
-  rowString3 += tdPrefix1 + 'Avg</th>';
-  rowString3 += tdPrefix1 + 'Max</th>';
-  rowString3 += tdPrefix0 + 'Avg</th>';
-  rowString3 += tdPrefix0 + 'Max</th>';
-  rowString3 += tdPrefix1 + 'Avg</th>';
-  rowString3 += tdPrefix1 + 'Max</th>';
-  rowString3 += tdPrefix0 + 'Avg</th>';
-  rowString3 += tdPrefix0 + 'Max</th>';
+  rowString3 += tdPrefix1 + 'Avg' + '</th>';
+  rowString3 += tdPrefix1 + 'Max' + '</th>';
+  rowString3 += tdPrefix0 + 'Avg' + '</th>';
+  rowString3 += tdPrefix0 + 'Max' + '</th>';
+  rowString3 += tdPrefix1 + 'Avg' + '</th>';
+  rowString3 += tdPrefix1 + 'Max' + '</th>';
+  rowString3 += tdPrefix0 + 'Avg' + '</th>';
+  rowString3 += tdPrefix0 + 'Max' + '</th>';
 
   // total game pieces
-  rowString3 += tdPrefix1 + 'Avg</th>';
-  rowString3 += tdPrefix1 + 'Max</th>';
-  rowString3 += tdPrefix0 + 'Avg</th>';
-  rowString3 += tdPrefix0 + 'Max</th>';
+  rowString3 += tdPrefix1 + 'Avg' + '</th>';
+  rowString3 += tdPrefix1 + 'Max' + '</th>';
+  rowString3 += tdPrefix0 + 'Avg' + '</th>';
+  rowString3 += tdPrefix0 + 'Max' + '</th>';
 
   // auton coral
-  rowString3 += tdPrefix1 + 'Avg</th>';
-  rowString3 += tdPrefix1 + 'Max</th>';
-  rowString3 += tdPrefix0 + 'Avg</th>';
-  rowString3 += tdPrefix0 + 'Max</th>';
-  rowString3 += tdPrefix1 + 'Avg</th>';
-  rowString3 += tdPrefix1 + 'Max</th>';
-  rowString3 += tdPrefix0 + 'Avg</th>';
-  rowString3 += tdPrefix0 + 'Max</th>';
-  rowString3 += tdPrefix1 + 'Avg</th>';
-  rowString3 += tdPrefix1 + 'Max</th>';
+  rowString3 += tdPrefix1 + 'Avg' + '</th>';
+  rowString3 += tdPrefix1 + 'Max' + '</th>';
+  rowString3 += tdPrefix0 + 'Avg' + '</th>';
+  rowString3 += tdPrefix0 + 'Max' + '</th>';
+  rowString3 += tdPrefix1 + 'Avg' + '</th>';
+  rowString3 += tdPrefix1 + 'Max' + '</th>';
+  rowString3 += tdPrefix0 + 'Avg' + '</th>';
+  rowString3 += tdPrefix0 + 'Max' + '</th>';
+  rowString3 += tdPrefix1 + 'Avg' + '</th>';
+  rowString3 += tdPrefix1 + 'Max' + '</th>';
 
   // auton algae
-  rowString3 += tdPrefix0 + 'Avg</th>';
-  rowString3 += tdPrefix0 + 'Max</th>';
-  rowString3 += tdPrefix1 + 'Avg</th>';
-  rowString3 += tdPrefix1 + 'Max</th>';
-  rowString3 += tdPrefix0 + 'Avg</th>';
-  rowString3 += tdPrefix0 + 'Max</th>';
+  rowString3 += tdPrefix0 + 'Avg' + '</th>';
+  rowString3 += tdPrefix0 + 'Max' + '</th>';
+  rowString3 += tdPrefix1 + 'Avg' + '</th>';
+  rowString3 += tdPrefix1 + 'Max' + '</th>';
+  rowString3 += tdPrefix0 + 'Avg' + '</th>';
+  rowString3 += tdPrefix0 + 'Max' + '</th>';
 
   // teleop coral
-  rowString3 += tdPrefix1 + 'Acc%</th>';
-  rowString3 += tdPrefix1 + 'Avg</th>';
-  rowString3 += tdPrefix1 + 'Max</th>';
-  rowString3 += tdPrefix0 + 'Avg</th>';
-  rowString3 += tdPrefix0 + 'Max</th>';
-  rowString3 += tdPrefix1 + 'Avg</th>';
-  rowString3 += tdPrefix1 + 'Max</th>';
-  rowString3 += tdPrefix0 + 'Avg</th>';
-  rowString3 += tdPrefix0 + 'Max</th>';
-  rowString3 += tdPrefix1 + 'Avg</th>';
-  rowString3 += tdPrefix1 + 'Max</th>';
+  rowString3 += tdPrefix1 + 'Acc%' + '</th>';
+  rowString3 += tdPrefix1 + 'Avg' + '</th>';
+  rowString3 += tdPrefix1 + 'Max' + '</th>';
+  rowString3 += tdPrefix0 + 'Avg' + '</th>';
+  rowString3 += tdPrefix0 + 'Max' + '</th>';
+  rowString3 += tdPrefix1 + 'Avg' + '</th>';
+  rowString3 += tdPrefix1 + 'Max' + '</th>';
+  rowString3 += tdPrefix0 + 'Avg' + '</th>';
+  rowString3 += tdPrefix0 + 'Max' + '</th>';
+  rowString3 += tdPrefix1 + 'Avg' + '</th>';
+  rowString3 += tdPrefix1 + 'Max' + '</th>';
 
   // telop algae
-  rowString3 += tdPrefix0 + 'Acc%</th>';
-  rowString3 += tdPrefix0 + 'Avg</th>';
-  rowString3 += tdPrefix0 + 'Max</th>';
-  rowString3 += tdPrefix1 + 'Avg</th>';
-  rowString3 += tdPrefix1 + 'Max</th>';
-  rowString3 += tdPrefix0 + 'Avg</th>';
-  rowString3 += tdPrefix0 + 'Max</th>';
+  rowString3 += tdPrefix0 + 'Acc%' + '</th>';
+  rowString3 += tdPrefix0 + 'Avg' + '</th>';
+  rowString3 += tdPrefix0 + 'Max' + '</th>';
+  rowString3 += tdPrefix1 + 'Avg' + '</th>';
+  rowString3 += tdPrefix1 + 'Max' + '</th>';
+  rowString3 += tdPrefix0 + 'Avg' + '</th>';
+  rowString3 += tdPrefix0 + 'Max' + '</th>';
 
   // defense 
-  rowString3 += tdPrefix1 + 'Avg</th>';
+  rowString3 += tdPrefix1 + 'Avg' + '</th>';
 
   // endgame(start climb)
-  rowString3 += tdPrefix0 + 'N</th>';
-  rowString3 += tdPrefix0 + 'B</th>';
-  rowString3 += tdPrefix0 + 'A</th>';
-  rowString3 += tdPrefix0 + 'L</th>';
+  rowString3 += tdPrefix0 + 'N' + '</th>';
+  rowString3 += tdPrefix0 + 'B' + '</th>';
+  rowString3 += tdPrefix0 + 'A' + '</th>';
+  rowString3 += tdPrefix0 + 'L' + '</th>';
 
   // endgame(climb)
-  rowString3 += tdPrefix1 + 'N</th>';
-  rowString3 += tdPrefix1 + 'P</th>';
-  rowString3 += tdPrefix1 + 'F</th>';
-  rowString3 += tdPrefix1 + 'S</th>';
-  rowString3 += tdPrefix1 + 'D</th>';
+  rowString3 += tdPrefix1 + 'N' + '</th>';
+  rowString3 += tdPrefix1 + 'P' + '</th>';
+  rowString3 += tdPrefix1 + 'F' + '</th>';
+  rowString3 += tdPrefix1 + 'S' + '</th>';
+  rowString3 += tdPrefix1 + 'D' + '</th>';
 
   // died 
-  rowString3 += tdPrefix0 + '#</th>';
+  rowString3 += tdPrefix0 + '#' + '</th>';
 
   theadRef.insertRow().innerHTML = rowString3;
 };
@@ -263,7 +263,7 @@ function insertEventAveragesBody(tableId, eventAverages, coprData, aliasList, te
       continue;
 
     const tdPrefix0 = '<td ' + thBody + '>';
-    const tdPrefix1 = '<td ' + thInfoSortable + '>';
+    const tdPrefix1 = '<td ' + thBlueSort + '>';
     let rowString = "";
     rowString += tdPrefix0 + "<a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</td>";
     // Insert column if the aliasList is not empty

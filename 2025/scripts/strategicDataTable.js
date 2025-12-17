@@ -36,50 +36,50 @@ function insertStrategicDataHeader(tableId, aliasList) {
   }
   rowString1 += '<th colspan="1" class="bg-body"> </th>';
   rowString1 += '<th colspan="1" class="bg-primary-subtle"> </th>';
-  rowString1 += '<th colspan="2" class="bg-primary-subtle">Against Defense</th>';
-  rowString1 += '<th colspan="3" class="bg-body">Defense Tactics</th>';
-  rowString1 += '<th colspan="8" class="bg-primary-subtle">Fouls</th>';
-  rowString1 += '<th colspan="4" class="bg-success-subtle">Auton</th>';
-  rowString1 += '<th colspan="4" class="bg-primary-subtle">Teleop</th>';
-  rowString1 += '<th colspan="2" class="bg-body">Notes</th>';
-  rowString1 += '<th colspan="1"> </th>';
+  rowString1 += '<th colspan="2" class="bg-body">' + 'Against Defense' + '</th>';
+  rowString1 += '<th colspan="3" class="bg-primary-subtle">' + 'Defense Tactics' + '</th>';
+  rowString1 += '<th colspan="8" class="bg-body">' + 'Fouls' + '</th>';
+  rowString1 += '<th colspan="4" class="bg-success-subtle">' + 'Auton' + '</th>';
+  rowString1 += '<th colspan="4" class="bg-primary-subtle">' + 'Teleop' + '</th>';
+  rowString1 += '<th colspan="2" class="bg-body">Notes' + '</th>';
+  rowString1 += '<th colspan="1" class="bg-body"> </th>';
 
   theadRef.insertRow().innerHTML = rowString1;
 
   let rowString2 = '';
-  const thPrefix0 = '<th scope="col" class="bg-body">';
-  const thPrefix1 = '<th scope="col" class="bg-primary-subtle">';
-  rowString2 += '<th scope="col" class="bg-body sorttable_numeric">Team</th>';
+  const thBody = '<th scope="col" class="bg-body">';
+  const thBlue = '<th scope="col" class="bg-primary-subtle">';
+  rowString2 += '<th scope="col" class="bg-body sorttable_numeric">' + 'Team' + '</th>';
   // Insert column if the aliasList is not empty
   if (aliasList.length > 0) {
-    rowString2 += thPrefix0 + 'Alias</th>';
+    rowString2 += thBody + 'Alias' + '</th>';
   }
-  rowString2 += thPrefix0 + 'Match</th>';
-  rowString2 += thPrefix1 + 'Drive Skill</th>';
-  rowString2 += thPrefix0 + 'Block</th>';
-  rowString2 += thPrefix1 + 'Note</th>';
-  rowString2 += thPrefix0 + 'Block Path</th>';
-  rowString2 += thPrefix1 + 'Block Station</th>';
-  rowString2 += thPrefix0 + 'Note</th>';
-  rowString2 += thPrefix1 + 'Pin</th>';
-  rowString2 += thPrefix0 + 'Auton Barge Contact</th>';
-  rowString2 += thPrefix1 + 'Auton Cage Contact</th>';
-  rowString2 += thPrefix0 + 'Anchor Contact</th>';
-  rowString2 += thPrefix1 + 'Barge Contact</th>';
-  rowString2 += thPrefix0 + 'Reef Contact</th>';
-  rowString2 += thPrefix1 + 'Cage Contact</th>';
-  rowString2 += thPrefix0 + 'Contact Climbing Robot</th>';
-  rowString2 += thAuto + 'Get Floor Coral</th>';
-  rowString2 += thAuto + 'Get Stn Coral</th>';
-  rowString2 += thAuto + 'Get Floor Algae</th>';
-  rowString2 += thAuto + 'Get Reef Algae</th>';
-  rowString2 += thTeleop + 'Get Floor Coral</th>';
-  rowString2 += thTeleop + 'Get Floor Algae</th>';
-  rowString2 += thTeleop + 'Knock Algae</th>';
-  rowString2 += thTeleop + 'Acquire Reef Algae</th>';
-  rowString2 += thPrefix1 + 'Problem Note</th>';
-  rowString2 += thPrefix0 + 'General Note</th>';
-  rowString2 += thPrefix1 + 'Scout Name</th>';
+  rowString2 += thBody + 'Match' + '</th>';
+  rowString2 += thBlue + 'Drive Skill' + '</th>';
+  rowString2 += thBody + 'Block' + '</th>';
+  rowString2 += thBlue + 'Note' + '</th>';
+  rowString2 += thBody + 'Block Path' + '</th>';
+  rowString2 += thBlue + 'Block Station' + '</th>';
+  rowString2 += thBody + 'Note' + '</th>';
+  rowString2 += thBlue + 'Pin' + '</th>';
+  rowString2 += thBody + 'Auton Barge Contact' + '</th>';
+  rowString2 += thBlue + 'Auton Cage Contact' + '</th>';
+  rowString2 += thBody + 'Anchor Contact' + '</th>';
+  rowString2 += thBlue + 'Barge Contact' + '</th>';
+  rowString2 += thBody + 'Reef Contact' + '</th>';
+  rowString2 += thBlue + 'Cage Contact' + '</th>';
+  rowString2 += thBody + 'Contact Climbing Robot' + '</th>';
+  rowString2 += thAuto + 'Get Floor Coral' + '</th>';
+  rowString2 += thAuto + 'Get Stn Coral' + '</th>';
+  rowString2 += thAuto + 'Get Floor Algae' + '</th>';
+  rowString2 += thAuto + 'Get Reef Algae' + '</th>';
+  rowString2 += thTeleop + 'Get Floor Coral' + '</th>';
+  rowString2 += thTeleop + 'Get Floor Algae' + '</th>';
+  rowString2 += thTeleop + 'Knock Algae' + '</th>';
+  rowString2 += thTeleop + 'Acquire Reef Algae' + '</th>';
+  rowString2 += thBlue + 'Problem Note' + '</th>';
+  rowString2 += thBody + 'General Note' + '</th>';
+  rowString2 += thBlue + 'Scout Name' + '</th>';
 
   theadRef.insertRow().innerHTML = rowString2;
 };

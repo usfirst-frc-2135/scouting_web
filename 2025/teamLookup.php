@@ -269,11 +269,11 @@ require 'inc/header.php';
                   <thead>
                     <tr>
                       <th scope="col" class="text-start"></th>
-                      <th style="width:12%" scope="col">N</th>
-                      <th style="width:12%" scope="col">F</th>
-                      <th style="width:12%" scope="col">P</th>
-                      <th style="width:12%" scope="col">S</th>
-                      <th style="width:12%" scope="col">D</th>
+                      <th scope="col" style="width:12%">N</th>
+                      <th scope="col" style="width:12%">F</th>
+                      <th scope="col" style="width:12%">P</th>
+                      <th scope="col" style="width:12%">S</th>
+                      <th scope="col" style="width:12%">D</th>
                     </tr>
                   </thead>
                   <tbody class="table-group-divider">
@@ -292,10 +292,10 @@ require 'inc/header.php';
                   <thead>
                     <tr>
                       <th scope="col" class="text-start"></th>
-                      <th style="width:12%" scope="col">N</th>
-                      <th style="width:12%" scope="col">B</th>
-                      <th style="width:12%" scope="col">A</th>
-                      <th style="width:12%" scope="col">L</th>
+                      <th scope="col" style="width:12%">N</th>
+                      <th scope="col" style="width:12%">B</th>
+                      <th scope="col" style="width:12%">A</th>
+                      <th scope="col" style="width:12%">L</th>
                     </tr>
                   </thead>
                   <tbody class="table-group-divider">
@@ -382,7 +382,8 @@ require 'inc/header.php';
 
             <!-- <div id="freeze-table-match" class="freeze-table overflow-auto"> -->
             <div class="overflow-auto">
-              <table id="matchDataTable" class="table table-striped table-bordered table-hover table-sm border-secondary text-center">
+              <table id="matchDataTable"
+                class="table table-striped table-bordered table-hover table-sm border-secondary text-center">
                 <thead class="z-3"> </thead>
                 <tbody class="table-group-divider"> </tbody>
               </table>

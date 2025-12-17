@@ -40,7 +40,7 @@
       <span id="navbarEventCode"> ????</span>
     </a>
     <div class="nav-item nav-item-dark align-left me-auto">
-      <img id="modeSwitch" src="./images/moon.svg" alt="Mode Switch" width="24" height="24">
+      <img id="modeSwitch" src="./images/icons8-moon-50.png" alt="Mode Switch" width="24" height="24">
     </div>
     <button class="navbar-toggler navbar-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
       aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">

@@ -1,5 +1,5 @@
 <?php
-$title = 'Match Scouting Status';
+$title = 'Match Data Status';
 require 'inc/header.php';
 ?>
 
@@ -43,12 +43,12 @@ require 'inc/header.php';
 
     console.log("=> loadMatchStatusTable");
     let hdrString = "<th scope='col' class='sorttable_numerci'>Match</th>" +
-      "<th class='text-bg-danger'>Red 1</th>" +
-      "<th class='text-bg-danger'>Red 2</th>" +
-      "<th class='text-bg-danger'>Red 3</th>" +
-      "<th class='text-bg-primary'>Blue 1</th>" +
-      "<th class='text-bg-primary'>Blue 2</th>" +
-      "<th class='text-bg-primary'>Blue 3</th>";
+      "<th scope='col' class='text-bg-danger'>Red 1</th>" +
+      "<th scope='col' class='text-bg-danger'>Red 2</th>" +
+      "<th scope='col' class='text-bg-danger'>Red 3</th>" +
+      "<th scope='col' class='text-bg-primary'>Blue 1</th>" +
+      "<th scope='col' class='text-bg-primary'>Blue 2</th>" +
+      "<th scope='col' class='text-bg-primary'>Blue 3</th>";
     document.getElementById(tableId).querySelector('thead').insertRow().innerHTML = hdrString;
 
     let tbodyRef = document.getElementById(tableId).querySelector('tbody');

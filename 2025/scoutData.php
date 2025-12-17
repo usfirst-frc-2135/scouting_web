@@ -21,9 +21,6 @@ require 'inc/header.php';
         <div class="input-group-append">
           <button id="addScoutName" class="btn btn-primary me-2" type="button">Add Scout</button>
         </div>
-        <div class="input-group-append">
-          <button id="writeScoutNameJSON" class="btn btn-primary" type="button">Write File</button>
-        </div>
       </div>
     </div>
 
@@ -49,6 +46,12 @@ require 'inc/header.php';
         </tbody>
       </table>
     </div>
+
+    <!-- Write Scout Names to a JSON file -->
+    <div class="row mb-3 mx-auto" style=" width: 200px;">
+      <button id="writeScoutNameJSON" class="btn btn-primary" type="button">Write JSON File</button>
+    </div>
+
   </div>
 </div>
 

@@ -62,7 +62,7 @@ require 'inc/header.php';
             <h3>Existing Photos</h3>
           </div>
           <div class="card-body">
-            <output id="photoPrevious"></output>
+            <div id="photoPrevious"></div>
           </div>
         </div>
 
@@ -244,8 +244,8 @@ require 'inc/header.php';
 
       for (let imageFile of jTeamImages) {
         document.getElementById('photoPrevious').innerHTML +=
-          '<div>File:  ' + imageFile + '</div>' +
-          '<img class="mb-3" src="' + imageFile + '" title="' + teamNum + '" width="150" >';
+          '<div class="text-center">File:  ' + imageFile + '</div>' +
+          '<img class="mx-auto d-block mb-3" src="' + imageFile + '" title="' + teamNum + '" width="150" >';
       }
     });
   }

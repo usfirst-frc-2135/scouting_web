@@ -48,7 +48,7 @@ require 'inc/header.php';
               <div class="card-body">
                 <div class="mb-3">
                   <span>Does your robot have swerve drive?</span>
-                  <div class="col-4">
+                  <div class="col-6">
                     <div class="input-group mb-3">
                       <select id="swerveDrive" class="form-select">
                         <option selected value="-1">Choose ...</option>
@@ -61,7 +61,7 @@ require 'inc/header.php';
 
                 <div class="mb-3">
                   <span>What type of motors do you use on your drive train?</span>
-                  <div class="col-4">
+                  <div class="col-6">
                     <div class="input-group mb-3">
                       <select id="driveMotors" class="form-select">
                         <option selected value="-1">Choose ...</option>
@@ -76,7 +76,7 @@ require 'inc/header.php';
 
                 <div class="mb-3">
                   <span>Does your team have spare parts for the robot?</span>
-                  <div class="col-4">
+                  <div class="col-6">
                     <div class="input-group mb-3">
                       <select id="spareParts" class="form-select">
                         <option selected value="-1">Choose ...</option>
@@ -89,7 +89,7 @@ require 'inc/header.php';
 
                 <div class="mb-3">
                   <span>What programming language do you use?</span>
-                  <div class="col-4">
+                  <div class="col-6">
                     <div class="input-group mb-3">
                       <select id="progLanguage" class="form-select">
                         <option selected value="-1">Choose ...</option>
@@ -106,7 +106,7 @@ require 'inc/header.php';
                 <div class="mb-3">
                   <div>
                     <span>Does your robot have computer vision?</span>
-                    <div class="col-4">
+                    <div class="col-6">
                       <div class="input-group mb-3">
                         <select id="computerVision" class="form-select">
                           <option selected value="-1">Choose ...</option>
@@ -129,7 +129,7 @@ require 'inc/header.php';
               <div class="card-body">
                 <div class="mb-3">
                   <span>Pit Organization</span>
-                  <div class="col-5">
+                  <div class="col-6">
                     <div class="input-group mb-3">
                       <select id="pitOrganization" class="form-select">
                         <option selected value="-1">Choose ...</option>
@@ -145,7 +145,7 @@ require 'inc/header.php';
 
                 <div class="mb-3">
                   <span>Preparedness/Professionalism</span>
-                  <div class="col-5">
+                  <div class="col-6">
                     <div class="input-group mb-3">
                       <select id="preparednessScore" class="form-select">
                         <option selected value="-1">Choose ...</option>
@@ -161,7 +161,7 @@ require 'inc/header.php';
 
                 <div class="mb-3">
                   <label for="numBatteries" class="form-label">Count the number of batteries they have</label>
-                  <div class="col-4">
+                  <div class="col-6">
                     <input id="numBatteries" class="form-control" type="number" placeholder="Battery count">
                   </div>
                 </div>

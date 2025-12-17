@@ -28,16 +28,12 @@ require 'inc/header.php';
           }
         </style>
         <table id="stratSchedTable" class="table table-striped table-bordered table-hover border-secondary text-center sortable">
-          <colgroup>
-            <col span="1" class="bg-body">
-            <col span="1" class="bg-primary-subtle">
-          </colgroup>
           <thead>
             <tr>
-              <th class="sorttable_numeric" scope="col">Match</th>
-              <th class="sorttable_nosort" scope="col">Teams</th>
-              <th class="sorttable_nosort" scope="col">Scheduled</th>
-              <th class="sorttable_nosort" scope="col">Predicted</th>
+              <th scope="col" class="bg-body sorttable_numeric">Match</th>
+              <th scope="col" class="bg-body sorttable_nosort">Teams</th>
+              <th scope="col" class="bg-body sorttable_nosort">Scheduled</th>
+              <th scope="col" class="bg-body sorttable_nosort">Predicted</th>
             </tr>
           </thead>
           <tbody class="table-group-divider"> </tbody>
