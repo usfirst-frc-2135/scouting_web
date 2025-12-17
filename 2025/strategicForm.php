@@ -136,28 +136,20 @@ require 'inc/header.php';
                 </div>
 
                 <!-- Driver ability section -->
-                <div>
+                <div class="mb-2">
                   <span class="fw-bold">Driver ability/speed:</span>
                 </div>
-                <div class="form-check form-check-inline">
-                  <input id="driveScore0" class="form-check-input" type="radio" name="driverAbilityGroup" value="0">
-                  <label for="driveScore0" class="form-check-label">0 - N/A</label>
-                </div>
-                <div class="form-check form-check-inline">
-                  <input id="driveScore1" class="form-check-input" type="radio" name="driverAbilityGroup" value="1">
-                  <label for="driveScore1" class="form-check-label">1 - Jerky</label>
-                </div>
-                <div class="form-check form-check-inline">
-                  <input id="driveScore2" class="form-check-input" type="radio" name="driverAbilityGroup" value="2">
-                  <label for="driveScore2" class=" form-check-label">2 - Slow</label>
-                </div>
-                <div class="form-check form-check-inline">
-                  <input id="driveScore3" class="form-check-input" type="radio" name="driverAbilityGroup" value="3">
-                  <label for="driveScore3" class="form-check-label">3 - Average</label>
-                </div>
-                <div class="form-check form-check-inline">
-                  <input id="driveScore4" class="form-check-input" type="radio" name="driverAbilityGroup" value="4">
-                  <label for="driveScore4" class="form-check-label">4 - Quick/agile</label>
+                <div class="col-6">
+                  <div class="input-group mb-3">
+                    <select id="driverAbility" class="form-select">
+                      <option selected value="-1">Choose ...</option>
+                      <option value="0">0 - N/A</option>
+                      <option value="1">1 - Jerky</option>
+                      <option value="2">2 - Slow</option>
+                      <option value="3">3 - Average!</option>
+                      <option value="4">4 - Quick/Agile</option>
+                    </select>
+                  </div>
                 </div>
 
                 <!-- Against defensive robot section -->
@@ -173,7 +165,7 @@ require 'inc/header.php';
                   <input id="againstComment" class="form-control" type="text">
                 </div>
                 <div>
-                  <span class="fw-bold">Endgame: Climbing Foul:</span>
+                  <span class="fw-bold">Climbing Foul:</span>
                 </div>
                 <div class="form-check form-check-inline">
                   <label for="teleopFoul1" class="form-label">Contact with anchor when climbing</label>
@@ -245,7 +237,7 @@ require 'inc/header.php';
               </div>
               <div class="card-body">
                 <div>
-                  <label for="problemComment" class="form-label">Problems robot ran into on the field:</label>
+                  <label for="problemComment" class="form-label">Problems robot had on the field:</label>
                   <input id="problemComment" class="form-control" type="text">
                 </div>
 
@@ -355,38 +347,35 @@ require 'inc/header.php';
     document.getElementById("selectScoutName").value = "Choose ...";
     document.getElementById("otherScoutName").value = "";
 
-    const driverAbilityBtns = document.querySelectorAll("input[name = 'driverAbilityGroup']");
-    driverAbilityBtns.forEach(function (button) {
-      button.checked = false;
-    });
-
-    document.getElementById("defenseTactic1").checked = false;
-    document.getElementById("defenseTactic2").checked = false;
-    document.getElementById("defenseComment").value = "";
-
-    document.getElementById("againstTactic1").checked = false;
-    document.getElementById("againstComment").value = "";
-
-    document.getElementById("foul1").checked = false;
-
-    document.getElementById("autonFoul1").checked = false;
-    document.getElementById("autonFoul2").checked = false;
+    // Autonomous Scouting
     document.getElementById("autonGetCoralFromFloor").checked = false;
     document.getElementById("autonGetCoralFromStation").checked = false;
     document.getElementById("autonGetAlgaeFromFloor").checked = false;
     document.getElementById("autonGetAlgaeFromReef").checked = false;
+    document.getElementById("autonFoul1").checked = false;
+    document.getElementById("autonFoul2").checked = false;
 
-    document.getElementById("teleopFoul1").checked = false;
-    document.getElementById("teleopFoul2").checked = false;
-    document.getElementById("teleopFoul3").checked = false;
-    document.getElementById("teleopFoul4").checked = false;
-    document.getElementById("teleopKnockOffAlgaeFromReef").checked = false;
-    document.getElementById("teleopAcquireAlgaeFromReef").checked = false;
+    // Teleop Scouting
     document.getElementById("teleopFloorPickupCoral").checked = false;
     document.getElementById("teleopFloorPickupAlgae").checked = false;
+    document.getElementById("teleopKnockOffAlgaeFromReef").checked = false;
+    document.getElementById("teleopAcquireAlgaeFromReef").checked = false;
+    document.getElementById("driverAbility").value = "";
+    document.getElementById("teleopFoul1").checked = false;
+    document.getElementById("againstTactic1").checked = false;
+    document.getElementById("againstComment").value = "";
 
+    // Defense Scouting
+    document.getElementById("defenseTactic1").checked = false;
+    document.getElementById("defenseTactic2").checked = false;
+    document.getElementById("defenseComment").value = "";
+    document.getElementById("foul1").checked = false;
+    document.getElementById("teleopFoul3").checked = false;
+    document.getElementById("teleopFoul2").checked = false;
+    document.getElementById("teleopFoul4").checked = false;
     document.getElementById("endgameFoul1").checked = false;
 
+    // Coment boxes
     document.getElementById("problemComment").value = "";
     document.getElementById("generalComment").value = "";
   }
@@ -398,51 +387,42 @@ require 'inc/header.php';
     console.log("==> strategicForm.php: getStrategicFormData()");
     let dataToSave = {};
 
+    // Create match number before writing to table.
     let compLevel = document.getElementById("enterCompLevel").value;
     let matchNumber = document.getElementById("enterMatchNumber").value.trim();
-    let teamNum = document.getElementById("enterTeamNumber").value.toUpperCase().trim();
-    let scoutName = getScoutName();
-
-    // Clean up team number before writing to table.
     dataToSave["matchnumber"] = compLevel + matchNumber;
-    dataToSave["teamnumber"] = teamNum;
+    dataToSave["teamnumber"] = document.getElementById("enterTeamNumber").value.toUpperCase().trim();
     dataToSave["scoutname"] = getScoutName();
 
-    // Process driver ability radio buttons
-    const driverAbilityBtns = document.querySelectorAll("input[name = 'driverAbilityGroup']");
-    dataToSave["driverability"] = 0; // default
-    driverAbilityBtns.forEach(function (button) {
-      if (button.checked) {
-        console.log("driverability: " + button.value + " selected!");
-        dataToSave["driverability"] = +button.value;
-      }
-    });
-
-    // Checkboxes and comment fields
-    dataToSave["defense_tactic1"] = (document.getElementById("defenseTactic1").checked) ? 1 : 0;
-    dataToSave["defense_tactic2"] = (document.getElementById("defenseTactic2").checked) ? 1 : 0;
-    dataToSave["defense_comment"] = document.getElementById("defenseComment").value;
-
-    dataToSave["against_tactic1"] = (document.getElementById("againstTactic1").checked) ? 1 : 0;
-    dataToSave["against_comment"] = document.getElementById("againstComment").value;
-
-    dataToSave["foul1"] = (document.getElementById("foul1").checked) ? 1 : 0;
-    dataToSave["autonFoul1"] = (document.getElementById("autonFoul1").checked) ? 1 : 0;
-    dataToSave["autonFoul2"] = (document.getElementById("autonFoul2").checked) ? 1 : 0;
+    // Autonomous scouting
     dataToSave["autonGetCoralFromFloor"] = (document.getElementById("autonGetCoralFromFloor").checked) ? 1 : 0;
     dataToSave["autonGetCoralFromStation"] = (document.getElementById("autonGetCoralFromStation").checked) ? 1 : 0;
     dataToSave["autonGetAlgaeFromFloor"] = (document.getElementById("autonGetAlgaeFromFloor").checked) ? 1 : 0;
     dataToSave["autonGetAlgaeFromReef"] = (document.getElementById("autonGetAlgaeFromReef").checked) ? 1 : 0;
-    dataToSave["teleopFoul1"] = (document.getElementById("teleopFoul1").checked) ? 1 : 0;
-    dataToSave["teleopFoul2"] = (document.getElementById("teleopFoul2").checked) ? 1 : 0;
-    dataToSave["teleopFoul3"] = (document.getElementById("teleopFoul3").checked) ? 1 : 0;
-    dataToSave["teleopFoul4"] = (document.getElementById("teleopFoul4").checked) ? 1 : 0;
-    dataToSave["teleopKnockOffAlgaeFromReef"] = (document.getElementById("teleopKnockOffAlgaeFromReef").checked) ? 1 : 0;
-    dataToSave["teleopAcquireAlgaeFromReef"] = (document.getElementById("teleopAcquireAlgaeFromReef").checked) ? 1 : 0;
+    dataToSave["autonFoul1"] = (document.getElementById("autonFoul1").checked) ? 1 : 0;
+    dataToSave["autonFoul2"] = (document.getElementById("autonFoul2").checked) ? 1 : 0;
+
+    // Teleop scouting
     dataToSave["teleopFloorPickupCoral"] = (document.getElementById("teleopFloorPickupCoral").checked) ? 1 : 0;
     dataToSave["teleopFloorPickupAlgae"] = (document.getElementById("teleopFloorPickupAlgae").checked) ? 1 : 0;
+    dataToSave["teleopKnockOffAlgaeFromReef"] = (document.getElementById("teleopKnockOffAlgaeFromReef").checked) ? 1 : 0;
+    dataToSave["teleopAcquireAlgaeFromReef"] = (document.getElementById("teleopAcquireAlgaeFromReef").checked) ? 1 : 0;
+    dataToSave["teleopFoul1"] = (document.getElementById("teleopFoul1").checked) ? 1 : 0;
+    dataToSave["driverability"] = document.getElementById('driverAbility').value;
+    dataToSave["against_tactic1"] = (document.getElementById("againstTactic1").checked) ? 1 : 0;
+    dataToSave["against_comment"] = document.getElementById("againstComment").value;
+
+    // Defense scouting
+    dataToSave["defense_tactic1"] = (document.getElementById("defenseTactic1").checked) ? 1 : 0;
+    dataToSave["defense_tactic2"] = (document.getElementById("defenseTactic2").checked) ? 1 : 0;
+    dataToSave["defense_comment"] = document.getElementById("defenseComment").value;
+    dataToSave["foul1"] = (document.getElementById("foul1").checked) ? 1 : 0;
+    dataToSave["teleopFoul3"] = (document.getElementById("teleopFoul3").checked) ? 1 : 0;
+    dataToSave["teleopFoul2"] = (document.getElementById("teleopFoul2").checked) ? 1 : 0;
+    dataToSave["teleopFoul4"] = (document.getElementById("teleopFoul4").checked) ? 1 : 0;
     dataToSave["endgameFoul1"] = (document.getElementById("endgameFoul1").checked) ? 1 : 0;
 
+    // Comment boxes
     dataToSave["problem_comment"] = document.getElementById("problemComment").value;
     dataToSave["general_comment"] = document.getElementById("generalComment").value;
 
