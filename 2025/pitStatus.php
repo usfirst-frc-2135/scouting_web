@@ -69,7 +69,7 @@ require 'inc/header.php';
       }
 
       if ((images[teamNum] != null) && (images[teamNum].length > 0)) {
-        row += " <td class='table-success'>Yes</td>";
+        row += "<td class='table-success'><a href='pitPhotoUpload.php?teamNum=" + teamNum + "'>Yes</td>";
       } else {
         row += "<td><a href='pitPhotoUpload.php?teamNum=" + teamNum + "'>No</td>"
       }
