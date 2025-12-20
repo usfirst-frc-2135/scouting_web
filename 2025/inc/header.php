@@ -16,7 +16,7 @@
   <style type="text/css" media="screen">
     .form-check-input {
       /* darken check box borders */
-      border-color: rgba(0, 0, 0, .5);
+      border-color: rgba(127, 127, 127, 0.75);
     }
 
     .nav-pills {
