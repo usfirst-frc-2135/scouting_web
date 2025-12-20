@@ -142,8 +142,7 @@ require 'inc/header.php';
                 <h5 class="text-center"><a href="#collapseAuton" data-bs-toggle="collapse" aria-expanded="false">Auton</a></h5>
               </div>
               <div id="collapseAuton" class="card-body collapse">
-                <table id="autonTable"
-                  class="table table-striped table-bordered table-hover table-sm border-secondary text-center ">
+                <table id="autonTable" class="table table-striped table-bordered table-hover table-sm border-secondary text-center">
                   <thead>
                     <tr>
                       <th scope="col" class="text-start"></th>
@@ -286,7 +285,7 @@ require 'inc/header.php';
                       <td> </td>
                     </tr>
                   </tbody>
-                </table>border-secondary
+                </table>
                 <table id="endgameStartClimbTable"
                   class="table table-striped table-bordered table-hover table-sm border-secondary text-center ">
                   <thead>
@@ -301,7 +300,6 @@ require 'inc/header.php';
                   <tbody class="table-group-divider">
                     <tr>
                       <th scope="row" class="text-start">Start Climb %</th>
-                      <td> </td>
                       <td> </td>
                       <td> </td>
                       <td> </td>
