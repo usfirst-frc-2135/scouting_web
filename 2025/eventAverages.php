@@ -90,7 +90,7 @@ require 'inc/header.php';
     let csv = [];
 
     // This CSV header must match the order in eventAveragesTable.js insertEventAveragesBody()
-    let hdrStr = "Team,Alias,COPRs," +
+    let hdrStr = "Team,Alias,COPRs,Matches" +
       "Total Pts Avg,Total Pts Max," +
       "Auto Pts Avg,Auto Pts Max,Tel Pts Avg,Tel Pts Max,End Pts Avg,End Pts Max," +
       "Auton Coral Pts Avg,Auton Coral Pts Max,Auto Algae Pts Avg,Auto Algae Pts Max," +
@@ -242,6 +242,7 @@ require 'inc/header.php';
 </script>
 
 <script src="./scripts/aliasFunctions.js"></script>
+<script src="./scripts/compareMatchNumbers.js"></script>
 <script src="./scripts/compareTeamNumbers.js"></script>
 <script src="./scripts/eventAveragesTable.js"></script>
 <script src="./scripts/matchDataProcessor.js"></script>

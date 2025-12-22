@@ -263,16 +263,16 @@ require 'inc/header.php';
                     </tr>
                   </tbody>
                 </table>
-                <table id="endgameClimbTable"
+                <table id="endgameCageClimbTable"
                   class="table table-striped table-bordered table-hover table-sm border-secondary text-center ">
                   <thead>
                     <tr>
                       <th scope="col" class="text-start"></th>
-                      <th scope="col" style="width:12%">N</th>
-                      <th scope="col" style="width:12%">F</th>
-                      <th scope="col" style="width:12%">P</th>
-                      <th scope="col" style="width:12%">S</th>
-                      <th scope="col" style="width:12%">D</th>
+                      <th scope="col" style="width:12%">NO</th>
+                      <th scope="col" style="width:12%">FL</th>
+                      <th scope="col" style="width:12%">PK</th>
+                      <th scope="col" style="width:12%">SH</th>
+                      <th scope="col" style="width:12%">DP</th>
                     </tr>
                   </thead>
                   <tbody class="table-group-divider">
@@ -291,10 +291,10 @@ require 'inc/header.php';
                   <thead>
                     <tr>
                       <th scope="col" class="text-start"></th>
-                      <th scope="col" style="width:12%">N</th>
-                      <th scope="col" style="width:12%">B</th>
-                      <th scope="col" style="width:12%">A</th>
-                      <th scope="col" style="width:12%">L</th>
+                      <th scope="col" style="width:12%">NO</th>
+                      <th scope="col" style="width:12%">B20</th>
+                      <th scope="col" style="width:12%">A10</th>
+                      <th scope="col" style="width:12%">L5</th>
                     </tr>
                   </thead>
                   <tbody class="table-group-divider">
@@ -738,11 +738,11 @@ require 'inc/header.php';
   //
   // Create an html table row with tr and td cells
   //
-  function writeAverageTableRow(tableID, dict, keys, length) {
+  function writeAverageTableRow(tableID, values, length) {
     let tbodyRef = document.getElementById(tableID).querySelector('tbody');
-    let row = "<th  class='text-start'>" + dict[keys[0]] + "</th>";
+    let row = "<th  class='text-start'>" + values[0] + "</th>";
     for (let i = 1; i < length; i++) {
-      row += (i < keys.length) ? "<td>" + dict[keys[i]] + "</td>" : "<td> </td>";
+      row += (i < values.length) ? "<td>" + values[i] + "</td>" : "<td> </td>";
     }
     tbodyRef.insertRow().innerHTML = row;
   }
@@ -753,62 +753,34 @@ require 'inc/header.php';
   function loadAverageTables(avgs) {
     console.log("==> teamLookup: loadAverageTables()");
 
-    /////// Match Totals Table
-    avgs["totalCoralStr"] = "Coral Scored";
-    avgs["totalAlgaeStr"] = "Algae Scored";
-    avgs["totalCoralPointsStr"] = "Coral Points";
-    avgs["totalAlgaePointsStr"] = "Algae Points";
-
-    writeAverageTableRow("matchSheetTable", avgs, ["totalCoralStr", "totalCoralScoredAvg", "totalCoralScoredMax"], 3);
-    writeAverageTableRow("matchSheetTable", avgs, ["totalAlgaeStr", "totalAlgaeScoredAvg", "totalAlgaeScoredMax"], 3);
-    writeAverageTableRow("matchSheetTable", avgs, ["totalCoralPointsStr", "totalCoralPointsAvg", "totalCoralPointsMax"], 3);
-    writeAverageTableRow("matchSheetTable", avgs, ["totalAlgaePointsStr", "totalAlgaePointsAvg", "totalAlgaePointsMax"], 3);
-
-    avgs["totalMatchPointsStr"] = "Match Points";
-    avgs["avgTotalMatchPoints"] = roundTwoPlaces(avgs["totalCoralPointsAvg"] + avgs["totalAlgaePointsAvg"]);
-    avgs["maxTotalMatchPoints"] = roundTwoPlaces(avgs["totalCoralPointsMax"] + avgs["totalAlgaePointsMax"]);
-    writeAverageTableRow("matchSheetTable", avgs, ["totalMatchPointsStr", "avgTotalMatchPoints", "maxTotalMatchPoints"], 3);
+    /////// Match Totals Table  
+    writeAverageTableRow("matchSheetTable", ["Coral Pieces", avgs["totalCoralPieces"].avg, avgs["totalCoralPieces"].max], 3);
+    writeAverageTableRow("matchSheetTable", ["Algae Pieces", avgs["totalAlgaePieces"].avg, avgs["totalAlgaePieces"].max], 3);
+    writeAverageTableRow("matchSheetTable", ["Coral Points", avgs["totalCoralPoints"].avg, avgs["totalCoralPoints"].max], 3);
+    writeAverageTableRow("matchSheetTable", ["Algae Points", avgs["totalAlgaePoints"].avg, avgs["totalAlgaePoints"].max], 3);
+    writeAverageTableRow("matchSheetTable", ["Match Points", avgs["totalMatchPoints"].avg, avgs["totalMatchPoints"].max], 3);
 
     //Auton Table  
-    avgs["autonpointsStr"] = "Total Points";
-    avgs["autontotalcoralStr"] = "Coral Scored";
-    avgs["autontotalalgaeStr"] = "Algae Scored";
-    avgs["autoncoralpointsStr"] = "Coral Points";
-    avgs["autonalgaepointsStr"] = "Algae Points";
-
-    writeAverageTableRow("autonTable", avgs, ["autonpointsStr", "autonPointsAvg", "autonPointsMax"], 3);
-    writeAverageTableRow("autonTable", avgs, ["autontotalcoralStr", "autonCoralScoredAvg", "autonCoralScoredMax"], 3);
-    writeAverageTableRow("autonTable", avgs, ["autontotalalgaeStr", "autonAlgaeScoredAvg", "autonAlgaeScoredMax"], 3);
-    writeAverageTableRow("autonTable", avgs, ["autoncoralpointsStr", "autonCoralPointsAvg", "autonCoralPointsMax"], 3);
-    writeAverageTableRow("autonTable", avgs, ["autonalgaepointsStr", "autonAlgaePointsAvg", "autonAlgaePointsMax"], 3);
+    writeAverageTableRow("autonTable", ["Total Points", avgs["autonPoints"].avg, avgs["autonPoints"].max], 3);
+    writeAverageTableRow("autonTable", ["Coral Pieces", avgs["autonCoralPieces"].avg, avgs["autonCoralPieces"].max], 3);
+    writeAverageTableRow("autonTable", ["Algae Pieces", avgs["autonAlgaePieces"].avg, avgs["autonAlgaePieces"].max], 3);
+    writeAverageTableRow("autonTable", ["Coral Points", avgs["autonCoralPoints"].avg, avgs["autonCoralPoints"].max], 3);
+    writeAverageTableRow("autonTable", ["Algae Points", avgs["autonAlgaePoints"].avg, avgs["autonAlgaePoints"].max], 3);
 
     // Teleop Table
-
-    avgs["teleoppointsStr"] = "Total Points";
-    avgs["teleoptotalcoralStr"] = "Coral Scored";
-    avgs["teleoptotalalgaeStr"] = "Algae Scored";
-    avgs["teleopcoralpointsStr"] = "Coral Points";
-    avgs["teleopalgaepointsStr"] = "Algae Points";
-    avgs["teleopcoralaccuracyStr"] = "Coral Acc%";
-    avgs["teleopalgaeaccuracysStr"] = "Algae Acc%";
-
-    writeAverageTableRow("teleopTable", avgs, ["teleoppointsStr", "teleopPointsAvg", "teleopPointsMax"], 3);
-    writeAverageTableRow("teleopTable", avgs, ["teleoptotalcoralStr", "teleopCoralScoredAvg", "teleopCoralScoredMax"], 3);
-    writeAverageTableRow("teleopTable", avgs, ["teleoptotalalgaeStr", "teleopAlgaeScoredAvg", "teleopAlgaeScoredMax"], 3);
-    writeAverageTableRow("teleopTable", avgs, ["teleopcoralpointsStr", "teleopCoralPointsAvg", "teleopCoralPointsMax"], 3);
-    writeAverageTableRow("teleopTable", avgs, ["teleopalgaepointsStr", "teleopAlgaePointsAvg", "teleopAlgaePointsMax"], 3);
-    writeAverageTableRow("teleopTable", avgs, ["teleopcoralaccuracyStr", "teleopCoralPercent"], 3);
-    writeAverageTableRow("teleopTable", avgs, ["teleopalgaeaccuracysStr", "teleopAlgaePercent"], 3);
+    writeAverageTableRow("teleopTable", ["Total Points", avgs["teleopPoints"].avg, avgs["teleopPoints"].max], 3);
+    writeAverageTableRow("teleopTable", ["Coral Pieces", avgs["teleopCoralPieces"].avg, avgs["teleopCoralPieces"].max], 3);
+    writeAverageTableRow("teleopTable", ["Algae Pieces", avgs["teleopAlgaePieces"].avg, avgs["teleopAlgaePieces"].max], 3);
+    writeAverageTableRow("teleopTable", ["Coral Points", avgs["teleopCoralPoints"].avg, avgs["teleopCoralPoints"].max], 3);
+    writeAverageTableRow("teleopTable", ["Algae Points", avgs["teleopAlgaePoints"].avg, avgs["teleopAlgaePoints"].max], 3);
+    writeAverageTableRow("teleopTable", ["Coral Acc%", avgs["teleopCoralPieces"].acc], 3);
+    writeAverageTableRow("teleopTable", ["Algae Acc%", avgs["teleopAlgaePieces"].acc], 3);
 
     /////// Endgame Table
-    avgs["totalEndGamePointsStr"] = "Endgame Points";
-    avgs["endgameClimbPercent"]["endgameclimbStr"] = "Cage Climb %";
-    avgs["endgameClimbStartPercent"]["endgamestartclimbStr"] = "Start Climb %";
 
-    writeAverageTableRow("endgameTotalPtsTable", avgs, ["totalEndGamePointsStr", "endgamePointsAvg", "endgamePointsMax"], 3);
-    writeAverageTableRow("endgameClimbTable", avgs["endgameClimbPercent"], ["endgameclimbStr", 0, 2, 1, 3, 4], 6);
-    writeAverageTableRow("endgameStartClimbTable", avgs["endgameClimbStartPercent"], ["endgamestartclimbStr", 0, 1, 2, 3], 5);//LOOK
-
+    writeAverageTableRow("endgameTotalPtsTable", ["Endgame Points", avgs["endgamePoints"].avg, avgs["endgamePoints"].max], 3);
+    writeAverageTableRow("endgameCageClimbTable", ["Cage Climb %", avgs["endgameCageClimb"].arr[0].avg, avgs["endgameCageClimb"].arr[2].avg, avgs["endgameCageClimb"].arr[1].avg, avgs["endgameCageClimb"].arr[3].avg, avgs["endgameCageClimb"].arr[4].avg], 6);
+    writeAverageTableRow("endgameStartClimbTable", ["Start Climb %", avgs["endgameStartClimb"].arr[0].avg, avgs["endgameStartClimb"].arr[1].avg, avgs["endgameStartClimb"].arr[2].avg, avgs["endgameStartClimb"].arr[3].avg], 5);
   }
 
   // MAIN PAGE PROCESSORS HERE
@@ -927,7 +899,7 @@ require 'inc/header.php';
     document.getElementById("autonTable").querySelector('tbody').innerHTML = "";
     document.getElementById("teleopTable").querySelector('tbody').innerHTML = "";
     document.getElementById("endgameTotalPtsTable").querySelector('tbody').innerHTML = "";
-    document.getElementById("endgameClimbTable").querySelector('tbody').innerHTML = "";
+    document.getElementById("endgameCageClimbTable").querySelector('tbody').innerHTML = "";
     document.getElementById("endgameStartClimbTable").querySelector('tbody').innerHTML = "";
     document.getElementById("pitTable1").querySelector('tbody').innerHTML = "";
     document.getElementById("pitTable2").querySelector('tbody').innerHTML = "";

@@ -38,6 +38,7 @@ function insertEventAveragesHeader(tableId, aliasList) {
     rowString1 += '<th colspan="1" ' + thBody + '> </th>';
   }
   rowString1 += '<th colspan="1" ' + thBody + '> </th>';
+  rowString1 += '<th colspan="1" ' + thBody + '> </th>';
 
   // points by game phase
   rowString1 += '<th colspan="8" ' + thMatch + '>Match Points' + '</th>';
@@ -61,6 +62,7 @@ function insertEventAveragesHeader(tableId, aliasList) {
   if (aliasList.length > 0) {
     rowString2 += '<th colspan="1" ' + thBody + '> </th>';
   }
+  rowString2 += '<th colspan="1" ' + thBody + '> </th>';
   rowString2 += '<th colspan="1" ' + thBody + '> </th>';
 
   // points by game phase
@@ -123,6 +125,7 @@ function insertEventAveragesHeader(tableId, aliasList) {
     rowString3 += tdPrefix0 + 'Alias' + '</th>';
   }
   rowString3 += tdPrefix0 + 'COPRs' + '</th>';
+  rowString3 += tdPrefix0 + '#' + '</th>';
 
   // points by game phase
   rowString3 += tdPrefix1 + 'Avg' + '</th>';
@@ -196,17 +199,17 @@ function insertEventAveragesHeader(tableId, aliasList) {
   rowString3 += tdPrefix1 + 'Avg' + '</th>';
 
   // endgame(start climb)
-  rowString3 += tdPrefix0 + 'N' + '</th>';
-  rowString3 += tdPrefix0 + 'B' + '</th>';
-  rowString3 += tdPrefix0 + 'A' + '</th>';
-  rowString3 += tdPrefix0 + 'L' + '</th>';
+  rowString3 += tdPrefix0 + 'NO' + '</th>';
+  rowString3 += tdPrefix0 + 'B20' + '</th>';
+  rowString3 += tdPrefix0 + 'A10' + '</th>';
+  rowString3 += tdPrefix0 + 'L5' + '</th>';
 
   // endgame(climb)
-  rowString3 += tdPrefix1 + 'N' + '</th>';
-  rowString3 += tdPrefix1 + 'P' + '</th>';
-  rowString3 += tdPrefix1 + 'F' + '</th>';
-  rowString3 += tdPrefix1 + 'S' + '</th>';
-  rowString3 += tdPrefix1 + 'D' + '</th>';
+  rowString3 += tdPrefix1 + 'NO' + '</th>';
+  rowString3 += tdPrefix1 + 'PK' + '</th>';
+  rowString3 += tdPrefix1 + 'FL' + '</th>';
+  rowString3 += tdPrefix1 + 'SH' + '</th>';
+  rowString3 += tdPrefix1 + 'DP' + '</th>';
 
   // died 
   rowString3 += tdPrefix0 + '#' + '</th>';
@@ -227,12 +230,15 @@ function getTeamListFromData(matchData) {
 //
 // Lookup value for a key in the passed dictionary - team in match data
 //
-function getDataValue(dict, key) {
+function getDataValue(dict, key, field) {
   if (!dict) {
     console.warn("getDataValue: Dictionary not found! " + dict);
   }
   else if (key in dict) {
-    return dict[key];
+    if (field != undefined)
+      return dict[key][field];
+    else
+      return dict[key];
   }
   else {
     console.warn("getDataValue: Key not found in dictionary! " + key + " " + dict);
@@ -272,93 +278,92 @@ function insertEventAveragesBody(tableId, eventAverages, coprData, aliasList, te
     }
     let coprEntry = (coprData.length !== 0) ? getDataValue(coprData[teamNum], "totalPoints") : "";  // TODO: Load COPR data from TBA and pass in here
     rowString += tdPrefix0 + coprEntry + "</td>";
+    rowString += tdPrefix0 + getDataValue(avgItem, "totalMatches") + "</td>";
 
     // points by game phase
-    rowString += tdPrefix1 + getDataValue(avgItem, "totalPointsAvg") + "</td>";
-    rowString += tdPrefix1 + getDataValue(avgItem, "totalPointsMax") + "</td>";
-    rowString += tdPrefix0 + getDataValue(avgItem, "autonPointsAvg") + "</td>";
-    rowString += tdPrefix0 + getDataValue(avgItem, "autonPointsMax") + "</td>";
-    rowString += tdPrefix1 + getDataValue(avgItem, "teleopPointsAvg") + "</td>";
-    rowString += tdPrefix1 + getDataValue(avgItem, "teleopPointsMax") + "</td>";
-    rowString += tdPrefix0 + getDataValue(avgItem, "endgamePointsAvg") + "</td>";
-    rowString += tdPrefix0 + getDataValue(avgItem, "endgamePointsMax") + "</td>";
+    rowString += tdPrefix1 + getDataValue(avgItem, "totalMatchPoints", "avg") + "</td>";
+    rowString += tdPrefix1 + getDataValue(avgItem, "totalMatchPoints", "max") + "</td>";
+    rowString += tdPrefix0 + getDataValue(avgItem, "autonPoints", "avg") + "</td>";
+    rowString += tdPrefix0 + getDataValue(avgItem, "autonPoints", "max") + "</td>";
+    rowString += tdPrefix1 + getDataValue(avgItem, "teleopPoints", "avg") + "</td>";
+    rowString += tdPrefix1 + getDataValue(avgItem, "teleopPoints", "max") + "</td>";
+    rowString += tdPrefix0 + getDataValue(avgItem, "endgamePoints", "avg") + "</td>";
+    rowString += tdPrefix0 + getDataValue(avgItem, "endgamePoints", "max") + "</td>";
 
     // points by game piece
-    rowString += tdPrefix1 + getDataValue(avgItem, "autonCoralPointsAvg") + "</td>";
-    rowString += tdPrefix1 + getDataValue(avgItem, "autonCoralPointsMax") + "</td>";
-    rowString += tdPrefix0 + getDataValue(avgItem, "autonAlgaePointsAvg") + "</td>";
-    rowString += tdPrefix0 + getDataValue(avgItem, "autonAlgaePointsMax") + "</td>";
-    rowString += tdPrefix1 + getDataValue(avgItem, "teleopCoralPointsAvg") + "</td>";
-    rowString += tdPrefix1 + getDataValue(avgItem, "teleopCoralPointsMax") + "</td>";
-    rowString += tdPrefix0 + getDataValue(avgItem, "teleopAlgaePointsAvg") + "</td>";
-    rowString += tdPrefix0 + getDataValue(avgItem, "teleopAlgaePointsMax") + "</td>";
+    rowString += tdPrefix1 + getDataValue(avgItem, "autonCoralPoints", "avg") + "</td>";
+    rowString += tdPrefix1 + getDataValue(avgItem, "autonCoralPoints", "max") + "</td>";
+    rowString += tdPrefix0 + getDataValue(avgItem, "autonAlgaePoints", "avg") + "</td>";
+    rowString += tdPrefix0 + getDataValue(avgItem, "autonAlgaePoints", "max") + "</td>";
+    rowString += tdPrefix1 + getDataValue(avgItem, "teleopCoralPoints", "avg") + "</td>";
+    rowString += tdPrefix1 + getDataValue(avgItem, "teleopCoralPoints", "max") + "</td>";
+    rowString += tdPrefix0 + getDataValue(avgItem, "teleopAlgaePoints", "avg") + "</td>";
+    rowString += tdPrefix0 + getDataValue(avgItem, "teleopAlgaePoints", "max") + "</td>";
 
     // total game pieces
-    rowString += tdPrefix1 + getDataValue(avgItem, "totalCoralScoredAvg") + "</td>";
-    rowString += tdPrefix1 + getDataValue(avgItem, "totalCoralScoredMax") + "</td>";
-    rowString += tdPrefix0 + getDataValue(avgItem, "totalAlgaeScoredAvg") + "</td>";
-    rowString += tdPrefix0 + getDataValue(avgItem, "totalAlgaeScoredMax") + "</td>";
+    rowString += tdPrefix1 + getDataValue(avgItem, "totalCoralPieces", "avg") + "</td>";
+    rowString += tdPrefix1 + getDataValue(avgItem, "totalCoralPieces", "max") + "</td>";
+    rowString += tdPrefix0 + getDataValue(avgItem, "totalAlgaePieces", "avg") + "</td>";
+    rowString += tdPrefix0 + getDataValue(avgItem, "totalAlgaePieces", "max") + "</td>";
 
     // auton coral
-    rowString += tdPrefix1 + getDataValue(avgItem, "autonCoralScoredAvg") + "</td>";
-    rowString += tdPrefix1 + getDataValue(avgItem, "autonCoralScoredMax") + "</td>";
-    rowString += tdPrefix0 + getDataValue(avgItem, "autonCoralL4Avg") + "</td>";
-    rowString += tdPrefix0 + getDataValue(avgItem, "autonCoralL4Max") + "</td>";
-    rowString += tdPrefix1 + getDataValue(avgItem, "autonCoralL3Avg") + "</td>";
-    rowString += tdPrefix1 + getDataValue(avgItem, "autonCoralL3Max") + "</td>";
-    rowString += tdPrefix0 + getDataValue(avgItem, "autonCoralL2Avg") + "</td>";
-    rowString += tdPrefix0 + getDataValue(avgItem, "autonCoralL2Max") + "</td>";
-    rowString += tdPrefix1 + getDataValue(avgItem, "autonCoralL1Avg") + "</td>";
-    rowString += tdPrefix1 + getDataValue(avgItem, "autonCoralL1Max") + "</td>";
+    rowString += tdPrefix1 + getDataValue(avgItem, "autonCoralPieces", "avg") + "</td>";
+    rowString += tdPrefix1 + getDataValue(avgItem, "autonCoralPieces", "max") + "</td>";
+    rowString += tdPrefix0 + getDataValue(avgItem, "autonCoralL4", "avg") + "</td>";
+    rowString += tdPrefix0 + getDataValue(avgItem, "autonCoralL4", "max") + "</td>";
+    rowString += tdPrefix1 + getDataValue(avgItem, "autonCoralL3", "avg") + "</td>";
+    rowString += tdPrefix1 + getDataValue(avgItem, "autonCoralL3", "max") + "</td>";
+    rowString += tdPrefix0 + getDataValue(avgItem, "autonCoralL2", "avg") + "</td>";
+    rowString += tdPrefix0 + getDataValue(avgItem, "autonCoralL2", "max") + "</td>";
+    rowString += tdPrefix1 + getDataValue(avgItem, "autonCoralL1", "avg") + "</td>";
+    rowString += tdPrefix1 + getDataValue(avgItem, "autonCoralL1", "max") + "</td>";
 
     // auton algae
-    rowString += tdPrefix0 + getDataValue(avgItem, "autonAlgaeScoredAvg") + "</td>";
-    rowString += tdPrefix0 + getDataValue(avgItem, "autonAlgaeScoredMax") + "</td>";
-    rowString += tdPrefix1 + getDataValue(avgItem, "autonAlgaeProcAvg") + "</td>";
-    rowString += tdPrefix1 + getDataValue(avgItem, "autonAlgaeProcMax") + "</td>";
-    rowString += tdPrefix0 + getDataValue(avgItem, "autonAlgaeNetAvg") + "</td>";
-    rowString += tdPrefix0 + getDataValue(avgItem, "autonAlgaeNetMax") + "</td>";
+    rowString += tdPrefix0 + getDataValue(avgItem, "autonAlgaePieces", "avg") + "</td>";
+    rowString += tdPrefix0 + getDataValue(avgItem, "autonAlgaePieces", "max") + "</td>";
+    rowString += tdPrefix1 + getDataValue(avgItem, "autonAlgaeProc", "avg") + "</td>";
+    rowString += tdPrefix1 + getDataValue(avgItem, "autonAlgaeProc", "max") + "</td>";
+    rowString += tdPrefix0 + getDataValue(avgItem, "autonAlgaeNet", "avg") + "</td>";
+    rowString += tdPrefix0 + getDataValue(avgItem, "autonAlgaeNet", "max") + "</td>";
 
     // teleop coral
-    rowString += tdPrefix1 + getDataValue(avgItem, "teleopCoralPercent") + "</td>";
-    rowString += tdPrefix1 + getDataValue(avgItem, "teleopCoralScoredAvg") + "</td>";
-    rowString += tdPrefix1 + getDataValue(avgItem, "teleopCoralScoredMax") + "</td>";
-    rowString += tdPrefix0 + getDataValue(avgItem, "teleopCoralL4Avg") + "</td>";
-    rowString += tdPrefix0 + getDataValue(avgItem, "teleopCoralL4Max") + "</td>";
-    rowString += tdPrefix1 + getDataValue(avgItem, "teleopCoralL3Avg") + "</td>";
-    rowString += tdPrefix1 + getDataValue(avgItem, "teleopCoralL3Max") + "</td>";
-    rowString += tdPrefix0 + getDataValue(avgItem, "teleopCoralL2Avg") + "</td>";
-    rowString += tdPrefix0 + getDataValue(avgItem, "teleopCoralL2Max") + "</td>";
-    rowString += tdPrefix1 + getDataValue(avgItem, "teleopCoralL1Avg") + "</td>";
-    rowString += tdPrefix1 + getDataValue(avgItem, "teleopCoralL1Max") + "</td>";
+    rowString += tdPrefix1 + getDataValue(avgItem, "teleopCoralPieces", "acc") + "</td>";
+    rowString += tdPrefix1 + getDataValue(avgItem, "teleopCoralPieces", "avg") + "</td>";
+    rowString += tdPrefix1 + getDataValue(avgItem, "teleopCoralPieces", "max") + "</td>";
+    rowString += tdPrefix0 + getDataValue(avgItem, "teleopCoralL4", "avg") + "</td>";
+    rowString += tdPrefix0 + getDataValue(avgItem, "teleopCoralL4", "max") + "</td>";
+    rowString += tdPrefix1 + getDataValue(avgItem, "teleopCoralL3", "avg") + "</td>";
+    rowString += tdPrefix1 + getDataValue(avgItem, "teleopCoralL3", "max") + "</td>";
+    rowString += tdPrefix0 + getDataValue(avgItem, "teleopCoralL2", "avg") + "</td>";
+    rowString += tdPrefix0 + getDataValue(avgItem, "teleopCoralL2", "max") + "</td>";
+    rowString += tdPrefix1 + getDataValue(avgItem, "teleopCoralL1", "avg") + "</td>";
+    rowString += tdPrefix1 + getDataValue(avgItem, "teleopCoralL1", "max") + "</td>";
 
     // teleop algae
-    rowString += tdPrefix0 + getDataValue(avgItem, "teleopAlgaePercent") + "</td>";
-    rowString += tdPrefix0 + getDataValue(avgItem, "teleopAlgaeScoredAvg") + "</td>";
-    rowString += tdPrefix0 + getDataValue(avgItem, "teleopAlgaeScoredMax") + "</td>";
-    rowString += tdPrefix1 + getDataValue(avgItem, "teleopAlgaeProcAvg") + "</td>";
-    rowString += tdPrefix1 + getDataValue(avgItem, "teleopAlgaeProcMax") + "</td>";
-    rowString += tdPrefix0 + getDataValue(avgItem, "teleopAlgaeNetAvg") + "</td>";
-    rowString += tdPrefix0 + getDataValue(avgItem, "teleopAlgaeNetMax") + "</td>";
-
+    rowString += tdPrefix0 + getDataValue(avgItem, "teleopAlgaePieces", "acc") + "</td>";
+    rowString += tdPrefix0 + getDataValue(avgItem, "teleopAlgaePieces", "avg") + "</td>";
+    rowString += tdPrefix0 + getDataValue(avgItem, "teleopAlgaePieces", "max") + "</td>";
+    rowString += tdPrefix1 + getDataValue(avgItem, "teleopAlgaeProc", "avg") + "</td>";
+    rowString += tdPrefix1 + getDataValue(avgItem, "teleopAlgaeProc", "max") + "</td>";
+    rowString += tdPrefix0 + getDataValue(avgItem, "teleopAlgaeNet", "avg") + "</td>";
+    rowString += tdPrefix0 + getDataValue(avgItem, "teleopAlgaeNet", "max") + "</td>";
     // defense
-    rowString += tdPrefix1 + getDataValue(avgItem, "defenseAvg") + "</td>";
+    rowString += tdPrefix1 + getDataValue(avgItem, "defenseLevel", "avg") + "</td>";
 
     // endgame
-    let endgameClimbStartPercentage = getDataValue(avgItem, "endgameClimbStartPercent");
-    rowString += tdPrefix0 + getDataValue(endgameClimbStartPercentage, 0) + "</td>";
-    rowString += tdPrefix0 + getDataValue(endgameClimbStartPercentage, 1) + "</td>";
-    rowString += tdPrefix0 + getDataValue(endgameClimbStartPercentage, 2) + "</td>";
-    rowString += tdPrefix0 + getDataValue(endgameClimbStartPercentage, 3) + "</td>";
+    let endgameClimbStartPercentage = getDataValue(avgItem, "endgameStartClimb", "arr");
+    rowString += tdPrefix0 + getDataValue(endgameClimbStartPercentage, 0, "avg") + "</td>";
+    rowString += tdPrefix0 + getDataValue(endgameClimbStartPercentage, 1, "avg") + "</td>";
+    rowString += tdPrefix0 + getDataValue(endgameClimbStartPercentage, 2, "avg") + "</td>";
+    rowString += tdPrefix0 + getDataValue(endgameClimbStartPercentage, 3, "avg") + "</td>";
 
-    let endgameClimbPercentage = getDataValue(avgItem, "endgameClimbPercent");
-    rowString += tdPrefix1 + getDataValue(endgameClimbPercentage, 0) + "</td>";
-    rowString += tdPrefix1 + getDataValue(endgameClimbPercentage, 1) + "</td>";
-    rowString += tdPrefix1 + getDataValue(endgameClimbPercentage, 2) + "</td>";
-    rowString += tdPrefix1 + getDataValue(endgameClimbPercentage, 3) + "</td>";
-    rowString += tdPrefix1 + getDataValue(endgameClimbPercentage, 4) + "</td>";
-
-    rowString += tdPrefix0 + getDataValue(avgItem, "totaldied") + "</td>";
+    let endgameClimbPercentage = getDataValue(avgItem, "endgameCageClimb", "arr");
+    rowString += tdPrefix1 + getDataValue(endgameClimbPercentage, 0, "avg") + "</td>";
+    rowString += tdPrefix1 + getDataValue(endgameClimbPercentage, 1, "avg") + "</td>";
+    rowString += tdPrefix1 + getDataValue(endgameClimbPercentage, 2, "avg") + "</td>";
+    rowString += tdPrefix1 + getDataValue(endgameClimbPercentage, 3, "avg") + "</td>";
+    rowString += tdPrefix1 + getDataValue(endgameClimbPercentage, 4, "avg") + "</td>";
+    rowString += tdPrefix0 + getDataValue(avgItem, "died", "sum") + "</td>";
 
     tbodyRef.insertRow().innerHTML = rowString;
   }

@@ -586,11 +586,11 @@ require 'inc/header.php';
     rowString2 += thTeleop + 'A%' + '</th>';
 
     const thEndgame = '<th scope="col" class="table-warning">';
-    rowString2 += thEndgame + 'D' + '</th>';
-    rowString2 += thEndgame + 'S' + '</th>';
-    rowString2 += thEndgame + 'F' + '</th>';
-    rowString2 += thEndgame + 'P' + '</th>';
-    rowString2 += thEndgame + 'N' + '</th>';
+    rowString2 += thEndgame + 'DP' + '</th>';
+    rowString2 += thEndgame + 'SH' + '</th>';
+    rowString2 += thEndgame + 'FL' + '</th>';
+    rowString2 += thEndgame + 'PK' + '</th>';
+    rowString2 += thEndgame + 'NO' + '</th>';
 
     document.getElementById(tableId).querySelector('thead').insertRow().innerHTML = rowString1;
     document.getElementById(tableId).querySelector('thead').insertRow().innerHTML = rowString2;
@@ -599,7 +599,7 @@ require 'inc/header.php';
   //
   // Load the info into the team box
   //
-  function buildTeamBoxTableBody(color, index, teamNum, averageData) {
+  function buildTeamBoxTableBody(color, index, teamNum, averagesData) {
     console.log("==> buildTeamBoxTableBody: build the team box in the match sheet - " + teamNum);
     // Get team name from TBA
     $.get("api/tbaAPI.php", {
@@ -625,30 +625,30 @@ require 'inc/header.php';
     });
 
     // Load team scouted information
-    let rd = averageData[teamNum];
+    let ad = averagesData[teamNum];
     let tbodyRef = document.getElementById(color + index + "DataTable").querySelector('tbody');
     tbodyRef.innerHTML = "";
     let row = "";
-    if (rd != null) {
-      row += "<td>" + rd["autonCoralL4Avg"] + "</td>";
-      row += "<td>" + rd["autonCoralL3Avg"] + "</td>";
-      row += "<td>" + rd["autonCoralL2Avg"] + "</td>";
-      row += "<td>" + rd["autonCoralL1Avg"] + "</td>";
-      row += "<td>" + rd["autonAlgaeNetAvg"] + "</td>";
-      row += "<td>" + rd["autonAlgaeProcAvg"] + "</td>";
-      row += "<td>" + rd["teleopCoralL4Avg"] + "</td>";
-      row += "<td>" + rd["teleopCoralL3Avg"] + "</td>";
-      row += "<td>" + rd["teleopCoralL2Avg"] + "</td>";
-      row += "<td>" + rd["teleopCoralL1Avg"] + "</td>";
-      row += "<td>" + rd["teleopCoralPercent"] + "</td>";
-      row += "<td>" + rd["teleopAlgaeNetAvg"] + "</td>";
-      row += "<td>" + rd["teleopAlgaeProcAvg"] + "</td>";
-      row += "<td>" + rd["teleopAlgaePercent"] + "</td>";
-      row += "<td>" + rd["endgameClimbPercent"][4] + "</td>";
-      row += "<td>" + rd["endgameClimbPercent"][3] + "</td>";
-      row += "<td>" + rd["endgameClimbPercent"][2] + "</td>";
-      row += "<td>" + rd["endgameClimbPercent"][1] + "</td>";
-      row += "<td>" + rd["endgameClimbPercent"][0] + "</td>";
+    if (ad != null) {
+      row += "<td>" + ad["autonCoralL4"].avg + "</td>";
+      row += "<td>" + ad["autonCoralL3"].avg + "</td>";
+      row += "<td>" + ad["autonCoralL2"].avg + "</td>";
+      row += "<td>" + ad["autonCoralL1"].avg + "</td>";
+      row += "<td>" + ad["autonAlgaeNet"].avg + "</td>";
+      row += "<td>" + ad["autonAlgaeProc"].avg + "</td>";
+      row += "<td>" + ad["teleopCoralL4"].avg + "</td>";
+      row += "<td>" + ad["teleopCoralL3"].avg + "</td>";
+      row += "<td>" + ad["teleopCoralL2"].avg + "</td>";
+      row += "<td>" + ad["teleopCoralL1"].avg + "</td>";
+      row += "<td>" + ad["teleopCoralPieces"].acc + "</td>";
+      row += "<td>" + ad["teleopAlgaeNet"].avg + "</td>";
+      row += "<td>" + ad["teleopAlgaeProc"].avg + "</td>";
+      row += "<td>" + ad["teleopAlgaePieces"].acc + "</td>";
+      row += "<td>" + ad["endgameCageClimb"].arr[4].avg + "</td>";
+      row += "<td>" + ad["endgameCageClimb"].arr[3].avg + "</td>";
+      row += "<td>" + ad["endgameCageClimb"].arr[2].avg + "</td>";
+      row += "<td>" + ad["endgameCageClimb"].arr[1].avg + "</td>";
+      row += "<td>" + ad["endgameCageClimb"].arr[0].avg + "</td>";
     }
     tbodyRef.insertRow().innerHTML = row;
   }
@@ -656,9 +656,9 @@ require 'inc/header.php';
   //
   // Update the match summary table comparing both alliances
   //
-  function updateMatchSummary(matchSpec, averageData) {
-    let totalCoralScoredAvg = { "red": 0, "blue": 0 };
-    let totalAlgaeScoredAvg = { "red": 0, "blue": 0 };
+  function updateMatchSummary(matchSpec, averagesData) {
+    let totalCoralPiecesAvg = { "red": 0, "blue": 0 };
+    let totalAlgaePiecesAvg = { "red": 0, "blue": 0 };
     let avgAutoPoints = { "red": 0, "blue": 0 };
     let avgTeleopPoints = { "red": 0, "blue": 0 };
     let endgamePointsAvg = { "red": 0, "blue": 0 };
@@ -666,38 +666,38 @@ require 'inc/header.php';
 
     for (let i in matchSpec.red) {
       teamNum = matchSpec.red[i];
-      let rd = averageData[teamNum];
-      if (rd != null) {
-        totalCoralScoredAvg["red"] += rd["totalCoralScoredAvg"];
-        totalAlgaeScoredAvg["red"] += rd["totalAlgaeScoredAvg"];
-        avgAutoPoints["red"] += rd["autonPointsAvg"];
-        avgTeleopPoints["red"] += rd["teleopPointsAvg"];
-        endgamePointsAvg["red"] += rd["endgamePointsAvg"];
-        totalPredictedPoints["red"] += rd["totalPointsAvg"];
+      let ad = averagesData[teamNum];
+      if (ad != null) {
+        totalCoralPiecesAvg["red"] += ad["totalCoralPieces"].avg;
+        totalAlgaePiecesAvg["red"] += ad["totalAlgaePieces"].avg;
+        avgAutoPoints["red"] += ad["autonPoints"].avg;
+        avgTeleopPoints["red"] += ad["teleopPoints"].avg;
+        endgamePointsAvg["red"] += ad["endgamePoints"].avg;
+        totalPredictedPoints["red"] += ad["totalMatchPoints"].avg;
       }
     }
     for (let i in matchSpec.blue) {
       teamNum = matchSpec.blue[i];
-      let rd = averageData[teamNum];
-      if (rd != null) {
-        totalCoralScoredAvg["blue"] += rd["totalCoralScoredAvg"];
-        totalAlgaeScoredAvg["blue"] += rd["totalAlgaeScoredAvg"];
-        avgAutoPoints["blue"] += rd["autonPointsAvg"];
-        avgTeleopPoints["blue"] += rd["teleopPointsAvg"];
-        endgamePointsAvg["blue"] += rd["endgamePointsAvg"];
-        totalPredictedPoints["blue"] += rd["totalPointsAvg"];
+      let ad = averagesData[teamNum];
+      if (ad != null) {
+        totalCoralPiecesAvg["blue"] += ad["totalCoralPieces"].avg;
+        totalAlgaePiecesAvg["blue"] += ad["totalAlgaePieces"].avg;
+        avgAutoPoints["blue"] += ad["autonPoints"].avg;
+        avgTeleopPoints["blue"] += ad["teleopPoints"].avg;
+        endgamePointsAvg["blue"] += ad["endgamePoints"].avg;
+        totalPredictedPoints["blue"] += ad["totalMatchPoints"].avg;
       }
     }
 
-    document.getElementById("redTotalCoral").innerText = roundTwoPlaces(totalCoralScoredAvg["red"]);
-    document.getElementById("redTotalAlgae").innerText = roundTwoPlaces(totalAlgaeScoredAvg["red"]);
+    document.getElementById("redTotalCoral").innerText = roundTwoPlaces(totalCoralPiecesAvg["red"]);
+    document.getElementById("redTotalAlgae").innerText = roundTwoPlaces(totalAlgaePiecesAvg["red"]);
     document.getElementById("redAvgAutoPoints").innerText = roundTwoPlaces(avgAutoPoints["red"]);
     document.getElementById("redAvgTeleopPoints").innerText = roundTwoPlaces(avgTeleopPoints["red"]);
     document.getElementById("redAvgEndgamePoints").innerText = roundTwoPlaces(endgamePointsAvg["red"]);
     document.getElementById("redTotalPredictedPoints").innerText = roundTwoPlaces(totalPredictedPoints["red"]);
 
-    document.getElementById("blueTotalCoral").innerText = roundTwoPlaces(totalCoralScoredAvg["blue"]);
-    document.getElementById("blueTotalAlgae").innerText = roundTwoPlaces(totalAlgaeScoredAvg["blue"]);
+    document.getElementById("blueTotalCoral").innerText = roundTwoPlaces(totalCoralPiecesAvg["blue"]);
+    document.getElementById("blueTotalAlgae").innerText = roundTwoPlaces(totalAlgaePiecesAvg["blue"]);
     document.getElementById("blueAvgAutoPoints").innerText = roundTwoPlaces(avgAutoPoints["blue"]);
     document.getElementById("blueAvgTeleopPoints").innerText = roundTwoPlaces(avgTeleopPoints["blue"]);
     document.getElementById("blueAvgEndgamePoints").innerText = roundTwoPlaces(endgamePointsAvg["blue"]);
@@ -836,13 +836,13 @@ require 'inc/header.php';
   //
   // Build a custom red and blue alliance matchsheet
   //
-  function loadMatchSheet(matchSpec, averageData) {
+  function loadMatchSheet(matchSpec, averagesData) {
     console.log("==> matchSheet: loadMatchSheet()");
     clearMatchSheet();
 
     if (matchSpec === null) {
-      console.error("matchSheet: loadMatchSheet: averageData is null!");
-      return alert("matchSheet: loadMatchSheet: averageData is null!");
+      console.error("matchSheet: loadMatchSheet: averagesData is null!");
+      return alert("matchSheet: loadMatchSheet: averagesData is null!");
     }
     sendPhotoRequest(matchSpec);
 
@@ -850,14 +850,14 @@ require 'inc/header.php';
     if (matchSpec.title !== "CUSTOM") {
       updateMatchTime(matchSpec["time"]);
     }
-    updateMatchSummary(matchSpec, averageData);
+    updateMatchSummary(matchSpec, averagesData);
 
-    buildTeamBoxTableBody("R", 0, matchSpec.red[0], averageData);
-    buildTeamBoxTableBody("R", 1, matchSpec.red[1], averageData);
-    buildTeamBoxTableBody("R", 2, matchSpec.red[2], averageData);
-    buildTeamBoxTableBody("B", 0, matchSpec.blue[0], averageData);
-    buildTeamBoxTableBody("B", 1, matchSpec.blue[1], averageData);
-    buildTeamBoxTableBody("B", 2, matchSpec.blue[2], averageData);
+    buildTeamBoxTableBody("R", 0, matchSpec.red[0], averagesData);
+    buildTeamBoxTableBody("R", 1, matchSpec.red[1], averagesData);
+    buildTeamBoxTableBody("R", 2, matchSpec.red[2], averagesData);
+    buildTeamBoxTableBody("B", 0, matchSpec.blue[0], averagesData);
+    buildTeamBoxTableBody("B", 1, matchSpec.blue[1], averagesData);
+    buildTeamBoxTableBody("B", 2, matchSpec.blue[2], averagesData);
   }
 
   /////////////////////////////////////////////////////////////////////////////
@@ -871,7 +871,7 @@ require 'inc/header.php';
   //    Create a matchSpec from the teams entered
   //
   //  Note that all 5 of these events can happen or complete at different times. All five sequences test 
-  //    to see if the minimum data is needed for the match sheet (matchSpec and averageData) and call the 
+  //    to see if the minimum data is needed for the match sheet (matchSpec and averagesData) and call the 
   //    final function to load the match sheet.
   //
   //  LoadMatchSheet function:
@@ -882,7 +882,7 @@ require 'inc/header.php';
   document.addEventListener("DOMContentLoaded", function () {
     let matchId = null;
     let matchList = null;
-    let averageData = null;
+    let averagesData = null;
     let matchSpec = null;
 
     buildTeamBoxTableHeader("R0DataTable");
@@ -905,8 +905,8 @@ require 'inc/header.php';
         matchList = buildMatchList(jEventMatches);
         if (matchId !== null)
           matchSpec = getEventMatchSpec(matchId, matchList);
-        if ((matchSpec !== null) && (averageData !== null))
-          loadMatchSheet(matchSpec, averageData);
+        if ((matchSpec !== null) && (averagesData !== null))
+          loadMatchSheet(matchSpec, averagesData);
       }
     });
 
@@ -917,9 +917,9 @@ require 'inc/header.php';
       console.log("=> getAllMatchData");
       let mdp = new matchDataProcessor(JSON.parse(allMatchData));
       mdp.getSiteFilteredAverages(function (filteredMatchData, filteredAvgData) {
-        averageData = filteredAvgData;
-        if ((matchSpec !== null) && (averageData !== null))
-          loadMatchSheet(matchSpec, averageData);
+        averagesData = filteredAvgData;
+        if ((matchSpec !== null) && (averagesData !== null))
+          loadMatchSheet(matchSpec, averagesData);
       });
     });
 
@@ -928,8 +928,8 @@ require 'inc/header.php';
     if (matchId !== null) {
       console.log("==> matchsheet: building from URL match ID! " + matchId);
       matchSpec = getEventMatchSpec(matchId, matchList);
-      if ((matchSpec !== null) && (averageData !== null))
-        loadMatchSheet(matchSpec, averageData);
+      if ((matchSpec !== null) && (averagesData !== null))
+        loadMatchSheet(matchSpec, averagesData);
     }
 
     // Load the match sheet from the match number entries
@@ -937,8 +937,8 @@ require 'inc/header.php';
       console.log("=> matchsheet: load event match!");
       matchId = document.getElementById("enterCompLevel").value + document.getElementById("enterMatchNumber").value.trim();
       matchSpec = getEventMatchSpec(matchId, matchList);
-      if ((matchSpec !== null) && (averageData !== null))
-        loadMatchSheet(matchSpec, averageData);
+      if ((matchSpec !== null) && (averagesData !== null))
+        loadMatchSheet(matchSpec, averagesData);
     });
 
     // Load the custom match using the custom team numbers entries
@@ -957,8 +957,8 @@ require 'inc/header.php';
       }
       else {
         matchSpec = newSpec;
-        if ((matchSpec !== null) && (averageData !== null))
-          loadMatchSheet(matchSpec, averageData);
+        if ((matchSpec !== null) && (averagesData !== null))
+          loadMatchSheet(matchSpec, averagesData);
       }
     });
 

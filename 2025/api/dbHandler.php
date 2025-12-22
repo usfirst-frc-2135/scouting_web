@@ -765,7 +765,8 @@ class dbHandler
         cageClimb TINYINT UNSIGNED NOT NULL,
         startClimb TINYINT UNSIGNED NOT NULL,
         died TINYINT UNSIGNED NOT NULL,
-        comment VARCHAR(500) NOT NULL
+        comment VARCHAR(500) NOT NULL,
+        INDEX (eventcode, matchnumber, teamnumber)
       )";
     $statement = $conn->prepare($query);
     if (!$statement->execute())
@@ -812,7 +813,8 @@ class dbHandler
         computervision TINYINT UNSIGNED NOT NULL,
         pitorg TINYINT UNSIGNED NOT NULL,
         preparedness TINYINT UNSIGNED NOT NULL,
-        numbatteries VARCHAR(8) NOT NULL
+        numbatteries VARCHAR(8) NOT NULL,
+        INDEX (eventcode)
       )";
     $statement = $conn->prepare($query);
     if (!$statement->execute())
@@ -857,7 +859,8 @@ class dbHandler
         teleopFoul4 TINYINT UNSIGNED NOT NULL,
         endgameFoul1 TINYINT UNSIGNED NOT NULL,
         problem_comment VARCHAR(500) NOT NULL,
-        general_comment VARCHAR(500) NOT NULL
+        general_comment VARCHAR(500) NOT NULL,
+        INDEX (eventcode)
       )";
     $statement = $conn->prepare($query);
     if (!$statement->execute())
@@ -876,7 +879,8 @@ class dbHandler
       " (
         entrykey VARCHAR(60) NOT NULL PRIMARY KEY,
         eventcode VARCHAR(10) NOT NULL,
-        scoutname VARCHAR(30) NOT NULL
+        scoutname VARCHAR(30) NOT NULL,
+        INDEX (eventcode)
       )";
     $statement = $conn->prepare($query);
     if (!$statement->execute())
@@ -921,7 +925,8 @@ class dbHandler
         entrykey VARCHAR(60) NOT NULL PRIMARY KEY,
         eventcode VARCHAR(10) NOT NULL,
         teamnumber VARCHAR(10) NOT NULL,
-        aliasnumber VARCHAR(10) NOT NULL
+        aliasnumber VARCHAR(10) NOT NULL,
+        INDEX (eventcode)
       )";
     $statement = $conn->prepare($query);
     if (!$statement->execute())
@@ -941,7 +946,8 @@ class dbHandler
         entrykey VARCHAR(60) NOT NULL PRIMARY KEY,
         eventcode VARCHAR(10) NOT NULL,
         teamnumber VARCHAR(10) NOT NULL,
-        status VARCHAR(10) NOT NULL
+        status VARCHAR(10) NOT NULL,
+        INDEX (eventcode)
       )";
     $statement = $conn->prepare($query);
     if (!$statement->execute())

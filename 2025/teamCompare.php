@@ -245,22 +245,22 @@ require 'inc/header.php';
 
     datasets.push({
       label: team1, data: [
-        avgData[team1]["autonPointsAvg"],
-        avgData[team1]["teleopPointsAvg"],
-        avgData[team1]["endgamePointsAvg"],
-        avgData[team1]["teleopAlgaeNetAvg"] * 4,    // Multiply teleopAlgaeNetAvg by 4 to get points.
-        avgData[team1]["teleopCoralL4Avg"] * 5,     // Multiply teleopCoralL4Avg by 5 to get points.
-        avgData[team1]["teleopCoralL3Avg"] * 4      // Multiply teleopCoralL3Avg by 4 to get points.
+        avgData[team1]["autonPoints"].avg,
+        avgData[team1]["teleopPoints"].avg,
+        avgData[team1]["endgamePoints"].avg,
+        avgData[team1]["teleopAlgaeNet"].avg * 4,    // Multiply teleopAlgaeNetAvg by 4 to get points.
+        avgData[team1]["teleopCoralL4"].avg * 5,     // Multiply teleopCoralL4Avg by 5 to get points.
+        avgData[team1]["teleopCoralL3"].avg * 4      // Multiply teleopCoralL3Avg by 4 to get points.
       ], backgroundColor: '#FF4316'
     });
     datasets.push({
       label: team2, data: [
-        avgData[team2]["autonPointsAvg"],
-        avgData[team2]["teleopPointsAvg"],
-        avgData[team2]["endgamePointsAvg"],
-        avgData[team2]["teleopAlgaeNetAvg"] * 4,    // Multiply teleopAlgaeNetAvg by 4 to get points.
-        avgData[team2]["teleopCoralL4Avg"] * 5,     // Multiply teleopCoralL4Avg by 5 to get points.
-        avgData[team2]["teleopCoralL3Avg"] * 4      // Multiply teleopCoralL3Avg by 4 to get points.
+        avgData[team2]["autonPoints"].avg,
+        avgData[team2]["teleopPoints"].avg,
+        avgData[team2]["endgamePoints"].avg,
+        avgData[team2]["teleopAlgaeNet"].avg * 4,    // Multiply teleopAlgaeNetAvg by 4 to get points.
+        avgData[team2]["teleopCoralL4"].avg * 5,     // Multiply teleopCoralL4Avg by 5 to get points.
+        avgData[team2]["teleopCoralL3"].avg * 4      // Multiply teleopCoralL3Avg by 4 to get points.
       ], backgroundColor: '#0033FF'
     });
 
@@ -298,22 +298,22 @@ require 'inc/header.php';
 
     datasets.push({
       label: team1, data: [
-        avgData[team1]["autonPointsAvg"],
-        avgData[team1]["teleopPointsAvg"],
-        avgData[team1]["endgamePointsAvg"],
-        avgData[team1]["teleopAlgaeNetAvg"] * 4,    // Multiply teleopAlgaeNetAvg by 4 to get points.
-        avgData[team1]["teleopCoralL3Avg"] * 4,     // Multiply teleopCoralL3Avg by 4 to get points.
-        avgData[team1]["teleopCoralL2Avg"] * 3      // Multiply teleopCoralL2Avg by 3 to get points.
+        avgData[team1]["autonPoints"].avg,
+        avgData[team1]["teleopPoints"].avg,
+        avgData[team1]["endgamePoints"].avg,
+        avgData[team1]["teleopAlgaeNet"].avg * 4,    // Multiply teleopAlgaeNetAvg by 4 to get points.
+        avgData[team1]["teleopCoralL3"].avg * 4,     // Multiply teleopCoralL3Avg by 4 to get points.
+        avgData[team1]["teleopCoralL2"].avg * 3      // Multiply teleopCoralL2Avg by 3 to get points.
       ], backgroundColor: '#FF4316'
     });
     datasets.push({
       label: team2, data: [
-        avgData[team2]["autonPointsAvg"],
-        avgData[team2]["teleopPointsAvg"],
-        avgData[team2]["endgamePointsAvg"],
-        avgData[team2]["teleopAlgaeNetAvg"] * 4,    // Multiply teleopAlgaeNetAvg by 4 to get points.   
-        avgData[team2]["teleopCoralL3Avg"] * 4,     // Multiply teleopCoralL3Avg by 4 to get points.
-        avgData[team2]["teleopCoralL2Avg"] * 3      // Multiply teleopCoralL2Avg by 3 to get points.
+        avgData[team2]["autonPoints"].avg,
+        avgData[team2]["teleopPoints"].avg,
+        avgData[team2]["endgamePoints"].avg,
+        avgData[team2]["teleopAlgaeNet"].avg * 4,    // Multiply teleopAlgaeNetAvg by 4 to get points.   
+        avgData[team2]["teleopCoralL3"].avg * 4,     // Multiply teleopCoralL3Avg by 4 to get points.
+        avgData[team2]["teleopCoralL2"].avg * 3      // Multiply teleopCoralL2Avg by 3 to get points.
       ], backgroundColor: '#0033FF'
     });
 
@@ -351,20 +351,20 @@ require 'inc/header.php';
 
     datasets.push({
       label: team1, data: [
-        avgData[team1]["autonPointsAvg"],
-        avgData[team1]["teleopPointsAvg"],
-        avgData[team1]["endgamePointsAvg"],
-        avgData[team1]["teleopAlgaeNetAvg"] * 4,    // Multiply teleopAlgaeNetAvg by 4 to get points.
-        avgData[team1]["teleopCoralL3Avg"] * 4      // Multiply teleopCoralL3Avg by 4 to get points.
+        avgData[team1]["autonPoints"].avg,
+        avgData[team1]["teleopPoints"].avg,
+        avgData[team1]["endgamePoints"].avg,
+        avgData[team1]["teleopAlgaeNet"].avg * 4,    // Multiply teleopAlgaeNetAvg by 4 to get points.
+        avgData[team1]["teleopCoralL3"].avg * 4      // Multiply teleopCoralL3Avg by 4 to get points.
       ], backgroundColor: '#FF4316'
     });
     datasets.push({
       label: team2, data: [
-        avgData[team2]["autonPointsAvg"],
-        avgData[team2]["teleopPointsAvg"],
-        avgData[team2]["endgamePointsAvg"],
-        avgData[team2]["teleopAlgaeNetAvg"] * 4,    // Multiply teleopAlgaeNetAvg by 4 to get points.
-        avgData[team2]["teleopCoralL3Avg"] * 4      // Multiply teleopCoralL3Avg by 4 to get points.
+        avgData[team2]["autonPoints"].avg,
+        avgData[team2]["teleopPoints"].avg,
+        avgData[team2]["endgamePoints"].avg,
+        avgData[team2]["teleopAlgaeNet"].avg * 4,    // Multiply teleopAlgaeNetAvg by 4 to get points.
+        avgData[team2]["teleopCoralL3"].avg * 4      // Multiply teleopCoralL3Avg by 4 to get points.
       ], backgroundColor: '#0033FF'
     });
 
@@ -442,17 +442,16 @@ require 'inc/header.php';
   // Create a single endgame climb entry row
   //
   function createEndgameEntry(teamNum, avgData) {
-    let endgameClimbPercentage = getDataValue(avgData[teamNum], "endgameClimbPercent");
+    let endgameCageClimb = getDataValue(avgData[teamNum], "endgameCageClimb");
     const tdPrefix = "<td>";
 
     let rowString = "";
     rowString += tdPrefix + "<a href='teamLookup.php?teamNum=" + teamNum + "'>" + teamNum + "</a></td>";
-    rowString += tdPrefix + getDataValue(endgameClimbPercentage, 0) + "</td>";
-    rowString += tdPrefix + getDataValue(endgameClimbPercentage, 2) + "</td>";
-    rowString += tdPrefix + getDataValue(endgameClimbPercentage, 1) + "</td>";
-    rowString += tdPrefix + getDataValue(endgameClimbPercentage, 3) + "</td>";
-    rowString += tdPrefix + getDataValue(endgameClimbPercentage, 4) + "</td>";
-
+    rowString += tdPrefix + getDataValue(endgameCageClimb.arr, 0).avg + "</td>";
+    rowString += tdPrefix + getDataValue(endgameCageClimb.arr, 2).avg + "</td>";
+    rowString += tdPrefix + getDataValue(endgameCageClimb.arr, 1).avg + "</td>";
+    rowString += tdPrefix + getDataValue(endgameCageClimb.arr, 3).avg + "</td>";
+    rowString += tdPrefix + getDataValue(endgameCageClimb.arr, 4).avg + "</td>";
     return rowString;
   }
 

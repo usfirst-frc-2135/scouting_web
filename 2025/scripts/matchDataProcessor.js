@@ -7,11 +7,28 @@
     matchTuple - a two entry tuple that identifies a match (e.g. ["qm", "5"])
 */
 class matchDataProcessor {
+  mData = {};   // Match data from scouting database
+  pData = [];   // Processed data after totals and averages calculated
 
   constructor(jMatchData) {
     this.mData = jMatchData;
     this.siteFilter = null;
     console.log("matchDataProcessor: MatchData: num of matches = " + this.mData.length);
+
+    // Organize the match data by team number
+    for (let i = 0; i < this.mData.length; i++) {
+      let teamNum = this.mData[i]["teamnumber"];
+      if (this.pData[teamNum] === undefined) {
+        this.pData[teamNum] = { teamNum: teamNum, matches: [] };
+      }
+      this.pData[teamNum]["matches"].push(this.mData[i]);
+    }
+
+    // Sort the matches for each team by match number
+    for (const teamNum in this.pData) {
+      let matches = this.pData[teamNum]["matches"];
+      matches.sort((a, b) => { return compareMatchNumbers(a["matchnumber"], b["matchnumber"]) });
+    }
   }
 
   //
@@ -172,402 +189,285 @@ class matchDataProcessor {
     });
   }
 
+  //  
+  // Initialize match item statistics
   //
-  // Returns the match data with all calculations
+  initializeItem(item, itemField) {
+    if (!Object.prototype.hasOwnProperty.call(item, itemField)) {
+      item[itemField] = { val: 0, sum: 0, max: 0, avg: 0, acc: 0 };
+    }
+  }
+
+  //
+  // Retrieve match data into item statistics
+  //
+  getMatchItem(item, itemField, match, matchField) {
+    this.initializeItem(item, itemField);
+
+    let value = parseInt(match[matchField]);
+    item[itemField].val = value;
+    item[itemField].sum += value;
+    item[itemField].max = Math.max(item[itemField].max, value);
+
+    return value;
+  }
+
+  //
+  // Update match array into item statistics
+  //
+  getMatchArray(item, itemField, arraySize, match, matchField) {
+    if (!Object.prototype.hasOwnProperty.call(item, itemField)) {
+      item[itemField] = { val: 0, arr: [] };
+      for (let i = 0; i < arraySize; i++) {
+        item[itemField].arr[i] = { sum: 0, max: 0, avg: 0, acc: 0 };
+      }
+    }
+
+    let value = parseFloat(match[matchField]);
+    item[itemField].val = value;
+    if (value >= arraySize) {
+      console.error("getMatchArray: array index out of bounds! " + value + " >= " + arraySize);
+      return -1;
+    }
+
+    item[itemField].arr[value].sum += 1;
+    return value;
+  }
+
+  //
+  // Update match item statistics
+  //
+  updateItem(item, itemField, value) {
+    this.initializeItem(item, itemField);
+
+    item[itemField].sum += value;
+    item[itemField].max = Math.max(item[itemField].max, value);
+  }
+
+  //
+  // Update match item average
+  //
+  calcAverage(item, itemField, denominator) {
+    item[itemField].avg = (item[denominator] != 0) ? this.roundOnePlace(item[itemField].sum / item[denominator]) : 0;
+  }
+
+  //
+  // Update match item accuracy
+  //
+  calcAccuracy(item, itemField, denominator) {
+    item[itemField].acc = (item[denominator].sum != 0) ? this.toPercent(item[itemField].sum / item[denominator].sum) : 0;
+  }
+
+  //
+  // Update match item percent array
+  //
+  calcArray(item, itemField, denominator) {
+    for (const i in item[itemField].arr) {
+      item[itemField].arr[i].avg = (item[denominator] != 0) ? this.toPercent(item[itemField].arr[i].sum / item[denominator]) : 0;
+    }
+  }
+
+  //
+  // Get event averages by calculating averages from the match data
+  //
+  // pData - processed data structure is an array of team numbered objects with match data and calculated averages
+  //  structure:
+  //  teamNumber: {
+  //   matches: [match1, match2, ...]
+  //   totalMatches: int
+  //   autonLeave: { sum: int, max: int, avg: float }
+  //   autonCoralL1: { sum: int, max: int, avg: float }
+  //   ...
+  //   scoutNames: [name1, name2, ...]
+  //   commentList: [comment1, comment2, ...]
+  //  }
   //
   getEventAverages() {
     console.log("matchDataProcessor: getEventAverages:");
-    let pdata = {}; // to hold returning data for all matches and all teams
 
-    // Process the each match
-    //    For each team, go thru all its matches and do the calculations for the averages data.
-    for (let i = 0; i < this.mData.length; i++) {
-      let tn = this.mData[i]["teamnumber"];
-      // console.log("===> doing MDP calculations for team (" + i + "): " + tn);  // TEST
+    //////////////////// PROCESS ALL TEAMS ////////////////////
 
-      // If this team doesn't have any data stored yet, initialize its data array.
-      if (!(tn in pdata)) {
-        pdata[tn] = {};
-        // No need to initialize individual data fields here -- just the match index
-        pdata[tn]["totalmatches"] = 0;
-        pdata[tn]["totaldefensematches"] = 0;  // incremented each match this team played defense
+    //  For each team, go thru all its matches and do the calculations for this event
+    for (const i in this.pData) {
+      let team = this.pData[i];
+      let matchList = team["matches"];
+      console.log("===> doing MDP calculations for team: " + team["teamNum"] + " matches: " + matchList.length);  // TEST
 
-        // points by game phase
-        pdata[tn]["totalPointsAvg"] = 0;
-        pdata[tn]["totalPointsMax"] = 0;
-        pdata[tn]["autonPointsAvg"] = 0;
-        pdata[tn]["autonPointsMax"] = 0;
-        pdata[tn]["teleopPointsAvg"] = 0;
-        pdata[tn]["teleopPointsMax"] = 0;
-        pdata[tn]["endgamePointsAvg"] = 0;
-        pdata[tn]["endgamePointsMax"] = 0;
-
-        // points by game piece
-        pdata[tn]["totalCoralPointsAvg"] = 0;
-        pdata[tn]["totalCoralPointsMax"] = 0;
-        pdata[tn]["totalAlgaePointsAvg"] = 0;
-        pdata[tn]["totalAlgaePointsMax"] = 0;
-
-        pdata[tn]["autonCoralPointsAvg"] = 0;
-        pdata[tn]["autonCoralPointsMax"] = 0;
-        pdata[tn]["autonAlgaePointsAvg"] = 0;
-        pdata[tn]["autonAlgaePointsMax"] = 0;
-        pdata[tn]["teleopCoralPointsAvg"] = 0;
-        pdata[tn]["teleopCoralPointsMax"] = 0;
-        pdata[tn]["teleopAlgaePointsAvg"] = 0;
-        pdata[tn]["teleopAlgaePointsMax"] = 0;
-
-        // total game pieces
-        pdata[tn]["totalCoralScoredAvg"] = 0;
-        pdata[tn]["totalCoralScoredMax"] = 0;
-        pdata[tn]["totalAlgaeScoredAvg"] = 0;
-        pdata[tn]["totalAlgaeScoredMax"] = 0;
-
-        // auton coral
-        pdata[tn]["autonCoralScoredAvg"] = 0;
-        pdata[tn]["autonCoralScoredMax"] = 0;
-        pdata[tn]["autonCoralL4Avg"] = 0;
-        pdata[tn]["autonCoralL4Max"] = 0;
-        pdata[tn]["autonCoralL3Avg"] = 0;
-        pdata[tn]["autonCoralL3Max"] = 0;
-        pdata[tn]["autonCoralL2Avg"] = 0;
-        pdata[tn]["autonCoralL2Max"] = 0;
-        pdata[tn]["autonCoralL1Avg"] = 0;
-        pdata[tn]["autonCoralL1Max"] = 0;
-
-        // auton algae
-        pdata[tn]["autonAlgaeScoredAvg"] = 0;
-        pdata[tn]["autonAlgaeScoredMax"] = 0;
-        pdata[tn]["autonAlgaeProcAvg"] = 0;
-        pdata[tn]["autonAlgaeProcMax"] = 0;
-        pdata[tn]["autonAlgaeNetAvg"] = 0;
-        pdata[tn]["autonAlgaeNetMax"] = 0;
-
-        // teleop coral
-        pdata[tn]["teleopCoralPercent"] = 0;
-        pdata[tn]["teleopCoralScoredAvg"] = 0;
-        pdata[tn]["teleopCoralScoredMax"] = 0;
-        pdata[tn]["teleopCoralL4Avg"] = 0;
-        pdata[tn]["teleopCoralL4Max"] = 0;
-        pdata[tn]["teleopCoralL3Avg"] = 0;
-        pdata[tn]["teleopCoralL3Max"] = 0;
-        pdata[tn]["teleopCoralL2Avg"] = 0;
-        pdata[tn]["teleopCoralL2Max"] = 0;
-        pdata[tn]["teleopCoralL1Avg"] = 0;
-        pdata[tn]["teleopCoralL1Max"] = 0;
-
-        pdata[tn]["teleopCoralAcquired"] = 0;    // for calculating shooting percentage
-
-        // teleop algae
-        pdata[tn]["teleopAlgaePercent"] = 0;
-        pdata[tn]["teleopAlgaeScoredAvg"] = 0;
-        pdata[tn]["teleopAlgaeScoredMax"] = 0;
-        pdata[tn]["teleopAlgaeProcAvg"] = 0;
-        pdata[tn]["teleopAlgaeProcMax"] = 0;
-        pdata[tn]["teleopAlgaeNetAvg"] = 0;
-        pdata[tn]["teleopAlgaeNetMax"] = 0;
-
-        pdata[tn]["teleopAlgaeAcquired"] = 0;   // for calculating shooting percentage
-
-        pdata[tn]["defenseAvg"] = 0;
-
-        // endgame
-        pdata[tn]["endgameClimbPercent"] = { 0: 0, 1: 0, 2: 0, 3: 0, 4: 0 };
-
-        pdata[tn]["endgameClimbStartPercent"] = { 0: 0, 1: 0, 2: 0, 3: 0 };
-
-
-        pdata[tn]["totaldied"] = 0;
-        pdata[tn]["scoutnames"] = [];
-        pdata[tn]["commentlist"] = [];
-      }
-
-      // HOLD      console.log("  -> for match = "+ this.mData[i]["matchnumber"]); // TEST
-
-      //////////////////// AUTON ////////////////////
-
-      let currentAutonCoralL4 = parseInt(this.mData[i]["autonCoralL4"]);
-      let currentAutonCoralL3 = parseInt(this.mData[i]["autonCoralL3"]);
-      let currentAutonCoralL2 = parseInt(this.mData[i]["autonCoralL2"]);
-      let currentAutonCoralL1 = parseInt(this.mData[i]["autonCoralL1"]);
-      // HOLD      console.log(" --> auton coral L4 = "+currentAutonCoralL4);  // TEST
-      // HOLD      console.log(" --> auton coral L3 = "+currentAutonCoralL3);  // TEST
-      // HOLD      console.log(" --> auton coral L2 = "+currentAutonCoralL2);  // TEST
-      // HOLD      console.log(" --> auton coral L1 = "+currentAutonCoralL1);  // TEST
-      let currentAutonAlgaeProcessor = parseInt(this.mData[i]["autonAlgaeProcessor"]);
-      let currentAutonAlgaeNet = parseInt(this.mData[i]["autonAlgaeNet"]);
-      // HOLD      console.log(" --> auton algae proc = "+currentAutonAlgaeProcessor);  // TEST
-      // HOLD      console.log(" --> auton algae net = "+currentAutonAlgaeNet);  // TEST
-      let totalAutoCoral = currentAutonCoralL1 + currentAutonCoralL2 + currentAutonCoralL3 + currentAutonCoralL4;
-      let totalAutoAlgae = currentAutonAlgaeNet + currentAutonAlgaeProcessor;
-      // HOLD      console.log(" --> total auton coral = "+totalAutoCoral);  // TEST
-      // HOLD      console.log(" --> total auton algae = "+totalAutoAlgae);  // TEST
-
-      //////////////////// TELEOP ////////////////////
-
-      let currentTeleopCoralL1 = parseInt(this.mData[i]["teleopCoralL1"]);
-      let currentTeleopCoralL2 = parseInt(this.mData[i]["teleopCoralL2"]);
-      let currentTeleopCoralL3 = parseInt(this.mData[i]["teleopCoralL3"]);
-      let currentTeleopCoralL4 = parseInt(this.mData[i]["teleopCoralL4"]);
-      // HOLD      console.log(" --> teleop coral L4 = "+currentTeleopCoralL4);  // TEST
-      // HOLD      console.log(" --> teleop coral L3 = "+currentTeleopCoralL3);  // TEST
-      // HOLD      console.log(" --> teleop coral L2 = "+currentTeleopCoralL2);  // TEST
-      // HOLD      console.log(" --> teleop coral L1 = "+currentTeleopCoralL1);  // TEST
-      let currentTeleopAlgaeProcessor = parseInt(this.mData[i]["teleopAlgaeProcessor"]);
-      let currentTeleopAlgaeNet = parseInt(this.mData[i]["teleopAlgaeNet"]);
-      // HOLD      console.log(" --> teleop algae proc = "+currentTeleopAlgaeProcessor);  // TEST
-      // HOLD      console.log(" --> teleop algae net = "+currentTeleopAlgaeNet);  // TEST
-
-      let currentTeleopCoralAcquired = parseInt(this.mData[i]["acquiredCoral"]);
-      let currentTeleopAlgaeAcquired = parseInt(this.mData[i]["acquiredAlgae"]);
-
-      let currentDefense = parseInt(this.mData[i]["defenseLevel"]);
-      if (currentDefense != 0) {
-        pdata[tn]["totaldefensematches"] += 1;  // increment if this team played defense
-      }
-
-      //////////////////// ENDGAME ////////////////////
-
-      let climbLevel = parseInt(this.mData[i]["cageClimb"]);
-
-      //////////////////// MATCH TOTALS ////////////////////
-
-      let totalTeleopCoral = currentTeleopCoralL1 + currentTeleopCoralL2 + currentTeleopCoralL3 + currentTeleopCoralL4;
-      let totalTeleopAlgae = currentTeleopAlgaeNet + currentTeleopAlgaeProcessor;
-      // HOLD      console.log(" --> total teleop coral = "+totalTeleopCoral);  // TEST
-      // HOLD      console.log(" --> total teleop algae = "+totalTeleopAlgae);  // TEST
-
-      let totalCoral = totalAutoCoral + totalTeleopCoral;
-      let totalAlgae = totalAutoAlgae + totalTeleopAlgae;
-
-      //////////////////// POINT TOTALS ////////////////////
-
-      let autonLeave = parseInt(this.mData[i]["autonLeave"]);
-      let autonLeavePoints = 0;
-      if (autonLeave === 1) {
-        autonLeavePoints = 3;
-      }
-      // HOLD      console.log(" --> auton Leave points = "+autonLeavePoints);  // TEST
-
-      let totalAutoCoralPoints = (currentAutonCoralL1 * 3) + (currentAutonCoralL2 * 4) + (currentAutonCoralL3 * 6) + (currentAutonCoralL4 * 7);
-      let totalAutoAlgaePoints = (currentAutonAlgaeNet * 4) + (currentAutonAlgaeProcessor * 6);
-      // HOLD      console.log(" --> total auton coral pts = "+totalAutoCoralPoints);  // TEST
-      // HOLD      console.log(" --> total auton algae pts = "+totalAutoAlgaePoints);  // TEST
-
-      let totalTeleopCoralPoints = (currentTeleopCoralL1 * 2) + (currentTeleopCoralL2 * 3) + (currentTeleopCoralL3 * 4) + (currentTeleopCoralL4 * 5);
-      let totalTeleopAlgaePoints = (currentTeleopAlgaeNet * 4) + (currentTeleopAlgaeProcessor * 6);
-      // HOLD      console.log(" --> total teleop coral pts = "+totalTeleopCoralPoints);  // TEST
-      // HOLD      console.log(" --> total teleop algae pts = "+totalTeleopAlgaePoints);  // TEST
-
-      let endgameClimbPoints = 0;
-      switch (climbLevel) {
-        case 1: endgameClimbPoints = 2; break;  // Fell
-        case 2: endgameClimbPoints = 2; break;  // Park
-        case 3: endgameClimbPoints = 6; break;  // Shallow
-        case 4: endgameClimbPoints = 12; break; // Deep
-        default: endgameClimbPoints = 0; break; // No climb
-      }
-      // HOLD      console.log(" --> endgame climb points = "+endgameClimbPoints);  // TEST
-
-      let totalCoralPoints = totalAutoCoralPoints + totalTeleopCoralPoints;
-      let totalAlgaePoints = totalAutoAlgaePoints + totalTeleopAlgaePoints;
-      let totalAutoPoints = autonLeavePoints + totalAutoCoralPoints + totalAutoAlgaePoints;
-      let totalTeleopPoints = totalTeleopCoralPoints + totalTeleopAlgaePoints;
-      let totalPoints = totalAutoPoints + totalTeleopPoints + endgameClimbPoints;
-      // HOLD      console.log("    ==> totalCoralPoints = "+totalCoralPoints);  // TEST
-      // HOLD      console.log("    ==> totalAlgaePoints = "+totalAlgaePoints);  // TEST
-      // HOLD      console.log("    ==> totalAutoPoints = "+totalAutoPoints);  // TEST
-      // HOLD      console.log("    ==> totalTeleopPoints = "+totalTeleopPoints);  // TEST
-      // HOLD      console.log("    ==> totalPoints = "+totalPoints);  // TEST
-
-      //////////////////// PROCESSED DATA ////////////////////
-
-      pdata[tn]["totalmatches"] += 1;
-
-      // Points - accumulate in average data and find each max
-
-      pdata[tn]["totalPointsAvg"] += totalPoints;
-      pdata[tn]["totalPointsMax"] = Math.max(pdata[tn]["totalPointsMax"], totalPoints);
-
-      pdata[tn]["autonPointsAvg"] += totalAutoPoints;
-      pdata[tn]["autonPointsMax"] = Math.max(pdata[tn]["autonPointsMax"], totalAutoPoints);
-
-      pdata[tn]["teleopPointsAvg"] += totalTeleopPoints;
-      pdata[tn]["teleopPointsMax"] = Math.max(pdata[tn]["teleopPointsMax"], totalTeleopPoints);
-
-      pdata[tn]["endgamePointsAvg"] += endgameClimbPoints;
-      pdata[tn]["endgamePointsMax"] = Math.max(pdata[tn]["endgamePointsMax"], endgameClimbPoints);
-
-      pdata[tn]["totalCoralPointsAvg"] += totalCoralPoints;
-      pdata[tn]["totalCoralPointsMax"] = Math.max(pdata[tn]["totalCoralPointsMax"], totalCoralPoints);
-
-      pdata[tn]["totalAlgaePointsAvg"] += totalAlgaePoints;
-      pdata[tn]["totalAlgaePointsMax"] = Math.max(pdata[tn]["totalAlgaePointsMax"], totalAlgaePoints);
-
-      pdata[tn]["autonCoralPointsAvg"] += totalAutoCoralPoints;
-      pdata[tn]["autonCoralPointsMax"] = Math.max(pdata[tn]["autonCoralPointsMax"], totalAutoCoralPoints);
-
-      pdata[tn]["autonAlgaePointsAvg"] += totalAutoAlgaePoints;
-      pdata[tn]["autonAlgaePointsMax"] = Math.max(pdata[tn]["autonAlgaePointsMax"], totalAutoAlgaePoints);
-
-      pdata[tn]["teleopCoralPointsAvg"] += totalTeleopCoralPoints;
-      pdata[tn]["teleopCoralPointsMax"] = Math.max(pdata[tn]["teleopCoralPointsMax"], totalTeleopCoralPoints);
-
-      pdata[tn]["teleopAlgaePointsAvg"] += totalTeleopAlgaePoints;
-      pdata[tn]["teleopAlgaePointsMax"] = Math.max(pdata[tn]["teleopAlgaePointsMax"], totalTeleopAlgaePoints);
-
-      // By game piece
-
-      pdata[tn]["totalCoralScoredAvg"] += totalCoral;
-      pdata[tn]["totalCoralScoredMax"] = Math.max(pdata[tn]["totalCoralScoredMax"], totalCoral);
-      pdata[tn]["totalAlgaeScoredAvg"] += totalAlgae;
-      pdata[tn]["totalAlgaeScoredMax"] = Math.max(pdata[tn]["totalAlgaeScoredMax"], totalAlgae);
-
-      pdata[tn]["totalTeleopCoral"] += totalTeleopCoral;
-      pdata[tn]["totalTeleopAlgae"] += totalTeleopAlgae;
-      pdata[tn]["teleopCoralAcquired"] += currentTeleopCoralAcquired;
-      pdata[tn]["teleopAlgaeAcquired"] += currentTeleopAlgaeAcquired;
-
-      pdata[tn]["autonCoralScoredAvg"] += totalAutoCoral;
-      pdata[tn]["autonCoralScoredMax"] = Math.max(pdata[tn]["autonCoralScoredMax"], totalAutoCoral);
-      pdata[tn]["autonAlgaeScoredAvg"] += totalAutoAlgae;
-      pdata[tn]["autonAlgaeScoredMax"] = Math.max(pdata[tn]["autonAlgaeScoredMax"], totalAutoAlgae);
-
-      pdata[tn]["teleopCoralScoredAvg"] += totalTeleopCoral;
-      pdata[tn]["teleopCoralScoredMax"] = Math.max(pdata[tn]["teleopCoralScoredMax"], totalTeleopCoral);
-      pdata[tn]["teleopAlgaeScoredAvg"] += totalTeleopAlgae;
-      pdata[tn]["teleopAlgaeScoredMax"] = Math.max(pdata[tn]["teleopAlgaeScoredMax"], totalTeleopAlgae);
-
-      // Individual game phase by match phase
-
-      pdata[tn]["autonCoralL1Avg"] += currentAutonCoralL1;
-      pdata[tn]["autonCoralL1Max"] = Math.max(pdata[tn]["autonCoralL1Max"], currentAutonCoralL1);
-      pdata[tn]["autonCoralL2Avg"] += currentAutonCoralL2;
-      pdata[tn]["autonCoralL2Max"] = Math.max(pdata[tn]["autonCoralL2Max"], currentAutonCoralL2);
-      pdata[tn]["autonCoralL3Avg"] += currentAutonCoralL3;
-      pdata[tn]["autonCoralL3Max"] = Math.max(pdata[tn]["autonCoralL3Max"], currentAutonCoralL3);
-      pdata[tn]["autonCoralL4Avg"] += currentAutonCoralL4;
-      pdata[tn]["autonCoralL4Max"] = Math.max(pdata[tn]["autonCoralL4Max"], currentAutonCoralL4);
-
-      pdata[tn]["autonAlgaeNetAvg"] += currentAutonAlgaeNet;
-      pdata[tn]["autonAlgaeNetMax"] = Math.max(pdata[tn]["autonAlgaeNetMax"], currentAutonAlgaeNet);
-      pdata[tn]["autonAlgaeProcAvg"] += currentAutonAlgaeProcessor;
-      pdata[tn]["autonAlgaeProcMax"] = Math.max(pdata[tn]["autonAlgaeProcMax"], currentAutonAlgaeProcessor);
-
-      pdata[tn]["teleopCoralL1Avg"] += currentTeleopCoralL1;
-      pdata[tn]["teleopCoralL1Max"] = Math.max(pdata[tn]["teleopCoralL1Max"], currentTeleopCoralL1);
-      pdata[tn]["teleopCoralL2Avg"] += currentTeleopCoralL2;
-      pdata[tn]["teleopCoralL2Max"] = Math.max(pdata[tn]["teleopCoralL2Max"], currentTeleopCoralL2);
-      pdata[tn]["teleopCoralL3Avg"] += currentTeleopCoralL3;
-      pdata[tn]["teleopCoralL3Max"] = Math.max(pdata[tn]["teleopCoralL3Max"], currentTeleopCoralL3);
-      pdata[tn]["teleopCoralL4Avg"] += currentTeleopCoralL4;
-      pdata[tn]["teleopCoralL4Max"] = Math.max(pdata[tn]["teleopCoralL4Max"], currentTeleopCoralL4);
-
-      pdata[tn]["teleopAlgaeNetAvg"] += currentTeleopAlgaeNet;
-      pdata[tn]["teleopAlgaeNetMax"] = Math.max(pdata[tn]["teleopAlgaeNetMax"], currentTeleopAlgaeNet);
-      pdata[tn]["teleopAlgaeProcAvg"] += currentTeleopAlgaeProcessor;
-      pdata[tn]["teleopAlgaeProcMax"] = Math.max(pdata[tn]["teleopAlgaeProcMax"], currentTeleopAlgaeProcessor);
-
-      pdata[tn]["defenseAvg"] += currentDefense;
-
-      // For boolean data, we are just incrementing that data instead of adding the value here.
-      pdata[tn]["endgameClimbStartPercent"][this.mData[i]["startClimb"]] += 1;
-      pdata[tn]["endgameClimbPercent"][this.mData[i]["cageClimb"]] += 1;
+      // Initialize team processed data
+      team["totalDefenseMatches"] = 0;  // incremented each match this team played defense
 
       // Text data for matches
+      team["scoutNames"] = [];
+      team["commentList"] = [];
+      team["totalMatches"] = matchList.length;
 
-      pdata[tn]["totaldied"] += this.mData[i]["died"];
-      pdata[tn]["scoutnames"].push(this.mData[i]["scoutname"]);
-      pdata[tn]["commentlist"].push(this.mData[i]["comment"]);
-    }
+      //////////////////// PROCESS TEAM MATCHES ////////////////////
 
-    //////////////////// CALCULATE AVERAGES USING TOTAL MATCH COUNT ////////////////////
+      for (const j in matchList) {
+        let match = matchList[j];
 
-    // Go thru each team in pdata and do the avg and percent calculations.
-    for (let key in pdata) {
+        //////////////////// GET MATCH DATA INTO TEAM OBJECT ////////////////////
+
+        // NOTE: The field names on the right side of getMatchXXX must match the DB field names in the scouting database
+        //        The field names on the left side of getMatchXXX must match the field names in this class
+
+        // Autonomous mode
+        this.getMatchItem(team, "autonLeave", match, "autonLeave");
+        this.getMatchItem(team, "autonCoralL1", match, "autonCoralL1");
+        this.getMatchItem(team, "autonCoralL2", match, "autonCoralL2");
+        this.getMatchItem(team, "autonCoralL3", match, "autonCoralL3");
+        this.getMatchItem(team, "autonCoralL4", match, "autonCoralL4");
+        this.getMatchItem(team, "autonAlgaeProc", match, "autonAlgaeProcessor");
+        this.getMatchItem(team, "autonAlgaeNet", match, "autonAlgaeNet");
+
+        // Teleop mode
+        this.getMatchItem(team, "teleopCoralL1", match, "teleopCoralL1");
+        this.getMatchItem(team, "teleopCoralL2", match, "teleopCoralL2");
+        this.getMatchItem(team, "teleopCoralL3", match, "teleopCoralL3");
+        this.getMatchItem(team, "teleopCoralL4", match, "teleopCoralL4");
+        this.getMatchItem(team, "teleopAlgaeProc", match, "teleopAlgaeProcessor");
+        this.getMatchItem(team, "teleopAlgaeNet", match, "teleopAlgaeNet");
+        this.getMatchItem(team, "teleopCoralAcquired", match, "acquiredCoral");
+        this.getMatchItem(team, "teleopAlgaeAcquired", match, "acquiredAlgae");
+
+        let matchDefenseLevel = this.getMatchItem(team, "defenseLevel", match, "defenseLevel");
+        if (matchDefenseLevel != 0) {
+          team["totalDefenseMatches"] += 1;  // increment if this team played defense
+        }
+
+        // Endgame
+        this.getMatchArray(team, "endgameStartClimb", 4, match, "startClimb");
+        this.getMatchArray(team, "endgameCageClimb", 5, match, "cageClimb");
+
+        this.getMatchItem(team, "died", match, "died");
+
+        // Append text data for matches
+        team["scoutNames"].push(match["scoutname"]);
+        team["commentList"].push(match["comment"]);
+
+        //////////////////// GAME PIECE TOTALS ////////////////////
+
+        let autonCoralPieces = team["autonCoralL1"].val + team["autonCoralL2"].val + team["autonCoralL3"].val + team["autonCoralL4"].val;
+        let autonAlgaePieces = team["autonAlgaeNet"].val + team["autonAlgaeProc"].val;
+
+        let teleopCoralPieces = team["teleopCoralL1"].val + team["teleopCoralL2"].val + team["teleopCoralL3"].val + team["teleopCoralL4"].val;
+        let teleopAlgaePieces = team["teleopAlgaeNet"].val + team["teleopAlgaeProc"].val;
+        let totalCoralPieces = autonCoralPieces + teleopCoralPieces;
+        let totalAlgaePieces = autonAlgaePieces + teleopAlgaePieces;
+
+        // Store piece values
+        this.updateItem(team, "autonCoralPieces", autonCoralPieces);
+        this.updateItem(team, "autonAlgaePieces", autonAlgaePieces);
+
+        this.updateItem(team, "teleopCoralPieces", teleopCoralPieces);
+        this.updateItem(team, "teleopAlgaePieces", teleopAlgaePieces);
+
+        this.updateItem(team, "totalCoralPieces", totalCoralPieces);
+        this.updateItem(team, "totalAlgaePieces", totalAlgaePieces);
+
+        //////////////////// POINT TOTALS ////////////////////
+
+        let autonLeavePoints = (team["autonLeave"].val === 1) ? 3 : 0;
+        let autonCoralPoints = (team["autonCoralL1"].val * 3) + (team["autonCoralL2"].val * 4) + (team["autonCoralL3"].val * 6) + (team["autonCoralL4"].val * 7);
+        let autonAlgaePoints = (team["autonAlgaeNet"].val * 4) + (team["autonAlgaeProc"].val * 6);
+        let totalAutoPoints = autonLeavePoints + autonCoralPoints + autonAlgaePoints;
+
+        let teleopCoralPoints = (team["teleopCoralL1"].val * 2) + (team["teleopCoralL2"].val * 3) + (team["teleopCoralL3"].val * 4) + (team["teleopCoralL4"].val * 5);
+        let teleopAlgaePoints = (team["teleopAlgaeNet"].val * 4) + (team["teleopAlgaeProc"].val * 6);
+        let totalTeleopPoints = teleopCoralPoints + teleopAlgaePoints;
+
+        let totalCoralPoints = autonCoralPoints + teleopCoralPoints;
+        let totalAlgaePoints = autonAlgaePoints + teleopAlgaePoints;
+
+        let endgameClimbPoints = 0;
+        switch (team["endgameCageClimb"].val) {
+          case 1: endgameClimbPoints = 2; break;  // Fell
+          case 2: endgameClimbPoints = 2; break;  // Park
+          case 3: endgameClimbPoints = 6; break;  // Shallow
+          case 4: endgameClimbPoints = 12; break; // Deep
+          default: endgameClimbPoints = 0; break; // No climb
+        }
+
+        let totalMatchPoints = totalAutoPoints + totalTeleopPoints + endgameClimbPoints;
+
+        // Store point values
+        this.updateItem(team, "autonCoralPoints", autonCoralPoints);
+        this.updateItem(team, "autonAlgaePoints", autonAlgaePoints);
+        this.updateItem(team, "autonPoints", totalAutoPoints);
+
+        this.updateItem(team, "teleopCoralPoints", teleopCoralPoints);
+        this.updateItem(team, "teleopAlgaePoints", teleopAlgaePoints);
+        this.updateItem(team, "teleopPoints", totalTeleopPoints);
+
+        this.updateItem(team, "totalCoralPoints", totalCoralPoints);
+        this.updateItem(team, "totalAlgaePoints", totalAlgaePoints);
+
+        this.updateItem(team, "endgamePoints", endgameClimbPoints);
+        this.updateItem(team, "totalMatchPoints", totalMatchPoints);
+      }
+
+      //////////////////// CALCULATE AVERAGES USING TOTAL MATCH COUNT ////////////////////
+
       // console.log("===> doing MDP averages, max for team: " + key);  // TEST
 
-      // Divide total scored by number of matches. Avoid divide by zero
-      let teleopCoralAcquired = parseInt(pdata[key]["teleopCoralAcquired"]);
-      pdata[key]["teleopCoralPercent"] = 0;
-      if (teleopCoralAcquired !== 0) {
-        pdata[key]["teleopCoralPercent"] = this.toPercent(pdata[key]["teleopCoralScoredAvg"] / teleopCoralAcquired);
-      }
+      // Autonomous mode
+      this.calcAverage(team, "autonLeave", "totalMatches");
+      this.calcAverage(team, "autonCoralL1", "totalMatches");
+      this.calcAverage(team, "autonCoralL2", "totalMatches");
+      this.calcAverage(team, "autonCoralL3", "totalMatches");
+      this.calcAverage(team, "autonCoralL4", "totalMatches");
+      this.calcAverage(team, "autonAlgaeProc", "totalMatches");
+      this.calcAverage(team, "autonAlgaeNet", "totalMatches");
 
-      // Divide total scored by number of matches. Avoid divide by zero
-      let teleopAlgaeAcquired = parseInt(pdata[key]["teleopAlgaeAcquired"]);
-      pdata[key]["teleopAlgaePercent"] = 0;
-      if (teleopAlgaeAcquired !== 0) {
-        pdata[key]["teleopAlgaePercent"] = this.toPercent(pdata[key]["teleopAlgaeScoredAvg"] / teleopAlgaeAcquired);
-      }
-      // HOLD      console.log("  ---> total (teleop) coral acquired: " + teleopCoralAcquired); // TEST
-      // HOLD      console.log("  ---> Coral Scoring Percentage: " + pdata[key]["teleopCoralPercent"]); // TEST
-      // HOLD      console.log("  ---> total (teleop) algae acquired: " + teleopAlgaeAcquired); // TEST
-      // HOLD      console.log("  ---> Algae Scoring Percentage: " + pdata[key]["teleopAlgaePercent"]); // TEST
+      // Teleop mode
+      this.calcAverage(team, "teleopCoralL1", "totalMatches");
+      this.calcAverage(team, "teleopCoralL2", "totalMatches");
+      this.calcAverage(team, "teleopCoralL3", "totalMatches");
+      this.calcAverage(team, "teleopCoralL4", "totalMatches");
+      this.calcAverage(team, "teleopAlgaeProc", "totalMatches");
+      this.calcAverage(team, "teleopAlgaeNet", "totalMatches");
 
-      // points by game phase
-      pdata[key]["totalPointsAvg"] = this.roundOnePlace(pdata[key]["totalPointsAvg"] / pdata[key]["totalmatches"]);
-      pdata[key]["autonPointsAvg"] = this.roundOnePlace(pdata[key]["autonPointsAvg"] / pdata[key]["totalmatches"]);
-      pdata[key]["autonCoralPointsAvg"] = this.roundOnePlace(pdata[key]["autonCoralPointsAvg"] / pdata[key]["totalmatches"]);
-      pdata[key]["autonAlgaePointsAvg"] = this.roundOnePlace(pdata[key]["autonAlgaePointsAvg"] / pdata[key]["totalmatches"]);
-      pdata[key]["teleopPointsAvg"] = this.roundOnePlace(pdata[key]["teleopPointsAvg"] / pdata[key]["totalmatches"]);
-      pdata[key]["teleopCoralPointsAvg"] = this.roundOnePlace(pdata[key]["teleopCoralPointsAvg"] / pdata[key]["totalmatches"]);
-      pdata[key]["teleopAlgaePointsAvg"] = this.roundOnePlace(pdata[key]["teleopAlgaePointsAvg"] / pdata[key]["totalmatches"]);
-
-      // points by game piece
-      pdata[key]["totalCoralPointsAvg"] = this.roundOnePlace(pdata[key]["totalCoralPointsAvg"] / pdata[key]["totalmatches"]);
-      pdata[key]["totalAlgaePointsAvg"] = this.roundOnePlace(pdata[key]["totalAlgaePointsAvg"] / pdata[key]["totalmatches"]);
-      pdata[key]["totalCoralScoredAvg"] = this.roundOnePlace(pdata[key]["totalCoralScoredAvg"] / pdata[key]["totalmatches"]);
-      pdata[key]["totalAlgaeScoredAvg"] = this.roundOnePlace(pdata[key]["totalAlgaeScoredAvg"] / pdata[key]["totalmatches"]);
-
-      // total auton
-      pdata[key]["autonCoralScoredAvg"] = this.roundOnePlace(pdata[key]["autonCoralScoredAvg"] / pdata[key]["totalmatches"]);
-      pdata[key]["autonAlgaeScoredAvg"] = this.roundOnePlace(pdata[key]["autonAlgaeScoredAvg"] / pdata[key]["totalmatches"]);
-
-      // total teleop
-      pdata[key]["teleopCoralScoredAvg"] = this.roundOnePlace(pdata[key]["teleopCoralScoredAvg"] / pdata[key]["totalmatches"]);
-      pdata[key]["teleopAlgaeScoredAvg"] = this.roundOnePlace(pdata[key]["teleopAlgaeScoredAvg"] / pdata[key]["totalmatches"]);
-
-      pdata[key]["endgamePointsAvg"] = this.roundOnePlace(pdata[key]["endgamePointsAvg"] / pdata[key]["totalmatches"]);
-
-      // auton coral
-      pdata[key]["autonCoralL4Avg"] = this.roundOnePlace(pdata[key]["autonCoralL4Avg"] / pdata[key]["totalmatches"]);
-      pdata[key]["autonCoralL3Avg"] = this.roundOnePlace(pdata[key]["autonCoralL3Avg"] / pdata[key]["totalmatches"]);
-      pdata[key]["autonCoralL2Avg"] = this.roundOnePlace(pdata[key]["autonCoralL2Avg"] / pdata[key]["totalmatches"]);
-      pdata[key]["autonCoralL1Avg"] = this.roundOnePlace(pdata[key]["autonCoralL1Avg"] / pdata[key]["totalmatches"]);
-
-      // auton algae
-      pdata[key]["autonAlgaeProcAvg"] = this.roundOnePlace(pdata[key]["autonAlgaeProcAvg"] / pdata[key]["totalmatches"]);
-      pdata[key]["autonAlgaeNetAvg"] = this.roundOnePlace(pdata[key]["autonAlgaeNetAvg"] / pdata[key]["totalmatches"]);
-
-      // teleop coral
-      pdata[key]["teleopCoralL4Avg"] = this.roundOnePlace(pdata[key]["teleopCoralL4Avg"] / pdata[key]["totalmatches"]);
-      pdata[key]["teleopCoralL3Avg"] = this.roundOnePlace(pdata[key]["teleopCoralL3Avg"] / pdata[key]["totalmatches"]);
-      pdata[key]["teleopCoralL2Avg"] = this.roundOnePlace(pdata[key]["teleopCoralL2Avg"] / pdata[key]["totalmatches"]);
-      pdata[key]["teleopCoralL1Avg"] = this.roundOnePlace(pdata[key]["teleopCoralL1Avg"] / pdata[key]["totalmatches"]);
-
-      // teleop algae
-      pdata[key]["teleopAlgaeProcAvg"] = this.roundOnePlace(pdata[key]["teleopAlgaeProcAvg"] / pdata[key]["totalmatches"]);
-      pdata[key]["teleopAlgaeNetAvg"] = this.roundOnePlace(pdata[key]["teleopAlgaeNetAvg"] / pdata[key]["totalmatches"]);
+      // Divide coral/algae pieces by acquired pieces
+      this.calcAccuracy(team, "teleopCoralPieces", "teleopCoralAcquired");
+      this.calcAccuracy(team, "teleopAlgaePieces", "teleopAlgaeAcquired");
 
       // Defense avg - only calculate this if this team played defense in a match
-      if (pdata[key]["totaldefensematches"] != 0)
-        pdata[key]["defenseAvg"] = this.roundOnePlace(pdata[key]["defenseAvg"] / pdata[key]["totaldefensematches"]);
+      this.calcAverage(team, "defenseLevel", "totalDefenseMatches");
+
+      this.calcAverage(team, "died", "totalMatches");
 
       // endgame
+      this.calcArray(team, "endgameStartClimb", "totalMatches");
+      this.calcArray(team, "endgameCageClimb", "totalMatches");
 
-      pdata[key]["endgameClimbStartPercent"][0] = this.toPercent(pdata[key]["endgameClimbStartPercent"][0] / pdata[key]["totalmatches"]);
-      pdata[key]["endgameClimbStartPercent"][1] = this.toPercent(pdata[key]["endgameClimbStartPercent"][1] / pdata[key]["totalmatches"]);
-      pdata[key]["endgameClimbStartPercent"][2] = this.toPercent(pdata[key]["endgameClimbStartPercent"][2] / pdata[key]["totalmatches"]);
-      pdata[key]["endgameClimbStartPercent"][3] = this.toPercent(pdata[key]["endgameClimbStartPercent"][3] / pdata[key]["totalmatches"]);
+      // points by game phase
+      this.calcAverage(team, "autonCoralPoints", "totalMatches");
+      this.calcAverage(team, "autonAlgaePoints", "totalMatches");
+      this.calcAverage(team, "teleopCoralPoints", "totalMatches");
+      this.calcAverage(team, "teleopAlgaePoints", "totalMatches");
 
-      pdata[key]["endgameClimbPercent"][0] = this.toPercent(pdata[key]["endgameClimbPercent"][0] / pdata[key]["totalmatches"]);
-      pdata[key]["endgameClimbPercent"][1] = this.toPercent(pdata[key]["endgameClimbPercent"][1] / pdata[key]["totalmatches"]);
-      pdata[key]["endgameClimbPercent"][2] = this.toPercent(pdata[key]["endgameClimbPercent"][2] / pdata[key]["totalmatches"]);
-      pdata[key]["endgameClimbPercent"][3] = this.toPercent(pdata[key]["endgameClimbPercent"][3] / pdata[key]["totalmatches"]);
-      pdata[key]["endgameClimbPercent"][4] = this.toPercent(pdata[key]["endgameClimbPercent"][4] / pdata[key]["totalmatches"]);
+      this.calcAverage(team, "autonPoints", "totalMatches");
+      this.calcAverage(team, "teleopPoints", "totalMatches");
+      this.calcAverage(team, "totalMatchPoints", "totalMatches");
+
+      // points by game piece
+      this.calcAverage(team, "totalCoralPoints", "totalMatches");
+      this.calcAverage(team, "totalAlgaePoints", "totalMatches");
+
+      // total auton
+      this.calcAverage(team, "autonCoralPieces", "totalMatches");
+      this.calcAverage(team, "autonAlgaePieces", "totalMatches");
+      this.calcAverage(team, "teleopCoralPieces", "totalMatches");
+      this.calcAverage(team, "teleopAlgaePieces", "totalMatches");
+
+      // total game pieces
+      this.calcAverage(team, "totalCoralPieces", "totalMatches");
+      this.calcAverage(team, "totalAlgaePieces", "totalMatches");
+
+      this.calcAverage(team, "endgamePoints", "totalMatches");
     }
 
-    return pdata;
+    return this.pData;
   }
+
 }
