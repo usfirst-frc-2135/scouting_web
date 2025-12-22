@@ -110,18 +110,18 @@ function insertMatchDataBody(tableId, matchData, aliasList, teamFilter) {
     rowString += tdBlue + matchItem["autonCoralL3"] + "</td>";
     rowString += tdBody + matchItem["autonCoralL4"] + "</td>";
     rowString += tdBlue + matchItem["autonAlgaeNet"] + "</td>";
-    rowString += tdBody + matchItem["autonAlgaeProcessor"] + "</td>";
+    rowString += tdBody + matchItem["autonAlgaeProc"] + "</td>";
     rowString += tdBlue + matchItem["teleopCoralL1"] + "</td>";
     rowString += tdBody + matchItem["teleopCoralL2"] + "</td>";
     rowString += tdBlue + matchItem["teleopCoralL3"] + "</td>";
     rowString += tdBody + matchItem["teleopCoralL4"] + "</td>";
     rowString += tdBlue + matchItem["teleopAlgaeNet"] + "</td>";
-    rowString += tdBody + matchItem["teleopAlgaeProcessor"] + "</td>";
-    rowString += tdBlue + matchItem["cageClimb"] + "</td>";
-    rowString += tdBody + matchItem["startClimb"] + "</td>";
+    rowString += tdBody + matchItem["teleopAlgaeProc"] + "</td>";
+    rowString += tdBlue + matchItem["endgameCageClimb"] + "</td>";
+    rowString += tdBody + matchItem["endgameStartClimb"] + "</td>";
     rowString += tdBlue + matchItem["defenseLevel"] + "</td>";
-    rowString += tdBody + matchItem["acquiredCoral"] + "</td>";
-    rowString += tdBlue + matchItem["acquiredAlgae"] + "</td>";
+    rowString += tdBody + matchItem["teleopCoralAcquired"] + "</td>";
+    rowString += tdBlue + matchItem["teleopAlgaeAcquired"] + "</td>";
     rowString += tdBody + matchItem["scoutname"] + "</td>";
     rowString += tdBlue + matchItem["comment"] + "</td>";
 

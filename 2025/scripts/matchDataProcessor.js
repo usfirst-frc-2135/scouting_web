@@ -204,6 +204,11 @@ class matchDataProcessor {
   getMatchItem(item, itemField, match, matchField) {
     this.initializeItem(item, itemField);
 
+    // If the match data field is null, use the item field name instead
+    if (match[matchField] === null) {
+      matchField = itemField;
+    }
+
     let value = parseInt(match[matchField]);
     item[itemField].val = value;
     item[itemField].sum += value;
@@ -221,6 +226,11 @@ class matchDataProcessor {
       for (let i = 0; i < arraySize; i++) {
         item[itemField].arr[i] = { sum: 0, max: 0, avg: 0, acc: 0 };
       }
+    }
+
+    // If the match data field is null, use the item field name instead
+    if (match[matchField] === null) {
+      matchField = itemField;
     }
 
     let value = parseFloat(match[matchField]);
@@ -293,20 +303,18 @@ class matchDataProcessor {
       let matchList = team["matches"];
       console.log("===> doing MDP calculations for team: " + team["teamNum"] + " matches: " + matchList.length);  // TEST
 
-      // Initialize team processed data
-      team["totalDefenseMatches"] = 0;  // incremented each match this team played defense
-
-      // Text data for matches
+      // Initialize text data for matches
       team["scoutNames"] = [];
       team["commentList"] = [];
+
+      // Initialize team processed data
+      team["totalDefenseMatches"] = 0;  // incremented each match this team played defense
       team["totalMatches"] = matchList.length;
 
-      //////////////////// PROCESS TEAM MATCHES ////////////////////
+      //////////////////// PROCESS MATCHES INTO TEAM OBJECT ////////////////////
 
       for (const j in matchList) {
         let match = matchList[j];
-
-        //////////////////// GET MATCH DATA INTO TEAM OBJECT ////////////////////
 
         // NOTE: The field names on the right side of getMatchXXX must match the DB field names in the scouting database
         //        The field names on the left side of getMatchXXX must match the field names in this class
@@ -317,7 +325,7 @@ class matchDataProcessor {
         this.getMatchItem(team, "autonCoralL2", match, "autonCoralL2");
         this.getMatchItem(team, "autonCoralL3", match, "autonCoralL3");
         this.getMatchItem(team, "autonCoralL4", match, "autonCoralL4");
-        this.getMatchItem(team, "autonAlgaeProc", match, "autonAlgaeProcessor");
+        this.getMatchItem(team, "autonAlgaeProc", match, "autonAlgaeProc");
         this.getMatchItem(team, "autonAlgaeNet", match, "autonAlgaeNet");
 
         // Teleop mode
@@ -325,10 +333,10 @@ class matchDataProcessor {
         this.getMatchItem(team, "teleopCoralL2", match, "teleopCoralL2");
         this.getMatchItem(team, "teleopCoralL3", match, "teleopCoralL3");
         this.getMatchItem(team, "teleopCoralL4", match, "teleopCoralL4");
-        this.getMatchItem(team, "teleopAlgaeProc", match, "teleopAlgaeProcessor");
+        this.getMatchItem(team, "teleopAlgaeProc", match, "teleopAlgaeProc");
         this.getMatchItem(team, "teleopAlgaeNet", match, "teleopAlgaeNet");
-        this.getMatchItem(team, "teleopCoralAcquired", match, "acquiredCoral");
-        this.getMatchItem(team, "teleopAlgaeAcquired", match, "acquiredAlgae");
+        this.getMatchItem(team, "teleopCoralAcquired", match, "teleopCoralAcquired");
+        this.getMatchItem(team, "teleopAlgaeAcquired", match, "teleopAlgaeAcquired");
 
         let matchDefenseLevel = this.getMatchItem(team, "defenseLevel", match, "defenseLevel");
         if (matchDefenseLevel != 0) {
@@ -336,8 +344,8 @@ class matchDataProcessor {
         }
 
         // Endgame
-        this.getMatchArray(team, "endgameStartClimb", 4, match, "startClimb");
-        this.getMatchArray(team, "endgameCageClimb", 5, match, "cageClimb");
+        this.getMatchArray(team, "endgameStartClimb", 4, match, "endgameStartClimb");
+        this.getMatchArray(team, "endgameCageClimb", 5, match, "endgameCageClimb");
 
         this.getMatchItem(team, "died", match, "died");
 

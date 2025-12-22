@@ -392,7 +392,7 @@ require 'inc/header.php';
     dataToSave["autonCoralL2"] = auton.coral.l2;
     dataToSave["autonCoralL1"] = auton.coral.l1;
     dataToSave["autonAlgaeNet"] = auton.algae.net;
-    dataToSave["autonAlgaeProcessor"] = auton.algae.processor;
+    dataToSave["autonAlgaeProc"] = auton.algae.processor;
 
     dataToSave["teleopCoralL4"] = teleop.coral.l4;
     dataToSave["teleopCoralL3"] = teleop.coral.l3;
@@ -401,7 +401,7 @@ require 'inc/header.php';
     dataToSave["teleopAlgaeNet"] = teleop.algae.net;
     dataToSave["teleopAlgaeProc"] = teleop.algae.processor;
 
-    dataToSave["cageClimb"] = document.getElementById("endGameClimb").value;
+    dataToSave["endgameCageClimb"] = document.getElementById("endGameClimb").value;
     dataToSave["died"] = document.getElementById("robotDied").checked ? 1 : 0;
     dataToSave["comment"] = document.getElementById("generalComment").innerText;
     return dataToSave;

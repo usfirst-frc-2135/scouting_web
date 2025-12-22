@@ -438,7 +438,7 @@ require 'inc/header.php';
       mydata.push({
         matchnum: matchItem["matchnumber"],
         leave: matchItem["autonLeave"],
-        processor: matchItem["autonAlgaeProcessor"],
+        processor: matchItem["autonAlgaeProc"],
         net: matchItem["autonAlgaeNet"],
         one: matchItem["autonCoralL1"],
         two: matchItem["autonCoralL2"],
@@ -557,7 +557,7 @@ require 'inc/header.php';
       let matchItem = matchData[i];
       mydata.push({
         matchnum: matchItem["matchnumber"],
-        teleopprocessor: matchItem["teleopAlgaeProcessor"],
+        teleopprocessor: matchItem["teleopAlgaeProc"],
         teleopnet: matchItem["teleopAlgaeNet"],
         levelone: matchItem["teleopCoralL1"],
         leveltwo: matchItem["teleopCoralL2"],
@@ -665,7 +665,7 @@ require 'inc/header.php';
       let matchItem = matchData[i];
       mydata.push({
         matchnum: matchItem["matchnumber"],
-        cage: matchItem["cageClimb"],
+        cage: matchItem["endgameCageClimb"],
       });
     }
 
@@ -685,9 +685,9 @@ require 'inc/header.php';
       value = { 0: "N/A", 1: "Parked", 2: "Fell", 3: "Shallow", 4: "Deep" };
 
       // Get endgame climb cage level
-      let cageClimb = mydata[i]["cage"];
-      datasets[0]["data"].push(cageClimb);
-      cageClimbTips.push({ xlabel: matchnum, tip: "Cage Climb =" + value[cageClimb] });
+      let endgameCageClimb = mydata[i]["cage"];
+      datasets[0]["data"].push(endgameCageClimb);
+      cageClimbTips.push({ xlabel: matchnum, tip: "Cage Climb =" + value[endgameCageClimb] });
     }
 
     if (endgameChart !== undefined) {
