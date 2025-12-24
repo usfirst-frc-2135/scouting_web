@@ -39,6 +39,7 @@ function insertEventAveragesHeader(tableId, aliasList) {
   }
   rowString1 += '<th colspan="1" ' + thBody + '> </th>';
   rowString1 += '<th colspan="1" ' + thBody + '> </th>';
+  rowString1 += '<th colspan="1" ' + thMatch + '>' + '</th>';
 
   // points by game phase
   rowString1 += '<th colspan="8" ' + thMatch + '>Match Points' + '</th>';
@@ -51,7 +52,6 @@ function insertEventAveragesHeader(tableId, aliasList) {
   rowString1 += '<th colspan="7" ' + thTeleop + '>Teleop Algae' + '</th>';
   rowString1 += '<th colspan="1" ' + thTeleop + '>Def' + '</th>';
   rowString1 += '<th colspan="9" ' + thEndgame + '>Endgame' + '</th>';
-  rowString1 += '<th colspan="1" ' + thMatch + '>' + '</th>';
 
   theadRef.insertRow().innerHTML = rowString1;
 
@@ -63,7 +63,10 @@ function insertEventAveragesHeader(tableId, aliasList) {
     rowString2 += '<th colspan="1" ' + thBody + '> </th>';
   }
   rowString2 += '<th colspan="1" ' + thBody + '> </th>';
-  rowString2 += '<th colspan="1" ' + thBody + '> </th>';
+  rowString2 += '<th colspan="1" ' + thBody + '>M</th>';
+
+  // died 
+  rowString2 += '<th colspan="1" ' + thMatch + '>Died' + '</th>';
 
   // points by game phase
   rowString2 += '<th colspan="2" ' + thMatch + '>Total Pts' + '</th>';
@@ -111,9 +114,6 @@ function insertEventAveragesHeader(tableId, aliasList) {
   rowString2 += '<th colspan="4" ' + thEndgame + '>Start Climb%' + '</th>';
   rowString2 += '<th colspan="5" ' + thEndgame + '>Climb%' + '</th>';
 
-  // died 
-  rowString2 += '<th colspan="1" ' + thMatch + '>Died' + '</th>';
-
   theadRef.insertRow().innerHTML = rowString2;
 
   let rowString3 = '';
@@ -125,6 +125,9 @@ function insertEventAveragesHeader(tableId, aliasList) {
     rowString3 += tdPrefix0 + 'Alias' + '</th>';
   }
   rowString3 += tdPrefix0 + 'COPRs' + '</th>';
+  rowString3 += tdPrefix0 + '#' + '</th>';
+
+  // died 
   rowString3 += tdPrefix0 + '#' + '</th>';
 
   // points by game phase
@@ -211,9 +214,6 @@ function insertEventAveragesHeader(tableId, aliasList) {
   rowString3 += tdPrefix1 + 'SH' + '</th>';
   rowString3 += tdPrefix1 + 'DP' + '</th>';
 
-  // died 
-  rowString3 += tdPrefix0 + '#' + '</th>';
-
   theadRef.insertRow().innerHTML = rowString3;
 };
 
@@ -279,6 +279,7 @@ function insertEventAveragesBody(tableId, eventAverages, coprData, aliasList, te
     let coprEntry = (coprData.length !== 0) ? getDataValue(coprData[teamNum], "totalPoints") : "";  // TODO: Load COPR data from TBA and pass in here
     rowString += tdPrefix0 + coprEntry + "</td>";
     rowString += tdPrefix0 + getDataValue(avgItem, "totalMatches") + "</td>";
+    rowString += tdPrefix0 + getDataValue(avgItem, "died", "sum") + "</td>";
 
     // points by game phase
     rowString += tdPrefix1 + getDataValue(avgItem, "totalMatchPoints", "avg") + "</td>";
@@ -363,7 +364,6 @@ function insertEventAveragesBody(tableId, eventAverages, coprData, aliasList, te
     rowString += tdPrefix1 + getDataValue(endgameClimbPercentage, 2, "avg") + "</td>";
     rowString += tdPrefix1 + getDataValue(endgameClimbPercentage, 3, "avg") + "</td>";
     rowString += tdPrefix1 + getDataValue(endgameClimbPercentage, 4, "avg") + "</td>";
-    rowString += tdPrefix0 + getDataValue(avgItem, "died", "sum") + "</td>";
 
     tbodyRef.insertRow().innerHTML = rowString;
   }

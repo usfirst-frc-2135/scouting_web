@@ -121,13 +121,13 @@ function insertStrategicDataBody(tableId, stratData, aliasList, teamFilter) {
     const tdPrefix1 = "<td class='bg-primary-subtle'>";
 
     let driveVal = "";
-    switch (stratItem["driverability"]) {
-      case 1: driveVal = "Jerky"; break;
-      case 2: driveVal = "Slow"; break;
-      case 3: driveVal = "Average"; break;
-      case 4: driveVal = "Quick"; break;
+    switch (String(stratItem["driverability"])) {
+      case "1": driveVal = "Jerky"; break;
+      case "2": driveVal = "Slow"; break;
+      case "3": driveVal = "Average"; break;
+      case "4": driveVal = "Quick"; break;
       default:
-      case 0: driveVal = "-"; break;
+      case "0": driveVal = "-"; break;
     }
 
     let rowString = "";

@@ -50,24 +50,26 @@ function insertMatchDataHeader(tableId, aliasList) {
   rowString += thTeleop + 'Teleop Coral L4</th>';
   rowString += thTeleop + 'Teleop Algae Net</th>';
   rowString += thTeleop + 'Teleop Algae Proc</th>';
+  rowString += thTeleop + 'Teleop Acqd Coral</th>';
+  rowString += thTeleop + 'Teleop Acqd Algae</th>';
   rowString += thEndgame + 'Cage Climb</th>';
   rowString += thEndgame + 'Start Climb</th>';
   rowString += thTeleop + 'Defense</th>';
-  rowString += thMatch + 'Acqd Coral</th>';
-  rowString += thMatch + 'Acqd Algae</th>';
-  rowString += thMatch + 'Scout Name</th>';
   rowString += thMatch + 'Comment</th>';
+  rowString += thMatch + 'Scout Name</th>';
 
   theadRef.insertRow().innerHTML = rowString;
 };
 
 //
-// Converts a given "1" to yes, "2" to no, anything else to a dash.
+// Converts a given climb level to a string
 //
-function toYesNo(value) {
+function toClimbLevel(value) {
   switch (String(value)) {
-    case "1": return "Yes";
-    case "2": return "No";
+    case "1": return "1-Park";
+    case "2": return "2-Fell";
+    case "3": return "3-Shallow!";
+    case "4": return "4-Deep";
     default: return "-";
   }
 }
@@ -117,13 +119,13 @@ function insertMatchDataBody(tableId, matchData, aliasList, teamFilter) {
     rowString += tdBody + matchItem["teleopCoralL4"] + "</td>";
     rowString += tdBlue + matchItem["teleopAlgaeNet"] + "</td>";
     rowString += tdBody + matchItem["teleopAlgaeProc"] + "</td>";
-    rowString += tdBlue + matchItem["endgameCageClimb"] + "</td>";
-    rowString += tdBody + matchItem["endgameStartClimb"] + "</td>";
-    rowString += tdBlue + matchItem["defenseLevel"] + "</td>";
     rowString += tdBody + matchItem["teleopCoralAcquired"] + "</td>";
     rowString += tdBlue + matchItem["teleopAlgaeAcquired"] + "</td>";
-    rowString += tdBody + matchItem["scoutname"] + "</td>";
+    rowString += tdBlue + toClimbLevel(matchItem["endgameCageClimb"]) + "</td>";
+    rowString += tdBody + matchItem["endgameStartClimb"] + "</td>";
+    rowString += tdBlue + matchItem["defenseLevel"] + "</td>";
     rowString += tdBlue + matchItem["comment"] + "</td>";
+    rowString += tdBody + matchItem["scoutname"] + "</td>";
 
     tbodyRef.insertRow().innerHTML = rowString;
   }

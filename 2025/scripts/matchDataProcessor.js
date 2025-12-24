@@ -350,8 +350,8 @@ class matchDataProcessor {
         this.getMatchItem(team, "died", match, "died");
 
         // Append text data for matches
-        team["scoutNames"].push(match["scoutname"]);
-        team["commentList"].push(match["comment"]);
+        team["scoutNames"].push(match["matchnumber"] + " - " + match["scoutname"]);
+        team["commentList"].push(match["matchnumber"] + " - " + match["comment"]);
 
         //////////////////// GAME PIECE TOTALS ////////////////////
 
@@ -388,11 +388,11 @@ class matchDataProcessor {
         let totalAlgaePoints = autonAlgaePoints + teleopAlgaePoints;
 
         let endgameClimbPoints = 0;
-        switch (team["endgameCageClimb"].val) {
-          case 1: endgameClimbPoints = 2; break;  // Fell
-          case 2: endgameClimbPoints = 2; break;  // Park
-          case 3: endgameClimbPoints = 6; break;  // Shallow
-          case 4: endgameClimbPoints = 12; break; // Deep
+        switch (String(team["endgameCageClimb"].val)) {
+          case "1": endgameClimbPoints = 2; break;  // Fell
+          case "2": endgameClimbPoints = 2; break;  // Park
+          case "3": endgameClimbPoints = 6; break;  // Shallow
+          case "4": endgameClimbPoints = 12; break; // Deep
           default: endgameClimbPoints = 0; break; // No climb
         }
 

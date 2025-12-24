@@ -67,9 +67,9 @@ require 'inc/header.php';
   // Converts a given "1" to yes, "2" to no, anything else to a dash.
   //
   function toYesNo(value) {
-    switch (value) {
-      case 0: return "No";
-      case 1: return "Yes";
+    switch (String(value)) {
+      case "0": return "No";
+      case "1": return "Yes";
       default: return "-";
     }
   }
@@ -78,12 +78,12 @@ require 'inc/header.php';
   // Converts a given pit organization to a string
   //
   function toOrganization(value) {
-    switch (value) {
-      case 1: return "1-Messy";
-      case 2: return "2-Below Average";
-      case 3: return "3-Organized!";
-      case 4: return "4-Above Average";
-      case 5: return "5-Pristine";
+    switch (String(value)) {
+      case "1": return "1-Messy";
+      case "2": return "2-Below Average";
+      case "3": return "3-Organized!";
+      case "4": return "4-Above Average";
+      case "5": return "5-Pristine";
       default: return "-";
     }
   }
@@ -92,12 +92,12 @@ require 'inc/header.php';
   // Converts a given readiness to a string
   //
   function toPreparedness(value) {
-    switch (value) {
-      case 1: return "1-Chaos";
-      case 2: return "2-Below Average";
-      case 3: return "3-Prepared!";
-      case 4: return "4-Above Average";
-      case 5: return "5-Proactive";
+    switch (String(value)) {
+      case "1": return "1-Chaos";
+      case "2": return "2-Below Average";
+      case "3": return "3-Prepared!";
+      case "4": return "4-Above Average";
+      case "5": return "5-Proactive";
       default: return "-";
     }
   }
