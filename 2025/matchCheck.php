@@ -379,6 +379,34 @@ require 'inc/header.php';
   }
 
   //
+  // These utilities convert TBA climb values to our match data values for comparison
+  //
+  function stringToClimbValue(climbString) {
+    let value = 0;
+    switch (climbString) {
+      default:
+      case "None":
+        break;
+      case "Parked":
+        value = 1;
+        break;
+      case "ShallowCage":
+        value = 3;
+        break;
+      case "DeepCage":
+        value = 4;
+        break;
+    }
+    return value;
+  }
+
+  function matchToClimbValue(matchValue) {
+    if (matchValue === 2)
+      matchValue = 1;
+    return matchValue;
+  }
+
+  //
   // Build the diff row between TBA and our match data
   // Params:
   //   tbaScoreRed    - the TBA score object for red alliance
@@ -405,9 +433,9 @@ require 'inc/header.php';
     diffRowString += "<td class='table-primary'>" + (matchScoreRed.teleopCoralL1 - tbaScoreRed.teleopCoralL1) + "</td>";
     diffRowString += "<td class='table-primary'>" + (matchScoreRed.allNet - tbaScoreRed.allNet) + "</td>";
     diffRowString += "<td class='table-primary'>" + (matchScoreRed.allProc - tbaScoreRed.allProc) + "</td>";
-    diffRowString += "<td class='table-warning'> </td>";
-    diffRowString += "<td class='table-warning'> </td>";
-    diffRowString += "<td class='table-warning'> </td>";
+    diffRowString += "<td class='table-warning'>" + (matchToClimbValue(matchScoreRed.endgameCageClimb[0]) - stringToClimbValue(tbaScoreRed.endgameCageClimb[0])) + "</td>";
+    diffRowString += "<td class='table-warning'>" + (matchToClimbValue(matchScoreRed.endgameCageClimb[1]) - stringToClimbValue(tbaScoreRed.endgameCageClimb[1])) + "</td>";
+    diffRowString += "<td class='table-warning'>" + (matchToClimbValue(matchScoreRed.endgameCageClimb[2]) - stringToClimbValue(tbaScoreRed.endgameCageClimb[2])) + "</td>";
     diffRowString += "<td class='table-body'>" + (matchScoreRed.fouls - tbaScoreRed.fouls) + "</td>";
 
     // Blue alliance diff
@@ -426,9 +454,9 @@ require 'inc/header.php';
     diffRowString += "<td class='table-primary'>" + (matchScoreBlue.teleopCoralL1 - tbaScoreBlue.teleopCoralL1) + "</td>";
     diffRowString += "<td class='table-primary'>" + (matchScoreBlue.allNet - tbaScoreBlue.allNet) + "</td>";
     diffRowString += "<td class='table-primary'>" + (matchScoreBlue.allProc - tbaScoreBlue.allProc) + "</td>";
-    diffRowString += "<td class='table-warning'> </td>";
-    diffRowString += "<td class='table-warning'> </td>";
-    diffRowString += "<td class='table-warning'> </td>";
+    diffRowString += "<td class='table-warning'>" + (matchScoreBlue.endgameCageClimb[0] - stringToClimbValue(tbaScoreBlue.endgameCageClimb[0])) + "</td>";
+    diffRowString += "<td class='table-warning'>" + (matchScoreBlue.endgameCageClimb[1] - stringToClimbValue(tbaScoreBlue.endgameCageClimb[1])) + "</td>";
+    diffRowString += "<td class='table-warning'>" + (matchScoreBlue.endgameCageClimb[2] - stringToClimbValue(tbaScoreBlue.endgameCageClimb[2])) + "</td>";
     diffRowString += "<td class='table-body'>" + (matchScoreBlue.fouls - tbaScoreBlue.fouls) + "</td>";
 
     return diffRowString;
@@ -507,8 +535,8 @@ require 'inc/header.php';
 
       // build the diff row
       let diffRowString = "";
-      diffRowString += "<td class='fw-bold'>" + matchId + "</td>";
-      diffRowString += "<td class='bg-body'>Diff</td>";
+      diffRowString += "<th class='fw-bold table-primary'>" + matchId + "</td>";
+      diffRowString += "<td class='table-primary'>Diff</td>";
       diffRowString += buildDiffDataRow(tbaScoreRed, tbaScoreBlue, matchScoreRed, matchScoreBlue);
       tbodyRef.insertRow().innerHTML = diffRowString;
     }
