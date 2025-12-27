@@ -117,102 +117,102 @@ function insertEventAveragesHeader(tableId, aliasList) {
   theadRef.insertRow().innerHTML = rowString2;
 
   let rowString3 = '';
-  const tdPrefix0 = '<th scope="col" ' + thBodySort + '>';
-  const tdPrefix1 = '<th scope="col" ' + thBlueSort + '>';
+  const thPrefix0 = '<th scope="col" ' + thBodySort + '>';
+  const thPrefix1 = '<th scope="col" ' + thBlueSort + '>';
   // team number
-  rowString3 += tdPrefix0 + 'Team' + '</th>';
+  rowString3 += thPrefix0 + 'Team' + '</th>';
   if (aliasList.length > 0) {
-    rowString3 += tdPrefix0 + 'Alias' + '</th>';
+    rowString3 += thPrefix0 + 'Alias' + '</th>';
   }
-  rowString3 += tdPrefix0 + 'COPRs' + '</th>';
-  rowString3 += tdPrefix0 + '#' + '</th>';
+  rowString3 += thPrefix0 + 'COPRs' + '</th>';
+  rowString3 += thPrefix0 + '#' + '</th>';
 
   // died 
-  rowString3 += tdPrefix0 + '#' + '</th>';
+  rowString3 += thPrefix0 + '#' + '</th>';
 
   // points by game phase
-  rowString3 += tdPrefix1 + 'Avg' + '</th>';
-  rowString3 += tdPrefix1 + 'Max' + '</th>';
-  rowString3 += tdPrefix0 + 'Avg' + '</th>';
-  rowString3 += tdPrefix0 + 'Max' + '</th>';
-  rowString3 += tdPrefix1 + 'Avg' + '</th>';
-  rowString3 += tdPrefix1 + 'Max' + '</th>';
-  rowString3 += tdPrefix0 + 'Avg' + '</th>';
-  rowString3 += tdPrefix0 + 'Max' + '</th>';
+  rowString3 += thPrefix1 + 'Avg' + '</th>';
+  rowString3 += thPrefix1 + 'Max' + '</th>';
+  rowString3 += thPrefix0 + 'Avg' + '</th>';
+  rowString3 += thPrefix0 + 'Max' + '</th>';
+  rowString3 += thPrefix1 + 'Avg' + '</th>';
+  rowString3 += thPrefix1 + 'Max' + '</th>';
+  rowString3 += thPrefix0 + 'Avg' + '</th>';
+  rowString3 += thPrefix0 + 'Max' + '</th>';
 
   // points by game piece
-  rowString3 += tdPrefix1 + 'Avg' + '</th>';
-  rowString3 += tdPrefix1 + 'Max' + '</th>';
-  rowString3 += tdPrefix0 + 'Avg' + '</th>';
-  rowString3 += tdPrefix0 + 'Max' + '</th>';
-  rowString3 += tdPrefix1 + 'Avg' + '</th>';
-  rowString3 += tdPrefix1 + 'Max' + '</th>';
-  rowString3 += tdPrefix0 + 'Avg' + '</th>';
-  rowString3 += tdPrefix0 + 'Max' + '</th>';
+  rowString3 += thPrefix1 + 'Avg' + '</th>';
+  rowString3 += thPrefix1 + 'Max' + '</th>';
+  rowString3 += thPrefix0 + 'Avg' + '</th>';
+  rowString3 += thPrefix0 + 'Max' + '</th>';
+  rowString3 += thPrefix1 + 'Avg' + '</th>';
+  rowString3 += thPrefix1 + 'Max' + '</th>';
+  rowString3 += thPrefix0 + 'Avg' + '</th>';
+  rowString3 += thPrefix0 + 'Max' + '</th>';
 
   // total game pieces
-  rowString3 += tdPrefix1 + 'Avg' + '</th>';
-  rowString3 += tdPrefix1 + 'Max' + '</th>';
-  rowString3 += tdPrefix0 + 'Avg' + '</th>';
-  rowString3 += tdPrefix0 + 'Max' + '</th>';
+  rowString3 += thPrefix1 + 'Avg' + '</th>';
+  rowString3 += thPrefix1 + 'Max' + '</th>';
+  rowString3 += thPrefix0 + 'Avg' + '</th>';
+  rowString3 += thPrefix0 + 'Max' + '</th>';
 
   // auton coral
-  rowString3 += tdPrefix1 + 'Avg' + '</th>';
-  rowString3 += tdPrefix1 + 'Max' + '</th>';
-  rowString3 += tdPrefix0 + 'Avg' + '</th>';
-  rowString3 += tdPrefix0 + 'Max' + '</th>';
-  rowString3 += tdPrefix1 + 'Avg' + '</th>';
-  rowString3 += tdPrefix1 + 'Max' + '</th>';
-  rowString3 += tdPrefix0 + 'Avg' + '</th>';
-  rowString3 += tdPrefix0 + 'Max' + '</th>';
-  rowString3 += tdPrefix1 + 'Avg' + '</th>';
-  rowString3 += tdPrefix1 + 'Max' + '</th>';
+  rowString3 += thPrefix1 + 'Avg' + '</th>';
+  rowString3 += thPrefix1 + 'Max' + '</th>';
+  rowString3 += thPrefix0 + 'Avg' + '</th>';
+  rowString3 += thPrefix0 + 'Max' + '</th>';
+  rowString3 += thPrefix1 + 'Avg' + '</th>';
+  rowString3 += thPrefix1 + 'Max' + '</th>';
+  rowString3 += thPrefix0 + 'Avg' + '</th>';
+  rowString3 += thPrefix0 + 'Max' + '</th>';
+  rowString3 += thPrefix1 + 'Avg' + '</th>';
+  rowString3 += thPrefix1 + 'Max' + '</th>';
 
   // auton algae
-  rowString3 += tdPrefix0 + 'Avg' + '</th>';
-  rowString3 += tdPrefix0 + 'Max' + '</th>';
-  rowString3 += tdPrefix1 + 'Avg' + '</th>';
-  rowString3 += tdPrefix1 + 'Max' + '</th>';
-  rowString3 += tdPrefix0 + 'Avg' + '</th>';
-  rowString3 += tdPrefix0 + 'Max' + '</th>';
+  rowString3 += thPrefix0 + 'Avg' + '</th>';
+  rowString3 += thPrefix0 + 'Max' + '</th>';
+  rowString3 += thPrefix1 + 'Avg' + '</th>';
+  rowString3 += thPrefix1 + 'Max' + '</th>';
+  rowString3 += thPrefix0 + 'Avg' + '</th>';
+  rowString3 += thPrefix0 + 'Max' + '</th>';
 
   // teleop coral
-  rowString3 += tdPrefix1 + 'Acc%' + '</th>';
-  rowString3 += tdPrefix1 + 'Avg' + '</th>';
-  rowString3 += tdPrefix1 + 'Max' + '</th>';
-  rowString3 += tdPrefix0 + 'Avg' + '</th>';
-  rowString3 += tdPrefix0 + 'Max' + '</th>';
-  rowString3 += tdPrefix1 + 'Avg' + '</th>';
-  rowString3 += tdPrefix1 + 'Max' + '</th>';
-  rowString3 += tdPrefix0 + 'Avg' + '</th>';
-  rowString3 += tdPrefix0 + 'Max' + '</th>';
-  rowString3 += tdPrefix1 + 'Avg' + '</th>';
-  rowString3 += tdPrefix1 + 'Max' + '</th>';
+  rowString3 += thPrefix1 + 'Acc%' + '</th>';
+  rowString3 += thPrefix1 + 'Avg' + '</th>';
+  rowString3 += thPrefix1 + 'Max' + '</th>';
+  rowString3 += thPrefix0 + 'Avg' + '</th>';
+  rowString3 += thPrefix0 + 'Max' + '</th>';
+  rowString3 += thPrefix1 + 'Avg' + '</th>';
+  rowString3 += thPrefix1 + 'Max' + '</th>';
+  rowString3 += thPrefix0 + 'Avg' + '</th>';
+  rowString3 += thPrefix0 + 'Max' + '</th>';
+  rowString3 += thPrefix1 + 'Avg' + '</th>';
+  rowString3 += thPrefix1 + 'Max' + '</th>';
 
   // telop algae
-  rowString3 += tdPrefix0 + 'Acc%' + '</th>';
-  rowString3 += tdPrefix0 + 'Avg' + '</th>';
-  rowString3 += tdPrefix0 + 'Max' + '</th>';
-  rowString3 += tdPrefix1 + 'Avg' + '</th>';
-  rowString3 += tdPrefix1 + 'Max' + '</th>';
-  rowString3 += tdPrefix0 + 'Avg' + '</th>';
-  rowString3 += tdPrefix0 + 'Max' + '</th>';
+  rowString3 += thPrefix0 + 'Acc%' + '</th>';
+  rowString3 += thPrefix0 + 'Avg' + '</th>';
+  rowString3 += thPrefix0 + 'Max' + '</th>';
+  rowString3 += thPrefix1 + 'Avg' + '</th>';
+  rowString3 += thPrefix1 + 'Max' + '</th>';
+  rowString3 += thPrefix0 + 'Avg' + '</th>';
+  rowString3 += thPrefix0 + 'Max' + '</th>';
 
   // defense 
-  rowString3 += tdPrefix1 + 'Avg' + '</th>';
+  rowString3 += thPrefix1 + 'Avg' + '</th>';
 
   // endgame(start climb)
-  rowString3 += tdPrefix0 + 'NO' + '</th>';
-  rowString3 += tdPrefix0 + 'B20' + '</th>';
-  rowString3 += tdPrefix0 + 'A10' + '</th>';
-  rowString3 += tdPrefix0 + 'L5' + '</th>';
+  rowString3 += thPrefix0 + 'NO' + '</th>';
+  rowString3 += thPrefix0 + 'B20' + '</th>';
+  rowString3 += thPrefix0 + 'A10' + '</th>';
+  rowString3 += thPrefix0 + 'L5' + '</th>';
 
   // endgame(climb)
-  rowString3 += tdPrefix1 + 'NO' + '</th>';
-  rowString3 += tdPrefix1 + 'PK' + '</th>';
-  rowString3 += tdPrefix1 + 'FL' + '</th>';
-  rowString3 += tdPrefix1 + 'SH' + '</th>';
-  rowString3 += tdPrefix1 + 'DP' + '</th>';
+  rowString3 += thPrefix1 + 'NO' + '</th>';
+  rowString3 += thPrefix1 + 'PK' + '</th>';
+  rowString3 += thPrefix1 + 'FL' + '</th>';
+  rowString3 += thPrefix1 + 'SH' + '</th>';
+  rowString3 += thPrefix1 + 'DP' + '</th>';
 
   theadRef.insertRow().innerHTML = rowString3;
 };

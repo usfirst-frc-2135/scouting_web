@@ -141,6 +141,9 @@ require 'inc/header.php';
             <div class="row mb-3 mx-auto" style=" width: 200px;">
               <a class="btn btn-primary" href="./matchStatus.php" role="button">Match Data Status</a>
             </div>
+            <div class="row mb-3 mx-auto" style=" width: 200px;">
+              <a class="btn btn-primary" href="./matchCheck.php" role="button">Match Data Check</a>
+            </div>
           </div>
         </div>
       </div>

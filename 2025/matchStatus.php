@@ -21,8 +21,8 @@ require 'inc/header.php';
           <tbody class="table-group-divider"> </tbody>
         </table>
       </div>
-
     </div>
+
   </div>
 </div>
 
@@ -33,16 +33,19 @@ require 'inc/header.php';
 <script>
 
   //
-  // Load the table with the match status values
+  //  Match data check table utilities that:
+  //    1) insert a header row for a match data check table
+  //    2) insert a body row for match data check table
   //
-  function loadMatchStatusTable(tableId, eventMatches, allMatchData) {
-    console.log("==> matchStatus: loadMatchStatusTable()");
 
-    if ((eventMatches === null) || (allMatchData === null))
-      return;
-
-    console.log("=> loadMatchStatusTable");
-    let hdrString = "<th scope='col' class='sorttable_numerci'>Match</th>" +
+  //
+  //  Insert a match status table header
+  //    Params
+  //      tableId     - the HTML ID where the table header is inserted
+  //
+  function insertMatchStatusHeader(tableId) {
+    console.log("==> insertMatchStatusHeader: tableId " + tableId);
+    let hdrString = "<th scope='col' class='sorttable_numeric'>Match</th>" +
       "<th scope='col' class='text-bg-danger'>Red 1</th>" +
       "<th scope='col' class='text-bg-danger'>Red 2</th>" +
       "<th scope='col' class='text-bg-danger'>Red 3</th>" +
@@ -50,6 +53,15 @@ require 'inc/header.php';
       "<th scope='col' class='text-bg-primary'>Blue 2</th>" +
       "<th scope='col' class='text-bg-primary'>Blue 3</th>";
     document.getElementById(tableId).querySelector('thead').insertRow().innerHTML = hdrString;
+  }
+
+  //
+  //  Insert a match check table body (all rows)
+  //    Params
+  //      tableId     - the HTML ID where the table header is inserted
+  //
+  function insertMatchStatusBody(tableId, eventMatches, allMatchData) {
+    console.log("==> insertMatchStatusBody: tableId " + tableId);
 
     let tbodyRef = document.getElementById(tableId).querySelector('tbody');
     for (let emi in eventMatches) {
@@ -100,6 +112,21 @@ require 'inc/header.php';
   }
 
   //
+  // Load the table with the match status values
+  //
+  function loadMatchStatusTable(tableId, eventMatches, allMatchData) {
+    console.log("==> matchStatus: loadMatchStatusTable()");
+
+    if ((eventMatches === null) || (allMatchData === null))
+      return;
+
+    console.log("=> loadMatchStatusTable");
+    insertMatchStatusHeader(tableId);
+    insertMatchStatusBody(tableId, eventMatches, allMatchData);
+    document.getElementById(tableId).click(); // This magic fixes the floating column bug
+  }
+
+  //
   // Load match data and event matches
   //
   function buildMatchStatusTable(tableId) {
@@ -146,6 +173,7 @@ require 'inc/header.php';
       }
     });
   });
+
 </script>
 
 <script src="./scripts/compareMatchNumbers.js"></script>
