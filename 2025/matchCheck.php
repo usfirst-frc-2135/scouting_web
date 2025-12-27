@@ -37,84 +37,9 @@ require 'inc/header.php';
   //    1) insert a header row for a match data check table
   //    2) insert a body row for match data check table
   //
-  const tbaScore = {
-    number: "qm0",
-    score: {
-      red: {
-        totalPoints: {
-          autoPoints: {
-            autoCoralCount: {
-              autoReef: {
-                trough: 0,
-                tba_botRowCount: 0,
-                tba_midRowCount: 0,
-                tba_topCount: 0
-              }
-            },
-            autoline: [0, 0, 0]
-          },
-          teleopPoints: {
-            teleopCoralCount: {
-              trough: 0,
-              tba_botRowCount: 0,
-              tba_midRowCount: 0,
-              tba_topRowCount: 0
-            },
-            algaePoints: {
-              netAlgaeCount: 0,
-              wallAlgaeCount: 0
-            },
-            endgameBargePoints: {
-              endgameRobot1: "",
-              endgameRobot2: "",
-              endgameRobot3: ""
-            }
-          },
-          foulPoints: {
-            foulCount: 0
-          }
-        }
-      },
-      blue: {
-        totalPoints: {
-          autoPoints: {
-            autoCoralCount: {
-              autoReef: {
-                trough: 0,
-                tba_botRowCount: 0,
-                tba_midRowCount: 0,
-                tba_topRowCount: 0
-              }
-            },
-            autoline: [0, 0, 0]
-          },
-          teleopPoints: {
-            teleopCoralCount: {
-              trough: 0,
-              tba_botRowCount: 0,
-              tba_midRowCount: 0,
-              tba_topRowCount: 0
-            },
-            algaePoints: {
-              netAlgaeCount: 0,
-              wallAlgaeCount: 0
-            },
-            endgameBargePoints: {
-              endgameRobot1: "",
-              endgameRobot2: "",
-              endgameRobot3: ""
-            }
-          },
-          foulPoints: {
-            foulCount: 0
-          }
-        }
-      }
-    }
-  };
 
   const thBody = 'class="bg-body"';
-  const thBodySort = 'class="bg-body sorttable_numeric"';
+  const thBodySort = 'class="bg-body"';
   const thRedPrefix = 'class="bg-danger"';
   const thBluePrefix = 'class="bg-primary"';
 
@@ -268,7 +193,7 @@ require 'inc/header.php';
     cellString += "<td class='table-danger'>" + matchScore.totalPoints + "</td>";
     cellString += "<td class='table-success'>" + matchScore.autonPoints + "</td>";
     cellString += "<td class='table-primary'>" + matchScore.teleopPoints + "</td>";
-    cellString += "<td class='table-body'>" + matchScore.foulPoints + "</td>";
+    cellString += "<td class='table-light'>" + matchScore.foulPoints + "</td>";
     cellString += "<td class='table-danger'>" + matchScore.autonLeave + "</td>";
     cellString += "<td class='table-danger'>" + matchScore.autonCoralL4 + "</td>";
     cellString += "<td class='table-danger'>" + matchScore.autonCoralL3 + "</td>";
@@ -283,7 +208,7 @@ require 'inc/header.php';
     cellString += "<td class='table-warning'>" + matchScore.endgameCageClimb[0] + "</td>";
     cellString += "<td class='table-warning'>" + matchScore.endgameCageClimb[1] + "</td>";
     cellString += "<td class='table-warning'>" + matchScore.endgameCageClimb[2] + "</td>";
-    cellString += "<td class='table-body'>" + matchScore.fouls + "</td>";
+    cellString += "<td class='table-light'>" + matchScore.fouls + "</td>";
 
     return cellString;
   }
@@ -421,7 +346,7 @@ require 'inc/header.php';
     diffRowString += "<td class='table-danger'>" + (matchScoreRed.totalPoints - tbaScoreRed.totalPoints) + "</td>";
     diffRowString += "<td class='table-success'>" + (matchScoreRed.autonPoints - tbaScoreRed.autonPoints) + "</td>";
     diffRowString += "<td class='table-primary'>" + (matchScoreRed.teleopPoints - tbaScoreRed.teleopPoints) + "</td>";
-    diffRowString += "<td class='table-body'>" + (matchScoreRed.foulPoints - tbaScoreRed.foulPoints) + "</td>";
+    diffRowString += "<td class='table-light'>" + (matchScoreRed.foulPoints - tbaScoreRed.foulPoints) + "</td>";
     diffRowString += "<td class='table-danger'>" + (matchScoreRed.autonLeave - tbaScoreRed.autonLeave) + "</td>";
     diffRowString += "<td class='table-danger'>" + (matchScoreRed.autonCoralL4 - tbaScoreRed.autonCoralL4) + "</td>";
     diffRowString += "<td class='table-danger'>" + (matchScoreRed.autonCoralL3 - tbaScoreRed.autonCoralL3) + "</td>";
@@ -436,13 +361,13 @@ require 'inc/header.php';
     diffRowString += "<td class='table-warning'>" + (matchToClimbValue(matchScoreRed.endgameCageClimb[0]) - stringToClimbValue(tbaScoreRed.endgameCageClimb[0])) + "</td>";
     diffRowString += "<td class='table-warning'>" + (matchToClimbValue(matchScoreRed.endgameCageClimb[1]) - stringToClimbValue(tbaScoreRed.endgameCageClimb[1])) + "</td>";
     diffRowString += "<td class='table-warning'>" + (matchToClimbValue(matchScoreRed.endgameCageClimb[2]) - stringToClimbValue(tbaScoreRed.endgameCageClimb[2])) + "</td>";
-    diffRowString += "<td class='table-body'>" + (matchScoreRed.fouls - tbaScoreRed.fouls) + "</td>";
+    diffRowString += "<td class='table-light'>" + (matchScoreRed.fouls - tbaScoreRed.fouls) + "</td>";
 
     // Blue alliance diff
     diffRowString += "<td class='table-danger'>" + (matchScoreBlue.totalPoints - tbaScoreBlue.totalPoints) + "</td>";
     diffRowString += "<td class='table-success'>" + (matchScoreBlue.autonPoints - tbaScoreBlue.autonPoints) + "</td>";
     diffRowString += "<td class='table-primary'>" + (matchScoreBlue.teleopPoints - tbaScoreBlue.teleopPoints) + "</td>";
-    diffRowString += "<td class='table-body'>" + (matchScoreBlue.foulPoints - tbaScoreBlue.foulPoints) + "</td>";
+    diffRowString += "<td class='table-light'>" + (matchScoreBlue.foulPoints - tbaScoreBlue.foulPoints) + "</td>";
     diffRowString += "<td class='table-danger'>" + (matchScoreBlue.autonLeave - tbaScoreBlue.autonLeave) + "</td>";
     diffRowString += "<td class='table-danger'>" + (matchScoreBlue.autonCoralL4 - tbaScoreBlue.autonCoralL4) + "</td>";
     diffRowString += "<td class='table-danger'>" + (matchScoreBlue.autonCoralL3 - tbaScoreBlue.autonCoralL3) + "</td>";
@@ -457,7 +382,7 @@ require 'inc/header.php';
     diffRowString += "<td class='table-warning'>" + (matchScoreBlue.endgameCageClimb[0] - stringToClimbValue(tbaScoreBlue.endgameCageClimb[0])) + "</td>";
     diffRowString += "<td class='table-warning'>" + (matchScoreBlue.endgameCageClimb[1] - stringToClimbValue(tbaScoreBlue.endgameCageClimb[1])) + "</td>";
     diffRowString += "<td class='table-warning'>" + (matchScoreBlue.endgameCageClimb[2] - stringToClimbValue(tbaScoreBlue.endgameCageClimb[2])) + "</td>";
-    diffRowString += "<td class='table-body'>" + (matchScoreBlue.fouls - tbaScoreBlue.fouls) + "</td>";
+    diffRowString += "<td class='table-light'>" + (matchScoreBlue.fouls - tbaScoreBlue.fouls) + "</td>";
 
     return diffRowString;
   }
