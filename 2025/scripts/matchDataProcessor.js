@@ -389,11 +389,11 @@ class matchDataProcessor {
 
         let endgameClimbPoints = 0;
         switch (String(team["endgameCageClimb"].val)) {
-          case "1": endgameClimbPoints = 2; break;  // Fell
-          case "2": endgameClimbPoints = 2; break;  // Park
+          case "1": endgameClimbPoints = 2; break;  // Parked
+          case "2": endgameClimbPoints = 2; break;  // Fell
           case "3": endgameClimbPoints = 6; break;  // Shallow
           case "4": endgameClimbPoints = 12; break; // Deep
-          default: endgameClimbPoints = 0; break; // No climb
+          default: endgameClimbPoints = 0; break;   // No climb
         }
 
         let totalMatchPoints = totalAutoPoints + totalTeleopPoints + endgameClimbPoints;

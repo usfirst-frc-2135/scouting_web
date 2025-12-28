@@ -226,8 +226,8 @@ require 'inc/header.php';
                     <label for="endGameClimb" class="form-check-label">Barge Climb?</label>
                     <select id="endGameClimb" class="form-select">
                       <option id="endGameClimbNA" value="0">No Attempt</option>
-                      <option id="endGameClimbFell" value="1">Fell</option>
-                      <option id="endGameClimbParked" value="2">Parked</option>
+                      <option id="endGameClimbParked" value="1">Parked</option>
+                      <option id="endGameClimbFell" value="2">Fell</option>
                       <option id="endGameClimbShallow" value="3">Shallow Climb</option>
                       <option id="endGameClimbDeep" value="4">Deep Climb</option>
                     </select>

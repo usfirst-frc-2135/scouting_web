@@ -7,9 +7,11 @@ require 'inc/header.php';
   <div id="content" class="column card-lg-12 col-sm-12 col-xs-12">
 
     <!-- Page Title -->
-    <div class="col-md-6 d-flex flex-row pt-3 pb-3 mb-3">
+    <div class="col-md-8 d-flex flex-row pt-3 pb-3 mb-3">
       <h2><?php echo $title; ?></h2>
-      <a class="btn btn-primary ms-5 pt-2" href="javascript:history.back()">Back</a>
+      <div id="spinner" class="spinner-border ms-3"></div>
+      <a class="btn btn-primary ms-3 pt-2" href="javascript:history.back()">Back</a>
+      <button id="downloadCsvFile" class="btn btn-primary ms-3 pt-1" type="button">Download CSV</button>
     </div>
 
     <!-- Main row to hold the table -->
@@ -37,6 +39,45 @@ require 'inc/header.php';
   //    1) insert a header row for a match data check table
   //    2) insert a body row for match data check table
   //
+
+  //
+  // Scrape table and write CSV file
+  //
+  function downloadTableAsCSV(tableId, csvName) {
+    csvName = csvName + ".csv";
+    console.log("==> matchCheck: downloadTableAsCSV(): " + csvName);
+    const table = document.getElementById(tableId).querySelector('tbody');
+    let csv = [];
+
+    // This CSV header must match the order in eventAveragesTable.js insertEventAveragesBody()
+    let hdrStr = "Match,Count," +
+      "RedTotalPts,RedAutonPts,RedTeleopPts,RedFoulsPts," +
+      "RedLeave,RedAutonL4,RedAutonL3,RedAutonL2,RedAutoL1," +
+      "RedTeleopL4,RedTeleopL3,RedTeleopL2,RedTelopL1,RedNet,RedProc," +
+      "RedEnd1,RedEnd2,RedEnd3,RedFouls," +
+      "BlueTotalPts,BlueAutonPts,BlueTeleopPts,BlueFoulsPts," +
+      "BlueLeave,BlueAutonL4,BlueAutonL3,BlueAutonL2,BlueAutoL1," +
+      "BlueTeleopL4,BlueTeleopL3,BlueTeleopL2,BlueTelopL1,BlueNet,BlueProc," +
+      "BlueEnd1,BlueEnd2,BlueEnd3,BlueFouls";
+    csv.push(hdrStr);
+
+    const rows = table.querySelectorAll("tr");
+
+    rows.forEach(row => {
+      const cols = row.querySelectorAll("td");
+      const rowData = Array.from(cols).map(col => col.innerText);
+      csv.push(rowData.join(","));
+    });
+
+    const csvFile = new Blob([csv.join("\n")], { type: "text/csv" });
+    const downloadLink = document.createElement("a");
+    downloadLink.download = csvName;
+    downloadLink.href = window.URL.createObjectURL(csvFile);
+    downloadLink.style.display = "none";
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
+  }
 
   const thBody = 'class="bg-body"';
   const thBodySort = 'class="bg-body"';
@@ -310,23 +351,16 @@ require 'inc/header.php';
     let value = 0;
     switch (climbString) {
       default:
-      case "None":
-        break;
-      case "Parked":
-        value = 1;
-        break;
-      case "ShallowCage":
-        value = 3;
-        break;
-      case "DeepCage":
-        value = 4;
-        break;
+      case "None": break;
+      case "Parked": value = 1; break;
+      case "ShallowCage": value = 3; break;
+      case "DeepCage": value = 4; break;
     }
     return value;
   }
 
   function matchToClimbValue(matchValue) {
-    if (matchValue === 2)
+    if (matchValue === 2) // Fell setting is same as park for scoring
       matchValue = 1;
     return matchValue;
   }
@@ -460,7 +494,7 @@ require 'inc/header.php';
 
       // build the diff row
       let diffRowString = "";
-      diffRowString += "<th class='fw-bold table-primary'>" + matchId + "</td>";
+      diffRowString += "<td class='fw-bold table-primary'>" + matchId + "</td>";
       diffRowString += "<td class='table-primary'>Diff</td>";
       diffRowString += buildDiffDataRow(tbaScoreRed, tbaScoreBlue, matchScoreRed, matchScoreBlue);
       tbodyRef.insertRow().innerHTML = diffRowString;
@@ -483,6 +517,7 @@ require 'inc/header.php';
     insertMatchCheckHeader(tableId);
     insertMatchCheckBody(tableId, eventMatches, allMatchData);
     document.getElementById(tableId).click(); // This magic fixes the floating column bug
+    document.getElementById('spinner').style.display = 'none';
   }
 
   //
@@ -524,6 +559,12 @@ require 'inc/header.php';
     const frozenTable = new FreezeTable('.freeze-table', { fixedNavbar: '.navbar' });
 
     buildMatchCheckTable(tableId);
+
+    // Write out picklist CSV file to client's download dir.
+    document.getElementById("downloadCsvFile").addEventListener('click', function () {
+      const csvFileName = frcEventCode + "_matchCheck";
+      downloadTableAsCSV(tableId, csvFileName);
+    });
 
     // Create frozen table panes and keep the panes updated
     document.getElementById(tableId).addEventListener('click', function () {

@@ -9,7 +9,8 @@ require 'inc/header.php';
     <!-- Page Title -->
     <div class="col-md-6 d-flex flex-row pt-3 pb-3 mb-3">
       <h2><?php echo $title; ?></h2>
-      <a class="btn btn-primary ms-5 pt-2" href="javascript:history.back()">Back</a>
+      <div id="spinner" class="spinner-border ms-3"></div>
+      <a class="btn btn-primary ms-3 pt-2" href="javascript:history.back()">Back</a>
     </div>
 
     <!-- Main row to hold the table -->
@@ -124,6 +125,7 @@ require 'inc/header.php';
     insertMatchStatusHeader(tableId);
     insertMatchStatusBody(tableId, eventMatches, allMatchData);
     document.getElementById(tableId).click(); // This magic fixes the floating column bug
+    document.getElementById('spinner').style.display = 'none';
   }
 
   //
