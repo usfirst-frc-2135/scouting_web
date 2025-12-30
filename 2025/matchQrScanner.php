@@ -7,9 +7,9 @@ require 'inc/header.php';
   <div id="content" class="column card-lg-12 col-sm-12 col-xs-12">
 
     <!-- Page Title -->
-    <div class="row pt-3 pb-3 mb-3">
+    <div class="row pt-3 mb-3">
       <div class="row justify-content-md-center">
-        <h2 class="col-md-6"><?php echo $title; ?></h2>
+        <h2 class="col-md-6 mb-3 me-3"><?php echo $title; ?> </h2>
       </div>
 
       <!-- Main card to hold the QR scanner -->
@@ -89,7 +89,7 @@ require 'inc/header.php';
   // IMPORTANT! also need to adjust data list size in "validateQrList" and "padList"!!!
   //  TODO: For 2026, please change the field order to put match or year-specific items LAST (order is suggested below in comments)
   //        For 2026, remove any undocumented "padding" on the structure. Just declare an "other" field.
-  //        Also for 2026, add about 10 "other" fields to the QR list so it can be slightly expanded without breaking the android app
+  //        Also for 2026, add about 10 extra "other" fields to the QR list so it can be slightly expanded without breaking the android app
   function qrListToMatchData(qrList) {
     let matchData = {};
     // Perennial fields that always occur
@@ -98,6 +98,10 @@ require 'inc/header.php';
     matchData["teamnumber"] = qrList[0];      // Make this [2] in 2026
     matchData["teamalias"] = qrList[40];      // Make this [3] in 2026
     matchData["scoutname"] = qrList[38];      // Make this [4] in 2026
+    // matchData["version"] = qrList[];       // Make this [5] in 2026 - this will be a NEW field from the Android app
+
+    // Recurring (and overall) data
+    matchData["died"] = qrList[35];           // Make this [6] in 2026
 
     // Match or year-specific fields below here!
 
@@ -144,7 +148,7 @@ require 'inc/header.php';
     matchData["endgameStartClimb"] = qrList[34];
 
     // Overall
-    matchData["died"] = qrList[35];
+    // qrList[35] see above
     // qrList[36] see above
     // qrList[37] see above
     // qrList[38] see above

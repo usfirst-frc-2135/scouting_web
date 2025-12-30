@@ -7,20 +7,19 @@ require 'inc/header.php';
   <div id="content" class="column card-lg-12 col-sm-12 col-xs-12">
 
     <!-- Page Title -->
-    <div class="row pt-3 pb-3 mb-3">
-      <h2 class="col-md-4"><?php echo $title; ?></h2>
-      <div id="spinner" class="spinner-border"></div>
+    <div class="row pt-3 mb-3">
+      <h2 class="col-auto text-nowrap mb-3 me-3"><?php echo $title; ?> </h2>
 
-      <div class="col-md-4 mb-3">
+      <div class="col-auto mb-3 me-3">
         <button id="downloadCsvFile" class="btn btn-primary" type="button">Download CSV</button>
       </div>
 
       <!-- Match Filter -->
-      <div class="col-md-3 mb-3">
+      <div class="col-md-3 mb-3 me-3">
         <div id="customMatch" class="accordion accordion-flush">
           <div class="accordion-item bg-secondary-subtle">
             <h2 class="accordion-header">
-              <button class="accordion-button text-light bg-secondary mb-3" type="button" data-bs-toggle="collapse"
+              <button class="accordion-button text-nowrap text-light bg-secondary mb-3" type="button" data-bs-toggle="collapse"
                 data-bs-target="#filterEntry" aria-expanded="false" aria-controls="matchEntry">Match Range Filter</button>
             </h2>
 
@@ -59,6 +58,7 @@ require 'inc/header.php';
           </div>
         </div>
       </div>
+      <div id="spinner" class="col-auto spinner-border ms-3 mb-3 me-3"></div>
     </div>
 
     <!-- Main row to hold the table -->

@@ -7,9 +7,9 @@ require 'inc/header.php';
   <div id="content" class="column card-lg-12 col-sm-12 col-xs-12">
 
     <!-- Page Title -->
-    <div class="row pt-3 pb-3 mb-3">
+    <div class="row pt-3 mb-3">
       <div class="row justify-content-md-center">
-        <h2 class="col-md-6"><?php echo $title; ?></h2>
+        <h2 class="col-md-6 mb-3 me-3"><?php echo $title; ?> </h2>
       </div>
 
       <!-- Main card to hold the pit scouting form -->

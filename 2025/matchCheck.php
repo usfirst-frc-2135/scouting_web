@@ -1,5 +1,5 @@
 <?php
-$title = 'Match Data Check';
+$title = 'Match Check';
 require 'inc/header.php';
 ?>
 
@@ -7,11 +7,11 @@ require 'inc/header.php';
   <div id="content" class="column card-lg-12 col-sm-12 col-xs-12">
 
     <!-- Page Title -->
-    <div class="col-md-8 d-flex flex-row pt-3 pb-3 mb-3">
-      <h2><?php echo $title; ?></h2>
-      <div id="spinner" class="spinner-border ms-3"></div>
-      <a class="btn btn-primary ms-3 pt-2" href="javascript:history.back()">Back</a>
-      <button id="downloadCsvFile" class="btn btn-primary ms-3 pt-1" type="button">Download CSV</button>
+    <div class="row col-md-6 pt-3 mb-3">
+      <h2 class="col-auto mb-3 me-3"><?php echo $title; ?> </h2>
+      <a class="col-auto btn btn-primary mb-3 me-3" href="javascript:history.back()">Back</a>
+      <button id="downloadCsvFile" class="col-auto btn btn-primary mb-3 me-3" type="button">Download CSV</button>
+      <div id="spinner" class="spinner-border ms-3 mb-3 me-3"></div>
     </div>
 
     <!-- Main row to hold the table -->

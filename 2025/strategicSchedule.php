@@ -7,13 +7,13 @@ require 'inc/header.php';
   <div id="content" class="column card-lg-12 col-sm-12 col-xs-12">
 
     <!-- Page Title -->
-    <div class="row pt-3 pb-3 mb-3">
-      <h2 class="col-md-4"><?php echo $title; ?></h2>
-      <div id="spinner" class="spinner-border"></div>
-      <div class="col-md-4 mb-d form-check form-check-inline">
-        <input id="showCompleted" class="form-check-input ms-1" type="checkbox" name="showCompleted" checked>
-        <label for="showCompleted" class="form-check-label ms-1">Show Completed Matches</label>
+    <div class="row pt-3 mb-3">
+      <h2 class="col-md-6 mb-3 me-3"><?php echo $title; ?> </h2>
+      <div class="col-auto mb-3 form-check form-check-inline">
+        <input id="showCompleted" class="form-check-input mt-3 ms-1" type="checkbox" name="showCompleted" checked>
+        <label for="showCompleted" class="form-check-label mt-3 ms-1">Show Completed Matches</label>
       </div>
+      <div id="spinner" class="spinner-border ms-3 mb-3 me-3"></div>
     </div>
 
     <!-- Main column to hold the strategic match schedule -->

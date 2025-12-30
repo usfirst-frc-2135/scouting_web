@@ -7,9 +7,9 @@ require 'inc/header.php';
   <div id="content" class="column card-lg-12  col-sm-12 col-xs-12">
 
     <!-- Page Title -->
-    <div class="col-md-6 d-flex flex-row pt-3 pb-3 mb-3">
-      <h2><?php echo $title; ?></h2>
-      <a class="btn btn-primary ms-5 pt-2" href="javascript:history.back()">Back</a>
+    <div class="row col-md-6 pt-3 mb-3">
+      <h2 class="col-auto mb-3 me-3"><?php echo $title; ?> </h2>
+      <a class="col-auto btn btn-primary mb-3 me-3" href="javascript:history.back()">Back</a>
     </div>
 
     <!-- Main row to hold the entry card -->
@@ -45,11 +45,11 @@ require 'inc/header.php';
         <tbody class=" table-group-divider">
         </tbody>
       </table>
-    </div>
 
-    <!-- Write Scout Names to a JSON file -->
-    <div class="row mb-3 mx-auto" style=" width: 200px;">
-      <button id="writeScoutNameJSON" class="btn btn-primary" type="button">Write JSON File</button>
+      <!-- Write Scout Names to a JSON file -->
+      <div class="row mb-3 mx-auto" style=" width: 200px;">
+        <button id="writeScoutNameJSON" class="col-auto btn btn-primary" type="button">Write JSON File</button>
+      </div>
     </div>
 
   </div>

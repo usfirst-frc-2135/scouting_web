@@ -7,8 +7,8 @@ require 'inc/header.php';
   <div id="content" class="column card-lg-12 col-sm-12 col-xs-12">
 
     <!-- Page Title -->
-    <div class="row pt-3 pb-3 mb-3">
-      <h2 class="col-md-6"><?php echo $title; ?></h2>
+    <div class="row pt-3 mb-3">
+      <h2 class="col-md-6 mb-3 me-3"><?php echo $title; ?> </h2>
     </div>
 
     <!-- Main row to hold the team number entry -->
@@ -146,75 +146,74 @@ require 'inc/header.php';
       </div>
     </div>
 
-    <div class="container row-offcanvas row-offcanvas-left">
-      <div class="column card-lg-12 col-sm-12 col-xs-12" id="content">
+    <!-- Event Averages section -->
+    <div class="column card-lg-12 col-sm-12 col-xs-12" id="content">
 
-        <!-- Page Title -->
-        <div class="row pt-3 pb-3 mb-3">
-          <h3 class="col-md-4"><?php echo "Event Averages"; ?></h3>
+      <!-- Section Title -->
+      <div class="row pt-3 mb-3">
+        <h3 class="col-md-4"><?php echo "Event Averages"; ?> </h3>
 
-          <!-- Match Filter -->
-          <div class="col-md-3 mb-3">
-            <div id="customMatch" class="accordion accordion-flush">
-              <div class="accordion-item bg-secondary-subtle">
-                <h2 class="accordion-header">
-                  <button class="accordion-button text-light bg-secondary mb-3" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#filterEntry" aria-expanded="false" aria-controls="matchEntry">Match Range Filter</button>
-                </h2>
+        <!-- Match Filter -->
+        <div class="col-md-3">
+          <div id="customMatch" class="accordion accordion-flush">
+            <div class="accordion-item bg-secondary-subtle">
+              <h2 class="accordion-header">
+                <button class="accordion-button text-light bg-secondary mb-3" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#filterEntry" aria-expanded="false" aria-controls="matchEntry">Match Range Filter</button>
+              </h2>
 
-                <div id="filterEntry" class="accordion-collapse collapse" data-bs-parent="#customMatch">
+              <div id="filterEntry" class="accordion-collapse collapse" data-bs-parent="#customMatch">
 
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <select id="startCompLevel" class="form-select ms-2 mb-3" aria-label="Comp Level Select">
-                        <option value="p">P</option>
-                        <option value="qm" selected>QM</option>
-                        <option value="sf">SF</option>
-                        <option value="f">F</option>
-                      </select>
-                    </div>
-                    <input id="startMatchNum" class="form-control col-2 me-2 mb-3" type="text" placeholder="Start"
-                      aria-label="Start Match Filter">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <select id="startCompLevel" class="form-select ms-2 mb-3" aria-label="Comp Level Select">
+                      <option value="p">P</option>
+                      <option value="qm" selected>QM</option>
+                      <option value="sf">SF</option>
+                      <option value="f">F</option>
+                    </select>
                   </div>
+                  <input id="startMatchNum" class="form-control col-2 me-2 mb-3" type="text" placeholder="Start"
+                    aria-label="Start Match Filter">
+                </div>
 
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <select id="endCompLevel" class="form-select ms-2 mb-3" aria-label="Comp Level Select">
-                        <option value="p">P</option>
-                        <option value="qm" selected>QM</option>
-                        <option value="sf">SF</option>
-                        <option value="f">F</option>
-                      </select>
-                    </div>
-                    <input id="endMatchNum" class="form-control col-2 me-2 mb-3" type="text" placeholder="End"
-                      aria-label="End Match Filter">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <select id="endCompLevel" class="form-select ms-2 mb-3" aria-label="Comp Level Select">
+                      <option value="p">P</option>
+                      <option value="qm" selected>QM</option>
+                      <option value="sf">SF</option>
+                      <option value="f">F</option>
+                    </select>
                   </div>
+                  <input id="endMatchNum" class="form-control col-2 me-2 mb-3" type="text" placeholder="End"
+                    aria-label="End Match Filter">
+                </div>
 
-                  <div>
-                    <button id="filterData" class="btn btn-primary btn-sm ms-2 mb-3" type="button">Filter Data</button>
-                  </div>
-
+                <div>
+                  <button id="filterData" class="btn btn-primary btn-sm ms-2 mb-3" type="button">Filter Data</button>
                 </div>
 
               </div>
             </div>
-          </div>
 
-        </div>
-
-        <!-- Main row to hold the table -->
-        <div class="row mb-3">
-
-          <div id="freeze-table" class="freeze-table overflow-auto">
-            <table id="averagesTable" class="table table-striped table-bordered table-hover table-sm border-secondary text-center">
-              <thead> </thead>
-              <tbody class="table-group-divider">
-              </tbody>
-            </table>
           </div>
         </div>
       </div>
+
+      <!-- Main row to hold the table -->
+      <div class="row mb-3">
+
+        <div id="freeze-table" class="freeze-table overflow-auto">
+          <table id="averagesTable" class="table table-striped table-bordered table-hover table-sm border-secondary text-center">
+            <thead> </thead>
+            <tbody class="table-group-divider">
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
+
   </div>
 </div>
 
@@ -629,6 +628,15 @@ require 'inc/header.php';
         buildTeamComparePage(teamNum1, teamNum2, jAliasNames);
       }
     });
+
+    // Filter out unwanted matches
+    document.getElementById("filterData").addEventListener('click', function () {
+      let startMatch = document.getElementById("startCompLevel").value + document.getElementById("startMatchNum").value.trim();
+      let endMatch = document.getElementById("endCompLevel").value + document.getElementById("endMatchNum").value.trim();
+      console.log("==> eventAverages: filterMatchRange: " + startMatch + " to " + endMatch);
+      alert("Match filter not yet implemented!");
+    });
+
   });
 
 </script>
