@@ -301,7 +301,7 @@ class matchDataProcessor {
     for (const i in this.pData) {
       let team = this.pData[i];
       let matchList = team["matches"];
-      console.log("===> doing MDP calculations for team: " + team["teamNum"] + " matches: " + matchList.length);  // TEST
+      console.log("===> MDP calcs team: " + team["teamNum"] + " matches: " + matchList.length);  // TEST
 
       // Initialize text data for matches
       team["scoutNames"] = [];

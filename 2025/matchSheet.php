@@ -543,7 +543,7 @@ require 'inc/header.php';
   // Takes list of Team Pic paths and loads them
   //
   function buildRobotPhotoLinks(prefix, teamPics) {
-    console.log("==> buildRobotPhotoLinks: build the entries in the photo carousels");
+    console.log("==> buildRobotPhotoLinks: build photo carousel");
     let count = 0;
     let slideRef = document.getElementById(prefix + "RobotPics");
     slideRef.innerHTML = "";
@@ -619,7 +619,7 @@ require 'inc/header.php';
   // Load the info into the team box
   //
   function buildTeamBoxTableBody(color, index, teamNum, averagesData) {
-    console.log("==> buildTeamBoxTableBody: build the team box in the match sheet - " + teamNum);
+    console.log("==> buildTeamBoxTableBody: build team box: " + teamNum);
     // Get team name from TBA
     $.get("api/tbaAPI.php", {
       getTeamInfo: teamNum
@@ -636,7 +636,7 @@ require 'inc/header.php';
         let jTeamInfo = JSON.parse(teamInfo)["response"];
         teamName += " " + jTeamInfo["nickname"];
       }
-      console.log("==> matchSheet: buildTeamBoxTableBody() for " + teamNum + teamName);
+      console.log("==> matchSheet: buildTeamBoxTableBody: " + teamNum + teamName);
       let elementRef = document.getElementById(color + index + "TeamHeader");
       let aRef = elementRef.querySelector('a');
       aRef.href = 'teamLookup.php?teamNum=' + teamNum;
@@ -726,29 +726,43 @@ require 'inc/header.php';
       }
     }
 
+    //
     // Predict ranking points
-    //  AutoRP - auto leaves > 2.5 (> 80% success for leaving) AND at least one coral scored in autonomous (> 0.8 coral scored)
-    //  CoralRP - 5 coral on each level:  can score on L1 and average a total of at tleast 18.5 coral
-    //  Endgame average points > 10 (indicates at least one deep climb, because one shallow plus 2 parks is == 10)
-    //  Win - predicted points for each alliance 2, 1, 0
+    //    This can be done in two different ways:
+    //    - Sum the averages of the three teams and decide probable outcomes (estimate probable outcome)
+    //      - Sum of AutoLeave averages > 2.5 (two robots 100% and one at 50%)
+    //      - Sum of AutoCoralPieces > 1.0 (at least one coral scored between all three robots)
+    //    - Best case of all robots (highly optimistic)
+    //      - All AutoLeave maximums == 3.0
+    //      - The maximum of all AutoCoralPieces for each robot is at least 1.0
+    //  Code below uses first choice
+    //
+    //      AutoRP -  3 robots leave and one coral scored:
+    //          sum of robot leaves > 2.5 (> 80% success for leaving) AND at least one coral scored in autonomous (> 1.0 coral scored)
     let predictedRP = { "red": 0, "blue": 0 };
-    predictedRP["red"] += (autoLeaves["red"] > 2.5) && (autoCorals["red"] > 0.8);
-    predictedRP["blue"] += (autoLeaves["blue"] > 2.5) && (autoCorals["blue"] > 0.8);
+    predictedRP["red"] += (autoLeaves["red"] > 2.5) && (autoCorals["red"] > 1.0);
+    predictedRP["blue"] += (autoLeaves["blue"] > 2.5) && (autoCorals["blue"] > 1.0);
+    console.log("==> matchSheet: (Auto RP): red: " + predictedRP["red"] + " blue: " + predictedRP["blue"]);
 
+    //      CoralRP - 5 coral on each of the 4 levels L1-L4 (ignores Co-op):  
+    //          robots can score on levels L1-L4 and average a total of at tleast 18.5 coral
     predictedRP["red"] += (totalCoralsL1["red"] > 2.5) && ((totalCoralsL1["red"] + totalCoralsL2["red"] + totalCoralsL3["red"] + totalCoralsL4["red"]) > 18.5) ? 1 : 0;
     predictedRP["blue"] += (totalCoralsL1["blue"] > 2.5) && ((totalCoralsL1["blue"] + totalCoralsL2["blue"] + totalCoralsL3["blue"] + totalCoralsL4["blue"]) > 18.5) ? 1 : 0;
+    console.log("==> matchSheet: (Coral RP): red: " + predictedRP["red"] + " blue: " + predictedRP["blue"]);
 
+    //      Endgame average points > 10 (indicates at least one deep climb, because one shallow plus 2 parks is == 10)
     predictedRP["red"] += (endgamePointsAvg["red"] > 10.0) ? 1 : 0;
     predictedRP["blue"] += (endgamePointsAvg["blue"] > 10.0) ? 1 : 0;
+    console.log("==> matchSheet: (Barge RP): red: " + predictedRP["red"] + " blue: " + predictedRP["blue"]);
 
+    //      Win - predicted points for each alliance 2, 1, 0 (ignores ties)
     predictedRP["red"] += (predictedPoints["red"] > predictedPoints["blue"]) ? 3 :
       (predictedPoints["red"] == predictedPoints["blue"]) ? 1 : 0;
     predictedRP["blue"] += (predictedPoints["blue"] > predictedPoints["red"]) ? 3 :
       (predictedPoints["blue"] == predictedPoints["red"]) ? 1 : 0;
+    console.log("==> matchSheet: (Win/Lose): red: " + predictedRP["red"] + " blue: " + predictedRP["blue"]);
 
-    let summedOPR = { "red": 0, "blue": 0 };
-    let actualPoints = { "red": 0, "blue": 0 };
-
+    // Fill the table
     document.getElementById("redTotalCoral").innerText = roundTwoPlaces(totalCoralPiecesAvg["red"]);
     document.getElementById("redTotalAlgae").innerText = roundTwoPlaces(totalAlgaePiecesAvg["red"]);
     document.getElementById("redAvgAutoPoints").innerText = roundTwoPlaces(avgAutoPoints["red"]);
