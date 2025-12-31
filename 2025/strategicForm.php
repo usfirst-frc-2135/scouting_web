@@ -143,11 +143,11 @@ require 'inc/header.php';
                   <div class="input-group mb-3">
                     <select id="driverAbility" class="form-select">
                       <option selected value="-1">Choose ...</option>
-                      <option value="0">0 - N/A</option>
-                      <option value="1">1 - Jerky</option>
-                      <option value="2">2 - Slow</option>
-                      <option value="3">3 - Average!</option>
-                      <option value="4">4 - Quick/Agile</option>
+                      <option value="0">0-N/A</option>
+                      <option value="1">1-Jerky</option>
+                      <option value="2">2-Slow</option>
+                      <option value="3">3-Average!</option>
+                      <option value="4">4-Quick/Agile</option>
                     </select>
                   </div>
                 </div>

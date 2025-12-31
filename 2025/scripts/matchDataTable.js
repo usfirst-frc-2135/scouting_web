@@ -66,9 +66,9 @@ function insertMatchDataHeader(tableId, aliasList) {
 //
 function toClimbLevel(value) {
   switch (String(value)) {
-    case "1": return "1-Parked";
+    case "1": return "1-Park";
     case "2": return "2-Fell";
-    case "3": return "3-Shallow!";
+    case "3": return "3-Shallow";
     case "4": return "4-Deep";
     default: return "-";
   }

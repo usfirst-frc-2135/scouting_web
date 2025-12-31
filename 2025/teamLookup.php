@@ -277,7 +277,7 @@ require 'inc/header.php';
                   </thead>
                   <tbody class="table-group-divider">
                     <tr>
-                      <th scope="row" class="text-start">Cage Climb %</th>
+                      <th scope="row" class="text-start">Climb %</th>
                       <td> </td>
                       <td> </td>
                       <td> </td>
@@ -779,7 +779,7 @@ require 'inc/header.php';
     /////// Endgame Table
 
     writeAverageTableRow("endgameTotalPtsTable", ["Endgame Points", avgs["endgamePoints"].avg, avgs["endgamePoints"].max], 3);
-    writeAverageTableRow("endgameCageClimbTable", ["Cage Climb %", avgs["endgameCageClimb"].arr[0].avg, avgs["endgameCageClimb"].arr[2].avg, avgs["endgameCageClimb"].arr[1].avg, avgs["endgameCageClimb"].arr[3].avg, avgs["endgameCageClimb"].arr[4].avg], 6);
+    writeAverageTableRow("endgameCageClimbTable", ["Climb %", avgs["endgameCageClimb"].arr[0].avg, avgs["endgameCageClimb"].arr[2].avg, avgs["endgameCageClimb"].arr[1].avg, avgs["endgameCageClimb"].arr[3].avg, avgs["endgameCageClimb"].arr[4].avg], 6);
     writeAverageTableRow("endgameStartClimbTable", ["Start Climb %", avgs["endgameStartClimb"].arr[0].avg, avgs["endgameStartClimb"].arr[1].avg, avgs["endgameStartClimb"].arr[2].avg, avgs["endgameStartClimb"].arr[3].avg], 5);
   }
 

@@ -118,11 +118,24 @@ require 'inc/header.php';
               <td class="text-start table-secondary">Avg Endgame Points</td>
               <td id="redAvgEndgamePoints" class="table-danger"></td>
               <td id="blueAvgEndgamePoints" class="table-primary"></td>
+            <tr>
+              <td class="text-start table-secondary">Predicted Points</td>
+              <td id="redPredictedTotalPoints" class="table-danger"></td>
+              <td id="bluePredictedTotalPoints" class="table-primary"></td>
             </tr>
             <tr>
-              <td class="text-start table-secondary">Total Predicted Points</td>
-              <td id="redTotalPredictedPoints" class="table-danger"></td>
-              <td id="blueTotalPredictedPoints" class="table-primary"></td>
+              <td class="text-start table-secondary">Actual Points</td>
+              <td id="redActualTotalPoints" class="table-danger"></td>
+              <td id="blueActualTotalPoints" class="table-primary"></td>
+            <tr>
+              <td class="text-start table-secondary">Predicted RP</td>
+              <td id="redPredictedRP" class="table-danger"></td>
+              <td id="bluePredictedRP" class="table-primary"></td>
+            </tr>
+            <tr>
+              <td class="text-start table-secondary">Actual RP</td>
+              <td id="redActualRP" class="table-danger"></td>
+              <td id="blueActualRP" class="table-primary"></td>
             </tr>
           </tbody>
         </table>
@@ -459,14 +472,20 @@ require 'inc/header.php';
     document.getElementById("redAvgAutoPoints").innerText = "";
     document.getElementById("redAvgTeleopPoints").innerText = "";
     document.getElementById("redAvgEndgamePoints").innerText = "";
-    document.getElementById("redTotalPredictedPoints").innerText = "";
+    document.getElementById("redPredictedTotalPoints").innerText = "";
+    document.getElementById("redActualTotalPoints").innerText = "";
+    document.getElementById("redPredictedRP").innerText = "";
+    document.getElementById("redActualRP").innerText = "";
 
     document.getElementById("blueTotalCoral").innerText = "";
     document.getElementById("blueTotalAlgae").innerText = "";
     document.getElementById("blueAvgAutoPoints").innerText = "";
     document.getElementById("blueAvgTeleopPoints").innerText = "";
     document.getElementById("blueAvgEndgamePoints").innerText = "";
-    document.getElementById("blueTotalPredictedPoints").innerText = "";
+    document.getElementById("bluePredictedTotalPoints").innerText = "";
+    document.getElementById("blueActualTotalPoints").innerText = "";
+    document.getElementById("bluePredictedRP").innerText = "";
+    document.getElementById("blueActualRP").innerText = "";
 
     // Clear team box photo and match data
     document.getElementById("R0RobotPics").innerText = "";
@@ -662,7 +681,13 @@ require 'inc/header.php';
     let avgAutoPoints = { "red": 0, "blue": 0 };
     let avgTeleopPoints = { "red": 0, "blue": 0 };
     let endgamePointsAvg = { "red": 0, "blue": 0 };
-    let totalPredictedPoints = { "red": 0, "blue": 0 };
+    let predictedPoints = { "red": 0, "blue": 0 };
+    let autoLeaves = { "red": 0, "blue": 0 };
+    let autoCorals = { "red": 0, "blue": 0 };
+    let totalCoralsL1 = { "red": 0, "blue": 0 };
+    let totalCoralsL2 = { "red": 0, "blue": 0 };
+    let totalCoralsL3 = { "red": 0, "blue": 0 };
+    let totalCoralsL4 = { "red": 0, "blue": 0 };
 
     for (let i in matchSpec.red) {
       teamNum = matchSpec.red[i];
@@ -673,7 +698,13 @@ require 'inc/header.php';
         avgAutoPoints["red"] += ad["autonPoints"].avg;
         avgTeleopPoints["red"] += ad["teleopPoints"].avg;
         endgamePointsAvg["red"] += ad["endgamePoints"].avg;
-        totalPredictedPoints["red"] += ad["totalMatchPoints"].avg;
+        predictedPoints["red"] += ad["totalMatchPoints"].avg;
+        autoLeaves["red"] += ad["autonLeave"].avg;
+        autoCorals["red"] += ad["autonCoralL1"].avg + ad["autonCoralL2"].avg + ad["autonCoralL3"].avg + ad["autonCoralL4"].avg;
+        totalCoralsL1["red"] += ad["autonCoralL1"].avg + ad["teleopCoralL1"].avg;
+        totalCoralsL2["red"] += ad["autonCoralL2"].avg + ad["teleopCoralL2"].avg;
+        totalCoralsL3["red"] += ad["autonCoralL3"].avg + ad["teleopCoralL3"].avg;
+        totalCoralsL4["red"] += ad["autonCoralL4"].avg + ad["teleopCoralL4"].avg;
       }
     }
     for (let i in matchSpec.blue) {
@@ -685,23 +716,58 @@ require 'inc/header.php';
         avgAutoPoints["blue"] += ad["autonPoints"].avg;
         avgTeleopPoints["blue"] += ad["teleopPoints"].avg;
         endgamePointsAvg["blue"] += ad["endgamePoints"].avg;
-        totalPredictedPoints["blue"] += ad["totalMatchPoints"].avg;
+        predictedPoints["blue"] += ad["totalMatchPoints"].avg;
+        autoLeaves["blue"] += ad["autonLeave"].avg;
+        autoCorals["blue"] += ad["autonCoralL1"].avg + ad["autonCoralL2"].avg + ad["autonCoralL3"].avg + ad["autonCoralL4"].avg;
+        totalCoralsL1["blue"] += ad["autonCoralL1"].avg + ad["teleopCoralL1"].avg;
+        totalCoralsL2["blue"] += ad["autonCoralL2"].avg + ad["teleopCoralL2"].avg;
+        totalCoralsL3["blue"] += ad["autonCoralL3"].avg + ad["teleopCoralL3"].avg;
+        totalCoralsL4["blue"] += ad["autonCoralL4"].avg + ad["teleopCoralL4"].avg;
       }
     }
+
+    // Predict ranking points
+    //  AutoRP - auto leaves > 2.5 (> 80% success for leaving) AND at least one coral scored in autonomous (> 0.8 coral scored)
+    //  CoralRP - 5 coral on each level:  can score on L1 and average a total of at tleast 18.5 coral
+    //  Endgame average points > 10 (indicates at least one deep climb, because one shallow plus 2 parks is == 10)
+    //  Win - predicted points for each alliance 2, 1, 0
+    let predictedRP = { "red": 0, "blue": 0 };
+    predictedRP["red"] += (autoLeaves["red"] > 2.5) && (autoCorals["red"] > 0.8);
+    predictedRP["blue"] += (autoLeaves["blue"] > 2.5) && (autoCorals["blue"] > 0.8);
+
+    predictedRP["red"] += (totalCoralsL1["red"] > 2.5) && ((totalCoralsL1["red"] + totalCoralsL2["red"] + totalCoralsL3["red"] + totalCoralsL4["red"]) > 18.5) ? 1 : 0;
+    predictedRP["blue"] += (totalCoralsL1["blue"] > 2.5) && ((totalCoralsL1["blue"] + totalCoralsL2["blue"] + totalCoralsL3["blue"] + totalCoralsL4["blue"]) > 18.5) ? 1 : 0;
+
+    predictedRP["red"] += (endgamePointsAvg["red"] > 10.0) ? 1 : 0;
+    predictedRP["blue"] += (endgamePointsAvg["blue"] > 10.0) ? 1 : 0;
+
+    predictedRP["red"] += (predictedPoints["red"] > predictedPoints["blue"]) ? 3 :
+      (predictedPoints["red"] == predictedPoints["blue"]) ? 1 : 0;
+    predictedRP["blue"] += (predictedPoints["blue"] > predictedPoints["red"]) ? 3 :
+      (predictedPoints["blue"] == predictedPoints["red"]) ? 1 : 0;
+
+    let summedOPR = { "red": 0, "blue": 0 };
+    let actualPoints = { "red": 0, "blue": 0 };
 
     document.getElementById("redTotalCoral").innerText = roundTwoPlaces(totalCoralPiecesAvg["red"]);
     document.getElementById("redTotalAlgae").innerText = roundTwoPlaces(totalAlgaePiecesAvg["red"]);
     document.getElementById("redAvgAutoPoints").innerText = roundTwoPlaces(avgAutoPoints["red"]);
     document.getElementById("redAvgTeleopPoints").innerText = roundTwoPlaces(avgTeleopPoints["red"]);
     document.getElementById("redAvgEndgamePoints").innerText = roundTwoPlaces(endgamePointsAvg["red"]);
-    document.getElementById("redTotalPredictedPoints").innerText = roundTwoPlaces(totalPredictedPoints["red"]);
+    document.getElementById("redPredictedTotalPoints").innerText = roundTwoPlaces(predictedPoints["red"]);
+    document.getElementById("redActualTotalPoints").innerText = roundTwoPlaces(matchSpec["redScore"]);
+    document.getElementById("redPredictedRP").innerText = roundTwoPlaces(predictedRP["red"]);
+    document.getElementById("redActualRP").innerText = roundTwoPlaces(matchSpec["redRP"]);
 
     document.getElementById("blueTotalCoral").innerText = roundTwoPlaces(totalCoralPiecesAvg["blue"]);
     document.getElementById("blueTotalAlgae").innerText = roundTwoPlaces(totalAlgaePiecesAvg["blue"]);
     document.getElementById("blueAvgAutoPoints").innerText = roundTwoPlaces(avgAutoPoints["blue"]);
     document.getElementById("blueAvgTeleopPoints").innerText = roundTwoPlaces(avgTeleopPoints["blue"]);
     document.getElementById("blueAvgEndgamePoints").innerText = roundTwoPlaces(endgamePointsAvg["blue"]);
-    document.getElementById("blueTotalPredictedPoints").innerText = roundTwoPlaces(totalPredictedPoints["blue"]);
+    document.getElementById("bluePredictedTotalPoints").innerText = roundTwoPlaces(predictedPoints["blue"]);
+    document.getElementById("blueActualTotalPoints").innerText = roundTwoPlaces(matchSpec["blueScore"]);
+    document.getElementById("bluePredictedRP").innerText = roundTwoPlaces(predictedRP["blue"]);
+    document.getElementById("blueActualRP").innerText = roundTwoPlaces(matchSpec["blueRP"]);
   }
 
   //
@@ -768,7 +834,13 @@ require 'inc/header.php';
       }
 
       newMatch["red_teams"] = match["alliances"]["red"]["team_keys"];
+      newMatch["redScore"] = match["alliances"]["red"]["score"];
+      newMatch["redRP"] = match["score_breakdown"]["red"]["rp"];
+
       newMatch["blue_teams"] = match["alliances"]["blue"]["team_keys"];
+      newMatch["blueScore"] = match["alliances"]["blue"]["score"];
+      newMatch["blueRP"] = match["score_breakdown"]["blue"]["rp"];
+
       newMatch["time"] = null;
       if (match["predicted_time"] != null) {
         newMatch["time"] = match["predicted_time"];
@@ -823,11 +895,15 @@ require 'inc/header.php';
         strTeamToIntTeam(matchVector["red_teams"][1]),
         strTeamToIntTeam(matchVector["red_teams"][2])
       ],
+      redScore: matchVector["redScore"],
+      redRP: matchVector["redRP"],
       blue: [
         strTeamToIntTeam(matchVector["blue_teams"][0]),
         strTeamToIntTeam(matchVector["blue_teams"][1]),
         strTeamToIntTeam(matchVector["blue_teams"][2])
-      ]
+      ],
+      blueScore: matchVector["blueScore"],
+      blueRP: matchVector["blueRP"]
     };
 
     return matchSpec;
