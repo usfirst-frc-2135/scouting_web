@@ -33,11 +33,27 @@ require 'inc/header.php';
 <script>
 
   //
+  // Load the strategic data into the table body
+  //
+  function loadStrategicTableBody(tableId, stratData, aliasList, teamFilter) {
+    console.log("=> loadStrategicTableBody");
+    if (aliasList === null || stratData === null)
+      return;
+
+    insertStrategicDataBody(tableId, stratData, aliasList, teamFilter);
+    document.getElementById('spinner').style.display = 'none';
+    // script instructions say this is needed, but it breaks table header sorting
+    // sorttable.makeSortable(document.getElementById(tableId));
+    document.getElementById(tableId).click(); // This magic fixes the floating column bug
+  }
+
+  //
   // Retrive strategic scouting data and load the table
   //
   function buildStrategicDataTable(tableId) {
     console.log("==> strategicData: buildStrategicDataTable()");
     let jAliasNames = null;
+    let jStratData = null;
 
     // Load alias lookup table
     $.get("api/dbReadAPI.php", {
@@ -46,6 +62,7 @@ require 'inc/header.php';
       console.log("=> eventAliasNames");
       jAliasNames = JSON.parse(eventAliasNames);
       insertStrategicDataHeader(tableId, jAliasNames);
+      loadStrategicTableBody(tableId, jStratData, jAliasNames, []);
     });
 
     // Load the strategic data
@@ -53,11 +70,8 @@ require 'inc/header.php';
       getAllStrategicData: true
     }).done(function (strategicData) {
       console.log("=> getAllStrategicData");
-      insertStrategicDataBody(tableId, JSON.parse(strategicData), jAliasNames, []);
-      document.getElementById('spinner').style.display = 'none';
-      // script instructions say this is needed, but it breaks table header sorting
-      // sorttable.makeSortable(document.getElementById(tableId));
-      document.getElementById(tableId).click(); // This magic fixes the floating column bug
+      jStratData = JSON.parse(strategicData);
+      loadStrategicTableBody(tableId, jStratData, jAliasNames, []);
     });
   }
 
