@@ -32,7 +32,6 @@ require 'inc/header.php';
 <!-- Javascript page handlers -->
 
 <script>
-
   //
   //  Match data check table utilities that:
   //    1) insert a header row for a match data check table
@@ -138,7 +137,7 @@ require 'inc/header.php';
 
     $.get("api/tbaAPI.php", {
       getEventMatches: true
-    }).done(function (eventMatches) {
+    }).done(function(eventMatches) {
       console.log("=> getEventMatches");
       jEventMatches = JSON.parse(eventMatches)["response"];
       loadMatchStatusTable(tableId, jEventMatches, jAllMatchData);
@@ -146,7 +145,7 @@ require 'inc/header.php';
 
     $.get("api/dbReadAPI.php", {
       getAllMatchData: true
-    }).done(function (matchData) {
+    }).done(function(matchData) {
       console.log("=> getAllMatchData");
       jAllMatchData = JSON.parse(matchData);
       loadMatchStatusTable(tableId, jEventMatches, jAllMatchData);
@@ -161,21 +160,22 @@ require 'inc/header.php';
   //    Get all match data from our database
   //    When completed, display the web page
   //
-  document.addEventListener("DOMContentLoaded", function () {
+  document.addEventListener("DOMContentLoaded", function() {
 
     const tableId = "matchStatusTable";
-    const frozenTable = new FreezeTable('.freeze-table', { fixedNavbar: '.navbar' });
+    const frozenTable = new FreezeTable('.freeze-table', {
+      fixedNavbar: '.navbar'
+    });
 
     buildMatchStatusTable(tableId);
 
     // Create frozen table panes and keep the panes updated
-    document.getElementById(tableId).addEventListener('click', function () {
+    document.getElementById(tableId).addEventListener('click', function() {
       if (frozenTable) {
         frozenTable.update();
       }
     });
   });
-
 </script>
 
 <script src="./scripts/compareMatchNumbers.js"></script>

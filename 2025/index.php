@@ -156,7 +156,6 @@ require 'inc/header.php';
 <!-- Javascript page handlers -->
 
 <script>
-
   //
   // Set the status badges for an item
   //
@@ -225,7 +224,7 @@ require 'inc/header.php';
     for (const id in idToConfigKey) {
       fieldWriteMap[id] = false;
       let elementRef = document.getElementById(id);
-      elementRef.addEventListener("change", function (evt) {
+      elementRef.addEventListener("change", function(evt) {
         if (elementRef.value === "") {
           elementRef.classList.add("text-bg-warning");
           fieldWriteMap[id] = false;
@@ -254,7 +253,7 @@ require 'inc/header.php';
   //
   // Process the generated html
   //
-  document.addEventListener("DOMContentLoaded", function () {
+  document.addEventListener("DOMContentLoaded", function() {
 
     // Map form form-control IDs to the db_config labels that store them
     const idToConfigKey = {
@@ -272,13 +271,13 @@ require 'inc/header.php';
     // Update the database status badges
     $.post("api/dbAPI.php", {
       getDBStatus: true
-    }, function (dbStatus) {
+    }, function(dbStatus) {
       console.log("=> getDBStatus");
       updateStatusValues(JSON.parse(dbStatus));
     });
 
     // Create the write db_config file button
-    document.getElementById("writeConfig").addEventListener('click', function () {
+    document.getElementById("writeConfig").addEventListener('click', function() {
       for (const id in idToConfigKey) {
         if (document.getElementById(id).value.trim() == "") {
           console.warn("Enter all fields: server URL, database name, username, password, TBA key, and event code.");
@@ -307,7 +306,7 @@ require 'inc/header.php';
       configData["writeConfig"] = JSON.stringify(configData);
 
       // Update the status badges after writing the config file and reload the page
-      $.post("api/dbAPI.php", configData, function (dbStatus) {
+      $.post("api/dbAPI.php", configData, function(dbStatus) {
         console.log("=> writeConfig");
         updateStatusValues(JSON.parse(dbStatus));
         location.reload(); // This updates the event code in the header
@@ -315,7 +314,7 @@ require 'inc/header.php';
     });
 
     // Create the filter checkbox listeners and create the config file values
-    document.getElementById("filterData").addEventListener('click', function () {
+    document.getElementById("filterData").addEventListener('click', function() {
       let filterData = {};
       filterData["useP"] = +document.getElementById("dataP").checked;
       filterData["useQm"] = +document.getElementById("dataQm").checked;
@@ -326,17 +325,17 @@ require 'inc/header.php';
       configInfo["filterConfig"] = JSON.stringify(filterData);
 
       // Make request
-      $.post("api/dbAPI.php", configInfo, function (dbStatus) {
+      $.post("api/dbAPI.php", configInfo, function(dbStatus) {
         console.log("=> filterConfig");
         updateStatusValues(JSON.parse(dbStatus));
       });
     });
 
     // Create the button to create a new database
-    document.getElementById("createDB").addEventListener('click', function () {
+    document.getElementById("createDB").addEventListener('click', function() {
       $.post("api/dbAPI.php", {
         createDB: true
-      }, function (dbStatus) {
+      }, function(dbStatus) {
         console.log("=> createDB");
         updateStatusValues(JSON.parse(dbStatus));
         alert("While this might create a new database, it cannot add permissions for this username! This must be done using phpMyAdmin.");
@@ -344,14 +343,13 @@ require 'inc/header.php';
     });
 
     // Create the button to create new tables in the atabase
-    document.getElementById("createTables").addEventListener('click', function () {
+    document.getElementById("createTables").addEventListener('click', function() {
       $.post("api/dbAPI.php", {
         createTables: true
-      }, function (createTables) {
+      }, function(createTables) {
         console.log("=> createTables");
         updateStatusValues(JSON.parse(createTables));
       });
     });
   });
-
 </script>

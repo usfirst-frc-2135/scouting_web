@@ -60,7 +60,6 @@ require 'inc/header.php';
 <!-- Javascript page handlers -->
 
 <script>
-
   //
   // Build the scout name table
   //
@@ -82,7 +81,7 @@ require 'inc/header.php';
       row.innerHTML += "<td> <button id='" + key + "_delete' value='" + key + "' class='btn btn-danger' type='button'>Delete</button></td>";
 
       // Add delete button
-      document.getElementById(key + "_delete").addEventListener('click', function () {
+      document.getElementById(key + "_delete").addEventListener('click', function() {
         console.log("Deleted " + this.value);
         deleteScoutName(tableId, this.value);
       });
@@ -98,9 +97,11 @@ require 'inc/header.php';
   function addScoutName(tableId, scoutName) {
     console.log("==> scoutData: addScoutName()" + " " + scoutName);
     $.post("api/dbWriteAPI.php", {
-      writeSingleScoutName: JSON.stringify({ "scoutname": scoutName })
-    }, function (response) {
-      if (response.indexOf('success') > -1) {    // A loose compare, because success word may have a newline
+      writeSingleScoutName: JSON.stringify({
+        "scoutname": scoutName
+      })
+    }, function(response) {
+      if (response.indexOf('success') > -1) { // A loose compare, because success word may have a newline
         // alert("Success in submitting Scout Name data! Clearing Data.");
         document.getElementById("enterScoutName").value = "";
         buildScoutTable(tableId);
@@ -116,9 +117,11 @@ require 'inc/header.php';
   function deleteScoutName(tableId, scoutName) {
     console.log("==> scoutData: deleteScoutName()" + " " + scoutName);
     $.post("api/dbWriteAPI.php", {
-      deleteSingleScoutName: JSON.stringify({ "scoutname": scoutName })
-    }, function (response) {
-      if (response.indexOf('success') > -1) {    // A loose compare, because success word may have a newline
+      deleteSingleScoutName: JSON.stringify({
+        "scoutname": scoutName
+      })
+    }, function(response) {
+      if (response.indexOf('success') > -1) { // A loose compare, because success word may have a newline
         // alert("Success in submitting Scout Name data! Clearing Data.");
         document.getElementById("enterScoutName").value = "";
         buildScoutTable(tableId);
@@ -139,7 +142,7 @@ require 'inc/header.php';
     $.post("api/dbAPI.php", {
       writeScoutNameJSON: JSON.stringify(jsonTable),
       filename: fileName
-    }, function (dbStatus) {
+    }, function(dbStatus) {
       console.log("=> writeScoutNameFile - DONE");
       alert("Scout Names JSON file written to: \n\n     " + fileName);
     });
@@ -151,7 +154,7 @@ require 'inc/header.php';
   function buildScoutTable(tableId) {
     $.get("api/dbReadAPI.php", {
       getEventScoutNames: true
-    }).done(function (eventScoutNames) {
+    }).done(function(eventScoutNames) {
       console.log("=> eventScoutNames");
       let jScoutNames = JSON.parse(eventScoutNames);
       loadScoutDataTable(tableId, jScoutNames);
@@ -164,7 +167,7 @@ require 'inc/header.php';
   //    Get scout names for this eventcode from TBA
   //    When all completed, generate the web page
   //
-  document.addEventListener("DOMContentLoaded", function () {
+  document.addEventListener("DOMContentLoaded", function() {
 
     const tableId = "scoutTable";
     let scoutNameList = [];
@@ -173,7 +176,7 @@ require 'inc/header.php';
     buildScoutTable(tableId);
 
     // Pressing enter in team number field attempts to save the scout name
-    document.getElementById("enterScoutName").addEventListener("keypress", function (event) {
+    document.getElementById("enterScoutName").addEventListener("keypress", function(event) {
       if (event.key === "Enter") {
         event.preventDefault();
         document.getElementById("addScoutName").click();
@@ -181,7 +184,7 @@ require 'inc/header.php';
     });
 
     // Add the scout name
-    document.getElementById("addScoutName").addEventListener('click', function () {
+    document.getElementById("addScoutName").addEventListener('click', function() {
       let scoutName = document.getElementById("enterScoutName").value.trim();
       if (scoutName != "") {
         addScoutName(tableId, scoutName);
@@ -189,12 +192,11 @@ require 'inc/header.php';
     });
 
     // Write out scout name JSON file to server folder
-    document.getElementById("writeScoutNameJSON").addEventListener('click', function () {
+    document.getElementById("writeScoutNameJSON").addEventListener('click', function() {
       const filename = "../../../json/" + frcEventCode + "_" + "scoutNames.json";
       writeScoutNameFile(tableId, filename);
     });
   });
-
 </script>
 
 <script src="./scripts/tableToJSON.js"></script>

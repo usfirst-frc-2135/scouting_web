@@ -49,9 +49,8 @@ require 'inc/header.php';
 <!-- Javascript page handlers -->
 
 <script>
-
-  const qrValidLength = 42;   // This is determined by game requirements and adjusted each year
-  const qrPadLength = 1;      // TODO: no explanation why this is padded--did we delete something? Remove for 2026
+  const qrValidLength = 42; // This is determined by game requirements and adjusted each year
+  const qrPadLength = 1; // TODO: no explanation why this is padded--did we delete something? Remove for 2026
 
   //
   // update this data list length whenever more data is added to the table
@@ -93,20 +92,20 @@ require 'inc/header.php';
   function qrListToMatchData(qrList) {
     let matchData = {};
     // Perennial fields that always occur
-    matchData["eventcode"] = qrList[37];      // Make this [0] in 2026
-    matchData["matchnumber"] = qrList[36];    // Make this [1] in 2026
-    matchData["teamnumber"] = qrList[0];      // Make this [2] in 2026
-    matchData["teamalias"] = qrList[40];      // Make this [3] in 2026
-    matchData["scoutname"] = qrList[38];      // Make this [4] in 2026
+    matchData["eventcode"] = qrList[37]; // Make this [0] in 2026
+    matchData["matchnumber"] = qrList[36]; // Make this [1] in 2026
+    matchData["teamnumber"] = qrList[0]; // Make this [2] in 2026
+    matchData["teamalias"] = qrList[40]; // Make this [3] in 2026
+    matchData["scoutname"] = qrList[38]; // Make this [4] in 2026
     // matchData["version"] = qrList[];       // Make this [5] in 2026 - this will be a NEW field from the Android app
 
     // Recurring (and overall) data
-    matchData["died"] = qrList[35];           // Make this [6] in 2026
+    matchData["died"] = qrList[35]; // Make this [6] in 2026
 
     // Match or year-specific fields below here!
 
     // Autonomous
-    matchData["autonStartPos"] = qrList[1];   // UNUSED
+    matchData["autonStartPos"] = qrList[1]; // UNUSED
     matchData["autonLeave"] = qrList[2];
     // matchData["reefzoneAB"] = qrList[3];      // UNUSED
     // matchData["reefzoneCD"] = qrList[4];      // UNUSED
@@ -190,11 +189,10 @@ require 'inc/header.php';
       row.innerHTML += "<td> <button id='" + key + "_delete' value='" + key + "' class='btn btn-danger' type='button'>Delete</button></td>";
 
       // Add delete button
-      document.getElementById(key + "_delete").addEventListener('click', function () {
+      document.getElementById(key + "_delete").addEventListener('click', function() {
         removeQrScanEntry(this.value, scannedMatches);
       });
-    }
-    else {
+    } else {
       console.log("addMatchDataToTable: scannedMatches already has that key!");
     }
   }
@@ -208,8 +206,7 @@ require 'inc/header.php';
       delete scannedMatches[dataKey];
       updateScannedMatchCount(scannedMatches);
       document.getElementById(dataKey + "_row").remove();
-    }
-    else {
+    } else {
       console.log("removeQrScanEntry: scannedMatches does not have that key!");
     }
   }
@@ -219,18 +216,17 @@ require 'inc/header.php';
   //
   function indicateScanSuccess() {
     const canVibrate = window.navigator.vibrate;
-    if (canVibrate) {                   // iOS does not support vibrate and crashes, so test if it's available
+    if (canVibrate) { // iOS does not support vibrate and crashes, so test if it's available
       try {
         window.navigator.vibrate(200); // MacOS Chrome throws an "intervention" if window is not clicked first!
-      }
-      catch (exception) {
+      } catch (exception) {
         console.warn("indicateScanSuccess: Vibrate notification request failed! - " + e);
         alert("Vibrate notification request failed!");
       }
     }
 
     document.getElementById("content").classList.add("bg-success");
-    setTimeout(function () {
+    setTimeout(function() {
       document.getElementById("content").classList.remove("bg-success");
     }, 500);
   }
@@ -254,7 +250,7 @@ require 'inc/header.php';
   // Responsible for handling actions that occur when camera is scanning
   //
   function addCameraScanner(camId, scanner, tableId, scannedMatches) {
-    scanner.decodeFromInputVideoDeviceContinuously(camId, 'camera', function (result, err) {
+    scanner.decodeFromInputVideoDeviceContinuously(camId, 'camera', function(result, err) {
       if (result) {
         let qrList = qrStringToList(result.text);
         qrList = padList(qrList);
@@ -262,8 +258,7 @@ require 'inc/header.php';
         if (validateQrList(qrList)) {
           indicateScanSuccess();
           addMatchDataToTable(tableId, qrListToMatchData(qrList), scannedMatches);
-        }
-        else {
+        } else {
           console.warn("addCameraScanner: QR scan content failed validation!");
           alert("QR scan content failed validation!");
         }
@@ -276,12 +271,12 @@ require 'inc/header.php';
   //
   function createCameraSelector(camTagId, scanner, tableId, scannedMatches) {
     // Look for cameras, enumerate them, and connect the scanner
-    scanner.getVideoInputDevices().then(function (videoInputDevices) {
+    scanner.getVideoInputDevices().then(function(videoInputDevices) {
       let camDeviceId = null;
       let camSelector = document.getElementById(camTagId);
       console.log("createCameraSelector: Camera count: " + videoInputDevices.length);
       if (videoInputDevices.length >= 1) {
-        videoInputDevices.forEach(function (element) {
+        videoInputDevices.forEach(function(element) {
           if (camDeviceId === null) {
             camDeviceId = element.deviceId;
           }
@@ -297,7 +292,7 @@ require 'inc/header.php';
       addCameraScanner(getDefaultDeviceID(camDeviceId), scanner, tableId, scannedMatches);
 
       // Handle drop down changes to select another camera when necessary
-      document.getElementById(camTagId).addEventListener('change', function () {
+      document.getElementById(camTagId).addEventListener('change', function() {
         let newCamId = document.getElementById(camTagId).value;
         addCameraScanner(newCamId, scanner, tableId, scannedMatches);
         setDefaultDeviceID(newCamId);
@@ -333,11 +328,10 @@ require 'inc/header.php';
     if (indexedMatches.length == 0) {
       console.warn("submitScannedMatches: No scanned match entries found! - Data NOT Submitted");
       alert("No scanned match entries found! - Data NOT Submitted");
-    }
-    else {
+    } else {
       $.post("api/dbWriteAPI.php", {
         writeTeamMatch: JSON.stringify(indexedMatches)
-      }, function (response) {
+      }, function(response) {
         console.log("=> writeTeamMatch: " + JSON.stringify(response));
         if (response.indexOf('success') > -1) { // A loose compare, because success word may have a newline
           clearScannedMatches(tableId, scannedMatches);
@@ -354,7 +348,7 @@ require 'inc/header.php';
   //
   // Process the generated html
   //
-  document.addEventListener("DOMContentLoaded", function () {
+  document.addEventListener("DOMContentLoaded", function() {
 
     // All successfully scanned matches
     const tableId = "qrScanTable";
@@ -368,11 +362,10 @@ require 'inc/header.php';
     createCameraSelector("cameraSelector", scanner, tableId, scannedMatches);
 
     // Submit the scanned data
-    document.getElementById("submitData").addEventListener('click', function () {
+    document.getElementById("submitData").addEventListener('click', function() {
       submitScannedMatches(tableId, scannedMatches);
     });
   });
-
 </script>
 
 <script src="./external/zxing/zxing.min.js"></script>

@@ -88,7 +88,6 @@ require 'inc/header.php';
 <!-- Javascript page handlers -->
 
 <script>
-
   //
   // Build the team watch list table
   //
@@ -111,7 +110,7 @@ require 'inc/header.php';
       row.innerHTML += "<td> <button id='" + key + "_delete' value='" + key + "' class='btn btn-danger' type='button'>Delete</button></td>";
 
       // Add delete button
-      document.getElementById(key + "_delete").addEventListener('click', function () {
+      document.getElementById(key + "_delete").addEventListener('click', function() {
         console.log("Deleted " + this.value);
         deleteTeamWatch(tableId, watchId, this.value);
       });
@@ -129,9 +128,12 @@ require 'inc/header.php';
   function updateTeamWatch(tableId, watchId, teamNum, status) {
     console.log("==> strategicSchedule: updateTeamWatch()" + " " + teamNum + " " + status);
     $.post("api/dbWriteAPI.php", {
-      writeSingleTeamWatch: JSON.stringify({ "teamnumber": teamNum, "status": status })
-    }, function (response) {
-      if (response.indexOf('success') > -1) {    // A loose compare, because success word may have a newline
+      writeSingleTeamWatch: JSON.stringify({
+        "teamnumber": teamNum,
+        "status": status
+      })
+    }, function(response) {
+      if (response.indexOf('success') > -1) { // A loose compare, because success word may have a newline
         // alert("Success in submitting Team Watch status! Clearing Data.");
         document.getElementById("enterTeamNumber").value = "";
         buildWatchTable(tableId, watchId);
@@ -147,9 +149,11 @@ require 'inc/header.php';
   function deleteTeamWatch(tableId, watchId, teamWatch) {
     console.log("==> strategicSchedule: deleteTeamWatch()" + " " + teamWatch);
     $.post("api/dbWriteAPI.php", {
-      deleteSingleTeamWatch: JSON.stringify({ "teamwatch": teamWatch })
-    }, function (response) {
-      if (response.indexOf('success') > -1) {    // A loose compare, because success word may have a newline
+      deleteSingleTeamWatch: JSON.stringify({
+        "teamwatch": teamWatch
+      })
+    }, function(response) {
+      if (response.indexOf('success') > -1) { // A loose compare, because success word may have a newline
         // alert("Success in submitting Team Watch status! Clearing Data.");
         document.getElementById("enterTeamNumber").value = "";
         buildWatchTable(tableId, watchId);
@@ -165,7 +169,7 @@ require 'inc/header.php';
   function buildWatchTable(tableId, watchId) {
     $.get("api/dbReadAPI.php", {
       getEventWatchList: true
-    }).done(function (eventWatchList) {
+    }).done(function(eventWatchList) {
       console.log("=> eventWatchList" + eventWatchList);
       let jWatchList = JSON.parse(eventWatchList);
       loadTeamWatchTable(tableId, watchId, jWatchList);
@@ -188,7 +192,13 @@ require 'inc/header.php';
       let timeNow = new Date();
       // Use this for testing a partial schedule, uncomment following lineand change the date/time to mid schedule
       // timeNow = new Date("2025-05-17T17:52:00");
-      let options = { weekday: 'short', month: 'short', day: 'numeric', hour: "numeric", minute: "numeric" };
+      let options = {
+        weekday: 'short',
+        month: 'short',
+        day: 'numeric',
+        hour: "numeric",
+        minute: "numeric"
+      };
       let timeStr = matchTime.toLocaleDateString("en-us", options);
       let predStr = predictedTime.toLocaleDateString("en-us", options);
       if (matchTime < timeNow) {
@@ -215,7 +225,7 @@ require 'inc/header.php';
     $.get("api/tbaAPI.php", {
       getStrategicMatches: true,
       watchList: watchList
-    }).done(function (strategicMatches) {
+    }).done(function(strategicMatches) {
       // console.log("=> getStrategicMatches: " + strategicMatches);
       if (strategicMatches === null) {
         return alert("Can't load strategicMatches from TBA; check if TBA Key was set in db_config");
@@ -233,7 +243,7 @@ require 'inc/header.php';
   //    Get a (calcuated) strategic schedule from our database for our matches
   //    When completed, display the web page
   //
-  document.addEventListener("DOMContentLoaded", function () {
+  document.addEventListener("DOMContentLoaded", function() {
 
     const tableId = "stratSchedTable";
     const watchId = "watchTable";
@@ -241,12 +251,12 @@ require 'inc/header.php';
     buildWatchTable(tableId, watchId);
 
     // Create the completed match filter checkbox listener
-    document.getElementById("showCompleted").addEventListener('click', function () {
+    document.getElementById("showCompleted").addEventListener('click', function() {
       buildWatchTable(tableId, watchId);
     });
 
     // Save the team status to watch
-    document.getElementById("addTeamWatch").addEventListener('click', function () {
+    document.getElementById("addTeamWatch").addEventListener('click', function() {
       let teamNum = document.getElementById("enterTeamNumber").value.toUpperCase().trim();
       if (validateTeamNumber(teamNum, null) > 0) {
         updateTeamWatch(tableId, watchId, teamNum, "watch");
@@ -254,7 +264,7 @@ require 'inc/header.php';
     });
 
     // Save the team status to ignore
-    document.getElementById("addTeamIgnore").addEventListener('click', function () {
+    document.getElementById("addTeamIgnore").addEventListener('click', function() {
       let teamNum = document.getElementById("enterTeamNumber").value.toUpperCase().trim();
       if (validateTeamNumber(teamNum, null) > 0) {
         updateTeamWatch(tableId, watchId, teamNum, "ignore");

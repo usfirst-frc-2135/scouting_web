@@ -42,7 +42,6 @@ require 'inc/header.php';
 <!-- Javascript page handlers -->
 
 <script>
-
   //
   // Build the pit status table
   //
@@ -96,7 +95,7 @@ require 'inc/header.php';
     // Get alias table data
     $.get("api/dbReadAPI.php", {
       getEventAliasNames: true
-    }).done(function (eventAliasNames) {
+    }).done(function(eventAliasNames) {
       console.log("=> eventAliasNames");
       jAliasNames = JSON.parse(eventAliasNames);
       if (jAliasNames.length > 0) {
@@ -107,7 +106,7 @@ require 'inc/header.php';
     // Get the list of teams and add the team names 
     $.get("api/tbaAPI.php", {
       getEventTeamNames: true
-    }).done(function (eventTeamNames) {
+    }).done(function(eventTeamNames) {
       console.log("=> getEventTeamNames");
       if (eventTeamNames === null) {
         return alert("Can't load eventTeamNames from TBA; check if TBA Key was set in db_config");
@@ -135,7 +134,7 @@ require 'inc/header.php';
       // Get all the team images for the list of teams
       $.get("api/dbReadAPI.php", {
         getAllTeamImages: JSON.stringify(teamList)
-      }).done(function (teamImages) {
+      }).done(function(teamImages) {
         console.log("=> pitStatus: getAllTeamImages");
         jTeamImages = JSON.parse(teamImages);
         loadPitStatusTable(tableId, teamList, namesList, jTeamImages, jPitData);
@@ -145,7 +144,7 @@ require 'inc/header.php';
     // Get all the teams pit scouted
     $.get("api/dbReadAPI.php", {
       getAllPitData: true
-    }).done(function (allPitData) {
+    }).done(function(allPitData) {
       console.log("=> getAllPitData");
       jPitData = JSON.parse(allPitData);
       loadPitStatusTable(tableId, teamList, namesList, jTeamImages, jPitData);
@@ -160,14 +159,13 @@ require 'inc/header.php';
   //    Get all pit data from our database
   //    When all completed, generate the web page
   //
-  document.addEventListener("DOMContentLoaded", function () {
+  document.addEventListener("DOMContentLoaded", function() {
 
     const tableId = "psTable";
 
     buildPitStatusTable(tableId);
 
   });
-
 </script>
 
 <script src="./scripts/compareMatchNumbers.js"></script>

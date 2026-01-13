@@ -50,6 +50,7 @@
     <div id="navbarCollapse" class="collapse navbar-collapse">
       <ul class="navbar-nav navbar-dark mr-auto">
         <ul class="nav nav-pills flex-column flex-sm-row">
+
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle text-white-50 text-end text-sm-start" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Teams</a>
             <ul class="dropdown-menu bg-dark">
@@ -96,7 +97,6 @@
   </nav>
 
   <script>
-
     // Handle navbar button state toggles
     const currentLocation = location.href;
     const items = document.querySelectorAll("a");
@@ -109,8 +109,7 @@
         menuLink.classList.add("active");
         menuLink.classList.add("text-light");
         menuLink.classList.remove("text-secondary");
-      }
-      else {
+      } else {
         menuLink.classList.remove("active");
         menuLink.classList.remove("text-light");
         menuLink.classList.add("text-secondary");
@@ -122,8 +121,7 @@
       if (mode == 'dark') {
         document.documentElement.setAttribute('data-bs-theme', 'dark');
         document.getElementById('modeSwitch').src = './images/icons8-sun-50.png';
-      }
-      else {
+      } else {
         document.documentElement.setAttribute('data-bs-theme', 'light');
         document.getElementById('modeSwitch').src = './images/icons8-moon-50.png';
       }
@@ -132,26 +130,25 @@
     //
     // Update navbar with the event code if available
     //
-    document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("DOMContentLoaded", function() {
       // Load dark
       selectDarkLightMode();
 
       // Update the navbar with the event code
       $.post("api/dbAPI.php", {
         getDBStatus: true
-      }, function (dbStatus) {
+      }, function(dbStatus) {
         console.log("=> getDBStatus");
         let jDbStatus = JSON.parse(dbStatus);
         if (jDbStatus["server"] !== "") {
           $.get("api/dbAPI.php", {
             getEventCode: true
-          }, function (eventCode) {
+          }, function(eventCode) {
             frcEventCode = eventCode.trim();
             console.log("=> index: getEventCode: " + frcEventCode + "\n");
             document.getElementById("navbarEventCode").innerText = frcEventCode;
           });
-        }
-        else {
+        } else {
           console.warn("DB server undefined -- cannot retrieve event code!");
         }
       });
@@ -161,5 +158,4 @@
       localStorage.setItem('dark-light', document.documentElement.getAttribute('data-bs-theme') == 'dark' ? 'light' : 'dark');
       selectDarkLightMode();
     })
-
   </script>

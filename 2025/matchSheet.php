@@ -381,7 +381,6 @@ require 'inc/header.php';
 <!-- Javascript page handlers -->
 
 <script>
-
   //
   // Utility to strip off leading "frc" from team number
   //
@@ -404,8 +403,7 @@ require 'inc/header.php';
     if ((matchId.search("p") != -1) || (matchId.search("qm") != -1) ||
       (matchId.search("sf") != -1) || (matchId.search("f") != -1)) {
       return matchId;
-    }
-    else {  // Attempt to repair bad match IDs but log them
+    } else { // Attempt to repair bad match IDs but log them
       console.warn("getMatchTuple: Invalid matchId! " + matchId);
       return "qm" + matchId;
     }
@@ -418,17 +416,13 @@ require 'inc/header.php';
     matchId = getFixedMatchId(matchId);
     if (matchId.search("p") != -1) {
       return ["p", parseInt(matchId.substring(1))];
-    }
-    else if (matchId.search("qm") != -1) {
+    } else if (matchId.search("qm") != -1) {
       return ["qm", parseInt(matchId.substring(2))];
-    }
-    else if (matchId.search("sf") != -1) {
+    } else if (matchId.search("sf") != -1) {
       return ["sf", parseInt(matchId.substring(2))];
-    }
-    else if (matchId.search("f") != -1) {
+    } else if (matchId.search("f") != -1) {
       return ["f", parseInt(matchId.substring(1))];
-    }
-    else {  // Repair bad match IDs but report them
+    } else { // Repair bad match IDs but report them
       console.warn("getMatchTuple: Invalid match prefix! " + matchId);
     }
     return null;
@@ -513,7 +507,7 @@ require 'inc/header.php';
       ourMatchesArray.push(ourMatches[key]);
     }
 
-    ourMatchesArray.sort(function (matchA, matchB) {
+    ourMatchesArray.sort(function(matchA, matchB) {
       return compareMatchNumbers(matchA["comp_level"] + matchA["match_number"], matchB["comp_level"] + matchB["match_number"]);
     });
 
@@ -530,7 +524,7 @@ require 'inc/header.php';
       button.type = "button";
       button.textContent = matchId;
 
-      button.onclick = function (el) {
+      button.onclick = function(el) {
         document.getElementById("enterCompLevel").value = thisMatch["comp_level"];
         document.getElementById("enterMatchNumber").value = thisMatch["match_number"];
         document.getElementById("loadMatchButton").click();
@@ -623,7 +617,7 @@ require 'inc/header.php';
     // Get team name from TBA
     $.get("api/tbaAPI.php", {
       getTeamInfo: teamNum
-    }).done(function (teamInfo) {
+    }).done(function(teamInfo) {
       console.log("=> getTeamInfo:");
       if (teamInfo === null) {
         return alert("Can't load teamInfo from TBA; check if TBA Key was set in db_config");
@@ -631,8 +625,7 @@ require 'inc/header.php';
       let teamName = "";
       if (teamInfo === null) {
         alert("Can't load teamName from TBA; check if TBA Key was set in db_config");
-      }
-      else {
+      } else {
         let jTeamInfo = JSON.parse(teamInfo)["response"];
         teamName += " " + jTeamInfo["nickname"];
       }
@@ -676,18 +669,54 @@ require 'inc/header.php';
   // Update the match summary table comparing both alliances
   //
   function updateMatchSummary(matchSpec, averagesData) {
-    let totalCoralPiecesAvg = { "red": 0, "blue": 0 };
-    let totalAlgaePiecesAvg = { "red": 0, "blue": 0 };
-    let avgAutoPoints = { "red": 0, "blue": 0 };
-    let avgTeleopPoints = { "red": 0, "blue": 0 };
-    let endgamePointsAvg = { "red": 0, "blue": 0 };
-    let predictedPoints = { "red": 0, "blue": 0 };
-    let autoLeaves = { "red": 0, "blue": 0 };
-    let autoCorals = { "red": 0, "blue": 0 };
-    let totalCoralsL1 = { "red": 0, "blue": 0 };
-    let totalCoralsL2 = { "red": 0, "blue": 0 };
-    let totalCoralsL3 = { "red": 0, "blue": 0 };
-    let totalCoralsL4 = { "red": 0, "blue": 0 };
+    let totalCoralPiecesAvg = {
+      "red": 0,
+      "blue": 0
+    };
+    let totalAlgaePiecesAvg = {
+      "red": 0,
+      "blue": 0
+    };
+    let avgAutoPoints = {
+      "red": 0,
+      "blue": 0
+    };
+    let avgTeleopPoints = {
+      "red": 0,
+      "blue": 0
+    };
+    let endgamePointsAvg = {
+      "red": 0,
+      "blue": 0
+    };
+    let predictedPoints = {
+      "red": 0,
+      "blue": 0
+    };
+    let autoLeaves = {
+      "red": 0,
+      "blue": 0
+    };
+    let autoCorals = {
+      "red": 0,
+      "blue": 0
+    };
+    let totalCoralsL1 = {
+      "red": 0,
+      "blue": 0
+    };
+    let totalCoralsL2 = {
+      "red": 0,
+      "blue": 0
+    };
+    let totalCoralsL3 = {
+      "red": 0,
+      "blue": 0
+    };
+    let totalCoralsL4 = {
+      "red": 0,
+      "blue": 0
+    };
 
     for (let i in matchSpec.red) {
       teamNum = matchSpec.red[i];
@@ -739,7 +768,10 @@ require 'inc/header.php';
     //
     //      AutoRP -  3 robots leave and one coral scored:
     //          sum of robot leaves > 2.5 (> 80% success for leaving) AND at least one coral scored in autonomous (> 1.0 coral scored)
-    let predictedRP = { "red": 0, "blue": 0 };
+    let predictedRP = {
+      "red": 0,
+      "blue": 0
+    };
     predictedRP["red"] += (autoLeaves["red"] > 2.5) && (autoCorals["red"] > 1.0);
     predictedRP["blue"] += (autoLeaves["blue"] > 2.5) && (autoCorals["blue"] > 1.0);
     console.log("==> matchSheet: (Auto RP): red: " + predictedRP["red"] + " blue: " + predictedRP["blue"]);
@@ -810,7 +842,7 @@ require 'inc/header.php';
 
     $.get("api/dbReadAPI.php", {
       getAllTeamImages: JSON.stringify(requestList)
-    }).done(function (imageData) {
+    }).done(function(imageData) {
       console.log("=> getAllTeamImages");
       let jImageData = JSON.parse(imageData);
       for (let team of Object.keys(jImageData)) {
@@ -969,7 +1001,7 @@ require 'inc/header.php';
   //    Update the match summary table using the match averages
   //    Build a team box for each team with the team info, photo, and match average data
   //
-  document.addEventListener("DOMContentLoaded", function () {
+  document.addEventListener("DOMContentLoaded", function() {
     let matchId = null;
     let matchList = null;
     let averagesData = null;
@@ -985,12 +1017,11 @@ require 'inc/header.php';
     // Load event matches from TBA and build our links and a full match list
     $.get("api/tbaAPI.php", {
       getEventMatches: true
-    }).done(function (eventMatches) {
+    }).done(function(eventMatches) {
       console.log("=> getEventMatches");
       if (eventMatches === null) {
         return alert("Can't load eventMatches from TBA; check if TBA Key was set in db_config");
-      }
-      else {
+      } else {
         let jEventMatches = JSON.parse(eventMatches)["response"];
         matchList = buildMatchList(jEventMatches);
         if (matchId !== null)
@@ -1003,10 +1034,10 @@ require 'inc/header.php';
     // Load all match scouting data to be processed later
     $.get("api/dbReadAPI.php", {
       getAllMatchData: true
-    }).done(function (allMatchData) {
+    }).done(function(allMatchData) {
       console.log("=> getAllMatchData");
       let mdp = new matchDataProcessor(JSON.parse(allMatchData));
-      mdp.getSiteFilteredAverages(function (filteredMatchData, filteredAvgData) {
+      mdp.getSiteFilteredAverages(function(filteredMatchData, filteredAvgData) {
         averagesData = filteredAvgData;
         if ((matchSpec !== null) && (averagesData !== null))
           loadMatchSheet(matchSpec, averagesData);
@@ -1023,7 +1054,7 @@ require 'inc/header.php';
     }
 
     // Load the match sheet from the match number entries
-    document.getElementById("loadMatchButton").addEventListener('click', function () {
+    document.getElementById("loadMatchButton").addEventListener('click', function() {
       console.log("=> matchsheet: load event match!");
       matchId = document.getElementById("enterCompLevel").value + document.getElementById("enterMatchNumber").value.trim();
       matchSpec = getEventMatchSpec(matchId, matchList);
@@ -1032,7 +1063,7 @@ require 'inc/header.php';
     });
 
     // Load the custom match using the custom team numbers entries
-    document.getElementById("loadCustomMatch").addEventListener('click', function () {
+    document.getElementById("loadCustomMatch").addEventListener('click', function() {
       console.log("=> matchsheet: load custom match!");
       let newSpec = {
         title: "CUSTOM",
@@ -1044,8 +1075,7 @@ require 'inc/header.php';
       if (newSpec.red[0] === "" && newSpec.blue[0] === "") {
         console.warn("loadCustomMatch: No Red or Blue team 1 entered!");
         return alert("Please fill in Red Team Number 1 and Blue Team Number 1!");
-      }
-      else {
+      } else {
         matchSpec = newSpec;
         if ((matchSpec !== null) && (averagesData !== null))
           loadMatchSheet(matchSpec, averagesData);
@@ -1053,7 +1083,6 @@ require 'inc/header.php';
     });
 
   });
-
 </script>
 
 <script src="./scripts/compareMatchNumbers.js"></script>

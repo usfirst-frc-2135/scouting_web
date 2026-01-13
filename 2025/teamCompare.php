@@ -223,7 +223,6 @@ require 'inc/header.php';
 
 
 <script>
-
   let firstPickChart;
   let secondPickChart;
   let thirdPickChart;
@@ -243,24 +242,28 @@ require 'inc/header.php';
     let datasets = [];
 
     datasets.push({
-      label: team1, data: [
+      label: team1,
+      data: [
         avgData[team1]["autonPoints"].avg,
         avgData[team1]["teleopPoints"].avg,
         avgData[team1]["endgamePoints"].avg,
-        avgData[team1]["teleopAlgaeNet"].avg * 4,    // Multiply teleopAlgaeNetAvg by 4 to get points.
-        avgData[team1]["teleopCoralL4"].avg * 5,     // Multiply teleopCoralL4Avg by 5 to get points.
-        avgData[team1]["teleopCoralL3"].avg * 4      // Multiply teleopCoralL3Avg by 4 to get points.
-      ], backgroundColor: '#FF4316'
+        avgData[team1]["teleopAlgaeNet"].avg * 4, // Multiply teleopAlgaeNetAvg by 4 to get points.
+        avgData[team1]["teleopCoralL4"].avg * 5, // Multiply teleopCoralL4Avg by 5 to get points.
+        avgData[team1]["teleopCoralL3"].avg * 4 // Multiply teleopCoralL3Avg by 4 to get points.
+      ],
+      backgroundColor: '#FF4316'
     });
     datasets.push({
-      label: team2, data: [
+      label: team2,
+      data: [
         avgData[team2]["autonPoints"].avg,
         avgData[team2]["teleopPoints"].avg,
         avgData[team2]["endgamePoints"].avg,
-        avgData[team2]["teleopAlgaeNet"].avg * 4,    // Multiply teleopAlgaeNetAvg by 4 to get points.
-        avgData[team2]["teleopCoralL4"].avg * 5,     // Multiply teleopCoralL4Avg by 5 to get points.
-        avgData[team2]["teleopCoralL3"].avg * 4      // Multiply teleopCoralL3Avg by 4 to get points.
-      ], backgroundColor: '#0033FF'
+        avgData[team2]["teleopAlgaeNet"].avg * 4, // Multiply teleopAlgaeNetAvg by 4 to get points.
+        avgData[team2]["teleopCoralL4"].avg * 5, // Multiply teleopCoralL4Avg by 5 to get points.
+        avgData[team2]["teleopCoralL3"].avg * 4 // Multiply teleopCoralL3Avg by 4 to get points.
+      ],
+      backgroundColor: '#0033FF'
     });
 
     // Define the graph as a bar chart:
@@ -279,10 +282,15 @@ require 'inc/header.php';
       options: {
         scales: {
           x: {},
-          y: { min: 0, ticks: { precision: 0 }, max: 50 } // Set Y axis maximum value - 4 coral + algae in  auto plus leave
+          y: {
+            min: 0,
+            ticks: {
+              precision: 0
+            },
+            max: 50
+          } // Set Y axis maximum value - 4 coral + algae in  auto plus leave
         },
-        plugins: {
-        }
+        plugins: {}
       }
     });
   }
@@ -296,24 +304,28 @@ require 'inc/header.php';
     let datasets = [];
 
     datasets.push({
-      label: team1, data: [
+      label: team1,
+      data: [
         avgData[team1]["autonPoints"].avg,
         avgData[team1]["teleopPoints"].avg,
         avgData[team1]["endgamePoints"].avg,
-        avgData[team1]["teleopAlgaeNet"].avg * 4,    // Multiply teleopAlgaeNetAvg by 4 to get points.
-        avgData[team1]["teleopCoralL3"].avg * 4,     // Multiply teleopCoralL3Avg by 4 to get points.
-        avgData[team1]["teleopCoralL2"].avg * 3      // Multiply teleopCoralL2Avg by 3 to get points.
-      ], backgroundColor: '#FF4316'
+        avgData[team1]["teleopAlgaeNet"].avg * 4, // Multiply teleopAlgaeNetAvg by 4 to get points.
+        avgData[team1]["teleopCoralL3"].avg * 4, // Multiply teleopCoralL3Avg by 4 to get points.
+        avgData[team1]["teleopCoralL2"].avg * 3 // Multiply teleopCoralL2Avg by 3 to get points.
+      ],
+      backgroundColor: '#FF4316'
     });
     datasets.push({
-      label: team2, data: [
+      label: team2,
+      data: [
         avgData[team2]["autonPoints"].avg,
         avgData[team2]["teleopPoints"].avg,
         avgData[team2]["endgamePoints"].avg,
-        avgData[team2]["teleopAlgaeNet"].avg * 4,    // Multiply teleopAlgaeNetAvg by 4 to get points.   
-        avgData[team2]["teleopCoralL3"].avg * 4,     // Multiply teleopCoralL3Avg by 4 to get points.
-        avgData[team2]["teleopCoralL2"].avg * 3      // Multiply teleopCoralL2Avg by 3 to get points.
-      ], backgroundColor: '#0033FF'
+        avgData[team2]["teleopAlgaeNet"].avg * 4, // Multiply teleopAlgaeNetAvg by 4 to get points.   
+        avgData[team2]["teleopCoralL3"].avg * 4, // Multiply teleopCoralL3Avg by 4 to get points.
+        avgData[team2]["teleopCoralL2"].avg * 3 // Multiply teleopCoralL2Avg by 3 to get points.
+      ],
+      backgroundColor: '#0033FF'
     });
 
     // Define the graph as a bar chart:
@@ -332,10 +344,15 @@ require 'inc/header.php';
       options: {
         scales: {
           x: {},
-          y: { min: 0, ticks: { precision: 0 }, max: 50 } // Set Y axis maximum value - 4 coral + algae in  auto plus leave
+          y: {
+            min: 0,
+            ticks: {
+              precision: 0
+            },
+            max: 50
+          } // Set Y axis maximum value - 4 coral + algae in  auto plus leave
         },
-        plugins: {
-        }
+        plugins: {}
       }
     });
   }
@@ -349,22 +366,26 @@ require 'inc/header.php';
     let datasets = [];
 
     datasets.push({
-      label: team1, data: [
+      label: team1,
+      data: [
         avgData[team1]["autonPoints"].avg,
         avgData[team1]["teleopPoints"].avg,
         avgData[team1]["endgamePoints"].avg,
-        avgData[team1]["teleopAlgaeNet"].avg * 4,    // Multiply teleopAlgaeNetAvg by 4 to get points.
-        avgData[team1]["teleopCoralL3"].avg * 4      // Multiply teleopCoralL3Avg by 4 to get points.
-      ], backgroundColor: '#FF4316'
+        avgData[team1]["teleopAlgaeNet"].avg * 4, // Multiply teleopAlgaeNetAvg by 4 to get points.
+        avgData[team1]["teleopCoralL3"].avg * 4 // Multiply teleopCoralL3Avg by 4 to get points.
+      ],
+      backgroundColor: '#FF4316'
     });
     datasets.push({
-      label: team2, data: [
+      label: team2,
+      data: [
         avgData[team2]["autonPoints"].avg,
         avgData[team2]["teleopPoints"].avg,
         avgData[team2]["endgamePoints"].avg,
-        avgData[team2]["teleopAlgaeNet"].avg * 4,    // Multiply teleopAlgaeNetAvg by 4 to get points.
-        avgData[team2]["teleopCoralL3"].avg * 4      // Multiply teleopCoralL3Avg by 4 to get points.
-      ], backgroundColor: '#0033FF'
+        avgData[team2]["teleopAlgaeNet"].avg * 4, // Multiply teleopAlgaeNetAvg by 4 to get points.
+        avgData[team2]["teleopCoralL3"].avg * 4 // Multiply teleopCoralL3Avg by 4 to get points.
+      ],
+      backgroundColor: '#0033FF'
     });
 
     // Define the graph as a bar chart:
@@ -383,10 +404,15 @@ require 'inc/header.php';
       options: {
         scales: {
           x: {},
-          y: { min: 0, ticks: { precision: 0 }, max: 50 } // Set Y axis maximum value - 4 coral + algae in  auto plus leave
+          y: {
+            min: 0,
+            ticks: {
+              precision: 0
+            },
+            max: 50
+          } // Set Y axis maximum value - 4 coral + algae in  auto plus leave
         },
-        plugins: {
-        }
+        plugins: {}
       }
     });
   }
@@ -427,11 +453,9 @@ require 'inc/header.php';
   function getDataValue(dict, key) {
     if (!dict) {
       console.warn("getDataValue: Dictionary not found! " + dict);
-    }
-    else if (key in dict) {
+    } else if (key in dict) {
       return dict[key];
-    }
-    else {
+    } else {
       console.warn("getDataValue: Key not found in dictionary! " + key + " " + dict);
     }
     return "";
@@ -500,7 +524,7 @@ require 'inc/header.php';
     // Get team1 name from TBA
     $.get("api/tbaAPI.php", {
       getEventTeamNames: true
-    }).done(function (eventTeamNames) {
+    }).done(function(eventTeamNames) {
       console.log("=> getEventTeamNames: ");
       if (eventTeamNames === null) {
         return alert("Can't load teams from TBA; check if TBA Key was set in db_config");
@@ -513,7 +537,7 @@ require 'inc/header.php';
     // Get strategic data and filter for both teams
     $.get("api/dbReadAPI.php", {
       getAllStrategicData: true
-    }).done(function (allStrategicData) {
+    }).done(function(allStrategicData) {
       let jStratData = JSON.parse(allStrategicData);
       console.log("=> getAllStrategicData");
       document.getElementById("strategicLink1").querySelector('a').text = teamNum1 + " - Strategic Data";
@@ -525,17 +549,19 @@ require 'inc/header.php';
     // Get team2 match data
     $.get("api/dbReadAPI.php", {
       getAllMatchData: true
-    }).done(function (allMatchData) {
+    }).done(function(allMatchData) {
       console.log("=> getAllMatchData");
       let jMatches = JSON.parse(allMatchData);
-      let compareMatches = jMatches.filter(function (el) { return el["teamnumber"] == teamNum1 || el["teamnumber"] == teamNum2; });
+      let compareMatches = jMatches.filter(function(el) {
+        return el["teamnumber"] == teamNum1 || el["teamnumber"] == teamNum2;
+      });
       let mdp = new matchDataProcessor(compareMatches);
       if (mdp === null) {
         alert("No match data for this team at this event!");
       }
 
       // Get the team1 averages data from matchDataProcessor (mdp)
-      mdp.getSiteFilteredAverages(function (filteredMatches, filteredAvgData) {
+      mdp.getSiteFilteredAverages(function(filteredMatches, filteredAvgData) {
         if (filteredAvgData !== undefined) {
 
           // Load the graphs
@@ -544,8 +570,7 @@ require 'inc/header.php';
           loadThirdPickGraph(teamNum1, teamNum2, filteredAvgData);
           loadEndgameTable(teamNum1, teamNum2, filteredAvgData);
           insertEventAveragesBody("averagesTable", filteredAvgData, [], aliasList, [teamNum1, teamNum2]);
-        }
-        else
+        } else
           alert("No averages data for matches at this event!");
       });
     });
@@ -564,8 +589,7 @@ require 'inc/header.php';
       else
         document.getElementById(aliasId).innerText = "Alias number " + enteredNum + " is Team " + teamNum;
       document.getElementById(enterId).value = teamNum;
-    }
-    else
+    } else
       document.getElementById(aliasId).innerText = "";
   }
 
@@ -576,14 +600,14 @@ require 'inc/header.php';
   //      In parallel, start retrieving each of these for the selected team:
   //        - Team info (name) from TBA
   //
-  document.addEventListener("DOMContentLoaded", function () {
+  document.addEventListener("DOMContentLoaded", function() {
 
     let jAliasNames = null;
 
     // Read the alias table
     $.get("api/dbReadAPI.php", {
       getEventAliasNames: true
-    }).done(function (eventAliasNames) {
+    }).done(function(eventAliasNames) {
       console.log("=> eventAliasNames");
       jAliasNames = JSON.parse(eventAliasNames);
       insertStrategicDataHeader("strategicDataTable1", jAliasNames);
@@ -593,7 +617,7 @@ require 'inc/header.php';
 
 
     // Pressing enter in team number field loads the page
-    document.getElementById("enterTeamNumber1").addEventListener("keypress", function (event1) {
+    document.getElementById("enterTeamNumber1").addEventListener("keypress", function(event1) {
       if (event1.key === "Enter") {
         validateEnteredTeamNumber("enterTeamNumber1", "aliasNumber1", event, jAliasNames);
         event1.preventDefault();
@@ -601,7 +625,7 @@ require 'inc/header.php';
       }
     });
 
-    document.getElementById("enterTeamNumber2").addEventListener("keypress", function (event2) {
+    document.getElementById("enterTeamNumber2").addEventListener("keypress", function(event2) {
       if (event2.key === "Enter") {
         validateEnteredTeamNumber("enterTeamNumber2", "aliasNumber2", event, jAliasNames);
         event2.preventDefault();
@@ -610,18 +634,18 @@ require 'inc/header.php';
     });
 
     // Attach enterTeamNumber listener when losing focus to check for alias numbers
-    document.getElementById('enterTeamNumber1').addEventListener('focusout', function () {
+    document.getElementById('enterTeamNumber1').addEventListener('focusout', function() {
       console.log("enterTeamNumber: focus out");
       validateEnteredTeamNumber("enterTeamNumber1", "aliasNumber1", event, jAliasNames);
     });
 
-    document.getElementById('enterTeamNumber2').addEventListener('focusout', function () {
+    document.getElementById('enterTeamNumber2').addEventListener('focusout', function() {
       console.log("enterTeamNumber: focus out");
       validateEnteredTeamNumber("enterTeamNumber2", "aliasNumber2", event, jAliasNames);
     });
 
     // Load team data for the number entered
-    document.getElementById("loadTeamButton").addEventListener('click', function () {
+    document.getElementById("loadTeamButton").addEventListener('click', function() {
       let teamNum1 = document.getElementById("enterTeamNumber1").value.toUpperCase().trim();
       let teamNum2 = document.getElementById("enterTeamNumber2").value.toUpperCase().trim();
       if (validateTeamNumber(teamNum1, null) > 0 && validateTeamNumber(teamNum2, null) > 0) {
@@ -630,7 +654,7 @@ require 'inc/header.php';
     });
 
     // Filter out unwanted matches
-    document.getElementById("filterData").addEventListener('click', function () {
+    document.getElementById("filterData").addEventListener('click', function() {
       let startMatch = document.getElementById("startCompLevel").value + document.getElementById("startMatchNum").value.trim();
       let endMatch = document.getElementById("endCompLevel").value + document.getElementById("endMatchNum").value.trim();
       console.log("==> eventAverages: filterMatchRange: " + startMatch + " to " + endMatch);
@@ -638,7 +662,6 @@ require 'inc/header.php';
     });
 
   });
-
 </script>
 
 <script src="./scripts/aliasFunctions.js"></script>

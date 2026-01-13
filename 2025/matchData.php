@@ -31,18 +31,17 @@ require 'inc/header.php';
 <!-- Javascript page handlers -->
 
 <script>
-
   //
   // Build the match data table
   //
-  function buildMatchDataTable(tableId) {    // Load the alias table
+  function buildMatchDataTable(tableId) { // Load the alias table
     console.log("==> matchData: buildMatchDataTable()");
     let jAliasNames = null;
 
     // Load alias lookup table
     $.get("api/dbReadAPI.php", {
       getEventAliasNames: true
-    }).done(function (eventAliasNames) {
+    }).done(function(eventAliasNames) {
       console.log("=> eventAliasNames");
       jAliasNames = JSON.parse(eventAliasNames);
       insertMatchDataHeader(tableId, jAliasNames);
@@ -51,19 +50,18 @@ require 'inc/header.php';
     // Load the match data
     $.get("api/dbReadAPI.php", {
       getAllMatchData: true
-    }).done(function (matchData) {
+    }).done(function(matchData) {
       console.log("=> getAllMatchData");
       let mdp = new matchDataProcessor(JSON.parse(matchData));
       // mdp.sortMatches(allEventMatches);
-      mdp.getSiteFilteredAverages(function (filteredMatchData, filteredAvgData) {
+      mdp.getSiteFilteredAverages(function(filteredMatchData, filteredAvgData) {
         if (filteredMatchData !== undefined) {
           insertMatchDataBody(tableId, filteredMatchData, jAliasNames, []);
           document.getElementById('spinner').style.display = 'none';
           // script instructions say this is needed, but it breaks table header sorting
           // sorttable.makeSortable(document.getElementById(tableId));
           document.getElementById(tableId).click(); // This magic fixes the floating column bug
-        }
-        else {
+        } else {
           alert("No match data found!");
         }
       });
@@ -76,15 +74,17 @@ require 'inc/header.php';
   //    Get all match data from our database
   //    When completed, display the web page
   //
-  document.addEventListener("DOMContentLoaded", function () {
+  document.addEventListener("DOMContentLoaded", function() {
 
     const tableId = "matchDataTable";
-    const frozenTable = new FreezeTable('.freeze-table', { fixedNavbar: '.navbar' });
+    const frozenTable = new FreezeTable('.freeze-table', {
+      fixedNavbar: '.navbar'
+    });
 
     buildMatchDataTable(tableId);
 
     // Create frozen table panes and keep the panes updated
-    document.getElementById(tableId).addEventListener('click', function () {
+    document.getElementById(tableId).addEventListener('click', function() {
       if (frozenTable) {
         frozenTable.update();
       }

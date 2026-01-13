@@ -77,7 +77,6 @@ require 'inc/header.php';
 <!-- Javascript page handlers -->
 
 <script>
-
   //
   // Check if our URL directs to a specific team
   //
@@ -148,7 +147,7 @@ require 'inc/header.php';
           // First get list of robot-pic files for this team.
           $.get("api/dbReadAPI.php", {
             getImagesForTeam: teamNum
-          }).done(function (teamImages) {
+          }).done(function(teamImages) {
             console.log("=> getImagesForTeam\n" + teamImages);
             let jTeamImages = JSON.parse(teamImages);
 
@@ -156,12 +155,14 @@ require 'inc/header.php';
             for (let imageFile of jTeamImages) {
               $.ajax({
                 url: 'api/deleteFile.php',
-                data: { 'file': "<?php echo dirname(__FILE__) . '/' ?>" + imageFile },
-                success: function (response) {
+                data: {
+                  'file': "<?php echo dirname(__FILE__) . '/' ?>" + imageFile
+                },
+                success: function(response) {
                   console.log("==> Deleted existing photo: " + imageFile);
                   document.getElementById("replacePic").checked = false;
                 },
-                error: function () {
+                error: function() {
                   console.error("Could NOT delete existing photo: " + imageFile);
                 }
               });
@@ -170,10 +171,10 @@ require 'inc/header.php';
         }
 
         // Load/reload the list of team images 
-        setTimeout(function () {
+        setTimeout(function() {
           $.get("api/dbReadAPI.php", {
             getImagesForTeam: teamNum
-          }).done(function (teamImages) {
+          }).done(function(teamImages) {
             console.log("=> getImagesForTeam\n" + teamImages);
 
             // Now upload the selected image
@@ -192,18 +193,16 @@ require 'inc/header.php';
             });
           });
         }, 500);
-      }
-      else {
+      } else {
         loadingSpinner.style.visibility = 'hidden';
         alert("Team Number is invalid - must be integer with optional last alpha!");
       }
-    }
-    else {
+    } else {
       loadingSpinner.style.visibility = 'hidden';
       alert("Please fill in robot photo!");
     }
 
-    document.getElementById("closeMessage").addEventListener('click', function () {
+    document.getElementById("closeMessage").addEventListener('click', function() {
       document.getElementById("uploadMessage").style.display = "none";
       document.getElementById("replacePic").checked = false;
     });
@@ -217,8 +216,8 @@ require 'inc/header.php';
     let f = files[0];
     let reader = new FileReader();
     reader.onload = (
-      function (theFile) {
-        return function (e) {
+      function(theFile) {
+        return function(e) {
           document.getElementById('photoPreview').innerHTML = [
             '<img src="', e.target.result, '" title="', theFile.name, '" width="300">'
           ].join('');
@@ -238,7 +237,7 @@ require 'inc/header.php';
     // First get list of robot-pic files for this team.
     $.get("api/dbReadAPI.php", {
       getImagesForTeam: teamNum
-    }).done(function (teamImages) {
+    }).done(function(teamImages) {
       console.log("=> getImagesForTeam\n" + teamImages);
       let jTeamImages = JSON.parse(teamImages);
 
@@ -260,7 +259,7 @@ require 'inc/header.php';
   //    Post the new image to the database
   //    Delay 500 msec while flashing a success to the user
   //
-  document.addEventListener("DOMContentLoaded", function () {
+  document.addEventListener("DOMContentLoaded", function() {
 
     const loadingSpinner = document.getElementById("loadingSpinner");
     loadingSpinner.style.visibility = 'hidden';
@@ -269,7 +268,7 @@ require 'inc/header.php';
     // Read the alias table
     $.get("api/dbReadAPI.php", {
       getEventAliasNames: true
-    }).done(function (eventAliasNames) {
+    }).done(function(eventAliasNames) {
       console.log("=> eventAliasNames");
       jAliasNames = JSON.parse(eventAliasNames);
     });
@@ -281,7 +280,7 @@ require 'inc/header.php';
     }
 
     // Attach enterTeamNumber listener when losing focus to check for alias numbers
-    document.getElementById('enterTeamNumber').addEventListener('focusout', function () {
+    document.getElementById('enterTeamNumber').addEventListener('focusout', function() {
       console.log("enterTeamNumber: focus out");
       let enteredNum = event.target.value.toUpperCase().trim();
       if (isAliasNumber(enteredNum)) {
@@ -291,8 +290,7 @@ require 'inc/header.php';
         else
           document.getElementById("aliasNumber").innerText = "Alias number " + enteredNum + " is Team " + teamNum;
         document.getElementById("enterTeamNumber").value = teamNum;
-      }
-      else
+      } else
         document.getElementById("aliasNumber").innerText = "";
       loadPreviousTeamPhotos(document.getElementById("enterTeamNumber").value);
     });

@@ -35,7 +35,6 @@ require 'inc/header.php';
 <!-- Javascript page handlers -->
 
 <script>
-
   //
   // Add data keys (header fields) to COPR table in html
   //
@@ -74,8 +73,8 @@ require 'inc/header.php';
   //
   // This table controls the order and header names for the COPR table
   //    First column matches TBA keys for a match breakdown, column two is a preferred header name
-  const coprKeys =
-    [["rp", "RP"],
+  const coprKeys = [
+    ["rp", "RP"],
     ["totalPoints", "Total Pts"],
     ["autoPoints", "Auto Pts"],
     ["autoMobilityPoints", "Leave"],
@@ -91,7 +90,7 @@ require 'inc/header.php';
     ["foulPoints", "Foul Pts"],
     ["foulCount", "Foul Ct"],
     ["techFoulCount", "Tech Foul Ct"]
-    ];
+  ];
 
   //
   // Add data keys (fields) to COPR table in html
@@ -118,7 +117,7 @@ require 'inc/header.php';
     //output: gets the COPR data from TBA
     $.get("api/tbaAPI.php", {
       getCOPRs: true
-    }).done(function (coprs) {
+    }).done(function(coprs) {
       console.log("=> getCOPRs");
       if (coprs === null) {
         return alert("Can't load COPRs from TBA; check if TBA Key was set in db_config");
@@ -138,21 +137,22 @@ require 'inc/header.php';
   //    Get all COPR data from TBA
   //    When completed, display the web page
   //
-  document.addEventListener("DOMContentLoaded", function () {
+  document.addEventListener("DOMContentLoaded", function() {
 
     const tableId = "coprTable";
-    const frozenTable = new FreezeTable('.freeze-table', { fixedNavbar: '.navbar' });
+    const frozenTable = new FreezeTable('.freeze-table', {
+      fixedNavbar: '.navbar'
+    });
 
     buildTbaCoprTable(tableId);
 
     // Create frozen table panes and keep the panes updated
-    document.getElementById(tableId).addEventListener('click', function () {
+    document.getElementById(tableId).addEventListener('click', function() {
       if (frozenTable) {
         frozenTable.update();
       }
     });
   });
-
 </script>
 
 <script src="./scripts/aliasFunctions.js"></script>

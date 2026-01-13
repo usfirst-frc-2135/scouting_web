@@ -79,7 +79,6 @@ require 'inc/header.php';
 <!-- Javascript page handlers -->
 
 <script>
-
   //
   // Scrape table and write CSV file
   //
@@ -116,7 +115,9 @@ require 'inc/header.php';
       csv.push(rowData.join(","));
     });
 
-    const csvFile = new Blob([csv.join("\n")], { type: "text/csv" });
+    const csvFile = new Blob([csv.join("\n")], {
+      type: "text/csv"
+    });
     const downloadLink = document.createElement("a");
     downloadLink.download = csvName;
     downloadLink.href = window.URL.createObjectURL(csvFile);
@@ -150,7 +151,7 @@ require 'inc/header.php';
     if (startMatch !== null && endMatch !== null) {
       mdp.filterMatchRange(startMatch, endMatch);
     }
-    mdp.getSiteFilteredAverages(function (filteredMatchData, filteredAvgData) {
+    mdp.getSiteFilteredAverages(function(filteredMatchData, filteredAvgData) {
       insertEventAveragesBody(tableId, filteredAvgData, coprs, aliasNames, []);
       // script instructions say this is needed, but it breaks table header sorting
       // sorttable.makeSortable(document.getElementById(tableId));
@@ -170,7 +171,7 @@ require 'inc/header.php';
     // Get Alias lookup table
     $.get("api/dbReadAPI.php", {
       getEventAliasNames: true
-    }).done(function (eventAliasNames) {
+    }).done(function(eventAliasNames) {
       console.log("=> eventAliasNames");
       jAliasNames = JSON.parse(eventAliasNames);
       buildAveragesHeader(tableId, jAliasNames);
@@ -180,7 +181,7 @@ require 'inc/header.php';
     // Get OPR data from TBA
     $.get("api/tbaAPI.php", {
       getCOPRs: true
-    }).done(function (coprs) {
+    }).done(function(coprs) {
       if (coprs === null) {
         return alert("Can't load COPRs from TBA; check if TBA Key was set in db_config");
       }
@@ -192,14 +193,14 @@ require 'inc/header.php';
     // Get match data from DB
     $.get("api/dbReadAPI.php", {
       getAllMatchData: true
-    }).done(function (matchData) {
+    }).done(function(matchData) {
       console.log("=> getAllMatchData");
       jMatchData = JSON.parse(matchData);
       buildAveragesBody(tableId, jAliasNames, jCoprData, jMatchData, null, null); // Retrieve all data
     });
 
     // Filter out unwanted matches
-    document.getElementById("filterData").addEventListener('click', function () {
+    document.getElementById("filterData").addEventListener('click', function() {
       let startMatch = document.getElementById("startCompLevel").value + document.getElementById("startMatchNum").value.trim();
       let endMatch = document.getElementById("endCompLevel").value + document.getElementById("endMatchNum").value.trim();
       console.log("==> eventAverages: filterMatchRange: " + startMatch + " to " + endMatch);
@@ -218,27 +219,28 @@ require 'inc/header.php';
   //    Get event COPRs from TBA
   //    Write combined data into a CSV file
   //
-  document.addEventListener("DOMContentLoaded", function () {
+  document.addEventListener("DOMContentLoaded", function() {
 
     const tableId = "averagesTable";
-    const frozenTable = new FreezeTable('.freeze-table', { fixedNavbar: '.navbar' });
+    const frozenTable = new FreezeTable('.freeze-table', {
+      fixedNavbar: '.navbar'
+    });
 
     buildEventAveragesTable(tableId, null, null);
 
     // Write out picklist CSV file to client's download dir.
-    document.getElementById("downloadCsvFile").addEventListener('click', function () {
+    document.getElementById("downloadCsvFile").addEventListener('click', function() {
       const csvFileName = frcEventCode + "_eventAverages";
       downloadTableAsCSV(tableId, csvFileName);
     });
 
     // Create frozen table panes and keep the panes updated
-    document.getElementById(tableId).addEventListener('click', function () {
+    document.getElementById(tableId).addEventListener('click', function() {
       if (frozenTable) {
         frozenTable.update();
       }
     });
   });
-
 </script>
 
 <script src="./scripts/aliasFunctions.js"></script>

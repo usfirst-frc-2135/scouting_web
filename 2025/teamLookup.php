@@ -401,7 +401,6 @@ require 'inc/header.php';
 
 
 <script>
-
   let autoChart;
   let teleopChart;
   let endgameChart;
@@ -422,13 +421,41 @@ require 'inc/header.php';
     // Retrieve the data for each match
     let datasets = []; // Each entry is a dict with a label and data attribute
 
-    datasets.push({ label: "Leave", data: [], backgroundColor: '#F7CF58' });      // Yellow
-    datasets.push({ label: "Processor", data: [], backgroundColor: '#B4E7D6' });  // Teal - algae
-    datasets.push({ label: "Net", data: [], backgroundColor: '#4C9F7C' });        // Darker Teal - algae
-    datasets.push({ label: "L1", data: [], backgroundColor: '#D98AB3' });         // Light pink - coral branch
-    datasets.push({ label: "L2", data: [], backgroundColor: '#CE649B' });         // Medium light pink - coral branch
-    datasets.push({ label: "L3", data: [], backgroundColor: '#C54282' });         // Medium dark pink - coral branch
-    datasets.push({ label: "L4", data: [], backgroundColor: '#9D3468' });         // Dark pink - coral branch
+    datasets.push({
+      label: "Leave",
+      data: [],
+      backgroundColor: '#F7CF58'
+    }); // Yellow
+    datasets.push({
+      label: "Processor",
+      data: [],
+      backgroundColor: '#B4E7D6'
+    }); // Teal - algae
+    datasets.push({
+      label: "Net",
+      data: [],
+      backgroundColor: '#4C9F7C'
+    }); // Darker Teal - algae
+    datasets.push({
+      label: "L1",
+      data: [],
+      backgroundColor: '#D98AB3'
+    }); // Light pink - coral branch
+    datasets.push({
+      label: "L2",
+      data: [],
+      backgroundColor: '#CE649B'
+    }); // Medium light pink - coral branch
+    datasets.push({
+      label: "L3",
+      data: [],
+      backgroundColor: '#C54282'
+    }); // Medium dark pink - coral branch
+    datasets.push({
+      label: "L4",
+      data: [],
+      backgroundColor: '#9D3468'
+    }); // Dark pink - coral branch
 
     // Go thru each matchData QR code string and build up a table of the data, so we can
     // later sort it so the matches are listed in the right order. 
@@ -447,7 +474,7 @@ require 'inc/header.php';
       });
     }
 
-    mydata.sort(function (rowA, rowB) {
+    mydata.sort(function(rowA, rowB) {
       return (compareMatchNumbers(rowA["matchnum"], rowB["matchnum"]));
     });
 
@@ -473,13 +500,34 @@ require 'inc/header.php';
         return tipPrefix + value;
       }
 
-      autonLeaveTips.push({ xlabel: matchnum, tip: storeAndGetTip(mydata[i]["leave"], "Leave=", datasets[0]["data"], true) });
-      autonAlgaeProcTips.push({ xlabel: matchnum, tip: storeAndGetTip(mydata[i]["processor"], "Processor=", datasets[1]["data"], false) });
-      autonAlgaeNetTips.push({ xlabel: matchnum, tip: storeAndGetTip(mydata[i]["net"], "Net=", datasets[2]["data"], false) });
-      autonCoralL1Tips.push({ xlabel: matchnum, tip: storeAndGetTip(mydata[i]["one"], "L1=", datasets[3]["data"], false) });
-      autonCoralL2Tips.push({ xlabel: matchnum, tip: storeAndGetTip(mydata[i]["two"], "L2=", datasets[4]["data"], false) });
-      autonCoralL3Tips.push({ xlabel: matchnum, tip: storeAndGetTip(mydata[i]["three"], "L3=", datasets[5]["data"], false) });
-      autonCoralL4Tips.push({ xlabel: matchnum, tip: storeAndGetTip(mydata[i]["four"], "L4=", datasets[6]["data"], false) });
+      autonLeaveTips.push({
+        xlabel: matchnum,
+        tip: storeAndGetTip(mydata[i]["leave"], "Leave=", datasets[0]["data"], true)
+      });
+      autonAlgaeProcTips.push({
+        xlabel: matchnum,
+        tip: storeAndGetTip(mydata[i]["processor"], "Processor=", datasets[1]["data"], false)
+      });
+      autonAlgaeNetTips.push({
+        xlabel: matchnum,
+        tip: storeAndGetTip(mydata[i]["net"], "Net=", datasets[2]["data"], false)
+      });
+      autonCoralL1Tips.push({
+        xlabel: matchnum,
+        tip: storeAndGetTip(mydata[i]["one"], "L1=", datasets[3]["data"], false)
+      });
+      autonCoralL2Tips.push({
+        xlabel: matchnum,
+        tip: storeAndGetTip(mydata[i]["two"], "L2=", datasets[4]["data"], false)
+      });
+      autonCoralL3Tips.push({
+        xlabel: matchnum,
+        tip: storeAndGetTip(mydata[i]["three"], "L3=", datasets[5]["data"], false)
+      });
+      autonCoralL4Tips.push({
+        xlabel: matchnum,
+        tip: storeAndGetTip(mydata[i]["four"], "L4=", datasets[6]["data"], false)
+      });
     }
 
     // Define the graph as a line chart:
@@ -497,13 +545,22 @@ require 'inc/header.php';
       },
       options: {
         scales: {
-          x: { stacked: true },
-          y: { stacked: true, min: 0, ticks: { precision: 0 }, max: 5 } // Set Y axis maximum value - 4 coral + algae in  auto plus leave
+          x: {
+            stacked: true
+          },
+          y: {
+            stacked: true,
+            min: 0,
+            ticks: {
+              precision: 0
+            },
+            max: 5
+          } // Set Y axis maximum value - 4 coral + algae in  auto plus leave
         },
         plugins: {
           tooltip: {
-            callbacks: {  // Special tooltip handling
-              label: function (tooltipItem, ddata) {
+            callbacks: { // Special tooltip handling
+              label: function(tooltipItem, ddata) {
 
                 function getTip(matchno, tipList) {
                   for (let i = 0; i < tipList.length; i++)
@@ -514,14 +571,22 @@ require 'inc/header.php';
                 let matchnum = tooltipItem.label;
                 let tipStr = datasets[tooltipItem.datasetIndex].label;
                 switch (tooltipItem.datasetIndex) {
-                  case 0: return getTip(matchnum, autonLeaveTips);
-                  case 1: return getTip(matchnum, autonAlgaeProcTips);
-                  case 2: return getTip(matchnum, autonAlgaeNetTips);
-                  case 3: return getTip(matchnum, autonCoralL1Tips);
-                  case 4: return getTip(matchnum, autonCoralL2Tips);
-                  case 5: return getTip(matchnum, autonCoralL3Tips);
-                  case 6: return getTip(matchnum, autonCoralL4Tips);
-                  default: return "missing tip string!"
+                  case 0:
+                    return getTip(matchnum, autonLeaveTips);
+                  case 1:
+                    return getTip(matchnum, autonAlgaeProcTips);
+                  case 2:
+                    return getTip(matchnum, autonAlgaeNetTips);
+                  case 3:
+                    return getTip(matchnum, autonCoralL1Tips);
+                  case 4:
+                    return getTip(matchnum, autonCoralL2Tips);
+                  case 5:
+                    return getTip(matchnum, autonCoralL3Tips);
+                  case 6:
+                    return getTip(matchnum, autonCoralL4Tips);
+                  default:
+                    return "missing tip string!"
                 }
                 return tipStr;
               }
@@ -543,12 +608,36 @@ require 'inc/header.php';
     // Declare variables
     let datasets = []; // Each entry is a dict with a label and data attribute
 
-    datasets.push({ label: "Processor", data: [], backgroundColor: '#B4E7D6' });  // Teal - algae
-    datasets.push({ label: "Net", data: [], backgroundColor: '#4C9F7C' });        // Darker Teal - algae
-    datasets.push({ label: "L1", data: [], backgroundColor: '#D98AB3' });         // Light pink - coral branch
-    datasets.push({ label: "L2", data: [], backgroundColor: '#CE649B' });         // Medium light pink - coral branch
-    datasets.push({ label: "L3", data: [], backgroundColor: '#C54282' });         // Medium dark pink - coral branch
-    datasets.push({ label: "L4", data: [], backgroundColor: '#9D3468' });         // Dark pink - coral branch
+    datasets.push({
+      label: "Processor",
+      data: [],
+      backgroundColor: '#B4E7D6'
+    }); // Teal - algae
+    datasets.push({
+      label: "Net",
+      data: [],
+      backgroundColor: '#4C9F7C'
+    }); // Darker Teal - algae
+    datasets.push({
+      label: "L1",
+      data: [],
+      backgroundColor: '#D98AB3'
+    }); // Light pink - coral branch
+    datasets.push({
+      label: "L2",
+      data: [],
+      backgroundColor: '#CE649B'
+    }); // Medium light pink - coral branch
+    datasets.push({
+      label: "L3",
+      data: [],
+      backgroundColor: '#C54282'
+    }); // Medium dark pink - coral branch
+    datasets.push({
+      label: "L4",
+      data: [],
+      backgroundColor: '#9D3468'
+    }); // Dark pink - coral branch
 
     // Go thru each matchData QR code string and build up a table of the data, so we can
     // later sort it so the matches are listed in the right order. 
@@ -566,14 +655,14 @@ require 'inc/header.php';
       });
     }
 
-    mydata.sort(function (rowA, rowB) {
+    mydata.sort(function(rowA, rowB) {
       return (compareMatchNumbers(rowA["matchnum"], rowB["matchnum"]));
     });
 
     // Build data sets; go thru each mydata row and populate the graph datasets.
     let matchList = []; // List of matches to use as x lables
     let teleopAlgaeProcessorTips = []; // holds custom tooltips for teleop speaker notes
-    let teleopAlgaeNetTips = [];//holds custom tooltips for if amplification used
+    let teleopAlgaeNetTips = []; //holds custom tooltips for if amplification used
     let teleopCoralL1Tips = []; // holds custom tooltips for teleop coral L1
     let teleopCoralL2Tips = []; // holds custom tooltips for teleop coral L2
     let teleopCoralL3Tips = []; // holds custom tooltips for teleop coral L3
@@ -588,12 +677,30 @@ require 'inc/header.php';
         return tipPrefix + value;
       }
 
-      teleopAlgaeProcessorTips.push({ xlabel: matchnum, tip: storeAndGetTip(mydata[i]["teleopprocessor"], "Processor=", datasets[0]["data"]) });
-      teleopAlgaeNetTips.push({ xlabel: matchnum, tip: storeAndGetTip(mydata[i]["teleopnet"], "Net=", datasets[1]["data"]) });
-      teleopCoralL1Tips.push({ xlabel: matchnum, tip: storeAndGetTip(mydata[i]["levelone"], "L1=", datasets[2]["data"]) });
-      teleopCoralL2Tips.push({ xlabel: matchnum, tip: storeAndGetTip(mydata[i]["leveltwo"], "L2=", datasets[3]["data"]) });
-      teleopCoralL3Tips.push({ xlabel: matchnum, tip: storeAndGetTip(mydata[i]["levelthree"], "L3=", datasets[4]["data"]) });
-      teleopCoralL4Tips.push({ xlabel: matchnum, tip: storeAndGetTip(mydata[i]["levelfour"], "L4=", datasets[5]["data"]) });
+      teleopAlgaeProcessorTips.push({
+        xlabel: matchnum,
+        tip: storeAndGetTip(mydata[i]["teleopprocessor"], "Processor=", datasets[0]["data"])
+      });
+      teleopAlgaeNetTips.push({
+        xlabel: matchnum,
+        tip: storeAndGetTip(mydata[i]["teleopnet"], "Net=", datasets[1]["data"])
+      });
+      teleopCoralL1Tips.push({
+        xlabel: matchnum,
+        tip: storeAndGetTip(mydata[i]["levelone"], "L1=", datasets[2]["data"])
+      });
+      teleopCoralL2Tips.push({
+        xlabel: matchnum,
+        tip: storeAndGetTip(mydata[i]["leveltwo"], "L2=", datasets[3]["data"])
+      });
+      teleopCoralL3Tips.push({
+        xlabel: matchnum,
+        tip: storeAndGetTip(mydata[i]["levelthree"], "L3=", datasets[4]["data"])
+      });
+      teleopCoralL4Tips.push({
+        xlabel: matchnum,
+        tip: storeAndGetTip(mydata[i]["levelfour"], "L4=", datasets[5]["data"])
+      });
     }
 
     // Define the graph as a line chart:
@@ -611,13 +718,22 @@ require 'inc/header.php';
       },
       options: {
         scales: {
-          x: { stacked: true },
-          y: { stacked: true, min: 0, ticks: { precision: 0 }, max: 16 } // Set Y axis maximum value - 16 coral + algae in teleop
+          x: {
+            stacked: true
+          },
+          y: {
+            stacked: true,
+            min: 0,
+            ticks: {
+              precision: 0
+            },
+            max: 16
+          } // Set Y axis maximum value - 16 coral + algae in teleop
         },
         plugins: {
           tooltip: {
-            callbacks: {  // Special tooltip handling
-              label: function (tooltipItem, ddata) {
+            callbacks: { // Special tooltip handling
+              label: function(tooltipItem, ddata) {
 
                 function getTip(matchno, tipList) {
                   for (let i = 0; i < tipList.length; i++)
@@ -628,13 +744,20 @@ require 'inc/header.php';
                 let matchnum = tooltipItem.label;
                 let tipStr = datasets[tooltipItem.datasetIndex].label;
                 switch (tooltipItem.datasetIndex) {
-                  case 0: return getTip(matchnum, teleopAlgaeProcessorTips);
-                  case 1: return getTip(matchnum, teleopAlgaeNetTips);
-                  case 2: return getTip(matchnum, teleopCoralL1Tips);
-                  case 3: return getTip(matchnum, teleopCoralL2Tips);
-                  case 4: return getTip(matchnum, teleopCoralL3Tips);
-                  case 5: return getTip(matchnum, teleopCoralL4Tips);
-                  default: return "missing tip string!"
+                  case 0:
+                    return getTip(matchnum, teleopAlgaeProcessorTips);
+                  case 1:
+                    return getTip(matchnum, teleopAlgaeNetTips);
+                  case 2:
+                    return getTip(matchnum, teleopCoralL1Tips);
+                  case 3:
+                    return getTip(matchnum, teleopCoralL2Tips);
+                  case 4:
+                    return getTip(matchnum, teleopCoralL3Tips);
+                  case 5:
+                    return getTip(matchnum, teleopCoralL4Tips);
+                  default:
+                    return "missing tip string!"
                 }
                 return tipStr;
               }
@@ -656,7 +779,11 @@ require 'inc/header.php';
     // Retrieve the data for each match
     let datasets = [];
 
-    datasets.push({ label: "Cage Climb", data: [], backgroundColor: '#ED8537' });   // Orange - endgame
+    datasets.push({
+      label: "Cage Climb",
+      data: [],
+      backgroundColor: '#ED8537'
+    }); // Orange - endgame
 
     // Go thru each matchData QR code string and build up a table of the data, so we can
     // later sort it so the matches are listed in the right order. 
@@ -669,7 +796,7 @@ require 'inc/header.php';
       });
     }
 
-    mydata.sort(function (rowA, rowB) {
+    mydata.sort(function(rowA, rowB) {
       return (compareMatchNumbers(rowA["matchnum"], rowB["matchnum"]));
     });
 
@@ -682,12 +809,21 @@ require 'inc/header.php';
       let matchnum = mydata[i]["matchnum"];
       matchList.push(matchnum);
 
-      value = { 0: "N/A", 1: "Parked", 2: "Fell", 3: "Shallow", 4: "Deep" };
+      value = {
+        0: "N/A",
+        1: "Parked",
+        2: "Fell",
+        3: "Shallow",
+        4: "Deep"
+      };
 
       // Get endgame climb cage level
       let endgameCageClimb = mydata[i]["cage"];
       datasets[0]["data"].push(endgameCageClimb);
-      cageClimbTips.push({ xlabel: matchnum, tip: "Cage Climb =" + value[endgameCageClimb] });
+      cageClimbTips.push({
+        xlabel: matchnum,
+        tip: "Cage Climb =" + value[endgameCageClimb]
+      });
     }
 
     if (endgameChart !== undefined) {
@@ -704,13 +840,22 @@ require 'inc/header.php';
       },
       options: {
         scales: {
-          x: { stacked: true },
-          y: { stacked: true, min: 0, ticks: { precision: 0 }, max: 4 } // Set Y axis maximum value - deep climb
+          x: {
+            stacked: true
+          },
+          y: {
+            stacked: true,
+            min: 0,
+            ticks: {
+              precision: 0
+            },
+            max: 4
+          } // Set Y axis maximum value - deep climb
         },
         plugins: {
           tooltip: {
-            callbacks: {  // Special tooltip handling
-              label: function (tooltipItem, ddata) {
+            callbacks: { // Special tooltip handling
+              label: function(tooltipItem, ddata) {
 
                 function getTip(matchno, tipList) {
                   for (let i = 0; i < tipList.length; i++)
@@ -721,8 +866,10 @@ require 'inc/header.php';
                 let matchnum = tooltipItem.label;
                 let tipStr = datasets[tooltipItem.datasetIndex].label;
                 switch (tooltipItem.datasetIndex) {
-                  case 0: return getTip(matchnum, cageClimbTips);
-                  default: return "missing tip string!"
+                  case 0:
+                    return getTip(matchnum, cageClimbTips);
+                  default:
+                    return "missing tip string!"
                 }
                 return tipStr;
               }
@@ -819,9 +966,12 @@ require 'inc/header.php';
   //
   function toYesNo(value) {
     switch (String(value)) {
-      case "1": return "Yes";
-      case "2": return "No";
-      default: return "-";
+      case "1":
+        return "Yes";
+      case "2":
+        return "No";
+      default:
+        return "-";
     }
   }
 
@@ -867,21 +1017,19 @@ require 'inc/header.php';
     console.log("==> teamLookup: loadMatchData()");
     let mdp = new matchDataProcessor(allEventMatches);
     // mdp.sortMatches(allEventMatches);
-    mdp.getSiteFilteredAverages(function (filteredMatches, filteredAvgData) {
+    mdp.getSiteFilteredAverages(function(filteredMatches, filteredAvgData) {
       if (filteredMatches != undefined) {
         loadAutonGraph(filteredMatches);
         loadTeleopGraph(filteredMatches);
         loadEndgameGraph(filteredMatches);
         insertMatchDataBody("matchDataTable", filteredMatches, jAliasNames, [team]);
-      }
-      else {
+      } else {
         alert("No match data for this team at this event!");
       }
       let teamAverages = filteredAvgData[team];
       if (teamAverages !== undefined) {
         loadAverageTables(teamAverages);
-      }
-      else {
+      } else {
         alert("No averages data for this team at this event!");
       }
     });
@@ -925,7 +1073,7 @@ require 'inc/header.php';
     // Retrieve team info to get team names
     $.get("api/tbaAPI.php", {
       getTeamInfo: evtTeam
-    }).done(function (teamInfo) {
+    }).done(function(teamInfo) {
       console.log("=> getTeamInfo:\n" + teamInfo);
       if (teamInfo === null) {
         return alert("Can't load teamName from TBA; check if TBA Key was set in db_config");
@@ -941,7 +1089,7 @@ require 'inc/header.php';
     // Add images for the team
     $.get("api/dbReadAPI.php", {
       getImagesForTeam: teamNum
-    }).done(function (teamImages) {
+    }).done(function(teamImages) {
       console.log("=> getImagesForTeam:\n" + teamImages);
       loadTeamPhotos(JSON.parse(teamImages));
     });
@@ -949,7 +1097,7 @@ require 'inc/header.php';
     // Add Match Scouting Data
     $.get("api/dbReadAPI.php", {
       getTeamMatchData: teamNum
-    }).done(function (teamMatches) {
+    }).done(function(teamMatches) {
       console.log("=> getTeamMatchData");
       loadMatchData(teamNum, JSON.parse(teamMatches), aliasList);
     });
@@ -957,7 +1105,7 @@ require 'inc/header.php';
     // Do the Pit Scouting Data
     $.get("api/dbReadAPI.php", {
       getTeamPitData: teamNum
-    }).done(function (teamPitData) {
+    }).done(function(teamPitData) {
       console.log("=> getTeamPitData\n");
       loadPitData(JSON.parse(teamPitData));
     });
@@ -965,7 +1113,7 @@ require 'inc/header.php';
     // Do the Strategic Data Table.
     $.get("api/dbReadAPI.php", {
       getTeamStrategicData: teamNum
-    }).done(function (teamStratData) {
+    }).done(function(teamStratData) {
       console.log("=> getTeamStrategicData");
       insertStrategicDataBody("strategicDataTable", JSON.parse(teamStratData), aliasList, [teamNum]);
     });
@@ -984,8 +1132,7 @@ require 'inc/header.php';
       else
         document.getElementById("aliasNumber").innerText = "Alias number " + enteredNum + " is Team " + teamNum;
       document.getElementById("enterTeamNumber").value = teamNum;
-    }
-    else
+    } else
       document.getElementById("aliasNumber").innerText = "";
   }
 
@@ -1000,7 +1147,7 @@ require 'inc/header.php';
   //        - Pit scouting data from database
   //        - Strategic scouting data from database
   //
-  document.addEventListener("DOMContentLoaded", function () {
+  document.addEventListener("DOMContentLoaded", function() {
 
     console.log("!!> addEventListener");
     let jAliasNames = null;
@@ -1008,7 +1155,7 @@ require 'inc/header.php';
     // Read the alias table
     $.get("api/dbReadAPI.php", {
       getEventAliasNames: true
-    }).done(function (eventAliasNames) {
+    }).done(function(eventAliasNames) {
       console.log("=> eventAliasNames");
       jAliasNames = JSON.parse(eventAliasNames);
       insertStrategicDataHeader("strategicDataTable", jAliasNames);
@@ -1025,7 +1172,7 @@ require 'inc/header.php';
     });
 
     // Attach enterTeamNumber listener so that pressing enter in team number field loads the page
-    document.getElementById("enterTeamNumber").addEventListener("keypress", function (event) {
+    document.getElementById("enterTeamNumber").addEventListener("keypress", function(event) {
       if (event.key === "Enter") {
         validateEnteredTeamNumber(event, jAliasNames);
         event.preventDefault();
@@ -1034,20 +1181,19 @@ require 'inc/header.php';
     });
 
     // Attach enterTeamNumber listener when losing focus to check for alias numbers
-    document.getElementById('enterTeamNumber').addEventListener('focusout', function () {
+    document.getElementById('enterTeamNumber').addEventListener('focusout', function() {
       console.log("enterTeamNumber: focus out");
       validateEnteredTeamNumber(event, jAliasNames);
     });
 
     // Load team data for the number entered
-    document.getElementById("loadTeamButton").addEventListener('click', function () {
+    document.getElementById("loadTeamButton").addEventListener('click', function() {
       let teamNum = document.getElementById("enterTeamNumber").value.toUpperCase().trim();
       if (validateTeamNumber(teamNum, null) > 0 && jAliasNames !== null) {
         buildTeamLookupPage(teamNum, jAliasNames);
       }
     });
   });
-
 </script>
 
 <script src="./scripts/aliasFunctions.js"></script>

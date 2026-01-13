@@ -269,7 +269,6 @@ require 'inc/header.php';
 <!-- Javascript page handlers -->
 
 <script>
-
   //
   // Clear all form fields
   //
@@ -414,8 +413,8 @@ require 'inc/header.php';
     console.log("==> matchForm: submitMatchFormData()");
     $.post("api/dbWriteAPI.php", {
       writeSingleMatch: JSON.stringify(matchFormData)
-    }, function (response) {
-      if (response.indexOf('success') > -1) {    // A loose compare, because success word may have a newline
+    }, function(response) {
+      if (response.indexOf('success') > -1) { // A loose compare, because success word may have a newline
         alert("Success in submitting Match data! Clearing Data.");
         clearMatchForm();
       } else {
@@ -431,125 +430,125 @@ require 'inc/header.php';
     console.log("=> matchForm: attachButtonListeners()");
 
     // Auto coral
-    document.getElementById("autonCoralL4Plus").addEventListener('click', function () {
+    document.getElementById("autonCoralL4Plus").addEventListener('click', function() {
       auton.coral.l4 += 1;
       document.getElementById("autonCoralL4").innerText = "Coral Level 4: " + auton.coral.l4;
     });
 
-    document.getElementById("autonCoralL4Minus").addEventListener('click', function () {
+    document.getElementById("autonCoralL4Minus").addEventListener('click', function() {
       auton.coral.l4 = Math.max(auton.coral.l4 - 1, 0);
       document.getElementById("autonCoralL4").innerText = "Coral Level 4: " + auton.coral.l4;
     });
 
-    document.getElementById("autonCoralL3Plus").addEventListener('click', function () {
+    document.getElementById("autonCoralL3Plus").addEventListener('click', function() {
       auton.coral.l3 += 1;
       document.getElementById("autonCoralL3").innerText = "Coral Level 3: " + auton.coral.l3;
     });
 
-    document.getElementById("autonCoralL3Minus").addEventListener('click', function () {
+    document.getElementById("autonCoralL3Minus").addEventListener('click', function() {
       auton.coral.l3 = Math.max(auton.coral.l3 - 1, 0);
       document.getElementById("autonCoralL3").innerText = "Coral Level 3: " + auton.coral.l3;
     });
 
-    document.getElementById("autonCoralL2Plus").addEventListener('click', function () {
+    document.getElementById("autonCoralL2Plus").addEventListener('click', function() {
       auton.coral.l2 += 1;
       document.getElementById("autonCoralL2").innerText = "Coral Level 2: " + auton.coral.l2
     });
 
-    document.getElementById("autonCoralL2Minus").addEventListener('click', function () {
+    document.getElementById("autonCoralL2Minus").addEventListener('click', function() {
       auton.coral.l2 = Math.max(auton.coral.l2 - 1, 0);
       document.getElementById("autonCoralL2").innerText = "Coral Level 2: " + auton.coral.l2
     });
 
-    document.getElementById("autonCoralL1Plus").addEventListener('click', function () {
+    document.getElementById("autonCoralL1Plus").addEventListener('click', function() {
       auton.coral.l1 += 1;
       document.getElementById("autonCoralL1").innerText = "Coral Level 1: " + auton.coral.l1;
     });
 
-    document.getElementById("autonCoralL1Minus").addEventListener('click', function () {
+    document.getElementById("autonCoralL1Minus").addEventListener('click', function() {
       auton.coral.l1 = Math.max(auton.coral.l1 - 1, 0);
       document.getElementById("autonCoralL1").innerText = "Coral Level 1: " + auton.coral.l1;
     });
 
     // Auto algae
-    document.getElementById("autonAlgaeProcPlus").addEventListener('click', function () {
+    document.getElementById("autonAlgaeProcPlus").addEventListener('click', function() {
       auton.algae.processor += 1;
       document.getElementById("autonAlgaeProc").innerText = "Algae Processor: " + auton.algae.processor;
     });
 
-    document.getElementById("autonAlgaeProcMinus").addEventListener('click', function () {
+    document.getElementById("autonAlgaeProcMinus").addEventListener('click', function() {
       auton.algae.processor = Math.max(auton.algae.processor - 1, 0);
       document.getElementById("autonAlgaeProc").innerText = "Algae Processor: " + auton.algae.processor;
     });
 
-    document.getElementById("autonAlgaeNetPlus").addEventListener('click', function () {
+    document.getElementById("autonAlgaeNetPlus").addEventListener('click', function() {
       auton.algae.net += 1;
       document.getElementById("autonAlgaeNet").innerText = "Algae Net: " + auton.algae.net;
     });
 
-    document.getElementById("autonAlgaeNetMinus").addEventListener('click', function () {
+    document.getElementById("autonAlgaeNetMinus").addEventListener('click', function() {
       auton.algae.net = Math.max(auton.algae.net - 1, 0);
       document.getElementById("autonAlgaeNet").innerText = "Algae Net: " + auton.algae.net;
     });
 
     // Teleop coral
-    document.getElementById("teleopCoralL4Plus").addEventListener('click', function () {
+    document.getElementById("teleopCoralL4Plus").addEventListener('click', function() {
       teleop.coral.l4 += 1;
       document.getElementById("teleopCoralL4").innerText = "Coral Level 4: " + teleop.coral.l4;
     });
 
-    document.getElementById("teleopCoralL4Minus").addEventListener('click', function () {
+    document.getElementById("teleopCoralL4Minus").addEventListener('click', function() {
       teleop.coral.l4 = Math.max(teleop.coral.l4 - 1, 0);
       document.getElementById("teleopCoralL4").innerText = "Coral Level 4: " + teleop.coral.l4;
     });
 
-    document.getElementById("teleopCoralL3Plus").addEventListener('click', function () {
+    document.getElementById("teleopCoralL3Plus").addEventListener('click', function() {
       teleop.coral.l3 += 1;
       document.getElementById("teleopCoralL3").innerText = "Coral Level 3: " + teleop.coral.l3;
     });
 
-    document.getElementById("teleopCoralL3Minus").addEventListener('click', function () {
+    document.getElementById("teleopCoralL3Minus").addEventListener('click', function() {
       teleop.coral.l3 = Math.max(teleop.coral.l3 - 1, 0);
       document.getElementById("teleopCoralL3").innerText = "Coral Level 3: " + teleop.coral.l3;
     });
 
-    document.getElementById("teleopCoralL2Plus").addEventListener('click', function () {
+    document.getElementById("teleopCoralL2Plus").addEventListener('click', function() {
       teleop.coral.l2 += 1;
       document.getElementById("teleopCoralL2").innerText = "Coral Level 2: " + teleop.coral.l2
     });
 
-    document.getElementById("teleopCoralL2Minus").addEventListener('click', function () {
+    document.getElementById("teleopCoralL2Minus").addEventListener('click', function() {
       teleop.coral.l2 = Math.max(teleop.coral.l2 - 1, 0);
       document.getElementById("teleopCoralL2").innerText = "Coral Level 2: " + teleop.coral.l2
     });
 
-    document.getElementById("teleopCoralL1Plus").addEventListener('click', function () {
+    document.getElementById("teleopCoralL1Plus").addEventListener('click', function() {
       teleop.coral.l1 += 1;
       document.getElementById("teleopCoralL1").innerText = "Coral Level 1: " + teleop.coral.l1;
     });
 
-    document.getElementById("teleopCoralL1Minus").addEventListener('click', function () {
+    document.getElementById("teleopCoralL1Minus").addEventListener('click', function() {
       teleop.coral.l1 = Math.max(teleop.coral.l1 - 1, 0);
       document.getElementById("teleopCoralL1").innerText = "Coral Level 1: " + teleop.coral.l1;
     });
 
     // Teleop algae
-    document.getElementById("teleopAlgaeProcPlus").addEventListener('click', function () {
+    document.getElementById("teleopAlgaeProcPlus").addEventListener('click', function() {
       teleop.algae.processor += 1;
       document.getElementById("teleopAlgaeProc").innerText = "Algae Processor: " + teleop.algae.processor;
     });
 
-    document.getElementById("teleopAlgaeProcMinus").addEventListener('click', function () {
+    document.getElementById("teleopAlgaeProcMinus").addEventListener('click', function() {
       teleop.algae.processor = Math.max(teleop.algae.processor - 1, 0);
       document.getElementById("teleopAlgaeProc").innerText = "Algae Processor: " + teleop.algae.processor;
     });
 
-    document.getElementById("teleopAlgaeNetPlus").addEventListener('click', function () {
+    document.getElementById("teleopAlgaeNetPlus").addEventListener('click', function() {
       teleop.algae.net += 1;
       document.getElementById("teleopAlgaeNet").innerText = "Algae Net: " + teleop.algae.net;
     });
 
-    document.getElementById("teleopAlgaeNetMinus").addEventListener('click', function () {
+    document.getElementById("teleopAlgaeNetMinus").addEventListener('click', function() {
       teleop.algae.net = Math.max(teleop.algae.net - 1, 0);
       document.getElementById("teleopAlgaeNet").innerText = "Algae Net: " + teleop.algae.net;
     });
@@ -560,15 +559,31 @@ require 'inc/header.php';
   //
   // Process the generated html
   //
-  document.addEventListener("DOMContentLoaded", function () {
+  document.addEventListener("DOMContentLoaded", function() {
 
     const auton = {
-      coral: { l1: 0, l2: 0, l3: 0, l4: 0 },
-      algae: { processor: 0, net: 0 }
+      coral: {
+        l1: 0,
+        l2: 0,
+        l3: 0,
+        l4: 0
+      },
+      algae: {
+        processor: 0,
+        net: 0
+      }
     };
     const teleop = {
-      coral: { l1: 0, l2: 0, l3: 0, l4: 0 },
-      algae: { processor: 0, net: 0 }
+      coral: {
+        l1: 0,
+        l2: 0,
+        l3: 0,
+        l4: 0
+      },
+      algae: {
+        processor: 0,
+        net: 0
+      }
     };
 
     attachButtonListeners(auton, teleop);
@@ -576,7 +591,7 @@ require 'inc/header.php';
     // Read scout names from database for this event
     $.get("api/dbReadAPI.php", {
       getEventScoutNames: true
-    }).done(function (eventScoutNames) {
+    }).done(function(eventScoutNames) {
       console.log("=> getEventScoutNames");
       let scoutSelect = document.getElementById("selectScoutName");
       let jsonNames = JSON.parse(eventScoutNames);
@@ -593,7 +608,7 @@ require 'inc/header.php';
     });
 
     // Submit the match data form 
-    document.getElementById("submitForm").addEventListener('click', function () {
+    document.getElementById("submitForm").addEventListener('click', function() {
       if (!validateMatchForm(auton, teleop)) {
         matchFormData = getMatchFormData(auton, teleop);
         alert("This match form is NOT yet tested to save data for the 2025 game!");
@@ -601,7 +616,6 @@ require 'inc/header.php';
       }
     });
   });
-
 </script>
 
 <script src="./scripts/validateTeamNumber.js"></script>

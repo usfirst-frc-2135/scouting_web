@@ -30,7 +30,6 @@ require 'inc/header.php';
 <!-- Javascript page handlers -->
 
 <script>
-
   //
   // Insert the pit data table header
   //
@@ -40,17 +39,46 @@ require 'inc/header.php';
     let headerRow = tbodyRef.insertRow();
 
     // Static columns
-    let headers = [
-      { text: "Team", class: "table-primary sorttable_numeric" },
-      { text: "Swerve", class: "table-primary" },
-      { text: "Drive Motors", class: "table-primary" },
-      { text: "Spare Parts", class: "table-primary" },
-      { text: "Prog Language", class: "table-primary" },
-      { text: "Computer Vision", class: "table-primary" },
-      { text: "Pit Org", class: "table-primary text-start" },
-      { text: "Prep", class: "table-primary text-start" },
-      { text: "Num Batteries", class: "table-primary" },
-      { text: "Scout", class: "table-primary" }
+    let headers = [{
+        text: "Team",
+        class: "table-primary sorttable_numeric"
+      },
+      {
+        text: "Swerve",
+        class: "table-primary"
+      },
+      {
+        text: "Drive Motors",
+        class: "table-primary"
+      },
+      {
+        text: "Spare Parts",
+        class: "table-primary"
+      },
+      {
+        text: "Prog Language",
+        class: "table-primary"
+      },
+      {
+        text: "Computer Vision",
+        class: "table-primary"
+      },
+      {
+        text: "Pit Org",
+        class: "table-primary text-start"
+      },
+      {
+        text: "Prep",
+        class: "table-primary text-start"
+      },
+      {
+        text: "Num Batteries",
+        class: "table-primary"
+      },
+      {
+        text: "Scout",
+        class: "table-primary"
+      }
     ];
 
     // Create header cells
@@ -68,9 +96,12 @@ require 'inc/header.php';
   //
   function toYesNo(value) {
     switch (String(value)) {
-      case "0": return "No";
-      case "1": return "Yes";
-      default: return "-";
+      case "0":
+        return "No";
+      case "1":
+        return "Yes";
+      default:
+        return "-";
     }
   }
 
@@ -79,12 +110,18 @@ require 'inc/header.php';
   //
   function toOrganization(value) {
     switch (String(value)) {
-      case "1": return "1-Messy";
-      case "2": return "2-Below Average";
-      case "3": return "3-Organized!";
-      case "4": return "4-Above Average";
-      case "5": return "5-Pristine";
-      default: return "-";
+      case "1":
+        return "1-Messy";
+      case "2":
+        return "2-Below Average";
+      case "3":
+        return "3-Organized!";
+      case "4":
+        return "4-Above Average";
+      case "5":
+        return "5-Pristine";
+      default:
+        return "-";
     }
   }
 
@@ -93,12 +130,18 @@ require 'inc/header.php';
   //
   function toPreparedness(value) {
     switch (String(value)) {
-      case "1": return "1-Chaos";
-      case "2": return "2-Below Average";
-      case "3": return "3-Prepared!";
-      case "4": return "4-Above Average";
-      case "5": return "5-Proactive";
-      default: return "-";
+      case "1":
+        return "1-Chaos";
+      case "2":
+        return "2-Below Average";
+      case "3":
+        return "3-Prepared!";
+      case "4":
+        return "4-Above Average";
+      case "5":
+        return "5-Proactive";
+      default:
+        return "-";
     }
   }
 
@@ -135,7 +178,7 @@ require 'inc/header.php';
   function buildPitDataTable(tableId) {
     $.get("api/dbReadAPI.php", {
       getAllPitData: true
-    }).done(function (pitData) {
+    }).done(function(pitData) {
       console.log("=> eventAliasNames");
       let jPitData = JSON.parse(pitData);
       insertPitTableHeader(tableId, jPitData);
@@ -153,15 +196,17 @@ require 'inc/header.php';
   //    Get all pit data from our database
   //    When completed, display the web page
   //
-  document.addEventListener("DOMContentLoaded", function () {
+  document.addEventListener("DOMContentLoaded", function() {
 
     const tableId = "pitDataTable";
-    const frozenTable = new FreezeTable('.freeze-table', { fixedNavbar: '.navbar' });
+    const frozenTable = new FreezeTable('.freeze-table', {
+      fixedNavbar: '.navbar'
+    });
 
     buildPitDataTable(tableId);
 
     // Create frozen table panes and keep the panes updated
-    document.getElementById(tableId).addEventListener('click', function () {
+    document.getElementById(tableId).addEventListener('click', function() {
       if (frozenTable) {
         frozenTable.update();
       }

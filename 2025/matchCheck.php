@@ -33,7 +33,6 @@ require 'inc/header.php';
 <!-- Javascript page handlers -->
 
 <script>
-
   //
   //  Match data check table utilities that:
   //    1) insert a header row for a match data check table
@@ -69,7 +68,9 @@ require 'inc/header.php';
       csv.push(rowData.join(","));
     });
 
-    const csvFile = new Blob([csv.join("\n")], { type: "text/csv" });
+    const csvFile = new Blob([csv.join("\n")], {
+      type: "text/csv"
+    });
     const downloadLink = document.createElement("a");
     downloadLink.download = csvName;
     downloadLink.href = window.URL.createObjectURL(csvFile);
@@ -99,9 +100,9 @@ require 'inc/header.php';
 
     let rowString1 = '';
 
-    rowString1 += '<th colspan="2" ' + thBody + '> </th>';    // Match no, match count
-    rowString1 += '<th colspan="19" ' + thRedPrefix + '>Red</th>';   // Match data count
-    rowString1 += '<th colspan="19" ' + thBluePrefix + '>Blue</th>';   // Match data count
+    rowString1 += '<th colspan="2" ' + thBody + '> </th>'; // Match no, match count
+    rowString1 += '<th colspan="19" ' + thRedPrefix + '>Red</th>'; // Match data count
+    rowString1 += '<th colspan="19" ' + thBluePrefix + '>Blue</th>'; // Match data count
 
     theadRef.insertRow().innerHTML = rowString1;
 
@@ -113,18 +114,18 @@ require 'inc/header.php';
 
     let rowString2 = '';
 
-    rowString2 += '<th colspan="2" ' + thBodyTable + '> </th>';    // Match no, match count
-    rowString2 += '<th colspan="4" ' + thRedPrefixTable + '>Points</th>';   // Match data count
-    rowString2 += '<th colspan="5" ' + thRedPrefixTable + '>Auto</th>';   // Match data count
-    rowString2 += '<th colspan="6" ' + thRedPrefixTable + '>Teleop</th>';   // Match data count
-    rowString2 += '<th colspan="3" ' + thRedPrefixTable + '>Endgame</th>';   // Match data count
-    rowString2 += '<th colspan="1" ' + thRedPrefixTable + '></th>';   // Match data count
+    rowString2 += '<th colspan="2" ' + thBodyTable + '> </th>'; // Match no, match count
+    rowString2 += '<th colspan="4" ' + thRedPrefixTable + '>Points</th>'; // Match data count
+    rowString2 += '<th colspan="5" ' + thRedPrefixTable + '>Auto</th>'; // Match data count
+    rowString2 += '<th colspan="6" ' + thRedPrefixTable + '>Teleop</th>'; // Match data count
+    rowString2 += '<th colspan="3" ' + thRedPrefixTable + '>Endgame</th>'; // Match data count
+    rowString2 += '<th colspan="1" ' + thRedPrefixTable + '></th>'; // Match data count
 
-    rowString2 += '<th colspan="4" ' + thBluePrefixTable + '>Points</th>';   // Match data count
-    rowString2 += '<th colspan="5" ' + thBluePrefixTable + '>Auto</th>';   // Match data count
-    rowString2 += '<th colspan="6" ' + thBluePrefixTable + '>Teleop</th>';   // Match data count
-    rowString2 += '<th colspan="3" ' + thBluePrefixTable + '>Endgame</th>';   // Match data count
-    rowString2 += '<th colspan="1" ' + thBluePrefixTable + '></th>';   // Match data count
+    rowString2 += '<th colspan="4" ' + thBluePrefixTable + '>Points</th>'; // Match data count
+    rowString2 += '<th colspan="5" ' + thBluePrefixTable + '>Auto</th>'; // Match data count
+    rowString2 += '<th colspan="6" ' + thBluePrefixTable + '>Teleop</th>'; // Match data count
+    rowString2 += '<th colspan="3" ' + thBluePrefixTable + '>Endgame</th>'; // Match data count
+    rowString2 += '<th colspan="1" ' + thBluePrefixTable + '></th>'; // Match data count
 
     theadRef.insertRow().innerHTML = rowString2;
 
@@ -229,7 +230,7 @@ require 'inc/header.php';
   // Params:
   //   matchScore - the match score object to build from
   //
-  buildMatchDataSubstring = function (matchScore) {
+  buildMatchDataSubstring = function(matchScore) {
     let cellString = "";
     cellString += "<td class='table-danger'>" + matchScore.totalPoints + "</td>";
     cellString += "<td class='table-success'>" + matchScore.autonPoints + "</td>";
@@ -331,9 +332,9 @@ require 'inc/header.php';
       parseInt(matchData["teleopAlgaeProc"]) * 6 +
       (parseInt(matchData["endgameCageClimb"]) === 0 ? 0 :
         parseInt(matchData["endgameCageClimb"]) === 1 ? 2 :
-          parseInt(matchData["endgameCageClimb"]) === 2 ? 2 :
-            parseInt(matchData["endgameCageClimb"]) === 3 ? 6 :
-              parseInt(matchData["endgameCageClimb"]) === 4 ? 12 : 0);
+        parseInt(matchData["endgameCageClimb"]) === 2 ? 2 :
+        parseInt(matchData["endgameCageClimb"]) === 3 ? 6 :
+        parseInt(matchData["endgameCageClimb"]) === 4 ? 12 : 0);
     let foulPoints = 0 * 2; // We don't track fouls
 
     matchScore.autonPoints += autonPoints;
@@ -351,10 +352,17 @@ require 'inc/header.php';
     let value = 0;
     switch (climbString) {
       default:
-      case "None": break;
-      case "Parked": value = 1; break;
-      case "ShallowCage": value = 3; break;
-      case "DeepCage": value = 4; break;
+      case "None":
+        break;
+      case "Parked":
+        value = 1;
+        break;
+      case "ShallowCage":
+        value = 3;
+        break;
+      case "DeepCage":
+        value = 4;
+        break;
     }
     return value;
   }
@@ -433,7 +441,7 @@ require 'inc/header.php';
     let tbodyRef = document.getElementById(tableId).querySelector('tbody');
     for (let emi in eventMatches) {
       let match = eventMatches[emi];
-      if (match["comp_level"] !== "qm") {// Limit to qual matches for now
+      if (match["comp_level"] !== "qm") { // Limit to qual matches for now
         continue;
       }
       let matchNum = match["match_number"];
@@ -530,7 +538,7 @@ require 'inc/header.php';
 
     $.get("api/tbaAPI.php", {
       getEventMatches: true
-    }).done(function (eventMatches) {
+    }).done(function(eventMatches) {
       console.log("=> getEventMatches");
       jEventMatches = JSON.parse(eventMatches)["response"];
       loadMatchCheckTable(tableId, jEventMatches, jAllMatchData);
@@ -538,7 +546,7 @@ require 'inc/header.php';
 
     $.get("api/dbReadAPI.php", {
       getAllMatchData: true
-    }).done(function (matchData) {
+    }).done(function(matchData) {
       console.log("=> getAllMatchData");
       jAllMatchData = JSON.parse(matchData);
       loadMatchCheckTable(tableId, jEventMatches, jAllMatchData);
@@ -553,27 +561,28 @@ require 'inc/header.php';
   //    Get all match data from our database
   //    When completed, display the web page
   //
-  document.addEventListener("DOMContentLoaded", function () {
+  document.addEventListener("DOMContentLoaded", function() {
 
     const tableId = "matchCheckTable";
-    const frozenTable = new FreezeTable('.freeze-table', { fixedNavbar: '.navbar' });
+    const frozenTable = new FreezeTable('.freeze-table', {
+      fixedNavbar: '.navbar'
+    });
 
     buildMatchCheckTable(tableId);
 
     // Write out picklist CSV file to client's download dir.
-    document.getElementById("downloadCsvFile").addEventListener('click', function () {
+    document.getElementById("downloadCsvFile").addEventListener('click', function() {
       const csvFileName = frcEventCode + "_matchCheck";
       downloadTableAsCSV(tableId, csvFileName);
     });
 
     // Create frozen table panes and keep the panes updated
-    document.getElementById(tableId).addEventListener('click', function () {
+    document.getElementById(tableId).addEventListener('click', function() {
       if (frozenTable) {
         frozenTable.update();
       }
     });
   });
-
 </script>
 
 <script src="./scripts/compareMatchNumbers.js"></script>

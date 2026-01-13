@@ -184,7 +184,6 @@ require 'inc/header.php';
 <!-- Javascript page handlers -->
 
 <script>
-
   //
   // Check if our URL directs to a specific team
   //
@@ -351,9 +350,9 @@ require 'inc/header.php';
     console.log("==> pitForm: submitPitFormData()");
     $.post("api/dbWriteAPI.php", {
       writePitTable: JSON.stringify(pitFormData)
-    }).done(function (response) {
+    }).done(function(response) {
       console.log("=> writePitTable");
-      if (response.indexOf('success') > -1) {    // A loose compare, because success word may have a newline
+      if (response.indexOf('success') > -1) { // A loose compare, because success word may have a newline
         clearPitForm();
         alert("Success in submitting Pit data! - Clearning form");
       } else {
@@ -366,14 +365,14 @@ require 'inc/header.php';
   //
   // Process the generated html
   //
-  document.addEventListener("DOMContentLoaded", function () {
+  document.addEventListener("DOMContentLoaded", function() {
 
     let jAliasNames = null;
 
     // Read the alias table
     $.get("api/dbReadAPI.php", {
       getEventAliasNames: true
-    }).done(function (eventAliasNames) {
+    }).done(function(eventAliasNames) {
       console.log("=> eventAliasNames");
       jAliasNames = JSON.parse(eventAliasNames);
     });
@@ -387,7 +386,7 @@ require 'inc/header.php';
     // Read scout names from database for this event
     $.get("api/dbReadAPI.php", {
       getEventScoutNames: true
-    }).done(function (eventScoutNames) {
+    }).done(function(eventScoutNames) {
       console.log("=> getEventScoutNames");
       let scoutSelect = document.getElementById("selectScoutName");
       let jsonNames = JSON.parse(eventScoutNames);
@@ -404,7 +403,7 @@ require 'inc/header.php';
     });
 
     // Submit the match data form
-    document.getElementById("submitButton").addEventListener('click', function () {
+    document.getElementById("submitButton").addEventListener('click', function() {
       if (!validatePitForm()) {
         pitFormData = getPitFormData();
         submitPitFormData(pitFormData);
@@ -412,7 +411,7 @@ require 'inc/header.php';
     });
 
     // Attach enterTeamNumber listener when losing focus to check for alias numbers
-    document.getElementById('enterTeamNumber').addEventListener('focusout', function () {
+    document.getElementById('enterTeamNumber').addEventListener('focusout', function() {
       console.log("enterTeamNumber: focus out");
       let enteredNum = event.target.value.toUpperCase().trim();
       if (isAliasNumber(enteredNum)) {
@@ -422,8 +421,7 @@ require 'inc/header.php';
         else
           document.getElementById("aliasNumber").innerText = "Alias number " + enteredNum + " is Team " + teamNum;
         document.getElementById("enterTeamNumber").value = teamNum;
-      }
-      else
+      } else
         document.getElementById("aliasNumber").innerText = "";
     });
   });

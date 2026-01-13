@@ -31,7 +31,6 @@ require 'inc/header.php';
 <!-- Javascript page handlers -->
 
 <script>
-
   //
   // Load the strategic data into the table body
   //
@@ -58,7 +57,7 @@ require 'inc/header.php';
     // Load alias lookup table
     $.get("api/dbReadAPI.php", {
       getEventAliasNames: true
-    }).done(function (eventAliasNames) {
+    }).done(function(eventAliasNames) {
       console.log("=> eventAliasNames");
       jAliasNames = JSON.parse(eventAliasNames);
       insertStrategicDataHeader(tableId, jAliasNames);
@@ -68,7 +67,7 @@ require 'inc/header.php';
     // Load the strategic data
     $.get("api/dbReadAPI.php", {
       getAllStrategicData: true
-    }).done(function (strategicData) {
+    }).done(function(strategicData) {
       console.log("=> getAllStrategicData");
       jStratData = JSON.parse(strategicData);
       loadStrategicTableBody(tableId, jStratData, jAliasNames, []);
@@ -81,15 +80,17 @@ require 'inc/header.php';
   //    Get all strategic data from our database
   //    When completed, display the web page
   //
-  document.addEventListener("DOMContentLoaded", function () {
+  document.addEventListener("DOMContentLoaded", function() {
 
     const tableId = "strategicTable";
-    const frozenTable = new FreezeTable('.freeze-table', { fixedNavbar: '.navbar' });
+    const frozenTable = new FreezeTable('.freeze-table', {
+      fixedNavbar: '.navbar'
+    });
 
     buildStrategicDataTable(tableId);
 
     // Create frozen table panes and keep the panes updated
-    document.getElementById(tableId).addEventListener('click', function () {
+    document.getElementById(tableId).addEventListener('click', function() {
       if (frozenTable) {
         frozenTable.update();
       }

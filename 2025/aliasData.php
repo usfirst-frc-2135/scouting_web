@@ -61,7 +61,6 @@ require 'inc/header.php';
 <!-- Javascript page handlers -->
 
 <script>
-
   //
   // Build the team alias table
   //
@@ -84,7 +83,7 @@ require 'inc/header.php';
       row.innerHTML += "<td> <button id='" + key + "_delete' value='" + key + "' class='btn btn-danger' type='button'>Delete</button></td>";
 
       // Add delete button
-      document.getElementById(key + "_delete").addEventListener('click', function () {
+      document.getElementById(key + "_delete").addEventListener('click', function() {
         console.log("Deleted " + this.value);
         deleteTeamAlias(tableId, this.value);
       });
@@ -102,9 +101,12 @@ require 'inc/header.php';
   function addTeamAlias(tableId, teamNum, alias) {
     console.log("==> aliasData: addTeamAlias()" + " " + teamNum + " " + alias);
     $.post("api/dbWriteAPI.php", {
-      writeSingleTeamAlias: JSON.stringify({ "teamnumber": teamNum, "aliasnumber": alias })
-    }, function (response) {
-      if (response.indexOf('success') > -1) {    // A loose compare, because success word may have a newline
+      writeSingleTeamAlias: JSON.stringify({
+        "teamnumber": teamNum,
+        "aliasnumber": alias
+      })
+    }, function(response) {
+      if (response.indexOf('success') > -1) { // A loose compare, because success word may have a newline
         // alert("Success in submitting Team Alias data! Clearing Data.");
         document.getElementById("enterTeamNumber").value = "";
         document.getElementById("enterAliasNumber").value = "";
@@ -121,9 +123,11 @@ require 'inc/header.php';
   function deleteTeamAlias(tableId, teamAlias) {
     console.log("==> aliasData: deleteTeamAlias()" + " " + teamAlias);
     $.post("api/dbWriteAPI.php", {
-      deleteSingleTeamAlias: JSON.stringify({ "teamalias": teamAlias })
-    }, function (response) {
-      if (response.indexOf('success') > -1) {    // A loose compare, because success word may have a newline
+      deleteSingleTeamAlias: JSON.stringify({
+        "teamalias": teamAlias
+      })
+    }, function(response) {
+      if (response.indexOf('success') > -1) { // A loose compare, because success word may have a newline
         // alert("Success in submitting Team Alias data! Clearing Data.");
         document.getElementById("enterTeamNumber").value = "";
         document.getElementById("enterAliasNumber").value = "";
@@ -139,20 +143,20 @@ require 'inc/header.php';
   //
   function writeTeamAliasFile(tableId, fileName) {
     console.log("==> aliasData: writeTeamAliasFile() - " + fileName);
-    let jsonTable = tableToJSON(tableId);   // Convert the HTML table into a JSON object
-    jsonTable.forEach(function (row) {
-      row["teamnum"] = row["Team Number"];  // Make a new team number field with correct tag
-      delete row["Team Number"];            // Remove the undesired tag
-      row["aliasnum"] = row["Team Alias"];  // Make a new alias number field with correct tag
-      delete row["Team Alias"];             // Remove the undesired tag
-      delete row.Delete;                    // Remove the "Delete" field from each row
+    let jsonTable = tableToJSON(tableId); // Convert the HTML table into a JSON object
+    jsonTable.forEach(function(row) {
+      row["teamnum"] = row["Team Number"]; // Make a new team number field with correct tag
+      delete row["Team Number"]; // Remove the undesired tag
+      row["aliasnum"] = row["Team Alias"]; // Make a new alias number field with correct tag
+      delete row["Team Alias"]; // Remove the undesired tag
+      delete row.Delete; // Remove the "Delete" field from each row
     });
     console.log(jsonTable);
 
     $.post("api/dbAPI.php", {
       writeTeamAliasJSON: JSON.stringify(jsonTable),
       filename: fileName
-    }, function (dbStatus) {
+    }, function(dbStatus) {
       console.log("=> writeTeamAliasFile - DONE");
       alert("Team Alias JSON file written to: \n\n     " + fileName);
     });
@@ -164,7 +168,7 @@ require 'inc/header.php';
   function buildAliasTable(tableId) {
     $.get("api/dbReadAPI.php", {
       getEventAliasNames: true
-    }).done(function (eventAliasNames) {
+    }).done(function(eventAliasNames) {
       console.log("=> eventAliasNames");
       let jAliasNames = JSON.parse(eventAliasNames);
       loadAliasDataTable(tableId, jAliasNames);
@@ -177,7 +181,7 @@ require 'inc/header.php';
   //    Get team list and aliases for this eventcode from TBA
   //    When all completed, generate the web page
   //
-  document.addEventListener("DOMContentLoaded", function () {
+  document.addEventListener("DOMContentLoaded", function() {
 
     const tableId = "aliasTable";
     let teamAliasList = [];
@@ -187,7 +191,7 @@ require 'inc/header.php';
 
     // Pressing enter in team number field attempts to save the alias
     let teamInput = document.getElementById("enterTeamNumber");
-    teamInput.addEventListener("keypress", function (event) {
+    teamInput.addEventListener("keypress", function(event) {
       if (event.key === "Enter") {
         event.preventDefault();
         document.getElementById("addTeamAlias").click();
@@ -196,7 +200,7 @@ require 'inc/header.php';
 
     // Pressing enter in alias number field attempts to save the alias
     let aliasInput = document.getElementById("enterAliasNumber");
-    aliasInput.addEventListener("keypress", function (event) {
+    aliasInput.addEventListener("keypress", function(event) {
       if (event.key === "Enter") {
         event.preventDefault();
         document.getElementById("addTeamAlias").click();
@@ -204,7 +208,7 @@ require 'inc/header.php';
     });
 
     // Save the team alias for the number entered
-    document.getElementById("addTeamAlias").addEventListener('click', function () {
+    document.getElementById("addTeamAlias").addEventListener('click', function() {
       let teamNum = document.getElementById("enterTeamNumber").value.toUpperCase().trim();
       let aliasNum = document.getElementById("enterAliasNumber").value.trim();
       if (validateTeamNumber(teamNum, null) > 0 && validateTeamNumber(aliasNum, null) > 0) {
@@ -213,12 +217,11 @@ require 'inc/header.php';
     });
 
     // Write out team alias JSON file to server folder
-    document.getElementById("writeTeamAliasJSON").addEventListener('click', function () {
+    document.getElementById("writeTeamAliasJSON").addEventListener('click', function() {
       const filename = "../../../json/" + frcEventCode + "_" + "teamAliases.json";
       writeTeamAliasFile(tableId, filename);
     });
   });
-
 </script>
 
 <script src="./scripts/compareMatchNumbers.js"></script>
