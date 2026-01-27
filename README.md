@@ -65,7 +65,7 @@ While the scouting web database is hosted on the team web site at frc2135.org, i
 
 The scouting web app consists of a hosted web site containing PHP web pages and javascript helper utilities. The directory structure is detailed below:
 - scouting_web (this is the github repo root directory)
-  - 2026 (this subdirectory level is a mirror of what is placed on the live web site) 
+  - 2025 (this subdirectory level is a mirror of what is placed on the live web site) 
     - api - directory of PHP files for accessing the MySQL database and The Blue Alliance
     - external - the javascript libraries used by the web site
       - bootstrap - the framework used to build web pages and widgets
@@ -89,7 +89,7 @@ The scouting web app consists of a hosted web site containing PHP web pages and 
 ## Setting the event code for a new event:
 
 To change the event code at the actual website scouting data: 
-- Go to the https://frc2135.org/scouting/2026/ path in your browser. The pit status page will be shown.
+- Go to the https://frc2135.org/scouting/2025/ path in your browser. The pit status page will be shown.
 - Click on the event code (or ????) in the upper left corner to get to the dbStatus page.
 - In the dbStatus page, you only need to change the event code to the one you want. (e.g. 2026cafr)
 - Scroll down to the bottom of the page and click "Write Config" (no other buttons need to be clicked). This writes a file onto the server that changes the active event for everyone using the scouting web app on this server.
@@ -125,10 +125,10 @@ __Base Path__
 The Java script PHP files and directories (these are the files stored for the Scouring Web App in github) are found here (this is the `<base_path>`):
 
 On the live team website (frc2135.org):
-- `/public_html/scouting/2026/`
+- `/public_html/scouting/2025/`
 
 For the localhost on a (Mac OS X) development computer:
-- `/Applications/MAMP/htdocs/scouting/2026`
+- `/Applications/MAMP/htdocs/scouting/2025`
 
 __Robot Photo Image Files__
 
@@ -174,7 +174,7 @@ Where <msg_text> can be a string or reference a PHP variable such as $var in thi
 The issued message will be found near the bottom of the error log file, here:
 
 On the live team website (frc2135):
-- `/public_html/scouting/2026/api/error_log`
+- `/public_html/scouting/2025/api/error_log`
 
 For the localhost on a (Mac OS X) development computer:
 - `/Applications/MAMP/logs/php_error.log`
